@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 __title__ = "lithic"
-__version__ = "0.0.1"
+__version__ = "0.1.1"
 
 import os
 from typing import Optional, Union
