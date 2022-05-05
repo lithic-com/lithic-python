@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "lithic"
+version = "0.0.1"
+description = "Client library for the lithic API"
+authors = ["Lithic <sdk-feedback@lithic.com>"]
+license = "Apache-2.0"
+repository = "https://github.com/lithic-com/lithic-python"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+httpx = "^0.22.0"
+pydantic = "^1.9.0"
+typing-extensions = "^4.1.1"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.941"
+black = "^22.1.0"
+docformatter = "^1.4"
+respx = "^0.19.2"
+pytest = "^7.1.1"
+pytest-asyncio = "^0.18.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target-version = ["py37"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short"
+xfail_strict = true
+log_cli = true
+log_level = "INFO"
+asyncio_mode = "auto"
