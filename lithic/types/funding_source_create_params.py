@@ -15,7 +15,7 @@ class Bank(TypedDict, total=False):
     routing_number: Required[str]
     """The routing number of the bank account."""
 
-    validation_method: Required[str]
+    validation_method: Required[Literal["BANK"]]
 
     account_name: str
     """The name associated with the bank account. This property is only for identification purposes, and has no bearing on the external properties of the bank."""
@@ -28,7 +28,7 @@ class Plaid(TypedDict, total=False):
     processor_token: Required[str]
     """The processor token associated with the bank account."""
 
-    validation_method: Required[str]
+    validation_method: Required[Literal["PLAID"]]
 
     account_token: str
     """Only required for multi-account users. Token identifying the account associated with the bank account. Only applicable if using account creation. See [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more information."""

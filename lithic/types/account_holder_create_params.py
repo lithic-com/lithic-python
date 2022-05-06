@@ -72,11 +72,11 @@ class KYC(TypedDict, total=False):
     tos_timestamp: Required[str]
     """An ISO 8601 timestamp indicating when Lithic's terms of service were accepted by the API customer."""
 
-    workflow: Required[Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_PRECHECKED"]]
+    workflow: Required[Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]]
     """Specifies the type of KYC workflow to run."""
 
     kyc_passed_timestamp: str
-    """An ISO 8601 timestamp indicating when precomputed KYC was completed on the individual with a pass result. This field is required only if workflow type is `KYC_PRECHECKED`."""
+    """An ISO 8601 timestamp indicating when precomputed KYC was completed on the individual with a pass result. This field is required only if workflow type is `KYC_BYO`."""
 
 
 class KybBusinessEntityAddress(TypedDict, total=False):
@@ -267,11 +267,11 @@ class Kyb(TypedDict, total=False):
     website_url: Required[str]
     """Company website URL."""
 
-    workflow: Required[Literal["KYB_BASIC", "KYB_PRECHECKED"]]
+    workflow: Required[Literal["KYB_BASIC", "KYB_BYO"]]
     """Specifies the type of KYB workflow to run."""
 
     kyb_passed_timestamp: str
-    """An ISO 8601 timestamp indicating when precomputed KYC was completed on the business with a pass result. This field is required only if workflow type is `KYB_PRECHECKED`."""
+    """An ISO 8601 timestamp indicating when precomputed KYC was completed on the business with a pass result. This field is required only if workflow type is `KYB_BYO`."""
 
 
 AccountHolderCreateParams = Union[KYC, Kyb]

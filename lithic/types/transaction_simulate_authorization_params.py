@@ -24,5 +24,7 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
     merchant_currency: str
     """3-digit alphabetic ISO 4217 currency code."""
 
-    status: Literal["AUTHORIZATION", "FINANCIAL_CREDIT_AUTHORIZATION"]
-    """Type of event to simulate."""
+    status: Literal[
+        "AUTHORIZATION", "CREDIT_AUTHORIZATION", "FINANCIAL_AUTHORIZATION", "FINANCIAL_CREDIT_AUTHORIZATION"
+    ]
+    """Type of event to simulate. * `CREDIT` indicates funds flow towards the user rather than towards the merchant. * `FINANCIAL` indicates that this is a single message transaction that completes immediately if approved."""

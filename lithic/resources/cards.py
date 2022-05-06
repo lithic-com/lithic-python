@@ -124,8 +124,8 @@ class Cards(SyncAPIResource):
         """Allow your cardholders to directly add payment cards to the device's
         digital wallet (e.g. Apple Pay) with one touch from your app.
 
-        This requires some additional setup and configuration. Please
-        reach out to [api@lithic.com](mailto:api@lithic.com) or your
+        This requires some additional setup and configuration. Reach out
+        at [lithic.com/contact](https://lithic.com/contact) or your
         account rep for more information.
         """
         headers = {"Accept": "application/json", **(headers or {})}
@@ -257,8 +257,8 @@ class AsyncCards(AsyncAPIResource):
         """Allow your cardholders to directly add payment cards to the device's
         digital wallet (e.g. Apple Pay) with one touch from your app.
 
-        This requires some additional setup and configuration. Please
-        reach out to [api@lithic.com](mailto:api@lithic.com) or your
+        This requires some additional setup and configuration. Reach out
+        at [lithic.com/contact](https://lithic.com/contact) or your
         account rep for more information.
         """
         headers = {"Accept": "application/json", **(headers or {})}
