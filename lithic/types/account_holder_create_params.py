@@ -9,15 +9,15 @@ __all__ = [
     "KYCIndividualAddress",
     "KYCIndividual",
     "KYC",
-    "KybBusinessEntityAddress",
-    "KybBusinessEntity",
-    "KybBeneficialOwnerEntitiesAddress",
-    "KybBeneficialOwnerEntities",
-    "KybBeneficialOwnerIndividualsAddress",
-    "KybBeneficialOwnerIndividuals",
-    "KybControlPersonAddress",
-    "KybControlPerson",
-    "Kyb",
+    "KYBBusinessEntityAddress",
+    "KYBBusinessEntity",
+    "KYBBeneficialOwnerEntitiesAddress",
+    "KYBBeneficialOwnerEntities",
+    "KYBBeneficialOwnerIndividualsAddress",
+    "KYBBeneficialOwnerIndividuals",
+    "KYBControlPersonAddress",
+    "KYBControlPerson",
+    "KYB",
     "AccountHolderCreateParams",
 ]
 
@@ -79,7 +79,7 @@ class KYC(TypedDict, total=False):
     """An ISO 8601 timestamp indicating when precomputed KYC was completed on the individual with a pass result. This field is required only if workflow type is `KYC_BYO`."""
 
 
-class KybBusinessEntityAddress(TypedDict, total=False):
+class KYBBusinessEntityAddress(TypedDict, total=False):
     address1: Required[str]
     """Valid deliverable address (no PO boxes)."""
 
@@ -99,8 +99,8 @@ class KybBusinessEntityAddress(TypedDict, total=False):
     """Unit or apartment number (if applicable)."""
 
 
-class KybBusinessEntity(TypedDict, total=False):
-    address: Required[KybBusinessEntityAddress]
+class KYBBusinessEntity(TypedDict, total=False):
+    address: Required[KYBBusinessEntityAddress]
     """Business's physical address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable."""
 
     government_id: Required[str]
@@ -119,7 +119,7 @@ class KybBusinessEntity(TypedDict, total=False):
     """Parent company name (if applicable)."""
 
 
-class KybBeneficialOwnerEntitiesAddress(TypedDict, total=False):
+class KYBBeneficialOwnerEntitiesAddress(TypedDict, total=False):
     address1: Required[str]
     """Valid deliverable address (no PO boxes)."""
 
@@ -139,8 +139,8 @@ class KybBeneficialOwnerEntitiesAddress(TypedDict, total=False):
     """Unit or apartment number (if applicable)."""
 
 
-class KybBeneficialOwnerEntities(TypedDict, total=False):
-    address: Required[KybBeneficialOwnerEntitiesAddress]
+class KYBBeneficialOwnerEntities(TypedDict, total=False):
+    address: Required[KYBBeneficialOwnerEntitiesAddress]
     """Business's physical address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable."""
 
     government_id: Required[str]
@@ -159,7 +159,7 @@ class KybBeneficialOwnerEntities(TypedDict, total=False):
     """Parent company name (if applicable)."""
 
 
-class KybBeneficialOwnerIndividualsAddress(TypedDict, total=False):
+class KYBBeneficialOwnerIndividualsAddress(TypedDict, total=False):
     address1: Required[str]
     """Valid deliverable address (no PO boxes)."""
 
@@ -179,8 +179,8 @@ class KybBeneficialOwnerIndividualsAddress(TypedDict, total=False):
     """Unit or apartment number (if applicable)."""
 
 
-class KybBeneficialOwnerIndividuals(TypedDict, total=False):
-    address: Required[KybBeneficialOwnerIndividualsAddress]
+class KYBBeneficialOwnerIndividuals(TypedDict, total=False):
+    address: Required[KYBBeneficialOwnerIndividualsAddress]
     """Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported."""
 
     dob: Required[str]
@@ -202,7 +202,7 @@ class KybBeneficialOwnerIndividuals(TypedDict, total=False):
     """Individual's phone number, entered in E.164 format."""
 
 
-class KybControlPersonAddress(TypedDict, total=False):
+class KYBControlPersonAddress(TypedDict, total=False):
     address1: Required[str]
     """Valid deliverable address (no PO boxes)."""
 
@@ -222,8 +222,8 @@ class KybControlPersonAddress(TypedDict, total=False):
     """Unit or apartment number (if applicable)."""
 
 
-class KybControlPerson(TypedDict, total=False):
-    address: Required[KybControlPersonAddress]
+class KYBControlPerson(TypedDict, total=False):
+    address: Required[KYBControlPersonAddress]
     """Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported."""
 
     dob: Required[str]
@@ -245,17 +245,17 @@ class KybControlPerson(TypedDict, total=False):
     """Individual's phone number, entered in E.164 format."""
 
 
-class Kyb(TypedDict, total=False):
-    beneficial_owner_entities: Required[List[KybBeneficialOwnerEntities]]
+class KYB(TypedDict, total=False):
+    beneficial_owner_entities: Required[List[KYBBeneficialOwnerEntities]]
     """List of all entities with >25% ownership in the company. If no entity or individual owns >25% of the company, and the largest shareholder is an entity, please identify them in this field. See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section I) for more background. If no business owner is an entity, pass in an empty list. However, either this parameter or `beneficial_owner_individuals` must be populated. on entities that should be included."""
 
-    beneficial_owner_individuals: Required[List[KybBeneficialOwnerIndividuals]]
+    beneficial_owner_individuals: Required[List[KYBBeneficialOwnerIndividuals]]
     """List of all individuals with >25% ownership in the company. If no entity or individual owns >25% of the company, and the largest shareholder is an individual, please identify them in this field. See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section I) for more background on individuals that should be included. If no individual is an entity, pass in an empty list. However, either this parameter or `beneficial_owner_entities` must be populated."""
 
-    business_entity: Required[KybBusinessEntity]
+    business_entity: Required[KYBBusinessEntity]
     """Information for business for which the account is being opened and KYB is being run."""
 
-    control_person: Required[KybControlPerson]
+    control_person: Required[KYBControlPerson]
     """An individual with significant responsibility for managing the legal entity (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating Officer, Managing Member, General Partner, President, Vice President, or Treasurer). This can be an executive, or someone who will have program-wide access to the cards that Lithic will provide. In some cases, this individual could also be a beneficial owner listed above. See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section II) for more background."""
 
     nature_of_business: Required[str]
@@ -274,4 +274,4 @@ class Kyb(TypedDict, total=False):
     """An ISO 8601 timestamp indicating when precomputed KYC was completed on the business with a pass result. This field is required only if workflow type is `KYB_BYO`."""
 
 
-AccountHolderCreateParams = Union[KYC, Kyb]
+AccountHolderCreateParams = Union[KYC, KYB]
