@@ -23,10 +23,10 @@ class Page(BasePage[Item, PaginationParams], Generic[Item]):
     def has_next_page(self) -> bool:
         return self.page < self.total_pages
 
-    def _next_page_params(self):
+    def _next_page_params(self) -> PaginationParams:
         return {"page": self.page + 1}
 
-    def _get_page_items(self):
+    def _get_page_items(self) -> List[Item]:
         return self.data
 
 

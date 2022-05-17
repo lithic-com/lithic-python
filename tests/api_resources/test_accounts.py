@@ -46,13 +46,13 @@ class TestAccounts:
 
     def test_method_list(self) -> None:
         resource = self.client.accounts.list()
-        assert isinstance(resource, SyncPage[Account])
+        assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.accounts.list(
             {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 10, "page_size": 457}
         )
-        assert isinstance(resource, SyncPage[Account])
+        assert isinstance(resource, SyncPage)
 
 
 class TestAsyncAccounts:
@@ -90,10 +90,10 @@ class TestAsyncAccounts:
 
     async def test_method_list(self) -> None:
         resource = await self.client.accounts.list()
-        assert isinstance(resource, AsyncPage[Account])
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.accounts.list(
             {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 18, "page_size": 162}
         )
-        assert isinstance(resource, AsyncPage[Account])
+        assert isinstance(resource, AsyncPage)

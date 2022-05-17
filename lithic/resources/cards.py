@@ -31,9 +31,8 @@ class Cards(SyncAPIResource):
         Parameters `pin`, `shipping_address`, and `product_id` only
         apply to physical cards.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post("/cards", model=Card, body=body, options=options)
+        return self._post("/cards", model=Card, body=body, options=options)
 
     def retrieve(
         self,
@@ -44,9 +43,8 @@ class Cards(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get(f"/cards/{id}", model=Card, options=options)
+        return self._get(f"/cards/{id}", model=Card, options=options)
 
     def update(
         self,
@@ -63,9 +61,8 @@ class Cards(SyncAPIResource):
         only applies to physical cards. *Note: setting a card to a
         `CLOSED` state is a final action that cannot be undone.*
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.patch(f"/cards/{id}", model=Card, body=body, options=options)
+        return self._patch(f"/cards/{id}", model=Card, body=body, options=options)
 
     def list(
         self,
@@ -76,9 +73,8 @@ class Cards(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> SyncPage[Card]:
         """List cards."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list("/cards", model=Card, page=SyncPage[Card], query=query, options=options)
+        return self._get_api_list("/cards", model=Card, page=SyncPage[Card], query=query, options=options)
 
     def embed(
         self,
@@ -109,7 +105,7 @@ class Cards(SyncAPIResource):
         """
         headers = {"Accept": "text/html", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        result = self.get("/embed/card", model=StringModel, query=query, options=options)
+        result = self._get("/embed/card", model=StringModel, query=query, options=options)
         return result.content
 
     def provision(
@@ -128,9 +124,8 @@ class Cards(SyncAPIResource):
         at [lithic.com/contact](https://lithic.com/contact) or your
         account rep for more information.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(f"/cards/{id}/provision", model=CardProvisionResponse, body=body, options=options)
+        return self._post(f"/cards/{id}/provision", model=CardProvisionResponse, body=body, options=options)
 
     def reissue(
         self,
@@ -145,9 +140,8 @@ class Cards(SyncAPIResource):
 
         Only applies to cards of type `PHYSICAL` [beta].
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(f"/cards/{id}/reissue", model=Card, body=body, options=options)
+        return self._post(f"/cards/{id}/reissue", model=Card, body=body, options=options)
 
 
 class AsyncCards(AsyncAPIResource):
@@ -164,9 +158,8 @@ class AsyncCards(AsyncAPIResource):
         Parameters `pin`, `shipping_address`, and `product_id` only
         apply to physical cards.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post("/cards", model=Card, body=body, options=options)
+        return await self._post("/cards", model=Card, body=body, options=options)
 
     async def retrieve(
         self,
@@ -177,9 +170,8 @@ class AsyncCards(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get(f"/cards/{id}", model=Card, options=options)
+        return await self._get(f"/cards/{id}", model=Card, options=options)
 
     async def update(
         self,
@@ -196,9 +188,8 @@ class AsyncCards(AsyncAPIResource):
         only applies to physical cards. *Note: setting a card to a
         `CLOSED` state is a final action that cannot be undone.*
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.patch(f"/cards/{id}", model=Card, body=body, options=options)
+        return await self._patch(f"/cards/{id}", model=Card, body=body, options=options)
 
     def list(
         self,
@@ -209,9 +200,8 @@ class AsyncCards(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AsyncPage[Card]:
         """List cards."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list("/cards", model=Card, page=AsyncPage[Card], query=query, options=options)
+        return self._get_api_list("/cards", model=Card, page=AsyncPage[Card], query=query, options=options)
 
     async def embed(
         self,
@@ -242,7 +232,7 @@ class AsyncCards(AsyncAPIResource):
         """
         headers = {"Accept": "text/html", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        result = await self.get("/embed/card", model=StringModel, query=query, options=options)
+        result = await self._get("/embed/card", model=StringModel, query=query, options=options)
         return result.content
 
     async def provision(
@@ -261,9 +251,8 @@ class AsyncCards(AsyncAPIResource):
         at [lithic.com/contact](https://lithic.com/contact) or your
         account rep for more information.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(f"/cards/{id}/provision", model=CardProvisionResponse, body=body, options=options)
+        return await self._post(f"/cards/{id}/provision", model=CardProvisionResponse, body=body, options=options)
 
     async def reissue(
         self,
@@ -278,6 +267,5 @@ class AsyncCards(AsyncAPIResource):
 
         Only applies to cards of type `PHYSICAL` [beta].
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(f"/cards/{id}/reissue", model=Card, body=body, options=options)
+        return await self._post(f"/cards/{id}/reissue", model=Card, body=body, options=options)

@@ -80,7 +80,7 @@ class TestCards:
 
     def test_method_list(self) -> None:
         resource = self.client.cards.list()
-        assert isinstance(resource, SyncPage[Card])
+        assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.cards.list(
@@ -92,7 +92,7 @@ class TestCards:
                 "page_size": 711,
             }
         )
-        assert isinstance(resource, SyncPage[Card])
+        assert isinstance(resource, SyncPage)
 
     def test_method_embed(self) -> None:
         resource = self.client.cards.embed()
@@ -214,7 +214,7 @@ class TestAsyncCards:
 
     async def test_method_list(self) -> None:
         resource = await self.client.cards.list()
-        assert isinstance(resource, AsyncPage[Card])
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.cards.list(
@@ -226,7 +226,7 @@ class TestAsyncCards:
                 "page_size": 833,
             }
         )
-        assert isinstance(resource, AsyncPage[Card])
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_embed(self) -> None:
         resource = await self.client.cards.embed()

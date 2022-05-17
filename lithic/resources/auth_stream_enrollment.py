@@ -21,9 +21,8 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
     ) -> AuthStreamEnrollment:
         """Check status for whether you have enrolled in Authorization Stream
         Access (ASA) for your program in Sandbox."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get("/auth_stream", model=AuthStreamEnrollment, options=options)
+        return self._get("/auth_stream", model=AuthStreamEnrollment, options=options)
 
     def disenroll(
         self,
@@ -33,8 +32,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
+        headers = {"Accept": "*/*", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        self.delete("/auth_stream", model=NoneModel, options=options)
+        self._delete("/auth_stream", model=NoneModel, options=options)
 
     def enroll(
         self,
@@ -58,8 +58,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         ASA. In production, onboarding requires manual approval and
         setup.
         """
+        headers = {"Accept": "*/*", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        self.post("/auth_stream", model=NoneModel, body=body, options=options)
+        self._post("/auth_stream", model=NoneModel, body=body, options=options)
 
 
 class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
@@ -72,9 +73,8 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
     ) -> AuthStreamEnrollment:
         """Check status for whether you have enrolled in Authorization Stream
         Access (ASA) for your program in Sandbox."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get("/auth_stream", model=AuthStreamEnrollment, options=options)
+        return await self._get("/auth_stream", model=AuthStreamEnrollment, options=options)
 
     async def disenroll(
         self,
@@ -84,8 +84,9 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
+        headers = {"Accept": "*/*", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        await self.delete("/auth_stream", model=NoneModel, options=options)
+        await self._delete("/auth_stream", model=NoneModel, options=options)
 
     async def enroll(
         self,
@@ -109,5 +110,6 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         ASA. In production, onboarding requires manual approval and
         setup.
         """
+        headers = {"Accept": "*/*", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        await self.post("/auth_stream", model=NoneModel, body=body, options=options)
+        await self._post("/auth_stream", model=NoneModel, body=body, options=options)

@@ -5,27 +5,17 @@ import pydantic
 import pydantic.generics
 from pydantic.typing import is_literal_type, resolve_annotations
 
-__all__ = ["BaseModel", "GenericModel", "IResponseModel", "StringModel", "NoneModel"]
-
-
-@runtime_checkable
-class IResponseModel(Protocol):
-    def __init__(self, **data: Any) -> None:
-        pass
-
-    @classmethod
-    def construct(cls, _fields_set=None, **values) -> Self:  # type: ignore [valid-type]
-        pass
+__all__ = ["BaseModel", "GenericModel", "StringModel", "NoneModel"]
 
 
 TBase = TypeVar("TBase")
 
-# Extension class to override a pydantic 'construct' method in a way that supports recursive parsing without validation.
-# Based on https://github.com/samuelcolvin/pydantic/issues/1168#issuecomment-817742836.
-# Should be inherited before the pydantic base class.
-class ExtSafeConstruct:
+
+class BaseModel(pydantic.BaseModel):
+    # Override the 'construct' method in a way that supports recursive parsing without validation.
+    # Based on https://github.com/samuelcolvin/pydantic/issues/1168#issuecomment-817742836.
     @classmethod
-    def construct(cls, _fields_set=None, **values):
+    def construct(cls, _fields_set: set[str] | None = None, **values: object) -> Self:
         m = cls.__new__(cls)
         fields_values = {}
 
@@ -60,11 +50,7 @@ class ExtSafeConstruct:
         return m
 
 
-class BaseModel(ExtSafeConstruct, pydantic.BaseModel):
-    pass
-
-
-class GenericModel(ExtSafeConstruct, pydantic.generics.GenericModel):
+class GenericModel(BaseModel, pydantic.generics.GenericModel):
     pass
 
 

@@ -32,9 +32,8 @@ class AuthRules(SyncAPIResource):
     ) -> AuthRuleCreateResponse:
         """Creates an authorization rule (Auth Rule) and applies it at the
         program, account, or card level."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post("/auth_rules", model=AuthRuleCreateResponse, body=body, options=options)
+        return self._post("/auth_rules", model=AuthRuleCreateResponse, body=body, options=options)
 
     def retrieve(
         self,
@@ -46,9 +45,8 @@ class AuthRules(SyncAPIResource):
     ) -> AuthRuleRetrieveResponse:
         """Detail the properties and entities (program, accounts, and cards)
         associated with an existing authorization rule (Auth Rule)."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get(f"/auth_rules/{id}", model=AuthRuleRetrieveResponse, options=options)
+        return self._get(f"/auth_rules/{id}", model=AuthRuleRetrieveResponse, options=options)
 
     def update(
         self,
@@ -61,9 +59,8 @@ class AuthRules(SyncAPIResource):
     ) -> AuthRuleUpdateResponse:
         """Update the properties associated with an existing authorization rule
         (Auth Rule)."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.put(f"/auth_rules/{id}", model=AuthRuleUpdateResponse, body=body, options=options)
+        return self._put(f"/auth_rules/{id}", model=AuthRuleUpdateResponse, body=body, options=options)
 
     def list(
         self,
@@ -74,9 +71,8 @@ class AuthRules(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AuthRuleListResponse:
         """Return all of the Auth Rules under the program."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get("/auth_rules", model=AuthRuleListResponse, query=query, options=options)
+        return self._get("/auth_rules", model=AuthRuleListResponse, query=query, options=options)
 
     def apply(
         self,
@@ -89,9 +85,8 @@ class AuthRules(SyncAPIResource):
     ) -> AuthRuleApplyResponse:
         """Applies an existing authorization rule (Auth Rule) to an program,
         account, or card level."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(f"/auth_rules/{id}/apply", model=AuthRuleApplyResponse, body=body, options=options)
+        return self._post(f"/auth_rules/{id}/apply", model=AuthRuleApplyResponse, body=body, options=options)
 
     def remove(
         self,
@@ -103,9 +98,8 @@ class AuthRules(SyncAPIResource):
     ) -> AuthRuleRemoveResponse:
         """Remove an existing authorization rule (Auth Rule) from an program,
         account, or card-level."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.delete("/auth_rules/remove", model=AuthRuleRemoveResponse, body=body, options=options)
+        return self._delete("/auth_rules/remove", model=AuthRuleRemoveResponse, body=body, options=options)
 
 
 class AsyncAuthRules(AsyncAPIResource):
@@ -119,9 +113,8 @@ class AsyncAuthRules(AsyncAPIResource):
     ) -> AuthRuleCreateResponse:
         """Creates an authorization rule (Auth Rule) and applies it at the
         program, account, or card level."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post("/auth_rules", model=AuthRuleCreateResponse, body=body, options=options)
+        return await self._post("/auth_rules", model=AuthRuleCreateResponse, body=body, options=options)
 
     async def retrieve(
         self,
@@ -133,9 +126,8 @@ class AsyncAuthRules(AsyncAPIResource):
     ) -> AuthRuleRetrieveResponse:
         """Detail the properties and entities (program, accounts, and cards)
         associated with an existing authorization rule (Auth Rule)."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get(f"/auth_rules/{id}", model=AuthRuleRetrieveResponse, options=options)
+        return await self._get(f"/auth_rules/{id}", model=AuthRuleRetrieveResponse, options=options)
 
     async def update(
         self,
@@ -148,9 +140,8 @@ class AsyncAuthRules(AsyncAPIResource):
     ) -> AuthRuleUpdateResponse:
         """Update the properties associated with an existing authorization rule
         (Auth Rule)."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.put(f"/auth_rules/{id}", model=AuthRuleUpdateResponse, body=body, options=options)
+        return await self._put(f"/auth_rules/{id}", model=AuthRuleUpdateResponse, body=body, options=options)
 
     async def list(
         self,
@@ -161,9 +152,8 @@ class AsyncAuthRules(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AuthRuleListResponse:
         """Return all of the Auth Rules under the program."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get("/auth_rules", model=AuthRuleListResponse, query=query, options=options)
+        return await self._get("/auth_rules", model=AuthRuleListResponse, query=query, options=options)
 
     async def apply(
         self,
@@ -176,9 +166,8 @@ class AsyncAuthRules(AsyncAPIResource):
     ) -> AuthRuleApplyResponse:
         """Applies an existing authorization rule (Auth Rule) to an program,
         account, or card level."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(f"/auth_rules/{id}/apply", model=AuthRuleApplyResponse, body=body, options=options)
+        return await self._post(f"/auth_rules/{id}/apply", model=AuthRuleApplyResponse, body=body, options=options)
 
     async def remove(
         self,
@@ -190,6 +179,5 @@ class AsyncAuthRules(AsyncAPIResource):
     ) -> AuthRuleRemoveResponse:
         """Remove an existing authorization rule (Auth Rule) from an program,
         account, or card-level."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.delete("/auth_rules/remove", model=AuthRuleRemoveResponse, body=body, options=options)
+        return await self._delete("/auth_rules/remove", model=AuthRuleRemoveResponse, body=body, options=options)

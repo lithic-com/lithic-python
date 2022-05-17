@@ -1,8 +1,10 @@
 from __future__ import annotations
 import time
-import asyncio
-from typing import Any, Awaitable, Dict, TypeVar, Union, Optional, Type, Generic, Iterator, AsyncIterator
-from typing_extensions import Literal
+from typing import Any, TypeVar, Union, Optional, Type, Generic, Generator, Iterator, AsyncIterator
+from ._types import Query
+from ._core import RequestOptions, FinalRequestOptions
+
+import anyio
 import httpx
 import pydantic
 from ._core import (
@@ -70,7 +72,7 @@ class AsyncPage(BasePage[Item, PageParams], Generic[Item, TAsyncPage, PageParams
         self._options = options
         self._awaited = False
 
-    def __await__(self) -> Iterator[TAsyncPage]:
+    def __await__(self) -> Generator[Any, None, TAsyncPage]:
         async def awaitable() -> TAsyncPage:
             resp: TAsyncPage = await self._client.request(self._tpage, self._options)
             resp._init_for_iter(self._client, self._tmodel, self._tpage, self._options)
@@ -117,7 +119,13 @@ class SyncAPIClient(BaseClient):
         _strict_response_validation: bool,
     ) -> None:
         super().__init__(version, api_key, _strict_response_validation, max_retries, timeout)
-        self._client = httpx.Client(base_url=base_url, timeout=timeout, proxies=proxies, transport=transport)
+        self._client = httpx.Client(
+            base_url=base_url,
+            timeout=timeout,
+            proxies=proxies,
+            transport=transport,
+            headers={"Accept": "application/json"},
+        )
 
     def request(self, model: Type[Rsp], options: FinalRequestOptions, remaining_retries: Optional[int] = None) -> Rsp:
         retries = self.remaining_retries(remaining_retries, options)
@@ -171,6 +179,32 @@ class SyncAPIClient(BaseClient):
         resp._init_for_iter(self, model, page, options)
         return resp
 
+    def get(self, path: str, *, query: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        return self.request(model, opts)
+
+    def post(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="post", url=path, json=body, **options)  # type: ignore[misc]
+        return self.request(model, opts)
+
+    def patch(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="patch", url=path, json=body, **options)  # type: ignore[misc]
+        return self.request(model, opts)
+
+    def put(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="put", url=path, json=body, **options)  # type: ignore[misc]
+        return self.request(model, opts)
+
+    def delete(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="delete", url=path, json=body, **options)  # type: ignore[misc]
+        return self.request(model, opts)
+
+    def get_api_list(
+        self, path: str, *, query: Query | None = None, model: Type[Item], page: Type[TPage], options: RequestOptions
+    ) -> TPage:
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        return self.request_api_list(model, page, opts)
+
 
 class AsyncAPIClient(BaseClient):
     _client: httpx.AsyncClient
@@ -188,7 +222,13 @@ class AsyncAPIClient(BaseClient):
         proxies: Optional[ProxiesTypes] = None,
     ) -> None:
         super().__init__(version, api_key, _strict_response_validation, max_retries, timeout)
-        self._client = httpx.AsyncClient(base_url=base_url, timeout=timeout, proxies=proxies, transport=transport)
+        self._client = httpx.AsyncClient(
+            base_url=base_url,
+            timeout=timeout,
+            proxies=proxies,
+            transport=transport,
+            headers={"Accept": "application/json"},
+        )
 
     async def request(
         self, model: Type[Rsp], options: FinalRequestOptions, remaining_retries: Optional[int] = None
@@ -229,7 +269,7 @@ class AsyncAPIClient(BaseClient):
         remaining = remaining_retries - 1
         timeout = self.calculate_retry_timeout(remaining, options, response_headers)
         print(f"Retry request in {timeout} seconds")
-        await asyncio.sleep(timeout)
+        await anyio.sleep(timeout)
         return await self.request(
             options=options,
             model=model,
@@ -240,3 +280,35 @@ class AsyncAPIClient(BaseClient):
         p = page.construct()  # construct() here is necessary to instanciate without triggering pydantic validation
         p._init_for_iter(self, model, page, options)
         return p
+
+    async def get(self, path: str, *, query: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        return await self.request(model, opts)
+
+    async def post(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="post", url=path, json=body, **options)  # type: ignore[misc]
+        return await self.request(model, opts)
+
+    async def patch(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="patch", url=path, json=body, **options)  # type: ignore[misc]
+        return await self.request(model, opts)
+
+    async def put(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="put", url=path, json=body, **options)  # type: ignore[misc]
+        return await self.request(model, opts)
+
+    async def delete(self, path: str, *, body: Query | None = None, model: Type[Rsp], options: RequestOptions) -> Rsp:
+        opts = FinalRequestOptions(method="delete", url=path, json=body, **options)  # type: ignore[misc]
+        return await self.request(model, opts)
+
+    def get_api_list(
+        self,
+        path: str,
+        *,
+        query: Query | None = None,
+        model: Type[Item],
+        page: Type[TAsyncPage],
+        options: RequestOptions,
+    ) -> TAsyncPage:
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        return self.request_api_list(model, page, opts)

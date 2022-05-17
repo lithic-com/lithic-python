@@ -22,9 +22,8 @@ class Accounts(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Account:
         """Get account configuration such as spend limits."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get(f"/accounts/{id}", model=Account, options=options)
+        return self._get(f"/accounts/{id}", model=Account, options=options)
 
     def update(
         self,
@@ -42,9 +41,8 @@ class Accounts(SyncAPIResource):
         by this API key. Accounts that are in the `PAUSED` state will
         not be able to transact or create new cards.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.patch(f"/accounts/{id}", model=Account, body=body, options=options)
+        return self._patch(f"/accounts/{id}", model=Account, body=body, options=options)
 
     def list(
         self,
@@ -55,9 +53,8 @@ class Accounts(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> SyncPage[Account]:
         """List account configurations."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list("/accounts", model=Account, page=SyncPage[Account], query=query, options=options)
+        return self._get_api_list("/accounts", model=Account, page=SyncPage[Account], query=query, options=options)
 
 
 class AsyncAccounts(AsyncAPIResource):
@@ -70,9 +67,8 @@ class AsyncAccounts(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Account:
         """Get account configuration such as spend limits."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get(f"/accounts/{id}", model=Account, options=options)
+        return await self._get(f"/accounts/{id}", model=Account, options=options)
 
     async def update(
         self,
@@ -90,9 +86,8 @@ class AsyncAccounts(AsyncAPIResource):
         by this API key. Accounts that are in the `PAUSED` state will
         not be able to transact or create new cards.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.patch(f"/accounts/{id}", model=Account, body=body, options=options)
+        return await self._patch(f"/accounts/{id}", model=Account, body=body, options=options)
 
     def list(
         self,
@@ -103,6 +98,5 @@ class AsyncAccounts(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AsyncPage[Account]:
         """List account configurations."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list("/accounts", model=Account, page=AsyncPage[Account], query=query, options=options)
+        return self._get_api_list("/accounts", model=Account, page=AsyncPage[Account], query=query, options=options)

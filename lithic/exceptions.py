@@ -15,6 +15,7 @@ class APIError(Exception):
 
 class APIResponseValidationError(APIError):
     response: Response
+    status_code: int
 
     def __init__(self, request: Request, response: Response) -> None:
         super().__init__("Data returned by API invalid for expected schema.", request)

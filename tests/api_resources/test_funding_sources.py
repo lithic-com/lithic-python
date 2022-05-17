@@ -43,11 +43,11 @@ class TestFundingSources:
 
     def test_method_list(self) -> None:
         resource = self.client.funding_sources.list()
-        assert isinstance(resource, SyncPage[FundingSource])
+        assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.funding_sources.list({"account_token": "bdcb0604-ffb0-4d92-954f-f0eb3246ee17"})
-        assert isinstance(resource, SyncPage[FundingSource])
+        assert isinstance(resource, SyncPage)
 
     def test_method_verify(self) -> None:
         resource = self.client.funding_sources.verify(
@@ -95,11 +95,11 @@ class TestAsyncFundingSources:
 
     async def test_method_list(self) -> None:
         resource = await self.client.funding_sources.list()
-        assert isinstance(resource, AsyncPage[FundingSource])
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.funding_sources.list({"account_token": "8ba7d10b-6e45-46c0-ba0f-04aed2e22894"})
-        assert isinstance(resource, AsyncPage[FundingSource])
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_verify(self) -> None:
         resource = await self.client.funding_sources.verify(

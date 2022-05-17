@@ -18,9 +18,8 @@ class StatusResource(SyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> APIStatus:
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get("/status", model=APIStatus, options=options)
+        return self._get("/status", model=APIStatus, options=options)
 
 
 class AsyncStatusResource(AsyncAPIResource):
@@ -31,6 +30,5 @@ class AsyncStatusResource(AsyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> APIStatus:
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get("/status", model=APIStatus, options=options)
+        return await self._get("/status", model=APIStatus, options=options)

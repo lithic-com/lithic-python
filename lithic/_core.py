@@ -5,7 +5,7 @@ from typing import Dict, Generic, Iterable, Optional, Any, TypeVar, Union, Type
 from typing_extensions import TypedDict
 import json
 from random import random
-from ._models import NoneModel, IResponseModel, GenericModel
+from ._models import NoneModel, BaseModel, GenericModel
 from abc import ABC, abstractmethod
 from pydantic import PrivateAttr
 
@@ -19,7 +19,7 @@ Transport = httpx.BaseTransport
 ProxiesTypes = Union[str, httpx.Proxy, Dict[str, Union[None, str, httpx.Proxy]]]
 
 Req = TypeVar("Req")
-Rsp = TypeVar("Rsp", bound=IResponseModel)
+Rsp = TypeVar("Rsp", bound=BaseModel)
 
 
 class RequestOptions(TypedDict, total=False):

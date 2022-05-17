@@ -4,7 +4,7 @@ __title__ = "lithic"
 __version__ = "0.1.3"
 
 import os
-from typing import Optional, Union
+from typing import Optional, Union, Dict
 from typing_extensions import TypedDict
 from ._core import Timeout, Transport, ProxiesTypes, DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, RequestOptions
 from ._client import SyncAPIClient, AsyncAPIClient
@@ -27,14 +27,14 @@ from .exceptions import (
     APIStatusError,
 )
 
-environments = {"production": "https://api.lithic.com/v1", "sandbox": "https://sandbox.lithic.com/v1"}
+environments: Dict[str, str] = {"production": "https://api.lithic.com/v1", "sandbox": "https://sandbox.lithic.com/v1"}
 
 __all__ = [
-    "environments",
     "Lithic",
     "AsyncLithic",
     "Client",
     "AsyncClient",
+    "environments",
     "Timeout",
     "Transport",
     "ProxiesTypes",
@@ -114,9 +114,8 @@ class Lithic(SyncAPIClient):
         self.transactions = resources.Transactions(self)
         self.status = resources.StatusResource(self)
 
-    def default_headers(self):
-        header = f"api-key {self.api_key}"
-        return {**super().default_headers(), "Authorization": header}
+    def default_headers(self) -> Dict[str, str]:
+        return {**super().default_headers(), "Authorization": self.api_key}
 
 
 class AsyncLithic(AsyncAPIClient):
@@ -176,9 +175,8 @@ class AsyncLithic(AsyncAPIClient):
         self.transactions = resources.AsyncTransactions(self)
         self.status = resources.AsyncStatusResource(self)
 
-    def default_headers(self):
-        header = f"api-key {self.api_key}"
-        return {**super().default_headers(), "Authorization": header}
+    def default_headers(self) -> Dict[str, str]:
+        return {**super().default_headers(), "Authorization": self.api_key}
 
 
 class Client(Lithic):

@@ -26,7 +26,7 @@ class TestTransactions:
 
     def test_method_list(self) -> None:
         resource = self.client.transactions.list()
-        assert isinstance(resource, SyncPage[Transaction])
+        assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.transactions.list(
@@ -40,7 +40,7 @@ class TestTransactions:
                 "page_size": 586,
             }
         )
-        assert isinstance(resource, SyncPage[Transaction])
+        assert isinstance(resource, SyncPage)
 
     def test_method_simulate_authorization(self) -> None:
         resource = self.client.transactions.simulate_authorization(
@@ -105,7 +105,7 @@ class TestAsyncTransactions:
 
     async def test_method_list(self) -> None:
         resource = await self.client.transactions.list()
-        assert isinstance(resource, AsyncPage[Transaction])
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.transactions.list(
@@ -119,7 +119,7 @@ class TestAsyncTransactions:
                 "page_size": 870,
             }
         )
-        assert isinstance(resource, AsyncPage[Transaction])
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_simulate_authorization(self) -> None:
         resource = await self.client.transactions.simulate_authorization(

@@ -32,9 +32,8 @@ class AccountHolders(SyncAPIResource):
 
         All calls to this endpoint will return an immediate response - though in some cases, the response may indicate the workflow is under review or further action will be needed to complete the account creation process. This endpoint can only be used on accounts that are part of the program the calling API key manages.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post("/account_holders", model=AccountHolder, body=body, options=options)
+        return self._post("/account_holders", model=AccountHolder, body=body, options=options)
 
     def retrieve(
         self,
@@ -45,9 +44,8 @@ class AccountHolders(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get(f"/account_holders/{id}", model=AccountHolder, options=options)
+        return self._get(f"/account_holders/{id}", model=AccountHolder, options=options)
 
     def create_webhook(
         self,
@@ -61,9 +59,8 @@ class AccountHolders(SyncAPIResource):
 
         There are two types of account holder webhooks: - `verification`: Webhook sent when the status of a KYC or KYB evaluation changes from `PENDING_DOCUMENT` (KYC) or `PENDING` (KYB) to `ACCEPTED` or `REJECTED`. - `document_upload_front`/`document_upload_back`: Webhook sent when a document upload fails. After a webhook has been created, this endpoint can be used to rotate a webhooks HMAC token or modify the registered URL. Only a single webhook is allowed per program.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(
+        return self._post(
             "/webhooks/account_holders", model=AccountHolderCreateWebhookResponse, body=body, options=options
         )
 
@@ -89,9 +86,8 @@ class AccountHolders(SyncAPIResource):
         additional entry in the `required_document_uploads` list in a
         `PENDING` state for the corresponding `image_type`.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get(f"/account_holders/{id}/documents", model=AccountHolderListDocumentsResponse, options=options)
+        return self._get(f"/account_holders/{id}/documents", model=AccountHolderListDocumentsResponse, options=options)
 
     def resubmit(
         self,
@@ -113,9 +109,8 @@ class AccountHolders(SyncAPIResource):
         endpoint before a `REJECTED` status is returned and the account
         creation process is ended.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(f"/account_holders/{id}/resubmit", model=AccountHolder, body=body, options=options)
+        return self._post(f"/account_holders/{id}/resubmit", model=AccountHolder, body=body, options=options)
 
     def retrieve_document(
         self,
@@ -140,9 +135,8 @@ class AccountHolders(SyncAPIResource):
         in the `required_document_uploads` array in a `PENDING` state
         for the corresponding `image_type`.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get(
+        return self._get(
             f"/account_holders/{account_holder_token}/documents/{id}", model=AccountHolderDocument, options=options
         )
 
@@ -160,9 +154,8 @@ class AccountHolders(SyncAPIResource):
 
         It will return two URLs to upload your document images to - one for the front image and one for the back image. This endpoint is only valid for evaluations in a `PENDING_DOCUMENT` state. Uploaded images must either be a `jpg` or `png` file, and each must be less than 15 MiB. Once both required uploads have been successfully completed, your document will be run through KYC verification. If you have registered a webhook, you will receive evaluation updates for any document submission evaluations, as well as for any failed document uploads. Two document submission attempts are permitted via this endpoint before a `REJECTED` status is returned and the account creation process is ended. Currently only one type of account holder document is supported per KYC verification.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(f"/account_holders/{id}/documents", model=AccountHolderDocument, body=body, options=options)
+        return self._post(f"/account_holders/{id}/documents", model=AccountHolderDocument, body=body, options=options)
 
 
 class AsyncAccountHolders(AsyncAPIResource):
@@ -180,9 +173,8 @@ class AsyncAccountHolders(AsyncAPIResource):
 
         All calls to this endpoint will return an immediate response - though in some cases, the response may indicate the workflow is under review or further action will be needed to complete the account creation process. This endpoint can only be used on accounts that are part of the program the calling API key manages.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post("/account_holders", model=AccountHolder, body=body, options=options)
+        return await self._post("/account_holders", model=AccountHolder, body=body, options=options)
 
     async def retrieve(
         self,
@@ -193,9 +185,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get(f"/account_holders/{id}", model=AccountHolder, options=options)
+        return await self._get(f"/account_holders/{id}", model=AccountHolder, options=options)
 
     async def create_webhook(
         self,
@@ -209,9 +200,8 @@ class AsyncAccountHolders(AsyncAPIResource):
 
         There are two types of account holder webhooks: - `verification`: Webhook sent when the status of a KYC or KYB evaluation changes from `PENDING_DOCUMENT` (KYC) or `PENDING` (KYB) to `ACCEPTED` or `REJECTED`. - `document_upload_front`/`document_upload_back`: Webhook sent when a document upload fails. After a webhook has been created, this endpoint can be used to rotate a webhooks HMAC token or modify the registered URL. Only a single webhook is allowed per program.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(
+        return await self._post(
             "/webhooks/account_holders", model=AccountHolderCreateWebhookResponse, body=body, options=options
         )
 
@@ -237,9 +227,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         additional entry in the `required_document_uploads` list in a
         `PENDING` state for the corresponding `image_type`.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get(
+        return await self._get(
             f"/account_holders/{id}/documents", model=AccountHolderListDocumentsResponse, options=options
         )
 
@@ -263,9 +252,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         endpoint before a `REJECTED` status is returned and the account
         creation process is ended.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(f"/account_holders/{id}/resubmit", model=AccountHolder, body=body, options=options)
+        return await self._post(f"/account_holders/{id}/resubmit", model=AccountHolder, body=body, options=options)
 
     async def retrieve_document(
         self,
@@ -290,9 +278,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         in the `required_document_uploads` array in a `PENDING` state
         for the corresponding `image_type`.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get(
+        return await self._get(
             f"/account_holders/{account_holder_token}/documents/{id}", model=AccountHolderDocument, options=options
         )
 
@@ -310,8 +297,7 @@ class AsyncAccountHolders(AsyncAPIResource):
 
         It will return two URLs to upload your document images to - one for the front image and one for the back image. This endpoint is only valid for evaluations in a `PENDING_DOCUMENT` state. Uploaded images must either be a `jpg` or `png` file, and each must be less than 15 MiB. Once both required uploads have been successfully completed, your document will be run through KYC verification. If you have registered a webhook, you will receive evaluation updates for any document submission evaluations, as well as for any failed document uploads. Two document submission attempts are permitted via this endpoint before a `REJECTED` status is returned and the account creation process is ended. Currently only one type of account holder document is supported per KYC verification.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(
+        return await self._post(
             f"/account_holders/{id}/documents", model=AccountHolderDocument, body=body, options=options
         )

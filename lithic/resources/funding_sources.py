@@ -31,9 +31,8 @@ class FundingSources(SyncAPIResource):
         funding accounts in sandbox will be set to `ENABLED` state
         automatically.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post("/funding_sources", model=FundingSource, body=body, options=options)
+        return self._post("/funding_sources", model=FundingSource, body=body, options=options)
 
     def update(
         self,
@@ -45,9 +44,8 @@ class FundingSources(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> FundingSource:
         """Update a funding source."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.patch(f"/funding_sources/{id}", model=FundingSource, body=body, options=options)
+        return self._patch(f"/funding_sources/{id}", model=FundingSource, body=body, options=options)
 
     def list(
         self,
@@ -58,9 +56,8 @@ class FundingSources(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> SyncPage[FundingSource]:
         """List all the funding sources associated with the Lithic account."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list(
+        return self._get_api_list(
             "/funding_sources", model=FundingSource, page=SyncPage[FundingSource], query=query, options=options
         )
 
@@ -75,9 +72,8 @@ class FundingSources(SyncAPIResource):
     ) -> FundingSource:
         """Verify a bank account as a funding source by providing received
         micro-deposit amounts."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(f"/funding_sources/{id}/verify", model=FundingSource, body=body, options=options)
+        return self._post(f"/funding_sources/{id}/verify", model=FundingSource, body=body, options=options)
 
 
 class AsyncFundingSources(AsyncAPIResource):
@@ -97,9 +93,8 @@ class AsyncFundingSources(AsyncAPIResource):
         funding accounts in sandbox will be set to `ENABLED` state
         automatically.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post("/funding_sources", model=FundingSource, body=body, options=options)
+        return await self._post("/funding_sources", model=FundingSource, body=body, options=options)
 
     async def update(
         self,
@@ -111,9 +106,8 @@ class AsyncFundingSources(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> FundingSource:
         """Update a funding source."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.patch(f"/funding_sources/{id}", model=FundingSource, body=body, options=options)
+        return await self._patch(f"/funding_sources/{id}", model=FundingSource, body=body, options=options)
 
     def list(
         self,
@@ -124,9 +118,8 @@ class AsyncFundingSources(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AsyncPage[FundingSource]:
         """List all the funding sources associated with the Lithic account."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list(
+        return self._get_api_list(
             "/funding_sources", model=FundingSource, page=AsyncPage[FundingSource], query=query, options=options
         )
 
@@ -141,6 +134,5 @@ class AsyncFundingSources(AsyncAPIResource):
     ) -> FundingSource:
         """Verify a bank account as a funding source by providing received
         micro-deposit amounts."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(f"/funding_sources/{id}/verify", model=FundingSource, body=body, options=options)
+        return await self._post(f"/funding_sources/{id}/verify", model=FundingSource, body=body, options=options)

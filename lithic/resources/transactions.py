@@ -29,9 +29,8 @@ class Transactions(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Transaction:
         """Get specific transaction."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get(f"/transactions/{id}", model=Transaction, options=options)
+        return self._get(f"/transactions/{id}", model=Transaction, options=options)
 
     def list(
         self,
@@ -42,9 +41,8 @@ class Transactions(SyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> SyncPage[Transaction]:
         """List transactions."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list(
+        return self._get_api_list(
             "/transactions", model=Transaction, page=SyncPage[Transaction], query=query, options=options
         )
 
@@ -63,9 +61,8 @@ class Transactions(SyncAPIResource):
         client to be set up properly (respond with a valid JSON to the
         ASA request).
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post(
+        return self._post(
             "/simulate/authorize", model=TransactionSimulateAuthorizationResponse, body=body, options=options
         )
 
@@ -84,9 +81,8 @@ class Transactions(SyncAPIResource):
         transaction will be captured. Any transaction that has any
         amount completed at all do not have access to this behavior.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post("/simulate/clearing", model=TransactionSimulateClearingResponse, body=body, options=options)
+        return self._post("/simulate/clearing", model=TransactionSimulateClearingResponse, body=body, options=options)
 
     def simulate_return(
         self,
@@ -101,9 +97,8 @@ class Transactions(SyncAPIResource):
         Returns are cleared immediately and do not spend time in a
         `PENDING` state.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
+        return self._post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
 
     def simulate_void(
         self,
@@ -119,9 +114,8 @@ class Transactions(SyncAPIResource):
         used on partially completed transactions, but can be used on
         partially voided transactions.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)
+        return self._post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)
 
 
 class AsyncTransactions(AsyncAPIResource):
@@ -134,9 +128,8 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Transaction:
         """Get specific transaction."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.get(f"/transactions/{id}", model=Transaction, options=options)
+        return await self._get(f"/transactions/{id}", model=Transaction, options=options)
 
     def list(
         self,
@@ -147,9 +140,8 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AsyncPage[Transaction]:
         """List transactions."""
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return self.get_api_list(
+        return self._get_api_list(
             "/transactions", model=Transaction, page=AsyncPage[Transaction], query=query, options=options
         )
 
@@ -168,9 +160,8 @@ class AsyncTransactions(AsyncAPIResource):
         client to be set up properly (respond with a valid JSON to the
         ASA request).
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(
+        return await self._post(
             "/simulate/authorize", model=TransactionSimulateAuthorizationResponse, body=body, options=options
         )
 
@@ -189,9 +180,8 @@ class AsyncTransactions(AsyncAPIResource):
         transaction will be captured. Any transaction that has any
         amount completed at all do not have access to this behavior.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post(
+        return await self._post(
             "/simulate/clearing", model=TransactionSimulateClearingResponse, body=body, options=options
         )
 
@@ -208,9 +198,8 @@ class AsyncTransactions(AsyncAPIResource):
         Returns are cleared immediately and do not spend time in a
         `PENDING` state.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
+        return await self._post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
 
     async def simulate_void(
         self,
@@ -226,6 +215,5 @@ class AsyncTransactions(AsyncAPIResource):
         used on partially completed transactions, but can be used on
         partially voided transactions.
         """
-        headers = {"Accept": "application/json", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        return await self.post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)
+        return await self._post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)
