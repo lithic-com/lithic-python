@@ -5,6 +5,7 @@ from .._core import Timeout, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
+from .._client import AsyncPaginator
 from ..types.auth_stream_enrollment import *
 from ..types.auth_stream_enrollment_enroll_params import *
 

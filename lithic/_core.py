@@ -1,18 +1,21 @@
+from __future__ import annotations
+
 import inspect
 import platform
 import httpx
-from typing import Dict, Generic, Iterable, Optional, Any, TypeVar, Union, Type
+from typing import Dict, Generic, Iterable, Optional, Any, TypeVar, Union, Type, Mapping
 from typing_extensions import TypedDict
 import json
 from random import random
 from ._models import NoneModel, BaseModel, GenericModel
-from abc import ABC, abstractmethod
+from ._types import ModelT
+from abc import ABC
 from pydantic import PrivateAttr
 
 DEFAULT_MAX_RETRIES = 2
 
 Timeout = httpx.Timeout
-DEFAULT_TIMEOUT = Timeout(timeout=60.0)
+DEFAULT_TIMEOUT = Timeout(timeout=60.0, connect=5.0)
 
 Transport = httpx.BaseTransport
 # Approximates httpx internal ProxiesTypes
@@ -29,9 +32,9 @@ class RequestOptions(TypedDict, total=False):
 
 
 def make_request_options(
-    headers,
-    max_retries,
-    timeout,
+    headers: Dict[str, str] | None = None,
+    max_retries: int | None = None,
+    timeout: float | Timeout | None = None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of None values."""
     d = {
@@ -87,9 +90,13 @@ class BaseClient(ABC):
     ) -> Dict[str, Any]:
         headers = {**self.default_headers(), **options.get("headers", {})}
         req_args: Dict[str, Any] = {**options, "headers": headers, "timeout": options.get("timeout", self.timeout)}
+
         # ensure we only returned expected keyword arguments to `build_request()` to avoid a `TypeError: build_request()
         # got an unexpected keyword argument 'max_retries'`.
-        expected_params = inspect.signature(httpx.Client.build_request).parameters.values()
+        # https://github.com/encode/httpx/discussions/2181
+        expected_params = inspect.signature(
+            httpx.Client.build_request  # pyright: ignore[reportUnknownArgumentType, reportUnknownMemberType]
+        ).parameters.values()
         return {k: v for k, v in req_args.items() if k in [p.name for p in expected_params]}
 
     def process_response(self, model: Type[Rsp], options: FinalRequestOptions, response: httpx.Response) -> Rsp:
@@ -160,44 +167,47 @@ class BaseClient(ABC):
 
     def should_retry(self, response: httpx.Response) -> bool:
         # Note: this is not a standard header
-        shouldRetryHeader = response.headers.get("x-should-retry")
+        should_retry_header = response.headers.get("x-should-retry")
 
         # If the server explicitly says whether or not to retry, obey.
-        if shouldRetryHeader == "true":
+        if should_retry_header == "true":
             return True
-        if shouldRetryHeader == "false":
+        if should_retry_header == "false":
             return False
 
         # Retry on lock timeouts.
         if response.status_code == 409:
             return True
+
         # Retry on rate limits.
         if response.status_code == 429:
             return True
+
         # Retry internal errors.
         if response.status_code >= 500:
             return True
+
         return False
 
 
 Page = TypeVar("Page")
-Item = TypeVar("Item")
-PageParams = TypeVar("PageParams")
+PageParams = TypeVar("PageParams", bound=Mapping[str, object])
 
 
-class BasePage(GenericModel, Generic[Item, PageParams]):
+class BasePage(GenericModel, Generic[ModelT, PageParams]):
     _options: FinalRequestOptions = PrivateAttr()
+    _model: Type[ModelT] = PrivateAttr()
 
-    def has_next_page(self) -> bool:  # type: ignore
-        pass
+    def has_next_page(self) -> bool:
+        ...
 
-    def next_page_params(self) -> Optional[PageParams]:  # type: ignore
+    def next_page_params(self) -> Optional[PageParams]:
         if self.has_next_page():
             return self._next_page_params()
         return None
 
-    def _next_page_params(self) -> PageParams:  # type: ignore
-        pass
+    def _next_page_params(self) -> PageParams:
+        ...
 
-    def _get_page_items(self) -> Iterable[Item]:  # type: ignore
-        pass
+    def _get_page_items(self) -> Iterable[ModelT]:
+        ...

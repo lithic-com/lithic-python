@@ -1,21 +1,21 @@
 from __future__ import annotations
-from typing import Any, ForwardRef, Generic, TypeVar
-from typing_extensions import Protocol, Self, runtime_checkable
+from typing import Any, Type, cast
+
 import pydantic
 import pydantic.generics
-from pydantic.typing import is_literal_type, resolve_annotations
+from pydantic.typing import is_literal_type
+
+from ._types import ModelT
+
 
 __all__ = ["BaseModel", "GenericModel", "StringModel", "NoneModel"]
-
-
-TBase = TypeVar("TBase")
 
 
 class BaseModel(pydantic.BaseModel):
     # Override the 'construct' method in a way that supports recursive parsing without validation.
     # Based on https://github.com/samuelcolvin/pydantic/issues/1168#issuecomment-817742836.
     @classmethod
-    def construct(cls, _fields_set: set[str] | None = None, **values: object) -> Self:
+    def construct(cls: Type[ModelT], _fields_set: set[str] | None = None, **values: object) -> ModelT:
         m = cls.__new__(cls)
         fields_values = {}
 
@@ -34,7 +34,9 @@ class BaseModel(pydantic.BaseModel):
                         issubclass(field.type_, BaseModel) or issubclass(field.type_, GenericModel)
                     ):
                         if field.shape == 2:
-                            fields_values[name] = [field.type_.construct(**e) for e in values[key]]
+                            # field.shape == 2 signifies a List
+                            # TODO: should we validate that this is actually a list at runtime?
+                            fields_values[name] = [field.type_.construct(**e) for e in cast(Any, values[key])]
                         else:
                             fields_values[name] = field.outer_type_.construct(**values[key])
                     else:

@@ -5,6 +5,7 @@ from .._core import Timeout, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
+from .._client import AsyncPaginator
 from ..types.transaction import *
 from ..types.transaction_simulate_authorization_response import *
 from ..types.transaction_simulate_clearing_response import *
@@ -138,7 +139,7 @@ class AsyncTransactions(AsyncAPIResource):
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
-    ) -> AsyncPage[Transaction]:
+    ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """List transactions."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get_api_list(

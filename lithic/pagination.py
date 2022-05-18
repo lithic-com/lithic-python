@@ -4,7 +4,8 @@ from typing import Optional, TypeVar, List, Generic, Dict, Any
 from typing_extensions import TypedDict
 from ._models import GenericModel
 from ._core import FinalRequestOptions, BasePage
-from ._client import SyncPage as BaseSyncPage, AsyncPage as BaseAsyncPage, Item
+from ._client import BaseSyncPage, BaseAsyncPage
+from ._types import ModelT
 
 __all__ = ["PaginationParams", "SyncPage", "AsyncPage"]
 
@@ -14,8 +15,8 @@ class PaginationParams(TypedDict, total=False):
     page_size: int
 
 
-class Page(BasePage[Item, PaginationParams], Generic[Item]):
-    data: List[Item]
+class Page(BasePage[ModelT, PaginationParams], Generic[ModelT]):
+    data: List[ModelT]
     page: int
     total_pages: int
     total_entries: int
@@ -26,13 +27,13 @@ class Page(BasePage[Item, PaginationParams], Generic[Item]):
     def _next_page_params(self) -> PaginationParams:
         return {"page": self.page + 1}
 
-    def _get_page_items(self) -> List[Item]:
+    def _get_page_items(self) -> List[ModelT]:
         return self.data
 
 
-class SyncPage(Page[Item], BaseSyncPage[Item, "SyncPage[Item]", PaginationParams], Generic[Item]):
+class SyncPage(Page[ModelT], BaseSyncPage[ModelT], Generic[ModelT]):
     pass
 
 
-class AsyncPage(Page[Item], BaseAsyncPage[Item, "AsyncPage[Item]", PaginationParams], Generic[Item]):
+class AsyncPage(Page[ModelT], BaseAsyncPage[ModelT], Generic[ModelT]):
     pass

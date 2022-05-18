@@ -5,6 +5,7 @@ from .._core import Timeout, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
+from .._client import AsyncPaginator
 from ..types.account_holder import *
 from ..types.account_holder_document import *
 from ..types.account_holder_create_webhook_response import *

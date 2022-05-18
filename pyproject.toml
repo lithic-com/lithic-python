@@ -15,12 +15,13 @@ typing-extensions = "^4.1.1"
 anyio = "^3.5.0"
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.941"
+mypy = "^0.950"
 black = "^22.1.0"
 docformatter = "^1.4"
 respx = "^0.19.2"
 pytest = "^7.1.1"
 pytest-asyncio = "^0.18.3"
+pyright = "^1.1.247"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -37,3 +38,23 @@ xfail_strict = true
 log_cli = true
 log_level = "INFO"
 asyncio_mode = "auto"
+
+[tool.pyright]
+# this enables practically every flag given by pyright.
+# there are a couple of flags that are still disabled by
+# default in strict mode as they are experimental and niche.
+typeCheckingMode = "strict"
+
+include = [
+    "lithic",
+    "tests",
+]
+exclude = [
+    "_dev"
+]
+
+# Currently we have a lot of unused imports, this doesn't matter
+# that much and is more of a code cleanliness lint.
+# In the future we could re-enable this flag when the codegen
+# is improved in this regard.
+reportUnusedImport = false

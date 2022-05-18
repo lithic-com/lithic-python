@@ -5,6 +5,7 @@ from .._core import Timeout, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
+from .._client import AsyncPaginator
 from ..types.funding_source import *
 from ..types.funding_source_create_params import *
 from ..types.funding_source_update_params import *
@@ -116,7 +117,7 @@ class AsyncFundingSources(AsyncAPIResource):
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
-    ) -> AsyncPage[FundingSource]:
+    ) -> AsyncPaginator[FundingSource, AsyncPage[FundingSource]]:
         """List all the funding sources associated with the Lithic account."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get_api_list(

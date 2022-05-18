@@ -5,6 +5,7 @@ from .._core import Timeout, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
+from .._client import AsyncPaginator
 from ..types.account import *
 from ..types.account_update_params import *
 from ..types.account_list_params import *
@@ -96,7 +97,7 @@ class AsyncAccounts(AsyncAPIResource):
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
-    ) -> AsyncPage[Account]:
+    ) -> AsyncPaginator[Account, AsyncPage[Account]]:
         """List account configurations."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get_api_list("/accounts", model=Account, page=AsyncPage[Account], query=query, options=options)
