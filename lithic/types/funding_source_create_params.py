@@ -18,10 +18,20 @@ class Bank(TypedDict, total=False):
     validation_method: Required[Literal["BANK"]]
 
     account_name: str
-    """The name associated with the bank account. This property is only for identification purposes, and has no bearing on the external properties of the bank."""
+    """The name associated with the bank account.
+
+    This property is only for identification purposes, and has no bearing on the
+    external properties of the bank.
+    """
 
     account_token: str
-    """Only required for multi-account users. Token identifying the account that the bank account will be associated with. Only applicable if using account enrollment. See [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more information."""
+    """Only required for multi-account users.
+
+    Token identifying the account that the bank account will be associated with.
+    Only applicable if using account enrollment. See
+    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
+    information.
+    """
 
 
 class Plaid(TypedDict, total=False):
@@ -31,7 +41,13 @@ class Plaid(TypedDict, total=False):
     validation_method: Required[Literal["PLAID"]]
 
     account_token: str
-    """Only required for multi-account users. Token identifying the account associated with the bank account. Only applicable if using account creation. See [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more information."""
+    """Only required for multi-account users.
+
+    Token identifying the account associated with the bank account. Only applicable
+    if using account creation. See
+    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
+    information.
+    """
 
 
 FundingSourceCreateParams = Union[Bank, Plaid]

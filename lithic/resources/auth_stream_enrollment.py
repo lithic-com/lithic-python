@@ -1,11 +1,12 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import Optional, Union, List, Dict
-from .._core import Timeout, make_request_options
+
+from .._types import Timeout
+from .._base_client import AsyncPaginator, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
-from .._client import AsyncPaginator
 from ..types.auth_stream_enrollment import *
 from ..types.auth_stream_enrollment_enroll_params import *
 
@@ -20,8 +21,10 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AuthStreamEnrollment:
-        """Check status for whether you have enrolled in Authorization Stream
-        Access (ASA) for your program in Sandbox."""
+        """
+        Check status for whether you have enrolled in Authorization Stream Access (ASA)
+        for your program in Sandbox.
+        """
         options = make_request_options(headers, max_retries, timeout)
         return self._get("/auth_stream", model=AuthStreamEnrollment, options=options)
 
@@ -45,19 +48,19 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> None:
-        """Authorization Stream Access (ASA) provides the ability to make
-        custom transaction approval decisions through an HTTP interface to the
-        ISO 8583 message stream.
+        """
+        Authorization Stream Access (ASA) provides the ability to make custom
+        transaction approval decisions through an HTTP interface to the ISO 8583 message
+        stream.
 
-        ASA requests are delivered as an HTTP POST during authorization.
-        The ASA request body adheres to the Lithic transaction schema,
-        with some additional fields added for use in decisioning. A
-        response should be sent with HTTP response code 200 and the
-        approval decision in the response body. This response is
-        converted by Lithic back into ISO 8583 format and forwarded to
-        the network. In Sandbox, users can self-enroll and disenroll in
-        ASA. In production, onboarding requires manual approval and
-        setup.
+        ASA requests are delivered as an HTTP POST during authorization. The ASA request
+        body adheres to the Lithic transaction schema, with some additional fields added
+        for use in decisioning. A response should be sent with HTTP response code 200
+        and the approval decision in the response body. This response is converted by
+        Lithic back into ISO 8583 format and forwarded to the network.
+
+        In Sandbox, users can self-enroll and disenroll in ASA. In production,
+        onboarding requires manual approval and setup.
         """
         headers = {"Accept": "*/*", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
@@ -72,8 +75,10 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> AuthStreamEnrollment:
-        """Check status for whether you have enrolled in Authorization Stream
-        Access (ASA) for your program in Sandbox."""
+        """
+        Check status for whether you have enrolled in Authorization Stream Access (ASA)
+        for your program in Sandbox.
+        """
         options = make_request_options(headers, max_retries, timeout)
         return await self._get("/auth_stream", model=AuthStreamEnrollment, options=options)
 
@@ -97,19 +102,19 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> None:
-        """Authorization Stream Access (ASA) provides the ability to make
-        custom transaction approval decisions through an HTTP interface to the
-        ISO 8583 message stream.
+        """
+        Authorization Stream Access (ASA) provides the ability to make custom
+        transaction approval decisions through an HTTP interface to the ISO 8583 message
+        stream.
 
-        ASA requests are delivered as an HTTP POST during authorization.
-        The ASA request body adheres to the Lithic transaction schema,
-        with some additional fields added for use in decisioning. A
-        response should be sent with HTTP response code 200 and the
-        approval decision in the response body. This response is
-        converted by Lithic back into ISO 8583 format and forwarded to
-        the network. In Sandbox, users can self-enroll and disenroll in
-        ASA. In production, onboarding requires manual approval and
-        setup.
+        ASA requests are delivered as an HTTP POST during authorization. The ASA request
+        body adheres to the Lithic transaction schema, with some additional fields added
+        for use in decisioning. A response should be sent with HTTP response code 200
+        and the approval decision in the response body. This response is converted by
+        Lithic back into ISO 8583 format and forwarded to the network.
+
+        In Sandbox, users can self-enroll and disenroll in ASA. In production,
+        onboarding requires manual approval and setup.
         """
         headers = {"Accept": "*/*", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)

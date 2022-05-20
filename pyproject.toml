@@ -17,7 +17,6 @@ anyio = "^3.5.0"
 [tool.poetry.dev-dependencies]
 mypy = "^0.950"
 black = "^22.1.0"
-docformatter = "^1.4"
 respx = "^0.19.2"
 pytest = "^7.1.1"
 pytest-asyncio = "^0.18.3"
@@ -52,9 +51,5 @@ include = [
 exclude = [
     "_dev"
 ]
-
-# Currently we have a lot of unused imports, this doesn't matter
-# that much and is more of a code cleanliness lint.
-# In the future we could re-enable this flag when the codegen
-# is improved in this regard.
+reportImportCycles = false
 reportUnusedImport = false

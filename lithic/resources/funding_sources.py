@@ -1,11 +1,12 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import Optional, Union, List, Dict
-from .._core import Timeout, make_request_options
+
+from .._types import Timeout
+from .._base_client import AsyncPaginator, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
-from .._client import AsyncPaginator
 from ..types.funding_source import *
 from ..types.funding_source_create_params import *
 from ..types.funding_source_update_params import *
@@ -24,13 +25,11 @@ class FundingSources(SyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> FundingSource:
-        """Add a funding source using bank routing and account numbers or via
-        Plaid.
+        """Add a funding source using bank routing and account numbers or via Plaid.
 
-        In the production environment, funding accounts will be set to
-        `PENDING` state until micro-deposit validation completes while
-        funding accounts in sandbox will be set to `ENABLED` state
-        automatically.
+        In the production environment, funding accounts will be set to `PENDING` state
+        until micro-deposit validation completes while funding accounts in sandbox will
+        be set to `ENABLED` state automatically.
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post("/funding_sources", model=FundingSource, body=body, options=options)
@@ -71,8 +70,10 @@ class FundingSources(SyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> FundingSource:
-        """Verify a bank account as a funding source by providing received
-        micro-deposit amounts."""
+        """
+        Verify a bank account as a funding source by providing received micro-deposit
+        amounts.
+        """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(f"/funding_sources/{id}/verify", model=FundingSource, body=body, options=options)
 
@@ -86,13 +87,11 @@ class AsyncFundingSources(AsyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> FundingSource:
-        """Add a funding source using bank routing and account numbers or via
-        Plaid.
+        """Add a funding source using bank routing and account numbers or via Plaid.
 
-        In the production environment, funding accounts will be set to
-        `PENDING` state until micro-deposit validation completes while
-        funding accounts in sandbox will be set to `ENABLED` state
-        automatically.
+        In the production environment, funding accounts will be set to `PENDING` state
+        until micro-deposit validation completes while funding accounts in sandbox will
+        be set to `ENABLED` state automatically.
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post("/funding_sources", model=FundingSource, body=body, options=options)
@@ -133,7 +132,9 @@ class AsyncFundingSources(AsyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> FundingSource:
-        """Verify a bank account as a funding source by providing received
-        micro-deposit amounts."""
+        """
+        Verify a bank account as a funding source by providing received micro-deposit
+        amounts.
+        """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(f"/funding_sources/{id}/verify", model=FundingSource, body=body, options=options)

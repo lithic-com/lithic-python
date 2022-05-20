@@ -10,10 +10,16 @@ __all__ = ["AccountListParams"]
 
 class AccountListParams(TypedDict, total=False):
     begin: str
-    """Date string in 8601 format. Only entries created after the specified date will be included. UTC time zone."""
+    """Date string in 8601 format.
+
+    Only entries created after the specified date will be included. UTC time zone.
+    """
 
     end: str
-    """Date string in 8601 format. Only entries created before the specified date will be included. UTC time zone."""
+    """Date string in 8601 format.
+
+    Only entries created before the specified date will be included. UTC time zone.
+    """
 
     page: int
     """Page (for pagination)."""

@@ -14,4 +14,7 @@ class TransactionSimulateAuthorizationResponse(BaseModel):
     """Debugging request ID to share with Lithic Support team."""
 
     token: Optional[str]
-    """A unique token to reference this transaction with later calls to void or clear the authorization."""
+    """
+    A unique token to reference this transaction with later calls to void or clear
+    the authorization.
+    """

@@ -13,4 +13,10 @@ class FundingSourceVerifyParams(TypedDict, total=False):
     """An array of dollar amounts (in cents) received in two credit transactions."""
 
     account_token: str
-    """Only required for multi-account users. Token identifying the account that the bank account will be associated with. Only applicable if using account enrollment. See [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more information."""
+    """Only required for multi-account users.
+
+    Token identifying the account that the bank account will be associated with.
+    Only applicable if using account enrollment. See
+    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
+    information.
+    """

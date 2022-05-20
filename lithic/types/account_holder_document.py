@@ -30,7 +30,12 @@ class RequiredDocumentUploads(BaseModel):
     ]
 
     upload_url: Optional[str]
-    """URL to upload document image to. Note that the upload URLs expire after 7 days. If an upload URL expires, you can refresh the URLs by retrieving the document upload from `GET /account_holders/{account_holder_token}/documents`."""
+    """URL to upload document image to.
+
+    Note that the upload URLs expire after 7 days. If an upload URL expires, you can
+    refresh the URLs by retrieving the document upload from
+    `GET /account_holders/{account_holder_token}/documents`.
+    """
 
 
 class AccountHolderDocument(BaseModel):

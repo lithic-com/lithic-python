@@ -1,11 +1,12 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import Optional, Union, List, Dict
-from .._core import Timeout, make_request_options
+
+from .._types import Timeout
+from .._base_client import AsyncPaginator, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
-from .._client import AsyncPaginator
 from ..types.account import *
 from ..types.account_update_params import *
 from ..types.account_list_params import *
@@ -35,12 +36,13 @@ class Accounts(SyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Account:
-        """Update account configuration such as spend limits and verification
-        address.
+        """Update account configuration such as spend limits and verification address.
 
-        Can only be run on accounts that are part of the program managed
-        by this API key. Accounts that are in the `PAUSED` state will
-        not be able to transact or create new cards.
+        Can only be run on accounts that are part of the program managed by this API
+        key.
+
+        Accounts that are in the `PAUSED` state will not be able to transact or create
+        new cards.
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._patch(f"/accounts/{id}", model=Account, body=body, options=options)
@@ -80,12 +82,13 @@ class AsyncAccounts(AsyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> Account:
-        """Update account configuration such as spend limits and verification
-        address.
+        """Update account configuration such as spend limits and verification address.
 
-        Can only be run on accounts that are part of the program managed
-        by this API key. Accounts that are in the `PAUSED` state will
-        not be able to transact or create new cards.
+        Can only be run on accounts that are part of the program managed by this API
+        key.
+
+        Accounts that are in the `PAUSED` state will not be able to transact or create
+        new cards.
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._patch(f"/accounts/{id}", model=Account, body=body, options=options)

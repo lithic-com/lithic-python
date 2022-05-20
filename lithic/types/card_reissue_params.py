@@ -10,7 +10,12 @@ __all__ = ["CardReissueParams"]
 
 class CardReissueParams(TypedDict, total=False):
     product_id: str
-    """Specifies the configuration (e.g. physical card art) that the card should be manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This must be configured with Lithic before use."""
+    """Specifies the configuration (e.g.
+
+    physical card art) that the card should be manufactured with, and only applies
+    to cards of type `PHYSICAL` [beta]. This must be configured with Lithic before
+    use.
+    """
 
     shipping_address: shared_params.ShippingAddress
     """If omitted, the previous shipping address will be used."""

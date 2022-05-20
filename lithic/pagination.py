@@ -3,9 +3,8 @@
 from typing import Optional, TypeVar, List, Generic, Dict, Any
 from typing_extensions import TypedDict
 from ._models import GenericModel
-from ._core import FinalRequestOptions, BasePage
-from ._client import BaseSyncPage, BaseAsyncPage
-from ._types import ModelT
+from ._types import FinalRequestOptions, ModelT
+from ._base_client import BasePage, BaseSyncPage, BaseAsyncPage
 
 __all__ = ["PaginationParams", "SyncPage", "AsyncPage"]
 

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from ._client import SyncAPIClient, AsyncAPIClient
+from ._base_client import SyncAPIClient, AsyncAPIClient
 
 
 class SyncAPIResource:

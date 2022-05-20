@@ -1,11 +1,12 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import Optional, Union, List, Dict
-from .._core import Timeout, make_request_options
+
+from .._types import Timeout
+from .._base_client import AsyncPaginator, make_request_options
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
-from .._client import AsyncPaginator
 from ..types.transaction import *
 from ..types.transaction_simulate_authorization_response import *
 from ..types.transaction_simulate_clearing_response import *
@@ -55,12 +56,10 @@ class Transactions(SyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> TransactionSimulateAuthorizationResponse:
-        """Simulates an authorization request from the payment network as if it
-        came from a merchant acquirer.
-
-        If you're configured for ASA, simulating auths requires your ASA
-        client to be set up properly (respond with a valid JSON to the
-        ASA request).
+        """
+        Simulates an authorization request from the payment network as if it came from a
+        merchant acquirer. If you're configured for ASA, simulating auths requires your
+        ASA client to be set up properly (respond with a valid JSON to the ASA request).
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
@@ -77,10 +76,11 @@ class Transactions(SyncAPIResource):
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
-        After this event, the transaction is no longer pending. If no
-        `amount` is supplied to this endpoint, the amount of the
-        transaction will be captured. Any transaction that has any
-        amount completed at all do not have access to this behavior.
+        After this event, the transaction is no longer pending.
+
+        If no `amount` is supplied to this endpoint, the amount of the transaction will
+        be captured. Any transaction that has any amount completed at all do not have
+        access to this behavior.
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post("/simulate/clearing", model=TransactionSimulateClearingResponse, body=body, options=options)
@@ -95,8 +95,7 @@ class Transactions(SyncAPIResource):
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
-        Returns are cleared immediately and do not spend time in a
-        `PENDING` state.
+        Returns are cleared immediately and do not spend time in a `PENDING` state.
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
@@ -111,9 +110,9 @@ class Transactions(SyncAPIResource):
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
-        If amount is not sent the full amount will be voided. Cannot be
-        used on partially completed transactions, but can be used on
-        partially voided transactions.
+        If amount is not sent the full amount will be voided. Cannot be used on
+        partially completed transactions, but can be used on partially voided
+        transactions.
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)
@@ -154,12 +153,10 @@ class AsyncTransactions(AsyncAPIResource):
         max_retries: Optional[int] = None,
         timeout: Optional[Union[float, Timeout]] = None,
     ) -> TransactionSimulateAuthorizationResponse:
-        """Simulates an authorization request from the payment network as if it
-        came from a merchant acquirer.
-
-        If you're configured for ASA, simulating auths requires your ASA
-        client to be set up properly (respond with a valid JSON to the
-        ASA request).
+        """
+        Simulates an authorization request from the payment network as if it came from a
+        merchant acquirer. If you're configured for ASA, simulating auths requires your
+        ASA client to be set up properly (respond with a valid JSON to the ASA request).
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
@@ -176,10 +173,11 @@ class AsyncTransactions(AsyncAPIResource):
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
-        After this event, the transaction is no longer pending. If no
-        `amount` is supplied to this endpoint, the amount of the
-        transaction will be captured. Any transaction that has any
-        amount completed at all do not have access to this behavior.
+        After this event, the transaction is no longer pending.
+
+        If no `amount` is supplied to this endpoint, the amount of the transaction will
+        be captured. Any transaction that has any amount completed at all do not have
+        access to this behavior.
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
@@ -196,8 +194,7 @@ class AsyncTransactions(AsyncAPIResource):
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
-        Returns are cleared immediately and do not spend time in a
-        `PENDING` state.
+        Returns are cleared immediately and do not spend time in a `PENDING` state.
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
@@ -212,9 +209,9 @@ class AsyncTransactions(AsyncAPIResource):
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
-        If amount is not sent the full amount will be voided. Cannot be
-        used on partially completed transactions, but can be used on
-        partially voided transactions.
+        If amount is not sent the full amount will be voided. Cannot be used on
+        partially completed transactions, but can be used on partially voided
+        transactions.
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)

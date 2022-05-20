@@ -14,7 +14,11 @@ class AccountHolder(BaseModel):
     """Globally unique identifier for the account."""
 
     status: Optional[Literal["ACCEPTED", "REJECTED", "PENDING_RESUBMIT", "PENDING_DOCUMENT"]]
-    """KYC and KYB evaluation states. Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the `ADVANCED` workflow."""
+    """KYC and KYB evaluation states.
+
+    Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
+    `ADVANCED` workflow.
+    """
 
     status_reasons: Optional[
         List[

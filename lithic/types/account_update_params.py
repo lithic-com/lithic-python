@@ -27,7 +27,11 @@ class AccountUpdateParams(TypedDict, total=False):
     """Amount (in cents) for the account's new daily spend limit."""
 
     lifetime_spend_limit: int
-    """Amount (in cents) for the account's new lifetime limit. Once this limit is reached, no transactions will be accepted on any card created for this account until the limit is updated."""
+    """Amount (in cents) for the account's new lifetime limit.
+
+    Once this limit is reached, no transactions will be accepted on any card created
+    for this account until the limit is updated.
+    """
 
     monthly_spend_limit: int
     """Amount (in cents) for the account's new monthly spend limit."""
@@ -36,4 +40,7 @@ class AccountUpdateParams(TypedDict, total=False):
     """Account states."""
 
     verification_address: VerificationAddress
-    """Address used during Address Verification Service (AVS) checks during transactions if enabled via Auth Rules."""
+    """
+    Address used during Address Verification Service (AVS) checks during
+    transactions if enabled via Auth Rules.
+    """

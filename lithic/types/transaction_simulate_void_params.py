@@ -13,4 +13,7 @@ class TransactionSimulateVoidParams(TypedDict, total=False):
     """The transaction token returned from the /v1/simulate/authorize response."""
 
     amount: int
-    """Amount (in cents) to void. Typically this will match the original authorization, but may be less."""
+    """Amount (in cents) to void.
+
+    Typically this will match the original authorization, but may be less.
+    """
