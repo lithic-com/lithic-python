@@ -11,7 +11,7 @@ from ._client import (
     AsyncClient,
     Lithic,
     AsyncLithic,
-    environments,
+    ENVIRONMENTS,
 )
 from .exceptions import (
     APIError,
@@ -54,5 +54,5 @@ __all__ = [
     "AsyncClient",
     "Lithic",
     "AsyncLithic",
-    "environments",
+    "ENVIRONMENTS",
 ]

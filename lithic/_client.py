@@ -2,25 +2,39 @@
 
 import os
 from typing import Optional, Union, Dict
+from typing_extensions import Literal
 from ._types import Timeout, Transport, ProxiesTypes, RequestOptions
-from ._base_client import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, SyncAPIClient, AsyncAPIClient
+from ._base_client import (
+    DEFAULT_TIMEOUT,
+    DEFAULT_MAX_RETRIES,
+    SyncAPIClient,
+    AsyncAPIClient,
+    AsyncPaginator,
+    make_request_options,
+)
 from . import resources
 from ._version import __version__
+from .pagination import SyncPage, AsyncPage
+from .types.shipping_address import *
 
-environments: Dict[str, str] = {"production": "https://api.lithic.com/v1", "sandbox": "https://sandbox.lithic.com/v1"}
 
 __all__ = [
     "Lithic",
     "AsyncLithic",
     "Client",
     "AsyncClient",
-    "environments",
+    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
     "resources",
 ]
+
+ENVIRONMENTS: Dict[str, str] = {
+    "production": "https://api.lithic.com/v1",
+    "sandbox": "https://sandbox.lithic.com/v1",
+}
 
 
 class Lithic(SyncAPIClient):
@@ -36,7 +50,7 @@ class Lithic(SyncAPIClient):
     def __init__(
         self,
         *,
-        environment: str = "production",
+        environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
@@ -58,7 +72,12 @@ class Lithic(SyncAPIClient):
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
             raise Exception("No API key provided")
-        base_url = base_url or environments.get(environment or "") or ""
+
+        if base_url is None:
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -97,7 +116,7 @@ class AsyncLithic(AsyncAPIClient):
     def __init__(
         self,
         *,
-        environment: str = "production",
+        environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
@@ -119,7 +138,12 @@ class AsyncLithic(AsyncAPIClient):
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
             raise Exception("No API key provided")
-        base_url = base_url or environments.get(environment or "") or ""
+
+        if base_url is None:
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
