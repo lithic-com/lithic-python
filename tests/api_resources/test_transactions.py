@@ -1,15 +1,15 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
+
 import pytest
+
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
-
 from lithic.types.transaction import *
-from lithic.types.transaction_simulate_authorization_response import *
-from lithic.types.transaction_simulate_clearing_response import *
-from lithic.types.transaction_simulate_return_response import *
 from lithic.types.transaction_simulate_void_response import *
-
+from lithic.types.transaction_simulate_return_response import *
+from lithic.types.transaction_simulate_clearing_response import *
+from lithic.types.transaction_simulate_authorization_response import *
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")

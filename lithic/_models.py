@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import Any, Type, cast
 
 import pydantic
@@ -6,7 +7,6 @@ import pydantic.generics
 from pydantic.typing import is_literal_type
 
 from ._types import ModelT
-
 
 __all__ = ["BaseModel", "GenericModel", "StringModel", "NoneModel"]
 

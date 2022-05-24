@@ -1,23 +1,23 @@
 from __future__ import annotations
 
-import time
 import json
+import time
 import inspect
 import platform
 from random import random
 from typing import (
     Any,
-    TypeVar,
-    Union,
-    Optional,
-    Type,
-    Generic,
-    Generator,
-    Iterator,
-    Iterable,
-    AsyncIterator,
-    Mapping,
     Dict,
+    Type,
+    Union,
+    Generic,
+    Mapping,
+    TypeVar,
+    Iterable,
+    Iterator,
+    Optional,
+    Generator,
+    AsyncIterator,
     cast,
 )
 
@@ -26,18 +26,22 @@ import httpx
 import pydantic
 from pydantic import PrivateAttr
 
-from ._models import GenericModel, BaseModel, NoneModel
-from ._types import ModelT
 from ._types import (
     Query,
+    ModelT,
     Timeout,
     Transport,
     ProxiesTypes,
     RequestOptions,
     FinalRequestOptions,
 )
-from .exceptions import APITimeoutError, APIConnectionError, APIResponseValidationError, make_status_error
-
+from ._models import BaseModel, NoneModel, GenericModel
+from .exceptions import (
+    APITimeoutError,
+    APIConnectionError,
+    APIResponseValidationError,
+    make_status_error,
+)
 
 # TODO: make base page type vars covariant
 SyncPageT = TypeVar("SyncPageT", bound="BaseSyncPage[Any]")

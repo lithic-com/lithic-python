@@ -1,15 +1,15 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Optional, Union, List, Dict
+from typing import Dict, List, Union, Optional
 
 from .._types import Timeout
-from .._base_client import AsyncPaginator, make_request_options
+from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._models import StringModel, NoneModel
 from ..pagination import SyncPage, AsyncPage
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.account import *
-from ..types.account_update_params import *
 from ..types.account_list_params import *
+from ..types.account_update_params import *
 
 __all__ = ["Accounts", "AsyncAccounts"]
 

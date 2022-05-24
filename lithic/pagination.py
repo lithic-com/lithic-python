@@ -1,9 +1,11 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Optional, TypeVar, List, Generic, Dict, Any
+from typing import Any, Dict, List, Generic, TypeVar, Optional
+
 from typing_extensions import TypedDict
+
+from ._types import ModelT, FinalRequestOptions
 from ._models import GenericModel
-from ._types import FinalRequestOptions, ModelT
 from ._base_client import BasePage, BaseSyncPage, BaseAsyncPage
 
 __all__ = ["PaginationParams", "SyncPage", "AsyncPage"]

@@ -1,9 +1,8 @@
-from typing import Mapping, TypeVar, Dict, Union, Any
-from typing_extensions import TypedDict
+from typing import Any, Dict, Union, Mapping, TypeVar
 
 import pydantic
-from httpx import Timeout, BaseTransport, Proxy
-
+from httpx import Proxy, Timeout, BaseTransport
+from typing_extensions import TypedDict
 
 Transport = BaseTransport
 Query = Mapping[str, object]

@@ -1,9 +1,14 @@
 # File generated from our OpenAPI spec by Stainless.
 
 import os
-from typing import Optional, Union, Dict
+from typing import Dict, Union, Optional
+
 from typing_extensions import Literal
+
+from . import resources
 from ._types import Timeout, Transport, ProxiesTypes, RequestOptions
+from ._version import __version__
+from .pagination import SyncPage, AsyncPage
 from ._base_client import (
     DEFAULT_TIMEOUT,
     DEFAULT_MAX_RETRIES,
@@ -12,11 +17,7 @@ from ._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from . import resources
-from ._version import __version__
-from .pagination import SyncPage, AsyncPage
 from .types.shipping_address import *
-
 
 __all__ = [
     "Lithic",
