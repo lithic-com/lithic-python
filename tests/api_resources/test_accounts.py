@@ -16,28 +16,28 @@ class TestAccounts:
 
     def test_method_retrieve(self) -> None:
         resource = self.client.accounts.retrieve(
-            "bb463b8b-b76c-4f6a-9726-65ab5730b69b",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, Account)
 
     def test_method_update(self) -> None:
-        resource = self.client.accounts.update("a27218b8-6a4d-47bb-95b6-5a55334fac1c", {})
+        resource = self.client.accounts.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, Account)
 
     def test_method_update_with_optional_params(self) -> None:
         resource = self.client.accounts.update(
-            "a27218b8-6a4d-47bb-95b6-5a55334fac1c",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
-                "daily_spend_limit": 9,
+                "daily_spend_limit": 0,
                 "lifetime_spend_limit": 0,
-                "monthly_spend_limit": 9,
+                "monthly_spend_limit": 0,
                 "verification_address": {
-                    "address1": "mel",
-                    "address2": "i",
-                    "city": "ltxsynnmqodhimkrwx",
-                    "state": "cmmzg",
-                    "postal_code": "lptdmvupho",
-                    "country": "iahikrrww",
+                    "address1": "string",
+                    "address2": "string",
+                    "city": "string",
+                    "state": "string",
+                    "postal_code": "string",
+                    "country": "string",
                 },
                 "state": "ACTIVE",
             },
@@ -50,7 +50,7 @@ class TestAccounts:
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.accounts.list(
-            {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 10, "page_size": 457}
+            {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 0, "page_size": 1}
         )
         assert isinstance(resource, SyncPage)
 
@@ -60,30 +60,30 @@ class TestAsyncAccounts:
 
     async def test_method_retrieve(self) -> None:
         resource = await self.client.accounts.retrieve(
-            "a49d94a8-d215-4ce3-a379-318e2aebf079",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, Account)
 
     async def test_method_update(self) -> None:
-        resource = await self.client.accounts.update("488242cb-158b-4e83-a5ed-db56034668b8", {})
+        resource = await self.client.accounts.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, Account)
 
     async def test_method_update_with_optional_params(self) -> None:
         resource = await self.client.accounts.update(
-            "488242cb-158b-4e83-a5ed-db56034668b8",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
-                "daily_spend_limit": 20,
+                "daily_spend_limit": 0,
                 "lifetime_spend_limit": 0,
-                "monthly_spend_limit": 7,
+                "monthly_spend_limit": 0,
                 "verification_address": {
-                    "address1": "tbpbrwdhktgji",
-                    "address2": "narocgdxilrfwhovwo",
-                    "city": "rivjwekv",
-                    "state": "i",
-                    "postal_code": "onppniaxzr",
-                    "country": "jfohlnhxhzogsonujkq",
+                    "address1": "string",
+                    "address2": "string",
+                    "city": "string",
+                    "state": "string",
+                    "postal_code": "string",
+                    "country": "string",
                 },
-                "state": "PAUSED",
+                "state": "ACTIVE",
             },
         )
         assert isinstance(resource, Account)
@@ -94,6 +94,6 @@ class TestAsyncAccounts:
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.accounts.list(
-            {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 18, "page_size": 162}
+            {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 0, "page_size": 1}
         )
         assert isinstance(resource, AsyncPage)

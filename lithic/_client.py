@@ -17,7 +17,6 @@ from ._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from .types.shipping_address import *
 
 __all__ = [
     "Lithic",

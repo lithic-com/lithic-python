@@ -23,21 +23,23 @@ class TestFundingSources:
     def test_method_create_with_optional_params(self) -> None:
         resource = self.client.funding_sources.create(
             {
-                "validation_method": "PLAID",
-                "account_token": "6c060042-dfd3-4ad4-978e-712450f29275",
-                "processor_token": "sghoosrcoha",
+                "validation_method": "BANK",
+                "account_name": "Sandbox",
+                "account_number": "13719713158835300",
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "routing_number": "011103093",
             }
         )
         assert isinstance(resource, FundingSource)
 
     def test_method_update(self) -> None:
-        resource = self.client.funding_sources.update("36b1e36a-a903-4246-aa6a-23d22f253751", {})
+        resource = self.client.funding_sources.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, FundingSource)
 
     def test_method_update_with_optional_params(self) -> None:
         resource = self.client.funding_sources.update(
-            "36b1e36a-a903-4246-aa6a-23d22f253751",
-            {"account_token": "deea88c6-b003-4bdd-9a32-3f5c968c88db", "state": "ENABLED"},
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "state": "DELETED"},
         )
         assert isinstance(resource, FundingSource)
 
@@ -46,19 +48,19 @@ class TestFundingSources:
         assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
-        resource = self.client.funding_sources.list({"account_token": "bdcb0604-ffb0-4d92-954f-f0eb3246ee17"})
+        resource = self.client.funding_sources.list({"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
         assert isinstance(resource, SyncPage)
 
     def test_method_verify(self) -> None:
         resource = self.client.funding_sources.verify(
-            "3c912590-9e9b-442d-bf14-9de4f57cd2c0", {"micro_deposits": [0, 8, 3]}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"micro_deposits": [0, 0, 0]}
         )
         assert isinstance(resource, FundingSource)
 
     def test_method_verify_with_optional_params(self) -> None:
         resource = self.client.funding_sources.verify(
-            "3c912590-9e9b-442d-bf14-9de4f57cd2c0",
-            {"account_token": "23119425-46be-418f-a478-8c43954346db", "micro_deposits": [8, 15, 10]},
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "micro_deposits": [0, 0, 0]},
         )
         assert isinstance(resource, FundingSource)
 
@@ -75,21 +77,23 @@ class TestAsyncFundingSources:
     async def test_method_create_with_optional_params(self) -> None:
         resource = await self.client.funding_sources.create(
             {
-                "validation_method": "PLAID",
-                "account_token": "79b9bca4-3cd8-44e5-a81d-6aeb73e5028b",
-                "processor_token": "yftldz",
+                "validation_method": "BANK",
+                "account_name": "Sandbox",
+                "account_number": "13719713158835300",
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "routing_number": "011103093",
             }
         )
         assert isinstance(resource, FundingSource)
 
     async def test_method_update(self) -> None:
-        resource = await self.client.funding_sources.update("b46d13fb-b490-4de5-8af7-b138aab7d2c1", {})
+        resource = await self.client.funding_sources.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, FundingSource)
 
     async def test_method_update_with_optional_params(self) -> None:
         resource = await self.client.funding_sources.update(
-            "b46d13fb-b490-4de5-8af7-b138aab7d2c1",
-            {"account_token": "aa3d0e36-4f7d-4664-aa53-1d0d3d41bc2c", "state": "ENABLED"},
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "state": "DELETED"},
         )
         assert isinstance(resource, FundingSource)
 
@@ -98,18 +102,18 @@ class TestAsyncFundingSources:
         assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
-        resource = await self.client.funding_sources.list({"account_token": "8ba7d10b-6e45-46c0-ba0f-04aed2e22894"})
+        resource = await self.client.funding_sources.list({"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
         assert isinstance(resource, AsyncPage)
 
     async def test_method_verify(self) -> None:
         resource = await self.client.funding_sources.verify(
-            "4836be62-76dc-4328-8db2-89ed7c3e40cb", {"micro_deposits": [17, 4, 15]}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"micro_deposits": [0, 0, 0]}
         )
         assert isinstance(resource, FundingSource)
 
     async def test_method_verify_with_optional_params(self) -> None:
         resource = await self.client.funding_sources.verify(
-            "4836be62-76dc-4328-8db2-89ed7c3e40cb",
-            {"account_token": "82c76cb1-d7fe-4825-b62d-d32e103f81ee", "micro_deposits": [2, 11, 20]},
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "micro_deposits": [0, 0, 0]},
         )
         assert isinstance(resource, FundingSource)

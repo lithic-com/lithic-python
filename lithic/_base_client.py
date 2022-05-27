@@ -416,7 +416,7 @@ class SyncAPIClient(BaseClient):
         self,
         model: Type[ModelT],
         page: Type[SyncPageT],
-        options: FinalRequestOptions,
+        options: FinalRequestOptions = {},
     ) -> SyncPageT:
         resp = self.request(page, options)
         resp._set_private_attributes(  # pyright: ignore[reportPrivateUsage]
@@ -430,9 +430,9 @@ class SyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        query: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        query: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
         return self.request(model, opts)
@@ -441,9 +441,9 @@ class SyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        body: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="post", url=path, json=body, **options)  # type: ignore[misc]
         return self.request(model, opts)
@@ -452,9 +452,9 @@ class SyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        body: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="patch", url=path, json=body, **options)  # type: ignore[misc]
         return self.request(model, opts)
@@ -463,9 +463,9 @@ class SyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        body: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="put", url=path, json=body, **options)  # type: ignore[misc]
         return self.request(model, opts)
@@ -474,9 +474,9 @@ class SyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        body: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="delete", url=path, json=body, **options)  # type: ignore[misc]
         return self.request(model, opts)
@@ -488,7 +488,7 @@ class SyncAPIClient(BaseClient):
         query: Query | None = None,
         model: Type[ModelT],
         page: Type[SyncPageT],
-        options: RequestOptions,
+        options: RequestOptions = {},
     ) -> SyncPageT:
         opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
         return self.request_api_list(model, page, opts)
@@ -584,7 +584,7 @@ class AsyncAPIClient(BaseClient):
         self,
         model: Type[ModelT],
         page: Type[AsyncPageT],
-        options: FinalRequestOptions,
+        options: FinalRequestOptions = {},
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
         return AsyncPaginator(client=self, options=options, page_cls=page, model=model)
 
@@ -592,9 +592,9 @@ class AsyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        query: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        query: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
         return await self.request(model, opts)
@@ -603,9 +603,9 @@ class AsyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        body: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="post", url=path, json=body, **options)  # type: ignore[misc]
         return await self.request(model, opts)
@@ -614,21 +614,31 @@ class AsyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        body: Query | None = None,
         model: Type[ResponseT],
-        options: RequestOptions,
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="patch", url=path, json=body, **options)  # type: ignore[misc]
         return await self.request(model, opts)
 
     async def put(
-        self, path: str, *, body: Query | None = None, model: Type[ResponseT], options: RequestOptions
+        self,
+        path: str,
+        *,
+        model: Type[ResponseT],
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="put", url=path, json=body, **options)  # type: ignore[misc]
         return await self.request(model, opts)
 
     async def delete(
-        self, path: str, *, body: Query | None = None, model: Type[ResponseT], options: RequestOptions
+        self,
+        path: str,
+        *,
+        model: Type[ResponseT],
+        body: Query | None = None,
+        options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="delete", url=path, json=body, **options)  # type: ignore[misc]
         return await self.request(model, opts)
@@ -640,7 +650,7 @@ class AsyncAPIClient(BaseClient):
         query: Query | None = None,
         model: Type[ModelT],
         page: Type[AsyncPageT],
-        options: RequestOptions,
+        options: RequestOptions = {},
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
         opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
         return self.request_api_list(model, page, opts)

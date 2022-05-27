@@ -27,13 +27,13 @@ class TestAuthRules:
     def test_method_create_with_optional_params(self) -> None:
         resource = self.client.auth_rules.create(
             {
-                "allowed_mcc": ["rjjhdroasarbgcntnxs", "jyumqxaforweooehnwtk", "iv"],
-                "blocked_mcc": ["ejnjkugfqyawtjniwd", "vahduuhmnl", "iwhxzjlwwpquwiwdyq"],
-                "allowed_countries": ["fuutlpvsasabbn", "utgrmylvksdpnql", "rqomalausascyo"],
-                "blocked_countries": ["mmdqylufjjtcrroepm", "zva", "dehtyzxzeuzltdogydw"],
+                "allowed_mcc": ["string", "string", "string"],
+                "blocked_mcc": ["string", "string", "string"],
+                "allowed_countries": ["string", "string", "string"],
+                "blocked_countries": ["string", "string", "string"],
                 "avs_type": "ZIP_ONLY",
-                "card_tokens": ["koroqjiaermegnjoyr", "hrkiozjrj", "ecfy"],
-                "account_tokens": ["ycqxalf", "umwglljxhzdpdqy", "vxekfhrstqvmevzwfs"],
+                "card_tokens": ["string", "string", "string"],
+                "account_tokens": ["string", "string", "string"],
                 "program_level": True,
             }
         )
@@ -41,22 +41,22 @@ class TestAuthRules:
 
     def test_method_retrieve(self) -> None:
         resource = self.client.auth_rules.retrieve(
-            "499f7af9-b8dc-4711-83fc-7c5955c862cb",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AuthRuleRetrieveResponse)
 
     def test_method_update(self) -> None:
-        resource = self.client.auth_rules.update("73d41570-764d-4f2e-a7c1-836477d51c77", {})
+        resource = self.client.auth_rules.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, AuthRuleUpdateResponse)
 
     def test_method_update_with_optional_params(self) -> None:
         resource = self.client.auth_rules.update(
-            "73d41570-764d-4f2e-a7c1-836477d51c77",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
-                "allowed_mcc": ["wqzcftpnwpyohxs", "aiwrb", "tdzjnrfqprqfryew"],
-                "blocked_mcc": ["sqlbnrofgaoovvswdc", "rgsihuz", "hbblngsogtiyoixwtefo"],
-                "allowed_countries": ["knvtz", "bnapltinrxqy", "xftignkdhhrjiutgc"],
-                "blocked_countries": ["uvpwvplcqzor", "qtjoneuxafnqaylfzfiw", "vdjzgodizevcxunbc"],
+                "allowed_mcc": ["string", "string", "string"],
+                "blocked_mcc": ["string", "string", "string"],
+                "allowed_countries": ["string", "string", "string"],
+                "blocked_countries": ["string", "string", "string"],
                 "avs_type": "ZIP_ONLY",
             },
         )
@@ -67,20 +67,20 @@ class TestAuthRules:
         assert isinstance(resource, AuthRuleListResponse)
 
     def test_method_list_with_optional_params(self) -> None:
-        resource = self.client.auth_rules.list({"page": 6, "page_size": 53})
+        resource = self.client.auth_rules.list({"page": 0, "page_size": 1})
         assert isinstance(resource, AuthRuleListResponse)
 
     def test_method_apply(self) -> None:
-        resource = self.client.auth_rules.apply("95cebf0d-f216-4f31-b3aa-7955178f5968", {})
+        resource = self.client.auth_rules.apply("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, AuthRuleApplyResponse)
 
     def test_method_apply_with_optional_params(self) -> None:
         resource = self.client.auth_rules.apply(
-            "95cebf0d-f216-4f31-b3aa-7955178f5968",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
-                "card_tokens": ["wksona", "wvxfoggjz", "jcsarilxfkztblmo"],
-                "account_tokens": ["jhdv", "jlckfqwjzlgtrucy", "akzxeixyjnhjpqa"],
-                "program_level": False,
+                "card_tokens": ["string", "string", "string"],
+                "account_tokens": ["string", "string", "string"],
+                "program_level": True,
             },
         )
         assert isinstance(resource, AuthRuleApplyResponse)
@@ -92,8 +92,8 @@ class TestAuthRules:
     def test_method_remove_with_optional_params(self) -> None:
         resource = self.client.auth_rules.remove(
             {
-                "card_tokens": ["fafsyomqtqmkpkpwzyrg", "sahfy", "lktvguwck"],
-                "account_tokens": ["nnwpwkoqpwurhzmskvh", "", "rericuvvpqcx"],
+                "card_tokens": ["string", "string", "string"],
+                "account_tokens": ["string", "string", "string"],
                 "program_level": True,
             }
         )
@@ -110,13 +110,13 @@ class TestAsyncAuthRules:
     async def test_method_create_with_optional_params(self) -> None:
         resource = await self.client.auth_rules.create(
             {
-                "allowed_mcc": ["", "fgxapjxqii", "hjt"],
-                "blocked_mcc": ["tpskcznaowt", "xwjdlitz", "poqjxfcewcxcp"],
-                "allowed_countries": ["xjrbexyfugwfdzccr", "pykrewmgerdswln", "issxztangmileatnwk"],
-                "blocked_countries": ["ejdklebjz", "jijs", "x"],
+                "allowed_mcc": ["string", "string", "string"],
+                "blocked_mcc": ["string", "string", "string"],
+                "allowed_countries": ["string", "string", "string"],
+                "blocked_countries": ["string", "string", "string"],
                 "avs_type": "ZIP_ONLY",
-                "card_tokens": ["gavaciqv", "lxavevtqtztfjrjlusk", "snpyjlci"],
-                "account_tokens": ["fx", "lnzvjqgwjcilqlaw", "jkxlnmglgmviqlmk"],
+                "card_tokens": ["string", "string", "string"],
+                "account_tokens": ["string", "string", "string"],
                 "program_level": True,
             }
         )
@@ -124,22 +124,22 @@ class TestAsyncAuthRules:
 
     async def test_method_retrieve(self) -> None:
         resource = await self.client.auth_rules.retrieve(
-            "82983a8f-9004-4803-86cd-8597a0646aa5",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AuthRuleRetrieveResponse)
 
     async def test_method_update(self) -> None:
-        resource = await self.client.auth_rules.update("53b4fff1-5740-4885-adae-4bbb56014d18", {})
+        resource = await self.client.auth_rules.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, AuthRuleUpdateResponse)
 
     async def test_method_update_with_optional_params(self) -> None:
         resource = await self.client.auth_rules.update(
-            "53b4fff1-5740-4885-adae-4bbb56014d18",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
-                "allowed_mcc": ["qhrqomaafi", "mlos", "uq"],
-                "blocked_mcc": ["ikemukbbyhsjmfapkw", "vwoqskmlmwqju", "w"],
-                "allowed_countries": ["vzkjuflbk", "zic", "lrybsylghdan"],
-                "blocked_countries": ["rdhirkhixswr", "m", "osw"],
+                "allowed_mcc": ["string", "string", "string"],
+                "blocked_mcc": ["string", "string", "string"],
+                "allowed_countries": ["string", "string", "string"],
+                "blocked_countries": ["string", "string", "string"],
                 "avs_type": "ZIP_ONLY",
             },
         )
@@ -150,20 +150,20 @@ class TestAsyncAuthRules:
         assert isinstance(resource, AuthRuleListResponse)
 
     async def test_method_list_with_optional_params(self) -> None:
-        resource = await self.client.auth_rules.list({"page": 0, "page_size": 749})
+        resource = await self.client.auth_rules.list({"page": 0, "page_size": 1})
         assert isinstance(resource, AuthRuleListResponse)
 
     async def test_method_apply(self) -> None:
-        resource = await self.client.auth_rules.apply("d354b706-3415-4236-a74e-fa0b81746f28", {})
+        resource = await self.client.auth_rules.apply("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
         assert isinstance(resource, AuthRuleApplyResponse)
 
     async def test_method_apply_with_optional_params(self) -> None:
         resource = await self.client.auth_rules.apply(
-            "d354b706-3415-4236-a74e-fa0b81746f28",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
-                "card_tokens": ["", "zauclcrahxlgwzot", "gwzvwbekew"],
-                "account_tokens": ["ncspzbffyyrmko", "hvlfdt", "kbxbqrlbvn"],
-                "program_level": False,
+                "card_tokens": ["string", "string", "string"],
+                "account_tokens": ["string", "string", "string"],
+                "program_level": True,
             },
         )
         assert isinstance(resource, AuthRuleApplyResponse)
@@ -175,8 +175,8 @@ class TestAsyncAuthRules:
     async def test_method_remove_with_optional_params(self) -> None:
         resource = await self.client.auth_rules.remove(
             {
-                "card_tokens": ["qepov", "flldwd", "cpbsohtkuiyyezd"],
-                "account_tokens": ["mtwxteoneskbsujebi", "rsdsqehitklk", "cckdnasaoakvynpmzr"],
+                "card_tokens": ["string", "string", "string"],
+                "account_tokens": ["string", "string", "string"],
                 "program_level": True,
             }
         )
