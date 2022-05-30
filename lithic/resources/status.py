@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import AsyncPaginator, make_request_options
@@ -15,9 +15,9 @@ class StatusResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> APIStatus:
         options = make_request_options(headers, max_retries, timeout)
         return self._get("/status", model=APIStatus, options=options)
@@ -27,9 +27,9 @@ class AsyncStatusResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> APIStatus:
         options = make_request_options(headers, max_retries, timeout)
         return await self._get("/status", model=APIStatus, options=options)

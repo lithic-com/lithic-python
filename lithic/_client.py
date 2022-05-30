@@ -6,7 +6,7 @@ from typing import Dict, Union, Optional
 from typing_extensions import Literal
 
 from . import resources
-from ._types import Timeout, Transport, ProxiesTypes, RequestOptions
+from ._types import Timeout, NotGiven, Transport, ProxiesTypes, RequestOptions
 from ._version import __version__
 from ._base_client import (
     DEFAULT_TIMEOUT,

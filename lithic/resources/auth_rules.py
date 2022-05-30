@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import AsyncPaginator, make_request_options
@@ -27,9 +27,9 @@ class AuthRules(SyncAPIResource):
         self,
         body: AuthRuleCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleCreateResponse:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
@@ -42,9 +42,9 @@ class AuthRules(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleRetrieveResponse:
         """
         Detail the properties and entities (program, accounts, and cards) associated
@@ -58,9 +58,9 @@ class AuthRules(SyncAPIResource):
         id: str,
         body: AuthRuleUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleUpdateResponse:
         """
         Update the properties associated with an existing authorization rule (Auth
@@ -73,9 +73,9 @@ class AuthRules(SyncAPIResource):
         self,
         query: AuthRuleListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleListResponse:
         """Return all of the Auth Rules under the program."""
         options = make_request_options(headers, max_retries, timeout)
@@ -86,9 +86,9 @@ class AuthRules(SyncAPIResource):
         id: str,
         body: AuthRuleApplyParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleApplyResponse:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
@@ -101,9 +101,9 @@ class AuthRules(SyncAPIResource):
         self,
         body: AuthRuleRemoveParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or
@@ -118,9 +118,9 @@ class AsyncAuthRules(AsyncAPIResource):
         self,
         body: AuthRuleCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleCreateResponse:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
@@ -133,9 +133,9 @@ class AsyncAuthRules(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleRetrieveResponse:
         """
         Detail the properties and entities (program, accounts, and cards) associated
@@ -149,9 +149,9 @@ class AsyncAuthRules(AsyncAPIResource):
         id: str,
         body: AuthRuleUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleUpdateResponse:
         """
         Update the properties associated with an existing authorization rule (Auth
@@ -164,9 +164,9 @@ class AsyncAuthRules(AsyncAPIResource):
         self,
         query: AuthRuleListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleListResponse:
         """Return all of the Auth Rules under the program."""
         options = make_request_options(headers, max_retries, timeout)
@@ -177,9 +177,9 @@ class AsyncAuthRules(AsyncAPIResource):
         id: str,
         body: AuthRuleApplyParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleApplyResponse:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
@@ -192,9 +192,9 @@ class AsyncAuthRules(AsyncAPIResource):
         self,
         body: AuthRuleRemoveParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or

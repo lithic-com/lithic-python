@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
@@ -26,9 +26,9 @@ class Transactions(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Transaction:
         """Get specific transaction."""
         options = make_request_options(headers, max_retries, timeout)
@@ -38,9 +38,9 @@ class Transactions(SyncAPIResource):
         self,
         query: TransactionListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> SyncPage[Transaction]:
         """List transactions."""
         options = make_request_options(headers, max_retries, timeout)
@@ -52,9 +52,9 @@ class Transactions(SyncAPIResource):
         self,
         body: TransactionSimulateAuthorizationParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
@@ -70,9 +70,9 @@ class Transactions(SyncAPIResource):
         self,
         body: TransactionSimulateClearingParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -89,9 +89,9 @@ class Transactions(SyncAPIResource):
         self,
         body: TransactionSimulateReturnParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
@@ -104,9 +104,9 @@ class Transactions(SyncAPIResource):
         self,
         body: TransactionSimulateVoidParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
@@ -123,9 +123,9 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Transaction:
         """Get specific transaction."""
         options = make_request_options(headers, max_retries, timeout)
@@ -135,9 +135,9 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         query: TransactionListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """List transactions."""
         options = make_request_options(headers, max_retries, timeout)
@@ -149,9 +149,9 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         body: TransactionSimulateAuthorizationParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
@@ -167,9 +167,9 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         body: TransactionSimulateClearingParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -188,9 +188,9 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         body: TransactionSimulateReturnParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
@@ -203,9 +203,9 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         body: TransactionSimulateVoidParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 

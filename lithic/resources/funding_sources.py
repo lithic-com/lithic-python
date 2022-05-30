@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
@@ -21,9 +21,9 @@ class FundingSources(SyncAPIResource):
         self,
         body: FundingSourceCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> FundingSource:
         """Add a funding source using bank routing and account numbers or via Plaid.
 
@@ -39,9 +39,9 @@ class FundingSources(SyncAPIResource):
         id: str,
         body: FundingSourceUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> FundingSource:
         """Update a funding source."""
         options = make_request_options(headers, max_retries, timeout)
@@ -51,9 +51,9 @@ class FundingSources(SyncAPIResource):
         self,
         query: FundingSourceListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> SyncPage[FundingSource]:
         """List all the funding sources associated with the Lithic account."""
         options = make_request_options(headers, max_retries, timeout)
@@ -66,9 +66,9 @@ class FundingSources(SyncAPIResource):
         id: str,
         body: FundingSourceVerifyParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> FundingSource:
         """
         Verify a bank account as a funding source by providing received micro-deposit
@@ -83,9 +83,9 @@ class AsyncFundingSources(AsyncAPIResource):
         self,
         body: FundingSourceCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> FundingSource:
         """Add a funding source using bank routing and account numbers or via Plaid.
 
@@ -101,9 +101,9 @@ class AsyncFundingSources(AsyncAPIResource):
         id: str,
         body: FundingSourceUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> FundingSource:
         """Update a funding source."""
         options = make_request_options(headers, max_retries, timeout)
@@ -113,9 +113,9 @@ class AsyncFundingSources(AsyncAPIResource):
         self,
         query: FundingSourceListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AsyncPaginator[FundingSource, AsyncPage[FundingSource]]:
         """List all the funding sources associated with the Lithic account."""
         options = make_request_options(headers, max_retries, timeout)
@@ -128,9 +128,9 @@ class AsyncFundingSources(AsyncAPIResource):
         id: str,
         body: FundingSourceVerifyParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> FundingSource:
         """
         Verify a bank account as a funding source by providing received micro-deposit

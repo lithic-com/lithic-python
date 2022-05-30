@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import AsyncPaginator, make_request_options
@@ -23,9 +23,9 @@ class AccountHolders(SyncAPIResource):
         self,
         body: AccountHolderCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -43,9 +43,9 @@ class AccountHolders(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
         options = make_request_options(headers, max_retries, timeout)
@@ -55,9 +55,9 @@ class AccountHolders(SyncAPIResource):
         self,
         body: AccountHolderCreateWebhookParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderCreateWebhookResponse:
         """Create a webhook to receive KYC or KYB evaluation events.
 
@@ -82,9 +82,9 @@ class AccountHolders(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -111,9 +111,9 @@ class AccountHolders(SyncAPIResource):
         id: str,
         body: AccountHolderResubmitParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -134,9 +134,9 @@ class AccountHolders(SyncAPIResource):
         account_holder_token: str,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -164,9 +164,9 @@ class AccountHolders(SyncAPIResource):
         id: str,
         body: AccountHolderUploadDocumentParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -197,9 +197,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         body: AccountHolderCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -217,9 +217,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
         options = make_request_options(headers, max_retries, timeout)
@@ -229,9 +229,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         body: AccountHolderCreateWebhookParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderCreateWebhookResponse:
         """Create a webhook to receive KYC or KYB evaluation events.
 
@@ -256,9 +256,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -287,9 +287,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         id: str,
         body: AccountHolderResubmitParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -310,9 +310,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         account_holder_token: str,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -340,9 +340,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         id: str,
         body: AccountHolderUploadDocumentParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued

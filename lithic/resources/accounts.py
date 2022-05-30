@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
@@ -19,9 +19,9 @@ class Accounts(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Account:
         """Get account configuration such as spend limits."""
         options = make_request_options(headers, max_retries, timeout)
@@ -32,9 +32,9 @@ class Accounts(SyncAPIResource):
         id: str,
         body: AccountUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Account:
         """Update account configuration such as spend limits and verification address.
 
@@ -51,9 +51,9 @@ class Accounts(SyncAPIResource):
         self,
         query: AccountListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> SyncPage[Account]:
         """List account configurations."""
         options = make_request_options(headers, max_retries, timeout)
@@ -65,9 +65,9 @@ class AsyncAccounts(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Account:
         """Get account configuration such as spend limits."""
         options = make_request_options(headers, max_retries, timeout)
@@ -78,9 +78,9 @@ class AsyncAccounts(AsyncAPIResource):
         id: str,
         body: AccountUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Account:
         """Update account configuration such as spend limits and verification address.
 
@@ -97,9 +97,9 @@ class AsyncAccounts(AsyncAPIResource):
         self,
         query: AccountListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AsyncPaginator[Account, AsyncPage[Account]]:
         """List account configurations."""
         options = make_request_options(headers, max_retries, timeout)

@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import AsyncPaginator, make_request_options
@@ -16,9 +16,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthStreamEnrollment:
         """
         Check status for whether you have enrolled in Authorization Stream Access (ASA)
@@ -30,9 +30,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
     def disenroll(
         self,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
         headers = {"Accept": "*/*", **(headers or {})}
@@ -43,9 +43,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         self,
         body: Optional[AuthStreamEnrollmentEnrollParams] = None,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> None:
         """
         Authorization Stream Access (ASA) provides the ability to make custom
@@ -70,9 +70,9 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AuthStreamEnrollment:
         """
         Check status for whether you have enrolled in Authorization Stream Access (ASA)
@@ -84,9 +84,9 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
     async def disenroll(
         self,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
         headers = {"Accept": "*/*", **(headers or {})}
@@ -97,9 +97,9 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         self,
         body: Optional[AuthStreamEnrollmentEnrollParams] = None,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> None:
         """
         Authorization Stream Access (ASA) provides the ability to make custom

@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 
-from .._types import Timeout
+from .._types import Timeout, NotGiven
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
@@ -24,9 +24,9 @@ class Cards(SyncAPIResource):
         self,
         body: CardCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -40,9 +40,9 @@ class Cards(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout)
@@ -53,9 +53,9 @@ class Cards(SyncAPIResource):
         id: str,
         body: CardUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -72,9 +72,9 @@ class Cards(SyncAPIResource):
         self,
         query: CardListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> SyncPage[Card]:
         """List cards."""
         options = make_request_options(headers, max_retries, timeout)
@@ -84,9 +84,9 @@ class Cards(SyncAPIResource):
         self,
         query: CardEmbedParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> str:
         """
         Handling full card PANs and CVV codes requires that you comply with the Payment
@@ -126,9 +126,9 @@ class Cards(SyncAPIResource):
         id: str,
         body: CardProvisionParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -146,9 +146,9 @@ class Cards(SyncAPIResource):
         id: str,
         body: CardReissueParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Initiate print and shipment of a duplicate card.
 
@@ -163,9 +163,9 @@ class AsyncCards(AsyncAPIResource):
         self,
         body: CardCreateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -179,9 +179,9 @@ class AsyncCards(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout)
@@ -192,9 +192,9 @@ class AsyncCards(AsyncAPIResource):
         id: str,
         body: CardUpdateParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -211,9 +211,9 @@ class AsyncCards(AsyncAPIResource):
         self,
         query: CardListParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> AsyncPaginator[Card, AsyncPage[Card]]:
         """List cards."""
         options = make_request_options(headers, max_retries, timeout)
@@ -223,9 +223,9 @@ class AsyncCards(AsyncAPIResource):
         self,
         query: CardEmbedParams = {},
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> str:
         """
         Handling full card PANs and CVV codes requires that you comply with the Payment
@@ -265,9 +265,9 @@ class AsyncCards(AsyncAPIResource):
         id: str,
         body: CardProvisionParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -285,9 +285,9 @@ class AsyncCards(AsyncAPIResource):
         id: str,
         body: CardReissueParams,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        max_retries: Optional[int] = None,
-        timeout: Optional[Union[float, Timeout]] = None,
+        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
+        max_retries: Union[int, NotGiven] = NotGiven(),
+        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
     ) -> Card:
         """Initiate print and shipment of a duplicate card.
 

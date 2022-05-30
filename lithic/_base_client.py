@@ -26,7 +26,15 @@ import httpx
 import pydantic
 from pydantic import PrivateAttr
 
-from ._types import Query, ModelT, Timeout, Transport, ProxiesTypes, RequestOptions
+from ._types import (
+    Query,
+    ModelT,
+    Timeout,
+    NotGiven,
+    Transport,
+    ProxiesTypes,
+    RequestOptions,
+)
 from ._models import BaseModel, NoneModel, GenericModel, FinalRequestOptions
 from .exceptions import (
     APITimeoutError,
@@ -640,19 +648,19 @@ class AsyncAPIClient(BaseClient):
 
 
 def make_request_options(
-    headers: Dict[str, str] | None = None,
-    max_retries: int | None = None,
-    timeout: float | Timeout | None = None,
+    headers: Dict[str, str] | NotGiven,
+    max_retries: int | NotGiven,
+    timeout: float | Timeout | None | NotGiven,
 ) -> RequestOptions:
-    """Create a dict of type RequestOptions without keys of None values."""
+    """Create a dict of type RequestOptions without keys of NotGiven values."""
     options: RequestOptions = {}
-    if headers is not None:
+    if not isinstance(headers, NotGiven):
         options["headers"] = headers
 
-    if max_retries is not None:
+    if not isinstance(max_retries, NotGiven):
         options["max_retries"] = max_retries
 
-    if timeout is not None:
+    if not isinstance(timeout, NotGiven):
         options["timeout"] = timeout
 
     return options
