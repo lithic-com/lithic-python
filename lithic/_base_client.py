@@ -104,7 +104,9 @@ class BaseSyncPage(BasePage[ModelT, Mapping[str, object]], Generic[ModelT]):
     def get_next_page(self: SyncPageT) -> SyncPageT:
         next_params = self.next_page_params()
         if not next_params:
-            raise StopIteration()
+            raise RuntimeError(
+                "No next page expected; please check `.has_next_page()` before calling `.get_next_page()`."
+            )
 
         options = self._options.copy()
         options.params = {**options.params, **next_params}
@@ -177,7 +179,9 @@ class BaseAsyncPage(BasePage[ModelT, Mapping[str, object]], Generic[ModelT]):
     async def get_next_page(self: AsyncPageT) -> AsyncPageT:
         next_params = self.next_page_params()
         if not next_params:
-            raise StopIteration()
+            raise RuntimeError(
+                "No next page expected; please check `.has_next_page()` before calling `.get_next_page()`."
+            )
 
         options = self._options.copy()
         options.params = {**options.params, **next_params}
