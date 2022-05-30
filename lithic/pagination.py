@@ -4,37 +4,47 @@ from typing import Any, Dict, List, Generic, TypeVar, Optional
 
 from typing_extensions import TypedDict
 
-from ._types import ModelT, FinalRequestOptions
-from ._models import GenericModel
+from ._types import ModelT
 from ._base_client import BasePage, BaseSyncPage, BaseAsyncPage
 
-__all__ = ["PaginationParams", "SyncPage", "AsyncPage"]
+__all__ = ["PageParams", "SyncPage", "AsyncPage"]
 
 
-class PaginationParams(TypedDict, total=False):
+class PageParams(TypedDict, total=False):
     page: int
+    """Page (for pagination)."""
+
     page_size: int
+    """Page size (for pagination)."""
 
 
-class Page(BasePage[ModelT, PaginationParams], Generic[ModelT]):
+class SyncPage(BaseSyncPage[ModelT], BasePage[ModelT, PageParams], Generic[ModelT]):
     data: List[ModelT]
     page: int
-    total_pages: int
     total_entries: int
-
-    def has_next_page(self) -> bool:
-        return self.page < self.total_pages
-
-    def _next_page_params(self) -> PaginationParams:
-        return {"page": self.page + 1}
+    total_pages: int
 
     def _get_page_items(self) -> List[ModelT]:
         return self.data
 
+    def next_page_params(self) -> Optional[PageParams]:
+        if not self.page < self.total_pages:
+            return None
 
-class SyncPage(Page[ModelT], BaseSyncPage[ModelT], Generic[ModelT]):
-    pass
+        return {"page": self.page + 1}
 
 
-class AsyncPage(Page[ModelT], BaseAsyncPage[ModelT], Generic[ModelT]):
-    pass
+class AsyncPage(BaseAsyncPage[ModelT], BasePage[ModelT, PageParams], Generic[ModelT]):
+    data: List[ModelT]
+    page: int
+    total_entries: int
+    total_pages: int
+
+    def _get_page_items(self) -> List[ModelT]:
+        return self.data
+
+    def next_page_params(self) -> Optional[PageParams]:
+        if not self.page < self.total_pages:
+            return None
+
+        return {"page": self.page + 1}

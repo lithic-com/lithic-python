@@ -5,7 +5,6 @@ from typing import Dict, List, Union, Optional
 from .._types import Timeout
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.auth_rule import *
 from ..types.auth_rule_list_params import *
@@ -72,7 +71,7 @@ class AuthRules(SyncAPIResource):
 
     def list(
         self,
-        query: Optional[AuthRuleListParams] = None,
+        query: AuthRuleListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
@@ -163,7 +162,7 @@ class AsyncAuthRules(AsyncAPIResource):
 
     async def list(
         self,
-        query: Optional[AuthRuleListParams] = None,
+        query: AuthRuleListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,

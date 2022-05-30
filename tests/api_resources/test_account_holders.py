@@ -4,7 +4,6 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.account_holder import *
 from lithic.types.account_holder_document import *
 from lithic.types.account_holder_create_webhook_response import *

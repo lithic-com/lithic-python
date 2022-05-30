@@ -70,7 +70,7 @@ class Cards(SyncAPIResource):
 
     def list(
         self,
-        query: Optional[CardListParams] = None,
+        query: CardListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
@@ -82,7 +82,7 @@ class Cards(SyncAPIResource):
 
     def embed(
         self,
-        query: Optional[CardEmbedParams] = None,
+        query: CardEmbedParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
@@ -209,7 +209,7 @@ class AsyncCards(AsyncAPIResource):
 
     def list(
         self,
-        query: Optional[CardListParams] = None,
+        query: CardListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
@@ -221,7 +221,7 @@ class AsyncCards(AsyncAPIResource):
 
     async def embed(
         self,
-        query: Optional[CardEmbedParams] = None,
+        query: CardEmbedParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,

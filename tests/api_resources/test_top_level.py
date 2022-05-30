@@ -4,7 +4,6 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.shipping_address import *
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")

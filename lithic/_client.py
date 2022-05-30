@@ -8,7 +8,6 @@ from typing_extensions import Literal
 from . import resources
 from ._types import Timeout, Transport, ProxiesTypes, RequestOptions
 from ._version import __version__
-from .pagination import SyncPage, AsyncPage
 from ._base_client import (
     DEFAULT_TIMEOUT,
     DEFAULT_MAX_RETRIES,

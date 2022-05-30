@@ -4,7 +4,6 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.auth_rule import *
 from lithic.types.auth_rule_list_response import *
 from lithic.types.auth_rule_apply_response import *

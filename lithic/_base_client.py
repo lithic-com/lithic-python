@@ -26,16 +26,8 @@ import httpx
 import pydantic
 from pydantic import PrivateAttr
 
-from ._types import (
-    Query,
-    ModelT,
-    Timeout,
-    Transport,
-    ProxiesTypes,
-    RequestOptions,
-    FinalRequestOptions,
-)
-from ._models import BaseModel, NoneModel, GenericModel
+from ._types import Query, ModelT, Timeout, Transport, ProxiesTypes, RequestOptions
+from ._models import BaseModel, NoneModel, GenericModel, FinalRequestOptions
 from .exceptions import (
     APITimeoutError,
     APIConnectionError,
@@ -65,14 +57,9 @@ class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
     _model: Type[ModelT] = PrivateAttr()
 
     def has_next_page(self) -> bool:
-        ...
+        return self.next_page_params() is not None
 
     def next_page_params(self) -> Optional[PageParamsT]:
-        if self.has_next_page():
-            return self._next_page_params()
-        return None
-
-    def _next_page_params(self) -> PageParamsT:
         ...
 
     def _get_page_items(self) -> Iterable[ModelT]:
@@ -115,15 +102,14 @@ class BaseSyncPage(BasePage[ModelT, Mapping[str, object]], Generic[ModelT]):
                 return
 
     def get_next_page(self: SyncPageT) -> SyncPageT:
-        page_params = self._next_page_params()
-        params = self._options.get("params", {}) or {}
-        options: Mapping[str, object] = {**self._options, "params": {**params, **page_params}}
-        return self._client.request_api_list(
-            self._model,
-            page=self.__class__,
-            # TODO: validate that what we pass is actually valid at runtime
-            options=options,  # type: ignore
-        )
+        next_params = self.next_page_params()
+        if not next_params:
+            raise StopIteration()
+
+        options = self._options.copy()
+        options.params = {**options.params, **next_params}
+
+        return self._client.request_api_list(self._model, page=self.__class__, options=options)
 
 
 class AsyncPaginator(Generic[ModelT, AsyncPageT]):
@@ -189,15 +175,13 @@ class BaseAsyncPage(BasePage[ModelT, Mapping[str, object]], Generic[ModelT]):
                 return
 
     async def get_next_page(self: AsyncPageT) -> AsyncPageT:
-        page_params = self._next_page_params()
-        params = self._options.get("params", {}) or {}
-        options: Mapping[str, object] = {**self._options, "params": {**params, **page_params}}
-        return await self._client.request_api_list(
-            self._model,
-            page=self.__class__,
-            # TODO: validate that what we pass is actually valid at runtime
-            options=options,  # type: ignore
-        )
+        next_params = self.next_page_params()
+        if not next_params:
+            raise StopIteration()
+
+        options = self._options.copy()
+        options.params = {**options.params, **next_params}
+        return await self._client.request_api_list(self._model, page=self.__class__, options=options)
 
 
 class BaseClient:
@@ -226,18 +210,13 @@ class BaseClient:
         remaining_retries: Optional[int],
         options: FinalRequestOptions,
     ) -> int:
-        return remaining_retries if remaining_retries is not None else options.get("max_retries", self.max_retries)
+        return remaining_retries if remaining_retries is not None else options.get_max_retries(self.max_retries)
 
     def prepare_request_args(
         self,
         options: FinalRequestOptions,
     ) -> Dict[str, Any]:
-        headers = {**self.default_headers(), **options.get("headers", {})}
-        req_args: Dict[str, Any] = {**options, "headers": headers, "timeout": options.get("timeout", self.timeout)}
-
-        # ensure we only returned expected keyword arguments to `build_request()` to avoid a `TypeError: build_request()
-        # got an unexpected keyword argument 'max_retries'`.
-        return {k: v for k, v in req_args.items() if k in [p.name for p in BUILD_REQUEST_PARAMS]}
+        return options.to_request_args(default_headers=self.default_headers(), default_timeout=self.timeout)
 
     def process_response(
         self, model: Type[ResponseT], options: FinalRequestOptions, response: httpx.Response
@@ -282,7 +261,7 @@ class BaseClient:
         options: FinalRequestOptions,
         response_headers: Optional[httpx.Headers] = None,
     ) -> float:
-        max_retries = options.get("max_retries", self.max_retries)
+        max_retries = options.get_max_retries(self.max_retries)
         try:
             # About the Retry-After header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After
             #
@@ -416,7 +395,7 @@ class SyncAPIClient(BaseClient):
         self,
         model: Type[ModelT],
         page: Type[SyncPageT],
-        options: FinalRequestOptions = {},
+        options: FinalRequestOptions,
     ) -> SyncPageT:
         resp = self.request(page, options)
         resp._set_private_attributes(  # pyright: ignore[reportPrivateUsage]
@@ -431,10 +410,10 @@ class SyncAPIClient(BaseClient):
         path: str,
         *,
         model: Type[ResponseT],
-        query: Query | None = None,
+        query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
         return self.request(model, opts)
 
     def post(
@@ -445,7 +424,7 @@ class SyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="post", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="post", url=path, json_data=body, **options)
         return self.request(model, opts)
 
     def patch(
@@ -456,7 +435,7 @@ class SyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="patch", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="patch", url=path, json_data=body, **options)
         return self.request(model, opts)
 
     def put(
@@ -467,7 +446,7 @@ class SyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="put", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="put", url=path, json_data=body, **options)
         return self.request(model, opts)
 
     def delete(
@@ -478,19 +457,19 @@ class SyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="delete", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="delete", url=path, json_data=body, **options)
         return self.request(model, opts)
 
     def get_api_list(
         self,
         path: str,
         *,
-        query: Query | None = None,
         model: Type[ModelT],
         page: Type[SyncPageT],
+        query: Query = {},
         options: RequestOptions = {},
     ) -> SyncPageT:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
         return self.request_api_list(model, page, opts)
 
 
@@ -584,7 +563,7 @@ class AsyncAPIClient(BaseClient):
         self,
         model: Type[ModelT],
         page: Type[AsyncPageT],
-        options: FinalRequestOptions = {},
+        options: FinalRequestOptions,
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
         return AsyncPaginator(client=self, options=options, page_cls=page, model=model)
 
@@ -593,10 +572,10 @@ class AsyncAPIClient(BaseClient):
         path: str,
         *,
         model: Type[ResponseT],
-        query: Query | None = None,
+        query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
         return await self.request(model, opts)
 
     async def post(
@@ -607,7 +586,7 @@ class AsyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="post", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="post", url=path, json_data=body, **options)
         return await self.request(model, opts)
 
     async def patch(
@@ -618,7 +597,7 @@ class AsyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="patch", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="patch", url=path, json_data=body, **options)
         return await self.request(model, opts)
 
     async def put(
@@ -629,7 +608,7 @@ class AsyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="put", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="put", url=path, json_data=body, **options)
         return await self.request(model, opts)
 
     async def delete(
@@ -640,19 +619,19 @@ class AsyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="delete", url=path, json=body, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="delete", url=path, json_data=body, **options)
         return await self.request(model, opts)
 
     def get_api_list(
         self,
         path: str,
         *,
-        query: Query | None = None,
         model: Type[ModelT],
         page: Type[AsyncPageT],
+        query: Query = {},
         options: RequestOptions = {},
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)  # type: ignore[misc]
+        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
         return self.request_api_list(model, page, opts)
 
 
@@ -662,10 +641,14 @@ def make_request_options(
     timeout: float | Timeout | None = None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of None values."""
-    d = {
-        "headers": headers,
-        "max_retries": max_retries,
-        "timeout": timeout,
-    }
-    filtered = {k: v for k, v in d.items() if v is not None}
-    return RequestOptions(**filtered)  # type: ignore
+    options: RequestOptions = {}
+    if headers is not None:
+        options["headers"] = headers
+
+    if max_retries is not None:
+        options["max_retries"] = max_retries
+
+    if timeout is not None:
+        options["timeout"] = timeout
+
+    return options

@@ -5,7 +5,6 @@ from typing import Dict, List, Union, Optional
 from .._types import Timeout
 from .._models import NoneModel, StringModel
 from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.api_status import *
 

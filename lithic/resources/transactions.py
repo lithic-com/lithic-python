@@ -36,7 +36,7 @@ class Transactions(SyncAPIResource):
 
     def list(
         self,
-        query: Optional[TransactionListParams] = None,
+        query: TransactionListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
@@ -133,7 +133,7 @@ class AsyncTransactions(AsyncAPIResource):
 
     def list(
         self,
-        query: Optional[TransactionListParams] = None,
+        query: TransactionListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,

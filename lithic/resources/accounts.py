@@ -49,7 +49,7 @@ class Accounts(SyncAPIResource):
 
     def list(
         self,
-        query: Optional[AccountListParams] = None,
+        query: AccountListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
@@ -95,7 +95,7 @@ class AsyncAccounts(AsyncAPIResource):
 
     def list(
         self,
-        query: Optional[AccountListParams] = None,
+        query: AccountListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,

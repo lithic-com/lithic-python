@@ -49,7 +49,7 @@ class FundingSources(SyncAPIResource):
 
     def list(
         self,
-        query: Optional[FundingSourceListParams] = None,
+        query: FundingSourceListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
@@ -111,7 +111,7 @@ class AsyncFundingSources(AsyncAPIResource):
 
     def list(
         self,
-        query: Optional[FundingSourceListParams] = None,
+        query: FundingSourceListParams = {},
         *,
         headers: Optional[Dict[str, str]] = None,
         max_retries: Optional[int] = None,
