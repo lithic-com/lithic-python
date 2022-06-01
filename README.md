@@ -1,5 +1,7 @@
 # Lithic Python API Library
 
+[![PyPI version](https://img.shields.io/pypi/v/lithic.svg)](https://pypi.org/project/lithic/)
+
 The Lithic Python library provides convenient access to the Lithic REST API from any Python 3.7+
 application. It includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
