@@ -1,15 +1,14 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Dict, List, Union, Optional
+from typing import Union
 
-from .._types import Timeout, NotGiven
-from .._models import NoneModel, StringModel
+from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.account import *
-from ..types.account_list_params import *
-from ..types.account_update_params import *
+from ..types.account_list_params import AccountListParams
+from ..types.account_update_params import AccountUpdateParams
 
 __all__ = ["Accounts", "AsyncAccounts"]
 
@@ -19,22 +18,26 @@ class Accounts(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Account:
         """Get account configuration such as spend limits."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get(f"/accounts/{id}", model=Account, options=options)
+        return self._get(
+            f"/accounts/{id}",
+            options=options,
+            cast_to=Account,
+        )
 
     def update(
         self,
         id: str,
         body: AccountUpdateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Account:
         """Update account configuration such as spend limits and verification address.
 
@@ -45,19 +48,30 @@ class Accounts(SyncAPIResource):
         new cards.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._patch(f"/accounts/{id}", model=Account, body=body, options=options)
+        return self._patch(
+            f"/accounts/{id}",
+            body=body,
+            options=options,
+            cast_to=Account,
+        )
 
     def list(
         self,
         query: AccountListParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Account]:
         """List account configurations."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get_api_list("/accounts", model=Account, page=SyncPage[Account], query=query, options=options)
+        return self._get_api_list(
+            "/accounts",
+            page=SyncPage[Account],
+            query=query,
+            options=options,
+            model=Account,
+        )
 
 
 class AsyncAccounts(AsyncAPIResource):
@@ -65,22 +79,26 @@ class AsyncAccounts(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Account:
         """Get account configuration such as spend limits."""
         options = make_request_options(headers, max_retries, timeout)
-        return await self._get(f"/accounts/{id}", model=Account, options=options)
+        return await self._get(
+            f"/accounts/{id}",
+            options=options,
+            cast_to=Account,
+        )
 
     async def update(
         self,
         id: str,
         body: AccountUpdateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Account:
         """Update account configuration such as spend limits and verification address.
 
@@ -91,16 +109,27 @@ class AsyncAccounts(AsyncAPIResource):
         new cards.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._patch(f"/accounts/{id}", model=Account, body=body, options=options)
+        return await self._patch(
+            f"/accounts/{id}",
+            body=body,
+            options=options,
+            cast_to=Account,
+        )
 
     def list(
         self,
         query: AccountListParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Account, AsyncPage[Account]]:
         """List account configurations."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get_api_list("/accounts", model=Account, page=AsyncPage[Account], query=query, options=options)
+        return self._get_api_list(
+            "/accounts",
+            page=AsyncPage[Account],
+            query=query,
+            options=options,
+            model=Account,
+        )

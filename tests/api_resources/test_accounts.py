@@ -1,8 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
 
-import pytest
-
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.account import *
@@ -21,7 +19,10 @@ class TestAccounts:
         assert isinstance(resource, Account)
 
     def test_method_update(self) -> None:
-        resource = self.client.accounts.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = self.client.accounts.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, Account)
 
     def test_method_update_with_optional_params(self) -> None:
@@ -50,7 +51,12 @@ class TestAccounts:
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.accounts.list(
-            {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 0, "page_size": 1}
+            {
+                "begin": "2019-12-27T18:11:19.117Z",
+                "end": "2019-12-27T18:11:19.117Z",
+                "page": 0,
+                "page_size": 1,
+            },
         )
         assert isinstance(resource, SyncPage)
 
@@ -65,7 +71,10 @@ class TestAsyncAccounts:
         assert isinstance(resource, Account)
 
     async def test_method_update(self) -> None:
-        resource = await self.client.accounts.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = await self.client.accounts.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, Account)
 
     async def test_method_update_with_optional_params(self) -> None:
@@ -94,6 +103,11 @@ class TestAsyncAccounts:
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.accounts.list(
-            {"begin": "2019-12-27T18:11:19.117Z", "end": "2019-12-27T18:11:19.117Z", "page": 0, "page_size": 1}
+            {
+                "begin": "2019-12-27T18:11:19.117Z",
+                "end": "2019-12-27T18:11:19.117Z",
+                "page": 0,
+                "page_size": 1,
+            },
         )
         assert isinstance(resource, AsyncPage)

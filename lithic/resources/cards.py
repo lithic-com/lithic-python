@@ -1,19 +1,18 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Dict, List, Union, Optional
+from typing import Union
 
-from .._types import Timeout, NotGiven
-from .._models import NoneModel, StringModel
+from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from ..types.card import *
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.card_list_params import *
-from ..types.card_embed_params import *
-from ..types.card_create_params import *
-from ..types.card_update_params import *
-from ..types.card_reissue_params import *
-from ..types.card_provision_params import *
+from ..types.card_list_params import CardListParams
+from ..types.card_embed_params import CardEmbedParams
+from ..types.card_create_params import CardCreateParams
+from ..types.card_update_params import CardUpdateParams
+from ..types.card_reissue_params import CardReissueParams
+from ..types.card_provision_params import CardProvisionParams
 from ..types.card_provision_response import *
 
 __all__ = ["Cards", "AsyncCards"]
@@ -24,9 +23,9 @@ class Cards(SyncAPIResource):
         self,
         body: CardCreateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -34,28 +33,37 @@ class Cards(SyncAPIResource):
         cards.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post("/cards", model=Card, body=body, options=options)
+        return self._post(
+            "/cards",
+            body=body,
+            options=options,
+            cast_to=Card,
+        )
 
     def retrieve(
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get(f"/cards/{id}", model=Card, options=options)
+        return self._get(
+            f"/cards/{id}",
+            options=options,
+            cast_to=Card,
+        )
 
     def update(
         self,
         id: str,
         body: CardUpdateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -66,27 +74,38 @@ class Cards(SyncAPIResource):
         undone._
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._patch(f"/cards/{id}", model=Card, body=body, options=options)
+        return self._patch(
+            f"/cards/{id}",
+            body=body,
+            options=options,
+            cast_to=Card,
+        )
 
     def list(
         self,
         query: CardListParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Card]:
         """List cards."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get_api_list("/cards", model=Card, page=SyncPage[Card], query=query, options=options)
+        return self._get_api_list(
+            "/cards",
+            page=SyncPage[Card],
+            query=query,
+            options=options,
+            model=Card,
+        )
 
     def embed(
         self,
         query: CardEmbedParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> str:
         """
         Handling full card PANs and CVV codes requires that you comply with the Payment
@@ -118,17 +137,21 @@ class Cards(SyncAPIResource):
         """
         headers = {"Accept": "text/html", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        result = self._get("/embed/card", model=StringModel, query=query, options=options)
-        return result.content
+        return self._get(
+            "/embed/card",
+            query=query,
+            options=options,
+            cast_to=str,
+        )
 
     def provision(
         self,
         id: str,
         body: CardProvisionParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -139,23 +162,33 @@ class Cards(SyncAPIResource):
         information.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post(f"/cards/{id}/provision", model=CardProvisionResponse, body=body, options=options)
+        return self._post(
+            f"/cards/{id}/provision",
+            body=body,
+            options=options,
+            cast_to=CardProvisionResponse,
+        )
 
     def reissue(
         self,
         id: str,
         body: CardReissueParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Initiate print and shipment of a duplicate card.
 
         Only applies to cards of type `PHYSICAL` [beta].
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post(f"/cards/{id}/reissue", model=Card, body=body, options=options)
+        return self._post(
+            f"/cards/{id}/reissue",
+            body=body,
+            options=options,
+            cast_to=Card,
+        )
 
 
 class AsyncCards(AsyncAPIResource):
@@ -163,9 +196,9 @@ class AsyncCards(AsyncAPIResource):
         self,
         body: CardCreateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -173,28 +206,37 @@ class AsyncCards(AsyncAPIResource):
         cards.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._post("/cards", model=Card, body=body, options=options)
+        return await self._post(
+            "/cards",
+            body=body,
+            options=options,
+            cast_to=Card,
+        )
 
     async def retrieve(
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout)
-        return await self._get(f"/cards/{id}", model=Card, options=options)
+        return await self._get(
+            f"/cards/{id}",
+            options=options,
+            cast_to=Card,
+        )
 
     async def update(
         self,
         id: str,
         body: CardUpdateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -205,27 +247,38 @@ class AsyncCards(AsyncAPIResource):
         undone._
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._patch(f"/cards/{id}", model=Card, body=body, options=options)
+        return await self._patch(
+            f"/cards/{id}",
+            body=body,
+            options=options,
+            cast_to=Card,
+        )
 
     def list(
         self,
         query: CardListParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Card, AsyncPage[Card]]:
         """List cards."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get_api_list("/cards", model=Card, page=AsyncPage[Card], query=query, options=options)
+        return self._get_api_list(
+            "/cards",
+            page=AsyncPage[Card],
+            query=query,
+            options=options,
+            model=Card,
+        )
 
     async def embed(
         self,
         query: CardEmbedParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> str:
         """
         Handling full card PANs and CVV codes requires that you comply with the Payment
@@ -257,17 +310,21 @@ class AsyncCards(AsyncAPIResource):
         """
         headers = {"Accept": "text/html", **(headers or {})}
         options = make_request_options(headers, max_retries, timeout)
-        result = await self._get("/embed/card", model=StringModel, query=query, options=options)
-        return result.content
+        return await self._get(
+            "/embed/card",
+            query=query,
+            options=options,
+            cast_to=str,
+        )
 
     async def provision(
         self,
         id: str,
         body: CardProvisionParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -278,20 +335,30 @@ class AsyncCards(AsyncAPIResource):
         information.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._post(f"/cards/{id}/provision", model=CardProvisionResponse, body=body, options=options)
+        return await self._post(
+            f"/cards/{id}/provision",
+            body=body,
+            options=options,
+            cast_to=CardProvisionResponse,
+        )
 
     async def reissue(
         self,
         id: str,
         body: CardReissueParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Initiate print and shipment of a duplicate card.
 
         Only applies to cards of type `PHYSICAL` [beta].
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._post(f"/cards/{id}/reissue", model=Card, body=body, options=options)
+        return await self._post(
+            f"/cards/{id}/reissue",
+            body=body,
+            options=options,
+            cast_to=Card,
+        )

@@ -1,17 +1,20 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Dict, List, Union, Optional
+from typing import Union
 
-from .._types import Timeout, NotGiven
-from .._models import NoneModel, StringModel
+from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import make_request_options
 from ..types.account_holder import *
 from ..types.account_holder_document import *
-from ..types.account_holder_create_params import *
-from ..types.account_holder_resubmit_params import *
-from ..types.account_holder_create_webhook_params import *
-from ..types.account_holder_upload_document_params import *
+from ..types.account_holder_create_params import AccountHolderCreateParams
+from ..types.account_holder_resubmit_params import AccountHolderResubmitParams
+from ..types.account_holder_create_webhook_params import (
+    AccountHolderCreateWebhookParams,
+)
+from ..types.account_holder_upload_document_params import (
+    AccountHolderUploadDocumentParams,
+)
 from ..types.account_holder_create_webhook_response import *
 from ..types.account_holder_list_documents_response import *
 
@@ -23,9 +26,9 @@ class AccountHolders(SyncAPIResource):
         self,
         body: AccountHolderCreateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -37,27 +40,36 @@ class AccountHolders(SyncAPIResource):
         part of the program the calling API key manages.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post("/account_holders", model=AccountHolder, body=body, options=options)
+        return self._post(
+            "/account_holders",
+            body=body,
+            options=options,
+            cast_to=AccountHolder,
+        )
 
     def retrieve(
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get(f"/account_holders/{id}", model=AccountHolder, options=options)
+        return self._get(
+            f"/account_holders/{id}",
+            options=options,
+            cast_to=AccountHolder,
+        )
 
     def create_webhook(
         self,
         body: AccountHolderCreateWebhookParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderCreateWebhookResponse:
         """Create a webhook to receive KYC or KYB evaluation events.
 
@@ -75,16 +87,19 @@ class AccountHolders(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            "/webhooks/account_holders", model=AccountHolderCreateWebhookResponse, body=body, options=options
+            "/webhooks/account_holders",
+            body=body,
+            options=options,
+            cast_to=AccountHolderCreateWebhookResponse,
         )
 
     def list_documents(
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -104,16 +119,20 @@ class AccountHolders(SyncAPIResource):
         state for the corresponding `image_type`.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._get(f"/account_holders/{id}/documents", model=AccountHolderListDocumentsResponse, options=options)
+        return self._get(
+            f"/account_holders/{id}/documents",
+            options=options,
+            cast_to=AccountHolderListDocumentsResponse,
+        )
 
     def resubmit(
         self,
         id: str,
         body: AccountHolderResubmitParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -127,16 +146,21 @@ class AccountHolders(SyncAPIResource):
         status is returned and the account creation process is ended.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post(f"/account_holders/{id}/resubmit", model=AccountHolder, body=body, options=options)
+        return self._post(
+            f"/account_holders/{id}/resubmit",
+            body=body,
+            options=options,
+            cast_to=AccountHolder,
+        )
 
     def retrieve_document(
         self,
         account_holder_token: str,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -156,7 +180,9 @@ class AccountHolders(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/account_holders/{account_holder_token}/documents/{id}", model=AccountHolderDocument, options=options
+            f"/account_holders/{account_holder_token}/documents/{id}",
+            options=options,
+            cast_to=AccountHolderDocument,
         )
 
     def upload_document(
@@ -164,9 +190,9 @@ class AccountHolders(SyncAPIResource):
         id: str,
         body: AccountHolderUploadDocumentParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -189,7 +215,12 @@ class AccountHolders(SyncAPIResource):
         verification.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post(f"/account_holders/{id}/documents", model=AccountHolderDocument, body=body, options=options)
+        return self._post(
+            f"/account_holders/{id}/documents",
+            body=body,
+            options=options,
+            cast_to=AccountHolderDocument,
+        )
 
 
 class AsyncAccountHolders(AsyncAPIResource):
@@ -197,9 +228,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         body: AccountHolderCreateParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -211,27 +242,36 @@ class AsyncAccountHolders(AsyncAPIResource):
         part of the program the calling API key manages.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._post("/account_holders", model=AccountHolder, body=body, options=options)
+        return await self._post(
+            "/account_holders",
+            body=body,
+            options=options,
+            cast_to=AccountHolder,
+        )
 
     async def retrieve(
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
         options = make_request_options(headers, max_retries, timeout)
-        return await self._get(f"/account_holders/{id}", model=AccountHolder, options=options)
+        return await self._get(
+            f"/account_holders/{id}",
+            options=options,
+            cast_to=AccountHolder,
+        )
 
     async def create_webhook(
         self,
         body: AccountHolderCreateWebhookParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderCreateWebhookResponse:
         """Create a webhook to receive KYC or KYB evaluation events.
 
@@ -249,16 +289,19 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            "/webhooks/account_holders", model=AccountHolderCreateWebhookResponse, body=body, options=options
+            "/webhooks/account_holders",
+            body=body,
+            options=options,
+            cast_to=AccountHolderCreateWebhookResponse,
         )
 
     async def list_documents(
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -279,7 +322,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/account_holders/{id}/documents", model=AccountHolderListDocumentsResponse, options=options
+            f"/account_holders/{id}/documents",
+            options=options,
+            cast_to=AccountHolderListDocumentsResponse,
         )
 
     async def resubmit(
@@ -287,9 +332,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         id: str,
         body: AccountHolderResubmitParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -303,16 +348,21 @@ class AsyncAccountHolders(AsyncAPIResource):
         status is returned and the account creation process is ended.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._post(f"/account_holders/{id}/resubmit", model=AccountHolder, body=body, options=options)
+        return await self._post(
+            f"/account_holders/{id}/resubmit",
+            body=body,
+            options=options,
+            cast_to=AccountHolder,
+        )
 
     async def retrieve_document(
         self,
         account_holder_token: str,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -332,7 +382,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/account_holders/{account_holder_token}/documents/{id}", model=AccountHolderDocument, options=options
+            f"/account_holders/{account_holder_token}/documents/{id}",
+            options=options,
+            cast_to=AccountHolderDocument,
         )
 
     async def upload_document(
@@ -340,9 +392,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         id: str,
         body: AccountHolderUploadDocumentParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -366,5 +418,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            f"/account_holders/{id}/documents", model=AccountHolderDocument, body=body, options=options
+            f"/account_holders/{id}/documents",
+            body=body,
+            options=options,
+            cast_to=AccountHolderDocument,
         )

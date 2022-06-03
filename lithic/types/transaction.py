@@ -1,11 +1,10 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Any, List, Union, Optional
-
+from typing import List, Optional
 from typing_extensions import Literal
 
 from ..types import card
-from .._models import BaseModel, NoneModel, StringModel
+from .._models import BaseModel
 
 __all__ = ["Events", "Funding", "Merchant", "Transaction"]
 
@@ -76,13 +75,7 @@ class Events(BaseModel):
     """Globally unique identifier."""
 
     type: Literal[
-        "AUTHORIZATION",
-        "AUTHORIZATION_ADVICE",
-        "CLEARING",
-        "RETURN",
-        "VOID",
-        "TRANSACTION_CORRECTION_DEBIT",
-        "TRANSACTION_CORRECTION_CREDIT",
+        "AUTHORIZATION", "AUTHORIZATION_ADVICE", "CLEARING", "RETURN", "VOID", "CORRECTION_DEBIT", "CORRECTION_CREDIT"
     ]
     """Event types:
 
@@ -91,8 +84,8 @@ class Events(BaseModel):
     - `CLEARING` - Transaction is settled.
     - `RETURN` - A return authorization.
     - `VOID` - Transaction is voided.
-    - `TRANSACTION_CORRECTION_DEBIT` - Manual transaction correction (Debit).
-    - `TRANSACTION_CORRECTION_CREDIT` - Manual transaction correction (Credit).
+    - `CORRECTION_DEBIT` - Manual transaction correction (Debit).
+    - `CORRECTION_CREDIT` - Manual transaction correction (Credit).
     """
 
 

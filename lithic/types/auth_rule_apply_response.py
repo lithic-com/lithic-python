@@ -1,11 +1,9 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Any, List, Union, Optional
-
-from typing_extensions import Literal
+from typing import Optional
 
 from ..types import auth_rule
-from .._models import BaseModel, NoneModel, StringModel
+from .._models import BaseModel
 
 __all__ = ["AuthRuleApplyResponse"]
 

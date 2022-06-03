@@ -9,7 +9,7 @@ repository = "https://github.com/lithic-com/lithic-python"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-httpx = "^0.23.0"
+httpx = ">= 0.23.0"
 pydantic = "^1.9.0"
 typing-extensions = "^4.1.1"
 anyio = "^3.5.0"
@@ -20,8 +20,9 @@ black = "^22.1.0"
 respx = "^0.19.2"
 pytest = "^7.1.1"
 pytest-asyncio = "^0.18.3"
-pyright = "^1.1.247"
+pyright = "^1.1.253"
 isort = "^5.10.1"
+autoflake = "^1.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -44,6 +45,7 @@ asyncio_mode = "auto"
 # there are a couple of flags that are still disabled by
 # default in strict mode as they are experimental and niche.
 typeCheckingMode = "strict"
+pythonVersion = "3.7"
 
 include = [
     "lithic",
@@ -53,8 +55,8 @@ exclude = [
     "_dev"
 ]
 reportImportCycles = false
-reportUnusedImport = false
 
 [tool.isort]
 profile = "black"
 length_sort = true
+extra_standard_library = ["typing_extensions"]

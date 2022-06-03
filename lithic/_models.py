@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Type, Union, Mapping, cast
+from typing import Any, Type, Union, cast
 
 import pydantic
 import pydantic.generics
 from pydantic.typing import is_literal_type
 
-from ._types import ModelT, Timeout, NotGiven
+from ._types import Query, ModelT, Headers, Timeout, NotGiven, RequestFiles
 
-__all__ = ["BaseModel", "GenericModel", "StringModel", "NoneModel"]
+__all__ = ["BaseModel", "GenericModel"]
 
 
 class BaseModel(pydantic.BaseModel):
@@ -56,21 +56,14 @@ class GenericModel(BaseModel, pydantic.generics.GenericModel):
     pass
 
 
-class StringModel(BaseModel):
-    content: str
-
-
-class NoneModel(BaseModel):
-    pass
-
-
 class FinalRequestOptions(BaseModel):
     method: str
     url: str
-    params: Mapping[str, object] = {}
-    headers: Union[Dict[str, str], NotGiven] = NotGiven()
+    params: Query = {}
+    headers: Union[Headers, NotGiven] = NotGiven()
     max_retries: Union[int, NotGiven] = NotGiven()
     timeout: Union[float, Timeout, None, NotGiven] = NotGiven()
+    files: Union[RequestFiles, None] = None
 
     # It should be noted that we cannot use `json` here as that would override
     # a BaseModel method in an incompatible fashion.
@@ -83,18 +76,3 @@ class FinalRequestOptions(BaseModel):
         if isinstance(self.max_retries, NotGiven):
             return max_retries
         return self.max_retries
-
-    def to_request_args(
-        self, default_headers: Dict[str, str], default_timeout: Union[float, Timeout, None]
-    ) -> Dict[str, object]:
-        return {
-            "headers": {
-                **default_headers,
-                **({} if isinstance(self.headers, NotGiven) else self.headers),
-            },
-            "timeout": default_timeout if isinstance(self.timeout, NotGiven) else self.timeout,
-            "method": self.method,
-            "url": self.url,
-            "params": self.params,
-            "json": self.json_data,
-        }

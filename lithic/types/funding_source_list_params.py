@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
-
-from typing_extensions import Literal, Required, TypedDict
-
-from ..types import shared_params
+from typing_extensions import TypedDict
 
 __all__ = ["FundingSourceListParams"]
 
 
 class FundingSourceListParams(TypedDict, total=False):
     account_token: str
+
+    page: float
+
+    page_size: float

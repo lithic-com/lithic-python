@@ -1,19 +1,67 @@
-from typing import Dict, Union, Literal, Mapping, TypeVar
+from __future__ import annotations
+
+from typing import (
+    IO,
+    TYPE_CHECKING,
+    Dict,
+    Type,
+    Tuple,
+    Union,
+    Mapping,
+    TypeVar,
+    Optional,
+    Sequence,
+)
+from typing_extensions import Literal, TypedDict
 
 import pydantic
 from httpx import Proxy, Timeout, BaseTransport
-from typing_extensions import TypedDict
 
 Transport = BaseTransport
 Query = Mapping[str, object]
 ModelT = TypeVar("ModelT", bound=pydantic.BaseModel)
+_T = TypeVar("_T")
 
-# Approximates httpx internal ProxiesTypes
+# Approximates httpx internal ProxiesTypes and RequestFiles types
 ProxiesTypes = Union[str, Proxy, Dict[str, Union[None, str, Proxy]]]
+FileContent = Union[IO[bytes], bytes]
+FileTypes = Union[
+    # file (or bytes)
+    FileContent,
+    # (filename, file (or bytes))
+    Tuple[Optional[str], FileContent],
+    # (filename, file (or bytes), content_type)
+    Tuple[Optional[str], FileContent, Optional[str]],
+    # (filename, file (or bytes), content_type, headers)
+    Tuple[Optional[str], FileContent, Optional[str], Mapping[str, str]],
+]
+RequestFiles = Union[Mapping[str, FileTypes], Sequence[Tuple[str, FileTypes]]]
+
+
+# Workaround to support (cast_to: Type[ResponseT]) -> ResponseT
+# where ResponseT includes `None`. In order to support directly
+# passing `None`, overloads would have to be defined for every
+# method that uses `ResponseT` which would lead to an unacceptable
+# amount of code duplication and make it unreadable. See _base_client.py
+# for example usage.
+#
+# This unfortunately means that you will either have
+# to import this type and pass it explicitly:
+#
+# from lithic import NoneType
+# client.get('/foo', cast_to=NoneType)
+#
+# or build it yourself:
+#
+# client.get('/foo', cast_to=type(None))
+if TYPE_CHECKING:
+    NoneType: Type[None]
+else:
+    NoneType = type(None)
 
 
 class RequestOptions(TypedDict, total=False):
-    headers: Dict[str, str]
+    headers: Headers
     max_retries: int
     timeout: Union[float, Timeout, None]
 
@@ -37,3 +85,28 @@ class NotGiven:
 
     def __bool__(self) -> Literal[False]:
         return False
+
+
+NotGivenOr = Union[_T, NotGiven]
+NOT_GIVEN = NotGiven()
+
+
+class Omit:
+    """In certain situations you need to be able to represent a case where a default value has
+    to be explicitly removed and `None` is not an appropriate substitute, for example:
+
+    ```py
+    # as the default `Content-Type` header is `application/json` that will be sent
+    client.post('/upload/files', files={'file': b'my raw file content'})
+
+    # you can't explicitly override the header as it has to be dynamically generated
+    # to look something like: 'multipart/form-data; boundary=0d8382fcf5f8c3be01ca2e11002d2983'
+    client.post(..., headers={'Content-Type': 'multipart/form-data'})
+
+    # instead you can remove the default `application/json` header by passing Omit
+    client.post(..., headers={'Content-Type': Omit()})
+    ```
+    """
+
+
+Headers = Mapping[str, str]

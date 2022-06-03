@@ -32,7 +32,9 @@ class TestAuthStreamEnrollment:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     def test_method_enroll_with_optional_params(self) -> None:
-        resource = self.client.auth_stream_enrollment.enroll({"webhook_url": "https://example.com"})
+        resource = self.client.auth_stream_enrollment.enroll(
+            {"webhook_url": "https://example.com"},
+        )
         assert resource is None
 
 
@@ -58,5 +60,7 @@ class TestAsyncAuthStreamEnrollment:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     async def test_method_enroll_with_optional_params(self) -> None:
-        resource = await self.client.auth_stream_enrollment.enroll({"webhook_url": "https://example.com"})
+        resource = await self.client.auth_stream_enrollment.enroll(
+            {"webhook_url": "https://example.com"},
+        )
         assert resource is None

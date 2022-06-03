@@ -1,8 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
 
-import pytest
-
 from lithic import Lithic, AsyncLithic
 from lithic.types.api_status import *
 

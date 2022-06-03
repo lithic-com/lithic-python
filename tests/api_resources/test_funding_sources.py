@@ -1,8 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
 
-import pytest
-
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.funding_source import *
@@ -16,7 +14,11 @@ class TestFundingSources:
 
     def test_method_create(self) -> None:
         resource = self.client.funding_sources.create(
-            {"validation_method": "BANK", "account_number": "13719713158835300", "routing_number": "011103093"}
+            {
+                "validation_method": "BANK",
+                "account_number": "13719713158835300",
+                "routing_number": "011103093",
+            },
         )
         assert isinstance(resource, FundingSource)
 
@@ -28,18 +30,24 @@ class TestFundingSources:
                 "account_number": "13719713158835300",
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "routing_number": "011103093",
-            }
+            },
         )
         assert isinstance(resource, FundingSource)
 
     def test_method_update(self) -> None:
-        resource = self.client.funding_sources.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = self.client.funding_sources.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, FundingSource)
 
     def test_method_update_with_optional_params(self) -> None:
         resource = self.client.funding_sources.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "state": "DELETED"},
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "state": "DELETED",
+            },
         )
         assert isinstance(resource, FundingSource)
 
@@ -48,19 +56,29 @@ class TestFundingSources:
         assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
-        resource = self.client.funding_sources.list({"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
+        resource = self.client.funding_sources.list(
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "page": 0,
+                "page_size": 0,
+            },
+        )
         assert isinstance(resource, SyncPage)
 
     def test_method_verify(self) -> None:
         resource = self.client.funding_sources.verify(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"micro_deposits": [0, 0, 0]}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"micro_deposits": [0, 0, 0]},
         )
         assert isinstance(resource, FundingSource)
 
     def test_method_verify_with_optional_params(self) -> None:
         resource = self.client.funding_sources.verify(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "micro_deposits": [0, 0, 0]},
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "micro_deposits": [0, 0, 0],
+            },
         )
         assert isinstance(resource, FundingSource)
 
@@ -70,7 +88,11 @@ class TestAsyncFundingSources:
 
     async def test_method_create(self) -> None:
         resource = await self.client.funding_sources.create(
-            {"validation_method": "BANK", "account_number": "13719713158835300", "routing_number": "011103093"}
+            {
+                "validation_method": "BANK",
+                "account_number": "13719713158835300",
+                "routing_number": "011103093",
+            },
         )
         assert isinstance(resource, FundingSource)
 
@@ -82,18 +104,24 @@ class TestAsyncFundingSources:
                 "account_number": "13719713158835300",
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "routing_number": "011103093",
-            }
+            },
         )
         assert isinstance(resource, FundingSource)
 
     async def test_method_update(self) -> None:
-        resource = await self.client.funding_sources.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = await self.client.funding_sources.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, FundingSource)
 
     async def test_method_update_with_optional_params(self) -> None:
         resource = await self.client.funding_sources.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "state": "DELETED"},
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "state": "DELETED",
+            },
         )
         assert isinstance(resource, FundingSource)
 
@@ -102,18 +130,28 @@ class TestAsyncFundingSources:
         assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
-        resource = await self.client.funding_sources.list({"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
+        resource = await self.client.funding_sources.list(
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "page": 0,
+                "page_size": 0,
+            },
+        )
         assert isinstance(resource, AsyncPage)
 
     async def test_method_verify(self) -> None:
         resource = await self.client.funding_sources.verify(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"micro_deposits": [0, 0, 0]}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"micro_deposits": [0, 0, 0]},
         )
         assert isinstance(resource, FundingSource)
 
     async def test_method_verify_with_optional_params(self) -> None:
         resource = await self.client.funding_sources.verify(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "micro_deposits": [0, 0, 0]},
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "micro_deposits": [0, 0, 0],
+            },
         )
         assert isinstance(resource, FundingSource)

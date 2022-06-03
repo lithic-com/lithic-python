@@ -2,19 +2,17 @@
 
 import os
 from typing import Dict, Union, Optional
-
 from typing_extensions import Literal
 
 from . import resources
-from ._types import Timeout, NotGiven, Transport, ProxiesTypes, RequestOptions
+from ._qs import Querystring
+from ._types import Timeout, Transport, ProxiesTypes, RequestOptions
 from ._version import __version__
 from ._base_client import (
     DEFAULT_TIMEOUT,
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
-    AsyncPaginator,
-    make_request_options,
 )
 
 __all__ = [
@@ -98,8 +96,13 @@ class Lithic(SyncAPIClient):
         self.transactions = resources.Transactions(self)
         self.status = resources.StatusResource(self)
 
+    @property
+    def qs(self) -> Querystring:
+        return Querystring(array_format="comma")
+
+    @property
     def default_headers(self) -> Dict[str, str]:
-        return {**super().default_headers(), "Authorization": self.api_key}
+        return {**super().default_headers, "Authorization": self.api_key}
 
 
 class AsyncLithic(AsyncAPIClient):
@@ -164,8 +167,13 @@ class AsyncLithic(AsyncAPIClient):
         self.transactions = resources.AsyncTransactions(self)
         self.status = resources.AsyncStatusResource(self)
 
+    @property
+    def qs(self) -> Querystring:
+        return Querystring(array_format="comma")
+
+    @property
     def default_headers(self) -> Dict[str, str]:
-        return {**super().default_headers(), "Authorization": self.api_key}
+        return {**super().default_headers, "Authorization": self.api_key}
 
 
 Client = Lithic

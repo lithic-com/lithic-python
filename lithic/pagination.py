@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Any, Dict, List, Generic, TypeVar, Optional
-
+from typing import List, Generic, Optional
 from typing_extensions import TypedDict
 
 from ._types import ModelT
@@ -28,10 +27,10 @@ class SyncPage(BaseSyncPage[ModelT], BasePage[ModelT, PageParams], Generic[Model
         return self.data
 
     def next_page_params(self) -> Optional[PageParams]:
-        if not self.page < self.total_pages:
+        current_page = self.page
+        if not current_page < self.total_pages:
             return None
-
-        return {"page": self.page + 1}
+        return {"page": current_page + 1}
 
 
 class AsyncPage(BaseAsyncPage[ModelT], BasePage[ModelT, PageParams], Generic[ModelT]):
@@ -44,7 +43,7 @@ class AsyncPage(BaseAsyncPage[ModelT], BasePage[ModelT, PageParams], Generic[Mod
         return self.data
 
     def next_page_params(self) -> Optional[PageParams]:
-        if not self.page < self.total_pages:
+        current_page = self.page
+        if not current_page < self.total_pages:
             return None
-
-        return {"page": self.page + 1}
+        return {"page": current_page + 1}

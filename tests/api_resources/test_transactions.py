@@ -1,8 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
 
-import pytest
-
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.transaction import *
@@ -38,13 +36,17 @@ class TestTransactions:
                 "end": "2019-12-27T18:11:19.117Z",
                 "page": 0,
                 "page_size": 1,
-            }
+            },
         )
         assert isinstance(resource, SyncPage)
 
     def test_method_simulate_authorization(self) -> None:
         resource = self.client.transactions.simulate_authorization(
-            {"amount": 0, "descriptor": "COFFEE SHOP", "pan": "4111111289144142"}
+            {
+                "amount": 0,
+                "descriptor": "COFFEE SHOP",
+                "pan": "4111111289144142",
+            },
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)
 
@@ -57,39 +59,57 @@ class TestTransactions:
                 "status": "AUTHORIZATION",
                 "merchant_currency": "GBP",
                 "merchant_amount": 0,
-            }
+            },
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)
 
     def test_method_simulate_clearing(self) -> None:
-        resource = self.client.transactions.simulate_clearing({"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
+        resource = self.client.transactions.simulate_clearing(
+            {"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+        )
         assert isinstance(resource, TransactionSimulateClearingResponse)
 
     def test_method_simulate_clearing_with_optional_params(self) -> None:
         resource = self.client.transactions.simulate_clearing(
-            {"amount": 0, "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}
+            {
+                "amount": 0,
+                "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
         )
         assert isinstance(resource, TransactionSimulateClearingResponse)
 
     def test_method_simulate_return(self) -> None:
         resource = self.client.transactions.simulate_return(
-            {"amount": 0, "descriptor": "COFFEE SHOP", "pan": "4111111289144142"}
+            {
+                "amount": 0,
+                "descriptor": "COFFEE SHOP",
+                "pan": "4111111289144142",
+            },
         )
         assert isinstance(resource, TransactionSimulateReturnResponse)
 
     def test_method_simulate_return_with_optional_params(self) -> None:
         resource = self.client.transactions.simulate_return(
-            {"amount": 0, "descriptor": "COFFEE SHOP", "pan": "4111111289144142"}
+            {
+                "amount": 0,
+                "descriptor": "COFFEE SHOP",
+                "pan": "4111111289144142",
+            },
         )
         assert isinstance(resource, TransactionSimulateReturnResponse)
 
     def test_method_simulate_void(self) -> None:
-        resource = self.client.transactions.simulate_void({"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
+        resource = self.client.transactions.simulate_void(
+            {"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+        )
         assert isinstance(resource, TransactionSimulateVoidResponse)
 
     def test_method_simulate_void_with_optional_params(self) -> None:
         resource = self.client.transactions.simulate_void(
-            {"amount": 0, "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}
+            {
+                "amount": 0,
+                "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
         )
         assert isinstance(resource, TransactionSimulateVoidResponse)
 
@@ -117,13 +137,17 @@ class TestAsyncTransactions:
                 "end": "2019-12-27T18:11:19.117Z",
                 "page": 0,
                 "page_size": 1,
-            }
+            },
         )
         assert isinstance(resource, AsyncPage)
 
     async def test_method_simulate_authorization(self) -> None:
         resource = await self.client.transactions.simulate_authorization(
-            {"amount": 0, "descriptor": "COFFEE SHOP", "pan": "4111111289144142"}
+            {
+                "amount": 0,
+                "descriptor": "COFFEE SHOP",
+                "pan": "4111111289144142",
+            },
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)
 
@@ -136,38 +160,56 @@ class TestAsyncTransactions:
                 "status": "AUTHORIZATION",
                 "merchant_currency": "GBP",
                 "merchant_amount": 0,
-            }
+            },
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)
 
     async def test_method_simulate_clearing(self) -> None:
-        resource = await self.client.transactions.simulate_clearing({"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
+        resource = await self.client.transactions.simulate_clearing(
+            {"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+        )
         assert isinstance(resource, TransactionSimulateClearingResponse)
 
     async def test_method_simulate_clearing_with_optional_params(self) -> None:
         resource = await self.client.transactions.simulate_clearing(
-            {"amount": 0, "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}
+            {
+                "amount": 0,
+                "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
         )
         assert isinstance(resource, TransactionSimulateClearingResponse)
 
     async def test_method_simulate_return(self) -> None:
         resource = await self.client.transactions.simulate_return(
-            {"amount": 0, "descriptor": "COFFEE SHOP", "pan": "4111111289144142"}
+            {
+                "amount": 0,
+                "descriptor": "COFFEE SHOP",
+                "pan": "4111111289144142",
+            },
         )
         assert isinstance(resource, TransactionSimulateReturnResponse)
 
     async def test_method_simulate_return_with_optional_params(self) -> None:
         resource = await self.client.transactions.simulate_return(
-            {"amount": 0, "descriptor": "COFFEE SHOP", "pan": "4111111289144142"}
+            {
+                "amount": 0,
+                "descriptor": "COFFEE SHOP",
+                "pan": "4111111289144142",
+            },
         )
         assert isinstance(resource, TransactionSimulateReturnResponse)
 
     async def test_method_simulate_void(self) -> None:
-        resource = await self.client.transactions.simulate_void({"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"})
+        resource = await self.client.transactions.simulate_void(
+            {"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+        )
         assert isinstance(resource, TransactionSimulateVoidResponse)
 
     async def test_method_simulate_void_with_optional_params(self) -> None:
         resource = await self.client.transactions.simulate_void(
-            {"amount": 0, "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}
+            {
+                "amount": 0,
+                "token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
         )
         assert isinstance(resource, TransactionSimulateVoidResponse)

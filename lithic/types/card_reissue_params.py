@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
-
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import TypedDict
 
 from ..types import shared_params
 

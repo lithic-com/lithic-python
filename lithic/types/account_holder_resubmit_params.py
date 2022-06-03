@@ -2,11 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
-
 from typing_extensions import Literal, Required, TypedDict
-
-from ..types import shared_params
 
 __all__ = ["IndividualAddress", "Individual", "AccountHolderResubmitParams"]
 
@@ -87,8 +83,9 @@ class AccountHolderResubmitParams(TypedDict, total=False):
 
     tos_timestamp: Required[str]
     """
-    An ISO 8601 timestamp indicating when Lithic's terms of service were accepted by
-    the API customer.
+    An ISO 8601 timestamp indicating when the account holder accepted the applicable
+    legal agreements (e.g., cardholder terms) as agreed upon during API customer's
+    implementation with Lithic.
     """
 
     workflow: Required[Literal["KYC_ADVANCED"]]

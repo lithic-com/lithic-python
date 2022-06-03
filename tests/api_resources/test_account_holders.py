@@ -1,8 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
 
-import pytest
-
 from lithic import Lithic, AsyncLithic
 from lithic.types.account_holder import *
 from lithic.types.account_holder_document import *
@@ -37,7 +35,7 @@ class TestAccountHolders:
                 },
                 "tos_timestamp": "2022-03-08 08:00:00",
                 "workflow": "KYC_ADVANCED",
-            }
+            },
         )
         assert isinstance(resource, AccountHolder)
 
@@ -63,7 +61,7 @@ class TestAccountHolders:
                 "kyc_passed_timestamp": "2022-03-09 08:00:00",
                 "tos_timestamp": "2022-03-08 08:00:00",
                 "workflow": "KYC_ADVANCED",
-            }
+            },
         )
         assert isinstance(resource, AccountHolder)
 
@@ -74,11 +72,15 @@ class TestAccountHolders:
         assert isinstance(resource, AccountHolder)
 
     def test_method_create_webhook(self) -> None:
-        resource = self.client.account_holders.create_webhook({"url": "string"})
+        resource = self.client.account_holders.create_webhook(
+            {"url": "string"},
+        )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     def test_method_create_webhook_with_optional_params(self) -> None:
-        resource = self.client.account_holders.create_webhook({"url": "string"})
+        resource = self.client.account_holders.create_webhook(
+            {"url": "string"},
+        )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     def test_method_list_documents(self) -> None:
@@ -148,13 +150,15 @@ class TestAccountHolders:
 
     def test_method_upload_document(self) -> None:
         resource = self.client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"document_type": "COMMERCIAL_LICENCE"}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"document_type": "COMMERCIAL_LICENCE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
     def test_method_upload_document_with_optional_params(self) -> None:
         resource = self.client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"document_type": "COMMERCIAL_LICENCE"}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"document_type": "COMMERCIAL_LICENCE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
@@ -183,7 +187,7 @@ class TestAsyncAccountHolders:
                 },
                 "tos_timestamp": "2022-03-08 08:00:00",
                 "workflow": "KYC_ADVANCED",
-            }
+            },
         )
         assert isinstance(resource, AccountHolder)
 
@@ -209,7 +213,7 @@ class TestAsyncAccountHolders:
                 "kyc_passed_timestamp": "2022-03-09 08:00:00",
                 "tos_timestamp": "2022-03-08 08:00:00",
                 "workflow": "KYC_ADVANCED",
-            }
+            },
         )
         assert isinstance(resource, AccountHolder)
 
@@ -220,11 +224,15 @@ class TestAsyncAccountHolders:
         assert isinstance(resource, AccountHolder)
 
     async def test_method_create_webhook(self) -> None:
-        resource = await self.client.account_holders.create_webhook({"url": "string"})
+        resource = await self.client.account_holders.create_webhook(
+            {"url": "string"},
+        )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     async def test_method_create_webhook_with_optional_params(self) -> None:
-        resource = await self.client.account_holders.create_webhook({"url": "string"})
+        resource = await self.client.account_holders.create_webhook(
+            {"url": "string"},
+        )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     async def test_method_list_documents(self) -> None:
@@ -294,12 +302,14 @@ class TestAsyncAccountHolders:
 
     async def test_method_upload_document(self) -> None:
         resource = await self.client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"document_type": "COMMERCIAL_LICENCE"}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"document_type": "COMMERCIAL_LICENCE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
     async def test_method_upload_document_with_optional_params(self) -> None:
         resource = await self.client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {"document_type": "COMMERCIAL_LICENCE"}
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"document_type": "COMMERCIAL_LICENCE"},
         )
         assert isinstance(resource, AccountHolderDocument)

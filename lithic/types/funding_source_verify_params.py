@@ -2,11 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
-
-from typing_extensions import Literal, Required, TypedDict
-
-from ..types import shared_params
+from typing import List
+from typing_extensions import Required, TypedDict
 
 __all__ = ["FundingSourceVerifyParams"]
 

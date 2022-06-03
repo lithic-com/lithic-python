@@ -1,8 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
 
-import pytest
-
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.card import *
@@ -16,7 +14,9 @@ class TestCards:
     client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     def test_method_create(self) -> None:
-        resource = self.client.cards.create({"type": "DIGITAL_WALLET"})
+        resource = self.client.cards.create(
+            {"type": "DIGITAL_WALLET"},
+        )
         assert isinstance(resource, Card)
 
     def test_method_create_with_optional_params(self) -> None:
@@ -48,7 +48,7 @@ class TestCards:
                     "phone_number": "+12124007676",
                 },
                 "shipping_method": "STANDARD",
-            }
+            },
         )
         assert isinstance(resource, Card)
 
@@ -59,7 +59,10 @@ class TestCards:
         assert isinstance(resource, Card)
 
     def test_method_update(self) -> None:
-        resource = self.client.cards.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = self.client.cards.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, Card)
 
     def test_method_update_with_optional_params(self) -> None:
@@ -90,7 +93,7 @@ class TestCards:
                 "end": "2019-12-27T18:11:19.117Z",
                 "page": 0,
                 "page_size": 1,
-            }
+            },
         )
         assert isinstance(resource, SyncPage)
 
@@ -99,11 +102,19 @@ class TestCards:
         assert isinstance(resource, str)
 
     def test_method_embed_with_optional_params(self) -> None:
-        resource = self.client.cards.embed({"embed_request": "string", "hmac": "string"})
+        resource = self.client.cards.embed(
+            {
+                "embed_request": "string",
+                "hmac": "string",
+            },
+        )
         assert isinstance(resource, str)
 
     def test_method_provision(self) -> None:
-        resource = self.client.cards.provision("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = self.client.cards.provision(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, CardProvisionResponse)
 
     def test_method_provision_with_optional_params(self) -> None:
@@ -120,7 +131,10 @@ class TestCards:
         assert isinstance(resource, CardProvisionResponse)
 
     def test_method_reissue(self) -> None:
-        resource = self.client.cards.reissue("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = self.client.cards.reissue(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, Card)
 
     def test_method_reissue_with_optional_params(self) -> None:
@@ -150,7 +164,9 @@ class TestAsyncCards:
     client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     async def test_method_create(self) -> None:
-        resource = await self.client.cards.create({"type": "DIGITAL_WALLET"})
+        resource = await self.client.cards.create(
+            {"type": "DIGITAL_WALLET"},
+        )
         assert isinstance(resource, Card)
 
     async def test_method_create_with_optional_params(self) -> None:
@@ -182,7 +198,7 @@ class TestAsyncCards:
                     "phone_number": "+12124007676",
                 },
                 "shipping_method": "STANDARD",
-            }
+            },
         )
         assert isinstance(resource, Card)
 
@@ -193,7 +209,10 @@ class TestAsyncCards:
         assert isinstance(resource, Card)
 
     async def test_method_update(self) -> None:
-        resource = await self.client.cards.update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = await self.client.cards.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, Card)
 
     async def test_method_update_with_optional_params(self) -> None:
@@ -224,7 +243,7 @@ class TestAsyncCards:
                 "end": "2019-12-27T18:11:19.117Z",
                 "page": 0,
                 "page_size": 1,
-            }
+            },
         )
         assert isinstance(resource, AsyncPage)
 
@@ -233,11 +252,19 @@ class TestAsyncCards:
         assert isinstance(resource, str)
 
     async def test_method_embed_with_optional_params(self) -> None:
-        resource = await self.client.cards.embed({"embed_request": "string", "hmac": "string"})
+        resource = await self.client.cards.embed(
+            {
+                "embed_request": "string",
+                "hmac": "string",
+            },
+        )
         assert isinstance(resource, str)
 
     async def test_method_provision(self) -> None:
-        resource = await self.client.cards.provision("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = await self.client.cards.provision(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, CardProvisionResponse)
 
     async def test_method_provision_with_optional_params(self) -> None:
@@ -254,7 +281,10 @@ class TestAsyncCards:
         assert isinstance(resource, CardProvisionResponse)
 
     async def test_method_reissue(self) -> None:
-        resource = await self.client.cards.reissue("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", {})
+        resource = await self.client.cards.reissue(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
         assert isinstance(resource, Card)
 
     async def test_method_reissue_with_optional_params(self) -> None:

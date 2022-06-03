@@ -1,21 +1,24 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Dict, List, Union, Optional
+from typing import Union
 
-from .._types import Timeout, NotGiven
-from .._models import NoneModel, StringModel
+from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.transaction import *
-from ..types.transaction_list_params import *
-from ..types.transaction_simulate_void_params import *
-from ..types.transaction_simulate_return_params import *
+from ..types.transaction_list_params import TransactionListParams
+from ..types.transaction_simulate_void_params import TransactionSimulateVoidParams
+from ..types.transaction_simulate_return_params import TransactionSimulateReturnParams
 from ..types.transaction_simulate_void_response import *
-from ..types.transaction_simulate_clearing_params import *
+from ..types.transaction_simulate_clearing_params import (
+    TransactionSimulateClearingParams,
+)
 from ..types.transaction_simulate_return_response import *
 from ..types.transaction_simulate_clearing_response import *
-from ..types.transaction_simulate_authorization_params import *
+from ..types.transaction_simulate_authorization_params import (
+    TransactionSimulateAuthorizationParams,
+)
 from ..types.transaction_simulate_authorization_response import *
 
 __all__ = ["Transactions", "AsyncTransactions"]
@@ -26,35 +29,43 @@ class Transactions(SyncAPIResource):
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Transaction:
         """Get specific transaction."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get(f"/transactions/{id}", model=Transaction, options=options)
+        return self._get(
+            f"/transactions/{id}",
+            options=options,
+            cast_to=Transaction,
+        )
 
     def list(
         self,
         query: TransactionListParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Transaction]:
         """List transactions."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get_api_list(
-            "/transactions", model=Transaction, page=SyncPage[Transaction], query=query, options=options
+            "/transactions",
+            page=SyncPage[Transaction],
+            query=query,
+            options=options,
+            model=Transaction,
         )
 
     def simulate_authorization(
         self,
         body: TransactionSimulateAuthorizationParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
@@ -63,16 +74,19 @@ class Transactions(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            "/simulate/authorize", model=TransactionSimulateAuthorizationResponse, body=body, options=options
+            "/simulate/authorize",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateAuthorizationResponse,
         )
 
     def simulate_clearing(
         self,
         body: TransactionSimulateClearingParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -83,30 +97,40 @@ class Transactions(SyncAPIResource):
         access to this behavior.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post("/simulate/clearing", model=TransactionSimulateClearingResponse, body=body, options=options)
+        return self._post(
+            "/simulate/clearing",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateClearingResponse,
+        )
 
     def simulate_return(
         self,
         body: TransactionSimulateReturnParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
         Returns are cleared immediately and do not spend time in a `PENDING` state.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
+        return self._post(
+            "/simulate/return",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateReturnResponse,
+        )
 
     def simulate_void(
         self,
         body: TransactionSimulateVoidParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
@@ -115,7 +139,12 @@ class Transactions(SyncAPIResource):
         transactions.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return self._post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)
+        return self._post(
+            "/simulate/void",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateVoidResponse,
+        )
 
 
 class AsyncTransactions(AsyncAPIResource):
@@ -123,35 +152,43 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         id: str,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Transaction:
         """Get specific transaction."""
         options = make_request_options(headers, max_retries, timeout)
-        return await self._get(f"/transactions/{id}", model=Transaction, options=options)
+        return await self._get(
+            f"/transactions/{id}",
+            options=options,
+            cast_to=Transaction,
+        )
 
     def list(
         self,
         query: TransactionListParams = {},
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """List transactions."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get_api_list(
-            "/transactions", model=Transaction, page=AsyncPage[Transaction], query=query, options=options
+            "/transactions",
+            page=AsyncPage[Transaction],
+            query=query,
+            options=options,
+            model=Transaction,
         )
 
     async def simulate_authorization(
         self,
         body: TransactionSimulateAuthorizationParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
@@ -160,16 +197,19 @@ class AsyncTransactions(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            "/simulate/authorize", model=TransactionSimulateAuthorizationResponse, body=body, options=options
+            "/simulate/authorize",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateAuthorizationResponse,
         )
 
     async def simulate_clearing(
         self,
         body: TransactionSimulateClearingParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -181,31 +221,39 @@ class AsyncTransactions(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            "/simulate/clearing", model=TransactionSimulateClearingResponse, body=body, options=options
+            "/simulate/clearing",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateClearingResponse,
         )
 
     async def simulate_return(
         self,
         body: TransactionSimulateReturnParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
         Returns are cleared immediately and do not spend time in a `PENDING` state.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._post("/simulate/return", model=TransactionSimulateReturnResponse, body=body, options=options)
+        return await self._post(
+            "/simulate/return",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateReturnResponse,
+        )
 
     async def simulate_void(
         self,
         body: TransactionSimulateVoidParams,
         *,
-        headers: Union[Dict[str, str], NotGiven] = NotGiven(),
-        max_retries: Union[int, NotGiven] = NotGiven(),
-        timeout: Union[float, Timeout, None, NotGiven] = NotGiven(),
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
@@ -214,4 +262,9 @@ class AsyncTransactions(AsyncAPIResource):
         transactions.
         """
         options = make_request_options(headers, max_retries, timeout)
-        return await self._post("/simulate/void", model=TransactionSimulateVoidResponse, body=body, options=options)
+        return await self._post(
+            "/simulate/void",
+            body=body,
+            options=options,
+            cast_to=TransactionSimulateVoidResponse,
+        )

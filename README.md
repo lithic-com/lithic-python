@@ -6,6 +6,10 @@ The Lithic Python library provides convenient access to the Lithic REST API from
 application. It includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
+## Documentation
+
+The API documentation can be found [here](https://docs.lithic.com).
+
 ## Installation
 
 ```sh
@@ -17,13 +21,13 @@ pip install lithic
 ```python
 from lithic import Lithic
 
-client = Lithic(
-    api_key="my api key", # defaults to os.environ.get("LITHIC_API_KEY")
-    environment="sandbox" # defaults to "production"
+lithic = Lithic(
+  api_key='my api key',  # defaults to os.environ.get("LITHIC_API_KEY")
+  environment='sandbox',  # defaults to 'production'.
 )
 
-card = client.cards.create({
-    "type": "SINGLE_USE"
+card = lithic.cards.create({
+    "type": "SINGLE_USE",
 })
 
 print(card.token)
@@ -38,19 +42,18 @@ Simply import `AsyncLithic` instead of `Lithic` and use `await` with each API ca
 
 ```python
 from lithic import AsyncLithic
-import asyncio # or the async environment of your choice
 
-client = AsyncLithic(
-    api_key="my api key", # defaults to os.environ.get("LITHIC_API_KEY")
-    environment="sandbox" # defaults to "production"
+lithic = AsyncLithic(
+  api_key='my api key',  # defaults to os.environ.get("LITHIC_API_KEY")
+  environment='sandbox',  # defaults to 'production'.
 )
 
 async def main():
-    card = await client.cards.create({
+    card = await lithic.cards.create({
         "type": "SINGLE_USE"
     })
-
     print(card.token)
+
 
 asyncio.run(main())
 ```
@@ -69,32 +72,37 @@ List methods in the Lithic API are paginated.
 
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
-```python
-import lithic
+```py
 from typing import List
+import lithic
 
-client = lithic.Lithic()
+lithic = Lithic()
 
 all_cards = []
-# Iterate through items across all pages, issuing requests as needed.
-for card in client.cards.list():
+# Automatically fetches more pages as needed.
+for card in lithic.cards.list():
+    # Do something with card here
     all_cards.append(card)
+return all_cards
 ```
 
 Or, asynchronously:
 
 ```python
-import lithic
+import asyncio
 from typing import List
+import lithic
 
-client = lithic.AsyncLithic()
+lithic = AsyncLithic()
 
-async def get_all_cards() -> List[lithic.types.Card]:
-    cards = []
+async def main() -> None:
+    all_cards = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for card in client.cards.list():
-        cards.append(card)
-    return cards
+    async for card in lithic.cards.list():
+        all_cards.append(card)
+    return all_cards
+
+asyncio.run(main())
 ```
 
 Alternatively, you can use the `.has_next_page()`, `.next_page_params()`,
@@ -132,20 +140,19 @@ response), a subclass of `lithic.APIStatusError` will be raised, containing `sta
 All errors inherit from `lithic.APIError`.
 
 ```python
-import lithic
+from lithic import Lithic
 
-client = lithic.Lithic()
+lithic = Lithic()
 
 try:
-    client.cards.create()
-
+    lithic.cards.create({
+        "type": "an_incorrect_type"
+    })
 except lithic.APIConnectionError as e:
     print('The server could not be reached')
     print(e.__cause__) # an underlying Exception, likely raised within httpx.
-
 except lithic.RateLimitError as e:
     print('A 429 status code was received; we should back off a bit.')
-
 except lithic.APIStatusError as e:
     print('Another non-200-range status code was received')
     print(e.status_code)
@@ -177,10 +184,15 @@ You can use the `max_retries` option to configure or disable this:
 from lithic import Lithic
 
 # Configure the default for all requests:
-client = Lithic(max_retries=0)
+lithic = Lithic(
+  # default is 2
+  max_retries=0,
+)
 
-# Override per-request:
-client.cards.list({"page_size": 10}, max_retries=5)
+# Or, configure per-request:
+lithic.cards.list({
+    "page_size": 10
+}, max_retries=5);
 ```
 
 ### Timeouts
@@ -189,18 +201,23 @@ Requests time out after 60 seconds by default. You can configure this with a `ti
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration):
 
 ```python
+from lithic import Lithic
+
 # Configure the default for all requests:
-client = Lithic(
-  timeout=20.0 # default is 60s.
+lithic = Lithic(
+  # default is 60s
+  timeout=20.0,
 )
 
 # More granular control:
-client = Lithic(
-  timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0)
+lithic = Lithic(
+  timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.cards.list({"page_size": 10}, timeout=5.0)
+lithic.cards.list({
+    "page_size": 10
+}, timeout=5 * 1000)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -213,12 +230,13 @@ You can configure the following keyword arguments when instantiating the client:
 
 ```python
 import httpx
-import lithic
+from lithic import Lithic
 
-client = lithic.Lithic(
-    base_url="http://my.test.server.example.com:8083", # Use a custom base URL
-    proxies="http://my.test.proxy.example.com",
-    transport=httpx.HTTPTransport(local_address="0.0.0.0")
+lithic = Lithic(
+  # Use a custom base URL
+  base_url="http://my.test.server.example.com:8083",
+  proxies="http://my.test.proxy.example.com",
+  transport=httpx.HTTPTransport(local_address="0.0.0.0"),
 )
 ```
 

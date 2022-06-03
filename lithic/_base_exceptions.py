@@ -1,7 +1,6 @@
-import json
+from typing_extensions import Literal
 
 from httpx import Request, Response
-from typing_extensions import Literal
 
 
 class APIError(Exception):
@@ -34,32 +33,6 @@ class APIStatusError(APIError):
         super().__init__(message, request)
         self.response = response
         self.status_code = response.status_code
-
-
-def make_status_error(request: Request, response: Response) -> APIStatusError:
-    err_text = response.text.strip()
-    try:
-        err_msg = json.loads(err_text)
-    except:
-        err_msg = err_text or "Unknown"
-
-    if response.status_code == 400:
-        return BadRequestError(err_msg, request, response)
-    if response.status_code == 401:
-        return AuthenticationError(err_msg, request, response)
-    if response.status_code == 403:
-        return PermissionDeniedError(err_msg, request, response)
-    if response.status_code == 404:
-        return NotFoundError(err_msg, request, response)
-    if response.status_code == 409:
-        return ConflictError(err_msg, request, response)
-    if response.status_code == 422:
-        return UnprocessableEntityError(err_msg, request, response)
-    if response.status_code == 429:
-        return RateLimitError(err_msg, request, response)
-    if response.status_code >= 500:
-        return InternalServerError(err_msg, request, response)
-    return APIStatusError(err_msg, request, response)
 
 
 class BadRequestError(APIStatusError):

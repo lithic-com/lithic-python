@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import time
-import inspect
 import platform
 from random import random
 from typing import (
@@ -20,27 +19,34 @@ from typing import (
     AsyncIterator,
     cast,
 )
+from functools import lru_cache
 
 import anyio
 import httpx
 import pydantic
 from pydantic import PrivateAttr
 
+from . import _base_exceptions as exceptions
+from ._qs import Querystring
 from ._types import (
+    Omit,
     Query,
     ModelT,
+    Headers,
     Timeout,
+    NoneType,
     NotGiven,
     Transport,
     ProxiesTypes,
+    RequestFiles,
     RequestOptions,
 )
-from ._models import BaseModel, NoneModel, GenericModel, FinalRequestOptions
-from .exceptions import (
+from ._models import BaseModel, GenericModel, FinalRequestOptions
+from ._base_exceptions import (
+    APIStatusError,
     APITimeoutError,
     APIConnectionError,
     APIResponseValidationError,
-    make_status_error,
 )
 
 # TODO: make base page type vars covariant
@@ -48,16 +54,14 @@ SyncPageT = TypeVar("SyncPageT", bound="BaseSyncPage[Any]")
 AsyncPageT = TypeVar("AsyncPageT", bound="BaseAsyncPage[Any]")
 
 
-PageParamsT = TypeVar("PageParamsT", bound=Mapping[str, object])
-ResponseT = TypeVar("ResponseT", bound=BaseModel)
+PageParamsT = TypeVar("PageParamsT", bound=Query)
+ResponseT = TypeVar("ResponseT", bound=Union[BaseModel, str, None])
+
+_T = TypeVar("_T")
+_T_co = TypeVar("_T_co", covariant=True)
 
 DEFAULT_TIMEOUT = Timeout(timeout=60.0, connect=5.0)
 DEFAULT_MAX_RETRIES = 2
-
-# https://github.com/encode/httpx/discussions/2181
-BUILD_REQUEST_PARAMS = inspect.signature(
-    httpx.Client.build_request  # pyright: ignore[reportUnknownArgumentType, reportUnknownMemberType]
-).parameters.values()
 
 
 class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
@@ -74,7 +78,7 @@ class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
         ...
 
 
-class BaseSyncPage(BasePage[ModelT, Mapping[str, object]], Generic[ModelT]):
+class BaseSyncPage(BasePage[ModelT, Query], Generic[ModelT]):
     _client: SyncAPIClient = pydantic.PrivateAttr()
 
     def _set_private_attributes(
@@ -157,7 +161,7 @@ class AsyncPaginator(Generic[ModelT, AsyncPageT]):
             yield item
 
 
-class BaseAsyncPage(BasePage[ModelT, Mapping[str, object]], Generic[ModelT]):
+class BaseAsyncPage(BasePage[ModelT, Query], Generic[ModelT]):
     _client: AsyncAPIClient = pydantic.PrivateAttr()
 
     def _set_private_attributes(
@@ -197,6 +201,7 @@ class BaseAsyncPage(BasePage[ModelT, Mapping[str, object]], Generic[ModelT]):
 
 
 class BaseClient:
+    _client: httpx.Client | httpx.AsyncClient
     _version: str
     api_key: str
     max_retries: int
@@ -217,6 +222,31 @@ class BaseClient:
         self.timeout = timeout
         self._strict_response_validation = _strict_response_validation
 
+    def _make_status_error(self, request: httpx.Request, response: httpx.Response) -> APIStatusError:
+        err_text = response.text.strip()
+        try:
+            err_msg = json.loads(err_text)
+        except:
+            err_msg = err_text or "Unknown"
+
+        if response.status_code == 400:
+            return exceptions.BadRequestError(err_msg, request, response)
+        if response.status_code == 401:
+            return exceptions.AuthenticationError(err_msg, request, response)
+        if response.status_code == 403:
+            return exceptions.PermissionDeniedError(err_msg, request, response)
+        if response.status_code == 404:
+            return exceptions.NotFoundError(err_msg, request, response)
+        if response.status_code == 409:
+            return exceptions.ConflictError(err_msg, request, response)
+        if response.status_code == 422:
+            return exceptions.UnprocessableEntityError(err_msg, request, response)
+        if response.status_code == 429:
+            return exceptions.RateLimitError(err_msg, request, response)
+        if response.status_code >= 500:
+            return exceptions.InternalServerError(err_msg, request, response)
+        return APIStatusError(err_msg, request, response)
+
     def remaining_retries(
         self,
         remaining_retries: Optional[int],
@@ -224,37 +254,93 @@ class BaseClient:
     ) -> int:
         return remaining_retries if remaining_retries is not None else options.get_max_retries(self.max_retries)
 
-    def prepare_request_args(
+    def build_request(
         self,
         options: FinalRequestOptions,
-    ) -> Dict[str, Any]:
-        return options.to_request_args(default_headers=self.default_headers(), default_timeout=self.timeout)
+    ) -> httpx.Request:
+        headers = _merge_mappings(
+            self.default_headers,
+            {} if isinstance(options.headers, NotGiven) else options.headers,
+        )
+
+        # If the given Content-Type header is multipart/form-data then it
+        # has to be removed so that httpx can generate the header with
+        # additional information for us as it has to be in this form
+        # for the server to be able to correctly parse the request:
+        # multipart/form-data; boundary=---abc--
+        if headers.get("Content-Type") == "multipart/form-data":
+            headers.pop("Content-Type")
+
+        # TODO: report this error to httpx
+        return self._client.build_request(  # pyright: ignore[reportUnknownMemberType]
+            headers=headers,
+            timeout=self.timeout if isinstance(options.timeout, NotGiven) else options.timeout,
+            method=options.method,
+            url=options.url,
+            # the `Query` type that we use is incompatible with qs'
+            # `Params` type as it needs to be typed as `Mapping[str, object]`
+            # so that passing a `TypedDict` doesn't cause an error.
+            # https://github.com/microsoft/pyright/issues/3526#event-6715453066
+            params=self.qs.stringify(cast(Mapping[str, Any], options.params)) if options.params else None,
+            json=options.json_data,
+            files=options.files,
+        )
 
     def process_response(
-        self, model: Type[ResponseT], options: FinalRequestOptions, response: httpx.Response
+        self,
+        *,
+        cast_to: Type[ResponseT],
+        options: FinalRequestOptions,
+        response: httpx.Response,
     ) -> ResponseT:
-        if model is NoneModel:
-            return model()
-        data = (
-            response.json()
-            if response.headers.get("content-type") == "application/json"
-            else {"content": response.text}
-        )
-        if self._strict_response_validation:
-            return model(**data)
-        else:
-            return model.construct(**data)
+        if cast_to is NoneType:
+            return cast(ResponseT, None)
 
+        if cast_to == str:
+            return cast(ResponseT, response.text)
+
+        # The check here is necessary as we are subverting the the type system
+        # with casts as the relationship between TypeVars and Types are very strict
+        # which means we must return *exactly* what was input or transform it in a
+        # way that retains the TypeVar state. As we cannot do that in this function
+        # then we have to resort to using `cast`. At the time of writing, we know this
+        # to be safe as we have handled all the types that could be bound to the
+        # `ResponseT` TypeVar, however if that TypeVar is ever updated in the future, then
+        # this function would become unsafe but a type checker would not report an error.
+        if not issubclass(cast_to, BaseModel):
+            raise RuntimeError(f"Invalid state, expected {cast_to} to be a subclass type of {BaseModel}.")
+
+        model_cls = cast(Type[BaseModel], cast_to)
+
+        content_type = response.headers.get("content-type")
+        if content_type != "application/json":
+            raise ValueError(
+                f"Expected Content-Type response header to be `application/json` but received {content_type} instead."
+            )
+
+        data = response.json()
+        if self._strict_response_validation:
+            return cast(ResponseT, model_cls(**data))
+        else:
+            return cast(ResponseT, model_cls.construct(**data))
+
+    @property
+    def qs(self) -> Querystring:
+        return Querystring()
+
+    @property
     def default_headers(self) -> Dict[str, str]:
         return {
             "Content-Type": "application/json",
-            "User-Agent": self.user_agent(),
+            "User-Agent": self.user_agent,
             "X-Stainless-Client-User-Agent": self.platform_properties(),
         }
 
+    @property
     def user_agent(self) -> str:
         return f"{self.__class__.__name__}/Python {self._version}"
 
+    @lru_cache(maxsize=None)
     def platform_properties(self) -> str:
         arch, _ = platform.architecture()
         properties = {
@@ -351,34 +437,32 @@ class SyncAPIClient(BaseClient):
 
     def request(
         self,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         options: FinalRequestOptions,
         remaining_retries: Optional[int] = None,
     ) -> ResponseT:
         retries = self.remaining_retries(remaining_retries, options)
-        req_args = self.prepare_request_args(options)
 
-        # https://github.com/encode/httpx/discussions/2181
-        request = self._client.build_request(**req_args)  # pyright: ignore[reportUnknownMemberType]
+        request = self.build_request(options)
 
         try:
             response = self._client.send(request)
             response.raise_for_status()
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
             if retries > 0 and self.should_retry(err.response):
-                return self.retry_request(options, model, retries, err.response.headers)
-            raise make_status_error(request, err.response)
+                return self.retry_request(options, cast_to, retries, err.response.headers)
+            raise self._make_status_error(request, err.response)
         except httpx.TimeoutException as err:
             if retries > 0:
-                return self.retry_request(options, model, retries)
+                return self.retry_request(options, cast_to, retries)
             raise APITimeoutError(request=request) from err
         except Exception as err:
             if retries > 0:
-                return self.retry_request(options, model, retries)
+                return self.retry_request(options, cast_to, retries)
             raise APIConnectionError(request=request) from err
 
         try:
-            rsp = self.process_response(model, options, response)
+            rsp = self.process_response(cast_to=cast_to, options=options, response=response)
         except pydantic.ValidationError as err:
             raise APIResponseValidationError(request=request, response=response) from err
 
@@ -387,7 +471,7 @@ class SyncAPIClient(BaseClient):
     def retry_request(
         self,
         options: FinalRequestOptions,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         remaining_retries: int,
         response_headers: Optional[httpx.Headers] = None,
     ) -> ResponseT:
@@ -399,7 +483,7 @@ class SyncAPIClient(BaseClient):
         time.sleep(timeout)
         return self.request(
             options=options,
-            model=model,
+            cast_to=cast_to,
             remaining_retries=remaining,
         )
 
@@ -421,56 +505,57 @@ class SyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="get", url=path, params=query, **options)
-        return self.request(model, opts)
+        return self.request(cast_to, opts)
 
     def post(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
         options: RequestOptions = {},
+        files: RequestFiles | None = None,
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="post", url=path, json_data=body, **options)
-        return self.request(model, opts)
+        opts = FinalRequestOptions(method="post", url=path, json_data=body, files=files, **options)
+        return self.request(cast_to, opts)
 
     def patch(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="patch", url=path, json_data=body, **options)
-        return self.request(model, opts)
+        return self.request(cast_to, opts)
 
     def put(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="put", url=path, json_data=body, **options)
-        return self.request(model, opts)
+        return self.request(cast_to, opts)
 
     def delete(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="delete", url=path, json_data=body, **options)
-        return self.request(model, opts)
+        return self.request(cast_to, opts)
 
     def get_api_list(
         self,
@@ -511,26 +596,24 @@ class AsyncAPIClient(BaseClient):
 
     async def request(
         self,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         options: FinalRequestOptions,
         remaining_retries: Optional[int] = None,
     ) -> ResponseT:
         retries = self.remaining_retries(remaining_retries, options)
-        req_args = self.prepare_request_args(options)
 
-        # https://github.com/encode/httpx/discussions/2181
-        request = self._client.build_request(**req_args)  # pyright: ignore[reportUnknownMemberType]
+        request = self.build_request(options)
 
         try:
             response = await self._client.send(request)
             response.raise_for_status()
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
             if retries > 0 and self.should_retry(err.response):
-                return await self.retry_request(options, model, retries, err.response.headers)
-            raise make_status_error(request, err.response)
+                return await self.retry_request(options, cast_to, retries, err.response.headers)
+            raise self._make_status_error(request, err.response)
         except httpx.ConnectTimeout as err:
             if retries > 0:
-                return await self.retry_request(options, model, retries)
+                return await self.retry_request(options, cast_to, retries)
             raise APITimeoutError(request=request) from err
         except httpx.ReadTimeout as err:
             # We explicitly do not retry on ReadTimeout errors as this means
@@ -540,15 +623,15 @@ class AsyncAPIClient(BaseClient):
             raise
         except httpx.TimeoutException as err:
             if retries > 0:
-                return await self.retry_request(options, model, retries)
+                return await self.retry_request(options, cast_to, retries)
             raise APITimeoutError(request=request) from err
         except Exception as err:
             if retries > 0:
-                return await self.retry_request(options, model, retries)
+                return await self.retry_request(options, cast_to, retries)
             raise APIConnectionError(request=request) from err
 
         try:
-            rsp = self.process_response(model, options, response)
+            rsp = self.process_response(cast_to=cast_to, options=options, response=response)
         except pydantic.ValidationError as err:
             raise APIResponseValidationError(request=request, response=response) from err
 
@@ -557,7 +640,7 @@ class AsyncAPIClient(BaseClient):
     async def retry_request(
         self,
         options: FinalRequestOptions,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         remaining_retries: int,
         response_headers: Optional[httpx.Headers] = None,
     ) -> ResponseT:
@@ -567,7 +650,7 @@ class AsyncAPIClient(BaseClient):
         await anyio.sleep(timeout)
         return await self.request(
             options=options,
-            model=model,
+            cast_to=cast_to,
             remaining_retries=remaining,
         )
 
@@ -583,61 +666,63 @@ class AsyncAPIClient(BaseClient):
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="get", url=path, params=query, **options)
-        return await self.request(model, opts)
+        return await self.request(cast_to, opts)
 
     async def post(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
+        files: RequestFiles | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="post", url=path, json_data=body, **options)
-        return await self.request(model, opts)
+        opts = FinalRequestOptions(method="post", url=path, json_data=body, files=files, **options)
+        return await self.request(cast_to, opts)
 
     async def patch(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="patch", url=path, json_data=body, **options)
-        return await self.request(model, opts)
+        return await self.request(cast_to, opts)
 
     async def put(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="put", url=path, json_data=body, **options)
-        return await self.request(model, opts)
+        return await self.request(cast_to, opts)
 
     async def delete(
         self,
         path: str,
         *,
-        model: Type[ResponseT],
+        cast_to: Type[ResponseT],
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions(method="delete", url=path, json_data=body, **options)
-        return await self.request(model, opts)
+        return await self.request(cast_to, opts)
 
     def get_api_list(
         self,
         path: str,
         *,
+        # TODO: support paginating `str`
         model: Type[ModelT],
         page: Type[AsyncPageT],
         query: Query = {},
@@ -648,7 +733,7 @@ class AsyncAPIClient(BaseClient):
 
 
 def make_request_options(
-    headers: Dict[str, str] | NotGiven,
+    headers: Headers | NotGiven,
     max_retries: int | NotGiven,
     timeout: float | Timeout | None | NotGiven,
 ) -> RequestOptions:
@@ -664,3 +749,15 @@ def make_request_options(
         options["timeout"] = timeout
 
     return options
+
+
+def _merge_mappings(
+    obj1: Mapping[_T_co, Union[_T, Omit]],
+    obj2: Mapping[_T_co, Union[_T, Omit]],
+) -> Dict[_T_co, _T]:
+    """Merge two mappings of the same type, removing any values that are instances of `Omit`.
+
+    In cases with duplicate keys the second mapping takes precedence.
+    """
+    merged = {**obj1, **obj2}
+    return {key: value for key, value in merged.items() if not isinstance(value, Omit)}
