@@ -40,6 +40,7 @@ from ._types import (
     ProxiesTypes,
     RequestFiles,
     RequestOptions,
+    ModelBuilderProtocol,
 )
 from ._models import BaseModel, GenericModel, FinalRequestOptions
 from ._base_exceptions import (
@@ -55,7 +56,7 @@ AsyncPageT = TypeVar("AsyncPageT", bound="BaseAsyncPage[Any]")
 
 
 PageParamsT = TypeVar("PageParamsT", bound=Query)
-ResponseT = TypeVar("ResponseT", bound=Union[BaseModel, str, None])
+ResponseT = TypeVar("ResponseT", bound=Union[BaseModel, ModelBuilderProtocol, str, None])
 
 _T = TypeVar("_T")
 _T_co = TypeVar("_T_co", covariant=True)
@@ -312,17 +313,22 @@ class BaseClient:
 
         model_cls = cast(Type[BaseModel], cast_to)
 
-        content_type = response.headers.get("content-type")
+        # split is required to handle cases where additional information is included
+        # in the response, e.g. application/json; charset=utf-8
+        content_type, *_ = response.headers.get("content-type").split(";")
         if content_type != "application/json":
             raise ValueError(
                 f"Expected Content-Type response header to be `application/json` but received {content_type} instead."
             )
 
         data = response.json()
+        if issubclass(cast_to, ModelBuilderProtocol):
+            return cast(ResponseT, cast_to.build(response=response, data=data))
+
         if self._strict_response_validation:
             return cast(ResponseT, model_cls(**data))
-        else:
-            return cast(ResponseT, model_cls.construct(**data))
+
+        return cast(ResponseT, model_cls.construct(**data))
 
     @property
     def qs(self) -> Querystring:

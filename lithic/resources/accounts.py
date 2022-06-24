@@ -16,7 +16,7 @@ __all__ = ["Accounts", "AsyncAccounts"]
 class Accounts(SyncAPIResource):
     def retrieve(
         self,
-        id: str,
+        account_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -25,14 +25,14 @@ class Accounts(SyncAPIResource):
         """Get account configuration such as spend limits."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/accounts/{id}",
+            f"/accounts/{account_token}",
             options=options,
             cast_to=Account,
         )
 
     def update(
         self,
-        id: str,
+        account_token: str,
         body: AccountUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -49,7 +49,7 @@ class Accounts(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._patch(
-            f"/accounts/{id}",
+            f"/accounts/{account_token}",
             body=body,
             options=options,
             cast_to=Account,
@@ -77,7 +77,7 @@ class Accounts(SyncAPIResource):
 class AsyncAccounts(AsyncAPIResource):
     async def retrieve(
         self,
-        id: str,
+        account_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -86,14 +86,14 @@ class AsyncAccounts(AsyncAPIResource):
         """Get account configuration such as spend limits."""
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/accounts/{id}",
+            f"/accounts/{account_token}",
             options=options,
             cast_to=Account,
         )
 
     async def update(
         self,
-        id: str,
+        account_token: str,
         body: AccountUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -110,7 +110,7 @@ class AsyncAccounts(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._patch(
-            f"/accounts/{id}",
+            f"/accounts/{account_token}",
             body=body,
             options=options,
             cast_to=Account,

@@ -44,7 +44,7 @@ class AuthRules(SyncAPIResource):
 
     def retrieve(
         self,
-        id: str,
+        auth_rule_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -56,14 +56,14 @@ class AuthRules(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/auth_rules/{id}",
+            f"/auth_rules/{auth_rule_token}",
             options=options,
             cast_to=AuthRuleRetrieveResponse,
         )
 
     def update(
         self,
-        id: str,
+        auth_rule_token: str,
         body: AuthRuleUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -76,7 +76,7 @@ class AuthRules(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._put(
-            f"/auth_rules/{id}",
+            f"/auth_rules/{auth_rule_token}",
             body=body,
             options=options,
             cast_to=AuthRuleUpdateResponse,
@@ -101,7 +101,7 @@ class AuthRules(SyncAPIResource):
 
     def apply(
         self,
-        id: str,
+        auth_rule_token: str,
         body: AuthRuleApplyParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -114,7 +114,7 @@ class AuthRules(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            f"/auth_rules/{id}/apply",
+            f"/auth_rules/{auth_rule_token}/apply",
             body=body,
             options=options,
             cast_to=AuthRuleApplyResponse,
@@ -164,7 +164,7 @@ class AsyncAuthRules(AsyncAPIResource):
 
     async def retrieve(
         self,
-        id: str,
+        auth_rule_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -176,14 +176,14 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/auth_rules/{id}",
+            f"/auth_rules/{auth_rule_token}",
             options=options,
             cast_to=AuthRuleRetrieveResponse,
         )
 
     async def update(
         self,
-        id: str,
+        auth_rule_token: str,
         body: AuthRuleUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -196,7 +196,7 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._put(
-            f"/auth_rules/{id}",
+            f"/auth_rules/{auth_rule_token}",
             body=body,
             options=options,
             cast_to=AuthRuleUpdateResponse,
@@ -221,7 +221,7 @@ class AsyncAuthRules(AsyncAPIResource):
 
     async def apply(
         self,
-        id: str,
+        auth_rule_token: str,
         body: AuthRuleApplyParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -234,7 +234,7 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            f"/auth_rules/{id}/apply",
+            f"/auth_rules/{auth_rule_token}/apply",
             body=body,
             options=options,
             cast_to=AuthRuleApplyResponse,

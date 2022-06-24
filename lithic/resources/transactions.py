@@ -27,7 +27,7 @@ __all__ = ["Transactions", "AsyncTransactions"]
 class Transactions(SyncAPIResource):
     def retrieve(
         self,
-        id: str,
+        transaction_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -36,7 +36,7 @@ class Transactions(SyncAPIResource):
         """Get specific transaction."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/transactions/{id}",
+            f"/transactions/{transaction_token}",
             options=options,
             cast_to=Transaction,
         )
@@ -150,7 +150,7 @@ class Transactions(SyncAPIResource):
 class AsyncTransactions(AsyncAPIResource):
     async def retrieve(
         self,
-        id: str,
+        transaction_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -159,7 +159,7 @@ class AsyncTransactions(AsyncAPIResource):
         """Get specific transaction."""
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/transactions/{id}",
+            f"/transactions/{transaction_token}",
             options=options,
             cast_to=Transaction,
         )

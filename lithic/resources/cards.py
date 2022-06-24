@@ -42,7 +42,7 @@ class Cards(SyncAPIResource):
 
     def retrieve(
         self,
-        id: str,
+        card_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -51,14 +51,14 @@ class Cards(SyncAPIResource):
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/cards/{id}",
+            f"/cards/{card_token}",
             options=options,
             cast_to=Card,
         )
 
     def update(
         self,
-        id: str,
+        card_token: str,
         body: CardUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -75,7 +75,7 @@ class Cards(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._patch(
-            f"/cards/{id}",
+            f"/cards/{card_token}",
             body=body,
             options=options,
             cast_to=Card,
@@ -146,7 +146,7 @@ class Cards(SyncAPIResource):
 
     def provision(
         self,
-        id: str,
+        card_token: str,
         body: CardProvisionParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -163,7 +163,7 @@ class Cards(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            f"/cards/{id}/provision",
+            f"/cards/{card_token}/provision",
             body=body,
             options=options,
             cast_to=CardProvisionResponse,
@@ -171,7 +171,7 @@ class Cards(SyncAPIResource):
 
     def reissue(
         self,
-        id: str,
+        card_token: str,
         body: CardReissueParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -184,7 +184,7 @@ class Cards(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            f"/cards/{id}/reissue",
+            f"/cards/{card_token}/reissue",
             body=body,
             options=options,
             cast_to=Card,
@@ -215,7 +215,7 @@ class AsyncCards(AsyncAPIResource):
 
     async def retrieve(
         self,
-        id: str,
+        card_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -224,14 +224,14 @@ class AsyncCards(AsyncAPIResource):
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/cards/{id}",
+            f"/cards/{card_token}",
             options=options,
             cast_to=Card,
         )
 
     async def update(
         self,
-        id: str,
+        card_token: str,
         body: CardUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -248,7 +248,7 @@ class AsyncCards(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._patch(
-            f"/cards/{id}",
+            f"/cards/{card_token}",
             body=body,
             options=options,
             cast_to=Card,
@@ -319,7 +319,7 @@ class AsyncCards(AsyncAPIResource):
 
     async def provision(
         self,
-        id: str,
+        card_token: str,
         body: CardProvisionParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -336,7 +336,7 @@ class AsyncCards(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            f"/cards/{id}/provision",
+            f"/cards/{card_token}/provision",
             body=body,
             options=options,
             cast_to=CardProvisionResponse,
@@ -344,7 +344,7 @@ class AsyncCards(AsyncAPIResource):
 
     async def reissue(
         self,
-        id: str,
+        card_token: str,
         body: CardReissueParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -357,7 +357,7 @@ class AsyncCards(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            f"/cards/{id}/reissue",
+            f"/cards/{card_token}/reissue",
             body=body,
             options=options,
             cast_to=Card,

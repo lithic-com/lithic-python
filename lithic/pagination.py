@@ -1,12 +1,16 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import List, Generic, Optional
+from typing import List, Generic, TypeVar, Optional
 from typing_extensions import TypedDict
+
+from pydantic import BaseModel
 
 from ._types import ModelT
 from ._base_client import BasePage, BaseSyncPage, BaseAsyncPage
 
 __all__ = ["PageParams", "SyncPage", "AsyncPage"]
+
+_BaseModelT = TypeVar("_BaseModelT", bound=BaseModel)
 
 
 class PageParams(TypedDict, total=False):
