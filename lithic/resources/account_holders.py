@@ -49,7 +49,7 @@ class AccountHolders(SyncAPIResource):
 
     def retrieve(
         self,
-        id: str,
+        account_holder_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -58,7 +58,7 @@ class AccountHolders(SyncAPIResource):
         """Check the current status of a KYC or KYB evaluation."""
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/account_holders/{id}",
+            f"/account_holders/{account_holder_token}",
             options=options,
             cast_to=AccountHolder,
         )
@@ -95,7 +95,7 @@ class AccountHolders(SyncAPIResource):
 
     def list_documents(
         self,
-        id: str,
+        account_holder_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -120,14 +120,14 @@ class AccountHolders(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/account_holders/{id}/documents",
+            f"/account_holders/{account_holder_token}/documents",
             options=options,
             cast_to=AccountHolderListDocumentsResponse,
         )
 
     def resubmit(
         self,
-        id: str,
+        account_holder_token: str,
         body: AccountHolderResubmitParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -147,7 +147,7 @@ class AccountHolders(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            f"/account_holders/{id}/resubmit",
+            f"/account_holders/{account_holder_token}/resubmit",
             body=body,
             options=options,
             cast_to=AccountHolder,
@@ -156,7 +156,7 @@ class AccountHolders(SyncAPIResource):
     def retrieve_document(
         self,
         account_holder_token: str,
-        id: str,
+        document_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -180,14 +180,14 @@ class AccountHolders(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._get(
-            f"/account_holders/{account_holder_token}/documents/{id}",
+            f"/account_holders/{account_holder_token}/documents/{document_token}",
             options=options,
             cast_to=AccountHolderDocument,
         )
 
     def upload_document(
         self,
-        id: str,
+        account_holder_token: str,
         body: AccountHolderUploadDocumentParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -216,7 +216,7 @@ class AccountHolders(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            f"/account_holders/{id}/documents",
+            f"/account_holders/{account_holder_token}/documents",
             body=body,
             options=options,
             cast_to=AccountHolderDocument,
@@ -251,7 +251,7 @@ class AsyncAccountHolders(AsyncAPIResource):
 
     async def retrieve(
         self,
-        id: str,
+        account_holder_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -260,7 +260,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         """Check the current status of a KYC or KYB evaluation."""
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/account_holders/{id}",
+            f"/account_holders/{account_holder_token}",
             options=options,
             cast_to=AccountHolder,
         )
@@ -297,7 +297,7 @@ class AsyncAccountHolders(AsyncAPIResource):
 
     async def list_documents(
         self,
-        id: str,
+        account_holder_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -322,14 +322,14 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/account_holders/{id}/documents",
+            f"/account_holders/{account_holder_token}/documents",
             options=options,
             cast_to=AccountHolderListDocumentsResponse,
         )
 
     async def resubmit(
         self,
-        id: str,
+        account_holder_token: str,
         body: AccountHolderResubmitParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -349,7 +349,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            f"/account_holders/{id}/resubmit",
+            f"/account_holders/{account_holder_token}/resubmit",
             body=body,
             options=options,
             cast_to=AccountHolder,
@@ -358,7 +358,7 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def retrieve_document(
         self,
         account_holder_token: str,
-        id: str,
+        document_token: str,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -382,14 +382,14 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._get(
-            f"/account_holders/{account_holder_token}/documents/{id}",
+            f"/account_holders/{account_holder_token}/documents/{document_token}",
             options=options,
             cast_to=AccountHolderDocument,
         )
 
     async def upload_document(
         self,
-        id: str,
+        account_holder_token: str,
         body: AccountHolderUploadDocumentParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -418,7 +418,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            f"/account_holders/{id}/documents",
+            f"/account_holders/{account_holder_token}/documents",
             body=body,
             options=options,
             cast_to=AccountHolderDocument,

@@ -40,7 +40,7 @@ class FundingSources(SyncAPIResource):
 
     def update(
         self,
-        id: str,
+        funding_source_token: str,
         body: FundingSourceUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -50,7 +50,7 @@ class FundingSources(SyncAPIResource):
         """Update a funding source."""
         options = make_request_options(headers, max_retries, timeout)
         return self._patch(
-            f"/funding_sources/{id}",
+            f"/funding_sources/{funding_source_token}",
             body=body,
             options=options,
             cast_to=FundingSource,
@@ -76,7 +76,7 @@ class FundingSources(SyncAPIResource):
 
     def verify(
         self,
-        id: str,
+        funding_source_token: str,
         body: FundingSourceVerifyParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -89,7 +89,7 @@ class FundingSources(SyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
-            f"/funding_sources/{id}/verify",
+            f"/funding_sources/{funding_source_token}/verify",
             body=body,
             options=options,
             cast_to=FundingSource,
@@ -121,7 +121,7 @@ class AsyncFundingSources(AsyncAPIResource):
 
     async def update(
         self,
-        id: str,
+        funding_source_token: str,
         body: FundingSourceUpdateParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -131,7 +131,7 @@ class AsyncFundingSources(AsyncAPIResource):
         """Update a funding source."""
         options = make_request_options(headers, max_retries, timeout)
         return await self._patch(
-            f"/funding_sources/{id}",
+            f"/funding_sources/{funding_source_token}",
             body=body,
             options=options,
             cast_to=FundingSource,
@@ -157,7 +157,7 @@ class AsyncFundingSources(AsyncAPIResource):
 
     async def verify(
         self,
-        id: str,
+        funding_source_token: str,
         body: FundingSourceVerifyParams,
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
@@ -170,7 +170,7 @@ class AsyncFundingSources(AsyncAPIResource):
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(
-            f"/funding_sources/{id}/verify",
+            f"/funding_sources/{funding_source_token}/verify",
             body=body,
             options=options,
             cast_to=FundingSource,

@@ -12,10 +12,10 @@ from typing import (
     Optional,
     Sequence,
 )
-from typing_extensions import Literal, TypedDict
+from typing_extensions import Literal, Protocol, TypedDict, runtime_checkable
 
 import pydantic
-from httpx import Proxy, Timeout, BaseTransport
+from httpx import Proxy, Timeout, Response, BaseTransport
 
 Transport = BaseTransport
 Query = Mapping[str, object]
@@ -107,6 +107,18 @@ class Omit:
     client.post(..., headers={'Content-Type': Omit()})
     ```
     """
+
+
+@runtime_checkable
+class ModelBuilderProtocol(Protocol):
+    @classmethod
+    def build(
+        cls: type[_T],
+        *,
+        response: Response,
+        data: object,
+    ) -> _T:
+        ...
 
 
 Headers = Mapping[str, str]

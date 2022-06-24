@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Union, Optional
+from typing import Union
 
 from .._types import NOT_GIVEN, Headers, Timeout, NoneType, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -50,7 +50,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
 
     def enroll(
         self,
-        body: Optional[AuthStreamEnrollmentEnrollParams] = None,
+        body: AuthStreamEnrollmentEnrollParams = {},
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
@@ -117,7 +117,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
 
     async def enroll(
         self,
-        body: Optional[AuthStreamEnrollmentEnrollParams] = None,
+        body: AuthStreamEnrollmentEnrollParams = {},
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
