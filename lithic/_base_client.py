@@ -460,7 +460,7 @@ class SyncAPIClient(BaseClient):
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
             if retries > 0 and self.should_retry(err.response):
                 return self.retry_request(options, cast_to, retries, err.response.headers)
-            raise self._make_status_error(request, err.response)
+            raise self._make_status_error(request, err.response) from None
         except httpx.TimeoutException as err:
             if retries > 0:
                 return self.retry_request(options, cast_to, retries)
@@ -619,7 +619,7 @@ class AsyncAPIClient(BaseClient):
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
             if retries > 0 and self.should_retry(err.response):
                 return await self.retry_request(options, cast_to, retries, err.response.headers)
-            raise self._make_status_error(request, err.response)
+            raise self._make_status_error(request, err.response) from None
         except httpx.ConnectTimeout as err:
             if retries > 0:
                 return await self.retry_request(options, cast_to, retries)
