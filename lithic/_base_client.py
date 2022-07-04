@@ -70,6 +70,9 @@ class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
     _model: Type[ModelT] = PrivateAttr()
 
     def has_next_page(self) -> bool:
+        items = self._get_page_items()
+        if not items:
+            return False
         return self.next_page_params() is not None
 
     def next_page_params(self) -> Optional[PageParamsT]:
