@@ -22,8 +22,10 @@ pip install lithic
 from lithic import Lithic
 
 lithic = Lithic(
-  api_key='my api key',  # defaults to os.environ.get("LITHIC_API_KEY")
-  environment='sandbox',  # defaults to 'production'.
+    # defaults to os.environ.get("LITHIC_API_KEY")
+    api_key="my api key",
+    # defaults to "production".
+    environment="sandbox",
 )
 
 card = lithic.cards.create({
@@ -44,8 +46,10 @@ Simply import `AsyncLithic` instead of `Lithic` and use `await` with each API ca
 from lithic import AsyncLithic
 
 lithic = AsyncLithic(
-  api_key='my api key',  # defaults to os.environ.get("LITHIC_API_KEY")
-  environment='sandbox',  # defaults to 'production'.
+    # defaults to os.environ.get("LITHIC_API_KEY")
+    api_key="my api key",
+    # defaults to "production".
+    environment="sandbox",
 )
 
 async def main():
@@ -149,12 +153,12 @@ try:
         "type": "an_incorrect_type"
     })
 except lithic.APIConnectionError as e:
-    print('The server could not be reached')
+    print("The server could not be reached")
     print(e.__cause__) # an underlying Exception, likely raised within httpx.
 except lithic.RateLimitError as e:
-    print('A 429 status code was received; we should back off a bit.')
+    print("A 429 status code was received; we should back off a bit.")
 except lithic.APIStatusError as e:
-    print('Another non-200-range status code was received')
+    print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
 ```
@@ -185,8 +189,8 @@ from lithic import Lithic
 
 # Configure the default for all requests:
 lithic = Lithic(
-  # default is 2
-  max_retries=0,
+    # default is 2
+    max_retries=0,
 )
 
 # Or, configure per-request:
@@ -205,13 +209,13 @@ from lithic import Lithic
 
 # Configure the default for all requests:
 lithic = Lithic(
-  # default is 60s
-  timeout=20.0,
+    # default is 60s
+    timeout=20.0,
 )
 
 # More granular control:
 lithic = Lithic(
-  timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
+    timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
@@ -233,10 +237,10 @@ import httpx
 from lithic import Lithic
 
 lithic = Lithic(
-  # Use a custom base URL
-  base_url="http://my.test.server.example.com:8083",
-  proxies="http://my.test.proxy.example.com",
-  transport=httpx.HTTPTransport(local_address="0.0.0.0"),
+    # Use a custom base URL
+    base_url="http://my.test.server.example.com:8083",
+    proxies="http://my.test.proxy.example.com",
+    transport=httpx.HTTPTransport(local_address="0.0.0.0"),
 )
 ```
 
