@@ -24,6 +24,7 @@ from functools import lru_cache
 import anyio
 import httpx
 import pydantic
+from httpx import URL
 from pydantic import PrivateAttr
 
 from . import _base_exceptions as exceptions
@@ -348,6 +349,10 @@ class BaseClient:
     @property
     def user_agent(self) -> str:
         return f"{self.__class__.__name__}/Python {self._version}"
+
+    @property
+    def base_url(self) -> URL:
+        return self._client.base_url
 
     @lru_cache(maxsize=None)
     def platform_properties(self) -> str:

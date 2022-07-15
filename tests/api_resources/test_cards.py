@@ -4,6 +4,7 @@ import os
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.card import *
+from lithic.types.embed_request_param import *
 from lithic.types.card_provision_response import *
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
@@ -109,6 +110,18 @@ class TestCards:
             },
         )
         assert isinstance(resource, str)
+
+    def test_get_embed_html(self) -> None:
+        html = self.client.cards.get_embed_html({"token": "foo"})
+        assert "html" in html
+
+    def test_get_embed_url(self) -> None:
+        url = self.client.cards.get_embed_url({"token": "foo"})
+        params = set(  # pyright: ignore[reportUnknownVariableType]
+            url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
+        )
+        assert "hmac" in params
+        assert "embed_request" in params
 
     def test_method_provision(self) -> None:
         resource = self.client.cards.provision(
@@ -259,6 +272,18 @@ class TestAsyncCards:
             },
         )
         assert isinstance(resource, str)
+
+    async def test_get_embed_html(self) -> None:
+        html = await self.client.cards.get_embed_html({"token": "foo"})
+        assert "html" in html
+
+    def test_get_embed_url(self) -> None:
+        url = self.client.cards.get_embed_url({"token": "foo"})
+        params = set(  # pyright: ignore[reportUnknownVariableType]
+            url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
+        )
+        assert "hmac" in params
+        assert "embed_request" in params
 
     async def test_method_provision(self) -> None:
         resource = await self.client.cards.provision(

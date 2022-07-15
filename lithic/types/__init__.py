@@ -13,6 +13,7 @@ from .card_create_params import CardCreateParams as CardCreateParams
 from .card_update_params import CardUpdateParams as CardUpdateParams
 from .account_list_params import AccountListParams as AccountListParams
 from .card_reissue_params import CardReissueParams as CardReissueParams
+from .embed_request_param import EmbedRequestParams as EmbedRequestParams
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .auth_rule_list_params import AuthRuleListParams as AuthRuleListParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams
@@ -29,6 +30,8 @@ from .auth_rule_apply_response import AuthRuleApplyResponse as AuthRuleApplyResp
 from .auth_rule_create_response import AuthRuleCreateResponse as AuthRuleCreateResponse
 from .auth_rule_remove_response import AuthRuleRemoveResponse as AuthRuleRemoveResponse
 from .auth_rule_update_response import AuthRuleUpdateResponse as AuthRuleUpdateResponse
+from .card_get_embed_url_params import CardGetEmbedURLParams as CardGetEmbedURLParams
+from .card_get_embed_html_params import CardGetEmbedHTMLParams as CardGetEmbedHTMLParams
 from .funding_source_list_params import (
     FundingSourceListParams as FundingSourceListParams,
 )
