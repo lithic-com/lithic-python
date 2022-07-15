@@ -2,8 +2,8 @@
 import os
 
 from lithic import Lithic, AsyncLithic
+from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.funding_source import *
-from lithic.types.funding_source_list_response import *
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -53,13 +53,17 @@ class TestFundingSources:
 
     def test_method_list(self) -> None:
         resource = self.client.funding_sources.list()
-        assert isinstance(resource, FundingSourceListResponse)
+        assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.funding_sources.list(
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "page": 0,
+                "page_size": 0,
+            },
         )
-        assert isinstance(resource, FundingSourceListResponse)
+        assert isinstance(resource, SyncPage)
 
     def test_method_verify(self) -> None:
         resource = self.client.funding_sources.verify(
@@ -123,13 +127,17 @@ class TestAsyncFundingSources:
 
     async def test_method_list(self) -> None:
         resource = await self.client.funding_sources.list()
-        assert isinstance(resource, FundingSourceListResponse)
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.funding_sources.list(
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            {
+                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "page": 0,
+                "page_size": 0,
+            },
         )
-        assert isinstance(resource, FundingSourceListResponse)
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_verify(self) -> None:
         resource = await self.client.funding_sources.verify(

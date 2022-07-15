@@ -4,11 +4,11 @@ from typing import Union
 
 from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._base_client import make_request_options
+from ..pagination import SyncPage, AsyncPage
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.funding_source import *
 from ..types.funding_source_list_params import FundingSourceListParams
 from ..types.funding_source_create_params import FundingSourceCreateParams
-from ..types.funding_source_list_response import *
 from ..types.funding_source_update_params import FundingSourceUpdateParams
 from ..types.funding_source_verify_params import FundingSourceVerifyParams
 
@@ -63,14 +63,15 @@ class FundingSources(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> FundingSourceListResponse:
+    ) -> SyncPage[FundingSource]:
         """List all the funding sources associated with the Lithic account."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get(
+        return self._get_api_list(
             "/funding_sources",
+            page=SyncPage[FundingSource],
             query=query,
             options=options,
-            cast_to=FundingSourceListResponse,
+            model=FundingSource,
         )
 
     def verify(
@@ -136,21 +137,22 @@ class AsyncFundingSources(AsyncAPIResource):
             cast_to=FundingSource,
         )
 
-    async def list(
+    def list(
         self,
         query: FundingSourceListParams = {},
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> FundingSourceListResponse:
+    ) -> AsyncPaginator[FundingSource, AsyncPage[FundingSource]]:
         """List all the funding sources associated with the Lithic account."""
         options = make_request_options(headers, max_retries, timeout)
-        return await self._get(
+        return self._get_api_list(
             "/funding_sources",
+            page=AsyncPage[FundingSource],
             query=query,
             options=options,
-            cast_to=FundingSourceListResponse,
+            model=FundingSource,
         )
 
     async def verify(

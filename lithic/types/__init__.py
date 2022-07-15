@@ -44,9 +44,6 @@ from .account_holder_create_params import (
 from .funding_source_create_params import (
     FundingSourceCreateParams as FundingSourceCreateParams,
 )
-from .funding_source_list_response import (
-    FundingSourceListResponse as FundingSourceListResponse,
-)
 from .funding_source_update_params import (
     FundingSourceUpdateParams as FundingSourceUpdateParams,
 )

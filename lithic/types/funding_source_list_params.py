@@ -9,3 +9,7 @@ __all__ = ["FundingSourceListParams"]
 
 class FundingSourceListParams(TypedDict, total=False):
     account_token: str
+
+    page: float
+
+    page_size: float
