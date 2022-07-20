@@ -64,6 +64,7 @@ class FinalRequestOptions(BaseModel):
     max_retries: Union[int, NotGiven] = NotGiven()
     timeout: Union[float, Timeout, None, NotGiven] = NotGiven()
     files: Union[RequestFiles, None] = None
+    idempotency_key: Union[str, None] = None
 
     # It should be noted that we cannot use `json` here as that would override
     # a BaseModel method in an incompatible fashion.

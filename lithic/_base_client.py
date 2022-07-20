@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+import uuid
 import platform
 from random import random
 from typing import (
@@ -212,6 +213,7 @@ class BaseClient:
     max_retries: int
     timeout: Union[float, Timeout, None]
     _strict_response_validation: bool
+    _idempotency_header: str | None
 
     def __init__(
         self,
@@ -226,6 +228,7 @@ class BaseClient:
         self.max_retries = max_retries
         self.timeout = timeout
         self._strict_response_validation = _strict_response_validation
+        self._idempotency_header = None
 
     def _make_status_error(self, request: httpx.Request, response: httpx.Response) -> APIStatusError:
         err_text = response.text.strip()
@@ -267,6 +270,10 @@ class BaseClient:
             self.default_headers,
             {} if isinstance(options.headers, NotGiven) else options.headers,
         )
+        if self._idempotency_header and options.method.lower() != "get":
+            if not options.idempotency_key:
+                options.idempotency_key = self._idempotency_key()
+            headers[self._idempotency_header] = options.idempotency_key
 
         # If the given Content-Type header is multipart/form-data then it
         # has to be removed so that httpx can generate the header with
@@ -424,6 +431,9 @@ class BaseClient:
 
         return False
 
+    def _idempotency_key(self) -> str:
+        return f"stainless-python-retry-{uuid.uuid4()}"
+
 
 class SyncAPIClient(BaseClient):
     _client: httpx.Client
@@ -456,7 +466,6 @@ class SyncAPIClient(BaseClient):
         remaining_retries: Optional[int] = None,
     ) -> ResponseT:
         retries = self.remaining_retries(remaining_retries, options)
-
         request = self.build_request(options)
 
         try:
@@ -615,7 +624,6 @@ class AsyncAPIClient(BaseClient):
         remaining_retries: Optional[int] = None,
     ) -> ResponseT:
         retries = self.remaining_retries(remaining_retries, options)
-
         request = self.build_request(options)
 
         try:
