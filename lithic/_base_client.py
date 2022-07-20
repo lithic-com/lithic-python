@@ -58,7 +58,7 @@ AsyncPageT = TypeVar("AsyncPageT", bound="BaseAsyncPage[Any]")
 
 
 PageParamsT = TypeVar("PageParamsT", bound=Query)
-ResponseT = TypeVar("ResponseT", bound=Union[BaseModel, ModelBuilderProtocol, str, None])
+ResponseT = TypeVar("ResponseT", bound=Union[BaseModel, ModelBuilderProtocol, str, None, httpx.Response])
 
 _T = TypeVar("_T")
 _T_co = TypeVar("_T_co", covariant=True)
@@ -310,6 +310,16 @@ class BaseClient:
 
         if cast_to == str:
             return cast(ResponseT, response.text)
+
+        if issubclass(cast_to, httpx.Response):
+            # Because of the invariance of our ResponseT TypeVar, users can subclass httpx.Response
+            # and pass that class to our request functions. We cannot change the variance to be either
+            # covariant or contravariant as that makes our usage of ResponseT illegal. We could construct
+            # the response class ourselves but that is something that should be supported directly in httpx
+            # as it would be easy to incorrectly construct the Response object due to the multitude of arguments.
+            if cast_to != httpx.Response:
+                raise ValueError(f"Subclasses of httpx.Response cannot be passed to `cast_to`")
+            return cast(ResponseT, response)
 
         # The check here is necessary as we are subverting the the type system
         # with casts as the relationship between TypeVars and Types are very strict
