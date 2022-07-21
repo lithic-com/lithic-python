@@ -16,7 +16,7 @@ class TestCards:
 
     def test_method_create(self) -> None:
         resource = self.client.cards.create(
-            {"type": "DIGITAL_WALLET"},
+            {"type": "MERCHANT_LOCKED"},
         )
         assert isinstance(resource, Card)
 
@@ -32,7 +32,7 @@ class TestCards:
                 "spend_limit": 0,
                 "spend_limit_duration": "ANNUALLY",
                 "state": "OPEN",
-                "type": "DIGITAL_WALLET",
+                "type": "MERCHANT_LOCKED",
                 "pin": "string",
                 "product_id": "1",
                 "shipping_address": {
@@ -167,6 +167,7 @@ class TestCards:
                     "email": "johnny@appleseed.com",
                     "phone_number": "+12124007676",
                 },
+                "shipping_method": "STANDARD",
                 "product_id": "string",
             },
         )
@@ -178,7 +179,7 @@ class TestAsyncCards:
 
     async def test_method_create(self) -> None:
         resource = await self.client.cards.create(
-            {"type": "DIGITAL_WALLET"},
+            {"type": "MERCHANT_LOCKED"},
         )
         assert isinstance(resource, Card)
 
@@ -194,7 +195,7 @@ class TestAsyncCards:
                 "spend_limit": 0,
                 "spend_limit_duration": "ANNUALLY",
                 "state": "OPEN",
-                "type": "DIGITAL_WALLET",
+                "type": "MERCHANT_LOCKED",
                 "pin": "string",
                 "product_id": "1",
                 "shipping_address": {
@@ -329,6 +330,7 @@ class TestAsyncCards:
                     "email": "johnny@appleseed.com",
                     "phone_number": "+12124007676",
                 },
+                "shipping_method": "STANDARD",
                 "product_id": "string",
             },
         )

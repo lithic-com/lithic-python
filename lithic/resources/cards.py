@@ -241,9 +241,9 @@ class Cards(SyncAPIResource):
         Allow your cardholders to directly add payment cards to the device's digital
         wallet (e.g. Apple Pay) with one touch from your app.
 
-        This requires some additional setup and configuration. Reach out at
-        [lithic.com/contact](https://lithic.com/contact) or your account rep for more
-        information.
+        This requires some additional setup and configuration. Please
+        [Contact Us](https://lithic.com/contact) or your Customer Success representative
+        for more information.
         """
         options = make_request_options(headers, max_retries, timeout)
         return self._post(
@@ -488,9 +488,9 @@ class AsyncCards(AsyncAPIResource):
         Allow your cardholders to directly add payment cards to the device's digital
         wallet (e.g. Apple Pay) with one touch from your app.
 
-        This requires some additional setup and configuration. Reach out at
-        [lithic.com/contact](https://lithic.com/contact) or your account rep for more
-        information.
+        This requires some additional setup and configuration. Please
+        [Contact Us](https://lithic.com/contact) or your Customer Success representative
+        for more information.
         """
         options = make_request_options(headers, max_retries, timeout)
         return await self._post(

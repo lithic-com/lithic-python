@@ -12,9 +12,9 @@ class CardProvisionParams(TypedDict, total=False):
     """Only required for multi-account users.
 
     Token identifying the account the card will be associated with. Only applicable
-    if using account enrollment. See
-    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
-    information.
+    if using account holder enrollment. See
+    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+    more information.
     """
 
     certificate: str
@@ -26,10 +26,7 @@ class CardProvisionParams(TypedDict, total=False):
     """
 
     digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"]
-    """
-    Currently `APPLE_PAY` and `SAMSUNG_PAY` are supported (`GOOGLE_PAY` coming
-    soon).
-    """
+    """Name of digital wallet provider."""
 
     nonce: str
     """Required for `APPLE_PAY`.

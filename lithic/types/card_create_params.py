@@ -10,11 +10,9 @@ __all__ = ["CardCreateParams"]
 
 
 class CardCreateParams(TypedDict, total=False):
-    type: Required[Literal["DIGITAL_WALLET", "MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "UNLOCKED"]]
+    type: Required[Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"]]
     """Card types:
 
-    - `DIGITAL_WALLET` - Cards that can be provisioned to a digital wallet like
-      Google Pay or Apple Wallet.
     - `MERCHANT_LOCKED` - Card is locked to first merchant that successfully
       authorizes the card.
     - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
@@ -22,17 +20,18 @@ class CardCreateParams(TypedDict, total=False):
       Reach out at [lithic.com/contact](https://lithic.com/contact) for more
       information.
     - `SINGLE_USE` - Card will close shortly after the first transaction.
-    - `UNLOCKED` - Card will authorize at any merchant. Creating these cards
-      requires additional privileges.
+    - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
+      wallet like Apple Pay or Google Pay (if the card program is digital
+      wallet-enabled).
     """
 
     account_token: str
     """Only required for multi-account users.
 
     Token identifying the account the card will be associated with. Only applicable
-    if using account enrollment. See
-    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
-    information.
+    if using account holder enrollment. See
+    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+    more information.
     """
 
     card_program_token: str
@@ -68,8 +67,7 @@ class CardCreateParams(TypedDict, total=False):
     pin: str
     """Encrypted PIN block (in base64).
 
-    Only applies to cards of type `PHYSICAL` [beta], `UNLOCKED`, and
-    `DIGITAL_WALLET`. See
+    Only applies to cards of type `PHYSICAL` and `VIRTUAL`. See
     [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
     """
 

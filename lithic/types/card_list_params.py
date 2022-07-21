@@ -12,9 +12,9 @@ class CardListParams(TypedDict, total=False):
     """Only required for multi-account users.
 
     Returns cards associated with this account. Only applicable if using account
-    enrollment. See
-    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
-    information.
+    holder enrollment. See
+    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+    more information.
     """
 
     begin: str

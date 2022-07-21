@@ -64,11 +64,9 @@ class Card(BaseModel):
     token: str
     """Globally unique identifier."""
 
-    type: Literal["DIGITAL_WALLET", "MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "UNLOCKED"]
+    type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"]
     """Card types:
 
-    - `DIGITAL_WALLET` - Cards that can be provisioned to a digital wallet like
-      Google Pay or Apple Wallet.
     - `MERCHANT_LOCKED` - Card is locked to first merchant that successfully
       authorizes the card.
     - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
@@ -76,8 +74,9 @@ class Card(BaseModel):
       Reach out at [lithic.com/contact](https://lithic.com/contact) for more
       information.
     - `SINGLE_USE` - Card will close shortly after the first transaction.
-    - `UNLOCKED` - Card will authorize at any merchant. Creating these cards
-      requires additional privileges.
+    - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
+      wallet like Apple Pay or Google Pay (if the card program is digital
+      wallet-enabled).
     """
 
     auth_rule_tokens: Optional[List[str]]

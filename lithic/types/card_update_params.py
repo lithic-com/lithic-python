@@ -12,9 +12,9 @@ class CardUpdateParams(TypedDict, total=False):
     """Only required for multi-account users.
 
     Token identifying the account the card will be associated with. Only applicable
-    if using account enrollment. See
-    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
-    information.
+    if using account holder enrollment. See
+    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+    more information.
     """
 
     auth_rule_token: str
@@ -35,8 +35,7 @@ class CardUpdateParams(TypedDict, total=False):
     pin: str
     """Encrypted PIN block (in base64).
 
-    Only applies to cards of type `PHYSICAL` [beta], `UNLOCKED`, and
-    `DIGITAL_WALLET`. See
+    Only applies to cards of type `PHYSICAL` and `VIRTUAL`. See
     [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
     """
 

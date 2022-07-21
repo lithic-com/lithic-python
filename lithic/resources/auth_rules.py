@@ -4,12 +4,12 @@ from typing import Union
 
 from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._base_client import make_request_options
+from ..pagination import SyncPage, AsyncPage
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.auth_rule import *
 from ..types.auth_rule_list_params import AuthRuleListParams
 from ..types.auth_rule_apply_params import AuthRuleApplyParams
 from ..types.auth_rule_create_params import AuthRuleCreateParams
-from ..types.auth_rule_list_response import *
 from ..types.auth_rule_remove_params import AuthRuleRemoveParams
 from ..types.auth_rule_update_params import AuthRuleUpdateParams
 from ..types.auth_rule_apply_response import *
@@ -89,14 +89,15 @@ class AuthRules(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> AuthRuleListResponse:
+    ) -> SyncPage[AuthRule]:
         """Return all of the Auth Rules under the program."""
         options = make_request_options(headers, max_retries, timeout)
-        return self._get(
+        return self._get_api_list(
             "/auth_rules",
+            page=SyncPage[AuthRule],
             query=query,
             options=options,
-            cast_to=AuthRuleListResponse,
+            model=AuthRule,
         )
 
     def apply(
@@ -202,21 +203,22 @@ class AsyncAuthRules(AsyncAPIResource):
             cast_to=AuthRuleUpdateResponse,
         )
 
-    async def list(
+    def list(
         self,
         query: AuthRuleListParams = {},
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> AuthRuleListResponse:
+    ) -> AsyncPaginator[AuthRule, AsyncPage[AuthRule]]:
         """Return all of the Auth Rules under the program."""
         options = make_request_options(headers, max_retries, timeout)
-        return await self._get(
+        return self._get_api_list(
             "/auth_rules",
+            page=AsyncPage[AuthRule],
             query=query,
             options=options,
-            cast_to=AuthRuleListResponse,
+            model=AuthRule,
         )
 
     async def apply(

@@ -10,9 +10,11 @@ __all__ = ["AuthRule"]
 
 class AuthRule(BaseModel):
     account_tokens: Optional[List[str]]
-    """
-    Array of account_token(s) identifying the accounts that the Auth Rule applies
+    """Array of account_token(s) identifying the accounts that the Auth Rule applies
     to.
+
+    Note that only this field or `card_tokens` can be provided for a given Auth
+    Rule.
     """
 
     allowed_countries: Optional[List[str]]
@@ -48,20 +50,11 @@ class AuthRule(BaseModel):
     """
 
     card_tokens: Optional[List[str]]
-    """Array of card_token(s) identifying the cards that the Auth Rule applies to."""
+    """Array of card_token(s) identifying the cards that the Auth Rule applies to.
 
-    previous_auth_rule_tokens: Optional[List[str]]
-    """
-    Identifier for the Auth Rule(s) that a new Auth Rule replaced; will be returned
-    only if an Auth Rule is applied to entities that previously already had one
-    applied.
+    Note that only this field or `account_tokens` can be provided for a given Auth
+    Rule.
     """
 
     program_level: Optional[bool]
     """Boolean indicating whether the Auth Rule is applied at the program level."""
-
-    state: Optional[Literal["ACTIVE", "INACTIVE"]]
-    """Indicates whether the Auth Rule is ACTIVE or INACTIVE"""
-
-    token: Optional[str]
-    """Globally unique identifier."""

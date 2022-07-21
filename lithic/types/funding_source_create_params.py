@@ -28,9 +28,9 @@ class Bank(TypedDict, total=False):
     """Only required for multi-account users.
 
     Token identifying the account that the bank account will be associated with.
-    Only applicable if using account enrollment. See
-    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
-    information.
+    Only applicable if using account holder enrollment. See
+    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+    more information.
     """
 
 
@@ -44,9 +44,9 @@ class Plaid(TypedDict, total=False):
     """Only required for multi-account users.
 
     Token identifying the account associated with the bank account. Only applicable
-    if using account creation. See
-    [Managing Accounts](https://docs.lithic.com/docs/managing-accounts) for more
-    information.
+    if using account holder enrollment. See
+    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+    more information.
     """
 
 

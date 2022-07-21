@@ -2,8 +2,8 @@
 import os
 
 from lithic import Lithic, AsyncLithic
+from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.auth_rule import *
-from lithic.types.auth_rule_list_response import *
 from lithic.types.auth_rule_apply_response import *
 from lithic.types.auth_rule_create_response import *
 from lithic.types.auth_rule_remove_response import *
@@ -31,9 +31,9 @@ class TestAuthRules:
                 "allowed_countries": ["string", "string", "string"],
                 "blocked_countries": ["string", "string", "string"],
                 "avs_type": "ZIP_ONLY",
-                "card_tokens": ["string", "string", "string"],
                 "account_tokens": ["string", "string", "string"],
-                "program_level": True,
+                "card_tokens": ["string", "string", "string"],
+                "program_level": False,
             },
         )
         assert isinstance(resource, AuthRuleCreateResponse)
@@ -66,7 +66,7 @@ class TestAuthRules:
 
     def test_method_list(self) -> None:
         resource = self.client.auth_rules.list()
-        assert isinstance(resource, AuthRuleListResponse)
+        assert isinstance(resource, SyncPage)
 
     def test_method_list_with_optional_params(self) -> None:
         resource = self.client.auth_rules.list(
@@ -75,7 +75,7 @@ class TestAuthRules:
                 "page_size": 1,
             },
         )
-        assert isinstance(resource, AuthRuleListResponse)
+        assert isinstance(resource, SyncPage)
 
     def test_method_apply(self) -> None:
         resource = self.client.auth_rules.apply(
@@ -129,9 +129,9 @@ class TestAsyncAuthRules:
                 "allowed_countries": ["string", "string", "string"],
                 "blocked_countries": ["string", "string", "string"],
                 "avs_type": "ZIP_ONLY",
-                "card_tokens": ["string", "string", "string"],
                 "account_tokens": ["string", "string", "string"],
-                "program_level": True,
+                "card_tokens": ["string", "string", "string"],
+                "program_level": False,
             },
         )
         assert isinstance(resource, AuthRuleCreateResponse)
@@ -164,7 +164,7 @@ class TestAsyncAuthRules:
 
     async def test_method_list(self) -> None:
         resource = await self.client.auth_rules.list()
-        assert isinstance(resource, AuthRuleListResponse)
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_list_with_optional_params(self) -> None:
         resource = await self.client.auth_rules.list(
@@ -173,7 +173,7 @@ class TestAsyncAuthRules:
                 "page_size": 1,
             },
         )
-        assert isinstance(resource, AuthRuleListResponse)
+        assert isinstance(resource, AsyncPage)
 
     async def test_method_apply(self) -> None:
         resource = await self.client.auth_rules.apply(

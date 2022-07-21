@@ -1,6 +1,8 @@
 # File generated from our OpenAPI spec by Stainless.
 import os
 
+import pytest
+
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.account import *
@@ -18,6 +20,7 @@ class TestAccounts:
         )
         assert isinstance(resource, Account)
 
+    @pytest.mark.skip(reason="Prism returns invalid data")
     def test_method_update(self) -> None:
         resource = self.client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -25,6 +28,7 @@ class TestAccounts:
         )
         assert isinstance(resource, Account)
 
+    @pytest.mark.skip(reason="Prism returns invalid data")
     def test_method_update_with_optional_params(self) -> None:
         resource = self.client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -70,6 +74,7 @@ class TestAsyncAccounts:
         )
         assert isinstance(resource, Account)
 
+    @pytest.mark.skip(reason="Prism returns invalid data")
     async def test_method_update(self) -> None:
         resource = await self.client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -77,6 +82,7 @@ class TestAsyncAccounts:
         )
         assert isinstance(resource, Account)
 
+    @pytest.mark.skip(reason="Prism returns invalid data")
     async def test_method_update_with_optional_params(self) -> None:
         resource = await self.client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
