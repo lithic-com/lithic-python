@@ -27,7 +27,7 @@ class BaseModel(pydantic.BaseModel):
                 key = name
 
             if key in values:
-                if values[key] is None and not field.required:
+                if values[key] is None:
                     fields_values[name] = field.get_default()
                 else:
                     if not is_literal_type(field.type_) and (
