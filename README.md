@@ -58,7 +58,6 @@ async def main():
     })
     print(card.token)
 
-
 asyncio.run(main())
 ```
 
