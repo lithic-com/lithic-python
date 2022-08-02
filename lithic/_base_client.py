@@ -275,6 +275,8 @@ class BaseClient:
                 options.idempotency_key = self._idempotency_key()
             headers[self._idempotency_header] = options.idempotency_key
 
+        kwargs: dict[str, Any] = {}
+
         # If the given Content-Type header is multipart/form-data then it
         # has to be removed so that httpx can generate the header with
         # additional information for us as it has to be in this form
@@ -282,6 +284,11 @@ class BaseClient:
         # multipart/form-data; boundary=---abc--
         if headers.get("Content-Type") == "multipart/form-data":
             headers.pop("Content-Type")
+
+            # As we are now sending multipart/form-data instead of application/json
+            # we need to tell httpx to use it, https://www.python-httpx.org/advanced/#multipart-file-encoding
+            if options.json_data:
+                kwargs["data"] = options.json_data
 
         # TODO: report this error to httpx
         return self._client.build_request(  # pyright: ignore[reportUnknownMemberType]
@@ -296,6 +303,7 @@ class BaseClient:
             params=self.qs.stringify(cast(Mapping[str, Any], options.params)) if options.params else None,
             json=options.json_data,
             files=options.files,
+            **kwargs,
         )
 
     def process_response(
