@@ -381,14 +381,14 @@ class TestAccountHolders:
     def test_method_upload_document(self) -> None:
         resource = self.client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENCE"},
+            {"document_type": "COMMERCIAL_LICENSE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
     def test_method_upload_document_with_optional_params(self) -> None:
         resource = self.client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENCE"},
+            {"document_type": "COMMERCIAL_LICENSE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
@@ -761,13 +761,13 @@ class TestAsyncAccountHolders:
     async def test_method_upload_document(self) -> None:
         resource = await self.client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENCE"},
+            {"document_type": "COMMERCIAL_LICENSE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
     async def test_method_upload_document_with_optional_params(self) -> None:
         resource = await self.client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENCE"},
+            {"document_type": "COMMERCIAL_LICENSE"},
         )
         assert isinstance(resource, AccountHolderDocument)
