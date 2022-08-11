@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Union
+from typing import Union, Optional
 
-from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
+from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 from ..types.account_holder import *
@@ -29,6 +29,7 @@ class AccountHolders(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -39,7 +40,7 @@ class AccountHolders(SyncAPIResource):
         account creation process. This endpoint can only be used on accounts that are
         part of the program the calling API key manages.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/account_holders",
             body=body,
@@ -54,9 +55,10 @@ class AccountHolders(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             f"/account_holders/{account_holder_token}",
             options=options,
@@ -70,6 +72,7 @@ class AccountHolders(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderCreateWebhookResponse:
         """Create a webhook to receive KYC or KYB evaluation events.
 
@@ -85,7 +88,7 @@ class AccountHolders(SyncAPIResource):
         HMAC token or modify the registered URL. Only a single webhook is allowed per
         program.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/webhooks/account_holders",
             body=body,
@@ -100,6 +103,7 @@ class AccountHolders(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -118,7 +122,7 @@ class AccountHolders(SyncAPIResource):
         show an additional entry in the `required_document_uploads` list in a `PENDING`
         state for the corresponding `image_type`.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             f"/account_holders/{account_holder_token}/documents",
             options=options,
@@ -133,6 +137,7 @@ class AccountHolders(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -145,7 +150,7 @@ class AccountHolders(SyncAPIResource):
         Two resubmission attempts are permitted via this endpoint before a `REJECTED`
         status is returned and the account creation process is ended.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/account_holders/{account_holder_token}/resubmit",
             body=body,
@@ -161,6 +166,7 @@ class AccountHolders(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -178,7 +184,7 @@ class AccountHolders(SyncAPIResource):
         response will show an additional entry in the `required_document_uploads` array
         in a `PENDING` state for the corresponding `image_type`.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             f"/account_holders/{account_holder_token}/documents/{document_token}",
             options=options,
@@ -193,6 +199,7 @@ class AccountHolders(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -214,7 +221,7 @@ class AccountHolders(SyncAPIResource):
         Currently only one type of account holder document is supported per KYC
         verification.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/account_holders/{account_holder_token}/documents",
             body=body,
@@ -231,6 +238,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -241,7 +249,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         account creation process. This endpoint can only be used on accounts that are
         part of the program the calling API key manages.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/account_holders",
             body=body,
@@ -256,9 +264,10 @@ class AsyncAccountHolders(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolder:
         """Check the current status of a KYC or KYB evaluation."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             f"/account_holders/{account_holder_token}",
             options=options,
@@ -272,6 +281,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderCreateWebhookResponse:
         """Create a webhook to receive KYC or KYB evaluation events.
 
@@ -287,7 +297,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         HMAC token or modify the registered URL. Only a single webhook is allowed per
         program.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/webhooks/account_holders",
             body=body,
@@ -302,6 +312,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -320,7 +331,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         show an additional entry in the `required_document_uploads` list in a `PENDING`
         state for the corresponding `image_type`.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             f"/account_holders/{account_holder_token}/documents",
             options=options,
@@ -335,6 +346,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -347,7 +359,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         Two resubmission attempts are permitted via this endpoint before a `REJECTED`
         status is returned and the account creation process is ended.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/account_holders/{account_holder_token}/resubmit",
             body=body,
@@ -363,6 +375,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -380,7 +393,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         response will show an additional entry in the `required_document_uploads` array
         in a `PENDING` state for the corresponding `image_type`.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             f"/account_holders/{account_holder_token}/documents/{document_token}",
             options=options,
@@ -395,6 +408,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -416,7 +430,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         Currently only one type of account holder document is supported per KYC
         verification.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/account_holders/{account_holder_token}/documents",
             body=body,

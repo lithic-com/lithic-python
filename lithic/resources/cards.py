@@ -4,12 +4,12 @@ import hmac
 import json
 import base64
 import hashlib
-from typing import Union
+from typing import Union, Optional
 from datetime import datetime, timezone, timedelta
 
 from httpx import URL
 
-from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
+from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from ..types.card import *
@@ -36,13 +36,14 @@ class Cards(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Create a new virtual or physical card.
 
         Parameters `pin`, `shipping_address`, and `product_id` only apply to physical
         cards.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/cards",
             body=body,
@@ -57,9 +58,10 @@ class Cards(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             f"/cards/{card_token}",
             options=options,
@@ -74,6 +76,7 @@ class Cards(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -83,7 +86,7 @@ class Cards(SyncAPIResource):
         _Note: setting a card to a `CLOSED` state is a final action that cannot be
         undone._
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._patch(
             f"/cards/{card_token}",
             body=body,
@@ -100,11 +103,10 @@ class Cards(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Card]:
         """List cards."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/cards",
             page=SyncPage[Card],
-            query=query,
             options=options,
             model=Card,
         )
@@ -146,10 +148,9 @@ class Cards(SyncAPIResource):
         a serious security vulnerability**.
         """
         headers = {"Accept": "text/html", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             "/embed/card",
-            query=query,
             options=options,
             cast_to=str,
         )
@@ -177,7 +178,7 @@ class Cards(SyncAPIResource):
         return self._get(
             str(self.get_embed_url(query)),
             cast_to=str,
-            options=make_request_options(headers, max_retries, timeout),
+            options=make_request_options(headers, max_retries, timeout, query),
         )
 
     def get_embed_url(self, query: CardGetEmbedURLParams) -> URL:
@@ -236,6 +237,7 @@ class Cards(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -245,7 +247,7 @@ class Cards(SyncAPIResource):
         [Contact Us](https://lithic.com/contact) or your Customer Success representative
         for more information.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/cards/{card_token}/provision",
             body=body,
@@ -261,12 +263,13 @@ class Cards(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Initiate print and shipment of a duplicate card.
 
         Only applies to cards of type `PHYSICAL` [beta].
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/cards/{card_token}/reissue",
             body=body,
@@ -283,13 +286,14 @@ class AsyncCards(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Create a new virtual or physical card.
 
         Parameters `pin`, `shipping_address`, and `product_id` only apply to physical
         cards.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/cards",
             body=body,
@@ -304,9 +308,10 @@ class AsyncCards(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             f"/cards/{card_token}",
             options=options,
@@ -321,6 +326,7 @@ class AsyncCards(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -330,7 +336,7 @@ class AsyncCards(AsyncAPIResource):
         _Note: setting a card to a `CLOSED` state is a final action that cannot be
         undone._
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._patch(
             f"/cards/{card_token}",
             body=body,
@@ -347,11 +353,10 @@ class AsyncCards(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Card, AsyncPage[Card]]:
         """List cards."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/cards",
             page=AsyncPage[Card],
-            query=query,
             options=options,
             model=Card,
         )
@@ -393,10 +398,9 @@ class AsyncCards(AsyncAPIResource):
         a serious security vulnerability**.
         """
         headers = {"Accept": "text/html", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             "/embed/card",
-            query=query,
             options=options,
             cast_to=str,
         )
@@ -424,7 +428,7 @@ class AsyncCards(AsyncAPIResource):
         return await self._get(
             str(self.get_embed_url(query)),
             cast_to=str,
-            options=make_request_options(headers, max_retries, timeout),
+            options=make_request_options(headers, max_retries, timeout, query),
         )
 
     def get_embed_url(self, query: CardGetEmbedURLParams) -> URL:
@@ -483,6 +487,7 @@ class AsyncCards(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -492,7 +497,7 @@ class AsyncCards(AsyncAPIResource):
         [Contact Us](https://lithic.com/contact) or your Customer Success representative
         for more information.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/cards/{card_token}/provision",
             body=body,
@@ -508,12 +513,13 @@ class AsyncCards(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Card:
         """Initiate print and shipment of a duplicate card.
 
         Only applies to cards of type `PHYSICAL` [beta].
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/cards/{card_token}/reissue",
             body=body,

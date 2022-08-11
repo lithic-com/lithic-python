@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Union
+from typing import Union, Optional
 
-from .._types import NOT_GIVEN, Headers, Timeout, NoneType, NotGiven
+from .._types import NOT_GIVEN, Query, Headers, Timeout, NoneType, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 from ..types.auth_stream_enrollment import *
@@ -20,12 +20,13 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthStreamEnrollment:
         """
         Check status for whether you have enrolled in Authorization Stream Access (ASA)
         for your program in Sandbox.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             "/auth_stream",
             options=options,
@@ -38,10 +39,11 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
         headers = {"Accept": "*/*", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._delete(
             "/auth_stream",
             options=options,
@@ -55,6 +57,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> None:
         """
         Authorization Stream Access (ASA) provides the ability to make custom
@@ -71,7 +74,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         onboarding requires manual approval and setup.
         """
         headers = {"Accept": "*/*", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/auth_stream",
             body=body,
@@ -87,12 +90,13 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthStreamEnrollment:
         """
         Check status for whether you have enrolled in Authorization Stream Access (ASA)
         for your program in Sandbox.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             "/auth_stream",
             options=options,
@@ -105,10 +109,11 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
         headers = {"Accept": "*/*", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._delete(
             "/auth_stream",
             options=options,
@@ -122,6 +127,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> None:
         """
         Authorization Stream Access (ASA) provides the ability to make custom
@@ -138,7 +144,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         onboarding requires manual approval and setup.
         """
         headers = {"Accept": "*/*", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/auth_stream",
             body=body,

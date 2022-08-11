@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Union
+from typing import Union, Optional
 
-from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
+from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -29,12 +29,13 @@ class AuthRules(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleCreateResponse:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
         account, or card level.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/auth_rules",
             body=body,
@@ -49,12 +50,13 @@ class AuthRules(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleRetrieveResponse:
         """
         Detail the properties and entities (program, accounts, and cards) associated
         with an existing authorization rule (Auth Rule).
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             f"/auth_rules/{auth_rule_token}",
             options=options,
@@ -69,12 +71,13 @@ class AuthRules(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleUpdateResponse:
         """
         Update the properties associated with an existing authorization rule (Auth
         Rule).
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._put(
             f"/auth_rules/{auth_rule_token}",
             body=body,
@@ -91,11 +94,10 @@ class AuthRules(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[AuthRule]:
         """Return all of the Auth Rules under the program."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/auth_rules",
             page=SyncPage[AuthRule],
-            query=query,
             options=options,
             model=AuthRule,
         )
@@ -108,12 +110,13 @@ class AuthRules(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleApplyResponse:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
         card level.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/auth_rules/{auth_rule_token}/apply",
             body=body,
@@ -128,12 +131,13 @@ class AuthRules(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or
         card-level.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._delete(
             "/auth_rules/remove",
             body=body,
@@ -150,12 +154,13 @@ class AsyncAuthRules(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleCreateResponse:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
         account, or card level.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/auth_rules",
             body=body,
@@ -170,12 +175,13 @@ class AsyncAuthRules(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleRetrieveResponse:
         """
         Detail the properties and entities (program, accounts, and cards) associated
         with an existing authorization rule (Auth Rule).
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             f"/auth_rules/{auth_rule_token}",
             options=options,
@@ -190,12 +196,13 @@ class AsyncAuthRules(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleUpdateResponse:
         """
         Update the properties associated with an existing authorization rule (Auth
         Rule).
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._put(
             f"/auth_rules/{auth_rule_token}",
             body=body,
@@ -212,11 +219,10 @@ class AsyncAuthRules(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[AuthRule, AsyncPage[AuthRule]]:
         """Return all of the Auth Rules under the program."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/auth_rules",
             page=AsyncPage[AuthRule],
-            query=query,
             options=options,
             model=AuthRule,
         )
@@ -229,12 +235,13 @@ class AsyncAuthRules(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleApplyResponse:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
         card level.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/auth_rules/{auth_rule_token}/apply",
             body=body,
@@ -249,12 +256,13 @@ class AsyncAuthRules(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or
         card-level.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._delete(
             "/auth_rules/remove",
             body=body,

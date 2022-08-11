@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Union
+from typing import Union, Optional
 
-from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
+from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -32,9 +32,10 @@ class Transactions(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Transaction:
         """Get specific transaction."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             f"/transactions/{transaction_token}",
             options=options,
@@ -50,11 +51,10 @@ class Transactions(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Transaction]:
         """List transactions."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/transactions",
             page=SyncPage[Transaction],
-            query=query,
             options=options,
             model=Transaction,
         )
@@ -66,13 +66,14 @@ class Transactions(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
         merchant acquirer. If you're configured for ASA, simulating auths requires your
         ASA client to be set up properly (respond with a valid JSON to the ASA request).
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/authorize",
             body=body,
@@ -87,6 +88,7 @@ class Transactions(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -96,7 +98,7 @@ class Transactions(SyncAPIResource):
         be captured. Any transaction that has any amount completed at all do not have
         access to this behavior.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/clearing",
             body=body,
@@ -111,12 +113,13 @@ class Transactions(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
         Returns are cleared immediately and do not spend time in a `PENDING` state.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/return",
             body=body,
@@ -131,6 +134,7 @@ class Transactions(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
@@ -138,7 +142,7 @@ class Transactions(SyncAPIResource):
         partially completed transactions, but can be used on partially voided
         transactions.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/void",
             body=body,
@@ -155,9 +159,10 @@ class AsyncTransactions(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> Transaction:
         """Get specific transaction."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             f"/transactions/{transaction_token}",
             options=options,
@@ -173,11 +178,10 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """List transactions."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/transactions",
             page=AsyncPage[Transaction],
-            query=query,
             options=options,
             model=Transaction,
         )
@@ -189,13 +193,14 @@ class AsyncTransactions(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
         merchant acquirer. If you're configured for ASA, simulating auths requires your
         ASA client to be set up properly (respond with a valid JSON to the ASA request).
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/authorize",
             body=body,
@@ -210,6 +215,7 @@ class AsyncTransactions(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -219,7 +225,7 @@ class AsyncTransactions(AsyncAPIResource):
         be captured. Any transaction that has any amount completed at all do not have
         access to this behavior.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/clearing",
             body=body,
@@ -234,12 +240,13 @@ class AsyncTransactions(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
         Returns are cleared immediately and do not spend time in a `PENDING` state.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/return",
             body=body,
@@ -254,6 +261,7 @@ class AsyncTransactions(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
@@ -261,7 +269,7 @@ class AsyncTransactions(AsyncAPIResource):
         partially completed transactions, but can be used on partially voided
         transactions.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/void",
             body=body,

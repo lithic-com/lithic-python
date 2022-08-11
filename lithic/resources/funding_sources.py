@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Union
+from typing import Union, Optional
 
-from .._types import NOT_GIVEN, Headers, Timeout, NotGiven
+from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -23,6 +23,7 @@ class FundingSources(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> FundingSource:
         """Add a funding source using bank routing and account numbers or via Plaid.
 
@@ -30,7 +31,7 @@ class FundingSources(SyncAPIResource):
         until micro-deposit validation completes while funding accounts in sandbox will
         be set to `ENABLED` state automatically.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/funding_sources",
             body=body,
@@ -46,9 +47,10 @@ class FundingSources(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> FundingSource:
         """Update a funding source."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._patch(
             f"/funding_sources/{funding_source_token}",
             body=body,
@@ -65,11 +67,10 @@ class FundingSources(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[FundingSource]:
         """List all the funding sources associated with the Lithic account."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/funding_sources",
             page=SyncPage[FundingSource],
-            query=query,
             options=options,
             model=FundingSource,
         )
@@ -82,12 +83,13 @@ class FundingSources(SyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> FundingSource:
         """
         Verify a bank account as a funding source by providing received micro-deposit
         amounts.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/funding_sources/{funding_source_token}/verify",
             body=body,
@@ -104,6 +106,7 @@ class AsyncFundingSources(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> FundingSource:
         """Add a funding source using bank routing and account numbers or via Plaid.
 
@@ -111,7 +114,7 @@ class AsyncFundingSources(AsyncAPIResource):
         until micro-deposit validation completes while funding accounts in sandbox will
         be set to `ENABLED` state automatically.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/funding_sources",
             body=body,
@@ -127,9 +130,10 @@ class AsyncFundingSources(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> FundingSource:
         """Update a funding source."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._patch(
             f"/funding_sources/{funding_source_token}",
             body=body,
@@ -146,11 +150,10 @@ class AsyncFundingSources(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[FundingSource, AsyncPage[FundingSource]]:
         """List all the funding sources associated with the Lithic account."""
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/funding_sources",
             page=AsyncPage[FundingSource],
-            query=query,
             options=options,
             model=FundingSource,
         )
@@ -163,12 +166,13 @@ class AsyncFundingSources(AsyncAPIResource):
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
     ) -> FundingSource:
         """
         Verify a bank account as a funding source by providing received micro-deposit
         amounts.
         """
-        options = make_request_options(headers, max_retries, timeout)
+        options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/funding_sources/{funding_source_token}/verify",
             body=body,

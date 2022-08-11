@@ -547,10 +547,9 @@ class SyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
+        opts = FinalRequestOptions(method="get", url=path, **options)
         return self.request(cast_to, opts)
 
     def post(
@@ -604,10 +603,9 @@ class SyncAPIClient(BaseClient):
         *,
         model: Type[ModelT],
         page: Type[SyncPageT],
-        query: Query = {},
         options: RequestOptions = {},
     ) -> SyncPageT:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
+        opts = FinalRequestOptions(method="get", url=path, **options)
         return self.request_api_list(model, page, opts)
 
 
@@ -710,7 +708,7 @@ class AsyncAPIClient(BaseClient):
         query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
+        opts = FinalRequestOptions(method="get", url=path, **options)
         return await self.request(cast_to, opts)
 
     async def post(
@@ -765,10 +763,9 @@ class AsyncAPIClient(BaseClient):
         # TODO: support paginating `str`
         model: Type[ModelT],
         page: Type[AsyncPageT],
-        query: Query = {},
         options: RequestOptions = {},
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
-        opts = FinalRequestOptions(method="get", url=path, params=query, **options)
+        opts = FinalRequestOptions(method="get", url=path, **options)
         return self.request_api_list(model, page, opts)
 
 
@@ -776,6 +773,7 @@ def make_request_options(
     headers: Headers | NotGiven,
     max_retries: int | NotGiven,
     timeout: float | Timeout | None | NotGiven,
+    query: Query | None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of NotGiven values."""
     options: RequestOptions = {}
@@ -787,6 +785,9 @@ def make_request_options(
 
     if not isinstance(timeout, NotGiven):
         options["timeout"] = timeout
+
+    if query is not None:
+        options["params"] = query
 
     return options
 
