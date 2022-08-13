@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import os
 
+import pytest
+
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.auth_rule import *
@@ -17,16 +19,20 @@ api_key = os.environ.get("API_KEY", "something1234")
 
 
 class TestAuthRules:
-    client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    def test_method_create(self) -> None:
-        resource = self.client.auth_rules.create(
+    @parametrize
+    def test_method_create(self, client: Lithic) -> None:
+        resource = client.auth_rules.create(
             {},
         )
         assert isinstance(resource, AuthRuleCreateResponse)
 
-    def test_method_create_with_optional_params(self) -> None:
-        resource = self.client.auth_rules.create(
+    @parametrize
+    def test_method_create_with_optional_params(self, client: Lithic) -> None:
+        resource = client.auth_rules.create(
             {
                 "allowed_mcc": ["string", "string", "string"],
                 "blocked_mcc": ["string", "string", "string"],
@@ -40,21 +46,24 @@ class TestAuthRules:
         )
         assert isinstance(resource, AuthRuleCreateResponse)
 
-    def test_method_retrieve(self) -> None:
-        resource = self.client.auth_rules.retrieve(
+    @parametrize
+    def test_method_retrieve(self, client: Lithic) -> None:
+        resource = client.auth_rules.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AuthRuleRetrieveResponse)
 
-    def test_method_update(self) -> None:
-        resource = self.client.auth_rules.update(
+    @parametrize
+    def test_method_update(self, client: Lithic) -> None:
+        resource = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
-    def test_method_update_with_optional_params(self) -> None:
-        resource = self.client.auth_rules.update(
+    @parametrize
+    def test_method_update_with_optional_params(self, client: Lithic) -> None:
+        resource = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "allowed_mcc": ["string", "string", "string"],
@@ -66,12 +75,14 @@ class TestAuthRules:
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
-    def test_method_list(self) -> None:
-        resource = self.client.auth_rules.list()
+    @parametrize
+    def test_method_list(self, client: Lithic) -> None:
+        resource = client.auth_rules.list()
         assert isinstance(resource, SyncPage)
 
-    def test_method_list_with_optional_params(self) -> None:
-        resource = self.client.auth_rules.list(
+    @parametrize
+    def test_method_list_with_optional_params(self, client: Lithic) -> None:
+        resource = client.auth_rules.list(
             {
                 "page": 0,
                 "page_size": 1,
@@ -79,15 +90,17 @@ class TestAuthRules:
         )
         assert isinstance(resource, SyncPage)
 
-    def test_method_apply(self) -> None:
-        resource = self.client.auth_rules.apply(
+    @parametrize
+    def test_method_apply(self, client: Lithic) -> None:
+        resource = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
-    def test_method_apply_with_optional_params(self) -> None:
-        resource = self.client.auth_rules.apply(
+    @parametrize
+    def test_method_apply_with_optional_params(self, client: Lithic) -> None:
+        resource = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "card_tokens": ["string", "string", "string"],
@@ -97,14 +110,16 @@ class TestAuthRules:
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
-    def test_method_remove(self) -> None:
-        resource = self.client.auth_rules.remove(
+    @parametrize
+    def test_method_remove(self, client: Lithic) -> None:
+        resource = client.auth_rules.remove(
             {},
         )
         assert isinstance(resource, AuthRuleRemoveResponse)
 
-    def test_method_remove_with_optional_params(self) -> None:
-        resource = self.client.auth_rules.remove(
+    @parametrize
+    def test_method_remove_with_optional_params(self, client: Lithic) -> None:
+        resource = client.auth_rules.remove(
             {
                 "card_tokens": ["string", "string", "string"],
                 "account_tokens": ["string", "string", "string"],
@@ -115,16 +130,20 @@ class TestAuthRules:
 
 
 class TestAsyncAuthRules:
-    client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    async def test_method_create(self) -> None:
-        resource = await self.client.auth_rules.create(
+    @parametrize
+    async def test_method_create(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.create(
             {},
         )
         assert isinstance(resource, AuthRuleCreateResponse)
 
-    async def test_method_create_with_optional_params(self) -> None:
-        resource = await self.client.auth_rules.create(
+    @parametrize
+    async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.create(
             {
                 "allowed_mcc": ["string", "string", "string"],
                 "blocked_mcc": ["string", "string", "string"],
@@ -138,21 +157,24 @@ class TestAsyncAuthRules:
         )
         assert isinstance(resource, AuthRuleCreateResponse)
 
-    async def test_method_retrieve(self) -> None:
-        resource = await self.client.auth_rules.retrieve(
+    @parametrize
+    async def test_method_retrieve(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AuthRuleRetrieveResponse)
 
-    async def test_method_update(self) -> None:
-        resource = await self.client.auth_rules.update(
+    @parametrize
+    async def test_method_update(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
-    async def test_method_update_with_optional_params(self) -> None:
-        resource = await self.client.auth_rules.update(
+    @parametrize
+    async def test_method_update_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "allowed_mcc": ["string", "string", "string"],
@@ -164,12 +186,14 @@ class TestAsyncAuthRules:
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
-    async def test_method_list(self) -> None:
-        resource = await self.client.auth_rules.list()
+    @parametrize
+    async def test_method_list(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.list()
         assert isinstance(resource, AsyncPage)
 
-    async def test_method_list_with_optional_params(self) -> None:
-        resource = await self.client.auth_rules.list(
+    @parametrize
+    async def test_method_list_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.list(
             {
                 "page": 0,
                 "page_size": 1,
@@ -177,15 +201,17 @@ class TestAsyncAuthRules:
         )
         assert isinstance(resource, AsyncPage)
 
-    async def test_method_apply(self) -> None:
-        resource = await self.client.auth_rules.apply(
+    @parametrize
+    async def test_method_apply(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
-    async def test_method_apply_with_optional_params(self) -> None:
-        resource = await self.client.auth_rules.apply(
+    @parametrize
+    async def test_method_apply_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "card_tokens": ["string", "string", "string"],
@@ -195,14 +221,16 @@ class TestAsyncAuthRules:
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
-    async def test_method_remove(self) -> None:
-        resource = await self.client.auth_rules.remove(
+    @parametrize
+    async def test_method_remove(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.remove(
             {},
         )
         assert isinstance(resource, AuthRuleRemoveResponse)
 
-    async def test_method_remove_with_optional_params(self) -> None:
-        resource = await self.client.auth_rules.remove(
+    @parametrize
+    async def test_method_remove_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.auth_rules.remove(
             {
                 "card_tokens": ["string", "string", "string"],
                 "account_tokens": ["string", "string", "string"],

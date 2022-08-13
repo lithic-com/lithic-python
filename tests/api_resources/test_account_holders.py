@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import os
 
+import pytest
+
 from lithic import Lithic, AsyncLithic
 from lithic.types.account_holder import *
 from lithic.types.account_holder_document import *
@@ -14,10 +16,13 @@ api_key = os.environ.get("API_KEY", "something1234")
 
 
 class TestAccountHolders:
-    client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    def test_method_create(self) -> None:
-        resource = self.client.account_holders.create(
+    @parametrize
+    def test_method_create(self, client: Lithic) -> None:
+        resource = client.account_holders.create(
             {
                 "business_entity": {
                     "address": {
@@ -155,8 +160,9 @@ class TestAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    def test_method_create_with_optional_params(self) -> None:
-        resource = self.client.account_holders.create(
+    @parametrize
+    def test_method_create_with_optional_params(self, client: Lithic) -> None:
+        resource = client.account_holders.create(
             {
                 "business_entity": {
                     "address": {
@@ -295,32 +301,37 @@ class TestAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    def test_method_retrieve(self) -> None:
-        resource = self.client.account_holders.retrieve(
+    @parametrize
+    def test_method_retrieve(self, client: Lithic) -> None:
+        resource = client.account_holders.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolder)
 
-    def test_method_create_webhook(self) -> None:
-        resource = self.client.account_holders.create_webhook(
+    @parametrize
+    def test_method_create_webhook(self, client: Lithic) -> None:
+        resource = client.account_holders.create_webhook(
             {"url": "string"},
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
-    def test_method_create_webhook_with_optional_params(self) -> None:
-        resource = self.client.account_holders.create_webhook(
+    @parametrize
+    def test_method_create_webhook_with_optional_params(self, client: Lithic) -> None:
+        resource = client.account_holders.create_webhook(
             {"url": "string"},
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
-    def test_method_list_documents(self) -> None:
-        resource = self.client.account_holders.list_documents(
+    @parametrize
+    def test_method_list_documents(self, client: Lithic) -> None:
+        resource = client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolderListDocumentsResponse)
 
-    def test_method_resubmit(self) -> None:
-        resource = self.client.account_holders.resubmit(
+    @parametrize
+    def test_method_resubmit(self, client: Lithic) -> None:
+        resource = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "workflow": "KYC_ADVANCED",
@@ -345,8 +356,9 @@ class TestAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    def test_method_resubmit_with_optional_params(self) -> None:
-        resource = self.client.account_holders.resubmit(
+    @parametrize
+    def test_method_resubmit_with_optional_params(self, client: Lithic) -> None:
+        resource = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "workflow": "KYC_ADVANCED",
@@ -371,22 +383,25 @@ class TestAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    def test_method_retrieve_document(self) -> None:
-        resource = self.client.account_holders.retrieve_document(
+    @parametrize
+    def test_method_retrieve_document(self, client: Lithic) -> None:
+        resource = client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolderDocument)
 
-    def test_method_upload_document(self) -> None:
-        resource = self.client.account_holders.upload_document(
+    @parametrize
+    def test_method_upload_document(self, client: Lithic) -> None:
+        resource = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {"document_type": "COMMERCIAL_LICENSE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
-    def test_method_upload_document_with_optional_params(self) -> None:
-        resource = self.client.account_holders.upload_document(
+    @parametrize
+    def test_method_upload_document_with_optional_params(self, client: Lithic) -> None:
+        resource = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {"document_type": "COMMERCIAL_LICENSE"},
         )
@@ -394,10 +409,13 @@ class TestAccountHolders:
 
 
 class TestAsyncAccountHolders:
-    client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    async def test_method_create(self) -> None:
-        resource = await self.client.account_holders.create(
+    @parametrize
+    async def test_method_create(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create(
             {
                 "business_entity": {
                     "address": {
@@ -535,8 +553,9 @@ class TestAsyncAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    async def test_method_create_with_optional_params(self) -> None:
-        resource = await self.client.account_holders.create(
+    @parametrize
+    async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create(
             {
                 "business_entity": {
                     "address": {
@@ -675,32 +694,37 @@ class TestAsyncAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    async def test_method_retrieve(self) -> None:
-        resource = await self.client.account_holders.retrieve(
+    @parametrize
+    async def test_method_retrieve(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolder)
 
-    async def test_method_create_webhook(self) -> None:
-        resource = await self.client.account_holders.create_webhook(
+    @parametrize
+    async def test_method_create_webhook(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create_webhook(
             {"url": "string"},
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
-    async def test_method_create_webhook_with_optional_params(self) -> None:
-        resource = await self.client.account_holders.create_webhook(
+    @parametrize
+    async def test_method_create_webhook_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create_webhook(
             {"url": "string"},
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
-    async def test_method_list_documents(self) -> None:
-        resource = await self.client.account_holders.list_documents(
+    @parametrize
+    async def test_method_list_documents(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolderListDocumentsResponse)
 
-    async def test_method_resubmit(self) -> None:
-        resource = await self.client.account_holders.resubmit(
+    @parametrize
+    async def test_method_resubmit(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "workflow": "KYC_ADVANCED",
@@ -725,8 +749,9 @@ class TestAsyncAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    async def test_method_resubmit_with_optional_params(self) -> None:
-        resource = await self.client.account_holders.resubmit(
+    @parametrize
+    async def test_method_resubmit_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "workflow": "KYC_ADVANCED",
@@ -751,22 +776,25 @@ class TestAsyncAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
-    async def test_method_retrieve_document(self) -> None:
-        resource = await self.client.account_holders.retrieve_document(
+    @parametrize
+    async def test_method_retrieve_document(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolderDocument)
 
-    async def test_method_upload_document(self) -> None:
-        resource = await self.client.account_holders.upload_document(
+    @parametrize
+    async def test_method_upload_document(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {"document_type": "COMMERCIAL_LICENSE"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
-    async def test_method_upload_document_with_optional_params(self) -> None:
-        resource = await self.client.account_holders.upload_document(
+    @parametrize
+    async def test_method_upload_document_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {"document_type": "COMMERCIAL_LICENSE"},
         )

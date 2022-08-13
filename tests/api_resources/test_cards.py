@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import os
 
+import pytest
+
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
 from lithic.types.card import *
@@ -14,16 +16,20 @@ api_key = os.environ.get("API_KEY", "something1234")
 
 
 class TestCards:
-    client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    def test_method_create(self) -> None:
-        resource = self.client.cards.create(
+    @parametrize
+    def test_method_create(self, client: Lithic) -> None:
+        resource = client.cards.create(
             {"type": "MERCHANT_LOCKED"},
         )
         assert isinstance(resource, Card)
 
-    def test_method_create_with_optional_params(self) -> None:
-        resource = self.client.cards.create(
+    @parametrize
+    def test_method_create_with_optional_params(self, client: Lithic) -> None:
+        resource = client.cards.create(
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "card_program_token": "00000000-0000-0000-1000-000000000000",
@@ -55,21 +61,24 @@ class TestCards:
         )
         assert isinstance(resource, Card)
 
-    def test_method_retrieve(self) -> None:
-        resource = self.client.cards.retrieve(
+    @parametrize
+    def test_method_retrieve(self, client: Lithic) -> None:
+        resource = client.cards.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, Card)
 
-    def test_method_update(self) -> None:
-        resource = self.client.cards.update(
+    @parametrize
+    def test_method_update(self, client: Lithic) -> None:
+        resource = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, Card)
 
-    def test_method_update_with_optional_params(self) -> None:
-        resource = self.client.cards.update(
+    @parametrize
+    def test_method_update_with_optional_params(self, client: Lithic) -> None:
+        resource = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -84,12 +93,14 @@ class TestCards:
         )
         assert isinstance(resource, Card)
 
-    def test_method_list(self) -> None:
-        resource = self.client.cards.list()
+    @parametrize
+    def test_method_list(self, client: Lithic) -> None:
+        resource = client.cards.list()
         assert isinstance(resource, SyncPage)
 
-    def test_method_list_with_optional_params(self) -> None:
-        resource = self.client.cards.list(
+    @parametrize
+    def test_method_list_with_optional_params(self, client: Lithic) -> None:
+        resource = client.cards.list(
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "begin": "2019-12-27T18:11:19.117Z",
@@ -100,12 +111,14 @@ class TestCards:
         )
         assert isinstance(resource, SyncPage)
 
-    def test_method_embed(self) -> None:
-        resource = self.client.cards.embed()
+    @parametrize
+    def test_method_embed(self, client: Lithic) -> None:
+        resource = client.cards.embed()
         assert isinstance(resource, str)
 
-    def test_method_embed_with_optional_params(self) -> None:
-        resource = self.client.cards.embed(
+    @parametrize
+    def test_method_embed_with_optional_params(self, client: Lithic) -> None:
+        resource = client.cards.embed(
             {
                 "embed_request": "string",
                 "hmac": "string",
@@ -114,26 +127,28 @@ class TestCards:
         assert isinstance(resource, str)
 
     def test_get_embed_html(self) -> None:
-        html = self.client.cards.get_embed_html({"token": "foo"})
+        html = self.strict_client.cards.get_embed_html({"token": "foo"})
         assert "html" in html
 
     def test_get_embed_url(self) -> None:
-        url = self.client.cards.get_embed_url({"token": "foo"})
+        url = self.strict_client.cards.get_embed_url({"token": "foo"})
         params = set(  # pyright: ignore[reportUnknownVariableType]
             url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
         )
         assert "hmac" in params
         assert "embed_request" in params
 
-    def test_method_provision(self) -> None:
-        resource = self.client.cards.provision(
+    @parametrize
+    def test_method_provision(self, client: Lithic) -> None:
+        resource = client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, CardProvisionResponse)
 
-    def test_method_provision_with_optional_params(self) -> None:
-        resource = self.client.cards.provision(
+    @parametrize
+    def test_method_provision_with_optional_params(self, client: Lithic) -> None:
+        resource = client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "digital_wallet": "APPLE_PAY",
@@ -145,15 +160,17 @@ class TestCards:
         )
         assert isinstance(resource, CardProvisionResponse)
 
-    def test_method_reissue(self) -> None:
-        resource = self.client.cards.reissue(
+    @parametrize
+    def test_method_reissue(self, client: Lithic) -> None:
+        resource = client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, Card)
 
-    def test_method_reissue_with_optional_params(self) -> None:
-        resource = self.client.cards.reissue(
+    @parametrize
+    def test_method_reissue_with_optional_params(self, client: Lithic) -> None:
+        resource = client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "shipping_address": {
@@ -177,16 +194,20 @@ class TestCards:
 
 
 class TestAsyncCards:
-    client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    async def test_method_create(self) -> None:
-        resource = await self.client.cards.create(
+    @parametrize
+    async def test_method_create(self, client: AsyncLithic) -> None:
+        resource = await client.cards.create(
             {"type": "MERCHANT_LOCKED"},
         )
         assert isinstance(resource, Card)
 
-    async def test_method_create_with_optional_params(self) -> None:
-        resource = await self.client.cards.create(
+    @parametrize
+    async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.cards.create(
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "card_program_token": "00000000-0000-0000-1000-000000000000",
@@ -218,21 +239,24 @@ class TestAsyncCards:
         )
         assert isinstance(resource, Card)
 
-    async def test_method_retrieve(self) -> None:
-        resource = await self.client.cards.retrieve(
+    @parametrize
+    async def test_method_retrieve(self, client: AsyncLithic) -> None:
+        resource = await client.cards.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, Card)
 
-    async def test_method_update(self) -> None:
-        resource = await self.client.cards.update(
+    @parametrize
+    async def test_method_update(self, client: AsyncLithic) -> None:
+        resource = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, Card)
 
-    async def test_method_update_with_optional_params(self) -> None:
-        resource = await self.client.cards.update(
+    @parametrize
+    async def test_method_update_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -247,12 +271,14 @@ class TestAsyncCards:
         )
         assert isinstance(resource, Card)
 
-    async def test_method_list(self) -> None:
-        resource = await self.client.cards.list()
+    @parametrize
+    async def test_method_list(self, client: AsyncLithic) -> None:
+        resource = await client.cards.list()
         assert isinstance(resource, AsyncPage)
 
-    async def test_method_list_with_optional_params(self) -> None:
-        resource = await self.client.cards.list(
+    @parametrize
+    async def test_method_list_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.cards.list(
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "begin": "2019-12-27T18:11:19.117Z",
@@ -263,12 +289,14 @@ class TestAsyncCards:
         )
         assert isinstance(resource, AsyncPage)
 
-    async def test_method_embed(self) -> None:
-        resource = await self.client.cards.embed()
+    @parametrize
+    async def test_method_embed(self, client: AsyncLithic) -> None:
+        resource = await client.cards.embed()
         assert isinstance(resource, str)
 
-    async def test_method_embed_with_optional_params(self) -> None:
-        resource = await self.client.cards.embed(
+    @parametrize
+    async def test_method_embed_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.cards.embed(
             {
                 "embed_request": "string",
                 "hmac": "string",
@@ -277,26 +305,28 @@ class TestAsyncCards:
         assert isinstance(resource, str)
 
     async def test_get_embed_html(self) -> None:
-        html = await self.client.cards.get_embed_html({"token": "foo"})
+        html = await self.strict_client.cards.get_embed_html({"token": "foo"})
         assert "html" in html
 
     def test_get_embed_url(self) -> None:
-        url = self.client.cards.get_embed_url({"token": "foo"})
+        url = self.strict_client.cards.get_embed_url({"token": "foo"})
         params = set(  # pyright: ignore[reportUnknownVariableType]
             url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
         )
         assert "hmac" in params
         assert "embed_request" in params
 
-    async def test_method_provision(self) -> None:
-        resource = await self.client.cards.provision(
+    @parametrize
+    async def test_method_provision(self, client: AsyncLithic) -> None:
+        resource = await client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, CardProvisionResponse)
 
-    async def test_method_provision_with_optional_params(self) -> None:
-        resource = await self.client.cards.provision(
+    @parametrize
+    async def test_method_provision_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "digital_wallet": "APPLE_PAY",
@@ -308,15 +338,17 @@ class TestAsyncCards:
         )
         assert isinstance(resource, CardProvisionResponse)
 
-    async def test_method_reissue(self) -> None:
-        resource = await self.client.cards.reissue(
+    @parametrize
+    async def test_method_reissue(self, client: AsyncLithic) -> None:
+        resource = await client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {},
         )
         assert isinstance(resource, Card)
 
-    async def test_method_reissue_with_optional_params(self) -> None:
-        resource = await self.client.cards.reissue(
+    @parametrize
+    async def test_method_reissue_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             {
                 "shipping_address": {
