@@ -46,6 +46,7 @@ from ._types import (
     RequestOptions,
     ModelBuilderProtocol,
 )
+from ._utils import is_dict
 from ._models import BaseModel, GenericModel, FinalRequestOptions
 from ._base_exceptions import (
     APIStatusError,
@@ -290,7 +291,11 @@ class BaseClient:
             # As we are now sending multipart/form-data instead of application/json
             # we need to tell httpx to use it, https://www.python-httpx.org/advanced/#multipart-file-encoding
             if options.json_data:
-                kwargs["data"] = options.json_data
+                if not is_dict(options.json_data):
+                    raise TypeError(
+                        f"Expected query input to be a dictionary for multipart requests but got {type(options.json_data)} instead."
+                    )
+                kwargs["data"] = self._serialize_multipartform(options.json_data)
 
         # TODO: report this error to httpx
         return self._client.build_request(  # pyright: ignore[reportUnknownMemberType]
@@ -307,6 +312,20 @@ class BaseClient:
             files=options.files,
             **kwargs,
         )
+
+    def _serialize_multipartform(self, data: Mapping[object, object]) -> dict[str, object]:
+        items = self.qs.stringify_items(
+            # TODO: type ignore is required as stringify_items is well typed but we can't be
+            # well typed without heavy validation.
+            data,  # type: ignore
+            array_format="brackets",
+        )
+        serialized: dict[str, object] = {}
+        for key, value in items:
+            if key in serialized:
+                raise ValueError(f"Duplicate key encountered: {key}; This behaviour is not supported")
+            serialized[key] = value
+        return serialized
 
     def process_response(
         self,
@@ -558,7 +577,7 @@ class SyncAPIClient(BaseClient):
         cast_to: Type[ResponseT],
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="get", url=path, **options)
+        opts = FinalRequestOptions.construct(method="get", url=path, **options)
         return self.request(cast_to, opts)
 
     def post(
@@ -570,7 +589,7 @@ class SyncAPIClient(BaseClient):
         options: RequestOptions = {},
         files: RequestFiles | None = None,
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="post", url=path, json_data=body, files=files, **options)
+        opts = FinalRequestOptions.construct(method="post", url=path, json_data=body, files=files, **options)
         return self.request(cast_to, opts)
 
     def patch(
@@ -581,7 +600,7 @@ class SyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="patch", url=path, json_data=body, **options)
+        opts = FinalRequestOptions.construct(method="patch", url=path, json_data=body, **options)
         return self.request(cast_to, opts)
 
     def put(
@@ -592,7 +611,7 @@ class SyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="put", url=path, json_data=body, **options)
+        opts = FinalRequestOptions.construct(method="put", url=path, json_data=body, **options)
         return self.request(cast_to, opts)
 
     def delete(
@@ -603,7 +622,7 @@ class SyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="delete", url=path, json_data=body, **options)
+        opts = FinalRequestOptions.construct(method="delete", url=path, json_data=body, **options)
         return self.request(cast_to, opts)
 
     def get_api_list(
@@ -614,7 +633,7 @@ class SyncAPIClient(BaseClient):
         page: Type[SyncPageT],
         options: RequestOptions = {},
     ) -> SyncPageT:
-        opts = FinalRequestOptions(method="get", url=path, **options)
+        opts = FinalRequestOptions.construct(method="get", url=path, **options)
         return self.request_api_list(model, page, opts)
 
 
@@ -717,7 +736,7 @@ class AsyncAPIClient(BaseClient):
         query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="get", url=path, **options)
+        opts = FinalRequestOptions.construct(method="get", url=path, **options)
         return await self.request(cast_to, opts)
 
     async def post(
@@ -729,7 +748,7 @@ class AsyncAPIClient(BaseClient):
         files: RequestFiles | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="post", url=path, json_data=body, files=files, **options)
+        opts = FinalRequestOptions.construct(method="post", url=path, json_data=body, files=files, **options)
         return await self.request(cast_to, opts)
 
     async def patch(
@@ -740,7 +759,7 @@ class AsyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="patch", url=path, json_data=body, **options)
+        opts = FinalRequestOptions.construct(method="patch", url=path, json_data=body, **options)
         return await self.request(cast_to, opts)
 
     async def put(
@@ -751,7 +770,7 @@ class AsyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="put", url=path, json_data=body, **options)
+        opts = FinalRequestOptions.construct(method="put", url=path, json_data=body, **options)
         return await self.request(cast_to, opts)
 
     async def delete(
@@ -762,7 +781,7 @@ class AsyncAPIClient(BaseClient):
         body: Query | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
-        opts = FinalRequestOptions(method="delete", url=path, json_data=body, **options)
+        opts = FinalRequestOptions.construct(method="delete", url=path, json_data=body, **options)
         return await self.request(cast_to, opts)
 
     def get_api_list(
@@ -774,7 +793,7 @@ class AsyncAPIClient(BaseClient):
         page: Type[AsyncPageT],
         options: RequestOptions = {},
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
-        opts = FinalRequestOptions(method="get", url=path, **options)
+        opts = FinalRequestOptions.construct(method="get", url=path, **options)
         return self.request_api_list(model, page, opts)
 
 

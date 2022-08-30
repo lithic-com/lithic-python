@@ -56,7 +56,7 @@ class GenericModel(BaseModel, pydantic.generics.GenericModel):
     pass
 
 
-class FinalRequestOptions(BaseModel):
+class FinalRequestOptions(pydantic.BaseModel):
     method: str
     url: str
     params: Query = {}

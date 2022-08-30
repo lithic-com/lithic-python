@@ -10,7 +10,7 @@ from ._utils import flatten
 _T = TypeVar("_T")
 
 
-ArrayFormat = Literal["comma", "repeat", "indices"]
+ArrayFormat = Literal["comma", "repeat", "indices", "brackets"]
 NestedFormat = Literal["dots", "brackets"]
 
 PrimitiveData = Union[str, int, float, bool, None]
@@ -44,12 +44,27 @@ class Querystring:
         array_format: NotGivenOr[ArrayFormat] = NOT_GIVEN,
         nested_format: NotGivenOr[NestedFormat] = NOT_GIVEN,
     ) -> str:
+        return urlencode(
+            self.stringify_items(
+                params,
+                array_format=array_format,
+                nested_format=nested_format,
+            )
+        )
+
+    def stringify_items(
+        self,
+        params: Params,
+        *,
+        array_format: NotGivenOr[ArrayFormat] = NOT_GIVEN,
+        nested_format: NotGivenOr[NestedFormat] = NOT_GIVEN,
+    ) -> list[tuple[str, str]]:
         opts = Options(
             qs=self,
             array_format=array_format,
             nested_format=nested_format,
         )
-        return urlencode(flatten([self._stringify_item(key, value, opts) for key, value in params.items()]))
+        return flatten([self._stringify_item(key, value, opts) for key, value in params.items()])
 
     def _stringify_item(
         self,
@@ -85,6 +100,12 @@ class Querystring:
                 return items
             elif array_format == "indices":
                 raise NotImplementedError("The array indices format is not supported yet")
+            elif array_format == "brackets":
+                items = []
+                key = key + "[]"
+                for item in value:
+                    items.extend(self._stringify_item(key, item, opts))
+                return items
             else:
                 raise NotImplementedError(
                     f"Unknown array_format value: {array_format}, choose from {', '.join(get_args(ArrayFormat))}"
@@ -109,6 +130,7 @@ class Querystring:
 _qs = Querystring()
 parse = _qs.parse
 stringify = _qs.stringify
+stringify_items = _qs.stringify_items
 
 
 class Options:
