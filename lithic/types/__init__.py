@@ -4,7 +4,6 @@ from .card import Card as Card
 from .shared import ShippingAddress as ShippingAddress
 from .account import Account as Account
 from .auth_rule import AuthRule as AuthRule
-from .api_status import APIStatus as APIStatus
 from .transaction import Transaction as Transaction
 from .account_holder import AccountHolder as AccountHolder
 from .funding_source import FundingSource as FundingSource
@@ -15,6 +14,7 @@ from .card_update_params import CardUpdateParams as CardUpdateParams
 from .account_list_params import AccountListParams as AccountListParams
 from .card_reissue_params import CardReissueParams as CardReissueParams
 from .embed_request_param import EmbedRequestParams as EmbedRequestParams
+from .card_retrieve_params import CardRetrieveParams as CardRetrieveParams
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .auth_rule_list_params import AuthRuleListParams as AuthRuleListParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams
@@ -41,6 +41,9 @@ from .auth_rule_retrieve_response import (
 from .account_holder_create_params import (
     AccountHolderCreateParams as AccountHolderCreateParams,
 )
+from .account_holder_update_params import (
+    AccountHolderUpdateParams as AccountHolderUpdateParams,
+)
 from .funding_source_create_params import (
     FundingSourceCreateParams as FundingSourceCreateParams,
 )
@@ -52,6 +55,9 @@ from .funding_source_verify_params import (
 )
 from .account_holder_resubmit_params import (
     AccountHolderResubmitParams as AccountHolderResubmitParams,
+)
+from .account_holder_update_response import (
+    AccountHolderUpdateResponse as AccountHolderUpdateResponse,
 )
 from .transaction_simulate_void_params import (
     TransactionSimulateVoidParams as TransactionSimulateVoidParams,

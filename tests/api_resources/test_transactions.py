@@ -78,6 +78,7 @@ class TestTransactions:
                 "status": "AUTHORIZATION",
                 "merchant_currency": "GBP",
                 "merchant_amount": 0,
+                "partial_approval_capable": True,
             },
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)
@@ -192,6 +193,7 @@ class TestAsyncTransactions:
                 "status": "AUTHORIZATION",
                 "merchant_currency": "GBP",
                 "merchant_amount": 0,
+                "partial_approval_capable": True,
             },
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)

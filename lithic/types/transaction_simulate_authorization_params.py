@@ -26,6 +26,13 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
     merchant_currency: str
     """3-digit alphabetic ISO 4217 currency code."""
 
+    partial_approval_capable: bool
+    """
+    Set to true if the terminal is capable of partial approval otherwise false.
+    Partial approval is when part of a transaction is approved and another payment
+    must be used for the remainder.
+    """
+
     status: Literal[
         "AUTHORIZATION", "CREDIT_AUTHORIZATION", "FINANCIAL_AUTHORIZATION", "FINANCIAL_CREDIT_AUTHORIZATION"
     ]

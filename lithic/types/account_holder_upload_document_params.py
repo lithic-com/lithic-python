@@ -8,5 +8,5 @@ __all__ = ["AccountHolderUploadDocumentParams"]
 
 
 class AccountHolderUploadDocumentParams(TypedDict, total=False):
-    document_type: Required[Literal["COMMERCIAL_LICENSE", "DRIVERS_LICENSE", "PASSPORT", "PASSPORT_CARD", "VISA"]]
+    document_type: Required[Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]]
     """Type of the document to upload."""

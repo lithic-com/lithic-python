@@ -68,6 +68,14 @@ class TestCards:
         assert isinstance(resource, Card)
 
     @parametrize
+    def test_method_retrieve_with_optional_params(self, client: Lithic) -> None:
+        resource = client.cards.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+        )
+        assert isinstance(resource, Card)
+
+    @parametrize
     def test_method_update(self, client: Lithic) -> None:
         resource = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -242,6 +250,14 @@ class TestAsyncCards:
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
         resource = await client.cards.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert isinstance(resource, Card)
+
+    @parametrize
+    async def test_method_retrieve_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.cards.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
         )
         assert isinstance(resource, Card)
 

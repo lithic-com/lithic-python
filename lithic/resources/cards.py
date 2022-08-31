@@ -21,6 +21,7 @@ from ..types.card_embed_params import CardEmbedParams
 from ..types.card_create_params import CardCreateParams
 from ..types.card_update_params import CardUpdateParams
 from ..types.card_reissue_params import CardReissueParams
+from ..types.card_retrieve_params import CardRetrieveParams
 from ..types.card_provision_params import CardProvisionParams
 from ..types.card_provision_response import CardProvisionResponse
 from ..types.card_get_embed_url_params import CardGetEmbedURLParams
@@ -55,11 +56,11 @@ class Cards(SyncAPIResource):
     def retrieve(
         self,
         card_token: str,
+        query: CardRetrieveParams = {},
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-        query: Optional[Query] = None,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout, query)
@@ -305,11 +306,11 @@ class AsyncCards(AsyncAPIResource):
     async def retrieve(
         self,
         card_token: str,
+        query: CardRetrieveParams = {},
         *,
         headers: Union[Headers, NotGiven] = NOT_GIVEN,
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-        query: Optional[Query] = None,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
         options = make_request_options(headers, max_retries, timeout, query)

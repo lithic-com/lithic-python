@@ -42,7 +42,16 @@ class Transactions(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         query: Optional[Query] = None,
     ) -> Transaction:
-        """Get specific transaction."""
+        """Get specific transaction.
+
+        _Note that the events.amount field returned via this endpoint is changing and
+        will become a signed field. Debits will appear as positive amounts and credits
+        will appear as negative amounts. This is already reflected in Sandbox as of
+        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
+        2022 at 17:00 UTC. Please refer to
+        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        for more information._
+        """
         options = make_request_options(headers, max_retries, timeout, query)
         return self._get(
             f"/transactions/{transaction_token}",
@@ -58,7 +67,16 @@ class Transactions(SyncAPIResource):
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Transaction]:
-        """List transactions."""
+        """List transactions.
+
+        _Note that the events.amount field returned via this endpoint is changing and
+        will become a signed field. Debits will appear as positive amounts and credits
+        will appear as negative amounts. This is already reflected in Sandbox as of
+        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
+        2022 at 17:00 UTC. Please refer to
+        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        for more information._
+        """
         options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/transactions",
@@ -169,7 +187,16 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         query: Optional[Query] = None,
     ) -> Transaction:
-        """Get specific transaction."""
+        """Get specific transaction.
+
+        _Note that the events.amount field returned via this endpoint is changing and
+        will become a signed field. Debits will appear as positive amounts and credits
+        will appear as negative amounts. This is already reflected in Sandbox as of
+        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
+        2022 at 17:00 UTC. Please refer to
+        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        for more information._
+        """
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._get(
             f"/transactions/{transaction_token}",
@@ -185,7 +212,16 @@ class AsyncTransactions(AsyncAPIResource):
         max_retries: Union[int, NotGiven] = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
-        """List transactions."""
+        """List transactions.
+
+        _Note that the events.amount field returned via this endpoint is changing and
+        will become a signed field. Debits will appear as positive amounts and credits
+        will appear as negative amounts. This is already reflected in Sandbox as of
+        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
+        2022 at 17:00 UTC. Please refer to
+        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        for more information._
+        """
         options = make_request_options(headers, max_retries, timeout, query)
         return self._get_api_list(
             "/transactions",

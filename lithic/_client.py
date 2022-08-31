@@ -6,14 +6,25 @@ from typing_extensions import Literal
 
 from . import resources
 from ._qs import Querystring
-from ._types import Timeout, Transport, ProxiesTypes, RequestOptions
+from ._types import (
+    NOT_GIVEN,
+    Query,
+    Headers,
+    Timeout,
+    NotGiven,
+    Transport,
+    ProxiesTypes,
+    RequestOptions,
+)
 from ._version import __version__
 from ._base_client import (
     DEFAULT_TIMEOUT,
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
+    make_request_options,
 )
+from .types.api_status import APIStatus
 
 __all__ = [
     "Lithic",
@@ -42,7 +53,6 @@ class Lithic(SyncAPIClient):
     cards: resources.Cards
     funding_sources: resources.FundingSources
     transactions: resources.Transactions
-    status: resources.StatusResource
 
     def __init__(
         self,
@@ -94,7 +104,6 @@ class Lithic(SyncAPIClient):
         self.cards = resources.Cards(self)
         self.funding_sources = resources.FundingSources(self)
         self.transactions = resources.Transactions(self)
-        self.status = resources.StatusResource(self)
 
     @property
     def qs(self) -> Querystring:
@@ -103,6 +112,21 @@ class Lithic(SyncAPIClient):
     @property
     def auth_headers(self) -> Dict[str, str]:
         return {"Authorization": self.api_key}
+
+    def api_status(
+        self,
+        *,
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
+    ) -> APIStatus:
+        options = make_request_options(headers, max_retries, timeout, query)
+        return self.get(
+            "/status",
+            options=options,
+            cast_to=APIStatus,
+        )
 
 
 class AsyncLithic(AsyncAPIClient):
@@ -113,7 +137,6 @@ class AsyncLithic(AsyncAPIClient):
     cards: resources.AsyncCards
     funding_sources: resources.AsyncFundingSources
     transactions: resources.AsyncTransactions
-    status: resources.AsyncStatusResource
 
     def __init__(
         self,
@@ -165,7 +188,6 @@ class AsyncLithic(AsyncAPIClient):
         self.cards = resources.AsyncCards(self)
         self.funding_sources = resources.AsyncFundingSources(self)
         self.transactions = resources.AsyncTransactions(self)
-        self.status = resources.AsyncStatusResource(self)
 
     @property
     def qs(self) -> Querystring:
@@ -174,6 +196,21 @@ class AsyncLithic(AsyncAPIClient):
     @property
     def auth_headers(self) -> Dict[str, str]:
         return {"Authorization": self.api_key}
+
+    async def api_status(
+        self,
+        *,
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
+    ) -> APIStatus:
+        options = make_request_options(headers, max_retries, timeout, query)
+        return await self.get(
+            "/status",
+            options=options,
+            cast_to=APIStatus,
+        )
 
 
 Client = Lithic

@@ -10,7 +10,9 @@ from .._base_client import make_request_options
 from ..types.account_holder import AccountHolder
 from ..types.account_holder_document import AccountHolderDocument
 from ..types.account_holder_create_params import AccountHolderCreateParams
+from ..types.account_holder_update_params import AccountHolderUpdateParams
 from ..types.account_holder_resubmit_params import AccountHolderResubmitParams
+from ..types.account_holder_update_response import AccountHolderUpdateResponse
 from ..types.account_holder_create_webhook_params import (
     AccountHolderCreateWebhookParams,
 )
@@ -69,6 +71,25 @@ class AccountHolders(SyncAPIResource):
             f"/account_holders/{account_holder_token}",
             options=options,
             cast_to=AccountHolder,
+        )
+
+    def update(
+        self,
+        account_holder_token: str,
+        body: AccountHolderUpdateParams,
+        *,
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
+    ) -> AccountHolderUpdateResponse:
+        """Update the contact information associated with a particular account holder."""
+        options = make_request_options(headers, max_retries, timeout, query)
+        return self._patch(
+            f"/account_holders/{account_holder_token}",
+            body=body,
+            options=options,
+            cast_to=AccountHolderUpdateResponse,
         )
 
     def create_webhook(
@@ -278,6 +299,25 @@ class AsyncAccountHolders(AsyncAPIResource):
             f"/account_holders/{account_holder_token}",
             options=options,
             cast_to=AccountHolder,
+        )
+
+    async def update(
+        self,
+        account_holder_token: str,
+        body: AccountHolderUpdateParams,
+        *,
+        headers: Union[Headers, NotGiven] = NOT_GIVEN,
+        max_retries: Union[int, NotGiven] = NOT_GIVEN,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        query: Optional[Query] = None,
+    ) -> AccountHolderUpdateResponse:
+        """Update the contact information associated with a particular account holder."""
+        options = make_request_options(headers, max_retries, timeout, query)
+        return await self._patch(
+            f"/account_holders/{account_holder_token}",
+            body=body,
+            options=options,
+            cast_to=AccountHolderUpdateResponse,
         )
 
     async def create_webhook(

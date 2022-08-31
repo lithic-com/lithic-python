@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from .cards import Cards, AsyncCards
-from .status import StatusResource, AsyncStatusResource
 from .accounts import Accounts, AsyncAccounts
 from .auth_rules import AuthRules, AsyncAuthRules
 from .transactions import Transactions, AsyncTransactions
@@ -27,6 +26,4 @@ __all__ = [
     "AsyncFundingSources",
     "Transactions",
     "AsyncTransactions",
-    "StatusResource",
-    "AsyncStatusResource",
 ]

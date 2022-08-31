@@ -8,6 +8,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from lithic.types.account_holder import AccountHolder
 from lithic.types.account_holder_document import AccountHolderDocument
+from lithic.types.account_holder_update_response import AccountHolderUpdateResponse
 from lithic.types.account_holder_create_webhook_response import (
     AccountHolderCreateWebhookResponse,
 )
@@ -315,6 +316,25 @@ class TestAccountHolders:
         assert isinstance(resource, AccountHolder)
 
     @parametrize
+    def test_method_update(self, client: Lithic) -> None:
+        resource = client.account_holders.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
+        assert isinstance(resource, AccountHolderUpdateResponse)
+
+    @parametrize
+    def test_method_update_with_optional_params(self, client: Lithic) -> None:
+        resource = client.account_holders.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {
+                "email": "string",
+                "phone_number": "string",
+            },
+        )
+        assert isinstance(resource, AccountHolderUpdateResponse)
+
+    @parametrize
     def test_method_create_webhook(self, client: Lithic) -> None:
         resource = client.account_holders.create_webhook(
             {"url": "string"},
@@ -401,7 +421,7 @@ class TestAccountHolders:
     def test_method_upload_document(self, client: Lithic) -> None:
         resource = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENSE"},
+            {"document_type": "commercial_license"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
@@ -409,7 +429,7 @@ class TestAccountHolders:
     def test_method_upload_document_with_optional_params(self, client: Lithic) -> None:
         resource = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENSE"},
+            {"document_type": "commercial_license"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
@@ -710,6 +730,25 @@ class TestAsyncAccountHolders:
         assert isinstance(resource, AccountHolder)
 
     @parametrize
+    async def test_method_update(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {},
+        )
+        assert isinstance(resource, AccountHolderUpdateResponse)
+
+    @parametrize
+    async def test_method_update_with_optional_params(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            {
+                "email": "string",
+                "phone_number": "string",
+            },
+        )
+        assert isinstance(resource, AccountHolderUpdateResponse)
+
+    @parametrize
     async def test_method_create_webhook(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create_webhook(
             {"url": "string"},
@@ -796,7 +835,7 @@ class TestAsyncAccountHolders:
     async def test_method_upload_document(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENSE"},
+            {"document_type": "commercial_license"},
         )
         assert isinstance(resource, AccountHolderDocument)
 
@@ -804,6 +843,6 @@ class TestAsyncAccountHolders:
     async def test_method_upload_document_with_optional_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "COMMERCIAL_LICENSE"},
+            {"document_type": "commercial_license"},
         )
         assert isinstance(resource, AccountHolderDocument)

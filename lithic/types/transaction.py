@@ -96,12 +96,11 @@ class Funding(BaseModel):
     token: Optional[str]
     """Funding account token."""
 
-    type: Optional[Literal["DEPOSITORY_CHECKING", "DEPOSITORY_SAVINGS", "PROMO"]]
+    type: Optional[Literal["DEPOSITORY_CHECKING", "DEPOSITORY_SAVINGS"]]
     """Types of funding:
 
     - `DEPOSITORY_CHECKING` - Bank checking account.
     - `DEPOSITORY_SAVINGS` - Bank savings account.
-    - `PROMO` - Any promotional credit was used in paying for this transaction.
     """
 
 
@@ -163,8 +162,7 @@ class Transaction(BaseModel):
     A list of objects that describe how this transaction was funded, with the
     `amount` represented in cents. A reference to the funding account for the `card`
     that made this transaction may appear here and the `token` will match the
-    `token` for the funding account in the `card` field. If any promotional credit
-    was used in paying for this transaction, its `type` will be `PROMO`.
+    `token` for the funding account in the `card` field.
     """
 
     merchant: Optional[Merchant]
