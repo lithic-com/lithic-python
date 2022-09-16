@@ -182,7 +182,7 @@ class Transaction(BaseModel):
     merchant_currency: Optional[str]
     """3-digit alphabetic ISO 4217 code for the local currency of the transaction."""
 
-    network: Optional[Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "VISA", "UNKNOWN"]]]
+    network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "VISA", "UNKNOWN"]]
     """Card network of the authorization.
 
     Can be `INTERLINK`, `MAESTRO`, `MASTERCARD`, `VISA`, or `UNKNOWN`. Value is
