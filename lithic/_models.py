@@ -4,7 +4,7 @@ from typing import Any, Type, Union, cast
 
 import pydantic
 import pydantic.generics
-from pydantic.typing import is_literal_type
+from pydantic.typing import get_origin, is_literal_type
 
 from ._types import Query, ModelT, Headers, Timeout, NotGiven, RequestFiles
 
@@ -30,8 +30,11 @@ class BaseModel(pydantic.BaseModel):
                 if values[key] is None:
                     fields_values[name] = field.get_default()
                 else:
+                    # we need to use the origin class for any types that are subscripted generics
+                    # e.g. Dict[str, object]
+                    origin = get_origin(field.type_) or field.type_
                     if not is_literal_type(field.type_) and (
-                        issubclass(field.type_, BaseModel) or issubclass(field.type_, GenericModel)
+                        issubclass(origin, BaseModel) or issubclass(origin, GenericModel)
                     ):
                         if field.shape == 2:
                             # field.shape == 2 signifies a List
