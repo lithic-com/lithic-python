@@ -21,9 +21,11 @@ from typing import (
     cast,
 )
 from functools import lru_cache
+from typing_extensions import Literal
 
 import anyio
 import httpx
+import distro
 import pydantic
 from httpx import URL
 from pydantic import PrivateAttr
@@ -364,11 +366,20 @@ class BaseClient:
         return Querystring()
 
     @property
+    def custom_auth(self) -> httpx.Auth | None:
+        return None
+
+    @property
+    def auth_headers(self) -> Dict[str, str]:
+        return {}
+
+    @property
     def default_headers(self) -> Dict[str, str]:
         return {
             "Content-Type": "application/json",
             "User-Agent": self.user_agent,
-            "X-Stainless-Client-User-Agent": self.platform_properties(),
+            **self.platform_headers(),
+            **self.auth_headers,
         }
 
     @property
@@ -380,17 +391,15 @@ class BaseClient:
         return self._client.base_url
 
     @lru_cache(maxsize=None)
-    def platform_properties(self) -> str:
-        arch, _ = platform.architecture()
-        properties = {
-            "lang": "python",
-            "packageVersion": self._version,
-            "os": platform.system(),
-            "arch": arch,
-            "runtime": platform.python_implementation(),
-            "runtimeVersion": platform.python_version(),
+    def platform_headers(self) -> Dict[str, str]:
+        return {
+            "X-Stainless-Lang": "python",
+            "X-Stainless-Package-Version": self._version,
+            "X-Stainless-OS": str(get_platform()),
+            "X-Stainless-Arch": str(get_architecture()),
+            "X-Stainless-Runtime": platform.python_implementation(),
+            "X-Stainless-Runtime-Version": platform.python_version(),
         }
-        return json.dumps(properties)
 
     def calculate_retry_timeout(
         self,
@@ -487,7 +496,7 @@ class SyncAPIClient(BaseClient):
         request = self.build_request(options)
 
         try:
-            response = self._client.send(request)
+            response = self._client.send(request, auth=self.custom_auth)
             response.raise_for_status()
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
             if retries > 0 and self.should_retry(err.response):
@@ -643,7 +652,7 @@ class AsyncAPIClient(BaseClient):
         request = self.build_request(options)
 
         try:
-            response = await self._client.send(request)
+            response = await self._client.send(request, auth=self.custom_auth)
             response.raise_for_status()
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
             if retries > 0 and self.should_retry(err.response):
@@ -790,6 +799,101 @@ def make_request_options(
         options["params"] = query
 
     return options
+
+
+class OtherPlatform:
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def __str__(self) -> str:
+        return f"Other:{self.name}"
+
+
+Platform = Union[
+    OtherPlatform,
+    Literal[
+        "MacOS",
+        "Linux",
+        "Windows",
+        "FreeBSD",
+        "OpenBSD",
+        "iOS",
+        "Android",
+        "Unknown",
+    ],
+]
+
+
+def get_platform() -> Platform:
+    system = platform.system().lower()
+    platform_name = platform.platform().lower()
+    if "iphone" in platform_name or "ipad" in platform_name:
+        # Tested using Python3IDE on an iPhone 11 and Pythonista on an iPad 7
+        # system is Darwin and platform_name is a string like:
+        # - Darwin-21.6.0-iPhone12,1-64bit
+        # - Darwin-21.6.0-iPad7,11-64bit
+        return "iOS"
+
+    if system == "darwin":
+        return "MacOS"
+
+    if system == "windows":
+        return "Windows"
+
+    if "android" in platform_name:
+        # Tested using Pydroid 3
+        # system is Linux and platform_name is a string like 'Linux-5.10.81-android12-9-00001-geba40aecb3b7-ab8534902-aarch64-with-libc'
+        return "Android"
+
+    if system == "linux":
+        # https://distro.readthedocs.io/en/latest/#distro.id
+        distro_id = distro.id()
+        if distro_id == "freebsd":
+            return "FreeBSD"
+
+        if distro_id == "openbsd":
+            return "OpenBSD"
+
+        return "Linux"
+
+    if platform_name:
+        return OtherPlatform(platform_name)
+
+    return "Unknown"
+
+
+class OtherArch:
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def __str__(self) -> str:
+        return f"other:{self.name}"
+
+
+Arch = Union[OtherArch, Literal["x32", "x64", "arm", "arm64", "unknown"]]
+
+
+def get_architecture() -> Arch:
+    python_bitness, _ = platform.architecture()
+    machine = platform.machine().lower()
+    if machine in ("arm64", "aarch64"):
+        return "arm64"
+
+    # TODO: untested
+    if machine == "arm":
+        return "arm"
+
+    if machine == "x86_64":
+        return "x64"
+
+    # TODO: untested
+    if python_bitness == "32bit":
+        return "x32"
+
+    if machine:
+        return OtherArch(machine)
+
+    return "unknown"
 
 
 def _merge_mappings(

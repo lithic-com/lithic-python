@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 import hmac
 import json
 import base64
@@ -12,16 +14,15 @@ from httpx import URL
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
-from ..types.card import *
+from ..types.card import Card
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.card_list_params import CardListParams
 from ..types.card_embed_params import CardEmbedParams
 from ..types.card_create_params import CardCreateParams
 from ..types.card_update_params import CardUpdateParams
 from ..types.card_reissue_params import CardReissueParams
-from ..types.embed_request_param import *
 from ..types.card_provision_params import CardProvisionParams
-from ..types.card_provision_response import *
+from ..types.card_provision_response import CardProvisionResponse
 from ..types.card_get_embed_url_params import CardGetEmbedURLParams
 from ..types.card_get_embed_html_params import CardGetEmbedHTMLParams
 

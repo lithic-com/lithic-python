@@ -1,25 +1,33 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.transaction import *
+from ..types.transaction import Transaction
 from ..types.transaction_list_params import TransactionListParams
 from ..types.transaction_simulate_void_params import TransactionSimulateVoidParams
 from ..types.transaction_simulate_return_params import TransactionSimulateReturnParams
-from ..types.transaction_simulate_void_response import *
+from ..types.transaction_simulate_void_response import TransactionSimulateVoidResponse
 from ..types.transaction_simulate_clearing_params import (
     TransactionSimulateClearingParams,
 )
-from ..types.transaction_simulate_return_response import *
-from ..types.transaction_simulate_clearing_response import *
+from ..types.transaction_simulate_return_response import (
+    TransactionSimulateReturnResponse,
+)
+from ..types.transaction_simulate_clearing_response import (
+    TransactionSimulateClearingResponse,
+)
 from ..types.transaction_simulate_authorization_params import (
     TransactionSimulateAuthorizationParams,
 )
-from ..types.transaction_simulate_authorization_response import *
+from ..types.transaction_simulate_authorization_response import (
+    TransactionSimulateAuthorizationResponse,
+)
 
 __all__ = ["Transactions", "AsyncTransactions"]
 

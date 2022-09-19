@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from ._base_client import SyncAPIClient, AsyncAPIClient
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ._client import Lithic, AsyncLithic
 
 
 class SyncAPIResource:
-    _client: SyncAPIClient
+    _client: Lithic
 
-    def __init__(self, client: SyncAPIClient):
+    def __init__(self, client: Lithic) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post
@@ -17,9 +20,9 @@ class SyncAPIResource:
 
 
 class AsyncAPIResource:
-    _client: AsyncAPIClient
+    _client: AsyncLithic
 
-    def __init__(self, client: AsyncAPIClient):
+    def __init__(self, client: AsyncLithic) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post

@@ -1,22 +1,24 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.auth_rule import *
+from ..types.auth_rule import AuthRule
 from ..types.auth_rule_list_params import AuthRuleListParams
 from ..types.auth_rule_apply_params import AuthRuleApplyParams
 from ..types.auth_rule_create_params import AuthRuleCreateParams
 from ..types.auth_rule_remove_params import AuthRuleRemoveParams
 from ..types.auth_rule_update_params import AuthRuleUpdateParams
-from ..types.auth_rule_apply_response import *
-from ..types.auth_rule_create_response import *
-from ..types.auth_rule_remove_response import *
-from ..types.auth_rule_update_response import *
-from ..types.auth_rule_retrieve_response import *
+from ..types.auth_rule_apply_response import AuthRuleApplyResponse
+from ..types.auth_rule_create_response import AuthRuleCreateResponse
+from ..types.auth_rule_remove_response import AuthRuleRemoveResponse
+from ..types.auth_rule_update_response import AuthRuleUpdateResponse
+from ..types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
 
 __all__ = ["AuthRules", "AsyncAuthRules"]
 

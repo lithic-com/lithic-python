@@ -1,12 +1,14 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
-from ..types.account_holder import *
-from ..types.account_holder_document import *
+from ..types.account_holder import AccountHolder
+from ..types.account_holder_document import AccountHolderDocument
 from ..types.account_holder_create_params import AccountHolderCreateParams
 from ..types.account_holder_resubmit_params import AccountHolderResubmitParams
 from ..types.account_holder_create_webhook_params import (
@@ -15,8 +17,12 @@ from ..types.account_holder_create_webhook_params import (
 from ..types.account_holder_upload_document_params import (
     AccountHolderUploadDocumentParams,
 )
-from ..types.account_holder_create_webhook_response import *
-from ..types.account_holder_list_documents_response import *
+from ..types.account_holder_create_webhook_response import (
+    AccountHolderCreateWebhookResponse,
+)
+from ..types.account_holder_list_documents_response import (
+    AccountHolderListDocumentsResponse,
+)
 
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 

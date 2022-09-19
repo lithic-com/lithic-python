@@ -101,8 +101,8 @@ class Lithic(SyncAPIClient):
         return Querystring(array_format="comma")
 
     @property
-    def default_headers(self) -> Dict[str, str]:
-        return {**super().default_headers, "Authorization": self.api_key}
+    def auth_headers(self) -> Dict[str, str]:
+        return {"Authorization": self.api_key}
 
 
 class AsyncLithic(AsyncAPIClient):
@@ -172,8 +172,8 @@ class AsyncLithic(AsyncAPIClient):
         return Querystring(array_format="comma")
 
     @property
-    def default_headers(self) -> Dict[str, str]:
-        return {**super().default_headers, "Authorization": self.api_key}
+    def auth_headers(self) -> Dict[str, str]:
+        return {"Authorization": self.api_key}
 
 
 Client = Lithic

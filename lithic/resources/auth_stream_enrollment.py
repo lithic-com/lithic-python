@@ -1,11 +1,13 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NoneType, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
-from ..types.auth_stream_enrollment import *
+from ..types.auth_stream_enrollment import AuthStreamEnrollment
 from ..types.auth_stream_enrollment_enroll_params import (
     AuthStreamEnrollmentEnrollParams,
 )

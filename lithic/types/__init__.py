@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from .card import Card as Card
+from .shared import ShippingAddress as ShippingAddress
 from .account import Account as Account
 from .auth_rule import AuthRule as AuthRule
 from .api_status import APIStatus as APIStatus

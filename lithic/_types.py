@@ -123,3 +123,11 @@ class ModelBuilderProtocol(Protocol):
 
 
 Headers = Mapping[str, str]
+
+
+class HeadersLikeProtocol(Protocol):
+    def get(self, __key: str) -> str | None:
+        ...
+
+
+HeadersLike = Union[Headers, HeadersLikeProtocol]

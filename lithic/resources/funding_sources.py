@@ -1,12 +1,14 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.funding_source import *
+from ..types.funding_source import FundingSource
 from ..types.funding_source_list_params import FundingSourceListParams
 from ..types.funding_source_create_params import FundingSourceCreateParams
 from ..types.funding_source_update_params import FundingSourceUpdateParams

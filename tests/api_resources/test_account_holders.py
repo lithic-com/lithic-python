@@ -6,10 +6,14 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic.types.account_holder import *
-from lithic.types.account_holder_document import *
-from lithic.types.account_holder_create_webhook_response import *
-from lithic.types.account_holder_list_documents_response import *
+from lithic.types.account_holder import AccountHolder
+from lithic.types.account_holder_document import AccountHolderDocument
+from lithic.types.account_holder_create_webhook_response import (
+    AccountHolderCreateWebhookResponse,
+)
+from lithic.types.account_holder_list_documents_response import (
+    AccountHolderListDocumentsResponse,
+)
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -20,6 +24,7 @@ class TestAccountHolders:
     loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         resource = client.account_holders.create(
@@ -160,6 +165,7 @@ class TestAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     def test_method_create_with_optional_params(self, client: Lithic) -> None:
         resource = client.account_holders.create(
@@ -413,6 +419,7 @@ class TestAsyncAccountHolders:
     loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create(
@@ -553,6 +560,7 @@ class TestAsyncAccountHolders:
         )
         assert isinstance(resource, AccountHolder)
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create(

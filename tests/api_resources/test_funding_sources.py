@@ -7,7 +7,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from lithic.pagination import SyncPage, AsyncPage
-from lithic.types.funding_source import *
+from lithic.types.funding_source import FundingSource
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -18,6 +18,7 @@ class TestFundingSources:
     loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         resource = client.funding_sources.create(
@@ -29,6 +30,7 @@ class TestFundingSources:
         )
         assert isinstance(resource, FundingSource)
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     def test_method_create_with_optional_params(self, client: Lithic) -> None:
         resource = client.funding_sources.create(
@@ -72,7 +74,7 @@ class TestFundingSources:
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "page": 0,
-                "page_size": 0,
+                "page_size": 1,
             },
         )
         assert isinstance(resource, SyncPage)
@@ -102,6 +104,7 @@ class TestAsyncFundingSources:
     loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
         resource = await client.funding_sources.create(
@@ -113,6 +116,7 @@ class TestAsyncFundingSources:
         )
         assert isinstance(resource, FundingSource)
 
+    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
         resource = await client.funding_sources.create(
@@ -156,7 +160,7 @@ class TestAsyncFundingSources:
             {
                 "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "page": 0,
-                "page_size": 0,
+                "page_size": 1,
             },
         )
         assert isinstance(resource, AsyncPage)

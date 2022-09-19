@@ -13,6 +13,7 @@ httpx = ">= 0.23.0"
 pydantic = ">= 1.9.0"
 typing-extensions = ">= 4.1.1"
 anyio = ">= 3.5.0"
+distro = ">= 1.7.0"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.950"
@@ -48,7 +49,8 @@ typeCheckingMode = "strict"
 pythonVersion = "3.7"
 
 exclude = [
-    "_dev"
+    "_dev",
+    ".venv"
 ]
 reportImportCycles = false
 

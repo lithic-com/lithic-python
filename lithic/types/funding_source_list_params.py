@@ -10,6 +10,8 @@ __all__ = ["FundingSourceListParams"]
 class FundingSourceListParams(TypedDict, total=False):
     account_token: str
 
-    page: float
+    page: int
+    """Page (for pagination)."""
 
-    page_size: float
+    page_size: int
+    """Page size (for pagination)."""

@@ -1,12 +1,14 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.account import *
+from ..types.account import Account
 from ..types.account_list_params import AccountListParams
 from ..types.account_update_params import AccountUpdateParams
 
