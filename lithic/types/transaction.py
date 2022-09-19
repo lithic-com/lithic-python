@@ -129,6 +129,13 @@ class Merchant(BaseModel):
 
 
 class Transaction(BaseModel):
+    acquirer_reference_number: Optional[str]
+    """
+    A fixed-width 23-digit numeric identifier for the Transaction that may be set if
+    the transaction originated from the Mastercard network. This number may be used
+    for dispute tracking.
+    """
+
     amount: Optional[int]
     """Authorization amount (in USD cents) of the transaction.
 

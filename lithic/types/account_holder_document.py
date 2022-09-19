@@ -38,8 +38,8 @@ class RequiredDocumentUploads(BaseModel):
 
 
 class AccountHolderDocument(BaseModel):
-    account_token: Optional[str]
-    """Globally unique identifier for the account."""
+    account_holder_token: Optional[str]
+    """Globally unique identifier for the account holder."""
 
     document_type: Optional[Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]]
     """Type of documentation to be submitted for verification."""

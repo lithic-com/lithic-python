@@ -95,7 +95,11 @@ class Card(BaseModel):
     """Hostname of card’s locked merchant (will be empty if not applicable)."""
 
     memo: Optional[str]
-    """Friendly name to identify the card."""
+    """Friendly name to identify the card.
+
+    We recommend against using this field to store JSON data as it can cause
+    unexpected behavior.
+    """
 
     pan: Optional[str]
     """Primary Account Number (PAN) (i.e.
