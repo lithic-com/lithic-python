@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -54,7 +55,7 @@ class Accounts(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._patch(
             f"/accounts/{account_token}",
-            body=body,
+            body=maybe_transform(body, AccountUpdateParams),
             options=options,
             cast_to=Account,
         )
@@ -68,7 +69,7 @@ class Accounts(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Account]:
         """List account configurations."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, AccountListParams))
         return self._get_api_list(
             "/accounts",
             page=SyncPage[Account],
@@ -116,7 +117,7 @@ class AsyncAccounts(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._patch(
             f"/accounts/{account_token}",
-            body=body,
+            body=maybe_transform(body, AccountUpdateParams),
             options=options,
             cast_to=Account,
         )
@@ -130,7 +131,7 @@ class AsyncAccounts(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Account, AsyncPage[Account]]:
         """List account configurations."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, AccountListParams))
         return self._get_api_list(
             "/accounts",
             page=AsyncPage[Account],

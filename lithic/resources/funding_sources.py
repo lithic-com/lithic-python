@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -36,7 +37,7 @@ class FundingSources(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/funding_sources",
-            body=body,
+            body=maybe_transform(body, FundingSourceCreateParams),
             options=options,
             cast_to=FundingSource,
         )
@@ -55,7 +56,7 @@ class FundingSources(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._patch(
             f"/funding_sources/{funding_source_token}",
-            body=body,
+            body=maybe_transform(body, FundingSourceUpdateParams),
             options=options,
             cast_to=FundingSource,
         )
@@ -69,7 +70,7 @@ class FundingSources(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[FundingSource]:
         """List all the funding sources associated with the Lithic account."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, FundingSourceListParams))
         return self._get_api_list(
             "/funding_sources",
             page=SyncPage[FundingSource],
@@ -94,7 +95,7 @@ class FundingSources(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/funding_sources/{funding_source_token}/verify",
-            body=body,
+            body=maybe_transform(body, FundingSourceVerifyParams),
             options=options,
             cast_to=FundingSource,
         )
@@ -119,7 +120,7 @@ class AsyncFundingSources(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/funding_sources",
-            body=body,
+            body=maybe_transform(body, FundingSourceCreateParams),
             options=options,
             cast_to=FundingSource,
         )
@@ -138,7 +139,7 @@ class AsyncFundingSources(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._patch(
             f"/funding_sources/{funding_source_token}",
-            body=body,
+            body=maybe_transform(body, FundingSourceUpdateParams),
             options=options,
             cast_to=FundingSource,
         )
@@ -152,7 +153,7 @@ class AsyncFundingSources(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[FundingSource, AsyncPage[FundingSource]]:
         """List all the funding sources associated with the Lithic account."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, FundingSourceListParams))
         return self._get_api_list(
             "/funding_sources",
             page=AsyncPage[FundingSource],
@@ -177,7 +178,7 @@ class AsyncFundingSources(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/funding_sources/{funding_source_token}/verify",
-            body=body,
+            body=maybe_transform(body, FundingSourceVerifyParams),
             options=options,
             cast_to=FundingSource,
         )

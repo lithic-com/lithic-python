@@ -36,7 +36,7 @@ python-versions = ">=3.5"
 dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy (>=0.900,!=0.940)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "sphinx", "sphinx-notfound-page", "zope.interface"]
 docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
-tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
+tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "autoflake"
@@ -198,9 +198,9 @@ python-versions = ">=3.6.1,<4.0"
 
 [package.extras]
 colors = ["colorama (>=0.4.3,<0.5.0)"]
-pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
+pipfile-deprecated-finder = ["pipreqs", "requirementslib"]
 plugins = ["setuptools"]
-requirements_deprecated_finder = ["pip-api", "pipreqs"]
+requirements-deprecated-finder = ["pip-api", "pipreqs"]
 
 [[package]]
 name = "mypy"
@@ -330,7 +330,7 @@ diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
 name = "pyright"
-version = "1.1.269"
+version = "1.1.277"
 description = "Command line wrapper for pyright"
 category = "dev"
 optional = false
@@ -474,7 +474,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "cdb8eaa9225bfd0b6e72d3a650f9b8dc269004ab05b4e563807780b6a5012286"
+content-hash = "fe550e299004915af4ea051c083939f6a487c3b49153c9207611196f4bca8b70"
 
 [metadata.files]
 anyio = [
@@ -661,8 +661,8 @@ pyparsing = [
     {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
 ]
 pyright = [
-    {file = "pyright-1.1.269-py3-none-any.whl", hash = "sha256:4d5128ba5eeaf6989e5633dc4e68f0353d0146b9dc925062ff07f81863c0af8a"},
-    {file = "pyright-1.1.269.tar.gz", hash = "sha256:0e86d882e4b84f1b5be13b50364a2fc8b412299174242e11452b81aee8d67577"},
+    {file = "pyright-1.1.277-py3-none-any.whl", hash = "sha256:de7e2f533771d94e5db722cbdb0db9eafe250395b00cf2baa1ac969343ec23b0"},
+    {file = "pyright-1.1.277.tar.gz", hash = "sha256:38975508f2a3ef846db16466c659a37ad18c741113bc46bcdf6a7250b550cdc8"},
 ]
 pytest = [
     {file = "pytest-7.1.2-py3-none-any.whl", hash = "sha256:13d0e3ccfc2b6e26be000cb6568c832ba67ba32e719443bfe725814d3c42433c"},

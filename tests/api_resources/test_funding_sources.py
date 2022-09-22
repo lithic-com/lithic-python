@@ -18,7 +18,6 @@ class TestFundingSources:
     loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         resource = client.funding_sources.create(
@@ -30,7 +29,6 @@ class TestFundingSources:
         )
         assert isinstance(resource, FundingSource)
 
-    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     def test_method_create_with_optional_params(self, client: Lithic) -> None:
         resource = client.funding_sources.create(
@@ -104,7 +102,6 @@ class TestAsyncFundingSources:
     loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
-    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
         resource = await client.funding_sources.create(
@@ -116,7 +113,6 @@ class TestAsyncFundingSources:
         )
         assert isinstance(resource, FundingSource)
 
-    @pytest.mark.skip(reason="oneOfs not yet implemented in java")
     @parametrize
     async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
         resource = await client.funding_sources.create(

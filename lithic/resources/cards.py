@@ -12,6 +12,7 @@ from datetime import datetime, timezone, timedelta
 from httpx import URL
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from ..types.card import Card
@@ -48,7 +49,7 @@ class Cards(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/cards",
-            body=body,
+            body=maybe_transform(body, CardCreateParams),
             options=options,
             cast_to=Card,
         )
@@ -63,7 +64,7 @@ class Cards(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, CardRetrieveParams))
         return self._get(
             f"/cards/{card_token}",
             options=options,
@@ -91,7 +92,7 @@ class Cards(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._patch(
             f"/cards/{card_token}",
-            body=body,
+            body=maybe_transform(body, CardUpdateParams),
             options=options,
             cast_to=Card,
         )
@@ -105,7 +106,7 @@ class Cards(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[Card]:
         """List cards."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, CardListParams))
         return self._get_api_list(
             "/cards",
             page=SyncPage[Card],
@@ -150,7 +151,7 @@ class Cards(SyncAPIResource):
         a serious security vulnerability**.
         """
         headers = {"Accept": "text/html", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, CardEmbedParams))
         return self._get(
             "/embed/card",
             options=options,
@@ -252,7 +253,7 @@ class Cards(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/cards/{card_token}/provision",
-            body=body,
+            body=maybe_transform(body, CardProvisionParams),
             options=options,
             cast_to=CardProvisionResponse,
         )
@@ -274,7 +275,7 @@ class Cards(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/cards/{card_token}/reissue",
-            body=body,
+            body=maybe_transform(body, CardReissueParams),
             options=options,
             cast_to=Card,
         )
@@ -298,7 +299,7 @@ class AsyncCards(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/cards",
-            body=body,
+            body=maybe_transform(body, CardCreateParams),
             options=options,
             cast_to=Card,
         )
@@ -313,7 +314,7 @@ class AsyncCards(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Card:
         """Get card configuration such as spend limit and state."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, CardRetrieveParams))
         return await self._get(
             f"/cards/{card_token}",
             options=options,
@@ -341,7 +342,7 @@ class AsyncCards(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._patch(
             f"/cards/{card_token}",
-            body=body,
+            body=maybe_transform(body, CardUpdateParams),
             options=options,
             cast_to=Card,
         )
@@ -355,7 +356,7 @@ class AsyncCards(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[Card, AsyncPage[Card]]:
         """List cards."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, CardListParams))
         return self._get_api_list(
             "/cards",
             page=AsyncPage[Card],
@@ -400,7 +401,7 @@ class AsyncCards(AsyncAPIResource):
         a serious security vulnerability**.
         """
         headers = {"Accept": "text/html", **(headers or {})}
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, CardEmbedParams))
         return await self._get(
             "/embed/card",
             options=options,
@@ -502,7 +503,7 @@ class AsyncCards(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/cards/{card_token}/provision",
-            body=body,
+            body=maybe_transform(body, CardProvisionParams),
             options=options,
             cast_to=CardProvisionResponse,
         )
@@ -524,7 +525,7 @@ class AsyncCards(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/cards/{card_token}/reissue",
-            body=body,
+            body=maybe_transform(body, CardReissueParams),
             options=options,
             cast_to=Card,
         )

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -77,7 +78,7 @@ class Transactions(SyncAPIResource):
         [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
         for more information._
         """
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, TransactionListParams))
         return self._get_api_list(
             "/transactions",
             page=SyncPage[Transaction],
@@ -102,7 +103,7 @@ class Transactions(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/authorize",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateAuthorizationParams),
             options=options,
             cast_to=TransactionSimulateAuthorizationResponse,
         )
@@ -127,7 +128,7 @@ class Transactions(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/clearing",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateClearingParams),
             options=options,
             cast_to=TransactionSimulateClearingResponse,
         )
@@ -148,7 +149,7 @@ class Transactions(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/return",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateReturnParams),
             options=options,
             cast_to=TransactionSimulateReturnResponse,
         )
@@ -171,7 +172,7 @@ class Transactions(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/simulate/void",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateVoidParams),
             options=options,
             cast_to=TransactionSimulateVoidResponse,
         )
@@ -222,7 +223,7 @@ class AsyncTransactions(AsyncAPIResource):
         [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
         for more information._
         """
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, TransactionListParams))
         return self._get_api_list(
             "/transactions",
             page=AsyncPage[Transaction],
@@ -247,7 +248,7 @@ class AsyncTransactions(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/authorize",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateAuthorizationParams),
             options=options,
             cast_to=TransactionSimulateAuthorizationResponse,
         )
@@ -272,7 +273,7 @@ class AsyncTransactions(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/clearing",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateClearingParams),
             options=options,
             cast_to=TransactionSimulateClearingResponse,
         )
@@ -293,7 +294,7 @@ class AsyncTransactions(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/return",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateReturnParams),
             options=options,
             cast_to=TransactionSimulateReturnResponse,
         )
@@ -316,7 +317,7 @@ class AsyncTransactions(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/simulate/void",
-            body=body,
+            body=maybe_transform(body, TransactionSimulateVoidParams),
             options=options,
             cast_to=TransactionSimulateVoidResponse,
         )

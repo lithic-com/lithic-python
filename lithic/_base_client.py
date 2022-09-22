@@ -44,6 +44,7 @@ from ._types import (
     ProxiesTypes,
     RequestFiles,
     RequestOptions,
+    UnknownResponse,
     ModelBuilderProtocol,
 )
 from ._utils import is_dict
@@ -61,7 +62,10 @@ AsyncPageT = TypeVar("AsyncPageT", bound="BaseAsyncPage[Any]")
 
 
 PageParamsT = TypeVar("PageParamsT", bound=Query)
-ResponseT = TypeVar("ResponseT", bound=Union[BaseModel, ModelBuilderProtocol, str, None, httpx.Response])
+ResponseT = TypeVar(
+    "ResponseT",
+    bound=Union[BaseModel, ModelBuilderProtocol, str, None, httpx.Response, UnknownResponse],
+)
 
 _T = TypeVar("_T")
 _T_co = TypeVar("_T_co", covariant=True)
@@ -212,7 +216,6 @@ class BaseAsyncPage(BasePage[ModelT, Query], Generic[ModelT]):
 class BaseClient:
     _client: httpx.Client | httpx.AsyncClient
     _version: str
-    api_key: str
     max_retries: int
     timeout: Union[float, Timeout, None]
     _strict_response_validation: bool
@@ -221,13 +224,11 @@ class BaseClient:
     def __init__(
         self,
         version: str,
-        api_key: str,
         _strict_response_validation: bool,
         max_retries: int = DEFAULT_MAX_RETRIES,
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
     ) -> None:
         self._version = version
-        self.api_key = api_key
         self.max_retries = max_retries
         self.timeout = timeout
         self._strict_response_validation = _strict_response_validation
@@ -358,10 +359,8 @@ class BaseClient:
         # to be safe as we have handled all the types that could be bound to the
         # `ResponseT` TypeVar, however if that TypeVar is ever updated in the future, then
         # this function would become unsafe but a type checker would not report an error.
-        if not issubclass(cast_to, BaseModel):
+        if cast_to is not UnknownResponse and not issubclass(cast_to, BaseModel):
             raise RuntimeError(f"Invalid state, expected {cast_to} to be a subclass type of {BaseModel}.")
-
-        model_cls = cast(Type[BaseModel], cast_to)
 
         # split is required to handle cases where additional information is included
         # in the response, e.g. application/json; charset=utf-8
@@ -372,9 +371,17 @@ class BaseClient:
             )
 
         data = response.json()
+
+        if data is None:
+            return cast(ResponseT, None)
+
+        if cast_to is UnknownResponse:
+            return cast(ResponseT, data)
+
         if issubclass(cast_to, ModelBuilderProtocol):
             return cast(ResponseT, cast_to.build(response=response, data=data))
 
+        model_cls = cast(Type[BaseModel], cast_to)
         if self._strict_response_validation:
             return cast(ResponseT, model_cls(**data))
 
@@ -489,14 +496,18 @@ class SyncAPIClient(BaseClient):
         *,
         version: str,
         base_url: str,
-        api_key: str,
         max_retries: int = DEFAULT_MAX_RETRIES,
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
         transport: Optional[Transport] = None,
         proxies: Optional[ProxiesTypes] = None,
         _strict_response_validation: bool,
     ) -> None:
-        super().__init__(version, api_key, _strict_response_validation, max_retries, timeout)
+        super().__init__(
+            version=version,
+            timeout=timeout,
+            max_retries=max_retries,
+            _strict_response_validation=_strict_response_validation,
+        )
         self._client = httpx.Client(
             base_url=base_url,
             timeout=timeout,
@@ -632,8 +643,9 @@ class SyncAPIClient(BaseClient):
         model: Type[ModelT],
         page: Type[SyncPageT],
         options: RequestOptions = {},
+        method: str = "get",
     ) -> SyncPageT:
-        opts = FinalRequestOptions.construct(method="get", url=path, **options)
+        opts = FinalRequestOptions.construct(method=method, url=path, **options)
         return self.request_api_list(model, page, opts)
 
 
@@ -645,14 +657,18 @@ class AsyncAPIClient(BaseClient):
         *,
         version: str,
         base_url: str,
-        api_key: str,
         _strict_response_validation: bool,
         max_retries: int = DEFAULT_MAX_RETRIES,
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
         transport: Optional[Transport] = None,
         proxies: Optional[ProxiesTypes] = None,
     ) -> None:
-        super().__init__(version, api_key, _strict_response_validation, max_retries, timeout)
+        super().__init__(
+            version=version,
+            timeout=timeout,
+            max_retries=max_retries,
+            _strict_response_validation=_strict_response_validation,
+        )
         self._client = httpx.AsyncClient(
             base_url=base_url,
             timeout=timeout,
@@ -792,8 +808,9 @@ class AsyncAPIClient(BaseClient):
         model: Type[ModelT],
         page: Type[AsyncPageT],
         options: RequestOptions = {},
+        method: str = "get",
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
-        opts = FinalRequestOptions.construct(method="get", url=path, **options)
+        opts = FinalRequestOptions.construct(method=method, url=path, **options)
         return self.request_api_list(model, page, opts)
 
 

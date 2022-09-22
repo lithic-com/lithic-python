@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 from ..types.account_holder import AccountHolder
@@ -51,7 +52,7 @@ class AccountHolders(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/account_holders",
-            body=body,
+            body=maybe_transform(body, AccountHolderCreateParams),
             options=options,
             cast_to=AccountHolder,
         )
@@ -87,7 +88,7 @@ class AccountHolders(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._patch(
             f"/account_holders/{account_holder_token}",
-            body=body,
+            body=maybe_transform(body, AccountHolderUpdateParams),
             options=options,
             cast_to=AccountHolderUpdateResponse,
         )
@@ -118,7 +119,7 @@ class AccountHolders(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/webhooks/account_holders",
-            body=body,
+            body=maybe_transform(body, AccountHolderCreateWebhookParams),
             options=options,
             cast_to=AccountHolderCreateWebhookResponse,
         )
@@ -180,7 +181,7 @@ class AccountHolders(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/account_holders/{account_holder_token}/resubmit",
-            body=body,
+            body=maybe_transform(body, AccountHolderResubmitParams),
             options=options,
             cast_to=AccountHolder,
         )
@@ -251,7 +252,7 @@ class AccountHolders(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/account_holders/{account_holder_token}/documents",
-            body=body,
+            body=maybe_transform(body, AccountHolderUploadDocumentParams),
             options=options,
             cast_to=AccountHolderDocument,
         )
@@ -279,7 +280,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/account_holders",
-            body=body,
+            body=maybe_transform(body, AccountHolderCreateParams),
             options=options,
             cast_to=AccountHolder,
         )
@@ -315,7 +316,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._patch(
             f"/account_holders/{account_holder_token}",
-            body=body,
+            body=maybe_transform(body, AccountHolderUpdateParams),
             options=options,
             cast_to=AccountHolderUpdateResponse,
         )
@@ -346,7 +347,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/webhooks/account_holders",
-            body=body,
+            body=maybe_transform(body, AccountHolderCreateWebhookParams),
             options=options,
             cast_to=AccountHolderCreateWebhookResponse,
         )
@@ -408,7 +409,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/account_holders/{account_holder_token}/resubmit",
-            body=body,
+            body=maybe_transform(body, AccountHolderResubmitParams),
             options=options,
             cast_to=AccountHolder,
         )
@@ -479,7 +480,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/account_holders/{account_holder_token}/documents",
-            body=body,
+            body=maybe_transform(body, AccountHolderUploadDocumentParams),
             options=options,
             cast_to=AccountHolderDocument,
         )

@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from typing import Mapping, TypeVar, Iterable, Sequence, cast
-from typing_extensions import TypeGuard
+from typing_extensions import Required, Annotated, TypeGuard, get_args, get_origin
 
-from ._types import FileTypes
+from pydantic.typing import is_union as _is_union
+
+from .._types import FileTypes
 
 _T = TypeVar("_T")
 
@@ -95,9 +97,60 @@ def _extract_items(
 # care about the contained types we can safely use `object` in it's place.
 
 
+def is_mapping(obj: object) -> TypeGuard[Mapping[str, object]]:
+    return isinstance(obj, Mapping)
+
+
 def is_dict(obj: object) -> TypeGuard[dict[object, object]]:
     return isinstance(obj, dict)
 
 
 def is_list(obj: object) -> TypeGuard[list[object]]:
     return isinstance(obj, list)
+
+
+def is_annotated_type(typ: type) -> bool:
+    return get_origin(typ) == Annotated
+
+
+def is_list_type(typ: type) -> bool:
+    return get_origin(typ) == list
+
+
+def is_union_type(typ: type) -> bool:
+    return _is_union(get_origin(typ))
+
+
+def is_required_type(typ: type) -> bool:
+    return get_origin(typ) == Required
+
+
+# Extracts T from Annotated[T, ...] or from Required[Annotated[T, ...]]
+def strip_annotated_type(typ: type) -> type:
+    if is_required_type(typ) or is_annotated_type(typ):
+        return strip_annotated_type(cast(type, get_args(typ)[0]))
+
+    return typ
+
+
+def extract_type_arg(typ: type, index: int) -> type:
+    args = get_args(typ)
+    try:
+        return cast(type, args[index])
+    except IndexError:
+        raise RuntimeError(f"Expected type {typ} to have a type argument at index {index} but it did not")
+
+
+def deepcopy_minimal(item: _T) -> _T:
+    """Minimal reimplementation of copy.deepcopy() that will only copy certain object types:
+
+    - mappings, e.g. `dict`
+    - list
+
+    This is done for performance reasons.
+    """
+    if is_mapping(item):
+        return cast(_T, {k: deepcopy_minimal(v) for k, v in item.items()})
+    if is_list(item):
+        return cast(_T, [deepcopy_minimal(entry) for entry in item])
+    return item

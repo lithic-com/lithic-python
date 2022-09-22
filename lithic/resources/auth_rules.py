@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -40,7 +41,7 @@ class AuthRules(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/auth_rules",
-            body=body,
+            body=maybe_transform(body, AuthRuleCreateParams),
             options=options,
             cast_to=AuthRuleCreateResponse,
         )
@@ -82,7 +83,7 @@ class AuthRules(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._put(
             f"/auth_rules/{auth_rule_token}",
-            body=body,
+            body=maybe_transform(body, AuthRuleUpdateParams),
             options=options,
             cast_to=AuthRuleUpdateResponse,
         )
@@ -96,7 +97,7 @@ class AuthRules(SyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SyncPage[AuthRule]:
         """Return all of the Auth Rules under the program."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, AuthRuleListParams))
         return self._get_api_list(
             "/auth_rules",
             page=SyncPage[AuthRule],
@@ -121,7 +122,7 @@ class AuthRules(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             f"/auth_rules/{auth_rule_token}/apply",
-            body=body,
+            body=maybe_transform(body, AuthRuleApplyParams),
             options=options,
             cast_to=AuthRuleApplyResponse,
         )
@@ -142,7 +143,7 @@ class AuthRules(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._delete(
             "/auth_rules/remove",
-            body=body,
+            body=maybe_transform(body, AuthRuleRemoveParams),
             options=options,
             cast_to=AuthRuleRemoveResponse,
         )
@@ -165,7 +166,7 @@ class AsyncAuthRules(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/auth_rules",
-            body=body,
+            body=maybe_transform(body, AuthRuleCreateParams),
             options=options,
             cast_to=AuthRuleCreateResponse,
         )
@@ -207,7 +208,7 @@ class AsyncAuthRules(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._put(
             f"/auth_rules/{auth_rule_token}",
-            body=body,
+            body=maybe_transform(body, AuthRuleUpdateParams),
             options=options,
             cast_to=AuthRuleUpdateResponse,
         )
@@ -221,7 +222,7 @@ class AsyncAuthRules(AsyncAPIResource):
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncPaginator[AuthRule, AsyncPage[AuthRule]]:
         """Return all of the Auth Rules under the program."""
-        options = make_request_options(headers, max_retries, timeout, query)
+        options = make_request_options(headers, max_retries, timeout, maybe_transform(query, AuthRuleListParams))
         return self._get_api_list(
             "/auth_rules",
             page=AsyncPage[AuthRule],
@@ -246,7 +247,7 @@ class AsyncAuthRules(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             f"/auth_rules/{auth_rule_token}/apply",
-            body=body,
+            body=maybe_transform(body, AuthRuleApplyParams),
             options=options,
             cast_to=AuthRuleApplyResponse,
         )
@@ -267,7 +268,7 @@ class AsyncAuthRules(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._delete(
             "/auth_rules/remove",
-            body=body,
+            body=maybe_transform(body, AuthRuleRemoveParams),
             options=options,
             cast_to=AuthRuleRemoveResponse,
         )

@@ -31,12 +31,11 @@ lithic = Lithic(
 card = lithic.cards.create({
     "type": "SINGLE_USE",
 })
-
 print(card.token)
 ```
 
 While you can provide an `api_key` keyword argument, we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-and adding `LITHIC_API_KEY="my api key"` to your `.env` file so that your API keys are not stored in source control.
+and adding `LITHIC_API_KEY="my api key"` to your `.env` file so that your API Key is not stored in source control.
 
 ## Async Usage
 
@@ -54,7 +53,7 @@ lithic = AsyncLithic(
 
 async def main():
     card = await lithic.cards.create({
-        "type": "SINGLE_USE"
+        "type": "SINGLE_USE",
     })
     print(card.token)
 
@@ -76,7 +75,6 @@ List methods in the Lithic API are paginated.
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
 ```py
-from typing import List
 import lithic
 
 lithic = Lithic()
@@ -93,7 +91,6 @@ Or, asynchronously:
 
 ```python
 import asyncio
-from typing import List
 import lithic
 
 lithic = AsyncLithic()
@@ -103,7 +100,7 @@ async def main() -> None:
     # Iterate through items across all pages, issuing requests as needed.
     async for card in lithic.cards.list():
         all_cards.append(card)
-    return all_cards
+    print(all_cards)
 
 asyncio.run(main())
 ```
@@ -112,9 +109,9 @@ Alternatively, you can use the `.has_next_page()`, `.next_page_params()`,
 or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.cards.list({"page_size": 2})
+first_page = await lithic.cards.list()
 if first_page.has_next_page():
-    print("will fetch next page, with params", first_page.next_page_params())
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
     print(f"number of items we just fetched: {len(next_page.data)}")
 
@@ -124,13 +121,29 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.cards.list()
+first_page = await lithic.cards.list()
 
 print(f"page number: {first_page.page}") # => "page number: 1"
 for card in first_page.data:
-    print(card.token)
+    print(card.created)
 
 # Remove `await` for non-async usage.
+```
+
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```py
+from lithic import Lithic
+
+lithic = Lithic()
+
+lithic.cards.create({
+    "foo": {
+        "bar": True
+    },
+})
 ```
 
 ## Handling errors
@@ -149,7 +162,7 @@ lithic = Lithic()
 
 try:
     lithic.cards.create({
-        "type": "an_incorrect_type"
+        "type": "an_incorrect_type",
     })
 except lithic.APIConnectionError as e:
     print("The server could not be reached")
@@ -194,7 +207,7 @@ lithic = Lithic(
 
 # Or, configure per-request:
 lithic.cards.list({
-    "page_size": 10
+    "page_size": 10,
 }, max_retries=5);
 ```
 
@@ -219,7 +232,7 @@ lithic = Lithic(
 
 # Override per-request:
 lithic.cards.list({
-    "page_size": 10
+    "page_size": 10,
 }, timeout=5 * 1000)
 ```
 

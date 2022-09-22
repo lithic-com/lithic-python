@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 
 from .._types import NOT_GIVEN, Query, Headers, Timeout, NoneType, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 from ..types.auth_stream_enrollment import AuthStreamEnrollment
@@ -79,7 +80,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
             "/auth_stream",
-            body=body,
+            body=maybe_transform(body, AuthStreamEnrollmentEnrollParams),
             options=options,
             cast_to=NoneType,
         )
@@ -149,7 +150,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
             "/auth_stream",
-            body=body,
+            body=maybe_transform(body, AuthStreamEnrollmentEnrollParams),
             options=options,
             cast_to=NoneType,
         )
