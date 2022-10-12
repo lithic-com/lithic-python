@@ -226,11 +226,15 @@ class BaseClient:
         version: str,
         _strict_response_validation: bool,
         max_retries: int = DEFAULT_MAX_RETRIES,
-        timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
+        timeout: float | Timeout | None = DEFAULT_TIMEOUT,
+        custom_headers: Mapping[str, str] | None = None,
+        custom_query: Mapping[str, object] | None = None,
     ) -> None:
         self._version = version
         self.max_retries = max_retries
         self.timeout = timeout
+        self._custom_headers = custom_headers or {}
+        self._custom_query = custom_query or {}
         self._strict_response_validation = _strict_response_validation
         self._idempotency_header = None
 
@@ -280,6 +284,7 @@ class BaseClient:
             headers[self._idempotency_header] = options.idempotency_key
 
         kwargs: dict[str, Any] = {}
+        params = _merge_mappings(self._custom_query, options.params)
 
         # If the given Content-Type header is multipart/form-data then it
         # has to be removed so that httpx can generate the header with
@@ -308,7 +313,7 @@ class BaseClient:
             # `Params` type as it needs to be typed as `Mapping[str, object]`
             # so that passing a `TypedDict` doesn't cause an error.
             # https://github.com/microsoft/pyright/issues/3526#event-6715453066
-            params=self.qs.stringify(cast(Mapping[str, Any], options.params)) if options.params else None,
+            params=self.qs.stringify(cast(Mapping[str, Any], params)) if params else None,
             json=options.json_data,
             files=options.files,
             **kwargs,
@@ -406,6 +411,7 @@ class BaseClient:
             "User-Agent": self.user_agent,
             **self.platform_headers(),
             **self.auth_headers,
+            **self._custom_headers,
         }
 
     @property
@@ -500,12 +506,16 @@ class SyncAPIClient(BaseClient):
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
         transport: Optional[Transport] = None,
         proxies: Optional[ProxiesTypes] = None,
+        custom_headers: Mapping[str, str] | None = None,
+        custom_query: Mapping[str, object] | None = None,
         _strict_response_validation: bool,
     ) -> None:
         super().__init__(
             version=version,
             timeout=timeout,
             max_retries=max_retries,
+            custom_query=custom_query,
+            custom_headers=custom_headers,
             _strict_response_validation=_strict_response_validation,
         )
         self._client = httpx.Client(
@@ -662,11 +672,15 @@ class AsyncAPIClient(BaseClient):
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
         transport: Optional[Transport] = None,
         proxies: Optional[ProxiesTypes] = None,
+        custom_headers: Mapping[str, str] | None = None,
+        custom_query: Mapping[str, object] | None = None,
     ) -> None:
         super().__init__(
             version=version,
             timeout=timeout,
             max_retries=max_retries,
+            custom_query=custom_query,
+            custom_headers=custom_headers,
             _strict_response_validation=_strict_response_validation,
         )
         self._client = httpx.AsyncClient(

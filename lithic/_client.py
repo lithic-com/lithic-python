@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Dict, Union, Optional
+from typing import Dict, Union, Mapping, Optional
 from typing_extensions import Literal
 
 from . import resources
@@ -67,6 +67,8 @@ class Lithic(SyncAPIClient):
         api_key: Optional[str] = None,
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
         max_retries: int = DEFAULT_MAX_RETRIES,
+        default_headers: Mapping[str, str] | None = None,
+        default_query: Mapping[str, object] | None = None,
         # See httpx documentation for [custom transports](https://www.python-httpx.org/advanced/#custom-transports)
         transport: Optional[Transport] = None,
         # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
@@ -102,6 +104,8 @@ class Lithic(SyncAPIClient):
             timeout=timeout,
             transport=transport,
             proxies=proxies,
+            custom_headers=default_headers,
+            custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
 
@@ -130,6 +134,10 @@ class Lithic(SyncAPIClient):
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         max_retries: int | NotGiven = NOT_GIVEN,
+        default_headers: Mapping[str, str] | None = None,
+        set_default_headers: Mapping[str, str] | None = None,
+        default_query: Mapping[str, object] | None = None,
+        set_default_query: Mapping[str, object] | None = None,
     ) -> Lithic:
         """
         Create a new client instance re-using the same options given to the current client with optional overriding.
@@ -137,12 +145,32 @@ class Lithic(SyncAPIClient):
         It should be noted that this does not share the underlying httpx client class which may lead
         to performance issues.
         """
+        if default_headers is not None and set_default_headers is not None:
+            raise ValueError("The `default_headers` and `set_default_headers` arguments are mutually exclusive")
+
+        if default_query is not None and set_default_query is not None:
+            raise ValueError("The `default_query` and `set_default_query` arguments are mutually exclusive")
+
+        headers = self._custom_headers
+        if default_headers is not None:
+            headers = {**headers, **default_headers}
+        elif set_default_headers is not None:
+            headers = set_default_headers
+
+        params = self._custom_query
+        if default_query is not None:
+            params = {**params, **default_query}
+        elif set_default_query is not None:
+            params = set_default_query
+
         # TODO: share the same httpx client between instances
         return self.__class__(
             base_url=base_url or str(self.base_url),
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
+            default_headers=headers,
+            default_query=params,
         )
 
     # Alias for `copy` for nicer inline usage, e.g.
@@ -185,6 +213,8 @@ class AsyncLithic(AsyncAPIClient):
         api_key: Optional[str] = None,
         timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
         max_retries: int = DEFAULT_MAX_RETRIES,
+        default_headers: Mapping[str, str] | None = None,
+        default_query: Mapping[str, object] | None = None,
         # See httpx documentation for [custom transports](https://www.python-httpx.org/advanced/#custom-transports)
         transport: Optional[Transport] = None,
         # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
@@ -220,6 +250,8 @@ class AsyncLithic(AsyncAPIClient):
             timeout=timeout,
             transport=transport,
             proxies=proxies,
+            custom_headers=default_headers,
+            custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
 
@@ -248,6 +280,10 @@ class AsyncLithic(AsyncAPIClient):
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         max_retries: int | NotGiven = NOT_GIVEN,
+        default_headers: Mapping[str, str] | None = None,
+        set_default_headers: Mapping[str, str] | None = None,
+        default_query: Mapping[str, object] | None = None,
+        set_default_query: Mapping[str, object] | None = None,
     ) -> AsyncLithic:
         """
         Create a new client instance re-using the same options given to the current client with optional overriding.
@@ -255,12 +291,32 @@ class AsyncLithic(AsyncAPIClient):
         It should be noted that this does not share the underlying httpx client class which may lead
         to performance issues.
         """
+        if default_headers is not None and set_default_headers is not None:
+            raise ValueError("The `default_headers` and `set_default_headers` arguments are mutually exclusive")
+
+        if default_query is not None and set_default_query is not None:
+            raise ValueError("The `default_query` and `set_default_query` arguments are mutually exclusive")
+
+        headers = self._custom_headers
+        if default_headers is not None:
+            headers = {**headers, **default_headers}
+        elif set_default_headers is not None:
+            headers = set_default_headers
+
+        params = self._custom_query
+        if default_query is not None:
+            params = {**params, **default_query}
+        elif set_default_query is not None:
+            params = set_default_query
+
         # TODO: share the same httpx client between instances
         return self.__class__(
             base_url=base_url or str(self.base_url),
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
+            default_headers=headers,
+            default_query=params,
         )
 
     # Alias for `copy` for nicer inline usage, e.g.
