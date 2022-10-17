@@ -4,6 +4,7 @@ import json
 import time
 import uuid
 import platform
+import warnings
 from random import random
 from typing import (
     Any,
@@ -19,6 +20,7 @@ from typing import (
     Generator,
     AsyncIterator,
     cast,
+    overload,
 )
 from functools import lru_cache
 from typing_extensions import Literal
@@ -33,6 +35,7 @@ from pydantic import PrivateAttr
 from . import _base_exceptions as exceptions
 from ._qs import Querystring
 from ._types import (
+    NOT_GIVEN,
     Omit,
     Query,
     ModelT,
@@ -74,6 +77,41 @@ DEFAULT_TIMEOUT = Timeout(timeout=60.0, connect=5.0)
 DEFAULT_MAX_RETRIES = 2
 
 
+class PageInfo:
+    """Stores the necesary information to build the request to retrieve the next page.
+
+    Either `url` or `params` must be set.
+    """
+
+    url: URL | NotGiven
+    params: Query | NotGiven
+
+    @overload
+    def __init__(
+        self,
+        *,
+        url: URL,
+    ) -> None:
+        ...
+
+    @overload
+    def __init__(
+        self,
+        *,
+        params: Query,
+    ) -> None:
+        ...
+
+    def __init__(
+        self,
+        *,
+        url: URL | NotGiven = NOT_GIVEN,
+        params: Query | NotGiven = NOT_GIVEN,
+    ) -> None:
+        self.url = url
+        self.params = params
+
+
 class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
     _options: FinalRequestOptions = PrivateAttr()
     _model: Type[ModelT] = PrivateAttr()
@@ -82,13 +120,51 @@ class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
         items = self._get_page_items()
         if not items:
             return False
-        return self.next_page_params() is not None
+        return self.next_page_info() is not None
+
+    def next_page_info(self) -> Optional[PageInfo]:
+        ...
 
     def next_page_params(self) -> Optional[PageParamsT]:
-        ...
+        warnings.warn(
+            "The `next_page_params()` method is deprecated, please use `next_page_info()` instead",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        info = self.next_page_info()
+        if info is None:
+            return None
+
+        if not isinstance(info.params, NotGiven):
+            return cast(Optional[PageParamsT], info.params)
+
+        if not isinstance(info.url, NotGiven):
+            return cast(PageParamsT, self._params_from_url(info.url))
+
+        raise ValueError("Unexpected PageInfo state")
 
     def _get_page_items(self) -> Iterable[ModelT]:
         ...
+
+    def _params_from_url(self, url: URL) -> httpx.QueryParams:
+        # TODO: do we have to preprocess params here?
+        return httpx.QueryParams(cast(Any, self._options.params)).merge(url.params)
+
+    def _info_to_options(self, info: PageInfo) -> FinalRequestOptions:
+        options = self._options.copy()
+
+        if not isinstance(info.params, NotGiven):
+            options.params = {**options.params, **info.params}
+            return options
+
+        if not isinstance(info.url, NotGiven):
+            params = self._params_from_url(info.url)
+            url = info.url.copy_with(params=params)
+            options.params = dict(url.params)
+            options.url = str(url)
+            return options
+
+        raise ValueError("Unexpected PageInfo state")
 
 
 class BaseSyncPage(BasePage[ModelT, Query], Generic[ModelT]):
@@ -127,15 +203,13 @@ class BaseSyncPage(BasePage[ModelT, Query], Generic[ModelT]):
                 return
 
     def get_next_page(self: SyncPageT) -> SyncPageT:
-        next_params = self.next_page_params()
-        if not next_params:
+        info = self.next_page_info()
+        if not info:
             raise RuntimeError(
                 "No next page expected; please check `.has_next_page()` before calling `.get_next_page()`."
             )
 
-        options = self._options.copy()
-        options.params = {**options.params, **next_params}
-
+        options = self._info_to_options(info)
         return self._client.request_api_list(self._model, page=self.__class__, options=options)
 
 
@@ -202,14 +276,13 @@ class BaseAsyncPage(BasePage[ModelT, Query], Generic[ModelT]):
                 return
 
     async def get_next_page(self: AsyncPageT) -> AsyncPageT:
-        next_params = self.next_page_params()
-        if not next_params:
+        info = self.next_page_info()
+        if not info:
             raise RuntimeError(
                 "No next page expected; please check `.has_next_page()` before calling `.get_next_page()`."
             )
 
-        options = self._options.copy()
-        options.params = {**options.params, **next_params}
+        options = self._info_to_options(info)
         return await self._client.request_api_list(self._model, page=self.__class__, options=options)
 
 
