@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import inspect
 
 import httpx
 import pytest
@@ -122,6 +123,22 @@ class TestLithic:
             match="`default_query` and `set_default_query` arguments are mutually exclusive",
         ):
             client.copy(set_default_query={}, default_query={"foo": "Bar"})
+
+    def test_copy_signature(self) -> None:
+        # ensure the same parameters that can be passed to the client are defined in the `.copy()` method
+        init_signature = inspect.signature(
+            # mypy doesn't like that we access the `__init__` property.
+            self.client.__init__,  # type: ignore[misc]
+        )
+        copy_signature = inspect.signature(self.client.copy)
+        exclude_params = {"transport", "proxies", "_strict_response_validation"}
+
+        for name in init_signature.parameters.keys():
+            if name in exclude_params:
+                continue
+
+            copy_param = copy_signature.parameters.get(name)
+            assert copy_param is not None, f"copy() signature is missing the {name} param"
 
     def test_default_headers_option(self) -> None:
         client = Lithic(
@@ -264,6 +281,22 @@ class TestAsyncLithic:
             match="`default_query` and `set_default_query` arguments are mutually exclusive",
         ):
             client.copy(set_default_query={}, default_query={"foo": "Bar"})
+
+    def test_copy_signature(self) -> None:
+        # ensure the same parameters that can be passed to the client are defined in the `.copy()` method
+        init_signature = inspect.signature(
+            # mypy doesn't like that we access the `__init__` property.
+            self.client.__init__,  # type: ignore[misc]
+        )
+        copy_signature = inspect.signature(self.client.copy)
+        exclude_params = {"transport", "proxies", "_strict_response_validation"}
+
+        for name in init_signature.parameters.keys():
+            if name in exclude_params:
+                continue
+
+            copy_param = copy_signature.parameters.get(name)
+            assert copy_param is not None, f"copy() signature is missing the {name} param"
 
     def test_default_headers_option(self) -> None:
         client = AsyncLithic(

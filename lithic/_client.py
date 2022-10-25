@@ -59,6 +59,8 @@ class Lithic(SyncAPIClient):
     # client options
     api_key: str
 
+    _environment: Literal["production", "sandbox"]
+
     def __init__(
         self,
         *,
@@ -90,6 +92,8 @@ class Lithic(SyncAPIClient):
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
             raise Exception("No api_key argument provided")
+
+        self._environment = environment
 
         if base_url is None:
             try:
@@ -131,6 +135,7 @@ class Lithic(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         max_retries: int | NotGiven = NOT_GIVEN,
@@ -166,6 +171,7 @@ class Lithic(SyncAPIClient):
         # TODO: share the same httpx client between instances
         return self.__class__(
             base_url=base_url or str(self.base_url),
+            environment=environment or self._environment,
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
@@ -205,6 +211,8 @@ class AsyncLithic(AsyncAPIClient):
     # client options
     api_key: str
 
+    _environment: Literal["production", "sandbox"]
+
     def __init__(
         self,
         *,
@@ -236,6 +244,8 @@ class AsyncLithic(AsyncAPIClient):
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
             raise Exception("No api_key argument provided")
+
+        self._environment = environment
 
         if base_url is None:
             try:
@@ -277,6 +287,7 @@ class AsyncLithic(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         max_retries: int | NotGiven = NOT_GIVEN,
@@ -312,6 +323,7 @@ class AsyncLithic(AsyncAPIClient):
         # TODO: share the same httpx client between instances
         return self.__class__(
             base_url=base_url or str(self.base_url),
+            environment=environment or self._environment,
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
