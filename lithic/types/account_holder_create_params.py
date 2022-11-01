@@ -18,6 +18,8 @@ __all__ = [
     "KYCIndividualAddress",
     "KYCIndividual",
     "KYC",
+    "KYCExemptAddress",
+    "KYCExempt",
     "AccountHolderCreateParams",
 ]
 
@@ -448,4 +450,62 @@ class KYC(TypedDict, total=False):
     """
 
 
-AccountHolderCreateParams = Union[KYB, KYC]
+class KYCExemptAddress(TypedDict, total=False):
+    address1: Required[str]
+    """Valid deliverable address (no PO boxes)."""
+
+    city: Required[str]
+    """Name of city."""
+
+    country: Required[str]
+    """Valid country code.
+
+    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
+    three-character format.
+    """
+
+    postal_code: Required[str]
+    """Valid postal code.
+
+    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
+    nine-digit ZIP+4.
+    """
+
+    state: Required[str]
+    """Valid state code.
+
+    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
+    two-character format.
+    """
+
+    address2: str
+    """Unit or apartment number (if applicable)."""
+
+
+class KYCExempt(TypedDict, total=False):
+    email: Required[str]
+    """The KYC Exempt user's email"""
+
+    first_name: Required[str]
+    """The KYC Exempt user's first name"""
+
+    kyc_exemption_type: Required[str]
+    """Specifies the type of KYC Exempt user"""
+
+    last_name: Required[str]
+    """The KYC Exempt user's last name"""
+
+    phone_number: Required[str]
+    """The KYC Exempt user's phone number"""
+
+    workflow: Required[str]
+    """Specifies the workflow type. This must be 'KYC_EXEMPT'"""
+
+    address: KYCExemptAddress
+    """
+    KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
+
+AccountHolderCreateParams = Union[KYB, KYC, KYCExempt]

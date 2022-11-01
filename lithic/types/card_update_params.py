@@ -61,7 +61,7 @@ class CardUpdateParams(TypedDict, total=False):
       of the card.
     - `MONTHLY` - Card will authorize transactions up to spend limit for the
       trailing month. Month is calculated as this calendar date one month prior.
-    - `TRANSACTION` - Card will authorizate multiple transactions if each individual
+    - `TRANSACTION` - Card will authorize multiple transactions if each individual
       transaction is under the spend limit.
     """
 

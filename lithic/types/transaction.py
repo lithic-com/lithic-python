@@ -3,15 +3,121 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
+from pydantic import Field
+
 from ..types import card
 from .._models import BaseModel
 
-__all__ = ["Events", "Funding", "Merchant", "Transaction"]
+__all__ = ["CardholderAuthentication", "Events", "Funding", "Merchant", "Transaction"]
+
+
+class CardholderAuthentication(BaseModel):
+    three_ds_version: Optional[str] = Field(alias="3ds_version")
+    """3-D Secure Protocol version. Possible values:
+
+    - `1`: 3-D Secure Protocol version 1.x applied to the transaction.
+    - `2`: 3-D Secure Protocol version 2.x applied to the transaction.
+    - `null`: 3-D Secure was not used for the transaction
+    """
+
+    acquirer_exemption: Literal[
+        "AUTHENTICATION_OUTAGE_EXCEPTION",
+        "LOW_VALUE",
+        "MERCHANT_INITIATED_TRANSACTION",
+        "NONE",
+        "RECURRING_PAYMENT",
+        "SECURE_CORPORATE_PAYMENT",
+        "STRONG_CUSTOMER_AUTHENTICATION_DELEGATION",
+        "TRANSACTION_RISK_ANALYSIS",
+    ]
+    """
+    Exemption applied by the ACS to authenticate the transaction without requesting
+    a challenge. Possible values:
+
+    - `AUTHENTICATION_OUTAGE_EXCEPTION`: Authentication Outage Exception exemption.
+    - `LOW_VALUE`: Low Value Payment exemption.
+    - `MERCHANT_INITIATED_TRANSACTION`: Merchant Initiated Transaction (3RI).
+    - `NONE`: No exemption applied.
+    - `RECURRING_PAYMENT`: Recurring Payment exemption.
+    - `SECURE_CORPORATE_PAYMENT`: Secure Corporate Payment exemption.
+    - `STRONG_CUSTOMER_AUTHENTICATION_DELEGATION`: Strong Customer Authentication
+      Delegation exemption.
+    - `TRANSACTION_RISK_ANALYSIS`: Acquirer Low-Fraud and Transaction Risk Analysis
+      exemption.
+
+    Maps to the 3-D Secure `transChallengeExemption` field.
+    """
+
+    liability_shift: Literal["3DS_AUTHENTICATED", "ACQUIRER_EXEMPTION", "NONE", "TOKEN_AUTHENTICATED"]
+    """
+    Indicates whether chargeback liability shift applies to the transaction.
+    Possible values:
+
+    - `3DS_AUTHENTICATED`: The transaction was fully authenticated through a 3-D
+      Secure flow, chargeback liability shift applies.
+    - `ACQUIRER_EXEMPTION`: The acquirer utilised an exemption to bypass Strong
+      Customer Authentication (`transStatus = N`, or `transStatus = I`). Liability
+      remains with the acquirer and in this case the `acquirer_exemption` field is
+      expected to be not `NONE`.
+    - `NONE`: Chargeback liability shift has not shifted to the issuer, i.e. the
+      merchant is liable.
+    - `TOKEN_AUTHENTICATED`: The transaction was a tokenized payment with validated
+      cryptography, possibly recurring. Chargeback liability shift to the issuer
+      applies.
+    """
+
+    verification_attempted: Literal["APP_LOGIN", "BIOMETRIC", "NONE", "OTHER", "OTP"]
+    """Verification attempted values:
+
+    - `APP_LOGIN`: Out-of-band login verification was attempted by the ACS.
+    - `BIOMETRIC`: Out-of-band biometric verification was attempted by the ACS.
+    - `NONE`: No cardholder verification was attempted by the Access Control Server
+      (e.g. frictionless 3-D Secure flow, no 3-D Secure, or stand-in Risk Based
+      Analysis).
+    - `OTHER`: Other method was used by the ACS to verify the cardholder (e.g.
+      Mastercard Identity Check Express, recurring transactions, etc.)
+    - `OTP`: One-time password verification was attempted by the ACS.
+    """
+
+    verification_result: Literal["CANCELLED", "FAILED", "FRICTIONLESS", "NOT_ATTEMPTED", "REJECTED", "SUCCESS"]
+    """
+    This field partially maps to the `transStatus` field in the
+    [EMVCo 3-D Secure specification](https://www.emvco.com/emv-technologies/3d-secure/)
+    and Mastercard SPA2 AAV leading indicators.
+
+    Verification result values:
+
+    - `CANCELLED`: Authentication/Account verification could not be performed,
+      `transStatus = U`.
+    - `FAILED`: Transaction was not authenticated. `transStatus = N`, note: the
+      utilization of exemptions could also result in `transStatus = N`, inspect the
+      `acquirer_exemption` field for more information.
+    - `FRICTIONLESS`: Attempts processing performed, the transaction was not
+      authenticated, but a proof of attempted authentication/verification is
+      provided. `transStatus = A` and the leading AAV indicator was one of {`kE`,
+      `kF`, `kQ`}.
+    - `NOT_ATTEMPTED`: A 3-D Secure flow was not applied to this transaction.
+      Leading AAV indicator was one of {`kN`, `kX`} or no AAV was provided for the
+      transaction.
+    - `REJECTED`: Authentication/Account Verification rejected; `transStatus = R`.
+      Issuer is rejecting authentication/verification and requests that
+      authorization not be attempted.
+    - `SUCCESS`: Authentication verification successful. `transStatus = Y` and
+      leading AAV indicator for the transaction was one of {`kA`, `kB`, `kC`, `kD`,
+      `kO`, `kP`, `kR`, `kS`}.
+
+    Note that the following `transStatus` values are not represented by this field:
+
+    - `C`: Challenge Required
+    - `D`: Challenge Required; decoupled authentication confirmed
+    - `I`: Informational only
+    - `S`: Challenge using Secure Payment Confirmation (SPC)
+    """
 
 
 class Events(BaseModel):
     amount: int
-    """Amount (in cents) of the transaction event."""
+    """Amount of the transaction event (in cents), including any acquirer fees."""
 
     created: str
     """ISO 8601 date and time this event entered the system. UTC time zone."""
@@ -91,7 +197,7 @@ class Events(BaseModel):
 
 class Funding(BaseModel):
     amount: Optional[int]
-    """Funding amount (in cents)."""
+    """Amount of the transaction event, including any acquirer fees."""
 
     token: Optional[str]
     """Funding account token."""
@@ -137,15 +243,15 @@ class Transaction(BaseModel):
     """
 
     amount: Optional[int]
-    """Authorization amount (in USD cents) of the transaction.
-
+    """
+    Authorization amount of the transaction (in cents), including any acquirer fees.
     This may change over time, and will represent the settled amount once the
     transaction is settled.
     """
 
     authorization_amount: Optional[int]
-    """Authorization amount (in USD cents) of the transaction.
-
+    """
+    Authorization amount (in cents) of the transaction, including any acquirer fees.
     This amount always represents the amount authorized for the transaction,
     unaffected by settlement.
     """
@@ -157,6 +263,8 @@ class Transaction(BaseModel):
     """
 
     card: Optional[card.Card]
+
+    cardholder_authentication: Optional[CardholderAuthentication]
 
     created: Optional[str]
     """Date and time when the transaction first occurred. UTC time zone."""
@@ -176,14 +284,15 @@ class Transaction(BaseModel):
 
     merchant_amount: Optional[int]
     """
-    Analogous to the "amount" property, but represents the amount in the local
-    currency at the time of the transaction.
+    Analogous to the "amount" property, but will represent the amount in the
+    transaction's local currency (smallest unit), including any acquirer fees.
     """
 
     merchant_authorization_amount: Optional[int]
     """
-    Analogous to the "authorization_amount" property, but represents the amount in
-    the local currency at the time of the transaction.
+    Analogous to the "authorization_amount" property, but will represent the amount
+    in the transaction's local currency (smallest unit), including any acquirer
+    fees.
     """
 
     merchant_currency: Optional[str]
@@ -224,9 +333,9 @@ class Transaction(BaseModel):
     """`APPROVED` or decline reason. See Event result types"""
 
     settled_amount: Optional[int]
-    """Amount (in cents) of the transaction that has been settled.
-
-    This may change over time.
+    """
+    Amount of the transaction that has been settled (in cents), including any
+    acquirer fees. This may change over time.
     """
 
     status: Optional[Literal["BOUNCED", "DECLINED", "PENDING", "SETTLED", "SETTLING", "VOIDED"]]

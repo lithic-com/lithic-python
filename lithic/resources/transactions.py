@@ -45,11 +45,8 @@ class Transactions(SyncAPIResource):
     ) -> Transaction:
         """Get specific transaction.
 
-        _Note that the events.amount field returned via this endpoint is changing and
-        will become a signed field. Debits will appear as positive amounts and credits
-        will appear as negative amounts. This is already reflected in Sandbox as of
-        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
-        2022 at 17:00 UTC. Please refer to
+        _Note that the events.amount field returned via this endpoint became a signed
+        field on September 27, 2022. Please refer to
         [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
         for more information._
         """
@@ -70,11 +67,8 @@ class Transactions(SyncAPIResource):
     ) -> SyncPage[Transaction]:
         """List transactions.
 
-        _Note that the events.amount field returned via this endpoint is changing and
-        will become a signed field. Debits will appear as positive amounts and credits
-        will appear as negative amounts. This is already reflected in Sandbox as of
-        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
-        2022 at 17:00 UTC. Please refer to
+        _Note that the events.amount field returned via this endpoint became a signed
+        field on September 27, 2022. Please refer to
         [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
         for more information._
         """
@@ -190,11 +184,8 @@ class AsyncTransactions(AsyncAPIResource):
     ) -> Transaction:
         """Get specific transaction.
 
-        _Note that the events.amount field returned via this endpoint is changing and
-        will become a signed field. Debits will appear as positive amounts and credits
-        will appear as negative amounts. This is already reflected in Sandbox as of
-        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
-        2022 at 17:00 UTC. Please refer to
+        _Note that the events.amount field returned via this endpoint became a signed
+        field on September 27, 2022. Please refer to
         [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
         for more information._
         """
@@ -215,11 +206,8 @@ class AsyncTransactions(AsyncAPIResource):
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """List transactions.
 
-        _Note that the events.amount field returned via this endpoint is changing and
-        will become a signed field. Debits will appear as positive amounts and credits
-        will appear as negative amounts. This is already reflected in Sandbox as of
-        August 30, 2022 at 17:00 UTC and will be updated in Production on September 27,
-        2022 at 17:00 UTC. Please refer to
+        _Note that the events.amount field returned via this endpoint became a signed
+        field on September 27, 2022. Please refer to
         [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
         for more information._
         """

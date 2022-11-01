@@ -19,8 +19,8 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
 
     merchant_amount: int
     """
-    Amount of the transaction to be simlated in currency specified in
-    merchant_currency.
+    Amount of the transaction to be simulated in currency specified in
+    merchant_currency, including any acquirer fees.
     """
 
     merchant_currency: str

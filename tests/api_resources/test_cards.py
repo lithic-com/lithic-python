@@ -22,7 +22,7 @@ class TestCards:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         resource = client.cards.create(
-            {"type": "MERCHANT_LOCKED"},
+            {"type": "VIRTUAL"},
         )
         assert isinstance(resource, Card)
 
@@ -39,7 +39,7 @@ class TestCards:
                 "spend_limit": 0,
                 "spend_limit_duration": "ANNUALLY",
                 "state": "OPEN",
-                "type": "MERCHANT_LOCKED",
+                "type": "VIRTUAL",
                 "pin": "string",
                 "product_id": "1",
                 "shipping_address": {
@@ -208,7 +208,7 @@ class TestAsyncCards:
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
         resource = await client.cards.create(
-            {"type": "MERCHANT_LOCKED"},
+            {"type": "VIRTUAL"},
         )
         assert isinstance(resource, Card)
 
@@ -225,7 +225,7 @@ class TestAsyncCards:
                 "spend_limit": 0,
                 "spend_limit_duration": "ANNUALLY",
                 "state": "OPEN",
-                "type": "MERCHANT_LOCKED",
+                "type": "VIRTUAL",
                 "pin": "string",
                 "product_id": "1",
                 "shipping_address": {

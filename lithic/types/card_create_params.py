@@ -10,19 +10,20 @@ __all__ = ["CardCreateParams"]
 
 
 class CardCreateParams(TypedDict, total=False):
-    type: Required[Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"]]
+    type: Required[Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"]]
     """Card types:
 
-    - `MERCHANT_LOCKED` - Card is locked to first merchant that successfully
-      authorizes the card.
+    - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
+      wallet like Apple Pay or Google Pay (if the card program is digital
+      wallet-enabled).
     - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
       branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
       Reach out at [lithic.com/contact](https://lithic.com/contact) for more
       information.
-    - `SINGLE_USE` - Card will close shortly after the first transaction.
-    - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
-      wallet like Apple Pay or Google Pay (if the card program is digital
-      wallet-enabled).
+    - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
+      successfully authorizes the card.
+    - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
+      authorization.
     """
 
     account_token: str
@@ -38,7 +39,10 @@ class CardCreateParams(TypedDict, total=False):
     """Identifies the card program under which to create the card.
 
     Different card programs may have their own configurations (e.g., digital wallet
-    card art, BIN type). This must be configured with Lithic before use.
+    card art, BIN type). This must be configured with Lithic before use. In Sandbox,
+    use 00000000-0000-0000-1000-000000000000 and
+    00000000-0000-0000-2000-000000000000 to test creating cards on specific card
+    programs.
     """
 
     exp_month: str
@@ -116,7 +120,7 @@ class CardCreateParams(TypedDict, total=False):
       of the card.
     - `MONTHLY` - Card will authorize transactions up to spend limit for the
       trailing month. Month is calculated as this calendar date one month prior.
-    - `TRANSACTION` - Card will authorizate multiple transactions if each individual
+    - `TRANSACTION` - Card will authorize multiple transactions if each individual
       transaction is under the spend limit.
     """
 

@@ -114,7 +114,8 @@ class AccountHolders(SyncAPIResource):
 
         After a webhook has been created, this endpoint can be used to rotate a webhooks
         HMAC token or modify the registered URL. Only a single webhook is allowed per
-        program.
+        program. Since HMAC verification is available, the IP addresses from which
+        KYC/KYB webhooks are sent are subject to change.
         """
         options = make_request_options(headers, max_retries, timeout, query)
         return self._post(
@@ -342,7 +343,8 @@ class AsyncAccountHolders(AsyncAPIResource):
 
         After a webhook has been created, this endpoint can be used to rotate a webhooks
         HMAC token or modify the registered URL. Only a single webhook is allowed per
-        program.
+        program. Since HMAC verification is available, the IP addresses from which
+        KYC/KYB webhooks are sent are subject to change.
         """
         options = make_request_options(headers, max_retries, timeout, query)
         return await self._post(
