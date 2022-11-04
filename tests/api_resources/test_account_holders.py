@@ -26,10 +26,23 @@ class TestAccountHolders:
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
     @parametrize
-    def test_method_create(self, client: Lithic) -> None:
+    def test_method_create_overload_1(self, client: Lithic) -> None:
         resource = client.account_holders.create(
-            {
-                "business_entity": {
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "phone_numbers": ["+12124007676"],
+            },
+            beneficial_owner_entities=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -38,110 +51,39 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
                     "phone_numbers": ["+12124007676"],
                 },
-                "beneficial_owner_entities": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
-                    },
-                ],
-                "beneficial_owner_individuals": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                ],
-                "control_person": {
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+            ],
+            beneficial_owner_individuals=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -157,19 +99,82 @@ class TestAccountHolders:
                     "last_name": "Bombadil",
                     "phone_number": "+12124007676",
                 },
-                "nature_of_business": "Software company selling solutions to the restaurant industry",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "website_url": "www.mybusiness.com",
-                "workflow": "KYB_BASIC",
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+            ],
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
             },
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2022-03-08 08:00:00",
+            website_url="www.mybusiness.com",
+            workflow="KYB_BASIC",
         )
         assert isinstance(resource, AccountHolder)
 
     @parametrize
-    def test_method_create_with_optional_params(self, client: Lithic) -> None:
+    def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
         resource = client.account_holders.create(
-            {
-                "business_entity": {
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dba_business_name": "string",
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "parent_company": "string",
+                "phone_numbers": ["+12124007676"],
+            },
+            beneficial_owner_entities=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -184,104 +189,39 @@ class TestAccountHolders:
                     "parent_company": "string",
                     "phone_numbers": ["+12124007676"],
                 },
-                "beneficial_owner_entities": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                    "dba_business_name": "string",
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "parent_company": "string",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
-                    },
-                ],
-                "beneficial_owner_individuals": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                ],
-                "control_person": {
+                    "dba_business_name": "string",
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "parent_company": "string",
+                    "phone_numbers": ["+12124007676"],
+                },
+            ],
+            beneficial_owner_individuals=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -297,11 +237,140 @@ class TestAccountHolders:
                     "last_name": "Bombadil",
                     "phone_number": "+12124007676",
                 },
-                "kyb_passed_timestamp": "2022-03-08 08:00:00",
-                "nature_of_business": "Software company selling solutions to the restaurant industry",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "website_url": "www.mybusiness.com",
-                "workflow": "KYB_BASIC",
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+            ],
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            kyb_passed_timestamp="2022-03-08 08:00:00",
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2022-03-08 08:00:00",
+            website_url="www.mybusiness.com",
+            workflow="KYB_BASIC",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    def test_method_create_overload_2(self, client: Lithic) -> None:
+        resource = client.account_holders.create(
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            tos_timestamp="2022-03-08 08:00:00",
+            workflow="KYC_ADVANCED",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
+        resource = client.account_holders.create(
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            kyc_passed_timestamp="2022-03-09 08:00:00",
+            tos_timestamp="2022-03-08 08:00:00",
+            workflow="KYC_ADVANCED",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    def test_method_create_overload_3(self, client: Lithic) -> None:
+        resource = client.account_holders.create(
+            workflow="string",
+            kyc_exemption_type="string",
+            first_name="string",
+            last_name="string",
+            email="string",
+            phone_number="string",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
+        resource = client.account_holders.create(
+            workflow="string",
+            kyc_exemption_type="string",
+            first_name="string",
+            last_name="string",
+            email="string",
+            phone_number="string",
+            address={
+                "address1": "123 Old Forest Way",
+                "address2": "string",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
             },
         )
         assert isinstance(resource, AccountHolder)
@@ -317,32 +386,29 @@ class TestAccountHolders:
     def test_method_update(self, client: Lithic) -> None:
         resource = client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, AccountHolderUpdateResponse)
 
     @parametrize
-    def test_method_update_with_optional_params(self, client: Lithic) -> None:
+    def test_method_update_with_all_params(self, client: Lithic) -> None:
         resource = client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "email": "string",
-                "phone_number": "string",
-            },
+            email="string",
+            phone_number="string",
         )
         assert isinstance(resource, AccountHolderUpdateResponse)
 
     @parametrize
     def test_method_create_webhook(self, client: Lithic) -> None:
         resource = client.account_holders.create_webhook(
-            {"url": "string"},
+            url="string",
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     @parametrize
-    def test_method_create_webhook_with_optional_params(self, client: Lithic) -> None:
+    def test_method_create_webhook_with_all_params(self, client: Lithic) -> None:
         resource = client.account_holders.create_webhook(
-            {"url": "string"},
+            url="string",
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
@@ -357,52 +423,48 @@ class TestAccountHolders:
     def test_method_resubmit(self, client: Lithic) -> None:
         resource = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "workflow": "KYC_ADVANCED",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "individual": {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "address2": "string",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
+            workflow="KYC_ADVANCED",
+            tos_timestamp="2022-03-08 08:00:00",
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
                 },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
             },
         )
         assert isinstance(resource, AccountHolder)
 
     @parametrize
-    def test_method_resubmit_with_optional_params(self, client: Lithic) -> None:
+    def test_method_resubmit_with_all_params(self, client: Lithic) -> None:
         resource = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "workflow": "KYC_ADVANCED",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "individual": {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "address2": "string",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
+            workflow="KYC_ADVANCED",
+            tos_timestamp="2022-03-08 08:00:00",
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
                 },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
             },
         )
         assert isinstance(resource, AccountHolder)
@@ -419,15 +481,15 @@ class TestAccountHolders:
     def test_method_upload_document(self, client: Lithic) -> None:
         resource = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "commercial_license"},
+            document_type="commercial_license",
         )
         assert isinstance(resource, AccountHolderDocument)
 
     @parametrize
-    def test_method_upload_document_with_optional_params(self, client: Lithic) -> None:
+    def test_method_upload_document_with_all_params(self, client: Lithic) -> None:
         resource = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "commercial_license"},
+            document_type="commercial_license",
         )
         assert isinstance(resource, AccountHolderDocument)
 
@@ -438,10 +500,23 @@ class TestAsyncAccountHolders:
     parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
 
     @parametrize
-    async def test_method_create(self, client: AsyncLithic) -> None:
+    async def test_method_create_overload_1(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create(
-            {
-                "business_entity": {
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "phone_numbers": ["+12124007676"],
+            },
+            beneficial_owner_entities=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -450,110 +525,39 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
                     "phone_numbers": ["+12124007676"],
                 },
-                "beneficial_owner_entities": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
-                    },
-                ],
-                "beneficial_owner_individuals": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                ],
-                "control_person": {
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+            ],
+            beneficial_owner_individuals=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -569,19 +573,82 @@ class TestAsyncAccountHolders:
                     "last_name": "Bombadil",
                     "phone_number": "+12124007676",
                 },
-                "nature_of_business": "Software company selling solutions to the restaurant industry",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "website_url": "www.mybusiness.com",
-                "workflow": "KYB_BASIC",
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+            ],
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
             },
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2022-03-08 08:00:00",
+            website_url="www.mybusiness.com",
+            workflow="KYB_BASIC",
         )
         assert isinstance(resource, AccountHolder)
 
     @parametrize
-    async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_create_with_all_params_overload_1(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create(
-            {
-                "business_entity": {
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dba_business_name": "string",
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "parent_company": "string",
+                "phone_numbers": ["+12124007676"],
+            },
+            beneficial_owner_entities=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -596,104 +663,39 @@ class TestAsyncAccountHolders:
                     "parent_company": "string",
                     "phone_numbers": ["+12124007676"],
                 },
-                "beneficial_owner_entities": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
+                    "dba_business_name": "string",
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "parent_company": "string",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
                     },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dba_business_name": "string",
-                        "government_id": "114-123-1513",
-                        "legal_business_name": "Acme, Inc.",
-                        "parent_company": "string",
-                        "phone_numbers": ["+12124007676"],
-                    },
-                ],
-                "beneficial_owner_individuals": [
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                    {
-                        "address": {
-                            "address1": "123 Old Forest Way",
-                            "address2": "string",
-                            "city": "Omaha",
-                            "country": "USA",
-                            "postal_code": "68022",
-                            "state": "NE",
-                        },
-                        "dob": "1991-03-08 08:00:00",
-                        "email": "tom@middle-earth.com",
-                        "first_name": "Tom",
-                        "government_id": "111-23-1412",
-                        "last_name": "Bombadil",
-                        "phone_number": "+12124007676",
-                    },
-                ],
-                "control_person": {
+                    "dba_business_name": "string",
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "parent_company": "string",
+                    "phone_numbers": ["+12124007676"],
+                },
+            ],
+            beneficial_owner_individuals=[
+                {
                     "address": {
                         "address1": "123 Old Forest Way",
                         "address2": "string",
@@ -709,11 +711,140 @@ class TestAsyncAccountHolders:
                     "last_name": "Bombadil",
                     "phone_number": "+12124007676",
                 },
-                "kyb_passed_timestamp": "2022-03-08 08:00:00",
-                "nature_of_business": "Software company selling solutions to the restaurant industry",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "website_url": "www.mybusiness.com",
-                "workflow": "KYB_BASIC",
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "string",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+            ],
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            kyb_passed_timestamp="2022-03-08 08:00:00",
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2022-03-08 08:00:00",
+            website_url="www.mybusiness.com",
+            workflow="KYB_BASIC",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    async def test_method_create_overload_2(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create(
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            tos_timestamp="2022-03-08 08:00:00",
+            workflow="KYC_ADVANCED",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_2(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create(
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            kyc_passed_timestamp="2022-03-09 08:00:00",
+            tos_timestamp="2022-03-08 08:00:00",
+            workflow="KYC_ADVANCED",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    async def test_method_create_overload_3(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create(
+            workflow="string",
+            kyc_exemption_type="string",
+            first_name="string",
+            last_name="string",
+            email="string",
+            phone_number="string",
+        )
+        assert isinstance(resource, AccountHolder)
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_3(self, client: AsyncLithic) -> None:
+        resource = await client.account_holders.create(
+            workflow="string",
+            kyc_exemption_type="string",
+            first_name="string",
+            last_name="string",
+            email="string",
+            phone_number="string",
+            address={
+                "address1": "123 Old Forest Way",
+                "address2": "string",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
             },
         )
         assert isinstance(resource, AccountHolder)
@@ -729,32 +860,29 @@ class TestAsyncAccountHolders:
     async def test_method_update(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, AccountHolderUpdateResponse)
 
     @parametrize
-    async def test_method_update_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "email": "string",
-                "phone_number": "string",
-            },
+            email="string",
+            phone_number="string",
         )
         assert isinstance(resource, AccountHolderUpdateResponse)
 
     @parametrize
     async def test_method_create_webhook(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create_webhook(
-            {"url": "string"},
+            url="string",
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     @parametrize
-    async def test_method_create_webhook_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_create_webhook_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create_webhook(
-            {"url": "string"},
+            url="string",
         )
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
@@ -769,52 +897,48 @@ class TestAsyncAccountHolders:
     async def test_method_resubmit(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "workflow": "KYC_ADVANCED",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "individual": {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "address2": "string",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
+            workflow="KYC_ADVANCED",
+            tos_timestamp="2022-03-08 08:00:00",
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
                 },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
             },
         )
         assert isinstance(resource, AccountHolder)
 
     @parametrize
-    async def test_method_resubmit_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_resubmit_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "workflow": "KYC_ADVANCED",
-                "tos_timestamp": "2022-03-08 08:00:00",
-                "individual": {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "address2": "string",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
+            workflow="KYC_ADVANCED",
+            tos_timestamp="2022-03-08 08:00:00",
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
                 },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
             },
         )
         assert isinstance(resource, AccountHolder)
@@ -831,14 +955,14 @@ class TestAsyncAccountHolders:
     async def test_method_upload_document(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "commercial_license"},
+            document_type="commercial_license",
         )
         assert isinstance(resource, AccountHolderDocument)
 
     @parametrize
-    async def test_method_upload_document_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_upload_document_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"document_type": "commercial_license"},
+            document_type="commercial_license",
         )
         assert isinstance(resource, AccountHolderDocument)

@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 import os
+import json
 import inspect
+from typing import Dict, cast
 
 import httpx
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from lithic._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
 from lithic._models import FinalRequestOptions
-from lithic._base_client import BaseClient
+from lithic._base_client import BaseClient, RequestOptions
+from lithic._base_client import make_request_options as _make_request_options
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -20,6 +24,30 @@ def _get_params(client: BaseClient) -> dict[str, str]:
     request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
     url = httpx.URL(request.url)
     return dict(url.params)
+
+
+# Wrapper over the standard `make_request_options()` that makes every argument optional
+# for convenience. We don't want to do the same for the standard `make_request_options()` function
+# as it might let bugs slip through if we ever forget to pass in an option.
+def make_request_options(
+    headers: Headers | NotGiven = NOT_GIVEN,
+    max_retries: int | NotGiven = NOT_GIVEN,
+    timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+    query: Query | None = None,
+    *,
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Query | None = None,
+) -> RequestOptions:
+    return _make_request_options(
+        headers=headers,
+        max_retries=max_retries,
+        timeout=timeout,
+        query=query,
+        extra_headers=extra_headers,
+        extra_query=extra_query,
+        extra_body=extra_body,
+    )
 
 
 class TestLithic:
@@ -179,6 +207,118 @@ class TestLithic:
         url = httpx.URL(request.url)
         assert dict(url.params) == {"foo": "baz", "query_param": "overriden"}
 
+    def test_request_extra_json(self) -> None:
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar"},
+                extra_json={"baz": False},
+            ),
+        )
+        data = json.loads(request.content.decode("utf-8"))
+        assert data == {"foo": "bar", "baz": False}
+
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                extra_json={"baz": False},
+            ),
+        )
+        data = json.loads(request.content.decode("utf-8"))
+        assert data == {"baz": False}
+
+        # `extra_json` takes priority over `json_data` when keys clash
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar", "baz": True},
+                extra_json={"baz": None},
+            ),
+        )
+        data = json.loads(request.content.decode("utf-8"))
+        assert data == {"foo": "bar", "baz": None}
+
+    def test_request_extra_headers(self) -> None:
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(extra_headers={"X-Foo": "Foo"}),
+            ),
+        )
+        assert request.headers.get("X-Foo") == "Foo"
+
+        # if both `headers` and `extra_headers` are given, they are merged
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    headers={"X-Header": "1"},
+                    extra_headers={"X-Foo": "Foo"},
+                ),
+            ),
+        )
+        assert request.headers.get("X-Foo") == "Foo"
+        assert request.headers.get("X-Header") == "1"
+
+        # `extra_headers` takes priority over `headers` when keys clash
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    headers={"X-Bar": "true"},
+                    extra_headers={"X-Bar": "false"},
+                ),
+            ),
+        )
+        assert request.headers.get("X-Bar") == "false"
+
+    def test_request_extra_query(self) -> None:
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    extra_query={"my_query_param": "Foo"},
+                ),
+            ),
+        )
+        params = cast(Dict[str, str], dict(request.url.params))
+        assert params == {"my_query_param": "Foo"}
+
+        # if both `query` and `extra_query` are given, they are merged
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    query={"bar": "1"},
+                    extra_query={"foo": "2"},
+                ),
+            ),
+        )
+        params = cast(Dict[str, str], dict(request.url.params))
+        assert params == {"bar": "1", "foo": "2"}
+
+        # `extra_query` takes priority over `query` when keys clash
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    query={"foo": "1"},
+                    extra_query={"foo": "2"},
+                ),
+            ),
+        )
+        params = cast(Dict[str, str], dict(request.url.params))
+        assert params == {"foo": "2"}
+
 
 class TestAsyncLithic:
     client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -336,3 +476,115 @@ class TestAsyncLithic:
         )
         url = httpx.URL(request.url)
         assert dict(url.params) == {"foo": "baz", "query_param": "overriden"}
+
+    def test_request_extra_json(self) -> None:
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar"},
+                extra_json={"baz": False},
+            ),
+        )
+        data = json.loads(request.content.decode("utf-8"))
+        assert data == {"foo": "bar", "baz": False}
+
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                extra_json={"baz": False},
+            ),
+        )
+        data = json.loads(request.content.decode("utf-8"))
+        assert data == {"baz": False}
+
+        # `extra_json` takes priority over `json_data` when keys clash
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar", "baz": True},
+                extra_json={"baz": None},
+            ),
+        )
+        data = json.loads(request.content.decode("utf-8"))
+        assert data == {"foo": "bar", "baz": None}
+
+    def test_request_extra_headers(self) -> None:
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(extra_headers={"X-Foo": "Foo"}),
+            ),
+        )
+        assert request.headers.get("X-Foo") == "Foo"
+
+        # if both `headers` and `extra_headers` are given, they are merged
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    headers={"X-Header": "1"},
+                    extra_headers={"X-Foo": "Foo"},
+                ),
+            ),
+        )
+        assert request.headers.get("X-Foo") == "Foo"
+        assert request.headers.get("X-Header") == "1"
+
+        # `extra_headers` takes priority over `headers` when keys clash
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    headers={"X-Bar": "true"},
+                    extra_headers={"X-Bar": "false"},
+                ),
+            ),
+        )
+        assert request.headers.get("X-Bar") == "false"
+
+    def test_request_extra_query(self) -> None:
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    extra_query={"my_query_param": "Foo"},
+                ),
+            ),
+        )
+        params = cast(Dict[str, str], dict(request.url.params))
+        assert params == {"my_query_param": "Foo"}
+
+        # if both `query` and `extra_query` are given, they are merged
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    query={"bar": "1"},
+                    extra_query={"foo": "2"},
+                ),
+            ),
+        )
+        params = cast(Dict[str, str], dict(request.url.params))
+        assert params == {"bar": "1", "foo": "2"}
+
+        # `extra_query` takes priority over `query` when keys clash
+        request = self.client.build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                **make_request_options(
+                    query={"foo": "1"},
+                    extra_query={"foo": "2"},
+                ),
+            ),
+        )
+        params = cast(Dict[str, str], dict(request.url.params))
+        assert params == {"foo": "2"}

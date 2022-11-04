@@ -24,24 +24,20 @@ class TestAuthRules:
 
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
-        resource = client.auth_rules.create(
-            {},
-        )
+        resource = client.auth_rules.create()
         assert isinstance(resource, AuthRuleCreateResponse)
 
     @parametrize
-    def test_method_create_with_optional_params(self, client: Lithic) -> None:
+    def test_method_create_with_all_params(self, client: Lithic) -> None:
         resource = client.auth_rules.create(
-            {
-                "allowed_mcc": ["string", "string", "string"],
-                "blocked_mcc": ["string", "string", "string"],
-                "allowed_countries": ["string", "string", "string"],
-                "blocked_countries": ["string", "string", "string"],
-                "avs_type": "ZIP_ONLY",
-                "account_tokens": ["string", "string", "string"],
-                "card_tokens": ["string", "string", "string"],
-                "program_level": False,
-            },
+            allowed_mcc=["string", "string", "string"],
+            blocked_mcc=["string", "string", "string"],
+            allowed_countries=["string", "string", "string"],
+            blocked_countries=["string", "string", "string"],
+            avs_type="ZIP_ONLY",
+            account_tokens=["string", "string", "string"],
+            card_tokens=["string", "string", "string"],
+            program_level=False,
         )
         assert isinstance(resource, AuthRuleCreateResponse)
 
@@ -56,21 +52,18 @@ class TestAuthRules:
     def test_method_update(self, client: Lithic) -> None:
         resource = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
     @parametrize
-    def test_method_update_with_optional_params(self, client: Lithic) -> None:
+    def test_method_update_with_all_params(self, client: Lithic) -> None:
         resource = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "allowed_mcc": ["string", "string", "string"],
-                "blocked_mcc": ["string", "string", "string"],
-                "allowed_countries": ["string", "string", "string"],
-                "blocked_countries": ["string", "string", "string"],
-                "avs_type": "ZIP_ONLY",
-            },
+            allowed_mcc=["string", "string", "string"],
+            blocked_mcc=["string", "string", "string"],
+            allowed_countries=["string", "string", "string"],
+            blocked_countries=["string", "string", "string"],
+            avs_type="ZIP_ONLY",
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
@@ -80,12 +73,10 @@ class TestAuthRules:
         assert isinstance(resource, SyncPage)
 
     @parametrize
-    def test_method_list_with_optional_params(self, client: Lithic) -> None:
+    def test_method_list_with_all_params(self, client: Lithic) -> None:
         resource = client.auth_rules.list(
-            {
-                "page": 0,
-                "page_size": 1,
-            },
+            page=0,
+            page_size=1,
         )
         assert isinstance(resource, SyncPage)
 
@@ -93,37 +84,30 @@ class TestAuthRules:
     def test_method_apply(self, client: Lithic) -> None:
         resource = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
     @parametrize
-    def test_method_apply_with_optional_params(self, client: Lithic) -> None:
+    def test_method_apply_with_all_params(self, client: Lithic) -> None:
         resource = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "card_tokens": ["string", "string", "string"],
-                "account_tokens": ["string", "string", "string"],
-                "program_level": True,
-            },
+            card_tokens=["string", "string", "string"],
+            account_tokens=["string", "string", "string"],
+            program_level=True,
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
     @parametrize
     def test_method_remove(self, client: Lithic) -> None:
-        resource = client.auth_rules.remove(
-            {},
-        )
+        resource = client.auth_rules.remove()
         assert isinstance(resource, AuthRuleRemoveResponse)
 
     @parametrize
-    def test_method_remove_with_optional_params(self, client: Lithic) -> None:
+    def test_method_remove_with_all_params(self, client: Lithic) -> None:
         resource = client.auth_rules.remove(
-            {
-                "card_tokens": ["string", "string", "string"],
-                "account_tokens": ["string", "string", "string"],
-                "program_level": True,
-            },
+            card_tokens=["string", "string", "string"],
+            account_tokens=["string", "string", "string"],
+            program_level=True,
         )
         assert isinstance(resource, AuthRuleRemoveResponse)
 
@@ -135,24 +119,20 @@ class TestAsyncAuthRules:
 
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.create(
-            {},
-        )
+        resource = await client.auth_rules.create()
         assert isinstance(resource, AuthRuleCreateResponse)
 
     @parametrize
-    async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.auth_rules.create(
-            {
-                "allowed_mcc": ["string", "string", "string"],
-                "blocked_mcc": ["string", "string", "string"],
-                "allowed_countries": ["string", "string", "string"],
-                "blocked_countries": ["string", "string", "string"],
-                "avs_type": "ZIP_ONLY",
-                "account_tokens": ["string", "string", "string"],
-                "card_tokens": ["string", "string", "string"],
-                "program_level": False,
-            },
+            allowed_mcc=["string", "string", "string"],
+            blocked_mcc=["string", "string", "string"],
+            allowed_countries=["string", "string", "string"],
+            blocked_countries=["string", "string", "string"],
+            avs_type="ZIP_ONLY",
+            account_tokens=["string", "string", "string"],
+            card_tokens=["string", "string", "string"],
+            program_level=False,
         )
         assert isinstance(resource, AuthRuleCreateResponse)
 
@@ -167,21 +147,18 @@ class TestAsyncAuthRules:
     async def test_method_update(self, client: AsyncLithic) -> None:
         resource = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
     @parametrize
-    async def test_method_update_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "allowed_mcc": ["string", "string", "string"],
-                "blocked_mcc": ["string", "string", "string"],
-                "allowed_countries": ["string", "string", "string"],
-                "blocked_countries": ["string", "string", "string"],
-                "avs_type": "ZIP_ONLY",
-            },
+            allowed_mcc=["string", "string", "string"],
+            blocked_mcc=["string", "string", "string"],
+            allowed_countries=["string", "string", "string"],
+            blocked_countries=["string", "string", "string"],
+            avs_type="ZIP_ONLY",
         )
         assert isinstance(resource, AuthRuleUpdateResponse)
 
@@ -191,12 +168,10 @@ class TestAsyncAuthRules:
         assert isinstance(resource, AsyncPage)
 
     @parametrize
-    async def test_method_list_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.auth_rules.list(
-            {
-                "page": 0,
-                "page_size": 1,
-            },
+            page=0,
+            page_size=1,
         )
         assert isinstance(resource, AsyncPage)
 
@@ -204,36 +179,29 @@ class TestAsyncAuthRules:
     async def test_method_apply(self, client: AsyncLithic) -> None:
         resource = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
     @parametrize
-    async def test_method_apply_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_apply_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "card_tokens": ["string", "string", "string"],
-                "account_tokens": ["string", "string", "string"],
-                "program_level": True,
-            },
+            card_tokens=["string", "string", "string"],
+            account_tokens=["string", "string", "string"],
+            program_level=True,
         )
         assert isinstance(resource, AuthRuleApplyResponse)
 
     @parametrize
     async def test_method_remove(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.remove(
-            {},
-        )
+        resource = await client.auth_rules.remove()
         assert isinstance(resource, AuthRuleRemoveResponse)
 
     @parametrize
-    async def test_method_remove_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_remove_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.auth_rules.remove(
-            {
-                "card_tokens": ["string", "string", "string"],
-                "account_tokens": ["string", "string", "string"],
-                "program_level": True,
-            },
+            card_tokens=["string", "string", "string"],
+            account_tokens=["string", "string", "string"],
+            program_level=True,
         )
         assert isinstance(resource, AuthRuleRemoveResponse)

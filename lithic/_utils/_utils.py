@@ -1,6 +1,9 @@
 from __future__ import annotations
 
-from typing import Mapping, TypeVar, Iterable, Sequence, cast
+import inspect
+import warnings
+import functools
+from typing import Any, Mapping, TypeVar, Callable, Iterable, Sequence, cast
 from typing_extensions import Required, Annotated, TypeGuard, get_args, get_origin
 
 from pydantic.typing import is_union as _is_union
@@ -8,6 +11,7 @@ from pydantic.typing import is_union as _is_union
 from .._types import FileTypes
 
 _T = TypeVar("_T")
+CallableT = TypeVar("CallableT", bound=Callable[..., Any])
 
 
 def flatten(t: Iterable[Iterable[_T]]) -> list[_T]:
@@ -154,3 +158,142 @@ def deepcopy_minimal(item: _T) -> _T:
     if is_list(item):
         return cast(_T, [deepcopy_minimal(entry) for entry in item])
     return item
+
+
+# copied from https://github.com/Rapptz/RoboDanny
+def human_join(seq: Sequence[str], *, delim: str = ", ", final: str = "or") -> str:
+    size = len(seq)
+    if size == 0:
+        return ""
+
+    if size == 1:
+        return seq[0]
+
+    if size == 2:
+        return f"{seq[0]} {final} {seq[1]}"
+
+    return delim.join(seq[:-1]) + f" {final} {seq[-1]}"
+
+
+def quote(string: str) -> str:
+    """Add single quotation marks around the given string. Does *not* do any escaping."""
+    return "'" + string + "'"
+
+
+def required_args(*variants: Sequence[str]) -> Callable[[CallableT], CallableT]:
+    """Decorator to enforce a given set of arguments or variants of arguments are passed to the decorated function.
+
+    Useful for enforcing runtime validation of overloaded functions.
+
+    Example usage:
+    ```py
+    @overload
+    def foo(*, a: str) -> str:
+        ...
+
+    @overload
+    def foo(*, b: bool) -> str:
+        ...
+
+    # This enforces the same constraints that a static type checker would
+    # i.e. that either a or b must be passed to the function
+    @required_args(['a'], ['b'])
+    def foo(*, a: str | None = None, b: bool | None = None) -> str:
+        ...
+    ```
+    """
+
+    def inner(func: CallableT) -> CallableT:
+        params = inspect.signature(func).parameters
+        positional = [
+            name
+            for name, param in params.items()
+            if param.kind
+            in {
+                param.POSITIONAL_ONLY,
+                param.POSITIONAL_OR_KEYWORD,
+            }
+        ]
+
+        @functools.wraps(func)
+        def wrapper(*args: object, **kwargs: object) -> object:
+            given_params: set[str] = set()
+            for i, _ in enumerate(args):
+                try:
+                    given_params.add(positional[i])
+                except IndexError:
+                    raise TypeError(f"{func.__name__}() takes {len(positional)} argument(s) but {len(args)} were given")
+
+            for key in kwargs.keys():
+                given_params.add(key)
+
+            for variant in variants:
+                matches = all((param in given_params for param in variant))
+                if matches:
+                    break
+            else:  # no break
+                if len(variants) > 1:
+                    variations = human_join(
+                        ["(" + human_join([quote(arg) for arg in variant], final="and") + ")" for variant in variants]
+                    )
+                    msg = f"Missing required arguments; Expected either {variations} arguments to be given"
+                else:
+                    # TODO: this error message is not deterministic
+                    missing = list(set(variants[0]) - given_params)
+                    if len(missing) > 1:
+                        msg = f"Missing required arguments: {human_join([quote(arg) for arg in missing])}"
+                    else:
+                        msg = f"Missing required argument: {quote(missing[0])}"
+                raise TypeError(msg)
+            return func(*args, **kwargs)
+
+        return wrapper  # type: ignore
+
+    return inner
+
+
+def deprecated_positional_args(
+    *deprecated_args: str,
+) -> Callable[[CallableT], CallableT]:
+    """Decorator that issues deprecation warnings if a given set of arguments are passed positionally.
+
+    Example usage:
+    ```py
+    @deprecated_positional_args('b')
+    def foo(a: str, b: int) -> None:
+        ...
+
+    # issues a deprecation warning about the `b` argument.
+    foo('bar', 1)
+
+    # does not issue a deprecation warning.
+    foo('bar', b=1)
+    ```
+    """
+
+    def inner(func: CallableT) -> CallableT:
+        positional = [
+            name
+            for name, param in inspect.signature(func).parameters.items()
+            if param.kind
+            in {
+                param.POSITIONAL_ONLY,
+                param.POSITIONAL_OR_KEYWORD,
+            }
+            and name in deprecated_args
+        ]
+
+        @functools.wraps(func)
+        def wrapper(*args: object, **kwargs: object) -> object:
+            for name, _ in zip(positional, args):
+                warnings.warn(
+                    f"The `{name}` argument being passed as positional argument is deprecated, please use a named argument instead",
+                    DeprecationWarning,
+                    stacklevel=3,
+                )
+
+            return func(*args, **kwargs)
+
+        return wrapper  # type: ignore
+
+    return inner

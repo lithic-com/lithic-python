@@ -22,41 +22,39 @@ class TestCards:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         resource = client.cards.create(
-            {"type": "VIRTUAL"},
+            type="VIRTUAL",
         )
         assert isinstance(resource, Card)
 
     @parametrize
-    def test_method_create_with_optional_params(self, client: Lithic) -> None:
+    def test_method_create_with_all_params(self, client: Lithic) -> None:
         resource = client.cards.create(
-            {
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "card_program_token": "00000000-0000-0000-1000-000000000000",
-                "exp_month": "06",
-                "exp_year": "2027",
-                "funding_token": "ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
-                "memo": "New Card",
-                "spend_limit": 0,
-                "spend_limit_duration": "ANNUALLY",
-                "state": "OPEN",
-                "type": "VIRTUAL",
-                "pin": "string",
-                "product_id": "1",
-                "shipping_address": {
-                    "first_name": "Michael",
-                    "last_name": "Bluth",
-                    "line2_text": "The Bluth Company",
-                    "address1": "5 Broad Street",
-                    "address2": "Unit 25A",
-                    "city": "NEW YORK",
-                    "state": "NY",
-                    "postal_code": "10001-1809",
-                    "country": "USA",
-                    "email": "johnny@appleseed.com",
-                    "phone_number": "+12124007676",
-                },
-                "shipping_method": "STANDARD",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_program_token="00000000-0000-0000-1000-000000000000",
+            exp_month="06",
+            exp_year="2027",
+            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
+            memo="New Card",
+            spend_limit=0,
+            spend_limit_duration="ANNUALLY",
+            state="OPEN",
+            type="VIRTUAL",
+            pin="string",
+            product_id="1",
+            shipping_address={
+                "first_name": "Michael",
+                "last_name": "Bluth",
+                "line2_text": "The Bluth Company",
+                "address1": "5 Broad Street",
+                "address2": "Unit 25A",
+                "city": "NEW YORK",
+                "state": "NY",
+                "postal_code": "10001-1809",
+                "country": "USA",
+                "email": "johnny@appleseed.com",
+                "phone_number": "+12124007676",
             },
+            shipping_method="STANDARD",
         )
         assert isinstance(resource, Card)
 
@@ -68,10 +66,10 @@ class TestCards:
         assert isinstance(resource, Card)
 
     @parametrize
-    def test_method_retrieve_with_optional_params(self, client: Lithic) -> None:
+    def test_method_retrieve_with_all_params(self, client: Lithic) -> None:
         resource = client.cards.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, Card)
 
@@ -79,24 +77,21 @@ class TestCards:
     def test_method_update(self, client: Lithic) -> None:
         resource = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, Card)
 
     @parametrize
-    def test_method_update_with_optional_params(self, client: Lithic) -> None:
+    def test_method_update_with_all_params(self, client: Lithic) -> None:
         resource = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "funding_token": "ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
-                "memo": "New Card",
-                "spend_limit": 0,
-                "spend_limit_duration": "ANNUALLY",
-                "auth_rule_token": "string",
-                "state": "CLOSED",
-                "pin": "string",
-            },
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
+            memo="New Card",
+            spend_limit=0,
+            spend_limit_duration="ANNUALLY",
+            auth_rule_token="string",
+            state="CLOSED",
+            pin="string",
         )
         assert isinstance(resource, Card)
 
@@ -106,15 +101,13 @@ class TestCards:
         assert isinstance(resource, SyncPage)
 
     @parametrize
-    def test_method_list_with_optional_params(self, client: Lithic) -> None:
+    def test_method_list_with_all_params(self, client: Lithic) -> None:
         resource = client.cards.list(
-            {
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "begin": "2019-12-27T18:11:19.117Z",
-                "end": "2019-12-27T18:11:19.117Z",
-                "page": 0,
-                "page_size": 1,
-            },
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin="2019-12-27T18:11:19.117Z",
+            end="2019-12-27T18:11:19.117Z",
+            page=0,
+            page_size=1,
         )
         assert isinstance(resource, SyncPage)
 
@@ -124,21 +117,19 @@ class TestCards:
         assert isinstance(resource, str)
 
     @parametrize
-    def test_method_embed_with_optional_params(self, client: Lithic) -> None:
+    def test_method_embed_with_all_params(self, client: Lithic) -> None:
         resource = client.cards.embed(
-            {
-                "embed_request": "string",
-                "hmac": "string",
-            },
+            embed_request="string",
+            hmac="string",
         )
         assert isinstance(resource, str)
 
     def test_get_embed_html(self) -> None:
-        html = self.strict_client.cards.get_embed_html({"token": "foo"})
+        html = self.strict_client.cards.get_embed_html(token="foo")
         assert "html" in html
 
     def test_get_embed_url(self) -> None:
-        url = self.strict_client.cards.get_embed_url({"token": "foo"})
+        url = self.strict_client.cards.get_embed_url(token="foo")
         params = set(  # pyright: ignore[reportUnknownVariableType]
             url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
         )
@@ -149,21 +140,18 @@ class TestCards:
     def test_method_provision(self, client: Lithic) -> None:
         resource = client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, CardProvisionResponse)
 
     @parametrize
-    def test_method_provision_with_optional_params(self, client: Lithic) -> None:
+    def test_method_provision_with_all_params(self, client: Lithic) -> None:
         resource = client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "digital_wallet": "APPLE_PAY",
-                "nonce": "U3RhaW5sZXNzIHJvY2tz",
-                "nonce_signature": "U3RhaW5sZXNzIHJvY2tz",
-                "certificate": "U3RhaW5sZXNzIHJvY2tz",
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
+            digital_wallet="APPLE_PAY",
+            nonce="U3RhaW5sZXNzIHJvY2tz",
+            nonce_signature="U3RhaW5sZXNzIHJvY2tz",
+            certificate="U3RhaW5sZXNzIHJvY2tz",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, CardProvisionResponse)
 
@@ -171,31 +159,28 @@ class TestCards:
     def test_method_reissue(self, client: Lithic) -> None:
         resource = client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, Card)
 
     @parametrize
-    def test_method_reissue_with_optional_params(self, client: Lithic) -> None:
+    def test_method_reissue_with_all_params(self, client: Lithic) -> None:
         resource = client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "shipping_address": {
-                    "first_name": "Michael",
-                    "last_name": "Bluth",
-                    "line2_text": "The Bluth Company",
-                    "address1": "5 Broad Street",
-                    "address2": "Unit 25A",
-                    "city": "NEW YORK",
-                    "state": "NY",
-                    "postal_code": "10001-1809",
-                    "country": "USA",
-                    "email": "johnny@appleseed.com",
-                    "phone_number": "+12124007676",
-                },
-                "shipping_method": "STANDARD",
-                "product_id": "string",
+            shipping_address={
+                "first_name": "Michael",
+                "last_name": "Bluth",
+                "line2_text": "The Bluth Company",
+                "address1": "5 Broad Street",
+                "address2": "Unit 25A",
+                "city": "NEW YORK",
+                "state": "NY",
+                "postal_code": "10001-1809",
+                "country": "USA",
+                "email": "johnny@appleseed.com",
+                "phone_number": "+12124007676",
             },
+            shipping_method="STANDARD",
+            product_id="string",
         )
         assert isinstance(resource, Card)
 
@@ -208,41 +193,39 @@ class TestAsyncCards:
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
         resource = await client.cards.create(
-            {"type": "VIRTUAL"},
+            type="VIRTUAL",
         )
         assert isinstance(resource, Card)
 
     @parametrize
-    async def test_method_create_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.cards.create(
-            {
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "card_program_token": "00000000-0000-0000-1000-000000000000",
-                "exp_month": "06",
-                "exp_year": "2027",
-                "funding_token": "ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
-                "memo": "New Card",
-                "spend_limit": 0,
-                "spend_limit_duration": "ANNUALLY",
-                "state": "OPEN",
-                "type": "VIRTUAL",
-                "pin": "string",
-                "product_id": "1",
-                "shipping_address": {
-                    "first_name": "Michael",
-                    "last_name": "Bluth",
-                    "line2_text": "The Bluth Company",
-                    "address1": "5 Broad Street",
-                    "address2": "Unit 25A",
-                    "city": "NEW YORK",
-                    "state": "NY",
-                    "postal_code": "10001-1809",
-                    "country": "USA",
-                    "email": "johnny@appleseed.com",
-                    "phone_number": "+12124007676",
-                },
-                "shipping_method": "STANDARD",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_program_token="00000000-0000-0000-1000-000000000000",
+            exp_month="06",
+            exp_year="2027",
+            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
+            memo="New Card",
+            spend_limit=0,
+            spend_limit_duration="ANNUALLY",
+            state="OPEN",
+            type="VIRTUAL",
+            pin="string",
+            product_id="1",
+            shipping_address={
+                "first_name": "Michael",
+                "last_name": "Bluth",
+                "line2_text": "The Bluth Company",
+                "address1": "5 Broad Street",
+                "address2": "Unit 25A",
+                "city": "NEW YORK",
+                "state": "NY",
+                "postal_code": "10001-1809",
+                "country": "USA",
+                "email": "johnny@appleseed.com",
+                "phone_number": "+12124007676",
             },
+            shipping_method="STANDARD",
         )
         assert isinstance(resource, Card)
 
@@ -254,10 +237,10 @@ class TestAsyncCards:
         assert isinstance(resource, Card)
 
     @parametrize
-    async def test_method_retrieve_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_retrieve_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.cards.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {"account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, Card)
 
@@ -265,24 +248,21 @@ class TestAsyncCards:
     async def test_method_update(self, client: AsyncLithic) -> None:
         resource = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, Card)
 
     @parametrize
-    async def test_method_update_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "funding_token": "ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
-                "memo": "New Card",
-                "spend_limit": 0,
-                "spend_limit_duration": "ANNUALLY",
-                "auth_rule_token": "string",
-                "state": "CLOSED",
-                "pin": "string",
-            },
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
+            memo="New Card",
+            spend_limit=0,
+            spend_limit_duration="ANNUALLY",
+            auth_rule_token="string",
+            state="CLOSED",
+            pin="string",
         )
         assert isinstance(resource, Card)
 
@@ -292,15 +272,13 @@ class TestAsyncCards:
         assert isinstance(resource, AsyncPage)
 
     @parametrize
-    async def test_method_list_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.cards.list(
-            {
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "begin": "2019-12-27T18:11:19.117Z",
-                "end": "2019-12-27T18:11:19.117Z",
-                "page": 0,
-                "page_size": 1,
-            },
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin="2019-12-27T18:11:19.117Z",
+            end="2019-12-27T18:11:19.117Z",
+            page=0,
+            page_size=1,
         )
         assert isinstance(resource, AsyncPage)
 
@@ -310,21 +288,19 @@ class TestAsyncCards:
         assert isinstance(resource, str)
 
     @parametrize
-    async def test_method_embed_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_embed_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.cards.embed(
-            {
-                "embed_request": "string",
-                "hmac": "string",
-            },
+            embed_request="string",
+            hmac="string",
         )
         assert isinstance(resource, str)
 
     async def test_get_embed_html(self) -> None:
-        html = await self.strict_client.cards.get_embed_html({"token": "foo"})
+        html = await self.strict_client.cards.get_embed_html(token="foo")
         assert "html" in html
 
     def test_get_embed_url(self) -> None:
-        url = self.strict_client.cards.get_embed_url({"token": "foo"})
+        url = self.strict_client.cards.get_embed_url(token="foo")
         params = set(  # pyright: ignore[reportUnknownVariableType]
             url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
         )
@@ -335,21 +311,18 @@ class TestAsyncCards:
     async def test_method_provision(self, client: AsyncLithic) -> None:
         resource = await client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, CardProvisionResponse)
 
     @parametrize
-    async def test_method_provision_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_provision_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "digital_wallet": "APPLE_PAY",
-                "nonce": "U3RhaW5sZXNzIHJvY2tz",
-                "nonce_signature": "U3RhaW5sZXNzIHJvY2tz",
-                "certificate": "U3RhaW5sZXNzIHJvY2tz",
-                "account_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
+            digital_wallet="APPLE_PAY",
+            nonce="U3RhaW5sZXNzIHJvY2tz",
+            nonce_signature="U3RhaW5sZXNzIHJvY2tz",
+            certificate="U3RhaW5sZXNzIHJvY2tz",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, CardProvisionResponse)
 
@@ -357,30 +330,27 @@ class TestAsyncCards:
     async def test_method_reissue(self, client: AsyncLithic) -> None:
         resource = await client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, Card)
 
     @parametrize
-    async def test_method_reissue_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_reissue_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "shipping_address": {
-                    "first_name": "Michael",
-                    "last_name": "Bluth",
-                    "line2_text": "The Bluth Company",
-                    "address1": "5 Broad Street",
-                    "address2": "Unit 25A",
-                    "city": "NEW YORK",
-                    "state": "NY",
-                    "postal_code": "10001-1809",
-                    "country": "USA",
-                    "email": "johnny@appleseed.com",
-                    "phone_number": "+12124007676",
-                },
-                "shipping_method": "STANDARD",
-                "product_id": "string",
+            shipping_address={
+                "first_name": "Michael",
+                "last_name": "Bluth",
+                "line2_text": "The Bluth Company",
+                "address1": "5 Broad Street",
+                "address2": "Unit 25A",
+                "city": "NEW YORK",
+                "state": "NY",
+                "postal_code": "10001-1809",
+                "country": "USA",
+                "email": "johnny@appleseed.com",
+                "phone_number": "+12124007676",
             },
+            shipping_method="STANDARD",
+            product_id="string",
         )
         assert isinstance(resource, Card)

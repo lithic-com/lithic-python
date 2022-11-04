@@ -197,10 +197,9 @@ class KYBBeneficialOwnerIndividuals(TypedDict, total=False):
     """Individual's date of birth, as an ISO 8601 date."""
 
     email: Required[str]
-    """Individual's email address.
-
-    If utilizing Lithic for chargeback processing, this customer email address may
-    be used to communicate dispute status and resolution.
+    """
+    Individual's email address. If utilizing Lithic for chargeback processing, this
+    customer email address may be used to communicate dispute status and resolution.
     """
 
     first_name: Required[str]
@@ -264,10 +263,9 @@ class KYBControlPerson(TypedDict, total=False):
     """Individual's date of birth, as an ISO 8601 date."""
 
     email: Required[str]
-    """Individual's email address.
-
-    If utilizing Lithic for chargeback processing, this customer email address may
-    be used to communicate dispute status and resolution.
+    """
+    Individual's email address. If utilizing Lithic for chargeback processing, this
+    customer email address may be used to communicate dispute status and resolution.
     """
 
     first_name: Required[str]
@@ -400,10 +398,9 @@ class KYCIndividual(TypedDict, total=False):
     """Individual's date of birth, as an ISO 8601 date."""
 
     email: Required[str]
-    """Individual's email address.
-
-    If utilizing Lithic for chargeback processing, this customer email address may
-    be used to communicate dispute status and resolution.
+    """
+    Individual's email address. If utilizing Lithic for chargeback processing, this
+    customer email address may be used to communicate dispute status and resolution.
     """
 
     first_name: Required[str]

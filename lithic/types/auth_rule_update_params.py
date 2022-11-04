@@ -10,10 +10,9 @@ __all__ = ["AuthRuleUpdateParams"]
 
 class AuthRuleUpdateParams(TypedDict, total=False):
     allowed_countries: List[str]
-    """Array of country codes for which the Auth Rule will permit transactions.
-
-    Note that only this field or `blocked_countries` can be used for a given Auth
-    Rule.
+    """
+    Array of country codes for which the Auth Rule will permit transactions. Note
+    that only this field or `blocked_countries` can be used for a given Auth Rule.
     """
 
     allowed_mcc: List[str]

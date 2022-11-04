@@ -50,7 +50,7 @@ from ._types import (
     UnknownResponse,
     ModelBuilderProtocol,
 )
-from ._utils import is_dict
+from ._utils import is_dict, is_mapping
 from ._models import BaseModel, GenericModel, FinalRequestOptions
 from ._base_exceptions import (
     APIStatusError,
@@ -357,7 +357,16 @@ class BaseClient:
             headers[self._idempotency_header] = options.idempotency_key
 
         kwargs: dict[str, Any] = {}
-        params = _merge_mappings(self._custom_query, options.params)
+        json_data = strip_not_given(options.json_data)
+        if options.extra_json is not None:
+            if json_data is None:
+                json_data = options.extra_json
+            elif is_mapping(json_data):
+                json_data = _merge_mappings(json_data, options.extra_json)
+            else:
+                raise RuntimeError(f"Unexpected JSON data type, {type(json_data)}, cannot merge with `extra_body`")
+
+        params = _merge_mappings(self._custom_query, strip_not_given(options.params))
 
         # If the given Content-Type header is multipart/form-data then it
         # has to be removed so that httpx can generate the header with
@@ -369,12 +378,12 @@ class BaseClient:
 
             # As we are now sending multipart/form-data instead of application/json
             # we need to tell httpx to use it, https://www.python-httpx.org/advanced/#multipart-file-encoding
-            if options.json_data:
-                if not is_dict(options.json_data):
+            if json_data:
+                if not is_dict(json_data):
                     raise TypeError(
-                        f"Expected query input to be a dictionary for multipart requests but got {type(options.json_data)} instead."
+                        f"Expected query input to be a dictionary for multipart requests but got {type(json_data)} instead."
                     )
-                kwargs["data"] = self._serialize_multipartform(options.json_data)
+                kwargs["data"] = self._serialize_multipartform(json_data)
 
         # TODO: report this error to httpx
         return self._client.build_request(  # pyright: ignore[reportUnknownMemberType]
@@ -387,7 +396,7 @@ class BaseClient:
             # so that passing a `TypedDict` doesn't cause an error.
             # https://github.com/microsoft/pyright/issues/3526#event-6715453066
             params=self.qs.stringify(cast(Mapping[str, Any], params)) if params else None,
-            json=options.json_data,
+            json=json_data,
             files=options.files,
             **kwargs,
         )
@@ -906,20 +915,46 @@ def make_request_options(
     max_retries: int | NotGiven,
     timeout: float | Timeout | None | NotGiven,
     query: Query | None,
+    *,
+    extra_headers: Headers | None,
+    extra_query: Query | None,
+    extra_body: Query | None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of NotGiven values."""
     options: RequestOptions = {}
     if not isinstance(headers, NotGiven):
         options["headers"] = headers
+        warnings.warn(
+            "The `headers` argument is deprecated. Please use `extra_headers` instead",
+            DeprecationWarning,
+            stacklevel=3,
+        )
+    if extra_headers is not None:
+        options["headers"] = {**options.get("headers", {}), **extra_headers}
 
     if not isinstance(max_retries, NotGiven):
         options["max_retries"] = max_retries
+        warnings.warn(
+            "The `max_retries` argument is deprecated. Please use client.with_options(max_retries=5).foo.create(...) instead",
+            DeprecationWarning,
+            stacklevel=3,
+        )
 
     if not isinstance(timeout, NotGiven):
         options["timeout"] = timeout
+        warnings.warn(
+            "The `timeout` argument is deprecated. Please use client.with_options(timeout=httpx.Timeout(...)).foo.create(...) instead",
+            DeprecationWarning,
+            stacklevel=3,
+        )
 
     if query is not None:
         options["params"] = query
+    if extra_query is not None:
+        options["params"] = {**options.get("params", {}), **extra_query}
+
+    if extra_body is not None:
+        options["extra_json"] = extra_body
 
     return options
 
@@ -1029,3 +1064,31 @@ def _merge_mappings(
     """
     merged = {**obj1, **obj2}
     return {key: value for key, value in merged.items() if not isinstance(value, Omit)}
+
+
+_K = TypeVar("_K")
+_V = TypeVar("_V")
+
+
+@overload
+def strip_not_given(obj: None) -> None:
+    ...
+
+
+@overload
+def strip_not_given(obj: Mapping[_K, _V | NotGiven]) -> dict[_K, _V]:
+    ...
+
+
+@overload
+def strip_not_given(obj: object) -> object:
+    ...
+
+
+def strip_not_given(obj: object | None) -> object:
+    """Remove all top-level keys where their values are instances of `NotGiven`"""
+    if obj is None:
+        return None
+    if not is_mapping(obj):
+        return obj
+    return {key: value for key, value in obj.items() if not isinstance(value, NotGiven)}

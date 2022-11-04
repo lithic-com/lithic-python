@@ -13,8 +13,8 @@ from .card_create_params import CardCreateParams as CardCreateParams
 from .card_update_params import CardUpdateParams as CardUpdateParams
 from .account_list_params import AccountListParams as AccountListParams
 from .card_reissue_params import CardReissueParams as CardReissueParams
-from .embed_request_param import EmbedRequestParams as EmbedRequestParams
 from .card_retrieve_params import CardRetrieveParams as CardRetrieveParams
+from .embed_request_params import EmbedRequestParams as EmbedRequestParams
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .auth_rule_list_params import AuthRuleListParams as AuthRuleListParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams

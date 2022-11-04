@@ -30,29 +30,26 @@ class TestAccounts:
     def test_method_update(self, client: Lithic) -> None:
         resource = client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, Account)
 
     @pytest.mark.skip(reason="Prism returns invalid data")
     @parametrize
-    def test_method_update_with_optional_params(self, client: Lithic) -> None:
+    def test_method_update_with_all_params(self, client: Lithic) -> None:
         resource = client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "daily_spend_limit": 0,
-                "lifetime_spend_limit": 0,
-                "monthly_spend_limit": 0,
-                "verification_address": {
-                    "address1": "string",
-                    "address2": "string",
-                    "city": "string",
-                    "state": "string",
-                    "postal_code": "string",
-                    "country": "string",
-                },
-                "state": "ACTIVE",
+            daily_spend_limit=0,
+            lifetime_spend_limit=0,
+            monthly_spend_limit=0,
+            verification_address={
+                "address1": "string",
+                "address2": "string",
+                "city": "string",
+                "state": "string",
+                "postal_code": "string",
+                "country": "string",
             },
+            state="ACTIVE",
         )
         assert isinstance(resource, Account)
 
@@ -62,14 +59,12 @@ class TestAccounts:
         assert isinstance(resource, SyncPage)
 
     @parametrize
-    def test_method_list_with_optional_params(self, client: Lithic) -> None:
+    def test_method_list_with_all_params(self, client: Lithic) -> None:
         resource = client.accounts.list(
-            {
-                "begin": "2019-12-27T18:11:19.117Z",
-                "end": "2019-12-27T18:11:19.117Z",
-                "page": 0,
-                "page_size": 1,
-            },
+            begin="2019-12-27T18:11:19.117Z",
+            end="2019-12-27T18:11:19.117Z",
+            page=0,
+            page_size=1,
         )
         assert isinstance(resource, SyncPage)
 
@@ -91,29 +86,26 @@ class TestAsyncAccounts:
     async def test_method_update(self, client: AsyncLithic) -> None:
         resource = await client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {},
         )
         assert isinstance(resource, Account)
 
     @pytest.mark.skip(reason="Prism returns invalid data")
     @parametrize
-    async def test_method_update_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            {
-                "daily_spend_limit": 0,
-                "lifetime_spend_limit": 0,
-                "monthly_spend_limit": 0,
-                "verification_address": {
-                    "address1": "string",
-                    "address2": "string",
-                    "city": "string",
-                    "state": "string",
-                    "postal_code": "string",
-                    "country": "string",
-                },
-                "state": "ACTIVE",
+            daily_spend_limit=0,
+            lifetime_spend_limit=0,
+            monthly_spend_limit=0,
+            verification_address={
+                "address1": "string",
+                "address2": "string",
+                "city": "string",
+                "state": "string",
+                "postal_code": "string",
+                "country": "string",
             },
+            state="ACTIVE",
         )
         assert isinstance(resource, Account)
 
@@ -123,13 +115,11 @@ class TestAsyncAccounts:
         assert isinstance(resource, AsyncPage)
 
     @parametrize
-    async def test_method_list_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.accounts.list(
-            {
-                "begin": "2019-12-27T18:11:19.117Z",
-                "end": "2019-12-27T18:11:19.117Z",
-                "page": 0,
-                "page_size": 1,
-            },
+            begin="2019-12-27T18:11:19.117Z",
+            end="2019-12-27T18:11:19.117Z",
+            page=0,
+            page_size=1,
         )
         assert isinstance(resource, AsyncPage)

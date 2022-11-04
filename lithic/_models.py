@@ -71,7 +71,8 @@ class FinalRequestOptions(pydantic.BaseModel):
 
     # It should be noted that we cannot use `json` here as that would override
     # a BaseModel method in an incompatible fashion.
-    json_data: Union[object, None] = None
+    json_data: Union[Query, None] = None
+    extra_json: Union[Query, None] = None
 
     class Config(pydantic.BaseConfig):
         arbitrary_types_allowed: bool = True

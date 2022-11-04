@@ -49,8 +49,8 @@ class CardholderAuthentication(BaseModel):
     """
 
     liability_shift: Literal["3DS_AUTHENTICATED", "ACQUIRER_EXEMPTION", "NONE", "TOKEN_AUTHENTICATED"]
-    """
-    Indicates whether chargeback liability shift applies to the transaction.
+    """Indicates whether chargeback liability shift applies to the transaction.
+
     Possible values:
 
     - `3DS_AUTHENTICATED`: The transaction was fully authenticated through a 3-D
@@ -243,15 +243,15 @@ class Transaction(BaseModel):
     """
 
     amount: Optional[int]
-    """
-    Authorization amount of the transaction (in cents), including any acquirer fees.
+    """Authorization amount of the transaction (in cents), including any acquirer fees.
+
     This may change over time, and will represent the settled amount once the
     transaction is settled.
     """
 
     authorization_amount: Optional[int]
-    """
-    Authorization amount (in cents) of the transaction, including any acquirer fees.
+    """Authorization amount (in cents) of the transaction, including any acquirer fees.
+
     This amount always represents the amount authorized for the transaction,
     unaffected by settlement.
     """

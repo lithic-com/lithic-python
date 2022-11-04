@@ -39,9 +39,9 @@ class TestAuthStreamEnrollment:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_enroll_with_optional_params(self, client: Lithic) -> None:
+    def test_method_enroll_with_all_params(self, client: Lithic) -> None:
         resource = client.auth_stream_enrollment.enroll(
-            {"webhook_url": "https://example.com"},
+            webhook_url="https://example.com",
         )
         assert resource is None
 
@@ -73,8 +73,8 @@ class TestAsyncAuthStreamEnrollment:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_enroll_with_optional_params(self, client: AsyncLithic) -> None:
+    async def test_method_enroll_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.auth_stream_enrollment.enroll(
-            {"webhook_url": "https://example.com"},
+            webhook_url="https://example.com",
         )
         assert resource is None
