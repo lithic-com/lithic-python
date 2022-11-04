@@ -473,7 +473,7 @@ class TestAccountHolders:
     def test_method_retrieve_document(self, client: Lithic) -> None:
         resource = client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolderDocument)
 
@@ -947,7 +947,7 @@ class TestAsyncAccountHolders:
     async def test_method_retrieve_document(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert isinstance(resource, AccountHolderDocument)
 

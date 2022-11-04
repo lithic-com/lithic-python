@@ -4,7 +4,6 @@ import json
 import time
 import uuid
 import platform
-import warnings
 from random import random
 from typing import (
     Any,
@@ -64,7 +63,6 @@ SyncPageT = TypeVar("SyncPageT", bound="BaseSyncPage[Any]")
 AsyncPageT = TypeVar("AsyncPageT", bound="BaseAsyncPage[Any]")
 
 
-PageParamsT = TypeVar("PageParamsT", bound=Query)
 ResponseT = TypeVar(
     "ResponseT",
     bound=Union[BaseModel, ModelBuilderProtocol, str, None, httpx.Response, UnknownResponse],
@@ -112,7 +110,7 @@ class PageInfo:
         self.params = params
 
 
-class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
+class BasePage(GenericModel, Generic[ModelT]):
     _options: FinalRequestOptions = PrivateAttr()
     _model: Type[ModelT] = PrivateAttr()
 
@@ -124,24 +122,6 @@ class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
 
     def next_page_info(self) -> Optional[PageInfo]:
         ...
-
-    def next_page_params(self) -> Optional[PageParamsT]:
-        warnings.warn(
-            "The `next_page_params()` method is deprecated, please use `next_page_info()` instead",
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        info = self.next_page_info()
-        if info is None:
-            return None
-
-        if not isinstance(info.params, NotGiven):
-            return cast(Optional[PageParamsT], info.params)
-
-        if not isinstance(info.url, NotGiven):
-            return cast(PageParamsT, self._params_from_url(info.url))
-
-        raise ValueError("Unexpected PageInfo state")
 
     def _get_page_items(self) -> Iterable[ModelT]:
         ...
@@ -167,7 +147,7 @@ class BasePage(GenericModel, Generic[ModelT, PageParamsT]):
         raise ValueError("Unexpected PageInfo state")
 
 
-class BaseSyncPage(BasePage[ModelT, Query], Generic[ModelT]):
+class BaseSyncPage(BasePage[ModelT], Generic[ModelT]):
     _client: SyncAPIClient = pydantic.PrivateAttr()
 
     def _set_private_attributes(
@@ -248,7 +228,7 @@ class AsyncPaginator(Generic[ModelT, AsyncPageT]):
             yield item
 
 
-class BaseAsyncPage(BasePage[ModelT, Query], Generic[ModelT]):
+class BaseAsyncPage(BasePage[ModelT], Generic[ModelT]):
     _client: AsyncAPIClient = pydantic.PrivateAttr()
 
     def _set_private_attributes(
@@ -911,50 +891,25 @@ class AsyncAPIClient(BaseClient):
 
 
 def make_request_options(
-    headers: Headers | NotGiven,
-    max_retries: int | NotGiven,
-    timeout: float | Timeout | None | NotGiven,
-    query: Query | None,
     *,
-    extra_headers: Headers | None,
-    extra_query: Query | None,
-    extra_body: Query | None,
+    query: Query | None = None,
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Query | None = None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of NotGiven values."""
     options: RequestOptions = {}
-    if not isinstance(headers, NotGiven):
-        options["headers"] = headers
-        warnings.warn(
-            "The `headers` argument is deprecated. Please use `extra_headers` instead",
-            DeprecationWarning,
-            stacklevel=3,
-        )
     if extra_headers is not None:
-        options["headers"] = {**options.get("headers", {}), **extra_headers}
-
-    if not isinstance(max_retries, NotGiven):
-        options["max_retries"] = max_retries
-        warnings.warn(
-            "The `max_retries` argument is deprecated. Please use client.with_options(max_retries=5).foo.create(...) instead",
-            DeprecationWarning,
-            stacklevel=3,
-        )
-
-    if not isinstance(timeout, NotGiven):
-        options["timeout"] = timeout
-        warnings.warn(
-            "The `timeout` argument is deprecated. Please use client.with_options(timeout=httpx.Timeout(...)).foo.create(...) instead",
-            DeprecationWarning,
-            stacklevel=3,
-        )
-
-    if query is not None:
-        options["params"] = query
-    if extra_query is not None:
-        options["params"] = {**options.get("params", {}), **extra_query}
+        options["headers"] = extra_headers
 
     if extra_body is not None:
         options["extra_json"] = extra_body
+
+    if query is not None:
+        options["params"] = query
+
+    if extra_query is not None:
+        options["params"] = {**options.get("params", {}), **extra_query}
 
     return options
 

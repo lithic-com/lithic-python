@@ -11,7 +11,6 @@ from ._utils import extract_type_arg as extract_type_arg
 from ._utils import is_required_type as is_required_type
 from ._utils import is_annotated_type as is_annotated_type
 from ._utils import strip_annotated_type as strip_annotated_type
-from ._utils import deprecated_positional_args as deprecated_positional_args
 from ._transform import PropertyInfo as PropertyInfo
 from ._transform import transform as transform
 from ._transform import maybe_transform as maybe_transform

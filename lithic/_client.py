@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-import warnings
 from typing import Dict, Union, Mapping, Optional
 from typing_extensions import Literal
 
@@ -193,30 +192,10 @@ class Lithic(SyncAPIClient):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        # deprecated options params
-        headers: Union[Headers, NotGiven] = NOT_GIVEN,
-        max_retries: Union[int, NotGiven] = NOT_GIVEN,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-        query: Optional[Query] = None,
     ) -> APIStatus:
-        if query is not None:
-            warnings.warn(
-                "The `query` argument is deprecated. Please use `extra_query` instead",
-                DeprecationWarning,
-                stacklevel=3,
-            )
-
         return self.get(
             "/status",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                headers=headers,
-                max_retries=max_retries,
-                timeout=timeout,
-                query=query,
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=APIStatus,
         )
 
@@ -365,30 +344,10 @@ class AsyncLithic(AsyncAPIClient):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        # deprecated options params
-        headers: Union[Headers, NotGiven] = NOT_GIVEN,
-        max_retries: Union[int, NotGiven] = NOT_GIVEN,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
-        query: Optional[Query] = None,
     ) -> APIStatus:
-        if query is not None:
-            warnings.warn(
-                "The `query` argument is deprecated. Please use `extra_query` instead",
-                DeprecationWarning,
-                stacklevel=3,
-            )
-
         return await self.get(
             "/status",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                headers=headers,
-                max_retries=max_retries,
-                timeout=timeout,
-                query=query,
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=APIStatus,
         )
 

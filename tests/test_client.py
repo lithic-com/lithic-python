@@ -11,7 +11,7 @@ import httpx
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic._types import NOT_GIVEN, Query, Headers, Timeout, NotGiven
+from lithic._types import Query, Headers
 from lithic._models import FinalRequestOptions
 from lithic._base_client import BaseClient, RequestOptions
 from lithic._base_client import make_request_options as _make_request_options
@@ -30,9 +30,6 @@ def _get_params(client: BaseClient) -> dict[str, str]:
 # for convenience. We don't want to do the same for the standard `make_request_options()` function
 # as it might let bugs slip through if we ever forget to pass in an option.
 def make_request_options(
-    headers: Headers | NotGiven = NOT_GIVEN,
-    max_retries: int | NotGiven = NOT_GIVEN,
-    timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
     query: Query | None = None,
     *,
     extra_headers: Headers | None = None,
@@ -40,9 +37,6 @@ def make_request_options(
     extra_body: Query | None = None,
 ) -> RequestOptions:
     return _make_request_options(
-        headers=headers,
-        max_retries=max_retries,
-        timeout=timeout,
         query=query,
         extra_headers=extra_headers,
         extra_query=extra_query,
@@ -251,27 +245,12 @@ class TestLithic:
         )
         assert request.headers.get("X-Foo") == "Foo"
 
-        # if both `headers` and `extra_headers` are given, they are merged
-        request = self.client.build_request(
+        # `extra_headers` takes priority over `default_headers` when keys clash
+        request = self.client.with_options(default_headers={"X-Bar": "true"}).build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
                 **make_request_options(
-                    headers={"X-Header": "1"},
-                    extra_headers={"X-Foo": "Foo"},
-                ),
-            ),
-        )
-        assert request.headers.get("X-Foo") == "Foo"
-        assert request.headers.get("X-Header") == "1"
-
-        # `extra_headers` takes priority over `headers` when keys clash
-        request = self.client.build_request(
-            FinalRequestOptions(
-                method="post",
-                url="/foo",
-                **make_request_options(
-                    headers={"X-Bar": "true"},
                     extra_headers={"X-Bar": "false"},
                 ),
             ),
@@ -521,27 +500,12 @@ class TestAsyncLithic:
         )
         assert request.headers.get("X-Foo") == "Foo"
 
-        # if both `headers` and `extra_headers` are given, they are merged
-        request = self.client.build_request(
+        # `extra_headers` takes priority over `default_headers` when keys clash
+        request = self.client.with_options(default_headers={"X-Bar": "true"}).build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
                 **make_request_options(
-                    headers={"X-Header": "1"},
-                    extra_headers={"X-Foo": "Foo"},
-                ),
-            ),
-        )
-        assert request.headers.get("X-Foo") == "Foo"
-        assert request.headers.get("X-Header") == "1"
-
-        # `extra_headers` takes priority over `headers` when keys clash
-        request = self.client.build_request(
-            FinalRequestOptions(
-                method="post",
-                url="/foo",
-                **make_request_options(
-                    headers={"X-Bar": "true"},
                     extra_headers={"X-Bar": "false"},
                 ),
             ),

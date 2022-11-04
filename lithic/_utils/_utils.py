@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import inspect
-import warnings
 import functools
 from typing import Any, Mapping, TypeVar, Callable, Iterable, Sequence, cast
 from typing_extensions import Required, Annotated, TypeGuard, get_args, get_origin
@@ -245,53 +244,6 @@ def required_args(*variants: Sequence[str]) -> Callable[[CallableT], CallableT]:
                     else:
                         msg = f"Missing required argument: {quote(missing[0])}"
                 raise TypeError(msg)
-            return func(*args, **kwargs)
-
-        return wrapper  # type: ignore
-
-    return inner
-
-
-def deprecated_positional_args(
-    *deprecated_args: str,
-) -> Callable[[CallableT], CallableT]:
-    """Decorator that issues deprecation warnings if a given set of arguments are passed positionally.
-
-    Example usage:
-    ```py
-    @deprecated_positional_args('b')
-    def foo(a: str, b: int) -> None:
-        ...
-
-    # issues a deprecation warning about the `b` argument.
-    foo('bar', 1)
-
-    # does not issue a deprecation warning.
-    foo('bar', b=1)
-    ```
-    """
-
-    def inner(func: CallableT) -> CallableT:
-        positional = [
-            name
-            for name, param in inspect.signature(func).parameters.items()
-            if param.kind
-            in {
-                param.POSITIONAL_ONLY,
-                param.POSITIONAL_OR_KEYWORD,
-            }
-            and name in deprecated_args
-        ]
-
-        @functools.wraps(func)
-        def wrapper(*args: object, **kwargs: object) -> object:
-            for name, _ in zip(positional, args):
-                warnings.warn(
-                    f"The `{name}` argument being passed as positional argument is deprecated, please use a named argument instead",
-                    DeprecationWarning,
-                    stacklevel=3,
-                )
-
             return func(*args, **kwargs)
 
         return wrapper  # type: ignore
