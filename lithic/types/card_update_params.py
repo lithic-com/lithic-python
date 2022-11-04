@@ -23,6 +23,14 @@ class CardUpdateParams(TypedDict, total=False):
     with the card.
     """
 
+    digital_card_art_token: str
+    """
+    Specifies the digital card art to be displayed in the user’s digital wallet
+    after tokenization. This artwork must be approved by Mastercard and configured
+    by Lithic to use. See
+    [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+    """
+
     funding_token: str
     """
     The token for the desired `FundingAccount` to use when making transactions with

@@ -40,6 +40,7 @@ class TestCards:
             state="OPEN",
             type="VIRTUAL",
             pin="string",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             product_id="1",
             shipping_address={
                 "first_name": "Michael",
@@ -92,6 +93,7 @@ class TestCards:
             auth_rule_token="string",
             state="CLOSED",
             pin="string",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
         )
         assert isinstance(resource, Card)
 
@@ -211,6 +213,7 @@ class TestAsyncCards:
             state="OPEN",
             type="VIRTUAL",
             pin="string",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             product_id="1",
             shipping_address={
                 "first_name": "Michael",
@@ -263,6 +266,7 @@ class TestAsyncCards:
             auth_rule_token="string",
             state="CLOSED",
             pin="string",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
         )
         assert isinstance(resource, Card)
 

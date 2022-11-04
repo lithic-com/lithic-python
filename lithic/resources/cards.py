@@ -50,6 +50,7 @@ class Cards(SyncAPIResource):
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
@@ -138,6 +139,11 @@ class Cards(SyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           product_id: Specifies the configuration (e.g., physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
               must be configured with Lithic before use.
@@ -199,6 +205,7 @@ class Cards(SyncAPIResource):
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
@@ -290,6 +297,11 @@ class Cards(SyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           product_id: Specifies the configuration (e.g., physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
               must be configured with Lithic before use.
@@ -340,6 +352,7 @@ class Cards(SyncAPIResource):
                     "state": state,
                     "type": type,
                     "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
                     "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
@@ -485,6 +498,7 @@ class Cards(SyncAPIResource):
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -551,6 +565,11 @@ class Cards(SyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -599,6 +618,7 @@ class Cards(SyncAPIResource):
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -668,6 +688,11 @@ class Cards(SyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -701,6 +726,7 @@ class Cards(SyncAPIResource):
                     "auth_rule_token": auth_rule_token,
                     "state": state,
                     "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
                 },
             )
 
@@ -1560,6 +1586,7 @@ class AsyncCards(AsyncAPIResource):
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
@@ -1648,6 +1675,11 @@ class AsyncCards(AsyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           product_id: Specifies the configuration (e.g., physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
               must be configured with Lithic before use.
@@ -1709,6 +1741,7 @@ class AsyncCards(AsyncAPIResource):
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
@@ -1800,6 +1833,11 @@ class AsyncCards(AsyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           product_id: Specifies the configuration (e.g., physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
               must be configured with Lithic before use.
@@ -1850,6 +1888,7 @@ class AsyncCards(AsyncAPIResource):
                     "state": state,
                     "type": type,
                     "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
                     "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
@@ -1995,6 +2034,7 @@ class AsyncCards(AsyncAPIResource):
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2061,6 +2101,11 @@ class AsyncCards(AsyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2109,6 +2154,7 @@ class AsyncCards(AsyncAPIResource):
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2178,6 +2224,11 @@ class AsyncCards(AsyncAPIResource):
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2211,6 +2262,7 @@ class AsyncCards(AsyncAPIResource):
                     "auth_rule_token": auth_rule_token,
                     "state": state,
                     "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
                 },
             )
 

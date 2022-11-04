@@ -45,6 +45,14 @@ class CardCreateParams(TypedDict, total=False):
     programs.
     """
 
+    digital_card_art_token: str
+    """
+    Specifies the digital card art to be displayed in the user’s digital wallet
+    after tokenization. This artwork must be approved by Mastercard and configured
+    by Lithic to use. See
+    [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+    """
+
     exp_month: str
     """Two digit (MM) expiry month.
 

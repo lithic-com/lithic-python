@@ -86,6 +86,14 @@ class Card(BaseModel):
     cvv: Optional[str]
     """Three digit cvv printed on the back of the card."""
 
+    digital_card_art_token: Optional[str]
+    """
+    Specifies the digital card art to be displayed in the user’s digital wallet
+    after tokenization. This artwork must be approved by Mastercard and configured
+    by Lithic to use. See
+    [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+    """
+
     exp_month: Optional[str]
     """Two digit (MM) expiry month."""
 
