@@ -92,7 +92,9 @@ class Lithic(SyncAPIClient):
         """
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
-            raise Exception("No api_key argument provided")
+            raise Exception(
+                "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
+            )
 
         self._environment = environment
 
@@ -244,7 +246,9 @@ class AsyncLithic(AsyncAPIClient):
         """
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
-            raise Exception("No api_key argument provided")
+            raise Exception(
+                "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
+            )
 
         self._environment = environment
 
