@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Type, Union, cast
+from typing import Type, Union
 
 import pydantic
 import pydantic.generics
@@ -14,6 +14,7 @@ from pydantic.typing import (
 )
 
 from ._types import Query, ModelT, Headers, Timeout, NotGiven, RequestFiles
+from ._utils import is_list, is_mapping
 
 __all__ = ["BaseModel", "GenericModel"]
 
@@ -75,14 +76,14 @@ class BaseModel(pydantic.BaseModel):
                     if not is_literal_type(raw_type) and (
                         issubclass(origin, BaseModel) or issubclass(origin, GenericModel)
                     ):
-                        if field.shape == 2:
-                            # field.shape == 2 signifies a List
-                            # TODO: should we validate that this is actually a list at runtime?
+                        if is_list(value):
                             fields_values[name] = [
-                                raw_type.construct(**e) if e is not None else e for e in cast(Any, value)
+                                raw_type.construct(**entry) if is_mapping(entry) else entry for entry in value
                             ]
-                        else:
+                        elif is_mapping(value):
                             fields_values[name] = field.outer_type_.construct(**value)
+                        else:
+                            fields_values[name] = value
                     else:
                         fields_values[name] = value
             elif not field.required:

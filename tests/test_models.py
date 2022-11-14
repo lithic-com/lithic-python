@@ -5,16 +5,15 @@ from pydantic import Field
 
 from lithic._models import BaseModel
 
-# TODO: test mismatched input and  field types
-
 
 class BasicModel(BaseModel):
     foo: str
 
 
-def test_basic() -> None:
-    m = BasicModel.construct(foo="hello")
-    assert m.foo == "hello"
+@pytest.mark.parametrize("value", ["hello", 1], ids=["correct type", "mismatched"])
+def test_basic(value: object) -> None:
+    m = BasicModel.construct(foo=value)
+    assert m.foo == value
 
 
 def test_directly_nested_model() -> None:
@@ -23,6 +22,10 @@ def test_directly_nested_model() -> None:
 
     m = NestedModel.construct(nested={"foo": "Foo!"})
     assert m.nested.foo == "Foo!"
+
+    # mismatched types
+    m = NestedModel.construct(nested="hello!")
+    assert m.nested == "hello!"
 
 
 def test_optional_nested_model() -> None:
@@ -36,6 +39,11 @@ def test_optional_nested_model() -> None:
     assert m2.nested is not None
     assert m2.nested.foo == "bar"
 
+    # mismatched types
+    m3 = NestedModel.construct(nested={"foo"})
+    assert isinstance(cast(Any, m3.nested), set)
+    assert m3.nested == {"foo"}
+
 
 def test_list_nested_model() -> None:
     class NestedModel(BaseModel):
@@ -47,6 +55,13 @@ def test_list_nested_model() -> None:
     assert len(m.nested) == 2
     assert m.nested[0].foo == "bar"
     assert m.nested[1].foo == "2"
+
+    # mismatched types
+    m = NestedModel.construct(nested=True)
+    assert cast(Any, m.nested) is True
+
+    m = NestedModel.construct(nested=[False])
+    assert cast(Any, m.nested) == [False]
 
 
 def test_optional_list_nested_model() -> None:
@@ -63,6 +78,13 @@ def test_optional_list_nested_model() -> None:
     m2 = NestedModel.construct(nested=None)
     assert m2.nested is None
 
+    # mismatched types
+    m3 = NestedModel.construct(nested={1})
+    assert cast(Any, m3.nested) == {1}
+
+    m4 = NestedModel.construct(nested=[False])
+    assert cast(Any, m4.nested) == [False]
+
 
 def test_list_optional_items_nested_model() -> None:
     class NestedModel(BaseModel):
@@ -76,6 +98,13 @@ def test_list_optional_items_nested_model() -> None:
     assert m.nested[1] is not None
     assert m.nested[1].foo == "bar"
 
+    # mismatched types
+    m3 = NestedModel.construct(nested="foo")
+    assert cast(Any, m3.nested) == "foo"
+
+    m4 = NestedModel.construct(nested=[False])
+    assert cast(Any, m4.nested) == [False]
+
 
 def test_raw_dictionary() -> None:
     class NestedModel(BaseModel):
@@ -83,6 +112,10 @@ def test_raw_dictionary() -> None:
 
     m = NestedModel.construct(nested={"hello": "world"})
     assert m.nested == {"hello": "world"}
+
+    # mismatched types
+    m = NestedModel.construct(nested=False)
+    assert cast(Any, m.nested) is False
 
 
 @pytest.mark.skip(reason="We do not support nested dictionary models yet")
@@ -93,6 +126,10 @@ def test_nested_dictionary_model() -> None:
     m = NestedModel.construct(nested={"hello": {"foo": "bar"}})
     assert isinstance(m.nested, dict)
     assert m.nested["hello"].foo == "bar"
+
+    # mismatched types
+    m = NestedModel.construct(nested={"hello": False})
+    assert cast(Any, m.nested["hello"]) is False
 
 
 @pytest.mark.skip(reason="Unknown fields are not supported yet")
@@ -108,3 +145,7 @@ def test_aliases() -> None:
 
     m = Model.construct(myField=1)
     assert m.my_field == 1
+
+    # mismatched types
+    m = Model.construct(myField={"hello": False})
+    assert cast(Any, m.my_field) == {"hello": False}
