@@ -4,7 +4,14 @@ from typing import Any, Type, Union, cast
 
 import pydantic
 import pydantic.generics
-from pydantic.typing import get_origin, is_literal_type
+from pydantic.fields import SHAPE_DICT
+from pydantic.typing import (
+    get_args,
+    is_union,
+    get_origin,
+    is_none_type,
+    is_literal_type,
+)
 
 from ._types import Query, ModelT, Headers, Timeout, NotGiven, RequestFiles
 
@@ -27,25 +34,61 @@ class BaseModel(pydantic.BaseModel):
                 key = name
 
             if key in values:
-                if values[key] is None:
+                value = values[key]
+                if value is None:
                     fields_values[name] = field.get_default()
                 else:
                     # we need to use the origin class for any types that are subscripted generics
                     # e.g. Dict[str, object]
                     origin = get_origin(field.type_) or field.type_
-                    if not is_literal_type(field.type_) and (
+
+                    # We currently do not support field types such as `Dict[str, MyModel]`
+                    if field.shape == SHAPE_DICT:
+                        if issubclass(origin, BaseModel) or issubclass(origin, GenericModel):
+                            raise RuntimeError(
+                                f"Dictionary fields with nested models aren't supported yet; Encountered type: {field.type_}"
+                            )
+
+                    # We currently do not support constructing unions of types, e.g. `bool | MyModel` or `MyModel | MyOtherModel`
+                    # But we stil have to support `Optional[T]` which is shorthand for `Union[T, None]`
+                    if is_union(origin):
+                        args = get_args(field.type_)
+                        none_index = next((i for i, x in enumerate(args) if is_none_type(x)), None)
+                        if none_index is None or len(args) > 2:
+                            raise RuntimeError(f"Unsupported union type: {field.type_}")
+
+                        # Use the non None type for the rest of our construction.
+                        #
+                        # Note that if the `value` was None then we wouldn't reach this code path
+                        # but this raw type may be inaccurate for `list` types as it points to the items type,
+                        # e.g. the `T` in `list[T]`
+                        if none_index == 1:
+                            raw_type = args[0]
+                        else:
+                            raw_type = args[1]
+                    else:
+                        raw_type = field.type_
+
+                    # Recalculate the `origin` based off of the potentially new `raw_type` that has been found
+                    origin = get_origin(raw_type) or raw_type
+
+                    if not is_literal_type(raw_type) and (
                         issubclass(origin, BaseModel) or issubclass(origin, GenericModel)
                     ):
                         if field.shape == 2:
                             # field.shape == 2 signifies a List
                             # TODO: should we validate that this is actually a list at runtime?
-                            fields_values[name] = [field.type_.construct(**e) for e in cast(Any, values[key])]
+                            fields_values[name] = [
+                                raw_type.construct(**e) if e is not None else e for e in cast(Any, value)
+                            ]
                         else:
-                            fields_values[name] = field.outer_type_.construct(**values[key])
+                            fields_values[name] = field.outer_type_.construct(**value)
                     else:
-                        fields_values[name] = values[key]
+                        fields_values[name] = value
             elif not field.required:
                 fields_values[name] = field.get_default()
+
+        # TODO: this should set unknown properties too
 
         object.__setattr__(m, "__dict__", fields_values)
         if _fields_set is None:
