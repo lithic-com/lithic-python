@@ -132,11 +132,14 @@ def test_nested_dictionary_model() -> None:
     assert cast(Any, m.nested["hello"]) is False
 
 
-@pytest.mark.skip(reason="Unknown fields are not supported yet")
 def test_unknown_fields() -> None:
-    m = BasicModel.construct(foo="foo", unknown=1)
-    assert m.foo == "foo"
-    assert cast(Any, m).unknown == 1
+    m1 = BasicModel.construct(foo="foo", unknown=1)
+    assert m1.foo == "foo"
+    assert cast(Any, m1).unknown == 1
+
+    m2 = BasicModel.construct(foo="foo", unknown={"foo_bar": True})
+    assert m2.foo == "foo"
+    assert cast(Any, m2).unknown == {"foo_bar": True}
 
 
 def test_aliases() -> None:

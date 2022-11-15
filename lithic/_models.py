@@ -25,7 +25,7 @@ class BaseModel(pydantic.BaseModel):
     @classmethod
     def construct(cls: Type[ModelT], _fields_set: set[str] | None = None, **values: object) -> ModelT:
         m = cls.__new__(cls)
-        fields_values = {}
+        fields_values: dict[str, object] = {}
 
         config = cls.__config__
 
@@ -89,11 +89,14 @@ class BaseModel(pydantic.BaseModel):
             elif not field.required:
                 fields_values[name] = field.get_default()
 
-        # TODO: this should set unknown properties too
+        for key, value in values.items():
+            if key not in cls.__fields__:
+                # TODO: add support for constructing nested unknown models
+                fields_values[key] = value
 
         object.__setattr__(m, "__dict__", fields_values)
         if _fields_set is None:
-            _fields_set = set(values.keys())
+            _fields_set = set(fields_values.keys())
         object.__setattr__(m, "__fields_set__", _fields_set)
         m._init_private_attributes()
         return m
