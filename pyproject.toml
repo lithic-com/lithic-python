@@ -7,7 +7,7 @@ authors = ["Lithic <sdk-feedback@lithic.com>"]
 license = "Apache-2.0"
 repository = "https://github.com/lithic-com/lithic-python"
 packages = [
-  { include = "lithic" }
+  { include = "lithic", from = "src" }
 ]
 
 [tool.poetry.dependencies]
