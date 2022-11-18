@@ -9,13 +9,7 @@ __all__ = ["TransactionListParams"]
 
 class TransactionListParams(TypedDict, total=False):
     account_token: str
-    """Only required for multi-account users.
-
-    Returns transactions associated with this account. Only applicable if using
-    account holder enrollment. See
-    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-    more information.
-    """
+    """Filters for transactions associated with a specific account."""
 
     begin: str
     """Date string in 8601 format.
@@ -24,7 +18,7 @@ class TransactionListParams(TypedDict, total=False):
     """
 
     card_token: str
-    """Filters transactions associated with a specific card."""
+    """Filters for transactions associated with a specific card."""
 
     end: str
     """Date string in 8601 format.
@@ -39,4 +33,7 @@ class TransactionListParams(TypedDict, total=False):
     """Page size (for pagination)."""
 
     result: Literal["APPROVED", "DECLINED"]
-    """List specific transactions. Filters include `APPROVED`, and `DECLINED`."""
+    """Filters for transactions using transaction result field.
+
+    Can filter by `APPROVED`, and `DECLINED`.
+    """

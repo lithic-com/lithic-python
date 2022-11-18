@@ -37,9 +37,9 @@ class Transactions(SyncAPIResource):
         """
         Get specific transaction.
 
-        _Note that the events.amount field returned via this endpoint became a signed
-        field on September 27, 2022. Please refer to
-        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        _Note that the transaction object returned via this endpoint will be changing in
+        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
+        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
         for more information._
         """
         return self._get(
@@ -67,20 +67,18 @@ class Transactions(SyncAPIResource):
         """
         List transactions.
 
-        _Note that the events.amount field returned via this endpoint became a signed
-        field on September 27, 2022. Please refer to
-        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        _Note that the transaction object returned via this endpoint will be changing in
+        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
+        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
         for more information._
 
         Args:
-          account_token: Only required for multi-account users. Returns transactions associated with this
-              account. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
+          account_token: Filters for transactions associated with a specific account.
 
-          card_token: Filters transactions associated with a specific card.
+          card_token: Filters for transactions associated with a specific card.
 
-          result: List specific transactions. Filters include `APPROVED`, and `DECLINED`.
+          result: Filters for transactions using transaction result field. Can filter by
+              `APPROVED`, and `DECLINED`.
 
           begin: Date string in 8601 format. Only entries created after the specified date will
               be included. UTC time zone.
@@ -327,9 +325,9 @@ class AsyncTransactions(AsyncAPIResource):
         """
         Get specific transaction.
 
-        _Note that the events.amount field returned via this endpoint became a signed
-        field on September 27, 2022. Please refer to
-        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        _Note that the transaction object returned via this endpoint will be changing in
+        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
+        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
         for more information._
         """
         return await self._get(
@@ -357,20 +355,18 @@ class AsyncTransactions(AsyncAPIResource):
         """
         List transactions.
 
-        _Note that the events.amount field returned via this endpoint became a signed
-        field on September 27, 2022. Please refer to
-        [this page](https://docs.lithic.com/docs/guide-to-lithic-api-changes-march-2022)
+        _Note that the transaction object returned via this endpoint will be changing in
+        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
+        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
         for more information._
 
         Args:
-          account_token: Only required for multi-account users. Returns transactions associated with this
-              account. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
+          account_token: Filters for transactions associated with a specific account.
 
-          card_token: Filters transactions associated with a specific card.
+          card_token: Filters for transactions associated with a specific card.
 
-          result: List specific transactions. Filters include `APPROVED`, and `DECLINED`.
+          result: Filters for transactions using transaction result field. Can filter by
+              `APPROVED`, and `DECLINED`.
 
           begin: Date string in 8601 format. Only entries created after the specified date will
               be included. UTC time zone.

@@ -36,13 +36,13 @@ class CardCreateParams(TypedDict, total=False):
     """
 
     card_program_token: str
-    """Identifies the card program under which to create the card.
+    """For physical card programs with more than one BIN range.
 
-    Different card programs may have their own configurations (e.g., digital wallet
-    card art, BIN type). This must be configured with Lithic before use. In Sandbox,
-    use 00000000-0000-0000-1000-000000000000 and
-    00000000-0000-0000-2000-000000000000 to test creating cards on specific card
-    programs.
+    This must be configured with Lithic before use. Identifies the card program/BIN
+    range under which to create the card. If omitted, will utilize the program's
+    default `card_program_token`. In Sandbox, use
+    00000000-0000-0000-1000-000000000000 and 00000000-0000-0000-2000-000000000000 to
+    test creating cards on specific card programs.
     """
 
     digital_card_art_token: str
@@ -88,10 +88,10 @@ class CardCreateParams(TypedDict, total=False):
     """
 
     product_id: str
-    """
-    Specifies the configuration (e.g., physical card art) that the card should be
-    manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
-    must be configured with Lithic before use.
+    """Only applicable to cards of type `PHYSICAL`.
+
+    This must be configured with Lithic before use. Specifies the configuration
+    (i.e., physical card art) that the card should be manufactured with.
     """
 
     shipping_address: shared_params.ShippingAddress

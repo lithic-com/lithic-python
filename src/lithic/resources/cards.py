@@ -58,11 +58,12 @@ class Cards(SyncAPIResource):
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
 
-          card_program_token: Identifies the card program under which to create the card. Different card
-              programs may have their own configurations (e.g., digital wallet card art, BIN
-              type). This must be configured with Lithic before use. In Sandbox, use
-              00000000-0000-0000-1000-000000000000 and 00000000-0000-0000-2000-000000000000 to
-              test creating cards on specific card programs.
+          card_program_token: For physical card programs with more than one BIN range. This must be configured
+              with Lithic before use. Identifies the card program/BIN range under which to
+              create the card. If omitted, will utilize the program's default
+              `card_program_token`. In Sandbox, use 00000000-0000-0000-1000-000000000000 and
+              00000000-0000-0000-2000-000000000000 to test creating cards on specific card
+              programs.
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date will be generated.
@@ -126,9 +127,9 @@ class Cards(SyncAPIResource):
               by Lithic to use. See
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
-          product_id: Specifies the configuration (e.g., physical card art) that the card should be
-              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
-              must be configured with Lithic before use.
+          product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
+              before use. Specifies the configuration (i.e., physical card art) that the card
+              should be manufactured with.
 
           shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
               of options besides `STANDARD` require additional permissions.
@@ -615,7 +616,7 @@ class Cards(SyncAPIResource):
         extra_body: Body | None = None,
     ) -> Card:
         """
-        Initiate print and shipment of a duplicate card.
+        Initiate print and shipment of a duplicate physical card.
 
         Only applies to cards of type `PHYSICAL` [beta].
 
@@ -690,11 +691,12 @@ class AsyncCards(AsyncAPIResource):
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
 
-          card_program_token: Identifies the card program under which to create the card. Different card
-              programs may have their own configurations (e.g., digital wallet card art, BIN
-              type). This must be configured with Lithic before use. In Sandbox, use
-              00000000-0000-0000-1000-000000000000 and 00000000-0000-0000-2000-000000000000 to
-              test creating cards on specific card programs.
+          card_program_token: For physical card programs with more than one BIN range. This must be configured
+              with Lithic before use. Identifies the card program/BIN range under which to
+              create the card. If omitted, will utilize the program's default
+              `card_program_token`. In Sandbox, use 00000000-0000-0000-1000-000000000000 and
+              00000000-0000-0000-2000-000000000000 to test creating cards on specific card
+              programs.
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date will be generated.
@@ -758,9 +760,9 @@ class AsyncCards(AsyncAPIResource):
               by Lithic to use. See
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
-          product_id: Specifies the configuration (e.g., physical card art) that the card should be
-              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
-              must be configured with Lithic before use.
+          product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
+              before use. Specifies the configuration (i.e., physical card art) that the card
+              should be manufactured with.
 
           shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
               of options besides `STANDARD` require additional permissions.
@@ -1247,7 +1249,7 @@ class AsyncCards(AsyncAPIResource):
         extra_body: Body | None = None,
     ) -> Card:
         """
-        Initiate print and shipment of a duplicate card.
+        Initiate print and shipment of a duplicate physical card.
 
         Only applies to cards of type `PHYSICAL` [beta].
 
