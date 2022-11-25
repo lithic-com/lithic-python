@@ -1,9 +1,12 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from __future__ import annotations
+
 from .card import Card as Card
 from .shared import ShippingAddress as ShippingAddress
 from .account import Account as Account
 from .auth_rule import AuthRule as AuthRule
+from .api_status import APIStatus as APIStatus
 from .transaction import Transaction as Transaction
 from .account_holder import AccountHolder as AccountHolder
 from .funding_source import FundingSource as FundingSource

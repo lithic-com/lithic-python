@@ -30,16 +30,16 @@ from ._base_client import (
 from .types.api_status import APIStatus
 
 __all__ = [
-    "Lithic",
-    "AsyncLithic",
-    "Client",
-    "AsyncClient",
     "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
     "resources",
+    "Lithic",
+    "AsyncLithic",
+    "Client",
+    "AsyncClient",
 ]
 
 ENVIRONMENTS: Dict[str, str] = {

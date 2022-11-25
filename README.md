@@ -85,7 +85,7 @@ List methods in the Lithic API are paginated.
 
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
-```py
+```python
 import lithic
 
 lithic = Lithic()
@@ -95,7 +95,7 @@ all_cards = []
 for card in lithic.cards.list():
     # Do something with card here
     all_cards.append(card)
-return all_cards
+print(all_cards)
 ```
 
 Or, asynchronously:
@@ -118,8 +118,7 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-Alternatively, you can use the `.has_next_page()`, `.next_page_params()`,
-or `.get_next_page()` methods for more granular control working with pages:
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
 first_page = await lithic.cards.list()
