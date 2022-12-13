@@ -19,7 +19,7 @@ anyio = ">= 3.5.0"
 distro = ">= 1.7.0"
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.950"
+mypy = "^0.982"
 black = "^22.1.0"
 respx = "^0.19.2"
 pytest = "^7.1.1"

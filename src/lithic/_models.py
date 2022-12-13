@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Type, Union
+from typing_extensions import final
 
 import pydantic
 import pydantic.generics
@@ -14,7 +15,7 @@ from pydantic.typing import (
 )
 
 from ._types import Query, ModelT, Headers, Timeout, NotGiven, RequestFiles
-from ._utils import is_list, is_mapping
+from ._utils import is_list, is_mapping, strip_not_given
 
 __all__ = ["BaseModel", "GenericModel"]
 
@@ -106,6 +107,7 @@ class GenericModel(BaseModel, pydantic.generics.GenericModel):
     pass
 
 
+@final
 class FinalRequestOptions(pydantic.BaseModel):
     method: str
     url: str
@@ -128,3 +130,17 @@ class FinalRequestOptions(pydantic.BaseModel):
         if isinstance(self.max_retries, NotGiven):
             return max_retries
         return self.max_retries
+
+    # override the `construct` method so that we can run custom transformations.
+    # this is necessary as we don't want to do any actual runtime type checking
+    # (which means we can't use validators) but we do want to ensure that `NotGiven`
+    # values are not present
+    @classmethod
+    def construct(cls, _fields_set: set[str] | None = None, **values: object) -> FinalRequestOptions:
+        kwargs = {
+            # we unconditionally call `strip_not_given` on any value
+            # as it will just ignore any non-mapping types
+            key: strip_not_given(value)
+            for key, value in values.items()
+        }
+        return super().construct(_fields_set, **kwargs)

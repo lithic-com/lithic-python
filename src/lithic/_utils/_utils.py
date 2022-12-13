@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import inspect
 import functools
-from typing import Any, Mapping, TypeVar, Callable, Iterable, Sequence, cast
+from typing import Any, Mapping, TypeVar, Callable, Iterable, Sequence, cast, overload
 from typing_extensions import Required, Annotated, TypeGuard, get_args, get_origin
 
 from pydantic.typing import is_union as _is_union
 
-from .._types import FileTypes
+from .._types import NotGiven, FileTypes
 
 _T = TypeVar("_T")
 CallableT = TypeVar("CallableT", bound=Callable[..., Any])
@@ -249,3 +249,33 @@ def required_args(*variants: Sequence[str]) -> Callable[[CallableT], CallableT]:
         return wrapper  # type: ignore
 
     return inner
+
+
+_K = TypeVar("_K")
+_V = TypeVar("_V")
+
+
+@overload
+def strip_not_given(obj: None) -> None:
+    ...
+
+
+@overload
+def strip_not_given(obj: Mapping[_K, _V | NotGiven]) -> dict[_K, _V]:
+    ...
+
+
+@overload
+def strip_not_given(obj: object) -> object:
+    ...
+
+
+def strip_not_given(obj: object | None) -> object:
+    """Remove all top-level keys where their values are instances of `NotGiven`"""
+    if obj is None:
+        return None
+
+    if not is_mapping(obj):
+        return obj
+
+    return {key: value for key, value in obj.items() if not isinstance(value, NotGiven)}

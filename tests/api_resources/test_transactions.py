@@ -103,15 +103,6 @@ class TestTransactions:
         assert isinstance(resource, TransactionSimulateReturnResponse)
 
     @parametrize
-    def test_method_simulate_return_with_all_params(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_return(
-            amount=0,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-        )
-        assert isinstance(resource, TransactionSimulateReturnResponse)
-
-    @parametrize
     def test_method_simulate_void(self, client: Lithic) -> None:
         resource = client.transactions.simulate_void(
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -196,15 +187,6 @@ class TestAsyncTransactions:
 
     @parametrize
     async def test_method_simulate_return(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_return(
-            amount=0,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-        )
-        assert isinstance(resource, TransactionSimulateReturnResponse)
-
-    @parametrize
-    async def test_method_simulate_return_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.transactions.simulate_return(
             amount=0,
             descriptor="COFFEE SHOP",

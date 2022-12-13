@@ -6,6 +6,7 @@ from ._utils import is_list_type as is_list_type
 from ._utils import extract_files as extract_files
 from ._utils import is_union_type as is_union_type
 from ._utils import required_args as required_args
+from ._utils import strip_not_given as strip_not_given
 from ._utils import deepcopy_minimal as deepcopy_minimal
 from ._utils import extract_type_arg as extract_type_arg
 from ._utils import is_required_type as is_required_type

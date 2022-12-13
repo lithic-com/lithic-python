@@ -407,13 +407,6 @@ class TestAccountHolders:
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     @parametrize
-    def test_method_create_webhook_with_all_params(self, client: Lithic) -> None:
-        resource = client.account_holders.create_webhook(
-            url="string",
-        )
-        assert isinstance(resource, AccountHolderCreateWebhookResponse)
-
-    @parametrize
     def test_method_list_documents(self, client: Lithic) -> None:
         resource = client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -422,31 +415,6 @@ class TestAccountHolders:
 
     @parametrize
     def test_method_resubmit(self, client: Lithic) -> None:
-        resource = client.account_holders.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            workflow="KYC_ADVANCED",
-            tos_timestamp="2022-03-08 08:00:00",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "address2": "string",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-        )
-        assert isinstance(resource, AccountHolder)
-
-    @parametrize
-    def test_method_resubmit_with_all_params(self, client: Lithic) -> None:
         resource = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow="KYC_ADVANCED",
@@ -480,14 +448,6 @@ class TestAccountHolders:
 
     @parametrize
     def test_method_upload_document(self, client: Lithic) -> None:
-        resource = client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="commercial_license",
-        )
-        assert isinstance(resource, AccountHolderDocument)
-
-    @parametrize
-    def test_method_upload_document_with_all_params(self, client: Lithic) -> None:
         resource = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="commercial_license",
@@ -881,13 +841,6 @@ class TestAsyncAccountHolders:
         assert isinstance(resource, AccountHolderCreateWebhookResponse)
 
     @parametrize
-    async def test_method_create_webhook_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create_webhook(
-            url="string",
-        )
-        assert isinstance(resource, AccountHolderCreateWebhookResponse)
-
-    @parametrize
     async def test_method_list_documents(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -896,31 +849,6 @@ class TestAsyncAccountHolders:
 
     @parametrize
     async def test_method_resubmit(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            workflow="KYC_ADVANCED",
-            tos_timestamp="2022-03-08 08:00:00",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "address2": "string",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-        )
-        assert isinstance(resource, AccountHolder)
-
-    @parametrize
-    async def test_method_resubmit_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow="KYC_ADVANCED",
@@ -954,14 +882,6 @@ class TestAsyncAccountHolders:
 
     @parametrize
     async def test_method_upload_document(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="commercial_license",
-        )
-        assert isinstance(resource, AccountHolderDocument)
-
-    @parametrize
-    async def test_method_upload_document_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="commercial_license",
