@@ -19,6 +19,12 @@ from ..types.transaction_simulate_clearing_response import (
 from ..types.transaction_simulate_authorization_response import (
     TransactionSimulateAuthorizationResponse,
 )
+from ..types.transaction_simulate_return_reversal_response import (
+    TransactionSimulateReturnReversalResponse,
+)
+from ..types.transaction_simulate_credit_authorization_response import (
+    TransactionSimulateCreditAuthorizationResponse,
+)
 
 __all__ = ["Transactions", "AsyncTransactions"]
 
@@ -123,7 +129,11 @@ class Transactions(SyncAPIResource):
         descriptor: str,
         pan: str,
         status: Literal[
-            "AUTHORIZATION", "CREDIT_AUTHORIZATION", "FINANCIAL_AUTHORIZATION", "FINANCIAL_CREDIT_AUTHORIZATION"
+            "AUTHORIZATION",
+            "BALANCE_INQUIRY",
+            "CREDIT_AUTHORIZATION",
+            "FINANCIAL_AUTHORIZATION",
+            "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
         | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
@@ -139,9 +149,17 @@ class Transactions(SyncAPIResource):
         Simulates an authorization request from the payment network as if it came from a
         merchant acquirer. If you're configured for ASA, simulating auths requires your
         ASA client to be set up properly (respond with a valid JSON to the ASA request).
+        For users that are not configured for ASA, a daily transaction limit of $5000
+        USD is applied by default. This limit can be modified via the
+        [update account](https://docs.lithic.com/reference/patchaccountbytoken)
+        endpoint.
 
         Args:
-          amount: Amount (in cents) to authorize.
+          amount: Amount (in cents) to authorize. For credit authorizations and financial credit
+              authorizations, any value entered will be converted into a negative amount in
+              the simulated transaction. For example, entering 100 in this field will appear
+              as a -100 amount in the transaction. For balance inquiries, this field must be
+              set to 0.
 
           descriptor: Merchant descriptor.
 
@@ -149,10 +167,20 @@ class Transactions(SyncAPIResource):
 
           status: Type of event to simulate.
 
-              - `CREDIT` indicates funds flow towards the user rather than towards the
-                merchant.
-              - `FINANCIAL` indicates that this is a single message transaction that completes
-                immediately if approved.
+              - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
+                clearing step is required to settle the transaction.
+              - `BALANCE_INQUIRY` is a $0 authorization that includes a request for the
+                balance held on the card, and is most typically seen when a cardholder
+                requests to view a card's balance at an ATM.
+              - `CREDIT_AUTHORIZATION` is a dual message request from a merchant to authorize
+                a refund or credit, meaning a subsequent clearing step is required to settle
+                the transaction.
+              - `FINANCIAL_AUTHORIZATION` is a single message request from a merchant to debit
+                funds immediately (such as an ATM withdrawal), and no subsequent clearing is
+                required to settle the transaction.
+              - `FINANCIAL_CREDIT_AUTHORIZATION` is a single message request from a merchant
+                to credit funds immediately, and no subsequent clearing is required to settle
+                the transaction.
 
           merchant_currency: 3-digit alphabetic ISO 4217 currency code.
 
@@ -230,6 +258,50 @@ class Transactions(SyncAPIResource):
             cast_to=TransactionSimulateClearingResponse,
         )
 
+    def simulate_credit_authorization(
+        self,
+        *,
+        amount: int,
+        descriptor: str,
+        pan: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> TransactionSimulateCreditAuthorizationResponse:
+        """Simulates a credit authorization advice message from the payment network.
+
+        This
+        message indicates that a credit authorization was approved on your behalf by the
+        network.
+
+        Args:
+          amount: Amount (in cents). Any value entered will be converted into a negative amount in
+              the simulated transaction. For example, entering 100 in this field will appear
+              as a -100 amount in the transaction.
+
+          descriptor: Merchant descriptor.
+
+          pan: Sixteen digit card number.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+        """
+        return self._post(
+            "/simulate/credit_authorization_advice",
+            body={
+                "amount": amount,
+                "descriptor": descriptor,
+                "pan": pan,
+            },
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            cast_to=TransactionSimulateCreditAuthorizationResponse,
+        )
+
     def simulate_return(
         self,
         *,
@@ -271,11 +343,44 @@ class Transactions(SyncAPIResource):
             cast_to=TransactionSimulateReturnResponse,
         )
 
+    def simulate_return_reversal(
+        self,
+        *,
+        token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> TransactionSimulateReturnReversalResponse:
+        """
+        Voids a settled credit transaction – i.e., a transaction with a negative amount
+        and `SETTLED` status. These can be credit authorizations that have already
+        cleared or financial credit authorizations. This endpoint will be available
+        beginning January 4, 2023.
+
+        Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+        """
+        return self._post(
+            "/simulate/return_reversal",
+            body={"token": token},
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            cast_to=TransactionSimulateReturnReversalResponse,
+        )
+
     def simulate_void(
         self,
         *,
         amount: int | NotGiven = NOT_GIVEN,
         token: str,
+        type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -286,13 +391,21 @@ class Transactions(SyncAPIResource):
 
         If amount is not sent
         the full amount will be voided. Cannot be used on partially completed
-        transactions, but can be used on partially voided transactions.
+        transactions, but can be used on partially voided transactions. _Note that
+        simulating an authorization expiry on credit authorizations or credit
+        authorization advice is not currently supported but will be added soon._
 
         Args:
           amount: Amount (in cents) to void. Typically this will match the original authorization,
               but may be less.
 
           token: The transaction token returned from the /v1/simulate/authorize response.
+
+          type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
+
+              - `AUTHORIZATION_EXPIRY` indicates authorization has expired and been reversed
+                by Lithic.
+              - `AUTHORIZATION_REVERSAL` indicates authorization was reversed by the merchant.
 
           extra_headers: Send extra headers
 
@@ -305,6 +418,7 @@ class Transactions(SyncAPIResource):
             body={
                 "amount": amount,
                 "token": token,
+                "type": type,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateVoidResponse,
@@ -411,7 +525,11 @@ class AsyncTransactions(AsyncAPIResource):
         descriptor: str,
         pan: str,
         status: Literal[
-            "AUTHORIZATION", "CREDIT_AUTHORIZATION", "FINANCIAL_AUTHORIZATION", "FINANCIAL_CREDIT_AUTHORIZATION"
+            "AUTHORIZATION",
+            "BALANCE_INQUIRY",
+            "CREDIT_AUTHORIZATION",
+            "FINANCIAL_AUTHORIZATION",
+            "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
         | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
@@ -427,9 +545,17 @@ class AsyncTransactions(AsyncAPIResource):
         Simulates an authorization request from the payment network as if it came from a
         merchant acquirer. If you're configured for ASA, simulating auths requires your
         ASA client to be set up properly (respond with a valid JSON to the ASA request).
+        For users that are not configured for ASA, a daily transaction limit of $5000
+        USD is applied by default. This limit can be modified via the
+        [update account](https://docs.lithic.com/reference/patchaccountbytoken)
+        endpoint.
 
         Args:
-          amount: Amount (in cents) to authorize.
+          amount: Amount (in cents) to authorize. For credit authorizations and financial credit
+              authorizations, any value entered will be converted into a negative amount in
+              the simulated transaction. For example, entering 100 in this field will appear
+              as a -100 amount in the transaction. For balance inquiries, this field must be
+              set to 0.
 
           descriptor: Merchant descriptor.
 
@@ -437,10 +563,20 @@ class AsyncTransactions(AsyncAPIResource):
 
           status: Type of event to simulate.
 
-              - `CREDIT` indicates funds flow towards the user rather than towards the
-                merchant.
-              - `FINANCIAL` indicates that this is a single message transaction that completes
-                immediately if approved.
+              - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
+                clearing step is required to settle the transaction.
+              - `BALANCE_INQUIRY` is a $0 authorization that includes a request for the
+                balance held on the card, and is most typically seen when a cardholder
+                requests to view a card's balance at an ATM.
+              - `CREDIT_AUTHORIZATION` is a dual message request from a merchant to authorize
+                a refund or credit, meaning a subsequent clearing step is required to settle
+                the transaction.
+              - `FINANCIAL_AUTHORIZATION` is a single message request from a merchant to debit
+                funds immediately (such as an ATM withdrawal), and no subsequent clearing is
+                required to settle the transaction.
+              - `FINANCIAL_CREDIT_AUTHORIZATION` is a single message request from a merchant
+                to credit funds immediately, and no subsequent clearing is required to settle
+                the transaction.
 
           merchant_currency: 3-digit alphabetic ISO 4217 currency code.
 
@@ -518,6 +654,50 @@ class AsyncTransactions(AsyncAPIResource):
             cast_to=TransactionSimulateClearingResponse,
         )
 
+    async def simulate_credit_authorization(
+        self,
+        *,
+        amount: int,
+        descriptor: str,
+        pan: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> TransactionSimulateCreditAuthorizationResponse:
+        """Simulates a credit authorization advice message from the payment network.
+
+        This
+        message indicates that a credit authorization was approved on your behalf by the
+        network.
+
+        Args:
+          amount: Amount (in cents). Any value entered will be converted into a negative amount in
+              the simulated transaction. For example, entering 100 in this field will appear
+              as a -100 amount in the transaction.
+
+          descriptor: Merchant descriptor.
+
+          pan: Sixteen digit card number.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+        """
+        return await self._post(
+            "/simulate/credit_authorization_advice",
+            body={
+                "amount": amount,
+                "descriptor": descriptor,
+                "pan": pan,
+            },
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            cast_to=TransactionSimulateCreditAuthorizationResponse,
+        )
+
     async def simulate_return(
         self,
         *,
@@ -559,11 +739,44 @@ class AsyncTransactions(AsyncAPIResource):
             cast_to=TransactionSimulateReturnResponse,
         )
 
+    async def simulate_return_reversal(
+        self,
+        *,
+        token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> TransactionSimulateReturnReversalResponse:
+        """
+        Voids a settled credit transaction – i.e., a transaction with a negative amount
+        and `SETTLED` status. These can be credit authorizations that have already
+        cleared or financial credit authorizations. This endpoint will be available
+        beginning January 4, 2023.
+
+        Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+        """
+        return await self._post(
+            "/simulate/return_reversal",
+            body={"token": token},
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            cast_to=TransactionSimulateReturnReversalResponse,
+        )
+
     async def simulate_void(
         self,
         *,
         amount: int | NotGiven = NOT_GIVEN,
         token: str,
+        type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -574,13 +787,21 @@ class AsyncTransactions(AsyncAPIResource):
 
         If amount is not sent
         the full amount will be voided. Cannot be used on partially completed
-        transactions, but can be used on partially voided transactions.
+        transactions, but can be used on partially voided transactions. _Note that
+        simulating an authorization expiry on credit authorizations or credit
+        authorization advice is not currently supported but will be added soon._
 
         Args:
           amount: Amount (in cents) to void. Typically this will match the original authorization,
               but may be less.
 
           token: The transaction token returned from the /v1/simulate/authorize response.
+
+          type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
+
+              - `AUTHORIZATION_EXPIRY` indicates authorization has expired and been reversed
+                by Lithic.
+              - `AUTHORIZATION_REVERSAL` indicates authorization was reversed by the merchant.
 
           extra_headers: Send extra headers
 
@@ -593,6 +814,7 @@ class AsyncTransactions(AsyncAPIResource):
             body={
                 "amount": amount,
                 "token": token,
+                "type": type,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateVoidResponse,

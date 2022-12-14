@@ -323,18 +323,23 @@ class BaseClient:
     ) -> int:
         return remaining_retries if remaining_retries is not None else options.get_max_retries(self.max_retries)
 
-    def build_request(
-        self,
-        options: FinalRequestOptions,
-    ) -> httpx.Request:
-        headers = _merge_mappings(
-            self.default_headers,
-            {} if isinstance(options.headers, NotGiven) else options.headers,
-        )
+    def _build_headers(self, options: FinalRequestOptions) -> dict[str, str]:
+        custom_headers = options.headers or {}
+        headers = _merge_mappings(self.default_headers, custom_headers)
+        self._validate_headers(headers, custom_headers)
+
         if self._idempotency_header and options.method.lower() != "get":
             if not options.idempotency_key:
                 options.idempotency_key = self._idempotency_key()
             headers[self._idempotency_header] = options.idempotency_key
+
+        return headers
+
+    def build_request(
+        self,
+        options: FinalRequestOptions,
+    ) -> httpx.Request:
+        headers = self._build_headers(options)
 
         kwargs: dict[str, Any] = {}
         json_data = options.json_data
@@ -475,6 +480,13 @@ class BaseClient:
             **self.auth_headers,
             **self._custom_headers,
         }
+
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        """Validate the given default headers and custom headers.
+
+        Does nothing by default.
+        """
+        return
 
     @property
     def user_agent(self) -> str:

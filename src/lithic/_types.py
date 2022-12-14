@@ -129,7 +129,7 @@ class ModelBuilderProtocol(Protocol):
         ...
 
 
-Headers = Mapping[str, str]
+Headers = Mapping[str, Union[str, Omit]]
 
 
 class HeadersLikeProtocol(Protocol):

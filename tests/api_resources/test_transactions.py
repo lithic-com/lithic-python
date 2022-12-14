@@ -21,6 +21,12 @@ from lithic.types.transaction_simulate_clearing_response import (
 from lithic.types.transaction_simulate_authorization_response import (
     TransactionSimulateAuthorizationResponse,
 )
+from lithic.types.transaction_simulate_return_reversal_response import (
+    TransactionSimulateReturnReversalResponse,
+)
+from lithic.types.transaction_simulate_credit_authorization_response import (
+    TransactionSimulateCreditAuthorizationResponse,
+)
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -94,6 +100,15 @@ class TestTransactions:
         assert isinstance(resource, TransactionSimulateClearingResponse)
 
     @parametrize
+    def test_method_simulate_credit_authorization(self, client: Lithic) -> None:
+        resource = client.transactions.simulate_credit_authorization(
+            amount=0,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+
+    @parametrize
     def test_method_simulate_return(self, client: Lithic) -> None:
         resource = client.transactions.simulate_return(
             amount=0,
@@ -101,6 +116,13 @@ class TestTransactions:
             pan="4111111289144142",
         )
         assert isinstance(resource, TransactionSimulateReturnResponse)
+
+    @parametrize
+    def test_method_simulate_return_reversal(self, client: Lithic) -> None:
+        resource = client.transactions.simulate_return_reversal(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert isinstance(resource, TransactionSimulateReturnReversalResponse)
 
     @parametrize
     def test_method_simulate_void(self, client: Lithic) -> None:
@@ -114,6 +136,7 @@ class TestTransactions:
         resource = client.transactions.simulate_void(
             amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            type="AUTHORIZATION_EXPIRY",
         )
         assert isinstance(resource, TransactionSimulateVoidResponse)
 
@@ -186,6 +209,15 @@ class TestAsyncTransactions:
         assert isinstance(resource, TransactionSimulateClearingResponse)
 
     @parametrize
+    async def test_method_simulate_credit_authorization(self, client: AsyncLithic) -> None:
+        resource = await client.transactions.simulate_credit_authorization(
+            amount=0,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+
+    @parametrize
     async def test_method_simulate_return(self, client: AsyncLithic) -> None:
         resource = await client.transactions.simulate_return(
             amount=0,
@@ -193,6 +225,13 @@ class TestAsyncTransactions:
             pan="4111111289144142",
         )
         assert isinstance(resource, TransactionSimulateReturnResponse)
+
+    @parametrize
+    async def test_method_simulate_return_reversal(self, client: AsyncLithic) -> None:
+        resource = await client.transactions.simulate_return_reversal(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert isinstance(resource, TransactionSimulateReturnReversalResponse)
 
     @parametrize
     async def test_method_simulate_void(self, client: AsyncLithic) -> None:
@@ -206,5 +245,6 @@ class TestAsyncTransactions:
         resource = await client.transactions.simulate_void(
             amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            type="AUTHORIZATION_EXPIRY",
         )
         assert isinstance(resource, TransactionSimulateVoidResponse)

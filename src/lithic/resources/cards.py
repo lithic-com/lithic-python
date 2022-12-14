@@ -17,7 +17,7 @@ from .._utils import strip_not_given
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from ..types.card import Card
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import AsyncPaginator, _merge_mappings, make_request_options
 from ..types.card_provision_response import CardProvisionResponse
 
 __all__ = ["Cards", "AsyncCards"]
@@ -458,7 +458,7 @@ class Cards(SyncAPIResource):
         `get_embed_url()` instead. You would then pass that returned URL to the
         frontend, where you can load it via an iframe.
         """
-        headers = {"Accept": "text/html", **(extra_headers or {})}
+        headers = _merge_mappings({"Accept": "text/html"}, extra_headers or {})
         url = self.get_embed_url(
             css=css,
             token=token,
@@ -1091,7 +1091,7 @@ class AsyncCards(AsyncAPIResource):
         `get_embed_url()` instead. You would then pass that returned URL to the
         frontend, where you can load it via an iframe.
         """
-        headers = {"Accept": "text/html", **(extra_headers or {})}
+        headers = _merge_mappings({"Accept": "text/html"}, extra_headers or {})
         url = self.get_embed_url(
             css=css,
             token=token,

@@ -101,3 +101,15 @@ from .transaction_simulate_authorization_params import (
 from .transaction_simulate_authorization_response import (
     TransactionSimulateAuthorizationResponse as TransactionSimulateAuthorizationResponse,
 )
+from .transaction_simulate_return_reversal_params import (
+    TransactionSimulateReturnReversalParams as TransactionSimulateReturnReversalParams,
+)
+from .transaction_simulate_return_reversal_response import (
+    TransactionSimulateReturnReversalResponse as TransactionSimulateReturnReversalResponse,
+)
+from .transaction_simulate_credit_authorization_params import (
+    TransactionSimulateCreditAuthorizationParams as TransactionSimulateCreditAuthorizationParams,
+)
+from .transaction_simulate_credit_authorization_response import (
+    TransactionSimulateCreditAuthorizationResponse as TransactionSimulateCreditAuthorizationResponse,
+)

@@ -9,7 +9,13 @@ __all__ = ["TransactionSimulateAuthorizationParams"]
 
 class TransactionSimulateAuthorizationParams(TypedDict, total=False):
     amount: Required[int]
-    """Amount (in cents) to authorize."""
+    """Amount (in cents) to authorize.
+
+    For credit authorizations and financial credit authorizations, any value entered
+    will be converted into a negative amount in the simulated transaction. For
+    example, entering 100 in this field will appear as a -100 amount in the
+    transaction. For balance inquiries, this field must be set to 0.
+    """
 
     descriptor: Required[str]
     """Merchant descriptor."""
@@ -34,12 +40,26 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
     """
 
     status: Literal[
-        "AUTHORIZATION", "CREDIT_AUTHORIZATION", "FINANCIAL_AUTHORIZATION", "FINANCIAL_CREDIT_AUTHORIZATION"
+        "AUTHORIZATION",
+        "BALANCE_INQUIRY",
+        "CREDIT_AUTHORIZATION",
+        "FINANCIAL_AUTHORIZATION",
+        "FINANCIAL_CREDIT_AUTHORIZATION",
     ]
     """Type of event to simulate.
 
-    - `CREDIT` indicates funds flow towards the user rather than towards the
-      merchant.
-    - `FINANCIAL` indicates that this is a single message transaction that completes
-      immediately if approved.
+    - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
+      clearing step is required to settle the transaction.
+    - `BALANCE_INQUIRY` is a $0 authorization that includes a request for the
+      balance held on the card, and is most typically seen when a cardholder
+      requests to view a card's balance at an ATM.
+    - `CREDIT_AUTHORIZATION` is a dual message request from a merchant to authorize
+      a refund or credit, meaning a subsequent clearing step is required to settle
+      the transaction.
+    - `FINANCIAL_AUTHORIZATION` is a single message request from a merchant to debit
+      funds immediately (such as an ATM withdrawal), and no subsequent clearing is
+      required to settle the transaction.
+    - `FINANCIAL_CREDIT_AUTHORIZATION` is a single message request from a merchant
+      to credit funds immediately, and no subsequent clearing is required to settle
+      the transaction.
     """

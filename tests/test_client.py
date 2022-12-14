@@ -183,6 +183,18 @@ class TestLithic:
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
+    def test_validate_headers(self) -> None:
+        client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == api_key
+
+        with pytest.raises(
+            Exception,
+            match="The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable",
+        ):
+            client2 = Lithic(base_url=base_url, api_key=None, _strict_response_validation=True)
+            client2.build_request(FinalRequestOptions(method="get", url="/foo"))
+
     def test_default_query_option(self) -> None:
         client = Lithic(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
@@ -437,6 +449,18 @@ class TestAsyncLithic:
         request = client2.build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == api_key
+
+        with pytest.raises(
+            Exception,
+            match="The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable",
+        ):
+            client2 = AsyncLithic(base_url=base_url, api_key=None, _strict_response_validation=True)
+            client2.build_request(FinalRequestOptions(method="get", url="/foo"))
 
     def test_default_query_option(self) -> None:
         client = AsyncLithic(
