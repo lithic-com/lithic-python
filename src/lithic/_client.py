@@ -195,6 +195,7 @@ class Lithic(SyncAPIClient):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> APIStatus:
+        """API status check"""
         return self.get(
             "/status",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -349,6 +350,7 @@ class AsyncLithic(AsyncAPIClient):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> APIStatus:
+        """API status check"""
         return await self.get(
             "/status",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
