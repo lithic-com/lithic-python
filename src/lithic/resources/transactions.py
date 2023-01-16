@@ -4,27 +4,19 @@ from __future__ import annotations
 
 from typing_extensions import Literal
 
+from ..types import (
+    Transaction,
+    TransactionSimulateVoidResponse,
+    TransactionSimulateReturnResponse,
+    TransactionSimulateClearingResponse,
+    TransactionSimulateAuthorizationResponse,
+    TransactionSimulateReturnReversalResponse,
+    TransactionSimulateCreditAuthorizationResponse,
+)
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.transaction import Transaction
-from ..types.transaction_simulate_void_response import TransactionSimulateVoidResponse
-from ..types.transaction_simulate_return_response import (
-    TransactionSimulateReturnResponse,
-)
-from ..types.transaction_simulate_clearing_response import (
-    TransactionSimulateClearingResponse,
-)
-from ..types.transaction_simulate_authorization_response import (
-    TransactionSimulateAuthorizationResponse,
-)
-from ..types.transaction_simulate_return_reversal_response import (
-    TransactionSimulateReturnReversalResponse,
-)
-from ..types.transaction_simulate_credit_authorization_response import (
-    TransactionSimulateCreditAuthorizationResponse,
-)
 
 __all__ = ["Transactions", "AsyncTransactions"]
 

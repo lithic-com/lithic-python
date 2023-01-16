@@ -7,26 +7,16 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic.pagination import SyncPage, AsyncPage
-from lithic.types.transaction import Transaction
-from lithic.types.transaction_simulate_void_response import (
+from lithic.types import (
+    Transaction,
     TransactionSimulateVoidResponse,
-)
-from lithic.types.transaction_simulate_return_response import (
     TransactionSimulateReturnResponse,
-)
-from lithic.types.transaction_simulate_clearing_response import (
     TransactionSimulateClearingResponse,
-)
-from lithic.types.transaction_simulate_authorization_response import (
     TransactionSimulateAuthorizationResponse,
-)
-from lithic.types.transaction_simulate_return_reversal_response import (
     TransactionSimulateReturnReversalResponse,
-)
-from lithic.types.transaction_simulate_credit_authorization_response import (
     TransactionSimulateCreditAuthorizationResponse,
 )
+from lithic.pagination import SyncPage, AsyncPage
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")

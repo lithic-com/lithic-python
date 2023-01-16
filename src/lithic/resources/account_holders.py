@@ -5,20 +5,19 @@ from __future__ import annotations
 from typing import List, overload
 from typing_extensions import Literal
 
-from ..types import account_holder_create_params, account_holder_resubmit_params
+from ..types import (
+    AccountHolder,
+    AccountHolderDocument,
+    AccountHolderUpdateResponse,
+    AccountHolderCreateWebhookResponse,
+    AccountHolderListDocumentsResponse,
+    account_holder_create_params,
+    account_holder_resubmit_params,
+)
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import required_args
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
-from ..types.account_holder import AccountHolder
-from ..types.account_holder_document import AccountHolderDocument
-from ..types.account_holder_update_response import AccountHolderUpdateResponse
-from ..types.account_holder_create_webhook_response import (
-    AccountHolderCreateWebhookResponse,
-)
-from ..types.account_holder_list_documents_response import (
-    AccountHolderListDocumentsResponse,
-)
 
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 

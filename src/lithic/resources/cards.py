@@ -11,14 +11,12 @@ from typing_extensions import Literal
 
 from httpx import URL
 
-from ..types import shared_params
+from ..types import Card, CardProvisionResponse, shared_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import strip_not_given
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
-from ..types.card import Card
 from .._base_client import AsyncPaginator, _merge_mappings, make_request_options
-from ..types.card_provision_response import CardProvisionResponse
 
 __all__ = ["Cards", "AsyncCards"]
 

@@ -98,7 +98,12 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Card, EmbedRequestParams, CardProvisionResponse
+from lithic.types import (
+    Card,
+    EmbedRequestParams,
+    CardEmbedResponse,
+    CardProvisionResponse,
+)
 ```
 
 Methods:

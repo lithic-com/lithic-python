@@ -15,6 +15,7 @@ from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .card_create_params import CardCreateParams as CardCreateParams
 from .card_update_params import CardUpdateParams as CardUpdateParams
 from .account_list_params import AccountListParams as AccountListParams
+from .card_embed_response import CardEmbedResponse as CardEmbedResponse
 from .card_reissue_params import CardReissueParams as CardReissueParams
 from .card_retrieve_params import CardRetrieveParams as CardRetrieveParams
 from .embed_request_params import EmbedRequestParams as EmbedRequestParams

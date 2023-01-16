@@ -7,13 +7,11 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic.types.account_holder import AccountHolder
-from lithic.types.account_holder_document import AccountHolderDocument
-from lithic.types.account_holder_update_response import AccountHolderUpdateResponse
-from lithic.types.account_holder_create_webhook_response import (
+from lithic.types import (
+    AccountHolder,
+    AccountHolderDocument,
+    AccountHolderUpdateResponse,
     AccountHolderCreateWebhookResponse,
-)
-from lithic.types.account_holder_list_documents_response import (
     AccountHolderListDocumentsResponse,
 )
 

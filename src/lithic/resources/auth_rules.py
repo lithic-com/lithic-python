@@ -5,16 +5,18 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal
 
+from ..types import (
+    AuthRule,
+    AuthRuleApplyResponse,
+    AuthRuleCreateResponse,
+    AuthRuleRemoveResponse,
+    AuthRuleUpdateResponse,
+    AuthRuleRetrieveResponse,
+)
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.auth_rule import AuthRule
-from ..types.auth_rule_apply_response import AuthRuleApplyResponse
-from ..types.auth_rule_create_response import AuthRuleCreateResponse
-from ..types.auth_rule_remove_response import AuthRuleRemoveResponse
-from ..types.auth_rule_update_response import AuthRuleUpdateResponse
-from ..types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
 
 __all__ = ["AuthRules", "AsyncAuthRules"]
 

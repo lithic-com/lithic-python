@@ -5,12 +5,12 @@ from __future__ import annotations
 from typing import List, overload
 from typing_extensions import Literal
 
+from ..types import FundingSource
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import required_args
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.funding_source import FundingSource
 
 __all__ = ["FundingSources", "AsyncFundingSources"]
 

@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+from ..types import AuthStreamEnrollment
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
-from ..types.auth_stream_enrollment import AuthStreamEnrollment
 
 __all__ = ["AuthStreamEnrollmentResource", "AsyncAuthStreamEnrollmentResource"]
 

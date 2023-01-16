@@ -7,9 +7,8 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from lithic.types import Card, CardProvisionResponse
 from lithic.pagination import SyncPage, AsyncPage
-from lithic.types.card import Card
-from lithic.types.card_provision_response import CardProvisionResponse
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")

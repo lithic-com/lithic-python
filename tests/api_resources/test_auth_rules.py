@@ -7,12 +7,14 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from lithic.types import (
+    AuthRuleApplyResponse,
+    AuthRuleCreateResponse,
+    AuthRuleRemoveResponse,
+    AuthRuleUpdateResponse,
+    AuthRuleRetrieveResponse,
+)
 from lithic.pagination import SyncPage, AsyncPage
-from lithic.types.auth_rule_apply_response import AuthRuleApplyResponse
-from lithic.types.auth_rule_create_response import AuthRuleCreateResponse
-from lithic.types.auth_rule_remove_response import AuthRuleRemoveResponse
-from lithic.types.auth_rule_update_response import AuthRuleUpdateResponse
-from lithic.types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")

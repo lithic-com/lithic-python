@@ -7,7 +7,7 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
-from lithic.types.auth_stream_enrollment import AuthStreamEnrollment
+from lithic.types import AuthStreamEnrollment
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
