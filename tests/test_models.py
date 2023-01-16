@@ -152,3 +152,23 @@ def test_aliases() -> None:
     # mismatched types
     m = Model.construct(myField={"hello": False})
     assert cast(Any, m.my_field) == {"hello": False}
+
+
+def test_repr() -> None:
+    model = BasicModel(foo="bar")
+    assert str(model) == "BasicModel(foo='bar')"
+    assert repr(model) == "BasicModel(foo='bar')"
+
+
+def test_repr_nested_model() -> None:
+    class Child(BaseModel):
+        name: str
+        age: int
+
+    class Parent(BaseModel):
+        name: str
+        child: Child
+
+    model = Parent(name="Robert", child=Child(name="Foo", age=5))
+    assert str(model) == "Parent(name='Robert', child=Child(name='Foo', age=5))"
+    assert repr(model) == "Parent(name='Robert', child=Child(name='Foo', age=5))"

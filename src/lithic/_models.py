@@ -21,6 +21,9 @@ __all__ = ["BaseModel", "GenericModel"]
 
 
 class BaseModel(pydantic.BaseModel):
+    def __str__(self) -> str:
+        return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+
     # Override the 'construct' method in a way that supports recursive parsing without validation.
     # Based on https://github.com/samuelcolvin/pydantic/issues/1168#issuecomment-817742836.
     @classmethod
