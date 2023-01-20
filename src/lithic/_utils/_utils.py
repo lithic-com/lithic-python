@@ -279,3 +279,15 @@ def strip_not_given(obj: object | None) -> object:
         return obj
 
     return {key: value for key, value in obj.items() if not isinstance(value, NotGiven)}
+
+
+def coerce_integer(val: str) -> int:
+    return int(val, base=10)
+
+
+def coerce_float(val: str) -> float:
+    return float(val)
+
+
+def coerce_boolean(val: str) -> bool:
+    return val == "true" or val == "1" or val == "on"
