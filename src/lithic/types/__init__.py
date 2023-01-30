@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .card import Card as Card
+from .shared import Address as Address
 from .shared import ShippingAddress as ShippingAddress
 from .account import Account as Account
 from .auth_rule import AuthRule as AuthRule
@@ -19,6 +20,7 @@ from .card_embed_response import CardEmbedResponse as CardEmbedResponse
 from .card_reissue_params import CardReissueParams as CardReissueParams
 from .card_retrieve_params import CardRetrieveParams as CardRetrieveParams
 from .embed_request_params import EmbedRequestParams as EmbedRequestParams
+from .spend_limit_duration import SpendLimitDuration as SpendLimitDuration
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .auth_rule_list_params import AuthRuleListParams as AuthRuleListParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams

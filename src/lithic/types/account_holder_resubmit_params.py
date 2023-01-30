@@ -4,43 +4,13 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["IndividualAddress", "Individual", "AccountHolderResubmitParams"]
+from ..types import shared_params
 
-
-class IndividualAddress(TypedDict, total=False):
-    address1: Required[str]
-    """Valid deliverable address (no PO boxes)."""
-
-    city: Required[str]
-    """Name of city."""
-
-    country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: str
-    """Unit or apartment number (if applicable)."""
+__all__ = ["Individual", "AccountHolderResubmitParams"]
 
 
 class Individual(TypedDict, total=False):
-    address: Required[IndividualAddress]
+    address: Required[shared_params.Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.

@@ -3,7 +3,7 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
-from ..types import funding_source
+from ..types import funding_source, spend_limit_duration
 from .._models import BaseModel
 
 __all__ = ["Card"]
@@ -24,7 +24,7 @@ class Card(BaseModel):
     Transaction requests above the spend limit will be declined.
     """
 
-    spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"]
+    spend_limit_duration: spend_limit_duration.SpendLimitDuration
     """Spend limit duration values:
 
     - `ANNUALLY` - Card will authorize transactions up to spend limit in a calendar

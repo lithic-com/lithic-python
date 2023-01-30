@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from lithic.types import ShippingAddress
+from lithic.types import Address, ShippingAddress
 ```
 
 # Top Level
@@ -101,6 +101,7 @@ Types:
 from lithic.types import (
     Card,
     EmbedRequestParams,
+    SpendLimitDuration,
     CardProvisionResponse,
     CardEmbedResponse,
 )

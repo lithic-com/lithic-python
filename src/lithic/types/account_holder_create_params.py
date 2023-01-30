@@ -5,59 +5,23 @@ from __future__ import annotations
 from typing import List, Union
 from typing_extensions import Literal, Required, TypedDict
 
+from ..types import shared_params
+
 __all__ = [
-    "KYBBusinessEntityAddress",
     "KYBBusinessEntity",
-    "KYBBeneficialOwnerEntitiesAddress",
     "KYBBeneficialOwnerEntities",
-    "KYBBeneficialOwnerIndividualsAddress",
     "KYBBeneficialOwnerIndividuals",
-    "KYBControlPersonAddress",
     "KYBControlPerson",
     "KYB",
-    "KYCIndividualAddress",
     "KYCIndividual",
     "KYC",
-    "KYCExemptAddress",
     "KYCExempt",
     "AccountHolderCreateParams",
 ]
 
 
-class KYBBusinessEntityAddress(TypedDict, total=False):
-    address1: Required[str]
-    """Valid deliverable address (no PO boxes)."""
-
-    city: Required[str]
-    """Name of city."""
-
-    country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: str
-    """Unit or apartment number (if applicable)."""
-
-
 class KYBBusinessEntity(TypedDict, total=False):
-    address: Required[KYBBusinessEntityAddress]
+    address: Required[shared_params.Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
@@ -87,42 +51,10 @@ class KYBBusinessEntity(TypedDict, total=False):
 
     parent_company: str
     """Parent company name (if applicable)."""
-
-
-class KYBBeneficialOwnerEntitiesAddress(TypedDict, total=False):
-    address1: Required[str]
-    """Valid deliverable address (no PO boxes)."""
-
-    city: Required[str]
-    """Name of city."""
-
-    country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: str
-    """Unit or apartment number (if applicable)."""
 
 
 class KYBBeneficialOwnerEntities(TypedDict, total=False):
-    address: Required[KYBBeneficialOwnerEntitiesAddress]
+    address: Required[shared_params.Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
@@ -154,40 +86,8 @@ class KYBBeneficialOwnerEntities(TypedDict, total=False):
     """Parent company name (if applicable)."""
 
 
-class KYBBeneficialOwnerIndividualsAddress(TypedDict, total=False):
-    address1: Required[str]
-    """Valid deliverable address (no PO boxes)."""
-
-    city: Required[str]
-    """Name of city."""
-
-    country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: str
-    """Unit or apartment number (if applicable)."""
-
-
 class KYBBeneficialOwnerIndividuals(TypedDict, total=False):
-    address: Required[KYBBeneficialOwnerIndividualsAddress]
+    address: Required[shared_params.Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -220,40 +120,8 @@ class KYBBeneficialOwnerIndividuals(TypedDict, total=False):
     """Individual's phone number, entered in E.164 format."""
 
 
-class KYBControlPersonAddress(TypedDict, total=False):
-    address1: Required[str]
-    """Valid deliverable address (no PO boxes)."""
-
-    city: Required[str]
-    """Name of city."""
-
-    country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: str
-    """Unit or apartment number (if applicable)."""
-
-
 class KYBControlPerson(TypedDict, total=False):
-    address: Required[KYBControlPersonAddress]
+    address: Required[shared_params.Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -355,40 +223,8 @@ class KYB(TypedDict, total=False):
     """
 
 
-class KYCIndividualAddress(TypedDict, total=False):
-    address1: Required[str]
-    """Valid deliverable address (no PO boxes)."""
-
-    city: Required[str]
-    """Name of city."""
-
-    country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: str
-    """Unit or apartment number (if applicable)."""
-
-
 class KYCIndividual(TypedDict, total=False):
-    address: Required[KYCIndividualAddress]
+    address: Required[shared_params.Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -447,38 +283,6 @@ class KYC(TypedDict, total=False):
     """
 
 
-class KYCExemptAddress(TypedDict, total=False):
-    address1: Required[str]
-    """Valid deliverable address (no PO boxes)."""
-
-    city: Required[str]
-    """Name of city."""
-
-    country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: str
-    """Unit or apartment number (if applicable)."""
-
-
 class KYCExempt(TypedDict, total=False):
     email: Required[str]
     """The KYC Exempt user's email"""
@@ -498,7 +302,7 @@ class KYCExempt(TypedDict, total=False):
     workflow: Required[str]
     """Specifies the workflow type. This must be 'KYC_EXEMPT'"""
 
-    address: KYCExemptAddress
+    address: shared_params.Address
     """
     KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.

@@ -11,6 +11,7 @@ from ..types import (
     AccountHolderUpdateResponse,
     AccountHolderCreateWebhookResponse,
     AccountHolderListDocumentsResponse,
+    shared_params,
     account_holder_create_params,
     account_holder_resubmit_params,
 )
@@ -160,7 +161,7 @@ class AccountHolders(SyncAPIResource):
         last_name: str,
         email: str,
         phone_number: str,
-        address: account_holder_create_params.KYCExemptAddress | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -237,7 +238,7 @@ class AccountHolders(SyncAPIResource):
         last_name: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
-        address: account_holder_create_params.KYCExemptAddress | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -750,7 +751,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         last_name: str,
         email: str,
         phone_number: str,
-        address: account_holder_create_params.KYCExemptAddress | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -827,7 +828,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         last_name: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
-        address: account_holder_create_params.KYCExemptAddress | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

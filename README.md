@@ -71,7 +71,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Functionality between the synchronous and asynchronous clients are otherwise identical.
+Functionality between the synchronous and asynchronous clients is otherwise identical.
 
 ## Using Types
 

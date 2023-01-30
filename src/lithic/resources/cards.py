@@ -11,7 +11,7 @@ from typing_extensions import Literal
 
 from httpx import URL
 
-from ..types import Card, CardProvisionResponse, shared_params
+from ..types import Card, SpendLimitDuration, CardProvisionResponse, shared_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import strip_not_given
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -32,7 +32,7 @@ class Cards(SyncAPIResource):
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"] | NotGiven = NOT_GIVEN,
+        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         pin: str | NotGiven = NOT_GIVEN,
@@ -214,7 +214,7 @@ class Cards(SyncAPIResource):
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"] | NotGiven = NOT_GIVEN,
+        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
@@ -665,7 +665,7 @@ class AsyncCards(AsyncAPIResource):
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"] | NotGiven = NOT_GIVEN,
+        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         pin: str | NotGiven = NOT_GIVEN,
@@ -847,7 +847,7 @@ class AsyncCards(AsyncAPIResource):
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"] | NotGiven = NOT_GIVEN,
+        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
