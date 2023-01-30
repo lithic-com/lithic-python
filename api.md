@@ -39,8 +39,8 @@ from lithic.types import (
     AccountHolder,
     AccountHolderDocument,
     AccountHolderUpdateResponse,
-    AccountHolderCreateWebhookResponse,
     AccountHolderListDocumentsResponse,
+    AccountHolderCreateWebhookResponse,
 )
 ```
 
@@ -101,8 +101,8 @@ Types:
 from lithic.types import (
     Card,
     EmbedRequestParams,
-    CardEmbedResponse,
     CardProvisionResponse,
+    CardEmbedResponse,
 )
 ```
 
@@ -145,10 +145,10 @@ from lithic.types import (
     Transaction,
     TransactionSimulateAuthorizationResponse,
     TransactionSimulateClearingResponse,
-    TransactionSimulateCreditAuthorizationResponse,
     TransactionSimulateReturnResponse,
     TransactionSimulateReturnReversalResponse,
     TransactionSimulateVoidResponse,
+    TransactionSimulateCreditAuthorizationResponse,
 )
 ```
 
