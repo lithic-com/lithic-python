@@ -25,8 +25,8 @@ respx = "^0.19.2"
 pytest = "^7.1.1"
 pytest-asyncio = "^0.18.3"
 pyright = "^1.1.277"
-isort = "^5.10.1"
-autoflake = "^1.4"
+ruff = "^0.0.239"
+isort = "5.10.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -62,3 +62,14 @@ reportPrivateUsage = false
 profile = "black"
 length_sort = true
 extra_standard_library = ["typing_extensions"]
+
+[tool.ruff]
+line-length = 120
+format = "grouped"
+target-version = "py37"
+select = [
+  # remove unused imports
+  "F401",
+]
+ignore-init-module-imports = true
+

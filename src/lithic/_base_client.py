@@ -838,7 +838,6 @@ class AsyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        query: Query = {},
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="get", url=path, **options)
