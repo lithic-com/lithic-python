@@ -290,7 +290,7 @@ class KYCExempt(TypedDict, total=False):
     first_name: Required[str]
     """The KYC Exempt user's first name"""
 
-    kyc_exemption_type: Required[str]
+    kyc_exemption_type: Required[Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"]]
     """Specifies the type of KYC Exempt user"""
 
     last_name: Required[str]
@@ -299,7 +299,7 @@ class KYCExempt(TypedDict, total=False):
     phone_number: Required[str]
     """The KYC Exempt user's phone number"""
 
-    workflow: Required[str]
+    workflow: Required[Literal["KYC_EXEMPT"]]
     """Specifies the workflow type. This must be 'KYC_EXEMPT'"""
 
     address: shared_params.Address

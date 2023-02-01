@@ -345,8 +345,8 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_overload_3(self, client: Lithic) -> None:
         resource = client.account_holders.create(
-            workflow="string",
-            kyc_exemption_type="string",
+            workflow="KYC_EXEMPT",
+            kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
             last_name="string",
             email="string",
@@ -357,8 +357,8 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
         resource = client.account_holders.create(
-            workflow="string",
-            kyc_exemption_type="string",
+            workflow="KYC_EXEMPT",
+            kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
             last_name="string",
             email="string",
@@ -779,8 +779,8 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_overload_3(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create(
-            workflow="string",
-            kyc_exemption_type="string",
+            workflow="KYC_EXEMPT",
+            kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
             last_name="string",
             email="string",
@@ -791,8 +791,8 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_with_all_params_overload_3(self, client: AsyncLithic) -> None:
         resource = await client.account_holders.create(
-            workflow="string",
-            kyc_exemption_type="string",
+            workflow="KYC_EXEMPT",
+            kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
             last_name="string",
             email="string",

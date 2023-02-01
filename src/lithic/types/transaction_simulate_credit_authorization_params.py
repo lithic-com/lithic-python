@@ -21,3 +21,6 @@ class TransactionSimulateCreditAuthorizationParams(TypedDict, total=False):
 
     pan: Required[str]
     """Sixteen digit card number."""
+
+    merchant_acceptor_id: str
+    """Unique identifier to identify the payment card acceptor."""

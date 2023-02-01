@@ -128,6 +128,7 @@ class Transactions(SyncAPIResource):
             "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
         | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         merchant_amount: int | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
@@ -174,6 +175,8 @@ class Transactions(SyncAPIResource):
                 to credit funds immediately, and no subsequent clearing is required to settle
                 the transaction.
 
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
           merchant_currency: 3-digit alphabetic ISO 4217 currency code.
 
           merchant_amount: Amount of the transaction to be simulated in currency specified in
@@ -196,6 +199,7 @@ class Transactions(SyncAPIResource):
                 "descriptor": descriptor,
                 "pan": pan,
                 "status": status,
+                "merchant_acceptor_id": merchant_acceptor_id,
                 "merchant_currency": merchant_currency,
                 "merchant_amount": merchant_amount,
                 "partial_approval_capable": partial_approval_capable,
@@ -256,6 +260,7 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -277,6 +282,8 @@ class Transactions(SyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -289,6 +296,7 @@ class Transactions(SyncAPIResource):
                 "amount": amount,
                 "descriptor": descriptor,
                 "pan": pan,
+                "merchant_acceptor_id": merchant_acceptor_id,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
@@ -524,6 +532,7 @@ class AsyncTransactions(AsyncAPIResource):
             "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
         | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         merchant_amount: int | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
@@ -570,6 +579,8 @@ class AsyncTransactions(AsyncAPIResource):
                 to credit funds immediately, and no subsequent clearing is required to settle
                 the transaction.
 
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
           merchant_currency: 3-digit alphabetic ISO 4217 currency code.
 
           merchant_amount: Amount of the transaction to be simulated in currency specified in
@@ -592,6 +603,7 @@ class AsyncTransactions(AsyncAPIResource):
                 "descriptor": descriptor,
                 "pan": pan,
                 "status": status,
+                "merchant_acceptor_id": merchant_acceptor_id,
                 "merchant_currency": merchant_currency,
                 "merchant_amount": merchant_amount,
                 "partial_approval_capable": partial_approval_capable,
@@ -652,6 +664,7 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -673,6 +686,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -685,6 +700,7 @@ class AsyncTransactions(AsyncAPIResource):
                 "amount": amount,
                 "descriptor": descriptor,
                 "pan": pan,
+                "merchant_acceptor_id": merchant_acceptor_id,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateCreditAuthorizationResponse,

@@ -218,9 +218,9 @@ class Events(BaseModel):
     - `RETURN` - A refund has been processed on the transaction.
     - `RETURN_REVERSAL` - A refund has been reversed (e.g., when a merchant reverses
       an incorrect refund).
-    - `VOID` - (Note this value will be removed with the
-      [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)).
-      A transaction has been voided (e.g., when a merchant reverses an incorrect
+    - `VOID` - Note this value will be removed with the February API changes (see
+      https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes). A
+      transaction has been voided (e.g., when a merchant reverses an incorrect
       authorization).
     """
 
@@ -295,7 +295,7 @@ class Transaction(BaseModel):
     card: Optional[card.Card]
     """
     Note this field will be removed with the
-    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)).
+    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
     Card used in this transaction.
     """
 
@@ -304,7 +304,7 @@ class Transaction(BaseModel):
     included.
 
     It will be added as part of the
-    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)).
+    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
     """
 
     cardholder_authentication: Optional[CardholderAuthentication]
@@ -318,7 +318,7 @@ class Transaction(BaseModel):
     funding: Optional[List[Funding]]
     """
     Note this field will be removed with the
-    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)).
+    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
     A list of objects that describe how this transaction was funded, with the
     `amount` represented in cents. A reference to the funding account for the `card`
     that made this transaction may appear here and the `token` will match the
@@ -388,7 +388,7 @@ class Transaction(BaseModel):
 
     - `BOUNCED` - The transaction was bounced. Note this value will be removed with
       the
-      [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)).
+      [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
     - `DECLINED` - The transaction was declined.
     - `EXPIRED` - Lithic reversed the authorization as it has passed its expiration
       time.
@@ -396,7 +396,7 @@ class Transaction(BaseModel):
     - `SETTLED` - The transaction is complete.
     - `SETTLING` - The merchant has completed the transaction and the funding source
       is being debited. Note this value will be removed with the
-      [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)).
+      [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
     - `VOIDED` - The merchant has voided the previously pending authorization.
     """
 

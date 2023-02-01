@@ -68,6 +68,7 @@ class TestTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
             status="AUTHORIZATION",
+            merchant_acceptor_id="OODKZAPJVN4YS7O",
             merchant_currency="GBP",
             merchant_amount=0,
             partial_approval_capable=True,
@@ -95,6 +96,16 @@ class TestTransactions:
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+        )
+        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+
+    @parametrize
+    def test_method_simulate_credit_authorization_with_all_params(self, client: Lithic) -> None:
+        resource = client.transactions.simulate_credit_authorization(
+            amount=0,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+            merchant_acceptor_id="XRKGDPOWEWQRRWU",
         )
         assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
 
@@ -177,6 +188,7 @@ class TestAsyncTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
             status="AUTHORIZATION",
+            merchant_acceptor_id="OODKZAPJVN4YS7O",
             merchant_currency="GBP",
             merchant_amount=0,
             partial_approval_capable=True,
@@ -204,6 +216,16 @@ class TestAsyncTransactions:
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+        )
+        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+
+    @parametrize
+    async def test_method_simulate_credit_authorization_with_all_params(self, client: AsyncLithic) -> None:
+        resource = await client.transactions.simulate_credit_authorization(
+            amount=0,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+            merchant_acceptor_id="XRKGDPOWEWQRRWU",
         )
         assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
 

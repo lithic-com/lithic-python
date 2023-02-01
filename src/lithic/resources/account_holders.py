@@ -155,8 +155,8 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        workflow: str,
-        kyc_exemption_type: str,
+        workflow: Literal["KYC_EXEMPT"],
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
         first_name: str,
         last_name: str,
         email: str,
@@ -229,11 +229,11 @@ class AccountHolders(SyncAPIResource):
         website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
-        | str
+        | Literal["KYC_EXEMPT"]
         | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: str | NotGiven = NOT_GIVEN,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
@@ -745,8 +745,8 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        workflow: str,
-        kyc_exemption_type: str,
+        workflow: Literal["KYC_EXEMPT"],
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
         first_name: str,
         last_name: str,
         email: str,
@@ -819,11 +819,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
-        | str
+        | Literal["KYC_EXEMPT"]
         | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: str | NotGiven = NOT_GIVEN,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
