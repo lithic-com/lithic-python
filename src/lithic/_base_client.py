@@ -293,28 +293,31 @@ class BaseClient:
 
     def _make_status_error(self, request: httpx.Request, response: httpx.Response) -> APIStatusError:
         err_text = response.text.strip()
+        body = err_text
+
         try:
-            err_msg = json.loads(err_text)
-        except:
-            err_msg = err_text or "Unknown"
+            body = json.loads(err_text)
+            err_msg = f"Error code: {response.status_code}"
+        except Exception:
+            err_msg = err_text or f"Error code: {response.status_code}"
 
         if response.status_code == 400:
-            return exceptions.BadRequestError(err_msg, request, response)
+            return exceptions.BadRequestError(err_msg, request=request, response=response, body=body)
         if response.status_code == 401:
-            return exceptions.AuthenticationError(err_msg, request, response)
+            return exceptions.AuthenticationError(err_msg, request=request, response=response, body=body)
         if response.status_code == 403:
-            return exceptions.PermissionDeniedError(err_msg, request, response)
+            return exceptions.PermissionDeniedError(err_msg, request=request, response=response, body=body)
         if response.status_code == 404:
-            return exceptions.NotFoundError(err_msg, request, response)
+            return exceptions.NotFoundError(err_msg, request=request, response=response, body=body)
         if response.status_code == 409:
-            return exceptions.ConflictError(err_msg, request, response)
+            return exceptions.ConflictError(err_msg, request=request, response=response, body=body)
         if response.status_code == 422:
-            return exceptions.UnprocessableEntityError(err_msg, request, response)
+            return exceptions.UnprocessableEntityError(err_msg, request=request, response=response, body=body)
         if response.status_code == 429:
-            return exceptions.RateLimitError(err_msg, request, response)
+            return exceptions.RateLimitError(err_msg, request=request, response=response, body=body)
         if response.status_code >= 500:
-            return exceptions.InternalServerError(err_msg, request, response)
-        return APIStatusError(err_msg, request, response)
+            return exceptions.InternalServerError(err_msg, request=request, response=response, body=body)
+        return APIStatusError(err_msg, request=request, response=response, body=body)
 
     def remaining_retries(
         self,
