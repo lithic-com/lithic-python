@@ -8,15 +8,15 @@ from typing_extensions import Literal, Required, TypedDict
 from ..types import shared_params
 
 __all__ = [
-    "KYBBusinessEntity",
-    "KYBBeneficialOwnerEntities",
-    "KYBBeneficialOwnerIndividuals",
-    "KYBControlPerson",
-    "KYB",
-    "KYCIndividual",
-    "KYC",
-    "KYCExempt",
     "AccountHolderCreateParams",
+    "KYB",
+    "KYBBusinessEntity",
+    "KYBBeneficialOwnerEntity",
+    "KYBBeneficialOwnerIndividual",
+    "KYBControlPerson",
+    "KYC",
+    "KYCIndividual",
+    "KYCExempt",
 ]
 
 
@@ -53,7 +53,7 @@ class KYBBusinessEntity(TypedDict, total=False):
     """Parent company name (if applicable)."""
 
 
-class KYBBeneficialOwnerEntities(TypedDict, total=False):
+class KYBBeneficialOwnerEntity(TypedDict, total=False):
     address: Required[shared_params.Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
@@ -86,7 +86,7 @@ class KYBBeneficialOwnerEntities(TypedDict, total=False):
     """Parent company name (if applicable)."""
 
 
-class KYBBeneficialOwnerIndividuals(TypedDict, total=False):
+class KYBBeneficialOwnerIndividual(TypedDict, total=False):
     address: Required[shared_params.Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -155,7 +155,7 @@ class KYBControlPerson(TypedDict, total=False):
 
 
 class KYB(TypedDict, total=False):
-    beneficial_owner_entities: Required[List[KYBBeneficialOwnerEntities]]
+    beneficial_owner_entities: Required[List[KYBBeneficialOwnerEntity]]
     """List of all entities with >25% ownership in the company.
 
     If no entity or individual owns >25% of the company, and the largest shareholder
@@ -166,7 +166,7 @@ class KYB(TypedDict, total=False):
     must be populated. on entities that should be included.
     """
 
-    beneficial_owner_individuals: Required[List[KYBBeneficialOwnerIndividuals]]
+    beneficial_owner_individuals: Required[List[KYBBeneficialOwnerIndividual]]
     """List of all individuals with >25% ownership in the company.
 
     If no entity or individual owns >25% of the company, and the largest shareholder

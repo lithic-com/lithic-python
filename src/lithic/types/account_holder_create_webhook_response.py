@@ -4,7 +4,7 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["Data", "AccountHolderCreateWebhookResponse"]
+__all__ = ["AccountHolderCreateWebhookResponse", "Data"]
 
 
 class Data(BaseModel):

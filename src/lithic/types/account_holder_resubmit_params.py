@@ -6,7 +6,7 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ..types import shared_params
 
-__all__ = ["Individual", "AccountHolderResubmitParams"]
+__all__ = ["AccountHolderResubmitParams", "Individual"]
 
 
 class Individual(TypedDict, total=False):

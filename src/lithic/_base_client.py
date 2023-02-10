@@ -22,7 +22,7 @@ from typing import (
     overload,
 )
 from functools import lru_cache
-from typing_extensions import Literal
+from typing_extensions import Literal, get_args, get_origin
 
 import anyio
 import httpx
@@ -409,12 +409,32 @@ class BaseClient:
         cast_to: Type[ResponseT],
         options: FinalRequestOptions,
         response: httpx.Response,
+        _strict: bool = False,
     ) -> ResponseT:
         if cast_to is NoneType:
             return cast(ResponseT, None)
 
         if cast_to == str:
             return cast(ResponseT, response.text)
+
+        # TODO: try to handle Unions better…
+        if get_origin(cast_to) is Union:
+            members = get_args(cast_to)
+            for member in members:
+                try:
+                    return cast(
+                        ResponseT,
+                        self.process_response(cast_to=member, options=options, response=response, _strict=True),
+                    )
+                except:
+                    continue
+            # If nobody matches exactly, try again loosely.
+            for member in members:
+                try:
+                    return cast(ResponseT, self.process_response(cast_to=member, options=options, response=response))
+                except:
+                    continue
+            raise ValueError(f"Response did not match any type in union {members}")
 
         if issubclass(cast_to, httpx.Response):
             # Because of the invariance of our ResponseT TypeVar, users can subclass httpx.Response
@@ -457,7 +477,7 @@ class BaseClient:
             return cast(ResponseT, cast_to.build(response=response, data=data))
 
         model_cls = cast(Type[BaseModel], cast_to)
-        if self._strict_response_validation:
+        if _strict or self._strict_response_validation:
             return cast(ResponseT, model_cls(**data))
 
         return cast(ResponseT, model_cls.construct(**data))

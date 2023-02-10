@@ -29,8 +29,8 @@ class AccountHolders(SyncAPIResource):
         self,
         *,
         business_entity: account_holder_create_params.KYBBusinessEntity,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntities],
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividuals],
+        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity],
+        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual],
         control_person: account_holder_create_params.KYBControlPerson,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         nature_of_business: str,
@@ -219,8 +219,8 @@ class AccountHolders(SyncAPIResource):
         self,
         *,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntities] | NotGiven = NOT_GIVEN,
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividuals]
+        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
@@ -619,8 +619,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         *,
         business_entity: account_holder_create_params.KYBBusinessEntity,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntities],
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividuals],
+        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity],
+        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual],
         control_person: account_holder_create_params.KYBControlPerson,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         nature_of_business: str,
@@ -809,8 +809,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         *,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntities] | NotGiven = NOT_GIVEN,
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividuals]
+        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,

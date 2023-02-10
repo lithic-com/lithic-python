@@ -8,7 +8,7 @@ from pydantic import Field
 from ..types import card
 from .._models import BaseModel
 
-__all__ = ["CardholderAuthentication", "Events", "Funding", "Merchant", "Transaction"]
+__all__ = ["Transaction", "CardholderAuthentication", "Event", "Funding", "Merchant"]
 
 
 class CardholderAuthentication(BaseModel):
@@ -115,7 +115,7 @@ class CardholderAuthentication(BaseModel):
     """
 
 
-class Events(BaseModel):
+class Event(BaseModel):
     amount: int
     """Amount of the transaction event (in cents), including any acquirer fees."""
 
@@ -312,7 +312,7 @@ class Transaction(BaseModel):
     created: Optional[str]
     """Date and time when the transaction first occurred. UTC time zone."""
 
-    events: Optional[List[Events]]
+    events: Optional[List[Event]]
     """A list of all events that have modified this transaction."""
 
     funding: Optional[List[Funding]]

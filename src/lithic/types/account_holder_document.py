@@ -5,10 +5,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["RequiredDocumentUploads", "AccountHolderDocument"]
+__all__ = ["AccountHolderDocument", "RequiredDocumentUpload"]
 
 
-class RequiredDocumentUploads(BaseModel):
+class RequiredDocumentUpload(BaseModel):
     image_type: Optional[Literal["back", "front"]]
     """Type of image to upload."""
 
@@ -44,7 +44,7 @@ class AccountHolderDocument(BaseModel):
     document_type: Optional[Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]]
     """Type of documentation to be submitted for verification."""
 
-    required_document_uploads: Optional[List[RequiredDocumentUploads]]
+    required_document_uploads: Optional[List[RequiredDocumentUpload]]
 
     token: Optional[str]
     """Globally unique identifier for the document."""
