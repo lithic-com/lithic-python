@@ -32,14 +32,7 @@ class Transactions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> Transaction:
-        """
-        Get specific transaction.
-
-        _Note that the transaction object returned via this endpoint will be changing in
-        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
-        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
-        for more information._
-        """
+        """Get specific transaction."""
         return self._get(
             f"/transactions/{transaction_token}",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -64,11 +57,6 @@ class Transactions(SyncAPIResource):
     ) -> SyncPage[Transaction]:
         """
         List transactions.
-
-        _Note that the transaction object returned via this endpoint will be changing in
-        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
-        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
-        for more information._
 
         Args:
           account_token: Filters for transactions associated with a specific account.
@@ -356,8 +344,7 @@ class Transactions(SyncAPIResource):
         """
         Voids a settled credit transaction – i.e., a transaction with a negative amount
         and `SETTLED` status. These can be credit authorizations that have already
-        cleared or financial credit authorizations. This endpoint will be available
-        beginning January 4, 2023.
+        cleared or financial credit authorizations.
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.
@@ -436,14 +423,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> Transaction:
-        """
-        Get specific transaction.
-
-        _Note that the transaction object returned via this endpoint will be changing in
-        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
-        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
-        for more information._
-        """
+        """Get specific transaction."""
         return await self._get(
             f"/transactions/{transaction_token}",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -468,11 +448,6 @@ class AsyncTransactions(AsyncAPIResource):
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """
         List transactions.
-
-        _Note that the transaction object returned via this endpoint will be changing in
-        Sandbox on January 4, 2023 and in Production on February 8, 2023. Please refer
-        to [this page](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes)
-        for more information._
 
         Args:
           account_token: Filters for transactions associated with a specific account.
@@ -760,8 +735,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         Voids a settled credit transaction – i.e., a transaction with a negative amount
         and `SETTLED` status. These can be credit authorizations that have already
-        cleared or financial credit authorizations. This endpoint will be available
-        beginning January 4, 2023.
+        cleared or financial credit authorizations.
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.

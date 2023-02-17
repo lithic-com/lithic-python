@@ -40,7 +40,6 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_body: Body | None = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             "/auth_stream",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -80,7 +79,6 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             "/auth_stream",
             body={"webhook_url": webhook_url},
@@ -119,7 +117,6 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_body: Body | None = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             "/auth_stream",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -159,7 +156,6 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             "/auth_stream",
             body={"webhook_url": webhook_url},

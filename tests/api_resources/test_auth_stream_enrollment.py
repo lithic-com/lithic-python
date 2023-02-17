@@ -23,22 +23,19 @@ class TestAuthStreamEnrollment:
         resource = client.auth_stream_enrollment.retrieve()
         assert isinstance(resource, AuthStreamEnrollment)
 
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_disenroll(self, client: Lithic) -> None:
         resource = client.auth_stream_enrollment.disenroll()
         assert resource is None
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_enroll(self, client: Lithic) -> None:
         resource = client.auth_stream_enrollment.enroll()
         assert resource is None
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_enroll_with_all_params(self, client: Lithic) -> None:
         resource = client.auth_stream_enrollment.enroll(
@@ -57,22 +54,19 @@ class TestAsyncAuthStreamEnrollment:
         resource = await client.auth_stream_enrollment.retrieve()
         assert isinstance(resource, AuthStreamEnrollment)
 
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_disenroll(self, client: AsyncLithic) -> None:
         resource = await client.auth_stream_enrollment.disenroll()
         assert resource is None
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_enroll(self, client: AsyncLithic) -> None:
         resource = await client.auth_stream_enrollment.enroll()
         assert resource is None
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_enroll_with_all_params(self, client: AsyncLithic) -> None:
         resource = await client.auth_stream_enrollment.enroll(

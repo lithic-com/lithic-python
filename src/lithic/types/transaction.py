@@ -5,10 +5,9 @@ from typing_extensions import Literal
 
 from pydantic import Field
 
-from ..types import card
 from .._models import BaseModel
 
-__all__ = ["Transaction", "CardholderAuthentication", "Event", "Funding", "Merchant"]
+__all__ = ["Transaction", "CardholderAuthentication", "Event", "Merchant"]
 
 
 class CardholderAuthentication(BaseModel):
@@ -218,25 +217,6 @@ class Event(BaseModel):
     - `RETURN` - A refund has been processed on the transaction.
     - `RETURN_REVERSAL` - A refund has been reversed (e.g., when a merchant reverses
       an incorrect refund).
-    - `VOID` - Note this value will be removed with the February API changes (see
-      https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes). A
-      transaction has been voided (e.g., when a merchant reverses an incorrect
-      authorization).
-    """
-
-
-class Funding(BaseModel):
-    amount: Optional[int]
-    """Amount of the transaction event, including any acquirer fees."""
-
-    token: Optional[str]
-    """Funding account token."""
-
-    type: Optional[Literal["DEPOSITORY_CHECKING", "DEPOSITORY_SAVINGS"]]
-    """Types of funding:
-
-    - `DEPOSITORY_CHECKING` - Bank checking account.
-    - `DEPOSITORY_SAVINGS` - Bank savings account.
     """
 
 
@@ -292,20 +272,8 @@ class Transaction(BaseModel):
     transaction with networks.
     """
 
-    card: Optional[card.Card]
-    """
-    Note this field will be removed with the
-    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
-    Card used in this transaction.
-    """
-
     card_token: Optional[str]
-    """Token for the card used in this transaction. Note this field is not yet
-    included.
-
-    It will be added as part of the
-    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
-    """
+    """Token for the card used in this transaction."""
 
     cardholder_authentication: Optional[CardholderAuthentication]
 
@@ -314,16 +282,6 @@ class Transaction(BaseModel):
 
     events: Optional[List[Event]]
     """A list of all events that have modified this transaction."""
-
-    funding: Optional[List[Funding]]
-    """
-    Note this field will be removed with the
-    [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
-    A list of objects that describe how this transaction was funded, with the
-    `amount` represented in cents. A reference to the funding account for the `card`
-    that made this transaction may appear here and the `token` will match the
-    `token` for the funding account in the `card` field.
-    """
 
     merchant: Optional[Merchant]
 
@@ -386,17 +344,11 @@ class Transaction(BaseModel):
     status: Optional[Literal["BOUNCED", "DECLINED", "EXPIRED", "PENDING", "SETTLED", "SETTLING", "VOIDED"]]
     """Status types:
 
-    - `BOUNCED` - The transaction was bounced. Note this value will be removed with
-      the
-      [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
     - `DECLINED` - The transaction was declined.
     - `EXPIRED` - Lithic reversed the authorization as it has passed its expiration
       time.
     - `PENDING` - Authorization is pending completion from the merchant.
     - `SETTLED` - The transaction is complete.
-    - `SETTLING` - The merchant has completed the transaction and the funding source
-      is being debited. Note this value will be removed with the
-      [February API changes](https://docs.lithic.com/docs/guide-to-q1-2023-lithic-api-changes).
     - `VOIDED` - The merchant has voided the previously pending authorization.
     """
 

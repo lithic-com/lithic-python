@@ -122,6 +122,43 @@ Custom Methods:
 - `get_embed_html`
 - `get_embed_url`
 
+# Events
+
+Types:
+
+```python
+from lithic.types import Event, EventSubscription
+```
+
+Methods:
+
+- <code title="get /events/{event_token}">client.events.<a href="./src/lithic/resources/events/events.py">retrieve</a>(event_token) -> <a href="./src/lithic/types/event.py">Event</a></code>
+- <code title="get /events">client.events.<a href="./src/lithic/resources/events/events.py">list</a>(\*\*<a href="src/lithic/types/event_list_params.py">params</a>) -> <a href="./src/lithic/types/event.py">SyncCursorPage[Event]</a></code>
+
+Custom Methods:
+
+- `resend`
+
+## Subscriptions
+
+Types:
+
+```python
+from lithic.types.events import SubscriptionRetrieveSecretResponse
+```
+
+Methods:
+
+- <code title="post /event_subscriptions">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">create</a>(\*\*<a href="src/lithic/types/events/subscription_create_params.py">params</a>) -> <a href="./src/lithic/types/event_subscription.py">EventSubscription</a></code>
+- <code title="get /event_subscriptions/{event_subscription_token}">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">retrieve</a>(event_subscription_token) -> <a href="./src/lithic/types/event_subscription.py">EventSubscription</a></code>
+- <code title="patch /event_subscriptions/{event_subscription_token}">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">update</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_update_params.py">params</a>) -> <a href="./src/lithic/types/event_subscription.py">EventSubscription</a></code>
+- <code title="get /event_subscriptions">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">list</a>(\*\*<a href="src/lithic/types/events/subscription_list_params.py">params</a>) -> <a href="./src/lithic/types/event_subscription.py">SyncCursorPage[EventSubscription]</a></code>
+- <code title="delete /event_subscriptions/{event_subscription_token}">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">delete</a>(event_subscription_token) -> None</code>
+- <code title="post /event_subscriptions/{event_subscription_token}/recover">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">recover</a>(event_subscription_token) -> None</code>
+- <code title="post /event_subscriptions/{event_subscription_token}/replay_missing">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">replay_missing</a>(event_subscription_token) -> None</code>
+- <code title="get /event_subscriptions/{event_subscription_token}/secret">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">retrieve_secret</a>(event_subscription_token) -> <a href="./src/lithic/types/events/subscription_retrieve_secret_response.py">SubscriptionRetrieveSecretResponse</a></code>
+- <code title="post /event_subscriptions/{event_subscription_token}/secret/rotate">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">rotate_secret</a>(event_subscription_token) -> None</code>
+
 # FundingSources
 
 Types:
