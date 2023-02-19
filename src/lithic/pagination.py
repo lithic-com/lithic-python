@@ -67,7 +67,7 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
             if not isinstance(item, CursorPageItem):
                 # TODO emit warning log
                 return None
-            return PageInfo(params={"staring_after": item.token})
+            return PageInfo(params={"starting_after": item.token})
         else:
             item = cast(Any, self.data[0])
             if not isinstance(item, CursorPageItem):
@@ -94,7 +94,7 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
             if not isinstance(item, CursorPageItem):
                 # TODO emit warning log
                 return None
-            return PageInfo(params={"staring_after": item.token})
+            return PageInfo(params={"starting_after": item.token})
         else:
             item = cast(Any, self.data[0])
             if not isinstance(item, CursorPageItem):
