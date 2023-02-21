@@ -426,14 +426,16 @@ class BaseClient:
                         ResponseT,
                         self.process_response(cast_to=member, options=options, response=response, _strict=True),
                     )
-                except:
+                except Exception:
                     continue
+
             # If nobody matches exactly, try again loosely.
             for member in members:
                 try:
                     return cast(ResponseT, self.process_response(cast_to=member, options=options, response=response))
-                except:
+                except Exception:
                     continue
+
             raise ValueError(f"Response did not match any type in union {members}")
 
         if issubclass(cast_to, httpx.Response):
@@ -544,7 +546,7 @@ class BaseClient:
             # <http-date>". See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After#syntax for
             # details.
             retry_after = -1 if response_headers is None else int(response_headers.get("retry-after"))
-        except:
+        except Exception:
             retry_after = -1
 
         # If the API asks us to wait a certain amount of time (and it's a reasonable amount), just do what it says.

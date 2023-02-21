@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, Dict, List, Union, Optional, cast
+from typing_extensions import Literal
 
 import pytest
 from pydantic import Field
@@ -118,7 +119,6 @@ def test_raw_dictionary() -> None:
     assert cast(Any, m.nested) is False
 
 
-@pytest.mark.skip(reason="We do not support nested dictionary models yet")
 def test_nested_dictionary_model() -> None:
     class NestedModel(BaseModel):
         nested: Dict[str, BasicModel]
@@ -172,3 +172,193 @@ def test_repr_nested_model() -> None:
     model = Parent(name="Robert", child=Child(name="Foo", age=5))
     assert str(model) == "Parent(name='Robert', child=Child(name='Foo', age=5))"
     assert repr(model) == "Parent(name='Robert', child=Child(name='Foo', age=5))"
+
+
+def test_optional_list() -> None:
+    class Submodel(BaseModel):
+        name: str
+
+    class Model(BaseModel):
+        items: Optional[List[Submodel]]
+
+    m = Model.construct(items=None)
+    assert m.items is None
+
+    m = Model.construct(items=[])
+    assert m.items == []
+
+    m = Model.construct(items=[{"name": "Robert"}])
+    assert m.items is not None
+    assert len(m.items) == 1
+    assert m.items[0].name == "Robert"
+
+
+def test_nested_union_of_models() -> None:
+    class Submodel1(BaseModel):
+        bar: bool
+
+    class Submodel2(BaseModel):
+        thing: str
+
+    class Model(BaseModel):
+        foo: Union[Submodel1, Submodel2]
+
+    m = Model.construct(foo={"thing": "hello"})
+    assert isinstance(m.foo, Submodel2)
+    assert m.foo.thing == "hello"
+
+
+def test_nested_union_of_mixed_types() -> None:
+    class Submodel1(BaseModel):
+        bar: bool
+
+    class Model(BaseModel):
+        foo: Union[Submodel1, Literal[True], Literal["CARD_HOLDER"]]
+
+    m = Model.construct(foo=True)
+    assert m.foo is True
+
+    m = Model.construct(foo="CARD_HOLDER")
+    assert m.foo is "CARD_HOLDER"
+
+    m = Model.construct(foo={"bar": False})
+    assert isinstance(m.foo, Submodel1)
+    assert m.foo.bar is False
+
+
+def test_nested_union_multiple_variants() -> None:
+    class Submodel1(BaseModel):
+        bar: bool
+
+    class Submodel2(BaseModel):
+        thing: str
+
+    class Submodel3(BaseModel):
+        foo: int
+
+    class Model(BaseModel):
+        foo: Union[Submodel1, Submodel2, None, Submodel3]
+
+    m = Model.construct(foo={"thing": "hello"})
+    assert isinstance(m.foo, Submodel2)
+    assert m.foo.thing == "hello"
+
+    m = Model.construct(foo=None)
+    assert m.foo is None
+
+    m = Model.construct()
+    assert m.foo is None
+
+    m = Model.construct(foo={"foo": "1"})
+    assert isinstance(m.foo, Submodel3)
+    assert m.foo.foo == 1
+
+
+def test_nested_union_invalid_data() -> None:
+    class Submodel1(BaseModel):
+        level: int
+
+    class Submodel2(BaseModel):
+        name: str
+
+    class Model(BaseModel):
+        foo: Union[Submodel1, Submodel2]
+
+    m = Model.construct(foo=True)
+    assert cast(bool, m.foo) is True
+
+    m = Model.construct(foo={"name": 3})
+    assert isinstance(m.foo, Submodel2)
+    assert m.foo.name == "3"
+
+
+def test_list_of_unions() -> None:
+    class Submodel1(BaseModel):
+        level: int
+
+    class Submodel2(BaseModel):
+        name: str
+
+    class Model(BaseModel):
+        items: List[Union[Submodel1, Submodel2]]
+
+    m = Model.construct(items=[{"level": 1}, {"name": "Robert"}])
+    assert len(m.items) == 2
+    assert isinstance(m.items[0], Submodel1)
+    assert m.items[0].level == 1
+    assert isinstance(m.items[1], Submodel2)
+    assert m.items[1].name == "Robert"
+
+    m = Model.construct(items=[{"level": -1}, 156])
+    assert len(m.items) == 2
+    assert isinstance(m.items[0], Submodel1)
+    assert m.items[0].level == -1
+    assert m.items[1] == 156
+
+
+def test_union_of_lists() -> None:
+    class SubModel1(BaseModel):
+        level: int
+
+    class SubModel2(BaseModel):
+        name: str
+
+    class Model(BaseModel):
+        items: Union[List[SubModel1], List[SubModel2]]
+
+    # with one valid entry
+    m = Model.construct(items=[{"name": "Robert"}])
+    assert len(m.items) == 1
+    assert isinstance(m.items[0], SubModel2)
+    assert m.items[0].name == "Robert"
+
+    # with two entries pointing to different types
+    m = Model.construct(items=[{"level": 1}, {"name": "Robert"}])
+    assert len(m.items) == 2
+    assert isinstance(m.items[0], SubModel1)
+    assert m.items[0].level == 1
+    assert isinstance(m.items[1], SubModel1)
+    assert cast(Any, m.items[1]).name == "Robert"
+
+    # with two entries pointing to *completely* different types
+    m = Model.construct(items=[{"level": -1}, 156])
+    assert len(m.items) == 2
+    assert isinstance(m.items[0], SubModel1)
+    assert m.items[0].level == -1
+    assert m.items[1] == 156
+
+
+def test_dict_of_union() -> None:
+    class SubModel1(BaseModel):
+        name: str
+
+    class SubModel2(BaseModel):
+        foo: str
+
+    class Model(BaseModel):
+        data: Dict[str, Union[SubModel1, SubModel2]]
+
+    m = Model.construct(data={"hello": {"name": "there"}, "foo": {"foo": "bar"}})
+    assert len(list(m.data.keys())) == 2
+    assert isinstance(m.data["hello"], SubModel1)
+    assert m.data["hello"].name == "there"
+    assert isinstance(m.data["foo"], SubModel2)
+    assert m.data["foo"].foo == "bar"
+
+
+def test_union_of_dict() -> None:
+    class SubModel1(BaseModel):
+        name: str
+
+    class SubModel2(BaseModel):
+        foo: str
+
+    class Model(BaseModel):
+        data: Union[Dict[str, SubModel1], Dict[str, SubModel2]]
+
+    m = Model.construct(data={"hello": {"name": "there"}, "foo": {"foo": "bar"}})
+    assert len(list(m.data.keys())) == 2
+    assert isinstance(m.data["hello"], SubModel1)
+    assert m.data["hello"].name == "there"
+    assert isinstance(m.data["foo"], SubModel1)
+    assert cast(Any, m.data["foo"]).foo == "bar"

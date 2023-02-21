@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import Type, Union
+from typing import Any, Type, Union, cast
 from typing_extensions import final
 
 import pydantic
 import pydantic.generics
-from pydantic.fields import SHAPE_DICT
+from pydantic.fields import ModelField
 from pydantic.typing import (
     get_args,
     is_union,
@@ -40,56 +40,7 @@ class BaseModel(pydantic.BaseModel):
 
             if key in values:
                 value = values[key]
-                if value is None:
-                    fields_values[name] = field.get_default()
-                else:
-                    # we need to use the origin class for any types that are subscripted generics
-                    # e.g. Dict[str, object]
-                    origin = get_origin(field.type_) or field.type_
-
-                    # We currently do not support field types such as `Dict[str, MyModel]`
-                    if field.shape == SHAPE_DICT:
-                        if issubclass(origin, BaseModel) or issubclass(origin, GenericModel):
-                            raise RuntimeError(
-                                f"Dictionary fields with nested models aren't supported yet; Encountered type: {field.type_}"
-                            )
-
-                    # We currently do not support constructing unions of types, e.g. `bool | MyModel` or `MyModel | MyOtherModel`
-                    # But we stil have to support `Optional[T]` which is shorthand for `Union[T, None]`
-                    if is_union(origin):
-                        args = get_args(field.type_)
-                        none_index = next((i for i, x in enumerate(args) if is_none_type(x)), None)
-                        if none_index is None or len(args) > 2:
-                            raise RuntimeError(f"Unsupported union type: {field.type_}")
-
-                        # Use the non None type for the rest of our construction.
-                        #
-                        # Note that if the `value` was None then we wouldn't reach this code path
-                        # but this raw type may be inaccurate for `list` types as it points to the items type,
-                        # e.g. the `T` in `list[T]`
-                        if none_index == 1:
-                            raw_type = args[0]
-                        else:
-                            raw_type = args[1]
-                    else:
-                        raw_type = field.type_
-
-                    # Recalculate the `origin` based off of the potentially new `raw_type` that has been found
-                    origin = get_origin(raw_type) or raw_type
-
-                    if not is_literal_type(raw_type) and (
-                        issubclass(origin, BaseModel) or issubclass(origin, GenericModel)
-                    ):
-                        if is_list(value):
-                            fields_values[name] = [
-                                raw_type.construct(**entry) if is_mapping(entry) else entry for entry in value
-                            ]
-                        elif is_mapping(value):
-                            fields_values[name] = field.outer_type_.construct(**value)
-                        else:
-                            fields_values[name] = value
-                    else:
-                        fields_values[name] = value
+                fields_values[name] = _construct_field(value=value, field=field)
             elif not field.required:
                 fields_values[name] = field.get_default()
 
@@ -104,6 +55,79 @@ class BaseModel(pydantic.BaseModel):
         object.__setattr__(m, "__fields_set__", _fields_set)
         m._init_private_attributes()
         return m
+
+
+def _construct_field(value: object, field: ModelField) -> object:
+    if value is None:
+        return field.get_default()
+
+    origin = get_origin(field.type_) or field.type_
+
+    if is_union(origin):
+        return _construct_union_field(value=value, field=field)
+
+    return _construct_type(value=value, type_=field.type_, outer_type=field.outer_type_)
+
+
+def _construct_union_field(value: object, field: ModelField) -> object:
+    args = get_args(field.type_)
+    none_index = next((i for i, x in enumerate(args) if is_none_type(x)), None)
+    if none_index is None or len(args) > 2:
+        # try validating all variants in strict mode first to get more accurate deserialization
+        new_value, error = field.validate(value, {}, loc=field.name)
+        if not error:
+            return new_value
+
+        # if the data is not valid, use the first variant that doesn't fail while deserializing
+        for variant in args:
+            try:
+                return _construct_type(value=value, type_=variant, outer_type=variant)
+            except Exception:
+                continue
+
+        raise RuntimeError(f"Could not convert data into a valid instance of {field.type_}")
+
+    # Use the non None type for the rest of our construction.
+    #
+    # Note that if the `value` was None then we wouldn't reach this code path
+    # but this raw type may be inaccurate for `list` types as it points to the items type,
+    # e.g. the `T` in `list[T]`
+    if none_index == 1:
+        raw_type = args[0]
+    else:
+        raw_type = args[1]
+
+    return _construct_type(value=value, type_=raw_type, outer_type=field.outer_type_)
+
+
+# TODO: remove the need for outer_type
+def _construct_type(*, value: object, type_: type, outer_type: type) -> object:
+    # we need to use the origin class for any types that are subscripted generics
+    # e.g. Dict[str, object]
+    origin = get_origin(type_) or type_
+    args = get_args(type_)
+
+    if get_origin(outer_type) == dict and is_mapping(value):
+        _, items_type = get_args(outer_type)  # Dict[_, items_type]
+        return {
+            key: _construct_type(value=item, type_=items_type, outer_type=items_type) for key, item in value.items()
+        }
+
+    if not is_literal_type(type_) and (issubclass(origin, BaseModel) or issubclass(origin, GenericModel)):
+        if is_list(value):
+            return [cast(Any, type_).construct(**entry) if is_mapping(entry) else entry for entry in value]
+
+        if is_mapping(value):
+            if issubclass(type_, BaseModel):
+                return type_.construct(**value)  # type: ignore[arg-type]
+
+            return cast(Any, outer_type).construct(**value)
+
+    if origin == list and is_list(value):
+        inner_type = args[0]  # List[inner_type]
+        return [_construct_type(value=entry, type_=inner_type, outer_type=inner_type) for entry in value]
+
+    return value
 
 
 class GenericModel(BaseModel, pydantic.generics.GenericModel):

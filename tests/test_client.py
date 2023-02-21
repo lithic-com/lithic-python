@@ -5,14 +5,15 @@ from __future__ import annotations
 import os
 import json
 import inspect
-from typing import Dict, cast
+from typing import Any, Dict, Union, cast
 
 import httpx
 import pytest
+from respx import MockRouter
 
 from lithic import Lithic, AsyncLithic
 from lithic._types import Query, Headers
-from lithic._models import FinalRequestOptions
+from lithic._models import BaseModel, FinalRequestOptions
 from lithic._base_client import BaseClient, RequestOptions
 from lithic._base_client import make_request_options as _make_request_options
 
@@ -310,6 +311,42 @@ class TestLithic:
         params = cast(Dict[str, str], dict(request.url.params))
         assert params == {"foo": "2"}
 
+    @pytest.mark.respx(base_url=base_url)
+    def test_basic_union_response(self, respx_mock: MockRouter) -> None:
+        class Model1(BaseModel):
+            name: str
+
+        class Model2(BaseModel):
+            foo: str
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
+
+        response = self.client.get("/foo", cast_to=cast(Any, Union[Model1, Model2]))
+        assert isinstance(response, Model2)
+        assert response.foo == "bar"
+
+    @pytest.mark.respx(base_url=base_url)
+    def test_union_response_different_types(self, respx_mock: MockRouter) -> None:
+        """Union of objects with the same field name using a different type"""
+
+        class Model1(BaseModel):
+            foo: int
+
+        class Model2(BaseModel):
+            foo: str
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
+
+        response = self.client.get("/foo", cast_to=cast(Any, Union[Model1, Model2]))
+        assert isinstance(response, Model2)
+        assert response.foo == "bar"
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, json={"foo": 1}))
+
+        response = self.client.get("/foo", cast_to=cast(Any, Union[Model1, Model2]))
+        assert isinstance(response, Model1)
+        assert response.foo == 1
+
 
 class TestAsyncLithic:
     client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -576,3 +613,39 @@ class TestAsyncLithic:
         )
         params = cast(Dict[str, str], dict(request.url.params))
         assert params == {"foo": "2"}
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_basic_union_response(self, respx_mock: MockRouter) -> None:
+        class Model1(BaseModel):
+            name: str
+
+        class Model2(BaseModel):
+            foo: str
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
+
+        response = await self.client.get("/foo", cast_to=cast(Any, Union[Model1, Model2]))
+        assert isinstance(response, Model2)
+        assert response.foo == "bar"
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_union_response_different_types(self, respx_mock: MockRouter) -> None:
+        """Union of objects with the same field name using a different type"""
+
+        class Model1(BaseModel):
+            foo: int
+
+        class Model2(BaseModel):
+            foo: str
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
+
+        response = await self.client.get("/foo", cast_to=cast(Any, Union[Model1, Model2]))
+        assert isinstance(response, Model2)
+        assert response.foo == "bar"
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, json={"foo": 1}))
+
+        response = await self.client.get("/foo", cast_to=cast(Any, Union[Model1, Model2]))
+        assert isinstance(response, Model1)
+        assert response.foo == 1
