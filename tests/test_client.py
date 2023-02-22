@@ -12,7 +12,7 @@ import pytest
 from respx import MockRouter
 
 from lithic import Lithic, AsyncLithic
-from lithic._types import Query, Headers
+from lithic._types import Body, Query, Headers
 from lithic._models import BaseModel, FinalRequestOptions
 from lithic._base_client import BaseClient, RequestOptions
 from lithic._base_client import make_request_options as _make_request_options
@@ -35,7 +35,7 @@ def make_request_options(
     *,
     extra_headers: Headers | None = None,
     extra_query: Query | None = None,
-    extra_body: Query | None = None,
+    extra_body: Body | None = None,
 ) -> RequestOptions:
     return _make_request_options(
         query=query,

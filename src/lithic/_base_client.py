@@ -35,6 +35,7 @@ from . import _base_exceptions as exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
+    Body,
     Omit,
     Query,
     ModelT,
@@ -43,6 +44,7 @@ from ._types import (
     NoneType,
     NotGiven,
     Transport,
+    AnyMapping,
     ProxiesTypes,
     RequestFiles,
     RequestOptions,
@@ -345,10 +347,11 @@ class BaseClient:
         headers = self._build_headers(options)
 
         kwargs: dict[str, Any] = {}
+
         json_data = options.json_data
         if options.extra_json is not None:
             if json_data is None:
-                json_data = options.extra_json
+                json_data = cast(Body, options.extra_json)
             elif is_mapping(json_data):
                 json_data = _merge_mappings(json_data, options.extra_json)
             else:
@@ -705,7 +708,7 @@ class SyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
         files: RequestFiles | None = None,
     ) -> ResponseT:
@@ -717,7 +720,7 @@ class SyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="patch", url=path, json_data=body, **options)
@@ -728,7 +731,7 @@ class SyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="put", url=path, json_data=body, **options)
@@ -739,7 +742,7 @@ class SyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="delete", url=path, json_data=body, **options)
@@ -751,7 +754,7 @@ class SyncAPIClient(BaseClient):
         *,
         model: Type[ModelT],
         page: Type[SyncPageT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
         method: str = "get",
     ) -> SyncPageT:
@@ -873,7 +876,7 @@ class AsyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         files: RequestFiles | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
@@ -885,7 +888,7 @@ class AsyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="patch", url=path, json_data=body, **options)
@@ -896,7 +899,7 @@ class AsyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="put", url=path, json_data=body, **options)
@@ -907,7 +910,7 @@ class AsyncAPIClient(BaseClient):
         path: str,
         *,
         cast_to: Type[ResponseT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="delete", url=path, json_data=body, **options)
@@ -920,7 +923,7 @@ class AsyncAPIClient(BaseClient):
         # TODO: support paginating `str`
         model: Type[ModelT],
         page: Type[AsyncPageT],
-        body: Query | None = None,
+        body: Body | None = None,
         options: RequestOptions = {},
         method: str = "get",
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
@@ -933,7 +936,7 @@ def make_request_options(
     query: Query | None = None,
     extra_headers: Headers | None = None,
     extra_query: Query | None = None,
-    extra_body: Query | None = None,
+    extra_body: Body | None = None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of NotGiven values."""
     options: RequestOptions = {}
@@ -941,7 +944,7 @@ def make_request_options(
         options["headers"] = extra_headers
 
     if extra_body is not None:
-        options["extra_json"] = extra_body
+        options["extra_json"] = cast(AnyMapping, extra_body)
 
     if query is not None:
         options["params"] = query
