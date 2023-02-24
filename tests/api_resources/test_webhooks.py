@@ -39,7 +39,6 @@ class TestWebhooks:
         secret = self.secret
 
         self.strict_client.webhooks.unwrap(payload, headers, secret=secret)
-        # TODO: assert data
 
     @time_machine.travel(fake_now)
     def test_verify_signature(self) -> None:
@@ -132,7 +131,6 @@ class TestAsyncWebhooks:
         secret = self.secret
 
         self.strict_client.webhooks.unwrap(payload, headers, secret=secret)
-        # TODO: assert data
 
     @time_machine.travel(fake_now)
     def test_verify_signature(self) -> None:
