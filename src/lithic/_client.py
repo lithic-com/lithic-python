@@ -57,15 +57,18 @@ class Lithic(SyncAPIClient):
     events: resources.Events
     funding_sources: resources.FundingSources
     transactions: resources.Transactions
+    webhooks: resources.Webhooks
 
     # client options
     api_key: str
+    webhook_secret: str | None
 
     _environment: Literal["production", "sandbox"]
 
     def __init__(
         self,
         *,
+        webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
@@ -89,7 +92,9 @@ class Lithic(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous lithic client instance.
 
-        This automatically infers the `api_key` argument from the `LITHIC_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
+        - `api_key` from `LITHIC_API_KEY`
         """
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
@@ -119,6 +124,9 @@ class Lithic(SyncAPIClient):
 
         self.api_key = api_key
 
+        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
+        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
+
         self.accounts = resources.Accounts(self)
         self.account_holders = resources.AccountHolders(self)
         self.auth_rules = resources.AuthRules(self)
@@ -127,6 +135,7 @@ class Lithic(SyncAPIClient):
         self.events = resources.Events(self)
         self.funding_sources = resources.FundingSources(self)
         self.transactions = resources.Transactions(self)
+        self.webhooks = resources.Webhooks(self)
 
     @property
     def qs(self) -> Querystring:
@@ -139,6 +148,7 @@ class Lithic(SyncAPIClient):
     def copy(
         self,
         *,
+        webhook_secret: str | None = None,
         api_key: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
@@ -175,6 +185,7 @@ class Lithic(SyncAPIClient):
 
         # TODO: share the same httpx client between instances
         return self.__class__(
+            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or str(self.base_url),
             environment=environment or self._environment,
             api_key=api_key or self.api_key,
@@ -214,15 +225,18 @@ class AsyncLithic(AsyncAPIClient):
     events: resources.AsyncEvents
     funding_sources: resources.AsyncFundingSources
     transactions: resources.AsyncTransactions
+    webhooks: resources.AsyncWebhooks
 
     # client options
     api_key: str
+    webhook_secret: str | None
 
     _environment: Literal["production", "sandbox"]
 
     def __init__(
         self,
         *,
+        webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
@@ -246,7 +260,9 @@ class AsyncLithic(AsyncAPIClient):
     ) -> None:
         """Construct a new async lithic client instance.
 
-        This automatically infers the `api_key` argument from the `LITHIC_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
+        - `api_key` from `LITHIC_API_KEY`
         """
         api_key = api_key or os.environ.get("LITHIC_API_KEY", "")
         if not api_key:
@@ -276,6 +292,9 @@ class AsyncLithic(AsyncAPIClient):
 
         self.api_key = api_key
 
+        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
+        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
+
         self.accounts = resources.AsyncAccounts(self)
         self.account_holders = resources.AsyncAccountHolders(self)
         self.auth_rules = resources.AsyncAuthRules(self)
@@ -284,6 +303,7 @@ class AsyncLithic(AsyncAPIClient):
         self.events = resources.AsyncEvents(self)
         self.funding_sources = resources.AsyncFundingSources(self)
         self.transactions = resources.AsyncTransactions(self)
+        self.webhooks = resources.AsyncWebhooks(self)
 
     @property
     def qs(self) -> Querystring:
@@ -296,6 +316,7 @@ class AsyncLithic(AsyncAPIClient):
     def copy(
         self,
         *,
+        webhook_secret: str | None = None,
         api_key: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
@@ -332,6 +353,7 @@ class AsyncLithic(AsyncAPIClient):
 
         # TODO: share the same httpx client between instances
         return self.__class__(
+            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or str(self.base_url),
             environment=environment or self._environment,
             api_key=api_key or self.api_key,

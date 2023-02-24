@@ -291,3 +291,23 @@ def coerce_float(val: str) -> float:
 
 def coerce_boolean(val: str) -> bool:
     return val == "true" or val == "1" or val == "on"
+
+
+def removeprefix(string: str, prefix: str) -> str:
+    """Remove a prefix from a string.
+
+    Backport of `str.removeprefix` for Python < 3.9
+    """
+    if string.startswith(prefix):
+        return string[len(prefix) :]
+    return string
+
+
+def removesuffix(string: str, suffix: str) -> str:
+    """Remove a suffix from a string.
+
+    Backport of `str.removesuffix` for Python < 3.9
+    """
+    if string.endswith(suffix):
+        return string[: -len(suffix)]
+    return string

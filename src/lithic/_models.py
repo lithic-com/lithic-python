@@ -14,16 +14,7 @@ from pydantic.typing import (
     is_literal_type,
 )
 
-from ._types import (
-    Body,
-    Query,
-    ModelT,
-    Headers,
-    Timeout,
-    NotGiven,
-    AnyMapping,
-    RequestFiles,
-)
+from ._types import Query, ModelT, Headers, Timeout, NotGiven, RequestFiles
 from ._utils import is_list, is_mapping, strip_not_given
 
 __all__ = ["BaseModel", "GenericModel"]
@@ -156,8 +147,8 @@ class FinalRequestOptions(pydantic.BaseModel):
 
     # It should be noted that we cannot use `json` here as that would override
     # a BaseModel method in an incompatible fashion.
-    json_data: Union[Body, None] = None
-    extra_json: Union[AnyMapping, None] = None
+    json_data: Union[Query, None] = None
+    extra_json: Union[Query, None] = None
 
     class Config(pydantic.BaseConfig):
         arbitrary_types_allowed: bool = True

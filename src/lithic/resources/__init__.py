@@ -3,6 +3,7 @@
 from .cards import Cards, AsyncCards
 from .events import Events, AsyncEvents
 from .accounts import Accounts, AsyncAccounts
+from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import AuthRules, AsyncAuthRules
 from .transactions import Transactions, AsyncTransactions
 from .account_holders import AccountHolders, AsyncAccountHolders
@@ -29,4 +30,6 @@ __all__ = [
     "AsyncFundingSources",
     "Transactions",
     "AsyncTransactions",
+    "Webhooks",
+    "AsyncWebhooks",
 ]

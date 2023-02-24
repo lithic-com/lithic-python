@@ -200,3 +200,10 @@ Methods:
 - <code title="post /simulate/return">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_return</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_response.py">TransactionSimulateReturnResponse</a></code>
 - <code title="post /simulate/return_reversal">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_return_reversal</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_reversal_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_reversal_response.py">TransactionSimulateReturnReversalResponse</a></code>
 - <code title="post /simulate/void">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_void</a>(\*\*<a href="src/lithic/types/transaction_simulate_void_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_void_response.py">TransactionSimulateVoidResponse</a></code>
+
+# Webhooks
+
+Custom Methods:
+
+- `unwrap`
+- `verify_signature`

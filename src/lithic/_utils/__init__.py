@@ -4,6 +4,8 @@ from ._utils import is_list as is_list
 from ._utils import is_mapping as is_mapping
 from ._utils import coerce_float as coerce_float
 from ._utils import is_list_type as is_list_type
+from ._utils import removeprefix as removeprefix
+from ._utils import removesuffix as removesuffix
 from ._utils import extract_files as extract_files
 from ._utils import is_union_type as is_union_type
 from ._utils import required_args as required_args
