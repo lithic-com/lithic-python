@@ -119,6 +119,7 @@ class Transactions(SyncAPIResource):
         merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         merchant_amount: int | NotGiven = NOT_GIVEN,
+        mcc: str | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -170,6 +171,10 @@ class Transactions(SyncAPIResource):
           merchant_amount: Amount of the transaction to be simulated in currency specified in
               merchant_currency, including any acquirer fees.
 
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
           partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
@@ -190,6 +195,7 @@ class Transactions(SyncAPIResource):
                 "merchant_acceptor_id": merchant_acceptor_id,
                 "merchant_currency": merchant_currency,
                 "merchant_amount": merchant_amount,
+                "mcc": mcc,
                 "partial_approval_capable": partial_approval_capable,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -249,6 +255,7 @@ class Transactions(SyncAPIResource):
         descriptor: str,
         pan: str,
         merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        mcc: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -272,6 +279,10 @@ class Transactions(SyncAPIResource):
 
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
 
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -285,6 +296,7 @@ class Transactions(SyncAPIResource):
                 "descriptor": descriptor,
                 "pan": pan,
                 "merchant_acceptor_id": merchant_acceptor_id,
+                "mcc": mcc,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
@@ -510,6 +522,7 @@ class AsyncTransactions(AsyncAPIResource):
         merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         merchant_amount: int | NotGiven = NOT_GIVEN,
+        mcc: str | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -561,6 +574,10 @@ class AsyncTransactions(AsyncAPIResource):
           merchant_amount: Amount of the transaction to be simulated in currency specified in
               merchant_currency, including any acquirer fees.
 
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
           partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
@@ -581,6 +598,7 @@ class AsyncTransactions(AsyncAPIResource):
                 "merchant_acceptor_id": merchant_acceptor_id,
                 "merchant_currency": merchant_currency,
                 "merchant_amount": merchant_amount,
+                "mcc": mcc,
                 "partial_approval_capable": partial_approval_capable,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -640,6 +658,7 @@ class AsyncTransactions(AsyncAPIResource):
         descriptor: str,
         pan: str,
         merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        mcc: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -663,6 +682,10 @@ class AsyncTransactions(AsyncAPIResource):
 
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
 
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -676,6 +699,7 @@ class AsyncTransactions(AsyncAPIResource):
                 "descriptor": descriptor,
                 "pan": pan,
                 "merchant_acceptor_id": merchant_acceptor_id,
+                "mcc": mcc,
             },
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateCreditAuthorizationResponse,

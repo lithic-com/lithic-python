@@ -71,6 +71,7 @@ class TestTransactions:
             merchant_acceptor_id="OODKZAPJVN4YS7O",
             merchant_currency="GBP",
             merchant_amount=0,
+            mcc="5812",
             partial_approval_capable=True,
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)
@@ -106,6 +107,7 @@ class TestTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
             merchant_acceptor_id="XRKGDPOWEWQRRWU",
+            mcc="5812",
         )
         assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
 
@@ -191,6 +193,7 @@ class TestAsyncTransactions:
             merchant_acceptor_id="OODKZAPJVN4YS7O",
             merchant_currency="GBP",
             merchant_amount=0,
+            mcc="5812",
             partial_approval_capable=True,
         )
         assert isinstance(resource, TransactionSimulateAuthorizationResponse)
@@ -226,6 +229,7 @@ class TestAsyncTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
             merchant_acceptor_id="XRKGDPOWEWQRRWU",
+            mcc="5812",
         )
         assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
 
