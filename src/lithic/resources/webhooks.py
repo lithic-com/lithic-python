@@ -20,7 +20,7 @@ __all__ = ["Webhooks", "AsyncWebhooks"]
 class Webhooks(SyncAPIResource):
     def unwrap(
         self,
-        payload: str,
+        payload: str | bytes,
         headers: HeadersLike,
         *,
         secret: str | None = None,
@@ -31,7 +31,7 @@ class Webhooks(SyncAPIResource):
 
     def verify_signature(
         self,
-        payload: str,
+        payload: str | bytes,
         headers: HeadersLike,
         *,
         secret: str | None = None,
@@ -79,8 +79,10 @@ class Webhooks(SyncAPIResource):
             raise ValueError("Webhook timestamp is too new")
 
         # create the signature
+        body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
         timestamp_str = str(math.floor(timestamp.replace(tzinfo=timezone.utc).timestamp()))
-        to_sign = f"{msg_id}.{timestamp_str}.{payload}".encode()
+
+        to_sign = f"{msg_id}.{timestamp_str}.{body}".encode()
         expected_signature = hmac.new(whsecret, to_sign, hashlib.sha256).digest()
 
         msg_signature = headers.get("webhook-signature")
@@ -113,7 +115,7 @@ class Webhooks(SyncAPIResource):
 class AsyncWebhooks(AsyncAPIResource):
     def unwrap(
         self,
-        payload: str,
+        payload: str | bytes,
         headers: HeadersLike,
         *,
         secret: str | None = None,
@@ -124,7 +126,7 @@ class AsyncWebhooks(AsyncAPIResource):
 
     def verify_signature(
         self,
-        payload: str,
+        payload: str | bytes,
         headers: HeadersLike,
         *,
         secret: str | None = None,
@@ -172,8 +174,10 @@ class AsyncWebhooks(AsyncAPIResource):
             raise ValueError("Webhook timestamp is too new")
 
         # create the signature
+        body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
         timestamp_str = str(math.floor(timestamp.replace(tzinfo=timezone.utc).timestamp()))
-        to_sign = f"{msg_id}.{timestamp_str}.{payload}".encode()
+
+        to_sign = f"{msg_id}.{timestamp_str}.{body}".encode()
         expected_signature = hmac.new(whsecret, to_sign, hashlib.sha256).digest()
 
         msg_signature = headers.get("webhook-signature")
