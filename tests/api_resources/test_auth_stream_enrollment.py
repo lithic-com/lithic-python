@@ -7,6 +7,7 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from tests.utils import assert_matches_type
 from lithic.types import AuthStreamEnrollment
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
@@ -20,28 +21,28 @@ class TestAuthStreamEnrollment:
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
-        resource = client.auth_stream_enrollment.retrieve()
-        assert isinstance(resource, AuthStreamEnrollment)
+        auth_stream_enrollment = client.auth_stream_enrollment.retrieve()
+        assert_matches_type(AuthStreamEnrollment, auth_stream_enrollment, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_disenroll(self, client: Lithic) -> None:
-        resource = client.auth_stream_enrollment.disenroll()
-        assert resource is None
+        auth_stream_enrollment = client.auth_stream_enrollment.disenroll()
+        assert auth_stream_enrollment is None
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_enroll(self, client: Lithic) -> None:
-        resource = client.auth_stream_enrollment.enroll()
-        assert resource is None
+        auth_stream_enrollment = client.auth_stream_enrollment.enroll()
+        assert auth_stream_enrollment is None
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_enroll_with_all_params(self, client: Lithic) -> None:
-        resource = client.auth_stream_enrollment.enroll(
+        auth_stream_enrollment = client.auth_stream_enrollment.enroll(
             webhook_url="https://example.com",
         )
-        assert resource is None
+        assert auth_stream_enrollment is None
 
 
 class TestAsyncAuthStreamEnrollment:
@@ -51,25 +52,25 @@ class TestAsyncAuthStreamEnrollment:
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        resource = await client.auth_stream_enrollment.retrieve()
-        assert isinstance(resource, AuthStreamEnrollment)
+        auth_stream_enrollment = await client.auth_stream_enrollment.retrieve()
+        assert_matches_type(AuthStreamEnrollment, auth_stream_enrollment, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_disenroll(self, client: AsyncLithic) -> None:
-        resource = await client.auth_stream_enrollment.disenroll()
-        assert resource is None
+        auth_stream_enrollment = await client.auth_stream_enrollment.disenroll()
+        assert auth_stream_enrollment is None
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_enroll(self, client: AsyncLithic) -> None:
-        resource = await client.auth_stream_enrollment.enroll()
-        assert resource is None
+        auth_stream_enrollment = await client.auth_stream_enrollment.enroll()
+        assert auth_stream_enrollment is None
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_enroll_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.auth_stream_enrollment.enroll(
+        auth_stream_enrollment = await client.auth_stream_enrollment.enroll(
             webhook_url="https://example.com",
         )
-        assert resource is None
+        assert auth_stream_enrollment is None

@@ -7,6 +7,7 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from tests.utils import assert_matches_type
 from lithic.types import Event
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
@@ -21,19 +22,19 @@ class TestEvents:
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
-        resource = client.events.retrieve(
+        event = client.events.retrieve(
             "string",
         )
-        assert isinstance(resource, Event)
+        assert_matches_type(Event, event, path=["response"])
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
-        resource = client.events.list()
-        assert isinstance(resource, SyncCursorPage)
+        event = client.events.list()
+        assert_matches_type(SyncCursorPage[Event], event, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
-        resource = client.events.list(
+        event = client.events.list(
             begin="2019-12-27T18:11:19.117Z",
             end="2019-12-27T18:11:19.117Z",
             page_size=1,
@@ -41,7 +42,7 @@ class TestEvents:
             ending_before="string",
             event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
         )
-        assert isinstance(resource, SyncCursorPage)
+        assert_matches_type(SyncCursorPage[Event], event, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     def test_method_resend(self) -> None:
@@ -58,19 +59,19 @@ class TestAsyncEvents:
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        resource = await client.events.retrieve(
+        event = await client.events.retrieve(
             "string",
         )
-        assert isinstance(resource, Event)
+        assert_matches_type(Event, event, path=["response"])
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
-        resource = await client.events.list()
-        assert isinstance(resource, AsyncCursorPage)
+        event = await client.events.list()
+        assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.events.list(
+        event = await client.events.list(
             begin="2019-12-27T18:11:19.117Z",
             end="2019-12-27T18:11:19.117Z",
             page_size=1,
@@ -78,7 +79,7 @@ class TestAsyncEvents:
             ending_before="string",
             event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
         )
-        assert isinstance(resource, AsyncCursorPage)
+        assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     async def test_method_resend(self) -> None:

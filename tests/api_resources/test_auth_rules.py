@@ -7,7 +7,9 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from tests.utils import assert_matches_type
 from lithic.types import (
+    AuthRule,
     AuthRuleApplyResponse,
     AuthRuleCreateResponse,
     AuthRuleRemoveResponse,
@@ -27,12 +29,12 @@ class TestAuthRules:
 
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
-        resource = client.auth_rules.create()
-        assert isinstance(resource, AuthRuleCreateResponse)
+        auth_rule = client.auth_rules.create()
+        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
-        resource = client.auth_rules.create(
+        auth_rule = client.auth_rules.create(
             allowed_mcc=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
             allowed_countries=["string", "string", "string"],
@@ -42,25 +44,25 @@ class TestAuthRules:
             card_tokens=["string", "string", "string"],
             program_level=False,
         )
-        assert isinstance(resource, AuthRuleCreateResponse)
+        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
-        resource = client.auth_rules.retrieve(
+        auth_rule = client.auth_rules.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AuthRuleRetrieveResponse)
+        assert_matches_type(AuthRuleRetrieveResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
-        resource = client.auth_rules.update(
+        auth_rule = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AuthRuleUpdateResponse)
+        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
-        resource = client.auth_rules.update(
+        auth_rule = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             allowed_mcc=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
@@ -68,51 +70,51 @@ class TestAuthRules:
             blocked_countries=["string", "string", "string"],
             avs_type="ZIP_ONLY",
         )
-        assert isinstance(resource, AuthRuleUpdateResponse)
+        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
-        resource = client.auth_rules.list()
-        assert isinstance(resource, SyncPage)
+        auth_rule = client.auth_rules.list()
+        assert_matches_type(SyncPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
-        resource = client.auth_rules.list(
+        auth_rule = client.auth_rules.list(
             page=0,
             page_size=1,
         )
-        assert isinstance(resource, SyncPage)
+        assert_matches_type(SyncPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     def test_method_apply(self, client: Lithic) -> None:
-        resource = client.auth_rules.apply(
+        auth_rule = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AuthRuleApplyResponse)
+        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_apply_with_all_params(self, client: Lithic) -> None:
-        resource = client.auth_rules.apply(
+        auth_rule = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_tokens=["string", "string", "string"],
             account_tokens=["string", "string", "string"],
             program_level=True,
         )
-        assert isinstance(resource, AuthRuleApplyResponse)
+        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_remove(self, client: Lithic) -> None:
-        resource = client.auth_rules.remove()
-        assert isinstance(resource, AuthRuleRemoveResponse)
+        auth_rule = client.auth_rules.remove()
+        assert_matches_type(AuthRuleRemoveResponse, auth_rule, path=["response"])
 
     @parametrize
     def test_method_remove_with_all_params(self, client: Lithic) -> None:
-        resource = client.auth_rules.remove(
+        auth_rule = client.auth_rules.remove(
             card_tokens=["string", "string", "string"],
             account_tokens=["string", "string", "string"],
             program_level=True,
         )
-        assert isinstance(resource, AuthRuleRemoveResponse)
+        assert_matches_type(AuthRuleRemoveResponse, auth_rule, path=["response"])
 
 
 class TestAsyncAuthRules:
@@ -122,12 +124,12 @@ class TestAsyncAuthRules:
 
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.create()
-        assert isinstance(resource, AuthRuleCreateResponse)
+        auth_rule = await client.auth_rules.create()
+        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.create(
+        auth_rule = await client.auth_rules.create(
             allowed_mcc=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
             allowed_countries=["string", "string", "string"],
@@ -137,25 +139,25 @@ class TestAsyncAuthRules:
             card_tokens=["string", "string", "string"],
             program_level=False,
         )
-        assert isinstance(resource, AuthRuleCreateResponse)
+        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.retrieve(
+        auth_rule = await client.auth_rules.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AuthRuleRetrieveResponse)
+        assert_matches_type(AuthRuleRetrieveResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.update(
+        auth_rule = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AuthRuleUpdateResponse)
+        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.update(
+        auth_rule = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             allowed_mcc=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
@@ -163,48 +165,48 @@ class TestAsyncAuthRules:
             blocked_countries=["string", "string", "string"],
             avs_type="ZIP_ONLY",
         )
-        assert isinstance(resource, AuthRuleUpdateResponse)
+        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.list()
-        assert isinstance(resource, AsyncPage)
+        auth_rule = await client.auth_rules.list()
+        assert_matches_type(AsyncPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.list(
+        auth_rule = await client.auth_rules.list(
             page=0,
             page_size=1,
         )
-        assert isinstance(resource, AsyncPage)
+        assert_matches_type(AsyncPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     async def test_method_apply(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.apply(
+        auth_rule = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AuthRuleApplyResponse)
+        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_apply_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.apply(
+        auth_rule = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_tokens=["string", "string", "string"],
             account_tokens=["string", "string", "string"],
             program_level=True,
         )
-        assert isinstance(resource, AuthRuleApplyResponse)
+        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_remove(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.remove()
-        assert isinstance(resource, AuthRuleRemoveResponse)
+        auth_rule = await client.auth_rules.remove()
+        assert_matches_type(AuthRuleRemoveResponse, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_remove_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.auth_rules.remove(
+        auth_rule = await client.auth_rules.remove(
             card_tokens=["string", "string", "string"],
             account_tokens=["string", "string", "string"],
             program_level=True,
         )
-        assert isinstance(resource, AuthRuleRemoveResponse)
+        assert_matches_type(AuthRuleRemoveResponse, auth_rule, path=["response"])

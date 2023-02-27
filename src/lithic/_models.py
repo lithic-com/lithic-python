@@ -122,6 +122,18 @@ def _construct_type(*, value: object, type_: type, outer_type: type) -> object:
             key: _construct_type(value=item, type_=items_type, outer_type=items_type) for key, item in value.items()
         }
 
+    if origin == float:
+        try:
+            return float(value)  # type: ignore
+        except Exception:
+            return value
+
+    if origin == int:
+        try:
+            return int(value)  # type: ignore
+        except Exception:
+            return value
+
     if not is_literal_type(type_) and (issubclass(origin, BaseModel) or issubclass(origin, GenericModel)):
         if is_list(value):
             return [cast(Any, type_).construct(**entry) if is_mapping(entry) else entry for entry in value]

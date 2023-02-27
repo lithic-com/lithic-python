@@ -7,6 +7,7 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from tests.utils import assert_matches_type
 from lithic.types import FundingSource
 from lithic.pagination import SyncPage, AsyncPage
 
@@ -21,87 +22,87 @@ class TestFundingSources:
 
     @parametrize
     def test_method_create_overload_1(self, client: Lithic) -> None:
-        resource = client.funding_sources.create(
+        funding_source = client.funding_sources.create(
             validation_method="BANK",
             account_number="13719713158835300",
             routing_number="011103093",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
-        resource = client.funding_sources.create(
+        funding_source = client.funding_sources.create(
             validation_method="BANK",
             account_name="Sandbox",
             account_number="13719713158835300",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             routing_number="011103093",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     def test_method_create_overload_2(self, client: Lithic) -> None:
-        resource = client.funding_sources.create(
+        funding_source = client.funding_sources.create(
             validation_method="PLAID",
             processor_token="string",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
-        resource = client.funding_sources.create(
+        funding_source = client.funding_sources.create(
             validation_method="PLAID",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             processor_token="string",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
-        resource = client.funding_sources.update(
+        funding_source = client.funding_sources.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
-        resource = client.funding_sources.update(
+        funding_source = client.funding_sources.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             state="DELETED",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
-        resource = client.funding_sources.list()
-        assert isinstance(resource, SyncPage)
+        funding_source = client.funding_sources.list()
+        assert_matches_type(SyncPage[FundingSource], funding_source, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
-        resource = client.funding_sources.list(
+        funding_source = client.funding_sources.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=0,
             page_size=1,
         )
-        assert isinstance(resource, SyncPage)
+        assert_matches_type(SyncPage[FundingSource], funding_source, path=["response"])
 
     @parametrize
     def test_method_verify(self, client: Lithic) -> None:
-        resource = client.funding_sources.verify(
+        funding_source = client.funding_sources.verify(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0, 0],
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     def test_method_verify_with_all_params(self, client: Lithic) -> None:
-        resource = client.funding_sources.verify(
+        funding_source = client.funding_sources.verify(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0, 0],
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
 
 class TestAsyncFundingSources:
@@ -111,84 +112,84 @@ class TestAsyncFundingSources:
 
     @parametrize
     async def test_method_create_overload_1(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.create(
+        funding_source = await client.funding_sources.create(
             validation_method="BANK",
             account_number="13719713158835300",
             routing_number="011103093",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.create(
+        funding_source = await client.funding_sources.create(
             validation_method="BANK",
             account_name="Sandbox",
             account_number="13719713158835300",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             routing_number="011103093",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     async def test_method_create_overload_2(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.create(
+        funding_source = await client.funding_sources.create(
             validation_method="PLAID",
             processor_token="string",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_2(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.create(
+        funding_source = await client.funding_sources.create(
             validation_method="PLAID",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             processor_token="string",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.update(
+        funding_source = await client.funding_sources.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.update(
+        funding_source = await client.funding_sources.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             state="DELETED",
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.list()
-        assert isinstance(resource, AsyncPage)
+        funding_source = await client.funding_sources.list()
+        assert_matches_type(AsyncPage[FundingSource], funding_source, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.list(
+        funding_source = await client.funding_sources.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=0,
             page_size=1,
         )
-        assert isinstance(resource, AsyncPage)
+        assert_matches_type(AsyncPage[FundingSource], funding_source, path=["response"])
 
     @parametrize
     async def test_method_verify(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.verify(
+        funding_source = await client.funding_sources.verify(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0, 0],
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])
 
     @parametrize
     async def test_method_verify_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.funding_sources.verify(
+        funding_source = await client.funding_sources.verify(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0, 0],
         )
-        assert isinstance(resource, FundingSource)
+        assert_matches_type(FundingSource, funding_source, path=["response"])

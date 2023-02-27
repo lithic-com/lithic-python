@@ -7,6 +7,7 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from tests.utils import assert_matches_type
 from lithic.types import (
     Transaction,
     TransactionSimulateVoidResponse,
@@ -29,19 +30,19 @@ class TestTransactions:
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
-        resource = client.transactions.retrieve(
+        transaction = client.transactions.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, Transaction)
+        assert_matches_type(Transaction, transaction, path=["response"])
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
-        resource = client.transactions.list()
-        assert isinstance(resource, SyncPage)
+        transaction = client.transactions.list()
+        assert_matches_type(SyncPage[Transaction], transaction, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
-        resource = client.transactions.list(
+        transaction = client.transactions.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             result="APPROVED",
@@ -50,20 +51,20 @@ class TestTransactions:
             page=0,
             page_size=1,
         )
-        assert isinstance(resource, SyncPage)
+        assert_matches_type(SyncPage[Transaction], transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_authorization(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_authorization(
+        transaction = client.transactions.simulate_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
-        assert isinstance(resource, TransactionSimulateAuthorizationResponse)
+        assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_authorization_with_all_params(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_authorization(
+        transaction = client.transactions.simulate_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
@@ -74,74 +75,74 @@ class TestTransactions:
             mcc="5812",
             partial_approval_capable=True,
         )
-        assert isinstance(resource, TransactionSimulateAuthorizationResponse)
+        assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_clearing(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_clearing(
+        transaction = client.transactions.simulate_clearing(
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateClearingResponse)
+        assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_clearing_with_all_params(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_clearing(
+        transaction = client.transactions.simulate_clearing(
             amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateClearingResponse)
+        assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_credit_authorization(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_credit_authorization(
+        transaction = client.transactions.simulate_credit_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
-        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+        assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_credit_authorization_with_all_params(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_credit_authorization(
+        transaction = client.transactions.simulate_credit_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
             merchant_acceptor_id="XRKGDPOWEWQRRWU",
             mcc="5812",
         )
-        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+        assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_return(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_return(
+        transaction = client.transactions.simulate_return(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
-        assert isinstance(resource, TransactionSimulateReturnResponse)
+        assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_return_reversal(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_return_reversal(
+        transaction = client.transactions.simulate_return_reversal(
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateReturnReversalResponse)
+        assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_void(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_void(
+        transaction = client.transactions.simulate_void(
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateVoidResponse)
+        assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_void_with_all_params(self, client: Lithic) -> None:
-        resource = client.transactions.simulate_void(
+        transaction = client.transactions.simulate_void(
             amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             type="AUTHORIZATION_EXPIRY",
         )
-        assert isinstance(resource, TransactionSimulateVoidResponse)
+        assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
 
 
 class TestAsyncTransactions:
@@ -151,19 +152,19 @@ class TestAsyncTransactions:
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.retrieve(
+        transaction = await client.transactions.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, Transaction)
+        assert_matches_type(Transaction, transaction, path=["response"])
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.list()
-        assert isinstance(resource, AsyncPage)
+        transaction = await client.transactions.list()
+        assert_matches_type(AsyncPage[Transaction], transaction, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.list(
+        transaction = await client.transactions.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             result="APPROVED",
@@ -172,20 +173,20 @@ class TestAsyncTransactions:
             page=0,
             page_size=1,
         )
-        assert isinstance(resource, AsyncPage)
+        assert_matches_type(AsyncPage[Transaction], transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_authorization(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_authorization(
+        transaction = await client.transactions.simulate_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
-        assert isinstance(resource, TransactionSimulateAuthorizationResponse)
+        assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_authorization_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_authorization(
+        transaction = await client.transactions.simulate_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
@@ -196,71 +197,71 @@ class TestAsyncTransactions:
             mcc="5812",
             partial_approval_capable=True,
         )
-        assert isinstance(resource, TransactionSimulateAuthorizationResponse)
+        assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_clearing(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_clearing(
+        transaction = await client.transactions.simulate_clearing(
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateClearingResponse)
+        assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_clearing_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_clearing(
+        transaction = await client.transactions.simulate_clearing(
             amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateClearingResponse)
+        assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_credit_authorization(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_credit_authorization(
+        transaction = await client.transactions.simulate_credit_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
-        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+        assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_credit_authorization_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_credit_authorization(
+        transaction = await client.transactions.simulate_credit_authorization(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
             merchant_acceptor_id="XRKGDPOWEWQRRWU",
             mcc="5812",
         )
-        assert isinstance(resource, TransactionSimulateCreditAuthorizationResponse)
+        assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_return(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_return(
+        transaction = await client.transactions.simulate_return(
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
-        assert isinstance(resource, TransactionSimulateReturnResponse)
+        assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_return_reversal(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_return_reversal(
+        transaction = await client.transactions.simulate_return_reversal(
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateReturnReversalResponse)
+        assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_void(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_void(
+        transaction = await client.transactions.simulate_void(
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, TransactionSimulateVoidResponse)
+        assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_void_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.transactions.simulate_void(
+        transaction = await client.transactions.simulate_void(
             amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             type="AUTHORIZATION_EXPIRY",
         )
-        assert isinstance(resource, TransactionSimulateVoidResponse)
+        assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])

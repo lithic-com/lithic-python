@@ -7,6 +7,7 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from tests.utils import assert_matches_type
 from lithic.types import (
     AccountHolder,
     AccountHolderDocument,
@@ -26,7 +27,7 @@ class TestAccountHolders:
 
     @parametrize
     def test_method_create_overload_1(self, client: Lithic) -> None:
-        resource = client.account_holders.create(
+        account_holder = client.account_holders.create(
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -152,11 +153,11 @@ class TestAccountHolders:
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
-        resource = client.account_holders.create(
+        account_holder = client.account_holders.create(
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -291,11 +292,11 @@ class TestAccountHolders:
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_overload_2(self, client: Lithic) -> None:
-        resource = client.account_holders.create(
+        account_holder = client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -315,11 +316,11 @@ class TestAccountHolders:
             tos_timestamp="2022-03-08 08:00:00",
             workflow="KYC_ADVANCED",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
-        resource = client.account_holders.create(
+        account_holder = client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -340,11 +341,11 @@ class TestAccountHolders:
             tos_timestamp="2022-03-08 08:00:00",
             workflow="KYC_ADVANCED",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_overload_3(self, client: Lithic) -> None:
-        resource = client.account_holders.create(
+        account_holder = client.account_holders.create(
             workflow="KYC_EXEMPT",
             kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
@@ -352,11 +353,11 @@ class TestAccountHolders:
             email="string",
             phone_number="string",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
-        resource = client.account_holders.create(
+        account_holder = client.account_holders.create(
             workflow="KYC_EXEMPT",
             kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
@@ -372,48 +373,48 @@ class TestAccountHolders:
                 "state": "NE",
             },
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
-        resource = client.account_holders.retrieve(
+        account_holder = client.account_holders.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
-        resource = client.account_holders.update(
+        account_holder = client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolderUpdateResponse)
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
-        resource = client.account_holders.update(
+        account_holder = client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="string",
             phone_number="string",
         )
-        assert isinstance(resource, AccountHolderUpdateResponse)
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_webhook(self, client: Lithic) -> None:
-        resource = client.account_holders.create_webhook(
+        account_holder = client.account_holders.create_webhook(
             url="string",
         )
-        assert isinstance(resource, AccountHolderCreateWebhookResponse)
+        assert_matches_type(AccountHolderCreateWebhookResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_list_documents(self, client: Lithic) -> None:
-        resource = client.account_holders.list_documents(
+        account_holder = client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolderListDocumentsResponse)
+        assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_resubmit(self, client: Lithic) -> None:
-        resource = client.account_holders.resubmit(
+        account_holder = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow="KYC_ADVANCED",
             tos_timestamp="2022-03-08 08:00:00",
@@ -434,23 +435,23 @@ class TestAccountHolders:
                 "phone_number": "+12124007676",
             },
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_retrieve_document(self, client: Lithic) -> None:
-        resource = client.account_holders.retrieve_document(
+        account_holder = client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolderDocument)
+        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
     @parametrize
     def test_method_upload_document(self, client: Lithic) -> None:
-        resource = client.account_holders.upload_document(
+        account_holder = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="commercial_license",
         )
-        assert isinstance(resource, AccountHolderDocument)
+        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
 
 class TestAsyncAccountHolders:
@@ -460,7 +461,7 @@ class TestAsyncAccountHolders:
 
     @parametrize
     async def test_method_create_overload_1(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create(
+        account_holder = await client.account_holders.create(
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -586,11 +587,11 @@ class TestAsyncAccountHolders:
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create(
+        account_holder = await client.account_holders.create(
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -725,11 +726,11 @@ class TestAsyncAccountHolders:
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_overload_2(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create(
+        account_holder = await client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -749,11 +750,11 @@ class TestAsyncAccountHolders:
             tos_timestamp="2022-03-08 08:00:00",
             workflow="KYC_ADVANCED",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_2(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create(
+        account_holder = await client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -774,11 +775,11 @@ class TestAsyncAccountHolders:
             tos_timestamp="2022-03-08 08:00:00",
             workflow="KYC_ADVANCED",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_overload_3(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create(
+        account_holder = await client.account_holders.create(
             workflow="KYC_EXEMPT",
             kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
@@ -786,11 +787,11 @@ class TestAsyncAccountHolders:
             email="string",
             phone_number="string",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_3(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create(
+        account_holder = await client.account_holders.create(
             workflow="KYC_EXEMPT",
             kyc_exemption_type="AUTHORIZED_USER",
             first_name="string",
@@ -806,48 +807,48 @@ class TestAsyncAccountHolders:
                 "state": "NE",
             },
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.retrieve(
+        account_holder = await client.account_holders.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.update(
+        account_holder = await client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolderUpdateResponse)
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.update(
+        account_holder = await client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="string",
             phone_number="string",
         )
-        assert isinstance(resource, AccountHolderUpdateResponse)
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_webhook(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.create_webhook(
+        account_holder = await client.account_holders.create_webhook(
             url="string",
         )
-        assert isinstance(resource, AccountHolderCreateWebhookResponse)
+        assert_matches_type(AccountHolderCreateWebhookResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_list_documents(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.list_documents(
+        account_holder = await client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolderListDocumentsResponse)
+        assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_resubmit(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.resubmit(
+        account_holder = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow="KYC_ADVANCED",
             tos_timestamp="2022-03-08 08:00:00",
@@ -868,20 +869,20 @@ class TestAsyncAccountHolders:
                 "phone_number": "+12124007676",
             },
         )
-        assert isinstance(resource, AccountHolder)
+        assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_retrieve_document(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.retrieve_document(
+        account_holder = await client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert isinstance(resource, AccountHolderDocument)
+        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
     @parametrize
     async def test_method_upload_document(self, client: AsyncLithic) -> None:
-        resource = await client.account_holders.upload_document(
+        account_holder = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="commercial_license",
         )
-        assert isinstance(resource, AccountHolderDocument)
+        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])

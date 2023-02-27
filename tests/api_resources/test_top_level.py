@@ -7,6 +7,7 @@ import os
 import pytest
 
 from lithic import Lithic, AsyncLithic
+from tests.utils import assert_matches_type
 from lithic.types import APIStatus
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
@@ -20,8 +21,8 @@ class TestTopLevel:
 
     @parametrize
     def test_method_api_status(self, client: Lithic) -> None:
-        resource = client.api_status()
-        assert isinstance(resource, APIStatus)
+        top_level = client.api_status()
+        assert_matches_type(APIStatus, top_level, path=["response"])
 
 
 class TestAsyncTopLevel:
@@ -31,5 +32,5 @@ class TestAsyncTopLevel:
 
     @parametrize
     async def test_method_api_status(self, client: AsyncLithic) -> None:
-        resource = await client.api_status()
-        assert isinstance(resource, APIStatus)
+        top_level = await client.api_status()
+        assert_matches_type(APIStatus, top_level, path=["response"])
