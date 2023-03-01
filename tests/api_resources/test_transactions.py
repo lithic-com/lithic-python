@@ -17,6 +17,7 @@ from lithic.types import (
     TransactionSimulateReturnReversalResponse,
     TransactionSimulateCreditAuthorizationResponse,
 )
+from lithic._utils import parse_datetime
 from lithic.pagination import SyncPage, AsyncPage
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
@@ -46,8 +47,8 @@ class TestTransactions:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             result="APPROVED",
-            begin="2019-12-27T18:11:19.117Z",
-            end="2019-12-27T18:11:19.117Z",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page=0,
             page_size=1,
         )
@@ -168,8 +169,8 @@ class TestAsyncTransactions:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             result="APPROVED",
-            begin="2019-12-27T18:11:19.117Z",
-            end="2019-12-27T18:11:19.117Z",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page=0,
             page_size=1,
         )

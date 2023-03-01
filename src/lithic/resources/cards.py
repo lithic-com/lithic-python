@@ -6,14 +6,28 @@ import hmac
 import json
 import base64
 import hashlib
+from typing import Union
 from datetime import datetime, timezone, timedelta
 from typing_extensions import Literal
 
 from httpx import URL
 
-from ..types import Card, SpendLimitDuration, CardProvisionResponse, shared_params
+from ..types import (
+    Card,
+    SpendLimitDuration,
+    CardProvisionResponse,
+    shared_params,
+    card_list_params,
+    card_embed_params,
+    card_create_params,
+    card_update_params,
+    card_reissue_params,
+    card_retrieve_params,
+    card_provision_params,
+    card_get_embed_url_params,
+)
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import strip_not_given
+from .._utils import maybe_transform, strip_not_given
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, _merge_mappings, make_request_options
@@ -148,23 +162,26 @@ class Cards(SyncAPIResource):
         """
         return self._post(
             "/cards",
-            body={
-                "account_token": account_token,
-                "card_program_token": card_program_token,
-                "exp_month": exp_month,
-                "exp_year": exp_year,
-                "funding_token": funding_token,
-                "memo": memo,
-                "spend_limit": spend_limit,
-                "spend_limit_duration": spend_limit_duration,
-                "state": state,
-                "type": type,
-                "pin": pin,
-                "digital_card_art_token": digital_card_art_token,
-                "product_id": product_id,
-                "shipping_address": shipping_address,
-                "shipping_method": shipping_method,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "card_program_token": card_program_token,
+                    "exp_month": exp_month,
+                    "exp_year": exp_year,
+                    "funding_token": funding_token,
+                    "memo": memo,
+                    "spend_limit": spend_limit,
+                    "spend_limit_duration": spend_limit_duration,
+                    "state": state,
+                    "type": type,
+                    "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
+                    "product_id": product_id,
+                    "shipping_address": shipping_address,
+                    "shipping_method": shipping_method,
+                },
+                card_create_params.CardCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )
@@ -201,7 +218,7 @@ class Cards(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={"account_token": account_token},
+                query=maybe_transform({"account_token": account_token}, card_retrieve_params.CardRetrieveParams),
             ),
             cast_to=Card,
         )
@@ -293,17 +310,20 @@ class Cards(SyncAPIResource):
         """
         return self._patch(
             f"/cards/{card_token}",
-            body={
-                "account_token": account_token,
-                "funding_token": funding_token,
-                "memo": memo,
-                "spend_limit": spend_limit,
-                "spend_limit_duration": spend_limit_duration,
-                "auth_rule_token": auth_rule_token,
-                "state": state,
-                "pin": pin,
-                "digital_card_art_token": digital_card_art_token,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "funding_token": funding_token,
+                    "memo": memo,
+                    "spend_limit": spend_limit,
+                    "spend_limit_duration": spend_limit_duration,
+                    "auth_rule_token": auth_rule_token,
+                    "state": state,
+                    "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
+                },
+                card_update_params.CardUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )
@@ -312,8 +332,8 @@ class Cards(SyncAPIResource):
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -355,13 +375,16 @@ class Cards(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "account_token": account_token,
-                    "begin": begin,
-                    "end": end,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "begin": begin,
+                        "end": end,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    card_list_params.CardListParams,
+                ),
             ),
             model=Card,
         )
@@ -423,10 +446,13 @@ class Cards(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "embed_request": embed_request,
-                    "hmac": hmac,
-                },
+                query=maybe_transform(
+                    {
+                        "embed_request": embed_request,
+                        "hmac": hmac,
+                    },
+                    card_embed_params.CardEmbedParams,
+                ),
             ),
             cast_to=str,
         )
@@ -437,7 +463,7 @@ class Cards(SyncAPIResource):
         token: str,
         account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
-        expiration: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -480,7 +506,7 @@ class Cards(SyncAPIResource):
         token: str,
         account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
-        expiration: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
     ) -> URL:
         """
@@ -513,16 +539,19 @@ class Cards(SyncAPIResource):
         """
         # Default expiration of 1 minute from now.
         if isinstance(expiration, NotGiven):
-            expiration = (datetime.now(timezone.utc) + timedelta(minutes=1)).isoformat()
+            expiration = datetime.now(timezone.utc) + timedelta(minutes=1)
 
-        query = strip_not_given(
-            {
-                "css": css,
-                "token": token,
-                "expiration": expiration,
-                "account_token": account_token,
-                "target_origin": target_origin,
-            }
+        query = maybe_transform(
+            strip_not_given(
+                {
+                    "css": css,
+                    "token": token,
+                    "expiration": expiration,
+                    "account_token": account_token,
+                    "target_origin": target_origin,
+                }
+            ),
+            card_get_embed_url_params.CardGetEmbedURLParams,
         )
         serialized = json.dumps(query, sort_keys=True, separators=(",", ":"))
         params = {
@@ -590,13 +619,16 @@ class Cards(SyncAPIResource):
         """
         return self._post(
             f"/cards/{card_token}/provision",
-            body={
-                "digital_wallet": digital_wallet,
-                "nonce": nonce,
-                "nonce_signature": nonce_signature,
-                "certificate": certificate,
-                "account_token": account_token,
-            },
+            body=maybe_transform(
+                {
+                    "digital_wallet": digital_wallet,
+                    "nonce": nonce,
+                    "nonce_signature": nonce_signature,
+                    "certificate": certificate,
+                    "account_token": account_token,
+                },
+                card_provision_params.CardProvisionParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=CardProvisionResponse,
         )
@@ -644,11 +676,14 @@ class Cards(SyncAPIResource):
         """
         return self._post(
             f"/cards/{card_token}/reissue",
-            body={
-                "shipping_address": shipping_address,
-                "shipping_method": shipping_method,
-                "product_id": product_id,
-            },
+            body=maybe_transform(
+                {
+                    "shipping_address": shipping_address,
+                    "shipping_method": shipping_method,
+                    "product_id": product_id,
+                },
+                card_reissue_params.CardReissueParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )
@@ -781,23 +816,26 @@ class AsyncCards(AsyncAPIResource):
         """
         return await self._post(
             "/cards",
-            body={
-                "account_token": account_token,
-                "card_program_token": card_program_token,
-                "exp_month": exp_month,
-                "exp_year": exp_year,
-                "funding_token": funding_token,
-                "memo": memo,
-                "spend_limit": spend_limit,
-                "spend_limit_duration": spend_limit_duration,
-                "state": state,
-                "type": type,
-                "pin": pin,
-                "digital_card_art_token": digital_card_art_token,
-                "product_id": product_id,
-                "shipping_address": shipping_address,
-                "shipping_method": shipping_method,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "card_program_token": card_program_token,
+                    "exp_month": exp_month,
+                    "exp_year": exp_year,
+                    "funding_token": funding_token,
+                    "memo": memo,
+                    "spend_limit": spend_limit,
+                    "spend_limit_duration": spend_limit_duration,
+                    "state": state,
+                    "type": type,
+                    "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
+                    "product_id": product_id,
+                    "shipping_address": shipping_address,
+                    "shipping_method": shipping_method,
+                },
+                card_create_params.CardCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )
@@ -834,7 +872,7 @@ class AsyncCards(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={"account_token": account_token},
+                query=maybe_transform({"account_token": account_token}, card_retrieve_params.CardRetrieveParams),
             ),
             cast_to=Card,
         )
@@ -926,17 +964,20 @@ class AsyncCards(AsyncAPIResource):
         """
         return await self._patch(
             f"/cards/{card_token}",
-            body={
-                "account_token": account_token,
-                "funding_token": funding_token,
-                "memo": memo,
-                "spend_limit": spend_limit,
-                "spend_limit_duration": spend_limit_duration,
-                "auth_rule_token": auth_rule_token,
-                "state": state,
-                "pin": pin,
-                "digital_card_art_token": digital_card_art_token,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "funding_token": funding_token,
+                    "memo": memo,
+                    "spend_limit": spend_limit,
+                    "spend_limit_duration": spend_limit_duration,
+                    "auth_rule_token": auth_rule_token,
+                    "state": state,
+                    "pin": pin,
+                    "digital_card_art_token": digital_card_art_token,
+                },
+                card_update_params.CardUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )
@@ -945,8 +986,8 @@ class AsyncCards(AsyncAPIResource):
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -988,13 +1029,16 @@ class AsyncCards(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "account_token": account_token,
-                    "begin": begin,
-                    "end": end,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "begin": begin,
+                        "end": end,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    card_list_params.CardListParams,
+                ),
             ),
             model=Card,
         )
@@ -1056,10 +1100,13 @@ class AsyncCards(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "embed_request": embed_request,
-                    "hmac": hmac,
-                },
+                query=maybe_transform(
+                    {
+                        "embed_request": embed_request,
+                        "hmac": hmac,
+                    },
+                    card_embed_params.CardEmbedParams,
+                ),
             ),
             cast_to=str,
         )
@@ -1070,7 +1117,7 @@ class AsyncCards(AsyncAPIResource):
         token: str,
         account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
-        expiration: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1113,7 +1160,7 @@ class AsyncCards(AsyncAPIResource):
         token: str,
         account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
-        expiration: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
     ) -> URL:
         """
@@ -1146,16 +1193,19 @@ class AsyncCards(AsyncAPIResource):
         """
         # Default expiration of 1 minute from now.
         if isinstance(expiration, NotGiven):
-            expiration = (datetime.now(timezone.utc) + timedelta(minutes=1)).isoformat()
+            expiration = datetime.now(timezone.utc) + timedelta(minutes=1)
 
-        query = strip_not_given(
-            {
-                "css": css,
-                "token": token,
-                "expiration": expiration,
-                "account_token": account_token,
-                "target_origin": target_origin,
-            }
+        query = maybe_transform(
+            strip_not_given(
+                {
+                    "css": css,
+                    "token": token,
+                    "expiration": expiration,
+                    "account_token": account_token,
+                    "target_origin": target_origin,
+                }
+            ),
+            card_get_embed_url_params.CardGetEmbedURLParams,
         )
         serialized = json.dumps(query, sort_keys=True, separators=(",", ":"))
         params = {
@@ -1223,13 +1273,16 @@ class AsyncCards(AsyncAPIResource):
         """
         return await self._post(
             f"/cards/{card_token}/provision",
-            body={
-                "digital_wallet": digital_wallet,
-                "nonce": nonce,
-                "nonce_signature": nonce_signature,
-                "certificate": certificate,
-                "account_token": account_token,
-            },
+            body=maybe_transform(
+                {
+                    "digital_wallet": digital_wallet,
+                    "nonce": nonce,
+                    "nonce_signature": nonce_signature,
+                    "certificate": certificate,
+                    "account_token": account_token,
+                },
+                card_provision_params.CardProvisionParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=CardProvisionResponse,
         )
@@ -1277,11 +1330,14 @@ class AsyncCards(AsyncAPIResource):
         """
         return await self._post(
             f"/cards/{card_token}/reissue",
-            body={
-                "shipping_address": shipping_address,
-                "shipping_method": shipping_method,
-                "product_id": product_id,
-            },
+            body=maybe_transform(
+                {
+                    "shipping_address": shipping_address,
+                    "shipping_method": shipping_method,
+                    "product_id": product_id,
+                },
+                card_reissue_params.CardReissueParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )

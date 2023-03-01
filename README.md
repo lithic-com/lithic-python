@@ -425,6 +425,40 @@ card = await client.cards.create(
 # https://api.lithic.com/v1/cards?special_param=bar
 ```
 
+## Rich `date` and `datetime` types
+
+We've improved the types for response fields / request params that correspond to `date` or `datetime` values!
+
+Previously they were just raw strings but now response fields will be instances of `date` or `datetime`.
+
+This means that if you're working with these fields and parsing them into `datetime` instances manually you will have to remove
+any code that performs said parsing.
+
+```diff
+card = client.cards.retrieve('<token>')
+- created = datetime.fromisoformat(card.created_at)
++ created = card.created_at
+print(created.month)
+```
+
+For request params you can continue to pass in strings if you want to use a datetime library other than the standard library version but if you
+were writing code that looked like this:
+
+```py
+dt = datetime(...)
+for card in client.cards.list(begin=dt.isoformat()):
+  ...
+```
+
+You can remove the explicit call to `isoformat`!
+
+```diff
+dt = datetime(...)
+- for card in client.cards.list(begin=dt.isoformat()):
++ for card in client.cards.list(begin=dt):
+  ...
+```
+
 ## Status
 
 This package is in beta. Its internals and interfaces are not stable and subject to change without a major semver bump;

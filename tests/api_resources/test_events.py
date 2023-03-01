@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Event
+from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
@@ -35,8 +36,8 @@ class TestEvents:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         event = client.events.list(
-            begin="2019-12-27T18:11:19.117Z",
-            end="2019-12-27T18:11:19.117Z",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page_size=1,
             starting_after="string",
             ending_before="string",
@@ -72,8 +73,8 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         event = await client.events.list(
-            begin="2019-12-27T18:11:19.117Z",
-            end="2019-12-27T18:11:19.117Z",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page_size=1,
             starting_after="string",
             ending_before="string",

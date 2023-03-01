@@ -7,6 +7,10 @@ from typing_extensions import Required, Annotated, TypeGuard, get_args, get_orig
 
 from pydantic.typing import is_union as _is_union
 
+# re-export for forwards compat
+from pydantic.datetime_parse import parse_date as parse_date
+from pydantic.datetime_parse import parse_datetime as parse_datetime
+
 from .._types import NotGiven, FileTypes
 
 _T = TypeVar("_T")

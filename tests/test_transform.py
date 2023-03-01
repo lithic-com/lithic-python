@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from typing import List, Union
-from typing_extensions import Annotated, TypedDict
+from typing import List, Union, Optional
+from datetime import date, datetime
+from typing_extensions import Required, Annotated, TypedDict
 
-from lithic._utils import PropertyInfo, transform
+from lithic._utils import PropertyInfo, transform, parse_datetime
 
 
 class Foo1(TypedDict):
@@ -93,7 +94,10 @@ class Foo6(TypedDict):
 
 
 def test_includes_unknown_keys() -> None:
-    assert transform({"bar": "bar", "baz_": {"FOO": 1}}, Foo6) == {"Bar": "bar", "baz_": {"FOO": 1}}
+    assert transform({"bar": "bar", "baz_": {"FOO": 1}}, Foo6) == {
+        "Bar": "bar",
+        "baz_": {"FOO": 1},
+    }
 
 
 class Foo7(TypedDict):
@@ -108,3 +112,68 @@ class Bar7(TypedDict):
 def test_ignores_invalid_input() -> None:
     assert transform({"bar": "<foo>"}, Foo7) == {"bAr": "<foo>"}
     assert transform({"foo": "<foo>"}, Foo7) == {"foo": "<foo>"}
+
+
+class DatetimeDict(TypedDict, total=False):
+    foo: Annotated[datetime, PropertyInfo(format="iso8601")]
+
+    bar: Annotated[Optional[datetime], PropertyInfo(format="iso8601")]
+
+    required: Required[Annotated[Optional[datetime], PropertyInfo(format="iso8601")]]
+
+    list_: Required[Annotated[Optional[List[datetime]], PropertyInfo(format="iso8601")]]
+
+    union: Annotated[Union[int, datetime], PropertyInfo(format="iso8601")]
+
+
+class DateDict(TypedDict, total=False):
+    foo: Annotated[date, PropertyInfo(format="iso8601")]
+
+
+def test_iso8601_format() -> None:
+    dt = datetime.fromisoformat("2023-02-23T14:16:36.337692+00:00")
+    assert transform({"foo": dt}, DatetimeDict) == {"foo": "2023-02-23T14:16:36.337692+00:00"}  # type: ignore[comparison-overlap]
+
+    dt = dt.replace(tzinfo=None)
+    assert transform({"foo": dt}, DatetimeDict) == {"foo": "2023-02-23T14:16:36.337692"}  # type: ignore[comparison-overlap]
+
+    assert transform({"foo": None}, DateDict) == {"foo": None}  # type: ignore[comparison-overlap]
+    assert transform({"foo": date.fromisoformat("2023-02-23")}, DateDict) == {"foo": "2023-02-23"}  # type: ignore[comparison-overlap]
+
+
+def test_optional_iso8601_format() -> None:
+    dt = datetime.fromisoformat("2023-02-23T14:16:36.337692+00:00")
+    assert transform({"bar": dt}, DatetimeDict) == {"bar": "2023-02-23T14:16:36.337692+00:00"}  # type: ignore[comparison-overlap]
+
+    assert transform({"bar": None}, DatetimeDict) == {"bar": None}
+
+
+def test_required_iso8601_format() -> None:
+    dt = datetime.fromisoformat("2023-02-23T14:16:36.337692+00:00")
+    assert transform({"required": dt}, DatetimeDict) == {"required": "2023-02-23T14:16:36.337692+00:00"}  # type: ignore[comparison-overlap]
+
+    assert transform({"required": None}, DatetimeDict) == {"required": None}
+
+
+def test_union_datetime() -> None:
+    dt = datetime.fromisoformat("2023-02-23T14:16:36.337692+00:00")
+    assert transform({"union": dt}, DatetimeDict) == {  # type: ignore[comparison-overlap]
+        "union": "2023-02-23T14:16:36.337692+00:00"
+    }
+
+    assert transform({"union": "foo"}, DatetimeDict) == {"union": "foo"}
+
+
+def test_nested_list_iso6801_format() -> None:
+    dt1 = datetime.fromisoformat("2023-02-23T14:16:36.337692+00:00")
+    dt2 = parse_datetime("2022-01-15T06:34:23Z")
+    assert transform({"list_": [dt1, dt2]}, DatetimeDict) == {  # type: ignore[comparison-overlap]
+        "list_": ["2023-02-23T14:16:36.337692+00:00", "2022-01-15T06:34:23+00:00"]
+    }
+
+
+def test_datetime_custom_format() -> None:
+    dt = parse_datetime("2022-01-15T06:34:23Z")
+
+    result = transform(dt, Annotated[datetime, PropertyInfo(format="custom", format_template="%H")])
+    assert result == "06"  # type: ignore[comparison-overlap]

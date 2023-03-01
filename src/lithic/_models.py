@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any, Type, Union, cast
+from datetime import date, datetime
 from typing_extensions import final
 
 import pydantic
@@ -13,6 +14,7 @@ from pydantic.typing import (
     is_none_type,
     is_literal_type,
 )
+from pydantic.datetime_parse import parse_date
 
 from ._types import (
     Body,
@@ -24,7 +26,7 @@ from ._types import (
     AnyMapping,
     RequestFiles,
 )
-from ._utils import is_list, is_mapping, strip_not_given
+from ._utils import is_list, is_mapping, parse_datetime, strip_not_given
 
 __all__ = ["BaseModel", "GenericModel"]
 
@@ -131,6 +133,18 @@ def _construct_type(*, value: object, type_: type, outer_type: type) -> object:
     if origin == int:
         try:
             return int(value)  # type: ignore
+        except Exception:
+            return value
+
+    if type_ == datetime:
+        try:
+            return parse_datetime(value)  # type: ignore
+        except Exception:
+            return value
+
+    if type_ == date:
+        try:
+            return parse_date(value)  # type: ignore
         except Exception:
             return value
 

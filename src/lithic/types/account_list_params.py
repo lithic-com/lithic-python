@@ -2,19 +2,23 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Union
+from datetime import datetime
+from typing_extensions import Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["AccountListParams"]
 
 
 class AccountListParams(TypedDict, total=False):
-    begin: str
+    begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in 8601 format.
 
     Only entries created after the specified date will be included. UTC time zone.
     """
 
-    end: str
+    end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in 8601 format.
 
     Only entries created before the specified date will be included. UTC time zone.

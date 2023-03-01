@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Union
+from datetime import datetime
+from typing_extensions import Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["CardGetEmbedHTMLParams"]
 
@@ -20,7 +24,7 @@ class CardGetEmbedHTMLParams(TypedDict, total=False):
     the client's branding.
     """
 
-    expiration: str
+    expiration: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """An ISO 8601 timestamp for when the request should expire. UTC time zone.
 
     If no timezone is specified, UTC will be used. If payload does not contain an

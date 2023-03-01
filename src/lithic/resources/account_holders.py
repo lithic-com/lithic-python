@@ -13,10 +13,13 @@ from ..types import (
     AccountHolderListDocumentsResponse,
     shared_params,
     account_holder_create_params,
+    account_holder_update_params,
     account_holder_resubmit_params,
+    account_holder_create_webhook_params,
+    account_holder_upload_document_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import required_args
+from .._utils import required_args, maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 
@@ -328,25 +331,28 @@ class AccountHolders(SyncAPIResource):
         """
         return self._post(
             "/account_holders",
-            body={
-                "business_entity": business_entity,
-                "beneficial_owner_entities": beneficial_owner_entities,
-                "beneficial_owner_individuals": beneficial_owner_individuals,
-                "control_person": control_person,
-                "kyb_passed_timestamp": kyb_passed_timestamp,
-                "nature_of_business": nature_of_business,
-                "tos_timestamp": tos_timestamp,
-                "website_url": website_url,
-                "workflow": workflow,
-                "individual": individual,
-                "kyc_passed_timestamp": kyc_passed_timestamp,
-                "kyc_exemption_type": kyc_exemption_type,
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-                "phone_number": phone_number,
-                "address": address,
-            },
+            body=maybe_transform(
+                {
+                    "business_entity": business_entity,
+                    "beneficial_owner_entities": beneficial_owner_entities,
+                    "beneficial_owner_individuals": beneficial_owner_individuals,
+                    "control_person": control_person,
+                    "kyb_passed_timestamp": kyb_passed_timestamp,
+                    "nature_of_business": nature_of_business,
+                    "tos_timestamp": tos_timestamp,
+                    "website_url": website_url,
+                    "workflow": workflow,
+                    "individual": individual,
+                    "kyc_passed_timestamp": kyc_passed_timestamp,
+                    "kyc_exemption_type": kyc_exemption_type,
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "email": email,
+                    "phone_number": phone_number,
+                    "address": address,
+                },
+                account_holder_create_params.AccountHolderCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolder,
         )
@@ -400,10 +406,13 @@ class AccountHolders(SyncAPIResource):
         """
         return self._patch(
             f"/account_holders/{account_holder_token}",
-            body={
-                "email": email,
-                "phone_number": phone_number,
-            },
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "phone_number": phone_number,
+                },
+                account_holder_update_params.AccountHolderUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolderUpdateResponse,
         )
@@ -445,7 +454,7 @@ class AccountHolders(SyncAPIResource):
         """
         return self._post(
             "/webhooks/account_holders",
-            body={"url": url},
+            body=maybe_transform({"url": url}, account_holder_create_webhook_params.AccountHolderCreateWebhookParams),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolderCreateWebhookResponse,
         )
@@ -523,11 +532,14 @@ class AccountHolders(SyncAPIResource):
         """
         return self._post(
             f"/account_holders/{account_holder_token}/resubmit",
-            body={
-                "workflow": workflow,
-                "tos_timestamp": tos_timestamp,
-                "individual": individual,
-            },
+            body=maybe_transform(
+                {
+                    "workflow": workflow,
+                    "tos_timestamp": tos_timestamp,
+                    "individual": individual,
+                },
+                account_holder_resubmit_params.AccountHolderResubmitParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolder,
         )
@@ -607,7 +619,10 @@ class AccountHolders(SyncAPIResource):
         """
         return self._post(
             f"/account_holders/{account_holder_token}/documents",
-            body={"document_type": document_type},
+            body=maybe_transform(
+                {"document_type": document_type},
+                account_holder_upload_document_params.AccountHolderUploadDocumentParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolderDocument,
         )
@@ -918,25 +933,28 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         return await self._post(
             "/account_holders",
-            body={
-                "business_entity": business_entity,
-                "beneficial_owner_entities": beneficial_owner_entities,
-                "beneficial_owner_individuals": beneficial_owner_individuals,
-                "control_person": control_person,
-                "kyb_passed_timestamp": kyb_passed_timestamp,
-                "nature_of_business": nature_of_business,
-                "tos_timestamp": tos_timestamp,
-                "website_url": website_url,
-                "workflow": workflow,
-                "individual": individual,
-                "kyc_passed_timestamp": kyc_passed_timestamp,
-                "kyc_exemption_type": kyc_exemption_type,
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-                "phone_number": phone_number,
-                "address": address,
-            },
+            body=maybe_transform(
+                {
+                    "business_entity": business_entity,
+                    "beneficial_owner_entities": beneficial_owner_entities,
+                    "beneficial_owner_individuals": beneficial_owner_individuals,
+                    "control_person": control_person,
+                    "kyb_passed_timestamp": kyb_passed_timestamp,
+                    "nature_of_business": nature_of_business,
+                    "tos_timestamp": tos_timestamp,
+                    "website_url": website_url,
+                    "workflow": workflow,
+                    "individual": individual,
+                    "kyc_passed_timestamp": kyc_passed_timestamp,
+                    "kyc_exemption_type": kyc_exemption_type,
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "email": email,
+                    "phone_number": phone_number,
+                    "address": address,
+                },
+                account_holder_create_params.AccountHolderCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolder,
         )
@@ -990,10 +1008,13 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         return await self._patch(
             f"/account_holders/{account_holder_token}",
-            body={
-                "email": email,
-                "phone_number": phone_number,
-            },
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "phone_number": phone_number,
+                },
+                account_holder_update_params.AccountHolderUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolderUpdateResponse,
         )
@@ -1035,7 +1056,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         return await self._post(
             "/webhooks/account_holders",
-            body={"url": url},
+            body=maybe_transform({"url": url}, account_holder_create_webhook_params.AccountHolderCreateWebhookParams),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolderCreateWebhookResponse,
         )
@@ -1113,11 +1134,14 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         return await self._post(
             f"/account_holders/{account_holder_token}/resubmit",
-            body={
-                "workflow": workflow,
-                "tos_timestamp": tos_timestamp,
-                "individual": individual,
-            },
+            body=maybe_transform(
+                {
+                    "workflow": workflow,
+                    "tos_timestamp": tos_timestamp,
+                    "individual": individual,
+                },
+                account_holder_resubmit_params.AccountHolderResubmitParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolder,
         )
@@ -1197,7 +1221,10 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         return await self._post(
             f"/account_holders/{account_holder_token}/documents",
-            body={"document_type": document_type},
+            body=maybe_transform(
+                {"document_type": document_type},
+                account_holder_upload_document_params.AccountHolderUploadDocumentParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AccountHolderDocument,
         )

@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, TypedDict
+from typing import Union
+from datetime import datetime
+from typing_extensions import Literal, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["TransactionListParams"]
 
@@ -11,7 +15,7 @@ class TransactionListParams(TypedDict, total=False):
     account_token: str
     """Filters for transactions associated with a specific account."""
 
-    begin: str
+    begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in 8601 format.
 
     Only entries created after the specified date will be included. UTC time zone.
@@ -20,7 +24,7 @@ class TransactionListParams(TypedDict, total=False):
     card_token: str
     """Filters for transactions associated with a specific card."""
 
-    end: str
+    end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in 8601 format.
 
     Only entries created before the specified date will be included. UTC time zone.

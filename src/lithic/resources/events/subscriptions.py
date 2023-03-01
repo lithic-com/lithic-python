@@ -7,10 +7,16 @@ from typing_extensions import Literal
 
 from ...types import EventSubscription
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.events import SubscriptionRetrieveSecretResponse
+from ...types.events import (
+    SubscriptionRetrieveSecretResponse,
+    subscription_list_params,
+    subscription_create_params,
+    subscription_update_params,
+)
 
 __all__ = ["Subscriptions", "AsyncSubscriptions"]
 
@@ -50,12 +56,15 @@ class Subscriptions(SyncAPIResource):
         """
         return self._post(
             "/event_subscriptions",
-            body={
-                "description": description,
-                "disabled": disabled,
-                "event_types": event_types,
-                "url": url,
-            },
+            body=maybe_transform(
+                {
+                    "description": description,
+                    "disabled": disabled,
+                    "event_types": event_types,
+                    "url": url,
+                },
+                subscription_create_params.SubscriptionCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=EventSubscription,
         )
@@ -112,12 +121,15 @@ class Subscriptions(SyncAPIResource):
         """
         return self._patch(
             f"/event_subscriptions/{event_subscription_token}",
-            body={
-                "description": description,
-                "disabled": disabled,
-                "event_types": event_types,
-                "url": url,
-            },
+            body=maybe_transform(
+                {
+                    "description": description,
+                    "disabled": disabled,
+                    "event_types": event_types,
+                    "url": url,
+                },
+                subscription_update_params.SubscriptionUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=EventSubscription,
         )
@@ -159,11 +171,14 @@ class Subscriptions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "page_size": page_size,
-                    "starting_after": starting_after,
-                    "ending_before": ending_before,
-                },
+                query=maybe_transform(
+                    {
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                        "ending_before": ending_before,
+                    },
+                    subscription_list_params.SubscriptionListParams,
+                ),
             ),
             model=EventSubscription,
         )
@@ -297,12 +312,15 @@ class AsyncSubscriptions(AsyncAPIResource):
         """
         return await self._post(
             "/event_subscriptions",
-            body={
-                "description": description,
-                "disabled": disabled,
-                "event_types": event_types,
-                "url": url,
-            },
+            body=maybe_transform(
+                {
+                    "description": description,
+                    "disabled": disabled,
+                    "event_types": event_types,
+                    "url": url,
+                },
+                subscription_create_params.SubscriptionCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=EventSubscription,
         )
@@ -359,12 +377,15 @@ class AsyncSubscriptions(AsyncAPIResource):
         """
         return await self._patch(
             f"/event_subscriptions/{event_subscription_token}",
-            body={
-                "description": description,
-                "disabled": disabled,
-                "event_types": event_types,
-                "url": url,
-            },
+            body=maybe_transform(
+                {
+                    "description": description,
+                    "disabled": disabled,
+                    "event_types": event_types,
+                    "url": url,
+                },
+                subscription_update_params.SubscriptionUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=EventSubscription,
         )
@@ -406,11 +427,14 @@ class AsyncSubscriptions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "page_size": page_size,
-                    "starting_after": starting_after,
-                    "ending_before": ending_before,
-                },
+                query=maybe_transform(
+                    {
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                        "ending_before": ending_before,
+                    },
+                    subscription_list_params.SubscriptionListParams,
+                ),
             ),
             model=EventSubscription,
         )

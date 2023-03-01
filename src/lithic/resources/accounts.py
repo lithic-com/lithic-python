@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import datetime
 from typing_extensions import Literal
 
-from ..types import Account, account_update_params
+from ..types import Account, account_list_params, account_update_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -85,13 +88,16 @@ class Accounts(SyncAPIResource):
         """
         return self._patch(
             f"/accounts/{account_token}",
-            body={
-                "daily_spend_limit": daily_spend_limit,
-                "lifetime_spend_limit": lifetime_spend_limit,
-                "monthly_spend_limit": monthly_spend_limit,
-                "verification_address": verification_address,
-                "state": state,
-            },
+            body=maybe_transform(
+                {
+                    "daily_spend_limit": daily_spend_limit,
+                    "lifetime_spend_limit": lifetime_spend_limit,
+                    "monthly_spend_limit": monthly_spend_limit,
+                    "verification_address": verification_address,
+                    "state": state,
+                },
+                account_update_params.AccountUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Account,
         )
@@ -99,8 +105,8 @@ class Accounts(SyncAPIResource):
     def list(
         self,
         *,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -137,12 +143,15 @@ class Accounts(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "begin": begin,
-                    "end": end,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    account_list_params.AccountListParams,
+                ),
             ),
             model=Account,
         )
@@ -220,13 +229,16 @@ class AsyncAccounts(AsyncAPIResource):
         """
         return await self._patch(
             f"/accounts/{account_token}",
-            body={
-                "daily_spend_limit": daily_spend_limit,
-                "lifetime_spend_limit": lifetime_spend_limit,
-                "monthly_spend_limit": monthly_spend_limit,
-                "verification_address": verification_address,
-                "state": state,
-            },
+            body=maybe_transform(
+                {
+                    "daily_spend_limit": daily_spend_limit,
+                    "lifetime_spend_limit": lifetime_spend_limit,
+                    "monthly_spend_limit": monthly_spend_limit,
+                    "verification_address": verification_address,
+                    "state": state,
+                },
+                account_update_params.AccountUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Account,
         )
@@ -234,8 +246,8 @@ class AsyncAccounts(AsyncAPIResource):
     def list(
         self,
         *,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -272,12 +284,15 @@ class AsyncAccounts(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "begin": begin,
-                    "end": end,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    account_list_params.AccountListParams,
+                ),
             ),
             model=Account,
         )
