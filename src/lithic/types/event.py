@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -8,7 +9,7 @@ __all__ = ["Event"]
 
 
 class Event(BaseModel):
-    created: str
+    created: datetime
     """An ISO 8601 timestamp for when the event was created. UTC time zone.
 
     If no timezone is specified, UTC will be used.

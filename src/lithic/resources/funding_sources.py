@@ -5,9 +5,15 @@ from __future__ import annotations
 from typing import List, overload
 from typing_extensions import Literal
 
-from ..types import FundingSource
+from ..types import (
+    FundingSource,
+    funding_source_list_params,
+    funding_source_create_params,
+    funding_source_update_params,
+    funding_source_verify_params,
+)
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import required_args
+from .._utils import required_args, maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -145,14 +151,17 @@ class FundingSources(SyncAPIResource):
         """
         return self._post(
             "/funding_sources",
-            body={
-                "validation_method": validation_method,
-                "account_name": account_name,
-                "account_number": account_number,
-                "account_token": account_token,
-                "routing_number": routing_number,
-                "processor_token": processor_token,
-            },
+            body=maybe_transform(
+                {
+                    "validation_method": validation_method,
+                    "account_name": account_name,
+                    "account_number": account_number,
+                    "account_token": account_token,
+                    "routing_number": routing_number,
+                    "processor_token": processor_token,
+                },
+                funding_source_create_params.FundingSourceCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=FundingSource,
         )
@@ -194,10 +203,13 @@ class FundingSources(SyncAPIResource):
         """
         return self._patch(
             f"/funding_sources/{funding_source_token}",
-            body={
-                "account_token": account_token,
-                "state": state,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "state": state,
+                },
+                funding_source_update_params.FundingSourceUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=FundingSource,
         )
@@ -235,11 +247,14 @@ class FundingSources(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "account_token": account_token,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    funding_source_list_params.FundingSourceListParams,
+                ),
             ),
             model=FundingSource,
         )
@@ -277,10 +292,13 @@ class FundingSources(SyncAPIResource):
         """
         return self._post(
             f"/funding_sources/{funding_source_token}/verify",
-            body={
-                "account_token": account_token,
-                "micro_deposits": micro_deposits,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "micro_deposits": micro_deposits,
+                },
+                funding_source_verify_params.FundingSourceVerifyParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=FundingSource,
         )
@@ -416,14 +434,17 @@ class AsyncFundingSources(AsyncAPIResource):
         """
         return await self._post(
             "/funding_sources",
-            body={
-                "validation_method": validation_method,
-                "account_name": account_name,
-                "account_number": account_number,
-                "account_token": account_token,
-                "routing_number": routing_number,
-                "processor_token": processor_token,
-            },
+            body=maybe_transform(
+                {
+                    "validation_method": validation_method,
+                    "account_name": account_name,
+                    "account_number": account_number,
+                    "account_token": account_token,
+                    "routing_number": routing_number,
+                    "processor_token": processor_token,
+                },
+                funding_source_create_params.FundingSourceCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=FundingSource,
         )
@@ -465,10 +486,13 @@ class AsyncFundingSources(AsyncAPIResource):
         """
         return await self._patch(
             f"/funding_sources/{funding_source_token}",
-            body={
-                "account_token": account_token,
-                "state": state,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "state": state,
+                },
+                funding_source_update_params.FundingSourceUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=FundingSource,
         )
@@ -506,11 +530,14 @@ class AsyncFundingSources(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "account_token": account_token,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    funding_source_list_params.FundingSourceListParams,
+                ),
             ),
             model=FundingSource,
         )
@@ -548,10 +575,13 @@ class AsyncFundingSources(AsyncAPIResource):
         """
         return await self._post(
             f"/funding_sources/{funding_source_token}/verify",
-            body={
-                "account_token": account_token,
-                "micro_deposits": micro_deposits,
-            },
+            body=maybe_transform(
+                {
+                    "account_token": account_token,
+                    "micro_deposits": micro_deposits,
+                },
+                funding_source_verify_params.FundingSourceVerifyParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=FundingSource,
         )

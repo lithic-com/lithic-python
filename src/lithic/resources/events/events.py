@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Union
+from datetime import datetime
 from typing_extensions import Literal
 
-from ...types import Event
+from ...types import Event, event_list_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from .subscriptions import Subscriptions, AsyncSubscriptions
@@ -45,8 +47,8 @@ class Events(SyncAPIResource):
     def list(
         self,
         *,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
@@ -89,14 +91,17 @@ class Events(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "begin": begin,
-                    "end": end,
-                    "page_size": page_size,
-                    "starting_after": starting_after,
-                    "ending_before": ending_before,
-                    "event_types": event_types,
-                },
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                        "ending_before": ending_before,
+                        "event_types": event_types,
+                    },
+                    event_list_params.EventListParams,
+                ),
             ),
             model=Event,
         )
@@ -145,8 +150,8 @@ class AsyncEvents(AsyncAPIResource):
     def list(
         self,
         *,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
@@ -189,14 +194,17 @@ class AsyncEvents(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "begin": begin,
-                    "end": end,
-                    "page_size": page_size,
-                    "starting_after": starting_after,
-                    "ending_before": ending_before,
-                    "event_types": event_types,
-                },
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                        "ending_before": ending_before,
+                        "event_types": event_types,
+                    },
+                    event_list_params.EventListParams,
+                ),
             ),
             model=Event,
         )

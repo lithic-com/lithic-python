@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import traceback
 from typing import Any, TypeVar, cast
+from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
 from lithic._utils import is_dict, is_list, is_list_type, is_union_type
@@ -37,8 +38,12 @@ def assert_matches_type(type_: Any, value: object, *, path: list[str]) -> None:
         assert isinstance(value, bool)
     elif origin == float:
         assert isinstance(value, float)
+    elif origin == datetime:
+        assert isinstance(value, datetime)
+    elif origin == date:
+        assert isinstance(value, date)
     elif origin == object:
-        # nothing to do here, type expected type is unknown
+        # nothing to do here, the expected type is unknown
         pass
     elif origin == Literal:
         assert value in get_args(type_)

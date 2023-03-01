@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import Optional
+from datetime import datetime
 
 from .._models import BaseModel
 
@@ -20,7 +21,7 @@ class EmbedRequestParams(BaseModel):
     the client's branding.
     """
 
-    expiration: Optional[str]
+    expiration: Optional[datetime]
     """An ISO 8601 timestamp for when the request should expire. UTC time zone.
 
     If no timezone is specified, UTC will be used. If payload does not contain an

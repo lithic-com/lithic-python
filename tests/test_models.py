@@ -1,4 +1,5 @@
 from typing import Any, Dict, List, Union, Optional, cast
+from datetime import datetime, timezone
 from typing_extensions import Literal
 
 import pytest
@@ -362,3 +363,19 @@ def test_union_of_dict() -> None:
     assert m.data["hello"].name == "there"
     assert isinstance(m.data["foo"], SubModel1)
     assert cast(Any, m.data["foo"]).foo == "bar"
+
+
+def test_iso8601_datetime() -> None:
+    class Model(BaseModel):
+        created_at: datetime
+
+    expected = datetime(2019, 12, 27, 18, 11, 19, 117000, tzinfo=timezone.utc)
+    expected_json = '{"created_at": "2019-12-27T18:11:19.117000+00:00"}'
+
+    model = Model.construct(created_at="2019-12-27T18:11:19.117Z")
+    assert model.created_at == expected
+    assert model.json() == expected_json
+
+    model = Model.parse_obj(dict(created_at="2019-12-27T18:11:19.117Z"))
+    assert model.created_at == expected
+    assert model.json() == expected_json

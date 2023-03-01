@@ -12,8 +12,14 @@ from ..types import (
     AuthRuleRemoveResponse,
     AuthRuleUpdateResponse,
     AuthRuleRetrieveResponse,
+    auth_rule_list_params,
+    auth_rule_apply_params,
+    auth_rule_create_params,
+    auth_rule_remove_params,
+    auth_rule_update_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -81,16 +87,19 @@ class AuthRules(SyncAPIResource):
         """
         return self._post(
             "/auth_rules",
-            body={
-                "allowed_mcc": allowed_mcc,
-                "blocked_mcc": blocked_mcc,
-                "allowed_countries": allowed_countries,
-                "blocked_countries": blocked_countries,
-                "avs_type": avs_type,
-                "account_tokens": account_tokens,
-                "card_tokens": card_tokens,
-                "program_level": program_level,
-            },
+            body=maybe_transform(
+                {
+                    "allowed_mcc": allowed_mcc,
+                    "blocked_mcc": blocked_mcc,
+                    "allowed_countries": allowed_countries,
+                    "blocked_countries": blocked_countries,
+                    "avs_type": avs_type,
+                    "account_tokens": account_tokens,
+                    "card_tokens": card_tokens,
+                    "program_level": program_level,
+                },
+                auth_rule_create_params.AuthRuleCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleCreateResponse,
         )
@@ -161,13 +170,16 @@ class AuthRules(SyncAPIResource):
         """
         return self._put(
             f"/auth_rules/{auth_rule_token}",
-            body={
-                "allowed_mcc": allowed_mcc,
-                "blocked_mcc": blocked_mcc,
-                "allowed_countries": allowed_countries,
-                "blocked_countries": blocked_countries,
-                "avs_type": avs_type,
-            },
+            body=maybe_transform(
+                {
+                    "allowed_mcc": allowed_mcc,
+                    "blocked_mcc": blocked_mcc,
+                    "allowed_countries": allowed_countries,
+                    "blocked_countries": blocked_countries,
+                    "avs_type": avs_type,
+                },
+                auth_rule_update_params.AuthRuleUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleUpdateResponse,
         )
@@ -204,10 +216,13 @@ class AuthRules(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    auth_rule_list_params.AuthRuleListParams,
+                ),
             ),
             model=AuthRule,
         )
@@ -247,11 +262,14 @@ class AuthRules(SyncAPIResource):
         """
         return self._post(
             f"/auth_rules/{auth_rule_token}/apply",
-            body={
-                "card_tokens": card_tokens,
-                "account_tokens": account_tokens,
-                "program_level": program_level,
-            },
+            body=maybe_transform(
+                {
+                    "card_tokens": card_tokens,
+                    "account_tokens": account_tokens,
+                    "program_level": program_level,
+                },
+                auth_rule_apply_params.AuthRuleApplyParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleApplyResponse,
         )
@@ -290,11 +308,14 @@ class AuthRules(SyncAPIResource):
         """
         return self._delete(
             "/auth_rules/remove",
-            body={
-                "card_tokens": card_tokens,
-                "account_tokens": account_tokens,
-                "program_level": program_level,
-            },
+            body=maybe_transform(
+                {
+                    "card_tokens": card_tokens,
+                    "account_tokens": account_tokens,
+                    "program_level": program_level,
+                },
+                auth_rule_remove_params.AuthRuleRemoveParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleRemoveResponse,
         )
@@ -360,16 +381,19 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return await self._post(
             "/auth_rules",
-            body={
-                "allowed_mcc": allowed_mcc,
-                "blocked_mcc": blocked_mcc,
-                "allowed_countries": allowed_countries,
-                "blocked_countries": blocked_countries,
-                "avs_type": avs_type,
-                "account_tokens": account_tokens,
-                "card_tokens": card_tokens,
-                "program_level": program_level,
-            },
+            body=maybe_transform(
+                {
+                    "allowed_mcc": allowed_mcc,
+                    "blocked_mcc": blocked_mcc,
+                    "allowed_countries": allowed_countries,
+                    "blocked_countries": blocked_countries,
+                    "avs_type": avs_type,
+                    "account_tokens": account_tokens,
+                    "card_tokens": card_tokens,
+                    "program_level": program_level,
+                },
+                auth_rule_create_params.AuthRuleCreateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleCreateResponse,
         )
@@ -440,13 +464,16 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return await self._put(
             f"/auth_rules/{auth_rule_token}",
-            body={
-                "allowed_mcc": allowed_mcc,
-                "blocked_mcc": blocked_mcc,
-                "allowed_countries": allowed_countries,
-                "blocked_countries": blocked_countries,
-                "avs_type": avs_type,
-            },
+            body=maybe_transform(
+                {
+                    "allowed_mcc": allowed_mcc,
+                    "blocked_mcc": blocked_mcc,
+                    "allowed_countries": allowed_countries,
+                    "blocked_countries": blocked_countries,
+                    "avs_type": avs_type,
+                },
+                auth_rule_update_params.AuthRuleUpdateParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleUpdateResponse,
         )
@@ -483,10 +510,13 @@ class AsyncAuthRules(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    auth_rule_list_params.AuthRuleListParams,
+                ),
             ),
             model=AuthRule,
         )
@@ -526,11 +556,14 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return await self._post(
             f"/auth_rules/{auth_rule_token}/apply",
-            body={
-                "card_tokens": card_tokens,
-                "account_tokens": account_tokens,
-                "program_level": program_level,
-            },
+            body=maybe_transform(
+                {
+                    "card_tokens": card_tokens,
+                    "account_tokens": account_tokens,
+                    "program_level": program_level,
+                },
+                auth_rule_apply_params.AuthRuleApplyParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleApplyResponse,
         )
@@ -569,11 +602,14 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return await self._delete(
             "/auth_rules/remove",
-            body={
-                "card_tokens": card_tokens,
-                "account_tokens": account_tokens,
-                "program_level": program_level,
-            },
+            body=maybe_transform(
+                {
+                    "card_tokens": card_tokens,
+                    "account_tokens": account_tokens,
+                    "program_level": program_level,
+                },
+                auth_rule_remove_params.AuthRuleRemoveParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=AuthRuleRemoveResponse,
         )

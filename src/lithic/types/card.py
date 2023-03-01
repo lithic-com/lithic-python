@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from ..types import funding_source, spend_limit_duration
@@ -10,7 +11,7 @@ __all__ = ["Card"]
 
 
 class Card(BaseModel):
-    created: str
+    created: datetime
     """An ISO 8601 timestamp for when the card was created. UTC time zone."""
 
     funding: funding_source.FundingSource

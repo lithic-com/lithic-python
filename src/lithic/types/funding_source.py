@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -9,7 +10,7 @@ __all__ = ["FundingSource"]
 
 
 class FundingSource(BaseModel):
-    created: str
+    created: datetime
     """
     An ISO 8601 string representing when this funding source was added to the Lithic
     account. This may be `null`. UTC time zone.

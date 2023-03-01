@@ -2,6 +2,7 @@ from ._utils import flatten as flatten
 from ._utils import is_dict as is_dict
 from ._utils import is_list as is_list
 from ._utils import is_mapping as is_mapping
+from ._utils import parse_date as parse_date
 from ._utils import coerce_float as coerce_float
 from ._utils import is_list_type as is_list_type
 from ._utils import removeprefix as removeprefix
@@ -11,6 +12,7 @@ from ._utils import is_union_type as is_union_type
 from ._utils import required_args as required_args
 from ._utils import coerce_boolean as coerce_boolean
 from ._utils import coerce_integer as coerce_integer
+from ._utils import parse_datetime as parse_datetime
 from ._utils import strip_not_given as strip_not_given
 from ._utils import deepcopy_minimal as deepcopy_minimal
 from ._utils import extract_type_arg as extract_type_arg

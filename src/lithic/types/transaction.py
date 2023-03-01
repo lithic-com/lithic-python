@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field
@@ -118,7 +119,7 @@ class Event(BaseModel):
     amount: int
     """Amount of the transaction event (in cents), including any acquirer fees."""
 
-    created: str
+    created: datetime
     """ISO 8601 date and time this event entered the system. UTC time zone."""
 
     result: Literal[
@@ -277,7 +278,7 @@ class Transaction(BaseModel):
 
     cardholder_authentication: Optional[CardholderAuthentication]
 
-    created: Optional[str]
+    created: Optional[datetime]
     """Date and time when the transaction first occurred. UTC time zone."""
 
     events: Optional[List[Event]]

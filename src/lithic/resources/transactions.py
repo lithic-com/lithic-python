@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import datetime
 from typing_extensions import Literal
 
 from ..types import (
@@ -12,8 +14,16 @@ from ..types import (
     TransactionSimulateAuthorizationResponse,
     TransactionSimulateReturnReversalResponse,
     TransactionSimulateCreditAuthorizationResponse,
+    transaction_list_params,
+    transaction_simulate_void_params,
+    transaction_simulate_return_params,
+    transaction_simulate_clearing_params,
+    transaction_simulate_authorization_params,
+    transaction_simulate_return_reversal_params,
+    transaction_simulate_credit_authorization_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncPage, AsyncPage
 from .._base_client import AsyncPaginator, make_request_options
@@ -45,8 +55,8 @@ class Transactions(SyncAPIResource):
         account_token: str | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -89,15 +99,18 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "account_token": account_token,
-                    "card_token": card_token,
-                    "result": result,
-                    "begin": begin,
-                    "end": end,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "card_token": card_token,
+                        "result": result,
+                        "begin": begin,
+                        "end": end,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    transaction_list_params.TransactionListParams,
+                ),
             ),
             model=Transaction,
         )
@@ -187,17 +200,20 @@ class Transactions(SyncAPIResource):
         """
         return self._post(
             "/simulate/authorize",
-            body={
-                "amount": amount,
-                "descriptor": descriptor,
-                "pan": pan,
-                "status": status,
-                "merchant_acceptor_id": merchant_acceptor_id,
-                "merchant_currency": merchant_currency,
-                "merchant_amount": merchant_amount,
-                "mcc": mcc,
-                "partial_approval_capable": partial_approval_capable,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                    "status": status,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_currency": merchant_currency,
+                    "merchant_amount": merchant_amount,
+                    "mcc": mcc,
+                    "partial_approval_capable": partial_approval_capable,
+                },
+                transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateAuthorizationResponse,
         )
@@ -240,10 +256,13 @@ class Transactions(SyncAPIResource):
         """
         return self._post(
             "/simulate/clearing",
-            body={
-                "amount": amount,
-                "token": token,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "token": token,
+                },
+                transaction_simulate_clearing_params.TransactionSimulateClearingParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateClearingResponse,
         )
@@ -291,13 +310,16 @@ class Transactions(SyncAPIResource):
         """
         return self._post(
             "/simulate/credit_authorization_advice",
-            body={
-                "amount": amount,
-                "descriptor": descriptor,
-                "pan": pan,
-                "merchant_acceptor_id": merchant_acceptor_id,
-                "mcc": mcc,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                    "mcc": mcc,
+                },
+                transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
         )
@@ -334,11 +356,14 @@ class Transactions(SyncAPIResource):
         """
         return self._post(
             "/simulate/return",
-            body={
-                "amount": amount,
-                "descriptor": descriptor,
-                "pan": pan,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                },
+                transaction_simulate_return_params.TransactionSimulateReturnParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateReturnResponse,
         )
@@ -369,7 +394,9 @@ class Transactions(SyncAPIResource):
         """
         return self._post(
             "/simulate/return_reversal",
-            body={"token": token},
+            body=maybe_transform(
+                {"token": token}, transaction_simulate_return_reversal_params.TransactionSimulateReturnReversalParams
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateReturnReversalResponse,
         )
@@ -414,11 +441,14 @@ class Transactions(SyncAPIResource):
         """
         return self._post(
             "/simulate/void",
-            body={
-                "amount": amount,
-                "token": token,
-                "type": type,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "token": token,
+                    "type": type,
+                },
+                transaction_simulate_void_params.TransactionSimulateVoidParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateVoidResponse,
         )
@@ -448,8 +478,8 @@ class AsyncTransactions(AsyncAPIResource):
         account_token: str | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        begin: str | NotGiven = NOT_GIVEN,
-        end: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -492,15 +522,18 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
-                query={
-                    "account_token": account_token,
-                    "card_token": card_token,
-                    "result": result,
-                    "begin": begin,
-                    "end": end,
-                    "page": page,
-                    "page_size": page_size,
-                },
+                query=maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "card_token": card_token,
+                        "result": result,
+                        "begin": begin,
+                        "end": end,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    transaction_list_params.TransactionListParams,
+                ),
             ),
             model=Transaction,
         )
@@ -590,17 +623,20 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/authorize",
-            body={
-                "amount": amount,
-                "descriptor": descriptor,
-                "pan": pan,
-                "status": status,
-                "merchant_acceptor_id": merchant_acceptor_id,
-                "merchant_currency": merchant_currency,
-                "merchant_amount": merchant_amount,
-                "mcc": mcc,
-                "partial_approval_capable": partial_approval_capable,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                    "status": status,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_currency": merchant_currency,
+                    "merchant_amount": merchant_amount,
+                    "mcc": mcc,
+                    "partial_approval_capable": partial_approval_capable,
+                },
+                transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateAuthorizationResponse,
         )
@@ -643,10 +679,13 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/clearing",
-            body={
-                "amount": amount,
-                "token": token,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "token": token,
+                },
+                transaction_simulate_clearing_params.TransactionSimulateClearingParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateClearingResponse,
         )
@@ -694,13 +733,16 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/credit_authorization_advice",
-            body={
-                "amount": amount,
-                "descriptor": descriptor,
-                "pan": pan,
-                "merchant_acceptor_id": merchant_acceptor_id,
-                "mcc": mcc,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                    "mcc": mcc,
+                },
+                transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
         )
@@ -737,11 +779,14 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/return",
-            body={
-                "amount": amount,
-                "descriptor": descriptor,
-                "pan": pan,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                },
+                transaction_simulate_return_params.TransactionSimulateReturnParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateReturnResponse,
         )
@@ -772,7 +817,9 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/return_reversal",
-            body={"token": token},
+            body=maybe_transform(
+                {"token": token}, transaction_simulate_return_reversal_params.TransactionSimulateReturnReversalParams
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateReturnReversalResponse,
         )
@@ -817,11 +864,14 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/void",
-            body={
-                "amount": amount,
-                "token": token,
-                "type": type,
-            },
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "token": token,
+                    "type": type,
+                },
+                transaction_simulate_void_params.TransactionSimulateVoidParams,
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=TransactionSimulateVoidResponse,
         )

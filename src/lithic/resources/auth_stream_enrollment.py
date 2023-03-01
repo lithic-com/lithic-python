@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from ..types import AuthStreamEnrollment
+from ..types import AuthStreamEnrollment, auth_stream_enrollment_enroll_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 
@@ -81,7 +82,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         """
         return self._post(
             "/auth_stream",
-            body={"webhook_url": webhook_url},
+            body=maybe_transform(
+                {"webhook_url": webhook_url}, auth_stream_enrollment_enroll_params.AuthStreamEnrollmentEnrollParams
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=NoneType,
         )
@@ -158,7 +161,9 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         """
         return await self._post(
             "/auth_stream",
-            body={"webhook_url": webhook_url},
+            body=maybe_transform(
+                {"webhook_url": webhook_url}, auth_stream_enrollment_enroll_params.AuthStreamEnrollmentEnrollParams
+            ),
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=NoneType,
         )
