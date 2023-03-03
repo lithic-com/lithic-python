@@ -328,15 +328,19 @@ class BaseClient:
     ) -> int:
         return remaining_retries if remaining_retries is not None else options.get_max_retries(self.max_retries)
 
-    def _build_headers(self, options: FinalRequestOptions) -> dict[str, str]:
+    def _build_headers(self, options: FinalRequestOptions) -> httpx.Headers:
         custom_headers = options.headers or {}
-        headers = _merge_mappings(self.default_headers, custom_headers)
-        self._validate_headers(headers, custom_headers)
+        headers_dict = _merge_mappings(self.default_headers, custom_headers)
+        self._validate_headers(headers_dict, custom_headers)
 
-        if self._idempotency_header and options.method.lower() != "get":
+        headers = httpx.Headers(headers_dict)
+
+        idempotency_header = self._idempotency_header
+        if idempotency_header and options.method.lower() != "get" and idempotency_header not in headers:
             if not options.idempotency_key:
                 options.idempotency_key = self._idempotency_key()
-            headers[self._idempotency_header] = options.idempotency_key
+
+            headers[idempotency_header] = options.idempotency_key
 
         return headers
 
