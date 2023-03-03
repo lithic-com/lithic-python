@@ -12,7 +12,6 @@ from datetime import datetime, timezone, timedelta
 from .._types import HeadersLike
 from .._utils import removeprefix
 from .._resource import SyncAPIResource, AsyncAPIResource
-from ..types.event import Event
 
 __all__ = ["Webhooks", "AsyncWebhooks"]
 
@@ -24,10 +23,10 @@ class Webhooks(SyncAPIResource):
         headers: HeadersLike,
         *,
         secret: str | None = None,
-    ) -> Event:
+    ) -> object:
         """Validates that the given payload was sent by Lithic and parses the payload."""
         self.verify_signature(payload=payload, headers=headers, secret=secret)
-        return Event.construct(**json.loads(payload))
+        return json.loads(payload)
 
     def verify_signature(
         self,
@@ -119,10 +118,10 @@ class AsyncWebhooks(AsyncAPIResource):
         headers: HeadersLike,
         *,
         secret: str | None = None,
-    ) -> Event:
+    ) -> object:
         """Validates that the given payload was sent by Lithic and parses the payload."""
         self.verify_signature(payload=payload, headers=headers, secret=secret)
-        return Event.construct(**json.loads(payload))
+        return json.loads(payload)
 
     def verify_signature(
         self,
