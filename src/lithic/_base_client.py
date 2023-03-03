@@ -669,10 +669,11 @@ class SyncAPIClient(BaseClient):
     ) -> ResponseT:
         remaining = remaining_retries - 1
         timeout = self.calculate_retry_timeout(remaining, options, response_headers)
-        print(f"Retry request in {timeout} seconds")
+
         # In a synchronous context we are blocking the entire thread. Up to the library user to run the client in a
         # different thread if necessary.
         time.sleep(timeout)
+
         return self.request(
             options=options,
             cast_to=cast_to,
@@ -845,7 +846,6 @@ class AsyncAPIClient(BaseClient):
     ) -> ResponseT:
         remaining = remaining_retries - 1
         timeout = self.calculate_retry_timeout(remaining, options, response_headers)
-        print(f"Retry request in {timeout} seconds")
         await anyio.sleep(timeout)
         return await self.request(
             options=options,
