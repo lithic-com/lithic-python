@@ -127,6 +127,8 @@ class Lithic(SyncAPIClient):
         webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
         self.webhook_secret = webhook_secret or webhook_secret_envvar or None
 
+        self._idempotency_header = "Idempotency-Token"
+
         self.accounts = resources.Accounts(self)
         self.account_holders = resources.AccountHolders(self)
         self.auth_rules = resources.AuthRules(self)
@@ -294,6 +296,8 @@ class AsyncLithic(AsyncAPIClient):
 
         webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
         self.webhook_secret = webhook_secret or webhook_secret_envvar or None
+
+        self._idempotency_header = "Idempotency-Token"
 
         self.accounts = resources.AsyncAccounts(self)
         self.account_holders = resources.AsyncAccountHolders(self)
