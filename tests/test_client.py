@@ -22,7 +22,7 @@ api_key = os.environ.get("API_KEY", "something1234")
 
 
 def _get_params(client: BaseClient) -> dict[str, str]:
-    request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+    request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
     url = httpx.URL(request.url)
     return dict(url.params)
 
@@ -167,7 +167,7 @@ class TestLithic:
         client = Lithic(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
-        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
@@ -180,13 +180,13 @@ class TestLithic:
                 "X-Stainless-Lang": "my-overriding-header",
             },
         )
-        request = client2.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
         client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(
@@ -194,17 +194,17 @@ class TestLithic:
             match="The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable",
         ):
             client2 = Lithic(base_url=base_url, api_key=None, _strict_response_validation=True)
-            client2.build_request(FinalRequestOptions(method="get", url="/foo"))
+            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
 
     def test_default_query_option(self) -> None:
         client = Lithic(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
-        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
         assert dict(url.params) == {"query_param": "bar"}
 
-        request = client.build_request(
+        request = client._build_request(
             FinalRequestOptions(
                 method="get",
                 url="/foo",
@@ -215,7 +215,7 @@ class TestLithic:
         assert dict(url.params) == {"foo": "baz", "query_param": "overriden"}
 
     def test_request_extra_json(self) -> None:
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -226,7 +226,7 @@ class TestLithic:
         data = json.loads(request.content.decode("utf-8"))
         assert data == {"foo": "bar", "baz": False}
 
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -237,7 +237,7 @@ class TestLithic:
         assert data == {"baz": False}
 
         # `extra_json` takes priority over `json_data` when keys clash
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -249,7 +249,7 @@ class TestLithic:
         assert data == {"foo": "bar", "baz": None}
 
     def test_request_extra_headers(self) -> None:
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -259,7 +259,7 @@ class TestLithic:
         assert request.headers.get("X-Foo") == "Foo"
 
         # `extra_headers` takes priority over `default_headers` when keys clash
-        request = self.client.with_options(default_headers={"X-Bar": "true"}).build_request(
+        request = self.client.with_options(default_headers={"X-Bar": "true"})._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -271,7 +271,7 @@ class TestLithic:
         assert request.headers.get("X-Bar") == "false"
 
     def test_request_extra_query(self) -> None:
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -284,7 +284,7 @@ class TestLithic:
         assert params == {"my_query_param": "Foo"}
 
         # if both `query` and `extra_query` are given, they are merged
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -298,7 +298,7 @@ class TestLithic:
         assert params == {"bar": "1", "foo": "2"}
 
         # `extra_query` takes priority over `query` when keys clash
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -494,7 +494,7 @@ class TestAsyncLithic:
         client = AsyncLithic(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
-        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
@@ -507,13 +507,13 @@ class TestAsyncLithic:
                 "X-Stainless-Lang": "my-overriding-header",
             },
         )
-        request = client2.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
         client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(
@@ -521,17 +521,17 @@ class TestAsyncLithic:
             match="The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable",
         ):
             client2 = AsyncLithic(base_url=base_url, api_key=None, _strict_response_validation=True)
-            client2.build_request(FinalRequestOptions(method="get", url="/foo"))
+            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
 
     def test_default_query_option(self) -> None:
         client = AsyncLithic(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
-        request = client.build_request(FinalRequestOptions(method="get", url="/foo"))
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
         assert dict(url.params) == {"query_param": "bar"}
 
-        request = client.build_request(
+        request = client._build_request(
             FinalRequestOptions(
                 method="get",
                 url="/foo",
@@ -542,7 +542,7 @@ class TestAsyncLithic:
         assert dict(url.params) == {"foo": "baz", "query_param": "overriden"}
 
     def test_request_extra_json(self) -> None:
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -553,7 +553,7 @@ class TestAsyncLithic:
         data = json.loads(request.content.decode("utf-8"))
         assert data == {"foo": "bar", "baz": False}
 
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -564,7 +564,7 @@ class TestAsyncLithic:
         assert data == {"baz": False}
 
         # `extra_json` takes priority over `json_data` when keys clash
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -576,7 +576,7 @@ class TestAsyncLithic:
         assert data == {"foo": "bar", "baz": None}
 
     def test_request_extra_headers(self) -> None:
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -586,7 +586,7 @@ class TestAsyncLithic:
         assert request.headers.get("X-Foo") == "Foo"
 
         # `extra_headers` takes priority over `default_headers` when keys clash
-        request = self.client.with_options(default_headers={"X-Bar": "true"}).build_request(
+        request = self.client.with_options(default_headers={"X-Bar": "true"})._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -598,7 +598,7 @@ class TestAsyncLithic:
         assert request.headers.get("X-Bar") == "false"
 
     def test_request_extra_query(self) -> None:
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -611,7 +611,7 @@ class TestAsyncLithic:
         assert params == {"my_query_param": "Foo"}
 
         # if both `query` and `extra_query` are given, they are merged
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",
@@ -625,7 +625,7 @@ class TestAsyncLithic:
         assert params == {"bar": "1", "foo": "2"}
 
         # `extra_query` takes priority over `query` when keys clash
-        request = self.client.build_request(
+        request = self.client._build_request(
             FinalRequestOptions(
                 method="post",
                 url="/foo",

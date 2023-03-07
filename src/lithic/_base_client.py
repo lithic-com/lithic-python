@@ -193,7 +193,7 @@ class BaseSyncPage(BasePage[ModelT], Generic[ModelT]):
             )
 
         options = self._info_to_options(info)
-        return self._client.request_api_list(self._model, page=self.__class__, options=options)
+        return self._client._request_api_list(self._model, page=self.__class__, options=options)
 
 
 class AsyncPaginator(Generic[ModelT, AsyncPageT]):
@@ -266,7 +266,7 @@ class BaseAsyncPage(BasePage[ModelT], Generic[ModelT]):
             )
 
         options = self._info_to_options(info)
-        return await self._client.request_api_list(self._model, page=self.__class__, options=options)
+        return await self._client._request_api_list(self._model, page=self.__class__, options=options)
 
 
 class BaseClient:
@@ -326,7 +326,7 @@ class BaseClient:
             return exceptions.InternalServerError(err_msg, request=request, response=response, body=body)
         return APIStatusError(err_msg, request=request, response=response, body=body)
 
-    def remaining_retries(
+    def _remaining_retries(
         self,
         remaining_retries: Optional[int],
         options: FinalRequestOptions,
@@ -349,7 +349,7 @@ class BaseClient:
 
         return headers
 
-    def build_request(
+    def _build_request(
         self,
         options: FinalRequestOptions,
     ) -> httpx.Request:
@@ -415,7 +415,7 @@ class BaseClient:
             serialized[key] = value
         return serialized
 
-    def process_response(
+    def _process_response(
         self,
         *,
         cast_to: Type[ResponseT],
@@ -436,7 +436,7 @@ class BaseClient:
                 try:
                     return cast(
                         ResponseT,
-                        self.process_response(cast_to=member, options=options, response=response, _strict=True),
+                        self._process_response(cast_to=member, options=options, response=response, _strict=True),
                     )
                 except Exception:
                     continue
@@ -444,7 +444,7 @@ class BaseClient:
             # If nobody matches exactly, try again loosely.
             for member in members:
                 try:
-                    return cast(ResponseT, self.process_response(cast_to=member, options=options, response=response))
+                    return cast(ResponseT, self._process_response(cast_to=member, options=options, response=response))
                 except Exception:
                     continue
 
@@ -544,7 +544,7 @@ class BaseClient:
             "X-Stainless-Runtime-Version": platform.python_version(),
         }
 
-    def calculate_retry_timeout(
+    def _calculate_retry_timeout(
         self,
         remaining_retries: int,
         options: FinalRequestOptions,
@@ -577,7 +577,7 @@ class BaseClient:
         timeout = sleep_seconds + jitter
         return timeout if timeout >= 0 else 0
 
-    def should_retry(self, response: httpx.Response) -> bool:
+    def _should_retry(self, response: httpx.Response) -> bool:
         # Note: this is not a standard header
         should_retry_header = response.headers.get("x-should-retry")
 
@@ -647,33 +647,33 @@ class SyncAPIClient(BaseClient):
         options: FinalRequestOptions,
         remaining_retries: Optional[int] = None,
     ) -> ResponseT:
-        retries = self.remaining_retries(remaining_retries, options)
-        request = self.build_request(options)
+        retries = self._remaining_retries(remaining_retries, options)
+        request = self._build_request(options)
 
         try:
             response = self._client.send(request, auth=self.custom_auth)
             response.raise_for_status()
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
-            if retries > 0 and self.should_retry(err.response):
-                return self.retry_request(options, cast_to, retries, err.response.headers)
+            if retries > 0 and self._should_retry(err.response):
+                return self._retry_request(options, cast_to, retries, err.response.headers)
             raise self._make_status_error(request, err.response) from None
         except httpx.TimeoutException as err:
             if retries > 0:
-                return self.retry_request(options, cast_to, retries)
+                return self._retry_request(options, cast_to, retries)
             raise APITimeoutError(request=request) from err
         except Exception as err:
             if retries > 0:
-                return self.retry_request(options, cast_to, retries)
+                return self._retry_request(options, cast_to, retries)
             raise APIConnectionError(request=request) from err
 
         try:
-            rsp = self.process_response(cast_to=cast_to, options=options, response=response)
+            rsp = self._process_response(cast_to=cast_to, options=options, response=response)
         except pydantic.ValidationError as err:
             raise APIResponseValidationError(request=request, response=response) from err
 
         return rsp
 
-    def retry_request(
+    def _retry_request(
         self,
         options: FinalRequestOptions,
         cast_to: Type[ResponseT],
@@ -681,7 +681,7 @@ class SyncAPIClient(BaseClient):
         response_headers: Optional[httpx.Headers] = None,
     ) -> ResponseT:
         remaining = remaining_retries - 1
-        timeout = self.calculate_retry_timeout(remaining, options, response_headers)
+        timeout = self._calculate_retry_timeout(remaining, options, response_headers)
 
         # In a synchronous context we are blocking the entire thread. Up to the library user to run the client in a
         # different thread if necessary.
@@ -693,7 +693,7 @@ class SyncAPIClient(BaseClient):
             remaining_retries=remaining,
         )
 
-    def request_api_list(
+    def _request_api_list(
         self,
         model: Type[ModelT],
         page: Type[SyncPageT],
@@ -773,7 +773,7 @@ class SyncAPIClient(BaseClient):
         method: str = "get",
     ) -> SyncPageT:
         opts = FinalRequestOptions.construct(method=method, url=path, json_data=body, **options)
-        return self.request_api_list(model, page, opts)
+        return self._request_api_list(model, page, opts)
 
 
 class AsyncAPIClient(BaseClient):
@@ -818,19 +818,19 @@ class AsyncAPIClient(BaseClient):
         options: FinalRequestOptions,
         remaining_retries: Optional[int] = None,
     ) -> ResponseT:
-        retries = self.remaining_retries(remaining_retries, options)
-        request = self.build_request(options)
+        retries = self._remaining_retries(remaining_retries, options)
+        request = self._build_request(options)
 
         try:
             response = await self._client.send(request, auth=self.custom_auth)
             response.raise_for_status()
         except httpx.HTTPStatusError as err:  # thrown on 4xx and 5xx status code
-            if retries > 0 and self.should_retry(err.response):
-                return await self.retry_request(options, cast_to, retries, err.response.headers)
+            if retries > 0 and self._should_retry(err.response):
+                return await self._retry_request(options, cast_to, retries, err.response.headers)
             raise self._make_status_error(request, err.response) from None
         except httpx.ConnectTimeout as err:
             if retries > 0:
-                return await self.retry_request(options, cast_to, retries)
+                return await self._retry_request(options, cast_to, retries)
             raise APITimeoutError(request=request) from err
         except httpx.ReadTimeout as err:
             # We explicitly do not retry on ReadTimeout errors as this means
@@ -840,21 +840,21 @@ class AsyncAPIClient(BaseClient):
             raise
         except httpx.TimeoutException as err:
             if retries > 0:
-                return await self.retry_request(options, cast_to, retries)
+                return await self._retry_request(options, cast_to, retries)
             raise APITimeoutError(request=request) from err
         except Exception as err:
             if retries > 0:
-                return await self.retry_request(options, cast_to, retries)
+                return await self._retry_request(options, cast_to, retries)
             raise APIConnectionError(request=request) from err
 
         try:
-            rsp = self.process_response(cast_to=cast_to, options=options, response=response)
+            rsp = self._process_response(cast_to=cast_to, options=options, response=response)
         except pydantic.ValidationError as err:
             raise APIResponseValidationError(request=request, response=response) from err
 
         return rsp
 
-    async def retry_request(
+    async def _retry_request(
         self,
         options: FinalRequestOptions,
         cast_to: Type[ResponseT],
@@ -862,7 +862,7 @@ class AsyncAPIClient(BaseClient):
         response_headers: Optional[httpx.Headers] = None,
     ) -> ResponseT:
         remaining = remaining_retries - 1
-        timeout = self.calculate_retry_timeout(remaining, options, response_headers)
+        timeout = self._calculate_retry_timeout(remaining, options, response_headers)
         await anyio.sleep(timeout)
         return await self.request(
             options=options,
@@ -870,7 +870,7 @@ class AsyncAPIClient(BaseClient):
             remaining_retries=remaining,
         )
 
-    def request_api_list(
+    def _request_api_list(
         self,
         model: Type[ModelT],
         page: Type[AsyncPageT],
@@ -945,7 +945,7 @@ class AsyncAPIClient(BaseClient):
         method: str = "get",
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
         opts = FinalRequestOptions.construct(method=method, url=path, json_data=body, **options)
-        return self.request_api_list(model, page, opts)
+        return self._request_api_list(model, page, opts)
 
 
 def make_request_options(
