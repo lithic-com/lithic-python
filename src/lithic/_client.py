@@ -6,6 +6,8 @@ import os
 from typing import Dict, Union, Mapping, Optional
 from typing_extensions import Literal
 
+import httpx
+
 from . import resources
 from ._qs import Querystring
 from .types import APIStatus
@@ -22,6 +24,7 @@ from ._types import (
 )
 from ._version import __version__
 from ._base_client import (
+    DEFAULT_LIMITS,
     DEFAULT_TIMEOUT,
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -80,6 +83,8 @@ class Lithic(SyncAPIClient):
         transport: Optional[Transport] = None,
         # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
         proxies: Optional[ProxiesTypes] = None,
+        # See httpx documentation for [limits](https://www.python-httpx.org/advanced/#pool-limit-configuration)
+        limits: httpx.Limits | None = DEFAULT_LIMITS,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
         # if the API responds with invalid data for the expected schema.
@@ -117,6 +122,7 @@ class Lithic(SyncAPIClient):
             timeout=timeout,
             transport=transport,
             proxies=proxies,
+            limits=limits,
             custom_headers=default_headers,
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
@@ -155,6 +161,7 @@ class Lithic(SyncAPIClient):
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        limits: httpx.Limits | NotGiven = NOT_GIVEN,
         max_retries: int | NotGiven = NOT_GIVEN,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
@@ -192,6 +199,7 @@ class Lithic(SyncAPIClient):
             environment=environment or self._environment,
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
+            limits=self._limits if isinstance(limits, NotGiven) else limits,
             max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
             default_headers=headers,
             default_query=params,
@@ -250,6 +258,8 @@ class AsyncLithic(AsyncAPIClient):
         transport: Optional[Transport] = None,
         # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
         proxies: Optional[ProxiesTypes] = None,
+        # See httpx documentation for [limits](https://www.python-httpx.org/advanced/#pool-limit-configuration)
+        limits: httpx.Limits | None = DEFAULT_LIMITS,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
         # if the API responds with invalid data for the expected schema.
@@ -287,6 +297,7 @@ class AsyncLithic(AsyncAPIClient):
             timeout=timeout,
             transport=transport,
             proxies=proxies,
+            limits=limits,
             custom_headers=default_headers,
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
@@ -325,6 +336,7 @@ class AsyncLithic(AsyncAPIClient):
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        limits: httpx.Limits | NotGiven = NOT_GIVEN,
         max_retries: int | NotGiven = NOT_GIVEN,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
@@ -362,6 +374,7 @@ class AsyncLithic(AsyncAPIClient):
             environment=environment or self._environment,
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
+            limits=self._limits if isinstance(limits, NotGiven) else limits,
             max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
             default_headers=headers,
             default_query=params,
