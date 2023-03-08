@@ -126,7 +126,7 @@ class BasePage(GenericModel, Generic[ModelT]):
     def next_page_info(self) -> Optional[PageInfo]:
         ...
 
-    def _get_page_items(self) -> Iterable[ModelT]:
+    def _get_page_items(self) -> Iterable[ModelT]:  # type: ignore[empty-body]
         ...
 
     def _params_from_url(self, url: URL) -> httpx.QueryParams:
@@ -436,7 +436,12 @@ class BaseClient:
                 try:
                     return cast(
                         ResponseT,
-                        self._process_response(cast_to=member, options=options, response=response, _strict=True),
+                        self._process_response(
+                            cast_to=member,
+                            options=options,
+                            response=response,
+                            _strict=True,
+                        ),
                     )
                 except Exception:
                     continue
@@ -444,7 +449,10 @@ class BaseClient:
             # If nobody matches exactly, try again loosely.
             for member in members:
                 try:
-                    return cast(ResponseT, self._process_response(cast_to=member, options=options, response=response))
+                    return cast(
+                        ResponseT,
+                        self._process_response(cast_to=member, options=options, response=response),
+                    )
                 except Exception:
                     continue
 
