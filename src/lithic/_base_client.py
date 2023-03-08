@@ -304,7 +304,7 @@ class BaseClient:
 
         try:
             body = json.loads(err_text)
-            err_msg = f"Error code: {response.status_code}"
+            err_msg = f"Error code: {response.status_code} - {body}"
         except Exception:
             err_msg = err_text or f"Error code: {response.status_code}"
 
