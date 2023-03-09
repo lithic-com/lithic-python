@@ -39,21 +39,21 @@ class Cards(SyncAPIResource):
     def create(
         self,
         *,
+        type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
-        spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
-        type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         pin: str | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
+        spend_limit: int | NotGiven = NOT_GIVEN,
+        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
+        state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -66,6 +66,21 @@ class Cards(SyncAPIResource):
         `product_id` only apply to physical cards.
 
         Args:
+          type:
+              Card types:
+
+              - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
+                wallet like Apple Pay or Google Pay (if the card program is digital
+                wallet-enabled).
+              - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
+                branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
+                Reach out at [lithic.com/contact](https://lithic.com/contact) for more
+                information.
+              - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
+                successfully authorizes the card.
+              - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
+                authorization.
+
           account_token: Only required for multi-account users. Token identifying the account the card
               will be associated with. Only applicable if using account holder enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
@@ -78,6 +93,11 @@ class Cards(SyncAPIResource):
               00000000-0000-0000-2000-000000000000 to test creating cards on specific card
               programs.
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date will be generated.
 
@@ -89,6 +109,24 @@ class Cards(SyncAPIResource):
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
+
+          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
+              `VIRTUAL`. See
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
+
+          product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
+              before use. Specifies the configuration (i.e., physical card art) that the card
+              should be manufactured with.
+
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
+              of options besides `STANDARD` require additional permissions.
+
+              - `STANDARD` - USPS regular mail or similar international option, with no
+                tracking
+              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
+                with tracking
+              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+                tracking
 
           spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
               the spend limit will be declined. Note that a spend limit of 0 is effectively no
@@ -115,44 +153,6 @@ class Cards(SyncAPIResource):
                 parameters).
               - `PAUSED` - Card will decline authorizations, but can be resumed at a later
                 time.
-
-          type:
-              Card types:
-
-              - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
-                wallet like Apple Pay or Google Pay (if the card program is digital
-                wallet-enabled).
-              - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
-                branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
-                Reach out at [lithic.com/contact](https://lithic.com/contact) for more
-                information.
-              - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
-                successfully authorizes the card.
-              - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
-                authorization.
-
-          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
-              `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
-
-          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
-              after tokenization. This artwork must be approved by Mastercard and configured
-              by Lithic to use. See
-              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
-
-          product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
-              before use. Specifies the configuration (i.e., physical card art) that the card
-              should be manufactured with.
-
-          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
-              of options besides `STANDARD` require additional permissions.
-
-              - `STANDARD` - USPS regular mail or similar international option, with no
-                tracking
-              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
-                with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
-                tracking
 
           extra_headers: Send extra headers
 
@@ -228,14 +228,14 @@ class Cards(SyncAPIResource):
         card_token: str,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
+        auth_rule_token: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
+        pin: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -256,11 +256,23 @@ class Cards(SyncAPIResource):
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
 
+          auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
+              with the card.
+
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           funding_token: The token for the desired `FundingAccount` to use when making transactions with
               this card.
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
+
+          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
+              `VIRTUAL`. See
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
           spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
               the spend limit will be declined. Note that a spend limit of 0 is effectively no
@@ -280,9 +292,6 @@ class Cards(SyncAPIResource):
               - `TRANSACTION` - Card will authorize multiple transactions if each individual
                 transaction is under the spend limit.
 
-          auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
-              with the card.
-
           state:
               Card state values:
 
@@ -292,15 +301,6 @@ class Cards(SyncAPIResource):
                 parameters).
               - `PAUSED` - Card will decline authorizations, but can be resumed at a later
                 time.
-
-          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
-              `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
-
-          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
-              after tokenization. This artwork must be approved by Mastercard and configured
-              by Lithic to use. See
-              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
           extra_headers: Send extra headers
 
@@ -574,11 +574,11 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
+        account_token: str | NotGiven = NOT_GIVEN,
+        certificate: str | NotGiven = NOT_GIVEN,
         digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
         nonce: str | NotGiven = NOT_GIVEN,
         nonce_signature: str | NotGiven = NOT_GIVEN,
-        certificate: str | NotGiven = NOT_GIVEN,
-        account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -594,6 +594,15 @@ class Cards(SyncAPIResource):
         for more information.
 
         Args:
+          account_token: Only required for multi-account users. Token identifying the account the card
+              will be associated with. Only applicable if using account holder enrollment. See
+              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+              more information.
+
+          certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
+              format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
+              Provided by the device's wallet.
+
           digital_wallet: Name of digital wallet provider.
 
           nonce: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
@@ -601,15 +610,6 @@ class Cards(SyncAPIResource):
 
           nonce_signature: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
               wallet.
-
-          certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
-              format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
-              Provided by the device's wallet.
-
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
 
           extra_headers: Send extra headers
 
@@ -637,9 +637,9 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
+        product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -652,6 +652,10 @@ class Cards(SyncAPIResource):
         Only applies to cards of type `PHYSICAL` [beta].
 
         Args:
+          product_id: Specifies the configuration (e.g. physical card art) that the card should be
+              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
+              must be configured with Lithic before use.
+
           shipping_address: If omitted, the previous shipping address will be used.
 
           shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
@@ -663,10 +667,6 @@ class Cards(SyncAPIResource):
                 with tracking
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
-
-          product_id: Specifies the configuration (e.g. physical card art) that the card should be
-              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
-              must be configured with Lithic before use.
 
           extra_headers: Send extra headers
 
@@ -693,21 +693,21 @@ class AsyncCards(AsyncAPIResource):
     async def create(
         self,
         *,
+        type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
-        spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
-        type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         pin: str | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
+        spend_limit: int | NotGiven = NOT_GIVEN,
+        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
+        state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -720,6 +720,21 @@ class AsyncCards(AsyncAPIResource):
         `product_id` only apply to physical cards.
 
         Args:
+          type:
+              Card types:
+
+              - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
+                wallet like Apple Pay or Google Pay (if the card program is digital
+                wallet-enabled).
+              - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
+                branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
+                Reach out at [lithic.com/contact](https://lithic.com/contact) for more
+                information.
+              - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
+                successfully authorizes the card.
+              - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
+                authorization.
+
           account_token: Only required for multi-account users. Token identifying the account the card
               will be associated with. Only applicable if using account holder enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
@@ -732,6 +747,11 @@ class AsyncCards(AsyncAPIResource):
               00000000-0000-0000-2000-000000000000 to test creating cards on specific card
               programs.
 
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date will be generated.
 
@@ -743,6 +763,24 @@ class AsyncCards(AsyncAPIResource):
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
+
+          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
+              `VIRTUAL`. See
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
+
+          product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
+              before use. Specifies the configuration (i.e., physical card art) that the card
+              should be manufactured with.
+
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
+              of options besides `STANDARD` require additional permissions.
+
+              - `STANDARD` - USPS regular mail or similar international option, with no
+                tracking
+              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
+                with tracking
+              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+                tracking
 
           spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
               the spend limit will be declined. Note that a spend limit of 0 is effectively no
@@ -769,44 +807,6 @@ class AsyncCards(AsyncAPIResource):
                 parameters).
               - `PAUSED` - Card will decline authorizations, but can be resumed at a later
                 time.
-
-          type:
-              Card types:
-
-              - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
-                wallet like Apple Pay or Google Pay (if the card program is digital
-                wallet-enabled).
-              - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
-                branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
-                Reach out at [lithic.com/contact](https://lithic.com/contact) for more
-                information.
-              - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
-                successfully authorizes the card.
-              - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
-                authorization.
-
-          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
-              `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
-
-          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
-              after tokenization. This artwork must be approved by Mastercard and configured
-              by Lithic to use. See
-              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
-
-          product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
-              before use. Specifies the configuration (i.e., physical card art) that the card
-              should be manufactured with.
-
-          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
-              of options besides `STANDARD` require additional permissions.
-
-              - `STANDARD` - USPS regular mail or similar international option, with no
-                tracking
-              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
-                with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
-                tracking
 
           extra_headers: Send extra headers
 
@@ -882,14 +882,14 @@ class AsyncCards(AsyncAPIResource):
         card_token: str,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
+        auth_rule_token: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
+        pin: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        auth_rule_token: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -910,11 +910,23 @@ class AsyncCards(AsyncAPIResource):
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
 
+          auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
+              with the card.
+
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
+              after tokenization. This artwork must be approved by Mastercard and configured
+              by Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
           funding_token: The token for the desired `FundingAccount` to use when making transactions with
               this card.
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
+
+          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
+              `VIRTUAL`. See
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
 
           spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
               the spend limit will be declined. Note that a spend limit of 0 is effectively no
@@ -934,9 +946,6 @@ class AsyncCards(AsyncAPIResource):
               - `TRANSACTION` - Card will authorize multiple transactions if each individual
                 transaction is under the spend limit.
 
-          auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
-              with the card.
-
           state:
               Card state values:
 
@@ -946,15 +955,6 @@ class AsyncCards(AsyncAPIResource):
                 parameters).
               - `PAUSED` - Card will decline authorizations, but can be resumed at a later
                 time.
-
-          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
-              `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
-
-          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
-              after tokenization. This artwork must be approved by Mastercard and configured
-              by Lithic to use. See
-              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
           extra_headers: Send extra headers
 
@@ -1228,11 +1228,11 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
+        account_token: str | NotGiven = NOT_GIVEN,
+        certificate: str | NotGiven = NOT_GIVEN,
         digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
         nonce: str | NotGiven = NOT_GIVEN,
         nonce_signature: str | NotGiven = NOT_GIVEN,
-        certificate: str | NotGiven = NOT_GIVEN,
-        account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1248,6 +1248,15 @@ class AsyncCards(AsyncAPIResource):
         for more information.
 
         Args:
+          account_token: Only required for multi-account users. Token identifying the account the card
+              will be associated with. Only applicable if using account holder enrollment. See
+              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
+              more information.
+
+          certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
+              format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
+              Provided by the device's wallet.
+
           digital_wallet: Name of digital wallet provider.
 
           nonce: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
@@ -1255,15 +1264,6 @@ class AsyncCards(AsyncAPIResource):
 
           nonce_signature: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
               wallet.
-
-          certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
-              format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
-              Provided by the device's wallet.
-
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
 
           extra_headers: Send extra headers
 
@@ -1291,9 +1291,9 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
+        product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1306,6 +1306,10 @@ class AsyncCards(AsyncAPIResource):
         Only applies to cards of type `PHYSICAL` [beta].
 
         Args:
+          product_id: Specifies the configuration (e.g. physical card art) that the card should be
+              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
+              must be configured with Lithic before use.
+
           shipping_address: If omitted, the previous shipping address will be used.
 
           shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
@@ -1317,10 +1321,6 @@ class AsyncCards(AsyncAPIResource):
                 with tracking
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
-
-          product_id: Specifies the configuration (e.g. physical card art) that the card should be
-              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
-              must be configured with Lithic before use.
 
           extra_headers: Send extra headers
 

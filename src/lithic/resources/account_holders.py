@@ -31,15 +31,15 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        business_entity: account_holder_create_params.KYBBusinessEntity,
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity],
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual],
+        business_entity: account_holder_create_params.KYBBusinessEntity,
         control_person: account_holder_create_params.KYBControlPerson,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         nature_of_business: str,
         tos_timestamp: str,
         website_url: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
+        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -56,9 +56,6 @@ class AccountHolders(SyncAPIResource):
         part of the program the calling API key manages.
 
         Args:
-          business_entity: Information for business for which the account is being opened and KYB is being
-              run.
-
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
               individual owns >25% of the company, and the largest shareholder is an entity,
               please identify them in this field. See
@@ -75,6 +72,9 @@ class AccountHolders(SyncAPIResource):
               individual is an entity, pass in an empty list. However, either this parameter
               or `beneficial_owner_entities` must be populated.
 
+          business_entity: Information for business for which the account is being opened and KYB is being
+              run.
+
           control_person: An individual with significant responsibility for managing the legal entity
               (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
               Officer, Managing Member, General Partner, President, Vice President, or
@@ -83,11 +83,6 @@ class AccountHolders(SyncAPIResource):
               could also be a beneficial owner listed above. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section II) for more background.
-
-          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
-              business with a pass result.
-
-              This field is required only if workflow type is `KYB_BYO`.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
@@ -99,6 +94,11 @@ class AccountHolders(SyncAPIResource):
           website_url: Company website URL.
 
           workflow: Specifies the type of KYB workflow to run.
+
+          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+              business with a pass result.
+
+              This field is required only if workflow type is `KYB_BYO`.
 
           extra_headers: Send extra headers
 
@@ -113,9 +113,9 @@ class AccountHolders(SyncAPIResource):
         self,
         *,
         individual: account_holder_create_params.KYCIndividual,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str,
         workflow: Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"],
+        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,16 +135,16 @@ class AccountHolders(SyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               run.
 
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
-              individual with a pass result.
-
-              This field is required only if workflow type is `KYC_BYO`.
-
           tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
           workflow: Specifies the type of KYC workflow to run.
+
+          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+              individual with a pass result.
+
+              This field is required only if workflow type is `KYC_BYO`.
 
           extra_headers: Send extra headers
 
@@ -158,12 +158,12 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        workflow: Literal["KYC_EXEMPT"],
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
-        first_name: str,
-        last_name: str,
         email: str,
+        first_name: str,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
+        last_name: str,
         phone_number: str,
+        workflow: Literal["KYC_EXEMPT"],
         address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -181,17 +181,17 @@ class AccountHolders(SyncAPIResource):
         part of the program the calling API key manages.
 
         Args:
-          workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
-
-          kyc_exemption_type: Specifies the type of KYC Exempt user
+          email: The KYC Exempt user's email
 
           first_name: The KYC Exempt user's first name
 
+          kyc_exemption_type: Specifies the type of KYC Exempt user
+
           last_name: The KYC Exempt user's last name
 
-          email: The KYC Exempt user's email
-
           phone_number: The KYC Exempt user's phone number
+
+          workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
 
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
               acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -221,27 +221,27 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
+        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"]
         | NotGiven = NOT_GIVEN,
-        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -258,8 +258,8 @@ class AccountHolders(SyncAPIResource):
         part of the program the calling API key manages.
 
         Args:
-          business_entity: Information for business for which the account is being opened and KYB is being
-              run.
+          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
+              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
               individual owns >25% of the company, and the largest shareholder is an entity,
@@ -277,6 +277,9 @@ class AccountHolders(SyncAPIResource):
               individual is an entity, pass in an empty list. However, either this parameter
               or `beneficial_owner_entities` must be populated.
 
+          business_entity: Information for business for which the account is being opened and KYB is being
+              run.
+
           control_person: An individual with significant responsibility for managing the legal entity
               (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
               Officer, Managing Member, General Partner, President, Vice President, or
@@ -286,13 +289,31 @@ class AccountHolders(SyncAPIResource):
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section II) for more background.
 
+          email: The KYC Exempt user's email
+
+          first_name: The KYC Exempt user's first name
+
+          individual: Information on individual for whom the account is being opened and KYC is being
+              run.
+
           kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
 
+          kyc_exemption_type: Specifies the type of KYC Exempt user
+
+          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+              individual with a pass result.
+
+              This field is required only if workflow type is `KYC_BYO`.
+
+          last_name: The KYC Exempt user's last name
+
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
+
+          phone_number: The KYC Exempt user's phone number
 
           tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
@@ -301,27 +322,6 @@ class AccountHolders(SyncAPIResource):
           website_url: Company website URL.
 
           workflow: Specifies the type of KYB workflow to run.
-
-          individual: Information on individual for whom the account is being opened and KYC is being
-              run.
-
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
-              individual with a pass result.
-
-              This field is required only if workflow type is `KYC_BYO`.
-
-          kyc_exemption_type: Specifies the type of KYC Exempt user
-
-          first_name: The KYC Exempt user's first name
-
-          last_name: The KYC Exempt user's last name
-
-          email: The KYC Exempt user's email
-
-          phone_number: The KYC Exempt user's phone number
-
-          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
           extra_headers: Send extra headers
 
@@ -496,9 +496,9 @@ class AccountHolders(SyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        workflow: Literal["KYC_ADVANCED"],
-        tos_timestamp: str,
         individual: account_holder_resubmit_params.Individual,
+        tos_timestamp: str,
+        workflow: Literal["KYC_ADVANCED"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -517,12 +517,12 @@ class AccountHolders(SyncAPIResource):
         status is returned and the account creation process is ended.
 
         Args:
+          individual: Information on individual for whom the account is being opened and KYC is being
+              re-run.
+
           tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
-
-          individual: Information on individual for whom the account is being opened and KYC is being
-              re-run.
 
           extra_headers: Send extra headers
 
@@ -633,15 +633,15 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        business_entity: account_holder_create_params.KYBBusinessEntity,
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity],
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual],
+        business_entity: account_holder_create_params.KYBBusinessEntity,
         control_person: account_holder_create_params.KYBControlPerson,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         nature_of_business: str,
         tos_timestamp: str,
         website_url: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
+        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -658,9 +658,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         part of the program the calling API key manages.
 
         Args:
-          business_entity: Information for business for which the account is being opened and KYB is being
-              run.
-
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
               individual owns >25% of the company, and the largest shareholder is an entity,
               please identify them in this field. See
@@ -677,6 +674,9 @@ class AsyncAccountHolders(AsyncAPIResource):
               individual is an entity, pass in an empty list. However, either this parameter
               or `beneficial_owner_entities` must be populated.
 
+          business_entity: Information for business for which the account is being opened and KYB is being
+              run.
+
           control_person: An individual with significant responsibility for managing the legal entity
               (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
               Officer, Managing Member, General Partner, President, Vice President, or
@@ -685,11 +685,6 @@ class AsyncAccountHolders(AsyncAPIResource):
               could also be a beneficial owner listed above. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section II) for more background.
-
-          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
-              business with a pass result.
-
-              This field is required only if workflow type is `KYB_BYO`.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
@@ -701,6 +696,11 @@ class AsyncAccountHolders(AsyncAPIResource):
           website_url: Company website URL.
 
           workflow: Specifies the type of KYB workflow to run.
+
+          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+              business with a pass result.
+
+              This field is required only if workflow type is `KYB_BYO`.
 
           extra_headers: Send extra headers
 
@@ -715,9 +715,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         *,
         individual: account_holder_create_params.KYCIndividual,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str,
         workflow: Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"],
+        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -737,16 +737,16 @@ class AsyncAccountHolders(AsyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               run.
 
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
-              individual with a pass result.
-
-              This field is required only if workflow type is `KYC_BYO`.
-
           tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
           workflow: Specifies the type of KYC workflow to run.
+
+          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+              individual with a pass result.
+
+              This field is required only if workflow type is `KYC_BYO`.
 
           extra_headers: Send extra headers
 
@@ -760,12 +760,12 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        workflow: Literal["KYC_EXEMPT"],
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
-        first_name: str,
-        last_name: str,
         email: str,
+        first_name: str,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
+        last_name: str,
         phone_number: str,
+        workflow: Literal["KYC_EXEMPT"],
         address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -783,17 +783,17 @@ class AsyncAccountHolders(AsyncAPIResource):
         part of the program the calling API key manages.
 
         Args:
-          workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
-
-          kyc_exemption_type: Specifies the type of KYC Exempt user
+          email: The KYC Exempt user's email
 
           first_name: The KYC Exempt user's first name
 
+          kyc_exemption_type: Specifies the type of KYC Exempt user
+
           last_name: The KYC Exempt user's last name
 
-          email: The KYC Exempt user's email
-
           phone_number: The KYC Exempt user's phone number
+
+          workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
 
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
               acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -823,27 +823,27 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
+        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"]
         | NotGiven = NOT_GIVEN,
-        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -860,8 +860,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         part of the program the calling API key manages.
 
         Args:
-          business_entity: Information for business for which the account is being opened and KYB is being
-              run.
+          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
+              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
               individual owns >25% of the company, and the largest shareholder is an entity,
@@ -879,6 +879,9 @@ class AsyncAccountHolders(AsyncAPIResource):
               individual is an entity, pass in an empty list. However, either this parameter
               or `beneficial_owner_entities` must be populated.
 
+          business_entity: Information for business for which the account is being opened and KYB is being
+              run.
+
           control_person: An individual with significant responsibility for managing the legal entity
               (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
               Officer, Managing Member, General Partner, President, Vice President, or
@@ -888,13 +891,31 @@ class AsyncAccountHolders(AsyncAPIResource):
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section II) for more background.
 
+          email: The KYC Exempt user's email
+
+          first_name: The KYC Exempt user's first name
+
+          individual: Information on individual for whom the account is being opened and KYC is being
+              run.
+
           kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
 
+          kyc_exemption_type: Specifies the type of KYC Exempt user
+
+          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+              individual with a pass result.
+
+              This field is required only if workflow type is `KYC_BYO`.
+
+          last_name: The KYC Exempt user's last name
+
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
+
+          phone_number: The KYC Exempt user's phone number
 
           tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
@@ -903,27 +924,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           website_url: Company website URL.
 
           workflow: Specifies the type of KYB workflow to run.
-
-          individual: Information on individual for whom the account is being opened and KYC is being
-              run.
-
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
-              individual with a pass result.
-
-              This field is required only if workflow type is `KYC_BYO`.
-
-          kyc_exemption_type: Specifies the type of KYC Exempt user
-
-          first_name: The KYC Exempt user's first name
-
-          last_name: The KYC Exempt user's last name
-
-          email: The KYC Exempt user's email
-
-          phone_number: The KYC Exempt user's phone number
-
-          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
           extra_headers: Send extra headers
 
@@ -1098,9 +1098,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        workflow: Literal["KYC_ADVANCED"],
-        tos_timestamp: str,
         individual: account_holder_resubmit_params.Individual,
+        tos_timestamp: str,
+        workflow: Literal["KYC_ADVANCED"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1119,12 +1119,12 @@ class AsyncAccountHolders(AsyncAPIResource):
         status is returned and the account creation process is ended.
 
         Args:
+          individual: Information on individual for whom the account is being opened and KYC is being
+              re-run.
+
           tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
-
-          individual: Information on individual for whom the account is being opened and KYC is being
-              re-run.
 
           extra_headers: Send extra headers
 

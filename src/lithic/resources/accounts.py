@@ -41,8 +41,8 @@ class Accounts(SyncAPIResource):
         daily_spend_limit: int | NotGiven = NOT_GIVEN,
         lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
         monthly_spend_limit: int | NotGiven = NOT_GIVEN,
-        verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         state: Literal["ACTIVE", "PAUSED"] | NotGiven = NOT_GIVEN,
+        verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -75,10 +75,10 @@ class Accounts(SyncAPIResource):
               prior limit. Only a limit of 1 or above will result in declined transactions due
               to checks against the account limit.
 
+          state: Account states.
+
           verification_address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules.
-
-          state: Account states.
 
           extra_headers: Send extra headers
 
@@ -182,8 +182,8 @@ class AsyncAccounts(AsyncAPIResource):
         daily_spend_limit: int | NotGiven = NOT_GIVEN,
         lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
         monthly_spend_limit: int | NotGiven = NOT_GIVEN,
-        verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         state: Literal["ACTIVE", "PAUSED"] | NotGiven = NOT_GIVEN,
+        verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -216,10 +216,10 @@ class AsyncAccounts(AsyncAPIResource):
               prior limit. Only a limit of 1 or above will result in declined transactions due
               to checks against the account limit.
 
+          state: Account states.
+
           verification_address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules.
-
-          state: Account states.
 
           extra_headers: Send extra headers
 

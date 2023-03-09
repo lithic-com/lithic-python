@@ -26,11 +26,11 @@ class FundingSources(SyncAPIResource):
     def create(
         self,
         *,
+        account_number: str,
+        routing_number: str,
         validation_method: Literal["BANK"],
         account_name: str | NotGiven = NOT_GIVEN,
-        account_number: str,
         account_token: str | NotGiven = NOT_GIVEN,
-        routing_number: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -45,19 +45,19 @@ class FundingSources(SyncAPIResource):
         be set to `ENABLED` state automatically.
 
         Args:
+          account_number: The account number of the bank account.
+
+          routing_number: The routing number of the bank account.
+
           account_name: The name associated with the bank account. This property is only for
               identification purposes, and has no bearing on the external properties of the
               bank.
-
-          account_number: The account number of the bank account.
 
           account_token: Only required for multi-account users. Token identifying the account that the
               bank account will be associated with. Only applicable if using account holder
               enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
-
-          routing_number: The routing number of the bank account.
 
           extra_headers: Send extra headers
 
@@ -71,9 +71,9 @@ class FundingSources(SyncAPIResource):
     def create(
         self,
         *,
+        processor_token: str,
         validation_method: Literal["PLAID"],
         account_token: str | NotGiven = NOT_GIVEN,
-        processor_token: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -88,12 +88,12 @@ class FundingSources(SyncAPIResource):
         be set to `ENABLED` state automatically.
 
         Args:
+          processor_token: The processor token associated with the bank account.
+
           account_token: Only required for multi-account users. Token identifying the account associated
               with the bank account. Only applicable if using account holder enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
-
-          processor_token: The processor token associated with the bank account.
 
           extra_headers: Send extra headers
 
@@ -107,12 +107,12 @@ class FundingSources(SyncAPIResource):
     def create(
         self,
         *,
-        validation_method: Literal["BANK"] | Literal["PLAID"] | NotGiven = NOT_GIVEN,
         account_name: str | NotGiven = NOT_GIVEN,
         account_number: str | NotGiven = NOT_GIVEN,
         account_token: str | str | NotGiven = NOT_GIVEN,
-        routing_number: str | NotGiven = NOT_GIVEN,
         processor_token: str | NotGiven = NOT_GIVEN,
+        routing_number: str | NotGiven = NOT_GIVEN,
+        validation_method: Literal["BANK"] | Literal["PLAID"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -139,9 +139,9 @@ class FundingSources(SyncAPIResource):
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
 
-          routing_number: The routing number of the bank account.
-
           processor_token: The processor token associated with the bank account.
+
+          routing_number: The routing number of the bank account.
 
           extra_headers: Send extra headers
 
@@ -263,8 +263,8 @@ class FundingSources(SyncAPIResource):
         self,
         funding_source_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         micro_deposits: List[int],
+        account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -276,13 +276,13 @@ class FundingSources(SyncAPIResource):
         amounts.
 
         Args:
+          micro_deposits: An array of dollar amounts (in cents) received in two credit transactions.
+
           account_token: Only required for multi-account users. Token identifying the account that the
               bank account will be associated with. Only applicable if using account holder
               enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
-
-          micro_deposits: An array of dollar amounts (in cents) received in two credit transactions.
 
           extra_headers: Send extra headers
 
@@ -309,11 +309,11 @@ class AsyncFundingSources(AsyncAPIResource):
     async def create(
         self,
         *,
+        account_number: str,
+        routing_number: str,
         validation_method: Literal["BANK"],
         account_name: str | NotGiven = NOT_GIVEN,
-        account_number: str,
         account_token: str | NotGiven = NOT_GIVEN,
-        routing_number: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -328,19 +328,19 @@ class AsyncFundingSources(AsyncAPIResource):
         be set to `ENABLED` state automatically.
 
         Args:
+          account_number: The account number of the bank account.
+
+          routing_number: The routing number of the bank account.
+
           account_name: The name associated with the bank account. This property is only for
               identification purposes, and has no bearing on the external properties of the
               bank.
-
-          account_number: The account number of the bank account.
 
           account_token: Only required for multi-account users. Token identifying the account that the
               bank account will be associated with. Only applicable if using account holder
               enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
-
-          routing_number: The routing number of the bank account.
 
           extra_headers: Send extra headers
 
@@ -354,9 +354,9 @@ class AsyncFundingSources(AsyncAPIResource):
     async def create(
         self,
         *,
+        processor_token: str,
         validation_method: Literal["PLAID"],
         account_token: str | NotGiven = NOT_GIVEN,
-        processor_token: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -371,12 +371,12 @@ class AsyncFundingSources(AsyncAPIResource):
         be set to `ENABLED` state automatically.
 
         Args:
+          processor_token: The processor token associated with the bank account.
+
           account_token: Only required for multi-account users. Token identifying the account associated
               with the bank account. Only applicable if using account holder enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
-
-          processor_token: The processor token associated with the bank account.
 
           extra_headers: Send extra headers
 
@@ -390,12 +390,12 @@ class AsyncFundingSources(AsyncAPIResource):
     async def create(
         self,
         *,
-        validation_method: Literal["BANK"] | Literal["PLAID"] | NotGiven = NOT_GIVEN,
         account_name: str | NotGiven = NOT_GIVEN,
         account_number: str | NotGiven = NOT_GIVEN,
         account_token: str | str | NotGiven = NOT_GIVEN,
-        routing_number: str | NotGiven = NOT_GIVEN,
         processor_token: str | NotGiven = NOT_GIVEN,
+        routing_number: str | NotGiven = NOT_GIVEN,
+        validation_method: Literal["BANK"] | Literal["PLAID"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -422,9 +422,9 @@ class AsyncFundingSources(AsyncAPIResource):
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
 
-          routing_number: The routing number of the bank account.
-
           processor_token: The processor token associated with the bank account.
+
+          routing_number: The routing number of the bank account.
 
           extra_headers: Send extra headers
 
@@ -546,8 +546,8 @@ class AsyncFundingSources(AsyncAPIResource):
         self,
         funding_source_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         micro_deposits: List[int],
+        account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -559,13 +559,13 @@ class AsyncFundingSources(AsyncAPIResource):
         amounts.
 
         Args:
+          micro_deposits: An array of dollar amounts (in cents) received in two credit transactions.
+
           account_token: Only required for multi-account users. Token identifying the account that the
               bank account will be associated with. Only applicable if using account holder
               enrollment. See
               [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
               more information.
-
-          micro_deposits: An array of dollar amounts (in cents) received in two credit transactions.
 
           extra_headers: Send extra headers
 

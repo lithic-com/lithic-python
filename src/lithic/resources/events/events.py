@@ -49,10 +49,10 @@ class Events(SyncAPIResource):
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,13 +70,13 @@ class Events(SyncAPIResource):
           end: Date string in 8601 format. Only entries created before the specified date will
               be included. UTC time zone.
 
+          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
+              the previous page.
+
           page_size: Page size (for pagination).
 
           starting_after: The unique identifier of the last item in the previous page. Used to retrieve
               the next page.
-
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
 
           extra_headers: Send extra headers
 
@@ -152,10 +152,10 @@ class AsyncEvents(AsyncAPIResource):
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -173,13 +173,13 @@ class AsyncEvents(AsyncAPIResource):
           end: Date string in 8601 format. Only entries created before the specified date will
               be included. UTC time zone.
 
+          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
+              the previous page.
+
           page_size: Page size (for pagination).
 
           starting_after: The unique identifier of the last item in the previous page. Used to retrieve
               the next page.
-
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
 
           extra_headers: Send extra headers
 

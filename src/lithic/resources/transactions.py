@@ -53,12 +53,12 @@ class Transactions(SyncAPIResource):
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        card_token: str | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -71,13 +71,10 @@ class Transactions(SyncAPIResource):
         Args:
           account_token: Filters for transactions associated with a specific account.
 
-          card_token: Filters for transactions associated with a specific card.
-
-          result: Filters for transactions using transaction result field. Can filter by
-              `APPROVED`, and `DECLINED`.
-
           begin: Date string in 8601 format. Only entries created after the specified date will
               be included. UTC time zone.
+
+          card_token: Filters for transactions associated with a specific card.
 
           end: Date string in 8601 format. Only entries created before the specified date will
               be included. UTC time zone.
@@ -85,6 +82,9 @@ class Transactions(SyncAPIResource):
           page: Page (for pagination).
 
           page_size: Page size (for pagination).
+
+          result: Filters for transactions using transaction result field. Can filter by
+              `APPROVED`, and `DECLINED`.
 
           extra_headers: Send extra headers
 
@@ -121,6 +121,11 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        mcc: str | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        merchant_amount: int | NotGiven = NOT_GIVEN,
+        merchant_currency: str | NotGiven = NOT_GIVEN,
+        partial_approval_capable: bool | NotGiven = NOT_GIVEN,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -129,11 +134,6 @@ class Transactions(SyncAPIResource):
             "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
         | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
-        merchant_currency: str | NotGiven = NOT_GIVEN,
-        merchant_amount: int | NotGiven = NOT_GIVEN,
-        mcc: str | NotGiven = NOT_GIVEN,
-        partial_approval_capable: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -160,6 +160,21 @@ class Transactions(SyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_amount: Amount of the transaction to be simulated in currency specified in
+              merchant_currency, including any acquirer fees.
+
+          merchant_currency: 3-digit alphabetic ISO 4217 currency code.
+
+          partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
+              Partial approval is when part of a transaction is approved and another payment
+              must be used for the remainder.
+
           status: Type of event to simulate.
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
@@ -176,21 +191,6 @@ class Transactions(SyncAPIResource):
               - `FINANCIAL_CREDIT_AUTHORIZATION` is a single message request from a merchant
                 to credit funds immediately, and no subsequent clearing is required to settle
                 the transaction.
-
-          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
-
-          merchant_currency: 3-digit alphabetic ISO 4217 currency code.
-
-          merchant_amount: Amount of the transaction to be simulated in currency specified in
-              merchant_currency, including any acquirer fees.
-
-          mcc: Merchant category code for the transaction to be simulated. A four-digit number
-              listed in ISO 18245. Supported merchant category codes can be found
-              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
-
-          partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
-              Partial approval is when part of a transaction is approved and another payment
-              must be used for the remainder.
 
           extra_headers: Send extra headers
 
@@ -221,8 +221,8 @@ class Transactions(SyncAPIResource):
     def simulate_clearing(
         self,
         *,
-        amount: int | NotGiven = NOT_GIVEN,
         token: str,
+        amount: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -239,14 +239,14 @@ class Transactions(SyncAPIResource):
         access to this behavior.
 
         Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
           amount: Amount (in cents) to complete. Typically this will match the original
               authorization, but may be more or less.
 
               If no amount is supplied to this endpoint, the amount of the transaction will be
               captured. Any transaction that has any amount completed at all do not have
               access to this behavior.
-
-          token: The transaction token returned from the /v1/simulate/authorize response.
 
           extra_headers: Send extra headers
 
@@ -273,8 +273,8 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         mcc: str | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -296,11 +296,11 @@ class Transactions(SyncAPIResource):
 
           pan: Sixteen digit card number.
 
-          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
-
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
 
           extra_headers: Send extra headers
 
@@ -404,8 +404,8 @@ class Transactions(SyncAPIResource):
     def simulate_void(
         self,
         *,
-        amount: int | NotGiven = NOT_GIVEN,
         token: str,
+        amount: int | NotGiven = NOT_GIVEN,
         type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -422,10 +422,10 @@ class Transactions(SyncAPIResource):
         authorization advice is not currently supported but will be added soon._
 
         Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
           amount: Amount (in cents) to void. Typically this will match the original authorization,
               but may be less.
-
-          token: The transaction token returned from the /v1/simulate/authorize response.
 
           type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
 
@@ -476,12 +476,12 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        card_token: str | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -494,13 +494,10 @@ class AsyncTransactions(AsyncAPIResource):
         Args:
           account_token: Filters for transactions associated with a specific account.
 
-          card_token: Filters for transactions associated with a specific card.
-
-          result: Filters for transactions using transaction result field. Can filter by
-              `APPROVED`, and `DECLINED`.
-
           begin: Date string in 8601 format. Only entries created after the specified date will
               be included. UTC time zone.
+
+          card_token: Filters for transactions associated with a specific card.
 
           end: Date string in 8601 format. Only entries created before the specified date will
               be included. UTC time zone.
@@ -508,6 +505,9 @@ class AsyncTransactions(AsyncAPIResource):
           page: Page (for pagination).
 
           page_size: Page size (for pagination).
+
+          result: Filters for transactions using transaction result field. Can filter by
+              `APPROVED`, and `DECLINED`.
 
           extra_headers: Send extra headers
 
@@ -544,6 +544,11 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        mcc: str | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        merchant_amount: int | NotGiven = NOT_GIVEN,
+        merchant_currency: str | NotGiven = NOT_GIVEN,
+        partial_approval_capable: bool | NotGiven = NOT_GIVEN,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -552,11 +557,6 @@ class AsyncTransactions(AsyncAPIResource):
             "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
         | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
-        merchant_currency: str | NotGiven = NOT_GIVEN,
-        merchant_amount: int | NotGiven = NOT_GIVEN,
-        mcc: str | NotGiven = NOT_GIVEN,
-        partial_approval_capable: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -583,6 +583,21 @@ class AsyncTransactions(AsyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_amount: Amount of the transaction to be simulated in currency specified in
+              merchant_currency, including any acquirer fees.
+
+          merchant_currency: 3-digit alphabetic ISO 4217 currency code.
+
+          partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
+              Partial approval is when part of a transaction is approved and another payment
+              must be used for the remainder.
+
           status: Type of event to simulate.
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
@@ -599,21 +614,6 @@ class AsyncTransactions(AsyncAPIResource):
               - `FINANCIAL_CREDIT_AUTHORIZATION` is a single message request from a merchant
                 to credit funds immediately, and no subsequent clearing is required to settle
                 the transaction.
-
-          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
-
-          merchant_currency: 3-digit alphabetic ISO 4217 currency code.
-
-          merchant_amount: Amount of the transaction to be simulated in currency specified in
-              merchant_currency, including any acquirer fees.
-
-          mcc: Merchant category code for the transaction to be simulated. A four-digit number
-              listed in ISO 18245. Supported merchant category codes can be found
-              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
-
-          partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
-              Partial approval is when part of a transaction is approved and another payment
-              must be used for the remainder.
 
           extra_headers: Send extra headers
 
@@ -644,8 +644,8 @@ class AsyncTransactions(AsyncAPIResource):
     async def simulate_clearing(
         self,
         *,
-        amount: int | NotGiven = NOT_GIVEN,
         token: str,
+        amount: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -662,14 +662,14 @@ class AsyncTransactions(AsyncAPIResource):
         access to this behavior.
 
         Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
           amount: Amount (in cents) to complete. Typically this will match the original
               authorization, but may be more or less.
 
               If no amount is supplied to this endpoint, the amount of the transaction will be
               captured. Any transaction that has any amount completed at all do not have
               access to this behavior.
-
-          token: The transaction token returned from the /v1/simulate/authorize response.
 
           extra_headers: Send extra headers
 
@@ -696,8 +696,8 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         mcc: str | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -719,11 +719,11 @@ class AsyncTransactions(AsyncAPIResource):
 
           pan: Sixteen digit card number.
 
-          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
-
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
 
           extra_headers: Send extra headers
 
@@ -827,8 +827,8 @@ class AsyncTransactions(AsyncAPIResource):
     async def simulate_void(
         self,
         *,
-        amount: int | NotGiven = NOT_GIVEN,
         token: str,
+        amount: int | NotGiven = NOT_GIVEN,
         type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -845,10 +845,10 @@ class AsyncTransactions(AsyncAPIResource):
         authorization advice is not currently supported but will be added soon._
 
         Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
           amount: Amount (in cents) to void. Typically this will match the original authorization,
               but may be less.
-
-          token: The transaction token returned from the /v1/simulate/authorize response.
 
           type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
 

@@ -25,10 +25,10 @@ class Subscriptions(SyncAPIResource):
     def create(
         self,
         *,
+        url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
-        url: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -39,14 +39,14 @@ class Subscriptions(SyncAPIResource):
         Create a new event subscription.
 
         Args:
+          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
+
           description: Event subscription description.
 
           disabled: Whether the event subscription is active (false) or inactive (true).
 
           event_types: Indicates types of events that will be sent to this subscription. If left blank,
               all types will be sent.
-
-          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
 
           extra_headers: Send extra headers
 
@@ -137,9 +137,9 @@ class Subscriptions(SyncAPIResource):
     def list(
         self,
         *,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -150,13 +150,13 @@ class Subscriptions(SyncAPIResource):
         List all the event subscriptions.
 
         Args:
+          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
+              the previous page.
+
           page_size: Page size (for pagination).
 
           starting_after: The unique identifier of the last item in the previous page. Used to retrieve
               the next page.
-
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
 
           extra_headers: Send extra headers
 
@@ -281,10 +281,10 @@ class AsyncSubscriptions(AsyncAPIResource):
     async def create(
         self,
         *,
+        url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
-        url: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -295,14 +295,14 @@ class AsyncSubscriptions(AsyncAPIResource):
         Create a new event subscription.
 
         Args:
+          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
+
           description: Event subscription description.
 
           disabled: Whether the event subscription is active (false) or inactive (true).
 
           event_types: Indicates types of events that will be sent to this subscription. If left blank,
               all types will be sent.
-
-          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
 
           extra_headers: Send extra headers
 
@@ -393,9 +393,9 @@ class AsyncSubscriptions(AsyncAPIResource):
     def list(
         self,
         *,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -406,13 +406,13 @@ class AsyncSubscriptions(AsyncAPIResource):
         List all the event subscriptions.
 
         Args:
+          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
+              the previous page.
+
           page_size: Page size (for pagination).
 
           starting_after: The unique identifier of the last item in the previous page. Used to retrieve
               the next page.
-
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
 
           extra_headers: Send extra headers
 

@@ -31,12 +31,12 @@ class AuthRules(SyncAPIResource):
     def create(
         self,
         *,
-        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
-        allowed_countries: List[str] | NotGiven = NOT_GIVEN,
-        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
-        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        allowed_countries: List[str] | NotGiven = NOT_GIVEN,
+        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
+        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
+        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
+        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -50,16 +50,15 @@ class AuthRules(SyncAPIResource):
         account, or card level.
 
         Args:
-          allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
-
-          blocked_mcc: Merchant category codes for which the Auth Rule automatically declines
-              transactions.
+          account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
+              to. Note that only this field or `card_tokens` can be provided for a given Auth
+              Rule.
 
           allowed_countries: Countries in which the Auth Rule permits transactions. Note that Lithic
               maintains a list of countries in which all transactions are blocked; "allowing"
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
-          blocked_countries: Countries in which the Auth Rule automatically declines transactions.
+          allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
 
           avs_type: Address verification to confirm that postal code entered at point of transaction
               (if applicable) matches the postal code on file for a given card. Since this
@@ -70,9 +69,10 @@ class AuthRules(SyncAPIResource):
               - `ZIP_ONLY` - AVS check is performed to confirm ZIP code entered at point of
                 transaction (if applicable) matches address on file.
 
-          account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
-              to. Note that only this field or `card_tokens` can be provided for a given Auth
-              Rule.
+          blocked_countries: Countries in which the Auth Rule automatically declines transactions.
+
+          blocked_mcc: Merchant category codes for which the Auth Rule automatically declines
+              transactions.
 
           card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
               that only this field or `account_tokens` can be provided for a given Auth Rule.
@@ -128,11 +128,11 @@ class AuthRules(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         allowed_countries: List[str] | NotGiven = NOT_GIVEN,
-        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
+        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
         avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
+        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
+        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -144,23 +144,23 @@ class AuthRules(SyncAPIResource):
         Rule).
 
         Args:
+          allowed_countries: Array of country codes for which the Auth Rule will permit transactions. Note
+              that only this field or `blocked_countries` can be used for a given Auth Rule.
+
           allowed_mcc: Array of merchant category codes for which the Auth Rule will permit
               transactions. Note that only this field or `blocked_mcc` can be used for a given
               Auth Rule.
 
-          blocked_mcc: Array of merchant category codes for which the Auth Rule will automatically
-              decline transactions. Note that only this field or `allowed_mcc` can be used for
-              a given Auth Rule.
-
-          allowed_countries: Array of country codes for which the Auth Rule will permit transactions. Note
-              that only this field or `blocked_countries` can be used for a given Auth Rule.
+          avs_type: Address verification to confirm that postal code entered at point of transaction
+              (if applicable) matches the postal code on file for a given card.
 
           blocked_countries: Array of country codes for which the Auth Rule will automatically decline
               transactions. Note that only this field or `allowed_countries` can be used for a
               given Auth Rule.
 
-          avs_type: Address verification to confirm that postal code entered at point of transaction
-              (if applicable) matches the postal code on file for a given card.
+          blocked_mcc: Array of merchant category codes for which the Auth Rule will automatically
+              decline transactions. Note that only this field or `allowed_mcc` can be used for
+              a given Auth Rule.
 
           extra_headers: Send extra headers
 
@@ -231,8 +231,8 @@ class AuthRules(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -245,12 +245,12 @@ class AuthRules(SyncAPIResource):
         card level.
 
         Args:
-          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
-              that only this field or `account_tokens` can be provided for a given Auth Rule.
-
           account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
               to. Note that only this field or `card_tokens` can be provided for a given Auth
               Rule.
+
+          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
+              that only this field or `account_tokens` can be provided for a given Auth Rule.
 
           program_level: Boolean indicating whether the Auth Rule is applied at the program level.
 
@@ -277,8 +277,8 @@ class AuthRules(SyncAPIResource):
     def remove(
         self,
         *,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -291,12 +291,12 @@ class AuthRules(SyncAPIResource):
         card-level.
 
         Args:
-          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
-              that only this field or `account_tokens` can be provided for a given Auth Rule.
-
           account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
               to. Note that only this field or `card_tokens` can be provided for a given Auth
               Rule.
+
+          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
+              that only this field or `account_tokens` can be provided for a given Auth Rule.
 
           program_level: Boolean indicating whether the Auth Rule is applied at the program level.
 
@@ -325,12 +325,12 @@ class AsyncAuthRules(AsyncAPIResource):
     async def create(
         self,
         *,
-        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
-        allowed_countries: List[str] | NotGiven = NOT_GIVEN,
-        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
-        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        allowed_countries: List[str] | NotGiven = NOT_GIVEN,
+        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
+        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
+        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
+        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -344,16 +344,15 @@ class AsyncAuthRules(AsyncAPIResource):
         account, or card level.
 
         Args:
-          allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
-
-          blocked_mcc: Merchant category codes for which the Auth Rule automatically declines
-              transactions.
+          account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
+              to. Note that only this field or `card_tokens` can be provided for a given Auth
+              Rule.
 
           allowed_countries: Countries in which the Auth Rule permits transactions. Note that Lithic
               maintains a list of countries in which all transactions are blocked; "allowing"
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
-          blocked_countries: Countries in which the Auth Rule automatically declines transactions.
+          allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
 
           avs_type: Address verification to confirm that postal code entered at point of transaction
               (if applicable) matches the postal code on file for a given card. Since this
@@ -364,9 +363,10 @@ class AsyncAuthRules(AsyncAPIResource):
               - `ZIP_ONLY` - AVS check is performed to confirm ZIP code entered at point of
                 transaction (if applicable) matches address on file.
 
-          account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
-              to. Note that only this field or `card_tokens` can be provided for a given Auth
-              Rule.
+          blocked_countries: Countries in which the Auth Rule automatically declines transactions.
+
+          blocked_mcc: Merchant category codes for which the Auth Rule automatically declines
+              transactions.
 
           card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
               that only this field or `account_tokens` can be provided for a given Auth Rule.
@@ -422,11 +422,11 @@ class AsyncAuthRules(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         allowed_countries: List[str] | NotGiven = NOT_GIVEN,
-        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
+        allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
         avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
+        blocked_countries: List[str] | NotGiven = NOT_GIVEN,
+        blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -438,23 +438,23 @@ class AsyncAuthRules(AsyncAPIResource):
         Rule).
 
         Args:
+          allowed_countries: Array of country codes for which the Auth Rule will permit transactions. Note
+              that only this field or `blocked_countries` can be used for a given Auth Rule.
+
           allowed_mcc: Array of merchant category codes for which the Auth Rule will permit
               transactions. Note that only this field or `blocked_mcc` can be used for a given
               Auth Rule.
 
-          blocked_mcc: Array of merchant category codes for which the Auth Rule will automatically
-              decline transactions. Note that only this field or `allowed_mcc` can be used for
-              a given Auth Rule.
-
-          allowed_countries: Array of country codes for which the Auth Rule will permit transactions. Note
-              that only this field or `blocked_countries` can be used for a given Auth Rule.
+          avs_type: Address verification to confirm that postal code entered at point of transaction
+              (if applicable) matches the postal code on file for a given card.
 
           blocked_countries: Array of country codes for which the Auth Rule will automatically decline
               transactions. Note that only this field or `allowed_countries` can be used for a
               given Auth Rule.
 
-          avs_type: Address verification to confirm that postal code entered at point of transaction
-              (if applicable) matches the postal code on file for a given card.
+          blocked_mcc: Array of merchant category codes for which the Auth Rule will automatically
+              decline transactions. Note that only this field or `allowed_mcc` can be used for
+              a given Auth Rule.
 
           extra_headers: Send extra headers
 
@@ -525,8 +525,8 @@ class AsyncAuthRules(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -539,12 +539,12 @@ class AsyncAuthRules(AsyncAPIResource):
         card level.
 
         Args:
-          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
-              that only this field or `account_tokens` can be provided for a given Auth Rule.
-
           account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
               to. Note that only this field or `card_tokens` can be provided for a given Auth
               Rule.
+
+          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
+              that only this field or `account_tokens` can be provided for a given Auth Rule.
 
           program_level: Boolean indicating whether the Auth Rule is applied at the program level.
 
@@ -571,8 +571,8 @@ class AsyncAuthRules(AsyncAPIResource):
     async def remove(
         self,
         *,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -585,12 +585,12 @@ class AsyncAuthRules(AsyncAPIResource):
         card-level.
 
         Args:
-          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
-              that only this field or `account_tokens` can be provided for a given Auth Rule.
-
           account_tokens: Array of account_token(s) identifying the accounts that the Auth Rule applies
               to. Note that only this field or `card_tokens` can be provided for a given Auth
               Rule.
+
+          card_tokens: Array of card_token(s) identifying the cards that the Auth Rule applies to. Note
+              that only this field or `account_tokens` can be provided for a given Auth Rule.
 
           program_level: Boolean indicating whether the Auth Rule is applied at the program level.
 
