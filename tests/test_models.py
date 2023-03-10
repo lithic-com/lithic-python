@@ -108,6 +108,14 @@ def test_list_optional_items_nested_model() -> None:
     assert cast(Any, m4.nested) == [False]
 
 
+def test_list_mismatched_type() -> None:
+    class NestedModel(BaseModel):
+        nested: List[str]
+
+    m = NestedModel.construct(nested=False)
+    assert cast(Any, m.nested) is False
+
+
 def test_raw_dictionary() -> None:
     class NestedModel(BaseModel):
         nested: Dict[str, str]
@@ -346,6 +354,32 @@ def test_dict_of_union() -> None:
     assert isinstance(m.data["foo"], SubModel2)
     assert m.data["foo"].foo == "bar"
 
+    # TODO: test mismatched type
+
+
+def test_double_nested_union() -> None:
+    class SubModel1(BaseModel):
+        name: str
+
+    class SubModel2(BaseModel):
+        bar: str
+
+    class Model(BaseModel):
+        data: Dict[str, List[Union[SubModel1, SubModel2]]]
+
+    m = Model.construct(data={"foo": [{"bar": "baz"}, {"name": "Robert"}]})
+    assert len(m.data["foo"]) == 2
+
+    entry1 = m.data["foo"][0]
+    assert isinstance(entry1, SubModel2)
+    assert entry1.bar == "baz"
+
+    entry2 = m.data["foo"][1]
+    assert isinstance(entry2, SubModel1)
+    assert entry2.name == "Robert"
+
+    # TODO: test mismatched type
+
 
 def test_union_of_dict() -> None:
     class SubModel1(BaseModel):
@@ -379,3 +413,20 @@ def test_iso8601_datetime() -> None:
     model = Model.parse_obj(dict(created_at="2019-12-27T18:11:19.117Z"))
     assert model.created_at == expected
     assert model.json() == expected_json
+
+
+def test_coerces_int() -> None:
+    class Model(BaseModel):
+        bar: int
+
+    assert Model.construct(bar=1).bar == 1
+    assert Model.construct(bar=10.9).bar == 10
+    assert Model.construct(bar="19").bar == 19
+    assert Model.construct(bar=False).bar == 0
+
+    # TODO: support this
+    # assert Model.construct(bar="True").bar == 1
+
+    # mismatched types are left as-is
+    m = Model.construct(bar={"foo": "bar"})
+    assert m.bar == {"foo": "bar"}  # type: ignore[comparison-overlap]
