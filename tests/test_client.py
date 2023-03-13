@@ -49,7 +49,7 @@ class TestLithic:
     client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     def test_raw_response(self) -> None:
-        response = self.client.get("/accounts", cast_to=httpx.Response)
+        response = self.client.get("/accounts", options={"params": {}}, cast_to=httpx.Response)
         assert response.status_code == 200
         assert isinstance(response, httpx.Response)
 
@@ -376,7 +376,7 @@ class TestAsyncLithic:
     client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     async def test_raw_response(self) -> None:
-        response = await self.client.get("/accounts", cast_to=httpx.Response)
+        response = await self.client.get("/accounts", options={"params": {}}, cast_to=httpx.Response)
         assert response.status_code == 200
         assert isinstance(response, httpx.Response)
 

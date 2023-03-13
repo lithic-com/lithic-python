@@ -31,7 +31,6 @@ class TestAccountHolders:
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -45,7 +44,6 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -58,7 +56,6 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -71,7 +68,6 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -86,7 +82,6 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -102,7 +97,6 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -118,7 +112,6 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -135,7 +128,6 @@ class TestAccountHolders:
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -300,7 +292,6 @@ class TestAccountHolders:
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -421,7 +412,6 @@ class TestAccountHolders:
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -465,7 +455,6 @@ class TestAsyncAccountHolders:
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -479,7 +468,6 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -492,7 +480,6 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -505,7 +492,6 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -520,7 +506,6 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -536,7 +521,6 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -552,7 +536,6 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -569,7 +552,6 @@ class TestAsyncAccountHolders:
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -734,7 +716,6 @@ class TestAsyncAccountHolders:
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -855,7 +836,6 @@ class TestAsyncAccountHolders:
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
