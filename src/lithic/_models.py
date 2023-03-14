@@ -6,6 +6,7 @@ from typing_extensions import final
 
 import pydantic
 import pydantic.generics
+from pydantic import Extra
 from pydantic.fields import ModelField
 from pydantic.typing import get_args, is_union, get_origin, is_literal_type
 from pydantic.datetime_parse import parse_date
@@ -28,6 +29,9 @@ _T = TypeVar("_T")
 
 
 class BaseModel(pydantic.BaseModel):
+    class Config(pydantic.BaseConfig):
+        extra: Extra = Extra.allow
+
     def __str__(self) -> str:
         return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
 

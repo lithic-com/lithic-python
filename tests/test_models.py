@@ -150,6 +150,19 @@ def test_unknown_fields() -> None:
     assert m2.foo == "foo"
     assert cast(Any, m2).unknown == {"foo_bar": True}
 
+    assert m2.dict() == {"foo": "foo", "unknown": {"foo_bar": True}}
+
+
+def test_strict_validation_unknown_fields() -> None:
+    class Model(BaseModel):
+        foo: str
+
+    model = Model.parse_obj(dict(foo="hello!", user="Robert"))
+    assert model.foo == "hello!"
+    assert cast(Any, model).user == "Robert"
+
+    assert model.dict() == {"foo": "hello!", "user": "Robert"}
+
 
 def test_aliases() -> None:
     class Model(BaseModel):
