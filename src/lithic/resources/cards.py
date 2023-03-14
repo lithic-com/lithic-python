@@ -59,6 +59,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -159,6 +160,8 @@ class Cards(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/cards",
@@ -182,7 +185,12 @@ class Cards(SyncAPIResource):
                 },
                 card_create_params.CardCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=Card,
         )
 
@@ -241,6 +249,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -307,6 +316,8 @@ class Cards(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._patch(
             f"/cards/{card_token}",
@@ -324,7 +335,12 @@ class Cards(SyncAPIResource):
                 },
                 card_update_params.CardUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=Card,
         )
 
@@ -470,6 +486,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> str:
         """
         Generates and executes an embed request, returning html you can serve to the
@@ -584,6 +601,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -616,6 +634,8 @@ class Cards(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/cards/{card_token}/provision",
@@ -629,7 +649,12 @@ class Cards(SyncAPIResource):
                 },
                 card_provision_params.CardProvisionParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=CardProvisionResponse,
         )
 
@@ -645,6 +670,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> Card:
         """
         Initiate print and shipment of a duplicate physical card.
@@ -673,6 +699,8 @@ class Cards(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/cards/{card_token}/reissue",
@@ -684,7 +712,12 @@ class Cards(SyncAPIResource):
                 },
                 card_reissue_params.CardReissueParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=Card,
         )
 
@@ -713,6 +746,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -813,6 +847,8 @@ class AsyncCards(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/cards",
@@ -836,7 +872,12 @@ class AsyncCards(AsyncAPIResource):
                 },
                 card_create_params.CardCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=Card,
         )
 
@@ -895,6 +936,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -961,6 +1003,8 @@ class AsyncCards(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._patch(
             f"/cards/{card_token}",
@@ -978,7 +1022,12 @@ class AsyncCards(AsyncAPIResource):
                 },
                 card_update_params.CardUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=Card,
         )
 
@@ -1124,6 +1173,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> str:
         """
         Generates and executes an embed request, returning html you can serve to the
@@ -1238,6 +1288,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -1270,6 +1321,8 @@ class AsyncCards(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/cards/{card_token}/provision",
@@ -1283,7 +1336,12 @@ class AsyncCards(AsyncAPIResource):
                 },
                 card_provision_params.CardProvisionParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=CardProvisionResponse,
         )
 
@@ -1299,6 +1357,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> Card:
         """
         Initiate print and shipment of a duplicate physical card.
@@ -1327,6 +1386,8 @@ class AsyncCards(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/cards/{card_token}/reissue",
@@ -1338,6 +1399,11 @@ class AsyncCards(AsyncAPIResource):
                 },
                 card_reissue_params.CardReissueParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=Card,
         )

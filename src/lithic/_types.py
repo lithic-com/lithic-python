@@ -68,6 +68,7 @@ class RequestOptions(TypedDict, total=False):
     timeout: float | Timeout | None
     params: Query
     extra_json: AnyMapping
+    idempotency_key: str
 
 
 # Sentinel class used when the response type is an object with an unknown schema

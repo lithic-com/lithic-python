@@ -1252,6 +1252,7 @@ def make_request_options(
     extra_headers: Headers | None = None,
     extra_query: Query | None = None,
     extra_body: Body | None = None,
+    idempotency_key: str | None = None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of NotGiven values."""
     options: RequestOptions = {}
@@ -1266,6 +1267,9 @@ def make_request_options(
 
     if extra_query is not None:
         options["params"] = {**options.get("params", {}), **extra_query}
+
+    if idempotency_key is not None:
+        options["idempotency_key"] = idempotency_key
 
     return options
 

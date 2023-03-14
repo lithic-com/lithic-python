@@ -44,6 +44,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleCreateResponse:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
@@ -84,6 +85,8 @@ class AuthRules(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/auth_rules",
@@ -100,7 +103,12 @@ class AuthRules(SyncAPIResource):
                 },
                 auth_rule_create_params.AuthRuleCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleCreateResponse,
         )
 
@@ -138,6 +146,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleUpdateResponse:
         """
         Update the properties associated with an existing authorization rule (Auth
@@ -167,6 +176,8 @@ class AuthRules(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._put(
             f"/auth_rules/{auth_rule_token}",
@@ -180,7 +191,12 @@ class AuthRules(SyncAPIResource):
                 },
                 auth_rule_update_params.AuthRuleUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleUpdateResponse,
         )
 
@@ -239,6 +255,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleApplyResponse:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
@@ -259,6 +276,8 @@ class AuthRules(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/auth_rules/{auth_rule_token}/apply",
@@ -270,7 +289,12 @@ class AuthRules(SyncAPIResource):
                 },
                 auth_rule_apply_params.AuthRuleApplyParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleApplyResponse,
         )
 
@@ -285,6 +309,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or
@@ -305,6 +330,8 @@ class AuthRules(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._delete(
             "/auth_rules/remove",
@@ -316,7 +343,12 @@ class AuthRules(SyncAPIResource):
                 },
                 auth_rule_remove_params.AuthRuleRemoveParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleRemoveResponse,
         )
 
@@ -338,6 +370,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleCreateResponse:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
@@ -378,6 +411,8 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/auth_rules",
@@ -394,7 +429,12 @@ class AsyncAuthRules(AsyncAPIResource):
                 },
                 auth_rule_create_params.AuthRuleCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleCreateResponse,
         )
 
@@ -432,6 +472,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleUpdateResponse:
         """
         Update the properties associated with an existing authorization rule (Auth
@@ -461,6 +502,8 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._put(
             f"/auth_rules/{auth_rule_token}",
@@ -474,7 +517,12 @@ class AsyncAuthRules(AsyncAPIResource):
                 },
                 auth_rule_update_params.AuthRuleUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleUpdateResponse,
         )
 
@@ -533,6 +581,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleApplyResponse:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
@@ -553,6 +602,8 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/auth_rules/{auth_rule_token}/apply",
@@ -564,7 +615,12 @@ class AsyncAuthRules(AsyncAPIResource):
                 },
                 auth_rule_apply_params.AuthRuleApplyParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleApplyResponse,
         )
 
@@ -579,6 +635,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or
@@ -599,6 +656,8 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._delete(
             "/auth_rules/remove",
@@ -610,6 +669,11 @@ class AsyncAuthRules(AsyncAPIResource):
                 },
                 auth_rule_remove_params.AuthRuleRemoveParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AuthRuleRemoveResponse,
         )

@@ -39,11 +39,17 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
         return self._delete(
             "/auth_stream",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -56,6 +62,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Authorization Stream Access (ASA) provides the ability to make custom
@@ -79,13 +86,20 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/auth_stream",
             body=maybe_transform(
                 {"webhook_url": webhook_url}, auth_stream_enrollment_enroll_params.AuthStreamEnrollmentEnrollParams
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -118,11 +132,17 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
         return await self._delete(
             "/auth_stream",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -135,6 +155,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """
         Authorization Stream Access (ASA) provides the ability to make custom
@@ -158,12 +179,19 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/auth_stream",
             body=maybe_transform(
                 {"webhook_url": webhook_url}, auth_stream_enrollment_enroll_params.AuthStreamEnrollmentEnrollParams
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )

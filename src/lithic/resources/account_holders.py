@@ -45,6 +45,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -105,6 +106,8 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -121,6 +124,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -151,6 +155,8 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -170,6 +176,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -201,6 +208,8 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -247,6 +256,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -328,6 +338,8 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/account_holders",
@@ -353,7 +365,12 @@ class AccountHolders(SyncAPIResource):
                 },
                 account_holder_create_params.AccountHolderCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolder,
         )
 
@@ -385,6 +402,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
         Update the contact information associated with a particular account holder.
@@ -403,6 +421,8 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._patch(
             f"/account_holders/{account_holder_token}",
@@ -413,7 +433,12 @@ class AccountHolders(SyncAPIResource):
                 },
                 account_holder_update_params.AccountHolderUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolderUpdateResponse,
         )
 
@@ -426,6 +451,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolderCreateWebhookResponse:
         """
         Create a webhook to receive KYC or KYB evaluation events.
@@ -451,11 +477,18 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/webhooks/account_holders",
             body=maybe_transform({"url": url}, account_holder_create_webhook_params.AccountHolderCreateWebhookParams),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolderCreateWebhookResponse,
         )
 
@@ -504,6 +537,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -529,6 +563,8 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/account_holders/{account_holder_token}/resubmit",
@@ -540,7 +576,12 @@ class AccountHolders(SyncAPIResource):
                 },
                 account_holder_resubmit_params.AccountHolderResubmitParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolder,
         )
 
@@ -587,6 +628,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -616,6 +658,8 @@ class AccountHolders(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/account_holders/{account_holder_token}/documents",
@@ -623,7 +667,12 @@ class AccountHolders(SyncAPIResource):
                 {"document_type": document_type},
                 account_holder_upload_document_params.AccountHolderUploadDocumentParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolderDocument,
         )
 
@@ -647,6 +696,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -707,6 +757,8 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -723,6 +775,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -753,6 +806,8 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -772,6 +827,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -803,6 +859,8 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -849,6 +907,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
         Run an individual or business's information through the Customer Identification
@@ -930,6 +989,8 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/account_holders",
@@ -955,7 +1016,12 @@ class AsyncAccountHolders(AsyncAPIResource):
                 },
                 account_holder_create_params.AccountHolderCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolder,
         )
 
@@ -987,6 +1053,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
         Update the contact information associated with a particular account holder.
@@ -1005,6 +1072,8 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._patch(
             f"/account_holders/{account_holder_token}",
@@ -1015,7 +1084,12 @@ class AsyncAccountHolders(AsyncAPIResource):
                 },
                 account_holder_update_params.AccountHolderUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolderUpdateResponse,
         )
 
@@ -1028,6 +1102,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolderCreateWebhookResponse:
         """
         Create a webhook to receive KYC or KYB evaluation events.
@@ -1053,11 +1128,18 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/webhooks/account_holders",
             body=maybe_transform({"url": url}, account_holder_create_webhook_params.AccountHolderCreateWebhookParams),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolderCreateWebhookResponse,
         )
 
@@ -1106,6 +1188,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -1131,6 +1214,8 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/account_holders/{account_holder_token}/resubmit",
@@ -1142,7 +1227,12 @@ class AsyncAccountHolders(AsyncAPIResource):
                 },
                 account_holder_resubmit_params.AccountHolderResubmitParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolder,
         )
 
@@ -1189,6 +1279,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -1218,6 +1309,8 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/account_holders/{account_holder_token}/documents",
@@ -1225,6 +1318,11 @@ class AsyncAccountHolders(AsyncAPIResource):
                 {"document_type": document_type},
                 account_holder_upload_document_params.AccountHolderUploadDocumentParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=AccountHolderDocument,
         )

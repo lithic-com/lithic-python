@@ -139,6 +139,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
@@ -197,6 +198,8 @@ class Transactions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/authorize",
@@ -214,7 +217,12 @@ class Transactions(SyncAPIResource):
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateAuthorizationResponse,
         )
 
@@ -228,6 +236,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -253,6 +262,8 @@ class Transactions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/clearing",
@@ -263,7 +274,12 @@ class Transactions(SyncAPIResource):
                 },
                 transaction_simulate_clearing_params.TransactionSimulateClearingParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateClearingResponse,
         )
 
@@ -280,6 +296,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateCreditAuthorizationResponse:
         """Simulates a credit authorization advice message from the payment network.
 
@@ -307,6 +324,8 @@ class Transactions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/credit_authorization_advice",
@@ -320,7 +339,12 @@ class Transactions(SyncAPIResource):
                 },
                 transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
         )
 
@@ -335,6 +359,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
@@ -353,6 +378,8 @@ class Transactions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/return",
@@ -364,7 +391,12 @@ class Transactions(SyncAPIResource):
                 },
                 transaction_simulate_return_params.TransactionSimulateReturnParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateReturnResponse,
         )
 
@@ -377,6 +409,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnReversalResponse:
         """
         Voids a settled credit transaction – i.e., a transaction with a negative amount
@@ -391,13 +424,20 @@ class Transactions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/return_reversal",
             body=maybe_transform(
                 {"token": token}, transaction_simulate_return_reversal_params.TransactionSimulateReturnReversalParams
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateReturnReversalResponse,
         )
 
@@ -412,6 +452,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
@@ -438,6 +479,8 @@ class Transactions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/void",
@@ -449,7 +492,12 @@ class Transactions(SyncAPIResource):
                 },
                 transaction_simulate_void_params.TransactionSimulateVoidParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateVoidResponse,
         )
 
@@ -562,6 +610,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the payment network as if it came from a
@@ -620,6 +669,8 @@ class AsyncTransactions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/authorize",
@@ -637,7 +688,12 @@ class AsyncTransactions(AsyncAPIResource):
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateAuthorizationResponse,
         )
 
@@ -651,6 +707,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
 
@@ -676,6 +733,8 @@ class AsyncTransactions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/clearing",
@@ -686,7 +745,12 @@ class AsyncTransactions(AsyncAPIResource):
                 },
                 transaction_simulate_clearing_params.TransactionSimulateClearingParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateClearingResponse,
         )
 
@@ -703,6 +767,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateCreditAuthorizationResponse:
         """Simulates a credit authorization advice message from the payment network.
 
@@ -730,6 +795,8 @@ class AsyncTransactions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/credit_authorization_advice",
@@ -743,7 +810,12 @@ class AsyncTransactions(AsyncAPIResource):
                 },
                 transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
         )
 
@@ -758,6 +830,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
 
@@ -776,6 +849,8 @@ class AsyncTransactions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/return",
@@ -787,7 +862,12 @@ class AsyncTransactions(AsyncAPIResource):
                 },
                 transaction_simulate_return_params.TransactionSimulateReturnParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateReturnResponse,
         )
 
@@ -800,6 +880,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnReversalResponse:
         """
         Voids a settled credit transaction – i.e., a transaction with a negative amount
@@ -814,13 +895,20 @@ class AsyncTransactions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/return_reversal",
             body=maybe_transform(
                 {"token": token}, transaction_simulate_return_reversal_params.TransactionSimulateReturnReversalParams
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateReturnReversalResponse,
         )
 
@@ -835,6 +923,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
 
@@ -861,6 +950,8 @@ class AsyncTransactions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/void",
@@ -872,6 +963,11 @@ class AsyncTransactions(AsyncAPIResource):
                 },
                 transaction_simulate_void_params.TransactionSimulateVoidParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=TransactionSimulateVoidResponse,
         )

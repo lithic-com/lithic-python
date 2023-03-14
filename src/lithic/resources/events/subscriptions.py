@@ -34,6 +34,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Create a new event subscription.
@@ -53,6 +54,8 @@ class Subscriptions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/event_subscriptions",
@@ -65,7 +68,12 @@ class Subscriptions(SyncAPIResource):
                 },
                 subscription_create_params.SubscriptionCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=EventSubscription,
         )
 
@@ -99,6 +107,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Update an event subscription.
@@ -118,6 +127,8 @@ class Subscriptions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._patch(
             f"/event_subscriptions/{event_subscription_token}",
@@ -130,7 +141,12 @@ class Subscriptions(SyncAPIResource):
                 },
                 subscription_update_params.SubscriptionUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=EventSubscription,
         )
 
@@ -192,11 +208,17 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Delete an event subscription."""
         return self._delete(
             f"/event_subscriptions/{event_subscription_token}",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -209,11 +231,17 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Resend all failed messages since a given time."""
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/recover",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -226,6 +254,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Replays messages to the endpoint.
 
@@ -234,7 +263,12 @@ class Subscriptions(SyncAPIResource):
         """
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/replay_missing",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -264,6 +298,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Rotate the secret for an event subscription.
 
@@ -272,7 +307,12 @@ class Subscriptions(SyncAPIResource):
         """
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -290,6 +330,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Create a new event subscription.
@@ -309,6 +350,8 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/event_subscriptions",
@@ -321,7 +364,12 @@ class AsyncSubscriptions(AsyncAPIResource):
                 },
                 subscription_create_params.SubscriptionCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=EventSubscription,
         )
 
@@ -355,6 +403,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Update an event subscription.
@@ -374,6 +423,8 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._patch(
             f"/event_subscriptions/{event_subscription_token}",
@@ -386,7 +437,12 @@ class AsyncSubscriptions(AsyncAPIResource):
                 },
                 subscription_update_params.SubscriptionUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=EventSubscription,
         )
 
@@ -448,11 +504,17 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Delete an event subscription."""
         return await self._delete(
             f"/event_subscriptions/{event_subscription_token}",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -465,11 +527,17 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Resend all failed messages since a given time."""
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/recover",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -482,6 +550,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Replays messages to the endpoint.
 
@@ -490,7 +559,12 @@ class AsyncSubscriptions(AsyncAPIResource):
         """
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/replay_missing",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )
 
@@ -520,6 +594,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> None:
         """Rotate the secret for an event subscription.
 
@@ -528,6 +603,11 @@ class AsyncSubscriptions(AsyncAPIResource):
         """
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=NoneType,
         )

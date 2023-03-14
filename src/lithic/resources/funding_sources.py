@@ -36,6 +36,7 @@ class FundingSources(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Add a funding source using bank routing and account numbers or via Plaid.
@@ -64,6 +65,8 @@ class FundingSources(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -79,6 +82,7 @@ class FundingSources(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Add a funding source using bank routing and account numbers or via Plaid.
@@ -100,6 +104,8 @@ class FundingSources(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -118,6 +124,7 @@ class FundingSources(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Add a funding source using bank routing and account numbers or via Plaid.
@@ -148,6 +155,8 @@ class FundingSources(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/funding_sources",
@@ -162,7 +171,12 @@ class FundingSources(SyncAPIResource):
                 },
                 funding_source_create_params.FundingSourceCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=FundingSource,
         )
 
@@ -177,6 +191,7 @@ class FundingSources(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Update a funding source.
@@ -200,6 +215,8 @@ class FundingSources(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._patch(
             f"/funding_sources/{funding_source_token}",
@@ -210,7 +227,12 @@ class FundingSources(SyncAPIResource):
                 },
                 funding_source_update_params.FundingSourceUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=FundingSource,
         )
 
@@ -270,6 +292,7 @@ class FundingSources(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Verify a bank account as a funding source by providing received micro-deposit
@@ -289,6 +312,8 @@ class FundingSources(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/funding_sources/{funding_source_token}/verify",
@@ -299,7 +324,12 @@ class FundingSources(SyncAPIResource):
                 },
                 funding_source_verify_params.FundingSourceVerifyParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=FundingSource,
         )
 
@@ -319,6 +349,7 @@ class AsyncFundingSources(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Add a funding source using bank routing and account numbers or via Plaid.
@@ -347,6 +378,8 @@ class AsyncFundingSources(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -362,6 +395,7 @@ class AsyncFundingSources(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Add a funding source using bank routing and account numbers or via Plaid.
@@ -383,6 +417,8 @@ class AsyncFundingSources(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -401,6 +437,7 @@ class AsyncFundingSources(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Add a funding source using bank routing and account numbers or via Plaid.
@@ -431,6 +468,8 @@ class AsyncFundingSources(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/funding_sources",
@@ -445,7 +484,12 @@ class AsyncFundingSources(AsyncAPIResource):
                 },
                 funding_source_create_params.FundingSourceCreateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=FundingSource,
         )
 
@@ -460,6 +504,7 @@ class AsyncFundingSources(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Update a funding source.
@@ -483,6 +528,8 @@ class AsyncFundingSources(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._patch(
             f"/funding_sources/{funding_source_token}",
@@ -493,7 +540,12 @@ class AsyncFundingSources(AsyncAPIResource):
                 },
                 funding_source_update_params.FundingSourceUpdateParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=FundingSource,
         )
 
@@ -553,6 +605,7 @@ class AsyncFundingSources(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        idempotency_key: str | None = None,
     ) -> FundingSource:
         """
         Verify a bank account as a funding source by providing received micro-deposit
@@ -572,6 +625,8 @@ class AsyncFundingSources(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/funding_sources/{funding_source_token}/verify",
@@ -582,6 +637,11 @@ class AsyncFundingSources(AsyncAPIResource):
                 },
                 funding_source_verify_params.FundingSourceVerifyParams,
             ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
             cast_to=FundingSource,
         )
