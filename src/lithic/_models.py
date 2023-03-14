@@ -71,10 +71,10 @@ def _construct_field(value: object, field: ModelField) -> object:
     if value is None:
         return field.get_default()
 
-    return _construct_type(value=value, type_=field.outer_type_)
+    return construct_type(value=value, type_=field.outer_type_)
 
 
-def _construct_type(*, value: object, type_: type) -> object:
+def construct_type(*, value: object, type_: type) -> object:
     # we need to use the origin class for any types that are subscripted generics
     # e.g. Dict[str, object]
     origin = get_origin(type_) or type_
@@ -88,7 +88,7 @@ def _construct_type(*, value: object, type_: type) -> object:
         # if the data is not valid, use the first variant that doesn't fail while deserializing
         for variant in args:
             try:
-                return _construct_type(value=value, type_=variant)
+                return construct_type(value=value, type_=variant)
             except Exception:
                 continue
 
@@ -99,7 +99,7 @@ def _construct_type(*, value: object, type_: type) -> object:
             return value
 
         _, items_type = get_args(type_)  # Dict[_, items_type]
-        return {key: _construct_type(value=item, type_=items_type) for key, item in value.items()}
+        return {key: construct_type(value=item, type_=items_type) for key, item in value.items()}
 
     if not is_literal_type(type_) and (issubclass(origin, BaseModel) or issubclass(origin, GenericModel)):
         if is_list(value):
@@ -116,7 +116,7 @@ def _construct_type(*, value: object, type_: type) -> object:
             return value
 
         inner_type = args[0]  # List[inner_type]
-        return [_construct_type(value=entry, type_=inner_type) for entry in value]
+        return [construct_type(value=entry, type_=inner_type) for entry in value]
 
     if origin == float:
         try:

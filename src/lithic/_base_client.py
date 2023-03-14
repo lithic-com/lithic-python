@@ -52,7 +52,7 @@ from ._types import (
     ModelBuilderProtocol,
 )
 from ._utils import is_dict, is_mapping
-from ._models import BaseModel, GenericModel, FinalRequestOptions
+from ._models import BaseModel, GenericModel, FinalRequestOptions, construct_type
 from ._base_exceptions import (
     APIStatusError,
     APITimeoutError,
@@ -67,7 +67,15 @@ AsyncPageT = TypeVar("AsyncPageT", bound="BaseAsyncPage[Any]")
 
 ResponseT = TypeVar(
     "ResponseT",
-    bound=Union[BaseModel, ModelBuilderProtocol, str, None, httpx.Response, UnknownResponse],
+    bound=Union[
+        str,
+        None,
+        BaseModel,
+        Dict[str, Any],
+        httpx.Response,
+        UnknownResponse,
+        ModelBuilderProtocol,
+    ],
 )
 
 _T = TypeVar("_T")
@@ -447,8 +455,10 @@ class BaseClient:
         if cast_to == str:
             return cast(ResponseT, response.text)
 
+        origin = get_origin(cast_to) or cast_to
+
         # TODO: try to handle Unions better…
-        if get_origin(cast_to) is Union:
+        if origin is Union:
             members = get_args(cast_to)
             for member in members:
                 try:
@@ -476,7 +486,7 @@ class BaseClient:
 
             raise ValueError(f"Response did not match any type in union {members}")
 
-        if issubclass(cast_to, httpx.Response):
+        if issubclass(origin, httpx.Response):
             # Because of the invariance of our ResponseT TypeVar, users can subclass httpx.Response
             # and pass that class to our request functions. We cannot change the variance to be either
             # covariant or contravariant as that makes our usage of ResponseT illegal. We could construct
@@ -494,8 +504,8 @@ class BaseClient:
         # to be safe as we have handled all the types that could be bound to the
         # `ResponseT` TypeVar, however if that TypeVar is ever updated in the future, then
         # this function would become unsafe but a type checker would not report an error.
-        if cast_to is not UnknownResponse and not issubclass(cast_to, BaseModel):
-            raise RuntimeError(f"Invalid state, expected {cast_to} to be a subclass type of {BaseModel}.")
+        if cast_to is not UnknownResponse and not issubclass(origin, BaseModel) and origin != dict:
+            raise RuntimeError(f"Invalid state, expected {cast_to} to be a subclass type of {BaseModel} or {dict}.")
 
         # split is required to handle cases where additional information is included
         # in the response, e.g. application/json; charset=utf-8
@@ -523,11 +533,15 @@ class BaseClient:
         response: httpx.Response,
         _strict: bool = False,
     ) -> ResponseT:
+        origin = get_origin(cast_to) or cast_to
         if data is None:
             return cast(ResponseT, None)
 
         if cast_to is UnknownResponse:
             return cast(ResponseT, data)
+
+        if origin == dict:
+            return cast(ResponseT, construct_type(value=data, type_=cast_to))
 
         if issubclass(cast_to, ModelBuilderProtocol):
             return cast(ResponseT, cast_to.build(response=response, data=data))
@@ -853,7 +867,9 @@ class SyncAPIClient(BaseClient):
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="get", url=path, **options)
-        return self.request(cast_to, opts)
+        # cast is required because mypy complains about returning Any even though
+        # it understands the type variables
+        return cast(ResponseT, self.request(cast_to, opts, stream=False))
 
     @overload
     def post(
@@ -905,7 +921,7 @@ class SyncAPIClient(BaseClient):
         stream: bool = False,
     ) -> ResponseT | Iterator[ResponseT]:
         opts = FinalRequestOptions.construct(method="post", url=path, json_data=body, files=files, **options)
-        return self.request(cast_to, opts, stream=stream)
+        return cast(ResponseT, self.request(cast_to, opts, stream=stream))
 
     def patch(
         self,
@@ -916,7 +932,7 @@ class SyncAPIClient(BaseClient):
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="patch", url=path, json_data=body, **options)
-        return self.request(cast_to, opts)
+        return cast(ResponseT, self.request(cast_to, opts))
 
     def put(
         self,
@@ -927,7 +943,7 @@ class SyncAPIClient(BaseClient):
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="put", url=path, json_data=body, **options)
-        return self.request(cast_to, opts)
+        return cast(ResponseT, self.request(cast_to, opts))
 
     def delete(
         self,
@@ -938,7 +954,7 @@ class SyncAPIClient(BaseClient):
         options: RequestOptions = {},
     ) -> ResponseT:
         opts = FinalRequestOptions.construct(method="delete", url=path, json_data=body, **options)
-        return self.request(cast_to, opts)
+        return cast(ResponseT, self.request(cast_to, opts))
 
     def get_api_list(
         self,
