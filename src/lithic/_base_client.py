@@ -3,11 +3,13 @@ from __future__ import annotations
 import json
 import time
 import uuid
+import inspect
 import platform
 from random import random
 from typing import (
     Any,
     Dict,
+    List,
     Type,
     Union,
     Generic,
@@ -22,7 +24,7 @@ from typing import (
     overload,
 )
 from functools import lru_cache
-from typing_extensions import Literal, get_args, get_origin
+from typing_extensions import Literal, get_origin
 
 import anyio
 import httpx
@@ -52,7 +54,13 @@ from ._types import (
     ModelBuilderProtocol,
 )
 from ._utils import is_dict, is_mapping
-from ._models import BaseModel, GenericModel, FinalRequestOptions, construct_type
+from ._models import (
+    BaseModel,
+    GenericModel,
+    FinalRequestOptions,
+    validate_type,
+    construct_type,
+)
 from ._base_exceptions import (
     APIStatusError,
     APITimeoutError,
@@ -71,6 +79,7 @@ ResponseT = TypeVar(
         str,
         None,
         BaseModel,
+        List[Any],
         Dict[str, Any],
         httpx.Response,
         UnknownResponse,
@@ -447,7 +456,6 @@ class BaseClient:
         cast_to: Type[ResponseT],
         options: FinalRequestOptions,
         response: httpx.Response,
-        _strict: bool = False,
     ) -> ResponseT:
         if cast_to is NoneType:
             return cast(ResponseT, None)
@@ -457,36 +465,7 @@ class BaseClient:
 
         origin = get_origin(cast_to) or cast_to
 
-        # TODO: try to handle Unions better…
-        if origin is Union:
-            members = get_args(cast_to)
-            for member in members:
-                try:
-                    return cast(
-                        ResponseT,
-                        self._process_response(
-                            cast_to=member,
-                            options=options,
-                            response=response,
-                            _strict=True,
-                        ),
-                    )
-                except Exception:
-                    continue
-
-            # If nobody matches exactly, try again loosely.
-            for member in members:
-                try:
-                    return cast(
-                        ResponseT,
-                        self._process_response(cast_to=member, options=options, response=response),
-                    )
-                except Exception:
-                    continue
-
-            raise ValueError(f"Response did not match any type in union {members}")
-
-        if issubclass(origin, httpx.Response):
+        if inspect.isclass(origin) and issubclass(origin, httpx.Response):
             # Because of the invariance of our ResponseT TypeVar, users can subclass httpx.Response
             # and pass that class to our request functions. We cannot change the variance to be either
             # covariant or contravariant as that makes our usage of ResponseT illegal. We could construct
@@ -504,8 +483,16 @@ class BaseClient:
         # to be safe as we have handled all the types that could be bound to the
         # `ResponseT` TypeVar, however if that TypeVar is ever updated in the future, then
         # this function would become unsafe but a type checker would not report an error.
-        if cast_to is not UnknownResponse and not issubclass(origin, BaseModel) and origin != dict:
-            raise RuntimeError(f"Invalid state, expected {cast_to} to be a subclass type of {BaseModel} or {dict}.")
+        if (
+            cast_to is not UnknownResponse
+            and not origin is list
+            and not origin is dict
+            and not origin is Union
+            and not issubclass(origin, BaseModel)
+        ):
+            raise RuntimeError(
+                f"Invalid state, expected {cast_to} to be a subclass type of {BaseModel}, {dict}, {list} or {Union}."
+            )
 
         # split is required to handle cases where additional information is included
         # in the response, e.g. application/json; charset=utf-8
@@ -516,14 +503,7 @@ class BaseClient:
             )
 
         data = response.json()
-
-        # TODO: investigate this type error
-        return self._process_response_data(  # type: ignore
-            data=data,
-            cast_to=cast_to,
-            response=response,
-            _strict=_strict,
-        )
+        return self._process_response_data(data=data, cast_to=cast_to, response=response)
 
     def _process_response_data(
         self,
@@ -531,33 +511,20 @@ class BaseClient:
         data: object,
         cast_to: type[ResponseT],
         response: httpx.Response,
-        _strict: bool = False,
     ) -> ResponseT:
-        origin = get_origin(cast_to) or cast_to
         if data is None:
             return cast(ResponseT, None)
 
         if cast_to is UnknownResponse:
             return cast(ResponseT, data)
 
-        if origin == dict:
-            return cast(ResponseT, construct_type(value=data, type_=cast_to))
-
-        if issubclass(cast_to, ModelBuilderProtocol):
+        if inspect.isclass(cast_to) and issubclass(cast_to, ModelBuilderProtocol):
             return cast(ResponseT, cast_to.build(response=response, data=data))
 
-        if not issubclass(cast_to, BaseModel):
-            raise RuntimeError(f"Invalid state, expected {cast_to} to be a subclass type of {BaseModel}.")
+        if self._strict_response_validation:
+            return cast(ResponseT, validate_type(type_=cast_to, value=data))
 
-        if not is_mapping(data):
-            raise TypeError(f"Expected response data to be a mapping but received {type(data)} instead.")
-
-        model_cls = cast(Type[BaseModel], cast_to)
-        if _strict or self._strict_response_validation:
-            return cast(ResponseT, model_cls(**data))
-
-        model = model_cls.construct(**data)  # type: ignore[arg-type]
-        return cast(ResponseT, model)
+        return cast(ResponseT, construct_type(type_=cast_to, value=data))
 
     # TODO: make the constants in here configurable
     def _process_stream_line(self, contents: str) -> str:

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 from typing import Any, Type, Union, Generic, TypeVar, cast
 from datetime import date, datetime
 from typing_extensions import final
@@ -79,6 +80,11 @@ def _construct_field(value: object, field: ModelField) -> object:
 
 
 def construct_type(*, value: object, type_: type) -> object:
+    """Loose coercion to the expected type with construction of nested values.
+
+    If the given value does not match the expected type then it is returned as-is.
+    """
+
     # we need to use the origin class for any types that are subscripted generics
     # e.g. Dict[str, object]
     origin = get_origin(type_) or type_
@@ -147,6 +153,19 @@ def construct_type(*, value: object, type_: type) -> object:
             return value
 
     return value
+
+
+def validate_type(*, type_: type[_T], value: object) -> _T:
+    """Strict validation that the given value matches the expected type"""
+    if inspect.isclass(type_) and issubclass(type_, pydantic.BaseModel):
+        return cast(_T, type_.parse_obj(value))
+
+    model = _create_pydantic_model(type_).validate(value)
+    return cast(_T, model.__root__)
+
+
+def _create_pydantic_model(type_: _T) -> Type[RootModel[_T]]:
+    return RootModel[type_]  # type: ignore
 
 
 def _create_pydantic_field(type_: type) -> ModelField:

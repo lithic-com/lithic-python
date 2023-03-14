@@ -121,7 +121,7 @@ def is_annotated_type(typ: type) -> bool:
 
 
 def is_list_type(typ: type) -> bool:
-    return get_origin(typ) == list
+    return (get_origin(typ) or typ) == list
 
 
 def is_union_type(typ: type) -> bool:
