@@ -22,7 +22,6 @@ from ..types import (
     card_create_params,
     card_update_params,
     card_reissue_params,
-    card_retrieve_params,
     card_provision_params,
     card_get_embed_url_params,
 )
@@ -82,10 +81,10 @@ class Cards(SyncAPIResource):
               - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
                 authorization.
 
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
+          account_token: Globally unique identifier for the account that the card will be associated
+              with. Required for programs enrolling users using the
+              [/account_holders endpoint](https://docs.lithic.com/docs/account-holders-kyc).
+              See [Managing Your Program](doc:managing-your-program) for more information.
 
           card_program_token: For physical card programs with more than one BIN range. This must be configured
               with Lithic before use. Identifies the card program/BIN range under which to
@@ -198,36 +197,16 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> Card:
-        """
-        Get card configuration such as spend limit and state.
-
-        Args:
-          account_token: Only required for multi-account users using account holder enrollment. Returns
-              card associated with this account. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-        """
+        """Get card configuration such as spend limit and state."""
         return self._get(
             f"/cards/{card_token}",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                query=maybe_transform({"account_token": account_token}, card_retrieve_params.CardRetrieveParams),
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )
 
@@ -235,7 +214,6 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         funding_token: str | NotGiven = NOT_GIVEN,
@@ -260,11 +238,6 @@ class Cards(SyncAPIResource):
         undone._
 
         Args:
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
-
           auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
               with the card.
 
@@ -323,7 +296,6 @@ class Cards(SyncAPIResource):
             f"/cards/{card_token}",
             body=maybe_transform(
                 {
-                    "account_token": account_token,
                     "funding_token": funding_token,
                     "memo": memo,
                     "spend_limit": spend_limit,
@@ -358,21 +330,17 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> SyncPage[Card]:
-        """List cards.
+        """
+        List cards.
 
         Args:
-          account_token: Only required for multi-account users.
+          account_token: Returns cards associated with the specified account.
 
-        Returns cards associated with this
-              account. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
+          begin: Date string in RFC 3339 format. Only entries created after the specified date
+              will be included. UTC time zone.
 
-          begin: Date string in 8601 format. Only entries created after the specified date will
-              be included. UTC time zone.
-
-          end: Date string in 8601 format. Only entries created before the specified date will
-              be included. UTC time zone.
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
 
           page: Page (for pagination).
 
@@ -447,7 +415,7 @@ class Cards(SyncAPIResource):
         Args:
           embed_request: A base64 encoded JSON string of an EmbedRequest to specify which card to load.
 
-          hmac: SHA2 HMAC of the embed_request JSON string with base64 digest.
+          hmac: SHA256 HMAC of the embed_request JSON string with base64 digest.
 
           extra_headers: Send extra headers
 
@@ -477,7 +445,6 @@ class Cards(SyncAPIResource):
         self,
         *,
         token: str,
-        account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
         expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
@@ -504,7 +471,6 @@ class Cards(SyncAPIResource):
             css=css,
             token=token,
             expiration=expiration,
-            account_token=account_token,
             target_origin=target_origin,
         )
         return self._get(
@@ -521,7 +487,6 @@ class Cards(SyncAPIResource):
         self,
         *,
         token: str,
-        account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
         expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
@@ -564,7 +529,6 @@ class Cards(SyncAPIResource):
                     "css": css,
                     "token": token,
                     "expiration": expiration,
-                    "account_token": account_token,
                     "target_origin": target_origin,
                 }
             ),
@@ -591,7 +555,6 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         certificate: str | NotGiven = NOT_GIVEN,
         digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
         nonce: str | NotGiven = NOT_GIVEN,
@@ -612,11 +575,6 @@ class Cards(SyncAPIResource):
         for more information.
 
         Args:
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
-
           certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
               format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
               Provided by the device's wallet.
@@ -645,7 +603,6 @@ class Cards(SyncAPIResource):
                     "nonce": nonce,
                     "nonce_signature": nonce_signature,
                     "certificate": certificate,
-                    "account_token": account_token,
                 },
                 card_provision_params.CardProvisionParams,
             ),
@@ -769,10 +726,10 @@ class AsyncCards(AsyncAPIResource):
               - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
                 authorization.
 
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
+          account_token: Globally unique identifier for the account that the card will be associated
+              with. Required for programs enrolling users using the
+              [/account_holders endpoint](https://docs.lithic.com/docs/account-holders-kyc).
+              See [Managing Your Program](doc:managing-your-program) for more information.
 
           card_program_token: For physical card programs with more than one BIN range. This must be configured
               with Lithic before use. Identifies the card program/BIN range under which to
@@ -885,36 +842,16 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> Card:
-        """
-        Get card configuration such as spend limit and state.
-
-        Args:
-          account_token: Only required for multi-account users using account holder enrollment. Returns
-              card associated with this account. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-        """
+        """Get card configuration such as spend limit and state."""
         return await self._get(
             f"/cards/{card_token}",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                query=maybe_transform({"account_token": account_token}, card_retrieve_params.CardRetrieveParams),
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=Card,
         )
 
@@ -922,7 +859,6 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         funding_token: str | NotGiven = NOT_GIVEN,
@@ -947,11 +883,6 @@ class AsyncCards(AsyncAPIResource):
         undone._
 
         Args:
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
-
           auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
               with the card.
 
@@ -1010,7 +941,6 @@ class AsyncCards(AsyncAPIResource):
             f"/cards/{card_token}",
             body=maybe_transform(
                 {
-                    "account_token": account_token,
                     "funding_token": funding_token,
                     "memo": memo,
                     "spend_limit": spend_limit,
@@ -1045,21 +975,17 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> AsyncPaginator[Card, AsyncPage[Card]]:
-        """List cards.
+        """
+        List cards.
 
         Args:
-          account_token: Only required for multi-account users.
+          account_token: Returns cards associated with the specified account.
 
-        Returns cards associated with this
-              account. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
+          begin: Date string in RFC 3339 format. Only entries created after the specified date
+              will be included. UTC time zone.
 
-          begin: Date string in 8601 format. Only entries created after the specified date will
-              be included. UTC time zone.
-
-          end: Date string in 8601 format. Only entries created before the specified date will
-              be included. UTC time zone.
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
 
           page: Page (for pagination).
 
@@ -1134,7 +1060,7 @@ class AsyncCards(AsyncAPIResource):
         Args:
           embed_request: A base64 encoded JSON string of an EmbedRequest to specify which card to load.
 
-          hmac: SHA2 HMAC of the embed_request JSON string with base64 digest.
+          hmac: SHA256 HMAC of the embed_request JSON string with base64 digest.
 
           extra_headers: Send extra headers
 
@@ -1164,7 +1090,6 @@ class AsyncCards(AsyncAPIResource):
         self,
         *,
         token: str,
-        account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
         expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
@@ -1191,7 +1116,6 @@ class AsyncCards(AsyncAPIResource):
             css=css,
             token=token,
             expiration=expiration,
-            account_token=account_token,
             target_origin=target_origin,
         )
         return await self._get(
@@ -1208,7 +1132,6 @@ class AsyncCards(AsyncAPIResource):
         self,
         *,
         token: str,
-        account_token: str | NotGiven = NOT_GIVEN,
         css: str | NotGiven = NOT_GIVEN,
         expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
         target_origin: str | NotGiven = NOT_GIVEN,
@@ -1251,7 +1174,6 @@ class AsyncCards(AsyncAPIResource):
                     "css": css,
                     "token": token,
                     "expiration": expiration,
-                    "account_token": account_token,
                     "target_origin": target_origin,
                 }
             ),
@@ -1278,7 +1200,6 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
         certificate: str | NotGiven = NOT_GIVEN,
         digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
         nonce: str | NotGiven = NOT_GIVEN,
@@ -1299,11 +1220,6 @@ class AsyncCards(AsyncAPIResource):
         for more information.
 
         Args:
-          account_token: Only required for multi-account users. Token identifying the account the card
-              will be associated with. Only applicable if using account holder enrollment. See
-              [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-              more information.
-
           certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
               format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
               Provided by the device's wallet.
@@ -1332,7 +1248,6 @@ class AsyncCards(AsyncAPIResource):
                     "nonce": nonce,
                     "nonce_signature": nonce_signature,
                     "certificate": certificate,
-                    "account_token": account_token,
                 },
                 card_provision_params.CardProvisionParams,
             ),

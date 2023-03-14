@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["SubscriptionUpdateParams"]
 
 
 class SubscriptionUpdateParams(TypedDict, total=False):
+    url: Required[str]
+    """URL to which event webhooks will be sent. URL must be a valid HTTPS address."""
+
     description: str
     """Event subscription description."""
 
@@ -20,6 +23,3 @@ class SubscriptionUpdateParams(TypedDict, total=False):
 
     If left blank, all types will be sent.
     """
-
-    url: str
-    """URL to which event webhooks will be sent. URL must be a valid HTTPS address."""

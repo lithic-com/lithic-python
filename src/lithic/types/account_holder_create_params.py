@@ -94,7 +94,7 @@ class KYBBeneficialOwnerIndividual(TypedDict, total=False):
     """
 
     dob: Required[str]
-    """Individual's date of birth, as an ISO 8601 date."""
+    """Individual's date of birth, as an RFC 3339 date."""
 
     email: Required[str]
     """
@@ -128,7 +128,7 @@ class KYBControlPerson(TypedDict, total=False):
     """
 
     dob: Required[str]
-    """Individual's date of birth, as an ISO 8601 date."""
+    """Individual's date of birth, as an RFC 3339 date."""
 
     email: Required[str]
     """
@@ -203,7 +203,7 @@ class KYB(TypedDict, total=False):
 
     tos_timestamp: Required[str]
     """
-    An ISO 8601 timestamp indicating when the account holder accepted the applicable
+    An RFC 3339 timestamp indicating when the account holder accepted the applicable
     legal agreements (e.g., cardholder terms) as agreed upon during API customer's
     implementation with Lithic.
     """
@@ -216,7 +216,7 @@ class KYB(TypedDict, total=False):
 
     kyb_passed_timestamp: str
     """
-    An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+    An RFC 3339 timestamp indicating when precomputed KYC was completed on the
     business with a pass result.
 
     This field is required only if workflow type is `KYB_BYO`.
@@ -231,7 +231,7 @@ class KYCIndividual(TypedDict, total=False):
     """
 
     dob: Required[str]
-    """Individual's date of birth, as an ISO 8601 date."""
+    """Individual's date of birth, as an RFC 3339 date."""
 
     email: Required[str]
     """
@@ -266,7 +266,7 @@ class KYC(TypedDict, total=False):
 
     tos_timestamp: Required[str]
     """
-    An ISO 8601 timestamp indicating when the account holder accepted the applicable
+    An RFC 3339 timestamp indicating when the account holder accepted the applicable
     legal agreements (e.g., cardholder terms) as agreed upon during API customer's
     implementation with Lithic.
     """
@@ -276,7 +276,7 @@ class KYC(TypedDict, total=False):
 
     kyc_passed_timestamp: str
     """
-    An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+    An RFC 3339 timestamp indicating when precomputed KYC was completed on the
     individual with a pass result.
 
     This field is required only if workflow type is `KYC_BYO`.

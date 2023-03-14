@@ -8,15 +8,6 @@ __all__ = ["CardProvisionParams"]
 
 
 class CardProvisionParams(TypedDict, total=False):
-    account_token: str
-    """Only required for multi-account users.
-
-    Token identifying the account the card will be associated with. Only applicable
-    if using account holder enrollment. See
-    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-    more information.
-    """
-
     certificate: str
     """Required for `APPLE_PAY`.
 

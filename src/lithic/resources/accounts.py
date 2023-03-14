@@ -126,13 +126,13 @@ class Accounts(SyncAPIResource):
         """List account configurations.
 
         Args:
-          begin: Date string in 8601 format.
+          begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified date will
-              be included. UTC time zone.
+        Only entries created after the specified date
+              will be included. UTC time zone.
 
-          end: Date string in 8601 format. Only entries created before the specified date will
-              be included. UTC time zone.
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
 
           page: Page (for pagination).
 
@@ -275,13 +275,13 @@ class AsyncAccounts(AsyncAPIResource):
         """List account configurations.
 
         Args:
-          begin: Date string in 8601 format.
+          begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified date will
-              be included. UTC time zone.
+        Only entries created after the specified date
+              will be included. UTC time zone.
 
-          end: Date string in 8601 format. Only entries created before the specified date will
-              be included. UTC time zone.
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
 
           page: Page (for pagination).
 

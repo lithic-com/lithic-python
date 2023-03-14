@@ -12,7 +12,7 @@ __all__ = ["FundingSource"]
 class FundingSource(BaseModel):
     created: datetime
     """
-    An ISO 8601 string representing when this funding source was added to the Lithic
+    An RFC 3339 string representing when this funding source was added to the Lithic
     account. This may be `null`. UTC time zone.
     """
 

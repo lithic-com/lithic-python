@@ -15,9 +15,6 @@ class CardGetEmbedURLParams(TypedDict, total=False):
     token: Required[str]
     """Globally unique identifier for the card to be displayed."""
 
-    account_token: str
-    """Only needs to be included if one or more end-users have been enrolled."""
-
     css: str
     """
     A publicly available URI, so the white-labeled card element can be styled with
@@ -25,7 +22,7 @@ class CardGetEmbedURLParams(TypedDict, total=False):
     """
 
     expiration: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """An ISO 8601 timestamp for when the request should expire. UTC time zone.
+    """An RFC 3339 timestamp for when the request should expire. UTC time zone.
 
     If no timezone is specified, UTC will be used. If payload does not contain an
     expiration, the request will never expire.

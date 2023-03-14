@@ -120,7 +120,7 @@ class Event(BaseModel):
     """Amount of the transaction event (in cents), including any acquirer fees."""
 
     created: datetime
-    """ISO 8601 date and time this event entered the system. UTC time zone."""
+    """RFC 3339 date and time this event entered the system. UTC time zone."""
 
     result: Literal[
         "ACCOUNT_STATE_TRANSACTION",

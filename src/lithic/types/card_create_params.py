@@ -27,12 +27,12 @@ class CardCreateParams(TypedDict, total=False):
     """
 
     account_token: str
-    """Only required for multi-account users.
+    """Globally unique identifier for the account that the card will be associated
+    with.
 
-    Token identifying the account the card will be associated with. Only applicable
-    if using account holder enrollment. See
-    [Managing Your Program](https://docs.lithic.com/docs/managing-your-program) for
-    more information.
+    Required for programs enrolling users using the
+    [/account_holders endpoint](https://docs.lithic.com/docs/account-holders-kyc).
+    See [Managing Your Program](doc:managing-your-program) for more information.
     """
 
     card_program_token: str

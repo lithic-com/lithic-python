@@ -110,7 +110,7 @@ from lithic.types import (
 Methods:
 
 - <code title="post /cards">client.cards.<a href="./src/lithic/resources/cards.py">create</a>(\*\*<a href="src/lithic/types/card_create_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
-- <code title="get /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards.py">retrieve</a>(card_token, \*\*<a href="src/lithic/types/card_retrieve_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="get /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards.py">retrieve</a>(card_token) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="patch /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards.py">update</a>(card_token, \*\*<a href="src/lithic/types/card_update_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /cards">client.cards.<a href="./src/lithic/resources/cards.py">list</a>(\*\*<a href="src/lithic/types/card_list_params.py">params</a>) -> <a href="./src/lithic/types/card.py">SyncPage[Card]</a></code>
 - <code title="get /embed/card">client.cards.<a href="./src/lithic/resources/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
@@ -121,6 +121,26 @@ Custom Methods:
 
 - `get_embed_html`
 - `get_embed_url`
+
+# Disputes
+
+Types:
+
+```python
+from lithic.types import Dispute, DisputeEvidence, DisputeInitiateEvidenceUploadResponse
+```
+
+Methods:
+
+- <code title="post /disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">create</a>(\*\*<a href="src/lithic/types/dispute_create_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="get /disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="patch /disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">update</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_update_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="get /disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">list</a>(\*\*<a href="src/lithic/types/dispute_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">SyncCursorPage[Dispute]</a></code>
+- <code title="delete /disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="delete /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete_evidence</a>(evidence_token, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
+- <code title="post /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">initiate_evidence_upload</a>(dispute_token) -> <a href="./src/lithic/types/dispute_initiate_evidence_upload_response.py">DisputeInitiateEvidenceUploadResponse</a></code>
+- <code title="get /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">list_evidences</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_list_evidences_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">SyncCursorPage[DisputeEvidence]</a></code>
+- <code title="get /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(evidence_token, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 
 # Events
 

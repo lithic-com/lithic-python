@@ -98,10 +98,10 @@ class Subscriptions(SyncAPIResource):
         self,
         event_subscription_token: str,
         *,
+        url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -113,14 +113,14 @@ class Subscriptions(SyncAPIResource):
         Update an event subscription.
 
         Args:
+          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
+
           description: Event subscription description.
 
           disabled: Whether the event subscription is active (false) or inactive (true).
 
           event_types: Indicates types of events that will be sent to this subscription. If left blank,
               all types will be sent.
-
-          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
 
           extra_headers: Send extra headers
 
@@ -394,10 +394,10 @@ class AsyncSubscriptions(AsyncAPIResource):
         self,
         event_subscription_token: str,
         *,
+        url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -409,14 +409,14 @@ class AsyncSubscriptions(AsyncAPIResource):
         Update an event subscription.
 
         Args:
+          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
+
           description: Event subscription description.
 
           disabled: Whether the event subscription is active (false) or inactive (true).
 
           event_types: Indicates types of events that will be sent to this subscription. If left blank,
               all types will be sent.
-
-          url: URL to which event webhooks will be sent. URL must be a valid HTTPS address.
 
           extra_headers: Send extra headers
 

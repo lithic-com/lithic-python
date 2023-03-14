@@ -10,7 +10,7 @@ __all__ = ["Event"]
 
 class Event(BaseModel):
     created: datetime
-    """An ISO 8601 timestamp for when the event was created. UTC time zone.
+    """An RFC 3339 timestamp for when the event was created. UTC time zone.
 
     If no timezone is specified, UTC will be used.
     """

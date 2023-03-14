@@ -141,7 +141,7 @@ class TestAccountHolders:
                 "phone_number": "+12124007676",
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
@@ -278,9 +278,9 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyb_passed_timestamp="2022-03-08T08:00:00Z",
+            kyb_passed_timestamp="2018-05-29T21:16:05Z",
             nature_of_business="Software company selling solutions to the restaurant industry",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
@@ -304,7 +304,7 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
@@ -328,8 +328,8 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyc_passed_timestamp="2022-03-09T08:00:00Z",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            kyc_passed_timestamp="string",
+            tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
@@ -408,7 +408,7 @@ class TestAccountHolders:
         account_holder = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow="KYC_ADVANCED",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="2018-05-29T21:16:05Z",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -565,7 +565,7 @@ class TestAsyncAccountHolders:
                 "phone_number": "+12124007676",
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
@@ -702,9 +702,9 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyb_passed_timestamp="2022-03-08T08:00:00Z",
+            kyb_passed_timestamp="2018-05-29T21:16:05Z",
             nature_of_business="Software company selling solutions to the restaurant industry",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
@@ -728,7 +728,7 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
@@ -752,8 +752,8 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyc_passed_timestamp="2022-03-09T08:00:00Z",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            kyc_passed_timestamp="string",
+            tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
@@ -832,7 +832,7 @@ class TestAsyncAccountHolders:
         account_holder = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow="KYC_ADVANCED",
-            tos_timestamp="2022-03-08T08:00:00Z",
+            tos_timestamp="2018-05-29T21:16:05Z",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",

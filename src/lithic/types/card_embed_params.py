@@ -12,4 +12,4 @@ class CardEmbedParams(TypedDict, total=False):
     """A base64 encoded JSON string of an EmbedRequest to specify which card to load."""
 
     hmac: str
-    """SHA2 HMAC of the embed_request JSON string with base64 digest."""
+    """SHA256 HMAC of the embed_request JSON string with base64 digest."""

@@ -8,13 +8,10 @@ from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["CardListParams"]
+__all__ = ["DisputeListEvidencesParams"]
 
 
-class CardListParams(TypedDict, total=False):
-    account_token: str
-    """Returns cards associated with the specified account."""
-
+class DisputeListEvidencesParams(TypedDict, total=False):
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
@@ -27,8 +24,17 @@ class CardListParams(TypedDict, total=False):
     Only entries created before the specified date will be included. UTC time zone.
     """
 
-    page: int
-    """Page (for pagination)."""
+    ending_before: str
+    """The unique identifier of the first item in the previous page.
+
+    Used to retrieve the previous page.
+    """
 
     page_size: int
     """Page size (for pagination)."""
+
+    starting_after: str
+    """The unique identifier of the last item in the previous page.
+
+    Used to retrieve the next page.
+    """

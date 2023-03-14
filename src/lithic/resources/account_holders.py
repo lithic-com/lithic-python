@@ -88,7 +88,7 @@ class AccountHolders(SyncAPIResource):
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
@@ -96,7 +96,7 @@ class AccountHolders(SyncAPIResource):
 
           workflow: Specifies the type of KYB workflow to run.
 
-          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
@@ -139,13 +139,13 @@ class AccountHolders(SyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               run.
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
           workflow: Specifies the type of KYC workflow to run.
 
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               individual with a pass result.
 
               This field is required only if workflow type is `KYC_BYO`.
@@ -306,14 +306,14 @@ class AccountHolders(SyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               run.
 
-          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
 
           kyc_exemption_type: Specifies the type of KYC Exempt user
 
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               individual with a pass result.
 
               This field is required only if workflow type is `KYC_BYO`.
@@ -325,7 +325,7 @@ class AccountHolders(SyncAPIResource):
 
           phone_number: The KYC Exempt user's phone number
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
@@ -554,7 +554,7 @@ class AccountHolders(SyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               re-run.
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
@@ -739,7 +739,7 @@ class AsyncAccountHolders(AsyncAPIResource):
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
@@ -747,7 +747,7 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           workflow: Specifies the type of KYB workflow to run.
 
-          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
@@ -790,13 +790,13 @@ class AsyncAccountHolders(AsyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               run.
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
           workflow: Specifies the type of KYC workflow to run.
 
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               individual with a pass result.
 
               This field is required only if workflow type is `KYC_BYO`.
@@ -957,14 +957,14 @@ class AsyncAccountHolders(AsyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               run.
 
-          kyb_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
 
           kyc_exemption_type: Specifies the type of KYC Exempt user
 
-          kyc_passed_timestamp: An ISO 8601 timestamp indicating when precomputed KYC was completed on the
+          kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               individual with a pass result.
 
               This field is required only if workflow type is `KYC_BYO`.
@@ -976,7 +976,7 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           phone_number: The KYC Exempt user's phone number
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
@@ -1205,7 +1205,7 @@ class AsyncAccountHolders(AsyncAPIResource):
           individual: Information on individual for whom the account is being opened and KYC is being
               re-run.
 
-          tos_timestamp: An ISO 8601 timestamp indicating when the account holder accepted the applicable
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 

@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["EventListParams"]
+__all__ = ["DisputeListParams"]
 
 
-class EventListParams(TypedDict, total=False):
+class DisputeListParams(TypedDict, total=False):
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
@@ -30,10 +30,6 @@ class EventListParams(TypedDict, total=False):
     Used to retrieve the previous page.
     """
 
-    event_types: Annotated[
-        List[Literal["dispute.updated", "digital_wallet.token_approval_request"]], PropertyInfo(alias="event_types[]")
-    ]
-
     page_size: int
     """Page size (for pagination)."""
 
@@ -42,3 +38,18 @@ class EventListParams(TypedDict, total=False):
 
     Used to retrieve the next page.
     """
+
+    status: Literal[
+        "NEW",
+        "PENDING_CUSTOMER",
+        "SUBMITTED",
+        "REPRESENTMENT",
+        "PREARBITRATION",
+        "ARBITRATION",
+        "CASE_WON",
+        "CASE_CLOSED",
+    ]
+    """List disputes of a specific status."""
+
+    transaction_token: str
+    """List disputes of a given transaction token."""

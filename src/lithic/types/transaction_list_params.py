@@ -16,7 +16,7 @@ class TransactionListParams(TypedDict, total=False):
     """Filters for transactions associated with a specific account."""
 
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """Date string in 8601 format.
+    """Date string in RFC 3339 format.
 
     Only entries created after the specified date will be included. UTC time zone.
     """
@@ -25,7 +25,7 @@ class TransactionListParams(TypedDict, total=False):
     """Filters for transactions associated with a specific card."""
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """Date string in 8601 format.
+    """Date string in RFC 3339 format.
 
     Only entries created before the specified date will be included. UTC time zone.
     """

@@ -57,6 +57,7 @@ class Lithic(SyncAPIClient):
     auth_rules: resources.AuthRules
     auth_stream_enrollment: resources.AuthStreamEnrollmentResource
     cards: resources.Cards
+    disputes: resources.Disputes
     events: resources.Events
     funding_sources: resources.FundingSources
     transactions: resources.Transactions
@@ -140,6 +141,7 @@ class Lithic(SyncAPIClient):
         self.auth_rules = resources.AuthRules(self)
         self.auth_stream_enrollment = resources.AuthStreamEnrollmentResource(self)
         self.cards = resources.Cards(self)
+        self.disputes = resources.Disputes(self)
         self.events = resources.Events(self)
         self.funding_sources = resources.FundingSources(self)
         self.transactions = resources.Transactions(self)
@@ -234,6 +236,7 @@ class AsyncLithic(AsyncAPIClient):
     auth_rules: resources.AsyncAuthRules
     auth_stream_enrollment: resources.AsyncAuthStreamEnrollmentResource
     cards: resources.AsyncCards
+    disputes: resources.AsyncDisputes
     events: resources.AsyncEvents
     funding_sources: resources.AsyncFundingSources
     transactions: resources.AsyncTransactions
@@ -317,6 +320,7 @@ class AsyncLithic(AsyncAPIClient):
         self.auth_rules = resources.AsyncAuthRules(self)
         self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResource(self)
         self.cards = resources.AsyncCards(self)
+        self.disputes = resources.AsyncDisputes(self)
         self.events = resources.AsyncEvents(self)
         self.funding_sources = resources.AsyncFundingSources(self)
         self.transactions = resources.AsyncTransactions(self)

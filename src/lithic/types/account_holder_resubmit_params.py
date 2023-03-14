@@ -17,7 +17,7 @@ class Individual(TypedDict, total=False):
     """
 
     dob: Required[str]
-    """Individual's date of birth, as an ISO 8601 date."""
+    """Individual's date of birth, as an RFC 3339 date."""
 
     email: Required[str]
     """
@@ -52,7 +52,7 @@ class AccountHolderResubmitParams(TypedDict, total=False):
 
     tos_timestamp: Required[str]
     """
-    An ISO 8601 timestamp indicating when the account holder accepted the applicable
+    An RFC 3339 timestamp indicating when the account holder accepted the applicable
     legal agreements (e.g., cardholder terms) as agreed upon during API customer's
     implementation with Lithic.
     """

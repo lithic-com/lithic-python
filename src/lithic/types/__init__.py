@@ -7,12 +7,14 @@ from .event import Event as Event
 from .shared import Address as Address
 from .shared import ShippingAddress as ShippingAddress
 from .account import Account as Account
+from .dispute import Dispute as Dispute
 from .auth_rule import AuthRule as AuthRule
 from .api_status import APIStatus as APIStatus
 from .transaction import Transaction as Transaction
 from .account_holder import AccountHolder as AccountHolder
 from .funding_source import FundingSource as FundingSource
 from .card_list_params import CardListParams as CardListParams
+from .dispute_evidence import DisputeEvidence as DisputeEvidence
 from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .event_list_params import EventListParams as EventListParams
 from .card_create_params import CardCreateParams as CardCreateParams
@@ -21,13 +23,15 @@ from .event_subscription import EventSubscription as EventSubscription
 from .account_list_params import AccountListParams as AccountListParams
 from .card_embed_response import CardEmbedResponse as CardEmbedResponse
 from .card_reissue_params import CardReissueParams as CardReissueParams
+from .dispute_list_params import DisputeListParams as DisputeListParams
 from .event_resend_params import EventResendParams as EventResendParams
-from .card_retrieve_params import CardRetrieveParams as CardRetrieveParams
 from .embed_request_params import EmbedRequestParams as EmbedRequestParams
 from .spend_limit_duration import SpendLimitDuration as SpendLimitDuration
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .auth_rule_list_params import AuthRuleListParams as AuthRuleListParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams
+from .dispute_create_params import DisputeCreateParams as DisputeCreateParams
+from .dispute_update_params import DisputeUpdateParams as DisputeUpdateParams
 from .auth_rule_apply_params import AuthRuleApplyParams as AuthRuleApplyParams
 from .auth_stream_enrollment import AuthStreamEnrollment as AuthStreamEnrollment
 from .account_holder_document import AccountHolderDocument as AccountHolderDocument
@@ -62,6 +66,9 @@ from .funding_source_update_params import (
 )
 from .funding_source_verify_params import (
     FundingSourceVerifyParams as FundingSourceVerifyParams,
+)
+from .dispute_list_evidences_params import (
+    DisputeListEvidencesParams as DisputeListEvidencesParams,
 )
 from .account_holder_resubmit_params import (
     AccountHolderResubmitParams as AccountHolderResubmitParams,
@@ -101,6 +108,9 @@ from .account_holder_list_documents_response import (
 )
 from .transaction_simulate_clearing_response import (
     TransactionSimulateClearingResponse as TransactionSimulateClearingResponse,
+)
+from .dispute_initiate_evidence_upload_response import (
+    DisputeInitiateEvidenceUploadResponse as DisputeInitiateEvidenceUploadResponse,
 )
 from .transaction_simulate_authorization_params import (
     TransactionSimulateAuthorizationParams as TransactionSimulateAuthorizationParams,

@@ -12,9 +12,6 @@ class EmbedRequestParams(BaseModel):
     token: str
     """Globally unique identifier for the card to be displayed."""
 
-    account_token: Optional[str]
-    """Only needs to be included if one or more end-users have been enrolled."""
-
     css: Optional[str]
     """
     A publicly available URI, so the white-labeled card element can be styled with
@@ -22,7 +19,7 @@ class EmbedRequestParams(BaseModel):
     """
 
     expiration: Optional[datetime]
-    """An ISO 8601 timestamp for when the request should expire. UTC time zone.
+    """An RFC 3339 timestamp for when the request should expire. UTC time zone.
 
     If no timezone is specified, UTC will be used. If payload does not contain an
     expiration, the request will never expire.

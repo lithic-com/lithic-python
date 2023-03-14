@@ -49,6 +49,7 @@ class TestSubscriptions:
     def test_method_update(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.update(
             "string",
+            url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -150,6 +151,7 @@ class TestAsyncSubscriptions:
     async def test_method_update(self, client: AsyncLithic) -> None:
         subscription = await client.events.subscriptions.update(
             "string",
+            url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 

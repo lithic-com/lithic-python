@@ -69,14 +69,6 @@ class TestCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    def test_method_retrieve_with_all_params(self, client: Lithic) -> None:
-        card = client.cards.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(Card, card, path=["response"])
-
-    @parametrize
     def test_method_update(self, client: Lithic) -> None:
         card = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -87,7 +79,6 @@ class TestCards:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         card = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
             memo="New Card",
             spend_limit=0,
@@ -155,7 +146,6 @@ class TestCards:
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
             certificate="U3RhaW5sZXNzIHJvY2tz",
-            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
@@ -242,14 +232,6 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_method_retrieve_with_all_params(self, client: AsyncLithic) -> None:
-        card = await client.cards.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(Card, card, path=["response"])
-
-    @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
         card = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -260,7 +242,6 @@ class TestAsyncCards:
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
             memo="New Card",
             spend_limit=0,
@@ -328,7 +309,6 @@ class TestAsyncCards:
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
             certificate="U3RhaW5sZXNzIHJvY2tz",
-            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 

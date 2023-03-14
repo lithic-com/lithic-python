@@ -12,7 +12,7 @@ __all__ = ["Card"]
 
 class Card(BaseModel):
     created: datetime
-    """An ISO 8601 timestamp for when the card was created. UTC time zone."""
+    """An RFC 3339 timestamp for when the card was created. UTC time zone."""
 
     funding: funding_source.FundingSource
 

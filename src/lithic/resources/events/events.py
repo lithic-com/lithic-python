@@ -62,13 +62,13 @@ class Events(SyncAPIResource):
         """List all events.
 
         Args:
-          begin: Date string in 8601 format.
+          begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified date will
-              be included. UTC time zone.
+        Only entries created after the specified date
+              will be included. UTC time zone.
 
-          end: Date string in 8601 format. Only entries created before the specified date will
-              be included. UTC time zone.
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
 
           ending_before: The unique identifier of the first item in the previous page. Used to retrieve
               the previous page.
@@ -98,7 +98,7 @@ class Events(SyncAPIResource):
                         "page_size": page_size,
                         "starting_after": starting_after,
                         "ending_before": ending_before,
-                        "event_types": event_types,
+                        "event_types[]": event_types,
                     },
                     event_list_params.EventListParams,
                 ),
@@ -165,13 +165,13 @@ class AsyncEvents(AsyncAPIResource):
         """List all events.
 
         Args:
-          begin: Date string in 8601 format.
+          begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified date will
-              be included. UTC time zone.
+        Only entries created after the specified date
+              will be included. UTC time zone.
 
-          end: Date string in 8601 format. Only entries created before the specified date will
-              be included. UTC time zone.
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
 
           ending_before: The unique identifier of the first item in the previous page. Used to retrieve
               the previous page.
@@ -201,7 +201,7 @@ class AsyncEvents(AsyncAPIResource):
                         "page_size": page_size,
                         "starting_after": starting_after,
                         "ending_before": ending_before,
-                        "event_types": event_types,
+                        "event_types[]": event_types,
                     },
                     event_list_params.EventListParams,
                 ),
