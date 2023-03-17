@@ -2,6 +2,7 @@
 
 from . import types
 from ._types import NoneType, Transport, ProxiesTypes
+from ._utils import file_from_path
 from ._client import (
     ENVIRONMENTS,
     Client,
@@ -57,6 +58,7 @@ __all__ = [
     "Lithic",
     "AsyncLithic",
     "ENVIRONMENTS",
+    "file_from_path",
 ]
 
 # Update the __module__ attribute for exported symbols so that

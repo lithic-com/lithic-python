@@ -15,7 +15,16 @@ from ..types import (
     dispute_update_params,
     dispute_list_evidences_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import (
+    NOT_GIVEN,
+    Body,
+    Omit,
+    Query,
+    Headers,
+    NoneType,
+    NotGiven,
+    FileTypes,
+)
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from ..pagination import SyncCursorPage, AsyncCursorPage
@@ -424,6 +433,28 @@ class Disputes(SyncAPIResource):
             cast_to=DisputeEvidence,
         )
 
+    def upload_evidence(
+        self,
+        dispute_token: str,
+        file: FileTypes,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> None:
+        """
+        Initiates the Dispute Evidence Upload, then uploads the file to the returned
+        `upload_url`.
+        """
+        payload = self._client.disputes.initiate_evidence_upload(
+            dispute_token, extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body
+        )
+        if not payload.upload_url:
+            raise ValueError("Missing 'upload_url' from response payload")
+        files = {"file": file}
+        options = make_request_options(extra_headers={"Authorization": Omit()})
+        self._put(payload.upload_url, cast_to=NoneType, body=None, files=files, options=options)
+
 
 class AsyncDisputes(AsyncAPIResource):
     async def create(
@@ -824,3 +855,25 @@ class AsyncDisputes(AsyncAPIResource):
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=DisputeEvidence,
         )
+
+    async def upload_evidence(
+        self,
+        dispute_token: str,
+        file: FileTypes,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> None:
+        """
+        Initiates the Dispute Evidence Upload, then uploads the file to the returned
+        `upload_url`.
+        """
+        payload = await self._client.disputes.initiate_evidence_upload(
+            dispute_token, extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body
+        )
+        if not payload.upload_url:
+            raise ValueError("Missing 'upload_url' from response payload")
+        files = {"file": file}
+        options = make_request_options(extra_headers={"Authorization": Omit()})
+        await self._put(payload.upload_url, cast_to=NoneType, body=None, files=files, options=options)

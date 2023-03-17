@@ -12,6 +12,7 @@ from ._utils import is_union_type as is_union_type
 from ._utils import required_args as required_args
 from ._utils import coerce_boolean as coerce_boolean
 from ._utils import coerce_integer as coerce_integer
+from ._utils import file_from_path as file_from_path
 from ._utils import parse_datetime as parse_datetime
 from ._utils import strip_not_given as strip_not_given
 from ._utils import deepcopy_minimal as deepcopy_minimal
