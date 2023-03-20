@@ -308,5 +308,12 @@ class KYCExempt(TypedDict, total=False):
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
     """
 
+    business_account_token: str
+    """
+    Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+    users of businesses. Pass the account_token of the enrolled business associated
+    with the AUTHORIZED_USER in this field.
+    """
+
 
 AccountHolderCreateParams = Union[KYB, KYC, KYCExempt]

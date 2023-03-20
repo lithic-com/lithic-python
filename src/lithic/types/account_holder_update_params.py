@@ -8,6 +8,13 @@ __all__ = ["AccountHolderUpdateParams"]
 
 
 class AccountHolderUpdateParams(TypedDict, total=False):
+    business_account_token: str
+    """
+    Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+    users of businesses. Pass the account_token of the enrolled business associated
+    with the AUTHORIZED_USER in this field.
+    """
+
     email: str
     """Account holder's email address.
 

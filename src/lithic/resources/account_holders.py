@@ -171,6 +171,7 @@ class AccountHolders(SyncAPIResource):
         phone_number: str,
         workflow: Literal["KYC_EXEMPT"],
         address: shared_params.Address | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -203,6 +204,10 @@ class AccountHolders(SyncAPIResource):
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
               acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
+          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+              users of businesses. Pass the account_token of the enrolled business associated
+              with the AUTHORIZED_USER in this field.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -234,6 +239,7 @@ class AccountHolders(SyncAPIResource):
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
@@ -286,6 +292,10 @@ class AccountHolders(SyncAPIResource):
               (Section I) for more background on individuals that should be included. If no
               individual is an entity, pass in an empty list. However, either this parameter
               or `beneficial_owner_entities` must be populated.
+
+          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+              users of businesses. Pass the account_token of the enrolled business associated
+              with the AUTHORIZED_USER in this field.
 
           business_entity: Information for business for which the account is being opened and KYB is being
               run.
@@ -361,6 +371,7 @@ class AccountHolders(SyncAPIResource):
                     "last_name": last_name,
                     "email": email,
                     "phone_number": phone_number,
+                    "business_account_token": business_account_token,
                     "address": address,
                 },
                 account_holder_create_params.AccountHolderCreateParams,
@@ -384,7 +395,10 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> AccountHolder:
-        """Check the current status of a KYC or KYB evaluation."""
+        """
+        Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
+        status.
+        """
         return self._get(
             f"/account_holders/{account_holder_token}",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -395,6 +409,7 @@ class AccountHolders(SyncAPIResource):
         self,
         account_holder_token: str,
         *,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -405,9 +420,13 @@ class AccountHolders(SyncAPIResource):
         idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
-        Update the contact information associated with a particular account holder.
+        Update the information associated with a particular account holder.
 
         Args:
+          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+              users of businesses. Pass the account_token of the enrolled business associated
+              with the AUTHORIZED_USER in this field.
+
           email: Account holder's email address. The primary purpose of this field is for
               cardholder identification and verification during the digital wallet
               tokenization process.
@@ -430,6 +449,7 @@ class AccountHolders(SyncAPIResource):
                 {
                     "email": email,
                     "phone_number": phone_number,
+                    "business_account_token": business_account_token,
                 },
                 account_holder_update_params.AccountHolderUpdateParams,
             ),
@@ -822,6 +842,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         phone_number: str,
         workflow: Literal["KYC_EXEMPT"],
         address: shared_params.Address | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -854,6 +875,10 @@ class AsyncAccountHolders(AsyncAPIResource):
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
               acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
+          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+              users of businesses. Pass the account_token of the enrolled business associated
+              with the AUTHORIZED_USER in this field.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -885,6 +910,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
@@ -937,6 +963,10 @@ class AsyncAccountHolders(AsyncAPIResource):
               (Section I) for more background on individuals that should be included. If no
               individual is an entity, pass in an empty list. However, either this parameter
               or `beneficial_owner_entities` must be populated.
+
+          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+              users of businesses. Pass the account_token of the enrolled business associated
+              with the AUTHORIZED_USER in this field.
 
           business_entity: Information for business for which the account is being opened and KYB is being
               run.
@@ -1012,6 +1042,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                     "last_name": last_name,
                     "email": email,
                     "phone_number": phone_number,
+                    "business_account_token": business_account_token,
                     "address": address,
                 },
                 account_holder_create_params.AccountHolderCreateParams,
@@ -1035,7 +1066,10 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
     ) -> AccountHolder:
-        """Check the current status of a KYC or KYB evaluation."""
+        """
+        Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
+        status.
+        """
         return await self._get(
             f"/account_holders/{account_holder_token}",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
@@ -1046,6 +1080,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         account_holder_token: str,
         *,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1056,9 +1091,13 @@ class AsyncAccountHolders(AsyncAPIResource):
         idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
-        Update the contact information associated with a particular account holder.
+        Update the information associated with a particular account holder.
 
         Args:
+          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+              users of businesses. Pass the account_token of the enrolled business associated
+              with the AUTHORIZED_USER in this field.
+
           email: Account holder's email address. The primary purpose of this field is for
               cardholder identification and verification during the digital wallet
               tokenization process.
@@ -1081,6 +1120,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 {
                     "email": email,
                     "phone_number": phone_number,
+                    "business_account_token": business_account_token,
                 },
                 account_holder_update_params.AccountHolderUpdateParams,
             ),

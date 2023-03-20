@@ -12,6 +12,13 @@ class AccountHolder(BaseModel):
     account_token: Optional[str]
     """Globally unique identifier for the account."""
 
+    business_account_token: Optional[str]
+    """
+    Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+    users of businesses. Pass the account_token of the enrolled business associated
+    with the AUTHORIZED_USER in this field.
+    """
+
     status: Optional[Literal["ACCEPTED", "REJECTED", "PENDING_RESUBMIT", "PENDING_DOCUMENT"]]
     """KYC and KYB evaluation states.
 

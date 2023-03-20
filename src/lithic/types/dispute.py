@@ -84,7 +84,7 @@ class Dispute(BaseModel):
     """Date the representment was received."""
 
     resolution_amount: int
-    """Amount to be credited to/debited from the customer. This is net of fees."""
+    """Resolution amount net of network fees."""
 
     resolution_date: datetime
     """Date that the dispute was resolved."""

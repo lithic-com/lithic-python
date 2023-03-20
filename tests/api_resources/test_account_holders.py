@@ -355,6 +355,7 @@ class TestAccountHolders:
             last_name="string",
             email="string",
             phone_number="string",
+            business_account_token="string",
             address={
                 "address1": "123 Old Forest Way",
                 "address2": "string",
@@ -386,6 +387,7 @@ class TestAccountHolders:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="string",
             phone_number="string",
+            business_account_token="string",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
@@ -779,6 +781,7 @@ class TestAsyncAccountHolders:
             last_name="string",
             email="string",
             phone_number="string",
+            business_account_token="string",
             address={
                 "address1": "123 Old Forest Way",
                 "address2": "string",
@@ -810,6 +813,7 @@ class TestAsyncAccountHolders:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="string",
             phone_number="string",
+            business_account_token="string",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 

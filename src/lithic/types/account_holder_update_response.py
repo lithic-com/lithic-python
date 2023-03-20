@@ -8,6 +8,13 @@ __all__ = ["AccountHolderUpdateResponse"]
 
 
 class AccountHolderUpdateResponse(BaseModel):
+    business_account_token: Optional[str]
+    """
+    Only applicable for customers using the KYC-Exempt workflow to enroll businesses
+    with authorized users. Pass the account_token of the enrolled business
+    associated with the AUTHORIZED_USER in this field.
+    """
+
     email: Optional[str]
     """The newly updated email for the account holder"""
 
