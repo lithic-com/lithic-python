@@ -627,11 +627,11 @@ class BaseClient:
         return None
 
     @property
-    def auth_headers(self) -> Dict[str, str]:
+    def auth_headers(self) -> dict[str, str]:
         return {}
 
     @property
-    def default_headers(self) -> Dict[str, str]:
+    def default_headers(self) -> dict[str, str | Omit]:
         return {
             "Content-Type": "application/json",
             "User-Agent": self.user_agent,
