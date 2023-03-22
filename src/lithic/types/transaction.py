@@ -4,7 +4,7 @@ from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from pydantic import Field
+from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
@@ -12,7 +12,7 @@ __all__ = ["Transaction", "CardholderAuthentication", "Event", "Merchant"]
 
 
 class CardholderAuthentication(BaseModel):
-    three_ds_version: Optional[str] = Field(alias="3ds_version")
+    three_ds_version: Optional[str] = FieldInfo(alias="3ds_version")
     """3-D Secure Protocol version. Possible values:
 
     - `1`: 3-D Secure Protocol version 1.x applied to the transaction.
