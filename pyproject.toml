@@ -45,6 +45,9 @@ xfail_strict = true
 log_cli = true
 log_level = "INFO"
 asyncio_mode = "auto"
+filterwarnings = [
+  "error"
+]
 
 [tool.pyright]
 # this enables practically every flag given by pyright.
