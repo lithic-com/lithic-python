@@ -28,7 +28,8 @@ class Subscriptions(SyncAPIResource):
         url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -101,7 +102,8 @@ class Subscriptions(SyncAPIResource):
         url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -324,7 +326,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -397,7 +400,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         url: str,
         description: str | NotGiven = NOT_GIVEN,
         disabled: bool | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

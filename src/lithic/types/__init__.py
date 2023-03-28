@@ -17,6 +17,7 @@ from .card_list_params import CardListParams as CardListParams
 from .dispute_evidence import DisputeEvidence as DisputeEvidence
 from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .event_list_params import EventListParams as EventListParams
+from .auth_stream_secret import AuthStreamSecret as AuthStreamSecret
 from .card_create_params import CardCreateParams as CardCreateParams
 from .card_update_params import CardUpdateParams as CardUpdateParams
 from .event_subscription import EventSubscription as EventSubscription
@@ -124,8 +125,14 @@ from .transaction_simulate_return_reversal_params import (
 from .transaction_simulate_return_reversal_response import (
     TransactionSimulateReturnReversalResponse as TransactionSimulateReturnReversalResponse,
 )
+from .transaction_simulate_authorization_advice_params import (
+    TransactionSimulateAuthorizationAdviceParams as TransactionSimulateAuthorizationAdviceParams,
+)
 from .transaction_simulate_credit_authorization_params import (
     TransactionSimulateCreditAuthorizationParams as TransactionSimulateCreditAuthorizationParams,
+)
+from .transaction_simulate_authorization_advice_response import (
+    TransactionSimulateAuthorizationAdviceResponse as TransactionSimulateAuthorizationAdviceResponse,
 )
 from .transaction_simulate_credit_authorization_response import (
     TransactionSimulateCreditAuthorizationResponse as TransactionSimulateCreditAuthorizationResponse,

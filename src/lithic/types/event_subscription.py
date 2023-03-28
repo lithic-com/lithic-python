@@ -15,7 +15,7 @@ class EventSubscription(BaseModel):
     disabled: bool
     """Whether the subscription is disabled."""
 
-    event_types: Optional[List[Literal["dispute.updated", "digital_wallet.token_approval_request"]]]
+    event_types: Optional[List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]]
 
     token: str
     """Globally unique identifier."""

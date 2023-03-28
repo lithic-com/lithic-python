@@ -15,12 +15,12 @@ class Event(BaseModel):
     If no timezone is specified, UTC will be used.
     """
 
-    event_type: Literal["dispute.updated", "digital_wallet.token_approval_request"]
+    event_type: Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]
     """Event types:
 
     - `dispute.updated` - A dispute has been updated.
-    - `digital_wallet.token_approval_request` - Card network's request to Lithic to
-      activate a digital wallet token.
+    - `digital_wallet.tokenization_approval_request` - Card network's request to
+      Lithic to activate a digital wallet token.
     """
 
     payload: object

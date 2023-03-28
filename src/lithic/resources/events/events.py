@@ -50,7 +50,8 @@ class Events(SyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -153,7 +154,8 @@ class AsyncEvents(AsyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]] | NotGiven = NOT_GIVEN,
+        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

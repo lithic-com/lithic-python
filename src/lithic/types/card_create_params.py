@@ -99,7 +99,7 @@ class CardCreateParams(TypedDict, total=False):
     shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"]
     """Shipping method for the card.
 
-    Only applies to cards of type PHYSICAL [beta]. Use of options besides `STANDARD`
+    Only applies to cards of type PHYSICAL. Use of options besides `STANDARD`
     require additional permissions.
 
     - `STANDARD` - USPS regular mail or similar international option, with no

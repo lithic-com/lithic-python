@@ -5,7 +5,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Account", "SpendLimit"]
+__all__ = ["Account", "SpendLimit", "VerificationAddress", "AccountHolder"]
 
 
 class SpendLimit(BaseModel):
@@ -17,6 +17,52 @@ class SpendLimit(BaseModel):
 
     monthly: int
     """Monthly spend limit (in cents)."""
+
+
+class VerificationAddress(BaseModel):
+    address1: str
+    """Valid deliverable address (no PO boxes)."""
+
+    city: str
+    """City name."""
+
+    country: str
+    """Country name. Only USA is currently supported."""
+
+    postal_code: str
+    """Valid postal code.
+
+    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
+    nine-digit ZIP+4.
+    """
+
+    state: str
+    """Valid state code.
+
+    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
+    two-character format.
+    """
+
+    address2: Optional[str]
+    """Unit or apartment number (if applicable)."""
+
+
+class AccountHolder(BaseModel):
+    business_account_token: str
+    """
+    Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+    users of businesses. Account_token of the enrolled business associated with an
+    enrolled AUTHORIZED_USER individual.
+    """
+
+    email: str
+    """Email address."""
+
+    phone_number: str
+    """Phone number of the individual."""
+
+    token: str
+    """Globally unique identifier for the account holder."""
 
 
 class Account(BaseModel):
@@ -46,5 +92,9 @@ class Account(BaseModel):
     this parameter, do not include pagination.
     """
 
+    account_holder: Optional[AccountHolder]
+
     auth_rule_tokens: Optional[List[str]]
     """List of identifiers for the Auth Rule(s) that are applied on the account."""
+
+    verification_address: Optional[VerificationAddress]

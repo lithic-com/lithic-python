@@ -84,7 +84,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types import AuthStreamEnrollment
+from lithic.types import AuthStreamEnrollment, AuthStreamSecret
 ```
 
 Methods:
@@ -92,6 +92,8 @@ Methods:
 - <code title="get /auth_stream">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">retrieve</a>() -> <a href="./src/lithic/types/auth_stream_enrollment.py">AuthStreamEnrollment</a></code>
 - <code title="delete /auth_stream">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">disenroll</a>() -> None</code>
 - <code title="post /auth_stream">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">enroll</a>(\*\*<a href="src/lithic/types/auth_stream_enrollment_enroll_params.py">params</a>) -> None</code>
+- <code title="get /auth_stream/secret">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">retrieve_secret</a>() -> <a href="./src/lithic/types/auth_stream_secret.py">AuthStreamSecret</a></code>
+- <code title="post /auth_stream/secret/rotate">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">rotate_secret</a>() -> None</code>
 
 # Cards
 
@@ -211,6 +213,7 @@ from lithic.types import (
     TransactionSimulateReturnReversalResponse,
     TransactionSimulateVoidResponse,
     TransactionSimulateCreditAuthorizationResponse,
+    TransactionSimulateAuthorizationAdviceResponse,
 )
 ```
 
@@ -219,6 +222,7 @@ Methods:
 - <code title="get /transactions/{transaction_token}">client.transactions.<a href="./src/lithic/resources/transactions.py">retrieve</a>(transaction_token) -> <a href="./src/lithic/types/transaction.py">Transaction</a></code>
 - <code title="get /transactions">client.transactions.<a href="./src/lithic/resources/transactions.py">list</a>(\*\*<a href="src/lithic/types/transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction.py">SyncPage[Transaction]</a></code>
 - <code title="post /simulate/authorize">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_response.py">TransactionSimulateAuthorizationResponse</a></code>
+- <code title="post /simulate/authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_authorization_advice</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_advice_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_advice_response.py">TransactionSimulateAuthorizationAdviceResponse</a></code>
 - <code title="post /simulate/clearing">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_clearing</a>(\*\*<a href="src/lithic/types/transaction_simulate_clearing_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_clearing_response.py">TransactionSimulateClearingResponse</a></code>
 - <code title="post /simulate/credit_authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_credit_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_credit_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_credit_authorization_response.py">TransactionSimulateCreditAuthorizationResponse</a></code>
 - <code title="post /simulate/return">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_return</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_response.py">TransactionSimulateReturnResponse</a></code>

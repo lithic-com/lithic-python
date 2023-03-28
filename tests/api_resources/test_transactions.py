@@ -15,6 +15,7 @@ from lithic.types import (
     TransactionSimulateClearingResponse,
     TransactionSimulateAuthorizationResponse,
     TransactionSimulateReturnReversalResponse,
+    TransactionSimulateAuthorizationAdviceResponse,
     TransactionSimulateCreditAuthorizationResponse,
 )
 from lithic._utils import parse_datetime
@@ -77,6 +78,14 @@ class TestTransactions:
             partial_approval_capable=True,
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_method_simulate_authorization_advice(self, client: Lithic) -> None:
+        transaction = client.transactions.simulate_authorization_advice(
+            amount=0,
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_clearing(self, client: Lithic) -> None:
@@ -199,6 +208,14 @@ class TestAsyncTransactions:
             partial_approval_capable=True,
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_authorization_advice(self, client: AsyncLithic) -> None:
+        transaction = await client.transactions.simulate_authorization_advice(
+            amount=0,
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_clearing(self, client: AsyncLithic) -> None:

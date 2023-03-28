@@ -31,7 +31,8 @@ class EventListParams(TypedDict, total=False):
     """
 
     event_types: Annotated[
-        List[Literal["dispute.updated", "digital_wallet.token_approval_request"]], PropertyInfo(alias="event_types[]")
+        List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]],
+        PropertyInfo(alias="event_types[]"),
     ]
 
     page_size: int

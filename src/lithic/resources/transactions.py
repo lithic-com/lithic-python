@@ -13,6 +13,7 @@ from ..types import (
     TransactionSimulateClearingResponse,
     TransactionSimulateAuthorizationResponse,
     TransactionSimulateReturnReversalResponse,
+    TransactionSimulateAuthorizationAdviceResponse,
     TransactionSimulateCreditAuthorizationResponse,
     transaction_list_params,
     transaction_simulate_void_params,
@@ -20,6 +21,7 @@ from ..types import (
     transaction_simulate_clearing_params,
     transaction_simulate_authorization_params,
     transaction_simulate_return_reversal_params,
+    transaction_simulate_authorization_advice_params,
     transaction_simulate_credit_authorization_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -224,6 +226,55 @@ class Transactions(SyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateAuthorizationResponse,
+        )
+
+    def simulate_authorization_advice(
+        self,
+        *,
+        amount: int,
+        token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        idempotency_key: str | None = None,
+    ) -> TransactionSimulateAuthorizationAdviceResponse:
+        """
+        Simulates an authorization advice request from the payment network as if it came
+        from a merchant acquirer. An authorization advice request changes the amount of
+        the transaction.
+
+        Args:
+          amount: Amount (in cents) to authorize. This amount will override the transaction's
+              amount that was originally set by /v1/simulate/authorize.
+
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            "/simulate/authorization_advice",
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "token": token,
+                },
+                transaction_simulate_authorization_advice_params.TransactionSimulateAuthorizationAdviceParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=TransactionSimulateAuthorizationAdviceResponse,
         )
 
     def simulate_clearing(
@@ -695,6 +746,55 @@ class AsyncTransactions(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateAuthorizationResponse,
+        )
+
+    async def simulate_authorization_advice(
+        self,
+        *,
+        amount: int,
+        token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        idempotency_key: str | None = None,
+    ) -> TransactionSimulateAuthorizationAdviceResponse:
+        """
+        Simulates an authorization advice request from the payment network as if it came
+        from a merchant acquirer. An authorization advice request changes the amount of
+        the transaction.
+
+        Args:
+          amount: Amount (in cents) to authorize. This amount will override the transaction's
+              amount that was originally set by /v1/simulate/authorize.
+
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            "/simulate/authorization_advice",
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "token": token,
+                },
+                transaction_simulate_authorization_advice_params.TransactionSimulateAuthorizationAdviceParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=TransactionSimulateAuthorizationAdviceResponse,
         )
 
     async def simulate_clearing(

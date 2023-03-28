@@ -18,7 +18,7 @@ class SubscriptionUpdateParams(TypedDict, total=False):
     disabled: bool
     """Whether the event subscription is active (false) or inactive (true)."""
 
-    event_types: List[Literal["dispute.updated", "digital_wallet.token_approval_request"]]
+    event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
     """Indicates types of events that will be sent to this subscription.
 
     If left blank, all types will be sent.

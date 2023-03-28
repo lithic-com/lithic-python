@@ -118,8 +118,8 @@ class Cards(SyncAPIResource):
               before use. Specifies the configuration (i.e., physical card art) that the card
               should be manufactured with.
 
-          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
-              of options besides `STANDARD` require additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking
@@ -632,12 +632,12 @@ class Cards(SyncAPIResource):
         """
         Initiate print and shipment of a duplicate physical card.
 
-        Only applies to cards of type `PHYSICAL` [beta].
+        Only applies to cards of type `PHYSICAL`.
 
         Args:
           product_id: Specifies the configuration (e.g. physical card art) that the card should be
-              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
-              must be configured with Lithic before use.
+              manufactured with, and only applies to cards of type `PHYSICAL`. This must be
+              configured with Lithic before use.
 
           shipping_address: If omitted, the previous shipping address will be used.
 
@@ -763,8 +763,8 @@ class AsyncCards(AsyncAPIResource):
               before use. Specifies the configuration (i.e., physical card art) that the card
               should be manufactured with.
 
-          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL [beta]. Use
-              of options besides `STANDARD` require additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking
@@ -1277,12 +1277,12 @@ class AsyncCards(AsyncAPIResource):
         """
         Initiate print and shipment of a duplicate physical card.
 
-        Only applies to cards of type `PHYSICAL` [beta].
+        Only applies to cards of type `PHYSICAL`.
 
         Args:
           product_id: Specifies the configuration (e.g. physical card art) that the card should be
-              manufactured with, and only applies to cards of type `PHYSICAL` [beta]. This
-              must be configured with Lithic before use.
+              manufactured with, and only applies to cards of type `PHYSICAL`. This must be
+              configured with Lithic before use.
 
           shipping_address: If omitted, the previous shipping address will be used.
 

@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from ..types import AuthStreamEnrollment, auth_stream_enrollment_enroll_params
+from ..types import (
+    AuthStreamSecret,
+    AuthStreamEnrollment,
+    auth_stream_enrollment_enroll_params,
+)
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -103,6 +107,58 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def retrieve_secret(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> AuthStreamSecret:
+        """Retrieve the ASA HMAC secret key.
+
+        If one does not exist your program yet,
+        calling this endpoint will create one for you. The headers (which you can use to
+        verify webhooks) will begin appearing shortly after calling this endpoint for
+        the first time. See
+        [this page](https://docs.lithic.com/docs/auth-stream-access-asa#asa-webhook-verification)
+        for more detail about verifying ASA webhooks.
+        """
+        return self._get(
+            "/auth_stream/secret",
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            cast_to=AuthStreamSecret,
+        )
+
+    def rotate_secret(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        idempotency_key: str | None = None,
+    ) -> None:
+        """Generate a new ASA HMAC secret key.
+
+        The old ASA HMAC secret key will be
+        deactivated 24 hours after a successful request to this endpoint. Make a
+        [`GET /auth_stream/secret`](https://docs.lithic.com/reference/getauthstreamsecret)
+        request to retrieve the new secret key.
+        """
+        return self._post(
+            "/auth_stream/secret/rotate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=NoneType,
+        )
+
 
 class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
     async def retrieve(
@@ -187,6 +243,58 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
             body=maybe_transform(
                 {"webhook_url": webhook_url}, auth_stream_enrollment_enroll_params.AuthStreamEnrollmentEnrollParams
             ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=NoneType,
+        )
+
+    async def retrieve_secret(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> AuthStreamSecret:
+        """Retrieve the ASA HMAC secret key.
+
+        If one does not exist your program yet,
+        calling this endpoint will create one for you. The headers (which you can use to
+        verify webhooks) will begin appearing shortly after calling this endpoint for
+        the first time. See
+        [this page](https://docs.lithic.com/docs/auth-stream-access-asa#asa-webhook-verification)
+        for more detail about verifying ASA webhooks.
+        """
+        return await self._get(
+            "/auth_stream/secret",
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            cast_to=AuthStreamSecret,
+        )
+
+    async def rotate_secret(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        idempotency_key: str | None = None,
+    ) -> None:
+        """Generate a new ASA HMAC secret key.
+
+        The old ASA HMAC secret key will be
+        deactivated 24 hours after a successful request to this endpoint. Make a
+        [`GET /auth_stream/secret`](https://docs.lithic.com/reference/getauthstreamsecret)
+        request to retrieve the new secret key.
+        """
+        return await self._post(
+            "/auth_stream/secret/rotate",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

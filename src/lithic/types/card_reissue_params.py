@@ -14,8 +14,7 @@ class CardReissueParams(TypedDict, total=False):
     """Specifies the configuration (e.g.
 
     physical card art) that the card should be manufactured with, and only applies
-    to cards of type `PHYSICAL` [beta]. This must be configured with Lithic before
-    use.
+    to cards of type `PHYSICAL`. This must be configured with Lithic before use.
     """
 
     shipping_address: shared_params.ShippingAddress
