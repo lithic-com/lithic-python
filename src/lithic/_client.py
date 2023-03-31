@@ -148,8 +148,9 @@ class Lithic(SyncAPIClient):
         return Querystring(array_format="comma")
 
     @property
-    def auth_headers(self) -> Dict[str, str]:
-        return {"Authorization": self.api_key}
+    def auth_headers(self) -> dict[str, str]:
+        api_key = self.api_key
+        return {"Authorization": api_key}
 
     def copy(
         self,
@@ -327,8 +328,9 @@ class AsyncLithic(AsyncAPIClient):
         return Querystring(array_format="comma")
 
     @property
-    def auth_headers(self) -> Dict[str, str]:
-        return {"Authorization": self.api_key}
+    def auth_headers(self) -> dict[str, str]:
+        api_key = self.api_key
+        return {"Authorization": api_key}
 
     def copy(
         self,
