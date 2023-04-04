@@ -44,7 +44,6 @@ class Cards(SyncAPIResource):
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
-        funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
@@ -103,9 +102,6 @@ class Cards(SyncAPIResource):
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date will be generated.
-
-          funding_token: The token for the desired `FundingAccount` to use when making transactions with
-              this card.
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
@@ -170,7 +166,6 @@ class Cards(SyncAPIResource):
                     "card_program_token": card_program_token,
                     "exp_month": exp_month,
                     "exp_year": exp_year,
-                    "funding_token": funding_token,
                     "memo": memo,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
@@ -216,7 +211,6 @@ class Cards(SyncAPIResource):
         *,
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
-        funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
@@ -245,9 +239,6 @@ class Cards(SyncAPIResource):
               after tokenization. This artwork must be approved by Mastercard and configured
               by Lithic to use. See
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
-
-          funding_token: The token for the desired `FundingAccount` to use when making transactions with
-              this card.
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
@@ -296,7 +287,6 @@ class Cards(SyncAPIResource):
             f"/cards/{card_token}",
             body=maybe_transform(
                 {
-                    "funding_token": funding_token,
                     "memo": memo,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
@@ -689,7 +679,6 @@ class AsyncCards(AsyncAPIResource):
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
-        funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
@@ -748,9 +737,6 @@ class AsyncCards(AsyncAPIResource):
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date will be generated.
-
-          funding_token: The token for the desired `FundingAccount` to use when making transactions with
-              this card.
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
@@ -815,7 +801,6 @@ class AsyncCards(AsyncAPIResource):
                     "card_program_token": card_program_token,
                     "exp_month": exp_month,
                     "exp_year": exp_year,
-                    "funding_token": funding_token,
                     "memo": memo,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
@@ -861,7 +846,6 @@ class AsyncCards(AsyncAPIResource):
         *,
         auth_rule_token: str | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
-        funding_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
@@ -890,9 +874,6 @@ class AsyncCards(AsyncAPIResource):
               after tokenization. This artwork must be approved by Mastercard and configured
               by Lithic to use. See
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
-
-          funding_token: The token for the desired `FundingAccount` to use when making transactions with
-              this card.
 
           memo: Friendly name to identify the card. We recommend against using this field to
               store JSON data as it can cause unexpected behavior.
@@ -941,7 +922,6 @@ class AsyncCards(AsyncAPIResource):
             f"/cards/{card_token}",
             body=maybe_transform(
                 {
-                    "funding_token": funding_token,
                     "memo": memo,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,

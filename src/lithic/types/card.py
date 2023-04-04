@@ -4,17 +4,59 @@ from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from ..types import funding_source, spend_limit_duration
+from ..types import spend_limit_duration
 from .._models import BaseModel
 
-__all__ = ["Card"]
+__all__ = ["Card", "Funding"]
+
+
+class Funding(BaseModel):
+    created: datetime
+    """
+    An RFC 3339 string representing when this funding source was added to the Lithic
+    account. This may be `null`. UTC time zone.
+    """
+
+    last_four: str
+    """The last 4 digits of the account (e.g.
+
+    bank account, debit card) associated with this FundingAccount. This may be null.
+    """
+
+    state: Literal["ENABLED", "PENDING", "DELETED"]
+    """State of funding source.
+
+    Funding source states:
+
+    - `ENABLED` - The funding account is available to use for card creation and
+      transactions.
+    - `PENDING` - The funding account is still being verified e.g. bank
+      micro-deposits verification.
+    - `DELETED` - The founding account has been deleted.
+    """
+
+    token: str
+    """A globally unique identifier for this FundingAccount."""
+
+    type: Literal["DEPOSITORY_CHECKING", "DEPOSITORY_SAVINGS"]
+    """Types of funding source:
+
+    - `DEPOSITORY_CHECKING` - Bank checking account.
+    - `DEPOSITORY_SAVINGS` - Bank savings account.
+    """
+
+    account_name: Optional[str]
+    """Account name identifying the funding source. This may be `null`."""
+
+    nickname: Optional[str]
+    """The nickname given to the `FundingAccount` or `null` if it has no nickname."""
 
 
 class Card(BaseModel):
     created: datetime
     """An RFC 3339 timestamp for when the card was created. UTC time zone."""
 
-    funding: funding_source.FundingSource
+    funding: Funding
 
     last_four: str
     """Last four digits of the card number."""

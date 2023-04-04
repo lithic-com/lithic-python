@@ -35,7 +35,6 @@ class TestCards:
             card_program_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
-            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
             memo="New Card",
             spend_limit=0,
             spend_limit_duration="ANNUALLY",
@@ -79,7 +78,6 @@ class TestCards:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         card = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
             memo="New Card",
             spend_limit=0,
             spend_limit_duration="ANNUALLY",
@@ -198,7 +196,6 @@ class TestAsyncCards:
             card_program_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
-            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
             memo="New Card",
             spend_limit=0,
             spend_limit_duration="ANNUALLY",
@@ -242,7 +239,6 @@ class TestAsyncCards:
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            funding_token="ecbd1d58-0299-48b3-84da-6ed7f5bf9ec1",
             memo="New Card",
             spend_limit=0,
             spend_limit_duration="ANNUALLY",

@@ -67,12 +67,6 @@ class CardCreateParams(TypedDict, total=False):
     generated.
     """
 
-    funding_token: str
-    """
-    The token for the desired `FundingAccount` to use when making transactions with
-    this card.
-    """
-
     memo: str
     """Friendly name to identify the card.
 

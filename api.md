@@ -95,6 +95,19 @@ Methods:
 - <code title="get /auth_stream/secret">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">retrieve_secret</a>() -> <a href="./src/lithic/types/auth_stream_secret.py">AuthStreamSecret</a></code>
 - <code title="post /auth_stream/secret/rotate">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">rotate_secret</a>() -> None</code>
 
+# TokenizationDecisioning
+
+Types:
+
+```python
+from lithic.types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
+```
+
+Methods:
+
+- <code title="get /tokenization_decisioning/secret">client.tokenization_decisioning.<a href="./src/lithic/resources/tokenization_decisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/tokenization_secret.py">TokenizationSecret</a></code>
+- <code title="post /tokenization_decisioning/secret/rotate">client.tokenization_decisioning.<a href="./src/lithic/resources/tokenization_decisioning.py">rotate_secret</a>() -> <a href="./src/lithic/types/tokenization_decisioning_rotate_secret_response.py">TokenizationDecisioningRotateSecretResponse</a></code>
+
 # Cards
 
 Types:
@@ -184,21 +197,6 @@ Methods:
 - <code title="post /event_subscriptions/{event_subscription_token}/replay_missing">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">replay_missing</a>(event_subscription_token) -> None</code>
 - <code title="get /event_subscriptions/{event_subscription_token}/secret">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">retrieve_secret</a>(event_subscription_token) -> <a href="./src/lithic/types/events/subscription_retrieve_secret_response.py">SubscriptionRetrieveSecretResponse</a></code>
 - <code title="post /event_subscriptions/{event_subscription_token}/secret/rotate">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">rotate_secret</a>(event_subscription_token) -> None</code>
-
-# FundingSources
-
-Types:
-
-```python
-from lithic.types import FundingSource
-```
-
-Methods:
-
-- <code title="post /funding_sources">client.funding_sources.<a href="./src/lithic/resources/funding_sources.py">create</a>(\*\*<a href="src/lithic/types/funding_source_create_params.py">params</a>) -> <a href="./src/lithic/types/funding_source.py">FundingSource</a></code>
-- <code title="patch /funding_sources/{funding_source_token}">client.funding_sources.<a href="./src/lithic/resources/funding_sources.py">update</a>(funding_source_token, \*\*<a href="src/lithic/types/funding_source_update_params.py">params</a>) -> <a href="./src/lithic/types/funding_source.py">FundingSource</a></code>
-- <code title="get /funding_sources">client.funding_sources.<a href="./src/lithic/resources/funding_sources.py">list</a>(\*\*<a href="src/lithic/types/funding_source_list_params.py">params</a>) -> <a href="./src/lithic/types/funding_source.py">SyncPage[FundingSource]</a></code>
-- <code title="post /funding_sources/{funding_source_token}/verify">client.funding_sources.<a href="./src/lithic/resources/funding_sources.py">verify</a>(funding_source_token, \*\*<a href="src/lithic/types/funding_source_verify_params.py">params</a>) -> <a href="./src/lithic/types/funding_source.py">FundingSource</a></code>
 
 # Transactions
 

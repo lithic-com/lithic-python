@@ -52,10 +52,10 @@ class Lithic(SyncAPIClient):
     account_holders: resources.AccountHolders
     auth_rules: resources.AuthRules
     auth_stream_enrollment: resources.AuthStreamEnrollmentResource
+    tokenization_decisioning: resources.TokenizationDecisioning
     cards: resources.Cards
     disputes: resources.Disputes
     events: resources.Events
-    funding_sources: resources.FundingSources
     transactions: resources.Transactions
     webhooks: resources.Webhooks
 
@@ -136,10 +136,10 @@ class Lithic(SyncAPIClient):
         self.account_holders = resources.AccountHolders(self)
         self.auth_rules = resources.AuthRules(self)
         self.auth_stream_enrollment = resources.AuthStreamEnrollmentResource(self)
+        self.tokenization_decisioning = resources.TokenizationDecisioning(self)
         self.cards = resources.Cards(self)
         self.disputes = resources.Disputes(self)
         self.events = resources.Events(self)
-        self.funding_sources = resources.FundingSources(self)
         self.transactions = resources.Transactions(self)
         self.webhooks = resources.Webhooks(self)
 
@@ -232,10 +232,10 @@ class AsyncLithic(AsyncAPIClient):
     account_holders: resources.AsyncAccountHolders
     auth_rules: resources.AsyncAuthRules
     auth_stream_enrollment: resources.AsyncAuthStreamEnrollmentResource
+    tokenization_decisioning: resources.AsyncTokenizationDecisioning
     cards: resources.AsyncCards
     disputes: resources.AsyncDisputes
     events: resources.AsyncEvents
-    funding_sources: resources.AsyncFundingSources
     transactions: resources.AsyncTransactions
     webhooks: resources.AsyncWebhooks
 
@@ -316,10 +316,10 @@ class AsyncLithic(AsyncAPIClient):
         self.account_holders = resources.AsyncAccountHolders(self)
         self.auth_rules = resources.AsyncAuthRules(self)
         self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResource(self)
+        self.tokenization_decisioning = resources.AsyncTokenizationDecisioning(self)
         self.cards = resources.AsyncCards(self)
         self.disputes = resources.AsyncDisputes(self)
         self.events = resources.AsyncEvents(self)
-        self.funding_sources = resources.AsyncFundingSources(self)
         self.transactions = resources.AsyncTransactions(self)
         self.webhooks = resources.AsyncWebhooks(self)
 

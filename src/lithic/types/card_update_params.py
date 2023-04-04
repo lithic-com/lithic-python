@@ -22,12 +22,6 @@ class CardUpdateParams(TypedDict, total=False):
     [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
     """
 
-    funding_token: str
-    """
-    The token for the desired `FundingAccount` to use when making transactions with
-    this card.
-    """
-
     memo: str
     """Friendly name to identify the card.
 

@@ -8,10 +8,13 @@ from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import AuthRules, AsyncAuthRules
 from .transactions import Transactions, AsyncTransactions
 from .account_holders import AccountHolders, AsyncAccountHolders
-from .funding_sources import FundingSources, AsyncFundingSources
 from .auth_stream_enrollment import (
     AuthStreamEnrollmentResource,
     AsyncAuthStreamEnrollmentResource,
+)
+from .tokenization_decisioning import (
+    TokenizationDecisioning,
+    AsyncTokenizationDecisioning,
 )
 
 __all__ = [
@@ -23,14 +26,14 @@ __all__ = [
     "AsyncAuthRules",
     "AuthStreamEnrollmentResource",
     "AsyncAuthStreamEnrollmentResource",
+    "TokenizationDecisioning",
+    "AsyncTokenizationDecisioning",
     "Cards",
     "AsyncCards",
     "Disputes",
     "AsyncDisputes",
     "Events",
     "AsyncEvents",
-    "FundingSources",
-    "AsyncFundingSources",
     "Transactions",
     "AsyncTransactions",
     "Webhooks",
