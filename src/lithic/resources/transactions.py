@@ -43,11 +43,14 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
         """Get specific transaction."""
         return self._get(
             f"/transactions/{transaction_token}",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Transaction,
         )
 
@@ -66,6 +69,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> SyncPage[Transaction]:
         """
         List transactions.
@@ -93,6 +97,8 @@ class Transactions(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
             "/transactions",
@@ -101,6 +107,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 query=maybe_transform(
                     {
                         "account_token": account_token,
@@ -141,6 +148,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateAuthorizationResponse:
         """
@@ -201,6 +209,8 @@ class Transactions(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -223,6 +233,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateAuthorizationResponse,
@@ -238,6 +249,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateAuthorizationAdviceResponse:
         """
@@ -257,6 +269,8 @@ class Transactions(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -272,6 +286,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateAuthorizationAdviceResponse,
@@ -287,6 +302,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
@@ -314,6 +330,8 @@ class Transactions(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -329,6 +347,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateClearingResponse,
@@ -347,6 +366,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateCreditAuthorizationResponse:
         """Simulates a credit authorization advice message from the payment network.
@@ -376,6 +396,8 @@ class Transactions(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -394,6 +416,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
@@ -410,6 +433,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
@@ -430,6 +454,8 @@ class Transactions(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -446,6 +472,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateReturnResponse,
@@ -460,6 +487,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnReversalResponse:
         """
@@ -476,6 +504,8 @@ class Transactions(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -487,6 +517,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateReturnReversalResponse,
@@ -503,6 +534,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
@@ -531,6 +563,8 @@ class Transactions(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -547,6 +581,7 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateVoidResponse,
@@ -563,11 +598,14 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
         """Get specific transaction."""
         return await self._get(
             f"/transactions/{transaction_token}",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Transaction,
         )
 
@@ -586,6 +624,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """
         List transactions.
@@ -613,6 +652,8 @@ class AsyncTransactions(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
             "/transactions",
@@ -621,6 +662,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 query=maybe_transform(
                     {
                         "account_token": account_token,
@@ -661,6 +703,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateAuthorizationResponse:
         """
@@ -721,6 +764,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -743,6 +788,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateAuthorizationResponse,
@@ -758,6 +804,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateAuthorizationAdviceResponse:
         """
@@ -777,6 +824,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -792,6 +841,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateAuthorizationAdviceResponse,
@@ -807,6 +857,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization.
@@ -834,6 +885,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -849,6 +902,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateClearingResponse,
@@ -867,6 +921,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateCreditAuthorizationResponse:
         """Simulates a credit authorization advice message from the payment network.
@@ -896,6 +951,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -914,6 +971,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
@@ -930,6 +988,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnResponse:
         """Returns (aka refunds) an amount back to a card.
@@ -950,6 +1009,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -966,6 +1027,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateReturnResponse,
@@ -980,6 +1042,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateReturnReversalResponse:
         """
@@ -996,6 +1059,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -1007,6 +1072,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateReturnReversalResponse,
@@ -1023,6 +1089,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TransactionSimulateVoidResponse:
         """Voids an existing, uncleared (aka pending) authorization.
@@ -1051,6 +1118,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -1067,6 +1136,7 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateVoidResponse,

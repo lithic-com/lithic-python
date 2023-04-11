@@ -44,6 +44,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleCreateResponse:
         """
@@ -86,6 +87,8 @@ class AuthRules(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -107,6 +110,7 @@ class AuthRules(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleCreateResponse,
@@ -121,6 +125,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AuthRuleRetrieveResponse:
         """
         Detail the properties and entities (program, accounts, and cards) associated
@@ -128,7 +133,9 @@ class AuthRules(SyncAPIResource):
         """
         return self._get(
             f"/auth_rules/{auth_rule_token}",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthRuleRetrieveResponse,
         )
 
@@ -146,6 +153,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleUpdateResponse:
         """
@@ -177,6 +185,8 @@ class AuthRules(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._put(
@@ -195,6 +205,7 @@ class AuthRules(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleUpdateResponse,
@@ -210,6 +221,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> SyncPage[AuthRule]:
         """
         Return all of the Auth Rules under the program.
@@ -224,6 +236,8 @@ class AuthRules(SyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
             "/auth_rules",
@@ -232,6 +246,7 @@ class AuthRules(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 query=maybe_transform(
                     {
                         "page": page,
@@ -255,6 +270,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleApplyResponse:
         """
@@ -277,6 +293,8 @@ class AuthRules(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -293,6 +311,7 @@ class AuthRules(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleApplyResponse,
@@ -309,6 +328,7 @@ class AuthRules(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleRemoveResponse:
         """
@@ -331,6 +351,8 @@ class AuthRules(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._delete(
@@ -347,6 +369,7 @@ class AuthRules(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleRemoveResponse,
@@ -370,6 +393,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleCreateResponse:
         """
@@ -412,6 +436,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -433,6 +459,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleCreateResponse,
@@ -447,6 +474,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AuthRuleRetrieveResponse:
         """
         Detail the properties and entities (program, accounts, and cards) associated
@@ -454,7 +482,9 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return await self._get(
             f"/auth_rules/{auth_rule_token}",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthRuleRetrieveResponse,
         )
 
@@ -472,6 +502,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleUpdateResponse:
         """
@@ -503,6 +534,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._put(
@@ -521,6 +554,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleUpdateResponse,
@@ -536,6 +570,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[AuthRule, AsyncPage[AuthRule]]:
         """
         Return all of the Auth Rules under the program.
@@ -550,6 +585,8 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_query: Add additional query parameters to the request
 
           extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
             "/auth_rules",
@@ -558,6 +595,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 query=maybe_transform(
                     {
                         "page": page,
@@ -581,6 +619,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleApplyResponse:
         """
@@ -603,6 +642,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -619,6 +660,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleApplyResponse,
@@ -635,6 +677,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AuthRuleRemoveResponse:
         """
@@ -657,6 +700,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._delete(
@@ -673,6 +718,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleRemoveResponse,

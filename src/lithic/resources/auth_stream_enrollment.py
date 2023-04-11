@@ -24,6 +24,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AuthStreamEnrollment:
         """
         Check status for whether you have enrolled in Authorization Stream Access (ASA)
@@ -31,7 +32,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         """
         return self._get(
             "/auth_stream",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthStreamEnrollment,
         )
 
@@ -43,6 +46,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
@@ -52,6 +56,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
@@ -66,6 +71,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
         """
@@ -91,6 +97,8 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
@@ -102,6 +110,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
@@ -115,6 +124,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AuthStreamSecret:
         """Retrieve the ASA HMAC secret key.
 
@@ -127,7 +137,9 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         """
         return self._get(
             "/auth_stream/secret",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthStreamSecret,
         )
 
@@ -139,6 +151,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
         """Generate a new ASA HMAC secret key.
@@ -154,6 +167,7 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
@@ -169,6 +183,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AuthStreamEnrollment:
         """
         Check status for whether you have enrolled in Authorization Stream Access (ASA)
@@ -176,7 +191,9 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         """
         return await self._get(
             "/auth_stream",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthStreamEnrollment,
         )
 
@@ -188,6 +205,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
         """Disenroll Authorization Stream Access (ASA) in Sandbox."""
@@ -197,6 +215,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
@@ -211,6 +230,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
         """
@@ -236,6 +256,8 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
 
           extra_body: Add additional JSON properties to the request
 
+          timeout: Override the client-level default timeout for this request, in seconds
+
           idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
@@ -247,6 +269,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
@@ -260,6 +283,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AuthStreamSecret:
         """Retrieve the ASA HMAC secret key.
 
@@ -272,7 +296,9 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         """
         return await self._get(
             "/auth_stream/secret",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthStreamSecret,
         )
 
@@ -284,6 +310,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
         """Generate a new ASA HMAC secret key.
@@ -299,6 +326,7 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from ..types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
-from .._types import Body, Query, Headers
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._base_client import make_request_options
 
@@ -19,6 +19,7 @@ class TokenizationDecisioning(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> TokenizationSecret:
         """Retrieve the Tokenization Decisioning secret key.
 
@@ -31,7 +32,9 @@ class TokenizationDecisioning(SyncAPIResource):
         """
         return self._get(
             "/tokenization_decisioning/secret",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=TokenizationSecret,
         )
 
@@ -43,6 +46,7 @@ class TokenizationDecisioning(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TokenizationDecisioningRotateSecretResponse:
         """Generate a new Tokenization Decisioning secret key.
@@ -57,6 +61,7 @@ class TokenizationDecisioning(SyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TokenizationDecisioningRotateSecretResponse,
@@ -72,6 +77,7 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> TokenizationSecret:
         """Retrieve the Tokenization Decisioning secret key.
 
@@ -84,7 +90,9 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         """
         return await self._get(
             "/tokenization_decisioning/secret",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=TokenizationSecret,
         )
 
@@ -96,6 +104,7 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> TokenizationDecisioningRotateSecretResponse:
         """Generate a new Tokenization Decisioning secret key.
@@ -110,6 +119,7 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
             cast_to=TokenizationDecisioningRotateSecretResponse,
