@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .kyb import KYB as KYB
+from .kyc import KYC as KYC
 from .card import Card as Card
 from .event import Event as Event
 from .shared import Address as Address
@@ -10,6 +12,7 @@ from .account import Account as Account
 from .dispute import Dispute as Dispute
 from .auth_rule import AuthRule as AuthRule
 from .api_status import APIStatus as APIStatus
+from .kyc_exempt import KYCExempt as KYCExempt
 from .transaction import Transaction as Transaction
 from .account_holder import AccountHolder as AccountHolder
 from .card_list_params import CardListParams as CardListParams

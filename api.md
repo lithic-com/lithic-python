@@ -38,6 +38,9 @@ Types:
 from lithic.types import (
     AccountHolder,
     AccountHolderDocument,
+    KYB,
+    KYC,
+    KYCExempt,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
     AccountHolderCreateWebhookResponse,
