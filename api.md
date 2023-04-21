@@ -140,6 +140,30 @@ Custom Methods:
 - `get_embed_html`
 - `get_embed_url`
 
+# Balances
+
+Types:
+
+```python
+from lithic.types import Balance
+```
+
+Methods:
+
+- <code title="get /balances">client.balances.<a href="./src/lithic/resources/balances.py">list</a>(\*\*<a href="src/lithic/types/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/balance.py">SyncSinglePage[Balance]</a></code>
+
+# AggregateBalances
+
+Types:
+
+```python
+from lithic.types import AggregateBalance
+```
+
+Methods:
+
+- <code title="get /aggregate_balances">client.aggregate_balances.<a href="./src/lithic/resources/aggregate_balances.py">list</a>(\*\*<a href="src/lithic/types/aggregate_balance_list_params.py">params</a>) -> <a href="./src/lithic/types/aggregate_balance.py">SyncSinglePage[AggregateBalance]</a></code>
+
 # Disputes
 
 Types:
@@ -201,6 +225,31 @@ Methods:
 - <code title="get /event_subscriptions/{event_subscription_token}/secret">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">retrieve_secret</a>(event_subscription_token) -> <a href="./src/lithic/types/events/subscription_retrieve_secret_response.py">SubscriptionRetrieveSecretResponse</a></code>
 - <code title="post /event_subscriptions/{event_subscription_token}/secret/rotate">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">rotate_secret</a>(event_subscription_token) -> None</code>
 
+# FinancialAccounts
+
+Types:
+
+```python
+from lithic.types import FinancialAccount, FinancialTransaction
+```
+
+Methods:
+
+- <code title="get /financial_accounts">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">list</a>(\*\*<a href="src/lithic/types/financial_account_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_account.py">SyncSinglePage[FinancialAccount]</a></code>
+
+## Balances
+
+Methods:
+
+- <code title="get /financial_accounts/{financial_account_token}/balances">client.financial_accounts.balances.<a href="./src/lithic/resources/financial_accounts/balances.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/balance.py">SyncSinglePage[Balance]</a></code>
+
+## FinancialTransactions
+
+Methods:
+
+- <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_transaction_token, financial_account_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
+
 # Transactions
 
 Types:
@@ -229,6 +278,20 @@ Methods:
 - <code title="post /simulate/return">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_return</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_response.py">TransactionSimulateReturnResponse</a></code>
 - <code title="post /simulate/return_reversal">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_return_reversal</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_reversal_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_reversal_response.py">TransactionSimulateReturnReversalResponse</a></code>
 - <code title="post /simulate/void">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_void</a>(\*\*<a href="src/lithic/types/transaction_simulate_void_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_void_response.py">TransactionSimulateVoidResponse</a></code>
+
+# ResponderEndpoints
+
+Types:
+
+```python
+from lithic.types import ResponderEndpointStatus, ResponderEndpointCreateResponse
+```
+
+Methods:
+
+- <code title="post /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">create</a>(\*\*<a href="src/lithic/types/responder_endpoint_create_params.py">params</a>) -> <a href="./src/lithic/types/responder_endpoint_create_response.py">ResponderEndpointCreateResponse</a></code>
+- <code title="delete /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">delete</a>() -> None</code>
+- <code title="get /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">check_status</a>(\*\*<a href="src/lithic/types/responder_endpoint_check_status_params.py">params</a>) -> <a href="./src/lithic/types/responder_endpoint_status.py">ResponderEndpointStatus</a></code>
 
 # Webhooks
 

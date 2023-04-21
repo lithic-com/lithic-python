@@ -86,10 +86,10 @@ class Cards(SyncAPIResource):
               [/account_holders endpoint](https://docs.lithic.com/docs/account-holders-kyc).
               See [Managing Your Program](doc:managing-your-program) for more information.
 
-          card_program_token: For physical card programs with more than one BIN range. This must be configured
-              with Lithic before use. Identifies the card program/BIN range under which to
-              create the card. If omitted, will utilize the program's default
-              `card_program_token`. In Sandbox, use 00000000-0000-0000-1000-000000000000 and
+          card_program_token: For card programs with more than one BIN range. This must be configured with
+              Lithic before use. Identifies the card program/BIN range under which to create
+              the card. If omitted, will utilize the program's default `card_program_token`.
+              In Sandbox, use 00000000-0000-0000-1000-000000000000 and
               00000000-0000-0000-2000-000000000000 to test creating cards on specific card
               programs.
 
@@ -381,8 +381,8 @@ class Cards(SyncAPIResource):
     def embed(
         self,
         *,
-        embed_request: str | NotGiven = NOT_GIVEN,
-        hmac: str | NotGiven = NOT_GIVEN,
+        embed_request: str,
+        hmac: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -749,10 +749,10 @@ class AsyncCards(AsyncAPIResource):
               [/account_holders endpoint](https://docs.lithic.com/docs/account-holders-kyc).
               See [Managing Your Program](doc:managing-your-program) for more information.
 
-          card_program_token: For physical card programs with more than one BIN range. This must be configured
-              with Lithic before use. Identifies the card program/BIN range under which to
-              create the card. If omitted, will utilize the program's default
-              `card_program_token`. In Sandbox, use 00000000-0000-0000-1000-000000000000 and
+          card_program_token: For card programs with more than one BIN range. This must be configured with
+              Lithic before use. Identifies the card program/BIN range under which to create
+              the card. If omitted, will utilize the program's default `card_program_token`.
+              In Sandbox, use 00000000-0000-0000-1000-000000000000 and
               00000000-0000-0000-2000-000000000000 to test creating cards on specific card
               programs.
 
@@ -1044,8 +1044,8 @@ class AsyncCards(AsyncAPIResource):
     async def embed(
         self,
         *,
-        embed_request: str | NotGiven = NOT_GIVEN,
-        hmac: str | NotGiven = NOT_GIVEN,
+        embed_request: str,
+        hmac: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

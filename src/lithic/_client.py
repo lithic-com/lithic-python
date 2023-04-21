@@ -54,9 +54,13 @@ class Lithic(SyncAPIClient):
     auth_stream_enrollment: resources.AuthStreamEnrollmentResource
     tokenization_decisioning: resources.TokenizationDecisioning
     cards: resources.Cards
+    balances: resources.Balances
+    aggregate_balances: resources.AggregateBalances
     disputes: resources.Disputes
     events: resources.Events
+    financial_accounts: resources.FinancialAccounts
     transactions: resources.Transactions
+    responder_endpoints: resources.ResponderEndpoints
     webhooks: resources.Webhooks
 
     # client options
@@ -138,9 +142,13 @@ class Lithic(SyncAPIClient):
         self.auth_stream_enrollment = resources.AuthStreamEnrollmentResource(self)
         self.tokenization_decisioning = resources.TokenizationDecisioning(self)
         self.cards = resources.Cards(self)
+        self.balances = resources.Balances(self)
+        self.aggregate_balances = resources.AggregateBalances(self)
         self.disputes = resources.Disputes(self)
         self.events = resources.Events(self)
+        self.financial_accounts = resources.FinancialAccounts(self)
         self.transactions = resources.Transactions(self)
+        self.responder_endpoints = resources.ResponderEndpoints(self)
         self.webhooks = resources.Webhooks(self)
 
     @property
@@ -237,9 +245,13 @@ class AsyncLithic(AsyncAPIClient):
     auth_stream_enrollment: resources.AsyncAuthStreamEnrollmentResource
     tokenization_decisioning: resources.AsyncTokenizationDecisioning
     cards: resources.AsyncCards
+    balances: resources.AsyncBalances
+    aggregate_balances: resources.AsyncAggregateBalances
     disputes: resources.AsyncDisputes
     events: resources.AsyncEvents
+    financial_accounts: resources.AsyncFinancialAccounts
     transactions: resources.AsyncTransactions
+    responder_endpoints: resources.AsyncResponderEndpoints
     webhooks: resources.AsyncWebhooks
 
     # client options
@@ -321,9 +333,13 @@ class AsyncLithic(AsyncAPIClient):
         self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResource(self)
         self.tokenization_decisioning = resources.AsyncTokenizationDecisioning(self)
         self.cards = resources.AsyncCards(self)
+        self.balances = resources.AsyncBalances(self)
+        self.aggregate_balances = resources.AsyncAggregateBalances(self)
         self.disputes = resources.AsyncDisputes(self)
         self.events = resources.AsyncEvents(self)
+        self.financial_accounts = resources.AsyncFinancialAccounts(self)
         self.transactions = resources.AsyncTransactions(self)
+        self.responder_endpoints = resources.AsyncResponderEndpoints(self)
         self.webhooks = resources.AsyncWebhooks(self)
 
     @property

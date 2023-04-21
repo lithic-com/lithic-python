@@ -106,11 +106,6 @@ class TestCards:
 
     @parametrize
     def test_method_embed(self, client: Lithic) -> None:
-        card = client.cards.embed()
-        assert_matches_type(str, card, path=["response"])
-
-    @parametrize
-    def test_method_embed_with_all_params(self, client: Lithic) -> None:
         card = client.cards.embed(
             embed_request="string",
             hmac="string",
@@ -267,11 +262,6 @@ class TestAsyncCards:
 
     @parametrize
     async def test_method_embed(self, client: AsyncLithic) -> None:
-        card = await client.cards.embed()
-        assert_matches_type(str, card, path=["response"])
-
-    @parametrize
-    async def test_method_embed_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.embed(
             embed_request="string",
             hmac="string",

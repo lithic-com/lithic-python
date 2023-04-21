@@ -36,7 +36,7 @@ class CardCreateParams(TypedDict, total=False):
     """
 
     card_program_token: str
-    """For physical card programs with more than one BIN range.
+    """For card programs with more than one BIN range.
 
     This must be configured with Lithic before use. Identifies the card program/BIN
     range under which to create the card. If omitted, will utilize the program's
