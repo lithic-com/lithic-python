@@ -9,7 +9,6 @@ from typing_extensions import Literal
 from ..types import (
     Dispute,
     DisputeEvidence,
-    DisputeInitiateEvidenceUploadResponse,
     dispute_list_params,
     dispute_create_params,
     dispute_update_params,
@@ -355,7 +354,7 @@ class Disputes(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> DisputeInitiateEvidenceUploadResponse:
+    ) -> DisputeEvidence:
         """Use this endpoint to upload evidences for the dispute.
 
         It will return a URL to
@@ -373,7 +372,7 @@ class Disputes(SyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=DisputeInitiateEvidenceUploadResponse,
+            cast_to=DisputeEvidence,
         )
 
     def list_evidences(
@@ -806,7 +805,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> DisputeInitiateEvidenceUploadResponse:
+    ) -> DisputeEvidence:
         """Use this endpoint to upload evidences for the dispute.
 
         It will return a URL to
@@ -824,7 +823,7 @@ class AsyncDisputes(AsyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=DisputeInitiateEvidenceUploadResponse,
+            cast_to=DisputeEvidence,
         )
 
     def list_evidences(
