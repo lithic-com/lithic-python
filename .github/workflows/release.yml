@@ -1,0 +1,34 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: release
+    if: github.ref == 'refs/heads/main' && github.repository == 'lithic-com/lithic-python'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: stainless-api/trigger-release-please@v1
+        id: release
+        with:
+          repo: ${{ github.event.repository.full_name }}
+          stainless-api-key: ${{ secrets.STAINLESS_API_KEY }}
+
+      - name: Set up Python
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
+
+      - name: Publish to PyPI
+        if: ${{ steps.release.outputs.releases_created }}
+        run: |
+          pipx install poetry
+          bash ./bin/publish-pypi
+        env:
+          PYPI_TOKEN: ${{ secrets.LITHIC_PYPI_TOKEN }}

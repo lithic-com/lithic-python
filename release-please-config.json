@@ -1,0 +1,13 @@
+{
+  "include-v-in-tag": true,
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "packages": {
+    ".": {}
+  },
+  "$schema": "https://raw.githubusercontent.com/stainless-api/release-please/main/schemas/config.json",
+  "release-type": "python",
+  "extra-files": [
+    "src/lithic/_version.py"
+  ]
+}
