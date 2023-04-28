@@ -8,7 +8,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import Dispute, DisputeEvidence, DisputeInitiateEvidenceUploadResponse
+from lithic.types import Dispute, DisputeEvidence
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
@@ -104,7 +104,7 @@ class TestDisputes:
         dispute = client.disputes.initiate_evidence_upload(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeInitiateEvidenceUploadResponse, dispute, path=["response"])
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
     def test_method_list_evidences(self, client: Lithic) -> None:
@@ -222,7 +222,7 @@ class TestAsyncDisputes:
         dispute = await client.disputes.initiate_evidence_upload(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeInitiateEvidenceUploadResponse, dispute, path=["response"])
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
     async def test_method_list_evidences(self, client: AsyncLithic) -> None:

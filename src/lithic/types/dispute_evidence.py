@@ -11,7 +11,7 @@ __all__ = ["DisputeEvidence"]
 
 class DisputeEvidence(BaseModel):
     created: datetime
-    """Timestamp of when first Dispute was reported."""
+    """Timestamp of when dispute evidence was created."""
 
     dispute_token: str
     """Dispute token evidence is attached to."""
