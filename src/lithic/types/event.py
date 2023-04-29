@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from typing import Dict
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -23,7 +24,7 @@ class Event(BaseModel):
       Lithic to activate a digital wallet token.
     """
 
-    payload: object
+    payload: Dict[str, object]
 
     token: str
     """Globally unique identifier."""
