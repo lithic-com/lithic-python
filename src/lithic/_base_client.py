@@ -127,8 +127,16 @@ class Stream(Generic[ResponseT]):
         process_line = self._client._process_stream_line
         process_data = self._client._process_response_data
 
+        awaiting_ping_data = False
         for raw_line in response.iter_lines():
             if not raw_line or raw_line == "\n":
+                continue
+
+            if raw_line.startswith("event: ping"):
+                awaiting_ping_data = True
+                continue
+            if awaiting_ping_data:
+                awaiting_ping_data = False
                 continue
 
             try:
@@ -168,8 +176,16 @@ class AsyncStream(Generic[ResponseT]):
         process_line = self._client._process_stream_line
         process_data = self._client._process_response_data
 
+        awaiting_ping_data = False
         async for raw_line in response.aiter_lines():
             if not raw_line or raw_line == "\n":
+                continue
+
+            if raw_line.startswith("event: ping"):
+                awaiting_ping_data = True
+                continue
+            if awaiting_ping_data:
+                awaiting_ping_data = False
                 continue
 
             try:
