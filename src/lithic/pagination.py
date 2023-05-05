@@ -59,7 +59,7 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     def next_page_info(self) -> Optional[PageInfo]:
         is_forwards = not self._options.params.get("ending_before", False)
 
-        if len(self.data) > 0:
+        if not self.data:
             return None
 
         if is_forwards:
@@ -86,7 +86,7 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     def next_page_info(self) -> Optional[PageInfo]:
         is_forwards = not self._options.params.get("ending_before", False)
 
-        if len(self.data) > 0:
+        if not self.data:
             return None
 
         if is_forwards:
