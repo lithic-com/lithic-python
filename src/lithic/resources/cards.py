@@ -76,10 +76,9 @@ class Cards(SyncAPIResource):
                 branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
                 Reach out at [lithic.com/contact](https://lithic.com/contact) for more
                 information.
+              - `SINGLE_USE` - Card is closed upon first successful authorization.
               - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
                 successfully authorizes the card.
-              - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
-                authorization.
 
           account_token: Globally unique identifier for the account that the card will be associated
               with. Required for programs enrolling users using the
@@ -739,10 +738,9 @@ class AsyncCards(AsyncAPIResource):
                 branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
                 Reach out at [lithic.com/contact](https://lithic.com/contact) for more
                 information.
+              - `SINGLE_USE` - Card is closed upon first successful authorization.
               - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
                 successfully authorizes the card.
-              - `SINGLE_USE` - _[Deprecated]_ Card is closed upon first successful
-                authorization.
 
           account_token: Globally unique identifier for the account that the card will be associated
               with. Required for programs enrolling users using the
