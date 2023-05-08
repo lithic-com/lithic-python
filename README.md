@@ -146,14 +146,14 @@ for card in first_page.data:
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
-```py
+```python
 from lithic import Lithic
 
 lithic = Lithic()
 
 lithic.cards.create(
     foo={
-        "bar": True
+        "bar": True,
     },
 )
 ```
