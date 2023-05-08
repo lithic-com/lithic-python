@@ -253,53 +253,51 @@ class Transaction(BaseModel):
     for dispute tracking.
     """
 
-    amount: Optional[int]
+    amount: int
     """Authorization amount of the transaction (in cents), including any acquirer fees.
 
     This may change over time, and will represent the settled amount once the
     transaction is settled.
     """
 
-    authorization_amount: Optional[int]
+    authorization_amount: int
     """Authorization amount (in cents) of the transaction, including any acquirer fees.
 
     This amount always represents the amount authorized for the transaction,
     unaffected by settlement.
     """
 
-    authorization_code: Optional[str]
+    authorization_code: str
     """
     A fixed-width 6-digit numeric identifier that can be used to identify a
     transaction with networks.
     """
 
-    card_token: Optional[str]
+    card_token: str
     """Token for the card used in this transaction."""
 
-    cardholder_authentication: Optional[CardholderAuthentication]
-
-    created: Optional[datetime]
+    created: datetime
     """Date and time when the transaction first occurred. UTC time zone."""
 
-    events: Optional[List[Event]]
+    events: List[Event]
     """A list of all events that have modified this transaction."""
 
-    merchant: Optional[Merchant]
+    merchant: Merchant
 
-    merchant_amount: Optional[int]
+    merchant_amount: int
     """
     Analogous to the "amount" property, but will represent the amount in the
     transaction's local currency (smallest unit), including any acquirer fees.
     """
 
-    merchant_authorization_amount: Optional[int]
+    merchant_authorization_amount: int
     """
     Analogous to the "authorization_amount" property, but will represent the amount
     in the transaction's local currency (smallest unit), including any acquirer
     fees.
     """
 
-    merchant_currency: Optional[str]
+    merchant_currency: str
     """3-digit alphabetic ISO 4217 code for the local currency of the transaction."""
 
     network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "VISA", "UNKNOWN"]]
@@ -310,39 +308,37 @@ class Transaction(BaseModel):
     provider.
     """
 
-    result: Optional[
-        Literal[
-            "ACCOUNT_STATE_TRANSACTION",
-            "APPROVED",
-            "BANK_CONNECTION_ERROR",
-            "BANK_NOT_VERIFIED",
-            "CARD_CLOSED",
-            "CARD_PAUSED",
-            "FRAUD_ADVICE",
-            "GLOBAL_TRANSACTION_LIMIT",
-            "GLOBAL_WEEKLY_LIMIT",
-            "GLOBAL_MONTHLY_LIMIT",
-            "INACTIVE_ACCOUNT",
-            "INCORRECT_PIN",
-            "INVALID_CARD_DETAILS",
-            "INSUFFICIENT_FUNDS",
-            "MERCHANT_BLACKLIST",
-            "SINGLE_USE_RECHARGED",
-            "SWITCH_INOPERATIVE_ADVICE",
-            "UNAUTHORIZED_MERCHANT",
-            "UNKNOWN_HOST_TIMEOUT",
-            "USER_TRANSACTION_LIMIT",
-        ]
+    result: Literal[
+        "ACCOUNT_STATE_TRANSACTION",
+        "APPROVED",
+        "BANK_CONNECTION_ERROR",
+        "BANK_NOT_VERIFIED",
+        "CARD_CLOSED",
+        "CARD_PAUSED",
+        "FRAUD_ADVICE",
+        "GLOBAL_TRANSACTION_LIMIT",
+        "GLOBAL_WEEKLY_LIMIT",
+        "GLOBAL_MONTHLY_LIMIT",
+        "INACTIVE_ACCOUNT",
+        "INCORRECT_PIN",
+        "INVALID_CARD_DETAILS",
+        "INSUFFICIENT_FUNDS",
+        "MERCHANT_BLACKLIST",
+        "SINGLE_USE_RECHARGED",
+        "SWITCH_INOPERATIVE_ADVICE",
+        "UNAUTHORIZED_MERCHANT",
+        "UNKNOWN_HOST_TIMEOUT",
+        "USER_TRANSACTION_LIMIT",
     ]
     """`APPROVED` or decline reason. See Event result types"""
 
-    settled_amount: Optional[int]
+    settled_amount: int
     """
     Amount of the transaction that has been settled (in cents), including any
     acquirer fees. This may change over time.
     """
 
-    status: Optional[Literal["BOUNCED", "DECLINED", "EXPIRED", "PENDING", "SETTLED", "SETTLING", "VOIDED"]]
+    status: Literal["BOUNCED", "DECLINED", "EXPIRED", "PENDING", "SETTLED", "SETTLING", "VOIDED"]
     """Status types:
 
     - `DECLINED` - The transaction was declined.
@@ -353,5 +349,7 @@ class Transaction(BaseModel):
     - `VOIDED` - The merchant has voided the previously pending authorization.
     """
 
-    token: Optional[str]
+    token: str
     """Globally unique identifier."""
+
+    cardholder_authentication: Optional[CardholderAuthentication]
