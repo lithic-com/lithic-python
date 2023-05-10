@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -226,6 +226,7 @@ class Disputes(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         transaction_token: str | NotGiven = NOT_GIVEN,
+        transaction_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -244,17 +245,19 @@ class Disputes(SyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
-          starting_after: The unique identifier of the last item in the previous page. Used to retrieve
-              the next page.
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           status: List disputes of a specific status.
 
           transaction_token: List disputes of a given transaction token.
+
+          transaction_tokens: List disputes from list of transaction tokens.
 
           extra_headers: Send extra headers
 
@@ -275,6 +278,7 @@ class Disputes(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "transaction_token": transaction_token,
+                        "transaction_tokens": transaction_tokens,
                         "status": status,
                         "page_size": page_size,
                         "begin": begin,
@@ -401,13 +405,13 @@ class Disputes(SyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
-          starting_after: The unique identifier of the last item in the previous page. Used to retrieve
-              the next page.
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -677,6 +681,7 @@ class AsyncDisputes(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         transaction_token: str | NotGiven = NOT_GIVEN,
+        transaction_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -695,17 +700,19 @@ class AsyncDisputes(AsyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
-          starting_after: The unique identifier of the last item in the previous page. Used to retrieve
-              the next page.
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           status: List disputes of a specific status.
 
           transaction_token: List disputes of a given transaction token.
+
+          transaction_tokens: List disputes from list of transaction tokens.
 
           extra_headers: Send extra headers
 
@@ -726,6 +733,7 @@ class AsyncDisputes(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "transaction_token": transaction_token,
+                        "transaction_tokens": transaction_tokens,
                         "status": status,
                         "page_size": page_size,
                         "begin": begin,
@@ -852,13 +860,13 @@ class AsyncDisputes(AsyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
-          starting_after: The unique identifier of the last item in the previous page. Used to retrieve
-              the next page.
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
