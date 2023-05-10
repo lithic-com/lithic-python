@@ -28,18 +28,19 @@ class FinancialTransactionListParams(TypedDict, total=False):
     """
 
     ending_before: str
-    """The unique identifier of the first item in the previous page.
+    """A cursor representing an item's token before which a page of results should end.
 
-    Used to retrieve the previous page.
+    Used to retrieve the previous page of results before this item.
     """
 
     result: Literal["APPROVED", "DECLINED"]
     """Financial Transaction result to be returned."""
 
     starting_after: str
-    """The unique identifier of the last item in the previous page.
+    """A cursor representing an item's token after which a page of results should
+    begin.
 
-    Used to retrieve the next page.
+    Used to retrieve the next page of results after this item.
     """
 
     status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]

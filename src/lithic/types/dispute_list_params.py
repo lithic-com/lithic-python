@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
@@ -25,18 +25,19 @@ class DisputeListParams(TypedDict, total=False):
     """
 
     ending_before: str
-    """The unique identifier of the first item in the previous page.
+    """A cursor representing an item's token before which a page of results should end.
 
-    Used to retrieve the previous page.
+    Used to retrieve the previous page of results before this item.
     """
 
     page_size: int
     """Page size (for pagination)."""
 
     starting_after: str
-    """The unique identifier of the last item in the previous page.
+    """A cursor representing an item's token after which a page of results should
+    begin.
 
-    Used to retrieve the next page.
+    Used to retrieve the next page of results after this item.
     """
 
     status: Literal[
@@ -53,3 +54,6 @@ class DisputeListParams(TypedDict, total=False):
 
     transaction_token: str
     """List disputes of a given transaction token."""
+
+    transaction_tokens: List[str]
+    """List disputes from list of transaction tokens."""

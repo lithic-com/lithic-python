@@ -75,13 +75,13 @@ class Events(SyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
-          starting_after: The unique identifier of the last item in the previous page. Used to retrieve
-              the next page.
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -186,13 +186,13 @@ class AsyncEvents(AsyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          ending_before: The unique identifier of the first item in the previous page. Used to retrieve
-              the previous page.
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
-          starting_after: The unique identifier of the last item in the previous page. Used to retrieve
-              the next page.
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
