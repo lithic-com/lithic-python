@@ -75,11 +75,6 @@ class TestDisputes:
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.list(
             transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            transaction_tokens=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
             status="NEW",
             page_size=1,
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -198,11 +193,6 @@ class TestAsyncDisputes:
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.list(
             transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            transaction_tokens=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
             status="NEW",
             page_size=1,
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
