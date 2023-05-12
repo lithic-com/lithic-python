@@ -33,7 +33,7 @@ class TestSubscriptions:
         subscription = client.events.subscriptions.create(
             description="string",
             disabled=True,
-            event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
+            event_types=["card.created", "card.created", "card.created"],
             url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
@@ -59,7 +59,7 @@ class TestSubscriptions:
             "string",
             description="string",
             disabled=True,
-            event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
+            event_types=["card.created", "card.created", "card.created"],
             url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
@@ -135,7 +135,7 @@ class TestAsyncSubscriptions:
         subscription = await client.events.subscriptions.create(
             description="string",
             disabled=True,
-            event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
+            event_types=["card.created", "card.created", "card.created"],
             url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
@@ -161,7 +161,7 @@ class TestAsyncSubscriptions:
             "string",
             description="string",
             disabled=True,
-            event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
+            event_types=["card.created", "card.created", "card.created"],
             url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])

@@ -30,7 +30,17 @@ class EventListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
-    event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+    event_types: List[
+        Literal[
+            "card.created",
+            "card.shipped",
+            "card_transaction.updated",
+            "digital_wallet.tokenization_approval_request",
+            "digital_wallet.tokenization_two_factor_authentication_code",
+            "dispute.updated",
+        ]
+    ]
+    """Event types to filter events by."""
 
     page_size: int
     """Page size (for pagination)."""
