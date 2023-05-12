@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
@@ -52,5 +52,5 @@ class DisputeListParams(TypedDict, total=False):
     ]
     """List disputes of a specific status."""
 
-    transaction_token: str
-    """List disputes of a given transaction token."""
+    transaction_tokens: List[str]
+    """Transaction tokens to filter by."""
