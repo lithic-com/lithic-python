@@ -153,7 +153,7 @@ class Lithic(SyncAPIClient):
 
     @property
     def qs(self) -> Querystring:
-        return Querystring(array_format="repeat")
+        return Querystring(array_format="comma")
 
     @property
     def auth_headers(self) -> dict[str, str]:
@@ -344,7 +344,7 @@ class AsyncLithic(AsyncAPIClient):
 
     @property
     def qs(self) -> Querystring:
-        return Querystring(array_format="repeat")
+        return Querystring(array_format="comma")
 
     @property
     def auth_headers(self) -> dict[str, str]:
