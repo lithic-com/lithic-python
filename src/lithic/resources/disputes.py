@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -225,7 +225,7 @@ class Disputes(SyncAPIResource):
             "CASE_CLOSED",
         ]
         | NotGiven = NOT_GIVEN,
-        transaction_token: str | NotGiven = NOT_GIVEN,
+        transaction_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -254,7 +254,7 @@ class Disputes(SyncAPIResource):
 
           status: List disputes of a specific status.
 
-          transaction_token: List disputes of a given transaction token.
+          transaction_tokens: Transaction tokens to filter by.
 
           extra_headers: Send extra headers
 
@@ -274,7 +274,7 @@ class Disputes(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "transaction_token": transaction_token,
+                        "transaction_tokens": transaction_tokens,
                         "status": status,
                         "page_size": page_size,
                         "begin": begin,
@@ -676,7 +676,7 @@ class AsyncDisputes(AsyncAPIResource):
             "CASE_CLOSED",
         ]
         | NotGiven = NOT_GIVEN,
-        transaction_token: str | NotGiven = NOT_GIVEN,
+        transaction_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -705,7 +705,7 @@ class AsyncDisputes(AsyncAPIResource):
 
           status: List disputes of a specific status.
 
-          transaction_token: List disputes of a given transaction token.
+          transaction_tokens: Transaction tokens to filter by.
 
           extra_headers: Send extra headers
 
@@ -725,7 +725,7 @@ class AsyncDisputes(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "transaction_token": transaction_token,
+                        "transaction_tokens": transaction_tokens,
                         "status": status,
                         "page_size": page_size,
                         "begin": begin,

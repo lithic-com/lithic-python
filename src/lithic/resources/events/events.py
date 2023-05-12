@@ -53,7 +53,16 @@ class Events(SyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        event_types: List[
+            Literal[
+                "card.created",
+                "card.shipped",
+                "card_transaction.updated",
+                "digital_wallet.tokenization_approval_request",
+                "digital_wallet.tokenization_two_factor_authentication_code",
+                "dispute.updated",
+            ]
+        ]
         | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
@@ -77,6 +86,8 @@ class Events(SyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          event_types: Event types to filter events by.
 
           page_size: Page size (for pagination).
 
@@ -164,7 +175,16 @@ class AsyncEvents(AsyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
-        event_types: List[Literal["dispute.updated", "digital_wallet.tokenization_approval_request"]]
+        event_types: List[
+            Literal[
+                "card.created",
+                "card.shipped",
+                "card_transaction.updated",
+                "digital_wallet.tokenization_approval_request",
+                "digital_wallet.tokenization_two_factor_authentication_code",
+                "dispute.updated",
+            ]
+        ]
         | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
@@ -188,6 +208,8 @@ class AsyncEvents(AsyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          event_types: Event types to filter events by.
 
           page_size: Page size (for pagination).
 

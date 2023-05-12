@@ -41,7 +41,7 @@ class TestEvents:
             page_size=1,
             starting_after="string",
             ending_before="string",
-            event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
+            event_types=["card.created", "card.created", "card.created"],
         )
         assert_matches_type(SyncCursorPage[Event], event, path=["response"])
 
@@ -78,7 +78,7 @@ class TestAsyncEvents:
             page_size=1,
             starting_after="string",
             ending_before="string",
-            event_types=["dispute.updated", "dispute.updated", "dispute.updated"],
+            event_types=["card.created", "card.created", "card.created"],
         )
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
