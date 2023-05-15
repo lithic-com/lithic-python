@@ -115,7 +115,7 @@ def _maybe_transform_key(key: str, type_: type) -> str:
         return key
 
     # ignore the first argument as it is the actual type
-    annotations = get_args(type_)[1:]
+    annotations = get_args(annotated_type)[1:]
     for annotation in annotations:
         if isinstance(annotation, PropertyInfo) and annotation.alias is not None:
             return annotation.alias
