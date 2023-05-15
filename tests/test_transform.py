@@ -177,3 +177,12 @@ def test_datetime_custom_format() -> None:
 
     result = transform(dt, Annotated[datetime, PropertyInfo(format="custom", format_template="%H")])
     assert result == "06"  # type: ignore[comparison-overlap]
+
+
+class DateDictWithRequiredAlias(TypedDict, total=False):
+    required_prop: Required[Annotated[date, PropertyInfo(format="iso8601", alias="prop")]]
+
+
+def test_datetime_with_alias() -> None:
+    assert transform({"required_prop": None}, DateDictWithRequiredAlias) == {"prop": None}  # type: ignore[comparison-overlap]
+    assert transform({"required_prop": date.fromisoformat("2023-02-23")}, DateDictWithRequiredAlias) == {"prop": "2023-02-23"}  # type: ignore[comparison-overlap]
