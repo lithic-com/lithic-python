@@ -585,17 +585,20 @@ class Cards(SyncAPIResource):
         for more information.
 
         Args:
-          certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
-              format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
-              Provided by the device's wallet.
+          certificate: Only applicable if `digital_wallet` is `APPLE_PAY`. Omit to receive only
+              `activationData` in the response. Apple's public leaf certificate. Base64
+              encoded in PEM format with headers `(-----BEGIN CERTIFICATE-----)` and trailers
+              omitted. Provided by the device's wallet.
 
           digital_wallet: Name of digital wallet provider.
 
-          nonce: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
-              wallet.
+          nonce: Only applicable if `digital_wallet` is `APPLE_PAY`. Omit to receive only
+              `activationData` in the response. Base64 cryptographic nonce provided by the
+              device's wallet.
 
-          nonce_signature: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
-              wallet.
+          nonce_signature: Only applicable if `digital_wallet` is `APPLE_PAY`. Omit to receive only
+              `activationData` in the response. Base64 cryptographic nonce provided by the
+              device's wallet.
 
           extra_headers: Send extra headers
 
@@ -1247,17 +1250,20 @@ class AsyncCards(AsyncAPIResource):
         for more information.
 
         Args:
-          certificate: Required for `APPLE_PAY`. Apple's public leaf certificate. Base64 encoded in PEM
-              format with headers `(-----BEGIN CERTIFICATE-----)` and trailers omitted.
-              Provided by the device's wallet.
+          certificate: Only applicable if `digital_wallet` is `APPLE_PAY`. Omit to receive only
+              `activationData` in the response. Apple's public leaf certificate. Base64
+              encoded in PEM format with headers `(-----BEGIN CERTIFICATE-----)` and trailers
+              omitted. Provided by the device's wallet.
 
           digital_wallet: Name of digital wallet provider.
 
-          nonce: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
-              wallet.
+          nonce: Only applicable if `digital_wallet` is `APPLE_PAY`. Omit to receive only
+              `activationData` in the response. Base64 cryptographic nonce provided by the
+              device's wallet.
 
-          nonce_signature: Required for `APPLE_PAY`. Base64 cryptographic nonce provided by the device's
-              wallet.
+          nonce_signature: Only applicable if `digital_wallet` is `APPLE_PAY`. Omit to receive only
+              `activationData` in the response. Base64 cryptographic nonce provided by the
+              device's wallet.
 
           extra_headers: Send extra headers
 
