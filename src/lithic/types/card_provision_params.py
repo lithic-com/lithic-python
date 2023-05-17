@@ -9,9 +9,10 @@ __all__ = ["CardProvisionParams"]
 
 class CardProvisionParams(TypedDict, total=False):
     certificate: str
-    """Required for `APPLE_PAY`.
+    """Only applicable if `digital_wallet` is `APPLE_PAY`.
 
-    Apple's public leaf certificate. Base64 encoded in PEM format with headers
+    Omit to receive only `activationData` in the response. Apple's public leaf
+    certificate. Base64 encoded in PEM format with headers
     `(-----BEGIN CERTIFICATE-----)` and trailers omitted. Provided by the device's
     wallet.
     """
@@ -20,13 +21,15 @@ class CardProvisionParams(TypedDict, total=False):
     """Name of digital wallet provider."""
 
     nonce: str
-    """Required for `APPLE_PAY`.
+    """Only applicable if `digital_wallet` is `APPLE_PAY`.
 
-    Base64 cryptographic nonce provided by the device's wallet.
+    Omit to receive only `activationData` in the response. Base64 cryptographic
+    nonce provided by the device's wallet.
     """
 
     nonce_signature: str
-    """Required for `APPLE_PAY`.
+    """Only applicable if `digital_wallet` is `APPLE_PAY`.
 
-    Base64 cryptographic nonce provided by the device's wallet.
+    Omit to receive only `activationData` in the response. Base64 cryptographic
+    nonce provided by the device's wallet.
     """
