@@ -358,6 +358,30 @@ class TestLithic:
         )
         assert response.request.headers.get("Idempotency-Token") == "custom-key"
 
+    def test_base_url_trailing_slash(self) -> None:
+        client = Lithic(
+            base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+        )
+        request = client._build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar"},
+            ),
+        )
+        assert request.url == "http://localhost:5000/custom/path/foo"
+
+    def test_base_url_no_trailing_slash(self) -> None:
+        client = Lithic(base_url="http://localhost:5000/custom/path", api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar"},
+            ),
+        )
+        assert request.url == "http://localhost:5000/custom/path/foo"
+
 
 class TestAsyncLithic:
     client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -691,3 +715,29 @@ class TestAsyncLithic:
             "/foo", cast_to=httpx.Response, options=make_request_options(idempotency_key="custom-key")
         )
         assert response.request.headers.get("Idempotency-Token") == "custom-key"
+
+    def test_base_url_trailing_slash(self) -> None:
+        client = AsyncLithic(
+            base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+        )
+        request = client._build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar"},
+            ),
+        )
+        assert request.url == "http://localhost:5000/custom/path/foo"
+
+    def test_base_url_no_trailing_slash(self) -> None:
+        client = AsyncLithic(
+            base_url="http://localhost:5000/custom/path", api_key=api_key, _strict_response_validation=True
+        )
+        request = client._build_request(
+            FinalRequestOptions(
+                method="post",
+                url="/foo",
+                json_data={"foo": "bar"},
+            ),
+        )
+        assert request.url == "http://localhost:5000/custom/path/foo"
