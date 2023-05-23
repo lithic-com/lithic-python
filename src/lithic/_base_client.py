@@ -626,7 +626,7 @@ class BaseClient:
 
     def _process_stream_line(self, contents: str) -> str:
         """Pre-process an indiviudal line from a streaming response"""
-        if contents == "data: [DONE]\n":
+        if contents.startswith("data: [DONE]"):
             raise StopStreaming()
 
         if contents.startswith("data: "):
