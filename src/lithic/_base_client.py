@@ -482,6 +482,15 @@ class BaseClient:
 
         return headers
 
+    def _prepare_request(self, request: httpx.Request) -> None:
+        """This method is used as a callback for mutating the `Request` object
+        after it has been constructed.
+
+        This is useful for cases where you want to add certain headers based off of
+        the request properties, e.g. `url`, `method` etc.
+        """
+        return None
+
     def _build_request(
         self,
         options: FinalRequestOptions,
@@ -519,7 +528,7 @@ class BaseClient:
                 kwargs["data"] = self._serialize_multipartform(json_data)
 
         # TODO: report this error to httpx
-        return self._client.build_request(  # pyright: ignore[reportUnknownMemberType]
+        request = self._client.build_request(  # pyright: ignore[reportUnknownMemberType]
             headers=headers,
             timeout=self.timeout if isinstance(options.timeout, NotGiven) else options.timeout,
             method=options.method,
@@ -533,6 +542,8 @@ class BaseClient:
             files=options.files,
             **kwargs,
         )
+        self._prepare_request(request)
+        return request
 
     def _serialize_multipartform(self, data: Mapping[object, object]) -> dict[str, object]:
         items = self.qs.stringify_items(
