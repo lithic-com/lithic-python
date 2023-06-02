@@ -45,7 +45,18 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
-        """Get specific transaction."""
+        """
+        Get specific transaction.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/transactions/{transaction_token}",
             options=make_request_options(
@@ -111,12 +122,12 @@ class Transactions(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "account_token": account_token,
-                        "card_token": card_token,
-                        "result": result,
                         "begin": begin,
+                        "card_token": card_token,
                         "end": end,
                         "page": page,
                         "page_size": page_size,
+                        "result": result,
                     },
                     transaction_list_params.TransactionListParams,
                 ),
@@ -220,12 +231,12 @@ class Transactions(SyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
-                    "status": status,
-                    "merchant_acceptor_id": merchant_acceptor_id,
-                    "merchant_currency": merchant_currency,
-                    "merchant_amount": merchant_amount,
                     "mcc": mcc,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_amount": merchant_amount,
+                    "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
+                    "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
             ),
@@ -338,8 +349,8 @@ class Transactions(SyncAPIResource):
             "/simulate/clearing",
             body=maybe_transform(
                 {
-                    "amount": amount,
                     "token": token,
+                    "amount": amount,
                 },
                 transaction_simulate_clearing_params.TransactionSimulateClearingParams,
             ),
@@ -407,8 +418,8 @@ class Transactions(SyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
-                    "merchant_acceptor_id": merchant_acceptor_id,
                     "mcc": mcc,
+                    "merchant_acceptor_id": merchant_acceptor_id,
                 },
                 transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
             ),
@@ -571,8 +582,8 @@ class Transactions(SyncAPIResource):
             "/simulate/void",
             body=maybe_transform(
                 {
-                    "amount": amount,
                     "token": token,
+                    "amount": amount,
                     "type": type,
                 },
                 transaction_simulate_void_params.TransactionSimulateVoidParams,
@@ -600,7 +611,18 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
-        """Get specific transaction."""
+        """
+        Get specific transaction.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/transactions/{transaction_token}",
             options=make_request_options(
@@ -666,12 +688,12 @@ class AsyncTransactions(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "account_token": account_token,
-                        "card_token": card_token,
-                        "result": result,
                         "begin": begin,
+                        "card_token": card_token,
                         "end": end,
                         "page": page,
                         "page_size": page_size,
+                        "result": result,
                     },
                     transaction_list_params.TransactionListParams,
                 ),
@@ -775,12 +797,12 @@ class AsyncTransactions(AsyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
-                    "status": status,
-                    "merchant_acceptor_id": merchant_acceptor_id,
-                    "merchant_currency": merchant_currency,
-                    "merchant_amount": merchant_amount,
                     "mcc": mcc,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_amount": merchant_amount,
+                    "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
+                    "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
             ),
@@ -893,8 +915,8 @@ class AsyncTransactions(AsyncAPIResource):
             "/simulate/clearing",
             body=maybe_transform(
                 {
-                    "amount": amount,
                     "token": token,
+                    "amount": amount,
                 },
                 transaction_simulate_clearing_params.TransactionSimulateClearingParams,
             ),
@@ -962,8 +984,8 @@ class AsyncTransactions(AsyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
-                    "merchant_acceptor_id": merchant_acceptor_id,
                     "mcc": mcc,
+                    "merchant_acceptor_id": merchant_acceptor_id,
                 },
                 transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
             ),
@@ -1126,8 +1148,8 @@ class AsyncTransactions(AsyncAPIResource):
             "/simulate/void",
             body=maybe_transform(
                 {
-                    "amount": amount,
                     "token": token,
+                    "amount": amount,
                     "type": type,
                 },
                 transaction_simulate_void_params.TransactionSimulateVoidParams,

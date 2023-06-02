@@ -229,9 +229,9 @@ class AccountHolders(SyncAPIResource):
 
     @required_args(
         [
-            "business_entity",
             "beneficial_owner_entities",
             "beneficial_owner_individuals",
+            "business_entity",
             "control_person",
             "nature_of_business",
             "tos_timestamp",
@@ -239,33 +239,32 @@ class AccountHolders(SyncAPIResource):
             "workflow",
         ],
         ["individual", "tos_timestamp", "workflow"],
-        ["workflow", "kyc_exemption_type", "first_name", "last_name", "email", "phone_number"],
+        ["email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
     )
     def create(
         self,
         *,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        tos_timestamp: str | str | NotGiven = NOT_GIVEN,
+        tos_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
-        | Literal["KYC_EXEMPT"]
-        | NotGiven = NOT_GIVEN,
+        | Literal["KYC_EXEMPT"],
+        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
+        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -274,117 +273,28 @@ class AccountHolders(SyncAPIResource):
         timeout: float | None | NotGiven = 300000,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
-        """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP) and return an `account_token` if the status is accepted or pending
-        (i.e., further action required). All calls to this endpoint will return an
-        immediate response - though in some cases, the response may indicate the
-        workflow is under review or further action will be needed to complete the
-        account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
-
-        Args:
-          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
-
-          beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an entity,
-              please identify them in this field. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background. If no business owner is an entity, pass in an
-              empty list. However, either this parameter or `beneficial_owner_individuals`
-              must be populated. on entities that should be included.
-
-          beneficial_owner_individuals: List of all individuals with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an
-              individual, please identify them in this field. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background on individuals that should be included. If no
-              individual is an entity, pass in an empty list. However, either this parameter
-              or `beneficial_owner_entities` must be populated.
-
-          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
-              users of businesses. Pass the account_token of the enrolled business associated
-              with the AUTHORIZED_USER in this field.
-
-          business_entity: Information for business for which the account is being opened and KYB is being
-              run.
-
-          control_person: An individual with significant responsibility for managing the legal entity
-              (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
-              Officer, Managing Member, General Partner, President, Vice President, or
-              Treasurer). This can be an executive, or someone who will have program-wide
-              access to the cards that Lithic will provide. In some cases, this individual
-              could also be a beneficial owner listed above. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section II) for more background.
-
-          email: The KYC Exempt user's email
-
-          first_name: The KYC Exempt user's first name
-
-          individual: Information on individual for whom the account is being opened and KYC is being
-              run.
-
-          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
-              business with a pass result.
-
-              This field is required only if workflow type is `KYB_BYO`.
-
-          kyc_exemption_type: Specifies the type of KYC Exempt user
-
-          kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
-              individual with a pass result.
-
-              This field is required only if workflow type is `KYC_BYO`.
-
-          last_name: The KYC Exempt user's last name
-
-          nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
-
-          phone_number: The KYC Exempt user's phone number
-
-          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
-              legal agreements (e.g., cardholder terms) as agreed upon during API customer's
-              implementation with Lithic.
-
-          website_url: Company website URL.
-
-          workflow: Specifies the type of KYB workflow to run.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
         return self._post(
             "/account_holders",
             body=maybe_transform(
                 {
-                    "business_entity": business_entity,
                     "beneficial_owner_entities": beneficial_owner_entities,
                     "beneficial_owner_individuals": beneficial_owner_individuals,
+                    "business_entity": business_entity,
                     "control_person": control_person,
-                    "kyb_passed_timestamp": kyb_passed_timestamp,
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "website_url": website_url,
                     "workflow": workflow,
+                    "kyb_passed_timestamp": kyb_passed_timestamp,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
-                    "kyc_exemption_type": kyc_exemption_type,
-                    "first_name": first_name,
-                    "last_name": last_name,
                     "email": email,
+                    "first_name": first_name,
+                    "kyc_exemption_type": kyc_exemption_type,
+                    "last_name": last_name,
                     "phone_number": phone_number,
-                    "business_account_token": business_account_token,
                     "address": address,
+                    "business_account_token": business_account_token,
                 },
                 account_holder_create_params.AccountHolderCreateParams,
             ),
@@ -412,6 +322,15 @@ class AccountHolders(SyncAPIResource):
         """
         Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
         status.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             f"/account_holders/{account_holder_token}",
@@ -466,9 +385,9 @@ class AccountHolders(SyncAPIResource):
             f"/account_holders/{account_holder_token}",
             body=maybe_transform(
                 {
+                    "business_account_token": business_account_token,
                     "email": email,
                     "phone_number": phone_number,
-                    "business_account_token": business_account_token,
                 },
                 account_holder_update_params.AccountHolderUpdateParams,
             ),
@@ -563,6 +482,15 @@ class AccountHolders(SyncAPIResource):
         When a new document upload is generated for a failed attempt, the response will
         show an additional entry in the `required_document_uploads` list in a `PENDING`
         state for the corresponding `image_type`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             f"/account_holders/{account_holder_token}/documents",
@@ -620,9 +548,9 @@ class AccountHolders(SyncAPIResource):
             f"/account_holders/{account_holder_token}/resubmit",
             body=maybe_transform(
                 {
-                    "workflow": workflow,
-                    "tos_timestamp": tos_timestamp,
                     "individual": individual,
+                    "tos_timestamp": tos_timestamp,
+                    "workflow": workflow,
                 },
                 account_holder_resubmit_params.AccountHolderResubmitParams,
             ),
@@ -663,6 +591,15 @@ class AccountHolders(SyncAPIResource):
         When a new account holder document upload is generated for a failed attempt, the
         response will show an additional entry in the `required_document_uploads` array
         in a `PENDING` state for the corresponding `image_type`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             f"/account_holders/{account_holder_token}/documents/{document_token}",
@@ -938,9 +875,9 @@ class AsyncAccountHolders(AsyncAPIResource):
 
     @required_args(
         [
-            "business_entity",
             "beneficial_owner_entities",
             "beneficial_owner_individuals",
+            "business_entity",
             "control_person",
             "nature_of_business",
             "tos_timestamp",
@@ -948,33 +885,32 @@ class AsyncAccountHolders(AsyncAPIResource):
             "workflow",
         ],
         ["individual", "tos_timestamp", "workflow"],
-        ["workflow", "kyc_exemption_type", "first_name", "last_name", "email", "phone_number"],
+        ["email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
     )
     async def create(
         self,
         *,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        tos_timestamp: str | str | NotGiven = NOT_GIVEN,
+        tos_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
-        | Literal["KYC_EXEMPT"]
-        | NotGiven = NOT_GIVEN,
+        | Literal["KYC_EXEMPT"],
+        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
+        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -983,117 +919,28 @@ class AsyncAccountHolders(AsyncAPIResource):
         timeout: float | None | NotGiven = 300000,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
-        """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP) and return an `account_token` if the status is accepted or pending
-        (i.e., further action required). All calls to this endpoint will return an
-        immediate response - though in some cases, the response may indicate the
-        workflow is under review or further action will be needed to complete the
-        account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
-
-        Args:
-          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
-
-          beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an entity,
-              please identify them in this field. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background. If no business owner is an entity, pass in an
-              empty list. However, either this parameter or `beneficial_owner_individuals`
-              must be populated. on entities that should be included.
-
-          beneficial_owner_individuals: List of all individuals with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an
-              individual, please identify them in this field. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background on individuals that should be included. If no
-              individual is an entity, pass in an empty list. However, either this parameter
-              or `beneficial_owner_entities` must be populated.
-
-          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
-              users of businesses. Pass the account_token of the enrolled business associated
-              with the AUTHORIZED_USER in this field.
-
-          business_entity: Information for business for which the account is being opened and KYB is being
-              run.
-
-          control_person: An individual with significant responsibility for managing the legal entity
-              (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
-              Officer, Managing Member, General Partner, President, Vice President, or
-              Treasurer). This can be an executive, or someone who will have program-wide
-              access to the cards that Lithic will provide. In some cases, this individual
-              could also be a beneficial owner listed above. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section II) for more background.
-
-          email: The KYC Exempt user's email
-
-          first_name: The KYC Exempt user's first name
-
-          individual: Information on individual for whom the account is being opened and KYC is being
-              run.
-
-          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
-              business with a pass result.
-
-              This field is required only if workflow type is `KYB_BYO`.
-
-          kyc_exemption_type: Specifies the type of KYC Exempt user
-
-          kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
-              individual with a pass result.
-
-              This field is required only if workflow type is `KYC_BYO`.
-
-          last_name: The KYC Exempt user's last name
-
-          nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
-
-          phone_number: The KYC Exempt user's phone number
-
-          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
-              legal agreements (e.g., cardholder terms) as agreed upon during API customer's
-              implementation with Lithic.
-
-          website_url: Company website URL.
-
-          workflow: Specifies the type of KYB workflow to run.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
         return await self._post(
             "/account_holders",
             body=maybe_transform(
                 {
-                    "business_entity": business_entity,
                     "beneficial_owner_entities": beneficial_owner_entities,
                     "beneficial_owner_individuals": beneficial_owner_individuals,
+                    "business_entity": business_entity,
                     "control_person": control_person,
-                    "kyb_passed_timestamp": kyb_passed_timestamp,
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "website_url": website_url,
                     "workflow": workflow,
+                    "kyb_passed_timestamp": kyb_passed_timestamp,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
-                    "kyc_exemption_type": kyc_exemption_type,
-                    "first_name": first_name,
-                    "last_name": last_name,
                     "email": email,
+                    "first_name": first_name,
+                    "kyc_exemption_type": kyc_exemption_type,
+                    "last_name": last_name,
                     "phone_number": phone_number,
-                    "business_account_token": business_account_token,
                     "address": address,
+                    "business_account_token": business_account_token,
                 },
                 account_holder_create_params.AccountHolderCreateParams,
             ),
@@ -1121,6 +968,15 @@ class AsyncAccountHolders(AsyncAPIResource):
         """
         Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
         status.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             f"/account_holders/{account_holder_token}",
@@ -1175,9 +1031,9 @@ class AsyncAccountHolders(AsyncAPIResource):
             f"/account_holders/{account_holder_token}",
             body=maybe_transform(
                 {
+                    "business_account_token": business_account_token,
                     "email": email,
                     "phone_number": phone_number,
-                    "business_account_token": business_account_token,
                 },
                 account_holder_update_params.AccountHolderUpdateParams,
             ),
@@ -1272,6 +1128,15 @@ class AsyncAccountHolders(AsyncAPIResource):
         When a new document upload is generated for a failed attempt, the response will
         show an additional entry in the `required_document_uploads` list in a `PENDING`
         state for the corresponding `image_type`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             f"/account_holders/{account_holder_token}/documents",
@@ -1329,9 +1194,9 @@ class AsyncAccountHolders(AsyncAPIResource):
             f"/account_holders/{account_holder_token}/resubmit",
             body=maybe_transform(
                 {
-                    "workflow": workflow,
-                    "tos_timestamp": tos_timestamp,
                     "individual": individual,
+                    "tos_timestamp": tos_timestamp,
+                    "workflow": workflow,
                 },
                 account_holder_resubmit_params.AccountHolderResubmitParams,
             ),
@@ -1372,6 +1237,15 @@ class AsyncAccountHolders(AsyncAPIResource):
         When a new account holder document upload is generated for a failed attempt, the
         response will show an additional entry in the `required_document_uploads` array
         in a `PENDING` state for the corresponding `image_type`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             f"/account_holders/{account_holder_token}/documents/{document_token}",

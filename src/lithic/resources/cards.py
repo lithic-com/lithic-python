@@ -164,20 +164,20 @@ class Cards(SyncAPIResource):
             "/cards",
             body=maybe_transform(
                 {
+                    "type": type,
                     "account_token": account_token,
                     "card_program_token": card_program_token,
+                    "digital_card_art_token": digital_card_art_token,
                     "exp_month": exp_month,
                     "exp_year": exp_year,
                     "memo": memo,
-                    "spend_limit": spend_limit,
-                    "spend_limit_duration": spend_limit_duration,
-                    "state": state,
-                    "type": type,
                     "pin": pin,
-                    "digital_card_art_token": digital_card_art_token,
                     "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
+                    "spend_limit": spend_limit,
+                    "spend_limit_duration": spend_limit_duration,
+                    "state": state,
                 },
                 card_create_params.CardCreateParams,
             ),
@@ -202,7 +202,18 @@ class Cards(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Card:
-        """Get card configuration such as spend limit and state."""
+        """
+        Get card configuration such as spend limit and state.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/cards/{card_token}",
             options=make_request_options(
@@ -296,13 +307,13 @@ class Cards(SyncAPIResource):
             f"/cards/{card_token}",
             body=maybe_transform(
                 {
+                    "auth_rule_token": auth_rule_token,
+                    "digital_card_art_token": digital_card_art_token,
                     "memo": memo,
+                    "pin": pin,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
-                    "auth_rule_token": auth_rule_token,
                     "state": state,
-                    "pin": pin,
-                    "digital_card_art_token": digital_card_art_token,
                 },
                 card_update_params.CardUpdateParams,
             ),
@@ -614,10 +625,10 @@ class Cards(SyncAPIResource):
             f"/cards/{card_token}/provision",
             body=maybe_transform(
                 {
+                    "certificate": certificate,
                     "digital_wallet": digital_wallet,
                     "nonce": nonce,
                     "nonce_signature": nonce_signature,
-                    "certificate": certificate,
                 },
                 card_provision_params.CardProvisionParams,
             ),
@@ -682,9 +693,9 @@ class Cards(SyncAPIResource):
             f"/cards/{card_token}/reissue",
             body=maybe_transform(
                 {
+                    "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
-                    "product_id": product_id,
                 },
                 card_reissue_params.CardReissueParams,
             ),
@@ -829,20 +840,20 @@ class AsyncCards(AsyncAPIResource):
             "/cards",
             body=maybe_transform(
                 {
+                    "type": type,
                     "account_token": account_token,
                     "card_program_token": card_program_token,
+                    "digital_card_art_token": digital_card_art_token,
                     "exp_month": exp_month,
                     "exp_year": exp_year,
                     "memo": memo,
-                    "spend_limit": spend_limit,
-                    "spend_limit_duration": spend_limit_duration,
-                    "state": state,
-                    "type": type,
                     "pin": pin,
-                    "digital_card_art_token": digital_card_art_token,
                     "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
+                    "spend_limit": spend_limit,
+                    "spend_limit_duration": spend_limit_duration,
+                    "state": state,
                 },
                 card_create_params.CardCreateParams,
             ),
@@ -867,7 +878,18 @@ class AsyncCards(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Card:
-        """Get card configuration such as spend limit and state."""
+        """
+        Get card configuration such as spend limit and state.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/cards/{card_token}",
             options=make_request_options(
@@ -961,13 +983,13 @@ class AsyncCards(AsyncAPIResource):
             f"/cards/{card_token}",
             body=maybe_transform(
                 {
+                    "auth_rule_token": auth_rule_token,
+                    "digital_card_art_token": digital_card_art_token,
                     "memo": memo,
+                    "pin": pin,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
-                    "auth_rule_token": auth_rule_token,
                     "state": state,
-                    "pin": pin,
-                    "digital_card_art_token": digital_card_art_token,
                 },
                 card_update_params.CardUpdateParams,
             ),
@@ -1279,10 +1301,10 @@ class AsyncCards(AsyncAPIResource):
             f"/cards/{card_token}/provision",
             body=maybe_transform(
                 {
+                    "certificate": certificate,
                     "digital_wallet": digital_wallet,
                     "nonce": nonce,
                     "nonce_signature": nonce_signature,
-                    "certificate": certificate,
                 },
                 card_provision_params.CardProvisionParams,
             ),
@@ -1347,9 +1369,9 @@ class AsyncCards(AsyncAPIResource):
             f"/cards/{card_token}/reissue",
             body=maybe_transform(
                 {
+                    "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
-                    "product_id": product_id,
                 },
                 card_reissue_params.CardReissueParams,
             ),

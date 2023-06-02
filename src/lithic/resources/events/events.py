@@ -38,7 +38,18 @@ class Events(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Event:
-        """Get an event."""
+        """
+        Get an event.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/events/{event_token}",
             options=make_request_options(
@@ -114,10 +125,10 @@ class Events(SyncAPIResource):
                     {
                         "begin": begin,
                         "end": end,
-                        "page_size": page_size,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
                         "event_types": event_types,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     event_list_params.EventListParams,
                 ),
@@ -160,7 +171,18 @@ class AsyncEvents(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Event:
-        """Get an event."""
+        """
+        Get an event.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/events/{event_token}",
             options=make_request_options(
@@ -236,10 +258,10 @@ class AsyncEvents(AsyncAPIResource):
                     {
                         "begin": begin,
                         "end": end,
-                        "page_size": page_size,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
                         "event_types": event_types,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     event_list_params.EventListParams,
                 ),

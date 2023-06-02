@@ -30,7 +30,18 @@ class FinancialTransactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> FinancialTransaction:
-        """Get the financial transaction for the provided token."""
+        """
+        Get the financial transaction for the provided token.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}",
             options=make_request_options(
@@ -97,13 +108,13 @@ class FinancialTransactions(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "category": category,
-                        "status": status,
-                        "result": result,
                         "begin": begin,
+                        "category": category,
                         "end": end,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
+                        "result": result,
+                        "starting_after": starting_after,
+                        "status": status,
                     },
                     financial_transaction_list_params.FinancialTransactionListParams,
                 ),
@@ -125,7 +136,18 @@ class AsyncFinancialTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> FinancialTransaction:
-        """Get the financial transaction for the provided token."""
+        """
+        Get the financial transaction for the provided token.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}",
             options=make_request_options(
@@ -192,13 +214,13 @@ class AsyncFinancialTransactions(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "category": category,
-                        "status": status,
-                        "result": result,
                         "begin": begin,
+                        "category": category,
                         "end": end,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
+                        "result": result,
+                        "starting_after": starting_after,
+                        "status": status,
                     },
                     financial_transaction_list_params.FinancialTransactionListParams,
                 ),

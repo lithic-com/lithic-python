@@ -28,18 +28,6 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_overload_1(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
-            business_entity={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "government_id": "114-123-1513",
-                "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
-            },
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -125,6 +113,18 @@ class TestAccountHolders:
                     "phone_number": "+12124007676",
                 },
             ],
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "phone_numbers": ["+12124007676"],
+            },
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -150,21 +150,6 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
-            business_entity={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "address2": "string",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dba_business_name": "string",
-                "government_id": "114-123-1513",
-                "legal_business_name": "Acme, Inc.",
-                "parent_company": "string",
-                "phone_numbers": ["+12124007676"],
-            },
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -262,6 +247,21 @@ class TestAccountHolders:
                     "phone_number": "+12124007676",
                 },
             ],
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dba_business_name": "string",
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "parent_company": "string",
+                "phone_numbers": ["+12124007676"],
+            },
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -278,11 +278,11 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyb_passed_timestamp="2018-05-29T21:16:05Z",
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
+            kyb_passed_timestamp="2018-05-29T21:16:05Z",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
@@ -328,34 +328,33 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyc_passed_timestamp="string",
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
+            kyc_passed_timestamp="string",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_overload_3(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
-            workflow="KYC_EXEMPT",
-            kyc_exemption_type="AUTHORIZED_USER",
-            first_name="string",
-            last_name="string",
             email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
             phone_number="string",
+            workflow="KYC_EXEMPT",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
-            workflow="KYC_EXEMPT",
-            kyc_exemption_type="AUTHORIZED_USER",
-            first_name="string",
-            last_name="string",
             email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
             phone_number="string",
-            business_account_token="string",
+            workflow="KYC_EXEMPT",
             address={
                 "address1": "123 Old Forest Way",
                 "address2": "string",
@@ -364,6 +363,7 @@ class TestAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
+            business_account_token="string",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
@@ -385,9 +385,9 @@ class TestAccountHolders:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         account_holder = client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            business_account_token="string",
             email="string",
             phone_number="string",
-            business_account_token="string",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
@@ -409,8 +409,6 @@ class TestAccountHolders:
     def test_method_resubmit(self, client: Lithic) -> None:
         account_holder = client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            workflow="KYC_ADVANCED",
-            tos_timestamp="2018-05-29T21:16:05Z",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -426,6 +424,8 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
+            tos_timestamp="2018-05-29T21:16:05Z",
+            workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
@@ -454,18 +454,6 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_overload_1(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.create(
-            business_entity={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "government_id": "114-123-1513",
-                "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
-            },
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -551,6 +539,18 @@ class TestAsyncAccountHolders:
                     "phone_number": "+12124007676",
                 },
             ],
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "phone_numbers": ["+12124007676"],
+            },
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -576,21 +576,6 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.create(
-            business_entity={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "address2": "string",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dba_business_name": "string",
-                "government_id": "114-123-1513",
-                "legal_business_name": "Acme, Inc.",
-                "parent_company": "string",
-                "phone_numbers": ["+12124007676"],
-            },
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -688,6 +673,21 @@ class TestAsyncAccountHolders:
                     "phone_number": "+12124007676",
                 },
             ],
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "string",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dba_business_name": "string",
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "parent_company": "string",
+                "phone_numbers": ["+12124007676"],
+            },
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -704,11 +704,11 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyb_passed_timestamp="2018-05-29T21:16:05Z",
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
+            kyb_passed_timestamp="2018-05-29T21:16:05Z",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
@@ -754,34 +754,33 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            kyc_passed_timestamp="string",
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
+            kyc_passed_timestamp="string",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_overload_3(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.create(
-            workflow="KYC_EXEMPT",
-            kyc_exemption_type="AUTHORIZED_USER",
-            first_name="string",
-            last_name="string",
             email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
             phone_number="string",
+            workflow="KYC_EXEMPT",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_3(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.create(
-            workflow="KYC_EXEMPT",
-            kyc_exemption_type="AUTHORIZED_USER",
-            first_name="string",
-            last_name="string",
             email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
             phone_number="string",
-            business_account_token="string",
+            workflow="KYC_EXEMPT",
             address={
                 "address1": "123 Old Forest Way",
                 "address2": "string",
@@ -790,6 +789,7 @@ class TestAsyncAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
+            business_account_token="string",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
@@ -811,9 +811,9 @@ class TestAsyncAccountHolders:
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            business_account_token="string",
             email="string",
             phone_number="string",
-            business_account_token="string",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
@@ -835,8 +835,6 @@ class TestAsyncAccountHolders:
     async def test_method_resubmit(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            workflow="KYC_ADVANCED",
-            tos_timestamp="2018-05-29T21:16:05Z",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -852,6 +850,8 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
+            tos_timestamp="2018-05-29T21:16:05Z",
+            workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 

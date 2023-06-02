@@ -34,9 +34,9 @@ class TestDisputes:
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.create(
             amount=0,
-            customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             reason="ATM_CASH_MISDISPENSE",
             transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             customer_note="string",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -74,6 +74,12 @@ class TestDisputes:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.list(
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ending_before="string",
+            page_size=1,
+            starting_after="string",
+            status="NEW",
             transaction_tokens=[
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -126,12 +132,6 @@ class TestDisputes:
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             ],
-            status="NEW",
-            page_size=1,
-            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
-            end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            starting_after="string",
-            ending_before="string",
         )
         assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
 
@@ -168,11 +168,11 @@ class TestDisputes:
     def test_method_list_evidences_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.list_evidences(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            page_size=1,
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            starting_after="string",
             ending_before="string",
+            page_size=1,
+            starting_after="string",
         )
         assert_matches_type(SyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
@@ -203,9 +203,9 @@ class TestAsyncDisputes:
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.create(
             amount=0,
-            customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             reason="ATM_CASH_MISDISPENSE",
             transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             customer_note="string",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -243,6 +243,12 @@ class TestAsyncDisputes:
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.list(
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ending_before="string",
+            page_size=1,
+            starting_after="string",
+            status="NEW",
             transaction_tokens=[
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -295,12 +301,6 @@ class TestAsyncDisputes:
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             ],
-            status="NEW",
-            page_size=1,
-            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
-            end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            starting_after="string",
-            ending_before="string",
         )
         assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
 
@@ -337,11 +337,11 @@ class TestAsyncDisputes:
     async def test_method_list_evidences_with_all_params(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.list_evidences(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            page_size=1,
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            starting_after="string",
             ending_before="string",
+            page_size=1,
+            starting_after="string",
         )
         assert_matches_type(AsyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
