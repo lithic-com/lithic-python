@@ -3,7 +3,9 @@ from __future__ import annotations
 from typing import (
     IO,
     TYPE_CHECKING,
+    Any,
     Dict,
+    List,
     Type,
     Tuple,
     Union,
@@ -14,8 +16,12 @@ from typing import (
 )
 from typing_extensions import Literal, Protocol, TypedDict, runtime_checkable
 
+import httpx
 import pydantic
 from httpx import Proxy, Timeout, Response, BaseTransport
+
+if TYPE_CHECKING:
+    from ._models import BaseModel
 
 Transport = BaseTransport
 Query = Mapping[str, object]
@@ -143,3 +149,8 @@ class HeadersLikeProtocol(Protocol):
 
 
 HeadersLike = Union[Headers, HeadersLikeProtocol]
+
+ResponseT = TypeVar(
+    "ResponseT",
+    bound="Union[str, None, BaseModel, List[Any], Dict[str, Any], httpx.Response, UnknownResponse, ModelBuilderProtocol]",
+)
