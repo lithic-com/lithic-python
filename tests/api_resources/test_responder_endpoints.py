@@ -27,15 +27,17 @@ class TestResponderEndpoints:
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         responder_endpoint = client.responder_endpoints.create(
-            url="https://example.com",
             type="TOKENIZATION_DECISIONING",
+            url="https://example.com",
         )
         assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
 
     @pytest.mark.skip(reason="Prism errors when accept header set but no request body is defined")
     @parametrize
     def test_method_delete(self, client: Lithic) -> None:
-        responder_endpoint = client.responder_endpoints.delete()
+        responder_endpoint = client.responder_endpoints.delete(
+            type="TOKENIZATION_DECISIONING",
+        )
         assert responder_endpoint is None
 
     @parametrize
@@ -59,15 +61,17 @@ class TestAsyncResponderEndpoints:
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         responder_endpoint = await client.responder_endpoints.create(
-            url="https://example.com",
             type="TOKENIZATION_DECISIONING",
+            url="https://example.com",
         )
         assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
 
     @pytest.mark.skip(reason="Prism errors when accept header set but no request body is defined")
     @parametrize
     async def test_method_delete(self, client: AsyncLithic) -> None:
-        responder_endpoint = await client.responder_endpoints.delete()
+        responder_endpoint = await client.responder_endpoints.delete(
+            type="TOKENIZATION_DECISIONING",
+        )
         assert responder_endpoint is None
 
     @parametrize

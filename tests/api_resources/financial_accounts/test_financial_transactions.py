@@ -40,13 +40,13 @@ class TestFinancialTransactions:
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         financial_transaction = client.financial_accounts.financial_transactions.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            category="ACH",
-            status="DECLINED",
-            result="APPROVED",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            category="ACH",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            starting_after="string",
             ending_before="string",
+            result="APPROVED",
+            starting_after="string",
+            status="DECLINED",
         )
         assert_matches_type(SyncSinglePage[FinancialTransaction], financial_transaction, path=["response"])
 
@@ -75,12 +75,12 @@ class TestAsyncFinancialTransactions:
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         financial_transaction = await client.financial_accounts.financial_transactions.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            category="ACH",
-            status="DECLINED",
-            result="APPROVED",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            category="ACH",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            starting_after="string",
             ending_before="string",
+            result="APPROVED",
+            starting_after="string",
+            status="DECLINED",
         )
         assert_matches_type(AsyncSinglePage[FinancialTransaction], financial_transaction, path=["response"])

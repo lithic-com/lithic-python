@@ -95,12 +95,12 @@ class AuthRules(SyncAPIResource):
             "/auth_rules",
             body=maybe_transform(
                 {
-                    "allowed_mcc": allowed_mcc,
-                    "blocked_mcc": blocked_mcc,
-                    "allowed_countries": allowed_countries,
-                    "blocked_countries": blocked_countries,
-                    "avs_type": avs_type,
                     "account_tokens": account_tokens,
+                    "allowed_countries": allowed_countries,
+                    "allowed_mcc": allowed_mcc,
+                    "avs_type": avs_type,
+                    "blocked_countries": blocked_countries,
+                    "blocked_mcc": blocked_mcc,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
                 },
@@ -130,6 +130,15 @@ class AuthRules(SyncAPIResource):
         """
         Detail the properties and entities (program, accounts, and cards) associated
         with an existing authorization rule (Auth Rule).
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             f"/auth_rules/{auth_rule_token}",
@@ -193,11 +202,11 @@ class AuthRules(SyncAPIResource):
             f"/auth_rules/{auth_rule_token}",
             body=maybe_transform(
                 {
-                    "allowed_mcc": allowed_mcc,
-                    "blocked_mcc": blocked_mcc,
                     "allowed_countries": allowed_countries,
-                    "blocked_countries": blocked_countries,
+                    "allowed_mcc": allowed_mcc,
                     "avs_type": avs_type,
+                    "blocked_countries": blocked_countries,
+                    "blocked_mcc": blocked_mcc,
                 },
                 auth_rule_update_params.AuthRuleUpdateParams,
             ),
@@ -301,8 +310,8 @@ class AuthRules(SyncAPIResource):
             f"/auth_rules/{auth_rule_token}/apply",
             body=maybe_transform(
                 {
-                    "card_tokens": card_tokens,
                     "account_tokens": account_tokens,
+                    "card_tokens": card_tokens,
                     "program_level": program_level,
                 },
                 auth_rule_apply_params.AuthRuleApplyParams,
@@ -359,8 +368,8 @@ class AuthRules(SyncAPIResource):
             "/auth_rules/remove",
             body=maybe_transform(
                 {
-                    "card_tokens": card_tokens,
                     "account_tokens": account_tokens,
+                    "card_tokens": card_tokens,
                     "program_level": program_level,
                 },
                 auth_rule_remove_params.AuthRuleRemoveParams,
@@ -444,12 +453,12 @@ class AsyncAuthRules(AsyncAPIResource):
             "/auth_rules",
             body=maybe_transform(
                 {
-                    "allowed_mcc": allowed_mcc,
-                    "blocked_mcc": blocked_mcc,
-                    "allowed_countries": allowed_countries,
-                    "blocked_countries": blocked_countries,
-                    "avs_type": avs_type,
                     "account_tokens": account_tokens,
+                    "allowed_countries": allowed_countries,
+                    "allowed_mcc": allowed_mcc,
+                    "avs_type": avs_type,
+                    "blocked_countries": blocked_countries,
+                    "blocked_mcc": blocked_mcc,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
                 },
@@ -479,6 +488,15 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         Detail the properties and entities (program, accounts, and cards) associated
         with an existing authorization rule (Auth Rule).
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             f"/auth_rules/{auth_rule_token}",
@@ -542,11 +560,11 @@ class AsyncAuthRules(AsyncAPIResource):
             f"/auth_rules/{auth_rule_token}",
             body=maybe_transform(
                 {
-                    "allowed_mcc": allowed_mcc,
-                    "blocked_mcc": blocked_mcc,
                     "allowed_countries": allowed_countries,
-                    "blocked_countries": blocked_countries,
+                    "allowed_mcc": allowed_mcc,
                     "avs_type": avs_type,
+                    "blocked_countries": blocked_countries,
+                    "blocked_mcc": blocked_mcc,
                 },
                 auth_rule_update_params.AuthRuleUpdateParams,
             ),
@@ -650,8 +668,8 @@ class AsyncAuthRules(AsyncAPIResource):
             f"/auth_rules/{auth_rule_token}/apply",
             body=maybe_transform(
                 {
-                    "card_tokens": card_tokens,
                     "account_tokens": account_tokens,
+                    "card_tokens": card_tokens,
                     "program_level": program_level,
                 },
                 auth_rule_apply_params.AuthRuleApplyParams,
@@ -708,8 +726,8 @@ class AsyncAuthRules(AsyncAPIResource):
             "/auth_rules/remove",
             body=maybe_transform(
                 {
-                    "card_tokens": card_tokens,
                     "account_tokens": account_tokens,
+                    "card_tokens": card_tokens,
                     "program_level": program_level,
                 },
                 auth_rule_remove_params.AuthRuleRemoveParams,

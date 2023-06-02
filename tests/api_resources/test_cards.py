@@ -31,17 +31,14 @@ class TestCards:
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         card = client.cards.create(
+            type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="00000000-0000-0000-1000-000000000000",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
             memo="New Card",
-            spend_limit=0,
-            spend_limit_duration="ANNUALLY",
-            state="OPEN",
-            type="VIRTUAL",
             pin="string",
-            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             product_id="1",
             shipping_address={
                 "first_name": "Michael",
@@ -57,6 +54,9 @@ class TestCards:
                 "phone_number": "+12124007676",
             },
             shipping_method="STANDARD",
+            spend_limit=0,
+            spend_limit_duration="ANNUALLY",
+            state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -78,13 +78,13 @@ class TestCards:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         card = client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auth_rule_token="string",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             memo="New Card",
+            pin="string",
             spend_limit=0,
             spend_limit_duration="ANNUALLY",
-            auth_rule_token="string",
             state="CLOSED",
-            pin="string",
-            digital_card_art_token="00000000-0000-0000-1000-000000000000",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -135,10 +135,10 @@ class TestCards:
     def test_method_provision_with_all_params(self, client: Lithic) -> None:
         card = client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            certificate="U3RhaW5sZXNzIHJvY2tz",
             digital_wallet="APPLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
-            certificate="U3RhaW5sZXNzIHJvY2tz",
         )
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
@@ -153,6 +153,7 @@ class TestCards:
     def test_method_reissue_with_all_params(self, client: Lithic) -> None:
         card = client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            product_id="string",
             shipping_address={
                 "first_name": "Michael",
                 "last_name": "Bluth",
@@ -167,7 +168,6 @@ class TestCards:
                 "phone_number": "+12124007676",
             },
             shipping_method="STANDARD",
-            product_id="string",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -187,17 +187,14 @@ class TestAsyncCards:
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.create(
+            type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="00000000-0000-0000-1000-000000000000",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
             memo="New Card",
-            spend_limit=0,
-            spend_limit_duration="ANNUALLY",
-            state="OPEN",
-            type="VIRTUAL",
             pin="string",
-            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             product_id="1",
             shipping_address={
                 "first_name": "Michael",
@@ -213,6 +210,9 @@ class TestAsyncCards:
                 "phone_number": "+12124007676",
             },
             shipping_method="STANDARD",
+            spend_limit=0,
+            spend_limit_duration="ANNUALLY",
+            state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -234,13 +234,13 @@ class TestAsyncCards:
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auth_rule_token="string",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             memo="New Card",
+            pin="string",
             spend_limit=0,
             spend_limit_duration="ANNUALLY",
-            auth_rule_token="string",
             state="CLOSED",
-            pin="string",
-            digital_card_art_token="00000000-0000-0000-1000-000000000000",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -291,10 +291,10 @@ class TestAsyncCards:
     async def test_method_provision_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            certificate="U3RhaW5sZXNzIHJvY2tz",
             digital_wallet="APPLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
-            certificate="U3RhaW5sZXNzIHJvY2tz",
         )
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
@@ -309,6 +309,7 @@ class TestAsyncCards:
     async def test_method_reissue_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            product_id="string",
             shipping_address={
                 "first_name": "Michael",
                 "last_name": "Bluth",
@@ -323,6 +324,5 @@ class TestAsyncCards:
                 "phone_number": "+12124007676",
             },
             shipping_method="STANDARD",
-            product_id="string",
         )
         assert_matches_type(Card, card, path=["response"])

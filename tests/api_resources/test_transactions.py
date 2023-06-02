@@ -46,12 +46,12 @@ class TestTransactions:
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         transaction = client.transactions.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            result="APPROVED",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page=0,
             page_size=1,
+            result="APPROVED",
         )
         assert_matches_type(SyncPage[Transaction], transaction, path=["response"])
 
@@ -70,12 +70,12 @@ class TestTransactions:
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
-            status="AUTHORIZATION",
-            merchant_acceptor_id="OODKZAPJVN4YS7O",
-            merchant_currency="GBP",
-            merchant_amount=0,
             mcc="5812",
+            merchant_acceptor_id="OODKZAPJVN4YS7O",
+            merchant_amount=0,
+            merchant_currency="GBP",
             partial_approval_capable=True,
+            status="AUTHORIZATION",
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
@@ -97,8 +97,8 @@ class TestTransactions:
     @parametrize
     def test_method_simulate_clearing_with_all_params(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_clearing(
-            amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
         )
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
@@ -117,8 +117,8 @@ class TestTransactions:
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
-            merchant_acceptor_id="XRKGDPOWEWQRRWU",
             mcc="5812",
+            merchant_acceptor_id="XRKGDPOWEWQRRWU",
         )
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
@@ -148,8 +148,8 @@ class TestTransactions:
     @parametrize
     def test_method_simulate_void_with_all_params(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_void(
-            amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
             type="AUTHORIZATION_EXPIRY",
         )
         assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
@@ -176,12 +176,12 @@ class TestAsyncTransactions:
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            result="APPROVED",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page=0,
             page_size=1,
+            result="APPROVED",
         )
         assert_matches_type(AsyncPage[Transaction], transaction, path=["response"])
 
@@ -200,12 +200,12 @@ class TestAsyncTransactions:
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
-            status="AUTHORIZATION",
-            merchant_acceptor_id="OODKZAPJVN4YS7O",
-            merchant_currency="GBP",
-            merchant_amount=0,
             mcc="5812",
+            merchant_acceptor_id="OODKZAPJVN4YS7O",
+            merchant_amount=0,
+            merchant_currency="GBP",
             partial_approval_capable=True,
+            status="AUTHORIZATION",
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
@@ -227,8 +227,8 @@ class TestAsyncTransactions:
     @parametrize
     async def test_method_simulate_clearing_with_all_params(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_clearing(
-            amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
         )
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
@@ -247,8 +247,8 @@ class TestAsyncTransactions:
             amount=0,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
-            merchant_acceptor_id="XRKGDPOWEWQRRWU",
             mcc="5812",
+            merchant_acceptor_id="XRKGDPOWEWQRRWU",
         )
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
@@ -278,8 +278,8 @@ class TestAsyncTransactions:
     @parametrize
     async def test_method_simulate_void_with_all_params(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_void(
-            amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
             type="AUTHORIZATION_EXPIRY",
         )
         assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])

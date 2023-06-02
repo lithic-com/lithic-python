@@ -7,20 +7,6 @@ from typing_extensions import Literal, TypedDict
 __all__ = ["AccountUpdateParams", "VerificationAddress"]
 
 
-class VerificationAddress(TypedDict, total=False):
-    address1: str
-
-    address2: str
-
-    city: str
-
-    country: str
-
-    postal_code: str
-
-    state: str
-
-
 class AccountUpdateParams(TypedDict, total=False):
     daily_spend_limit: int
     """Amount (in cents) for the account's new daily spend limit.
@@ -56,3 +42,17 @@ class AccountUpdateParams(TypedDict, total=False):
     Address used during Address Verification Service (AVS) checks during
     transactions if enabled via Auth Rules.
     """
+
+
+class VerificationAddress(TypedDict, total=False):
+    address1: str
+
+    address2: str
+
+    city: str
+
+    country: str
+
+    postal_code: str
+
+    state: str

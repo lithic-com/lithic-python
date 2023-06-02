@@ -28,7 +28,18 @@ class Accounts(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """Get account configuration such as spend limits."""
+        """
+        Get account configuration such as spend limits.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/accounts/{account_token}",
             options=make_request_options(
@@ -102,8 +113,8 @@ class Accounts(SyncAPIResource):
                     "daily_spend_limit": daily_spend_limit,
                     "lifetime_spend_limit": lifetime_spend_limit,
                     "monthly_spend_limit": monthly_spend_limit,
-                    "verification_address": verification_address,
                     "state": state,
+                    "verification_address": verification_address,
                 },
                 account_update_params.AccountUpdateParams,
             ),
@@ -188,7 +199,18 @@ class AsyncAccounts(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """Get account configuration such as spend limits."""
+        """
+        Get account configuration such as spend limits.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/accounts/{account_token}",
             options=make_request_options(
@@ -262,8 +284,8 @@ class AsyncAccounts(AsyncAPIResource):
                     "daily_spend_limit": daily_spend_limit,
                     "lifetime_spend_limit": lifetime_spend_limit,
                     "monthly_spend_limit": monthly_spend_limit,
-                    "verification_address": verification_address,
                     "state": state,
+                    "verification_address": verification_address,
                 },
                 account_update_params.AccountUpdateParams,
             ),
