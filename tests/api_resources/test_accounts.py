@@ -44,6 +44,7 @@ class TestAccounts:
             daily_spend_limit=0,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
+            state="ACTIVE",
             verification_address={
                 "address1": "string",
                 "address2": "string",
@@ -52,7 +53,6 @@ class TestAccounts:
                 "postal_code": "string",
                 "country": "string",
             },
-            state="ACTIVE",
         )
         assert_matches_type(Account, account, path=["response"])
 
@@ -100,6 +100,7 @@ class TestAsyncAccounts:
             daily_spend_limit=0,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
+            state="ACTIVE",
             verification_address={
                 "address1": "string",
                 "address2": "string",
@@ -108,7 +109,6 @@ class TestAsyncAccounts:
                 "postal_code": "string",
                 "country": "string",
             },
-            state="ACTIVE",
         )
         assert_matches_type(Account, account, path=["response"])
 

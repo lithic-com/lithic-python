@@ -8,6 +8,7 @@ from ..types import (
     ResponderEndpointStatus,
     ResponderEndpointCreateResponse,
     responder_endpoint_create_params,
+    responder_endpoint_delete_params,
     responder_endpoint_check_status_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
@@ -54,8 +55,8 @@ class ResponderEndpoints(SyncAPIResource):
             "/responder_endpoints",
             body=maybe_transform(
                 {
-                    "url": url,
                     "type": type,
+                    "url": url,
                 },
                 responder_endpoint_create_params.ResponderEndpointCreateParams,
             ),
@@ -72,6 +73,7 @@ class ResponderEndpoints(SyncAPIResource):
     def delete(
         self,
         *,
+        type: Literal["TOKENIZATION_DECISIONING"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -80,7 +82,22 @@ class ResponderEndpoints(SyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
-        """Disenroll a responder endpoint"""
+        """
+        Disenroll a responder endpoint
+
+        Args:
+          type: The type of the endpoint.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return self._delete(
             "/responder_endpoints",
             options=make_request_options(
@@ -89,6 +106,7 @@ class ResponderEndpoints(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 idempotency_key=idempotency_key,
+                query=maybe_transform({"type": type}, responder_endpoint_delete_params.ResponderEndpointDeleteParams),
             ),
             cast_to=NoneType,
         )
@@ -169,8 +187,8 @@ class AsyncResponderEndpoints(AsyncAPIResource):
             "/responder_endpoints",
             body=maybe_transform(
                 {
-                    "url": url,
                     "type": type,
+                    "url": url,
                 },
                 responder_endpoint_create_params.ResponderEndpointCreateParams,
             ),
@@ -187,6 +205,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
     async def delete(
         self,
         *,
+        type: Literal["TOKENIZATION_DECISIONING"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -195,7 +214,22 @@ class AsyncResponderEndpoints(AsyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
-        """Disenroll a responder endpoint"""
+        """
+        Disenroll a responder endpoint
+
+        Args:
+          type: The type of the endpoint.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return await self._delete(
             "/responder_endpoints",
             options=make_request_options(
@@ -204,6 +238,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 idempotency_key=idempotency_key,
+                query=maybe_transform({"type": type}, responder_endpoint_delete_params.ResponderEndpointDeleteParams),
             ),
             cast_to=NoneType,
         )

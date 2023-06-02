@@ -93,9 +93,9 @@ class Disputes(SyncAPIResource):
             body=maybe_transform(
                 {
                     "amount": amount,
-                    "customer_filed_date": customer_filed_date,
                     "reason": reason,
                     "transaction_token": transaction_token,
+                    "customer_filed_date": customer_filed_date,
                     "customer_note": customer_note,
                 },
                 dispute_create_params.DisputeCreateParams,
@@ -121,7 +121,18 @@ class Disputes(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Dispute:
-        """Get dispute."""
+        """
+        Get dispute.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -274,13 +285,13 @@ class Disputes(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "transaction_tokens": transaction_tokens,
-                        "status": status,
-                        "page_size": page_size,
                         "begin": begin,
                         "end": end,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                        "status": status,
+                        "transaction_tokens": transaction_tokens,
                     },
                     dispute_list_params.DisputeListParams,
                 ),
@@ -300,7 +311,20 @@ class Disputes(SyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> Dispute:
-        """Withdraw dispute."""
+        """
+        Withdraw dispute.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return self._delete(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -330,6 +354,17 @@ class Disputes(SyncAPIResource):
 
         Evidence will not be reviewed or submitted
         by Lithic after it is withdrawn.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._delete(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
@@ -362,6 +397,17 @@ class Disputes(SyncAPIResource):
 
         Uploaded documents must either be a `jpg`, `png` or `pdf` file, and each must be
         less than 5 GiB.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/disputes/{dispute_token}/evidences",
@@ -427,11 +473,11 @@ class Disputes(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "page_size": page_size,
                         "begin": begin,
                         "end": end,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     dispute_list_evidences_params.DisputeListEvidencesParams,
                 ),
@@ -451,7 +497,18 @@ class Disputes(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> DisputeEvidence:
-        """Get a dispute's evidence metadata."""
+        """
+        Get a dispute's evidence metadata.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(
@@ -544,9 +601,9 @@ class AsyncDisputes(AsyncAPIResource):
             body=maybe_transform(
                 {
                     "amount": amount,
-                    "customer_filed_date": customer_filed_date,
                     "reason": reason,
                     "transaction_token": transaction_token,
+                    "customer_filed_date": customer_filed_date,
                     "customer_note": customer_note,
                 },
                 dispute_create_params.DisputeCreateParams,
@@ -572,7 +629,18 @@ class AsyncDisputes(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Dispute:
-        """Get dispute."""
+        """
+        Get dispute.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -725,13 +793,13 @@ class AsyncDisputes(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "transaction_tokens": transaction_tokens,
-                        "status": status,
-                        "page_size": page_size,
                         "begin": begin,
                         "end": end,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                        "status": status,
+                        "transaction_tokens": transaction_tokens,
                     },
                     dispute_list_params.DisputeListParams,
                 ),
@@ -751,7 +819,20 @@ class AsyncDisputes(AsyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> Dispute:
-        """Withdraw dispute."""
+        """
+        Withdraw dispute.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return await self._delete(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -781,6 +862,17 @@ class AsyncDisputes(AsyncAPIResource):
 
         Evidence will not be reviewed or submitted
         by Lithic after it is withdrawn.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._delete(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
@@ -813,6 +905,17 @@ class AsyncDisputes(AsyncAPIResource):
 
         Uploaded documents must either be a `jpg`, `png` or `pdf` file, and each must be
         less than 5 GiB.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/disputes/{dispute_token}/evidences",
@@ -878,11 +981,11 @@ class AsyncDisputes(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "page_size": page_size,
                         "begin": begin,
                         "end": end,
-                        "starting_after": starting_after,
                         "ending_before": ending_before,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     dispute_list_evidences_params.DisputeListEvidencesParams,
                 ),
@@ -902,7 +1005,18 @@ class AsyncDisputes(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> DisputeEvidence:
-        """Get a dispute's evidence metadata."""
+        """
+        Get a dispute's evidence metadata.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(

@@ -10,148 +10,14 @@ from ..types import shared_params
 __all__ = [
     "AccountHolderCreateParams",
     "KYB",
-    "KYBBusinessEntity",
     "KYBBeneficialOwnerEntity",
     "KYBBeneficialOwnerIndividual",
+    "KYBBusinessEntity",
     "KYBControlPerson",
     "KYC",
     "KYCIndividual",
     "KYCExempt",
 ]
-
-
-class KYBBusinessEntity(TypedDict, total=False):
-    address: Required[shared_params.Address]
-    """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: Required[str]
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: Required[str]
-    """Legal (formal) business name."""
-
-    phone_numbers: Required[List[str]]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: str
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: str
-    """Parent company name (if applicable)."""
-
-
-class KYBBeneficialOwnerEntity(TypedDict, total=False):
-    address: Required[shared_params.Address]
-    """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: Required[str]
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: Required[str]
-    """Legal (formal) business name."""
-
-    phone_numbers: Required[List[str]]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: str
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: str
-    """Parent company name (if applicable)."""
-
-
-class KYBBeneficialOwnerIndividual(TypedDict, total=False):
-    address: Required[shared_params.Address]
-    """
-    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
-    """
-
-    dob: Required[str]
-    """Individual's date of birth, as an RFC 3339 date."""
-
-    email: Required[str]
-    """
-    Individual's email address. If utilizing Lithic for chargeback processing, this
-    customer email address may be used to communicate dispute status and resolution.
-    """
-
-    first_name: Required[str]
-    """Individual's first name, as it appears on government-issued identity documents."""
-
-    government_id: Required[str]
-    """
-    Government-issued identification number (required for identity verification and
-    compliance with banking regulations). Social Security Numbers (SSN) and
-    Individual Taxpayer Identification Numbers (ITIN) are currently supported,
-    entered as full nine-digits, with or without hyphens
-    """
-
-    last_name: Required[str]
-    """Individual's last name, as it appears on government-issued identity documents."""
-
-    phone_number: Required[str]
-    """Individual's phone number, entered in E.164 format."""
-
-
-class KYBControlPerson(TypedDict, total=False):
-    address: Required[shared_params.Address]
-    """
-    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
-    """
-
-    dob: Required[str]
-    """Individual's date of birth, as an RFC 3339 date."""
-
-    email: Required[str]
-    """
-    Individual's email address. If utilizing Lithic for chargeback processing, this
-    customer email address may be used to communicate dispute status and resolution.
-    """
-
-    first_name: Required[str]
-    """Individual's first name, as it appears on government-issued identity documents."""
-
-    government_id: Required[str]
-    """
-    Government-issued identification number (required for identity verification and
-    compliance with banking regulations). Social Security Numbers (SSN) and
-    Individual Taxpayer Identification Numbers (ITIN) are currently supported,
-    entered as full nine-digits, with or without hyphens
-    """
-
-    last_name: Required[str]
-    """Individual's last name, as it appears on government-issued identity documents."""
-
-    phone_number: Required[str]
-    """Individual's phone number, entered in E.164 format."""
 
 
 class KYB(TypedDict, total=False):
@@ -223,7 +89,107 @@ class KYB(TypedDict, total=False):
     """
 
 
-class KYCIndividual(TypedDict, total=False):
+class KYBBeneficialOwnerEntity(TypedDict, total=False):
+    address: Required[shared_params.Address]
+    """
+    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable.
+    """
+
+    government_id: Required[str]
+    """Government-issued identification number.
+
+    US Federal Employer Identification Numbers (EIN) are currently supported,
+    entered as full nine-digits, with or without hyphens.
+    """
+
+    legal_business_name: Required[str]
+    """Legal (formal) business name."""
+
+    phone_numbers: Required[List[str]]
+    """
+    One or more of the business's phone number(s), entered as a list in E.164
+    format.
+    """
+
+    dba_business_name: str
+    """
+    Any name that the business operates under that is not its legal business name
+    (if applicable).
+    """
+
+    parent_company: str
+    """Parent company name (if applicable)."""
+
+
+class KYBBeneficialOwnerIndividual(TypedDict, total=False):
+    address: Required[shared_params.Address]
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
+    dob: Required[str]
+    """Individual's date of birth, as an RFC 3339 date."""
+
+    email: Required[str]
+    """
+    Individual's email address. If utilizing Lithic for chargeback processing, this
+    customer email address may be used to communicate dispute status and resolution.
+    """
+
+    first_name: Required[str]
+    """Individual's first name, as it appears on government-issued identity documents."""
+
+    government_id: Required[str]
+    """
+    Government-issued identification number (required for identity verification and
+    compliance with banking regulations). Social Security Numbers (SSN) and
+    Individual Taxpayer Identification Numbers (ITIN) are currently supported,
+    entered as full nine-digits, with or without hyphens
+    """
+
+    last_name: Required[str]
+    """Individual's last name, as it appears on government-issued identity documents."""
+
+    phone_number: Required[str]
+    """Individual's phone number, entered in E.164 format."""
+
+
+class KYBBusinessEntity(TypedDict, total=False):
+    address: Required[shared_params.Address]
+    """
+    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable.
+    """
+
+    government_id: Required[str]
+    """Government-issued identification number.
+
+    US Federal Employer Identification Numbers (EIN) are currently supported,
+    entered as full nine-digits, with or without hyphens.
+    """
+
+    legal_business_name: Required[str]
+    """Legal (formal) business name."""
+
+    phone_numbers: Required[List[str]]
+    """
+    One or more of the business's phone number(s), entered as a list in E.164
+    format.
+    """
+
+    dba_business_name: str
+    """
+    Any name that the business operates under that is not its legal business name
+    (if applicable).
+    """
+
+    parent_company: str
+    """Parent company name (if applicable)."""
+
+
+class KYBControlPerson(TypedDict, total=False):
     address: Required[shared_params.Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -281,6 +247,40 @@ class KYC(TypedDict, total=False):
 
     This field is required only if workflow type is `KYC_BYO`.
     """
+
+
+class KYCIndividual(TypedDict, total=False):
+    address: Required[shared_params.Address]
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
+    dob: Required[str]
+    """Individual's date of birth, as an RFC 3339 date."""
+
+    email: Required[str]
+    """
+    Individual's email address. If utilizing Lithic for chargeback processing, this
+    customer email address may be used to communicate dispute status and resolution.
+    """
+
+    first_name: Required[str]
+    """Individual's first name, as it appears on government-issued identity documents."""
+
+    government_id: Required[str]
+    """
+    Government-issued identification number (required for identity verification and
+    compliance with banking regulations). Social Security Numbers (SSN) and
+    Individual Taxpayer Identification Numbers (ITIN) are currently supported,
+    entered as full nine-digits, with or without hyphens
+    """
+
+    last_name: Required[str]
+    """Individual's last name, as it appears on government-issued identity documents."""
+
+    phone_number: Required[str]
+    """Individual's phone number, entered in E.164 format."""
 
 
 class KYCExempt(TypedDict, total=False):

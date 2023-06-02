@@ -9,6 +9,12 @@ from .subscription_create_params import (
 from .subscription_update_params import (
     SubscriptionUpdateParams as SubscriptionUpdateParams,
 )
+from .subscription_recover_params import (
+    SubscriptionRecoverParams as SubscriptionRecoverParams,
+)
+from .subscription_replay_missing_params import (
+    SubscriptionReplayMissingParams as SubscriptionReplayMissingParams,
+)
 from .subscription_retrieve_secret_response import (
     SubscriptionRetrieveSecretResponse as SubscriptionRetrieveSecretResponse,
 )
