@@ -23,10 +23,16 @@ from ._types import (
     RequestOptions,
 )
 from ._version import __version__
-from ._base_client import DEFAULT_LIMITS, DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES
-from ._base_client import Stream as Stream
-from ._base_client import AsyncStream as AsyncStream
-from ._base_client import SyncAPIClient, AsyncAPIClient, make_request_options
+from ._streaming import Stream as Stream
+from ._streaming import AsyncStream as AsyncStream
+from ._base_client import (
+    DEFAULT_LIMITS,
+    DEFAULT_TIMEOUT,
+    DEFAULT_MAX_RETRIES,
+    SyncAPIClient,
+    AsyncAPIClient,
+    make_request_options,
+)
 
 __all__ = [
     "ENVIRONMENTS",
