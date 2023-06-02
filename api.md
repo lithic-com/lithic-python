@@ -50,12 +50,14 @@ from lithic.types import (
 Methods:
 
 - <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
+- <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
+- <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="get /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="patch /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">update</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_update_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_update_response.py">AccountHolderUpdateResponse</a></code>
 - <code title="post /webhooks/account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create_webhook</a>(\*\*<a href="src/lithic/types/account_holder_create_webhook_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_create_webhook_response.py">AccountHolderCreateWebhookResponse</a></code>
 - <code title="get /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">list_documents</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder_list_documents_response.py">AccountHolderListDocumentsResponse</a></code>
 - <code title="post /account_holders/{account_holder_token}/resubmit">client.account_holders.<a href="./src/lithic/resources/account_holders.py">resubmit</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_resubmit_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
-- <code title="get /account_holders/{account_holder_token}/documents/{document_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve_document</a>(document_token, account_holder_token) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
+- <code title="get /account_holders/{account_holder_token}/documents/{document_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve_document</a>(account_holder_token, document_token) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
 - <code title="post /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">upload_document</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_upload_document_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
 
 # AuthRules
@@ -179,10 +181,10 @@ Methods:
 - <code title="patch /disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">update</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_update_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
 - <code title="get /disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">list</a>(\*\*<a href="src/lithic/types/dispute_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">SyncCursorPage[Dispute]</a></code>
 - <code title="delete /disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
-- <code title="delete /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete_evidence</a>(evidence_token, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
+- <code title="delete /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete_evidence</a>(dispute_token, evidence_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="post /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">initiate_evidence_upload</a>(dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="get /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">list_evidences</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_list_evidences_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">SyncCursorPage[DisputeEvidence]</a></code>
-- <code title="get /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(evidence_token, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
+- <code title="get /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(dispute_token, evidence_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 
 Custom Methods:
 
@@ -220,8 +222,8 @@ Methods:
 - <code title="patch /event_subscriptions/{event_subscription_token}">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">update</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_update_params.py">params</a>) -> <a href="./src/lithic/types/event_subscription.py">EventSubscription</a></code>
 - <code title="get /event_subscriptions">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">list</a>(\*\*<a href="src/lithic/types/events/subscription_list_params.py">params</a>) -> <a href="./src/lithic/types/event_subscription.py">SyncCursorPage[EventSubscription]</a></code>
 - <code title="delete /event_subscriptions/{event_subscription_token}">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">delete</a>(event_subscription_token) -> None</code>
-- <code title="post /event_subscriptions/{event_subscription_token}/recover">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">recover</a>(event_subscription_token) -> None</code>
-- <code title="post /event_subscriptions/{event_subscription_token}/replay_missing">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">replay_missing</a>(event_subscription_token) -> None</code>
+- <code title="post /event_subscriptions/{event_subscription_token}/recover">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">recover</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_recover_params.py">params</a>) -> None</code>
+- <code title="post /event_subscriptions/{event_subscription_token}/replay_missing">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">replay_missing</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_replay_missing_params.py">params</a>) -> None</code>
 - <code title="get /event_subscriptions/{event_subscription_token}/secret">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">retrieve_secret</a>(event_subscription_token) -> <a href="./src/lithic/types/events/subscription_retrieve_secret_response.py">SubscriptionRetrieveSecretResponse</a></code>
 - <code title="post /event_subscriptions/{event_subscription_token}/secret/rotate">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">rotate_secret</a>(event_subscription_token) -> None</code>
 
@@ -247,7 +249,7 @@ Methods:
 
 Methods:
 
-- <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_transaction_token, financial_account_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_account_token, financial_transaction_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
 # Transactions
@@ -290,7 +292,7 @@ from lithic.types import ResponderEndpointStatus, ResponderEndpointCreateRespons
 Methods:
 
 - <code title="post /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">create</a>(\*\*<a href="src/lithic/types/responder_endpoint_create_params.py">params</a>) -> <a href="./src/lithic/types/responder_endpoint_create_response.py">ResponderEndpointCreateResponse</a></code>
-- <code title="delete /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">delete</a>() -> None</code>
+- <code title="delete /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">delete</a>(\*\*<a href="src/lithic/types/responder_endpoint_delete_params.py">params</a>) -> None</code>
 - <code title="get /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">check_status</a>(\*\*<a href="src/lithic/types/responder_endpoint_check_status_params.py">params</a>) -> <a href="./src/lithic/types/responder_endpoint_status.py">ResponderEndpointStatus</a></code>
 
 # Webhooks

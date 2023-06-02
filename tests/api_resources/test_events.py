@@ -38,10 +38,10 @@ class TestEvents:
         event = client.events.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            page_size=1,
-            starting_after="string",
             ending_before="string",
             event_types=["card.created", "card.created", "card.created"],
+            page_size=1,
+            starting_after="string",
         )
         assert_matches_type(SyncCursorPage[Event], event, path=["response"])
 
@@ -75,10 +75,10 @@ class TestAsyncEvents:
         event = await client.events.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            page_size=1,
-            starting_after="string",
             ending_before="string",
             event_types=["card.created", "card.created", "card.created"],
+            page_size=1,
+            starting_after="string",
         )
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 

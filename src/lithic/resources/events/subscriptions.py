@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union
+from datetime import datetime
 from typing_extensions import Literal
 
 from ...types import EventSubscription
@@ -16,6 +17,8 @@ from ...types.events import (
     subscription_list_params,
     subscription_create_params,
     subscription_update_params,
+    subscription_recover_params,
+    subscription_replay_missing_params,
 )
 
 __all__ = ["Subscriptions", "AsyncSubscriptions"]
@@ -74,10 +77,10 @@ class Subscriptions(SyncAPIResource):
             "/event_subscriptions",
             body=maybe_transform(
                 {
+                    "url": url,
                     "description": description,
                     "disabled": disabled,
                     "event_types": event_types,
-                    "url": url,
                 },
                 subscription_create_params.SubscriptionCreateParams,
             ),
@@ -102,7 +105,18 @@ class Subscriptions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> EventSubscription:
-        """Get an event subscription."""
+        """
+        Get an event subscription.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -164,10 +178,10 @@ class Subscriptions(SyncAPIResource):
             f"/event_subscriptions/{event_subscription_token}",
             body=maybe_transform(
                 {
+                    "url": url,
                     "description": description,
                     "disabled": disabled,
                     "event_types": event_types,
-                    "url": url,
                 },
                 subscription_update_params.SubscriptionUpdateParams,
             ),
@@ -224,9 +238,9 @@ class Subscriptions(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "ending_before": ending_before,
                         "page_size": page_size,
                         "starting_after": starting_after,
-                        "ending_before": ending_before,
                     },
                     subscription_list_params.SubscriptionListParams,
                 ),
@@ -246,7 +260,20 @@ class Subscriptions(SyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
-        """Delete an event subscription."""
+        """
+        Delete an event subscription.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return self._delete(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -263,6 +290,8 @@ class Subscriptions(SyncAPIResource):
         self,
         event_subscription_token: str,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -271,7 +300,26 @@ class Subscriptions(SyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
-        """Resend all failed messages since a given time."""
+        """
+        Resend all failed messages since a given time.
+
+        Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified date
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/recover",
             options=make_request_options(
@@ -280,6 +328,13 @@ class Subscriptions(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 idempotency_key=idempotency_key,
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                    },
+                    subscription_recover_params.SubscriptionRecoverParams,
+                ),
             ),
             cast_to=NoneType,
         )
@@ -288,6 +343,8 @@ class Subscriptions(SyncAPIResource):
         self,
         event_subscription_token: str,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -300,6 +357,23 @@ class Subscriptions(SyncAPIResource):
 
         Only messages that were created after `begin`
         will be sent. Messages that were previously sent to the endpoint are not resent.
+
+        Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified date
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/replay_missing",
@@ -309,6 +383,13 @@ class Subscriptions(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 idempotency_key=idempotency_key,
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                    },
+                    subscription_replay_missing_params.SubscriptionReplayMissingParams,
+                ),
             ),
             cast_to=NoneType,
         )
@@ -324,7 +405,18 @@ class Subscriptions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> SubscriptionRetrieveSecretResponse:
-        """Get the secret for an event subscription."""
+        """
+        Get the secret for an event subscription.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             f"/event_subscriptions/{event_subscription_token}/secret",
             options=make_request_options(
@@ -349,6 +441,17 @@ class Subscriptions(SyncAPIResource):
 
         The previous secret will be valid
         for the next 24 hours.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
@@ -416,10 +519,10 @@ class AsyncSubscriptions(AsyncAPIResource):
             "/event_subscriptions",
             body=maybe_transform(
                 {
+                    "url": url,
                     "description": description,
                     "disabled": disabled,
                     "event_types": event_types,
-                    "url": url,
                 },
                 subscription_create_params.SubscriptionCreateParams,
             ),
@@ -444,7 +547,18 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> EventSubscription:
-        """Get an event subscription."""
+        """
+        Get an event subscription.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -506,10 +620,10 @@ class AsyncSubscriptions(AsyncAPIResource):
             f"/event_subscriptions/{event_subscription_token}",
             body=maybe_transform(
                 {
+                    "url": url,
                     "description": description,
                     "disabled": disabled,
                     "event_types": event_types,
-                    "url": url,
                 },
                 subscription_update_params.SubscriptionUpdateParams,
             ),
@@ -566,9 +680,9 @@ class AsyncSubscriptions(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "ending_before": ending_before,
                         "page_size": page_size,
                         "starting_after": starting_after,
-                        "ending_before": ending_before,
                     },
                     subscription_list_params.SubscriptionListParams,
                 ),
@@ -588,7 +702,20 @@ class AsyncSubscriptions(AsyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
-        """Delete an event subscription."""
+        """
+        Delete an event subscription.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return await self._delete(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -605,6 +732,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         self,
         event_subscription_token: str,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -613,7 +742,26 @@ class AsyncSubscriptions(AsyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> None:
-        """Resend all failed messages since a given time."""
+        """
+        Resend all failed messages since a given time.
+
+        Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified date
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/recover",
             options=make_request_options(
@@ -622,6 +770,13 @@ class AsyncSubscriptions(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 idempotency_key=idempotency_key,
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                    },
+                    subscription_recover_params.SubscriptionRecoverParams,
+                ),
             ),
             cast_to=NoneType,
         )
@@ -630,6 +785,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         self,
         event_subscription_token: str,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -642,6 +799,23 @@ class AsyncSubscriptions(AsyncAPIResource):
 
         Only messages that were created after `begin`
         will be sent. Messages that were previously sent to the endpoint are not resent.
+
+        Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified date
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified date
+              will be included. UTC time zone.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/replay_missing",
@@ -651,6 +825,13 @@ class AsyncSubscriptions(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 idempotency_key=idempotency_key,
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                    },
+                    subscription_replay_missing_params.SubscriptionReplayMissingParams,
+                ),
             ),
             cast_to=NoneType,
         )
@@ -666,7 +847,18 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> SubscriptionRetrieveSecretResponse:
-        """Get the secret for an event subscription."""
+        """
+        Get the secret for an event subscription.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             f"/event_subscriptions/{event_subscription_token}/secret",
             options=make_request_options(
@@ -691,6 +883,17 @@ class AsyncSubscriptions(AsyncAPIResource):
 
         The previous secret will be valid
         for the next 24 hours.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",

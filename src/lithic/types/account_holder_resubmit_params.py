@@ -9,6 +9,23 @@ from ..types import shared_params
 __all__ = ["AccountHolderResubmitParams", "Individual"]
 
 
+class AccountHolderResubmitParams(TypedDict, total=False):
+    individual: Required[Individual]
+    """
+    Information on individual for whom the account is being opened and KYC is being
+    re-run.
+    """
+
+    tos_timestamp: Required[str]
+    """
+    An RFC 3339 timestamp indicating when the account holder accepted the applicable
+    legal agreements (e.g., cardholder terms) as agreed upon during API customer's
+    implementation with Lithic.
+    """
+
+    workflow: Required[Literal["KYC_ADVANCED"]]
+
+
 class Individual(TypedDict, total=False):
     address: Required[shared_params.Address]
     """
@@ -41,20 +58,3 @@ class Individual(TypedDict, total=False):
 
     phone_number: Required[str]
     """Individual's phone number, entered in E.164 format."""
-
-
-class AccountHolderResubmitParams(TypedDict, total=False):
-    individual: Required[Individual]
-    """
-    Information on individual for whom the account is being opened and KYC is being
-    re-run.
-    """
-
-    tos_timestamp: Required[str]
-    """
-    An RFC 3339 timestamp indicating when the account holder accepted the applicable
-    legal agreements (e.g., cardholder terms) as agreed upon during API customer's
-    implementation with Lithic.
-    """
-
-    workflow: Required[Literal["KYC_ADVANCED"]]
