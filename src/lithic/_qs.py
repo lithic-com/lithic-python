@@ -34,7 +34,7 @@ class Querystring:
         self.nested_format = nested_format
 
     def parse(self, query: str) -> Mapping[str, object]:
-        # TODO
+        # Note: custom format syntax is not supported yet
         return parse_qs(query)
 
     def stringify(
@@ -89,9 +89,11 @@ class Querystring:
         if isinstance(value, (list, tuple)):
             array_format = opts.array_format
             if array_format == "comma":
-                # TODO: support list of objects?
                 return [
-                    (key, ",".join(self._primitive_value_to_str(item) for item in value if item is not None)),
+                    (
+                        key,
+                        ",".join(self._primitive_value_to_str(item) for item in value if item is not None),
+                    ),
                 ]
             elif array_format == "repeat":
                 items = []

@@ -25,6 +25,10 @@ def assert_matches_model(model: type[BaseModelT], value: BaseModelT, *, path: li
 
 # Note: the `path` argument is only used to improve error messages when `--showlocals` is used
 def assert_matches_type(type_: Any, value: object, *, path: list[str]) -> None:
+    if type_ is None:
+        assert value is None
+        return
+
     origin = get_origin(type_) or type_
 
     if is_list_type(type_):
