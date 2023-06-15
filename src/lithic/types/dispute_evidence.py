@@ -32,5 +32,8 @@ class DisputeEvidence(BaseModel):
     download_url: Optional[str]
     """URL to download evidence. Only shown when `upload_status` is `UPLOADED`."""
 
+    filename: Optional[str]
+    """File name of evidence."""
+
     upload_url: Optional[str]
     """URL to upload evidence. Only shown when `upload_status` is `PENDING`."""

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["AuthRuleCreateParams"]
 
@@ -27,18 +27,6 @@ class AuthRuleCreateParams(TypedDict, total=False):
 
     allowed_mcc: List[str]
     """Merchant category codes for which the Auth Rule permits transactions."""
-
-    avs_type: Literal["ZIP_ONLY"]
-    """
-    Address verification to confirm that postal code entered at point of transaction
-    (if applicable) matches the postal code on file for a given card. Since this
-    check is performed against the address submitted via the Enroll Consumer
-    endpoint, it should only be used in cases where card users are enrolled with
-    their own accounts. Available values:
-
-    - `ZIP_ONLY` - AVS check is performed to confirm ZIP code entered at point of
-      transaction (if applicable) matches address on file.
-    """
 
     blocked_countries: List[str]
     """Countries in which the Auth Rule automatically declines transactions."""

@@ -13,6 +13,7 @@ from ..types import (
     dispute_create_params,
     dispute_update_params,
     dispute_list_evidences_params,
+    dispute_initiate_evidence_upload_params,
 )
 from .._types import (
     NOT_GIVEN,
@@ -161,8 +162,8 @@ class Disputes(SyncAPIResource):
             "MISSING_AUTH",
             "OTHER",
             "PROCESSING_ERROR",
-            "REFUND_NOT_PROCESSED",
             "RECURRING_TRANSACTION_NOT_CANCELLED",
+            "REFUND_NOT_PROCESSED",
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -382,6 +383,7 @@ class Disputes(SyncAPIResource):
         self,
         dispute_token: str,
         *,
+        filename: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -399,6 +401,8 @@ class Disputes(SyncAPIResource):
         less than 5 GiB.
 
         Args:
+          filename: Filename of the evidence.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -411,6 +415,9 @@ class Disputes(SyncAPIResource):
         """
         return self._post(
             f"/disputes/{dispute_token}/evidences",
+            body=maybe_transform(
+                {"filename": filename}, dispute_initiate_evidence_upload_params.DisputeInitiateEvidenceUploadParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -669,8 +676,8 @@ class AsyncDisputes(AsyncAPIResource):
             "MISSING_AUTH",
             "OTHER",
             "PROCESSING_ERROR",
-            "REFUND_NOT_PROCESSED",
             "RECURRING_TRANSACTION_NOT_CANCELLED",
+            "REFUND_NOT_PROCESSED",
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -890,6 +897,7 @@ class AsyncDisputes(AsyncAPIResource):
         self,
         dispute_token: str,
         *,
+        filename: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -907,6 +915,8 @@ class AsyncDisputes(AsyncAPIResource):
         less than 5 GiB.
 
         Args:
+          filename: Filename of the evidence.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -919,6 +929,9 @@ class AsyncDisputes(AsyncAPIResource):
         """
         return await self._post(
             f"/disputes/{dispute_token}/evidences",
+            body=maybe_transform(
+                {"filename": filename}, dispute_initiate_evidence_upload_params.DisputeInitiateEvidenceUploadParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
