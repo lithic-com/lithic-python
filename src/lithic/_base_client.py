@@ -820,17 +820,54 @@ class SyncAPIClient(BaseClient):
         )
         return resp
 
+    @overload
     def get(
         self,
         path: str,
         *,
         cast_to: Type[ResponseT],
         options: RequestOptions = {},
+        stream: Literal[False] = False,
     ) -> ResponseT:
+        ...
+
+    @overload
+    def get(
+        self,
+        path: str,
+        *,
+        cast_to: Type[ResponseT],
+        options: RequestOptions = {},
+        stream: Literal[True],
+        stream_cls: type[_StreamT],
+    ) -> _StreamT:
+        ...
+
+    @overload
+    def get(
+        self,
+        path: str,
+        *,
+        cast_to: Type[ResponseT],
+        options: RequestOptions = {},
+        stream: bool,
+        stream_cls: type[_StreamT] | None = None,
+    ) -> ResponseT | _StreamT:
+        ...
+
+    def get(
+        self,
+        path: str,
+        *,
+        cast_to: Type[ResponseT],
+        options: RequestOptions = {},
+        stream: bool = False,
+        stream_cls: type[_StreamT] | None = None,
+    ) -> ResponseT | _StreamT:
         opts = FinalRequestOptions.construct(method="get", url=path, **options)
         # cast is required because mypy complains about returning Any even though
         # it understands the type variables
-        return cast(ResponseT, self.request(cast_to, opts, stream=False))
+        return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
 
     @overload
     def post(
@@ -1117,15 +1154,52 @@ class AsyncAPIClient(BaseClient):
     ) -> AsyncPaginator[ModelT, AsyncPageT]:
         return AsyncPaginator(client=self, options=options, page_cls=page, model=model)
 
+    @overload
     async def get(
         self,
         path: str,
         *,
         cast_to: Type[ResponseT],
         options: RequestOptions = {},
+        stream: Literal[False] = False,
     ) -> ResponseT:
+        ...
+
+    @overload
+    async def get(
+        self,
+        path: str,
+        *,
+        cast_to: Type[ResponseT],
+        options: RequestOptions = {},
+        stream: Literal[True],
+        stream_cls: type[_AsyncStreamT],
+    ) -> _AsyncStreamT:
+        ...
+
+    @overload
+    async def get(
+        self,
+        path: str,
+        *,
+        cast_to: Type[ResponseT],
+        options: RequestOptions = {},
+        stream: bool,
+        stream_cls: type[_AsyncStreamT] | None = None,
+    ) -> ResponseT | _AsyncStreamT:
+        ...
+
+    async def get(
+        self,
+        path: str,
+        *,
+        cast_to: Type[ResponseT],
+        options: RequestOptions = {},
+        stream: bool = False,
+        stream_cls: type[_AsyncStreamT] | None = None,
+    ) -> ResponseT | _AsyncStreamT:
         opts = FinalRequestOptions.construct(method="get", url=path, **options)
-        return await self.request(cast_to, opts)
+        return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
 
     @overload
     async def post(
