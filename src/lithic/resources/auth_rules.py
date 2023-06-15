@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal
 
 from ..types import (
     AuthRule,
@@ -34,7 +33,6 @@ class AuthRules(SyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         allowed_countries: List[str] | NotGiven = NOT_GIVEN,
         allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
         blocked_countries: List[str] | NotGiven = NOT_GIVEN,
         blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
@@ -61,15 +59,6 @@ class AuthRules(SyncAPIResource):
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
           allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
-
-          avs_type: Address verification to confirm that postal code entered at point of transaction
-              (if applicable) matches the postal code on file for a given card. Since this
-              check is performed against the address submitted via the Enroll Consumer
-              endpoint, it should only be used in cases where card users are enrolled with
-              their own accounts. Available values:
-
-              - `ZIP_ONLY` - AVS check is performed to confirm ZIP code entered at point of
-                transaction (if applicable) matches address on file.
 
           blocked_countries: Countries in which the Auth Rule automatically declines transactions.
 
@@ -98,7 +87,6 @@ class AuthRules(SyncAPIResource):
                     "account_tokens": account_tokens,
                     "allowed_countries": allowed_countries,
                     "allowed_mcc": allowed_mcc,
-                    "avs_type": avs_type,
                     "blocked_countries": blocked_countries,
                     "blocked_mcc": blocked_mcc,
                     "card_tokens": card_tokens,
@@ -154,7 +142,6 @@ class AuthRules(SyncAPIResource):
         *,
         allowed_countries: List[str] | NotGiven = NOT_GIVEN,
         allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
         blocked_countries: List[str] | NotGiven = NOT_GIVEN,
         blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -176,9 +163,6 @@ class AuthRules(SyncAPIResource):
           allowed_mcc: Array of merchant category codes for which the Auth Rule will permit
               transactions. Note that only this field or `blocked_mcc` can be used for a given
               Auth Rule.
-
-          avs_type: Address verification to confirm that postal code entered at point of transaction
-              (if applicable) matches the postal code on file for a given card.
 
           blocked_countries: Array of country codes for which the Auth Rule will automatically decline
               transactions. Note that only this field or `allowed_countries` can be used for a
@@ -204,7 +188,6 @@ class AuthRules(SyncAPIResource):
                 {
                     "allowed_countries": allowed_countries,
                     "allowed_mcc": allowed_mcc,
-                    "avs_type": avs_type,
                     "blocked_countries": blocked_countries,
                     "blocked_mcc": blocked_mcc,
                 },
@@ -392,7 +375,6 @@ class AsyncAuthRules(AsyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         allowed_countries: List[str] | NotGiven = NOT_GIVEN,
         allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
         blocked_countries: List[str] | NotGiven = NOT_GIVEN,
         blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
@@ -419,15 +401,6 @@ class AsyncAuthRules(AsyncAPIResource):
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
           allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
-
-          avs_type: Address verification to confirm that postal code entered at point of transaction
-              (if applicable) matches the postal code on file for a given card. Since this
-              check is performed against the address submitted via the Enroll Consumer
-              endpoint, it should only be used in cases where card users are enrolled with
-              their own accounts. Available values:
-
-              - `ZIP_ONLY` - AVS check is performed to confirm ZIP code entered at point of
-                transaction (if applicable) matches address on file.
 
           blocked_countries: Countries in which the Auth Rule automatically declines transactions.
 
@@ -456,7 +429,6 @@ class AsyncAuthRules(AsyncAPIResource):
                     "account_tokens": account_tokens,
                     "allowed_countries": allowed_countries,
                     "allowed_mcc": allowed_mcc,
-                    "avs_type": avs_type,
                     "blocked_countries": blocked_countries,
                     "blocked_mcc": blocked_mcc,
                     "card_tokens": card_tokens,
@@ -512,7 +484,6 @@ class AsyncAuthRules(AsyncAPIResource):
         *,
         allowed_countries: List[str] | NotGiven = NOT_GIVEN,
         allowed_mcc: List[str] | NotGiven = NOT_GIVEN,
-        avs_type: Literal["ZIP_ONLY"] | NotGiven = NOT_GIVEN,
         blocked_countries: List[str] | NotGiven = NOT_GIVEN,
         blocked_mcc: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -534,9 +505,6 @@ class AsyncAuthRules(AsyncAPIResource):
           allowed_mcc: Array of merchant category codes for which the Auth Rule will permit
               transactions. Note that only this field or `blocked_mcc` can be used for a given
               Auth Rule.
-
-          avs_type: Address verification to confirm that postal code entered at point of transaction
-              (if applicable) matches the postal code on file for a given card.
 
           blocked_countries: Array of country codes for which the Auth Rule will automatically decline
               transactions. Note that only this field or `allowed_countries` can be used for a
@@ -562,7 +530,6 @@ class AsyncAuthRules(AsyncAPIResource):
                 {
                     "allowed_countries": allowed_countries,
                     "allowed_mcc": allowed_mcc,
-                    "avs_type": avs_type,
                     "blocked_countries": blocked_countries,
                     "blocked_mcc": blocked_mcc,
                 },

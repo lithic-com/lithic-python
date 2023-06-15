@@ -158,6 +158,14 @@ class TestDisputes:
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
+    def test_method_initiate_evidence_upload_with_all_params(self, client: Lithic) -> None:
+        dispute = client.disputes.initiate_evidence_upload(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            filename="string",
+        )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
     def test_method_list_evidences(self, client: Lithic) -> None:
         dispute = client.disputes.list_evidences(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -323,6 +331,14 @@ class TestAsyncDisputes:
     async def test_method_initiate_evidence_upload(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.initiate_evidence_upload(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
+    async def test_method_initiate_evidence_upload_with_all_params(self, client: AsyncLithic) -> None:
+        dispute = await client.disputes.initiate_evidence_upload(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            filename="string",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 

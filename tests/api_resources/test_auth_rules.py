@@ -38,7 +38,6 @@ class TestAuthRules:
             account_tokens=["string", "string", "string"],
             allowed_countries=["string", "string", "string"],
             allowed_mcc=["string", "string", "string"],
-            avs_type="ZIP_ONLY",
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
             card_tokens=["string", "string", "string"],
@@ -66,7 +65,6 @@ class TestAuthRules:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             allowed_countries=["string", "string", "string"],
             allowed_mcc=["string", "string", "string"],
-            avs_type="ZIP_ONLY",
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
         )
@@ -133,7 +131,6 @@ class TestAsyncAuthRules:
             account_tokens=["string", "string", "string"],
             allowed_countries=["string", "string", "string"],
             allowed_mcc=["string", "string", "string"],
-            avs_type="ZIP_ONLY",
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
             card_tokens=["string", "string", "string"],
@@ -161,7 +158,6 @@ class TestAsyncAuthRules:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             allowed_countries=["string", "string", "string"],
             allowed_mcc=["string", "string", "string"],
-            avs_type="ZIP_ONLY",
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
         )

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["AuthRuleUpdateParams"]
 
@@ -20,12 +20,6 @@ class AuthRuleUpdateParams(TypedDict, total=False):
     Array of merchant category codes for which the Auth Rule will permit
     transactions. Note that only this field or `blocked_mcc` can be used for a given
     Auth Rule.
-    """
-
-    avs_type: Literal["ZIP_ONLY"]
-    """
-    Address verification to confirm that postal code entered at point of transaction
-    (if applicable) matches the postal code on file for a given card.
     """
 
     blocked_countries: List[str]
