@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -13,31 +13,31 @@ class Dispute(BaseModel):
     amount: int
     """Amount under dispute. May be different from the original transaction amount."""
 
-    arbitration_date: datetime
+    arbitration_date: Optional[datetime]
     """Date dispute entered arbitration."""
 
     created: datetime
     """Timestamp of when first Dispute was reported."""
 
-    customer_filed_date: datetime
+    customer_filed_date: Optional[datetime]
     """Date that the dispute was filed by the customer making the dispute."""
 
-    customer_note: str
+    customer_note: Optional[str]
     """End customer description of the reason for the dispute."""
 
-    network_claim_ids: List[str]
+    network_claim_ids: Optional[List[str]]
     """Unique identifiers for the dispute from the network."""
 
-    network_filed_date: datetime
+    network_filed_date: Optional[datetime]
     """Date that the dispute was submitted to the network."""
 
-    network_reason_code: str
+    network_reason_code: Optional[str]
     """Network reason code used to file the dispute."""
 
-    prearbitration_date: datetime
+    prearbitration_date: Optional[datetime]
     """Date dispute entered pre-arbitration."""
 
-    primary_claim_id: str
+    primary_claim_id: Optional[str]
     """Unique identifier for the dispute from the network.
 
     If there are multiple, this will be the first claim id set by the network
@@ -80,36 +80,38 @@ class Dispute(BaseModel):
       cancelled.
     """
 
-    representment_date: datetime
+    representment_date: Optional[datetime]
     """Date the representment was received."""
 
-    resolution_amount: int
+    resolution_amount: Optional[int]
     """Resolution amount net of network fees."""
 
-    resolution_date: datetime
+    resolution_date: Optional[datetime]
     """Date that the dispute was resolved."""
 
-    resolution_note: str
+    resolution_note: Optional[str]
     """Note by Dispute team on the case resolution."""
 
-    resolution_reason: Literal[
-        "CASE_LOST",
-        "NETWORK_REJECTED",
-        "NO_DISPUTE_RIGHTS_3DS",
-        "NO_DISPUTE_RIGHTS_BELOW_THRESHOLD",
-        "NO_DISPUTE_RIGHTS_CONTACTLESS",
-        "NO_DISPUTE_RIGHTS_HYBRID",
-        "NO_DISPUTE_RIGHTS_MAX_CHARGEBACKS",
-        "NO_DISPUTE_RIGHTS_OTHER",
-        "PAST_FILING_DATE",
-        "PREARBITRATION_REJECTED",
-        "PROCESSOR_REJECTED_OTHER",
-        "REFUNDED",
-        "REFUNDED_AFTER_CHARGEBACK",
-        "WITHDRAWN",
-        "WON_ARBITRATION",
-        "WON_FIRST_CHARGEBACK",
-        "WON_PREARBITRATION",
+    resolution_reason: Optional[
+        Literal[
+            "CASE_LOST",
+            "NETWORK_REJECTED",
+            "NO_DISPUTE_RIGHTS_3DS",
+            "NO_DISPUTE_RIGHTS_BELOW_THRESHOLD",
+            "NO_DISPUTE_RIGHTS_CONTACTLESS",
+            "NO_DISPUTE_RIGHTS_HYBRID",
+            "NO_DISPUTE_RIGHTS_MAX_CHARGEBACKS",
+            "NO_DISPUTE_RIGHTS_OTHER",
+            "PAST_FILING_DATE",
+            "PREARBITRATION_REJECTED",
+            "PROCESSOR_REJECTED_OTHER",
+            "REFUNDED",
+            "REFUNDED_AFTER_CHARGEBACK",
+            "WITHDRAWN",
+            "WON_ARBITRATION",
+            "WON_FIRST_CHARGEBACK",
+            "WON_PREARBITRATION",
+        ]
     ]
     """Reason for the dispute resolution:
 

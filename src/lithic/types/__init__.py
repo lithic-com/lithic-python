@@ -127,6 +127,9 @@ from .responder_endpoint_check_status_params import (
 from .transaction_simulate_clearing_response import (
     TransactionSimulateClearingResponse as TransactionSimulateClearingResponse,
 )
+from .dispute_initiate_evidence_upload_params import (
+    DisputeInitiateEvidenceUploadParams as DisputeInitiateEvidenceUploadParams,
+)
 from .dispute_initiate_evidence_upload_response import (
     DisputeInitiateEvidenceUploadResponse as DisputeInitiateEvidenceUploadResponse,
 )
