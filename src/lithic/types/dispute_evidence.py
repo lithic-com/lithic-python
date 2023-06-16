@@ -33,7 +33,10 @@ class DisputeEvidence(BaseModel):
     """URL to download evidence. Only shown when `upload_status` is `UPLOADED`."""
 
     filename: Optional[str]
-    """File name of evidence."""
+    """File name of evidence.
+
+    Recommended to give the dispute evidence a human-readable identifier.
+    """
 
     upload_url: Optional[str]
     """URL to upload evidence. Only shown when `upload_status` is `PENDING`."""
