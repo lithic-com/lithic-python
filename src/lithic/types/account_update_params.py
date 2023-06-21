@@ -13,7 +13,8 @@ class AccountUpdateParams(TypedDict, total=False):
 
     Note that a spend limit of 0 is effectively no limit, and should only be used to
     reset or remove a prior limit. Only a limit of 1 or above will result in
-    declined transactions due to checks against the account limit.
+    declined transactions due to checks against the account limit. By default the
+    daily spend limit is set to $1,250.00.
     """
 
     lifetime_spend_limit: int
@@ -31,7 +32,8 @@ class AccountUpdateParams(TypedDict, total=False):
 
     Note that a spend limit of 0 is effectively no limit, and should only be used to
     reset or remove a prior limit. Only a limit of 1 or above will result in
-    declined transactions due to checks against the account limit.
+    declined transactions due to checks against the account limit. By default the
+    monthly spend limit is set to $5,000.00.
     """
 
     state: Literal["ACTIVE", "PAUSED"]
