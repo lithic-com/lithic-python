@@ -42,8 +42,8 @@ from lithic.types import (
     KYC,
     KYCExempt,
     AccountHolderUpdateResponse,
-    AccountHolderListDocumentsResponse,
     AccountHolderCreateWebhookResponse,
+    AccountHolderListDocumentsResponse,
 )
 ```
 
@@ -122,8 +122,8 @@ from lithic.types import (
     Card,
     EmbedRequestParams,
     SpendLimitDuration,
-    CardProvisionResponse,
     CardEmbedResponse,
+    CardProvisionResponse,
 )
 ```
 
@@ -260,12 +260,12 @@ Types:
 from lithic.types import (
     Transaction,
     TransactionSimulateAuthorizationResponse,
+    TransactionSimulateAuthorizationAdviceResponse,
     TransactionSimulateClearingResponse,
+    TransactionSimulateCreditAuthorizationResponse,
     TransactionSimulateReturnResponse,
     TransactionSimulateReturnReversalResponse,
     TransactionSimulateVoidResponse,
-    TransactionSimulateCreditAuthorizationResponse,
-    TransactionSimulateAuthorizationAdviceResponse,
 )
 ```
 
