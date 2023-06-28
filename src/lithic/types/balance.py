@@ -9,6 +9,9 @@ __all__ = ["Balance"]
 
 
 class Balance(BaseModel):
+    token: str
+    """Globally unique identifier for the financial account that holds this balance."""
+
     available_amount: int
     """Funds available for spend in the currency's smallest unit (e.g., cents for USD)"""
 
@@ -35,9 +38,6 @@ class Balance(BaseModel):
 
     Shown in the currency's smallest unit (e.g., cents for USD).
     """
-
-    token: str
-    """Globally unique identifier for the financial account that holds this balance."""
 
     total_amount: int
     """

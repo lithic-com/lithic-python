@@ -9,6 +9,9 @@ __all__ = ["EventSubscription"]
 
 
 class EventSubscription(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
     description: str
     """A description of the subscription."""
 
@@ -27,8 +30,5 @@ class EventSubscription(BaseModel):
             ]
         ]
     ]
-
-    token: str
-    """Globally unique identifier."""
 
     url: str

@@ -11,6 +11,9 @@ __all__ = ["Card", "Funding"]
 
 
 class Funding(BaseModel):
+    token: str
+    """A globally unique identifier for this FundingAccount."""
+
     created: datetime
     """
     An RFC 3339 string representing when this funding source was added to the Lithic
@@ -35,9 +38,6 @@ class Funding(BaseModel):
     - `DELETED` - The founding account has been deleted.
     """
 
-    token: str
-    """A globally unique identifier for this FundingAccount."""
-
     type: Literal["DEPOSITORY_CHECKING", "DEPOSITORY_SAVINGS"]
     """Types of funding source:
 
@@ -53,6 +53,9 @@ class Funding(BaseModel):
 
 
 class Card(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
     created: datetime
     """An RFC 3339 timestamp for when the card was created. UTC time zone."""
 
@@ -103,9 +106,6 @@ class Card(BaseModel):
     In sandbox, the same daily batch fulfillment occurs, but no cards are actually
     manufactured.
     """
-
-    token: str
-    """Globally unique identifier."""
 
     type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"]
     """Card types:

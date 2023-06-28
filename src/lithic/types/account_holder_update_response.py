@@ -8,6 +8,9 @@ __all__ = ["AccountHolderUpdateResponse"]
 
 
 class AccountHolderUpdateResponse(BaseModel):
+    token: Optional[str]
+    """The token for the account holder that was updated"""
+
     business_account_token: Optional[str]
     """
     Only applicable for customers using the KYC-Exempt workflow to enroll businesses
@@ -20,6 +23,3 @@ class AccountHolderUpdateResponse(BaseModel):
 
     phone_number: Optional[str]
     """The newly updated phone_number for the account holder"""
-
-    token: Optional[str]
-    """The token for the account holder that was updated"""

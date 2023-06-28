@@ -38,6 +38,9 @@ class RequiredDocumentUpload(BaseModel):
 
 
 class AccountHolderDocument(BaseModel):
+    token: Optional[str]
+    """Globally unique identifier for the document."""
+
     account_holder_token: Optional[str]
     """Globally unique identifier for the account holder."""
 
@@ -45,6 +48,3 @@ class AccountHolderDocument(BaseModel):
     """Type of documentation to be submitted for verification."""
 
     required_document_uploads: Optional[List[RequiredDocumentUpload]]
-
-    token: Optional[str]
-    """Globally unique identifier for the document."""

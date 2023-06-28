@@ -9,6 +9,9 @@ __all__ = ["AuthRule"]
 
 
 class AuthRule(BaseModel):
+    token: Optional[str]
+    """Globally unique identifier."""
+
     account_tokens: Optional[List[str]]
     """Array of account_token(s) identifying the accounts that the Auth Rule applies
     to.
@@ -56,6 +59,3 @@ class AuthRule(BaseModel):
 
     state: Optional[Literal["ACTIVE", "INACTIVE"]]
     """Indicates whether the Auth Rule is ACTIVE or INACTIVE"""
-
-    token: Optional[str]
-    """Globally unique identifier."""
