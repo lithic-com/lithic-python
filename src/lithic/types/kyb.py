@@ -6,40 +6,7 @@ from typing_extensions import Literal
 from ..types import shared
 from .._models import BaseModel
 
-__all__ = ["KYB", "BusinessEntity", "BeneficialOwnerEntity", "BeneficialOwnerIndividual", "ControlPerson"]
-
-
-class BusinessEntity(BaseModel):
-    address: shared.Address
-    """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: str
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: str
-    """Legal (formal) business name."""
-
-    phone_numbers: List[str]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: Optional[str]
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: Optional[str]
-    """Parent company name (if applicable)."""
+__all__ = ["KYB", "BeneficialOwnerEntity", "BeneficialOwnerIndividual", "BusinessEntity", "ControlPerson"]
 
 
 class BeneficialOwnerEntity(BaseModel):
@@ -107,6 +74,39 @@ class BeneficialOwnerIndividual(BaseModel):
 
     phone_number: str
     """Individual's phone number, entered in E.164 format."""
+
+
+class BusinessEntity(BaseModel):
+    address: shared.Address
+    """
+    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable.
+    """
+
+    government_id: str
+    """Government-issued identification number.
+
+    US Federal Employer Identification Numbers (EIN) are currently supported,
+    entered as full nine-digits, with or without hyphens.
+    """
+
+    legal_business_name: str
+    """Legal (formal) business name."""
+
+    phone_numbers: List[str]
+    """
+    One or more of the business's phone number(s), entered as a list in E.164
+    format.
+    """
+
+    dba_business_name: Optional[str]
+    """
+    Any name that the business operates under that is not its legal business name
+    (if applicable).
+    """
+
+    parent_company: Optional[str]
+    """Parent company name (if applicable)."""
 
 
 class ControlPerson(BaseModel):

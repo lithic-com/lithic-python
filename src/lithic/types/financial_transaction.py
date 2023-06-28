@@ -10,6 +10,9 @@ __all__ = ["FinancialTransaction", "Event"]
 
 
 class Event(BaseModel):
+    token: Optional[str]
+    """Globally unique identifier."""
+
     amount: Optional[int]
     """
     Amount of the financial event that has been settled in the currency's smallest
@@ -24,9 +27,6 @@ class Event(BaseModel):
     APPROVED financial events were successful while DECLINED financial events were
     declined by user, Lithic, or the network.
     """
-
-    token: Optional[str]
-    """Globally unique identifier."""
 
     type: Optional[
         Literal[
@@ -94,6 +94,9 @@ class Event(BaseModel):
 
 
 class FinancialTransaction(BaseModel):
+    token: Optional[str]
+    """Globally unique identifier."""
+
     category: Optional[Literal["CARD", "ACH", "TRANSFER"]]
     """Status types:
 
@@ -148,9 +151,6 @@ class FinancialTransaction(BaseModel):
     - `SETTLED` - The financial transaction is completed.
     - `VOIDED` - The merchant has voided the previously pending card authorization.
     """
-
-    token: Optional[str]
-    """Globally unique identifier."""
 
     updated: Optional[datetime]
     """Date and time when the financial transaction was last updated. UTC time zone."""

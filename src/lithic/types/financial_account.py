@@ -10,11 +10,11 @@ __all__ = ["FinancialAccount"]
 
 
 class FinancialAccount(BaseModel):
-    created: datetime
-    """Date and time for when the financial account was first created."""
-
     token: str
     """Globally unique identifier for the financial account."""
+
+    created: datetime
+    """Date and time for when the financial account was first created."""
 
     type: Literal["ISSUING", "RESERVE"]
     """Type of financial account"""

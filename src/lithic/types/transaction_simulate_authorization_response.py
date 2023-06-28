@@ -8,11 +8,11 @@ __all__ = ["TransactionSimulateAuthorizationResponse"]
 
 
 class TransactionSimulateAuthorizationResponse(BaseModel):
-    debugging_request_id: Optional[str]
-    """Debugging request ID to share with Lithic Support team."""
-
     token: Optional[str]
     """
     A unique token to reference this transaction with later calls to void or clear
     the authorization.
     """
+
+    debugging_request_id: Optional[str]
+    """Debugging request ID to share with Lithic Support team."""

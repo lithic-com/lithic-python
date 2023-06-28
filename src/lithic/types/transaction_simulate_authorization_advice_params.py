@@ -8,12 +8,12 @@ __all__ = ["TransactionSimulateAuthorizationAdviceParams"]
 
 
 class TransactionSimulateAuthorizationAdviceParams(TypedDict, total=False):
+    token: Required[str]
+    """The transaction token returned from the /v1/simulate/authorize response."""
+
     amount: Required[int]
     """Amount (in cents) to authorize.
 
     This amount will override the transaction's amount that was originally set by
     /v1/simulate/authorize.
     """
-
-    token: Required[str]
-    """The transaction token returned from the /v1/simulate/authorize response."""

@@ -82,8 +82,8 @@ class TestTransactions:
     @parametrize
     def test_method_simulate_authorization_advice(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_authorization_advice(
-            amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
         )
         assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
 
@@ -212,8 +212,8 @@ class TestAsyncTransactions:
     @parametrize
     async def test_method_simulate_authorization_advice(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_authorization_advice(
-            amount=0,
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
         )
         assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
 
