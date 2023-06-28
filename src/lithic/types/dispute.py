@@ -10,6 +10,9 @@ __all__ = ["Dispute"]
 
 
 class Dispute(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
     amount: int
     """Amount under dispute. May be different from the original transaction amount."""
 
@@ -156,9 +159,6 @@ class Dispute(BaseModel):
     - `CASE_WON` - Case was won and credit will be issued.
     - `CASE_CLOSED` - Case was lost or withdrawn.
     """
-
-    token: str
-    """Globally unique identifier."""
 
     transaction_token: str
     """The transaction that is being disputed.

@@ -8,7 +8,137 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["Transaction", "CardholderAuthentication", "Event", "Merchant"]
+__all__ = ["Transaction", "Event", "Merchant", "CardholderAuthentication"]
+
+
+class Event(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
+    amount: int
+    """Amount of the transaction event (in cents), including any acquirer fees."""
+
+    created: datetime
+    """RFC 3339 date and time this event entered the system. UTC time zone."""
+
+    result: Literal[
+        "ACCOUNT_STATE_TRANSACTION",
+        "APPROVED",
+        "BANK_CONNECTION_ERROR",
+        "BANK_NOT_VERIFIED",
+        "CARD_CLOSED",
+        "CARD_PAUSED",
+        "FRAUD_ADVICE",
+        "GLOBAL_TRANSACTION_LIMIT",
+        "GLOBAL_WEEKLY_LIMIT",
+        "GLOBAL_MONTHLY_LIMIT",
+        "INACTIVE_ACCOUNT",
+        "INCORRECT_PIN",
+        "INVALID_CARD_DETAILS",
+        "INSUFFICIENT_FUNDS",
+        "MERCHANT_BLACKLIST",
+        "SINGLE_USE_RECHARGED",
+        "SWITCH_INOPERATIVE_ADVICE",
+        "UNAUTHORIZED_MERCHANT",
+        "UNKNOWN_HOST_TIMEOUT",
+        "USER_TRANSACTION_LIMIT",
+    ]
+    """`APPROVED` or decline reason.
+
+    Result types:
+
+    - `ACCOUNT_STATE_TRANSACTION_FAIL` - Contact
+      [support@lithic.com](mailto:support@lithic.com).
+    - `APPROVED` - Transaction is approved.
+    - `BANK_CONNECTION_ERROR` - Please reconnect a funding source.
+    - `BANK_NOT_VERIFIED` - Please confirm the funding source.
+    - `CARD_CLOSED` - Card state was closed at the time of authorization.
+    - `CARD_PAUSED` - Card state was paused at the time of authorization.
+    - `FRAUD_ADVICE` - Transaction declined due to risk.
+    - `GLOBAL_TRANSACTION_LIMIT` - Platform spend limit exceeded, contact
+      [support@lithic.com](mailto:support@lithic.com).
+    - `GLOBAL_WEEKLY_LIMIT` - Platform spend limit exceeded, contact
+      [support@lithic.com](mailto:support@lithic.com).
+    - `GLOBAL_MONTHLY_LIMIT` - Platform spend limit exceeded, contact
+      [support@lithic.com](mailto:support@lithic.com).
+    - `INACTIVE_ACCOUNT` - Account is inactive. Contact
+      [support@lithic.com](mailto:support@lithic.com).
+    - `INCORRECT_PIN` - PIN verification failed.
+    - `INVALID_CARD_DETAILS` - Incorrect CVV or expiry date.
+    - `INSUFFICIENT_FUNDS` - Please ensure the funding source is connected and up to
+      date.
+    - `MERCHANT_BLACKLIST` - This merchant is disallowed on the platform.
+    - `SINGLE_USE_RECHARGED` - Single use card attempted multiple times.
+    - `SWITCH_INOPERATIVE_ADVICE` - Network error, re-attempt the transaction.
+    - `UNAUTHORIZED_MERCHANT` - Merchant locked card attempted at different
+      merchant.
+    - `UNKNOWN_HOST_TIMEOUT` - Network error, re-attempt the transaction.
+    - `USER_TRANSACTION_LIMIT` - User-set spend limit exceeded.
+    """
+
+    type: Literal[
+        "AUTHORIZATION",
+        "AUTHORIZATION_ADVICE",
+        "AUTHORIZATION_EXPIRY",
+        "AUTHORIZATION_REVERSAL",
+        "BALANCE_INQUIRY",
+        "CLEARING",
+        "CORRECTION_DEBIT",
+        "CORRECTION_CREDIT",
+        "CREDIT_AUTHORIZATION",
+        "CREDIT_AUTHORIZATION_ADVICE",
+        "FINANCIAL_AUTHORIZATION",
+        "FINANCIAL_CREDIT_AUTHORIZATION",
+        "RETURN",
+        "RETURN_REVERSAL",
+        "VOID",
+    ]
+    """Event types:
+
+    - `AUTHORIZATION` - Authorize a transaction.
+    - `AUTHORIZATION_ADVICE` - Advice on a transaction.
+    - `AUTHORIZATION_EXPIRY` - Authorization has expired and reversed by Lithic.
+    - `AUTHORIZATION_REVERSAL` - Authorization was reversed by the merchant.
+    - `BALANCE_INQUIRY` - A balance inquiry (typically a $0 authorization) has
+      occurred on a card.
+    - `CLEARING` - Transaction is settled.
+    - `CORRECTION_DEBIT` - Manual transaction correction (Debit).
+    - `CORRECTION_CREDIT` - Manual transaction correction (Credit).
+    - `CREDIT_AUTHORIZATION` - A refund or credit authorization from a merchant.
+    - `CREDIT_AUTHORIZATION_ADVICE` - A credit authorization was approved on your
+      behalf by the network.
+    - `FINANCIAL_AUTHORIZATION` - A request from a merchant to debit funds without
+      additional clearing.
+    - `FINANCIAL_CREDIT_AUTHORIZATION` - A request from a merchant to refund or
+      credit funds without additional clearing.
+    - `RETURN` - A refund has been processed on the transaction.
+    - `RETURN_REVERSAL` - A refund has been reversed (e.g., when a merchant reverses
+      an incorrect refund).
+    """
+
+
+class Merchant(BaseModel):
+    acceptor_id: Optional[str]
+    """Unique identifier to identify the payment card acceptor."""
+
+    city: Optional[str]
+    """City of card acceptor."""
+
+    country: Optional[str]
+    """Uppercase country of card acceptor (see ISO 8583 specs)."""
+
+    descriptor: Optional[str]
+    """Short description of card acceptor."""
+
+    mcc: Optional[str]
+    """Merchant category code (MCC).
+
+    A four-digit number listed in ISO 18245. An MCC is used to classify a business
+    by the types of goods or services it provides.
+    """
+
+    state: Optional[str]
+    """Geographic state of card acceptor (see ISO 8583 specs)."""
 
 
 class CardholderAuthentication(BaseModel):
@@ -115,137 +245,10 @@ class CardholderAuthentication(BaseModel):
     """
 
 
-class Event(BaseModel):
-    amount: int
-    """Amount of the transaction event (in cents), including any acquirer fees."""
-
-    created: datetime
-    """RFC 3339 date and time this event entered the system. UTC time zone."""
-
-    result: Literal[
-        "ACCOUNT_STATE_TRANSACTION",
-        "APPROVED",
-        "BANK_CONNECTION_ERROR",
-        "BANK_NOT_VERIFIED",
-        "CARD_CLOSED",
-        "CARD_PAUSED",
-        "FRAUD_ADVICE",
-        "GLOBAL_TRANSACTION_LIMIT",
-        "GLOBAL_WEEKLY_LIMIT",
-        "GLOBAL_MONTHLY_LIMIT",
-        "INACTIVE_ACCOUNT",
-        "INCORRECT_PIN",
-        "INVALID_CARD_DETAILS",
-        "INSUFFICIENT_FUNDS",
-        "MERCHANT_BLACKLIST",
-        "SINGLE_USE_RECHARGED",
-        "SWITCH_INOPERATIVE_ADVICE",
-        "UNAUTHORIZED_MERCHANT",
-        "UNKNOWN_HOST_TIMEOUT",
-        "USER_TRANSACTION_LIMIT",
-    ]
-    """`APPROVED` or decline reason.
-
-    Result types:
-
-    - `ACCOUNT_STATE_TRANSACTION_FAIL` - Contact
-      [support@lithic.com](mailto:support@lithic.com).
-    - `APPROVED` - Transaction is approved.
-    - `BANK_CONNECTION_ERROR` - Please reconnect a funding source.
-    - `BANK_NOT_VERIFIED` - Please confirm the funding source.
-    - `CARD_CLOSED` - Card state was closed at the time of authorization.
-    - `CARD_PAUSED` - Card state was paused at the time of authorization.
-    - `FRAUD_ADVICE` - Transaction declined due to risk.
-    - `GLOBAL_TRANSACTION_LIMIT` - Platform spend limit exceeded, contact
-      [support@lithic.com](mailto:support@lithic.com).
-    - `GLOBAL_WEEKLY_LIMIT` - Platform spend limit exceeded, contact
-      [support@lithic.com](mailto:support@lithic.com).
-    - `GLOBAL_MONTHLY_LIMIT` - Platform spend limit exceeded, contact
-      [support@lithic.com](mailto:support@lithic.com).
-    - `INACTIVE_ACCOUNT` - Account is inactive. Contact
-      [support@lithic.com](mailto:support@lithic.com).
-    - `INCORRECT_PIN` - PIN verification failed.
-    - `INVALID_CARD_DETAILS` - Incorrect CVV or expiry date.
-    - `INSUFFICIENT_FUNDS` - Please ensure the funding source is connected and up to
-      date.
-    - `MERCHANT_BLACKLIST` - This merchant is disallowed on the platform.
-    - `SINGLE_USE_RECHARGED` - Single use card attempted multiple times.
-    - `SWITCH_INOPERATIVE_ADVICE` - Network error, re-attempt the transaction.
-    - `UNAUTHORIZED_MERCHANT` - Merchant locked card attempted at different
-      merchant.
-    - `UNKNOWN_HOST_TIMEOUT` - Network error, re-attempt the transaction.
-    - `USER_TRANSACTION_LIMIT` - User-set spend limit exceeded.
-    """
-
+class Transaction(BaseModel):
     token: str
     """Globally unique identifier."""
 
-    type: Literal[
-        "AUTHORIZATION",
-        "AUTHORIZATION_ADVICE",
-        "AUTHORIZATION_EXPIRY",
-        "AUTHORIZATION_REVERSAL",
-        "BALANCE_INQUIRY",
-        "CLEARING",
-        "CORRECTION_DEBIT",
-        "CORRECTION_CREDIT",
-        "CREDIT_AUTHORIZATION",
-        "CREDIT_AUTHORIZATION_ADVICE",
-        "FINANCIAL_AUTHORIZATION",
-        "FINANCIAL_CREDIT_AUTHORIZATION",
-        "RETURN",
-        "RETURN_REVERSAL",
-        "VOID",
-    ]
-    """Event types:
-
-    - `AUTHORIZATION` - Authorize a transaction.
-    - `AUTHORIZATION_ADVICE` - Advice on a transaction.
-    - `AUTHORIZATION_EXPIRY` - Authorization has expired and reversed by Lithic.
-    - `AUTHORIZATION_REVERSAL` - Authorization was reversed by the merchant.
-    - `BALANCE_INQUIRY` - A balance inquiry (typically a $0 authorization) has
-      occurred on a card.
-    - `CLEARING` - Transaction is settled.
-    - `CORRECTION_DEBIT` - Manual transaction correction (Debit).
-    - `CORRECTION_CREDIT` - Manual transaction correction (Credit).
-    - `CREDIT_AUTHORIZATION` - A refund or credit authorization from a merchant.
-    - `CREDIT_AUTHORIZATION_ADVICE` - A credit authorization was approved on your
-      behalf by the network.
-    - `FINANCIAL_AUTHORIZATION` - A request from a merchant to debit funds without
-      additional clearing.
-    - `FINANCIAL_CREDIT_AUTHORIZATION` - A request from a merchant to refund or
-      credit funds without additional clearing.
-    - `RETURN` - A refund has been processed on the transaction.
-    - `RETURN_REVERSAL` - A refund has been reversed (e.g., when a merchant reverses
-      an incorrect refund).
-    """
-
-
-class Merchant(BaseModel):
-    acceptor_id: Optional[str]
-    """Unique identifier to identify the payment card acceptor."""
-
-    city: Optional[str]
-    """City of card acceptor."""
-
-    country: Optional[str]
-    """Uppercase country of card acceptor (see ISO 8583 specs)."""
-
-    descriptor: Optional[str]
-    """Short description of card acceptor."""
-
-    mcc: Optional[str]
-    """Merchant category code (MCC).
-
-    A four-digit number listed in ISO 18245. An MCC is used to classify a business
-    by the types of goods or services it provides.
-    """
-
-    state: Optional[str]
-    """Geographic state of card acceptor (see ISO 8583 specs)."""
-
-
-class Transaction(BaseModel):
     acquirer_reference_number: Optional[str]
     """
     A fixed-width 23-digit numeric identifier for the Transaction that may be set if
@@ -348,8 +351,5 @@ class Transaction(BaseModel):
     - `SETTLED` - The transaction is complete.
     - `VOIDED` - The merchant has voided the previously pending authorization.
     """
-
-    token: str
-    """Globally unique identifier."""
 
     cardholder_authentication: Optional[CardholderAuthentication]

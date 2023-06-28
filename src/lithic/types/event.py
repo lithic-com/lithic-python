@@ -10,6 +10,9 @@ __all__ = ["Event"]
 
 
 class Event(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
     created: datetime
     """An RFC 3339 timestamp for when the event was created. UTC time zone.
 
@@ -40,6 +43,3 @@ class Event(BaseModel):
     """
 
     payload: Dict[str, object]
-
-    token: str
-    """Globally unique identifier."""

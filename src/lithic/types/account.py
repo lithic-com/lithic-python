@@ -5,7 +5,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Account", "SpendLimit", "VerificationAddress", "AccountHolder"]
+__all__ = ["Account", "SpendLimit", "AccountHolder", "VerificationAddress"]
 
 
 class SpendLimit(BaseModel):
@@ -17,6 +17,24 @@ class SpendLimit(BaseModel):
 
     monthly: int
     """Monthly spend limit (in cents)."""
+
+
+class AccountHolder(BaseModel):
+    token: str
+    """Globally unique identifier for the account holder."""
+
+    business_account_token: str
+    """
+    Only applicable for customers using the KYC-Exempt workflow to enroll authorized
+    users of businesses. Account_token of the enrolled business associated with an
+    enrolled AUTHORIZED_USER individual.
+    """
+
+    email: str
+    """Email address."""
+
+    phone_number: str
+    """Phone number of the individual."""
 
 
 class VerificationAddress(BaseModel):
@@ -47,25 +65,14 @@ class VerificationAddress(BaseModel):
     """Unit or apartment number (if applicable)."""
 
 
-class AccountHolder(BaseModel):
-    business_account_token: str
-    """
-    Only applicable for customers using the KYC-Exempt workflow to enroll authorized
-    users of businesses. Account_token of the enrolled business associated with an
-    enrolled AUTHORIZED_USER individual.
-    """
-
-    email: str
-    """Email address."""
-
-    phone_number: str
-    """Phone number of the individual."""
-
-    token: str
-    """Globally unique identifier for the account holder."""
-
-
 class Account(BaseModel):
+    token: str
+    """Globally unique identifier for the account.
+
+    This is the same as the account_token returned by the enroll endpoint. If using
+    this parameter, do not include pagination.
+    """
+
     spend_limit: SpendLimit
     """
     Spend limit information for the user containing the daily, monthly, and lifetime
@@ -83,13 +90,6 @@ class Account(BaseModel):
       set back to `ACTIVE`.
     - `CLOSED` - Account will permanently not be able to transact or create new
       cards.
-    """
-
-    token: str
-    """Globally unique identifier for the account.
-
-    This is the same as the account_token returned by the enroll endpoint. If using
-    this parameter, do not include pagination.
     """
 
     account_holder: Optional[AccountHolder]

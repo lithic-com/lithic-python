@@ -9,6 +9,9 @@ __all__ = ["AccountHolder"]
 
 
 class AccountHolder(BaseModel):
+    token: Optional[str]
+    """Globally unique identifier for the account holder."""
+
     account_token: Optional[str]
     """Globally unique identifier for the account."""
 
@@ -44,6 +47,3 @@ class AccountHolder(BaseModel):
         ]
     ]
     """Reason for the evaluation status."""
-
-    token: Optional[str]
-    """Globally unique identifier for the account holder."""

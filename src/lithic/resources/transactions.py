@@ -253,8 +253,8 @@ class Transactions(SyncAPIResource):
     def simulate_authorization_advice(
         self,
         *,
-        amount: int,
         token: str,
+        amount: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -269,10 +269,10 @@ class Transactions(SyncAPIResource):
         the transaction.
 
         Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
           amount: Amount (in cents) to authorize. This amount will override the transaction's
               amount that was originally set by /v1/simulate/authorize.
-
-          token: The transaction token returned from the /v1/simulate/authorize response.
 
           extra_headers: Send extra headers
 
@@ -288,8 +288,8 @@ class Transactions(SyncAPIResource):
             "/simulate/authorization_advice",
             body=maybe_transform(
                 {
-                    "amount": amount,
                     "token": token,
+                    "amount": amount,
                 },
                 transaction_simulate_authorization_advice_params.TransactionSimulateAuthorizationAdviceParams,
             ),
@@ -819,8 +819,8 @@ class AsyncTransactions(AsyncAPIResource):
     async def simulate_authorization_advice(
         self,
         *,
-        amount: int,
         token: str,
+        amount: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -835,10 +835,10 @@ class AsyncTransactions(AsyncAPIResource):
         the transaction.
 
         Args:
+          token: The transaction token returned from the /v1/simulate/authorize response.
+
           amount: Amount (in cents) to authorize. This amount will override the transaction's
               amount that was originally set by /v1/simulate/authorize.
-
-          token: The transaction token returned from the /v1/simulate/authorize response.
 
           extra_headers: Send extra headers
 
@@ -854,8 +854,8 @@ class AsyncTransactions(AsyncAPIResource):
             "/simulate/authorization_advice",
             body=maybe_transform(
                 {
-                    "amount": amount,
                     "token": token,
+                    "amount": amount,
                 },
                 transaction_simulate_authorization_advice_params.TransactionSimulateAuthorizationAdviceParams,
             ),

@@ -10,14 +10,14 @@ __all__ = ["DisputeEvidence"]
 
 
 class DisputeEvidence(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
     created: datetime
     """Timestamp of when dispute evidence was created."""
 
     dispute_token: str
     """Dispute token evidence is attached to."""
-
-    token: str
-    """Globally unique identifier."""
 
     upload_status: Literal["DELETED", "ERROR", "PENDING", "REJECTED", "UPLOADED"]
     """Upload status types:

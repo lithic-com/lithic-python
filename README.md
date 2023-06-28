@@ -137,7 +137,7 @@ first_page = await lithic.cards.list()
 
 print(f"page number: {first_page.page}")  # => "page number: 1"
 for card in first_page.data:
-    print(card.created)
+    print(card.token)
 
 # Remove `await` for non-async usage.
 ```

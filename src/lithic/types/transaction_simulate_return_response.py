@@ -8,8 +8,8 @@ __all__ = ["TransactionSimulateReturnResponse"]
 
 
 class TransactionSimulateReturnResponse(BaseModel):
-    debugging_request_id: Optional[str]
-    """Debugging request ID to share with Lithic Support team."""
-
     token: Optional[str]
     """A unique token to reference this transaction."""
+
+    debugging_request_id: Optional[str]
+    """Debugging request ID to share with Lithic Support team."""
