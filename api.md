@@ -4,7 +4,7 @@
 from lithic.types import Address, ShippingAddress
 ```
 
-# Top Level
+# Lithic
 
 Types:
 
@@ -14,7 +14,7 @@ from lithic.types import APIStatus
 
 Methods:
 
-- <code title="get /status">client..<a href="./src/lithic/_client.py">api_status</a>() -> <a href="./src/lithic/types/api_status.py">APIStatus</a></code>
+- <code title="get /status">client.<a href="./src/lithic/_client.py">api_status</a>() -> <a href="./src/lithic/types/api_status.py">APIStatus</a></code>
 
 # Accounts
 
@@ -49,8 +49,6 @@ from lithic.types import (
 
 Methods:
 
-- <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
-- <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="get /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="patch /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">update</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_update_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_update_response.py">AccountHolderUpdateResponse</a></code>
@@ -136,11 +134,8 @@ Methods:
 - <code title="get /embed/card">client.cards.<a href="./src/lithic/resources/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
 - <code title="post /cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
 - <code title="post /cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
-
-Custom Methods:
-
-- `get_embed_html`
-- `get_embed_url`
+- <code>client.cards.<a href="./src/lithic/resources/cards.py">get_embed_html</a>(\*args) -> str</code>
+- <code>client.cards.<a href="./src/lithic/resources/cards.py">get_embed_url</a>(\*args) -> URL</code>
 
 # Balances
 
@@ -185,10 +180,7 @@ Methods:
 - <code title="post /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">initiate_evidence_upload</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_initiate_evidence_upload_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="get /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">list_evidences</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_list_evidences_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">SyncCursorPage[DisputeEvidence]</a></code>
 - <code title="get /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(dispute_token, evidence_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
-
-Custom Methods:
-
-- `upload_evidence`
+- <code>client.disputes.<a href="./src/lithic/resources/disputes.py">upload_evidence</a>(\*args) -> None</code>
 
 # Events
 
@@ -202,10 +194,7 @@ Methods:
 
 - <code title="get /events/{event_token}">client.events.<a href="./src/lithic/resources/events/events.py">retrieve</a>(event_token) -> <a href="./src/lithic/types/event.py">Event</a></code>
 - <code title="get /events">client.events.<a href="./src/lithic/resources/events/events.py">list</a>(\*\*<a href="src/lithic/types/event_list_params.py">params</a>) -> <a href="./src/lithic/types/event.py">SyncCursorPage[Event]</a></code>
-
-Custom Methods:
-
-- `resend`
+- <code>client.events.<a href="./src/lithic/resources/events/events.py">resend</a>(\*args) -> None</code>
 
 ## Subscriptions
 
@@ -297,7 +286,7 @@ Methods:
 
 # Webhooks
 
-Custom Methods:
+Methods:
 
-- `unwrap`
-- `verify_signature`
+- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">unwrap</a>(\*args) -> object</code>
+- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">verify_signature</a>(\*args) -> None</code>
