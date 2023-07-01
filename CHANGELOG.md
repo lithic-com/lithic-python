@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.16.2](https://github.com/lithic-com/lithic-python/compare/v0.16.1...v0.16.2) (2023-07-01)
+
+
+### Bug Fixes
+
+* **deps:** pin pydantic to less than v2.0 ([#65](https://github.com/lithic-com/lithic-python/issues/65)) ([57ec609](https://github.com/lithic-com/lithic-python/commit/57ec609c3f7d644db0c05d9847984384db08f711))
+
+
+### Chores
+
+* **deps:** update certifi ([#59](https://github.com/lithic-com/lithic-python/issues/59)) ([fecd16d](https://github.com/lithic-com/lithic-python/commit/fecd16d9a519c25649e52912d83d65303ada360a))
+* **internal:** minor changes to code format ([#58](https://github.com/lithic-com/lithic-python/issues/58)) ([94f4518](https://github.com/lithic-com/lithic-python/commit/94f45184c0eb53908fb3bdc42efc363b450f1f1a))
+
+
+### Styles
+
+* minor reordering of types and properties ([#61](https://github.com/lithic-com/lithic-python/issues/61)) ([36fd9f0](https://github.com/lithic-com/lithic-python/commit/36fd9f0a5fbeb097141548ba33b3dc614ec34227))
+
+
+### Documentation
+
+* add trailing newlines ([#60](https://github.com/lithic-com/lithic-python/issues/60)) ([17deafc](https://github.com/lithic-com/lithic-python/commit/17deafc53de12af1009ac8e943b3e977a0606356))
+* **api.md:** minor restructuring ([#63](https://github.com/lithic-com/lithic-python/issues/63)) ([2455100](https://github.com/lithic-com/lithic-python/commit/245510061002b63d05bf6ce0dba07010591d54ad))
+* **api:** update account limits docstrings ([#55](https://github.com/lithic-com/lithic-python/issues/55)) ([0ea7cb1](https://github.com/lithic-com/lithic-python/commit/0ea7cb1485df5e3385bc4963c8b1824028a147ac))
+* **api:** update limits docstrings ([#57](https://github.com/lithic-com/lithic-python/issues/57)) ([ab18e74](https://github.com/lithic-com/lithic-python/commit/ab18e74dd82747c309a7c9808fd1faf2a7e3c28c))
+
 ## [0.16.1](https://github.com/lithic-com/lithic-python/compare/v0.16.0...v0.16.1) (2023-06-19)
 
 
