@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.17.0](https://github.com/lithic-com/lithic-python/compare/v0.16.2...v0.17.0) (2023-07-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** remove previous_auth_rule_tokens from auth rules ([#69](https://github.com/lithic-com/lithic-python/issues/69))
+
+### Chores
+
+* **internal:** update lockfile ([#67](https://github.com/lithic-com/lithic-python/issues/67)) ([6b99cf3](https://github.com/lithic-com/lithic-python/commit/6b99cf3d08e15bbab1eb256e15f6acac39ef00a9))
+
+
+### Refactors
+
+* **api:** remove previous_auth_rule_tokens from auth rules ([#69](https://github.com/lithic-com/lithic-python/issues/69)) ([a6a3bc5](https://github.com/lithic-com/lithic-python/commit/a6a3bc5b2026875ea18e1b5b3d97cc2b13a8ada0))
+
 ## [0.16.2](https://github.com/lithic-com/lithic-python/compare/v0.16.1...v0.16.2) (2023-07-01)
 
 
