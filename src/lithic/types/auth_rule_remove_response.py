@@ -12,6 +12,4 @@ class AuthRuleRemoveResponse(BaseModel):
 
     card_tokens: Optional[List[str]]
 
-    previous_auth_rule_tokens: Optional[List[str]]
-
     program_level: Optional[bool]

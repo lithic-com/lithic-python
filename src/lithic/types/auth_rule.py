@@ -47,13 +47,6 @@ class AuthRule(BaseModel):
     Rule.
     """
 
-    previous_auth_rule_tokens: Optional[List[str]]
-    """
-    Identifier for the Auth Rule(s) that a new Auth Rule replaced; will be returned
-    only if an Auth Rule is applied to entities that previously already had one
-    applied.
-    """
-
     program_level: Optional[bool]
     """Boolean indicating whether the Auth Rule is applied at the program level."""
 
