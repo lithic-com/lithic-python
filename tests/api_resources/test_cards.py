@@ -101,6 +101,7 @@ class TestCards:
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page=0,
             page_size=1,
+            state="OPEN",
         )
         assert_matches_type(SyncPage[Card], card, path=["response"])
 
@@ -257,6 +258,7 @@ class TestAsyncCards:
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             page=0,
             page_size=1,
+            state="OPEN",
         )
         assert_matches_type(AsyncPage[Card], card, path=["response"])
 
