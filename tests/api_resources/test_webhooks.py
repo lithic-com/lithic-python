@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import base64
+from typing import Any, cast
 from datetime import datetime, timezone, timedelta
 
 import pytest
@@ -106,6 +107,14 @@ class TestWebhooks:
                 secret=secret,
             )
 
+        # non-string payload
+        with pytest.raises(ValueError, match=r"Webhook body should be a string"):
+            verify(
+                payload=cast(Any, {"payload": payload}),
+                headers=headers,
+                secret=secret,
+            )
+
 
 class TestAsyncWebhooks:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -195,5 +204,13 @@ class TestAsyncWebhooks:
             verify(
                 payload=payload,
                 headers={**headers, "webhook-signature": signature},
+                secret=secret,
+            )
+
+        # non-string payload
+        with pytest.raises(ValueError, match=r"Webhook body should be a string"):
+            verify(
+                payload=cast(Any, {"payload": payload}),
+                headers=headers,
                 secret=secret,
             )

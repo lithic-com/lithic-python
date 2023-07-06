@@ -79,6 +79,11 @@ class Webhooks(SyncAPIResource):
 
         # create the signature
         body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
+        if not isinstance(body, str):  # pyright: reportUnnecessaryIsInstance=false
+            raise ValueError(
+                "Webhook body should be a string of JSON (or bytes which can be decoded to a utf-8 string), not a parsed dictionary."
+            )
+
         timestamp_str = str(math.floor(timestamp.replace(tzinfo=timezone.utc).timestamp()))
 
         to_sign = f"{msg_id}.{timestamp_str}.{body}".encode()
@@ -174,6 +179,11 @@ class AsyncWebhooks(AsyncAPIResource):
 
         # create the signature
         body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
+        if not isinstance(body, str):  # pyright: reportUnnecessaryIsInstance=false
+            raise ValueError(
+                "Webhook body should be a string of JSON (or bytes which can be decoded to a utf-8 string), not a parsed dictionary."
+            )
+
         timestamp_str = str(math.floor(timestamp.replace(tzinfo=timezone.utc).timestamp()))
 
         to_sign = f"{msg_id}.{timestamp_str}.{body}".encode()
