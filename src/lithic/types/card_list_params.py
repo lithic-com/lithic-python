@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import datetime
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -32,3 +32,6 @@ class CardListParams(TypedDict, total=False):
 
     page_size: int
     """Page size (for pagination)."""
+
+    state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"]
+    """Returns cards with the specified state."""

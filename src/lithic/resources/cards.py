@@ -335,6 +335,7 @@ class Cards(SyncAPIResource):
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -357,6 +358,8 @@ class Cards(SyncAPIResource):
           page: Page (for pagination).
 
           page_size: Page size (for pagination).
+
+          state: Returns cards with the specified state.
 
           extra_headers: Send extra headers
 
@@ -381,6 +384,7 @@ class Cards(SyncAPIResource):
                         "end": end,
                         "page": page,
                         "page_size": page_size,
+                        "state": state,
                     },
                     card_list_params.CardListParams,
                 ),
@@ -1011,6 +1015,7 @@ class AsyncCards(AsyncAPIResource):
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1033,6 +1038,8 @@ class AsyncCards(AsyncAPIResource):
           page: Page (for pagination).
 
           page_size: Page size (for pagination).
+
+          state: Returns cards with the specified state.
 
           extra_headers: Send extra headers
 
@@ -1057,6 +1064,7 @@ class AsyncCards(AsyncAPIResource):
                         "end": end,
                         "page": page,
                         "page_size": page_size,
+                        "state": state,
                     },
                     card_list_params.CardListParams,
                 ),
