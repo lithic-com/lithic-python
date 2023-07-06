@@ -162,7 +162,13 @@ lithic.cards.create(
 
 We provide helper methods for verifying that a webhook request came from Lithic, and not a malicious third party.
 
-You can use `lithic.webhooks.verify_signature(body, headers, secret?) -> None` or `lithic.webhooks.unwrap(body, headers, secret?) -> Payload` like so:
+You can use `lithic.webhooks.verify_signature(body: string, headers, secret?) -> None` or `lithic.webhooks.unwrap(body: string, headers, secret?) -> Payload`,
+both of which will raise an error if the signature is invalid.
+
+Note that the "body" parameter must be the raw JSON string sent from the server (do not parse it first).
+The `.unwrap()` method can parse this JSON for you into a `Payload` object.
+
+For example, in [FastAPI](https://fastapi.tiangolo.com/):
 
 ```py
 @app.post('/my-webhook-handler')
@@ -171,9 +177,9 @@ async def handler(request: Request):
     secret = os.environ['LITHIC_WEBHOOK_SECRET']  # env var used by default; explicit here.
     payload = client.webhooks.unwrap(body, request.headers, secret)
     print(payload)
-```
 
-This example is written for [FastAPI](https://fastapi.tiangolo.com/), but usage is similar no matter what web framework you use.
+    return {'ok': True}
+```
 
 ## Handling errors
 
