@@ -45,7 +45,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -127,7 +127,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -183,7 +183,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -270,7 +270,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         return self._post(
@@ -691,7 +691,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -773,7 +773,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -829,7 +829,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -916,7 +916,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300000,
+        timeout: float | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         return await self._post(
