@@ -70,6 +70,7 @@ class Events(SyncAPIResource):
                 "card.shipped",
                 "card_transaction.updated",
                 "digital_wallet.tokenization_approval_request",
+                "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",
                 "dispute.updated",
             ]
@@ -203,6 +204,7 @@ class AsyncEvents(AsyncAPIResource):
                 "card.shipped",
                 "card_transaction.updated",
                 "digital_wallet.tokenization_approval_request",
+                "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",
                 "dispute.updated",
             ]
