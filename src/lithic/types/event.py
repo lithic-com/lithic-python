@@ -24,6 +24,7 @@ class Event(BaseModel):
         "card.shipped",
         "card_transaction.updated",
         "digital_wallet.tokenization_approval_request",
+        "digital_wallet.tokenization_result",
         "digital_wallet.tokenization_two_factor_authentication_code",
         "dispute.updated",
     ]
@@ -37,6 +38,8 @@ class Event(BaseModel):
     - `dispute.updated` - A dispute has been updated.
     - `digital_wallet.tokenization_approval_request` - Card network's request to
       Lithic to activate a digital wallet token.
+    - `digital_wallet.tokenization_result` - Notification of the end result of a
+      tokenization, whether successful or failed.
     - `digital_wallet.tokenization_two_factor_authentication_code` - A code to be
       passed to an end user to complete digital wallet authentication. See
       https://docs.lithic.com/docs/tokenization-control#digital-wallet-tokenization-auth-code.
