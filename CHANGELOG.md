@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.17.1](https://github.com/lithic-com/lithic-python/compare/v0.17.0...v0.17.1) (2023-07-12)
+
+
+### Features
+
+* **api:** add `state` query param for cards ([#73](https://github.com/lithic-com/lithic-python/issues/73)) ([84fc0f5](https://github.com/lithic-com/lithic-python/commit/84fc0f53fa1a25c72bff1bf44ac910a8f84797c2))
+* **api:** add digital wallet tokenization result event type ([#74](https://github.com/lithic-com/lithic-python/issues/74)) ([e3e21be](https://github.com/lithic-com/lithic-python/commit/e3e21be87c40a48731a109a4a2cc8031b0e22432))
+
+
+### Bug Fixes
+
+* **client:** use correct units for account holders create timeout ([#75](https://github.com/lithic-com/lithic-python/issues/75)) ([54915d3](https://github.com/lithic-com/lithic-python/commit/54915d32580689529831b91dfd6f2026e85634ee))
+
+
+### Chores
+
+* **package:** pin major versions of dependencies ([#76](https://github.com/lithic-com/lithic-python/issues/76)) ([9fd090c](https://github.com/lithic-com/lithic-python/commit/9fd090c22a4ee685794e52a5d7ef78536861b579))
+* **package:** pin major versions of dependencies ([#77](https://github.com/lithic-com/lithic-python/issues/77)) ([0635c8b](https://github.com/lithic-com/lithic-python/commit/0635c8bd33a9f88e938323e640c262452025ae2a))
+
 ## [0.17.0](https://github.com/lithic-com/lithic-python/compare/v0.16.2...v0.17.0) (2023-07-05)
 
 
