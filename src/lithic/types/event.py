@@ -27,6 +27,9 @@ class Event(BaseModel):
         "digital_wallet.tokenization_result",
         "digital_wallet.tokenization_two_factor_authentication_code",
         "dispute.updated",
+        "payment_transaction.created",
+        "payment_transaction.updated",
+        "transfer_transaction.created",
     ]
     """Event types:
 
