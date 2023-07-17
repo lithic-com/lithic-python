@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.17.2](https://github.com/lithic-com/lithic-python/compare/v0.17.1...v0.17.2) (2023-07-17)
+
+
+### Features
+
+* **api:** add more enum members to event types ([#79](https://github.com/lithic-com/lithic-python/issues/79)) ([3e57d94](https://github.com/lithic-com/lithic-python/commit/3e57d94cc1f0079474fd7d4c9b75dde93d6a72b3))
+* **api:** no longer require `website_url` property on KYB object ([#82](https://github.com/lithic-com/lithic-python/issues/82)) ([673a1c3](https://github.com/lithic-com/lithic-python/commit/673a1c3866611db00849967e88918238d3435235))
+
+
+### Chores
+
+* **internal:** add `codegen.log` to `.gitignore` ([#81](https://github.com/lithic-com/lithic-python/issues/81)) ([ec2ea75](https://github.com/lithic-com/lithic-python/commit/ec2ea75d55edbf9de9df2babedbfcef2e8baad0a))
+
 ## [0.17.1](https://github.com/lithic-com/lithic-python/compare/v0.17.0...v0.17.1) (2023-07-12)
 
 
