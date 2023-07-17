@@ -142,7 +142,6 @@ class TestAccountHolders:
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
-            website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
@@ -280,9 +279,9 @@ class TestAccountHolders:
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
-            website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
+            website_url="www.mybusiness.com",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
@@ -568,7 +567,6 @@ class TestAsyncAccountHolders:
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
-            website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
@@ -706,9 +704,9 @@ class TestAsyncAccountHolders:
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
-            website_url="www.mybusiness.com",
             workflow="KYB_BASIC",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
+            website_url="www.mybusiness.com",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 

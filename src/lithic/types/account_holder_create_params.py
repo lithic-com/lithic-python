@@ -74,9 +74,6 @@ class KYB(TypedDict, total=False):
     implementation with Lithic.
     """
 
-    website_url: Required[str]
-    """Company website URL."""
-
     workflow: Required[Literal["KYB_BASIC", "KYB_BYO"]]
     """Specifies the type of KYB workflow to run."""
 
@@ -87,6 +84,9 @@ class KYB(TypedDict, total=False):
 
     This field is required only if workflow type is `KYB_BYO`.
     """
+
+    website_url: str
+    """Company website URL."""
 
 
 class KYBBeneficialOwnerEntity(TypedDict, total=False):

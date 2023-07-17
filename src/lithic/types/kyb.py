@@ -197,9 +197,6 @@ class KYB(BaseModel):
     implementation with Lithic.
     """
 
-    website_url: str
-    """Company website URL."""
-
     workflow: Literal["KYB_BASIC", "KYB_BYO"]
     """Specifies the type of KYB workflow to run."""
 
@@ -210,3 +207,6 @@ class KYB(BaseModel):
 
     This field is required only if workflow type is `KYB_BYO`.
     """
+
+    website_url: Optional[str]
+    """Company website URL."""
