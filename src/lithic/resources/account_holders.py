@@ -37,9 +37,9 @@ class AccountHolders(SyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson,
         nature_of_business: str,
         tos_timestamp: str,
-        website_url: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -93,14 +93,14 @@ class AccountHolders(SyncAPIResource):
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
-          website_url: Company website URL.
-
           workflow: Specifies the type of KYB workflow to run.
 
           kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
+
+          website_url: Company website URL.
 
           extra_headers: Send extra headers
 
@@ -235,7 +235,6 @@ class AccountHolders(SyncAPIResource):
             "control_person",
             "nature_of_business",
             "tos_timestamp",
-            "website_url",
             "workflow",
         ],
         ["individual", "tos_timestamp", "workflow"],
@@ -251,11 +250,11 @@ class AccountHolders(SyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"],
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
@@ -283,9 +282,9 @@ class AccountHolders(SyncAPIResource):
                     "control_person": control_person,
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
-                    "website_url": website_url,
                     "workflow": workflow,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
+                    "website_url": website_url,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
                     "email": email,
@@ -683,9 +682,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson,
         nature_of_business: str,
         tos_timestamp: str,
-        website_url: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -739,14 +738,14 @@ class AsyncAccountHolders(AsyncAPIResource):
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
               implementation with Lithic.
 
-          website_url: Company website URL.
-
           workflow: Specifies the type of KYB workflow to run.
 
           kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
+
+          website_url: Company website URL.
 
           extra_headers: Send extra headers
 
@@ -881,7 +880,6 @@ class AsyncAccountHolders(AsyncAPIResource):
             "control_person",
             "nature_of_business",
             "tos_timestamp",
-            "website_url",
             "workflow",
         ],
         ["individual", "tos_timestamp", "workflow"],
@@ -897,11 +895,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"],
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
@@ -929,9 +927,9 @@ class AsyncAccountHolders(AsyncAPIResource):
                     "control_person": control_person,
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
-                    "website_url": website_url,
                     "workflow": workflow,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
+                    "website_url": website_url,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
                     "email": email,
