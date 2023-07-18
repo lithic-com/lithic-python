@@ -187,13 +187,14 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Event, EventSubscription
+from lithic.types import Event, EventSubscription, MessageAttempt
 ```
 
 Methods:
 
 - <code title="get /events/{event_token}">client.events.<a href="./src/lithic/resources/events/events.py">retrieve</a>(event_token) -> <a href="./src/lithic/types/event.py">Event</a></code>
 - <code title="get /events">client.events.<a href="./src/lithic/resources/events/events.py">list</a>(\*\*<a href="src/lithic/types/event_list_params.py">params</a>) -> <a href="./src/lithic/types/event.py">SyncCursorPage[Event]</a></code>
+- <code title="get /events/{event_token}/attempts">client.events.<a href="./src/lithic/resources/events/events.py">list_attempts</a>(event_token, \*\*<a href="src/lithic/types/event_list_attempts_params.py">params</a>) -> <a href="./src/lithic/types/message_attempt.py">SyncCursorPage[MessageAttempt]</a></code>
 - <code>client.events.<a href="./src/lithic/resources/events/events.py">resend</a>(\*args) -> None</code>
 
 ## Subscriptions
@@ -211,6 +212,7 @@ Methods:
 - <code title="patch /event_subscriptions/{event_subscription_token}">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">update</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_update_params.py">params</a>) -> <a href="./src/lithic/types/event_subscription.py">EventSubscription</a></code>
 - <code title="get /event_subscriptions">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">list</a>(\*\*<a href="src/lithic/types/events/subscription_list_params.py">params</a>) -> <a href="./src/lithic/types/event_subscription.py">SyncCursorPage[EventSubscription]</a></code>
 - <code title="delete /event_subscriptions/{event_subscription_token}">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">delete</a>(event_subscription_token) -> None</code>
+- <code title="get /event_subscriptions/{event_subscription_token}/attempts">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">list_attempts</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_list_attempts_params.py">params</a>) -> <a href="./src/lithic/types/message_attempt.py">SyncCursorPage[MessageAttempt]</a></code>
 - <code title="post /event_subscriptions/{event_subscription_token}/recover">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">recover</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_recover_params.py">params</a>) -> None</code>
 - <code title="post /event_subscriptions/{event_subscription_token}/replay_missing">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">replay_missing</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_replay_missing_params.py">params</a>) -> None</code>
 - <code title="get /event_subscriptions/{event_subscription_token}/secret">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">retrieve_secret</a>(event_subscription_token) -> <a href="./src/lithic/types/events/subscription_retrieve_secret_response.py">SubscriptionRetrieveSecretResponse</a></code>
