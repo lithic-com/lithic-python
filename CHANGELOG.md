@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.3](https://github.com/lithic-com/lithic-python/compare/v0.17.2...v0.17.3) (2023-07-18)
+
+
+### Features
+
+* **api:** add event message attempts ([#84](https://github.com/lithic-com/lithic-python/issues/84)) ([c3c9942](https://github.com/lithic-com/lithic-python/commit/c3c9942b104b3c0e3346b1b52c98ae172462f244))
+
 ## [0.17.2](https://github.com/lithic-com/lithic-python/compare/v0.17.1...v0.17.2) (2023-07-17)
 
 
