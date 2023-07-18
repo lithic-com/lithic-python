@@ -12,6 +12,9 @@ from .subscription_update_params import (
 from .subscription_recover_params import (
     SubscriptionRecoverParams as SubscriptionRecoverParams,
 )
+from .subscription_list_attempts_params import (
+    SubscriptionListAttemptsParams as SubscriptionListAttemptsParams,
+)
 from .subscription_replay_missing_params import (
     SubscriptionReplayMissingParams as SubscriptionReplayMissingParams,
 )
