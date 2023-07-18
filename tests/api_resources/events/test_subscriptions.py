@@ -8,7 +8,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import EventSubscription
+from lithic.types import MessageAttempt, EventSubscription
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 from lithic.types.events import SubscriptionRetrieveSecretResponse
@@ -86,6 +86,26 @@ class TestSubscriptions:
             "string",
         )
         assert subscription is None
+
+    @parametrize
+    def test_method_list_attempts(self, client: Lithic) -> None:
+        subscription = client.events.subscriptions.list_attempts(
+            "string",
+        )
+        assert_matches_type(SyncCursorPage[MessageAttempt], subscription, path=["response"])
+
+    @parametrize
+    def test_method_list_attempts_with_all_params(self, client: Lithic) -> None:
+        subscription = client.events.subscriptions.list_attempts(
+            "string",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ending_before="string",
+            page_size=1,
+            starting_after="string",
+            status="FAILED",
+        )
+        assert_matches_type(SyncCursorPage[MessageAttempt], subscription, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
@@ -208,6 +228,26 @@ class TestAsyncSubscriptions:
             "string",
         )
         assert subscription is None
+
+    @parametrize
+    async def test_method_list_attempts(self, client: AsyncLithic) -> None:
+        subscription = await client.events.subscriptions.list_attempts(
+            "string",
+        )
+        assert_matches_type(AsyncCursorPage[MessageAttempt], subscription, path=["response"])
+
+    @parametrize
+    async def test_method_list_attempts_with_all_params(self, client: AsyncLithic) -> None:
+        subscription = await client.events.subscriptions.list_attempts(
+            "string",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ending_before="string",
+            page_size=1,
+            starting_after="string",
+            status="FAILED",
+        )
+        assert_matches_type(AsyncCursorPage[MessageAttempt], subscription, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
