@@ -55,3 +55,6 @@ class EventListParams(TypedDict, total=False):
 
     Used to retrieve the next page of results after this item.
     """
+
+    with_content: bool
+    """Whether to include the event payload content in the response."""

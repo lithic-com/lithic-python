@@ -86,6 +86,7 @@ class Events(SyncAPIResource):
         | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
+        with_content: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -114,6 +115,8 @@ class Events(SyncAPIResource):
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
 
+          with_content: Whether to include the event payload content in the response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -138,6 +141,7 @@ class Events(SyncAPIResource):
                         "event_types": event_types,
                         "page_size": page_size,
                         "starting_after": starting_after,
+                        "with_content": with_content,
                     },
                     event_list_params.EventListParams,
                 ),
@@ -289,6 +293,7 @@ class AsyncEvents(AsyncAPIResource):
         | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
+        with_content: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -317,6 +322,8 @@ class AsyncEvents(AsyncAPIResource):
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
 
+          with_content: Whether to include the event payload content in the response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -341,6 +348,7 @@ class AsyncEvents(AsyncAPIResource):
                         "event_types": event_types,
                         "page_size": page_size,
                         "starting_after": starting_after,
+                        "with_content": with_content,
                     },
                     event_list_params.EventListParams,
                 ),
