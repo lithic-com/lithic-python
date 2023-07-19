@@ -42,6 +42,7 @@ class TestEvents:
             event_types=["card.created", "card.created", "card.created"],
             page_size=1,
             starting_after="string",
+            with_content=True,
         )
         assert_matches_type(SyncCursorPage[Event], event, path=["response"])
 
@@ -99,6 +100,7 @@ class TestAsyncEvents:
             event_types=["card.created", "card.created", "card.created"],
             page_size=1,
             starting_after="string",
+            with_content=True,
         )
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
