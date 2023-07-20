@@ -191,12 +191,13 @@ response), a subclass of `lithic.APIStatusError` will be raised, containing `sta
 All errors inherit from `lithic.APIError`.
 
 ```python
+import lithic
 from lithic import Lithic
 
-lithic = Lithic()
+client = Lithic()
 
 try:
-    lithic.cards.create(
+    client.cards.create(
         type="an_incorrect_type",
     )
 except lithic.APIConnectionError as e:
