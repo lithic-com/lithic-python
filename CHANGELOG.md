@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.17.4](https://github.com/lithic-com/lithic-python/compare/v0.17.3...v0.17.4) (2023-07-21)
+
+
+### Features
+
+* **api:** add `with_content` param ([#87](https://github.com/lithic-com/lithic-python/issues/87)) ([a8f6ca8](https://github.com/lithic-com/lithic-python/commit/a8f6ca80c7657e143451bd6ba97e156a6b1f346f))
+
+
+### Documentation
+
+* **readme:** reference "client" in errors section and add missing import ([#89](https://github.com/lithic-com/lithic-python/issues/89)) ([66127cc](https://github.com/lithic-com/lithic-python/commit/66127cc6aa93d707e26bf2b9bb4e090b4c473563))
+
 ## [0.17.3](https://github.com/lithic-com/lithic-python/compare/v0.17.2...v0.17.3) (2023-07-18)
 
 
