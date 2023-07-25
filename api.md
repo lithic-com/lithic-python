@@ -292,3 +292,53 @@ Methods:
 
 - <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">unwrap</a>(\*args) -> object</code>
 - <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">verify_signature</a>(\*args) -> None</code>
+
+# ExternalBankAccounts
+
+Types:
+
+```python
+from lithic.types import (
+    ExternalBankAccountAddress,
+    OwnerType,
+    VerificationMethod,
+    ExternalBankAccountCreateResponse,
+    ExternalBankAccountRetrieveResponse,
+    ExternalBankAccountUpdateResponse,
+    ExternalBankAccountListResponse,
+)
+```
+
+Methods:
+
+- <code title="post /external_bank_accounts">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">create</a>(\*\*<a href="src/lithic/types/external_bank_account_create_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_create_response.py">ExternalBankAccountCreateResponse</a></code>
+- <code title="get /external_bank_accounts/{external_bank_account_token}">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retrieve</a>(external_bank_account_token) -> <a href="./src/lithic/types/external_bank_account_retrieve_response.py">ExternalBankAccountRetrieveResponse</a></code>
+- <code title="patch /external_bank_accounts/{external_bank_account_token}">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">update</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_update_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_update_response.py">ExternalBankAccountUpdateResponse</a></code>
+- <code title="get /external_bank_accounts">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">list</a>(\*\*<a href="src/lithic/types/external_bank_account_list_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_list_response.py">SyncCursorPage[ExternalBankAccountListResponse]</a></code>
+
+## MicroDeposits
+
+Types:
+
+```python
+from lithic.types.external_bank_accounts import MicroDepositCreateResponse
+```
+
+Methods:
+
+- <code title="post /external_bank_accounts/{external_bank_account_token}/micro_deposits">client.external_bank_accounts.micro_deposits.<a href="./src/lithic/resources/external_bank_accounts/micro_deposits.py">create</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_accounts/micro_deposit_create_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_accounts/micro_deposit_create_response.py">MicroDepositCreateResponse</a></code>
+
+# Payments
+
+Types:
+
+```python
+from lithic.types import Payment, PaymentCreateResponse, PaymentSimulateReleaseResponse
+```
+
+Methods:
+
+- <code title="post /payments">client.payments.<a href="./src/lithic/resources/payments.py">create</a>(\*\*<a href="src/lithic/types/payment_create_params.py">params</a>) -> <a href="./src/lithic/types/payment_create_response.py">PaymentCreateResponse</a></code>
+- <code title="get /payments/{payment_token}">client.payments.<a href="./src/lithic/resources/payments.py">retrieve</a>(payment_token) -> <a href="./src/lithic/types/payment.py">Payment</a></code>
+- <code title="get /payments">client.payments.<a href="./src/lithic/resources/payments.py">list</a>(\*\*<a href="src/lithic/types/payment_list_params.py">params</a>) -> <a href="./src/lithic/types/payment.py">SyncCursorPage[Payment]</a></code>
+- <code title="post /simulate/payments/release">client.payments.<a href="./src/lithic/resources/payments.py">simulate_release</a>(\*\*<a href="src/lithic/types/payment_simulate_release_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_release_response.py">PaymentSimulateReleaseResponse</a></code>

@@ -94,10 +94,10 @@ class Event(BaseModel):
 
 
 class FinancialTransaction(BaseModel):
-    token: Optional[str]
+    token: str
     """Globally unique identifier."""
 
-    category: Optional[Literal["CARD", "ACH", "TRANSFER"]]
+    category: Literal["CARD", "ACH", "TRANSFER"]
     """Status types:
 
     - `CARD` - Issuing card transaction.
@@ -106,41 +106,41 @@ class FinancialTransaction(BaseModel):
       program.
     """
 
-    created: Optional[datetime]
+    created: datetime
     """Date and time when the financial transaction first occurred. UTC time zone."""
 
-    currency: Optional[str]
+    currency: str
     """3-digit alphabetic ISO 4217 code for the settling currency of the transaction."""
 
-    descriptor: Optional[str]
+    descriptor: str
     """
     A string that provides a description of the financial transaction; may be useful
     to display to users.
     """
 
-    events: Optional[List[Event]]
+    events: List[Event]
     """A list of all financial events that have modified this financial transaction."""
 
-    pending_amount: Optional[int]
+    pending_amount: int
     """
     Pending amount of the transaction in the currency's smallest unit (e.g., cents),
     including any acquirer fees. The value of this field will go to zero over time
     once the financial transaction is settled.
     """
 
-    result: Optional[Literal["APPROVED", "DECLINED"]]
+    result: Literal["APPROVED", "DECLINED"]
     """
     APPROVED transactions were successful while DECLINED transactions were declined
     by user, Lithic, or the network.
     """
 
-    settled_amount: Optional[int]
+    settled_amount: int
     """
     Amount of the transaction that has been settled in the currency's smallest unit
     (e.g., cents), including any acquirer fees. This may change over time.
     """
 
-    status: Optional[Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]]
+    status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
     """Status types:
 
     - `DECLINED` - The card transaction was declined.
@@ -152,5 +152,5 @@ class FinancialTransaction(BaseModel):
     - `VOIDED` - The merchant has voided the previously pending card authorization.
     """
 
-    updated: Optional[datetime]
+    updated: datetime
     """Date and time when the financial transaction was last updated. UTC time zone."""

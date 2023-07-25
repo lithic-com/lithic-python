@@ -341,7 +341,7 @@ class Transaction(BaseModel):
     acquirer fees. This may change over time.
     """
 
-    status: Literal["BOUNCED", "DECLINED", "EXPIRED", "PENDING", "SETTLED", "SETTLING", "VOIDED"]
+    status: Literal["BOUNCED", "DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
     """Status types:
 
     - `DECLINED` - The transaction was declined.
