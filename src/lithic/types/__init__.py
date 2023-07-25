@@ -11,9 +11,11 @@ from .shared import ShippingAddress as ShippingAddress
 from .account import Account as Account
 from .balance import Balance as Balance
 from .dispute import Dispute as Dispute
+from .payment import Payment as Payment
 from .auth_rule import AuthRule as AuthRule
 from .api_status import APIStatus as APIStatus
 from .kyc_exempt import KYCExempt as KYCExempt
+from .owner_type import OwnerType as OwnerType
 from .transaction import Transaction as Transaction
 from .account_holder import AccountHolder as AccountHolder
 from .message_attempt import MessageAttempt as MessageAttempt
@@ -33,7 +35,9 @@ from .card_embed_response import CardEmbedResponse as CardEmbedResponse
 from .card_reissue_params import CardReissueParams as CardReissueParams
 from .dispute_list_params import DisputeListParams as DisputeListParams
 from .event_resend_params import EventResendParams as EventResendParams
+from .payment_list_params import PaymentListParams as PaymentListParams
 from .tokenization_secret import TokenizationSecret as TokenizationSecret
+from .verification_method import VerificationMethod as VerificationMethod
 from .embed_request_params import EmbedRequestParams as EmbedRequestParams
 from .spend_limit_duration import SpendLimitDuration as SpendLimitDuration
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
@@ -42,6 +46,7 @@ from .card_provision_params import CardProvisionParams as CardProvisionParams
 from .dispute_create_params import DisputeCreateParams as DisputeCreateParams
 from .dispute_update_params import DisputeUpdateParams as DisputeUpdateParams
 from .financial_transaction import FinancialTransaction as FinancialTransaction
+from .payment_create_params import PaymentCreateParams as PaymentCreateParams
 from .auth_rule_apply_params import AuthRuleApplyParams as AuthRuleApplyParams
 from .auth_stream_enrollment import AuthStreamEnrollment as AuthStreamEnrollment
 from .account_holder_document import AccountHolderDocument as AccountHolderDocument
@@ -49,6 +54,7 @@ from .auth_rule_create_params import AuthRuleCreateParams as AuthRuleCreateParam
 from .auth_rule_remove_params import AuthRuleRemoveParams as AuthRuleRemoveParams
 from .auth_rule_update_params import AuthRuleUpdateParams as AuthRuleUpdateParams
 from .card_provision_response import CardProvisionResponse as CardProvisionResponse
+from .payment_create_response import PaymentCreateResponse as PaymentCreateResponse
 from .transaction_list_params import TransactionListParams as TransactionListParams
 from .auth_rule_apply_response import AuthRuleApplyResponse as AuthRuleApplyResponse
 from .auth_rule_create_response import AuthRuleCreateResponse as AuthRuleCreateResponse
@@ -77,6 +83,9 @@ from .aggregate_balance_list_params import (
 from .dispute_list_evidences_params import (
     DisputeListEvidencesParams as DisputeListEvidencesParams,
 )
+from .external_bank_account_address import (
+    ExternalBankAccountAddress as ExternalBankAccountAddress,
+)
 from .financial_account_list_params import (
     FinancialAccountListParams as FinancialAccountListParams,
 )
@@ -85,6 +94,9 @@ from .account_holder_resubmit_params import (
 )
 from .account_holder_update_response import (
     AccountHolderUpdateResponse as AccountHolderUpdateResponse,
+)
+from .payment_simulate_release_params import (
+    PaymentSimulateReleaseParams as PaymentSimulateReleaseParams,
 )
 from .responder_endpoint_create_params import (
     ResponderEndpointCreateParams as ResponderEndpointCreateParams,
@@ -95,6 +107,12 @@ from .responder_endpoint_delete_params import (
 from .transaction_simulate_void_params import (
     TransactionSimulateVoidParams as TransactionSimulateVoidParams,
 )
+from .external_bank_account_list_params import (
+    ExternalBankAccountListParams as ExternalBankAccountListParams,
+)
+from .payment_simulate_release_response import (
+    PaymentSimulateReleaseResponse as PaymentSimulateReleaseResponse,
+)
 from .responder_endpoint_create_response import (
     ResponderEndpointCreateResponse as ResponderEndpointCreateResponse,
 )
@@ -103,6 +121,15 @@ from .transaction_simulate_return_params import (
 )
 from .transaction_simulate_void_response import (
     TransactionSimulateVoidResponse as TransactionSimulateVoidResponse,
+)
+from .external_bank_account_create_params import (
+    ExternalBankAccountCreateParams as ExternalBankAccountCreateParams,
+)
+from .external_bank_account_list_response import (
+    ExternalBankAccountListResponse as ExternalBankAccountListResponse,
+)
+from .external_bank_account_update_params import (
+    ExternalBankAccountUpdateParams as ExternalBankAccountUpdateParams,
 )
 from .account_holder_create_webhook_params import (
     AccountHolderCreateWebhookParams as AccountHolderCreateWebhookParams,
@@ -119,6 +146,12 @@ from .transaction_simulate_return_response import (
 from .account_holder_upload_document_params import (
     AccountHolderUploadDocumentParams as AccountHolderUploadDocumentParams,
 )
+from .external_bank_account_create_response import (
+    ExternalBankAccountCreateResponse as ExternalBankAccountCreateResponse,
+)
+from .external_bank_account_update_response import (
+    ExternalBankAccountUpdateResponse as ExternalBankAccountUpdateResponse,
+)
 from .account_holder_create_webhook_response import (
     AccountHolderCreateWebhookResponse as AccountHolderCreateWebhookResponse,
 )
@@ -133,6 +166,9 @@ from .transaction_simulate_clearing_response import (
 )
 from .dispute_initiate_evidence_upload_params import (
     DisputeInitiateEvidenceUploadParams as DisputeInitiateEvidenceUploadParams,
+)
+from .external_bank_account_retrieve_response import (
+    ExternalBankAccountRetrieveResponse as ExternalBankAccountRetrieveResponse,
 )
 from .dispute_initiate_evidence_upload_response import (
     DisputeInitiateEvidenceUploadResponse as DisputeInitiateEvidenceUploadResponse,
