@@ -5,6 +5,7 @@ from .events import Events, AsyncEvents
 from .accounts import Accounts, AsyncAccounts
 from .balances import Balances, AsyncBalances
 from .disputes import Disputes, AsyncDisputes
+from .payments import Payments, AsyncPayments
 from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import AuthRules, AsyncAuthRules
 from .transactions import Transactions, AsyncTransactions
@@ -16,6 +17,7 @@ from .auth_stream_enrollment import (
     AuthStreamEnrollmentResource,
     AsyncAuthStreamEnrollmentResource,
 )
+from .external_bank_accounts import ExternalBankAccounts, AsyncExternalBankAccounts
 from .tokenization_decisioning import (
     TokenizationDecisioning,
     AsyncTokenizationDecisioning,
@@ -50,4 +52,8 @@ __all__ = [
     "AsyncResponderEndpoints",
     "Webhooks",
     "AsyncWebhooks",
+    "ExternalBankAccounts",
+    "AsyncExternalBankAccounts",
+    "Payments",
+    "AsyncPayments",
 ]
