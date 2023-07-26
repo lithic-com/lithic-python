@@ -30,14 +30,14 @@ pip install lithic
 ```python
 from lithic import Lithic
 
-lithic = Lithic(
+client = Lithic(
     # defaults to os.environ.get("LITHIC_API_KEY")
     api_key="my api key",
     # defaults to "production".
     environment="sandbox",
 )
 
-card = lithic.cards.create(
+card = client.cards.create(
     type="SINGLE_USE",
 )
 print(card.token)
@@ -53,7 +53,7 @@ Simply import `AsyncLithic` instead of `Lithic` and use `await` with each API ca
 ```python
 from lithic import AsyncLithic
 
-lithic = AsyncLithic(
+client = AsyncLithic(
     # defaults to os.environ.get("LITHIC_API_KEY")
     api_key="my api key",
     # defaults to "production".
@@ -62,7 +62,7 @@ lithic = AsyncLithic(
 
 
 async def main():
-    card = await lithic.cards.create(
+    card = await client.cards.create(
         type="SINGLE_USE",
     )
     print(card.token)
@@ -88,11 +88,11 @@ This library provides auto-paginating iterators with each list response, so you 
 ```python
 import lithic
 
-lithic = Lithic()
+client = Lithic()
 
 all_cards = []
 # Automatically fetches more pages as needed.
-for card in lithic.cards.list():
+for card in client.cards.list():
     # Do something with card here
     all_cards.append(card)
 print(all_cards)
@@ -104,13 +104,13 @@ Or, asynchronously:
 import asyncio
 import lithic
 
-lithic = AsyncLithic()
+client = AsyncLithic()
 
 
 async def main() -> None:
     all_cards = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for card in lithic.cards.list():
+    async for card in client.cards.list():
         all_cards.append(card)
     print(all_cards)
 
@@ -121,7 +121,7 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await lithic.cards.list()
+first_page = await client.cards.list()
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
@@ -133,7 +133,7 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await lithic.cards.list()
+first_page = await client.cards.list()
 
 print(f"page number: {first_page.page}")  # => "page number: 1"
 for card in first_page.data:
@@ -149,9 +149,9 @@ Nested parameters are dictionaries, typed using `TypedDict`, for example:
 ```python
 from lithic import Lithic
 
-lithic = Lithic()
+client = Lithic()
 
-lithic.cards.create(
+client.cards.create(
     foo={
         "bar": True,
     },
@@ -236,13 +236,13 @@ You can use the `max_retries` option to configure or disable this:
 from lithic import Lithic
 
 # Configure the default for all requests:
-lithic = Lithic(
+client = Lithic(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-lithic.with_options(max_retries=5).cards.list(
+client.with_options(max_retries=5).cards.list(
     page_size=10,
 )
 ```
@@ -256,18 +256,18 @@ which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advan
 from lithic import Lithic
 
 # Configure the default for all requests:
-lithic = Lithic(
+client = Lithic(
     # default is 60s
     timeout=20.0,
 )
 
 # More granular control:
-lithic = Lithic(
+client = Lithic(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-lithic.with_options(timeout=5 * 1000).cards.list(
+client.with_options(timeout=5 * 1000).cards.list(
     page_size=10,
 )
 ```
@@ -284,7 +284,7 @@ You can configure the following keyword arguments when instantiating the client:
 import httpx
 from lithic import Lithic
 
-lithic = Lithic(
+client = Lithic(
     # Use a custom base URL
     base_url="http://my.test.server.example.com:8083",
     proxies="http://my.test.proxy.example.com",
