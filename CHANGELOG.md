@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.17.5](https://github.com/lithic-com/lithic-python/compare/v0.17.4...v0.17.5) (2023-07-27)
+
+
+### Features
+
+* **api:** add payment and external bank accounts resource ([#91](https://github.com/lithic-com/lithic-python/issues/91)) ([9a63218](https://github.com/lithic-com/lithic-python/commit/9a63218bce1a24624748e49673fb19efcf12b2cc))
+
+
+### Documentation
+
+* **readme:** use `client` everywhere for consistency ([#93](https://github.com/lithic-com/lithic-python/issues/93)) ([be4350d](https://github.com/lithic-com/lithic-python/commit/be4350df71c7b05fdb394098e0ef326917571be7))
+
 ## [0.17.4](https://github.com/lithic-com/lithic-python/compare/v0.17.3...v0.17.4) (2023-07-21)
 
 
