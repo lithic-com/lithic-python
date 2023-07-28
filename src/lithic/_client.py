@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import asyncio
 from typing import Dict, Union, Mapping, Optional
 from typing_extensions import Literal
 
@@ -228,6 +229,9 @@ class Lithic(SyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
+    def __del__(self) -> None:
+        self.close()
+
     def api_status(
         self,
         *,
@@ -422,6 +426,12 @@ class AsyncLithic(AsyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    def __del__(self) -> None:
+        try:
+            asyncio.get_running_loop().create_task(self.close())
+        except Exception:
+            pass
 
     async def api_status(
         self,
