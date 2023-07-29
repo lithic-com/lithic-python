@@ -108,14 +108,18 @@ class Lithic(SyncAPIClient):
         """Construct a new synchronous lithic client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         - `api_key` from `LITHIC_API_KEY`
+        - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         """
         api_key = api_key or os.environ.get("LITHIC_API_KEY", None)
         if not api_key:
             raise Exception(
                 "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
             )
+        self.api_key = api_key
+
+        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
+        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
 
         self._environment = environment
 
@@ -137,11 +141,6 @@ class Lithic(SyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
-
-        self.api_key = api_key
-
-        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
-        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
 
         self._idempotency_header = "Idempotency-Token"
 
@@ -306,14 +305,18 @@ class AsyncLithic(AsyncAPIClient):
         """Construct a new async lithic client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         - `api_key` from `LITHIC_API_KEY`
+        - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         """
         api_key = api_key or os.environ.get("LITHIC_API_KEY", None)
         if not api_key:
             raise Exception(
                 "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
             )
+        self.api_key = api_key
+
+        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
+        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
 
         self._environment = environment
 
@@ -335,11 +338,6 @@ class AsyncLithic(AsyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
-
-        self.api_key = api_key
-
-        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
-        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
 
         self._idempotency_header = "Idempotency-Token"
 
