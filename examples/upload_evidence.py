@@ -1,3 +1,5 @@
+#!/usr/bin/env -S poetry run python
+
 #
 # Run with: LITHIC_API_KEY=<your_api_key> poetry run python examples/upload_evidence.py
 #
