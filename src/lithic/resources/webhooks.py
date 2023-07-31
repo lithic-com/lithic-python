@@ -79,7 +79,7 @@ class Webhooks(SyncAPIResource):
 
         # create the signature
         body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
-        if not isinstance(body, str):  # pyright: reportUnnecessaryIsInstance=false
+        if not isinstance(body, str):  # pyright: ignore[reportUnnecessaryIsInstance]
             raise ValueError(
                 "Webhook body should be a string of JSON (or bytes which can be decoded to a utf-8 string), not a parsed dictionary."
             )
@@ -179,7 +179,7 @@ class AsyncWebhooks(AsyncAPIResource):
 
         # create the signature
         body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
-        if not isinstance(body, str):  # pyright: reportUnnecessaryIsInstance=false
+        if not isinstance(body, str):  # pyright: ignore[reportUnnecessaryIsInstance]
             raise ValueError(
                 "Webhook body should be a string of JSON (or bytes which can be decoded to a utf-8 string), not a parsed dictionary."
             )
