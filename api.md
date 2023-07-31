@@ -357,15 +357,15 @@ Methods:
 
 - <code title="get /three_ds_authentication/{three_ds_authentication_token}">client.three_ds.authentication.<a href="./src/lithic/resources/three_ds/authentication.py">retrieve</a>(three_ds_authentication_token) -> <a href="./src/lithic/types/three_ds/authentication_retrieve_response.py">AuthenticationRetrieveResponse</a></code>
 
-## Descisioning
+## Decisioning
 
 Types:
 
 ```python
-from lithic.types.three_ds import DescisioningRetrieveSecretResponse
+from lithic.types.three_ds import DecisioningRetrieveSecretResponse
 ```
 
 Methods:
 
-- <code title="get /three_ds_decisioning/secret">client.three_ds.descisioning.<a href="./src/lithic/resources/three_ds/descisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/three_ds/descisioning_retrieve_secret_response.py">DescisioningRetrieveSecretResponse</a></code>
-- <code title="post /three_ds_decisioning/secret/rotate">client.three_ds.descisioning.<a href="./src/lithic/resources/three_ds/descisioning.py">rotate_secret</a>() -> None</code>
+- <code title="get /three_ds_decisioning/secret">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/three_ds/decisioning_retrieve_secret_response.py">DecisioningRetrieveSecretResponse</a></code>
+- <code title="post /three_ds_decisioning/secret/rotate">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">rotate_secret</a>() -> None</code>
