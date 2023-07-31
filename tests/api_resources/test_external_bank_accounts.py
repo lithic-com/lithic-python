@@ -54,7 +54,7 @@ class TestExternalBankAccounts:
     def test_method_create_overload_2(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.create(
             account_number="string",
-            country="US",
+            country="USD",
             currency="USD",
             owner="x",
             owner_type="INDIVIDUAL",
@@ -68,7 +68,7 @@ class TestExternalBankAccounts:
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.create(
             account_number="string",
-            country="US",
+            country="USD",
             currency="USD",
             owner="x",
             owner_type="INDIVIDUAL",
@@ -82,7 +82,7 @@ class TestExternalBankAccounts:
                 "city": "x",
                 "state": "xx",
                 "postal_code": "11201",
-                "country": "US",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
@@ -116,7 +116,7 @@ class TestExternalBankAccounts:
                 "city": "x",
                 "state": "xx",
                 "postal_code": "11201",
-                "country": "US",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
@@ -181,7 +181,7 @@ class TestAsyncExternalBankAccounts:
     async def test_method_create_overload_2(self, client: AsyncLithic) -> None:
         external_bank_account = await client.external_bank_accounts.create(
             account_number="string",
-            country="US",
+            country="USD",
             currency="USD",
             owner="x",
             owner_type="INDIVIDUAL",
@@ -195,7 +195,7 @@ class TestAsyncExternalBankAccounts:
     async def test_method_create_with_all_params_overload_2(self, client: AsyncLithic) -> None:
         external_bank_account = await client.external_bank_accounts.create(
             account_number="string",
-            country="US",
+            country="USD",
             currency="USD",
             owner="x",
             owner_type="INDIVIDUAL",
@@ -209,7 +209,7 @@ class TestAsyncExternalBankAccounts:
                 "city": "x",
                 "state": "xx",
                 "postal_code": "11201",
-                "country": "US",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
@@ -243,7 +243,7 @@ class TestAsyncExternalBankAccounts:
                 "city": "x",
                 "state": "xx",
                 "postal_code": "11201",
-                "country": "US",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
