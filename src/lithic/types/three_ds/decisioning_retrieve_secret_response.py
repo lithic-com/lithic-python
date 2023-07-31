@@ -4,9 +4,9 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["DescisioningRetrieveSecretResponse"]
+__all__ = ["DecisioningRetrieveSecretResponse"]
 
 
-class DescisioningRetrieveSecretResponse(BaseModel):
+class DecisioningRetrieveSecretResponse(BaseModel):
     secret: Optional[str]
     """The 3DS Decisioning HMAC secret"""

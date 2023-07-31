@@ -5,12 +5,12 @@ from __future__ import annotations
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._base_client import make_request_options
-from ...types.three_ds import DescisioningRetrieveSecretResponse
+from ...types.three_ds import DecisioningRetrieveSecretResponse
 
-__all__ = ["Descisioning", "AsyncDescisioning"]
+__all__ = ["Decisioning", "AsyncDecisioning"]
 
 
-class Descisioning(SyncAPIResource):
+class Decisioning(SyncAPIResource):
     def retrieve_secret(
         self,
         *,
@@ -20,7 +20,7 @@ class Descisioning(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> DescisioningRetrieveSecretResponse:
+    ) -> DecisioningRetrieveSecretResponse:
         """Retrieve the 3DS Decisioning HMAC secret key.
 
         If one does not exist for your
@@ -35,7 +35,7 @@ class Descisioning(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DescisioningRetrieveSecretResponse,
+            cast_to=DecisioningRetrieveSecretResponse,
         )
 
     def rotate_secret(
@@ -69,7 +69,7 @@ class Descisioning(SyncAPIResource):
         )
 
 
-class AsyncDescisioning(AsyncAPIResource):
+class AsyncDecisioning(AsyncAPIResource):
     async def retrieve_secret(
         self,
         *,
@@ -79,7 +79,7 @@ class AsyncDescisioning(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> DescisioningRetrieveSecretResponse:
+    ) -> DecisioningRetrieveSecretResponse:
         """Retrieve the 3DS Decisioning HMAC secret key.
 
         If one does not exist for your
@@ -94,7 +94,7 @@ class AsyncDescisioning(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DescisioningRetrieveSecretResponse,
+            cast_to=DecisioningRetrieveSecretResponse,
         )
 
     async def rotate_secret(

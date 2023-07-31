@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from .descisioning import Descisioning, AsyncDescisioning
+from .decisioning import Decisioning, AsyncDecisioning
 from .authentication import Authentication, AsyncAuthentication
 
 if TYPE_CHECKING:
@@ -16,19 +16,19 @@ __all__ = ["ThreeDS", "AsyncThreeDS"]
 
 class ThreeDS(SyncAPIResource):
     authentication: Authentication
-    descisioning: Descisioning
+    decisioning: Decisioning
 
     def __init__(self, client: Lithic) -> None:
         super().__init__(client)
         self.authentication = Authentication(client)
-        self.descisioning = Descisioning(client)
+        self.decisioning = Decisioning(client)
 
 
 class AsyncThreeDS(AsyncAPIResource):
     authentication: AsyncAuthentication
-    descisioning: AsyncDescisioning
+    decisioning: AsyncDecisioning
 
     def __init__(self, client: AsyncLithic) -> None:
         super().__init__(client)
         self.authentication = AsyncAuthentication(client)
-        self.descisioning = AsyncDescisioning(client)
+        self.decisioning = AsyncDecisioning(client)

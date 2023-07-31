@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from .three_ds import ThreeDS, AsyncThreeDS
-from .descisioning import Descisioning, AsyncDescisioning
+from .decisioning import Decisioning, AsyncDecisioning
 from .authentication import Authentication, AsyncAuthentication
 
-__all__ = ["Authentication", "AsyncAuthentication", "Descisioning", "AsyncDescisioning", "ThreeDS", "AsyncThreeDS"]
+__all__ = ["Authentication", "AsyncAuthentication", "Decisioning", "AsyncDecisioning", "ThreeDS", "AsyncThreeDS"]
