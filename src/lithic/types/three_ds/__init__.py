@@ -5,6 +5,6 @@ from __future__ import annotations
 from .authentication_retrieve_response import (
     AuthenticationRetrieveResponse as AuthenticationRetrieveResponse,
 )
-from .descisioning_retrieve_secret_response import (
-    DescisioningRetrieveSecretResponse as DescisioningRetrieveSecretResponse,
+from .decisioning_retrieve_secret_response import (
+    DecisioningRetrieveSecretResponse as DecisioningRetrieveSecretResponse,
 )
