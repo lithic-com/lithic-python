@@ -6,6 +6,7 @@ from .accounts import Accounts, AsyncAccounts
 from .balances import Balances, AsyncBalances
 from .disputes import Disputes, AsyncDisputes
 from .payments import Payments, AsyncPayments
+from .three_ds import ThreeDS, AsyncThreeDS
 from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import AuthRules, AsyncAuthRules
 from .transactions import Transactions, AsyncTransactions
@@ -56,4 +57,6 @@ __all__ = [
     "AsyncExternalBankAccounts",
     "Payments",
     "AsyncPayments",
+    "ThreeDS",
+    "AsyncThreeDS",
 ]
