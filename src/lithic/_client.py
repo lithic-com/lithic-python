@@ -71,6 +71,7 @@ class Lithic(SyncAPIClient):
     webhooks: resources.Webhooks
     external_bank_accounts: resources.ExternalBankAccounts
     payments: resources.Payments
+    three_ds: resources.ThreeDS
 
     # client options
     api_key: str
@@ -160,6 +161,7 @@ class Lithic(SyncAPIClient):
         self.webhooks = resources.Webhooks(self)
         self.external_bank_accounts = resources.ExternalBankAccounts(self)
         self.payments = resources.Payments(self)
+        self.three_ds = resources.ThreeDS(self)
 
     @property
     def qs(self) -> Querystring:
@@ -268,6 +270,7 @@ class AsyncLithic(AsyncAPIClient):
     webhooks: resources.AsyncWebhooks
     external_bank_accounts: resources.AsyncExternalBankAccounts
     payments: resources.AsyncPayments
+    three_ds: resources.AsyncThreeDS
 
     # client options
     api_key: str
@@ -357,6 +360,7 @@ class AsyncLithic(AsyncAPIClient):
         self.webhooks = resources.AsyncWebhooks(self)
         self.external_bank_accounts = resources.AsyncExternalBankAccounts(self)
         self.payments = resources.AsyncPayments(self)
+        self.three_ds = resources.AsyncThreeDS(self)
 
     @property
     def qs(self) -> Querystring:

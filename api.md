@@ -342,3 +342,30 @@ Methods:
 - <code title="get /payments/{payment_token}">client.payments.<a href="./src/lithic/resources/payments.py">retrieve</a>(payment_token) -> <a href="./src/lithic/types/payment.py">Payment</a></code>
 - <code title="get /payments">client.payments.<a href="./src/lithic/resources/payments.py">list</a>(\*\*<a href="src/lithic/types/payment_list_params.py">params</a>) -> <a href="./src/lithic/types/payment.py">SyncCursorPage[Payment]</a></code>
 - <code title="post /simulate/payments/release">client.payments.<a href="./src/lithic/resources/payments.py">simulate_release</a>(\*\*<a href="src/lithic/types/payment_simulate_release_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_release_response.py">PaymentSimulateReleaseResponse</a></code>
+
+# ThreeDS
+
+## Authentication
+
+Types:
+
+```python
+from lithic.types.three_ds import AuthenticationRetrieveResponse
+```
+
+Methods:
+
+- <code title="get /three_ds_authentication/{three_ds_authentication_token}">client.three_ds.authentication.<a href="./src/lithic/resources/three_ds/authentication.py">retrieve</a>(three_ds_authentication_token) -> <a href="./src/lithic/types/three_ds/authentication_retrieve_response.py">AuthenticationRetrieveResponse</a></code>
+
+## Descisioning
+
+Types:
+
+```python
+from lithic.types.three_ds import DescisioningRetrieveSecretResponse
+```
+
+Methods:
+
+- <code title="get /three_ds_decisioning/secret">client.three_ds.descisioning.<a href="./src/lithic/resources/three_ds/descisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/three_ds/descisioning_retrieve_secret_response.py">DescisioningRetrieveSecretResponse</a></code>
+- <code title="post /three_ds_decisioning/secret/rotate">client.three_ds.descisioning.<a href="./src/lithic/resources/three_ds/descisioning.py">rotate_secret</a>() -> None</code>
