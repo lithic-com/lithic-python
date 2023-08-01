@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.17.6](https://github.com/lithic-com/lithic-python/compare/v0.17.5...v0.17.6) (2023-08-01)
+
+
+### Features
+
+* **api:** updates ([#102](https://github.com/lithic-com/lithic-python/issues/102)) ([98b247e](https://github.com/lithic-com/lithic-python/commit/98b247e54a15fc1e725481bdb6ca651a33ae7658))
+* **client:** add client close handlers ([#97](https://github.com/lithic-com/lithic-python/issues/97)) ([34560c3](https://github.com/lithic-com/lithic-python/commit/34560c372ba69b2bfc8f4b72013544961a410a40))
+
+
+### Bug Fixes
+
+* adjust typo of 'descisioning' to 'decisioning' ([#103](https://github.com/lithic-com/lithic-python/issues/103)) ([2b0c0e7](https://github.com/lithic-com/lithic-python/commit/2b0c0e7f03e19a60582d03ea9f40c862493dfd88))
+* **client:** correctly handle environment variable access ([#95](https://github.com/lithic-com/lithic-python/issues/95)) ([1666080](https://github.com/lithic-com/lithic-python/commit/166608080f2245af170c11a9f5a10ce3bbe1ded6))
+
+
+### Chores
+
+* **internal:** bump pyright ([#100](https://github.com/lithic-com/lithic-python/issues/100)) ([096cf19](https://github.com/lithic-com/lithic-python/commit/096cf193324ac422682a6965b7c00ba69885d11d))
+* **internal:** bump pyright ([#101](https://github.com/lithic-com/lithic-python/issues/101)) ([cfa2725](https://github.com/lithic-com/lithic-python/commit/cfa2725b4d28acb78aa3595383281407b2de4fcb))
+* **internal:** make demo example runnable and more portable ([#99](https://github.com/lithic-com/lithic-python/issues/99)) ([538860c](https://github.com/lithic-com/lithic-python/commit/538860c859a309ed60709cf5f41cb8653252a349))
+* **internal:** minor reformatting of code ([#98](https://github.com/lithic-com/lithic-python/issues/98)) ([c6c7133](https://github.com/lithic-com/lithic-python/commit/c6c7133ea915c441b53169bf622415a37f403cbc))
+
 ## [0.17.5](https://github.com/lithic-com/lithic-python/compare/v0.17.4...v0.17.5) (2023-07-27)
 
 
