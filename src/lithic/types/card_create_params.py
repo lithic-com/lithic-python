@@ -44,6 +44,8 @@ class CardCreateParams(TypedDict, total=False):
     test creating cards on specific card programs.
     """
 
+    carrier: shared_params.Carrier
+
     digital_card_art_token: str
     """
     Specifies the digital card art to be displayed in the user’s digital wallet

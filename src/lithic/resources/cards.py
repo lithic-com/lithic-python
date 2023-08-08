@@ -41,6 +41,7 @@ class Cards(SyncAPIResource):
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
+        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
@@ -167,6 +168,7 @@ class Cards(SyncAPIResource):
                     "type": type,
                     "account_token": account_token,
                     "card_program_token": card_program_token,
+                    "carrier": carrier,
                     "digital_card_art_token": digital_card_art_token,
                     "exp_month": exp_month,
                     "exp_year": exp_year,
@@ -650,6 +652,7 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
+        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
@@ -667,6 +670,8 @@ class Cards(SyncAPIResource):
         Only applies to cards of type `PHYSICAL`.
 
         Args:
+          carrier: If omitted, the previous carrier will be used.
+
           product_id: Specifies the configuration (e.g. physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be
               configured with Lithic before use.
@@ -697,6 +702,7 @@ class Cards(SyncAPIResource):
             f"/cards/{card_token}/reissue",
             body=maybe_transform(
                 {
+                    "carrier": carrier,
                     "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
@@ -721,6 +727,7 @@ class AsyncCards(AsyncAPIResource):
         type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
+        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
@@ -847,6 +854,7 @@ class AsyncCards(AsyncAPIResource):
                     "type": type,
                     "account_token": account_token,
                     "card_program_token": card_program_token,
+                    "carrier": carrier,
                     "digital_card_art_token": digital_card_art_token,
                     "exp_month": exp_month,
                     "exp_year": exp_year,
@@ -1330,6 +1338,7 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
+        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
@@ -1347,6 +1356,8 @@ class AsyncCards(AsyncAPIResource):
         Only applies to cards of type `PHYSICAL`.
 
         Args:
+          carrier: If omitted, the previous carrier will be used.
+
           product_id: Specifies the configuration (e.g. physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be
               configured with Lithic before use.
@@ -1377,6 +1388,7 @@ class AsyncCards(AsyncAPIResource):
             f"/cards/{card_token}/reissue",
             body=maybe_transform(
                 {
+                    "carrier": carrier,
                     "product_id": product_id,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
