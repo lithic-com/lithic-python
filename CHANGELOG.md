@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.17.7](https://github.com/lithic-com/lithic-python/compare/v0.17.6...v0.17.7) (2023-08-08)
+
+
+### Features
+
+* **api:** add carrier property to card create and reissue params ([#111](https://github.com/lithic-com/lithic-python/issues/111)) ([a2d0279](https://github.com/lithic-com/lithic-python/commit/a2d027970a3685bcf0269e0de3a0218d88ef03c6))
+
+
+### Documentation
+
+* **readme:** remove beta status + document versioning policy ([#108](https://github.com/lithic-com/lithic-python/issues/108)) ([b7dc50d](https://github.com/lithic-com/lithic-python/commit/b7dc50dfe8dd2f6fe93d9a3a77d40f595846c8c7))
+
+
+### Chores
+
+* **internal:** bump certifi dependency ([#110](https://github.com/lithic-com/lithic-python/issues/110)) ([8994910](https://github.com/lithic-com/lithic-python/commit/899491010dbee90dc2374361bc5a38c5b33b3d3f))
+* **internal:** bump lock file ([#107](https://github.com/lithic-com/lithic-python/issues/107)) ([123fad1](https://github.com/lithic-com/lithic-python/commit/123fad1eca60bb9798af74c82ecc03678e6282f6))
+* **internal:** update mypy to v1.4.1 ([#105](https://github.com/lithic-com/lithic-python/issues/105)) ([22bac04](https://github.com/lithic-com/lithic-python/commit/22bac04159d2457ff29a7de8ba303ab68f05c9db))
+* **internal:** update ruff to v0.0.282 ([#109](https://github.com/lithic-com/lithic-python/issues/109)) ([fb5124a](https://github.com/lithic-com/lithic-python/commit/fb5124acdda2188c66a27334932c78ee9e405e68))
+
 ## [0.17.6](https://github.com/lithic-com/lithic-python/compare/v0.17.5...v0.17.6) (2023-08-01)
 
 
