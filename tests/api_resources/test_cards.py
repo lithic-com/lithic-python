@@ -34,6 +34,7 @@ class TestCards:
             type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="00000000-0000-0000-1000-000000000000",
+            carrier={"qr_code_url": "string"},
             digital_card_art_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
@@ -154,6 +155,7 @@ class TestCards:
     def test_method_reissue_with_all_params(self, client: Lithic) -> None:
         card = client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            carrier={"qr_code_url": "string"},
             product_id="string",
             shipping_address={
                 "first_name": "Michael",
@@ -191,6 +193,7 @@ class TestAsyncCards:
             type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="00000000-0000-0000-1000-000000000000",
+            carrier={"qr_code_url": "string"},
             digital_card_art_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
@@ -311,6 +314,7 @@ class TestAsyncCards:
     async def test_method_reissue_with_all_params(self, client: AsyncLithic) -> None:
         card = await client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            carrier={"qr_code_url": "string"},
             product_id="string",
             shipping_address={
                 "first_name": "Michael",

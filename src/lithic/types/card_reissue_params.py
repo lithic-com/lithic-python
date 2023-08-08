@@ -10,6 +10,9 @@ __all__ = ["CardReissueParams"]
 
 
 class CardReissueParams(TypedDict, total=False):
+    carrier: shared_params.Carrier
+    """If omitted, the previous carrier will be used."""
+
     product_id: str
     """Specifies the configuration (e.g.
 
