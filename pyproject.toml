@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lithic"
-version = "0.17.6"
+version = "0.17.7"
 description = "Client library for the lithic API"
 readme = "README.md"
 authors = ["Lithic <sdk-feedback@lithic.com>"]
