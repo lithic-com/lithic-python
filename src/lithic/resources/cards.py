@@ -49,7 +49,8 @@ class Cards(SyncAPIResource):
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2_DAY", "EXPEDITED"]
+        | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
@@ -122,6 +123,9 @@ class Cards(SyncAPIResource):
                 tracking
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
 
@@ -655,7 +659,8 @@ class Cards(SyncAPIResource):
         carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2-DAY", "EXPEDITED"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -685,6 +690,9 @@ class Cards(SyncAPIResource):
                 tracking
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
 
@@ -735,7 +743,8 @@ class AsyncCards(AsyncAPIResource):
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2_DAY", "EXPEDITED"]
+        | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
@@ -808,6 +817,9 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
 
@@ -1341,7 +1353,8 @@ class AsyncCards(AsyncAPIResource):
         carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"] | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2-DAY", "EXPEDITED"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1371,6 +1384,9 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
 
