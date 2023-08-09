@@ -91,7 +91,7 @@ class CardCreateParams(TypedDict, total=False):
 
     shipping_address: shared_params.ShippingAddress
 
-    shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "EXPEDITED"]
+    shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2_DAY", "EXPEDITED"]
     """Shipping method for the card.
 
     Only applies to cards of type PHYSICAL. Use of options besides `STANDARD`
@@ -101,6 +101,9 @@ class CardCreateParams(TypedDict, total=False):
       tracking
     - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
       with tracking
+    - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+    - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+    - `2_DAY` - FedEx 2-day shipping, with tracking
     - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
       tracking
     """
