@@ -3,14 +3,14 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
-from ..types import shared
 from .._models import BaseModel
+from ..types.shared.address import Address
 
 __all__ = ["KYB", "BeneficialOwnerEntity", "BeneficialOwnerIndividual", "BusinessEntity", "ControlPerson"]
 
 
 class BeneficialOwnerEntity(BaseModel):
-    address: shared.Address
+    address: Address
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
@@ -43,7 +43,7 @@ class BeneficialOwnerEntity(BaseModel):
 
 
 class BeneficialOwnerIndividual(BaseModel):
-    address: shared.Address
+    address: Address
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -77,7 +77,7 @@ class BeneficialOwnerIndividual(BaseModel):
 
 
 class BusinessEntity(BaseModel):
-    address: shared.Address
+    address: Address
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
@@ -110,7 +110,7 @@ class BusinessEntity(BaseModel):
 
 
 class ControlPerson(BaseModel):
-    address: shared.Address
+    address: Address
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
