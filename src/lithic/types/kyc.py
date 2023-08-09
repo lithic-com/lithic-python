@@ -3,14 +3,14 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from ..types import shared
 from .._models import BaseModel
+from ..types.shared.address import Address
 
 __all__ = ["KYC", "Individual"]
 
 
 class Individual(BaseModel):
-    address: shared.Address
+    address: Address
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
