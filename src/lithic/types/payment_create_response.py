@@ -3,8 +3,9 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from ..types import balance, financial_transaction
+from ..types import financial_transaction
 from .._models import BaseModel
+from ..types.balance import Balance
 
 __all__ = ["PaymentCreateResponse", "PaymentCreateResponseMethodAttributes"]
 
@@ -22,7 +23,7 @@ class PaymentCreateResponse(financial_transaction.FinancialTransaction):
 
     source: Literal["LITHIC", "CUSTOMER"]
 
-    balance: Optional[balance.Balance]
+    balance: Optional[Balance]
     """Balance of a Financial Account"""
 
     external_bank_account_token: Optional[str]
