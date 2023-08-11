@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.17.8](https://github.com/lithic-com/lithic-python/compare/v0.17.7...v0.17.8) (2023-08-11)
+
+
+### Features
+
+* allOf models now have toXxx methods to access the separate allOf models ([#117](https://github.com/lithic-com/lithic-python/issues/117)) ([f6103e9](https://github.com/lithic-com/lithic-python/commit/f6103e95f563dc53bdf9f97d1ddf755277008afa))
+* **api:** add card reissue shipping options ([#116](https://github.com/lithic-com/lithic-python/issues/116)) ([ed1bad9](https://github.com/lithic-com/lithic-python/commit/ed1bad98fdf5e6847e95d4fb71006930d22bc580))
+
+
+### Chores
+
+* **deps:** bump typing-extensions to 4.5 ([#118](https://github.com/lithic-com/lithic-python/issues/118)) ([0fc438c](https://github.com/lithic-com/lithic-python/commit/0fc438c952984ce9e2c41623518607c65f9bc11f))
+* **internal/deps:** update lock file ([#115](https://github.com/lithic-com/lithic-python/issues/115)) ([fa87728](https://github.com/lithic-com/lithic-python/commit/fa87728a052dd9184e10db98e834926bb72075b8))
+* **internal:** bump pytest-asyncio ([#119](https://github.com/lithic-com/lithic-python/issues/119)) ([5e041e1](https://github.com/lithic-com/lithic-python/commit/5e041e1b8bebdf1ae2606b90f6056614505b6105))
+* **internal:** minor import restructuring ([#113](https://github.com/lithic-com/lithic-python/issues/113)) ([47e1b9f](https://github.com/lithic-com/lithic-python/commit/47e1b9fc29504c987faac62bd853bad7b6d36197))
+
 ## [0.17.7](https://github.com/lithic-com/lithic-python/compare/v0.17.6...v0.17.7) (2023-08-08)
 
 
