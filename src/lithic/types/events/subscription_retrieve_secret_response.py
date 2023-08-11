@@ -8,4 +8,5 @@ __all__ = ["SubscriptionRetrieveSecretResponse"]
 
 
 class SubscriptionRetrieveSecretResponse(BaseModel):
-    key: Optional[str]
+    secret: Optional[str]
+    """The secret for the event subscription."""
