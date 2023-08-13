@@ -82,6 +82,7 @@ _StreamT = TypeVar("_StreamT", bound=Stream[Any])
 _AsyncStreamT = TypeVar("_AsyncStreamT", bound=AsyncStream[Any])
 
 
+# default timeout is 1 minute
 DEFAULT_TIMEOUT = Timeout(timeout=60.0, connect=5.0)
 DEFAULT_MAX_RETRIES = 2
 DEFAULT_LIMITS = Limits(max_connections=100, max_keepalive_connections=20)
