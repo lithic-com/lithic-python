@@ -3,8 +3,8 @@
 from typing import Optional
 from typing_extensions import Literal
 
+from .shared import Address
 from .._models import BaseModel
-from ..types.shared.address import Address
 
 __all__ = ["KYC", "Individual"]
 

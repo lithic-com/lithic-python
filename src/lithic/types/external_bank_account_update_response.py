@@ -4,8 +4,8 @@ from typing import Optional
 from datetime import date, datetime
 from typing_extensions import Literal
 
-from ..types import external_bank_account_address
 from .._models import BaseModel
+from .external_bank_account_address import ExternalBankAccountAddress
 
 __all__ = ["ExternalBankAccountUpdateResponse"]
 
@@ -65,7 +65,7 @@ class ExternalBankAccountUpdateResponse(BaseModel):
     returned will be null
     """
 
-    address: Optional[external_bank_account_address.ExternalBankAccountAddress]
+    address: Optional[ExternalBankAccountAddress]
     """
     Address used during Address Verification Service (AVS) checks during
     transactions if enabled via Auth Rules.
