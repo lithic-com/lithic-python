@@ -56,6 +56,9 @@
       "hidden": true
     }
   ],
+  "reviewers": [
+    "marcel-stainless"
+  ],
   "release-type": "python",
   "extra-files": [
     "src/lithic/_version.py"
