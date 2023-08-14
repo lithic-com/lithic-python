@@ -5,7 +5,7 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
-from ..types.spend_limit_duration import SpendLimitDuration
+from .spend_limit_duration import SpendLimitDuration
 
 __all__ = ["Card", "Funding"]
 

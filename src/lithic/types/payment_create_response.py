@@ -2,12 +2,12 @@
 
 from typing import Optional
 
-from ..types import payment
-from ..types.balance import Balance
+from .balance import Balance
+from .payment import Payment
 
 __all__ = ["PaymentCreateResponse"]
 
 
-class PaymentCreateResponse(payment.Payment):
+class PaymentCreateResponse(Payment):
     balance: Optional[Balance]
     """Balance of a Financial Account"""
