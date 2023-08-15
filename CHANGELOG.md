@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.18.0](https://github.com/lithic-com/lithic-python/compare/v0.17.8...v0.18.0) (2023-08-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** change `key` to `secret` ([#121](https://github.com/lithic-com/lithic-python/issues/121))
+
+### Features
+
+* allow a default timeout to be set for clients ([#123](https://github.com/lithic-com/lithic-python/issues/123)) ([13ce2e8](https://github.com/lithic-com/lithic-python/commit/13ce2e8aa1bdde7eab870adb360d808e203ff3eb))
+* **api:** change `key` to `secret` ([#121](https://github.com/lithic-com/lithic-python/issues/121)) ([faec3a2](https://github.com/lithic-com/lithic-python/commit/faec3a2442cf6c4937be5574405b5e81d4e618d1))
+
+
+### Styles
+
+* prefer importing types directly instead of module names ([#124](https://github.com/lithic-com/lithic-python/issues/124)) ([5048bec](https://github.com/lithic-com/lithic-python/commit/5048becd3e1606baf1511c39baf8d1bc5a2027b7))
+
+
+### Chores
+
+* assign default reviewers to release PRs ([#125](https://github.com/lithic-com/lithic-python/issues/125)) ([0ace592](https://github.com/lithic-com/lithic-python/commit/0ace59209c593e698d8c6ef49d6edc04939614e8))
+* **client:** send Idempotency-Key header ([#127](https://github.com/lithic-com/lithic-python/issues/127)) ([f387e15](https://github.com/lithic-com/lithic-python/commit/f387e15ec7517a4ac802cf3e71526660eb98ebec))
+* **internal:** minor formatting change ([#126](https://github.com/lithic-com/lithic-python/issues/126)) ([0093e61](https://github.com/lithic-com/lithic-python/commit/0093e6167b942e23ce6c74621274bcd198ba731e))
+
 ## [0.17.8](https://github.com/lithic-com/lithic-python/compare/v0.17.7...v0.17.8) (2023-08-11)
 
 
