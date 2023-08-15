@@ -322,7 +322,7 @@ class TestLithic:
 
         response = self.client.post("/foo", cast_to=httpx.Response)
 
-        header = response.request.headers.get("Idempotency-Token")
+        header = response.request.headers.get("Idempotency-Key")
         assert header is not None
         assert header.startswith("stainless-python-retry")
 
@@ -330,22 +330,22 @@ class TestLithic:
         response = self.client.post(
             "/foo",
             cast_to=httpx.Response,
-            options=make_request_options(extra_headers={"Idempotency-Token": "custom-key"}),
+            options=make_request_options(extra_headers={"Idempotency-Key": "custom-key"}),
         )
-        assert response.request.headers.get("Idempotency-Token") == "custom-key"
+        assert response.request.headers.get("Idempotency-Key") == "custom-key"
 
         response = self.client.post(
             "/foo",
             cast_to=httpx.Response,
-            options=make_request_options(extra_headers={"idempotency-token": "custom-key"}),
+            options=make_request_options(extra_headers={"idempotency-key": "custom-key"}),
         )
-        assert response.request.headers.get("Idempotency-Token") == "custom-key"
+        assert response.request.headers.get("Idempotency-Key") == "custom-key"
 
         # custom argument
         response = self.client.post(
             "/foo", cast_to=httpx.Response, options=make_request_options(idempotency_key="custom-key")
         )
-        assert response.request.headers.get("Idempotency-Token") == "custom-key"
+        assert response.request.headers.get("Idempotency-Key") == "custom-key"
 
     def test_base_url_trailing_slash(self) -> None:
         client = Lithic(
@@ -684,7 +684,7 @@ class TestAsyncLithic:
 
         response = await self.client.post("/foo", cast_to=httpx.Response)
 
-        header = response.request.headers.get("Idempotency-Token")
+        header = response.request.headers.get("Idempotency-Key")
         assert header is not None
         assert header.startswith("stainless-python-retry")
 
@@ -692,22 +692,22 @@ class TestAsyncLithic:
         response = await self.client.post(
             "/foo",
             cast_to=httpx.Response,
-            options=make_request_options(extra_headers={"Idempotency-Token": "custom-key"}),
+            options=make_request_options(extra_headers={"Idempotency-Key": "custom-key"}),
         )
-        assert response.request.headers.get("Idempotency-Token") == "custom-key"
+        assert response.request.headers.get("Idempotency-Key") == "custom-key"
 
         response = await self.client.post(
             "/foo",
             cast_to=httpx.Response,
-            options=make_request_options(extra_headers={"idempotency-token": "custom-key"}),
+            options=make_request_options(extra_headers={"idempotency-key": "custom-key"}),
         )
-        assert response.request.headers.get("Idempotency-Token") == "custom-key"
+        assert response.request.headers.get("Idempotency-Key") == "custom-key"
 
         # custom argument
         response = await self.client.post(
             "/foo", cast_to=httpx.Response, options=make_request_options(idempotency_key="custom-key")
         )
-        assert response.request.headers.get("Idempotency-Token") == "custom-key"
+        assert response.request.headers.get("Idempotency-Key") == "custom-key"
 
     def test_base_url_trailing_slash(self) -> None:
         client = AsyncLithic(

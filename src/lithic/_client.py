@@ -143,7 +143,7 @@ class Lithic(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self._idempotency_header = "Idempotency-Token"
+        self._idempotency_header = "Idempotency-Key"
 
         self.accounts = resources.Accounts(self)
         self.account_holders = resources.AccountHolders(self)
@@ -342,7 +342,7 @@ class AsyncLithic(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self._idempotency_header = "Idempotency-Token"
+        self._idempotency_header = "Idempotency-Key"
 
         self.accounts = resources.AsyncAccounts(self)
         self.account_holders = resources.AsyncAccountHolders(self)
