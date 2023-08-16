@@ -22,8 +22,8 @@ class FinancialAccount(BaseModel):
     updated: datetime
     """Date and time for when the financial account was last updated."""
 
-    account_number: Optional[str]
+    account_number: Optional[str] = None
     """Account number for your Lithic-assigned bank account number, if applicable."""
 
-    routing_number: Optional[str]
+    routing_number: Optional[str] = None
     """Routing number for your Lithic-assigned bank account number, if applicable."""

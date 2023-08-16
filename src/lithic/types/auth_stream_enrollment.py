@@ -8,5 +8,5 @@ __all__ = ["AuthStreamEnrollment"]
 
 
 class AuthStreamEnrollment(BaseModel):
-    enrolled: Optional[bool]
+    enrolled: Optional[bool] = None
     """Whether ASA is enrolled."""

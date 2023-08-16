@@ -8,8 +8,8 @@ __all__ = ["AuthRuleRemoveResponse"]
 
 
 class AuthRuleRemoveResponse(BaseModel):
-    account_tokens: Optional[List[str]]
+    account_tokens: Optional[List[str]] = None
 
-    card_tokens: Optional[List[str]]
+    card_tokens: Optional[List[str]] = None
 
-    program_level: Optional[bool]
+    program_level: Optional[bool] = None

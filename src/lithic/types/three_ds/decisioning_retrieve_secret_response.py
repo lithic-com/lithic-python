@@ -8,5 +8,5 @@ __all__ = ["DecisioningRetrieveSecretResponse"]
 
 
 class DecisioningRetrieveSecretResponse(BaseModel):
-    secret: Optional[str]
+    secret: Optional[str] = None
     """The 3DS Decisioning HMAC secret"""

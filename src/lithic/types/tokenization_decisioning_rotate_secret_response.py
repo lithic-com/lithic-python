@@ -8,5 +8,5 @@ __all__ = ["TokenizationDecisioningRotateSecretResponse"]
 
 
 class TokenizationDecisioningRotateSecretResponse(BaseModel):
-    secret: Optional[str]
+    secret: Optional[str] = None
     """The new Tokenization Decisioning HMAC secret"""

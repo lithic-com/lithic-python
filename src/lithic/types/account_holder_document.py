@@ -9,10 +9,10 @@ __all__ = ["AccountHolderDocument", "RequiredDocumentUpload"]
 
 
 class RequiredDocumentUpload(BaseModel):
-    image_type: Optional[Literal["back", "front"]]
+    image_type: Optional[Literal["back", "front"]] = None
     """Type of image to upload."""
 
-    status: Optional[Literal["COMPLETED", "FAILED", "PENDING", "UPLOADED"]]
+    status: Optional[Literal["COMPLETED", "FAILED", "PENDING", "UPLOADED"]] = None
     """Status of document image upload."""
 
     status_reasons: Optional[
@@ -26,9 +26,9 @@ class RequiredDocumentUpload(BaseModel):
                 "UNKNOWN_ERROR",
             ]
         ]
-    ]
+    ] = None
 
-    upload_url: Optional[str]
+    upload_url: Optional[str] = None
     """URL to upload document image to.
 
     Note that the upload URLs expire after 7 days. If an upload URL expires, you can
@@ -38,13 +38,15 @@ class RequiredDocumentUpload(BaseModel):
 
 
 class AccountHolderDocument(BaseModel):
-    token: Optional[str]
+    token: Optional[str] = None
     """Globally unique identifier for the document."""
 
-    account_holder_token: Optional[str]
+    account_holder_token: Optional[str] = None
     """Globally unique identifier for the account holder."""
 
-    document_type: Optional[Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]]
+    document_type: Optional[
+        Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]
+    ] = None
     """Type of documentation to be submitted for verification."""
 
-    required_document_uploads: Optional[List[RequiredDocumentUpload]]
+    required_document_uploads: Optional[List[RequiredDocumentUpload]] = None

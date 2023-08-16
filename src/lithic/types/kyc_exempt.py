@@ -28,13 +28,13 @@ class KYCExempt(BaseModel):
     workflow: Literal["KYC_EXEMPT"]
     """Specifies the workflow type. This must be 'KYC_EXEMPT'"""
 
-    address: Optional[Address]
+    address: Optional[Address] = None
     """
     KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
     """
 
-    business_account_token: Optional[str]
+    business_account_token: Optional[str] = None
     """
     Only applicable for customers using the KYC-Exempt workflow to enroll authorized
     users of businesses. Pass the account_token of the enrolled business associated

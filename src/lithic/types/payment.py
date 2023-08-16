@@ -22,6 +22,6 @@ class Payment(FinancialTransaction):
 
     source: Literal["LITHIC", "CUSTOMER"]
 
-    external_bank_account_token: Optional[str]
+    external_bank_account_token: Optional[str] = None
 
-    user_defined_id: Optional[str]
+    user_defined_id: Optional[str] = None

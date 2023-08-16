@@ -32,13 +32,13 @@ class BeneficialOwnerEntity(BaseModel):
     format.
     """
 
-    dba_business_name: Optional[str]
+    dba_business_name: Optional[str] = None
     """
     Any name that the business operates under that is not its legal business name
     (if applicable).
     """
 
-    parent_company: Optional[str]
+    parent_company: Optional[str] = None
     """Parent company name (if applicable)."""
 
 
@@ -99,13 +99,13 @@ class BusinessEntity(BaseModel):
     format.
     """
 
-    dba_business_name: Optional[str]
+    dba_business_name: Optional[str] = None
     """
     Any name that the business operates under that is not its legal business name
     (if applicable).
     """
 
-    parent_company: Optional[str]
+    parent_company: Optional[str] = None
     """Parent company name (if applicable)."""
 
 
@@ -200,7 +200,7 @@ class KYB(BaseModel):
     workflow: Literal["KYB_BASIC", "KYB_BYO"]
     """Specifies the type of KYB workflow to run."""
 
-    kyb_passed_timestamp: Optional[str]
+    kyb_passed_timestamp: Optional[str] = None
     """
     An RFC 3339 timestamp indicating when precomputed KYC was completed on the
     business with a pass result.
@@ -208,5 +208,5 @@ class KYB(BaseModel):
     This field is required only if workflow type is `KYB_BYO`.
     """
 
-    website_url: Optional[str]
+    website_url: Optional[str] = None
     """Company website URL."""

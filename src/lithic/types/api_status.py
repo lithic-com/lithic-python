@@ -8,4 +8,4 @@ __all__ = ["APIStatus"]
 
 
 class APIStatus(BaseModel):
-    message: Optional[str]
+    message: Optional[str] = None

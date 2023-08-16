@@ -12,13 +12,13 @@ class EmbedRequestParams(BaseModel):
     token: str
     """Globally unique identifier for the card to be displayed."""
 
-    css: Optional[str]
+    css: Optional[str] = None
     """
     A publicly available URI, so the white-labeled card element can be styled with
     the client's branding.
     """
 
-    expiration: Optional[datetime]
+    expiration: Optional[datetime] = None
     """An RFC 3339 timestamp for when the request should expire. UTC time zone.
 
     If no timezone is specified, UTC will be used. If payload does not contain an
@@ -30,7 +30,7 @@ class EmbedRequestParams(BaseModel):
     in transit, they will be able to obtain the response data indefinitely.
     """
 
-    target_origin: Optional[str]
+    target_origin: Optional[str] = None
     """Required if you want to post the element clicked to the parent iframe.
 
     If you supply this param, you can also capture click events in the parent iframe

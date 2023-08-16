@@ -118,26 +118,26 @@ class Event(BaseModel):
 
 
 class Merchant(BaseModel):
-    acceptor_id: Optional[str]
+    acceptor_id: Optional[str] = None
     """Unique identifier to identify the payment card acceptor."""
 
-    city: Optional[str]
+    city: Optional[str] = None
     """City of card acceptor."""
 
-    country: Optional[str]
+    country: Optional[str] = None
     """Uppercase country of card acceptor (see ISO 8583 specs)."""
 
-    descriptor: Optional[str]
+    descriptor: Optional[str] = None
     """Short description of card acceptor."""
 
-    mcc: Optional[str]
+    mcc: Optional[str] = None
     """Merchant category code (MCC).
 
     A four-digit number listed in ISO 18245. An MCC is used to classify a business
     by the types of goods or services it provides.
     """
 
-    state: Optional[str]
+    state: Optional[str] = None
     """Geographic state of card acceptor (see ISO 8583 specs)."""
 
 
@@ -352,4 +352,4 @@ class Transaction(BaseModel):
     - `VOIDED` - The merchant has voided the previously pending authorization.
     """
 
-    cardholder_authentication: Optional[CardholderAuthentication]
+    cardholder_authentication: Optional[CardholderAuthentication] = None
