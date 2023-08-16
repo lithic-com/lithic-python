@@ -8,5 +8,5 @@ __all__ = ["AuthStreamSecret"]
 
 
 class AuthStreamSecret(BaseModel):
-    secret: Optional[str]
+    secret: Optional[str] = None
     """The shared HMAC ASA secret"""

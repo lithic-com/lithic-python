@@ -8,4 +8,4 @@ __all__ = ["CardProvisionResponse"]
 
 
 class CardProvisionResponse(BaseModel):
-    provisioning_payload: Optional[str]
+    provisioning_payload: Optional[str] = None

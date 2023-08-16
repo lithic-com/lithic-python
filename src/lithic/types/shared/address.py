@@ -35,5 +35,5 @@ class Address(BaseModel):
     two-character format.
     """
 
-    address2: Optional[str]
+    address2: Optional[str] = None
     """Unit or apartment number (if applicable)."""

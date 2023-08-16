@@ -45,10 +45,10 @@ class Funding(BaseModel):
     - `DEPOSITORY_SAVINGS` - Bank savings account.
     """
 
-    account_name: Optional[str]
+    account_name: Optional[str] = None
     """Account name identifying the funding source. This may be `null`."""
 
-    nickname: Optional[str]
+    nickname: Optional[str] = None
     """The nickname given to the `FundingAccount` or `null` if it has no nickname."""
 
 
@@ -122,13 +122,13 @@ class Card(BaseModel):
       successfully authorizes the card.
     """
 
-    auth_rule_tokens: Optional[List[str]]
+    auth_rule_tokens: Optional[List[str]] = None
     """List of identifiers for the Auth Rule(s) that are applied on the card."""
 
-    cvv: Optional[str]
+    cvv: Optional[str] = None
     """Three digit cvv printed on the back of the card."""
 
-    digital_card_art_token: Optional[str]
+    digital_card_art_token: Optional[str] = None
     """
     Specifies the digital card art to be displayed in the user’s digital wallet
     after tokenization. This artwork must be approved by Mastercard and configured
@@ -136,23 +136,23 @@ class Card(BaseModel):
     [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
     """
 
-    exp_month: Optional[str]
+    exp_month: Optional[str] = None
     """Two digit (MM) expiry month."""
 
-    exp_year: Optional[str]
+    exp_year: Optional[str] = None
     """Four digit (yyyy) expiry year."""
 
-    hostname: Optional[str]
+    hostname: Optional[str] = None
     """Hostname of card’s locked merchant (will be empty if not applicable)."""
 
-    memo: Optional[str]
+    memo: Optional[str] = None
     """Friendly name to identify the card.
 
     We recommend against using this field to store JSON data as it can cause
     unexpected behavior.
     """
 
-    pan: Optional[str]
+    pan: Optional[str] = None
     """Primary Account Number (PAN) (i.e.
 
     the card number). Customers must be PCI compliant to have PAN returned as a

@@ -9,4 +9,4 @@ __all__ = ["AuthRuleRetrieveResponse"]
 
 
 class AuthRuleRetrieveResponse(BaseModel):
-    data: Optional[List[AuthRule]]
+    data: Optional[List[AuthRule]] = None

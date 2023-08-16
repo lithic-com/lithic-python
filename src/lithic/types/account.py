@@ -61,7 +61,7 @@ class VerificationAddress(BaseModel):
     two-character format.
     """
 
-    address2: Optional[str]
+    address2: Optional[str] = None
     """Unit or apartment number (if applicable)."""
 
 
@@ -92,9 +92,9 @@ class Account(BaseModel):
       cards.
     """
 
-    account_holder: Optional[AccountHolder]
+    account_holder: Optional[AccountHolder] = None
 
-    auth_rule_tokens: Optional[List[str]]
+    auth_rule_tokens: Optional[List[str]] = None
     """List of identifiers for the Auth Rule(s) that are applied on the account."""
 
-    verification_address: Optional[VerificationAddress]
+    verification_address: Optional[VerificationAddress] = None

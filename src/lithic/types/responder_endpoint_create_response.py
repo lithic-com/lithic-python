@@ -8,5 +8,5 @@ __all__ = ["ResponderEndpointCreateResponse"]
 
 
 class ResponderEndpointCreateResponse(BaseModel):
-    enrolled: Optional[bool]
+    enrolled: Optional[bool] = None
     """True if the endpoint was enrolled successfully."""

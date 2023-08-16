@@ -9,10 +9,10 @@ __all__ = ["AuthRule"]
 
 
 class AuthRule(BaseModel):
-    token: Optional[str]
+    token: Optional[str] = None
     """Globally unique identifier."""
 
-    account_tokens: Optional[List[str]]
+    account_tokens: Optional[List[str]] = None
     """Array of account_token(s) identifying the accounts that the Auth Rule applies
     to.
 
@@ -20,7 +20,7 @@ class AuthRule(BaseModel):
     Rule.
     """
 
-    allowed_countries: Optional[List[str]]
+    allowed_countries: Optional[List[str]] = None
     """Countries in which the Auth Rule permits transactions.
 
     Note that Lithic maintains a list of countries in which all transactions are
@@ -28,27 +28,27 @@ class AuthRule(BaseModel):
     Lithic-wide restrictions.
     """
 
-    allowed_mcc: Optional[List[str]]
+    allowed_mcc: Optional[List[str]] = None
     """Merchant category codes for which the Auth Rule permits transactions."""
 
-    blocked_countries: Optional[List[str]]
+    blocked_countries: Optional[List[str]] = None
     """Countries in which the Auth Rule automatically declines transactions."""
 
-    blocked_mcc: Optional[List[str]]
+    blocked_mcc: Optional[List[str]] = None
     """
     Merchant category codes for which the Auth Rule automatically declines
     transactions.
     """
 
-    card_tokens: Optional[List[str]]
+    card_tokens: Optional[List[str]] = None
     """Array of card_token(s) identifying the cards that the Auth Rule applies to.
 
     Note that only this field or `account_tokens` can be provided for a given Auth
     Rule.
     """
 
-    program_level: Optional[bool]
+    program_level: Optional[bool] = None
     """Boolean indicating whether the Auth Rule is applied at the program level."""
 
-    state: Optional[Literal["ACTIVE", "INACTIVE"]]
+    state: Optional[Literal["ACTIVE", "INACTIVE"]] = None
     """Indicates whether the Auth Rule is ACTIVE or INACTIVE"""

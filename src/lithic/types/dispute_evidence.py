@@ -29,14 +29,14 @@ class DisputeEvidence(BaseModel):
     - `UPLOADED` - Evidence was uploaded.
     """
 
-    download_url: Optional[str]
+    download_url: Optional[str] = None
     """URL to download evidence. Only shown when `upload_status` is `UPLOADED`."""
 
-    filename: Optional[str]
+    filename: Optional[str] = None
     """File name of evidence.
 
     Recommended to give the dispute evidence a human-readable identifier.
     """
 
-    upload_url: Optional[str]
+    upload_url: Optional[str] = None
     """URL to upload evidence. Only shown when `upload_status` is `PENDING`."""

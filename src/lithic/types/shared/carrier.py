@@ -8,5 +8,5 @@ __all__ = ["Carrier"]
 
 
 class Carrier(BaseModel):
-    qr_code_url: Optional[str]
+    qr_code_url: Optional[str] = None
     """QR code url to display on the card carrier"""

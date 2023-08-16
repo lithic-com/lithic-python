@@ -8,8 +8,8 @@ __all__ = ["TransactionSimulateAuthorizationAdviceResponse"]
 
 
 class TransactionSimulateAuthorizationAdviceResponse(BaseModel):
-    token: Optional[str]
+    token: Optional[str] = None
     """A unique token to reference this transaction."""
 
-    debugging_request_id: Optional[str]
+    debugging_request_id: Optional[str] = None
     """Debugging request ID to share with Lithic Support team."""

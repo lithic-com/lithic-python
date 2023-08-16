@@ -58,26 +58,26 @@ class ExternalBankAccountUpdateResponse(BaseModel):
 
     verification_state: Literal["PENDING", "ENABLED", "FAILED_VERIFICATION"]
 
-    account_token: Optional[str]
+    account_token: Optional[str] = None
     """Indicates which Lithic account the external account is associated with.
 
     For external accounts that are associated with the program, account_token field
     returned will be null
     """
 
-    address: Optional[ExternalBankAccountAddress]
+    address: Optional[ExternalBankAccountAddress] = None
     """
     Address used during Address Verification Service (AVS) checks during
     transactions if enabled via Auth Rules.
     """
 
-    company_id: Optional[str]
+    company_id: Optional[str] = None
     """Optional field that helps identify bank accounts in receipts"""
 
-    dob: Optional[date]
+    dob: Optional[date] = None
     """Date of Birth of the Individual that owns the external bank account"""
 
-    doing_business_as: Optional[str]
+    doing_business_as: Optional[str] = None
 
-    name: Optional[str]
+    name: Optional[str] = None
     """The nickname given to this record of External Bank Account"""

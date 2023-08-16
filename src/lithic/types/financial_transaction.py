@@ -10,19 +10,19 @@ __all__ = ["FinancialTransaction", "Event"]
 
 
 class Event(BaseModel):
-    token: Optional[str]
+    token: Optional[str] = None
     """Globally unique identifier."""
 
-    amount: Optional[int]
+    amount: Optional[int] = None
     """
     Amount of the financial event that has been settled in the currency's smallest
     unit (e.g., cents).
     """
 
-    created: Optional[datetime]
+    created: Optional[datetime] = None
     """Date and time when the financial event occurred. UTC time zone."""
 
-    result: Optional[Literal["APPROVED", "DECLINED"]]
+    result: Optional[Literal["APPROVED", "DECLINED"]] = None
     """
     APPROVED financial events were successful while DECLINED financial events were
     declined by user, Lithic, or the network.
@@ -53,7 +53,7 @@ class Event(BaseModel):
             "TRANSFER",
             "TRANSFER_INSUFFICIENT_FUNDS",
         ]
-    ]
+    ] = None
     """Event types:
 
     - `ACH_INSUFFICIENT_FUNDS` - Attempted ACH origination declined due to

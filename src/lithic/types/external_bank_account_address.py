@@ -18,4 +18,4 @@ class ExternalBankAccountAddress(BaseModel):
 
     state: str
 
-    address2: Optional[str]
+    address2: Optional[str] = None
