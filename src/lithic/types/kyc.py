@@ -60,7 +60,7 @@ class KYC(BaseModel):
     workflow: Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
     """Specifies the type of KYC workflow to run."""
 
-    kyc_passed_timestamp: Optional[str]
+    kyc_passed_timestamp: Optional[str] = None
     """
     An RFC 3339 timestamp indicating when precomputed KYC was completed on the
     individual with a pass result.

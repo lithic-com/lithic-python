@@ -9,4 +9,4 @@ __all__ = ["AccountHolderListDocumentsResponse"]
 
 
 class AccountHolderListDocumentsResponse(BaseModel):
-    data: Optional[List[AccountHolderDocument]]
+    data: Optional[List[AccountHolderDocument]] = None

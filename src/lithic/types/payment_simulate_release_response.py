@@ -9,8 +9,8 @@ __all__ = ["PaymentSimulateReleaseResponse"]
 
 
 class PaymentSimulateReleaseResponse(BaseModel):
-    debugging_request_id: Optional[str]
+    debugging_request_id: Optional[str] = None
 
-    result: Optional[Literal["APPROVED", "DECLINED"]]
+    result: Optional[Literal["APPROVED", "DECLINED"]] = None
 
-    transaction_event_token: Optional[str]
+    transaction_event_token: Optional[str] = None

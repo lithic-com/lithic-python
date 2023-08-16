@@ -8,8 +8,8 @@ __all__ = ["ResponderEndpointStatus"]
 
 
 class ResponderEndpointStatus(BaseModel):
-    enrolled: Optional[bool]
+    enrolled: Optional[bool] = None
     """True if the instance has an endpoint enrolled."""
 
-    url: Optional[str]
+    url: Optional[str] = None
     """The URL of the currently enrolled endpoint or null."""

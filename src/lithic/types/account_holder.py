@@ -9,20 +9,20 @@ __all__ = ["AccountHolder"]
 
 
 class AccountHolder(BaseModel):
-    token: Optional[str]
+    token: Optional[str] = None
     """Globally unique identifier for the account holder."""
 
-    account_token: Optional[str]
+    account_token: Optional[str] = None
     """Globally unique identifier for the account."""
 
-    business_account_token: Optional[str]
+    business_account_token: Optional[str] = None
     """
     Only applicable for customers using the KYC-Exempt workflow to enroll authorized
     users of businesses. Pass the account_token of the enrolled business associated
     with the AUTHORIZED_USER in this field.
     """
 
-    status: Optional[Literal["ACCEPTED", "REJECTED", "PENDING_RESUBMIT", "PENDING_DOCUMENT"]]
+    status: Optional[Literal["ACCEPTED", "REJECTED", "PENDING_RESUBMIT", "PENDING_DOCUMENT"]] = None
     """KYC and KYB evaluation states.
 
     Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
@@ -45,5 +45,5 @@ class AccountHolder(BaseModel):
                 "WATCHLIST_ALERT_FAILURE",
             ]
         ]
-    ]
+    ] = None
     """Reason for the evaluation status."""

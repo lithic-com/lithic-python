@@ -8,7 +8,7 @@ __all__ = ["AccountHolderCreateWebhookResponse", "Data"]
 
 
 class Data(BaseModel):
-    hmac_token: Optional[str]
+    hmac_token: Optional[str] = None
     """
     Shared secret which can optionally be used to validate the authenticity of
     incoming identity webhooks.
@@ -16,4 +16,4 @@ class Data(BaseModel):
 
 
 class AccountHolderCreateWebhookResponse(BaseModel):
-    data: Optional[Data]
+    data: Optional[Data] = None

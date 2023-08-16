@@ -41,22 +41,22 @@ class ShippingAddress(BaseModel):
     Optional with a limit of 24 characters for other countries.
     """
 
-    address2: Optional[str]
+    address2: Optional[str] = None
     """Unit number (if applicable)."""
 
-    email: Optional[str]
+    email: Optional[str] = None
     """Email address to be contacted for expedited shipping process purposes.
 
     Required if `shipping_method` is `EXPEDITED`.
     """
 
-    line2_text: Optional[str]
+    line2_text: Optional[str] = None
     """Text to be printed on line two of the physical card.
 
     Use of this field requires additional permissions.
     """
 
-    phone_number: Optional[str]
+    phone_number: Optional[str] = None
     """
     Cardholder's phone number in E.164 format to be contacted for expedited shipping
     process purposes. Required if `shipping_method` is `EXPEDITED`.
