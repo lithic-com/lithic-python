@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/lithic-com/lithic-python/compare/v0.18.0...v0.18.1) (2023-08-17)
+
+
+### Features
+
+* add support for Pydantic v2 ([#129](https://github.com/lithic-com/lithic-python/issues/129)) ([1f44714](https://github.com/lithic-com/lithic-python/commit/1f4471429a7cc391678e889eef74127658f5f90c))
+
 ## [0.18.0](https://github.com/lithic-com/lithic-python/compare/v0.17.8...v0.18.0) (2023-08-15)
 
 
