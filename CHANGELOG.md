@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.18.2](https://github.com/lithic-com/lithic-python/compare/v0.18.1...v0.18.2) (2023-08-24)
+
+
+### Chores
+
+* **internal:** bump pydantic dep ([#132](https://github.com/lithic-com/lithic-python/issues/132)) ([cb59327](https://github.com/lithic-com/lithic-python/commit/cb59327cec4a5e3fcf956fba0c14422680b0657e))
+* **internal:** update anyio ([#134](https://github.com/lithic-com/lithic-python/issues/134)) ([2acb7f6](https://github.com/lithic-com/lithic-python/commit/2acb7f69ed9b580122000c1f83d1d5ba895bfae2))
+
 ## [0.18.1](https://github.com/lithic-com/lithic-python/compare/v0.18.0...v0.18.1) (2023-08-17)
 
 
