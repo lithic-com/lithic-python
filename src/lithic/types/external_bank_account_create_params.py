@@ -7,23 +7,25 @@ from datetime import date
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .owner_type import OwnerType
+from .verification_method import VerificationMethod
+from .external_bank_account_address_param import ExternalBankAccountAddressParam
 
 __all__ = [
     "ExternalBankAccountCreateParams",
     "PlaidCreateBankAccountAPIRequest",
     "BankVerifiedCreateBankAccountAPIRequest",
-    "ExternalBankAccountAddress",
 ]
 
 
 class PlaidCreateBankAccountAPIRequest(TypedDict, total=False):
     owner: Required[str]
 
-    owner_type: Required[Literal["INDIVIDUAL", "BUSINESS"]]
+    owner_type: Required[OwnerType]
 
     processor_token: Required[str]
 
-    verification_method: Required[Literal["MANUAL", "MICRO_DEPOSIT", "PLAID"]]
+    verification_method: Required[VerificationMethod]
 
     account_token: str
 
@@ -35,6 +37,10 @@ class PlaidCreateBankAccountAPIRequest(TypedDict, total=False):
     doing_business_as: str
 
 
+ExternalBankAccountAddress = ExternalBankAccountAddressParam
+"""This type is deprecated, please use ExternalBankAccountAddressParam instead"""
+
+
 class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     account_number: Required[str]
 
@@ -44,17 +50,17 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
 
     owner: Required[str]
 
-    owner_type: Required[Literal["INDIVIDUAL", "BUSINESS"]]
+    owner_type: Required[OwnerType]
 
     routing_number: Required[str]
 
     type: Required[Literal["CHECKING", "SAVINGS"]]
 
-    verification_method: Required[Literal["MANUAL", "MICRO_DEPOSIT", "PLAID"]]
+    verification_method: Required[VerificationMethod]
 
     account_token: str
 
-    address: ExternalBankAccountAddress
+    address: ExternalBankAccountAddressParam
     """
     Address used during Address Verification Service (AVS) checks during
     transactions if enabled via Auth Rules.
@@ -76,20 +82,6 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     has already been verified before. By default, verification will be required
     unless users pass in a value of false
     """
-
-
-class ExternalBankAccountAddress(TypedDict, total=False):
-    address1: Required[str]
-
-    city: Required[str]
-
-    country: Required[str]
-
-    postal_code: Required[str]
-
-    state: Required[str]
-
-    address2: str
 
 
 ExternalBankAccountCreateParams = Union[PlaidCreateBankAccountAPIRequest, BankVerifiedCreateBankAccountAPIRequest]

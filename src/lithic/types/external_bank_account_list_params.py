@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, TypedDict
 
+from .owner_type import OwnerType
+
 __all__ = ["ExternalBankAccountListParams"]
 
 
@@ -21,7 +23,7 @@ class ExternalBankAccountListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
-    owner_types: List[Literal["INDIVIDUAL", "BUSINESS"]]
+    owner_types: List[OwnerType]
 
     page_size: int
     """Page size (for pagination)."""
