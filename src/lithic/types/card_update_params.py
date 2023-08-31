@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
+from .spend_limit_duration import SpendLimitDuration
+
 __all__ = ["CardUpdateParams"]
 
 
@@ -45,7 +47,7 @@ class CardUpdateParams(TypedDict, total=False):
     to checks against the card limit.
     """
 
-    spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"]
+    spend_limit_duration: SpendLimitDuration
     """Spend limit duration values:
 
     - `ANNUALLY` - Card will authorize transactions up to spend limit in a calendar
