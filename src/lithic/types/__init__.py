@@ -123,6 +123,9 @@ from .transaction_simulate_return_params import (
 from .transaction_simulate_void_response import (
     TransactionSimulateVoidResponse as TransactionSimulateVoidResponse,
 )
+from .external_bank_account_address_param import (
+    ExternalBankAccountAddressParam as ExternalBankAccountAddressParam,
+)
 from .external_bank_account_create_params import (
     ExternalBankAccountCreateParams as ExternalBankAccountCreateParams,
 )

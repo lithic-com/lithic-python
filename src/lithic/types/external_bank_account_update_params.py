@@ -4,15 +4,17 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import date
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .owner_type import OwnerType
+from .external_bank_account_address_param import ExternalBankAccountAddressParam
 
-__all__ = ["ExternalBankAccountUpdateParams", "ExternalBankAccountAddress"]
+__all__ = ["ExternalBankAccountUpdateParams"]
 
 
 class ExternalBankAccountUpdateParams(TypedDict, total=False):
-    address: ExternalBankAccountAddress
+    address: ExternalBankAccountAddressParam
     """
     Address used during Address Verification Service (AVS) checks during
     transactions if enabled via Auth Rules.
@@ -29,18 +31,8 @@ class ExternalBankAccountUpdateParams(TypedDict, total=False):
 
     owner: str
 
-    owner_type: Literal["INDIVIDUAL", "BUSINESS"]
+    owner_type: OwnerType
 
 
-class ExternalBankAccountAddress(TypedDict, total=False):
-    address1: Required[str]
-
-    city: Required[str]
-
-    country: Required[str]
-
-    postal_code: Required[str]
-
-    state: Required[str]
-
-    address2: str
+ExternalBankAccountAddress = ExternalBankAccountAddressParam
+"""This type is deprecated, please use ExternalBankAccountAddressParam instead"""
