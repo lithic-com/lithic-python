@@ -81,3 +81,5 @@ class MicroDepositCreateResponse(BaseModel):
 
     name: Optional[str] = None
     """The nickname given to this record of External Bank Account"""
+
+    user_defined_id: Optional[str] = None

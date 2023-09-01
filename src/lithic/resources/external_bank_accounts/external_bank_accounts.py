@@ -50,6 +50,7 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -94,6 +95,7 @@ class ExternalBankAccounts(SyncAPIResource):
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -153,6 +155,7 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
@@ -181,6 +184,7 @@ class ExternalBankAccounts(SyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
+                    "user_defined_id": user_defined_id,
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
@@ -244,6 +248,7 @@ class ExternalBankAccounts(SyncAPIResource):
         name: str | NotGiven = NOT_GIVEN,
         owner: str | NotGiven = NOT_GIVEN,
         owner_type: OwnerType | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -282,6 +287,7 @@ class ExternalBankAccounts(SyncAPIResource):
                     "name": name,
                     "owner": owner,
                     "owner_type": owner_type,
+                    "user_defined_id": user_defined_id,
                 },
                 external_bank_account_update_params.ExternalBankAccountUpdateParams,
             ),
@@ -380,6 +386,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -424,6 +431,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -483,6 +491,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
@@ -511,6 +520,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
+                    "user_defined_id": user_defined_id,
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
@@ -574,6 +584,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         name: str | NotGiven = NOT_GIVEN,
         owner: str | NotGiven = NOT_GIVEN,
         owner_type: OwnerType | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -612,6 +623,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "name": name,
                     "owner": owner,
                     "owner_type": owner_type,
+                    "user_defined_id": user_defined_id,
                 },
                 external_bank_account_update_params.ExternalBankAccountUpdateParams,
             ),

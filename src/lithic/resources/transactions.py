@@ -46,7 +46,7 @@ class Transactions(SyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
         """
-        Get specific transaction.
+        Get specific card transaction.
 
         Args:
           extra_headers: Send extra headers
@@ -83,7 +83,7 @@ class Transactions(SyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> SyncPage[Transaction]:
         """
-        List transactions.
+        List card transactions.
 
         Args:
           account_token: Filters for transactions associated with a specific account.
@@ -612,7 +612,7 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
         """
-        Get specific transaction.
+        Get specific card transaction.
 
         Args:
           extra_headers: Send extra headers
@@ -649,7 +649,7 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: float | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
         """
-        List transactions.
+        List card transactions.
 
         Args:
           account_token: Filters for transactions associated with a specific account.
