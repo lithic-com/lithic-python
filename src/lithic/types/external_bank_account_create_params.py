@@ -36,6 +36,8 @@ class PlaidCreateBankAccountAPIRequest(TypedDict, total=False):
 
     doing_business_as: str
 
+    user_defined_id: str
+
 
 ExternalBankAccountAddress = ExternalBankAccountAddressParam
 """This type is deprecated, please use ExternalBankAccountAddressParam instead"""
@@ -74,6 +76,8 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     doing_business_as: str
 
     name: str
+
+    user_defined_id: str
 
     verification_enforcement: bool
     """Indicates whether verification was enforced for a given association record.

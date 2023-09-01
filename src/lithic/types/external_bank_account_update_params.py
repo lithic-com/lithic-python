@@ -33,6 +33,8 @@ class ExternalBankAccountUpdateParams(TypedDict, total=False):
 
     owner_type: OwnerType
 
+    user_defined_id: str
+
 
 ExternalBankAccountAddress = ExternalBankAccountAddressParam
 """This type is deprecated, please use ExternalBankAccountAddressParam instead"""
