@@ -47,6 +47,7 @@ class TestExternalBankAccounts:
             company_id="x",
             dob=parse_date("2019-12-27"),
             doing_business_as="string",
+            user_defined_id="string",
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
@@ -88,6 +89,7 @@ class TestExternalBankAccounts:
             dob=parse_date("2019-12-27"),
             doing_business_as="string",
             name="x",
+            user_defined_id="string",
             verification_enforcement=True,
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
@@ -124,6 +126,7 @@ class TestExternalBankAccounts:
             name="x",
             owner="x",
             owner_type="INDIVIDUAL",
+            user_defined_id="string",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
@@ -174,6 +177,7 @@ class TestAsyncExternalBankAccounts:
             company_id="x",
             dob=parse_date("2019-12-27"),
             doing_business_as="string",
+            user_defined_id="string",
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
@@ -215,6 +219,7 @@ class TestAsyncExternalBankAccounts:
             dob=parse_date("2019-12-27"),
             doing_business_as="string",
             name="x",
+            user_defined_id="string",
             verification_enforcement=True,
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
@@ -251,6 +256,7 @@ class TestAsyncExternalBankAccounts:
             name="x",
             owner="x",
             owner_type="INDIVIDUAL",
+            user_defined_id="string",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
