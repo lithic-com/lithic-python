@@ -139,14 +139,14 @@ class TestExternalBankAccounts:
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_types=["CHECKING", "CHECKING", "CHECKING"],
+            account_types=["CHECKING", "SAVINGS"],
             countries=["string", "string", "string"],
             ending_before="string",
-            owner_types=["INDIVIDUAL", "INDIVIDUAL", "INDIVIDUAL"],
+            owner_types=["INDIVIDUAL", "BUSINESS"],
             page_size=1,
             starting_after="string",
-            states=["ENABLED", "ENABLED", "ENABLED"],
-            verification_states=["PENDING", "PENDING", "PENDING"],
+            states=["ENABLED", "CLOSED", "PAUSED"],
+            verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
         assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 
@@ -269,13 +269,13 @@ class TestAsyncExternalBankAccounts:
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         external_bank_account = await client.external_bank_accounts.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_types=["CHECKING", "CHECKING", "CHECKING"],
+            account_types=["CHECKING", "SAVINGS"],
             countries=["string", "string", "string"],
             ending_before="string",
-            owner_types=["INDIVIDUAL", "INDIVIDUAL", "INDIVIDUAL"],
+            owner_types=["INDIVIDUAL", "BUSINESS"],
             page_size=1,
             starting_after="string",
-            states=["ENABLED", "ENABLED", "ENABLED"],
-            verification_states=["PENDING", "PENDING", "PENDING"],
+            states=["ENABLED", "CLOSED", "PAUSED"],
+            verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
         assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])

@@ -35,12 +35,12 @@ class TestAuthRules:
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         auth_rule = client.auth_rules.create(
-            account_tokens=["string", "string", "string"],
-            allowed_countries=["string", "string", "string"],
-            allowed_mcc=["string", "string", "string"],
-            blocked_countries=["string", "string", "string"],
-            blocked_mcc=["string", "string", "string"],
-            card_tokens=["string", "string", "string"],
+            account_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+            allowed_countries=["MEX"],
+            allowed_mcc=["3000"],
+            blocked_countries=["USA", "CAN"],
+            blocked_mcc=["5811", "5812"],
+            card_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             program_level=False,
         )
         assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
@@ -128,12 +128,12 @@ class TestAsyncAuthRules:
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         auth_rule = await client.auth_rules.create(
-            account_tokens=["string", "string", "string"],
-            allowed_countries=["string", "string", "string"],
-            allowed_mcc=["string", "string", "string"],
-            blocked_countries=["string", "string", "string"],
-            blocked_mcc=["string", "string", "string"],
-            card_tokens=["string", "string", "string"],
+            account_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
+            allowed_countries=["MEX"],
+            allowed_mcc=["3000"],
+            blocked_countries=["USA", "CAN"],
+            blocked_mcc=["5811", "5812"],
+            card_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             program_level=False,
         )
         assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
