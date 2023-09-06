@@ -27,6 +27,8 @@ pip install lithic
 
 ## Usage
 
+The full API of this library can be found in [api.md](https://www.github.com/lithic-com/lithic-python/blob/main/api.md).
+
 ```python
 from lithic import Lithic
 
