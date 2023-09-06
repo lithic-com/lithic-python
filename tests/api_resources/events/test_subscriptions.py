@@ -35,7 +35,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.created", "card.created"],
+            event_types=["card.created", "card.shipped", "card_transaction.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -61,7 +61,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.created", "card.created"],
+            event_types=["card.created", "card.shipped", "card_transaction.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -177,7 +177,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.created", "card.created"],
+            event_types=["card.created", "card.shipped", "card_transaction.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -203,7 +203,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.created", "card.created"],
+            event_types=["card.created", "card.shipped", "card_transaction.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
