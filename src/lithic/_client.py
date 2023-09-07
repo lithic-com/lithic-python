@@ -60,6 +60,7 @@ class Lithic(SyncAPIClient):
     auth_rules: resources.AuthRules
     auth_stream_enrollment: resources.AuthStreamEnrollmentResource
     tokenization_decisioning: resources.TokenizationDecisioning
+    tokenizations: resources.Tokenizations
     cards: resources.Cards
     balances: resources.Balances
     aggregate_balances: resources.AggregateBalances
@@ -150,6 +151,7 @@ class Lithic(SyncAPIClient):
         self.auth_rules = resources.AuthRules(self)
         self.auth_stream_enrollment = resources.AuthStreamEnrollmentResource(self)
         self.tokenization_decisioning = resources.TokenizationDecisioning(self)
+        self.tokenizations = resources.Tokenizations(self)
         self.cards = resources.Cards(self)
         self.balances = resources.Balances(self)
         self.aggregate_balances = resources.AggregateBalances(self)
@@ -259,6 +261,7 @@ class AsyncLithic(AsyncAPIClient):
     auth_rules: resources.AsyncAuthRules
     auth_stream_enrollment: resources.AsyncAuthStreamEnrollmentResource
     tokenization_decisioning: resources.AsyncTokenizationDecisioning
+    tokenizations: resources.AsyncTokenizations
     cards: resources.AsyncCards
     balances: resources.AsyncBalances
     aggregate_balances: resources.AsyncAggregateBalances
@@ -349,6 +352,7 @@ class AsyncLithic(AsyncAPIClient):
         self.auth_rules = resources.AsyncAuthRules(self)
         self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResource(self)
         self.tokenization_decisioning = resources.AsyncTokenizationDecisioning(self)
+        self.tokenizations = resources.AsyncTokenizations(self)
         self.cards = resources.AsyncCards(self)
         self.balances = resources.AsyncBalances(self)
         self.aggregate_balances = resources.AsyncAggregateBalances(self)

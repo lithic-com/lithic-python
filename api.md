@@ -111,6 +111,18 @@ Methods:
 - <code title="get /tokenization_decisioning/secret">client.tokenization_decisioning.<a href="./src/lithic/resources/tokenization_decisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/tokenization_secret.py">TokenizationSecret</a></code>
 - <code title="post /tokenization_decisioning/secret/rotate">client.tokenization_decisioning.<a href="./src/lithic/resources/tokenization_decisioning.py">rotate_secret</a>() -> <a href="./src/lithic/types/tokenization_decisioning_rotate_secret_response.py">TokenizationDecisioningRotateSecretResponse</a></code>
 
+# Tokenizations
+
+Types:
+
+```python
+from lithic.types import Tokenization, TokenizationSimulateResponse
+```
+
+Methods:
+
+- <code title="post /simulate/tokenizations">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">simulate</a>(\*\*<a href="src/lithic/types/tokenization_simulate_params.py">params</a>) -> <a href="./src/lithic/types/tokenization_simulate_response.py">TokenizationSimulateResponse</a></code>
+
 # Cards
 
 Types:
