@@ -10,6 +10,7 @@ from .three_ds import ThreeDS, AsyncThreeDS
 from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import AuthRules, AsyncAuthRules
 from .transactions import Transactions, AsyncTransactions
+from .tokenizations import Tokenizations, AsyncTokenizations
 from .account_holders import AccountHolders, AsyncAccountHolders
 from .aggregate_balances import AggregateBalances, AsyncAggregateBalances
 from .financial_accounts import FinancialAccounts, AsyncFinancialAccounts
@@ -35,6 +36,8 @@ __all__ = [
     "AsyncAuthStreamEnrollmentResource",
     "TokenizationDecisioning",
     "AsyncTokenizationDecisioning",
+    "Tokenizations",
+    "AsyncTokenizations",
     "Cards",
     "AsyncCards",
     "Balances",
