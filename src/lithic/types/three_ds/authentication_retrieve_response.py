@@ -348,7 +348,7 @@ class AuthenticationRetrieveResponse(BaseModel):
     cardholder: Cardholder
     """Object containing data about the cardholder provided during the transaction."""
 
-    channel: Literal["APP_BASED", "BROWSER", "THREE_RI_REQUESTER_INITIATED"]
+    channel: Literal["APP_BASED", "BROWSER", "THREE_DS_REQUESTOR_INITIATED"]
     """Channel in which the authentication occurs.
 
     Maps to EMV 3DS field deviceChannel.
