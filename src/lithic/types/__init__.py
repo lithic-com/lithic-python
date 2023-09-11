@@ -96,11 +96,17 @@ from .account_holder_resubmit_params import (
 from .account_holder_update_response import (
     AccountHolderUpdateResponse as AccountHolderUpdateResponse,
 )
+from .payment_simulate_return_params import (
+    PaymentSimulateReturnParams as PaymentSimulateReturnParams,
+)
 from .tokenization_simulate_response import (
     TokenizationSimulateResponse as TokenizationSimulateResponse,
 )
 from .payment_simulate_release_params import (
     PaymentSimulateReleaseParams as PaymentSimulateReleaseParams,
+)
+from .payment_simulate_return_response import (
+    PaymentSimulateReturnResponse as PaymentSimulateReturnResponse,
 )
 from .responder_endpoint_create_params import (
     ResponderEndpointCreateParams as ResponderEndpointCreateParams,
