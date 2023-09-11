@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.18.3 (2023-09-11)
+
+Full Changelog: [v0.18.2...v0.18.3](https://github.com/lithic-com/lithic-python/compare/v0.18.2...v0.18.3)
+
+### Features
+
+* **api:** add Simulate Return Payment endpoint ([#155](https://github.com/lithic-com/lithic-python/issues/155)) ([b81d2ac](https://github.com/lithic-com/lithic-python/commit/b81d2aca3079b553f064159c74f4ba25178cf97e))
+* **api:** add tokenizations.simulate and correct typo'd enum  ([#151](https://github.com/lithic-com/lithic-python/issues/151)) ([8968036](https://github.com/lithic-com/lithic-python/commit/896803650b1bf00753f17f31053cde068f35a4d2))
+* **api:** add user defined id ([#144](https://github.com/lithic-com/lithic-python/issues/144)) ([88a2f52](https://github.com/lithic-com/lithic-python/commit/88a2f52a45f26c342148cf29d1c5883b0ba79b12))
+* fixes tests where an array has to have unique enum values ([#147](https://github.com/lithic-com/lithic-python/issues/147)) ([0dbc2e6](https://github.com/lithic-com/lithic-python/commit/0dbc2e664471d2889cdd40e584591e1b8e155e7c))
+* **types:** remove unused types ([#145](https://github.com/lithic-com/lithic-python/issues/145)) ([9e13e49](https://github.com/lithic-com/lithic-python/commit/9e13e4936d31f789b38853a9a9930398bf989527))
+
+
+### Bug Fixes
+
+* **client:** properly handle optional file params ([#146](https://github.com/lithic-com/lithic-python/issues/146)) ([15a0f07](https://github.com/lithic-com/lithic-python/commit/15a0f07400b61f1d99fae443226ac9dbeac8b1a3))
+
+
+### Chores
+
+* **ci:** setup workflows to create releases and release PRs ([#137](https://github.com/lithic-com/lithic-python/issues/137)) ([9d5ba39](https://github.com/lithic-com/lithic-python/commit/9d5ba39e3f2ff9fbf9956629b54c6511711bd6a4))
+* **internal:** add `pydantic.generics` import for compatibility ([#139](https://github.com/lithic-com/lithic-python/issues/139)) ([1933c6d](https://github.com/lithic-com/lithic-python/commit/1933c6d7e08bb8b0c0642dcfcd0c7cf796f10362))
+* **internal:** cleanup test params ([#152](https://github.com/lithic-com/lithic-python/issues/152)) ([99e8a4b](https://github.com/lithic-com/lithic-python/commit/99e8a4b9b7e2d9b2b71877e879776e4c970830d1))
+* **internal:** minor restructuring ([#142](https://github.com/lithic-com/lithic-python/issues/142)) ([65f9fc7](https://github.com/lithic-com/lithic-python/commit/65f9fc72aeb22556fb1beea1ea796bd7eac99c9c))
+* **internal:** minor update ([#149](https://github.com/lithic-com/lithic-python/issues/149)) ([b65dcfa](https://github.com/lithic-com/lithic-python/commit/b65dcfa341221f1f2727f667ac009642205245f4))
+* **internal:** update base client ([#148](https://github.com/lithic-com/lithic-python/issues/148)) ([7596e42](https://github.com/lithic-com/lithic-python/commit/7596e427559f2e271b1d6290960872510c70fcbd))
+* **internal:** update pyright ([#154](https://github.com/lithic-com/lithic-python/issues/154)) ([d44c079](https://github.com/lithic-com/lithic-python/commit/d44c079d71f827a22a43a90e89b61f71fa94c06b))
+* **internal:** updates ([#153](https://github.com/lithic-com/lithic-python/issues/153)) ([6d674bc](https://github.com/lithic-com/lithic-python/commit/6d674bcb807005692c71451f5ebf5844f6761edf))
+
+
+### Documentation
+
+* **readme:** add link to api.md ([#150](https://github.com/lithic-com/lithic-python/issues/150)) ([bb82d1d](https://github.com/lithic-com/lithic-python/commit/bb82d1dd49c81672be1bcd3fbd7582e400d511b2))
+* **readme:** reference pydantic helpers ([#143](https://github.com/lithic-com/lithic-python/issues/143)) ([f0d51be](https://github.com/lithic-com/lithic-python/commit/f0d51bee688b94115132af05caf32a68a8b11002))
+
 ## [0.18.2](https://github.com/lithic-com/lithic-python/compare/v0.18.1...v0.18.2) (2023-08-24)
 
 
