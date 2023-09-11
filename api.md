@@ -345,7 +345,12 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Payment, PaymentCreateResponse, PaymentSimulateReleaseResponse
+from lithic.types import (
+    Payment,
+    PaymentCreateResponse,
+    PaymentSimulateReleaseResponse,
+    PaymentSimulateReturnResponse,
+)
 ```
 
 Methods:
@@ -354,6 +359,7 @@ Methods:
 - <code title="get /payments/{payment_token}">client.payments.<a href="./src/lithic/resources/payments.py">retrieve</a>(payment_token) -> <a href="./src/lithic/types/payment.py">Payment</a></code>
 - <code title="get /payments">client.payments.<a href="./src/lithic/resources/payments.py">list</a>(\*\*<a href="src/lithic/types/payment_list_params.py">params</a>) -> <a href="./src/lithic/types/payment.py">SyncCursorPage[Payment]</a></code>
 - <code title="post /simulate/payments/release">client.payments.<a href="./src/lithic/resources/payments.py">simulate_release</a>(\*\*<a href="src/lithic/types/payment_simulate_release_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_release_response.py">PaymentSimulateReleaseResponse</a></code>
+- <code title="post /simulate/payments/return">client.payments.<a href="./src/lithic/resources/payments.py">simulate_return</a>(\*\*<a href="src/lithic/types/payment_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_return_response.py">PaymentSimulateReturnResponse</a></code>
 
 # ThreeDS
 

@@ -8,7 +8,12 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import Payment, PaymentCreateResponse, PaymentSimulateReleaseResponse
+from lithic.types import (
+    Payment,
+    PaymentCreateResponse,
+    PaymentSimulateReturnResponse,
+    PaymentSimulateReleaseResponse,
+)
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
@@ -78,6 +83,21 @@ class TestPayments:
         )
         assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
 
+    @parametrize
+    def test_method_simulate_return(self, client: Lithic) -> None:
+        payment = client.payments.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+    @parametrize
+    def test_method_simulate_return_with_all_params(self, client: Lithic) -> None:
+        payment = client.payments.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="string",
+        )
+        assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
 
 class TestAsyncPayments:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -141,3 +161,18 @@ class TestAsyncPayments:
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_return(self, client: AsyncLithic) -> None:
+        payment = await client.payments.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_return_with_all_params(self, client: AsyncLithic) -> None:
+        payment = await client.payments.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="string",
+        )
+        assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])

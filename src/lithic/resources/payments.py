@@ -7,9 +7,11 @@ from typing_extensions import Literal
 from ..types import (
     Payment,
     PaymentCreateResponse,
+    PaymentSimulateReturnResponse,
     PaymentSimulateReleaseResponse,
     payment_list_params,
     payment_create_params,
+    payment_simulate_return_params,
     payment_simulate_release_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -213,6 +215,52 @@ class Payments(SyncAPIResource):
             cast_to=PaymentSimulateReleaseResponse,
         )
 
+    def simulate_return(
+        self,
+        *,
+        payment_token: str,
+        return_reason_code: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> PaymentSimulateReturnResponse:
+        """
+        Simulates a return of a Payment.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            "/simulate/payments/return",
+            body=maybe_transform(
+                {
+                    "payment_token": payment_token,
+                    "return_reason_code": return_reason_code,
+                },
+                payment_simulate_return_params.PaymentSimulateReturnParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=PaymentSimulateReturnResponse,
+        )
+
 
 class AsyncPayments(AsyncAPIResource):
     async def create(
@@ -404,4 +452,50 @@ class AsyncPayments(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=PaymentSimulateReleaseResponse,
+        )
+
+    async def simulate_return(
+        self,
+        *,
+        payment_token: str,
+        return_reason_code: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> PaymentSimulateReturnResponse:
+        """
+        Simulates a return of a Payment.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            "/simulate/payments/return",
+            body=maybe_transform(
+                {
+                    "payment_token": payment_token,
+                    "return_reason_code": return_reason_code,
+                },
+                payment_simulate_return_params.PaymentSimulateReturnParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=PaymentSimulateReturnResponse,
         )
