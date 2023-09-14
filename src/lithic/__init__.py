@@ -13,7 +13,6 @@ from ._client import (
     AsyncClient,
     AsyncLithic,
     AsyncStream,
-    ProxiesTypes,
     RequestOptions,
 )
 from ._version import __title__, __version__
