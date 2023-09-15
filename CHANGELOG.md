@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.18.4 (2023-09-15)
+
+Full Changelog: [v0.18.3...v0.18.4](https://github.com/lithic-com/lithic-python/compare/v0.18.3...v0.18.4)
+
+### Features
+
+* **client:** retry on 408 Request Timeout ([#160](https://github.com/lithic-com/lithic-python/issues/160)) ([9ef57a3](https://github.com/lithic-com/lithic-python/commit/9ef57a3a53884a3a587d426f57bc1c3646fb610a))
+
+
+### Bug Fixes
+
+* **client:** properly configure model set fields ([#159](https://github.com/lithic-com/lithic-python/issues/159)) ([1c13556](https://github.com/lithic-com/lithic-python/commit/1c135563927c96796ce287184ab7de0c4ff0d150))
+
+
+### Chores
+
+* **internal:** add helpers ([#161](https://github.com/lithic-com/lithic-python/issues/161)) ([cbfebd7](https://github.com/lithic-com/lithic-python/commit/cbfebd70a47f4434f3386b69b375ca10389f2466))
+
+
+### Documentation
+
+* add some missing inline documentation ([#156](https://github.com/lithic-com/lithic-python/issues/156)) ([e1a3ac0](https://github.com/lithic-com/lithic-python/commit/e1a3ac05d29d792e1b3947e048bea43b03d2e7cd))
+
 ## 0.18.3 (2023-09-11)
 
 Full Changelog: [v0.18.2...v0.18.3](https://github.com/lithic-com/lithic-python/compare/v0.18.2...v0.18.3)
