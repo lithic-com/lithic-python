@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.5 (2023-09-20)
+
+Full Changelog: [v0.18.4...v0.18.5](https://github.com/lithic-com/lithic-python/compare/v0.18.4...v0.18.5)
+
+### Features
+
+* **api:** add simulation endpoints, event types, fix transfer request AuthRule ([#164](https://github.com/lithic-com/lithic-python/issues/164)) ([ca1e3dc](https://github.com/lithic-com/lithic-python/commit/ca1e3dc32ef7faece3c3502ae0083a8f28b42fd3))
+
 ## 0.18.4 (2023-09-15)
 
 Full Changelog: [v0.18.3...v0.18.4](https://github.com/lithic-com/lithic-python/compare/v0.18.3...v0.18.4)
