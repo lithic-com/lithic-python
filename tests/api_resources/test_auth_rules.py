@@ -8,14 +8,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    AuthRule,
-    AuthRuleApplyResponse,
-    AuthRuleCreateResponse,
-    AuthRuleRemoveResponse,
-    AuthRuleUpdateResponse,
-    AuthRuleRetrieveResponse,
-)
+from lithic.types import AuthRule, AuthRuleRemoveResponse, AuthRuleRetrieveResponse
 from lithic.pagination import SyncPage, AsyncPage
 
 base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
@@ -30,7 +23,7 @@ class TestAuthRules:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         auth_rule = client.auth_rules.create()
-        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
@@ -43,7 +36,7 @@ class TestAuthRules:
             card_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             program_level=False,
         )
-        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
@@ -57,7 +50,7 @@ class TestAuthRules:
         auth_rule = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
@@ -68,7 +61,7 @@ class TestAuthRules:
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
         )
-        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -88,7 +81,7 @@ class TestAuthRules:
         auth_rule = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     def test_method_apply_with_all_params(self, client: Lithic) -> None:
@@ -98,7 +91,7 @@ class TestAuthRules:
             card_tokens=["string", "string", "string"],
             program_level=True,
         )
-        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     def test_method_remove(self, client: Lithic) -> None:
@@ -123,7 +116,7 @@ class TestAsyncAuthRules:
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
         auth_rule = await client.auth_rules.create()
-        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
@@ -136,7 +129,7 @@ class TestAsyncAuthRules:
             card_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             program_level=False,
         )
-        assert_matches_type(AuthRuleCreateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
@@ -150,7 +143,7 @@ class TestAsyncAuthRules:
         auth_rule = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
@@ -161,7 +154,7 @@ class TestAsyncAuthRules:
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
         )
-        assert_matches_type(AuthRuleUpdateResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -181,7 +174,7 @@ class TestAsyncAuthRules:
         auth_rule = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_apply_with_all_params(self, client: AsyncLithic) -> None:
@@ -191,7 +184,7 @@ class TestAsyncAuthRules:
             card_tokens=["string", "string", "string"],
             program_level=True,
         )
-        assert_matches_type(AuthRuleApplyResponse, auth_rule, path=["response"])
+        assert_matches_type(AuthRule, auth_rule, path=["response"])
 
     @parametrize
     async def test_method_remove(self, client: AsyncLithic) -> None:
