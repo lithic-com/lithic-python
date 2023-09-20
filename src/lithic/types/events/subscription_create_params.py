@@ -27,6 +27,8 @@ class SubscriptionCreateParams(TypedDict, total=False):
             "digital_wallet.tokenization_result",
             "digital_wallet.tokenization_two_factor_authentication_code",
             "dispute.updated",
+            "dispute_evidence.upload_failed",
+            "three_ds_authentication.created",
             "payment_transaction.created",
             "payment_transaction.updated",
             "transfer_transaction.created",

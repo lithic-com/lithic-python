@@ -6,10 +6,7 @@ from typing import List
 
 from ..types import (
     AuthRule,
-    AuthRuleApplyResponse,
-    AuthRuleCreateResponse,
     AuthRuleRemoveResponse,
-    AuthRuleUpdateResponse,
     AuthRuleRetrieveResponse,
     auth_rule_list_params,
     auth_rule_apply_params,
@@ -44,7 +41,7 @@ class AuthRules(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> AuthRuleCreateResponse:
+    ) -> AuthRule:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
         account, or card level.
@@ -101,7 +98,7 @@ class AuthRules(SyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AuthRuleCreateResponse,
+            cast_to=AuthRule,
         )
 
     def retrieve(
@@ -151,7 +148,7 @@ class AuthRules(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> AuthRuleUpdateResponse:
+    ) -> AuthRule:
         """
         Update the properties associated with an existing authorization rule (Auth
         Rule).
@@ -200,7 +197,7 @@ class AuthRules(SyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AuthRuleUpdateResponse,
+            cast_to=AuthRule,
         )
 
     def list(
@@ -264,7 +261,7 @@ class AuthRules(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> AuthRuleApplyResponse:
+    ) -> AuthRule:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
         card level.
@@ -306,7 +303,7 @@ class AuthRules(SyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AuthRuleApplyResponse,
+            cast_to=AuthRule,
         )
 
     def remove(
@@ -386,7 +383,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> AuthRuleCreateResponse:
+    ) -> AuthRule:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
         account, or card level.
@@ -443,7 +440,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AuthRuleCreateResponse,
+            cast_to=AuthRule,
         )
 
     async def retrieve(
@@ -493,7 +490,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> AuthRuleUpdateResponse:
+    ) -> AuthRule:
         """
         Update the properties associated with an existing authorization rule (Auth
         Rule).
@@ -542,7 +539,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AuthRuleUpdateResponse,
+            cast_to=AuthRule,
         )
 
     def list(
@@ -606,7 +603,7 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
-    ) -> AuthRuleApplyResponse:
+    ) -> AuthRule:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
         card level.
@@ -648,7 +645,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AuthRuleApplyResponse,
+            cast_to=AuthRule,
         )
 
     async def remove(
