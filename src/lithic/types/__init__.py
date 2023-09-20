@@ -54,10 +54,7 @@ from .auth_rule_update_params import AuthRuleUpdateParams as AuthRuleUpdateParam
 from .card_provision_response import CardProvisionResponse as CardProvisionResponse
 from .payment_create_response import PaymentCreateResponse as PaymentCreateResponse
 from .transaction_list_params import TransactionListParams as TransactionListParams
-from .auth_rule_apply_response import AuthRuleApplyResponse as AuthRuleApplyResponse
-from .auth_rule_create_response import AuthRuleCreateResponse as AuthRuleCreateResponse
 from .auth_rule_remove_response import AuthRuleRemoveResponse as AuthRuleRemoveResponse
-from .auth_rule_update_response import AuthRuleUpdateResponse as AuthRuleUpdateResponse
 from .card_get_embed_url_params import CardGetEmbedURLParams as CardGetEmbedURLParams
 from .responder_endpoint_status import (
     ResponderEndpointStatus as ResponderEndpointStatus,

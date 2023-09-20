@@ -63,23 +63,16 @@ Methods:
 Types:
 
 ```python
-from lithic.types import (
-    AuthRule,
-    AuthRuleCreateResponse,
-    AuthRuleRetrieveResponse,
-    AuthRuleUpdateResponse,
-    AuthRuleApplyResponse,
-    AuthRuleRemoveResponse,
-)
+from lithic.types import AuthRule, AuthRuleRetrieveResponse, AuthRuleRemoveResponse
 ```
 
 Methods:
 
-- <code title="post /auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">create</a>(\*\*<a href="src/lithic/types/auth_rule_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_create_response.py">AuthRuleCreateResponse</a></code>
+- <code title="post /auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">create</a>(\*\*<a href="src/lithic/types/auth_rule_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
 - <code title="get /auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rule_retrieve_response.py">AuthRuleRetrieveResponse</a></code>
-- <code title="put /auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_update_response.py">AuthRuleUpdateResponse</a></code>
+- <code title="put /auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
 - <code title="get /auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">list</a>(\*\*<a href="src/lithic/types/auth_rule_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">SyncPage[AuthRule]</a></code>
-- <code title="post /auth_rules/{auth_rule_token}/apply">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_apply_response.py">AuthRuleApplyResponse</a></code>
+- <code title="post /auth_rules/{auth_rule_token}/apply">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
 - <code title="delete /auth_rules/remove">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">remove</a>(\*\*<a href="src/lithic/types/auth_rule_remove_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_remove_response.py">AuthRuleRemoveResponse</a></code>
 
 # AuthStreamEnrollmentResource
@@ -229,6 +222,7 @@ Methods:
 - <code title="post /event_subscriptions/{event_subscription_token}/replay_missing">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">replay_missing</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_replay_missing_params.py">params</a>) -> None</code>
 - <code title="get /event_subscriptions/{event_subscription_token}/secret">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">retrieve_secret</a>(event_subscription_token) -> <a href="./src/lithic/types/events/subscription_retrieve_secret_response.py">SubscriptionRetrieveSecretResponse</a></code>
 - <code title="post /event_subscriptions/{event_subscription_token}/secret/rotate">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">rotate_secret</a>(event_subscription_token) -> None</code>
+- <code title="post /simulate/event_subscriptions/{event_subscription_token}/send_example">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">send_simulated_example</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_send_simulated_example_params.py">params</a>) -> None</code>
 
 # FinancialAccounts
 
@@ -368,12 +362,16 @@ Methods:
 Types:
 
 ```python
-from lithic.types.three_ds import AuthenticationRetrieveResponse
+from lithic.types.three_ds import (
+    AuthenticationRetrieveResponse,
+    AuthenticationSimulateResponse,
+)
 ```
 
 Methods:
 
 - <code title="get /three_ds_authentication/{three_ds_authentication_token}">client.three_ds.authentication.<a href="./src/lithic/resources/three_ds/authentication.py">retrieve</a>(three_ds_authentication_token) -> <a href="./src/lithic/types/three_ds/authentication_retrieve_response.py">AuthenticationRetrieveResponse</a></code>
+- <code title="post /three_ds_authentication/simulate">client.three_ds.authentication.<a href="./src/lithic/resources/three_ds/authentication.py">simulate</a>(\*\*<a href="src/lithic/types/three_ds/authentication_simulate_params.py">params</a>) -> <a href="./src/lithic/types/three_ds/authentication_simulate_response.py">AuthenticationSimulateResponse</a></code>
 
 ## Decisioning
 

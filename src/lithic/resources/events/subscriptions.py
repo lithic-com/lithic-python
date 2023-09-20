@@ -20,6 +20,7 @@ from ...types.events import (
     subscription_recover_params,
     subscription_list_attempts_params,
     subscription_replay_missing_params,
+    subscription_send_simulated_example_params,
 )
 
 __all__ = ["Subscriptions", "AsyncSubscriptions"]
@@ -41,6 +42,8 @@ class Subscriptions(SyncAPIResource):
                 "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",
                 "dispute.updated",
+                "dispute_evidence.upload_failed",
+                "three_ds_authentication.created",
                 "payment_transaction.created",
                 "payment_transaction.updated",
                 "transfer_transaction.created",
@@ -146,6 +149,8 @@ class Subscriptions(SyncAPIResource):
                 "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",
                 "dispute.updated",
+                "dispute_evidence.upload_failed",
+                "three_ds_authentication.created",
                 "payment_transaction.created",
                 "payment_transaction.updated",
                 "transfer_transaction.created",
@@ -540,6 +545,65 @@ class Subscriptions(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def send_simulated_example(
+        self,
+        event_subscription_token: str,
+        *,
+        event_type: Literal[
+            "card.created",
+            "card.shipped",
+            "card_transaction.updated",
+            "digital_wallet.tokenization_approval_request",
+            "digital_wallet.tokenization_result",
+            "digital_wallet.tokenization_two_factor_authentication_code",
+            "dispute.updated",
+            "dispute_evidence.upload_failed",
+            "three_ds_authentication.created",
+            "payment_transaction.created",
+            "payment_transaction.updated",
+            "transfer_transaction.created",
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> None:
+        """
+        Send an example message for event.
+
+        Args:
+          event_type: Event type to send example message for.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            f"/simulate/event_subscriptions/{event_subscription_token}/send_example",
+            body=maybe_transform(
+                {"event_type": event_type},
+                subscription_send_simulated_example_params.SubscriptionSendSimulatedExampleParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=NoneType,
+        )
+
 
 class AsyncSubscriptions(AsyncAPIResource):
     async def create(
@@ -557,6 +621,8 @@ class AsyncSubscriptions(AsyncAPIResource):
                 "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",
                 "dispute.updated",
+                "dispute_evidence.upload_failed",
+                "three_ds_authentication.created",
                 "payment_transaction.created",
                 "payment_transaction.updated",
                 "transfer_transaction.created",
@@ -662,6 +728,8 @@ class AsyncSubscriptions(AsyncAPIResource):
                 "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",
                 "dispute.updated",
+                "dispute_evidence.upload_failed",
+                "three_ds_authentication.created",
                 "payment_transaction.created",
                 "payment_transaction.updated",
                 "transfer_transaction.created",
@@ -1046,6 +1114,65 @@ class AsyncSubscriptions(AsyncAPIResource):
         """
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=NoneType,
+        )
+
+    async def send_simulated_example(
+        self,
+        event_subscription_token: str,
+        *,
+        event_type: Literal[
+            "card.created",
+            "card.shipped",
+            "card_transaction.updated",
+            "digital_wallet.tokenization_approval_request",
+            "digital_wallet.tokenization_result",
+            "digital_wallet.tokenization_two_factor_authentication_code",
+            "dispute.updated",
+            "dispute_evidence.upload_failed",
+            "three_ds_authentication.created",
+            "payment_transaction.created",
+            "payment_transaction.updated",
+            "transfer_transaction.created",
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> None:
+        """
+        Send an example message for event.
+
+        Args:
+          event_type: Event type to send example message for.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            f"/simulate/event_subscriptions/{event_subscription_token}/send_example",
+            body=maybe_transform(
+                {"event_type": event_type},
+                subscription_send_simulated_example_params.SubscriptionSendSimulatedExampleParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

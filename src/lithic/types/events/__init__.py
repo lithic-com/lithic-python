@@ -21,3 +21,6 @@ from .subscription_replay_missing_params import (
 from .subscription_retrieve_secret_response import (
     SubscriptionRetrieveSecretResponse as SubscriptionRetrieveSecretResponse,
 )
+from .subscription_send_simulated_example_params import (
+    SubscriptionSendSimulatedExampleParams as SubscriptionSendSimulatedExampleParams,
+)

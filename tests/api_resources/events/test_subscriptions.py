@@ -158,6 +158,21 @@ class TestSubscriptions:
         )
         assert subscription is None
 
+    @parametrize
+    def test_method_send_simulated_example(self, client: Lithic) -> None:
+        subscription = client.events.subscriptions.send_simulated_example(
+            "string",
+        )
+        assert subscription is None
+
+    @parametrize
+    def test_method_send_simulated_example_with_all_params(self, client: Lithic) -> None:
+        subscription = client.events.subscriptions.send_simulated_example(
+            "string",
+            event_type="card.created",
+        )
+        assert subscription is None
+
 
 class TestAsyncSubscriptions:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -297,5 +312,20 @@ class TestAsyncSubscriptions:
     async def test_method_rotate_secret(self, client: AsyncLithic) -> None:
         subscription = await client.events.subscriptions.rotate_secret(
             "string",
+        )
+        assert subscription is None
+
+    @parametrize
+    async def test_method_send_simulated_example(self, client: AsyncLithic) -> None:
+        subscription = await client.events.subscriptions.send_simulated_example(
+            "string",
+        )
+        assert subscription is None
+
+    @parametrize
+    async def test_method_send_simulated_example_with_all_params(self, client: AsyncLithic) -> None:
+        subscription = await client.events.subscriptions.send_simulated_example(
+            "string",
+            event_type="card.created",
         )
         assert subscription is None
