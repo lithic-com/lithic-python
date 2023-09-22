@@ -12,7 +12,7 @@ import httpx
 import pytest
 from respx import MockRouter
 
-from lithic import Lithic, AsyncLithic
+from lithic import Lithic, AsyncLithic, APIResponseValidationError
 from lithic._models import BaseModel, FinalRequestOptions
 from lithic._base_client import BaseClient, make_request_options
 
@@ -387,6 +387,23 @@ class TestLithic:
             assert not client.is_closed()
         assert client.is_closed()
 
+    @pytest.mark.respx(base_url=base_url)
+    def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
+        class Model(BaseModel):
+            name: str
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
+
+        strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+
+        with pytest.raises(APIResponseValidationError):
+            strict_client.get("/foo", cast_to=Model)
+
+        client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+
+        response = client.get("/foo", cast_to=Model)
+        assert isinstance(response, str)  # type: ignore[unreachable]
+
 
 class TestAsyncLithic:
     client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -751,3 +768,21 @@ class TestAsyncLithic:
             assert not c2.is_closed()
             assert not client.is_closed()
         assert client.is_closed()
+
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.asyncio
+    async def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
+        class Model(BaseModel):
+            name: str
+
+        respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
+
+        strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+
+        with pytest.raises(APIResponseValidationError):
+            await strict_client.get("/foo", cast_to=Model)
+
+        client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+
+        response = await client.get("/foo", cast_to=Model)
+        assert isinstance(response, str)  # type: ignore[unreachable]
