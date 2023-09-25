@@ -18,7 +18,11 @@ __all__ = [
 ]
 
 
-class APIError(Exception):
+class LithicError(Exception):
+    pass
+
+
+class APIError(LithicError):
     message: str
     request: httpx.Request
 

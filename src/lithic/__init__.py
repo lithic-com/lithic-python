@@ -18,6 +18,7 @@ from ._client import (
 from ._version import __title__, __version__
 from ._exceptions import (
     APIError,
+    LithicError,
     ConflictError,
     NotFoundError,
     APIStatusError,
@@ -39,6 +40,7 @@ __all__ = [
     "NoneType",
     "Transport",
     "ProxiesTypes",
+    "LithicError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
