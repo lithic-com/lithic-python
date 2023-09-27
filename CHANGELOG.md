@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.18.6 (2023-09-27)
+
+Full Changelog: [v0.18.5...v0.18.6](https://github.com/lithic-com/lithic-python/compare/v0.18.5...v0.18.6)
+
+### Features
+
+* **package:** export a root error type ([#169](https://github.com/lithic-com/lithic-python/issues/169)) ([f4e57de](https://github.com/lithic-com/lithic-python/commit/f4e57decb9debf8e31e55fcd6ce1204656858228))
+
+
+### Bug Fixes
+
+* **client:** don't error by default for unexpected content types ([#166](https://github.com/lithic-com/lithic-python/issues/166)) ([cf9c611](https://github.com/lithic-com/lithic-python/commit/cf9c611ba78ac4e0ada060e9ecda7a387caba251))
+
+
+### Chores
+
+* **internal:** move error classes from _base_exceptions to _exceptions (⚠️ breaking) ([#168](https://github.com/lithic-com/lithic-python/issues/168)) ([f959dd5](https://github.com/lithic-com/lithic-python/commit/f959dd56cd0692c80ffb165eff2e965a5bc4ccf3))
+* **tests:** improve raw response test ([#170](https://github.com/lithic-com/lithic-python/issues/170)) ([0848bd0](https://github.com/lithic-com/lithic-python/commit/0848bd0663d0424ddba2826ab207c46ea266cf50))
+
 ## 0.18.5 (2023-09-20)
 
 Full Changelog: [v0.18.4...v0.18.5](https://github.com/lithic-com/lithic-python/compare/v0.18.4...v0.18.5)
