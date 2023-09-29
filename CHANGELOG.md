@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.19.0 (2023-09-29)
+
+Full Changelog: [v0.18.6...v0.19.0](https://github.com/lithic-com/lithic-python/compare/v0.18.6...v0.19.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** remove `post /webhooks/account_holders` endpoint ([#171](https://github.com/lithic-com/lithic-python/issues/171))
+
+### Refactors
+
+* **api:** remove `post /webhooks/account_holders` endpoint ([#171](https://github.com/lithic-com/lithic-python/issues/171)) ([a2143d4](https://github.com/lithic-com/lithic-python/commit/a2143d494256fdb142122a54af556d0f3a8bfce7))
+
 ## 0.18.6 (2023-09-27)
 
 Full Changelog: [v0.18.5...v0.18.6](https://github.com/lithic-com/lithic-python/compare/v0.18.5...v0.18.6)
