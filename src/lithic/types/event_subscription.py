@@ -21,6 +21,9 @@ class EventSubscription(BaseModel):
     event_types: Optional[
         List[
             Literal[
+                "account_holder.created",
+                "account_holder.updated",
+                "account_holder.verification",
                 "card.created",
                 "card.shipped",
                 "card_transaction.updated",

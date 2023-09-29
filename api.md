@@ -42,7 +42,6 @@ from lithic.types import (
     KYC,
     KYCExempt,
     AccountHolderUpdateResponse,
-    AccountHolderCreateWebhookResponse,
     AccountHolderListDocumentsResponse,
 )
 ```
@@ -52,7 +51,6 @@ Methods:
 - <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="get /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="patch /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">update</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_update_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_update_response.py">AccountHolderUpdateResponse</a></code>
-- <code title="post /webhooks/account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create_webhook</a>(\*\*<a href="src/lithic/types/account_holder_create_webhook_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_create_webhook_response.py">AccountHolderCreateWebhookResponse</a></code>
 - <code title="get /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">list_documents</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder_list_documents_response.py">AccountHolderListDocumentsResponse</a></code>
 - <code title="post /account_holders/{account_holder_token}/resubmit">client.account_holders.<a href="./src/lithic/resources/account_holders.py">resubmit</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_resubmit_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="get /account_holders/{account_holder_token}/documents/{document_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve_document</a>(account_holder_token, document_token) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>

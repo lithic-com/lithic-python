@@ -9,6 +9,9 @@ __all__ = ["SubscriptionSendSimulatedExampleParams"]
 
 class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
     event_type: Literal[
+        "account_holder.created",
+        "account_holder.updated",
+        "account_holder.verification",
         "card.created",
         "card.shipped",
         "card_transaction.updated",

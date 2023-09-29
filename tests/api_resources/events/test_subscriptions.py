@@ -35,7 +35,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.shipped", "card_transaction.updated"],
+            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -61,7 +61,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.shipped", "card_transaction.updated"],
+            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -169,7 +169,7 @@ class TestSubscriptions:
     def test_method_send_simulated_example_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.send_simulated_example(
             "string",
-            event_type="card.created",
+            event_type="account_holder.created",
         )
         assert subscription is None
 
@@ -192,7 +192,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.shipped", "card_transaction.updated"],
+            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -218,7 +218,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="string",
             disabled=True,
-            event_types=["card.created", "card.shipped", "card_transaction.updated"],
+            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -326,6 +326,6 @@ class TestAsyncSubscriptions:
     async def test_method_send_simulated_example_with_all_params(self, client: AsyncLithic) -> None:
         subscription = await client.events.subscriptions.send_simulated_example(
             "string",
-            event_type="card.created",
+            event_type="account_holder.created",
         )
         assert subscription is None

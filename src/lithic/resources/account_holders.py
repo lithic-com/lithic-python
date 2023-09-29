@@ -9,13 +9,11 @@ from ..types import (
     AccountHolder,
     AccountHolderDocument,
     AccountHolderUpdateResponse,
-    AccountHolderCreateWebhookResponse,
     AccountHolderListDocumentsResponse,
     shared_params,
     account_holder_create_params,
     account_holder_update_params,
     account_holder_resubmit_params,
-    account_holder_create_webhook_params,
     account_holder_upload_document_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -398,60 +396,6 @@ class AccountHolders(SyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=AccountHolderUpdateResponse,
-        )
-
-    def create_webhook(
-        self,
-        *,
-        url: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
-    ) -> AccountHolderCreateWebhookResponse:
-        """
-        Create a webhook to receive KYC or KYB evaluation events.
-
-        There are two types of account holder webhooks:
-
-        - `verification`: Webhook sent when the status of a KYC or KYB evaluation
-          changes from `PENDING_DOCUMENT` (KYC) or `PENDING` (KYB) to `ACCEPTED` or
-          `REJECTED`.
-        - `document_upload_front`/`document_upload_back`: Webhook sent when a document
-          upload fails.
-
-        After a webhook has been created, this endpoint can be used to rotate a webhooks
-        HMAC token or modify the registered URL. Only a single webhook is allowed per
-        program. Since HMAC verification is available, the IP addresses from which
-        KYC/KYB webhooks are sent are subject to change.
-
-        Args:
-          url: URL to receive webhook requests. Must be a valid HTTPS address.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        return self._post(
-            "/webhooks/account_holders",
-            body=maybe_transform({"url": url}, account_holder_create_webhook_params.AccountHolderCreateWebhookParams),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
-            ),
-            cast_to=AccountHolderCreateWebhookResponse,
         )
 
     def list_documents(
@@ -1043,60 +987,6 @@ class AsyncAccountHolders(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=AccountHolderUpdateResponse,
-        )
-
-    async def create_webhook(
-        self,
-        *,
-        url: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
-    ) -> AccountHolderCreateWebhookResponse:
-        """
-        Create a webhook to receive KYC or KYB evaluation events.
-
-        There are two types of account holder webhooks:
-
-        - `verification`: Webhook sent when the status of a KYC or KYB evaluation
-          changes from `PENDING_DOCUMENT` (KYC) or `PENDING` (KYB) to `ACCEPTED` or
-          `REJECTED`.
-        - `document_upload_front`/`document_upload_back`: Webhook sent when a document
-          upload fails.
-
-        After a webhook has been created, this endpoint can be used to rotate a webhooks
-        HMAC token or modify the registered URL. Only a single webhook is allowed per
-        program. Since HMAC verification is available, the IP addresses from which
-        KYC/KYB webhooks are sent are subject to change.
-
-        Args:
-          url: URL to receive webhook requests. Must be a valid HTTPS address.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        return await self._post(
-            "/webhooks/account_holders",
-            body=maybe_transform({"url": url}, account_holder_create_webhook_params.AccountHolderCreateWebhookParams),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
-            ),
-            cast_to=AccountHolderCreateWebhookResponse,
         )
 
     async def list_documents(
