@@ -20,6 +20,9 @@ class SubscriptionCreateParams(TypedDict, total=False):
 
     event_types: List[
         Literal[
+            "account_holder.created",
+            "account_holder.updated",
+            "account_holder.verification",
             "card.created",
             "card.shipped",
             "card_transaction.updated",

@@ -35,6 +35,9 @@ class Subscriptions(SyncAPIResource):
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[
             Literal[
+                "account_holder.created",
+                "account_holder.updated",
+                "account_holder.verification",
                 "card.created",
                 "card.shipped",
                 "card_transaction.updated",
@@ -142,6 +145,9 @@ class Subscriptions(SyncAPIResource):
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[
             Literal[
+                "account_holder.created",
+                "account_holder.updated",
+                "account_holder.verification",
                 "card.created",
                 "card.shipped",
                 "card_transaction.updated",
@@ -550,6 +556,9 @@ class Subscriptions(SyncAPIResource):
         event_subscription_token: str,
         *,
         event_type: Literal[
+            "account_holder.created",
+            "account_holder.updated",
+            "account_holder.verification",
             "card.created",
             "card.shipped",
             "card_transaction.updated",
@@ -614,6 +623,9 @@ class AsyncSubscriptions(AsyncAPIResource):
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[
             Literal[
+                "account_holder.created",
+                "account_holder.updated",
+                "account_holder.verification",
                 "card.created",
                 "card.shipped",
                 "card_transaction.updated",
@@ -721,6 +733,9 @@ class AsyncSubscriptions(AsyncAPIResource):
         disabled: bool | NotGiven = NOT_GIVEN,
         event_types: List[
             Literal[
+                "account_holder.created",
+                "account_holder.updated",
+                "account_holder.verification",
                 "card.created",
                 "card.shipped",
                 "card_transaction.updated",
@@ -1129,6 +1144,9 @@ class AsyncSubscriptions(AsyncAPIResource):
         event_subscription_token: str,
         *,
         event_type: Literal[
+            "account_holder.created",
+            "account_holder.updated",
+            "account_holder.verification",
             "card.created",
             "card.shipped",
             "card_transaction.updated",

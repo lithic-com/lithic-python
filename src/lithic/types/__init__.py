@@ -141,9 +141,6 @@ from .external_bank_account_list_response import (
 from .external_bank_account_update_params import (
     ExternalBankAccountUpdateParams as ExternalBankAccountUpdateParams,
 )
-from .account_holder_create_webhook_params import (
-    AccountHolderCreateWebhookParams as AccountHolderCreateWebhookParams,
-)
 from .auth_stream_enrollment_enroll_params import (
     AuthStreamEnrollmentEnrollParams as AuthStreamEnrollmentEnrollParams,
 )
@@ -161,9 +158,6 @@ from .external_bank_account_create_response import (
 )
 from .external_bank_account_update_response import (
     ExternalBankAccountUpdateResponse as ExternalBankAccountUpdateResponse,
-)
-from .account_holder_create_webhook_response import (
-    AccountHolderCreateWebhookResponse as AccountHolderCreateWebhookResponse,
 )
 from .account_holder_list_documents_response import (
     AccountHolderListDocumentsResponse as AccountHolderListDocumentsResponse,

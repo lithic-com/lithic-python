@@ -71,6 +71,9 @@ class Events(SyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         event_types: List[
             Literal[
+                "account_holder.created",
+                "account_holder.updated",
+                "account_holder.verification",
                 "card.created",
                 "card.shipped",
                 "card_transaction.updated",
@@ -280,6 +283,9 @@ class AsyncEvents(AsyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         event_types: List[
             Literal[
+                "account_holder.created",
+                "account_holder.updated",
+                "account_holder.verification",
                 "card.created",
                 "card.shipped",
                 "card_transaction.updated",
