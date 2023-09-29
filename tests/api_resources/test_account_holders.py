@@ -12,7 +12,6 @@ from lithic.types import (
     AccountHolder,
     AccountHolderDocument,
     AccountHolderUpdateResponse,
-    AccountHolderCreateWebhookResponse,
     AccountHolderListDocumentsResponse,
 )
 
@@ -389,13 +388,6 @@ class TestAccountHolders:
             phone_number="string",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
-
-    @parametrize
-    def test_method_create_webhook(self, client: Lithic) -> None:
-        account_holder = client.account_holders.create_webhook(
-            url="string",
-        )
-        assert_matches_type(AccountHolderCreateWebhookResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_list_documents(self, client: Lithic) -> None:
@@ -814,13 +806,6 @@ class TestAsyncAccountHolders:
             phone_number="string",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
-
-    @parametrize
-    async def test_method_create_webhook(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.create_webhook(
-            url="string",
-        )
-        assert_matches_type(AccountHolderCreateWebhookResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_list_documents(self, client: AsyncLithic) -> None:
