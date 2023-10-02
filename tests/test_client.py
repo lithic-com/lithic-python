@@ -7,6 +7,7 @@ import json
 import asyncio
 import inspect
 from typing import Any, Dict, Union, cast
+from unittest import mock
 
 import httpx
 import pytest
@@ -422,6 +423,33 @@ class TestLithic:
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
 
+    @pytest.mark.parametrize(
+        "remaining_retries,retry_after,timeout",
+        [
+            [3, "20", 20],
+            [3, "0", 2],
+            [3, "-10", 2],
+            [3, "60", 60],
+            [3, "61", 2],
+            [3, "Fri, 29 Sep 2023 16:26:57 GMT", 20],
+            [3, "Fri, 29 Sep 2023 16:26:37 GMT", 2],
+            [3, "Fri, 29 Sep 2023 16:26:27 GMT", 2],
+            [3, "Fri, 29 Sep 2023 16:27:37 GMT", 60],
+            [3, "Fri, 29 Sep 2023 16:27:38 GMT", 2],
+            [3, "99999999999999999999999999999999999", 2],
+            [3, "Zun, 29 Sep 2023 16:26:27 GMT", 2],
+            [3, "", 2],
+        ],
+    )
+    @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
+    def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
+        client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+
+        headers = httpx.Headers({"retry-after": retry_after})
+        options = FinalRequestOptions(method="get", url="/foo", max_retries=2)
+        calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
+        assert calculated == pytest.approx(timeout, 0.6)  # pyright: ignore[reportUnknownMemberType]
+
 
 class TestAsyncLithic:
     client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -822,3 +850,31 @@ class TestAsyncLithic:
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
+
+    @pytest.mark.parametrize(
+        "remaining_retries,retry_after,timeout",
+        [
+            [3, "20", 20],
+            [3, "0", 2],
+            [3, "-10", 2],
+            [3, "60", 60],
+            [3, "61", 2],
+            [3, "Fri, 29 Sep 2023 16:26:57 GMT", 20],
+            [3, "Fri, 29 Sep 2023 16:26:37 GMT", 2],
+            [3, "Fri, 29 Sep 2023 16:26:27 GMT", 2],
+            [3, "Fri, 29 Sep 2023 16:27:37 GMT", 60],
+            [3, "Fri, 29 Sep 2023 16:27:38 GMT", 2],
+            [3, "99999999999999999999999999999999999", 2],
+            [3, "Zun, 29 Sep 2023 16:26:27 GMT", 2],
+            [3, "", 2],
+        ],
+    )
+    @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
+    @pytest.mark.asyncio
+    async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
+        client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+
+        headers = httpx.Headers({"retry-after": retry_after})
+        options = FinalRequestOptions(method="get", url="/foo", max_retries=2)
+        calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
+        assert calculated == pytest.approx(timeout, 0.6)  # pyright: ignore[reportUnknownMemberType]
