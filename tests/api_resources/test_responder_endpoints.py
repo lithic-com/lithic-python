@@ -10,7 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import ResponderEndpointStatus, ResponderEndpointCreateResponse
 
-base_url = os.environ.get("API_BASE_URL", "http://127.0.0.1:4010")
+base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
 
 
