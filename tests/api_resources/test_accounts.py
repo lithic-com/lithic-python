@@ -41,7 +41,7 @@ class TestAccounts:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         account = client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            daily_spend_limit=0,
+            daily_spend_limit=1000,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
             state="ACTIVE",
@@ -97,7 +97,7 @@ class TestAsyncAccounts:
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         account = await client.accounts.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            daily_spend_limit=0,
+            daily_spend_limit=1000,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
             state="ACTIVE",
