@@ -55,8 +55,8 @@ class TestCards:
                 "phone_number": "+12124007676",
             },
             shipping_method="STANDARD",
-            spend_limit=0,
-            spend_limit_duration="ANNUALLY",
+            spend_limit=1000,
+            spend_limit_duration="TRANSACTION",
             state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
@@ -81,11 +81,11 @@ class TestCards:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             auth_rule_token="string",
             digital_card_art_token="00000000-0000-0000-1000-000000000000",
-            memo="New Card",
+            memo="Updated Name",
             pin="string",
-            spend_limit=0,
-            spend_limit_duration="ANNUALLY",
-            state="CLOSED",
+            spend_limit=100,
+            spend_limit_duration="FOREVER",
+            state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -138,7 +138,7 @@ class TestCards:
         card = client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             certificate="U3RhaW5sZXNzIHJvY2tz",
-            digital_wallet="APPLE_PAY",
+            digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -214,8 +214,8 @@ class TestAsyncCards:
                 "phone_number": "+12124007676",
             },
             shipping_method="STANDARD",
-            spend_limit=0,
-            spend_limit_duration="ANNUALLY",
+            spend_limit=1000,
+            spend_limit_duration="TRANSACTION",
             state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
@@ -240,11 +240,11 @@ class TestAsyncCards:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             auth_rule_token="string",
             digital_card_art_token="00000000-0000-0000-1000-000000000000",
-            memo="New Card",
+            memo="Updated Name",
             pin="string",
-            spend_limit=0,
-            spend_limit_duration="ANNUALLY",
-            state="CLOSED",
+            spend_limit=100,
+            spend_limit_duration="FOREVER",
+            state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -297,7 +297,7 @@ class TestAsyncCards:
         card = await client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             certificate="U3RhaW5sZXNzIHJvY2tz",
-            digital_wallet="APPLE_PAY",
+            digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
         )
