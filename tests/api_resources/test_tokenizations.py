@@ -23,7 +23,7 @@ class TestTokenizations:
     def test_method_simulate(self, client: Lithic) -> None:
         tokenization = client.tokenizations.simulate(
             cvv="776",
-            expiration_date="xxxxx",
+            expiration_date="08/29",
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
         )
@@ -33,11 +33,11 @@ class TestTokenizations:
     def test_method_simulate_with_all_params(self, client: Lithic) -> None:
         tokenization = client.tokenizations.simulate(
             cvv="776",
-            expiration_date="xxxxx",
+            expiration_date="08/29",
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
-            account_score=0,
-            device_score=0,
+            account_score=5,
+            device_score=5,
             wallet_recommended_decision="APPROVED",
         )
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
@@ -52,7 +52,7 @@ class TestAsyncTokenizations:
     async def test_method_simulate(self, client: AsyncLithic) -> None:
         tokenization = await client.tokenizations.simulate(
             cvv="776",
-            expiration_date="xxxxx",
+            expiration_date="08/29",
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
         )
@@ -62,11 +62,11 @@ class TestAsyncTokenizations:
     async def test_method_simulate_with_all_params(self, client: AsyncLithic) -> None:
         tokenization = await client.tokenizations.simulate(
             cvv="776",
-            expiration_date="xxxxx",
+            expiration_date="08/29",
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
-            account_score=0,
-            device_score=0,
+            account_score=5,
+            device_score=5,
             wallet_recommended_decision="APPROVED",
         )
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])

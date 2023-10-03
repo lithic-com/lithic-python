@@ -432,7 +432,7 @@ class TestAccountHolders:
     def test_method_upload_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="commercial_license",
+            document_type="drivers_license",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
@@ -850,6 +850,6 @@ class TestAsyncAccountHolders:
     async def test_method_upload_document(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="commercial_license",
+            document_type="drivers_license",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])

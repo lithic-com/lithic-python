@@ -56,8 +56,8 @@ class TestAuthRules:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         auth_rule = client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            allowed_countries=["string", "string", "string"],
-            allowed_mcc=["string", "string", "string"],
+            allowed_countries=["USA"],
+            allowed_mcc=["3000", "3001"],
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
         )
@@ -88,7 +88,7 @@ class TestAuthRules:
         auth_rule = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_tokens=["string", "string", "string"],
-            card_tokens=["string", "string", "string"],
+            card_tokens=["df942c4e-9130-4ab5-b067-778a2c55b357", "1336a403-2447-4b36-a009-6fbb852ee675"],
             program_level=True,
         )
         assert_matches_type(AuthRule, auth_rule, path=["response"])
@@ -103,7 +103,7 @@ class TestAuthRules:
         auth_rule = client.auth_rules.remove(
             account_tokens=["string", "string", "string"],
             card_tokens=["string", "string", "string"],
-            program_level=True,
+            program_level=False,
         )
         assert_matches_type(AuthRuleRemoveResponse, auth_rule, path=["response"])
 
@@ -149,8 +149,8 @@ class TestAsyncAuthRules:
     async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
         auth_rule = await client.auth_rules.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            allowed_countries=["string", "string", "string"],
-            allowed_mcc=["string", "string", "string"],
+            allowed_countries=["USA"],
+            allowed_mcc=["3000", "3001"],
             blocked_countries=["string", "string", "string"],
             blocked_mcc=["string", "string", "string"],
         )
@@ -181,7 +181,7 @@ class TestAsyncAuthRules:
         auth_rule = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_tokens=["string", "string", "string"],
-            card_tokens=["string", "string", "string"],
+            card_tokens=["df942c4e-9130-4ab5-b067-778a2c55b357", "1336a403-2447-4b36-a009-6fbb852ee675"],
             program_level=True,
         )
         assert_matches_type(AuthRule, auth_rule, path=["response"])
@@ -196,6 +196,6 @@ class TestAsyncAuthRules:
         auth_rule = await client.auth_rules.remove(
             account_tokens=["string", "string", "string"],
             card_tokens=["string", "string", "string"],
-            program_level=True,
+            program_level=False,
         )
         assert_matches_type(AuthRuleRemoveResponse, auth_rule, path=["response"])
