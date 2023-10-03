@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.19.1 (2023-10-03)
+
+Full Changelog: [v0.19.0...v0.19.1](https://github.com/lithic-com/lithic-python/compare/v0.19.0...v0.19.1)
+
+### Features
+
+* **client:** handle retry-after header with a date format ([#176](https://github.com/lithic-com/lithic-python/issues/176)) ([3d6fbc8](https://github.com/lithic-com/lithic-python/commit/3d6fbc8de998bf1f5694bddf2e533b0ec5decdbd))
+
+
+### Chores
+
+* **ci:** remove reviewer ([#175](https://github.com/lithic-com/lithic-python/issues/175)) ([b9778de](https://github.com/lithic-com/lithic-python/commit/b9778de4087a8d41680cc36c82606a03ba508814))
+* **tests:** update test examples ([#178](https://github.com/lithic-com/lithic-python/issues/178)) ([4f4d48e](https://github.com/lithic-com/lithic-python/commit/4f4d48e41d25a6d0ff47121405430ccdf4e8b5ce))
+
 ## 0.19.0 (2023-09-29)
 
 Full Changelog: [v0.18.6...v0.19.0](https://github.com/lithic-com/lithic-python/compare/v0.18.6...v0.19.0)
