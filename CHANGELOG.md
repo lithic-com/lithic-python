@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.19.2 (2023-10-05)
+
+Full Changelog: [v0.19.1...v0.19.2](https://github.com/lithic-com/lithic-python/compare/v0.19.1...v0.19.2)
+
+### Features
+
+* **api:** updates ([#179](https://github.com/lithic-com/lithic-python/issues/179)) ([c51c060](https://github.com/lithic-com/lithic-python/commit/c51c06045efd887584b31f212bac7f4b7dea88d8))
+
 ## 0.19.1 (2023-10-03)
 
 Full Changelog: [v0.19.0...v0.19.1](https://github.com/lithic-com/lithic-python/compare/v0.19.0...v0.19.1)
