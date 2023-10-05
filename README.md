@@ -137,7 +137,7 @@ Or just work directly with the returned data:
 ```python
 first_page = await client.cards.list()
 
-print(f"page number: {first_page.page}")  # => "page number: 1"
+print(f"next page cursor: {first_page.starting_after}")  # => "next page cursor: ..."
 for card in first_page.data:
     print(card.token)
 
@@ -277,6 +277,20 @@ client.with_options(timeout=5 * 1000).cards.list(
 On timeout, an `APITimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Default Headers
+
+We automatically send the `X-Lithic-Pagination` header set to `cursor`.
+
+If you need to, you can override it by setting default headers per-request or on the client object.
+
+```python
+from lithic import Lithic
+
+client = Lithic(
+    default_headers={"X-Lithic-Pagination": "My-Custom-Value"},
+)
+```
 
 ## Advanced
 

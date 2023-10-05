@@ -15,6 +15,7 @@ from .types import APIStatus
 from ._types import (
     NOT_GIVEN,
     Body,
+    Omit,
     Query,
     Headers,
     Timeout,
@@ -174,6 +175,14 @@ class Lithic(SyncAPIClient):
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": api_key}
+
+    @property
+    def default_headers(self) -> dict[str, str | Omit]:
+        return {
+            **super().default_headers,
+            "X-Lithic-Pagination": "cursor",
+            **self._custom_headers,
+        }
 
     def copy(
         self,
@@ -407,6 +416,14 @@ class AsyncLithic(AsyncAPIClient):
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": api_key}
+
+    @property
+    def default_headers(self) -> dict[str, str | Omit]:
+        return {
+            **super().default_headers,
+            "X-Lithic-Pagination": "cursor",
+            **self._custom_headers,
+        }
 
     def copy(
         self,
