@@ -17,7 +17,7 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncPage, AsyncPage
+from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 
 __all__ = ["AuthRules", "AsyncAuthRules"]
@@ -203,22 +203,27 @@ class AuthRules(SyncAPIResource):
     def list(
         self,
         *,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPage[AuthRule]:
+    ) -> SyncCursorPage[AuthRule]:
         """
         Return all of the Auth Rules under the program.
 
         Args:
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -230,7 +235,7 @@ class AuthRules(SyncAPIResource):
         """
         return self._get_api_list(
             "/auth_rules",
-            page=SyncPage[AuthRule],
+            page=SyncCursorPage[AuthRule],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -238,8 +243,9 @@ class AuthRules(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     auth_rule_list_params.AuthRuleListParams,
                 ),
@@ -545,22 +551,27 @@ class AsyncAuthRules(AsyncAPIResource):
     def list(
         self,
         *,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[AuthRule, AsyncPage[AuthRule]]:
+    ) -> AsyncPaginator[AuthRule, AsyncCursorPage[AuthRule]]:
         """
         Return all of the Auth Rules under the program.
 
         Args:
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -572,7 +583,7 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return self._get_api_list(
             "/auth_rules",
-            page=AsyncPage[AuthRule],
+            page=AsyncCursorPage[AuthRule],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -580,8 +591,9 @@ class AsyncAuthRules(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     auth_rule_list_params.AuthRuleListParams,
                 ),

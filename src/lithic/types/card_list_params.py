@@ -27,11 +27,21 @@ class CardListParams(TypedDict, total=False):
     Only entries created before the specified date will be included. UTC time zone.
     """
 
-    page: int
-    """Page (for pagination)."""
+    ending_before: str
+    """A cursor representing an item's token before which a page of results should end.
+
+    Used to retrieve the previous page of results before this item.
+    """
 
     page_size: int
     """Page size (for pagination)."""
+
+    starting_after: str
+    """A cursor representing an item's token after which a page of results should
+    begin.
+
+    Used to retrieve the next page of results after this item.
+    """
 
     state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"]
     """Returns cards with the specified state."""

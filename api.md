@@ -28,7 +28,7 @@ Methods:
 
 - <code title="get /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/account.py">Account</a></code>
 - <code title="patch /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">update</a>(account_token, \*\*<a href="src/lithic/types/account_update_params.py">params</a>) -> <a href="./src/lithic/types/account.py">Account</a></code>
-- <code title="get /accounts">client.accounts.<a href="./src/lithic/resources/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncPage[Account]</a></code>
+- <code title="get /accounts">client.accounts.<a href="./src/lithic/resources/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncCursorPage[Account]</a></code>
 
 # AccountHolders
 
@@ -69,7 +69,7 @@ Methods:
 - <code title="post /auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">create</a>(\*\*<a href="src/lithic/types/auth_rule_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
 - <code title="get /auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rule_retrieve_response.py">AuthRuleRetrieveResponse</a></code>
 - <code title="put /auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
-- <code title="get /auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">list</a>(\*\*<a href="src/lithic/types/auth_rule_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">SyncPage[AuthRule]</a></code>
+- <code title="get /auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">list</a>(\*\*<a href="src/lithic/types/auth_rule_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">SyncCursorPage[AuthRule]</a></code>
 - <code title="post /auth_rules/{auth_rule_token}/apply">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
 - <code title="delete /auth_rules/remove">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">remove</a>(\*\*<a href="src/lithic/types/auth_rule_remove_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_remove_response.py">AuthRuleRemoveResponse</a></code>
 
@@ -133,7 +133,7 @@ Methods:
 - <code title="post /cards">client.cards.<a href="./src/lithic/resources/cards.py">create</a>(\*\*<a href="src/lithic/types/card_create_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards.py">retrieve</a>(card_token) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="patch /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards.py">update</a>(card_token, \*\*<a href="src/lithic/types/card_update_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
-- <code title="get /cards">client.cards.<a href="./src/lithic/resources/cards.py">list</a>(\*\*<a href="src/lithic/types/card_list_params.py">params</a>) -> <a href="./src/lithic/types/card.py">SyncPage[Card]</a></code>
+- <code title="get /cards">client.cards.<a href="./src/lithic/resources/cards.py">list</a>(\*\*<a href="src/lithic/types/card_list_params.py">params</a>) -> <a href="./src/lithic/types/card.py">SyncCursorPage[Card]</a></code>
 - <code title="get /embed/card">client.cards.<a href="./src/lithic/resources/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
 - <code title="post /cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
 - <code title="post /cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
@@ -267,7 +267,7 @@ from lithic.types import (
 Methods:
 
 - <code title="get /transactions/{transaction_token}">client.transactions.<a href="./src/lithic/resources/transactions.py">retrieve</a>(transaction_token) -> <a href="./src/lithic/types/transaction.py">Transaction</a></code>
-- <code title="get /transactions">client.transactions.<a href="./src/lithic/resources/transactions.py">list</a>(\*\*<a href="src/lithic/types/transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction.py">SyncPage[Transaction]</a></code>
+- <code title="get /transactions">client.transactions.<a href="./src/lithic/resources/transactions.py">list</a>(\*\*<a href="src/lithic/types/transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction.py">SyncCursorPage[Transaction]</a></code>
 - <code title="post /simulate/authorize">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_response.py">TransactionSimulateAuthorizationResponse</a></code>
 - <code title="post /simulate/authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_authorization_advice</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_advice_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_advice_response.py">TransactionSimulateAuthorizationAdviceResponse</a></code>
 - <code title="post /simulate/clearing">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_clearing</a>(\*\*<a href="src/lithic/types/transaction_simulate_clearing_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_clearing_response.py">TransactionSimulateClearingResponse</a></code>

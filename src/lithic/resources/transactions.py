@@ -27,7 +27,7 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncPage, AsyncPage
+from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 
 __all__ = ["Transactions", "AsyncTransactions"]
@@ -72,16 +72,17 @@ class Transactions(SyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPage[Transaction]:
+    ) -> SyncCursorPage[Transaction]:
         """
         List card transactions.
 
@@ -96,12 +97,16 @@ class Transactions(SyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
           result: Filters for transactions using transaction result field. Can filter by
               `APPROVED`, and `DECLINED`.
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -113,7 +118,7 @@ class Transactions(SyncAPIResource):
         """
         return self._get_api_list(
             "/transactions",
-            page=SyncPage[Transaction],
+            page=SyncCursorPage[Transaction],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -125,9 +130,10 @@ class Transactions(SyncAPIResource):
                         "begin": begin,
                         "card_token": card_token,
                         "end": end,
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
                         "result": result,
+                        "starting_after": starting_after,
                     },
                     transaction_list_params.TransactionListParams,
                 ),
@@ -638,16 +644,17 @@ class AsyncTransactions(AsyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Transaction, AsyncPage[Transaction]]:
+    ) -> AsyncPaginator[Transaction, AsyncCursorPage[Transaction]]:
         """
         List card transactions.
 
@@ -662,12 +669,16 @@ class AsyncTransactions(AsyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
 
           result: Filters for transactions using transaction result field. Can filter by
               `APPROVED`, and `DECLINED`.
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -679,7 +690,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return self._get_api_list(
             "/transactions",
-            page=AsyncPage[Transaction],
+            page=AsyncCursorPage[Transaction],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -691,9 +702,10 @@ class AsyncTransactions(AsyncAPIResource):
                         "begin": begin,
                         "card_token": card_token,
                         "end": end,
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
                         "result": result,
+                        "starting_after": starting_after,
                     },
                     transaction_list_params.TransactionListParams,
                 ),

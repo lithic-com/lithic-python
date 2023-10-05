@@ -9,7 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import AuthRule, AuthRuleRemoveResponse, AuthRuleRetrieveResponse
-from lithic.pagination import SyncPage, AsyncPage
+from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -66,15 +66,16 @@ class TestAuthRules:
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         auth_rule = client.auth_rules.list()
-        assert_matches_type(SyncPage[AuthRule], auth_rule, path=["response"])
+        assert_matches_type(SyncCursorPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         auth_rule = client.auth_rules.list(
-            page=0,
+            ending_before="string",
             page_size=1,
+            starting_after="string",
         )
-        assert_matches_type(SyncPage[AuthRule], auth_rule, path=["response"])
+        assert_matches_type(SyncCursorPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     def test_method_apply(self, client: Lithic) -> None:
@@ -159,15 +160,16 @@ class TestAsyncAuthRules:
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
         auth_rule = await client.auth_rules.list()
-        assert_matches_type(AsyncPage[AuthRule], auth_rule, path=["response"])
+        assert_matches_type(AsyncCursorPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         auth_rule = await client.auth_rules.list(
-            page=0,
+            ending_before="string",
             page_size=1,
+            starting_after="string",
         )
-        assert_matches_type(AsyncPage[AuthRule], auth_rule, path=["response"])
+        assert_matches_type(AsyncCursorPage[AuthRule], auth_rule, path=["response"])
 
     @parametrize
     async def test_method_apply(self, client: AsyncLithic) -> None:

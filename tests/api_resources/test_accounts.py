@@ -10,7 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Account
 from lithic._utils import parse_datetime
-from lithic.pagination import SyncPage, AsyncPage
+from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -59,17 +59,18 @@ class TestAccounts:
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         account = client.accounts.list()
-        assert_matches_type(SyncPage[Account], account, path=["response"])
+        assert_matches_type(SyncCursorPage[Account], account, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         account = client.accounts.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            page=0,
+            ending_before="string",
             page_size=1,
+            starting_after="string",
         )
-        assert_matches_type(SyncPage[Account], account, path=["response"])
+        assert_matches_type(SyncCursorPage[Account], account, path=["response"])
 
 
 class TestAsyncAccounts:
@@ -115,14 +116,15 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
         account = await client.accounts.list()
-        assert_matches_type(AsyncPage[Account], account, path=["response"])
+        assert_matches_type(AsyncCursorPage[Account], account, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         account = await client.accounts.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            page=0,
+            ending_before="string",
             page_size=1,
+            starting_after="string",
         )
-        assert_matches_type(AsyncPage[Account], account, path=["response"])
+        assert_matches_type(AsyncCursorPage[Account], account, path=["response"])
