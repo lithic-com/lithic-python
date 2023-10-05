@@ -10,7 +10,7 @@ from ..types import Account, account_list_params, account_update_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncPage, AsyncPage
+from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 
 __all__ = ["Accounts", "AsyncAccounts"]
@@ -130,15 +130,16 @@ class Accounts(SyncAPIResource):
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPage[Account]:
+    ) -> SyncCursorPage[Account]:
         """List account configurations.
 
         Args:
@@ -150,9 +151,13 @@ class Accounts(SyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -164,7 +169,7 @@ class Accounts(SyncAPIResource):
         """
         return self._get_api_list(
             "/accounts",
-            page=SyncPage[Account],
+            page=SyncCursorPage[Account],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -174,8 +179,9 @@ class Accounts(SyncAPIResource):
                     {
                         "begin": begin,
                         "end": end,
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     account_list_params.AccountListParams,
                 ),
@@ -298,15 +304,16 @@ class AsyncAccounts(AsyncAPIResource):
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Account, AsyncPage[Account]]:
+    ) -> AsyncPaginator[Account, AsyncCursorPage[Account]]:
         """List account configurations.
 
         Args:
@@ -318,9 +325,13 @@ class AsyncAccounts(AsyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           extra_headers: Send extra headers
 
@@ -332,7 +343,7 @@ class AsyncAccounts(AsyncAPIResource):
         """
         return self._get_api_list(
             "/accounts",
-            page=AsyncPage[Account],
+            page=AsyncCursorPage[Account],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -342,8 +353,9 @@ class AsyncAccounts(AsyncAPIResource):
                     {
                         "begin": begin,
                         "end": end,
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
+                        "starting_after": starting_after,
                     },
                     account_list_params.AccountListParams,
                 ),

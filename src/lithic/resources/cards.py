@@ -28,7 +28,7 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, strip_not_given
 from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncPage, AsyncPage
+from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, _merge_mappings, make_request_options
 
 __all__ = ["Cards", "AsyncCards"]
@@ -339,8 +339,9 @@ class Cards(SyncAPIResource):
         account_token: str | NotGiven = NOT_GIVEN,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -348,7 +349,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPage[Card]:
+    ) -> SyncCursorPage[Card]:
         """
         List cards.
 
@@ -361,9 +362,13 @@ class Cards(SyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           state: Returns cards with the specified state.
 
@@ -377,7 +382,7 @@ class Cards(SyncAPIResource):
         """
         return self._get_api_list(
             "/cards",
-            page=SyncPage[Card],
+            page=SyncCursorPage[Card],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -388,8 +393,9 @@ class Cards(SyncAPIResource):
                         "account_token": account_token,
                         "begin": begin,
                         "end": end,
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
+                        "starting_after": starting_after,
                         "state": state,
                     },
                     card_list_params.CardListParams,
@@ -1033,8 +1039,9 @@ class AsyncCards(AsyncAPIResource):
         account_token: str | NotGiven = NOT_GIVEN,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
         state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1042,7 +1049,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Card, AsyncPage[Card]]:
+    ) -> AsyncPaginator[Card, AsyncCursorPage[Card]]:
         """
         List cards.
 
@@ -1055,9 +1062,13 @@ class AsyncCards(AsyncAPIResource):
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included. UTC time zone.
 
-          page: Page (for pagination).
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
 
           state: Returns cards with the specified state.
 
@@ -1071,7 +1082,7 @@ class AsyncCards(AsyncAPIResource):
         """
         return self._get_api_list(
             "/cards",
-            page=AsyncPage[Card],
+            page=AsyncCursorPage[Card],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1082,8 +1093,9 @@ class AsyncCards(AsyncAPIResource):
                         "account_token": account_token,
                         "begin": begin,
                         "end": end,
-                        "page": page,
+                        "ending_before": ending_before,
                         "page_size": page_size,
+                        "starting_after": starting_after,
                         "state": state,
                     },
                     card_list_params.CardListParams,

@@ -19,7 +19,7 @@ from lithic.types import (
     TransactionSimulateCreditAuthorizationResponse,
 )
 from lithic._utils import parse_datetime
-from lithic.pagination import SyncPage, AsyncPage
+from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = os.environ.get("API_KEY", "something1234")
@@ -40,7 +40,7 @@ class TestTransactions:
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         transaction = client.transactions.list()
-        assert_matches_type(SyncPage[Transaction], transaction, path=["response"])
+        assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
@@ -49,11 +49,12 @@ class TestTransactions:
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            page=0,
+            ending_before="string",
             page_size=1,
             result="APPROVED",
+            starting_after="string",
         )
-        assert_matches_type(SyncPage[Transaction], transaction, path=["response"])
+        assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_authorization(self, client: Lithic) -> None:
@@ -170,7 +171,7 @@ class TestAsyncTransactions:
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.list()
-        assert_matches_type(AsyncPage[Transaction], transaction, path=["response"])
+        assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
@@ -179,11 +180,12 @@ class TestAsyncTransactions:
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            page=0,
+            ending_before="string",
             page_size=1,
             result="APPROVED",
+            starting_after="string",
         )
-        assert_matches_type(AsyncPage[Transaction], transaction, path=["response"])
+        assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_authorization(self, client: AsyncLithic) -> None:
