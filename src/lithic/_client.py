@@ -22,15 +22,16 @@ from ._types import (
     NotGiven,
     Transport,
     ProxiesTypes,
+    AsyncTransport,
     RequestOptions,
 )
+from ._utils import is_given
 from ._version import __version__
 from ._streaming import Stream as Stream
 from ._streaming import AsyncStream as AsyncStream
 from ._exceptions import LithicError, APIStatusError
 from ._base_client import (
     DEFAULT_LIMITS,
-    DEFAULT_TIMEOUT,
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
@@ -89,16 +90,18 @@ class Lithic(SyncAPIClient):
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
-        timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
+        # Configure a custom httpx client. See the [httpx documentation](https://www.python-httpx.org/api/#client) for more details.
+        http_client: httpx.Client | None = None,
         # See httpx documentation for [custom transports](https://www.python-httpx.org/advanced/#custom-transports)
-        transport: Optional[Transport] = None,
+        transport: Transport | None = None,
         # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
-        proxies: Optional[ProxiesTypes] = None,
+        proxies: ProxiesTypes | None = None,
         # See httpx documentation for [limits](https://www.python-httpx.org/advanced/#pool-limit-configuration)
-        connection_pool_limits: httpx.Limits | None = DEFAULT_LIMITS,
+        connection_pool_limits: httpx.Limits | None = None,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
         # if the API responds with invalid data for the expected schema.
@@ -138,6 +141,7 @@ class Lithic(SyncAPIClient):
             base_url=base_url,
             max_retries=max_retries,
             timeout=timeout,
+            http_client=http_client,
             transport=transport,
             proxies=proxies,
             limits=connection_pool_limits,
@@ -192,7 +196,8 @@ class Lithic(SyncAPIClient):
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
-        connection_pool_limits: httpx.Limits | NotGiven = NOT_GIVEN,
+        http_client: httpx.Client | None = None,
+        connection_pool_limits: httpx.Limits | None = None,
         max_retries: int | NotGiven = NOT_GIVEN,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
@@ -223,17 +228,33 @@ class Lithic(SyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
 
-        # TODO: share the same httpx client between instances
+        if connection_pool_limits is not None:
+            if http_client is not None:
+                raise ValueError("The 'http_client' argument is mutually exclusive with 'connection_pool_limits'")
+
+            if self._has_custom_http_client:
+                raise ValueError(
+                    "A custom HTTP client has been set and is mutually exclusive with the 'connection_pool_limits' argument"
+                )
+
+            http_client = None
+        else:
+            if self._limits is not DEFAULT_LIMITS:
+                connection_pool_limits = self._limits
+            else:
+                connection_pool_limits = None
+
+            http_client = http_client or self._client
+
         return self.__class__(
             webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or str(self.base_url),
             environment=environment or self._environment,
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
-            connection_pool_limits=self._limits
-            if isinstance(connection_pool_limits, NotGiven)
-            else connection_pool_limits,
-            max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
+            http_client=http_client,
+            connection_pool_limits=connection_pool_limits,
+            max_retries=max_retries if is_given(max_retries) else self.max_retries,
             default_headers=headers,
             default_query=params,
         )
@@ -243,6 +264,13 @@ class Lithic(SyncAPIClient):
     with_options = copy
 
     def __del__(self) -> None:
+        if not hasattr(self, "_has_custom_http_client") or not hasattr(self, "close"):
+            # this can happen if the '__init__' method raised an error
+            return
+
+        if self._has_custom_http_client:
+            return
+
         self.close()
 
     def api_status(
@@ -330,16 +358,18 @@ class AsyncLithic(AsyncAPIClient):
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
-        timeout: Union[float, Timeout, None] = DEFAULT_TIMEOUT,
+        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
+        # Configure a custom httpx client. See the [httpx documentation](https://www.python-httpx.org/api/#asyncclient) for more details.
+        http_client: httpx.AsyncClient | None = None,
         # See httpx documentation for [custom transports](https://www.python-httpx.org/advanced/#custom-transports)
-        transport: Optional[Transport] = None,
+        transport: AsyncTransport | None = None,
         # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
-        proxies: Optional[ProxiesTypes] = None,
+        proxies: ProxiesTypes | None = None,
         # See httpx documentation for [limits](https://www.python-httpx.org/advanced/#pool-limit-configuration)
-        connection_pool_limits: httpx.Limits | None = DEFAULT_LIMITS,
+        connection_pool_limits: httpx.Limits | None = None,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
         # if the API responds with invalid data for the expected schema.
@@ -379,6 +409,7 @@ class AsyncLithic(AsyncAPIClient):
             base_url=base_url,
             max_retries=max_retries,
             timeout=timeout,
+            http_client=http_client,
             transport=transport,
             proxies=proxies,
             limits=connection_pool_limits,
@@ -433,7 +464,8 @@ class AsyncLithic(AsyncAPIClient):
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
-        connection_pool_limits: httpx.Limits | NotGiven = NOT_GIVEN,
+        http_client: httpx.AsyncClient | None = None,
+        connection_pool_limits: httpx.Limits | None = None,
         max_retries: int | NotGiven = NOT_GIVEN,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
@@ -464,17 +496,33 @@ class AsyncLithic(AsyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
 
-        # TODO: share the same httpx client between instances
+        if connection_pool_limits is not None:
+            if http_client is not None:
+                raise ValueError("The 'http_client' argument is mutually exclusive with 'connection_pool_limits'")
+
+            if self._has_custom_http_client:
+                raise ValueError(
+                    "A custom HTTP client has been set and is mutually exclusive with the 'connection_pool_limits' argument"
+                )
+
+            http_client = None
+        else:
+            if self._limits is not DEFAULT_LIMITS:
+                connection_pool_limits = self._limits
+            else:
+                connection_pool_limits = None
+
+            http_client = http_client or self._client
+
         return self.__class__(
             webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or str(self.base_url),
             environment=environment or self._environment,
             api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
-            connection_pool_limits=self._limits
-            if isinstance(connection_pool_limits, NotGiven)
-            else connection_pool_limits,
-            max_retries=self.max_retries if isinstance(max_retries, NotGiven) else max_retries,
+            http_client=http_client,
+            connection_pool_limits=connection_pool_limits,
+            max_retries=max_retries if is_given(max_retries) else self.max_retries,
             default_headers=headers,
             default_query=params,
         )
@@ -484,6 +532,13 @@ class AsyncLithic(AsyncAPIClient):
     with_options = copy
 
     def __del__(self) -> None:
+        if not hasattr(self, "_has_custom_http_client") or not hasattr(self, "close"):
+            # this can happen if the '__init__' method raised an error
+            return
+
+        if self._has_custom_http_client:
+            return
+
         try:
             asyncio.get_running_loop().create_task(self.close())
         except Exception:
