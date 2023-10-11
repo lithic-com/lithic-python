@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.19.3 (2023-10-11)
+
+Full Changelog: [v0.19.2...v0.19.3](https://github.com/lithic-com/lithic-python/compare/v0.19.2...v0.19.3)
+
+### Features
+
+* **client:** add forwards-compatible pydantic methods ([#181](https://github.com/lithic-com/lithic-python/issues/181)) ([0bb14e3](https://github.com/lithic-com/lithic-python/commit/0bb14e3c29d81a59942cf4a2d4c07cf056228afc))
+* **client:** add support for passing in a httpx client ([#183](https://github.com/lithic-com/lithic-python/issues/183)) ([c2a69fb](https://github.com/lithic-com/lithic-python/commit/c2a69fbbf70b4755e7aa23dca5cf9ca8c1208631))
+
 ## 0.19.2 (2023-10-05)
 
 Full Changelog: [v0.19.1...v0.19.2](https://github.com/lithic-com/lithic-python/compare/v0.19.1...v0.19.2)
