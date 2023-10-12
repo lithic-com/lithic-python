@@ -12,7 +12,7 @@ from lithic.types import AuthRule, AuthRuleRemoveResponse, AuthRuleRetrieveRespo
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = os.environ.get("API_KEY", "something1234")
+api_key = "My Lithic API Key"
 
 
 class TestAuthRules:

@@ -86,10 +86,10 @@ class Lithic(SyncAPIClient):
     def __init__(
         self,
         *,
-        webhook_secret: str | None = None,
+        api_key: str | None = os.environ.get("LITHIC_API_KEY", None),
+        webhook_secret: str | None = os.environ.get("LITHIC_WEBHOOK_SECRET", None),
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
-        api_key: Optional[str] = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -118,15 +118,13 @@ class Lithic(SyncAPIClient):
         - `api_key` from `LITHIC_API_KEY`
         - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         """
-        api_key = api_key or os.environ.get("LITHIC_API_KEY", None)
-        if not api_key:
+        if api_key is None:
             raise LithicError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
             )
         self.api_key = api_key
 
-        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
-        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
+        self.webhook_secret = webhook_secret
 
         self._environment = environment
 
@@ -191,8 +189,8 @@ class Lithic(SyncAPIClient):
     def copy(
         self,
         *,
-        webhook_secret: str | None = None,
         api_key: str | None = None,
+        webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
@@ -247,10 +245,10 @@ class Lithic(SyncAPIClient):
             http_client = http_client or self._client
 
         return self.__class__(
+            api_key=api_key or self.api_key,
             webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or str(self.base_url),
             environment=environment or self._environment,
-            api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             connection_pool_limits=connection_pool_limits,
@@ -354,10 +352,10 @@ class AsyncLithic(AsyncAPIClient):
     def __init__(
         self,
         *,
-        webhook_secret: str | None = None,
+        api_key: str | None = os.environ.get("LITHIC_API_KEY", None),
+        webhook_secret: str | None = os.environ.get("LITHIC_WEBHOOK_SECRET", None),
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
-        api_key: Optional[str] = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -386,15 +384,13 @@ class AsyncLithic(AsyncAPIClient):
         - `api_key` from `LITHIC_API_KEY`
         - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         """
-        api_key = api_key or os.environ.get("LITHIC_API_KEY", None)
-        if not api_key:
+        if api_key is None:
             raise LithicError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
             )
         self.api_key = api_key
 
-        webhook_secret_envvar = os.environ.get("LITHIC_WEBHOOK_SECRET", None)
-        self.webhook_secret = webhook_secret or webhook_secret_envvar or None
+        self.webhook_secret = webhook_secret
 
         self._environment = environment
 
@@ -459,8 +455,8 @@ class AsyncLithic(AsyncAPIClient):
     def copy(
         self,
         *,
-        webhook_secret: str | None = None,
         api_key: str | None = None,
+        webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
@@ -515,10 +511,10 @@ class AsyncLithic(AsyncAPIClient):
             http_client = http_client or self._client
 
         return self.__class__(
+            api_key=api_key or self.api_key,
             webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or str(self.base_url),
             environment=environment or self._environment,
-            api_key=api_key or self.api_key,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             connection_pool_limits=connection_pool_limits,

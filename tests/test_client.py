@@ -25,7 +25,7 @@ from lithic._base_client import (
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = os.environ.get("API_KEY", "something1234")
+api_key = "My Lithic API Key"
 
 
 def _get_params(client: BaseClient) -> dict[str, str]:
@@ -50,9 +50,9 @@ class TestLithic:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(api_key="my new api key")
-        assert copied.api_key == "my new api key"
-        assert self.client.api_key == api_key
+        copied = self.client.copy(api_key="another My Lithic API Key")
+        assert copied.api_key == "another My Lithic API Key"
+        assert self.client.api_key == "My Lithic API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -225,6 +225,15 @@ class TestLithic:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == api_key
+
+        with pytest.raises(Exception):
+            client2 = Lithic(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Lithic(
@@ -666,9 +675,9 @@ class TestAsyncLithic:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(api_key="my new api key")
-        assert copied.api_key == "my new api key"
-        assert self.client.api_key == api_key
+        copied = self.client.copy(api_key="another My Lithic API Key")
+        assert copied.api_key == "another My Lithic API Key"
+        assert self.client.api_key == "My Lithic API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -843,6 +852,15 @@ class TestAsyncLithic:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == api_key
+
+        with pytest.raises(Exception):
+            client2 = AsyncLithic(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncLithic(
