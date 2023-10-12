@@ -34,7 +34,7 @@ from lithic import Lithic
 
 client = Lithic(
     # defaults to os.environ.get("LITHIC_API_KEY")
-    api_key="my api key",
+    api_key="My Lithic API Key",
     # defaults to "production".
     environment="sandbox",
 )
@@ -45,8 +45,10 @@ card = client.cards.create(
 print(card.token)
 ```
 
-While you can provide an `api_key` keyword argument, we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-and adding `LITHIC_API_KEY="my api key"` to your `.env` file so that your API Key is not stored in source control.
+While you can provide an `api_key` keyword argument,
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
+to add `LITHIC_API_KEY="My Lithic API Key"` to your `.env` file
+so that your API Key is not stored in source control.
 
 ## Async usage
 
@@ -57,7 +59,7 @@ from lithic import AsyncLithic
 
 client = AsyncLithic(
     # defaults to os.environ.get("LITHIC_API_KEY")
-    api_key="my api key",
+    api_key="My Lithic API Key",
     # defaults to "production".
     environment="sandbox",
 )
