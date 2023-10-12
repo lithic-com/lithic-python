@@ -86,8 +86,8 @@ class Lithic(SyncAPIClient):
     def __init__(
         self,
         *,
-        api_key: str | None = os.environ.get("LITHIC_API_KEY", None),
-        webhook_secret: str | None = os.environ.get("LITHIC_WEBHOOK_SECRET", None),
+        api_key: str | None = None,
+        webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
@@ -119,11 +119,15 @@ class Lithic(SyncAPIClient):
         - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         """
         if api_key is None:
+            api_key = os.environ.get("LITHIC_API_KEY")
+        if api_key is None:
             raise LithicError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
             )
         self.api_key = api_key
 
+        if webhook_secret is None:
+            webhook_secret = os.environ.get("LITHIC_WEBHOOK_SECRET") or None
         self.webhook_secret = webhook_secret
 
         self._environment = environment
@@ -352,8 +356,8 @@ class AsyncLithic(AsyncAPIClient):
     def __init__(
         self,
         *,
-        api_key: str | None = os.environ.get("LITHIC_API_KEY", None),
-        webhook_secret: str | None = os.environ.get("LITHIC_WEBHOOK_SECRET", None),
+        api_key: str | None = None,
+        webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] = "production",
         base_url: Optional[str] = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
@@ -385,11 +389,15 @@ class AsyncLithic(AsyncAPIClient):
         - `webhook_secret` from `LITHIC_WEBHOOK_SECRET`
         """
         if api_key is None:
+            api_key = os.environ.get("LITHIC_API_KEY")
+        if api_key is None:
             raise LithicError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the LITHIC_API_KEY environment variable"
             )
         self.api_key = api_key
 
+        if webhook_secret is None:
+            webhook_secret = os.environ.get("LITHIC_WEBHOOK_SECRET") or None
         self.webhook_secret = webhook_secret
 
         self._environment = environment
