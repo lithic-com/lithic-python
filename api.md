@@ -169,7 +169,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Dispute, DisputeEvidence, DisputeInitiateEvidenceUploadResponse
+from lithic.types import Dispute, DisputeEvidence
 ```
 
 Methods:
