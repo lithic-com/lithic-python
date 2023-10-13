@@ -516,6 +516,8 @@ class Cards(SyncAPIResource):
                 extra_headers=headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
         )
 
@@ -1216,6 +1218,8 @@ class AsyncCards(AsyncAPIResource):
                 extra_headers=headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
         )
 
