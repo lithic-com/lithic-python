@@ -127,7 +127,7 @@ class Lithic(SyncAPIClient):
         self.api_key = api_key
 
         if webhook_secret is None:
-            webhook_secret = os.environ.get("LITHIC_WEBHOOK_SECRET") or None
+            webhook_secret = os.environ.get("LITHIC_WEBHOOK_SECRET")
         self.webhook_secret = webhook_secret
 
         self._environment = environment
@@ -397,7 +397,7 @@ class AsyncLithic(AsyncAPIClient):
         self.api_key = api_key
 
         if webhook_secret is None:
-            webhook_secret = os.environ.get("LITHIC_WEBHOOK_SECRET") or None
+            webhook_secret = os.environ.get("LITHIC_WEBHOOK_SECRET")
         self.webhook_secret = webhook_secret
 
         self._environment = environment
