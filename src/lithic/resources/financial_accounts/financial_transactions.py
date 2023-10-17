@@ -60,7 +60,7 @@ class FinancialTransactions(SyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"] | NotGiven = NOT_GIVEN,
+        status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "SETTLED", "VOIDED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -72,12 +72,12 @@ class FinancialTransactions(SyncAPIResource):
         List the financial transactions for a given financial account.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
           category: Financial Transaction category to be returned.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
@@ -166,7 +166,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"] | NotGiven = NOT_GIVEN,
+        status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "SETTLED", "VOIDED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -178,12 +178,12 @@ class AsyncFinancialTransactions(AsyncAPIResource):
         List the financial transactions for a given financial account.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
           category: Financial Transaction category to be returned.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.

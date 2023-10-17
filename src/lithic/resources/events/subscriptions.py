@@ -327,10 +327,10 @@ class Subscriptions(SyncAPIResource):
         List all the message attempts for a given event subscription.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
@@ -390,10 +390,10 @@ class Subscriptions(SyncAPIResource):
         Resend all failed messages since a given time.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           extra_headers: Send extra headers
@@ -448,10 +448,10 @@ class Subscriptions(SyncAPIResource):
         details.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           extra_headers: Send extra headers
@@ -918,10 +918,10 @@ class AsyncSubscriptions(AsyncAPIResource):
         List all the message attempts for a given event subscription.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
@@ -981,10 +981,10 @@ class AsyncSubscriptions(AsyncAPIResource):
         Resend all failed messages since a given time.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           extra_headers: Send extra headers
@@ -1039,10 +1039,10 @@ class AsyncSubscriptions(AsyncAPIResource):
         details.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           extra_headers: Send extra headers

@@ -21,14 +21,21 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Account
+from lithic.types import Account, BusinessAccount
 ```
 
 Methods:
 
-- <code title="get /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/account.py">Account</a></code>
-- <code title="patch /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">update</a>(account_token, \*\*<a href="src/lithic/types/account_update_params.py">params</a>) -> <a href="./src/lithic/types/account.py">Account</a></code>
-- <code title="get /accounts">client.accounts.<a href="./src/lithic/resources/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncCursorPage[Account]</a></code>
+- <code title="get /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/account.py">Account</a></code>
+- <code title="patch /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">update</a>(account_token, \*\*<a href="src/lithic/types/account_update_params.py">params</a>) -> <a href="./src/lithic/types/account.py">Account</a></code>
+- <code title="get /accounts">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncCursorPage[Account]</a></code>
+
+## CreditConfigurations
+
+Methods:
+
+- <code title="get /accounts/{account_token}/credit_configuration">client.accounts.credit_configurations.<a href="./src/lithic/resources/accounts/credit_configurations.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/business_account.py">BusinessAccount</a></code>
+- <code title="patch /accounts/{account_token}/credit_configuration">client.accounts.credit_configurations.<a href="./src/lithic/resources/accounts/credit_configurations.py">update</a>(account_token, \*\*<a href="src/lithic/types/accounts/credit_configuration_update_params.py">params</a>) -> <a href="./src/lithic/types/business_account.py">BusinessAccount</a></code>
 
 # AccountHolders
 
@@ -130,15 +137,40 @@ from lithic.types import (
 
 Methods:
 
-- <code title="post /cards">client.cards.<a href="./src/lithic/resources/cards.py">create</a>(\*\*<a href="src/lithic/types/card_create_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
-- <code title="get /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards.py">retrieve</a>(card_token) -> <a href="./src/lithic/types/card.py">Card</a></code>
-- <code title="patch /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards.py">update</a>(card_token, \*\*<a href="src/lithic/types/card_update_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
-- <code title="get /cards">client.cards.<a href="./src/lithic/resources/cards.py">list</a>(\*\*<a href="src/lithic/types/card_list_params.py">params</a>) -> <a href="./src/lithic/types/card.py">SyncCursorPage[Card]</a></code>
-- <code title="get /embed/card">client.cards.<a href="./src/lithic/resources/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
-- <code title="post /cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
-- <code title="post /cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
-- <code>client.cards.<a href="./src/lithic/resources/cards.py">get_embed_html</a>(\*args) -> str</code>
-- <code>client.cards.<a href="./src/lithic/resources/cards.py">get_embed_url</a>(\*args) -> URL</code>
+- <code title="post /cards">client.cards.<a href="./src/lithic/resources/cards/cards.py">create</a>(\*\*<a href="src/lithic/types/card_create_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="get /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve</a>(card_token) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="patch /cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards/cards.py">update</a>(card_token, \*\*<a href="src/lithic/types/card_update_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="get /cards">client.cards.<a href="./src/lithic/resources/cards/cards.py">list</a>(\*\*<a href="src/lithic/types/card_list_params.py">params</a>) -> <a href="./src/lithic/types/card.py">SyncCursorPage[Card]</a></code>
+- <code title="get /embed/card">client.cards.<a href="./src/lithic/resources/cards/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
+- <code title="post /cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
+- <code title="post /cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
+- <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
+
+## AggregateBalances
+
+Types:
+
+```python
+from lithic.types.cards import AggregateBalanceListResponse
+```
+
+Methods:
+
+- <code title="get /cards/aggregate_balances">client.cards.aggregate_balances.<a href="./src/lithic/resources/cards/aggregate_balances.py">list</a>(\*\*<a href="src/lithic/types/cards/aggregate_balance_list_params.py">params</a>) -> <a href="./src/lithic/types/cards/aggregate_balance_list_response.py">SyncSinglePage[AggregateBalanceListResponse]</a></code>
+
+## Balances
+
+Methods:
+
+- <code title="get /cards/{card_token}/balances">client.cards.balances.<a href="./src/lithic/resources/cards/balances.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/balance.py">SyncSinglePage[Balance]</a></code>
+
+## FinancialTransactions
+
+Methods:
+
+- <code title="get /cards/{card_token}/financial_transactions/{financial_transaction_token}">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">retrieve</a>(card_token, financial_transaction_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
+- <code title="get /cards/{card_token}/financial_transactions">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
 # Balances
 
@@ -247,6 +279,31 @@ Methods:
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_account_token, financial_transaction_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
+## Statements
+
+Types:
+
+```python
+from lithic.types.financial_accounts import Statement
+```
+
+Methods:
+
+- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">retrieve</a>(financial_account_token, statement_token) -> <a href="./src/lithic/types/financial_accounts/statement.py">Statement</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/statements">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statement_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statement.py">SyncCursorPage[Statement]</a></code>
+
+### LineItems
+
+Types:
+
+```python
+from lithic.types.financial_accounts.statements import LineItemListResponse
+```
+
+Methods:
+
+- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(financial_account_token, statement_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statements/line_item_list_response.py">SyncCursorPage[LineItemListResponse]</a></code>
+
 # Transactions
 
 Types:
@@ -340,6 +397,7 @@ Types:
 from lithic.types import (
     Payment,
     PaymentCreateResponse,
+    PaymentRetryResponse,
     PaymentSimulateReleaseResponse,
     PaymentSimulateReturnResponse,
 )
@@ -350,6 +408,7 @@ Methods:
 - <code title="post /payments">client.payments.<a href="./src/lithic/resources/payments.py">create</a>(\*\*<a href="src/lithic/types/payment_create_params.py">params</a>) -> <a href="./src/lithic/types/payment_create_response.py">PaymentCreateResponse</a></code>
 - <code title="get /payments/{payment_token}">client.payments.<a href="./src/lithic/resources/payments.py">retrieve</a>(payment_token) -> <a href="./src/lithic/types/payment.py">Payment</a></code>
 - <code title="get /payments">client.payments.<a href="./src/lithic/resources/payments.py">list</a>(\*\*<a href="src/lithic/types/payment_list_params.py">params</a>) -> <a href="./src/lithic/types/payment.py">SyncCursorPage[Payment]</a></code>
+- <code title="post /payments/{payment_token}/retry">client.payments.<a href="./src/lithic/resources/payments.py">retry</a>(payment_token) -> <a href="./src/lithic/types/payment_retry_response.py">PaymentRetryResponse</a></code>
 - <code title="post /simulate/payments/release">client.payments.<a href="./src/lithic/resources/payments.py">simulate_release</a>(\*\*<a href="src/lithic/types/payment_simulate_release_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_release_response.py">PaymentSimulateReleaseResponse</a></code>
 - <code title="post /simulate/payments/return">client.payments.<a href="./src/lithic/resources/payments.py">simulate_return</a>(\*\*<a href="src/lithic/types/payment_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_return_response.py">PaymentSimulateReturnResponse</a></code>
 
@@ -383,3 +442,36 @@ Methods:
 
 - <code title="get /three_ds_decisioning/secret">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/three_ds/decisioning_retrieve_secret_response.py">DecisioningRetrieveSecretResponse</a></code>
 - <code title="post /three_ds_decisioning/secret/rotate">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">rotate_secret</a>() -> None</code>
+
+# Reports
+
+Types:
+
+```python
+from lithic.types import SettlementDetail, SettlementReport, SettlementSummaryDetails
+```
+
+## Settlement
+
+Types:
+
+```python
+from lithic.types.reports import SettlementSummaryResponse
+```
+
+Methods:
+
+- <code title="get /reports/settlement/details/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">list_details</a>(report_date, \*\*<a href="src/lithic/types/reports/settlement_list_details_params.py">params</a>) -> <a href="./src/lithic/types/settlement_detail.py">SyncCursorPage[SettlementDetail]</a></code>
+- <code title="get /reports/settlement/summary/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">summary</a>(report_date) -> <a href="./src/lithic/types/reports/settlement_summary_response.py">SettlementSummaryResponse</a></code>
+
+# CardProduct
+
+Types:
+
+```python
+from lithic.types import CardProductCreditDetailResponse
+```
+
+Methods:
+
+- <code title="get /card_product/credit_detail">client.card_product.<a href="./src/lithic/resources/card_product.py">credit_detail</a>() -> <a href="./src/lithic/types/card_product_credit_detail_response.py">CardProductCreditDetailResponse</a></code>

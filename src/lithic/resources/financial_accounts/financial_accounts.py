@@ -9,6 +9,7 @@ from ...types import FinancialAccount, financial_account_list_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from .balances import Balances, AsyncBalances
+from .statements import Statements, AsyncStatements
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ..._base_client import AsyncPaginator, make_request_options
@@ -23,11 +24,13 @@ __all__ = ["FinancialAccounts", "AsyncFinancialAccounts"]
 class FinancialAccounts(SyncAPIResource):
     balances: Balances
     financial_transactions: FinancialTransactions
+    statements: Statements
 
     def __init__(self, client: Lithic) -> None:
         super().__init__(client)
         self.balances = Balances(client)
         self.financial_transactions = FinancialTransactions(client)
+        self.statements = Statements(client)
 
     def list(
         self,
@@ -81,11 +84,13 @@ class FinancialAccounts(SyncAPIResource):
 class AsyncFinancialAccounts(AsyncAPIResource):
     balances: AsyncBalances
     financial_transactions: AsyncFinancialTransactions
+    statements: AsyncStatements
 
     def __init__(self, client: AsyncLithic) -> None:
         super().__init__(client)
         self.balances = AsyncBalances(client)
         self.financial_transactions = AsyncFinancialTransactions(client)
+        self.statements = AsyncStatements(client)
 
     def list(
         self,

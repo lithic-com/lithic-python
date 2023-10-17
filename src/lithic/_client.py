@@ -76,6 +76,8 @@ class Lithic(SyncAPIClient):
     external_bank_accounts: resources.ExternalBankAccounts
     payments: resources.Payments
     three_ds: resources.ThreeDS
+    reports: resources.Reports
+    card_product: resources.CardProduct
 
     # client options
     api_key: str
@@ -172,6 +174,8 @@ class Lithic(SyncAPIClient):
         self.external_bank_accounts = resources.ExternalBankAccounts(self)
         self.payments = resources.Payments(self)
         self.three_ds = resources.ThreeDS(self)
+        self.reports = resources.Reports(self)
+        self.card_product = resources.CardProduct(self)
 
     @property
     def qs(self) -> Querystring:
@@ -346,6 +350,8 @@ class AsyncLithic(AsyncAPIClient):
     external_bank_accounts: resources.AsyncExternalBankAccounts
     payments: resources.AsyncPayments
     three_ds: resources.AsyncThreeDS
+    reports: resources.AsyncReports
+    card_product: resources.AsyncCardProduct
 
     # client options
     api_key: str
@@ -442,6 +448,8 @@ class AsyncLithic(AsyncAPIClient):
         self.external_bank_accounts = resources.AsyncExternalBankAccounts(self)
         self.payments = resources.AsyncPayments(self)
         self.three_ds = resources.AsyncThreeDS(self)
+        self.reports = resources.AsyncReports(self)
+        self.card_product = resources.AsyncCardProduct(self)
 
     @property
     def qs(self) -> Querystring:
