@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 import asyncio
-from typing import Dict, Union, Mapping, Optional
+from typing import Dict, Union, Mapping
 from typing_extensions import Literal
 
 import httpx
@@ -91,7 +91,7 @@ class Lithic(SyncAPIClient):
         api_key: str | None = None,
         webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] = "production",
-        base_url: Optional[str] = None,
+        base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -200,7 +200,7 @@ class Lithic(SyncAPIClient):
         api_key: str | None = None,
         webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
-        base_url: str | None = None,
+        base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
         connection_pool_limits: httpx.Limits | None = None,
@@ -365,7 +365,7 @@ class AsyncLithic(AsyncAPIClient):
         api_key: str | None = None,
         webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] = "production",
-        base_url: Optional[str] = None,
+        base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -474,7 +474,7 @@ class AsyncLithic(AsyncAPIClient):
         api_key: str | None = None,
         webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
-        base_url: str | None = None,
+        base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
         connection_pool_limits: httpx.Limits | None = None,
