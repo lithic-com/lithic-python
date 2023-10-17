@@ -15,7 +15,7 @@ class FinancialTransactionListParams(TypedDict, total=False):
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
-    Only entries created after the specified date will be included. UTC time zone.
+    Only entries created after the specified time will be included. UTC time zone.
     """
 
     category: Literal["ACH", "CARD", "TRANSFER"]
@@ -24,7 +24,7 @@ class FinancialTransactionListParams(TypedDict, total=False):
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
-    Only entries created before the specified date will be included. UTC time zone.
+    Only entries created before the specified time will be included. UTC time zone.
     """
 
     ending_before: str
@@ -43,5 +43,5 @@ class FinancialTransactionListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
+    status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "SETTLED", "VOIDED"]
     """Financial Transaction status to be returned."""

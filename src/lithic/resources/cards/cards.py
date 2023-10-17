@@ -6,13 +6,13 @@ import hmac
 import json
 import base64
 import hashlib
-from typing import Union
+from typing import TYPE_CHECKING, Union
 from datetime import datetime, timezone, timedelta
 from typing_extensions import Literal
 
 from httpx import URL
 
-from ..types import (
+from ...types import (
     Card,
     SpendLimitDuration,
     CardProvisionResponse,
@@ -25,16 +25,32 @@ from ..types import (
     card_provision_params,
     card_get_embed_url_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform, strip_not_given
-from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import AsyncPaginator, _merge_mappings, make_request_options
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import maybe_transform, strip_not_given
+from .balances import Balances, AsyncBalances
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ...pagination import SyncCursorPage, AsyncCursorPage
+from ..._base_client import AsyncPaginator, _merge_mappings, make_request_options
+from .aggregate_balances import AggregateBalances, AsyncAggregateBalances
+from .financial_transactions import FinancialTransactions, AsyncFinancialTransactions
+
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
 
 __all__ = ["Cards", "AsyncCards"]
 
 
 class Cards(SyncAPIResource):
+    aggregate_balances: AggregateBalances
+    balances: Balances
+    financial_transactions: FinancialTransactions
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.aggregate_balances = AggregateBalances(client)
+        self.balances = Balances(client)
+        self.financial_transactions = FinancialTransactions(client)
+
     def create(
         self,
         *,
@@ -356,10 +372,10 @@ class Cards(SyncAPIResource):
         Args:
           account_token: Returns cards associated with the specified account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
@@ -737,6 +753,16 @@ class Cards(SyncAPIResource):
 
 
 class AsyncCards(AsyncAPIResource):
+    aggregate_balances: AsyncAggregateBalances
+    balances: AsyncBalances
+    financial_transactions: AsyncFinancialTransactions
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.aggregate_balances = AsyncAggregateBalances(client)
+        self.balances = AsyncBalances(client)
+        self.financial_transactions = AsyncFinancialTransactions(client)
+
     async def create(
         self,
         *,
@@ -1058,10 +1084,10 @@ class AsyncCards(AsyncAPIResource):
         Args:
           account_token: Returns cards associated with the specified account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.

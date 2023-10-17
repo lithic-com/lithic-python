@@ -2,21 +2,31 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import TYPE_CHECKING, Union
 from datetime import datetime
 from typing_extensions import Literal
 
-from ..types import Account, account_list_params, account_update_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
-from .._resource import SyncAPIResource, AsyncAPIResource
-from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import AsyncPaginator, make_request_options
+from ...types import Account, account_list_params, account_update_params
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import maybe_transform
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ...pagination import SyncCursorPage, AsyncCursorPage
+from ..._base_client import AsyncPaginator, make_request_options
+from .credit_configurations import CreditConfigurations, AsyncCreditConfigurations
+
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
 
 __all__ = ["Accounts", "AsyncAccounts"]
 
 
 class Accounts(SyncAPIResource):
+    credit_configurations: CreditConfigurations
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.credit_configurations = CreditConfigurations(client)
+
     def retrieve(
         self,
         account_token: str,
@@ -145,10 +155,10 @@ class Accounts(SyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified date
+        Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
@@ -191,6 +201,12 @@ class Accounts(SyncAPIResource):
 
 
 class AsyncAccounts(AsyncAPIResource):
+    credit_configurations: AsyncCreditConfigurations
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.credit_configurations = AsyncCreditConfigurations(client)
+
     async def retrieve(
         self,
         account_token: str,
@@ -319,10 +335,10 @@ class AsyncAccounts(AsyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified date
+        Only entries created after the specified time
               will be included. UTC time zone.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.

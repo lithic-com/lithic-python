@@ -10,6 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import (
     Payment,
+    PaymentRetryResponse,
     PaymentCreateResponse,
     PaymentSimulateReturnResponse,
     PaymentSimulateReleaseResponse,
@@ -44,7 +45,11 @@ class TestPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={"sec_code": "PPD"},
+            method_attributes={
+                "retries": 0,
+                "return_reason_code": "string",
+                "sec_code": "PPD",
+            },
             type="PAYMENT",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="string",
@@ -75,6 +80,13 @@ class TestPayments:
             status="PENDING",
         )
         assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
+
+    @parametrize
+    def test_method_retry(self, client: Lithic) -> None:
+        payment = client.payments.retry(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(PaymentRetryResponse, payment, path=["response"])
 
     @parametrize
     def test_method_simulate_release(self, client: Lithic) -> None:
@@ -123,7 +135,11 @@ class TestAsyncPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={"sec_code": "PPD"},
+            method_attributes={
+                "retries": 0,
+                "return_reason_code": "string",
+                "sec_code": "PPD",
+            },
             type="PAYMENT",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="string",
@@ -154,6 +170,13 @@ class TestAsyncPayments:
             status="PENDING",
         )
         assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
+
+    @parametrize
+    async def test_method_retry(self, client: AsyncLithic) -> None:
+        payment = await client.payments.retry(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(PaymentRetryResponse, payment, path=["response"])
 
     @parametrize
     async def test_method_simulate_release(self, client: AsyncLithic) -> None:
