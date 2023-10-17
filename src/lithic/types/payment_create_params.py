@@ -29,3 +29,7 @@ class PaymentCreateParams(TypedDict, total=False):
 
 class MethodAttributes(TypedDict, total=False):
     sec_code: Required[Literal["PPD", "CCD", "WEB"]]
+
+    retries: int
+
+    return_reason_code: str

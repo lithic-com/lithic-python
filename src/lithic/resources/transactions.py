@@ -89,12 +89,12 @@ class Transactions(SyncAPIResource):
         Args:
           account_token: Filters for transactions associated with a specific account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
           card_token: Filters for transactions associated with a specific card.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
@@ -661,12 +661,12 @@ class AsyncTransactions(AsyncAPIResource):
         Args:
           account_token: Filters for transactions associated with a specific account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
           card_token: Filters for transactions associated with a specific card.
 
-          end: Date string in RFC 3339 format. Only entries created before the specified date
+          end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
