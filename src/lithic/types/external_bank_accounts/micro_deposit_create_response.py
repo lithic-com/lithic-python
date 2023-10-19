@@ -83,3 +83,10 @@ class MicroDepositCreateResponse(BaseModel):
     """The nickname given to this record of External Bank Account"""
 
     user_defined_id: Optional[str] = None
+
+    verification_failed_reason: Optional[str] = None
+    """Optional free text description of the reason for the failed verification.
+
+    For ACH micro-deposits returned, this field will display the reason return code
+    sent by the ACH network
+    """
