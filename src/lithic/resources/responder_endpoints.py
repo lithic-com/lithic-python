@@ -23,7 +23,7 @@ class ResponderEndpoints(SyncAPIResource):
     def create(
         self,
         *,
-        type: Literal["TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"] | NotGiven = NOT_GIVEN,
+        type: Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"] | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -73,7 +73,7 @@ class ResponderEndpoints(SyncAPIResource):
     def delete(
         self,
         *,
-        type: Literal["TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
+        type: Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -114,7 +114,7 @@ class ResponderEndpoints(SyncAPIResource):
     def check_status(
         self,
         *,
-        type: Literal["TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
+        type: Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -155,7 +155,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
     async def create(
         self,
         *,
-        type: Literal["TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"] | NotGiven = NOT_GIVEN,
+        type: Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"] | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -205,7 +205,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
     async def delete(
         self,
         *,
-        type: Literal["TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
+        type: Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -246,7 +246,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
     async def check_status(
         self,
         *,
-        type: Literal["TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
+        type: Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

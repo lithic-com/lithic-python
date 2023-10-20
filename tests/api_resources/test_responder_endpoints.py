@@ -27,7 +27,7 @@ class TestResponderEndpoints:
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         responder_endpoint = client.responder_endpoints.create(
-            type="TOKENIZATION_DECISIONING",
+            type="AUTH_STREAM_ACCESS",
             url="https://example.com",
         )
         assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
@@ -36,14 +36,14 @@ class TestResponderEndpoints:
     @parametrize
     def test_method_delete(self, client: Lithic) -> None:
         responder_endpoint = client.responder_endpoints.delete(
-            type="TOKENIZATION_DECISIONING",
+            type="AUTH_STREAM_ACCESS",
         )
         assert responder_endpoint is None
 
     @parametrize
     def test_method_check_status(self, client: Lithic) -> None:
         responder_endpoint = client.responder_endpoints.check_status(
-            type="TOKENIZATION_DECISIONING",
+            type="AUTH_STREAM_ACCESS",
         )
         assert_matches_type(ResponderEndpointStatus, responder_endpoint, path=["response"])
 
@@ -61,7 +61,7 @@ class TestAsyncResponderEndpoints:
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         responder_endpoint = await client.responder_endpoints.create(
-            type="TOKENIZATION_DECISIONING",
+            type="AUTH_STREAM_ACCESS",
             url="https://example.com",
         )
         assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
@@ -70,13 +70,13 @@ class TestAsyncResponderEndpoints:
     @parametrize
     async def test_method_delete(self, client: AsyncLithic) -> None:
         responder_endpoint = await client.responder_endpoints.delete(
-            type="TOKENIZATION_DECISIONING",
+            type="AUTH_STREAM_ACCESS",
         )
         assert responder_endpoint is None
 
     @parametrize
     async def test_method_check_status(self, client: AsyncLithic) -> None:
         responder_endpoint = await client.responder_endpoints.check_status(
-            type="TOKENIZATION_DECISIONING",
+            type="AUTH_STREAM_ACCESS",
         )
         assert_matches_type(ResponderEndpointStatus, responder_endpoint, path=["response"])
