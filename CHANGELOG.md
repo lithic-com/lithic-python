@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.20.0 (2023-10-25)
+
+Full Changelog: [v0.19.3...v0.20.0](https://github.com/lithic-com/lithic-python/compare/v0.19.3...v0.20.0)
+
+### Features
+
+* **api:** add AUTH_STREAM_ACCESS to responder endpoints ([#205](https://github.com/lithic-com/lithic-python/issues/205)) ([55d9f21](https://github.com/lithic-com/lithic-python/commit/55d9f2157baa536a789242c175f02049ac375eb0))
+* **api:** add verification_failed_reason ([#203](https://github.com/lithic-com/lithic-python/issues/203)) ([b6dfb4d](https://github.com/lithic-com/lithic-python/commit/b6dfb4d6942029db5d7f7be801c50c3a68bbf0de))
+* **api:** updates ([#197](https://github.com/lithic-com/lithic-python/issues/197)) ([34f3534](https://github.com/lithic-com/lithic-python/commit/34f3534570052d2aac66fb377fff2f0070e3bba1))
+* **client:** add logging setup ([#187](https://github.com/lithic-com/lithic-python/issues/187)) ([4ec658e](https://github.com/lithic-com/lithic-python/commit/4ec658e9ab1198fee4c7c56565e373544c8f0dc2))
+* **client:** adjust retry behavior to be exponential backoff ([#209](https://github.com/lithic-com/lithic-python/issues/209)) ([b571389](https://github.com/lithic-com/lithic-python/commit/b57138988410db4d48aaec60c6a9e89a77417d93))
+* **client:** improve file upload types ([#208](https://github.com/lithic-com/lithic-python/issues/208)) ([ff0cca0](https://github.com/lithic-com/lithic-python/commit/ff0cca01295b23feca0afd7acf2d4850c711b1c8))
+* **client:** support passing httpx.URL instances to base_url ([#199](https://github.com/lithic-com/lithic-python/issues/199)) ([fec5362](https://github.com/lithic-com/lithic-python/commit/fec5362238f361bc02574eadda2b851331303922))
+* make webhook headers case insensitive ([#190](https://github.com/lithic-com/lithic-python/issues/190)) ([e0a5811](https://github.com/lithic-com/lithic-python/commit/e0a58115203e16b042a27ccae640e49bfabc4bfe))
+
+
+### Bug Fixes
+
+* **client:** accept io.IOBase instances in file params ([#194](https://github.com/lithic-com/lithic-python/issues/194)) ([c41ebb0](https://github.com/lithic-com/lithic-python/commit/c41ebb0bc989ec82dc443e328078dbbbebc7882b))
+* **client:** correctly handle arguments with env vars ([#188](https://github.com/lithic-com/lithic-python/issues/188)) ([1bc8b58](https://github.com/lithic-com/lithic-python/commit/1bc8b58c1ff0669047ca2d62fa990ea2f4f3a33c))
+
+
+### Chores
+
+* **docs:** remove old migration guide ([#212](https://github.com/lithic-com/lithic-python/issues/212)) ([ee6cbb4](https://github.com/lithic-com/lithic-python/commit/ee6cbb4c0e34ab632bc15c0ab1604edd85595536))
+* **internal:** bump mypy ([#207](https://github.com/lithic-com/lithic-python/issues/207)) ([74308ad](https://github.com/lithic-com/lithic-python/commit/74308ad963fbd4b4591eb3f2a0ecc9b3dafdabf9))
+* **internal:** bump pyright ([#206](https://github.com/lithic-com/lithic-python/issues/206)) ([d65667f](https://github.com/lithic-com/lithic-python/commit/d65667fbf6484c9bab412b66fb7cac5373b0d70b))
+* **internal:** cleanup some redundant code ([#193](https://github.com/lithic-com/lithic-python/issues/193)) ([61a777a](https://github.com/lithic-com/lithic-python/commit/61a777ad39c3c41e9f834583a6de7108d7878570))
+* **internal:** enable lint rule ([#192](https://github.com/lithic-com/lithic-python/issues/192)) ([df95673](https://github.com/lithic-com/lithic-python/commit/df956735de9c13c50be6406d9b1ea539dd6bb656))
+* **internal:** improve publish script ([#198](https://github.com/lithic-com/lithic-python/issues/198)) ([9ecaa3c](https://github.com/lithic-com/lithic-python/commit/9ecaa3c95313fe60d79dda3ff8309e1652bbda52))
+* **internal:** migrate from Poetry to Rye ([#196](https://github.com/lithic-com/lithic-python/issues/196)) ([748a670](https://github.com/lithic-com/lithic-python/commit/748a6709bdd0207cd35faf4b4d768d5676b2da18))
+* **internal:** update gitignore ([#201](https://github.com/lithic-com/lithic-python/issues/201)) ([631d650](https://github.com/lithic-com/lithic-python/commit/631d6502ccc147ba606099572dc8671faf2be1f1))
+* **internal:** update gitignore ([#202](https://github.com/lithic-com/lithic-python/issues/202)) ([48a9f60](https://github.com/lithic-com/lithic-python/commit/48a9f6013454853fcb9162d1860f0d5ad31def42))
+* **internal:** update lock file ([#200](https://github.com/lithic-com/lithic-python/issues/200)) ([19aad77](https://github.com/lithic-com/lithic-python/commit/19aad77f824a3c454cbd3c03ed82996c387e896f))
+* update comment ([#191](https://github.com/lithic-com/lithic-python/issues/191)) ([c5e2a68](https://github.com/lithic-com/lithic-python/commit/c5e2a687b9a0ea0960046b00fa30b7cd46f7f730))
+* update README ([#184](https://github.com/lithic-com/lithic-python/issues/184)) ([bda1154](https://github.com/lithic-com/lithic-python/commit/bda11547b33249121ef97a221e9e7d7f851aa490))
+
+
+### Documentation
+
+* improve to dictionary example ([#211](https://github.com/lithic-com/lithic-python/issues/211)) ([773b0f5](https://github.com/lithic-com/lithic-python/commit/773b0f59bf5b65a99f0e707e5bda028ff7632b98))
+* organisation -&gt; organization (UK to US English) ([#195](https://github.com/lithic-com/lithic-python/issues/195)) ([d082979](https://github.com/lithic-com/lithic-python/commit/d08297944533fb314f4e5c38501be4bfa58c9e54))
+
+
+### Refactors
+
+* **test:** refactor authentication tests ([#186](https://github.com/lithic-com/lithic-python/issues/186)) ([2357bdd](https://github.com/lithic-com/lithic-python/commit/2357bdddb8a2f5f352c797fdc3e470ad4146c44b))
+
 ## 0.19.3 (2023-10-11)
 
 Full Changelog: [v0.19.2...v0.19.3](https://github.com/lithic-com/lithic-python/compare/v0.19.2...v0.19.3)
