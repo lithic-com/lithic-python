@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 import asyncio
 from typing import Dict, Union, Mapping
-from typing_extensions import Literal
+from typing_extensions import Literal, override
 
 import httpx
 
@@ -182,15 +182,18 @@ class Lithic(SyncAPIClient):
         self.digital_card_art = resources.DigitalCardArtResource(self)
 
     @property
+    @override
     def qs(self) -> Querystring:
         return Querystring(array_format="comma")
 
     @property
+    @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": api_key}
 
     @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -302,6 +305,7 @@ class Lithic(SyncAPIClient):
             cast_to=APIStatus,
         )
 
+    @override
     def _make_status_error(
         self,
         err_msg: str,
@@ -460,15 +464,18 @@ class AsyncLithic(AsyncAPIClient):
         self.digital_card_art = resources.AsyncDigitalCardArtResource(self)
 
     @property
+    @override
     def qs(self) -> Querystring:
         return Querystring(array_format="comma")
 
     @property
+    @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": api_key}
 
     @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -583,6 +590,7 @@ class AsyncLithic(AsyncAPIClient):
             cast_to=APIStatus,
         )
 
+    @override
     def _make_status_error(
         self,
         err_msg: str,

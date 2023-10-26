@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from typing import Any, List, Generic, TypeVar, Optional, cast
-from typing_extensions import Protocol, runtime_checkable
+from typing_extensions import Protocol, override, runtime_checkable
 
 from ._types import ModelT
 from ._models import BaseModel
@@ -21,9 +21,11 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     data: List[ModelT]
     has_more: bool
 
+    @override
     def _get_page_items(self) -> List[ModelT]:
         return self.data
 
+    @override
     def next_page_info(self) -> Optional[PageInfo]:
         is_forwards = not self._options.params.get("ending_before", False)
 
@@ -48,9 +50,11 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     data: List[ModelT]
     has_more: bool
 
+    @override
     def _get_page_items(self) -> List[ModelT]:
         return self.data
 
+    @override
     def next_page_info(self) -> Optional[PageInfo]:
         is_forwards = not self._options.params.get("ending_before", False)
 
@@ -75,9 +79,11 @@ class SyncSinglePage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     data: List[ModelT]
     has_more: bool
 
+    @override
     def _get_page_items(self) -> List[ModelT]:
         return self.data
 
+    @override
     def next_page_info(self) -> None:
         """
         This page represents a response that isn't actually paginated at the API level
@@ -90,9 +96,11 @@ class AsyncSinglePage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     data: List[ModelT]
     has_more: bool
 
+    @override
     def _get_page_items(self) -> List[ModelT]:
         return self.data
 
+    @override
     def next_page_info(self) -> None:
         """
         This page represents a response that isn't actually paginated at the API level
