@@ -12,8 +12,10 @@ from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import AuthRules, AsyncAuthRules
 from .card_product import CardProduct, AsyncCardProduct
 from .transactions import Transactions, AsyncTransactions
+from .card_programs import CardPrograms, AsyncCardPrograms
 from .tokenizations import Tokenizations, AsyncTokenizations
 from .account_holders import AccountHolders, AsyncAccountHolders
+from .digital_card_art import DigitalCardArtResource, AsyncDigitalCardArtResource
 from .aggregate_balances import AggregateBalances, AsyncAggregateBalances
 from .financial_accounts import FinancialAccounts, AsyncFinancialAccounts
 from .responder_endpoints import ResponderEndpoints, AsyncResponderEndpoints
@@ -68,4 +70,8 @@ __all__ = [
     "AsyncReports",
     "CardProduct",
     "AsyncCardProduct",
+    "CardPrograms",
+    "AsyncCardPrograms",
+    "DigitalCardArtResource",
+    "AsyncDigitalCardArtResource",
 ]
