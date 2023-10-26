@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.0 (2023-10-26)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/lithic-com/lithic-python/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* **api:** add CardProgram and DigitalCardArt resources ([#213](https://github.com/lithic-com/lithic-python/issues/213)) ([afcb7e4](https://github.com/lithic-com/lithic-python/commit/afcb7e416ee7ced7e67e5c0fd3374f13fee7b2f0))
+
 ## 0.20.0 (2023-10-25)
 
 Full Changelog: [v0.19.3...v0.20.0](https://github.com/lithic-com/lithic-python/compare/v0.19.3...v0.20.0)
