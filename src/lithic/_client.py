@@ -78,6 +78,8 @@ class Lithic(SyncAPIClient):
     three_ds: resources.ThreeDS
     reports: resources.Reports
     card_product: resources.CardProduct
+    card_programs: resources.CardPrograms
+    digital_card_art: resources.DigitalCardArtResource
 
     # client options
     api_key: str
@@ -176,6 +178,8 @@ class Lithic(SyncAPIClient):
         self.three_ds = resources.ThreeDS(self)
         self.reports = resources.Reports(self)
         self.card_product = resources.CardProduct(self)
+        self.card_programs = resources.CardPrograms(self)
+        self.digital_card_art = resources.DigitalCardArtResource(self)
 
     @property
     def qs(self) -> Querystring:
@@ -352,6 +356,8 @@ class AsyncLithic(AsyncAPIClient):
     three_ds: resources.AsyncThreeDS
     reports: resources.AsyncReports
     card_product: resources.AsyncCardProduct
+    card_programs: resources.AsyncCardPrograms
+    digital_card_art: resources.AsyncDigitalCardArtResource
 
     # client options
     api_key: str
@@ -450,6 +456,8 @@ class AsyncLithic(AsyncAPIClient):
         self.three_ds = resources.AsyncThreeDS(self)
         self.reports = resources.AsyncReports(self)
         self.card_product = resources.AsyncCardProduct(self)
+        self.card_programs = resources.AsyncCardPrograms(self)
+        self.digital_card_art = resources.AsyncDigitalCardArtResource(self)
 
     @property
     def qs(self) -> Querystring:

@@ -475,3 +475,28 @@ from lithic.types import CardProductCreditDetailResponse
 Methods:
 
 - <code title="get /card_product/credit_detail">client.card_product.<a href="./src/lithic/resources/card_product.py">credit_detail</a>() -> <a href="./src/lithic/types/card_product_credit_detail_response.py">CardProductCreditDetailResponse</a></code>
+
+# CardPrograms
+
+Types:
+
+```python
+from lithic.types import CardProgram
+```
+
+Methods:
+
+- <code title="get /card_programs/{card_program_token}">client.card_programs.<a href="./src/lithic/resources/card_programs.py">retrieve</a>(card_program_token) -> <a href="./src/lithic/types/card_program.py">CardProgram</a></code>
+- <code title="get /card_programs">client.card_programs.<a href="./src/lithic/resources/card_programs.py">list</a>(\*\*<a href="src/lithic/types/card_program_list_params.py">params</a>) -> <a href="./src/lithic/types/card_program.py">SyncCursorPage[CardProgram]</a></code>
+
+# DigitalCardArtResource
+
+Types:
+
+```python
+from lithic.types import DigitalCardArt
+```
+
+Methods:
+
+- <code title="get /digital_card_art">client.digital_card_art.<a href="./src/lithic/resources/digital_card_art.py">list</a>(\*\*<a href="src/lithic/types/digital_card_art_list_params.py">params</a>) -> <a href="./src/lithic/types/digital_card_art.py">SyncCursorPage[DigitalCardArt]</a></code>
