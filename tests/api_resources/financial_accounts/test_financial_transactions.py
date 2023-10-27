@@ -10,6 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import FinancialTransaction
 from lithic._utils import parse_datetime
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -27,6 +28,16 @@ class TestFinancialTransactions:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(FinancialTransaction, financial_transaction, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.financial_accounts.financial_transactions.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        financial_transaction = response.parse()
         assert_matches_type(FinancialTransaction, financial_transaction, path=["response"])
 
     @parametrize
@@ -50,6 +61,15 @@ class TestFinancialTransactions:
         )
         assert_matches_type(SyncSinglePage[FinancialTransaction], financial_transaction, path=["response"])
 
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.financial_accounts.financial_transactions.with_raw_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        financial_transaction = response.parse()
+        assert_matches_type(SyncSinglePage[FinancialTransaction], financial_transaction, path=["response"])
+
 
 class TestAsyncFinancialTransactions:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -62,6 +82,16 @@ class TestAsyncFinancialTransactions:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(FinancialTransaction, financial_transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.financial_accounts.financial_transactions.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        financial_transaction = response.parse()
         assert_matches_type(FinancialTransaction, financial_transaction, path=["response"])
 
     @parametrize
@@ -83,4 +113,13 @@ class TestAsyncFinancialTransactions:
             starting_after="string",
             status="DECLINED",
         )
+        assert_matches_type(AsyncSinglePage[FinancialTransaction], financial_transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.financial_accounts.financial_transactions.with_raw_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        financial_transaction = response.parse()
         assert_matches_type(AsyncSinglePage[FinancialTransaction], financial_transaction, path=["response"])

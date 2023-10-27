@@ -2,21 +2,31 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import make_request_options
 from ...types.external_bank_accounts import (
     MicroDepositCreateResponse,
     micro_deposit_create_params,
 )
 
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
+
 __all__ = ["MicroDeposits", "AsyncMicroDeposits"]
 
 
 class MicroDeposits(SyncAPIResource):
+    with_raw_response: MicroDepositsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = MicroDepositsWithRawResponse(self)
+
     def create(
         self,
         external_bank_account_token: str,
@@ -61,6 +71,12 @@ class MicroDeposits(SyncAPIResource):
 
 
 class AsyncMicroDeposits(AsyncAPIResource):
+    with_raw_response: AsyncMicroDepositsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncMicroDepositsWithRawResponse(self)
+
     async def create(
         self,
         external_bank_account_token: str,
@@ -101,4 +117,18 @@ class AsyncMicroDeposits(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=MicroDepositCreateResponse,
+        )
+
+
+class MicroDepositsWithRawResponse:
+    def __init__(self, micro_deposits: MicroDeposits) -> None:
+        self.create = to_raw_response_wrapper(
+            micro_deposits.create,
+        )
+
+
+class AsyncMicroDepositsWithRawResponse:
+    def __init__(self, micro_deposits: AsyncMicroDeposits) -> None:
+        self.create = async_to_raw_response_wrapper(
+            micro_deposits.create,
         )

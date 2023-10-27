@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import make_request_options
 from ...types.three_ds import (
     AuthenticationRetrieveResponse,
@@ -12,10 +15,19 @@ from ...types.three_ds import (
     authentication_simulate_params,
 )
 
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
+
 __all__ = ["Authentication", "AsyncAuthentication"]
 
 
 class Authentication(SyncAPIResource):
+    with_raw_response: AuthenticationWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AuthenticationWithRawResponse(self)
+
     def retrieve(
         self,
         three_ds_authentication_token: str,
@@ -102,6 +114,12 @@ class Authentication(SyncAPIResource):
 
 
 class AsyncAuthentication(AsyncAPIResource):
+    with_raw_response: AsyncAuthenticationWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncAuthenticationWithRawResponse(self)
+
     async def retrieve(
         self,
         three_ds_authentication_token: str,
@@ -184,4 +202,24 @@ class AsyncAuthentication(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthenticationSimulateResponse,
+        )
+
+
+class AuthenticationWithRawResponse:
+    def __init__(self, authentication: Authentication) -> None:
+        self.retrieve = to_raw_response_wrapper(
+            authentication.retrieve,
+        )
+        self.simulate = to_raw_response_wrapper(
+            authentication.simulate,
+        )
+
+
+class AsyncAuthenticationWithRawResponse:
+    def __init__(self, authentication: AsyncAuthentication) -> None:
+        self.retrieve = async_to_raw_response_wrapper(
+            authentication.retrieve,
+        )
+        self.simulate = async_to_raw_response_wrapper(
+            authentication.simulate,
         )

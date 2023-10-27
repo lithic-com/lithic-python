@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import TokenizationSimulateResponse
+from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -42,6 +43,18 @@ class TestTokenizations:
         )
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
 
+    @parametrize
+    def test_raw_response_simulate(self, client: Lithic) -> None:
+        response = client.tokenizations.with_raw_response.simulate(
+            cvv="776",
+            expiration_date="08/29",
+            pan="4111111289144142",
+            tokenization_source="APPLE_PAY",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+
 
 class TestAsyncTokenizations:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -69,4 +82,16 @@ class TestAsyncTokenizations:
             device_score=5,
             wallet_recommended_decision="APPROVED",
         )
+        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate(self, client: AsyncLithic) -> None:
+        response = await client.tokenizations.with_raw_response.simulate(
+            cvv="776",
+            expiration_date="08/29",
+            pan="4111111289144142",
+            tokenization_source="APPLE_PAY",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])

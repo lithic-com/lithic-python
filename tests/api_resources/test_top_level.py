@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import APIStatus
+from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -24,6 +25,13 @@ class TestTopLevel:
         top_level = client.api_status()
         assert_matches_type(APIStatus, top_level, path=["response"])
 
+    @parametrize
+    def test_raw_response_api_status(self, client: Lithic) -> None:
+        response = client.with_raw_response.api_status()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        top_level = response.parse()
+        assert_matches_type(APIStatus, top_level, path=["response"])
+
 
 class TestAsyncTopLevel:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -33,4 +41,11 @@ class TestAsyncTopLevel:
     @parametrize
     async def test_method_api_status(self, client: AsyncLithic) -> None:
         top_level = await client.api_status()
+        assert_matches_type(APIStatus, top_level, path=["response"])
+
+    @parametrize
+    async def test_raw_response_api_status(self, client: AsyncLithic) -> None:
+        response = await client.with_raw_response.api_status()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        top_level = response.parse()
         assert_matches_type(APIStatus, top_level, path=["response"])

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 from typing_extensions import Literal
 
 from ..types import (
@@ -14,12 +15,22 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["ResponderEndpoints", "AsyncResponderEndpoints"]
 
 
 class ResponderEndpoints(SyncAPIResource):
+    with_raw_response: ResponderEndpointsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = ResponderEndpointsWithRawResponse(self)
+
     def create(
         self,
         *,
@@ -152,6 +163,12 @@ class ResponderEndpoints(SyncAPIResource):
 
 
 class AsyncResponderEndpoints(AsyncAPIResource):
+    with_raw_response: AsyncResponderEndpointsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncResponderEndpointsWithRawResponse(self)
+
     async def create(
         self,
         *,
@@ -280,4 +297,30 @@ class AsyncResponderEndpoints(AsyncAPIResource):
                 ),
             ),
             cast_to=ResponderEndpointStatus,
+        )
+
+
+class ResponderEndpointsWithRawResponse:
+    def __init__(self, responder_endpoints: ResponderEndpoints) -> None:
+        self.create = to_raw_response_wrapper(
+            responder_endpoints.create,
+        )
+        self.delete = to_raw_response_wrapper(
+            responder_endpoints.delete,
+        )
+        self.check_status = to_raw_response_wrapper(
+            responder_endpoints.check_status,
+        )
+
+
+class AsyncResponderEndpointsWithRawResponse:
+    def __init__(self, responder_endpoints: AsyncResponderEndpoints) -> None:
+        self.create = async_to_raw_response_wrapper(
+            responder_endpoints.create,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            responder_endpoints.delete,
+        )
+        self.check_status = async_to_raw_response_wrapper(
+            responder_endpoints.check_status,
         )

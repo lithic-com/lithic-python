@@ -19,6 +19,7 @@ from lithic.types import (
     TransactionSimulateCreditAuthorizationResponse,
 )
 from lithic._utils import parse_datetime
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -38,6 +39,15 @@ class TestTransactions:
         assert_matches_type(Transaction, transaction, path=["response"])
 
     @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(Transaction, transaction, path=["response"])
+
+    @parametrize
     def test_method_list(self, client: Lithic) -> None:
         transaction = client.transactions.list()
         assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
@@ -54,6 +64,13 @@ class TestTransactions:
             result="APPROVED",
             starting_after="string",
         )
+        assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
+
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
 
     @parametrize
@@ -81,11 +98,32 @@ class TestTransactions:
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
+    def test_raw_response_simulate_authorization(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
     def test_method_simulate_authorization_advice(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_authorization_advice(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
             amount=3831,
         )
+        assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_authorization_advice(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_authorization_advice(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+            amount=3831,
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
 
     @parametrize
@@ -101,6 +139,15 @@ class TestTransactions:
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
         )
+        assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_clearing(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_clearing(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
@@ -124,6 +171,17 @@ class TestTransactions:
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
+    def test_raw_response_simulate_credit_authorization(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_credit_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
     def test_method_simulate_return(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_return(
             amount=3831,
@@ -133,10 +191,30 @@ class TestTransactions:
         assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
 
     @parametrize
+    def test_raw_response_simulate_return(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_return(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+    @parametrize
     def test_method_simulate_return_reversal(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_return_reversal(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+        assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_return_reversal(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_return_reversal(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
 
     @parametrize
@@ -155,6 +233,15 @@ class TestTransactions:
         )
         assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
 
+    @parametrize
+    def test_raw_response_simulate_void(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_void(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
+
 
 class TestAsyncTransactions:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -166,6 +253,15 @@ class TestAsyncTransactions:
         transaction = await client.transactions.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Transaction, transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
 
     @parametrize
@@ -185,6 +281,13 @@ class TestAsyncTransactions:
             result="APPROVED",
             starting_after="string",
         )
+        assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
 
     @parametrize
@@ -212,11 +315,32 @@ class TestAsyncTransactions:
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
+    async def test_raw_response_simulate_authorization(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.simulate_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
     async def test_method_simulate_authorization_advice(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_authorization_advice(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
             amount=3831,
         )
+        assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_authorization_advice(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.simulate_authorization_advice(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+            amount=3831,
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
 
     @parametrize
@@ -232,6 +356,15 @@ class TestAsyncTransactions:
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
         )
+        assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_clearing(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.simulate_clearing(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
@@ -255,6 +388,17 @@ class TestAsyncTransactions:
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
+    async def test_raw_response_simulate_credit_authorization(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.simulate_credit_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
     async def test_method_simulate_return(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_return(
             amount=3831,
@@ -264,10 +408,30 @@ class TestAsyncTransactions:
         assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
 
     @parametrize
+    async def test_raw_response_simulate_return(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.simulate_return(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+    @parametrize
     async def test_method_simulate_return_reversal(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_return_reversal(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+        assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_return_reversal(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.simulate_return_reversal(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
 
     @parametrize
@@ -284,4 +448,13 @@ class TestAsyncTransactions:
             amount=100,
             type="AUTHORIZATION_EXPIRY",
         )
+        assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_void(self, client: AsyncLithic) -> None:
+        response = await client.transactions.with_raw_response.simulate_void(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
         assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])

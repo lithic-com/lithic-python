@@ -2,15 +2,27 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import make_request_options
 from ...types.three_ds import DecisioningRetrieveSecretResponse
+
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
 
 __all__ = ["Decisioning", "AsyncDecisioning"]
 
 
 class Decisioning(SyncAPIResource):
+    with_raw_response: DecisioningWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = DecisioningWithRawResponse(self)
+
     def retrieve_secret(
         self,
         *,
@@ -70,6 +82,12 @@ class Decisioning(SyncAPIResource):
 
 
 class AsyncDecisioning(AsyncAPIResource):
+    with_raw_response: AsyncDecisioningWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncDecisioningWithRawResponse(self)
+
     async def retrieve_secret(
         self,
         *,
@@ -125,4 +143,24 @@ class AsyncDecisioning(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
+        )
+
+
+class DecisioningWithRawResponse:
+    def __init__(self, decisioning: Decisioning) -> None:
+        self.retrieve_secret = to_raw_response_wrapper(
+            decisioning.retrieve_secret,
+        )
+        self.rotate_secret = to_raw_response_wrapper(
+            decisioning.rotate_secret,
+        )
+
+
+class AsyncDecisioningWithRawResponse:
+    def __init__(self, decisioning: AsyncDecisioning) -> None:
+        self.retrieve_secret = async_to_raw_response_wrapper(
+            decisioning.retrieve_secret,
+        )
+        self.rotate_secret = async_to_raw_response_wrapper(
+            decisioning.rotate_secret,
         )

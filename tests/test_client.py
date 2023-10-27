@@ -15,6 +15,7 @@ from respx import MockRouter
 from pydantic import ValidationError
 
 from lithic import Lithic, AsyncLithic, APIResponseValidationError
+from lithic._client import Lithic, AsyncLithic
 from lithic._models import BaseModel, FinalRequestOptions
 from lithic._exceptions import APIResponseValidationError
 from lithic._base_client import (
@@ -28,7 +29,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
 
 
-def _get_params(client: BaseClient[Any]) -> dict[str, str]:
+def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
     request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
     url = httpx.URL(request.url)
     return dict(url.params)

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 from ..types import (
     AuthRule,
@@ -17,13 +17,23 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["AuthRules", "AsyncAuthRules"]
 
 
 class AuthRules(SyncAPIResource):
+    with_raw_response: AuthRulesWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AuthRulesWithRawResponse(self)
+
     def create(
         self,
         *,
@@ -372,6 +382,12 @@ class AuthRules(SyncAPIResource):
 
 
 class AsyncAuthRules(AsyncAPIResource):
+    with_raw_response: AsyncAuthRulesWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncAuthRulesWithRawResponse(self)
+
     async def create(
         self,
         *,
@@ -716,4 +732,48 @@ class AsyncAuthRules(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=AuthRuleRemoveResponse,
+        )
+
+
+class AuthRulesWithRawResponse:
+    def __init__(self, auth_rules: AuthRules) -> None:
+        self.create = to_raw_response_wrapper(
+            auth_rules.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            auth_rules.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            auth_rules.update,
+        )
+        self.list = to_raw_response_wrapper(
+            auth_rules.list,
+        )
+        self.apply = to_raw_response_wrapper(
+            auth_rules.apply,
+        )
+        self.remove = to_raw_response_wrapper(
+            auth_rules.remove,
+        )
+
+
+class AsyncAuthRulesWithRawResponse:
+    def __init__(self, auth_rules: AsyncAuthRules) -> None:
+        self.create = async_to_raw_response_wrapper(
+            auth_rules.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            auth_rules.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            auth_rules.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            auth_rules.list,
+        )
+        self.apply = async_to_raw_response_wrapper(
+            auth_rules.apply,
+        )
+        self.remove = async_to_raw_response_wrapper(
+            auth_rules.remove,
         )

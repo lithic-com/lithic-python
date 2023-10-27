@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from ..types import (
     AuthStreamSecret,
     AuthStreamEnrollment,
@@ -10,12 +12,22 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["AuthStreamEnrollmentResource", "AsyncAuthStreamEnrollmentResource"]
 
 
 class AuthStreamEnrollmentResource(SyncAPIResource):
+    with_raw_response: AuthStreamEnrollmentResourceWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AuthStreamEnrollmentResourceWithRawResponse(self)
+
     def retrieve(
         self,
         *,
@@ -175,6 +187,12 @@ class AuthStreamEnrollmentResource(SyncAPIResource):
 
 
 class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
+    with_raw_response: AsyncAuthStreamEnrollmentResourceWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncAuthStreamEnrollmentResourceWithRawResponse(self)
+
     async def retrieve(
         self,
         *,
@@ -330,4 +348,42 @@ class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
+        )
+
+
+class AuthStreamEnrollmentResourceWithRawResponse:
+    def __init__(self, auth_stream_enrollment: AuthStreamEnrollmentResource) -> None:
+        self.retrieve = to_raw_response_wrapper(
+            auth_stream_enrollment.retrieve,
+        )
+        self.disenroll = to_raw_response_wrapper(
+            auth_stream_enrollment.disenroll,
+        )
+        self.enroll = to_raw_response_wrapper(
+            auth_stream_enrollment.enroll,
+        )
+        self.retrieve_secret = to_raw_response_wrapper(
+            auth_stream_enrollment.retrieve_secret,
+        )
+        self.rotate_secret = to_raw_response_wrapper(
+            auth_stream_enrollment.rotate_secret,
+        )
+
+
+class AsyncAuthStreamEnrollmentResourceWithRawResponse:
+    def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollmentResource) -> None:
+        self.retrieve = async_to_raw_response_wrapper(
+            auth_stream_enrollment.retrieve,
+        )
+        self.disenroll = async_to_raw_response_wrapper(
+            auth_stream_enrollment.disenroll,
+        )
+        self.enroll = async_to_raw_response_wrapper(
+            auth_stream_enrollment.enroll,
+        )
+        self.retrieve_secret = async_to_raw_response_wrapper(
+            auth_stream_enrollment.retrieve_secret,
+        )
+        self.rotate_secret = async_to_raw_response_wrapper(
+            auth_stream_enrollment.rotate_secret,
         )
