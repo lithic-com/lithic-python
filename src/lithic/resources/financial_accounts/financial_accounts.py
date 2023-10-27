@@ -8,12 +8,28 @@ from typing_extensions import Literal
 from ...types import FinancialAccount, financial_account_list_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
-from .balances import Balances, AsyncBalances
-from .statements import Statements, AsyncStatements
+from .balances import (
+    Balances,
+    AsyncBalances,
+    BalancesWithRawResponse,
+    AsyncBalancesWithRawResponse,
+)
+from .statements import (
+    Statements,
+    AsyncStatements,
+    StatementsWithRawResponse,
+    AsyncStatementsWithRawResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ..._base_client import AsyncPaginator, make_request_options
-from .financial_transactions import FinancialTransactions, AsyncFinancialTransactions
+from .financial_transactions import (
+    FinancialTransactions,
+    AsyncFinancialTransactions,
+    FinancialTransactionsWithRawResponse,
+    AsyncFinancialTransactionsWithRawResponse,
+)
 
 if TYPE_CHECKING:
     from ..._client import Lithic, AsyncLithic
@@ -25,12 +41,14 @@ class FinancialAccounts(SyncAPIResource):
     balances: Balances
     financial_transactions: FinancialTransactions
     statements: Statements
+    with_raw_response: FinancialAccountsWithRawResponse
 
     def __init__(self, client: Lithic) -> None:
         super().__init__(client)
         self.balances = Balances(client)
         self.financial_transactions = FinancialTransactions(client)
         self.statements = Statements(client)
+        self.with_raw_response = FinancialAccountsWithRawResponse(self)
 
     def list(
         self,
@@ -85,12 +103,14 @@ class AsyncFinancialAccounts(AsyncAPIResource):
     balances: AsyncBalances
     financial_transactions: AsyncFinancialTransactions
     statements: AsyncStatements
+    with_raw_response: AsyncFinancialAccountsWithRawResponse
 
     def __init__(self, client: AsyncLithic) -> None:
         super().__init__(client)
         self.balances = AsyncBalances(client)
         self.financial_transactions = AsyncFinancialTransactions(client)
         self.statements = AsyncStatements(client)
+        self.with_raw_response = AsyncFinancialAccountsWithRawResponse(self)
 
     def list(
         self,
@@ -138,4 +158,28 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 ),
             ),
             model=FinancialAccount,
+        )
+
+
+class FinancialAccountsWithRawResponse:
+    def __init__(self, financial_accounts: FinancialAccounts) -> None:
+        self.balances = BalancesWithRawResponse(financial_accounts.balances)
+        self.financial_transactions = FinancialTransactionsWithRawResponse(financial_accounts.financial_transactions)
+        self.statements = StatementsWithRawResponse(financial_accounts.statements)
+
+        self.list = to_raw_response_wrapper(
+            financial_accounts.list,
+        )
+
+
+class AsyncFinancialAccountsWithRawResponse:
+    def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
+        self.balances = AsyncBalancesWithRawResponse(financial_accounts.balances)
+        self.financial_transactions = AsyncFinancialTransactionsWithRawResponse(
+            financial_accounts.financial_transactions
+        )
+        self.statements = AsyncStatementsWithRawResponse(financial_accounts.statements)
+
+        self.list = async_to_raw_response_wrapper(
+            financial_accounts.list,
         )

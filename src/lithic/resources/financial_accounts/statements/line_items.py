@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import maybe_transform
 from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.financial_accounts.statements import (
@@ -12,10 +15,19 @@ from ....types.financial_accounts.statements import (
     line_item_list_params,
 )
 
+if TYPE_CHECKING:
+    from ...._client import Lithic, AsyncLithic
+
 __all__ = ["LineItems", "AsyncLineItems"]
 
 
 class LineItems(SyncAPIResource):
+    with_raw_response: LineItemsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = LineItemsWithRawResponse(self)
+
     def list(
         self,
         statement_token: str,
@@ -73,6 +85,12 @@ class LineItems(SyncAPIResource):
 
 
 class AsyncLineItems(AsyncAPIResource):
+    with_raw_response: AsyncLineItemsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncLineItemsWithRawResponse(self)
+
     def list(
         self,
         statement_token: str,
@@ -126,4 +144,18 @@ class AsyncLineItems(AsyncAPIResource):
                 ),
             ),
             model=LineItemListResponse,
+        )
+
+
+class LineItemsWithRawResponse:
+    def __init__(self, line_items: LineItems) -> None:
+        self.list = to_raw_response_wrapper(
+            line_items.list,
+        )
+
+
+class AsyncLineItemsWithRawResponse:
+    def __init__(self, line_items: AsyncLineItems) -> None:
+        self.list = async_to_raw_response_wrapper(
+            line_items.list,
         )

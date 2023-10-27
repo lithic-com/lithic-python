@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import TYPE_CHECKING, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -27,13 +27,23 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["Transactions", "AsyncTransactions"]
 
 
 class Transactions(SyncAPIResource):
+    with_raw_response: TransactionsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = TransactionsWithRawResponse(self)
+
     def retrieve(
         self,
         transaction_token: str,
@@ -606,6 +616,12 @@ class Transactions(SyncAPIResource):
 
 
 class AsyncTransactions(AsyncAPIResource):
+    with_raw_response: AsyncTransactionsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncTransactionsWithRawResponse(self)
+
     async def retrieve(
         self,
         transaction_token: str,
@@ -1174,4 +1190,66 @@ class AsyncTransactions(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=TransactionSimulateVoidResponse,
+        )
+
+
+class TransactionsWithRawResponse:
+    def __init__(self, transactions: Transactions) -> None:
+        self.retrieve = to_raw_response_wrapper(
+            transactions.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            transactions.list,
+        )
+        self.simulate_authorization = to_raw_response_wrapper(
+            transactions.simulate_authorization,
+        )
+        self.simulate_authorization_advice = to_raw_response_wrapper(
+            transactions.simulate_authorization_advice,
+        )
+        self.simulate_clearing = to_raw_response_wrapper(
+            transactions.simulate_clearing,
+        )
+        self.simulate_credit_authorization = to_raw_response_wrapper(
+            transactions.simulate_credit_authorization,
+        )
+        self.simulate_return = to_raw_response_wrapper(
+            transactions.simulate_return,
+        )
+        self.simulate_return_reversal = to_raw_response_wrapper(
+            transactions.simulate_return_reversal,
+        )
+        self.simulate_void = to_raw_response_wrapper(
+            transactions.simulate_void,
+        )
+
+
+class AsyncTransactionsWithRawResponse:
+    def __init__(self, transactions: AsyncTransactions) -> None:
+        self.retrieve = async_to_raw_response_wrapper(
+            transactions.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            transactions.list,
+        )
+        self.simulate_authorization = async_to_raw_response_wrapper(
+            transactions.simulate_authorization,
+        )
+        self.simulate_authorization_advice = async_to_raw_response_wrapper(
+            transactions.simulate_authorization_advice,
+        )
+        self.simulate_clearing = async_to_raw_response_wrapper(
+            transactions.simulate_clearing,
+        )
+        self.simulate_credit_authorization = async_to_raw_response_wrapper(
+            transactions.simulate_credit_authorization,
+        )
+        self.simulate_return = async_to_raw_response_wrapper(
+            transactions.simulate_return,
+        )
+        self.simulate_return_reversal = async_to_raw_response_wrapper(
+            transactions.simulate_return_reversal,
+        )
+        self.simulate_void = async_to_raw_response_wrapper(
+            transactions.simulate_void,
         )

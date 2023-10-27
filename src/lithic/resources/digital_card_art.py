@@ -2,17 +2,29 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from ..types import DigitalCardArt, digital_card_art_list_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["DigitalCardArtResource", "AsyncDigitalCardArtResource"]
 
 
 class DigitalCardArtResource(SyncAPIResource):
+    with_raw_response: DigitalCardArtResourceWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = DigitalCardArtResourceWithRawResponse(self)
+
     def list(
         self,
         *,
@@ -68,6 +80,12 @@ class DigitalCardArtResource(SyncAPIResource):
 
 
 class AsyncDigitalCardArtResource(AsyncAPIResource):
+    with_raw_response: AsyncDigitalCardArtResourceWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncDigitalCardArtResourceWithRawResponse(self)
+
     def list(
         self,
         *,
@@ -119,4 +137,18 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
                 ),
             ),
             model=DigitalCardArt,
+        )
+
+
+class DigitalCardArtResourceWithRawResponse:
+    def __init__(self, digital_card_art: DigitalCardArtResource) -> None:
+        self.list = to_raw_response_wrapper(
+            digital_card_art.list,
+        )
+
+
+class AsyncDigitalCardArtResourceWithRawResponse:
+    def __init__(self, digital_card_art: AsyncDigitalCardArtResource) -> None:
+        self.list = async_to_raw_response_wrapper(
+            digital_card_art.list,
         )

@@ -10,9 +10,15 @@ from ...types import Account, account_list_params, account_update_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import AsyncPaginator, make_request_options
-from .credit_configurations import CreditConfigurations, AsyncCreditConfigurations
+from .credit_configurations import (
+    CreditConfigurations,
+    AsyncCreditConfigurations,
+    CreditConfigurationsWithRawResponse,
+    AsyncCreditConfigurationsWithRawResponse,
+)
 
 if TYPE_CHECKING:
     from ..._client import Lithic, AsyncLithic
@@ -22,10 +28,12 @@ __all__ = ["Accounts", "AsyncAccounts"]
 
 class Accounts(SyncAPIResource):
     credit_configurations: CreditConfigurations
+    with_raw_response: AccountsWithRawResponse
 
     def __init__(self, client: Lithic) -> None:
         super().__init__(client)
         self.credit_configurations = CreditConfigurations(client)
+        self.with_raw_response = AccountsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -202,10 +210,12 @@ class Accounts(SyncAPIResource):
 
 class AsyncAccounts(AsyncAPIResource):
     credit_configurations: AsyncCreditConfigurations
+    with_raw_response: AsyncAccountsWithRawResponse
 
     def __init__(self, client: AsyncLithic) -> None:
         super().__init__(client)
         self.credit_configurations = AsyncCreditConfigurations(client)
+        self.with_raw_response = AsyncAccountsWithRawResponse(self)
 
     async def retrieve(
         self,
@@ -377,4 +387,34 @@ class AsyncAccounts(AsyncAPIResource):
                 ),
             ),
             model=Account,
+        )
+
+
+class AccountsWithRawResponse:
+    def __init__(self, accounts: Accounts) -> None:
+        self.credit_configurations = CreditConfigurationsWithRawResponse(accounts.credit_configurations)
+
+        self.retrieve = to_raw_response_wrapper(
+            accounts.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            accounts.update,
+        )
+        self.list = to_raw_response_wrapper(
+            accounts.list,
+        )
+
+
+class AsyncAccountsWithRawResponse:
+    def __init__(self, accounts: AsyncAccounts) -> None:
+        self.credit_configurations = AsyncCreditConfigurationsWithRawResponse(accounts.credit_configurations)
+
+        self.retrieve = async_to_raw_response_wrapper(
+            accounts.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            accounts.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            accounts.list,
         )

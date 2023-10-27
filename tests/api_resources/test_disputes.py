@@ -10,6 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Dispute, DisputeEvidence
 from lithic._utils import parse_datetime
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -42,10 +43,30 @@ class TestDisputes:
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
+    def test_raw_response_create(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.create(
+            amount=0,
+            reason="ATM_CASH_MISDISPENSE",
+            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
         dispute = client.disputes.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
@@ -64,6 +85,15 @@ class TestDisputes:
             customer_note="string",
             reason="ATM_CASH_MISDISPENSE",
         )
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
+    def test_raw_response_update(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
@@ -89,10 +119,26 @@ class TestDisputes:
         assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
+        assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
+
+    @parametrize
     def test_method_delete(self, client: Lithic) -> None:
         dispute = client.disputes.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
+    def test_raw_response_delete(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.delete(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
@@ -101,6 +147,16 @@ class TestDisputes:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
+    def test_raw_response_delete_evidence(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.delete_evidence(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
@@ -116,6 +172,15 @@ class TestDisputes:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             filename="string",
         )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
+    def test_raw_response_initiate_evidence_upload(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.initiate_evidence_upload(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
@@ -138,11 +203,30 @@ class TestDisputes:
         assert_matches_type(SyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
     @parametrize
+    def test_raw_response_list_evidences(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.list_evidences(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
+        assert_matches_type(SyncCursorPage[DisputeEvidence], dispute, path=["response"])
+
+    @parametrize
     def test_method_retrieve_evidence(self, client: Lithic) -> None:
         dispute = client.disputes.retrieve_evidence(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_evidence(self, client: Lithic) -> None:
+        response = client.disputes.with_raw_response.retrieve_evidence(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
 
@@ -172,10 +256,30 @@ class TestAsyncDisputes:
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
+    async def test_raw_response_create(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.create(
+            amount=0,
+            reason="ATM_CASH_MISDISPENSE",
+            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
@@ -194,6 +298,15 @@ class TestAsyncDisputes:
             customer_note="string",
             reason="ATM_CASH_MISDISPENSE",
         )
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
@@ -219,10 +332,26 @@ class TestAsyncDisputes:
         assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
+        assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
+
+    @parametrize
     async def test_method_delete(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Dispute, dispute, path=["response"])
+
+    @parametrize
+    async def test_raw_response_delete(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.delete(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
@@ -231,6 +360,16 @@ class TestAsyncDisputes:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
+    async def test_raw_response_delete_evidence(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.delete_evidence(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
@@ -246,6 +385,15 @@ class TestAsyncDisputes:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             filename="string",
         )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
+    async def test_raw_response_initiate_evidence_upload(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.initiate_evidence_upload(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
@@ -268,9 +416,28 @@ class TestAsyncDisputes:
         assert_matches_type(AsyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
     @parametrize
+    async def test_raw_response_list_evidences(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.list_evidences(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
+        assert_matches_type(AsyncCursorPage[DisputeEvidence], dispute, path=["response"])
+
+    @parametrize
     async def test_method_retrieve_evidence(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.retrieve_evidence(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(DisputeEvidence, dispute, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_evidence(self, client: AsyncLithic) -> None:
+        response = await client.disputes.with_raw_response.retrieve_evidence(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        dispute = response.parse()
         assert_matches_type(DisputeEvidence, dispute, path=["response"])

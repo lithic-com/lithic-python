@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
+from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -25,8 +26,22 @@ class TestTokenizationDecisioning:
         assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
 
     @parametrize
+    def test_raw_response_retrieve_secret(self, client: Lithic) -> None:
+        response = client.tokenization_decisioning.with_raw_response.retrieve_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization_decisioning = response.parse()
+        assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
+
+    @parametrize
     def test_method_rotate_secret(self, client: Lithic) -> None:
         tokenization_decisioning = client.tokenization_decisioning.rotate_secret()
+        assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])
+
+    @parametrize
+    def test_raw_response_rotate_secret(self, client: Lithic) -> None:
+        response = client.tokenization_decisioning.with_raw_response.rotate_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization_decisioning = response.parse()
         assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])
 
 
@@ -41,6 +56,20 @@ class TestAsyncTokenizationDecisioning:
         assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
 
     @parametrize
+    async def test_raw_response_retrieve_secret(self, client: AsyncLithic) -> None:
+        response = await client.tokenization_decisioning.with_raw_response.retrieve_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization_decisioning = response.parse()
+        assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
+
+    @parametrize
     async def test_method_rotate_secret(self, client: AsyncLithic) -> None:
         tokenization_decisioning = await client.tokenization_decisioning.rotate_secret()
+        assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])
+
+    @parametrize
+    async def test_raw_response_rotate_secret(self, client: AsyncLithic) -> None:
+        response = await client.tokenization_decisioning.with_raw_response.rotate_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization_decisioning = response.parse()
         assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])

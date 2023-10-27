@@ -2,21 +2,31 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import TYPE_CHECKING, Union
 from datetime import date
 
 from ...types import SettlementDetail
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.reports import SettlementSummaryResponse, settlement_list_details_params
+
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
 
 __all__ = ["Settlement", "AsyncSettlement"]
 
 
 class Settlement(SyncAPIResource):
+    with_raw_response: SettlementWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = SettlementWithRawResponse(self)
+
     def list_details(
         self,
         report_date: Union[str, date],
@@ -104,6 +114,12 @@ class Settlement(SyncAPIResource):
 
 
 class AsyncSettlement(AsyncAPIResource):
+    with_raw_response: AsyncSettlementWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncSettlementWithRawResponse(self)
+
     def list_details(
         self,
         report_date: Union[str, date],
@@ -187,4 +203,24 @@ class AsyncSettlement(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SettlementSummaryResponse,
+        )
+
+
+class SettlementWithRawResponse:
+    def __init__(self, settlement: Settlement) -> None:
+        self.list_details = to_raw_response_wrapper(
+            settlement.list_details,
+        )
+        self.summary = to_raw_response_wrapper(
+            settlement.summary,
+        )
+
+
+class AsyncSettlementWithRawResponse:
+    def __init__(self, settlement: AsyncSettlement) -> None:
+        self.list_details = async_to_raw_response_wrapper(
+            settlement.list_details,
+        )
+        self.summary = async_to_raw_response_wrapper(
+            settlement.summary,
         )

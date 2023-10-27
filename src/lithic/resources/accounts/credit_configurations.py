@@ -2,17 +2,29 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from ...types import BusinessAccount
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import make_request_options
 from ...types.accounts import credit_configuration_update_params
+
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
 
 __all__ = ["CreditConfigurations", "AsyncCreditConfigurations"]
 
 
 class CreditConfigurations(SyncAPIResource):
+    with_raw_response: CreditConfigurationsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = CreditConfigurationsWithRawResponse(self)
+
     def retrieve(
         self,
         account_token: str,
@@ -105,6 +117,12 @@ class CreditConfigurations(SyncAPIResource):
 
 
 class AsyncCreditConfigurations(AsyncAPIResource):
+    with_raw_response: AsyncCreditConfigurationsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncCreditConfigurationsWithRawResponse(self)
+
     async def retrieve(
         self,
         account_token: str,
@@ -193,4 +211,24 @@ class AsyncCreditConfigurations(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=BusinessAccount,
+        )
+
+
+class CreditConfigurationsWithRawResponse:
+    def __init__(self, credit_configurations: CreditConfigurations) -> None:
+        self.retrieve = to_raw_response_wrapper(
+            credit_configurations.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            credit_configurations.update,
+        )
+
+
+class AsyncCreditConfigurationsWithRawResponse:
+    def __init__(self, credit_configurations: AsyncCreditConfigurations) -> None:
+        self.retrieve = async_to_raw_response_wrapper(
+            credit_configurations.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            credit_configurations.update,
         )

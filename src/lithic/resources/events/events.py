@@ -15,8 +15,14 @@ from ...types import (
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
-from .subscriptions import Subscriptions, AsyncSubscriptions
+from .subscriptions import (
+    Subscriptions,
+    AsyncSubscriptions,
+    SubscriptionsWithRawResponse,
+    AsyncSubscriptionsWithRawResponse,
+)
 from ..._base_client import AsyncPaginator, make_request_options
 
 if TYPE_CHECKING:
@@ -27,10 +33,12 @@ __all__ = ["Events", "AsyncEvents"]
 
 class Events(SyncAPIResource):
     subscriptions: Subscriptions
+    with_raw_response: EventsWithRawResponse
 
     def __init__(self, client: Lithic) -> None:
         super().__init__(client)
         self.subscriptions = Subscriptions(client)
+        self.with_raw_response = EventsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -239,10 +247,12 @@ class Events(SyncAPIResource):
 
 class AsyncEvents(AsyncAPIResource):
     subscriptions: AsyncSubscriptions
+    with_raw_response: AsyncEventsWithRawResponse
 
     def __init__(self, client: AsyncLithic) -> None:
         super().__init__(client)
         self.subscriptions = AsyncSubscriptions(client)
+        self.with_raw_response = AsyncEventsWithRawResponse(self)
 
     async def retrieve(
         self,
@@ -446,4 +456,34 @@ class AsyncEvents(AsyncAPIResource):
             f"/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=NoneType,
+        )
+
+
+class EventsWithRawResponse:
+    def __init__(self, events: Events) -> None:
+        self.subscriptions = SubscriptionsWithRawResponse(events.subscriptions)
+
+        self.retrieve = to_raw_response_wrapper(
+            events.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            events.list,
+        )
+        self.list_attempts = to_raw_response_wrapper(
+            events.list_attempts,
+        )
+
+
+class AsyncEventsWithRawResponse:
+    def __init__(self, events: AsyncEvents) -> None:
+        self.subscriptions = AsyncSubscriptionsWithRawResponse(events.subscriptions)
+
+        self.retrieve = async_to_raw_response_wrapper(
+            events.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            events.list,
+        )
+        self.list_attempts = async_to_raw_response_wrapper(
+            events.list_attempts,
         )

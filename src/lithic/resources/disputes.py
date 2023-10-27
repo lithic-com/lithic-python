@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import TYPE_CHECKING, List, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -27,13 +27,23 @@ from .._types import (
 )
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["Disputes", "AsyncDisputes"]
 
 
 class Disputes(SyncAPIResource):
+    with_raw_response: DisputesWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = DisputesWithRawResponse(self)
+
     def create(
         self,
         *,
@@ -548,6 +558,12 @@ class Disputes(SyncAPIResource):
 
 
 class AsyncDisputes(AsyncAPIResource):
+    with_raw_response: AsyncDisputesWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncDisputesWithRawResponse(self)
+
     async def create(
         self,
         *,
@@ -1059,3 +1075,65 @@ class AsyncDisputes(AsyncAPIResource):
         files = {"file": file}
         options = make_request_options(extra_headers={"Authorization": Omit()})
         await self._put(payload.upload_url, cast_to=NoneType, body=None, files=files, options=options)
+
+
+class DisputesWithRawResponse:
+    def __init__(self, disputes: Disputes) -> None:
+        self.create = to_raw_response_wrapper(
+            disputes.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            disputes.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            disputes.update,
+        )
+        self.list = to_raw_response_wrapper(
+            disputes.list,
+        )
+        self.delete = to_raw_response_wrapper(
+            disputes.delete,
+        )
+        self.delete_evidence = to_raw_response_wrapper(
+            disputes.delete_evidence,
+        )
+        self.initiate_evidence_upload = to_raw_response_wrapper(
+            disputes.initiate_evidence_upload,
+        )
+        self.list_evidences = to_raw_response_wrapper(
+            disputes.list_evidences,
+        )
+        self.retrieve_evidence = to_raw_response_wrapper(
+            disputes.retrieve_evidence,
+        )
+
+
+class AsyncDisputesWithRawResponse:
+    def __init__(self, disputes: AsyncDisputes) -> None:
+        self.create = async_to_raw_response_wrapper(
+            disputes.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            disputes.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            disputes.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            disputes.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            disputes.delete,
+        )
+        self.delete_evidence = async_to_raw_response_wrapper(
+            disputes.delete_evidence,
+        )
+        self.initiate_evidence_upload = async_to_raw_response_wrapper(
+            disputes.initiate_evidence_upload,
+        )
+        self.list_evidences = async_to_raw_response_wrapper(
+            disputes.list_evidences,
+        )
+        self.retrieve_evidence = async_to_raw_response_wrapper(
+            disputes.retrieve_evidence,
+        )

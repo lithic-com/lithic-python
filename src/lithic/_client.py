@@ -27,6 +27,7 @@ from ._types import (
 )
 from ._utils import is_given
 from ._version import __version__
+from ._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ._streaming import Stream as Stream
 from ._streaming import AsyncStream as AsyncStream
 from ._exceptions import LithicError, APIStatusError
@@ -80,6 +81,7 @@ class Lithic(SyncAPIClient):
     card_product: resources.CardProduct
     card_programs: resources.CardPrograms
     digital_card_art: resources.DigitalCardArtResource
+    with_raw_response: LithicWithRawResponse
 
     # client options
     api_key: str
@@ -180,6 +182,7 @@ class Lithic(SyncAPIClient):
         self.card_product = resources.CardProduct(self)
         self.card_programs = resources.CardPrograms(self)
         self.digital_card_art = resources.DigitalCardArtResource(self)
+        self.with_raw_response = LithicWithRawResponse(self)
 
     @property
     @override
@@ -362,6 +365,7 @@ class AsyncLithic(AsyncAPIClient):
     card_product: resources.AsyncCardProduct
     card_programs: resources.AsyncCardPrograms
     digital_card_art: resources.AsyncDigitalCardArtResource
+    with_raw_response: AsyncLithicWithRawResponse
 
     # client options
     api_key: str
@@ -462,6 +466,7 @@ class AsyncLithic(AsyncAPIClient):
         self.card_product = resources.AsyncCardProduct(self)
         self.card_programs = resources.AsyncCardPrograms(self)
         self.digital_card_art = resources.AsyncDigitalCardArtResource(self)
+        self.with_raw_response = AsyncLithicWithRawResponse(self)
 
     @property
     @override
@@ -622,6 +627,72 @@ class AsyncLithic(AsyncAPIClient):
         if response.status_code >= 500:
             return _exceptions.InternalServerError(err_msg, response=response, body=body)
         return APIStatusError(err_msg, response=response, body=body)
+
+
+class LithicWithRawResponse:
+    def __init__(self, client: Lithic) -> None:
+        self.accounts = resources.AccountsWithRawResponse(client.accounts)
+        self.account_holders = resources.AccountHoldersWithRawResponse(client.account_holders)
+        self.auth_rules = resources.AuthRulesWithRawResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AuthStreamEnrollmentResourceWithRawResponse(
+            client.auth_stream_enrollment
+        )
+        self.tokenization_decisioning = resources.TokenizationDecisioningWithRawResponse(
+            client.tokenization_decisioning
+        )
+        self.tokenizations = resources.TokenizationsWithRawResponse(client.tokenizations)
+        self.cards = resources.CardsWithRawResponse(client.cards)
+        self.balances = resources.BalancesWithRawResponse(client.balances)
+        self.aggregate_balances = resources.AggregateBalancesWithRawResponse(client.aggregate_balances)
+        self.disputes = resources.DisputesWithRawResponse(client.disputes)
+        self.events = resources.EventsWithRawResponse(client.events)
+        self.financial_accounts = resources.FinancialAccountsWithRawResponse(client.financial_accounts)
+        self.transactions = resources.TransactionsWithRawResponse(client.transactions)
+        self.responder_endpoints = resources.ResponderEndpointsWithRawResponse(client.responder_endpoints)
+        self.external_bank_accounts = resources.ExternalBankAccountsWithRawResponse(client.external_bank_accounts)
+        self.payments = resources.PaymentsWithRawResponse(client.payments)
+        self.three_ds = resources.ThreeDSWithRawResponse(client.three_ds)
+        self.reports = resources.ReportsWithRawResponse(client.reports)
+        self.card_product = resources.CardProductWithRawResponse(client.card_product)
+        self.card_programs = resources.CardProgramsWithRawResponse(client.card_programs)
+        self.digital_card_art = resources.DigitalCardArtResourceWithRawResponse(client.digital_card_art)
+
+        self.api_status = to_raw_response_wrapper(
+            client.api_status,
+        )
+
+
+class AsyncLithicWithRawResponse:
+    def __init__(self, client: AsyncLithic) -> None:
+        self.accounts = resources.AsyncAccountsWithRawResponse(client.accounts)
+        self.account_holders = resources.AsyncAccountHoldersWithRawResponse(client.account_holders)
+        self.auth_rules = resources.AsyncAuthRulesWithRawResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResourceWithRawResponse(
+            client.auth_stream_enrollment
+        )
+        self.tokenization_decisioning = resources.AsyncTokenizationDecisioningWithRawResponse(
+            client.tokenization_decisioning
+        )
+        self.tokenizations = resources.AsyncTokenizationsWithRawResponse(client.tokenizations)
+        self.cards = resources.AsyncCardsWithRawResponse(client.cards)
+        self.balances = resources.AsyncBalancesWithRawResponse(client.balances)
+        self.aggregate_balances = resources.AsyncAggregateBalancesWithRawResponse(client.aggregate_balances)
+        self.disputes = resources.AsyncDisputesWithRawResponse(client.disputes)
+        self.events = resources.AsyncEventsWithRawResponse(client.events)
+        self.financial_accounts = resources.AsyncFinancialAccountsWithRawResponse(client.financial_accounts)
+        self.transactions = resources.AsyncTransactionsWithRawResponse(client.transactions)
+        self.responder_endpoints = resources.AsyncResponderEndpointsWithRawResponse(client.responder_endpoints)
+        self.external_bank_accounts = resources.AsyncExternalBankAccountsWithRawResponse(client.external_bank_accounts)
+        self.payments = resources.AsyncPaymentsWithRawResponse(client.payments)
+        self.three_ds = resources.AsyncThreeDSWithRawResponse(client.three_ds)
+        self.reports = resources.AsyncReportsWithRawResponse(client.reports)
+        self.card_product = resources.AsyncCardProductWithRawResponse(client.card_product)
+        self.card_programs = resources.AsyncCardProgramsWithRawResponse(client.card_programs)
+        self.digital_card_art = resources.AsyncDigitalCardArtResourceWithRawResponse(client.digital_card_art)
+
+        self.api_status = async_to_raw_response_wrapper(
+            client.api_status,
+        )
 
 
 Client = Lithic

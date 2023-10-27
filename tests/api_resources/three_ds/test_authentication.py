@@ -8,6 +8,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
+from lithic._client import Lithic, AsyncLithic
 from lithic.types.three_ds import (
     AuthenticationRetrieveResponse,
     AuthenticationSimulateResponse,
@@ -30,6 +31,15 @@ class TestAuthentication:
         assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
 
     @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.three_ds.authentication.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        authentication = response.parse()
+        assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+
+    @parametrize
     def test_method_simulate(self, client: Lithic) -> None:
         authentication = client.three_ds.authentication.simulate(
             merchant={
@@ -46,6 +56,25 @@ class TestAuthentication:
         )
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
 
+    @parametrize
+    def test_raw_response_simulate(self, client: Lithic) -> None:
+        response = client.three_ds.authentication.with_raw_response.simulate(
+            merchant={
+                "country": "USA",
+                "mcc": "5812",
+                "id": "OODKZAPJVN4YS7O",
+                "name": "COFFEE SHOP",
+            },
+            pan="4111111289144142",
+            transaction={
+                "amount": 0,
+                "currency": "GBP",
+            },
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        authentication = response.parse()
+        assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
 
 class TestAsyncAuthentication:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -57,6 +86,15 @@ class TestAsyncAuthentication:
         authentication = await client.three_ds.authentication.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.three_ds.authentication.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        authentication = response.parse()
         assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
 
     @parametrize
@@ -74,4 +112,23 @@ class TestAsyncAuthentication:
                 "currency": "GBP",
             },
         )
+        assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate(self, client: AsyncLithic) -> None:
+        response = await client.three_ds.authentication.with_raw_response.simulate(
+            merchant={
+                "country": "USA",
+                "mcc": "5812",
+                "id": "OODKZAPJVN4YS7O",
+                "name": "COFFEE SHOP",
+            },
+            pan="4111111289144142",
+            transaction={
+                "amount": 0,
+                "currency": "GBP",
+            },
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        authentication = response.parse()
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])

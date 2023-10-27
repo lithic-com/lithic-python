@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, overload
+from typing import TYPE_CHECKING, List, overload
 from typing_extensions import Literal
 
 from ..types import (
@@ -19,12 +19,22 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import required_args, maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 
 
 class AccountHolders(SyncAPIResource):
+    with_raw_response: AccountHoldersWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AccountHoldersWithRawResponse(self)
+
     @overload
     def create(
         self,
@@ -616,6 +626,12 @@ class AccountHolders(SyncAPIResource):
 
 
 class AsyncAccountHolders(AsyncAPIResource):
+    with_raw_response: AsyncAccountHoldersWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncAccountHoldersWithRawResponse(self)
+
     @overload
     async def create(
         self,
@@ -1203,4 +1219,54 @@ class AsyncAccountHolders(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=AccountHolderDocument,
+        )
+
+
+class AccountHoldersWithRawResponse:
+    def __init__(self, account_holders: AccountHolders) -> None:
+        self.create = to_raw_response_wrapper(
+            account_holders.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            account_holders.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            account_holders.update,
+        )
+        self.list_documents = to_raw_response_wrapper(
+            account_holders.list_documents,
+        )
+        self.resubmit = to_raw_response_wrapper(
+            account_holders.resubmit,
+        )
+        self.retrieve_document = to_raw_response_wrapper(
+            account_holders.retrieve_document,
+        )
+        self.upload_document = to_raw_response_wrapper(
+            account_holders.upload_document,
+        )
+
+
+class AsyncAccountHoldersWithRawResponse:
+    def __init__(self, account_holders: AsyncAccountHolders) -> None:
+        self.create = async_to_raw_response_wrapper(
+            account_holders.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            account_holders.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            account_holders.update,
+        )
+        self.list_documents = async_to_raw_response_wrapper(
+            account_holders.list_documents,
+        )
+        self.resubmit = async_to_raw_response_wrapper(
+            account_holders.resubmit,
+        )
+        self.retrieve_document = async_to_raw_response_wrapper(
+            account_holders.retrieve_document,
+        )
+        self.upload_document = async_to_raw_response_wrapper(
+            account_holders.upload_document,
         )

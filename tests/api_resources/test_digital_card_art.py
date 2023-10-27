@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import DigitalCardArt
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -34,6 +35,13 @@ class TestDigitalCardArt:
         )
         assert_matches_type(SyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
 
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.digital_card_art.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        digital_card_art = response.parse()
+        assert_matches_type(SyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
+
 
 class TestAsyncDigitalCardArt:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -52,4 +60,11 @@ class TestAsyncDigitalCardArt:
             page_size=1,
             starting_after="string",
         )
+        assert_matches_type(AsyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.digital_card_art.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        digital_card_art = response.parse()
         assert_matches_type(AsyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
