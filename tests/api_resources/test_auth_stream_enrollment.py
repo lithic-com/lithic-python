@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import AuthStreamSecret, AuthStreamEnrollment
+from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -24,10 +25,25 @@ class TestAuthStreamEnrollment:
         auth_stream_enrollment = client.auth_stream_enrollment.retrieve()
         assert_matches_type(AuthStreamEnrollment, auth_stream_enrollment, path=["response"])
 
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.auth_stream_enrollment.with_raw_response.retrieve()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
+        assert_matches_type(AuthStreamEnrollment, auth_stream_enrollment, path=["response"])
+
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_disenroll(self, client: Lithic) -> None:
         auth_stream_enrollment = client.auth_stream_enrollment.disenroll()
+        assert auth_stream_enrollment is None
+
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @parametrize
+    def test_raw_response_disenroll(self, client: Lithic) -> None:
+        response = client.auth_stream_enrollment.with_raw_response.disenroll()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
         assert auth_stream_enrollment is None
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
@@ -44,14 +60,36 @@ class TestAuthStreamEnrollment:
         )
         assert auth_stream_enrollment is None
 
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @parametrize
+    def test_raw_response_enroll(self, client: Lithic) -> None:
+        response = client.auth_stream_enrollment.with_raw_response.enroll()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
+        assert auth_stream_enrollment is None
+
     @parametrize
     def test_method_retrieve_secret(self, client: Lithic) -> None:
         auth_stream_enrollment = client.auth_stream_enrollment.retrieve_secret()
         assert_matches_type(AuthStreamSecret, auth_stream_enrollment, path=["response"])
 
     @parametrize
+    def test_raw_response_retrieve_secret(self, client: Lithic) -> None:
+        response = client.auth_stream_enrollment.with_raw_response.retrieve_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
+        assert_matches_type(AuthStreamSecret, auth_stream_enrollment, path=["response"])
+
+    @parametrize
     def test_method_rotate_secret(self, client: Lithic) -> None:
         auth_stream_enrollment = client.auth_stream_enrollment.rotate_secret()
+        assert auth_stream_enrollment is None
+
+    @parametrize
+    def test_raw_response_rotate_secret(self, client: Lithic) -> None:
+        response = client.auth_stream_enrollment.with_raw_response.rotate_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
         assert auth_stream_enrollment is None
 
 
@@ -65,10 +103,25 @@ class TestAsyncAuthStreamEnrollment:
         auth_stream_enrollment = await client.auth_stream_enrollment.retrieve()
         assert_matches_type(AuthStreamEnrollment, auth_stream_enrollment, path=["response"])
 
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.auth_stream_enrollment.with_raw_response.retrieve()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
+        assert_matches_type(AuthStreamEnrollment, auth_stream_enrollment, path=["response"])
+
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_disenroll(self, client: AsyncLithic) -> None:
         auth_stream_enrollment = await client.auth_stream_enrollment.disenroll()
+        assert auth_stream_enrollment is None
+
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @parametrize
+    async def test_raw_response_disenroll(self, client: AsyncLithic) -> None:
+        response = await client.auth_stream_enrollment.with_raw_response.disenroll()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
         assert auth_stream_enrollment is None
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
@@ -85,12 +138,34 @@ class TestAsyncAuthStreamEnrollment:
         )
         assert auth_stream_enrollment is None
 
+    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @parametrize
+    async def test_raw_response_enroll(self, client: AsyncLithic) -> None:
+        response = await client.auth_stream_enrollment.with_raw_response.enroll()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
+        assert auth_stream_enrollment is None
+
     @parametrize
     async def test_method_retrieve_secret(self, client: AsyncLithic) -> None:
         auth_stream_enrollment = await client.auth_stream_enrollment.retrieve_secret()
         assert_matches_type(AuthStreamSecret, auth_stream_enrollment, path=["response"])
 
     @parametrize
+    async def test_raw_response_retrieve_secret(self, client: AsyncLithic) -> None:
+        response = await client.auth_stream_enrollment.with_raw_response.retrieve_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
+        assert_matches_type(AuthStreamSecret, auth_stream_enrollment, path=["response"])
+
+    @parametrize
     async def test_method_rotate_secret(self, client: AsyncLithic) -> None:
         auth_stream_enrollment = await client.auth_stream_enrollment.rotate_secret()
+        assert auth_stream_enrollment is None
+
+    @parametrize
+    async def test_raw_response_rotate_secret(self, client: AsyncLithic) -> None:
+        response = await client.auth_stream_enrollment.with_raw_response.rotate_secret()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth_stream_enrollment = response.parse()
         assert auth_stream_enrollment is None

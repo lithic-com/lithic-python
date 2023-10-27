@@ -27,12 +27,28 @@ from ...types import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform, strip_not_given
-from .balances import Balances, AsyncBalances
+from .balances import (
+    Balances,
+    AsyncBalances,
+    BalancesWithRawResponse,
+    AsyncBalancesWithRawResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import AsyncPaginator, _merge_mappings, make_request_options
-from .aggregate_balances import AggregateBalances, AsyncAggregateBalances
-from .financial_transactions import FinancialTransactions, AsyncFinancialTransactions
+from .aggregate_balances import (
+    AggregateBalances,
+    AsyncAggregateBalances,
+    AggregateBalancesWithRawResponse,
+    AsyncAggregateBalancesWithRawResponse,
+)
+from .financial_transactions import (
+    FinancialTransactions,
+    AsyncFinancialTransactions,
+    FinancialTransactionsWithRawResponse,
+    AsyncFinancialTransactionsWithRawResponse,
+)
 
 if TYPE_CHECKING:
     from ..._client import Lithic, AsyncLithic
@@ -44,12 +60,14 @@ class Cards(SyncAPIResource):
     aggregate_balances: AggregateBalances
     balances: Balances
     financial_transactions: FinancialTransactions
+    with_raw_response: CardsWithRawResponse
 
     def __init__(self, client: Lithic) -> None:
         super().__init__(client)
         self.aggregate_balances = AggregateBalances(client)
         self.balances = Balances(client)
         self.financial_transactions = FinancialTransactions(client)
+        self.with_raw_response = CardsWithRawResponse(self)
 
     def create(
         self,
@@ -756,12 +774,14 @@ class AsyncCards(AsyncAPIResource):
     aggregate_balances: AsyncAggregateBalances
     balances: AsyncBalances
     financial_transactions: AsyncFinancialTransactions
+    with_raw_response: AsyncCardsWithRawResponse
 
     def __init__(self, client: AsyncLithic) -> None:
         super().__init__(client)
         self.aggregate_balances = AsyncAggregateBalances(client)
         self.balances = AsyncBalances(client)
         self.financial_transactions = AsyncFinancialTransactions(client)
+        self.with_raw_response = AsyncCardsWithRawResponse(self)
 
     async def create(
         self,
@@ -1461,4 +1481,62 @@ class AsyncCards(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=Card,
+        )
+
+
+class CardsWithRawResponse:
+    def __init__(self, cards: Cards) -> None:
+        self.aggregate_balances = AggregateBalancesWithRawResponse(cards.aggregate_balances)
+        self.balances = BalancesWithRawResponse(cards.balances)
+        self.financial_transactions = FinancialTransactionsWithRawResponse(cards.financial_transactions)
+
+        self.create = to_raw_response_wrapper(
+            cards.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            cards.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            cards.update,
+        )
+        self.list = to_raw_response_wrapper(
+            cards.list,
+        )
+        self.embed = to_raw_response_wrapper(
+            cards.embed,
+        )
+        self.provision = to_raw_response_wrapper(
+            cards.provision,
+        )
+        self.reissue = to_raw_response_wrapper(
+            cards.reissue,
+        )
+
+
+class AsyncCardsWithRawResponse:
+    def __init__(self, cards: AsyncCards) -> None:
+        self.aggregate_balances = AsyncAggregateBalancesWithRawResponse(cards.aggregate_balances)
+        self.balances = AsyncBalancesWithRawResponse(cards.balances)
+        self.financial_transactions = AsyncFinancialTransactionsWithRawResponse(cards.financial_transactions)
+
+        self.create = async_to_raw_response_wrapper(
+            cards.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            cards.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            cards.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            cards.list,
+        )
+        self.embed = async_to_raw_response_wrapper(
+            cards.embed,
+        )
+        self.provision = async_to_raw_response_wrapper(
+            cards.provision,
+        )
+        self.reissue = async_to_raw_response_wrapper(
+            cards.reissue,
         )

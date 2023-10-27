@@ -8,6 +8,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
 from lithic.types.cards import AggregateBalanceListResponse
 
@@ -33,6 +34,13 @@ class TestAggregateBalances:
         )
         assert_matches_type(SyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
 
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.cards.aggregate_balances.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        aggregate_balance = response.parse()
+        assert_matches_type(SyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
+
 
 class TestAsyncAggregateBalances:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -50,4 +58,11 @@ class TestAsyncAggregateBalances:
             account_token="string",
             business_account_token="string",
         )
+        assert_matches_type(AsyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.cards.aggregate_balances.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        aggregate_balance = response.parse()
         assert_matches_type(AsyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])

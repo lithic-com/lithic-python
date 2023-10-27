@@ -10,6 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import SettlementDetail
 from lithic._utils import parse_date
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 from lithic.types.reports import SettlementSummaryResponse
 
@@ -40,10 +41,28 @@ class TestSettlement:
         assert_matches_type(SyncCursorPage[SettlementDetail], settlement, path=["response"])
 
     @parametrize
+    def test_raw_response_list_details(self, client: Lithic) -> None:
+        response = client.reports.settlement.with_raw_response.list_details(
+            parse_date("2019-12-27"),
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        settlement = response.parse()
+        assert_matches_type(SyncCursorPage[SettlementDetail], settlement, path=["response"])
+
+    @parametrize
     def test_method_summary(self, client: Lithic) -> None:
         settlement = client.reports.settlement.summary(
             parse_date("2019-12-27"),
         )
+        assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])
+
+    @parametrize
+    def test_raw_response_summary(self, client: Lithic) -> None:
+        response = client.reports.settlement.with_raw_response.summary(
+            parse_date("2019-12-27"),
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        settlement = response.parse()
         assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])
 
 
@@ -70,8 +89,26 @@ class TestAsyncSettlement:
         assert_matches_type(AsyncCursorPage[SettlementDetail], settlement, path=["response"])
 
     @parametrize
+    async def test_raw_response_list_details(self, client: AsyncLithic) -> None:
+        response = await client.reports.settlement.with_raw_response.list_details(
+            parse_date("2019-12-27"),
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        settlement = response.parse()
+        assert_matches_type(AsyncCursorPage[SettlementDetail], settlement, path=["response"])
+
+    @parametrize
     async def test_method_summary(self, client: AsyncLithic) -> None:
         settlement = await client.reports.settlement.summary(
             parse_date("2019-12-27"),
         )
+        assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])
+
+    @parametrize
+    async def test_raw_response_summary(self, client: AsyncLithic) -> None:
+        response = await client.reports.settlement.with_raw_response.summary(
+            parse_date("2019-12-27"),
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        settlement = response.parse()
         assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])

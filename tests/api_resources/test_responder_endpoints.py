@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import ResponderEndpointStatus, ResponderEndpointCreateResponse
+from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -32,6 +33,13 @@ class TestResponderEndpoints:
         )
         assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
 
+    @parametrize
+    def test_raw_response_create(self, client: Lithic) -> None:
+        response = client.responder_endpoints.with_raw_response.create()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        responder_endpoint = response.parse()
+        assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
+
     @pytest.mark.skip(reason="Prism errors when accept header set but no request body is defined")
     @parametrize
     def test_method_delete(self, client: Lithic) -> None:
@@ -40,11 +48,30 @@ class TestResponderEndpoints:
         )
         assert responder_endpoint is None
 
+    @pytest.mark.skip(reason="Prism errors when accept header set but no request body is defined")
+    @parametrize
+    def test_raw_response_delete(self, client: Lithic) -> None:
+        response = client.responder_endpoints.with_raw_response.delete(
+            type="AUTH_STREAM_ACCESS",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        responder_endpoint = response.parse()
+        assert responder_endpoint is None
+
     @parametrize
     def test_method_check_status(self, client: Lithic) -> None:
         responder_endpoint = client.responder_endpoints.check_status(
             type="AUTH_STREAM_ACCESS",
         )
+        assert_matches_type(ResponderEndpointStatus, responder_endpoint, path=["response"])
+
+    @parametrize
+    def test_raw_response_check_status(self, client: Lithic) -> None:
+        response = client.responder_endpoints.with_raw_response.check_status(
+            type="AUTH_STREAM_ACCESS",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        responder_endpoint = response.parse()
         assert_matches_type(ResponderEndpointStatus, responder_endpoint, path=["response"])
 
 
@@ -66,6 +93,13 @@ class TestAsyncResponderEndpoints:
         )
         assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
 
+    @parametrize
+    async def test_raw_response_create(self, client: AsyncLithic) -> None:
+        response = await client.responder_endpoints.with_raw_response.create()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        responder_endpoint = response.parse()
+        assert_matches_type(ResponderEndpointCreateResponse, responder_endpoint, path=["response"])
+
     @pytest.mark.skip(reason="Prism errors when accept header set but no request body is defined")
     @parametrize
     async def test_method_delete(self, client: AsyncLithic) -> None:
@@ -74,9 +108,28 @@ class TestAsyncResponderEndpoints:
         )
         assert responder_endpoint is None
 
+    @pytest.mark.skip(reason="Prism errors when accept header set but no request body is defined")
+    @parametrize
+    async def test_raw_response_delete(self, client: AsyncLithic) -> None:
+        response = await client.responder_endpoints.with_raw_response.delete(
+            type="AUTH_STREAM_ACCESS",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        responder_endpoint = response.parse()
+        assert responder_endpoint is None
+
     @parametrize
     async def test_method_check_status(self, client: AsyncLithic) -> None:
         responder_endpoint = await client.responder_endpoints.check_status(
             type="AUTH_STREAM_ACCESS",
         )
+        assert_matches_type(ResponderEndpointStatus, responder_endpoint, path=["response"])
+
+    @parametrize
+    async def test_raw_response_check_status(self, client: AsyncLithic) -> None:
+        response = await client.responder_endpoints.with_raw_response.check_status(
+            type="AUTH_STREAM_ACCESS",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        responder_endpoint = response.parse()
         assert_matches_type(ResponderEndpointStatus, responder_endpoint, path=["response"])

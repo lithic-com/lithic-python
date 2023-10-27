@@ -2,15 +2,27 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from ..types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["TokenizationDecisioning", "AsyncTokenizationDecisioning"]
 
 
 class TokenizationDecisioning(SyncAPIResource):
+    with_raw_response: TokenizationDecisioningWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = TokenizationDecisioningWithRawResponse(self)
+
     def retrieve_secret(
         self,
         *,
@@ -69,6 +81,12 @@ class TokenizationDecisioning(SyncAPIResource):
 
 
 class AsyncTokenizationDecisioning(AsyncAPIResource):
+    with_raw_response: AsyncTokenizationDecisioningWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncTokenizationDecisioningWithRawResponse(self)
+
     async def retrieve_secret(
         self,
         *,
@@ -123,4 +141,24 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=TokenizationDecisioningRotateSecretResponse,
+        )
+
+
+class TokenizationDecisioningWithRawResponse:
+    def __init__(self, tokenization_decisioning: TokenizationDecisioning) -> None:
+        self.retrieve_secret = to_raw_response_wrapper(
+            tokenization_decisioning.retrieve_secret,
+        )
+        self.rotate_secret = to_raw_response_wrapper(
+            tokenization_decisioning.rotate_secret,
+        )
+
+
+class AsyncTokenizationDecisioningWithRawResponse:
+    def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioning) -> None:
+        self.retrieve_secret = async_to_raw_response_wrapper(
+            tokenization_decisioning.retrieve_secret,
+        )
+        self.rotate_secret = async_to_raw_response_wrapper(
+            tokenization_decisioning.rotate_secret,
         )

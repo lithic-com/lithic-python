@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import TYPE_CHECKING, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -10,14 +10,24 @@ from ...types import FinancialTransaction
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.financial_accounts import financial_transaction_list_params
+
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
 
 __all__ = ["FinancialTransactions", "AsyncFinancialTransactions"]
 
 
 class FinancialTransactions(SyncAPIResource):
+    with_raw_response: FinancialTransactionsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = FinancialTransactionsWithRawResponse(self)
+
     def retrieve(
         self,
         financial_transaction_token: str,
@@ -124,6 +134,12 @@ class FinancialTransactions(SyncAPIResource):
 
 
 class AsyncFinancialTransactions(AsyncAPIResource):
+    with_raw_response: AsyncFinancialTransactionsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncFinancialTransactionsWithRawResponse(self)
+
     async def retrieve(
         self,
         financial_transaction_token: str,
@@ -226,4 +242,24 @@ class AsyncFinancialTransactions(AsyncAPIResource):
                 ),
             ),
             model=FinancialTransaction,
+        )
+
+
+class FinancialTransactionsWithRawResponse:
+    def __init__(self, financial_transactions: FinancialTransactions) -> None:
+        self.retrieve = to_raw_response_wrapper(
+            financial_transactions.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            financial_transactions.list,
+        )
+
+
+class AsyncFinancialTransactionsWithRawResponse:
+    def __init__(self, financial_transactions: AsyncFinancialTransactions) -> None:
+        self.retrieve = async_to_raw_response_wrapper(
+            financial_transactions.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            financial_transactions.list,
         )

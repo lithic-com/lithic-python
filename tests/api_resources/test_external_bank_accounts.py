@@ -15,6 +15,7 @@ from lithic.types import (
     ExternalBankAccountRetrieveResponse,
 )
 from lithic._utils import parse_date
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -49,6 +50,18 @@ class TestExternalBankAccounts:
             doing_business_as="string",
             user_defined_id="string",
         )
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_raw_response_create_overload_1(self, client: Lithic) -> None:
+        response = client.external_bank_accounts.with_raw_response.create(
+            owner="x",
+            owner_type="INDIVIDUAL",
+            processor_token="x",
+            verification_method="MANUAL",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
     @parametrize
@@ -95,10 +108,35 @@ class TestExternalBankAccounts:
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
     @parametrize
+    def test_raw_response_create_overload_2(self, client: Lithic) -> None:
+        response = client.external_bank_accounts.with_raw_response.create(
+            account_number="string",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="MANUAL",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.external_bank_accounts.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
 
     @parametrize
@@ -131,6 +169,15 @@ class TestExternalBankAccounts:
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
     @parametrize
+    def test_raw_response_update(self, client: Lithic) -> None:
+        response = client.external_bank_accounts.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
+
+    @parametrize
     def test_method_list(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.list()
         assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
@@ -148,6 +195,13 @@ class TestExternalBankAccounts:
             states=["ENABLED", "CLOSED", "PAUSED"],
             verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
+        assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
+
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.external_bank_accounts.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
         assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 
 
@@ -179,6 +233,18 @@ class TestAsyncExternalBankAccounts:
             doing_business_as="string",
             user_defined_id="string",
         )
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_create_overload_1(self, client: AsyncLithic) -> None:
+        response = await client.external_bank_accounts.with_raw_response.create(
+            owner="x",
+            owner_type="INDIVIDUAL",
+            processor_token="x",
+            verification_method="MANUAL",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
     @parametrize
@@ -225,10 +291,35 @@ class TestAsyncExternalBankAccounts:
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
     @parametrize
+    async def test_raw_response_create_overload_2(self, client: AsyncLithic) -> None:
+        response = await client.external_bank_accounts.with_raw_response.create(
+            account_number="string",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="MANUAL",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
         external_bank_account = await client.external_bank_accounts.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.external_bank_accounts.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
 
     @parametrize
@@ -261,6 +352,15 @@ class TestAsyncExternalBankAccounts:
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
     @parametrize
+    async def test_raw_response_update(self, client: AsyncLithic) -> None:
+        response = await client.external_bank_accounts.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
+
+    @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
         external_bank_account = await client.external_bank_accounts.list()
         assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
@@ -278,4 +378,11 @@ class TestAsyncExternalBankAccounts:
             states=["ENABLED", "CLOSED", "PAUSED"],
             verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
+        assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.external_bank_accounts.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
         assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])

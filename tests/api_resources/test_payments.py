@@ -15,6 +15,7 @@ from lithic.types import (
     PaymentSimulateReturnResponse,
     PaymentSimulateReleaseResponse,
 )
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -58,10 +59,33 @@ class TestPayments:
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
 
     @parametrize
+    def test_raw_response_create(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.create(
+            amount=1,
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            method="ACH_NEXT_DAY",
+            method_attributes={"sec_code": "PPD"},
+            type="PAYMENT",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentCreateResponse, payment, path=["response"])
+
+    @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
         payment = client.payments.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Payment, payment, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
         assert_matches_type(Payment, payment, path=["response"])
 
     @parametrize
@@ -82,6 +106,13 @@ class TestPayments:
         assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
 
     @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
+
+    @parametrize
     def test_method_retry(self, client: Lithic) -> None:
         payment = client.payments.retry(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -89,10 +120,28 @@ class TestPayments:
         assert_matches_type(PaymentRetryResponse, payment, path=["response"])
 
     @parametrize
+    def test_raw_response_retry(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.retry(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+    @parametrize
     def test_method_simulate_release(self, client: Lithic) -> None:
         payment = client.payments.simulate_release(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_release(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.simulate_release(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
         assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
 
     @parametrize
@@ -108,6 +157,15 @@ class TestPayments:
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             return_reason_code="string",
         )
+        assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_return(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
         assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
 
 
@@ -148,10 +206,33 @@ class TestAsyncPayments:
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
 
     @parametrize
+    async def test_raw_response_create(self, client: AsyncLithic) -> None:
+        response = await client.payments.with_raw_response.create(
+            amount=1,
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            method="ACH_NEXT_DAY",
+            method_attributes={"sec_code": "PPD"},
+            type="PAYMENT",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentCreateResponse, payment, path=["response"])
+
+    @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
         payment = await client.payments.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Payment, payment, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.payments.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
         assert_matches_type(Payment, payment, path=["response"])
 
     @parametrize
@@ -172,6 +253,13 @@ class TestAsyncPayments:
         assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
 
     @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.payments.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
+
+    @parametrize
     async def test_method_retry(self, client: AsyncLithic) -> None:
         payment = await client.payments.retry(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -179,10 +267,28 @@ class TestAsyncPayments:
         assert_matches_type(PaymentRetryResponse, payment, path=["response"])
 
     @parametrize
+    async def test_raw_response_retry(self, client: AsyncLithic) -> None:
+        response = await client.payments.with_raw_response.retry(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+    @parametrize
     async def test_method_simulate_release(self, client: AsyncLithic) -> None:
         payment = await client.payments.simulate_release(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_release(self, client: AsyncLithic) -> None:
+        response = await client.payments.with_raw_response.simulate_release(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
         assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
 
     @parametrize
@@ -198,4 +304,13 @@ class TestAsyncPayments:
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             return_reason_code="string",
         )
+        assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_return(self, client: AsyncLithic) -> None:
+        response = await client.payments.with_raw_response.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
         assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])

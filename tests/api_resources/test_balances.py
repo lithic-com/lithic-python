@@ -10,6 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Balance
 from lithic._utils import parse_datetime
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -35,6 +36,13 @@ class TestBalances:
         )
         assert_matches_type(SyncSinglePage[Balance], balance, path=["response"])
 
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.balances.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        balance = response.parse()
+        assert_matches_type(SyncSinglePage[Balance], balance, path=["response"])
+
 
 class TestAsyncBalances:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -53,4 +61,11 @@ class TestAsyncBalances:
             balance_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             financial_account_type="ISSUING",
         )
+        assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.balances.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        balance = response.parse()
         assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])

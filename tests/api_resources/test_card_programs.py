@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import CardProgram
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -28,6 +29,15 @@ class TestCardPrograms:
         assert_matches_type(CardProgram, card_program, path=["response"])
 
     @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.card_programs.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card_program = response.parse()
+        assert_matches_type(CardProgram, card_program, path=["response"])
+
+    @parametrize
     def test_method_list(self, client: Lithic) -> None:
         card_program = client.card_programs.list()
         assert_matches_type(SyncCursorPage[CardProgram], card_program, path=["response"])
@@ -39,6 +49,13 @@ class TestCardPrograms:
             page_size=1,
             starting_after="string",
         )
+        assert_matches_type(SyncCursorPage[CardProgram], card_program, path=["response"])
+
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.card_programs.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card_program = response.parse()
         assert_matches_type(SyncCursorPage[CardProgram], card_program, path=["response"])
 
 
@@ -55,6 +72,15 @@ class TestAsyncCardPrograms:
         assert_matches_type(CardProgram, card_program, path=["response"])
 
     @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.card_programs.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card_program = response.parse()
+        assert_matches_type(CardProgram, card_program, path=["response"])
+
+    @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
         card_program = await client.card_programs.list()
         assert_matches_type(AsyncCursorPage[CardProgram], card_program, path=["response"])
@@ -66,4 +92,11 @@ class TestAsyncCardPrograms:
             page_size=1,
             starting_after="string",
         )
+        assert_matches_type(AsyncCursorPage[CardProgram], card_program, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.card_programs.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card_program = response.parse()
         assert_matches_type(AsyncCursorPage[CardProgram], card_program, path=["response"])

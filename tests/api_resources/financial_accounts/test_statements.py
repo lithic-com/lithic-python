@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic._utils import parse_date
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 from lithic.types.financial_accounts import Statement
 
@@ -30,6 +31,16 @@ class TestStatements:
         assert_matches_type(Statement, statement, path=["response"])
 
     @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.financial_accounts.statements.with_raw_response.retrieve(
+            "string",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        statement = response.parse()
+        assert_matches_type(Statement, statement, path=["response"])
+
+    @parametrize
     def test_method_list(self, client: Lithic) -> None:
         statement = client.financial_accounts.statements.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -48,6 +59,15 @@ class TestStatements:
         )
         assert_matches_type(SyncCursorPage[Statement], statement, path=["response"])
 
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.financial_accounts.statements.with_raw_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        statement = response.parse()
+        assert_matches_type(SyncCursorPage[Statement], statement, path=["response"])
+
 
 class TestAsyncStatements:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -60,6 +80,16 @@ class TestAsyncStatements:
             "string",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Statement, statement, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.financial_accounts.statements.with_raw_response.retrieve(
+            "string",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        statement = response.parse()
         assert_matches_type(Statement, statement, path=["response"])
 
     @parametrize
@@ -79,4 +109,13 @@ class TestAsyncStatements:
             page_size=1,
             starting_after="string",
         )
+        assert_matches_type(AsyncCursorPage[Statement], statement, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.financial_accounts.statements.with_raw_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        statement = response.parse()
         assert_matches_type(AsyncCursorPage[Statement], statement, path=["response"])

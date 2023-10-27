@@ -10,6 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Event, MessageAttempt
 from lithic._utils import parse_datetime
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -26,6 +27,15 @@ class TestEvents:
         event = client.events.retrieve(
             "string",
         )
+        assert_matches_type(Event, event, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.events.with_raw_response.retrieve(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = response.parse()
         assert_matches_type(Event, event, path=["response"])
 
     @parametrize
@@ -47,6 +57,13 @@ class TestEvents:
         assert_matches_type(SyncCursorPage[Event], event, path=["response"])
 
     @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.events.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = response.parse()
+        assert_matches_type(SyncCursorPage[Event], event, path=["response"])
+
+    @parametrize
     def test_method_list_attempts(self, client: Lithic) -> None:
         event = client.events.list_attempts(
             "string",
@@ -64,6 +81,15 @@ class TestEvents:
             starting_after="string",
             status="FAILED",
         )
+        assert_matches_type(SyncCursorPage[MessageAttempt], event, path=["response"])
+
+    @parametrize
+    def test_raw_response_list_attempts(self, client: Lithic) -> None:
+        response = client.events.with_raw_response.list_attempts(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = response.parse()
         assert_matches_type(SyncCursorPage[MessageAttempt], event, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
@@ -87,6 +113,15 @@ class TestAsyncEvents:
         assert_matches_type(Event, event, path=["response"])
 
     @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.events.with_raw_response.retrieve(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = response.parse()
+        assert_matches_type(Event, event, path=["response"])
+
+    @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
         event = await client.events.list()
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
@@ -102,6 +137,13 @@ class TestAsyncEvents:
             starting_after="string",
             with_content=True,
         )
+        assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.events.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = response.parse()
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
     @parametrize
@@ -122,6 +164,15 @@ class TestAsyncEvents:
             starting_after="string",
             status="FAILED",
         )
+        assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list_attempts(self, client: AsyncLithic) -> None:
+        response = await client.events.with_raw_response.list_attempts(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = response.parse()
         assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")

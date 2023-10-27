@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import TYPE_CHECKING, List, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -10,6 +10,7 @@ from ...types import MessageAttempt, EventSubscription
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.events import (
@@ -23,10 +24,19 @@ from ...types.events import (
     subscription_send_simulated_example_params,
 )
 
+if TYPE_CHECKING:
+    from ..._client import Lithic, AsyncLithic
+
 __all__ = ["Subscriptions", "AsyncSubscriptions"]
 
 
 class Subscriptions(SyncAPIResource):
+    with_raw_response: SubscriptionsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = SubscriptionsWithRawResponse(self)
+
     def create(
         self,
         *,
@@ -618,6 +628,12 @@ class Subscriptions(SyncAPIResource):
 
 
 class AsyncSubscriptions(AsyncAPIResource):
+    with_raw_response: AsyncSubscriptionsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncSubscriptionsWithRawResponse(self)
+
     async def create(
         self,
         *,
@@ -1205,4 +1221,78 @@ class AsyncSubscriptions(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=NoneType,
+        )
+
+
+class SubscriptionsWithRawResponse:
+    def __init__(self, subscriptions: Subscriptions) -> None:
+        self.create = to_raw_response_wrapper(
+            subscriptions.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            subscriptions.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            subscriptions.update,
+        )
+        self.list = to_raw_response_wrapper(
+            subscriptions.list,
+        )
+        self.delete = to_raw_response_wrapper(
+            subscriptions.delete,
+        )
+        self.list_attempts = to_raw_response_wrapper(
+            subscriptions.list_attempts,
+        )
+        self.recover = to_raw_response_wrapper(
+            subscriptions.recover,
+        )
+        self.replay_missing = to_raw_response_wrapper(
+            subscriptions.replay_missing,
+        )
+        self.retrieve_secret = to_raw_response_wrapper(
+            subscriptions.retrieve_secret,
+        )
+        self.rotate_secret = to_raw_response_wrapper(
+            subscriptions.rotate_secret,
+        )
+        self.send_simulated_example = to_raw_response_wrapper(
+            subscriptions.send_simulated_example,
+        )
+
+
+class AsyncSubscriptionsWithRawResponse:
+    def __init__(self, subscriptions: AsyncSubscriptions) -> None:
+        self.create = async_to_raw_response_wrapper(
+            subscriptions.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            subscriptions.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            subscriptions.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            subscriptions.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            subscriptions.delete,
+        )
+        self.list_attempts = async_to_raw_response_wrapper(
+            subscriptions.list_attempts,
+        )
+        self.recover = async_to_raw_response_wrapper(
+            subscriptions.recover,
+        )
+        self.replay_missing = async_to_raw_response_wrapper(
+            subscriptions.replay_missing,
+        )
+        self.retrieve_secret = async_to_raw_response_wrapper(
+            subscriptions.retrieve_secret,
+        )
+        self.rotate_secret = async_to_raw_response_wrapper(
+            subscriptions.rotate_secret,
+        )
+        self.send_simulated_example = async_to_raw_response_wrapper(
+            subscriptions.send_simulated_example,
         )

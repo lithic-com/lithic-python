@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 from typing_extensions import Literal
 
 from ..types import (
@@ -18,13 +19,23 @@ from ..types import (
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["Payments", "AsyncPayments"]
 
 
 class Payments(SyncAPIResource):
+    with_raw_response: PaymentsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = PaymentsWithRawResponse(self)
+
     def create(
         self,
         *,
@@ -302,6 +313,12 @@ class Payments(SyncAPIResource):
 
 
 class AsyncPayments(AsyncAPIResource):
+    with_raw_response: AsyncPaymentsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncPaymentsWithRawResponse(self)
+
     async def create(
         self,
         *,
@@ -575,4 +592,48 @@ class AsyncPayments(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=PaymentSimulateReturnResponse,
+        )
+
+
+class PaymentsWithRawResponse:
+    def __init__(self, payments: Payments) -> None:
+        self.create = to_raw_response_wrapper(
+            payments.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            payments.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            payments.list,
+        )
+        self.retry = to_raw_response_wrapper(
+            payments.retry,
+        )
+        self.simulate_release = to_raw_response_wrapper(
+            payments.simulate_release,
+        )
+        self.simulate_return = to_raw_response_wrapper(
+            payments.simulate_return,
+        )
+
+
+class AsyncPaymentsWithRawResponse:
+    def __init__(self, payments: AsyncPayments) -> None:
+        self.create = async_to_raw_response_wrapper(
+            payments.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            payments.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            payments.list,
+        )
+        self.retry = async_to_raw_response_wrapper(
+            payments.retry,
+        )
+        self.simulate_release = async_to_raw_response_wrapper(
+            payments.simulate_release,
+        )
+        self.simulate_return = async_to_raw_response_wrapper(
+            payments.simulate_return,
         )

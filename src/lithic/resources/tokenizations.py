@@ -2,18 +2,29 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 from typing_extensions import Literal
 
 from ..types import TokenizationSimulateResponse, tokenization_simulate_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import make_request_options
+
+if TYPE_CHECKING:
+    from .._client import Lithic, AsyncLithic
 
 __all__ = ["Tokenizations", "AsyncTokenizations"]
 
 
 class Tokenizations(SyncAPIResource):
+    with_raw_response: TokenizationsWithRawResponse
+
+    def __init__(self, client: Lithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = TokenizationsWithRawResponse(self)
+
     def simulate(
         self,
         *,
@@ -90,6 +101,12 @@ class Tokenizations(SyncAPIResource):
 
 
 class AsyncTokenizations(AsyncAPIResource):
+    with_raw_response: AsyncTokenizationsWithRawResponse
+
+    def __init__(self, client: AsyncLithic) -> None:
+        super().__init__(client)
+        self.with_raw_response = AsyncTokenizationsWithRawResponse(self)
+
     async def simulate(
         self,
         *,
@@ -162,4 +179,18 @@ class AsyncTokenizations(AsyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=TokenizationSimulateResponse,
+        )
+
+
+class TokenizationsWithRawResponse:
+    def __init__(self, tokenizations: Tokenizations) -> None:
+        self.simulate = to_raw_response_wrapper(
+            tokenizations.simulate,
+        )
+
+
+class AsyncTokenizationsWithRawResponse:
+    def __init__(self, tokenizations: AsyncTokenizations) -> None:
+        self.simulate = async_to_raw_response_wrapper(
+            tokenizations.simulate,
         )

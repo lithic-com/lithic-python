@@ -9,6 +9,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import BusinessAccount
+from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -24,6 +25,15 @@ class TestCreditConfigurations:
         credit_configuration = client.accounts.credit_configurations.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.accounts.credit_configurations.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        credit_configuration = response.parse()
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
     @parametrize
@@ -44,6 +54,15 @@ class TestCreditConfigurations:
         )
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
+    @parametrize
+    def test_raw_response_update(self, client: Lithic) -> None:
+        response = client.accounts.credit_configurations.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        credit_configuration = response.parse()
+        assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
+
 
 class TestAsyncCreditConfigurations:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -55,6 +74,15 @@ class TestAsyncCreditConfigurations:
         credit_configuration = await client.accounts.credit_configurations.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.accounts.credit_configurations.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        credit_configuration = response.parse()
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
     @parametrize
@@ -73,4 +101,13 @@ class TestAsyncCreditConfigurations:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_period=0,
         )
+        assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update(self, client: AsyncLithic) -> None:
+        response = await client.accounts.credit_configurations.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        credit_configuration = response.parse()
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])

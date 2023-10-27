@@ -7,8 +7,14 @@ from datetime import date
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import maybe_transform
-from .line_items import LineItems, AsyncLineItems
+from .line_items import (
+    LineItems,
+    AsyncLineItems,
+    LineItemsWithRawResponse,
+    AsyncLineItemsWithRawResponse,
+)
 from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.financial_accounts import Statement, statement_list_params
@@ -21,10 +27,12 @@ __all__ = ["Statements", "AsyncStatements"]
 
 class Statements(SyncAPIResource):
     line_items: LineItems
+    with_raw_response: StatementsWithRawResponse
 
     def __init__(self, client: Lithic) -> None:
         super().__init__(client)
         self.line_items = LineItems(client)
+        self.with_raw_response = StatementsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -125,10 +133,12 @@ class Statements(SyncAPIResource):
 
 class AsyncStatements(AsyncAPIResource):
     line_items: AsyncLineItems
+    with_raw_response: AsyncStatementsWithRawResponse
 
     def __init__(self, client: AsyncLithic) -> None:
         super().__init__(client)
         self.line_items = AsyncLineItems(client)
+        self.with_raw_response = AsyncStatementsWithRawResponse(self)
 
     async def retrieve(
         self,
@@ -224,4 +234,28 @@ class AsyncStatements(AsyncAPIResource):
                 ),
             ),
             model=Statement,
+        )
+
+
+class StatementsWithRawResponse:
+    def __init__(self, statements: Statements) -> None:
+        self.line_items = LineItemsWithRawResponse(statements.line_items)
+
+        self.retrieve = to_raw_response_wrapper(
+            statements.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            statements.list,
+        )
+
+
+class AsyncStatementsWithRawResponse:
+    def __init__(self, statements: AsyncStatements) -> None:
+        self.line_items = AsyncLineItemsWithRawResponse(statements.line_items)
+
+        self.retrieve = async_to_raw_response_wrapper(
+            statements.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            statements.list,
         )

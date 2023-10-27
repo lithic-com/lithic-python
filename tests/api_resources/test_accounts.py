@@ -10,6 +10,7 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Account
 from lithic._utils import parse_datetime
+from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -26,6 +27,15 @@ class TestAccounts:
         account = client.accounts.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Account, account, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Lithic) -> None:
+        response = client.accounts.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
         assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism returns invalid data")
@@ -56,6 +66,16 @@ class TestAccounts:
         )
         assert_matches_type(Account, account, path=["response"])
 
+    @pytest.mark.skip(reason="Prism returns invalid data")
+    @parametrize
+    def test_raw_response_update(self, client: Lithic) -> None:
+        response = client.accounts.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(Account, account, path=["response"])
+
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         account = client.accounts.list()
@@ -72,6 +92,13 @@ class TestAccounts:
         )
         assert_matches_type(SyncCursorPage[Account], account, path=["response"])
 
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.accounts.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(SyncCursorPage[Account], account, path=["response"])
+
 
 class TestAsyncAccounts:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -83,6 +110,15 @@ class TestAsyncAccounts:
         account = await client.accounts.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+        assert_matches_type(Account, account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
+        response = await client.accounts.with_raw_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
         assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism returns invalid data")
@@ -113,6 +149,16 @@ class TestAsyncAccounts:
         )
         assert_matches_type(Account, account, path=["response"])
 
+    @pytest.mark.skip(reason="Prism returns invalid data")
+    @parametrize
+    async def test_raw_response_update(self, client: AsyncLithic) -> None:
+        response = await client.accounts.with_raw_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(Account, account, path=["response"])
+
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
         account = await client.accounts.list()
@@ -127,4 +173,11 @@ class TestAsyncAccounts:
             page_size=1,
             starting_after="string",
         )
+        assert_matches_type(AsyncCursorPage[Account], account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.accounts.with_raw_response.list()
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
         assert_matches_type(AsyncCursorPage[Account], account, path=["response"])
