@@ -54,6 +54,9 @@ class ExternalBankAccountCreateResponse(BaseModel):
 
     type: Literal["CHECKING", "SAVINGS"]
 
+    verification_attempts: int
+    """The number of attempts at verification"""
+
     verification_method: Literal["MANUAL", "MICRO_DEPOSIT", "PLAID"]
 
     verification_state: Literal["PENDING", "ENABLED", "FAILED_VERIFICATION"]
