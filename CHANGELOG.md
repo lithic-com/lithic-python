@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.1 (2023-11-03)
+
+Full Changelog: [v0.22.0...v0.22.1](https://github.com/lithic-com/lithic-python/compare/v0.22.0...v0.22.1)
+
+### Bug Fixes
+
+* **binaries:** don't synchronously block in astream_to_file ([#226](https://github.com/lithic-com/lithic-python/issues/226)) ([cfc5441](https://github.com/lithic-com/lithic-python/commit/cfc5441a47342e6ea57683222b15836404c0d50b))
+
 ## 0.22.0 (2023-11-03)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/lithic-com/lithic-python/compare/v0.21.0...v0.22.0)
