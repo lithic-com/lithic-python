@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.22.0 (2023-11-03)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/lithic-com/lithic-python/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **api:** add verification_attempts response property ([#223](https://github.com/lithic-com/lithic-python/issues/223)) ([84446d7](https://github.com/lithic-com/lithic-python/commit/84446d7a9e69bfe2bc4b22dca2b15ba4cfd053d5))
+* **client:** allow binary returns ([#224](https://github.com/lithic-com/lithic-python/issues/224)) ([78c7e86](https://github.com/lithic-com/lithic-python/commit/78c7e86a3930f9174e23363734499ff9b6fd1417))
+* **client:** support accessing raw response objects ([#218](https://github.com/lithic-com/lithic-python/issues/218)) ([8540bba](https://github.com/lithic-com/lithic-python/commit/8540bbac962b5241d01aee47e518033e0dfa6c5e))
+* **client:** support passing BaseModels to request params at runtime ([#225](https://github.com/lithic-com/lithic-python/issues/225)) ([ab37ce8](https://github.com/lithic-com/lithic-python/commit/ab37ce804c856b42f2964e5fc882a96199b2554d))
+* **github:** include a devcontainer setup ([#222](https://github.com/lithic-com/lithic-python/issues/222)) ([1256ea0](https://github.com/lithic-com/lithic-python/commit/1256ea00c91a566685741806c0611f32fa74a89c))
+* **package:** add classifiers ([#221](https://github.com/lithic-com/lithic-python/issues/221)) ([a1d9641](https://github.com/lithic-com/lithic-python/commit/a1d9641c633db15dff8306d45a555dcbb561a75a))
+
+
+### Chores
+
+* **internal:** minor restructuring of base client ([#220](https://github.com/lithic-com/lithic-python/issues/220)) ([2c36aa7](https://github.com/lithic-com/lithic-python/commit/2c36aa7f52575c37a7152bdfa00bc2fa5c37de92))
+* **internal:** require explicit overrides ([#217](https://github.com/lithic-com/lithic-python/issues/217)) ([c85bd62](https://github.com/lithic-com/lithic-python/commit/c85bd6213a6d8a3bbceccc700ed9004ce4d3f0cd))
+
 ## 0.21.0 (2023-10-26)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/lithic-com/lithic-python/compare/v0.20.0...v0.21.0)
