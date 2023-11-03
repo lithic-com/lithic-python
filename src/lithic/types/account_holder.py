@@ -211,10 +211,13 @@ class AccountHolder(BaseModel):
     """
 
     control_person: Optional[ControlPerson] = None
-    """Information about an individual associated with an account holder.
-
-    A subset of the information provided via KYC. For example, we do not return the
-    government id.
+    """
+    Only present when user_type == "BUSINESS". An individual with significant
+    responsibility for managing the legal entity (e.g., a Chief Executive Officer,
+    Chief Financial Officer, Chief Operating Officer, Managing Member, General
+    Partner, President, Vice President, or Treasurer). This can be an executive, or
+    someone who will have program-wide access to the cards that Lithic will provide.
+    In some cases, this individual could also be a beneficial owner listed above.
     """
 
     created: Optional[datetime] = None
