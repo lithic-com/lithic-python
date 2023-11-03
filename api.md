@@ -60,7 +60,7 @@ Methods:
 - <code title="patch /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">update</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_update_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_update_response.py">AccountHolderUpdateResponse</a></code>
 - <code title="get /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">list_documents</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder_list_documents_response.py">AccountHolderListDocumentsResponse</a></code>
 - <code title="post /account_holders/{account_holder_token}/resubmit">client.account_holders.<a href="./src/lithic/resources/account_holders.py">resubmit</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_resubmit_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
-- <code title="get /account_holders/{account_holder_token}/documents/{document_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve_document</a>(account_holder_token, document_token) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
+- <code title="get /account_holders/{account_holder_token}/documents/{document_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve_document</a>(document_token, \*, account_holder_token) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
 - <code title="post /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">upload_document</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_upload_document_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
 
 # AuthRules
@@ -169,7 +169,7 @@ Methods:
 
 Methods:
 
-- <code title="get /cards/{card_token}/financial_transactions/{financial_transaction_token}">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">retrieve</a>(card_token, financial_transaction_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
+- <code title="get /cards/{card_token}/financial_transactions/{financial_transaction_token}">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">retrieve</a>(financial_transaction_token, \*, card_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
 - <code title="get /cards/{card_token}/financial_transactions">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
 # Balances
@@ -211,10 +211,10 @@ Methods:
 - <code title="patch /disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">update</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_update_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
 - <code title="get /disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">list</a>(\*\*<a href="src/lithic/types/dispute_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">SyncCursorPage[Dispute]</a></code>
 - <code title="delete /disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
-- <code title="delete /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete_evidence</a>(dispute_token, evidence_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
+- <code title="delete /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete_evidence</a>(evidence_token, \*, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="post /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">initiate_evidence_upload</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_initiate_evidence_upload_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="get /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">list_evidences</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_list_evidences_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">SyncCursorPage[DisputeEvidence]</a></code>
-- <code title="get /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(dispute_token, evidence_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
+- <code title="get /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(evidence_token, \*, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code>client.disputes.<a href="./src/lithic/resources/disputes.py">upload_evidence</a>(\*args) -> None</code>
 
 # Events
@@ -276,7 +276,7 @@ Methods:
 
 Methods:
 
-- <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_account_token, financial_transaction_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_transaction_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
 ## Statements
@@ -289,7 +289,7 @@ from lithic.types.financial_accounts import Statement
 
 Methods:
 
-- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">retrieve</a>(financial_account_token, statement_token) -> <a href="./src/lithic/types/financial_accounts/statement.py">Statement</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">retrieve</a>(statement_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/statement.py">Statement</a></code>
 - <code title="get /financial_accounts/{financial_account_token}/statements">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statement_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statement.py">SyncCursorPage[Statement]</a></code>
 
 ### LineItems
@@ -302,7 +302,7 @@ from lithic.types.financial_accounts.statements import LineItemListResponse
 
 Methods:
 
-- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(financial_account_token, statement_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statements/line_item_list_response.py">SyncCursorPage[LineItemListResponse]</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(statement_token, \*, financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statements/line_item_list_response.py">SyncCursorPage[LineItemListResponse]</a></code>
 
 # Transactions
 
