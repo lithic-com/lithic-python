@@ -46,6 +46,7 @@ so that your API Key is not stored in source control.
 Simply import `AsyncLithic` instead of `Lithic` and use `await` with each API call:
 
 ```python
+import asyncio
 from lithic import AsyncLithic
 
 client = AsyncLithic(
@@ -56,7 +57,7 @@ client = AsyncLithic(
 )
 
 
-async def main():
+async def main() -> None:
     card = await client.cards.create(
         type="SINGLE_USE",
     )
@@ -146,11 +147,10 @@ from lithic import Lithic
 
 client = Lithic()
 
-client.cards.create(
-    foo={
-        "bar": True,
-    },
+card = client.cards.create(
+    type="VIRTUAL",
 )
+print(card.token)
 ```
 
 ## Webhook Verification
@@ -318,9 +318,8 @@ from lithic import Lithic
 
 client = Lithic()
 response = client.cards.with_raw_response.create(
-    type="VIRTUAL",
+    type="SINGLE_USE",
 )
-
 print(response.headers.get('X-My-Header'))
 
 card = response.parse()  # get the object that `cards.create()` would have returned
