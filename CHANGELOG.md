@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.22.2 (2023-11-06)
+
+Full Changelog: [v0.22.1...v0.22.2](https://github.com/lithic-com/lithic-python/compare/v0.22.1...v0.22.2)
+
+### Bug Fixes
+
+* prevent TypeError in Python 3.8 (ABC is not subscriptable) ([#233](https://github.com/lithic-com/lithic-python/issues/233)) ([55fd8a3](https://github.com/lithic-com/lithic-python/commit/55fd8a3315c546a4c83ff8e72b36aff78d7c7209))
+
+
+### Chores
+
+* **internal:** remove unused int/float conversion ([#231](https://github.com/lithic-com/lithic-python/issues/231)) ([1256055](https://github.com/lithic-com/lithic-python/commit/125605517acc43343c15a382c10ce535304c22d6))
+
+
+### Documentation
+
+* **api:** improve method signatures for named path params ([#228](https://github.com/lithic-com/lithic-python/issues/228)) ([476d296](https://github.com/lithic-com/lithic-python/commit/476d2960e890068e851c4d443533704178912431))
+* improve account holder control person documentation ([#230](https://github.com/lithic-com/lithic-python/issues/230)) ([36abfb0](https://github.com/lithic-com/lithic-python/commit/36abfb09f32eb367c6f4bba24c737bcf585defea))
+* **readme:** improve example snippets ([#232](https://github.com/lithic-com/lithic-python/issues/232)) ([ace36a4](https://github.com/lithic-com/lithic-python/commit/ace36a44b8f7fc05ebec0842d6be702150a71a3c))
+
 ## 0.22.1 (2023-11-03)
 
 Full Changelog: [v0.22.0...v0.22.1](https://github.com/lithic-com/lithic-python/compare/v0.22.0...v0.22.1)
