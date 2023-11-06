@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, List, overload
 from typing_extensions import Literal
 
+import httpx
+
 from ..types import (
     AccountHolder,
     AccountHolderDocument,
@@ -53,7 +55,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -135,7 +137,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -191,7 +193,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -277,7 +279,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         return self._post(
@@ -324,7 +326,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolder:
         """
         Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
@@ -359,7 +361,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
@@ -417,7 +419,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -465,7 +467,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
@@ -527,7 +529,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -572,7 +574,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AccountHolderDocument:
         """
@@ -650,7 +652,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -732,7 +734,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -788,7 +790,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """
@@ -874,7 +876,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         return await self._post(
@@ -921,7 +923,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolder:
         """
         Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
@@ -956,7 +958,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
@@ -1014,7 +1016,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -1062,7 +1064,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
@@ -1124,7 +1126,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderDocument:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -1169,7 +1171,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> AccountHolderDocument:
         """
