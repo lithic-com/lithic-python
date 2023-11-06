@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING, List, Union, overload
 from datetime import date
 from typing_extensions import Literal
 
+import httpx
+
 from ...types import (
     OwnerType,
     VerificationMethod,
@@ -64,7 +66,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
@@ -110,7 +112,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
@@ -177,7 +179,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         return self._post(
@@ -223,7 +225,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ExternalBankAccountRetrieveResponse:
         """
         Get the external bank account by token.
@@ -262,7 +264,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountUpdateResponse:
         """
@@ -326,7 +328,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncCursorPage[ExternalBankAccountListResponse]:
         """
         List all the external bank accounts for the provided search criteria.
@@ -402,7 +404,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
@@ -448,7 +450,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
@@ -515,7 +517,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         return await self._post(
@@ -561,7 +563,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ExternalBankAccountRetrieveResponse:
         """
         Get the external bank account by token.
@@ -600,7 +602,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
     ) -> ExternalBankAccountUpdateResponse:
         """
@@ -664,7 +666,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[ExternalBankAccountListResponse, AsyncCursorPage[ExternalBankAccountListResponse]]:
         """
         List all the external bank accounts for the provided search criteria.
