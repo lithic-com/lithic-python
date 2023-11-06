@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Union
 from datetime import date
 
+import httpx
+
 from ...types import SettlementDetail
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
@@ -39,7 +41,7 @@ class Settlement(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncCursorPage[SettlementDetail]:
         """
         List details.
@@ -90,7 +92,7 @@ class Settlement(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SettlementSummaryResponse:
         """
         Get the settlement report for a specified report date.
@@ -132,7 +134,7 @@ class AsyncSettlement(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[SettlementDetail, AsyncCursorPage[SettlementDetail]]:
         """
         List details.
@@ -183,7 +185,7 @@ class AsyncSettlement(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SettlementSummaryResponse:
         """
         Get the settlement report for a specified report date.
