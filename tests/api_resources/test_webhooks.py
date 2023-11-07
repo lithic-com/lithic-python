@@ -83,7 +83,7 @@ class TestWebhooks:
             is None
         )
 
-        # different signaature version
+        # different signature version
         with pytest.raises(ValueError, match=invalid_signature_message):
             verify(
                 payload=payload,
@@ -183,7 +183,7 @@ class TestAsyncWebhooks:
             is None
         )
 
-        # different signaature version
+        # different signature version
         with pytest.raises(ValueError, match=invalid_signature_message):
             verify(
                 payload=payload,
