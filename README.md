@@ -326,7 +326,7 @@ card = response.parse()  # get the object that `cards.create()` would have retur
 print(card.token)
 ```
 
-These methods return an [`APIResponse`](https://github.com/lithic-com/lithic-python/src/lithic/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/lithic-com/lithic-python/tree/main/src/lithic/_response.py) object.
 
 ### Configuring the HTTP client
 
