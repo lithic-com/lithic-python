@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.23.0 (2023-11-08)
+
+Full Changelog: [v0.22.2...v0.23.0](https://github.com/lithic-com/lithic-python/compare/v0.22.2...v0.23.0)
+
+### Features
+
+* **client:** support passing httpx.Timeout to method timeout argument ([#234](https://github.com/lithic-com/lithic-python/issues/234)) ([d70cab3](https://github.com/lithic-com/lithic-python/commit/d70cab37a0ef4a4cb76bce9ceb27a0591de65044))
+
+
+### Bug Fixes
+
+* **api:** correct type for other fees details ([#238](https://github.com/lithic-com/lithic-python/issues/238)) ([3e4efea](https://github.com/lithic-com/lithic-python/commit/3e4efea1d64c2dd51e9884dc7fd270d851424d41))
+
+
+### Chores
+
+* **docs:** fix github links ([#237](https://github.com/lithic-com/lithic-python/issues/237)) ([d747b8c](https://github.com/lithic-com/lithic-python/commit/d747b8c91d76843003394ccadca00f191fc19f81))
+* **internal:** fix some typos ([#236](https://github.com/lithic-com/lithic-python/issues/236)) ([ac40586](https://github.com/lithic-com/lithic-python/commit/ac4058660e21d2a5248fb4f354854be495f533ee))
+
 ## 0.22.2 (2023-11-06)
 
 Full Changelog: [v0.22.1...v0.22.2](https://github.com/lithic-com/lithic-python/compare/v0.22.1...v0.22.2)
