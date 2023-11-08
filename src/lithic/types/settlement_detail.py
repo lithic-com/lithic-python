@@ -4,15 +4,15 @@ from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from pydantic import Field as FieldInfo
+
 from .._models import BaseModel
 
 __all__ = ["SettlementDetail", "OtherFeesDetails"]
 
 
 class OtherFeesDetails(BaseModel):
-    title: Optional[object] = None
-
-    type: Optional[object] = None
+    isa: Optional[int] = FieldInfo(alias="ISA", default=None)
 
 
 class SettlementDetail(BaseModel):
@@ -46,7 +46,7 @@ class SettlementDetail(BaseModel):
     disputes_gross_amount: int
     """The total gross amount of disputes settlements."""
 
-    event_tokens: List[object]
+    event_tokens: List[str]
     """
     Globally unique identifiers denoting the Events associated with this settlement.
     """

@@ -12,6 +12,10 @@ __all__ = ["Payment", "PaymentMethodAttributes"]
 class PaymentMethodAttributes(BaseModel):
     sec_code: Literal["PPD", "CCD", "WEB"]
 
+    company_id: Optional[str] = None
+
+    receipt_routing_number: Optional[str] = None
+
     retries: Optional[int] = None
 
     return_reason_code: Optional[str] = None
