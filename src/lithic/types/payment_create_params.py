@@ -30,6 +30,10 @@ class PaymentCreateParams(TypedDict, total=False):
 class MethodAttributes(TypedDict, total=False):
     sec_code: Required[Literal["PPD", "CCD", "WEB"]]
 
+    company_id: str
+
+    receipt_routing_number: str
+
     retries: int
 
     return_reason_code: str
