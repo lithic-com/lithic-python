@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.24.0 (2023-11-09)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/lithic-com/lithic-python/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* **api:** updates ([#242](https://github.com/lithic-com/lithic-python/issues/242)) ([eecfe4d](https://github.com/lithic-com/lithic-python/commit/eecfe4df66172f4cf4b55c46d9032d7a923c802e))
+* **client:** support passing chunk size for binary responses ([#241](https://github.com/lithic-com/lithic-python/issues/241)) ([9bbaf15](https://github.com/lithic-com/lithic-python/commit/9bbaf15763aadce9de1993e1b786c77e98584f99))
+
+
+### Chores
+
+* **internal:** improve github devcontainer setup ([#239](https://github.com/lithic-com/lithic-python/issues/239)) ([c95e537](https://github.com/lithic-com/lithic-python/commit/c95e5374ff981d8249b77bfc2d1476eb1181d278))
+
 ## 0.23.0 (2023-11-08)
 
 Full Changelog: [v0.22.2...v0.23.0](https://github.com/lithic-com/lithic-python/compare/v0.22.2...v0.23.0)
