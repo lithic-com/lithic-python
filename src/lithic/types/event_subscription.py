@@ -18,6 +18,8 @@ class EventSubscription(BaseModel):
     disabled: bool
     """Whether the subscription is disabled."""
 
+    url: str
+
     event_types: Optional[
         List[
             Literal[
@@ -38,6 +40,4 @@ class EventSubscription(BaseModel):
                 "transfer_transaction.created",
             ]
         ]
-    ]
-
-    url: str
+    ] = None
