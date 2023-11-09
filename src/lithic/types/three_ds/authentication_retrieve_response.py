@@ -350,7 +350,7 @@ class AuthenticationRetrieveResponse(BaseModel):
     created: datetime
     """Date and time when the authentication was created in Lithic's system."""
 
-    decision_made_by: Optional[Literal["LITHIC_DEFAULT", "LITHIC_RULES", "CUSTOMER_ENDPOINT"]]
+    decision_made_by: Optional[Literal["NETWORK", "LITHIC_DEFAULT", "LITHIC_RULES", "CUSTOMER_ENDPOINT", "UNKNOWN"]]
     """Entity that made the authentication decision."""
 
     merchant: Merchant
