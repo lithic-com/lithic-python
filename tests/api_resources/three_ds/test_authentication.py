@@ -50,8 +50,8 @@ class TestAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 0,
-                "currency": "GBP",
+                "amount": 100,
+                "currency": "USD",
             },
         )
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
@@ -67,8 +67,8 @@ class TestAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 0,
-                "currency": "GBP",
+                "amount": 100,
+                "currency": "USD",
             },
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -108,8 +108,8 @@ class TestAsyncAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 0,
-                "currency": "GBP",
+                "amount": 100,
+                "currency": "USD",
             },
         )
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
@@ -125,8 +125,8 @@ class TestAsyncAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 0,
-                "currency": "GBP",
+                "amount": 100,
+                "currency": "USD",
             },
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"

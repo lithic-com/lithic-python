@@ -129,14 +129,14 @@ class TestTransactions:
     @parametrize
     def test_method_simulate_clearing(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_clearing(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_clearing_with_all_params(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_clearing(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
             amount=0,
         )
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
@@ -144,7 +144,7 @@ class TestTransactions:
     @parametrize
     def test_raw_response_simulate_clearing(self, client: Lithic) -> None:
         response = client.transactions.with_raw_response.simulate_clearing(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
@@ -346,14 +346,14 @@ class TestAsyncTransactions:
     @parametrize
     async def test_method_simulate_clearing(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_clearing(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_clearing_with_all_params(self, client: AsyncLithic) -> None:
         transaction = await client.transactions.simulate_clearing(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
             amount=0,
         )
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
@@ -361,7 +361,7 @@ class TestAsyncTransactions:
     @parametrize
     async def test_raw_response_simulate_clearing(self, client: AsyncLithic) -> None:
         response = await client.transactions.with_raw_response.simulate_clearing(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()

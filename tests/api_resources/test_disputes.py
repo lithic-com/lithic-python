@@ -25,19 +25,19 @@ class TestDisputes:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         dispute = client.disputes.create(
-            amount=0,
-            reason="ATM_CASH_MISDISPENSE",
-            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=10000,
+            reason="FRAUD_CARD_PRESENT",
+            transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.create(
-            amount=0,
-            reason="ATM_CASH_MISDISPENSE",
-            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            amount=10000,
+            reason="FRAUD_CARD_PRESENT",
+            transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
+            customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
             customer_note="string",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -45,9 +45,9 @@ class TestDisputes:
     @parametrize
     def test_raw_response_create(self, client: Lithic) -> None:
         response = client.disputes.with_raw_response.create(
-            amount=0,
-            reason="ATM_CASH_MISDISPENSE",
-            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=10000,
+            reason="FRAUD_CARD_PRESENT",
+            transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
@@ -238,19 +238,19 @@ class TestAsyncDisputes:
     @parametrize
     async def test_method_create(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.create(
-            amount=0,
-            reason="ATM_CASH_MISDISPENSE",
-            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=10000,
+            reason="FRAUD_CARD_PRESENT",
+            transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.create(
-            amount=0,
-            reason="ATM_CASH_MISDISPENSE",
-            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            amount=10000,
+            reason="FRAUD_CARD_PRESENT",
+            transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
+            customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
             customer_note="string",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -258,9 +258,9 @@ class TestAsyncDisputes:
     @parametrize
     async def test_raw_response_create(self, client: AsyncLithic) -> None:
         response = await client.disputes.with_raw_response.create(
-            amount=0,
-            reason="ATM_CASH_MISDISPENSE",
-            transaction_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=10000,
+            reason="FRAUD_CARD_PRESENT",
+            transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
