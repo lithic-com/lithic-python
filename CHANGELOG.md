@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.24.2 (2023-11-10)
+
+Full Changelog: [v0.24.1...v0.24.2](https://github.com/lithic-com/lithic-python/compare/v0.24.1...v0.24.2)
+
+### Bug Fixes
+
+* **client:** serialise pydantic v1 default fields correctly in params ([#247](https://github.com/lithic-com/lithic-python/issues/247)) ([ed6f61a](https://github.com/lithic-com/lithic-python/commit/ed6f61a910bd4511967b97ed70b588368530ef8b))
+
 ## 0.24.1 (2023-11-10)
 
 Full Changelog: [v0.24.0...v0.24.1](https://github.com/lithic-com/lithic-python/compare/v0.24.0...v0.24.1)
