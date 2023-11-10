@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.24.1 (2023-11-10)
+
+Full Changelog: [v0.24.0...v0.24.1](https://github.com/lithic-com/lithic-python/compare/v0.24.0...v0.24.1)
+
+### Bug Fixes
+
+* **models:** mark unknown fields as set in pydantic v1 ([#246](https://github.com/lithic-com/lithic-python/issues/246)) ([a495004](https://github.com/lithic-com/lithic-python/commit/a495004cc3d994860aa40a4adf6d1d4542f4be36))
+
+
+### Chores
+
+* **internal:** base client updates ([#245](https://github.com/lithic-com/lithic-python/issues/245)) ([f29d219](https://github.com/lithic-com/lithic-python/commit/f29d219dbb4c89d61820e84e1e059820e25085a7))
+
+
+### Documentation
+
+* reword package description ([#243](https://github.com/lithic-com/lithic-python/issues/243)) ([44e8d9f](https://github.com/lithic-com/lithic-python/commit/44e8d9fec40a837edacc9d2bdd741b0a5671b07b))
+
 ## 0.24.0 (2023-11-09)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/lithic-com/lithic-python/compare/v0.23.0...v0.24.0)
