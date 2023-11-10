@@ -45,9 +45,14 @@ class Stream(Generic[ResponseT]):
         cast_to = self._cast_to
         response = self.response
         process_data = self._client._process_response_data
+        iterator = self._iter_events()
 
-        for sse in self._iter_events():
+        for sse in iterator:
             yield process_data(data=sse.json(), cast_to=cast_to, response=response)
+
+        # Ensure the entire stream is consumed
+        for sse in iterator:
+            ...
 
 
 class AsyncStream(Generic[ResponseT]):
@@ -83,9 +88,14 @@ class AsyncStream(Generic[ResponseT]):
         cast_to = self._cast_to
         response = self.response
         process_data = self._client._process_response_data
+        iterator = self._iter_events()
 
-        async for sse in self._iter_events():
+        async for sse in iterator:
             yield process_data(data=sse.json(), cast_to=cast_to, response=response)
+
+        # Ensure the entire stream is consumed
+        async for sse in iterator:
+            ...
 
 
 class ServerSentEvent:
