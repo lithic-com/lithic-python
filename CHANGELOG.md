@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.24.3 (2023-11-13)
+
+Full Changelog: [v0.24.2...v0.24.3](https://github.com/lithic-com/lithic-python/compare/v0.24.2...v0.24.3)
+
+### Bug Fixes
+
+* **client:** retry if SSLWantReadError occurs in the async client ([#249](https://github.com/lithic-com/lithic-python/issues/249)) ([1267620](https://github.com/lithic-com/lithic-python/commit/1267620391bf4dd7358a767ca0944156f05fea72))
+
 ## 0.24.2 (2023-11-10)
 
 Full Changelog: [v0.24.1...v0.24.2](https://github.com/lithic-com/lithic-python/compare/v0.24.1...v0.24.2)
