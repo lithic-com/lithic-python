@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 import asyncio
-from typing import Dict, Union, Mapping
+from typing import Dict, Union, Mapping, cast
 from typing_extensions import Literal, override
 
 import httpx
@@ -87,15 +87,15 @@ class Lithic(SyncAPIClient):
     api_key: str
     webhook_secret: str | None
 
-    _environment: Literal["production", "sandbox"]
+    _environment: Literal["production", "sandbox"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "sandbox"] = "production",
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -138,7 +138,25 @@ class Lithic(SyncAPIClient):
 
         self._environment = environment
 
-        if base_url is None:
+        base_url_env = os.environ.get("LITHIC_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `LITHIC_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
             try:
                 base_url = ENVIRONMENTS[environment]
             except KeyError as exc:
@@ -371,15 +389,15 @@ class AsyncLithic(AsyncAPIClient):
     api_key: str
     webhook_secret: str | None
 
-    _environment: Literal["production", "sandbox"]
+    _environment: Literal["production", "sandbox"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "sandbox"] = "production",
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -422,7 +440,25 @@ class AsyncLithic(AsyncAPIClient):
 
         self._environment = environment
 
-        if base_url is None:
+        base_url_env = os.environ.get("LITHIC_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `LITHIC_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
             try:
                 base_url = ENVIRONMENTS[environment]
             except KeyError as exc:

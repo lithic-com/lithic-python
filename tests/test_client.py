@@ -25,6 +25,8 @@ from lithic._base_client import (
     make_request_options,
 )
 
+from .utils import update_env
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
 
@@ -428,6 +430,19 @@ class TestLithic:
             "/foo", cast_to=httpx.Response, options=make_request_options(idempotency_key="custom-key")
         )
         assert response.request.headers.get("Idempotency-Key") == "custom-key"
+
+    def test_base_url_env(self) -> None:
+        with update_env(LITHIC_BASE_URL="http://localhost:5000/from/env"):
+            client = Lithic(api_key=api_key, _strict_response_validation=True)
+            assert client.base_url == "http://localhost:5000/from/env/"
+
+        # explicit environment arg requires explicitness
+        with update_env(LITHIC_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                Lithic(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = Lithic(base_url=None, api_key=api_key, _strict_response_validation=True, environment="production")
+            assert str(client.base_url).startswith("https://api.lithic.com/v1")
 
     @pytest.mark.parametrize(
         "client",
@@ -1069,6 +1084,21 @@ class TestAsyncLithic:
             "/foo", cast_to=httpx.Response, options=make_request_options(idempotency_key="custom-key")
         )
         assert response.request.headers.get("Idempotency-Key") == "custom-key"
+
+    def test_base_url_env(self) -> None:
+        with update_env(LITHIC_BASE_URL="http://localhost:5000/from/env"):
+            client = AsyncLithic(api_key=api_key, _strict_response_validation=True)
+            assert client.base_url == "http://localhost:5000/from/env/"
+
+        # explicit environment arg requires explicitness
+        with update_env(LITHIC_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                AsyncLithic(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = AsyncLithic(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api.lithic.com/v1")
 
     @pytest.mark.parametrize(
         "client",
