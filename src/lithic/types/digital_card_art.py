@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -26,3 +27,6 @@ class DigitalCardArt(BaseModel):
 
     network: Literal["MASTERCARD", "VISA"]
     """Card network."""
+
+    is_card_program_default: Optional[bool] = None
+    """Whether the card art is the default card art to be added upon tokenization."""
