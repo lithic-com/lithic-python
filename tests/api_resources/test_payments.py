@@ -15,6 +15,7 @@ from lithic.types import (
     PaymentSimulateReturnResponse,
     PaymentSimulateReleaseResponse,
 )
+from lithic._utils import parse_datetime
 from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
@@ -98,12 +99,14 @@ class TestPayments:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         payment = client.payments.list(
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="string",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page_size=1,
             result="APPROVED",
             starting_after="string",
-            status="PENDING",
+            status="DECLINED",
         )
         assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
 
@@ -247,12 +250,14 @@ class TestAsyncPayments:
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
         payment = await client.payments.list(
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="string",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page_size=1,
             result="APPROVED",
             starting_after="string",
-            status="PENDING",
+            status="DECLINED",
         )
         assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
 
