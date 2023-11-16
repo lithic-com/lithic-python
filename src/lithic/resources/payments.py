@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
+from datetime import datetime
 from typing_extensions import Literal
 
 import httpx
@@ -132,12 +133,14 @@ class Payments(SyncAPIResource):
     def list(
         self,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         financial_account_token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "VOIDED", "SETTLED", "DECLINED", "EXPIRED"] | NotGiven = NOT_GIVEN,
+        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -149,6 +152,12 @@ class Payments(SyncAPIResource):
         List all the payments for the provided search criteria.
 
         Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified time
+              will be included. UTC time zone.
+
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
@@ -175,6 +184,8 @@ class Payments(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "begin": begin,
+                        "end": end,
                         "ending_before": ending_before,
                         "financial_account_token": financial_account_token,
                         "page_size": page_size,
@@ -415,12 +426,14 @@ class AsyncPayments(AsyncAPIResource):
     def list(
         self,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         financial_account_token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "VOIDED", "SETTLED", "DECLINED", "EXPIRED"] | NotGiven = NOT_GIVEN,
+        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -432,6 +445,12 @@ class AsyncPayments(AsyncAPIResource):
         List all the payments for the provided search criteria.
 
         Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified time
+              will be included. UTC time zone.
+
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
@@ -458,6 +477,8 @@ class AsyncPayments(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "begin": begin,
+                        "end": end,
                         "ending_before": ending_before,
                         "financial_account_token": financial_account_token,
                         "page_size": page_size,
