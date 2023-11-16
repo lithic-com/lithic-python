@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.25.0 (2023-11-16)
+
+Full Changelog: [v0.24.3...v0.25.0](https://github.com/lithic-com/lithic-python/compare/v0.24.3...v0.25.0)
+
+### Features
+
+* **api:** updates ([#256](https://github.com/lithic-com/lithic-python/issues/256)) ([fd10ea1](https://github.com/lithic-com/lithic-python/commit/fd10ea17206bb1a329aba07bc21a0d4472013678))
+* **client:** support reading the base url from an env variable ([#255](https://github.com/lithic-com/lithic-python/issues/255)) ([6f74bc5](https://github.com/lithic-com/lithic-python/commit/6f74bc5dc7cb8660913ff9612ed441158522904e))
+
+
+### Chores
+
+* **internal:** fix devcontainer interpeter path ([#253](https://github.com/lithic-com/lithic-python/issues/253)) ([17d39da](https://github.com/lithic-com/lithic-python/commit/17d39da204bc473fca803232f6942e879b4d6dc8))
+* **internal:** fix typo in NotGiven docstring ([#251](https://github.com/lithic-com/lithic-python/issues/251)) ([be151c6](https://github.com/lithic-com/lithic-python/commit/be151c69e40b2dc13c7b6086dad4bbab3c8d7342))
+
+
+### Documentation
+
+* fix code comment typo ([#254](https://github.com/lithic-com/lithic-python/issues/254)) ([9437ea3](https://github.com/lithic-com/lithic-python/commit/9437ea3fcba7ba23a50852e1d1a0f119b1636680))
+
 ## 0.24.3 (2023-11-13)
 
 Full Changelog: [v0.24.2...v0.24.3](https://github.com/lithic-com/lithic-python/compare/v0.24.2...v0.24.3)
