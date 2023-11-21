@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.25.1 (2023-11-21)
+
+Full Changelog: [v0.25.0...v0.25.1](https://github.com/lithic-com/lithic-python/compare/v0.25.0...v0.25.1)
+
+### Bug Fixes
+
+* **client:** attempt to parse unknown json content types ([#261](https://github.com/lithic-com/lithic-python/issues/261)) ([e8650d3](https://github.com/lithic-com/lithic-python/commit/e8650d31ee68cc5450def70a8565b7c286a6a6b4))
+
+
+### Chores
+
+* **internal:** update stats file ([#259](https://github.com/lithic-com/lithic-python/issues/259)) ([f312176](https://github.com/lithic-com/lithic-python/commit/f3121762d0fdd18bba8bbb214fac6a354a22ae36))
+* **internal:** update type hint for helper function ([#260](https://github.com/lithic-com/lithic-python/issues/260)) ([ee16cd4](https://github.com/lithic-com/lithic-python/commit/ee16cd4f41dbee183b7e490321f434d332d185c2))
+
+
+### Documentation
+
+* **readme:** minor updates ([#257](https://github.com/lithic-com/lithic-python/issues/257)) ([f20d860](https://github.com/lithic-com/lithic-python/commit/f20d860ad1ae935e3428ee4e1dfdef5128aa6e70))
+
 ## 0.25.0 (2023-11-16)
 
 Full Changelog: [v0.24.3...v0.25.0](https://github.com/lithic-com/lithic-python/compare/v0.24.3...v0.25.0)
