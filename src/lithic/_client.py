@@ -25,7 +25,7 @@ from ._types import (
     AsyncTransport,
     RequestOptions,
 )
-from ._utils import is_given
+from ._utils import is_given, get_async_library
 from ._version import __version__
 from ._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ._streaming import Stream as Stream
@@ -218,6 +218,7 @@ class Lithic(SyncAPIClient):
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
+            "X-Stainless-Async": "false",
             "X-Lithic-Pagination": "cursor",
             **self._custom_headers,
         }
@@ -519,6 +520,7 @@ class AsyncLithic(AsyncAPIClient):
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
+            "X-Stainless-Async": f"async:{get_async_library()}",
             "X-Lithic-Pagination": "cursor",
             **self._custom_headers,
         }
