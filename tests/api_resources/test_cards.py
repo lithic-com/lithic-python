@@ -8,7 +8,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import Card, CardProvisionResponse
+from lithic.types import Card, CardSpendLimits, CardProvisionResponse
 from lithic._utils import parse_datetime
 from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -238,6 +238,22 @@ class TestCards:
         card = response.parse()
         assert_matches_type(Card, card, path=["response"])
 
+    @parametrize
+    def test_method_retrieve_spend_limits(self, client: Lithic) -> None:
+        card = client.cards.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CardSpendLimits, card, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_spend_limits(self, client: Lithic) -> None:
+        response = client.cards.with_raw_response.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(CardSpendLimits, card, path=["response"])
+
 
 class TestAsyncCards:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -459,3 +475,19 @@ class TestAsyncCards:
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         card = response.parse()
         assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_spend_limits(self, client: AsyncLithic) -> None:
+        card = await client.cards.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CardSpendLimits, card, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_spend_limits(self, client: AsyncLithic) -> None:
+        response = await client.cards.with_raw_response.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(CardSpendLimits, card, path=["response"])

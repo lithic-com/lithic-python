@@ -8,7 +8,12 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...types import Account, account_list_params, account_update_params
+from ...types import (
+    Account,
+    AccountSpendLimits,
+    account_list_params,
+    account_update_params,
+)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -209,6 +214,41 @@ class Accounts(SyncAPIResource):
             model=Account,
         )
 
+    def retrieve_spend_limits(
+        self,
+        account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountSpendLimits:
+        """
+        Get an Account's available spend limits, which is based on the spend limit
+        configured on the Account and the amount already spent over the spend limit's
+        duration. For example, if the Account has a daily spend limit of $1000
+        configured, and has spent $600 in the last 24 hours, the available spend limit
+        returned would be $400.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            f"/accounts/{account_token}/spend_limits",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountSpendLimits,
+        )
+
 
 class AsyncAccounts(AsyncAPIResource):
     credit_configurations: AsyncCreditConfigurations
@@ -391,6 +431,41 @@ class AsyncAccounts(AsyncAPIResource):
             model=Account,
         )
 
+    async def retrieve_spend_limits(
+        self,
+        account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountSpendLimits:
+        """
+        Get an Account's available spend limits, which is based on the spend limit
+        configured on the Account and the amount already spent over the spend limit's
+        duration. For example, if the Account has a daily spend limit of $1000
+        configured, and has spent $600 in the last 24 hours, the available spend limit
+        returned would be $400.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            f"/accounts/{account_token}/spend_limits",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountSpendLimits,
+        )
+
 
 class AccountsWithRawResponse:
     def __init__(self, accounts: Accounts) -> None:
@@ -404,6 +479,9 @@ class AccountsWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             accounts.list,
+        )
+        self.retrieve_spend_limits = to_raw_response_wrapper(
+            accounts.retrieve_spend_limits,
         )
 
 
@@ -419,4 +497,7 @@ class AsyncAccountsWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             accounts.list,
+        )
+        self.retrieve_spend_limits = async_to_raw_response_wrapper(
+            accounts.retrieve_spend_limits,
         )
