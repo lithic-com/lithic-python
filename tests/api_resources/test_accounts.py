@@ -8,7 +8,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import Account
+from lithic.types import Account, AccountSpendLimits
 from lithic._utils import parse_datetime
 from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -99,6 +99,22 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(SyncCursorPage[Account], account, path=["response"])
 
+    @parametrize
+    def test_method_retrieve_spend_limits(self, client: Lithic) -> None:
+        account = client.accounts.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountSpendLimits, account, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_spend_limits(self, client: Lithic) -> None:
+        response = client.accounts.with_raw_response.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(AccountSpendLimits, account, path=["response"])
+
 
 class TestAsyncAccounts:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -181,3 +197,19 @@ class TestAsyncAccounts:
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
         assert_matches_type(AsyncCursorPage[Account], account, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_spend_limits(self, client: AsyncLithic) -> None:
+        account = await client.accounts.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountSpendLimits, account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_spend_limits(self, client: AsyncLithic) -> None:
+        response = await client.accounts.with_raw_response.retrieve_spend_limits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(AccountSpendLimits, account, path=["response"])

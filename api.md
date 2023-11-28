@@ -21,7 +21,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Account, BusinessAccount
+from lithic.types import Account, AccountSpendLimits, BusinessAccount
 ```
 
 Methods:
@@ -29,6 +29,7 @@ Methods:
 - <code title="get /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/account.py">Account</a></code>
 - <code title="patch /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">update</a>(account_token, \*\*<a href="src/lithic/types/account_update_params.py">params</a>) -> <a href="./src/lithic/types/account.py">Account</a></code>
 - <code title="get /accounts">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncCursorPage[Account]</a></code>
+- <code title="get /accounts/{account_token}/spend_limits">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">retrieve_spend_limits</a>(account_token) -> <a href="./src/lithic/types/account_spend_limits.py">AccountSpendLimits</a></code>
 
 ## CreditConfigurations
 
@@ -128,6 +129,7 @@ Types:
 ```python
 from lithic.types import (
     Card,
+    CardSpendLimits,
     EmbedRequestParams,
     SpendLimitDuration,
     CardEmbedResponse,
@@ -144,6 +146,7 @@ Methods:
 - <code title="get /embed/card">client.cards.<a href="./src/lithic/resources/cards/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
 - <code title="post /cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
 - <code title="post /cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="get /cards/{card_token}/spend_limits">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_spend_limits</a>(card_token) -> <a href="./src/lithic/types/card_spend_limits.py">CardSpendLimits</a></code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
 

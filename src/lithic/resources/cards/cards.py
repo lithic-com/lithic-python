@@ -15,6 +15,7 @@ from httpx import URL
 
 from ...types import (
     Card,
+    CardSpendLimits,
     SpendLimitDuration,
     CardProvisionResponse,
     shared_params,
@@ -770,6 +771,40 @@ class Cards(SyncAPIResource):
             cast_to=Card,
         )
 
+    def retrieve_spend_limits(
+        self,
+        card_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CardSpendLimits:
+        """
+        Get a Card's available spend limit, which is based on the spend limit configured
+        on the Card and the amount already spent over the spend limit's duration. For
+        example, if the Card has a monthly spend limit of $1000 configured, and has
+        spent $600 in the last month, the available spend limit returned would be $400.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            f"/cards/{card_token}/spend_limits",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CardSpendLimits,
+        )
+
 
 class AsyncCards(AsyncAPIResource):
     aggregate_balances: AsyncAggregateBalances
@@ -1484,6 +1519,40 @@ class AsyncCards(AsyncAPIResource):
             cast_to=Card,
         )
 
+    async def retrieve_spend_limits(
+        self,
+        card_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CardSpendLimits:
+        """
+        Get a Card's available spend limit, which is based on the spend limit configured
+        on the Card and the amount already spent over the spend limit's duration. For
+        example, if the Card has a monthly spend limit of $1000 configured, and has
+        spent $600 in the last month, the available spend limit returned would be $400.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            f"/cards/{card_token}/spend_limits",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CardSpendLimits,
+        )
+
 
 class CardsWithRawResponse:
     def __init__(self, cards: Cards) -> None:
@@ -1511,6 +1580,9 @@ class CardsWithRawResponse:
         )
         self.reissue = to_raw_response_wrapper(
             cards.reissue,
+        )
+        self.retrieve_spend_limits = to_raw_response_wrapper(
+            cards.retrieve_spend_limits,
         )
 
 
@@ -1540,4 +1612,7 @@ class AsyncCardsWithRawResponse:
         )
         self.reissue = async_to_raw_response_wrapper(
             cards.reissue,
+        )
+        self.retrieve_spend_limits = async_to_raw_response_wrapper(
+            cards.retrieve_spend_limits,
         )
