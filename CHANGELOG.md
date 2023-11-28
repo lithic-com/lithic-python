@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.26.0 (2023-11-28)
+
+Full Changelog: [v0.25.1...v0.26.0](https://github.com/lithic-com/lithic-python/compare/v0.25.1...v0.26.0)
+
+### Features
+
+* **api:** add `get spend_limits` endpoints to `cards` and `accounts` ([#269](https://github.com/lithic-com/lithic-python/issues/269)) ([d5601a3](https://github.com/lithic-com/lithic-python/commit/d5601a38388dba4f014d6e49efaf405e3ea297bb))
+
+
+### Chores
+
+* **client:** improve copy method ([#262](https://github.com/lithic-com/lithic-python/issues/262)) ([aac41f4](https://github.com/lithic-com/lithic-python/commit/aac41f49d9123f1ebc51e15f97511784cd159634))
+* **deps:** bump mypy to v1.7.1 ([#268](https://github.com/lithic-com/lithic-python/issues/268)) ([70c9557](https://github.com/lithic-com/lithic-python/commit/70c9557bb8691e8e7ce46ae2e1ba549502bbc00f))
+* **internal:** options updates ([#265](https://github.com/lithic-com/lithic-python/issues/265)) ([a691ce0](https://github.com/lithic-com/lithic-python/commit/a691ce07ca025e02aca60b14058fbcd66ac18a28))
+* **internal:** revert recent options change ([#266](https://github.com/lithic-com/lithic-python/issues/266)) ([3068340](https://github.com/lithic-com/lithic-python/commit/30683402609944684fac80f9dd9275e0edc5d4be))
+* **internal:** send more detailed x-stainless headers ([#267](https://github.com/lithic-com/lithic-python/issues/267)) ([685ae57](https://github.com/lithic-com/lithic-python/commit/685ae5742a7afe6cb2d29080366b3050e7d459f1))
+* **package:** add license classifier metadata ([#264](https://github.com/lithic-com/lithic-python/issues/264)) ([9a66cfd](https://github.com/lithic-com/lithic-python/commit/9a66cfdecce8374e8d25fd16ba5f5c39081bafbc))
+
 ## 0.25.1 (2023-11-21)
 
 Full Changelog: [v0.25.0...v0.25.1](https://github.com/lithic-com/lithic-python/compare/v0.25.0...v0.25.1)
