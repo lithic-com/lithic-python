@@ -14,7 +14,7 @@ _BaseModelT = TypeVar("_BaseModelT", bound=BaseModel)
 
 @runtime_checkable
 class CursorPageItem(Protocol):
-    token: str
+    token: Optional[str]
 
 
 class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
@@ -23,7 +23,8 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
 
     @override
     def _get_page_items(self) -> List[ModelT]:
-        return self.data
+        data = self.data
+        return data
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
@@ -34,15 +35,17 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
 
         if is_forwards:
             item = cast(Any, self.data[-1])
-            if not isinstance(item, CursorPageItem):
+            if not isinstance(item, CursorPageItem) or item.token is None:
                 # TODO emit warning log
                 return None
+
             return PageInfo(params={"starting_after": item.token})
         else:
             item = cast(Any, self.data[0])
-            if not isinstance(item, CursorPageItem):
+            if not isinstance(item, CursorPageItem) or item.token is None:
                 # TODO emit warning log
                 return None
+
             return PageInfo(params={"ending_before": item.token})
 
 
@@ -52,7 +55,8 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
 
     @override
     def _get_page_items(self) -> List[ModelT]:
-        return self.data
+        data = self.data
+        return data
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
@@ -63,15 +67,17 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
 
         if is_forwards:
             item = cast(Any, self.data[-1])
-            if not isinstance(item, CursorPageItem):
+            if not isinstance(item, CursorPageItem) or item.token is None:
                 # TODO emit warning log
                 return None
+
             return PageInfo(params={"starting_after": item.token})
         else:
             item = cast(Any, self.data[0])
-            if not isinstance(item, CursorPageItem):
+            if not isinstance(item, CursorPageItem) or item.token is None:
                 # TODO emit warning log
                 return None
+
             return PageInfo(params={"ending_before": item.token})
 
 
@@ -81,7 +87,8 @@ class SyncSinglePage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
 
     @override
     def _get_page_items(self) -> List[ModelT]:
-        return self.data
+        data = self.data
+        return data
 
     @override
     def next_page_info(self) -> None:
@@ -98,7 +105,8 @@ class AsyncSinglePage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
 
     @override
     def _get_page_items(self) -> List[ModelT]:
-        return self.data
+        data = self.data
+        return data
 
     @override
     def next_page_info(self) -> None:
