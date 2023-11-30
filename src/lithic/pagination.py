@@ -30,11 +30,12 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     def next_page_info(self) -> Optional[PageInfo]:
         is_forwards = not self._options.params.get("ending_before", False)
 
-        if not self.data:
+        data = self.data
+        if not data:
             return None
 
         if is_forwards:
-            item = cast(Any, self.data[-1])
+            item = cast(Any, data[-1])
             if not isinstance(item, CursorPageItem) or item.token is None:
                 # TODO emit warning log
                 return None
@@ -62,11 +63,12 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     def next_page_info(self) -> Optional[PageInfo]:
         is_forwards = not self._options.params.get("ending_before", False)
 
-        if not self.data:
+        data = self.data
+        if not data:
             return None
 
         if is_forwards:
-            item = cast(Any, self.data[-1])
+            item = cast(Any, data[-1])
             if not isinstance(item, CursorPageItem) or item.token is None:
                 # TODO emit warning log
                 return None
