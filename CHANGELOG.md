@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.26.1 (2023-11-30)
+
+Full Changelog: [v0.26.0...v0.26.1](https://github.com/lithic-com/lithic-python/compare/v0.26.0...v0.26.1)
+
+### Bug Fixes
+
+* **client:** ensure retried requests are closed ([#274](https://github.com/lithic-com/lithic-python/issues/274)) ([2275961](https://github.com/lithic-com/lithic-python/commit/227596193414b5d5bb808a7a46a63eb87b1f22fe))
+
+
+### Chores
+
+* **internal:** add tests for proxy change ([#273](https://github.com/lithic-com/lithic-python/issues/273)) ([9d30cdd](https://github.com/lithic-com/lithic-python/commit/9d30cdd88beb4de82f0a9b47d834a13443be19c0))
+* **internal:** minor pagination updates ([#270](https://github.com/lithic-com/lithic-python/issues/270)) ([4affab9](https://github.com/lithic-com/lithic-python/commit/4affab9c62b29a8ae4a2aa427e1d4a162e80fed7))
+* **internal:** updates to proxy helper ([#272](https://github.com/lithic-com/lithic-python/issues/272)) ([5dc86c8](https://github.com/lithic-com/lithic-python/commit/5dc86c88f75e1f18a3510d97ba99cf9218283d10))
+
 ## 0.26.0 (2023-11-28)
 
 Full Changelog: [v0.25.1...v0.26.0](https://github.com/lithic-com/lithic-python/compare/v0.25.1...v0.26.0)
