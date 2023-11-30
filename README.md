@@ -21,11 +21,12 @@ pip install lithic
 The full API of this library can be found in [api.md](https://www.github.com/lithic-com/lithic-python/blob/main/api.md).
 
 ```python
+import os
 from lithic import Lithic
 
 client = Lithic(
-    # defaults to os.environ.get("LITHIC_API_KEY")
-    api_key="My Lithic API Key",
+    # This is the default and can be omitted
+    api_key=os.environ.get("LITHIC_API_KEY"),
     # defaults to "production".
     environment="sandbox",
 )
@@ -46,12 +47,13 @@ so that your API Key is not stored in source control.
 Simply import `AsyncLithic` instead of `Lithic` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from lithic import AsyncLithic
 
 client = AsyncLithic(
-    # defaults to os.environ.get("LITHIC_API_KEY")
-    api_key="My Lithic API Key",
+    # This is the default and can be omitted
+    api_key=os.environ.get("LITHIC_API_KEY"),
     # defaults to "production".
     environment="sandbox",
 )
