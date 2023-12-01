@@ -475,6 +475,14 @@ class TestLithic:
         )
         assert response.request.headers.get("Idempotency-Key") == "custom-key"
 
+    def test_base_url_setter(self) -> None:
+        client = Lithic(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
+        assert client.base_url == "https://example.com/from_init/"
+
+        client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
+
+        assert client.base_url == "https://example.com/from_setter/"
+
     def test_base_url_env(self) -> None:
         with update_env(LITHIC_BASE_URL="http://localhost:5000/from/env"):
             client = Lithic(api_key=api_key, _strict_response_validation=True)
@@ -1223,6 +1231,16 @@ class TestAsyncLithic:
             "/foo", cast_to=httpx.Response, options=make_request_options(idempotency_key="custom-key")
         )
         assert response.request.headers.get("Idempotency-Key") == "custom-key"
+
+    def test_base_url_setter(self) -> None:
+        client = AsyncLithic(
+            base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
+        )
+        assert client.base_url == "https://example.com/from_init/"
+
+        client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
+
+        assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
         with update_env(LITHIC_BASE_URL="http://localhost:5000/from/env"):
