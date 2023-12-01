@@ -1,15 +1,12 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Any, List, Generic, TypeVar, Optional, cast
+from typing import Any, List, Generic, Optional, cast
 from typing_extensions import Protocol, override, runtime_checkable
 
 from ._types import ModelT
-from ._models import BaseModel
 from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 
 __all__ = ["SyncCursorPage", "AsyncCursorPage", "SyncSinglePage", "AsyncSinglePage"]
-
-_BaseModelT = TypeVar("_BaseModelT", bound=BaseModel)
 
 
 @runtime_checkable
@@ -24,6 +21,8 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     @override
     def _get_page_items(self) -> List[ModelT]:
         data = self.data
+        if not data:
+            return []
         return data
 
     @override
@@ -57,6 +56,8 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     @override
     def _get_page_items(self) -> List[ModelT]:
         data = self.data
+        if not data:
+            return []
         return data
 
     @override
@@ -90,6 +91,8 @@ class SyncSinglePage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     @override
     def _get_page_items(self) -> List[ModelT]:
         data = self.data
+        if not data:
+            return []
         return data
 
     @override
@@ -108,6 +111,8 @@ class AsyncSinglePage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
     @override
     def _get_page_items(self) -> List[ModelT]:
         data = self.data
+        if not data:
+            return []
         return data
 
     @override
