@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.26.2 (2023-12-01)
+
+Full Changelog: [v0.26.1...v0.26.2](https://github.com/lithic-com/lithic-python/compare/v0.26.1...v0.26.2)
+
+### Bug Fixes
+
+* **client:** correct base_url setter implementation ([#280](https://github.com/lithic-com/lithic-python/issues/280)) ([1b9427c](https://github.com/lithic-com/lithic-python/commit/1b9427c63f66436546acc3d2e364b934f38b369e))
+
+
+### Chores
+
+* **internal:** minor internal restructuring ([#277](https://github.com/lithic-com/lithic-python/issues/277)) ([c897da5](https://github.com/lithic-com/lithic-python/commit/c897da57f18fe3c2dcd069d3419600d2971ae145))
+* **internal:** remove unused type var ([#279](https://github.com/lithic-com/lithic-python/issues/279)) ([fcdcf4b](https://github.com/lithic-com/lithic-python/commit/fcdcf4bbaf0d87ea0017a77254f0971009e4162b))
+* **internal:** replace string concatenation with f-strings ([#278](https://github.com/lithic-com/lithic-python/issues/278)) ([b6d02a1](https://github.com/lithic-com/lithic-python/commit/b6d02a19a2cbc9c431bdd93f2e99c14f9692c5fd))
+
+
+### Documentation
+
+* **readme:** update example snippets ([#275](https://github.com/lithic-com/lithic-python/issues/275)) ([83f9eb1](https://github.com/lithic-com/lithic-python/commit/83f9eb180314f1a03f620774723e5f614d7cd89d))
+
 ## 0.26.1 (2023-11-30)
 
 Full Changelog: [v0.26.0...v0.26.1](https://github.com/lithic-com/lithic-python/compare/v0.26.0...v0.26.1)
