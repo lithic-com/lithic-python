@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.27.0 (2023-12-05)
+
+Full Changelog: [v0.26.2...v0.27.0](https://github.com/lithic-com/lithic-python/compare/v0.26.2...v0.27.0)
+
+### Features
+
+* **api:** remove `CLOSED` account enum and update docstrings ([#284](https://github.com/lithic-com/lithic-python/issues/284)) ([6441b1e](https://github.com/lithic-com/lithic-python/commit/6441b1e84499de12ab8061435c8fb19433080791))
+
+
+### Chores
+
+* **package:** lift anyio v4 restriction ([#281](https://github.com/lithic-com/lithic-python/issues/281)) ([ce7e5df](https://github.com/lithic-com/lithic-python/commit/ce7e5dff5f2b5a7421e339f56e247aca8c6ce77e))
+
 ## 0.26.2 (2023-12-01)
 
 Full Changelog: [v0.26.1...v0.26.2](https://github.com/lithic-com/lithic-python/compare/v0.26.1...v0.26.2)
