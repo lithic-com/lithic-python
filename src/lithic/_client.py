@@ -25,7 +25,10 @@ from ._types import (
     AsyncTransport,
     RequestOptions,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    get_async_library,
+)
 from ._version import __version__
 from ._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
