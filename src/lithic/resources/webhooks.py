@@ -56,8 +56,8 @@ class Webhooks(SyncAPIResource):
 
         try:
             whsecret = base64.b64decode(removeprefix(secret, "whsec_"))
-        except Exception:
-            raise ValueError("Bad secret")
+        except Exception as err:
+            raise ValueError("Bad secret") from err
 
         msg_id = get_required_header(headers, "webhook-id")
         msg_timestamp = get_required_header(headers, "webhook-timestamp")
@@ -68,8 +68,8 @@ class Webhooks(SyncAPIResource):
 
         try:
             timestamp = datetime.fromtimestamp(float(msg_timestamp), tz=timezone.utc)
-        except Exception:
-            raise ValueError("Invalid signature headers. Could not convert to timestamp")
+        except Exception as err:
+            raise ValueError("Invalid signature headers. Could not convert to timestamp") from err
 
         # too old
         if timestamp < (now - webhook_tolerance):
@@ -152,8 +152,8 @@ class AsyncWebhooks(AsyncAPIResource):
 
         try:
             whsecret = base64.b64decode(removeprefix(secret, "whsec_"))
-        except Exception:
-            raise ValueError("Bad secret")
+        except Exception as err:
+            raise ValueError("Bad secret") from err
 
         msg_id = get_required_header(headers, "webhook-id")
         msg_timestamp = get_required_header(headers, "webhook-timestamp")
@@ -164,8 +164,8 @@ class AsyncWebhooks(AsyncAPIResource):
 
         try:
             timestamp = datetime.fromtimestamp(float(msg_timestamp), tz=timezone.utc)
-        except Exception:
-            raise ValueError("Invalid signature headers. Could not convert to timestamp")
+        except Exception as err:
+            raise ValueError("Invalid signature headers. Could not convert to timestamp") from err
 
         # too old
         if timestamp < (now - webhook_tolerance):

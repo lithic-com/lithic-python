@@ -18,6 +18,7 @@ from lithic import Lithic, AsyncLithic, APIResponseValidationError
 from lithic._client import Lithic, AsyncLithic
 from lithic._models import BaseModel, FinalRequestOptions
 from lithic._exceptions import (
+    LithicError,
     APIStatusError,
     APITimeoutError,
     APIConnectionError,
@@ -268,7 +269,7 @@ class TestLithic:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == api_key
 
-        with pytest.raises(Exception):
+        with pytest.raises(LithicError):
             client2 = Lithic(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1029,7 +1030,7 @@ class TestAsyncLithic:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == api_key
 
-        with pytest.raises(Exception):
+        with pytest.raises(LithicError):
             client2 = AsyncLithic(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
