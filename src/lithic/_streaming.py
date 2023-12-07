@@ -51,7 +51,7 @@ class Stream(Generic[ResponseT]):
             yield process_data(data=sse.json(), cast_to=cast_to, response=response)
 
         # Ensure the entire stream is consumed
-        for sse in iterator:
+        for _sse in iterator:
             ...
 
 
@@ -94,7 +94,7 @@ class AsyncStream(Generic[ResponseT]):
             yield process_data(data=sse.json(), cast_to=cast_to, response=response)
 
         # Ensure the entire stream is consumed
-        async for sse in iterator:
+        async for _sse in iterator:
             ...
 
 
