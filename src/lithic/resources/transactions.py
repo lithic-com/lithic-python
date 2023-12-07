@@ -26,12 +26,21 @@ from ..types import (
     transaction_simulate_authorization_advice_params,
     transaction_simulate_credit_authorization_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import (
+    NOT_GIVEN,
+    Body,
+    Query,
+    Headers,
+    NotGiven,
+)
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import (
+    AsyncPaginator,
+    make_request_options,
+)
 
 if TYPE_CHECKING:
     from .._client import Lithic, AsyncLithic
