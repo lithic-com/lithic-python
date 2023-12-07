@@ -2,4 +2,6 @@
 
 from __future__ import annotations
 
-from .credit_configuration_update_params import CreditConfigurationUpdateParams as CreditConfigurationUpdateParams
+from .credit_configuration_update_params import (
+    CreditConfigurationUpdateParams as CreditConfigurationUpdateParams,
+)
