@@ -5,7 +5,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from .decisioning import Decisioning, AsyncDecisioning, DecisioningWithRawResponse, AsyncDecisioningWithRawResponse
+from .decisioning import (
+    Decisioning,
+    AsyncDecisioning,
+    DecisioningWithRawResponse,
+    AsyncDecisioningWithRawResponse,
+)
 from .authentication import (
     Authentication,
     AsyncAuthentication,
