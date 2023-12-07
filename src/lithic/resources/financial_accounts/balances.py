@@ -8,12 +8,21 @@ from datetime import datetime
 import httpx
 
 from ...types import Balance
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import (
+    NOT_GIVEN,
+    Body,
+    Query,
+    Headers,
+    NotGiven,
+)
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
-from ..._base_client import AsyncPaginator, make_request_options
+from ..._base_client import (
+    AsyncPaginator,
+    make_request_options,
+)
 from ...types.financial_accounts import balance_list_params
 
 if TYPE_CHECKING:
