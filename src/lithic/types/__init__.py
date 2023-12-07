@@ -4,9 +4,7 @@ from __future__ import annotations
 
 from .card import Card as Card
 from .event import Event as Event
-from .shared import Address as Address
-from .shared import Carrier as Carrier
-from .shared import ShippingAddress as ShippingAddress
+from .shared import Address as Address, Carrier as Carrier, ShippingAddress as ShippingAddress
 from .account import Account as Account
 from .balance import Balance as Balance
 from .dispute import Dispute as Dispute

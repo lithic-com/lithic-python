@@ -1,11 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from .events import (
-    Events,
-    AsyncEvents,
-    EventsWithRawResponse,
-    AsyncEventsWithRawResponse,
-)
+from .events import Events, AsyncEvents, EventsWithRawResponse, AsyncEventsWithRawResponse
 from .subscriptions import (
     Subscriptions,
     AsyncSubscriptions,
