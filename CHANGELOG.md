@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.27.1 (2023-12-08)
+
+Full Changelog: [v0.27.0...v0.27.1](https://github.com/lithic-com/lithic-python/compare/v0.27.0...v0.27.1)
+
+### Bug Fixes
+
+* **errors:** properly assign APIError.body ([#292](https://github.com/lithic-com/lithic-python/issues/292)) ([b331f3a](https://github.com/lithic-com/lithic-python/commit/b331f3a80f2fdfa23150cabb1c6ebf8ebbd056a1))
+
+
+### Chores
+
+* **internal:** enable more lint rules ([#291](https://github.com/lithic-com/lithic-python/issues/291)) ([81d6f42](https://github.com/lithic-com/lithic-python/commit/81d6f4263dc7c80c82ab258c09980c55d659dd7c))
+* **internal:** minor updates to pagination ([#289](https://github.com/lithic-com/lithic-python/issues/289)) ([c47d429](https://github.com/lithic-com/lithic-python/commit/c47d429e5aad580749d6e1feaf5a499128ae4244))
+* **internal:** reformat imports ([#287](https://github.com/lithic-com/lithic-python/issues/287)) ([1129916](https://github.com/lithic-com/lithic-python/commit/112991699bf979352d62304ed25d15242e766867))
+* **internal:** reformat imports ([#290](https://github.com/lithic-com/lithic-python/issues/290)) ([78d4f94](https://github.com/lithic-com/lithic-python/commit/78d4f9460aa5d5f1a798606d9a604c6faa887d88))
+* **internal:** update formatting ([#288](https://github.com/lithic-com/lithic-python/issues/288)) ([5551a3d](https://github.com/lithic-com/lithic-python/commit/5551a3d01b7a8f2156bb0c6298d7d684e0697b6c))
+
 ## 0.27.0 (2023-12-05)
 
 Full Changelog: [v0.26.2...v0.27.0](https://github.com/lithic-com/lithic-python/compare/v0.26.2...v0.27.0)
