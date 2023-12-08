@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.27.2 (2023-12-08)
+
+Full Changelog: [v0.27.1...v0.27.2](https://github.com/lithic-com/lithic-python/compare/v0.27.1...v0.27.2)
+
+### Bug Fixes
+
+* avoid leaking memory when Client.with_options is used ([#293](https://github.com/lithic-com/lithic-python/issues/293)) ([7d31816](https://github.com/lithic-com/lithic-python/commit/7d318161f5d7795fda3bd12ed86075e6f5bb4fdf))
+
 ## 0.27.1 (2023-12-08)
 
 Full Changelog: [v0.27.0...v0.27.1](https://github.com/lithic-com/lithic-python/compare/v0.27.0...v0.27.1)
