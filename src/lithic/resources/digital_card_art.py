@@ -27,6 +27,37 @@ class DigitalCardArtResource(SyncAPIResource):
         super().__init__(client)
         self.with_raw_response = DigitalCardArtResourceWithRawResponse(self)
 
+    def retrieve(
+        self,
+        digital_card_art_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DigitalCardArt:
+        """
+        Get digital card art by token.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            f"/digital_card_art/{digital_card_art_token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DigitalCardArt,
+        )
+
     def list(
         self,
         *,
@@ -88,6 +119,37 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
         super().__init__(client)
         self.with_raw_response = AsyncDigitalCardArtResourceWithRawResponse(self)
 
+    async def retrieve(
+        self,
+        digital_card_art_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DigitalCardArt:
+        """
+        Get digital card art by token.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            f"/digital_card_art/{digital_card_art_token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DigitalCardArt,
+        )
+
     def list(
         self,
         *,
@@ -144,6 +206,9 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
 
 class DigitalCardArtResourceWithRawResponse:
     def __init__(self, digital_card_art: DigitalCardArtResource) -> None:
+        self.retrieve = to_raw_response_wrapper(
+            digital_card_art.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             digital_card_art.list,
         )
@@ -151,6 +216,9 @@ class DigitalCardArtResourceWithRawResponse:
 
 class AsyncDigitalCardArtResourceWithRawResponse:
     def __init__(self, digital_card_art: AsyncDigitalCardArtResource) -> None:
+        self.retrieve = async_to_raw_response_wrapper(
+            digital_card_art.retrieve,
+        )
         self.list = async_to_raw_response_wrapper(
             digital_card_art.list,
         )

@@ -502,4 +502,5 @@ from lithic.types import DigitalCardArt
 
 Methods:
 
+- <code title="get /digital_card_art/{digital_card_art_token}">client.digital_card_art.<a href="./src/lithic/resources/digital_card_art.py">retrieve</a>(digital_card_art_token) -> <a href="./src/lithic/types/digital_card_art.py">DigitalCardArt</a></code>
 - <code title="get /digital_card_art">client.digital_card_art.<a href="./src/lithic/resources/digital_card_art.py">list</a>(\*\*<a href="src/lithic/types/digital_card_art_list_params.py">params</a>) -> <a href="./src/lithic/types/digital_card_art.py">SyncCursorPage[DigitalCardArt]</a></code>
