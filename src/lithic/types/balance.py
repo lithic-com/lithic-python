@@ -9,9 +9,6 @@ __all__ = ["Balance"]
 
 
 class Balance(BaseModel):
-    token: str
-    """Globally unique identifier for the financial account that holds this balance."""
-
     available_amount: int
     """Funds available for spend in the currency's smallest unit (e.g., cents for USD)"""
 
@@ -20,6 +17,12 @@ class Balance(BaseModel):
 
     currency: str
     """3-digit alphabetic ISO 4217 code for the local currency of the balance."""
+
+    financial_account_token: str
+    """Globally unique identifier for the financial account that holds this balance."""
+
+    financial_account_type: Literal["ISSUING", "RESERVE"]
+    """Type of financial account."""
 
     last_transaction_event_token: str
     """
@@ -44,9 +47,6 @@ class Balance(BaseModel):
     The sum of available and pending balance in the currency's smallest unit (e.g.,
     cents for USD).
     """
-
-    type: Literal["ISSUING", "RESERVE"]
-    """Type of financial account."""
 
     updated: datetime
     """Date and time for when the balance was last updated."""
