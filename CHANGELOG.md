@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.28.0 (2023-12-15)
+
+Full Changelog: [v0.27.2...v0.28.0](https://github.com/lithic-com/lithic-python/compare/v0.27.2...v0.28.0)
+
+### Features
+
+* **api:** rename `token` and `type` to `financial_account_token` and `financial_account_type` ([#299](https://github.com/lithic-com/lithic-python/issues/299)) ([e7fe65c](https://github.com/lithic-com/lithic-python/commit/e7fe65c5fed56e356d54d2a6dcb1e6140f3dcd5e))
+
+
+### Documentation
+
+* improve README timeout comment ([#295](https://github.com/lithic-com/lithic-python/issues/295)) ([fe21964](https://github.com/lithic-com/lithic-python/commit/fe2196458b282980d86dfefc9a68a05717397f33))
+
+
+### Refactors
+
+* **client:** simplify cleanup ([#297](https://github.com/lithic-com/lithic-python/issues/297)) ([226aea9](https://github.com/lithic-com/lithic-python/commit/226aea9169cf26d3ef7c6bd7f23d318fb7069332))
+* simplify internal error handling ([#298](https://github.com/lithic-com/lithic-python/issues/298)) ([95aa1a1](https://github.com/lithic-com/lithic-python/commit/95aa1a190b994d6ec6e893975430adbda6b8bfd0))
+
 ## 0.27.2 (2023-12-08)
 
 Full Changelog: [v0.27.1...v0.27.2](https://github.com/lithic-com/lithic-python/compare/v0.27.1...v0.27.2)
