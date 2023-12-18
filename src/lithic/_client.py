@@ -63,7 +63,7 @@ class Lithic(SyncAPIClient):
     accounts: resources.Accounts
     account_holders: resources.AccountHolders
     auth_rules: resources.AuthRules
-    auth_stream_enrollment: resources.AuthStreamEnrollmentResource
+    auth_stream_enrollment: resources.AuthStreamEnrollment
     tokenization_decisioning: resources.TokenizationDecisioning
     tokenizations: resources.Tokenizations
     cards: resources.Cards
@@ -182,7 +182,7 @@ class Lithic(SyncAPIClient):
         self.accounts = resources.Accounts(self)
         self.account_holders = resources.AccountHolders(self)
         self.auth_rules = resources.AuthRules(self)
-        self.auth_stream_enrollment = resources.AuthStreamEnrollmentResource(self)
+        self.auth_stream_enrollment = resources.AuthStreamEnrollment(self)
         self.tokenization_decisioning = resources.TokenizationDecisioning(self)
         self.tokenizations = resources.Tokenizations(self)
         self.cards = resources.Cards(self)
@@ -355,7 +355,7 @@ class AsyncLithic(AsyncAPIClient):
     accounts: resources.AsyncAccounts
     account_holders: resources.AsyncAccountHolders
     auth_rules: resources.AsyncAuthRules
-    auth_stream_enrollment: resources.AsyncAuthStreamEnrollmentResource
+    auth_stream_enrollment: resources.AsyncAuthStreamEnrollment
     tokenization_decisioning: resources.AsyncTokenizationDecisioning
     tokenizations: resources.AsyncTokenizations
     cards: resources.AsyncCards
@@ -474,7 +474,7 @@ class AsyncLithic(AsyncAPIClient):
         self.accounts = resources.AsyncAccounts(self)
         self.account_holders = resources.AsyncAccountHolders(self)
         self.auth_rules = resources.AsyncAuthRules(self)
-        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResource(self)
+        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollment(self)
         self.tokenization_decisioning = resources.AsyncTokenizationDecisioning(self)
         self.tokenizations = resources.AsyncTokenizations(self)
         self.cards = resources.AsyncCards(self)
@@ -648,9 +648,7 @@ class LithicWithRawResponse:
         self.accounts = resources.AccountsWithRawResponse(client.accounts)
         self.account_holders = resources.AccountHoldersWithRawResponse(client.account_holders)
         self.auth_rules = resources.AuthRulesWithRawResponse(client.auth_rules)
-        self.auth_stream_enrollment = resources.AuthStreamEnrollmentResourceWithRawResponse(
-            client.auth_stream_enrollment
-        )
+        self.auth_stream_enrollment = resources.AuthStreamEnrollmentWithRawResponse(client.auth_stream_enrollment)
         self.tokenization_decisioning = resources.TokenizationDecisioningWithRawResponse(
             client.tokenization_decisioning
         )
@@ -681,9 +679,7 @@ class AsyncLithicWithRawResponse:
         self.accounts = resources.AsyncAccountsWithRawResponse(client.accounts)
         self.account_holders = resources.AsyncAccountHoldersWithRawResponse(client.account_holders)
         self.auth_rules = resources.AsyncAuthRulesWithRawResponse(client.auth_rules)
-        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResourceWithRawResponse(
-            client.auth_stream_enrollment
-        )
+        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentWithRawResponse(client.auth_stream_enrollment)
         self.tokenization_decisioning = resources.AsyncTokenizationDecisioningWithRawResponse(
             client.tokenization_decisioning
         )
