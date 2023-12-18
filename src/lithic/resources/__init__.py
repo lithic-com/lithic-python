@@ -105,10 +105,10 @@ from .responder_endpoints import (
     AsyncResponderEndpointsWithRawResponse,
 )
 from .auth_stream_enrollment import (
-    AuthStreamEnrollmentResource,
-    AsyncAuthStreamEnrollmentResource,
-    AuthStreamEnrollmentResourceWithRawResponse,
-    AsyncAuthStreamEnrollmentResourceWithRawResponse,
+    AuthStreamEnrollment,
+    AsyncAuthStreamEnrollment,
+    AuthStreamEnrollmentWithRawResponse,
+    AsyncAuthStreamEnrollmentWithRawResponse,
 )
 from .external_bank_accounts import (
     ExternalBankAccounts,
@@ -136,10 +136,10 @@ __all__ = [
     "AsyncAuthRules",
     "AuthRulesWithRawResponse",
     "AsyncAuthRulesWithRawResponse",
-    "AuthStreamEnrollmentResource",
-    "AsyncAuthStreamEnrollmentResource",
-    "AuthStreamEnrollmentResourceWithRawResponse",
-    "AsyncAuthStreamEnrollmentResourceWithRawResponse",
+    "AuthStreamEnrollment",
+    "AsyncAuthStreamEnrollment",
+    "AuthStreamEnrollmentWithRawResponse",
+    "AsyncAuthStreamEnrollmentWithRawResponse",
     "TokenizationDecisioning",
     "AsyncTokenizationDecisioning",
     "TokenizationDecisioningWithRawResponse",
