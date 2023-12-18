@@ -81,19 +81,16 @@ Methods:
 - <code title="post /auth_rules/{auth_rule_token}/apply">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
 - <code title="delete /auth_rules/remove">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">remove</a>(\*\*<a href="src/lithic/types/auth_rule_remove_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_remove_response.py">AuthRuleRemoveResponse</a></code>
 
-# AuthStreamEnrollmentResource
+# AuthStreamEnrollment
 
 Types:
 
 ```python
-from lithic.types import AuthStreamEnrollment, AuthStreamSecret
+from lithic.types import AuthStreamSecret
 ```
 
 Methods:
 
-- <code title="get /auth_stream">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">retrieve</a>() -> <a href="./src/lithic/types/auth_stream_enrollment.py">AuthStreamEnrollment</a></code>
-- <code title="delete /auth_stream">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">disenroll</a>() -> None</code>
-- <code title="post /auth_stream">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">enroll</a>(\*\*<a href="src/lithic/types/auth_stream_enrollment_enroll_params.py">params</a>) -> None</code>
 - <code title="get /auth_stream/secret">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">retrieve_secret</a>() -> <a href="./src/lithic/types/auth_stream_secret.py">AuthStreamSecret</a></code>
 - <code title="post /auth_stream/secret/rotate">client.auth_stream_enrollment.<a href="./src/lithic/resources/auth_stream_enrollment.py">rotate_secret</a>() -> None</code>
 

@@ -53,7 +53,6 @@ from .dispute_update_params import DisputeUpdateParams as DisputeUpdateParams
 from .financial_transaction import FinancialTransaction as FinancialTransaction
 from .payment_create_params import PaymentCreateParams as PaymentCreateParams
 from .auth_rule_apply_params import AuthRuleApplyParams as AuthRuleApplyParams
-from .auth_stream_enrollment import AuthStreamEnrollment as AuthStreamEnrollment
 from .payment_retry_response import PaymentRetryResponse as PaymentRetryResponse
 from .account_holder_document import AccountHolderDocument as AccountHolderDocument
 from .auth_rule_create_params import AuthRuleCreateParams as AuthRuleCreateParams
@@ -158,9 +157,6 @@ from .external_bank_account_list_response import (
 )
 from .external_bank_account_update_params import (
     ExternalBankAccountUpdateParams as ExternalBankAccountUpdateParams,
-)
-from .auth_stream_enrollment_enroll_params import (
-    AuthStreamEnrollmentEnrollParams as AuthStreamEnrollmentEnrollParams,
 )
 from .transaction_simulate_clearing_params import (
     TransactionSimulateClearingParams as TransactionSimulateClearingParams,
