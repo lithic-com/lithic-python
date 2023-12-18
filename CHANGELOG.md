@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.29.0 (2023-12-18)
+
+Full Changelog: [v0.28.0...v0.29.0](https://github.com/lithic-com/lithic-python/compare/v0.28.0...v0.29.0)
+
+### Features
+
+* **api:** remove /auth_stream enrollment endpoints ([#302](https://github.com/lithic-com/lithic-python/issues/302)) ([a810e9c](https://github.com/lithic-com/lithic-python/commit/a810e9c432ca762a3d9fa9b10f8ce790ebbcef53))
+
+
+### Chores
+
+* **ci:** run release workflow once per day ([#300](https://github.com/lithic-com/lithic-python/issues/300)) ([edfd745](https://github.com/lithic-com/lithic-python/commit/edfd745018f2e823ec654a00aaacdfd78475f43e))
+
 ## 0.28.0 (2023-12-15)
 
 Full Changelog: [v0.27.2...v0.28.0](https://github.com/lithic-com/lithic-python/compare/v0.27.2...v0.28.0)
