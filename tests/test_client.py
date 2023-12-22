@@ -207,8 +207,8 @@ class TestLithic:
         ITERATIONS = 10
         for _ in range(ITERATIONS):
             build_request(options)
-            gc.collect()
 
+        gc.collect()
         snapshot_after = tracemalloc.take_snapshot()
 
         tracemalloc.stop()
@@ -974,8 +974,8 @@ class TestAsyncLithic:
         ITERATIONS = 10
         for _ in range(ITERATIONS):
             build_request(options)
-            gc.collect()
 
+        gc.collect()
         snapshot_after = tracemalloc.take_snapshot()
 
         tracemalloc.stop()
