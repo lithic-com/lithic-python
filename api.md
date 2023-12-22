@@ -419,10 +419,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types.three_ds import (
-    AuthenticationRetrieveResponse,
-    AuthenticationSimulateResponse,
-)
+from lithic.types.three_ds import AuthenticationRetrieveResponse, AuthenticationSimulateResponse
 ```
 
 Methods:
