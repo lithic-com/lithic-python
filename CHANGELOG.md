@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.29.1 (2023-12-28)
+
+Full Changelog: [v0.29.0...v0.29.1](https://github.com/lithic-com/lithic-python/compare/v0.29.0...v0.29.1)
+
+### Bug Fixes
+
+* **client:** correctly use custom http client auth ([#311](https://github.com/lithic-com/lithic-python/issues/311)) ([d3913db](https://github.com/lithic-com/lithic-python/commit/d3913dbd6bc3cd7516309eb0461a78903e893cdb))
+
+
+### Chores
+
+* **internal:** add bin script ([#308](https://github.com/lithic-com/lithic-python/issues/308)) ([1d9b46f](https://github.com/lithic-com/lithic-python/commit/1d9b46f318723f2d37f6b263eaf234f2f3a05352))
+* **internal:** fix typos ([#306](https://github.com/lithic-com/lithic-python/issues/306)) ([e8c2919](https://github.com/lithic-com/lithic-python/commit/e8c29193c1ff29ae3517f80bbe3290b1a4f19323))
+* **internal:** minor utils restructuring ([#305](https://github.com/lithic-com/lithic-python/issues/305)) ([9c1c54d](https://github.com/lithic-com/lithic-python/commit/9c1c54d8112838c46e360251f5c7de8c7bca5e58))
+* **internal:** updates to base client ([#303](https://github.com/lithic-com/lithic-python/issues/303)) ([ab29f31](https://github.com/lithic-com/lithic-python/commit/ab29f3175f825fb5625e372a2b49516bd92b46f8))
+* **internal:** use ruff instead of black for formatting ([#310](https://github.com/lithic-com/lithic-python/issues/310)) ([87c7468](https://github.com/lithic-com/lithic-python/commit/87c7468555a6070bf2c1b729ea68a68139203a96))
+* **package:** bump minimum typing-extensions to 4.7 ([#307](https://github.com/lithic-com/lithic-python/issues/307)) ([ef333f2](https://github.com/lithic-com/lithic-python/commit/ef333f2f23c8b685a73e9914253a3bff8e3d9a43))
+
 ## 0.29.0 (2023-12-18)
 
 Full Changelog: [v0.28.0...v0.29.0](https://github.com/lithic-com/lithic-python/compare/v0.28.0...v0.29.0)
