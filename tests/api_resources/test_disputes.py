@@ -8,7 +8,10 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import Dispute, DisputeEvidence
+from lithic.types import (
+    Dispute,
+    DisputeEvidence,
+)
 from lithic._utils import parse_datetime
 from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage

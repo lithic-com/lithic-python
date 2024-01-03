@@ -1,12 +1,7 @@
 # File generated from our OpenAPI spec by Stainless.
 
 from .cards import Cards, AsyncCards, CardsWithRawResponse, AsyncCardsWithRawResponse
-from .balances import (
-    Balances,
-    AsyncBalances,
-    BalancesWithRawResponse,
-    AsyncBalancesWithRawResponse,
-)
+from .balances import Balances, AsyncBalances, BalancesWithRawResponse, AsyncBalancesWithRawResponse
 from .aggregate_balances import (
     AggregateBalances,
     AsyncAggregateBalances,

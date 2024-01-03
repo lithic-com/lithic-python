@@ -4,12 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from .settlement import (
-    Settlement,
-    AsyncSettlement,
-    SettlementWithRawResponse,
-    AsyncSettlementWithRawResponse,
-)
+from .settlement import Settlement, AsyncSettlement, SettlementWithRawResponse, AsyncSettlementWithRawResponse
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
 if TYPE_CHECKING:

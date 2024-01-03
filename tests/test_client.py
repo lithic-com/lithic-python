@@ -19,18 +19,8 @@ from pydantic import ValidationError
 from lithic import Lithic, AsyncLithic, APIResponseValidationError
 from lithic._client import Lithic, AsyncLithic
 from lithic._models import BaseModel, FinalRequestOptions
-from lithic._exceptions import (
-    LithicError,
-    APIStatusError,
-    APITimeoutError,
-    APIResponseValidationError,
-)
-from lithic._base_client import (
-    DEFAULT_TIMEOUT,
-    HTTPX_DEFAULT_TIMEOUT,
-    BaseClient,
-    make_request_options,
-)
+from lithic._exceptions import LithicError, APIStatusError, APITimeoutError, APIResponseValidationError
+from lithic._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
 
