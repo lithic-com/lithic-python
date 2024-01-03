@@ -7,10 +7,18 @@ from typing import TYPE_CHECKING
 import httpx
 
 from ..types import CardProductCreditDetailResponse
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import (
+    NOT_GIVEN,
+    Body,
+    Query,
+    Headers,
+    NotGiven,
+)
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
-from .._base_client import make_request_options
+from .._base_client import (
+    make_request_options,
+)
 
 if TYPE_CHECKING:
     from .._client import Lithic, AsyncLithic

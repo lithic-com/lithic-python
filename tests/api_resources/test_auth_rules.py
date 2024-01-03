@@ -8,7 +8,11 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import AuthRule, AuthRuleRemoveResponse, AuthRuleRetrieveResponse
+from lithic.types import (
+    AuthRule,
+    AuthRuleRemoveResponse,
+    AuthRuleRetrieveResponse,
+)
 from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
