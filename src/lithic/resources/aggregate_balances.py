@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
 from typing_extensions import Literal
 
 import httpx
@@ -16,6 +15,7 @@ from .._types import (
     NotGiven,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncSinglePage, AsyncSinglePage
@@ -24,18 +24,13 @@ from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["AggregateBalances", "AsyncAggregateBalances"]
 
 
 class AggregateBalances(SyncAPIResource):
-    with_raw_response: AggregateBalancesWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AggregateBalancesWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AggregateBalancesWithRawResponse:
+        return AggregateBalancesWithRawResponse(self)
 
     def list(
         self,
@@ -81,11 +76,9 @@ class AggregateBalances(SyncAPIResource):
 
 
 class AsyncAggregateBalances(AsyncAPIResource):
-    with_raw_response: AsyncAggregateBalancesWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncAggregateBalancesWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncAggregateBalancesWithRawResponse:
+        return AsyncAggregateBalancesWithRawResponse(self)
 
     def list(
         self,

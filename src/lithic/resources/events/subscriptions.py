@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -18,6 +18,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
@@ -36,18 +37,13 @@ from ...types.events import (
     subscription_send_simulated_example_params,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["Subscriptions", "AsyncSubscriptions"]
 
 
 class Subscriptions(SyncAPIResource):
-    with_raw_response: SubscriptionsWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = SubscriptionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> SubscriptionsWithRawResponse:
+        return SubscriptionsWithRawResponse(self)
 
     def create(
         self,
@@ -640,11 +636,9 @@ class Subscriptions(SyncAPIResource):
 
 
 class AsyncSubscriptions(AsyncAPIResource):
-    with_raw_response: AsyncSubscriptionsWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncSubscriptionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncSubscriptionsWithRawResponse:
+        return AsyncSubscriptionsWithRawResponse(self)
 
     async def create(
         self,

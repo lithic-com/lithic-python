@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ..types import AuthStreamSecret
@@ -15,24 +13,20 @@ from .._types import (
     NoneType,
     NotGiven,
 )
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["AuthStreamEnrollment", "AsyncAuthStreamEnrollment"]
 
 
 class AuthStreamEnrollment(SyncAPIResource):
-    with_raw_response: AuthStreamEnrollmentWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AuthStreamEnrollmentWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AuthStreamEnrollmentWithRawResponse:
+        return AuthStreamEnrollmentWithRawResponse(self)
 
     def retrieve_secret(
         self,
@@ -93,11 +87,9 @@ class AuthStreamEnrollment(SyncAPIResource):
 
 
 class AsyncAuthStreamEnrollment(AsyncAPIResource):
-    with_raw_response: AsyncAuthStreamEnrollmentWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncAuthStreamEnrollmentWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncAuthStreamEnrollmentWithRawResponse:
+        return AsyncAuthStreamEnrollmentWithRawResponse(self)
 
     async def retrieve_secret(
         self,

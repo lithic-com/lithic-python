@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -28,6 +28,7 @@ from .._types import (
     FileTypes,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
@@ -36,18 +37,13 @@ from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["Disputes", "AsyncDisputes"]
 
 
 class Disputes(SyncAPIResource):
-    with_raw_response: DisputesWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = DisputesWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> DisputesWithRawResponse:
+        return DisputesWithRawResponse(self)
 
     def create(
         self,
@@ -563,11 +559,9 @@ class Disputes(SyncAPIResource):
 
 
 class AsyncDisputes(AsyncAPIResource):
-    with_raw_response: AsyncDisputesWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncDisputesWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncDisputesWithRawResponse:
+        return AsyncDisputesWithRawResponse(self)
 
     async def create(
         self,

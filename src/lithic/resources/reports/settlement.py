@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
+from typing import Union
 from datetime import date
 
 import httpx
@@ -16,6 +16,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
@@ -25,18 +26,13 @@ from ..._base_client import (
 )
 from ...types.reports import SettlementSummaryResponse, settlement_list_details_params
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["Settlement", "AsyncSettlement"]
 
 
 class Settlement(SyncAPIResource):
-    with_raw_response: SettlementWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = SettlementWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> SettlementWithRawResponse:
+        return SettlementWithRawResponse(self)
 
     def list_details(
         self,
@@ -125,11 +121,9 @@ class Settlement(SyncAPIResource):
 
 
 class AsyncSettlement(AsyncAPIResource):
-    with_raw_response: AsyncSettlementWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncSettlementWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncSettlementWithRawResponse:
+        return AsyncSettlementWithRawResponse(self)
 
     def list_details(
         self,
