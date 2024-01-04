@@ -2,35 +2,31 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
+from ..._compat import cached_property
 from .settlement import Settlement, AsyncSettlement, SettlementWithRawResponse, AsyncSettlementWithRawResponse
 from ..._resource import SyncAPIResource, AsyncAPIResource
-
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
 
 __all__ = ["Reports", "AsyncReports"]
 
 
 class Reports(SyncAPIResource):
-    settlement: Settlement
-    with_raw_response: ReportsWithRawResponse
+    @cached_property
+    def settlement(self) -> Settlement:
+        return Settlement(self._client)
 
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.settlement = Settlement(client)
-        self.with_raw_response = ReportsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> ReportsWithRawResponse:
+        return ReportsWithRawResponse(self)
 
 
 class AsyncReports(AsyncAPIResource):
-    settlement: AsyncSettlement
-    with_raw_response: AsyncReportsWithRawResponse
+    @cached_property
+    def settlement(self) -> AsyncSettlement:
+        return AsyncSettlement(self._client)
 
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.settlement = AsyncSettlement(client)
-        self.with_raw_response = AsyncReportsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncReportsWithRawResponse:
+        return AsyncReportsWithRawResponse(self)
 
 
 class ReportsWithRawResponse:

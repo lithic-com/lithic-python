@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ..types import CardProductCreditDetailResponse
@@ -14,24 +12,20 @@ from .._types import (
     Headers,
     NotGiven,
 )
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["CardProduct", "AsyncCardProduct"]
 
 
 class CardProduct(SyncAPIResource):
-    with_raw_response: CardProductWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = CardProductWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> CardProductWithRawResponse:
+        return CardProductWithRawResponse(self)
 
     def credit_detail(
         self,
@@ -54,11 +48,9 @@ class CardProduct(SyncAPIResource):
 
 
 class AsyncCardProduct(AsyncAPIResource):
-    with_raw_response: AsyncCardProductWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncCardProductWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncCardProductWithRawResponse:
+        return AsyncCardProductWithRawResponse(self)
 
     async def credit_detail(
         self,

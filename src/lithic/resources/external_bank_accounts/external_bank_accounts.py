@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Union, overload
+from typing import List, Union, overload
 from datetime import date
 from typing_extensions import Literal
 
@@ -28,6 +28,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import required_args, maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
@@ -42,20 +43,17 @@ from .micro_deposits import (
     AsyncMicroDepositsWithRawResponse,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["ExternalBankAccounts", "AsyncExternalBankAccounts"]
 
 
 class ExternalBankAccounts(SyncAPIResource):
-    micro_deposits: MicroDeposits
-    with_raw_response: ExternalBankAccountsWithRawResponse
+    @cached_property
+    def micro_deposits(self) -> MicroDeposits:
+        return MicroDeposits(self._client)
 
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.micro_deposits = MicroDeposits(client)
-        self.with_raw_response = ExternalBankAccountsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> ExternalBankAccountsWithRawResponse:
+        return ExternalBankAccountsWithRawResponse(self)
 
     @overload
     def create(
@@ -387,13 +385,13 @@ class ExternalBankAccounts(SyncAPIResource):
 
 
 class AsyncExternalBankAccounts(AsyncAPIResource):
-    micro_deposits: AsyncMicroDeposits
-    with_raw_response: AsyncExternalBankAccountsWithRawResponse
+    @cached_property
+    def micro_deposits(self) -> AsyncMicroDeposits:
+        return AsyncMicroDeposits(self._client)
 
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.micro_deposits = AsyncMicroDeposits(client)
-        self.with_raw_response = AsyncExternalBankAccountsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncExternalBankAccountsWithRawResponse:
+        return AsyncExternalBankAccountsWithRawResponse(self)
 
     @overload
     async def create(

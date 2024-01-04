@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
+from typing import Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -34,6 +34,7 @@ from .._types import (
     NotGiven,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
@@ -42,18 +43,13 @@ from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["Transactions", "AsyncTransactions"]
 
 
 class Transactions(SyncAPIResource):
-    with_raw_response: TransactionsWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = TransactionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> TransactionsWithRawResponse:
+        return TransactionsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -627,11 +623,9 @@ class Transactions(SyncAPIResource):
 
 
 class AsyncTransactions(AsyncAPIResource):
-    with_raw_response: AsyncTransactionsWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncTransactionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncTransactionsWithRawResponse:
+        return AsyncTransactionsWithRawResponse(self)
 
     async def retrieve(
         self,

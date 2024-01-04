@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, overload
+from typing import List, overload
 from typing_extensions import Literal
 
 import httpx
@@ -26,24 +26,20 @@ from .._types import (
     NotGiven,
 )
 from .._utils import required_args, maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 
 
 class AccountHolders(SyncAPIResource):
-    with_raw_response: AccountHoldersWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AccountHoldersWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AccountHoldersWithRawResponse:
+        return AccountHoldersWithRawResponse(self)
 
     @overload
     def create(
@@ -636,11 +632,9 @@ class AccountHolders(SyncAPIResource):
 
 
 class AsyncAccountHolders(AsyncAPIResource):
-    with_raw_response: AsyncAccountHoldersWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncAccountHoldersWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncAccountHoldersWithRawResponse:
+        return AsyncAccountHoldersWithRawResponse(self)
 
     @overload
     async def create(

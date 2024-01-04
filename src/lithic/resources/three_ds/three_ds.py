@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from .decisioning import Decisioning, AsyncDecisioning, DecisioningWithRawResponse, AsyncDecisioningWithRawResponse
 from .authentication import (
@@ -13,34 +12,35 @@ from .authentication import (
     AsyncAuthenticationWithRawResponse,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["ThreeDS", "AsyncThreeDS"]
 
 
 class ThreeDS(SyncAPIResource):
-    authentication: Authentication
-    decisioning: Decisioning
-    with_raw_response: ThreeDSWithRawResponse
+    @cached_property
+    def authentication(self) -> Authentication:
+        return Authentication(self._client)
 
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.authentication = Authentication(client)
-        self.decisioning = Decisioning(client)
-        self.with_raw_response = ThreeDSWithRawResponse(self)
+    @cached_property
+    def decisioning(self) -> Decisioning:
+        return Decisioning(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> ThreeDSWithRawResponse:
+        return ThreeDSWithRawResponse(self)
 
 
 class AsyncThreeDS(AsyncAPIResource):
-    authentication: AsyncAuthentication
-    decisioning: AsyncDecisioning
-    with_raw_response: AsyncThreeDSWithRawResponse
+    @cached_property
+    def authentication(self) -> AsyncAuthentication:
+        return AsyncAuthentication(self._client)
 
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.authentication = AsyncAuthentication(client)
-        self.decisioning = AsyncDecisioning(client)
-        self.with_raw_response = AsyncThreeDSWithRawResponse(self)
+    @cached_property
+    def decisioning(self) -> AsyncDecisioning:
+        return AsyncDecisioning(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncThreeDSWithRawResponse:
+        return AsyncThreeDSWithRawResponse(self)
 
 
 class ThreeDSWithRawResponse:

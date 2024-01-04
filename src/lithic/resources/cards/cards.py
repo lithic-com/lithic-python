@@ -6,7 +6,7 @@ import hmac
 import json
 import base64
 import hashlib
-from typing import TYPE_CHECKING, Union
+from typing import Union
 from datetime import datetime, timezone, timedelta
 from typing_extensions import Literal
 
@@ -36,6 +36,7 @@ from ..._types import (
 )
 from ..._utils import maybe_transform, strip_not_given
 from .balances import Balances, AsyncBalances, BalancesWithRawResponse, AsyncBalancesWithRawResponse
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
@@ -57,24 +58,25 @@ from .financial_transactions import (
     AsyncFinancialTransactionsWithRawResponse,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["Cards", "AsyncCards"]
 
 
 class Cards(SyncAPIResource):
-    aggregate_balances: AggregateBalances
-    balances: Balances
-    financial_transactions: FinancialTransactions
-    with_raw_response: CardsWithRawResponse
+    @cached_property
+    def aggregate_balances(self) -> AggregateBalances:
+        return AggregateBalances(self._client)
 
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.aggregate_balances = AggregateBalances(client)
-        self.balances = Balances(client)
-        self.financial_transactions = FinancialTransactions(client)
-        self.with_raw_response = CardsWithRawResponse(self)
+    @cached_property
+    def balances(self) -> Balances:
+        return Balances(self._client)
+
+    @cached_property
+    def financial_transactions(self) -> FinancialTransactions:
+        return FinancialTransactions(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> CardsWithRawResponse:
+        return CardsWithRawResponse(self)
 
     def create(
         self,
@@ -812,17 +814,21 @@ class Cards(SyncAPIResource):
 
 
 class AsyncCards(AsyncAPIResource):
-    aggregate_balances: AsyncAggregateBalances
-    balances: AsyncBalances
-    financial_transactions: AsyncFinancialTransactions
-    with_raw_response: AsyncCardsWithRawResponse
+    @cached_property
+    def aggregate_balances(self) -> AsyncAggregateBalances:
+        return AsyncAggregateBalances(self._client)
 
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.aggregate_balances = AsyncAggregateBalances(client)
-        self.balances = AsyncBalances(client)
-        self.financial_transactions = AsyncFinancialTransactions(client)
-        self.with_raw_response = AsyncCardsWithRawResponse(self)
+    @cached_property
+    def balances(self) -> AsyncBalances:
+        return AsyncBalances(self._client)
+
+    @cached_property
+    def financial_transactions(self) -> AsyncFinancialTransactions:
+        return AsyncFinancialTransactions(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncCardsWithRawResponse:
+        return AsyncCardsWithRawResponse(self)
 
     async def create(
         self,
