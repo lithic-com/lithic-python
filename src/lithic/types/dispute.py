@@ -16,31 +16,31 @@ class Dispute(BaseModel):
     amount: int
     """Amount under dispute. May be different from the original transaction amount."""
 
-    arbitration_date: Optional[datetime]
+    arbitration_date: Optional[datetime] = None
     """Date dispute entered arbitration."""
 
     created: datetime
     """Timestamp of when first Dispute was reported."""
 
-    customer_filed_date: Optional[datetime]
+    customer_filed_date: Optional[datetime] = None
     """Date that the dispute was filed by the customer making the dispute."""
 
-    customer_note: Optional[str]
+    customer_note: Optional[str] = None
     """End customer description of the reason for the dispute."""
 
-    network_claim_ids: Optional[List[str]]
+    network_claim_ids: Optional[List[str]] = None
     """Unique identifiers for the dispute from the network."""
 
-    network_filed_date: Optional[datetime]
+    network_filed_date: Optional[datetime] = None
     """Date that the dispute was submitted to the network."""
 
-    network_reason_code: Optional[str]
+    network_reason_code: Optional[str] = None
     """Network reason code used to file the dispute."""
 
-    prearbitration_date: Optional[datetime]
+    prearbitration_date: Optional[datetime] = None
     """Date dispute entered pre-arbitration."""
 
-    primary_claim_id: Optional[str]
+    primary_claim_id: Optional[str] = None
     """Unique identifier for the dispute from the network.
 
     If there are multiple, this will be the first claim id set by the network
@@ -83,16 +83,16 @@ class Dispute(BaseModel):
       cancelled.
     """
 
-    representment_date: Optional[datetime]
+    representment_date: Optional[datetime] = None
     """Date the representment was received."""
 
-    resolution_amount: Optional[int]
+    resolution_amount: Optional[int] = None
     """Resolution amount net of network fees."""
 
-    resolution_date: Optional[datetime]
+    resolution_date: Optional[datetime] = None
     """Date that the dispute was resolved."""
 
-    resolution_note: Optional[str]
+    resolution_note: Optional[str] = None
     """Note by Dispute team on the case resolution."""
 
     resolution_reason: Optional[
@@ -115,7 +115,7 @@ class Dispute(BaseModel):
             "WON_FIRST_CHARGEBACK",
             "WON_PREARBITRATION",
         ]
-    ]
+    ] = None
     """Reason for the dispute resolution:
 
     - `CASE_LOST`: This case was lost at final arbitration.
