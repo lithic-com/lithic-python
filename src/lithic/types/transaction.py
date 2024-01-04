@@ -142,7 +142,7 @@ class Merchant(BaseModel):
 
 
 class CardholderAuthentication(BaseModel):
-    three_ds_version: Optional[str] = FieldInfo(alias="3ds_version")
+    three_ds_version: Optional[str] = FieldInfo(alias="3ds_version", default=None)
     """3-D Secure Protocol version. Possible enum values:
 
     - `1`: 3-D Secure Protocol version 1.x applied to the transaction.
@@ -295,7 +295,7 @@ class Transaction(BaseModel):
     as a negative value to indicate credited fees.
     """
 
-    acquirer_reference_number: Optional[str]
+    acquirer_reference_number: Optional[str] = None
     """
     Unique identifier assigned to a transaction by the acquirer that can be used in
     dispute and chargeback filing.
@@ -348,7 +348,7 @@ class Transaction(BaseModel):
     merchant_currency: str
     """3-digit alphabetic ISO 4217 code for the local currency of the transaction."""
 
-    network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "VISA", "UNKNOWN"]]
+    network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "VISA", "UNKNOWN"]] = None
     """Card network of the authorization.
 
     Can be `INTERLINK`, `MAESTRO`, `MASTERCARD`, `VISA`, or `UNKNOWN`. Value is
