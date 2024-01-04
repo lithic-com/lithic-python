@@ -306,7 +306,7 @@ class Transaction(BaseModel):
             "QUASI_CASH_TRANSACTION",
             "PREPAID_ACTIVATION_AND_LOAD",
         ]
-    ]
+    ] = None
     """Type of the transaction for which a 3DS authentication request is occurring.
 
     Maps to EMV 3DS field transType.
@@ -317,13 +317,13 @@ class AuthenticationRetrieveResponse(BaseModel):
     token: str
     """Globally unique identifier for the 3DS authentication."""
 
-    account_type: Optional[Literal["NOT_APPLICABLE", "CREDIT", "DEBIT"]]
+    account_type: Optional[Literal["NOT_APPLICABLE", "CREDIT", "DEBIT"]] = None
     """Type of account/card that is being used for the transaction.
 
     Maps to EMV 3DS field acctType.
     """
 
-    authentication_result: Optional[Literal["SUCCESS", "DECLINE"]]
+    authentication_result: Optional[Literal["SUCCESS", "DECLINE"]] = None
     """Indicates the outcome of the 3DS authentication process."""
 
     card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"]
@@ -350,7 +350,9 @@ class AuthenticationRetrieveResponse(BaseModel):
     created: datetime
     """Date and time when the authentication was created in Lithic's system."""
 
-    decision_made_by: Optional[Literal["NETWORK", "LITHIC_DEFAULT", "LITHIC_RULES", "CUSTOMER_ENDPOINT", "UNKNOWN"]]
+    decision_made_by: Optional[
+        Literal["NETWORK", "LITHIC_DEFAULT", "LITHIC_RULES", "CUSTOMER_ENDPOINT", "UNKNOWN"]
+    ] = None
     """Entity that made the authentication decision."""
 
     merchant: Merchant
