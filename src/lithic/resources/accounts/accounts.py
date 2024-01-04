@@ -2,18 +2,13 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
+from typing import Union
 from datetime import datetime
 from typing_extensions import Literal
 
 import httpx
 
-from ...types import (
-    Account,
-    AccountSpendLimits,
-    account_list_params,
-    account_update_params,
-)
+from ...types import Account, AccountSpendLimits, account_list_params, account_update_params
 from ..._types import (
     NOT_GIVEN,
     Body,
@@ -22,6 +17,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
@@ -36,20 +32,17 @@ from .credit_configurations import (
     AsyncCreditConfigurationsWithRawResponse,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["Accounts", "AsyncAccounts"]
 
 
 class Accounts(SyncAPIResource):
-    credit_configurations: CreditConfigurations
-    with_raw_response: AccountsWithRawResponse
+    @cached_property
+    def credit_configurations(self) -> CreditConfigurations:
+        return CreditConfigurations(self._client)
 
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.credit_configurations = CreditConfigurations(client)
-        self.with_raw_response = AccountsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AccountsWithRawResponse:
+        return AccountsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -260,13 +253,13 @@ class Accounts(SyncAPIResource):
 
 
 class AsyncAccounts(AsyncAPIResource):
-    credit_configurations: AsyncCreditConfigurations
-    with_raw_response: AsyncAccountsWithRawResponse
+    @cached_property
+    def credit_configurations(self) -> AsyncCreditConfigurations:
+        return AsyncCreditConfigurations(self._client)
 
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.credit_configurations = AsyncCreditConfigurations(client)
-        self.with_raw_response = AsyncAccountsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncAccountsWithRawResponse:
+        return AsyncAccountsWithRawResponse(self)
 
     async def retrieve(
         self,

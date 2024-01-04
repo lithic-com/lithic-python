@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ...types import BusinessAccount
@@ -15,6 +13,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -22,18 +21,13 @@ from ..._base_client import (
 )
 from ...types.accounts import credit_configuration_update_params
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["CreditConfigurations", "AsyncCreditConfigurations"]
 
 
 class CreditConfigurations(SyncAPIResource):
-    with_raw_response: CreditConfigurationsWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = CreditConfigurationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> CreditConfigurationsWithRawResponse:
+        return CreditConfigurationsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -127,11 +121,9 @@ class CreditConfigurations(SyncAPIResource):
 
 
 class AsyncCreditConfigurations(AsyncAPIResource):
-    with_raw_response: AsyncCreditConfigurationsWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncCreditConfigurationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncCreditConfigurationsWithRawResponse:
+        return AsyncCreditConfigurationsWithRawResponse(self)
 
     async def retrieve(
         self,

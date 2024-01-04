@@ -7,7 +7,6 @@ import json
 import math
 import base64
 import hashlib
-from typing import TYPE_CHECKING
 from datetime import datetime, timezone, timedelta
 
 from .._types import (
@@ -19,16 +18,10 @@ from .._utils import (
 )
 from .._resource import SyncAPIResource, AsyncAPIResource
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["Webhooks", "AsyncWebhooks"]
 
 
 class Webhooks(SyncAPIResource):
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-
     def unwrap(
         self,
         payload: str | bytes,
@@ -122,9 +115,6 @@ class Webhooks(SyncAPIResource):
 
 
 class AsyncWebhooks(AsyncAPIResource):
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-
     def unwrap(
         self,
         payload: str | bytes,

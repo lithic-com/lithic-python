@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -23,6 +23,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
@@ -37,20 +38,17 @@ from ..._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Lithic, AsyncLithic
-
 __all__ = ["Events", "AsyncEvents"]
 
 
 class Events(SyncAPIResource):
-    subscriptions: Subscriptions
-    with_raw_response: EventsWithRawResponse
+    @cached_property
+    def subscriptions(self) -> Subscriptions:
+        return Subscriptions(self._client)
 
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.subscriptions = Subscriptions(client)
-        self.with_raw_response = EventsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> EventsWithRawResponse:
+        return EventsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -258,13 +256,13 @@ class Events(SyncAPIResource):
 
 
 class AsyncEvents(AsyncAPIResource):
-    subscriptions: AsyncSubscriptions
-    with_raw_response: AsyncEventsWithRawResponse
+    @cached_property
+    def subscriptions(self) -> AsyncSubscriptions:
+        return AsyncSubscriptions(self._client)
 
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.subscriptions = AsyncSubscriptions(client)
-        self.with_raw_response = AsyncEventsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncEventsWithRawResponse:
+        return AsyncEventsWithRawResponse(self)
 
     async def retrieve(
         self,

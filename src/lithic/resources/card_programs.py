@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ..types import CardProgram, card_program_list_params
@@ -15,6 +13,7 @@ from .._types import (
     NotGiven,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
@@ -23,18 +22,13 @@ from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Lithic, AsyncLithic
-
 __all__ = ["CardPrograms", "AsyncCardPrograms"]
 
 
 class CardPrograms(SyncAPIResource):
-    with_raw_response: CardProgramsWithRawResponse
-
-    def __init__(self, client: Lithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = CardProgramsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> CardProgramsWithRawResponse:
+        return CardProgramsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -122,11 +116,9 @@ class CardPrograms(SyncAPIResource):
 
 
 class AsyncCardPrograms(AsyncAPIResource):
-    with_raw_response: AsyncCardProgramsWithRawResponse
-
-    def __init__(self, client: AsyncLithic) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncCardProgramsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncCardProgramsWithRawResponse:
+        return AsyncCardProgramsWithRawResponse(self)
 
     async def retrieve(
         self,
