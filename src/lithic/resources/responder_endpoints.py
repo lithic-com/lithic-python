@@ -13,14 +13,7 @@ from ..types import (
     responder_endpoint_delete_params,
     responder_endpoint_check_status_params,
 )
-from .._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NoneType,
-    NotGiven,
-)
+from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
