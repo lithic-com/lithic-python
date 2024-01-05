@@ -27,13 +27,7 @@ from ...types import (
     card_provision_params,
     card_get_embed_url_params,
 )
-from ..._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NotGiven,
-)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform, strip_not_given
 from .balances import Balances, AsyncBalances, BalancesWithRawResponse, AsyncBalancesWithRawResponse
 from ..._compat import cached_property
