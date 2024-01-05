@@ -26,13 +26,7 @@ from ..types import (
     transaction_simulate_authorization_advice_params,
     transaction_simulate_credit_authorization_params,
 )
-from .._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NotGiven,
-)
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource

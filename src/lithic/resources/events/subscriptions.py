@@ -9,14 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from ...types import MessageAttempt, EventSubscription
-from ..._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NoneType,
-    NotGiven,
-)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource

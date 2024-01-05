@@ -20,13 +20,7 @@ from ...types import (
     external_bank_account_create_params,
     external_bank_account_update_params,
 )
-from ..._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NotGiven,
-)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import required_args, maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource

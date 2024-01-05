@@ -1,12 +1,13 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from typing import Any, List, Generic, Optional, cast
+from typing import Any, List, Generic, TypeVar, Optional, cast
 from typing_extensions import Protocol, override, runtime_checkable
 
-from ._types import ModelT
 from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 
 __all__ = ["SyncCursorPage", "AsyncCursorPage", "SyncSinglePage", "AsyncSinglePage"]
+
+_T = TypeVar("_T")
 
 
 @runtime_checkable
@@ -14,12 +15,12 @@ class CursorPageItem(Protocol):
     token: Optional[str]
 
 
-class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
-    data: List[ModelT]
+class SyncCursorPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    data: List[_T]
     has_more: bool
 
     @override
-    def _get_page_items(self) -> List[ModelT]:
+    def _get_page_items(self) -> List[_T]:
         data = self.data
         if not data:
             return []
@@ -49,12 +50,12 @@ class SyncCursorPage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
             return PageInfo(params={"ending_before": item.token})
 
 
-class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
-    data: List[ModelT]
+class AsyncCursorPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    data: List[_T]
     has_more: bool
 
     @override
-    def _get_page_items(self) -> List[ModelT]:
+    def _get_page_items(self) -> List[_T]:
         data = self.data
         if not data:
             return []
@@ -84,12 +85,12 @@ class AsyncCursorPage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
             return PageInfo(params={"ending_before": item.token})
 
 
-class SyncSinglePage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
-    data: List[ModelT]
+class SyncSinglePage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    data: List[_T]
     has_more: bool
 
     @override
-    def _get_page_items(self) -> List[ModelT]:
+    def _get_page_items(self) -> List[_T]:
         data = self.data
         if not data:
             return []
@@ -104,12 +105,12 @@ class SyncSinglePage(BaseSyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
         return None
 
 
-class AsyncSinglePage(BaseAsyncPage[ModelT], BasePage[ModelT], Generic[ModelT]):
-    data: List[ModelT]
+class AsyncSinglePage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    data: List[_T]
     has_more: bool
 
     @override
-    def _get_page_items(self) -> List[ModelT]:
+    def _get_page_items(self) -> List[_T]:
         data = self.data
         if not data:
             return []
