@@ -148,7 +148,7 @@ class VerificationApplication(BaseModel):
     created: Optional[datetime] = None
     """Timestamp of when the application was created."""
 
-    status: Optional[Literal["ACCEPTED", "REJECTED", "PENDING_RESUBMIT", "PENDING_DOCUMENT"]] = None
+    status: Optional[Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
     """
     KYC and KYB evaluation states. Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT`
     are only applicable for the `ADVANCED` workflow.
@@ -261,7 +261,7 @@ class AccountHolder(BaseModel):
     > Primary phone of Account Holder, entered in E.164 format.
     """
 
-    status: Optional[Literal["ACCEPTED", "REJECTED", "PENDING_RESUBMIT", "PENDING_DOCUMENT"]] = None
+    status: Optional[Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
     """<Deprecated.
 
     Use verification_application.status instead> KYC and KYB evaluation states.

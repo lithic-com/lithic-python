@@ -310,7 +310,7 @@ class Lithic(SyncAPIClient):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> APIStatus:
-        """API status check"""
+        """Status of api"""
         return self.get(
             "/status",
             options=make_request_options(
@@ -602,7 +602,7 @@ class AsyncLithic(AsyncAPIClient):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> APIStatus:
-        """API status check"""
+        """Status of api"""
         return await self.get(
             "/status",
             options=make_request_options(

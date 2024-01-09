@@ -35,6 +35,6 @@ class ExternalBankAccountListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    states: List[Literal["ENABLED", "CLOSED", "PAUSED"]]
+    states: List[Literal["CLOSED", "ENABLED", "PAUSED"]]
 
-    verification_states: List[Literal["PENDING", "ENABLED", "FAILED_VERIFICATION"]]
+    verification_states: List[Literal["ENABLED", "FAILED_VERIFICATION", "PENDING"]]

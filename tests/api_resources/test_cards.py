@@ -46,20 +46,21 @@ class TestCards:
             memo="New Card",
             pin="string",
             product_id="1",
+            replacement_for="00000000-0000-0000-1000-000000000000",
             shipping_address={
-                "first_name": "Michael",
-                "last_name": "Bluth",
-                "line2_text": "The Bluth Company",
                 "address1": "5 Broad Street",
                 "address2": "Unit 25A",
                 "city": "NEW YORK",
-                "state": "NY",
-                "postal_code": "10001-1809",
                 "country": "USA",
                 "email": "johnny@appleseed.com",
+                "first_name": "Michael",
+                "last_name": "Bluth",
+                "line2_text": "The Bluth Company",
                 "phone_number": "+12124007676",
+                "postal_code": "10001-1809",
+                "state": "NY",
             },
-            shipping_method="STANDARD",
+            shipping_method="2_DAY",
             spend_limit=1000,
             spend_limit_duration="TRANSACTION",
             state="OPEN",
@@ -135,7 +136,7 @@ class TestCards:
             ending_before="string",
             page_size=1,
             starting_after="string",
-            state="OPEN",
+            state="CLOSED",
         )
         assert_matches_type(SyncCursorPage[Card], card, path=["response"])
 
@@ -217,17 +218,17 @@ class TestCards:
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
             shipping_address={
-                "first_name": "Janet",
-                "last_name": "Yellen",
-                "line2_text": "The Bluth Company",
                 "address1": "5 Broad Street",
                 "address2": "Unit 5A",
                 "city": "NEW YORK",
-                "state": "NY",
-                "postal_code": "10001",
                 "country": "USA",
                 "email": "johnny@appleseed.com",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "line2_text": "The Bluth Company",
                 "phone_number": "+12124007676",
+                "postal_code": "10001",
+                "state": "NY",
             },
             shipping_method="STANDARD",
         )
@@ -237,6 +238,65 @@ class TestCards:
     def test_raw_response_reissue(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_method_renew(self, client: Lithic) -> None:
+        card = client.cards.renew(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_method_renew_with_all_params(self, client: Lithic) -> None:
+        card = client.cards.renew(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "address2": "Unit 5A",
+                "city": "NEW YORK",
+                "country": "USA",
+                "email": "johnny@appleseed.com",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+            carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
+            exp_month="06",
+            exp_year="2027",
+            product_id="100",
+            shipping_method="STANDARD",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_raw_response_renew(self, client: Lithic) -> None:
+        response = client.cards.with_raw_response.renew(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         card = response.parse()
@@ -284,20 +344,21 @@ class TestAsyncCards:
             memo="New Card",
             pin="string",
             product_id="1",
+            replacement_for="00000000-0000-0000-1000-000000000000",
             shipping_address={
-                "first_name": "Michael",
-                "last_name": "Bluth",
-                "line2_text": "The Bluth Company",
                 "address1": "5 Broad Street",
                 "address2": "Unit 25A",
                 "city": "NEW YORK",
-                "state": "NY",
-                "postal_code": "10001-1809",
                 "country": "USA",
                 "email": "johnny@appleseed.com",
+                "first_name": "Michael",
+                "last_name": "Bluth",
+                "line2_text": "The Bluth Company",
                 "phone_number": "+12124007676",
+                "postal_code": "10001-1809",
+                "state": "NY",
             },
-            shipping_method="STANDARD",
+            shipping_method="2_DAY",
             spend_limit=1000,
             spend_limit_duration="TRANSACTION",
             state="OPEN",
@@ -373,7 +434,7 @@ class TestAsyncCards:
             ending_before="string",
             page_size=1,
             starting_after="string",
-            state="OPEN",
+            state="CLOSED",
         )
         assert_matches_type(AsyncCursorPage[Card], card, path=["response"])
 
@@ -455,17 +516,17 @@ class TestAsyncCards:
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
             shipping_address={
-                "first_name": "Janet",
-                "last_name": "Yellen",
-                "line2_text": "The Bluth Company",
                 "address1": "5 Broad Street",
                 "address2": "Unit 5A",
                 "city": "NEW YORK",
-                "state": "NY",
-                "postal_code": "10001",
                 "country": "USA",
                 "email": "johnny@appleseed.com",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "line2_text": "The Bluth Company",
                 "phone_number": "+12124007676",
+                "postal_code": "10001",
+                "state": "NY",
             },
             shipping_method="STANDARD",
         )
@@ -475,6 +536,65 @@ class TestAsyncCards:
     async def test_raw_response_reissue(self, client: AsyncLithic) -> None:
         response = await client.cards.with_raw_response.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_method_renew(self, client: AsyncLithic) -> None:
+        card = await client.cards.renew(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_method_renew_with_all_params(self, client: AsyncLithic) -> None:
+        card = await client.cards.renew(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "address2": "Unit 5A",
+                "city": "NEW YORK",
+                "country": "USA",
+                "email": "johnny@appleseed.com",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+            carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
+            exp_month="06",
+            exp_year="2027",
+            product_id="100",
+            shipping_method="STANDARD",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_raw_response_renew(self, client: AsyncLithic) -> None:
+        response = await client.cards.with_raw_response.renew(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         card = response.parse()

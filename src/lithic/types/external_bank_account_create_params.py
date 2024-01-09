@@ -13,34 +13,9 @@ from .external_bank_account_address_param import ExternalBankAccountAddressParam
 
 __all__ = [
     "ExternalBankAccountCreateParams",
-    "PlaidCreateBankAccountAPIRequest",
     "BankVerifiedCreateBankAccountAPIRequest",
+    "PlaidCreateBankAccountAPIRequest",
 ]
-
-
-class PlaidCreateBankAccountAPIRequest(TypedDict, total=False):
-    owner: Required[str]
-
-    owner_type: Required[OwnerType]
-
-    processor_token: Required[str]
-
-    verification_method: Required[VerificationMethod]
-
-    account_token: str
-
-    company_id: str
-
-    dob: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
-    """Date of Birth of the Individual that owns the external bank account"""
-
-    doing_business_as: str
-
-    user_defined_id: str
-
-
-ExternalBankAccountAddress = ExternalBankAccountAddressParam
-"""This type is deprecated, please use ExternalBankAccountAddressParam instead"""
 
 
 class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
@@ -88,4 +63,28 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     """
 
 
-ExternalBankAccountCreateParams = Union[PlaidCreateBankAccountAPIRequest, BankVerifiedCreateBankAccountAPIRequest]
+class PlaidCreateBankAccountAPIRequest(TypedDict, total=False):
+    owner: Required[str]
+
+    owner_type: Required[OwnerType]
+
+    processor_token: Required[str]
+
+    verification_method: Required[VerificationMethod]
+
+    account_token: str
+
+    company_id: str
+
+    dob: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
+    """Date of Birth of the Individual that owns the external bank account"""
+
+    doing_business_as: str
+
+    user_defined_id: str
+
+
+ExternalBankAccountAddress = ExternalBankAccountAddressParam
+"""This type is deprecated, please use ExternalBankAccountAddressParam instead"""
+
+ExternalBankAccountCreateParams = Union[BankVerifiedCreateBankAccountAPIRequest, PlaidCreateBankAccountAPIRequest]

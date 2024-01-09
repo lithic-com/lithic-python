@@ -53,45 +53,6 @@ class ExternalBankAccounts(SyncAPIResource):
     def create(
         self,
         *,
-        owner: str,
-        owner_type: OwnerType,
-        processor_token: str,
-        verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
-    ) -> ExternalBankAccountCreateResponse:
-        """
-        Creates an external bank account within a program or Lithic account.
-
-        Args:
-          dob: Date of Birth of the Individual that owns the external bank account
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        ...
-
-    @overload
-    def create(
-        self,
-        *,
         account_number: str,
         country: str,
         currency: str,
@@ -142,8 +103,46 @@ class ExternalBankAccounts(SyncAPIResource):
         """
         ...
 
+    @overload
+    def create(
+        self,
+        *,
+        owner: str,
+        owner_type: OwnerType,
+        processor_token: str,
+        verification_method: VerificationMethod,
+        account_token: str | NotGiven = NOT_GIVEN,
+        company_id: str | NotGiven = NOT_GIVEN,
+        dob: Union[str, date] | NotGiven = NOT_GIVEN,
+        doing_business_as: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> ExternalBankAccountCreateResponse:
+        """
+        Creates an external bank account within a program or Lithic account.
+
+        Args:
+          dob: Date of Birth of the Individual that owns the external bank account
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        ...
+
     @required_args(
-        ["owner", "owner_type", "processor_token", "verification_method"],
         [
             "account_number",
             "country",
@@ -154,27 +153,28 @@ class ExternalBankAccounts(SyncAPIResource):
             "type",
             "verification_method",
         ],
+        ["owner", "owner_type", "processor_token", "verification_method"],
     )
     def create(
         self,
         *,
-        owner: str,
-        owner_type: OwnerType,
-        processor_token: str | NotGiven = NOT_GIVEN,
-        verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
+        owner: str,
+        owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
         type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
+        verification_method: VerificationMethod,
+        account_token: str | NotGiven = NOT_GIVEN,
         address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
+        company_id: str | NotGiven = NOT_GIVEN,
+        dob: Union[str, date] | NotGiven = NOT_GIVEN,
+        doing_business_as: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
+        processor_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -187,23 +187,23 @@ class ExternalBankAccounts(SyncAPIResource):
             "/external_bank_accounts",
             body=maybe_transform(
                 {
-                    "owner": owner,
-                    "owner_type": owner_type,
-                    "processor_token": processor_token,
-                    "verification_method": verification_method,
-                    "account_token": account_token,
-                    "company_id": company_id,
-                    "dob": dob,
-                    "doing_business_as": doing_business_as,
-                    "user_defined_id": user_defined_id,
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
+                    "owner": owner,
+                    "owner_type": owner_type,
                     "routing_number": routing_number,
                     "type": type,
+                    "verification_method": verification_method,
+                    "account_token": account_token,
                     "address": address,
+                    "company_id": company_id,
+                    "dob": dob,
+                    "doing_business_as": doing_business_as,
                     "name": name,
+                    "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
+                    "processor_token": processor_token,
                 },
                 external_bank_account_create_params.ExternalBankAccountCreateParams,
             ),
@@ -322,8 +322,8 @@ class ExternalBankAccounts(SyncAPIResource):
         owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | NotGiven = NOT_GIVEN,
-        verification_states: List[Literal["PENDING", "ENABLED", "FAILED_VERIFICATION"]] | NotGiven = NOT_GIVEN,
+        states: List[Literal["CLOSED", "ENABLED", "PAUSED"]] | NotGiven = NOT_GIVEN,
+        verification_states: List[Literal["ENABLED", "FAILED_VERIFICATION", "PENDING"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -391,45 +391,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
     async def create(
         self,
         *,
-        owner: str,
-        owner_type: OwnerType,
-        processor_token: str,
-        verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
-    ) -> ExternalBankAccountCreateResponse:
-        """
-        Creates an external bank account within a program or Lithic account.
-
-        Args:
-          dob: Date of Birth of the Individual that owns the external bank account
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
-        """
-        ...
-
-    @overload
-    async def create(
-        self,
-        *,
         account_number: str,
         country: str,
         currency: str,
@@ -480,8 +441,46 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         """
         ...
 
+    @overload
+    async def create(
+        self,
+        *,
+        owner: str,
+        owner_type: OwnerType,
+        processor_token: str,
+        verification_method: VerificationMethod,
+        account_token: str | NotGiven = NOT_GIVEN,
+        company_id: str | NotGiven = NOT_GIVEN,
+        dob: Union[str, date] | NotGiven = NOT_GIVEN,
+        doing_business_as: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> ExternalBankAccountCreateResponse:
+        """
+        Creates an external bank account within a program or Lithic account.
+
+        Args:
+          dob: Date of Birth of the Individual that owns the external bank account
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        ...
+
     @required_args(
-        ["owner", "owner_type", "processor_token", "verification_method"],
         [
             "account_number",
             "country",
@@ -492,27 +491,28 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             "type",
             "verification_method",
         ],
+        ["owner", "owner_type", "processor_token", "verification_method"],
     )
     async def create(
         self,
         *,
-        owner: str,
-        owner_type: OwnerType,
-        processor_token: str | NotGiven = NOT_GIVEN,
-        verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
+        owner: str,
+        owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
         type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
+        verification_method: VerificationMethod,
+        account_token: str | NotGiven = NOT_GIVEN,
         address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
+        company_id: str | NotGiven = NOT_GIVEN,
+        dob: Union[str, date] | NotGiven = NOT_GIVEN,
+        doing_business_as: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
+        processor_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -525,23 +525,23 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             "/external_bank_accounts",
             body=maybe_transform(
                 {
-                    "owner": owner,
-                    "owner_type": owner_type,
-                    "processor_token": processor_token,
-                    "verification_method": verification_method,
-                    "account_token": account_token,
-                    "company_id": company_id,
-                    "dob": dob,
-                    "doing_business_as": doing_business_as,
-                    "user_defined_id": user_defined_id,
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
+                    "owner": owner,
+                    "owner_type": owner_type,
                     "routing_number": routing_number,
                     "type": type,
+                    "verification_method": verification_method,
+                    "account_token": account_token,
                     "address": address,
+                    "company_id": company_id,
+                    "dob": dob,
+                    "doing_business_as": doing_business_as,
                     "name": name,
+                    "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
+                    "processor_token": processor_token,
                 },
                 external_bank_account_create_params.ExternalBankAccountCreateParams,
             ),
@@ -660,8 +660,8 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | NotGiven = NOT_GIVEN,
-        verification_states: List[Literal["PENDING", "ENABLED", "FAILED_VERIFICATION"]] | NotGiven = NOT_GIVEN,
+        states: List[Literal["CLOSED", "ENABLED", "PAUSED"]] | NotGiven = NOT_GIVEN,
+        verification_states: List[Literal["ENABLED", "FAILED_VERIFICATION", "PENDING"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

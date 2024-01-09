@@ -59,8 +59,8 @@ class Dispute(BaseModel):
         "MISSING_AUTH",
         "OTHER",
         "PROCESSING_ERROR",
-        "REFUND_NOT_PROCESSED",
         "RECURRING_TRANSACTION_NOT_CANCELLED",
+        "REFUND_NOT_PROCESSED",
     ]
     """Dispute reason:
 
@@ -138,14 +138,14 @@ class Dispute(BaseModel):
     """
 
     status: Literal[
+        "ARBITRATION",
+        "CASE_CLOSED",
+        "CASE_WON",
         "NEW",
         "PENDING_CUSTOMER",
-        "SUBMITTED",
-        "REPRESENTMENT",
         "PREARBITRATION",
-        "ARBITRATION",
-        "CASE_WON",
-        "CASE_CLOSED",
+        "REPRESENTMENT",
+        "SUBMITTED",
     ]
     """Status types:
 

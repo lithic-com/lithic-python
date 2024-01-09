@@ -8,11 +8,10 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import SettlementDetail
+from lithic.types import SettlementDetail, SettlementReport
 from lithic._utils import parse_date
 from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
-from lithic.types.reports import SettlementSummaryResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -54,7 +53,7 @@ class TestSettlement:
         settlement = client.reports.settlement.summary(
             parse_date("2019-12-27"),
         )
-        assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])
+        assert_matches_type(SettlementReport, settlement, path=["response"])
 
     @parametrize
     def test_raw_response_summary(self, client: Lithic) -> None:
@@ -63,7 +62,7 @@ class TestSettlement:
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         settlement = response.parse()
-        assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])
+        assert_matches_type(SettlementReport, settlement, path=["response"])
 
 
 class TestAsyncSettlement:
@@ -102,7 +101,7 @@ class TestAsyncSettlement:
         settlement = await client.reports.settlement.summary(
             parse_date("2019-12-27"),
         )
-        assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])
+        assert_matches_type(SettlementReport, settlement, path=["response"])
 
     @parametrize
     async def test_raw_response_summary(self, client: AsyncLithic) -> None:
@@ -111,4 +110,4 @@ class TestAsyncSettlement:
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         settlement = response.parse()
-        assert_matches_type(SettlementSummaryResponse, settlement, path=["response"])
+        assert_matches_type(SettlementReport, settlement, path=["response"])

@@ -10,7 +10,7 @@ __all__ = ["Payment", "PaymentMethodAttributes"]
 
 
 class PaymentMethodAttributes(BaseModel):
-    sec_code: Literal["PPD", "CCD", "WEB"]
+    sec_code: Literal["CCD", "PPD", "WEB"]
 
     company_id: Optional[str] = None
 
@@ -28,7 +28,7 @@ class Payment(FinancialTransaction):
 
     method_attributes: PaymentMethodAttributes
 
-    source: Literal["LITHIC", "CUSTOMER"]
+    source: Literal["CUSTOMER", "LITHIC"]
 
     external_bank_account_token: Optional[str] = None
 

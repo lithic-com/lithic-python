@@ -2,16 +2,33 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 from ..types import shared_params
 
-__all__ = ["CardReissueParams"]
+__all__ = ["CardRenewParams"]
 
 
-class CardReissueParams(TypedDict, total=False):
+class CardRenewParams(TypedDict, total=False):
+    shipping_address: Required[shared_params.ShippingAddress]
+    """The shipping address this card will be sent to."""
+
     carrier: shared_params.Carrier
     """If omitted, the previous carrier will be used."""
+
+    exp_month: str
+    """Two digit (MM) expiry month.
+
+    If neither `exp_month` nor `exp_year` is provided, an expiration date six years
+    in the future will be generated.
+    """
+
+    exp_year: str
+    """Four digit (yyyy) expiry year.
+
+    If neither `exp_month` nor `exp_year` is provided, an expiration date six years
+    in the future will be generated.
+    """
 
     product_id: str
     """Specifies the configuration (e.g.
@@ -19,9 +36,6 @@ class CardReissueParams(TypedDict, total=False):
     physical card art) that the card should be manufactured with, and only applies
     to cards of type `PHYSICAL`. This must be configured with Lithic before use.
     """
-
-    shipping_address: shared_params.ShippingAddress
-    """If omitted, the previous shipping address will be used."""
 
     shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
     """Shipping method for the card.

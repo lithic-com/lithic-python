@@ -36,7 +36,7 @@ class TestAuthRules:
             account_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             allowed_countries=["MEX"],
             allowed_mcc=["3000"],
-            blocked_countries=["USA", "CAN"],
+            blocked_countries=["CAN", "USA"],
             blocked_mcc=["5811", "5812"],
             card_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             program_level=False,
@@ -126,7 +126,7 @@ class TestAuthRules:
         auth_rule = client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_tokens=["string", "string", "string"],
-            card_tokens=["df942c4e-9130-4ab5-b067-778a2c55b357", "1336a403-2447-4b36-a009-6fbb852ee675"],
+            card_tokens=["1336a403-2447-4b36-a009-6fbb852ee675", "df942c4e-9130-4ab5-b067-778a2c55b357"],
             program_level=True,
         )
         assert_matches_type(AuthRule, auth_rule, path=["response"])
@@ -178,7 +178,7 @@ class TestAsyncAuthRules:
             account_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             allowed_countries=["MEX"],
             allowed_mcc=["3000"],
-            blocked_countries=["USA", "CAN"],
+            blocked_countries=["CAN", "USA"],
             blocked_mcc=["5811", "5812"],
             card_tokens=["3fa85f64-5717-4562-b3fc-2c963f66afa6"],
             program_level=False,
@@ -268,7 +268,7 @@ class TestAsyncAuthRules:
         auth_rule = await client.auth_rules.apply(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_tokens=["string", "string", "string"],
-            card_tokens=["df942c4e-9130-4ab5-b067-778a2c55b357", "1336a403-2447-4b36-a009-6fbb852ee675"],
+            card_tokens=["1336a403-2447-4b36-a009-6fbb852ee675", "df942c4e-9130-4ab5-b067-778a2c55b357"],
             program_level=True,
         )
         assert_matches_type(AuthRule, auth_rule, path=["response"])

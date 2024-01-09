@@ -59,9 +59,9 @@ class TestAccounts:
                 "address1": "string",
                 "address2": "string",
                 "city": "string",
-                "state": "string",
-                "postal_code": "string",
                 "country": "string",
+                "postal_code": "string",
+                "state": "string",
             },
         )
         assert_matches_type(Account, account, path=["response"])
@@ -158,9 +158,9 @@ class TestAsyncAccounts:
                 "address1": "string",
                 "address2": "string",
                 "city": "string",
-                "state": "string",
-                "postal_code": "string",
                 "country": "string",
+                "postal_code": "string",
+                "state": "string",
             },
         )
         assert_matches_type(Account, account, path=["response"])

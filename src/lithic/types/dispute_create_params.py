@@ -29,8 +29,8 @@ class DisputeCreateParams(TypedDict, total=False):
             "MISSING_AUTH",
             "OTHER",
             "PROCESSING_ERROR",
-            "REFUND_NOT_PROCESSED",
             "RECURRING_TRANSACTION_NOT_CANCELLED",
+            "REFUND_NOT_PROCESSED",
         ]
     ]
     """Reason for dispute"""
