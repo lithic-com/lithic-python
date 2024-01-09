@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.30.0 (2024-01-09)
+
+Full Changelog: [v0.29.1...v0.30.0](https://github.com/lithic-com/lithic-python/compare/v0.29.1...v0.30.0)
+
+### Features
+
+* add `None` default value to nullable response properties ([#315](https://github.com/lithic-com/lithic-python/issues/315)) ([81458b1](https://github.com/lithic-com/lithic-python/commit/81458b1cf5c7d260509b1606d1e21e9b8c9d495f))
+* **api:** add card renew endpoint ([#319](https://github.com/lithic-com/lithic-python/issues/319)) ([2ec8b25](https://github.com/lithic-com/lithic-python/commit/2ec8b251e6f7e8969a9fca78563eca07bd899444))
+
+
+### Chores
+
+* add .keep files for examples and custom code directories ([#318](https://github.com/lithic-com/lithic-python/issues/318)) ([d21bb0c](https://github.com/lithic-com/lithic-python/commit/d21bb0c1753d546491c04dadd0e77049c0def489))
+* **internal:** bump license ([#312](https://github.com/lithic-com/lithic-python/issues/312)) ([03038ed](https://github.com/lithic-com/lithic-python/commit/03038ed1dec2cd2407eb34a4c05b5c7d84390b16))
+* **internal:** loosen type var restrictions ([#317](https://github.com/lithic-com/lithic-python/issues/317)) ([fae02b2](https://github.com/lithic-com/lithic-python/commit/fae02b2eb95f8a8e26a7e651cdd76292c1d6879f))
+* **internal:** replace isort with ruff ([#314](https://github.com/lithic-com/lithic-python/issues/314)) ([8b841b0](https://github.com/lithic-com/lithic-python/commit/8b841b00f186701c9b6e101dd7e2500cafd7dfc1))
+* use property declarations for resource members ([#316](https://github.com/lithic-com/lithic-python/issues/316)) ([969451f](https://github.com/lithic-com/lithic-python/commit/969451f761be877fee3dc2b388154f15198185b6))
+
 ## 0.29.1 (2023-12-28)
 
 Full Changelog: [v0.29.0...v0.29.1](https://github.com/lithic-com/lithic-python/compare/v0.29.0...v0.29.1)
