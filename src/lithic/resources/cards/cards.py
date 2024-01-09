@@ -21,6 +21,7 @@ from ...types import (
     shared_params,
     card_list_params,
     card_embed_params,
+    card_renew_params,
     card_create_params,
     card_update_params,
     card_reissue_params,
@@ -75,7 +76,7 @@ class Cards(SyncAPIResource):
     def create(
         self,
         *,
-        type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
+        type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
         carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
@@ -85,8 +86,9 @@ class Cards(SyncAPIResource):
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
+        replacement_for: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2_DAY", "EXPEDITED"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
@@ -153,6 +155,9 @@ class Cards(SyncAPIResource):
               before use. Specifies the configuration (i.e., physical card art) that the card
               should be manufactured with.
 
+          replacement_for: Only applicable to cards of type `PHYSICAL`. Globally unique identifier for the
+              card that this physical card will replace.
+
           shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
               options besides `STANDARD` require additional permissions.
 
@@ -216,6 +221,7 @@ class Cards(SyncAPIResource):
                     "memo": memo,
                     "pin": pin,
                     "product_id": product_id,
+                    "replacement_for": replacement_for,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
                     "spend_limit": spend_limit,
@@ -379,7 +385,7 @@ class Cards(SyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"] | NotGiven = NOT_GIVEN,
+        state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -704,7 +710,7 @@ class Cards(SyncAPIResource):
         carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2-DAY", "EXPEDITED"]
+        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -772,6 +778,91 @@ class Cards(SyncAPIResource):
             cast_to=Card,
         )
 
+    def renew(
+        self,
+        card_token: str,
+        *,
+        shipping_address: shared_params.ShippingAddress,
+        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        exp_month: str | NotGiven = NOT_GIVEN,
+        exp_year: str | NotGiven = NOT_GIVEN,
+        product_id: str | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> Card:
+        """
+        Initiate print and shipment of a renewed physical card.
+
+        Only applies to cards of type `PHYSICAL`.
+
+        Args:
+          shipping_address: The shipping address this card will be sent to.
+
+          carrier: If omitted, the previous carrier will be used.
+
+          exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
+              an expiration date six years in the future will be generated.
+
+          exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
+              provided, an expiration date six years in the future will be generated.
+
+          product_id: Specifies the configuration (e.g. physical card art) that the card should be
+              manufactured with, and only applies to cards of type `PHYSICAL`. This must be
+              configured with Lithic before use.
+
+          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
+              additional permissions.
+
+              - `STANDARD` - USPS regular mail or similar international option, with no
+                tracking
+              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
+                with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
+              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+                tracking
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            f"/cards/{card_token}/renew",
+            body=maybe_transform(
+                {
+                    "shipping_address": shipping_address,
+                    "carrier": carrier,
+                    "exp_month": exp_month,
+                    "exp_year": exp_year,
+                    "product_id": product_id,
+                    "shipping_method": shipping_method,
+                },
+                card_renew_params.CardRenewParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=Card,
+        )
+
     def retrieve_spend_limits(
         self,
         card_token: str,
@@ -827,7 +918,7 @@ class AsyncCards(AsyncAPIResource):
     async def create(
         self,
         *,
-        type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"],
+        type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
         carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
@@ -837,8 +928,9 @@ class AsyncCards(AsyncAPIResource):
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
+        replacement_for: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2_DAY", "EXPEDITED"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
@@ -905,6 +997,9 @@ class AsyncCards(AsyncAPIResource):
               before use. Specifies the configuration (i.e., physical card art) that the card
               should be manufactured with.
 
+          replacement_for: Only applicable to cards of type `PHYSICAL`. Globally unique identifier for the
+              card that this physical card will replace.
+
           shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
               options besides `STANDARD` require additional permissions.
 
@@ -968,6 +1063,7 @@ class AsyncCards(AsyncAPIResource):
                     "memo": memo,
                     "pin": pin,
                     "product_id": product_id,
+                    "replacement_for": replacement_for,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
                     "spend_limit": spend_limit,
@@ -1131,7 +1227,7 @@ class AsyncCards(AsyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"] | NotGiven = NOT_GIVEN,
+        state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1456,7 +1552,7 @@ class AsyncCards(AsyncAPIResource):
         carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2-DAY", "EXPEDITED"]
+        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1513,6 +1609,91 @@ class AsyncCards(AsyncAPIResource):
                     "shipping_method": shipping_method,
                 },
                 card_reissue_params.CardReissueParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=Card,
+        )
+
+    async def renew(
+        self,
+        card_token: str,
+        *,
+        shipping_address: shared_params.ShippingAddress,
+        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        exp_month: str | NotGiven = NOT_GIVEN,
+        exp_year: str | NotGiven = NOT_GIVEN,
+        product_id: str | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> Card:
+        """
+        Initiate print and shipment of a renewed physical card.
+
+        Only applies to cards of type `PHYSICAL`.
+
+        Args:
+          shipping_address: The shipping address this card will be sent to.
+
+          carrier: If omitted, the previous carrier will be used.
+
+          exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
+              an expiration date six years in the future will be generated.
+
+          exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
+              provided, an expiration date six years in the future will be generated.
+
+          product_id: Specifies the configuration (e.g. physical card art) that the card should be
+              manufactured with, and only applies to cards of type `PHYSICAL`. This must be
+              configured with Lithic before use.
+
+          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
+              additional permissions.
+
+              - `STANDARD` - USPS regular mail or similar international option, with no
+                tracking
+              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
+                with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
+              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+                tracking
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            f"/cards/{card_token}/renew",
+            body=maybe_transform(
+                {
+                    "shipping_address": shipping_address,
+                    "carrier": carrier,
+                    "exp_month": exp_month,
+                    "exp_year": exp_year,
+                    "product_id": product_id,
+                    "shipping_method": shipping_method,
+                },
+                card_renew_params.CardRenewParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -1586,6 +1767,9 @@ class CardsWithRawResponse:
         self.reissue = to_raw_response_wrapper(
             cards.reissue,
         )
+        self.renew = to_raw_response_wrapper(
+            cards.renew,
+        )
         self.retrieve_spend_limits = to_raw_response_wrapper(
             cards.retrieve_spend_limits,
         )
@@ -1617,6 +1801,9 @@ class AsyncCardsWithRawResponse:
         )
         self.reissue = async_to_raw_response_wrapper(
             cards.reissue,
+        )
+        self.renew = async_to_raw_response_wrapper(
+            cards.renew,
         )
         self.retrieve_spend_limits = async_to_raw_response_wrapper(
             cards.retrieve_spend_limits,

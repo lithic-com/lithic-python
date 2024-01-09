@@ -8,7 +8,7 @@ __all__ = ["ResponderEndpointCreateParams"]
 
 
 class ResponderEndpointCreateParams(TypedDict, total=False):
-    type: Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"]
+    type: Literal["AUTH_STREAM_ACCESS", "THREE_DS_DECISIONING", "TOKENIZATION_DECISIONING"]
     """The type of the endpoint."""
 
     url: str

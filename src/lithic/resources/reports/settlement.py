@@ -7,7 +7,7 @@ from datetime import date
 
 import httpx
 
-from ...types import SettlementDetail
+from ...types import SettlementDetail, SettlementReport
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
@@ -18,7 +18,7 @@ from ..._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from ...types.reports import SettlementSummaryResponse, settlement_list_details_params
+from ...types.reports import settlement_list_details_params
 
 __all__ = ["Settlement", "AsyncSettlement"]
 
@@ -92,7 +92,7 @@ class Settlement(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SettlementSummaryResponse:
+    ) -> SettlementReport:
         """
         Get the settlement report for a specified report date.
 
@@ -110,7 +110,7 @@ class Settlement(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SettlementSummaryResponse,
+            cast_to=SettlementReport,
         )
 
 
@@ -183,7 +183,7 @@ class AsyncSettlement(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SettlementSummaryResponse:
+    ) -> SettlementReport:
         """
         Get the settlement report for a specified report date.
 
@@ -201,7 +201,7 @@ class AsyncSettlement(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SettlementSummaryResponse,
+            cast_to=SettlementReport,
         )
 
 

@@ -143,6 +143,7 @@ Methods:
 - <code title="get /embed/card">client.cards.<a href="./src/lithic/resources/cards/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
 - <code title="post /cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
 - <code title="post /cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="post /cards/{card_token}/renew">client.cards.<a href="./src/lithic/resources/cards/cards.py">renew</a>(card_token, \*\*<a href="src/lithic/types/card_renew_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /cards/{card_token}/spend_limits">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_spend_limits</a>(card_token) -> <a href="./src/lithic/types/card_spend_limits.py">CardSpendLimits</a></code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
@@ -450,16 +451,10 @@ from lithic.types import SettlementDetail, SettlementReport, SettlementSummaryDe
 
 ## Settlement
 
-Types:
-
-```python
-from lithic.types.reports import SettlementSummaryResponse
-```
-
 Methods:
 
 - <code title="get /reports/settlement/details/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">list_details</a>(report_date, \*\*<a href="src/lithic/types/reports/settlement_list_details_params.py">params</a>) -> <a href="./src/lithic/types/settlement_detail.py">SyncCursorPage[SettlementDetail]</a></code>
-- <code title="get /reports/settlement/summary/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">summary</a>(report_date) -> <a href="./src/lithic/types/reports/settlement_summary_response.py">SettlementSummaryResponse</a></code>
+- <code title="get /reports/settlement/summary/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">summary</a>(report_date) -> <a href="./src/lithic/types/settlement_report.py">SettlementReport</a></code>
 
 # CardProduct
 

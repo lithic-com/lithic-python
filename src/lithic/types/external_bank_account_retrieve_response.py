@@ -46,11 +46,11 @@ class ExternalBankAccountRetrieveResponse(BaseModel):
     This will appear in statements
     """
 
-    owner_type: Literal["INDIVIDUAL", "BUSINESS"]
+    owner_type: Literal["BUSINESS", "INDIVIDUAL"]
 
     routing_number: str
 
-    state: Literal["ENABLED", "CLOSED", "PAUSED"]
+    state: Literal["CLOSED", "ENABLED", "PAUSED"]
 
     type: Literal["CHECKING", "SAVINGS"]
 
@@ -59,7 +59,7 @@ class ExternalBankAccountRetrieveResponse(BaseModel):
 
     verification_method: Literal["MANUAL", "MICRO_DEPOSIT", "PLAID"]
 
-    verification_state: Literal["PENDING", "ENABLED", "FAILED_VERIFICATION"]
+    verification_state: Literal["ENABLED", "FAILED_VERIFICATION", "PENDING"]
 
     account_token: Optional[str] = None
     """Indicates which Lithic account the external account is associated with.

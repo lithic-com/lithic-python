@@ -26,7 +26,7 @@ class Funding(BaseModel):
     bank account, debit card) associated with this FundingAccount. This may be null.
     """
 
-    state: Literal["ENABLED", "PENDING", "DELETED"]
+    state: Literal["DELETED", "ENABLED", "PENDING"]
     """State of funding source.
 
     Funding source states:
@@ -107,7 +107,7 @@ class Card(BaseModel):
     manufactured.
     """
 
-    type: Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"]
+    type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"]
     """Card types:
 
     - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital

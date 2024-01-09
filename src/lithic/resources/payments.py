@@ -46,7 +46,7 @@ class Payments(SyncAPIResource):
         financial_account_token: str,
         method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY"],
         method_attributes: payment_create_params.MethodAttributes,
-        type: Literal["PAYMENT", "COLLECTION"],
+        type: Literal["COLLECTION", "PAYMENT"],
         token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
@@ -62,6 +62,9 @@ class Payments(SyncAPIResource):
         Initiates a payment between a financial account and an external bank account.
 
         Args:
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -337,7 +340,7 @@ class AsyncPayments(AsyncAPIResource):
         financial_account_token: str,
         method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY"],
         method_attributes: payment_create_params.MethodAttributes,
-        type: Literal["PAYMENT", "COLLECTION"],
+        type: Literal["COLLECTION", "PAYMENT"],
         token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
@@ -353,6 +356,9 @@ class AsyncPayments(AsyncAPIResource):
         Initiates a payment between a financial account and an external bank account.
 
         Args:
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request

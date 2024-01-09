@@ -15,7 +15,7 @@ class LineItemListResponse(BaseModel):
 
     amount: int
 
-    category: Literal["CARD", "ACH", "TRANSFER"]
+    category: Literal["ACH", "CARD", "TRANSFER"]
 
     created: datetime
     """Timestamp of when the line item was generated"""
@@ -36,8 +36,8 @@ class LineItemListResponse(BaseModel):
         "AUTHORIZATION_REVERSAL",
         "BALANCE_INQUIRY",
         "CLEARING",
-        "CORRECTION_DEBIT",
         "CORRECTION_CREDIT",
+        "CORRECTION_DEBIT",
         "CREDIT_AUTHORIZATION",
         "CREDIT_AUTHORIZATION_ADVICE",
         "FINANCIAL_AUTHORIZATION",

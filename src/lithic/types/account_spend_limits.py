@@ -27,6 +27,4 @@ class AvailableSpendLimit(BaseModel):
 
 
 class AccountSpendLimits(BaseModel):
-    available_spend_limit: Optional[AvailableSpendLimit] = None
-
-    required: Optional[object] = None
+    available_spend_limit: AvailableSpendLimit

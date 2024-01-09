@@ -43,5 +43,5 @@ class CardListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    state: Literal["OPEN", "PAUSED", "CLOSED", "PENDING_FULFILLMENT", "PENDING_ACTIVATION"]
+    state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"]
     """Returns cards with the specified state."""

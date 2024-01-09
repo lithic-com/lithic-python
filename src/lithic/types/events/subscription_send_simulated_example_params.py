@@ -12,7 +12,9 @@ class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
         "account_holder.created",
         "account_holder.updated",
         "account_holder.verification",
+        "balance.updated",
         "card.created",
+        "card.renewed",
         "card.shipped",
         "card_transaction.updated",
         "digital_wallet.tokenization_approval_request",
@@ -20,9 +22,9 @@ class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
         "digital_wallet.tokenization_two_factor_authentication_code",
         "dispute.updated",
         "dispute_evidence.upload_failed",
-        "three_ds_authentication.created",
         "payment_transaction.created",
         "payment_transaction.updated",
+        "three_ds_authentication.created",
         "transfer_transaction.created",
     ]
     """Event type to send example message for."""

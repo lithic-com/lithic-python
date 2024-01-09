@@ -21,7 +21,7 @@ class SettlementSummaryDetails(BaseModel):
     interchange_gross_amount: Optional[int] = None
     """The total amount of interchange."""
 
-    network: Optional[Literal["MASTERCARD", "VISA", "INTERLINK", "MAESTRO", "UNKNOWN"]] = None
+    network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]] = None
     """Card network where the transaction took place"""
 
     other_fees_gross_amount: Optional[int] = None

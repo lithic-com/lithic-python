@@ -44,8 +44,8 @@ class TestAuthentication:
         authentication = client.three_ds.authentication.simulate(
             merchant={
                 "country": "USA",
-                "mcc": "5812",
                 "id": "OODKZAPJVN4YS7O",
+                "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
             pan="4111111289144142",
@@ -61,8 +61,8 @@ class TestAuthentication:
         response = client.three_ds.authentication.with_raw_response.simulate(
             merchant={
                 "country": "USA",
-                "mcc": "5812",
                 "id": "OODKZAPJVN4YS7O",
+                "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
             pan="4111111289144142",
@@ -102,8 +102,8 @@ class TestAsyncAuthentication:
         authentication = await client.three_ds.authentication.simulate(
             merchant={
                 "country": "USA",
-                "mcc": "5812",
                 "id": "OODKZAPJVN4YS7O",
+                "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
             pan="4111111289144142",
@@ -119,8 +119,8 @@ class TestAsyncAuthentication:
         response = await client.three_ds.authentication.with_raw_response.simulate(
             merchant={
                 "country": "USA",
-                "mcc": "5812",
                 "id": "OODKZAPJVN4YS7O",
+                "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
             pan="4111111289144142",

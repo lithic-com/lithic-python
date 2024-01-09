@@ -117,7 +117,7 @@ class MerchantRiskIndicator(BaseModel):
     """
 
     delivery_time_frame: Optional[
-        Literal["ELECTRONIC_DELIVERY", "SAME_DAY_SHIPPING", "OVERNIGHT_SHIPPING", "TWO_DAY_OR_MORE_SHIPPING"]
+        Literal["ELECTRONIC_DELIVERY", "OVERNIGHT_SHIPPING", "SAME_DAY_SHIPPING", "TWO_DAY_OR_MORE_SHIPPING"]
     ] = None
     """The delivery time frame for the merchandise.
 
@@ -143,7 +143,7 @@ class MerchantRiskIndicator(BaseModel):
     Maps to EMV 3DS field giftCardCurr.
     """
 
-    order_availability: Optional[Literal["MERCHANDISE_AVAILABLE", "FUTURE_AVAILABILITY"]] = None
+    order_availability: Optional[Literal["FUTURE_AVAILABILITY", "MERCHANDISE_AVAILABLE"]] = None
     """
     Indicates whether the purchase is for merchandise that is available now or at a
     future date. Maps to EMV 3DS field preOrderPurchaseInd.
@@ -163,15 +163,15 @@ class MerchantRiskIndicator(BaseModel):
 
     shipping_method: Optional[
         Literal[
-            "SHIP_TO_BILLING_ADDRESS",
-            "SHIP_TO_OTHER_VERIFIED_ADDRESS",
-            "SHIP_TO_NON_BILLING_ADDRESS",
-            "SHIP_TO_STORE",
             "DIGITAL_GOODS",
-            "TRAVEL_AND_EVENT_TICKETS",
+            "LOCKER_DELIVERY",
             "OTHER",
             "PICK_UP_AND_GO_DELIVERY",
-            "LOCKER_DELIVERY",
+            "SHIP_TO_BILLING_ADDRESS",
+            "SHIP_TO_NON_BILLING_ADDRESS",
+            "SHIP_TO_OTHER_VERIFIED_ADDRESS",
+            "SHIP_TO_STORE",
+            "TRAVEL_AND_EVENT_TICKETS",
         ]
     ] = None
     """Shipping method that the cardholder chose for the transaction.
@@ -300,11 +300,11 @@ class Transaction(BaseModel):
 
     type: Optional[
         Literal[
-            "GOODS_SERVICE_PURCHASE",
-            "CHECK_ACCEPTANCE",
             "ACCOUNT_FUNDING",
-            "QUASI_CASH_TRANSACTION",
+            "CHECK_ACCEPTANCE",
+            "GOODS_SERVICE_PURCHASE",
             "PREPAID_ACTIVATION_AND_LOAD",
+            "QUASI_CASH_TRANSACTION",
         ]
     ] = None
     """Type of the transaction for which a 3DS authentication request is occurring.
@@ -317,13 +317,13 @@ class AuthenticationRetrieveResponse(BaseModel):
     token: str
     """Globally unique identifier for the 3DS authentication."""
 
-    account_type: Optional[Literal["NOT_APPLICABLE", "CREDIT", "DEBIT"]] = None
+    account_type: Optional[Literal["CREDIT", "DEBIT", "NOT_APPLICABLE"]] = None
     """Type of account/card that is being used for the transaction.
 
     Maps to EMV 3DS field acctType.
     """
 
-    authentication_result: Optional[Literal["SUCCESS", "DECLINE"]] = None
+    authentication_result: Optional[Literal["DECLINE", "SUCCESS"]] = None
     """Indicates the outcome of the 3DS authentication process."""
 
     card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"]
@@ -351,7 +351,7 @@ class AuthenticationRetrieveResponse(BaseModel):
     """Date and time when the authentication was created in Lithic's system."""
 
     decision_made_by: Optional[
-        Literal["NETWORK", "LITHIC_DEFAULT", "LITHIC_RULES", "CUSTOMER_ENDPOINT", "UNKNOWN"]
+        Literal["CUSTOMER_ENDPOINT", "LITHIC_DEFAULT", "LITHIC_RULES", "NETWORK", "UNKNOWN"]
     ] = None
     """Entity that made the authentication decision."""
 
@@ -361,7 +361,7 @@ class AuthenticationRetrieveResponse(BaseModel):
     transaction.
     """
 
-    message_category: Literal["PAYMENT_AUTHENTICATION", "NON_PAYMENT_AUTHENTICATION"]
+    message_category: Literal["NON_PAYMENT_AUTHENTICATION", "PAYMENT_AUTHENTICATION"]
     """Either PAYMENT_AUTHENTICATION or NON_PAYMENT_AUTHENTICATION.
 
     For NON_PAYMENT_AUTHENTICATION, additional_data and transaction fields are not
@@ -383,16 +383,16 @@ class AuthenticationRetrieveResponse(BaseModel):
 
     authentication_request_type: Optional[
         Literal[
+            "ADD_CARD",
+            "BILLING_AGREEMENT",
+            "DELAYED_SHIPMENT",
+            "EMV_TOKEN_CARDHOLDER_VERIFICATION",
+            "INSTALLMENT_TRANSACTION",
+            "MAINTAIN_CARD",
             "PAYMENT_TRANSACTION",
             "RECURRING_TRANSACTION",
-            "INSTALLMENT_TRANSACTION",
-            "ADD_CARD",
-            "MAINTAIN_CARD",
-            "EMV_TOKEN_CARDHOLDER_VERIFICATION",
-            "BILLING_AGREEMENT",
-            "SPLIT_SHIPMENT",
-            "DELAYED_SHIPMENT",
             "SPLIT_PAYMENT",
+            "SPLIT_SHIPMENT",
         ]
     ] = None
     """
@@ -409,22 +409,22 @@ class AuthenticationRetrieveResponse(BaseModel):
 
     three_ri_request_type: Optional[
         Literal[
-            "RECURRING_TRANSACTION",
-            "INSTALLMENT_TRANSACTION",
-            "ADD_CARD",
-            "MAINTAIN_CARD_INFO",
             "ACCOUNT_VERIFICATION",
-            "SPLIT_SHIPMENT",
-            "TOP_UP",
-            "MAIL_ORDER",
-            "TELEPHONE_ORDER",
-            "TRUST_LIST_STATUS_CHECK",
-            "OTHER_PAYMENT",
+            "ADD_CARD",
             "BILLING_AGREEMENT",
-            "DEVICE_BINDING_STATUS_CHECK",
             "CARD_SECURITY_CODE_STATUS_CHECK",
             "DELAYED_SHIPMENT",
+            "DEVICE_BINDING_STATUS_CHECK",
+            "INSTALLMENT_TRANSACTION",
+            "MAIL_ORDER",
+            "MAINTAIN_CARD_INFO",
+            "OTHER_PAYMENT",
+            "RECURRING_TRANSACTION",
             "SPLIT_PAYMENT",
+            "SPLIT_SHIPMENT",
+            "TELEPHONE_ORDER",
+            "TOP_UP",
+            "TRUST_LIST_STATUS_CHECK",
         ]
     ] = None
     """
