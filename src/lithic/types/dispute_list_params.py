@@ -41,14 +41,14 @@ class DisputeListParams(TypedDict, total=False):
     """
 
     status: Literal[
+        "ARBITRATION",
+        "CASE_CLOSED",
+        "CASE_WON",
         "NEW",
         "PENDING_CUSTOMER",
-        "SUBMITTED",
-        "REPRESENTMENT",
         "PREARBITRATION",
-        "ARBITRATION",
-        "CASE_WON",
-        "CASE_CLOSED",
+        "REPRESENTMENT",
+        "SUBMITTED",
     ]
     """List disputes of a specific status."""
 

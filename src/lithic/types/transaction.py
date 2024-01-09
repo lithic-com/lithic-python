@@ -21,6 +21,58 @@ class Event(BaseModel):
     created: datetime
     """RFC 3339 date and time this event entered the system. UTC time zone."""
 
+    detailed_results: List[
+        Literal[
+            "ACCOUNT_DAILY_SPEND_LIMIT_EXCEEDED",
+            "ACCOUNT_INACTIVE",
+            "ACCOUNT_LIFETIME_SPEND_LIMIT_EXCEEDED",
+            "ACCOUNT_MONTHLY_SPEND_LIMIT_EXCEEDED",
+            "ACCOUNT_UNDER_REVIEW",
+            "ADDRESS_INCORRECT",
+            "APPROVED",
+            "AUTH_RULE_ALLOWED_COUNTRY",
+            "AUTH_RULE_ALLOWED_MCC",
+            "AUTH_RULE_BLOCKED_COUNTRY",
+            "AUTH_RULE_BLOCKED_MCC",
+            "CARD_CLOSED",
+            "CARD_CRYPTOGRAM_VALIDATION_FAILURE",
+            "CARD_EXPIRED",
+            "CARD_EXPIRY_DATE_INCORRECT",
+            "CARD_INVALID",
+            "CARD_PAUSED",
+            "CARD_PIN_INCORRECT",
+            "CARD_RESTRICTED",
+            "CARD_SECURITY_CODE_INCORRECT",
+            "CARD_SPEND_LIMIT_EXCEEDED",
+            "CONTACT_CARD_ISSUER",
+            "CUSTOMER_ASA_TIMEOUT",
+            "CUSTOM_ASA_RESULT",
+            "DECLINED",
+            "DO_NOT_HONOR",
+            "FORMAT_ERROR",
+            "INSUFFICIENT_FUNDING_SOURCE_BALANCE",
+            "INSUFFICIENT_FUNDS",
+            "LITHIC_SYSTEM_ERROR",
+            "LITHIC_SYSTEM_RATE_LIMIT",
+            "MALFORMED_ASA_RESPONSE",
+            "MERCHANT_INVALID",
+            "MERCHANT_LOCKED_CARD_ATTEMPTED_ELSEWHERE",
+            "MERCHANT_NOT_PERMITTED",
+            "OVER_REVERSAL_ATTEMPTED",
+            "PROGRAM_CARD_SPEND_LIMIT_EXCEEDED",
+            "PROGRAM_SUSPENDED",
+            "PROGRAM_USAGE_RESTRICTION",
+            "REVERSAL_UNMATCHED",
+            "SECURITY_VIOLATION",
+            "SINGLE_USE_CARD_REATTEMPTED",
+            "TRANSACTION_INVALID",
+            "TRANSACTION_NOT_PERMITTED_TO_ACQUIRER_OR_TERMINAL",
+            "TRANSACTION_NOT_PERMITTED_TO_ISSUER_OR_CARDHOLDER",
+            "TRANSACTION_PREVIOUSLY_COMPLETED",
+            "UNAUTHORIZED_MERCHANT",
+        ]
+    ]
+
     result: Literal[
         "ACCOUNT_STATE_TRANSACTION",
         "APPROVED",
@@ -29,13 +81,13 @@ class Event(BaseModel):
         "CARD_CLOSED",
         "CARD_PAUSED",
         "FRAUD_ADVICE",
+        "GLOBAL_MONTHLY_LIMIT",
         "GLOBAL_TRANSACTION_LIMIT",
         "GLOBAL_WEEKLY_LIMIT",
-        "GLOBAL_MONTHLY_LIMIT",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
-        "INVALID_CARD_DETAILS",
         "INSUFFICIENT_FUNDS",
+        "INVALID_CARD_DETAILS",
         "MERCHANT_BLACKLIST",
         "SINGLE_USE_RECHARGED",
         "SWITCH_INOPERATIVE_ADVICE",
@@ -83,8 +135,8 @@ class Event(BaseModel):
         "AUTHORIZATION_REVERSAL",
         "BALANCE_INQUIRY",
         "CLEARING",
-        "CORRECTION_DEBIT",
         "CORRECTION_CREDIT",
+        "CORRECTION_DEBIT",
         "CREDIT_AUTHORIZATION",
         "CREDIT_AUTHORIZATION_ADVICE",
         "FINANCIAL_AUTHORIZATION",
@@ -178,7 +230,7 @@ class CardholderAuthentication(BaseModel):
     Maps to the 3-D Secure `transChallengeExemption` field.
     """
 
-    authentication_result: Literal["SUCCESS", "DECLINE", "ATTEMPTS", "NONE"]
+    authentication_result: Literal["ATTEMPTS", "DECLINE", "NONE", "SUCCESS"]
     """Outcome of the 3DS authentication process. Possible enum values:
 
     - `SUCCESS`: 3DS authentication was successful and the transaction is considered
@@ -192,7 +244,7 @@ class CardholderAuthentication(BaseModel):
     - `NONE`: 3DS authentication was not performed on the transaction.
     """
 
-    decision_made_by: Literal["NETWORK", "LITHIC_DEFAULT", "LITHIC_RULES", "CUSTOMER_ENDPOINT", "UNKNOWN"]
+    decision_made_by: Literal["CUSTOMER_ENDPOINT", "LITHIC_DEFAULT", "LITHIC_RULES", "NETWORK", "UNKNOWN"]
     """Indicator for which party made the 3DS authentication decision.
 
     Possible enum values:
@@ -348,7 +400,7 @@ class Transaction(BaseModel):
     merchant_currency: str
     """3-digit alphabetic ISO 4217 code for the local currency of the transaction."""
 
-    network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "VISA", "UNKNOWN"]] = None
+    network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]] = None
     """Card network of the authorization.
 
     Can be `INTERLINK`, `MAESTRO`, `MASTERCARD`, `VISA`, or `UNKNOWN`. Value is
@@ -364,13 +416,13 @@ class Transaction(BaseModel):
         "CARD_CLOSED",
         "CARD_PAUSED",
         "FRAUD_ADVICE",
+        "GLOBAL_MONTHLY_LIMIT",
         "GLOBAL_TRANSACTION_LIMIT",
         "GLOBAL_WEEKLY_LIMIT",
-        "GLOBAL_MONTHLY_LIMIT",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
-        "INVALID_CARD_DETAILS",
         "INSUFFICIENT_FUNDS",
+        "INVALID_CARD_DETAILS",
         "MERCHANT_BLACKLIST",
         "SINGLE_USE_RECHARGED",
         "SWITCH_INOPERATIVE_ADVICE",

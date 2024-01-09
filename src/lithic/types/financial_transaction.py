@@ -42,8 +42,8 @@ class Event(BaseModel):
             "AUTHORIZATION_REVERSAL",
             "BALANCE_INQUIRY",
             "CLEARING",
-            "CORRECTION_DEBIT",
             "CORRECTION_CREDIT",
+            "CORRECTION_DEBIT",
             "CREDIT_AUTHORIZATION",
             "CREDIT_AUTHORIZATION_ADVICE",
             "FINANCIAL_AUTHORIZATION",
@@ -97,7 +97,7 @@ class FinancialTransaction(BaseModel):
     token: str
     """Globally unique identifier."""
 
-    category: Literal["CARD", "ACH", "TRANSFER"]
+    category: Literal["ACH", "CARD", "TRANSFER"]
     """Status types:
 
     - `CARD` - Issuing card transaction.

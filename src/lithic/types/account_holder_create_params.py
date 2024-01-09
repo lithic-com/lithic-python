@@ -152,7 +152,7 @@ class KYBBeneficialOwnerIndividual(TypedDict, total=False):
     last_name: Required[str]
     """Individual's last name, as it appears on government-issued identity documents."""
 
-    phone_number: Required[str]
+    phone_number: str
     """Individual's phone number, entered in E.164 format."""
 
 
@@ -219,7 +219,7 @@ class KYBControlPerson(TypedDict, total=False):
     last_name: Required[str]
     """Individual's last name, as it appears on government-issued identity documents."""
 
-    phone_number: Required[str]
+    phone_number: str
     """Individual's phone number, entered in E.164 format."""
 
 

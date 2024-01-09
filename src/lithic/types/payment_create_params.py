@@ -18,9 +18,13 @@ class PaymentCreateParams(TypedDict, total=False):
 
     method_attributes: Required[MethodAttributes]
 
-    type: Required[Literal["PAYMENT", "COLLECTION"]]
+    type: Required[Literal["COLLECTION", "PAYMENT"]]
 
     token: str
+    """Customer-provided token that will serve as an idempotency token.
+
+    This token will become the transaction token.
+    """
 
     memo: str
 
@@ -28,7 +32,7 @@ class PaymentCreateParams(TypedDict, total=False):
 
 
 class MethodAttributes(TypedDict, total=False):
-    sec_code: Required[Literal["PPD", "CCD", "WEB"]]
+    sec_code: Required[Literal["CCD", "PPD", "WEB"]]
 
     company_id: str
 

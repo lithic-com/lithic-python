@@ -35,8 +35,8 @@ class TestPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={"sec_code": "PPD"},
-            type="PAYMENT",
+            method_attributes={"sec_code": "CCD"},
+            type="COLLECTION",
         )
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
 
@@ -48,13 +48,13 @@ class TestPayments:
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
             method_attributes={
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "PPD",
                 "company_id": "string",
                 "receipt_routing_number": "string",
+                "retries": 0,
+                "return_reason_code": "string",
+                "sec_code": "CCD",
             },
-            type="PAYMENT",
+            type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="string",
             user_defined_id="string",
@@ -68,8 +68,8 @@ class TestPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={"sec_code": "PPD"},
-            type="PAYMENT",
+            method_attributes={"sec_code": "CCD"},
+            type="COLLECTION",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
@@ -186,8 +186,8 @@ class TestAsyncPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={"sec_code": "PPD"},
-            type="PAYMENT",
+            method_attributes={"sec_code": "CCD"},
+            type="COLLECTION",
         )
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
 
@@ -199,13 +199,13 @@ class TestAsyncPayments:
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
             method_attributes={
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "PPD",
                 "company_id": "string",
                 "receipt_routing_number": "string",
+                "retries": 0,
+                "return_reason_code": "string",
+                "sec_code": "CCD",
             },
-            type="PAYMENT",
+            type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="string",
             user_defined_id="string",
@@ -219,8 +219,8 @@ class TestAsyncPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={"sec_code": "PPD"},
-            type="PAYMENT",
+            method_attributes={"sec_code": "CCD"},
+            type="COLLECTION",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()

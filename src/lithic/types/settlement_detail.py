@@ -60,7 +60,7 @@ class SettlementDetail(BaseModel):
     interchange_gross_amount: int
     """The total amount of interchange."""
 
-    network: Literal["MASTERCARD", "VISA", "INTERLINK", "MAESTRO", "UNKNOWN"]
+    network: Literal["INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]
     """Card network where the transaction took place."""
 
     other_fees_details: OtherFeesDetails

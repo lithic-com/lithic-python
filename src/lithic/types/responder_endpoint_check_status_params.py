@@ -8,5 +8,5 @@ __all__ = ["ResponderEndpointCheckStatusParams"]
 
 
 class ResponderEndpointCheckStatusParams(TypedDict, total=False):
-    type: Required[Literal["AUTH_STREAM_ACCESS", "TOKENIZATION_DECISIONING", "THREE_DS_DECISIONING"]]
+    type: Required[Literal["AUTH_STREAM_ACCESS", "THREE_DS_DECISIONING", "TOKENIZATION_DECISIONING"]]
     """The type of the endpoint."""

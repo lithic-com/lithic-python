@@ -11,7 +11,7 @@ __all__ = ["CardCreateParams"]
 
 
 class CardCreateParams(TypedDict, total=False):
-    type: Required[Literal["VIRTUAL", "PHYSICAL", "MERCHANT_LOCKED", "SINGLE_USE"]]
+    type: Required[Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"]]
     """Card types:
 
     - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
@@ -90,9 +90,15 @@ class CardCreateParams(TypedDict, total=False):
     (i.e., physical card art) that the card should be manufactured with.
     """
 
+    replacement_for: str
+    """Only applicable to cards of type `PHYSICAL`.
+
+    Globally unique identifier for the card that this physical card will replace.
+    """
+
     shipping_address: shared_params.ShippingAddress
 
-    shipping_method: Literal["STANDARD", "STANDARD_WITH_TRACKING", "PRIORITY", "EXPRESS", "2_DAY", "EXPEDITED"]
+    shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
     """Shipping method for the card.
 
     Only applies to cards of type PHYSICAL. Use of options besides `STANDARD`

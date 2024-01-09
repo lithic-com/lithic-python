@@ -23,6 +23,7 @@ from .digital_card_art import DigitalCardArt as DigitalCardArt
 from .dispute_evidence import DisputeEvidence as DisputeEvidence
 from .aggregate_balance import AggregateBalance as AggregateBalance
 from .card_embed_params import CardEmbedParams as CardEmbedParams
+from .card_renew_params import CardRenewParams as CardRenewParams
 from .card_spend_limits import CardSpendLimits as CardSpendLimits
 from .event_list_params import EventListParams as EventListParams
 from .financial_account import FinancialAccount as FinancialAccount
