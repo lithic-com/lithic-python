@@ -8,7 +8,7 @@ and offers both synchronous and asynchronous clients powered by [httpx](https://
 
 ## Documentation
 
-The API documentation can be found [here](https://docs.lithic.com).
+The REST API documentation can be found [on docs.lithic.com](https://docs.lithic.com). The full API of this library can be found in [api.md](https://www.github.com/lithic-com/lithic-python/blob/main/api.md).
 
 ## Installation
 
