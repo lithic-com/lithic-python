@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -396,9 +397,134 @@ class TestAccountHolders:
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.create(
+            beneficial_owner_entities=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+            ],
+            beneficial_owner_individuals=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                },
+            ],
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "phone_numbers": ["+12124007676"],
+            },
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+            },
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2018-05-29T21:16:05Z",
+            workflow="KYB_BASIC",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_create_overload_2(self, client: Lithic) -> None:
@@ -469,9 +595,40 @@ class TestAccountHolders:
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.create(
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            tos_timestamp="string",
+            workflow="KYC_ADVANCED",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_create_overload_3(self, client: Lithic) -> None:
@@ -516,9 +673,29 @@ class TestAccountHolders:
             phone_number="string",
             workflow="KYC_EXEMPT",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.create(
+            email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
+            phone_number="string",
+            workflow="KYC_EXEMPT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
@@ -532,9 +709,24 @@ class TestAccountHolders:
         response = client.account_holders.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
@@ -558,9 +750,24 @@ class TestAccountHolders:
         response = client.account_holders.with_raw_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list_documents(self, client: Lithic) -> None:
@@ -574,9 +781,24 @@ class TestAccountHolders:
         response = client.account_holders.with_raw_response.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list_documents(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.list_documents(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_resubmit(self, client: Lithic) -> None:
@@ -624,9 +846,41 @@ class TestAccountHolders:
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYC_ADVANCED",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_resubmit(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.resubmit(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            tos_timestamp="2018-05-29T21:16:05Z",
+            workflow="KYC_ADVANCED",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_retrieve_document(self, client: Lithic) -> None:
@@ -642,9 +896,25 @@ class TestAccountHolders:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_document(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.retrieve_document(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_upload_document(self, client: Lithic) -> None:
@@ -660,9 +930,25 @@ class TestAccountHolders:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_upload_document(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.upload_document(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="drivers_license",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncAccountHolders:
@@ -1041,9 +1327,134 @@ class TestAsyncAccountHolders:
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_1(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.create(
+            beneficial_owner_entities=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+12124007676"],
+                },
+            ],
+            beneficial_owner_individuals=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                },
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                },
+            ],
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "phone_numbers": ["+12124007676"],
+            },
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+            },
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2018-05-29T21:16:05Z",
+            workflow="KYB_BASIC",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_create_overload_2(self, client: AsyncLithic) -> None:
@@ -1114,9 +1525,40 @@ class TestAsyncAccountHolders:
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.create(
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            tos_timestamp="string",
+            workflow="KYC_ADVANCED",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_create_overload_3(self, client: AsyncLithic) -> None:
@@ -1161,9 +1603,29 @@ class TestAsyncAccountHolders:
             phone_number="string",
             workflow="KYC_EXEMPT",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_3(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.create(
+            email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
+            phone_number="string",
+            workflow="KYC_EXEMPT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
@@ -1177,9 +1639,24 @@ class TestAsyncAccountHolders:
         response = await client.account_holders.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
@@ -1203,9 +1680,24 @@ class TestAsyncAccountHolders:
         response = await client.account_holders.with_raw_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list_documents(self, client: AsyncLithic) -> None:
@@ -1219,9 +1711,24 @@ class TestAsyncAccountHolders:
         response = await client.account_holders.with_raw_response.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list_documents(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.list_documents(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_resubmit(self, client: AsyncLithic) -> None:
@@ -1269,9 +1776,41 @@ class TestAsyncAccountHolders:
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYC_ADVANCED",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_resubmit(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.resubmit(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            individual={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+12124007676",
+            },
+            tos_timestamp="2018-05-29T21:16:05Z",
+            workflow="KYC_ADVANCED",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolder, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_retrieve_document(self, client: AsyncLithic) -> None:
@@ -1287,9 +1826,25 @@ class TestAsyncAccountHolders:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_document(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.retrieve_document(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_upload_document(self, client: AsyncLithic) -> None:
@@ -1305,6 +1860,22 @@ class TestAsyncAccountHolders:
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_upload_document(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.upload_document(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="drivers_license",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

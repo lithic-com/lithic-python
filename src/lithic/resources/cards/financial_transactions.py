@@ -8,12 +8,13 @@ from typing_extensions import Literal
 
 import httpx
 
+from ... import _legacy_response
 from ...types import FinancialTransaction
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ...types.cards import financial_transaction_list_params
 from ..._base_client import (
@@ -28,6 +29,10 @@ class FinancialTransactions(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> FinancialTransactionsWithRawResponse:
         return FinancialTransactionsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> FinancialTransactionsWithStreamingResponse:
+        return FinancialTransactionsWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -139,6 +144,10 @@ class AsyncFinancialTransactions(AsyncAPIResource):
     def with_raw_response(self) -> AsyncFinancialTransactionsWithRawResponse:
         return AsyncFinancialTransactionsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncFinancialTransactionsWithStreamingResponse:
+        return AsyncFinancialTransactionsWithStreamingResponse(self)
+
     async def retrieve(
         self,
         financial_transaction_token: str,
@@ -246,19 +255,39 @@ class AsyncFinancialTransactions(AsyncAPIResource):
 
 class FinancialTransactionsWithRawResponse:
     def __init__(self, financial_transactions: FinancialTransactions) -> None:
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             financial_transactions.retrieve,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             financial_transactions.list,
         )
 
 
 class AsyncFinancialTransactionsWithRawResponse:
     def __init__(self, financial_transactions: AsyncFinancialTransactions) -> None:
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             financial_transactions.retrieve,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
+            financial_transactions.list,
+        )
+
+
+class FinancialTransactionsWithStreamingResponse:
+    def __init__(self, financial_transactions: FinancialTransactions) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            financial_transactions.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            financial_transactions.list,
+        )
+
+
+class AsyncFinancialTransactionsWithStreamingResponse:
+    def __init__(self, financial_transactions: AsyncFinancialTransactions) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
+            financial_transactions.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
             financial_transactions.list,
         )

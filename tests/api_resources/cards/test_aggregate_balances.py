@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -37,9 +38,22 @@ class TestAggregateBalances:
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
         response = client.cards.aggregate_balances.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         aggregate_balance = response.parse()
         assert_matches_type(SyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.cards.aggregate_balances.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            aggregate_balance = response.parse()
+            assert_matches_type(SyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncAggregateBalances:
@@ -63,6 +77,19 @@ class TestAsyncAggregateBalances:
     @parametrize
     async def test_raw_response_list(self, client: AsyncLithic) -> None:
         response = await client.cards.aggregate_balances.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         aggregate_balance = response.parse()
         assert_matches_type(AsyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.cards.aggregate_balances.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            aggregate_balance = await response.parse()
+            assert_matches_type(AsyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

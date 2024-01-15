@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import httpx
 
+from ... import _legacy_response
 from ...types import BusinessAccount
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..._base_client import (
     make_request_options,
 )
@@ -22,6 +23,10 @@ class CreditConfigurations(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> CreditConfigurationsWithRawResponse:
         return CreditConfigurationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> CreditConfigurationsWithStreamingResponse:
+        return CreditConfigurationsWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -119,6 +124,10 @@ class AsyncCreditConfigurations(AsyncAPIResource):
     def with_raw_response(self) -> AsyncCreditConfigurationsWithRawResponse:
         return AsyncCreditConfigurationsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncCreditConfigurationsWithStreamingResponse:
+        return AsyncCreditConfigurationsWithStreamingResponse(self)
+
     async def retrieve(
         self,
         account_token: str,
@@ -212,19 +221,39 @@ class AsyncCreditConfigurations(AsyncAPIResource):
 
 class CreditConfigurationsWithRawResponse:
     def __init__(self, credit_configurations: CreditConfigurations) -> None:
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             credit_configurations.retrieve,
         )
-        self.update = to_raw_response_wrapper(
+        self.update = _legacy_response.to_raw_response_wrapper(
             credit_configurations.update,
         )
 
 
 class AsyncCreditConfigurationsWithRawResponse:
     def __init__(self, credit_configurations: AsyncCreditConfigurations) -> None:
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             credit_configurations.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
+        self.update = _legacy_response.async_to_raw_response_wrapper(
+            credit_configurations.update,
+        )
+
+
+class CreditConfigurationsWithStreamingResponse:
+    def __init__(self, credit_configurations: CreditConfigurations) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            credit_configurations.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            credit_configurations.update,
+        )
+
+
+class AsyncCreditConfigurationsWithStreamingResponse:
+    def __init__(self, credit_configurations: AsyncCreditConfigurations) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
+            credit_configurations.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
             credit_configurations.update,
         )

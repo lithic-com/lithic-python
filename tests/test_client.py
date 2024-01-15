@@ -19,6 +19,8 @@ from pydantic import ValidationError
 from lithic import Lithic, AsyncLithic, APIResponseValidationError
 from lithic._client import Lithic, AsyncLithic
 from lithic._models import BaseModel, FinalRequestOptions
+from lithic._response import APIResponse, AsyncAPIResponse
+from lithic._constants import RAW_RESPONSE_HEADER
 from lithic._exceptions import LithicError, APIStatusError, APITimeoutError, APIResponseValidationError
 from lithic._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
@@ -219,6 +221,7 @@ class TestLithic:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
+                        "lithic/_legacy_response.py",
                         "lithic/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
                         "lithic/_compat.py",
@@ -782,6 +785,25 @@ class TestLithic:
 
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
+    def test_streaming_response(self) -> None:
+        response = self.client.post(
+            "/cards",
+            body=dict(type="SINGLE_USE"),
+            cast_to=APIResponse[bytes],
+            options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+        )
+
+        assert not cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 1
+
+        for _ in response.iter_bytes():
+            ...
+
+        assert cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 0
+
+    @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/cards").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
@@ -790,7 +812,7 @@ class TestLithic:
                 "/cards",
                 body=dict(type="SINGLE_USE"),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -805,7 +827,7 @@ class TestLithic:
                 "/cards",
                 body=dict(type="SINGLE_USE"),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -986,6 +1008,7 @@ class TestAsyncLithic:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
+                        "lithic/_legacy_response.py",
                         "lithic/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
                         "lithic/_compat.py",
@@ -1567,6 +1590,25 @@ class TestAsyncLithic:
 
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
+    async def test_streaming_response(self) -> None:
+        response = await self.client.post(
+            "/cards",
+            body=dict(type="SINGLE_USE"),
+            cast_to=AsyncAPIResponse[bytes],
+            options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+        )
+
+        assert not cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 1
+
+        async for _ in response.iter_bytes():
+            ...
+
+        assert cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 0
+
+    @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/cards").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
@@ -1575,7 +1617,7 @@ class TestAsyncLithic:
                 "/cards",
                 body=dict(type="SINGLE_USE"),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1590,7 +1632,7 @@ class TestAsyncLithic:
                 "/cards",
                 body=dict(type="SINGLE_USE"),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0

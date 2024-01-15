@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -28,9 +29,22 @@ class TestTokenizationDecisioning:
     @parametrize
     def test_raw_response_retrieve_secret(self, client: Lithic) -> None:
         response = client.tokenization_decisioning.with_raw_response.retrieve_secret()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization_decisioning = response.parse()
         assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_secret(self, client: Lithic) -> None:
+        with client.tokenization_decisioning.with_streaming_response.retrieve_secret() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization_decisioning = response.parse()
+            assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_rotate_secret(self, client: Lithic) -> None:
@@ -40,9 +54,24 @@ class TestTokenizationDecisioning:
     @parametrize
     def test_raw_response_rotate_secret(self, client: Lithic) -> None:
         response = client.tokenization_decisioning.with_raw_response.rotate_secret()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization_decisioning = response.parse()
         assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])
+
+    @parametrize
+    def test_streaming_response_rotate_secret(self, client: Lithic) -> None:
+        with client.tokenization_decisioning.with_streaming_response.rotate_secret() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization_decisioning = response.parse()
+            assert_matches_type(
+                TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncTokenizationDecisioning:
@@ -58,9 +87,22 @@ class TestAsyncTokenizationDecisioning:
     @parametrize
     async def test_raw_response_retrieve_secret(self, client: AsyncLithic) -> None:
         response = await client.tokenization_decisioning.with_raw_response.retrieve_secret()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization_decisioning = response.parse()
         assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_secret(self, client: AsyncLithic) -> None:
+        async with client.tokenization_decisioning.with_streaming_response.retrieve_secret() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization_decisioning = await response.parse()
+            assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_rotate_secret(self, client: AsyncLithic) -> None:
@@ -70,6 +112,21 @@ class TestAsyncTokenizationDecisioning:
     @parametrize
     async def test_raw_response_rotate_secret(self, client: AsyncLithic) -> None:
         response = await client.tokenization_decisioning.with_raw_response.rotate_secret()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization_decisioning = response.parse()
         assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_rotate_secret(self, client: AsyncLithic) -> None:
+        async with client.tokenization_decisioning.with_streaming_response.rotate_secret() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization_decisioning = await response.parse()
+            assert_matches_type(
+                TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True

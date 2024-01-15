@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -34,9 +35,24 @@ class TestEvents:
         response = client.events.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
         assert_matches_type(Event, event, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.events.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = response.parse()
+            assert_matches_type(Event, event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -59,9 +75,22 @@ class TestEvents:
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
         response = client.events.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
         assert_matches_type(SyncCursorPage[Event], event, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.events.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = response.parse()
+            assert_matches_type(SyncCursorPage[Event], event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list_attempts(self, client: Lithic) -> None:
@@ -88,9 +117,24 @@ class TestEvents:
         response = client.events.with_raw_response.list_attempts(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
         assert_matches_type(SyncCursorPage[MessageAttempt], event, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list_attempts(self, client: Lithic) -> None:
+        with client.events.with_streaming_response.list_attempts(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = response.parse()
+            assert_matches_type(SyncCursorPage[MessageAttempt], event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     def test_method_resend(self) -> None:
@@ -117,9 +161,24 @@ class TestAsyncEvents:
         response = await client.events.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
         assert_matches_type(Event, event, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.events.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = await response.parse()
+            assert_matches_type(Event, event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -142,9 +201,22 @@ class TestAsyncEvents:
     @parametrize
     async def test_raw_response_list(self, client: AsyncLithic) -> None:
         response = await client.events.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.events.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = await response.parse()
+            assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list_attempts(self, client: AsyncLithic) -> None:
@@ -171,9 +243,24 @@ class TestAsyncEvents:
         response = await client.events.with_raw_response.list_attempts(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
         assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list_attempts(self, client: AsyncLithic) -> None:
+        async with client.events.with_streaming_response.list_attempts(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = await response.parse()
+            assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     async def test_method_resend(self) -> None:

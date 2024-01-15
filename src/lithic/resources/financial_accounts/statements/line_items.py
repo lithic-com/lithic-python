@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import httpx
 
+from .... import _legacy_response
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import (
     AsyncPaginator,
@@ -23,6 +24,10 @@ class LineItems(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> LineItemsWithRawResponse:
         return LineItemsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> LineItemsWithStreamingResponse:
+        return LineItemsWithStreamingResponse(self)
 
     def list(
         self,
@@ -85,6 +90,10 @@ class AsyncLineItems(AsyncAPIResource):
     def with_raw_response(self) -> AsyncLineItemsWithRawResponse:
         return AsyncLineItemsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncLineItemsWithStreamingResponse:
+        return AsyncLineItemsWithStreamingResponse(self)
+
     def list(
         self,
         statement_token: str,
@@ -143,13 +152,27 @@ class AsyncLineItems(AsyncAPIResource):
 
 class LineItemsWithRawResponse:
     def __init__(self, line_items: LineItems) -> None:
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             line_items.list,
         )
 
 
 class AsyncLineItemsWithRawResponse:
     def __init__(self, line_items: AsyncLineItems) -> None:
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
+            line_items.list,
+        )
+
+
+class LineItemsWithStreamingResponse:
+    def __init__(self, line_items: LineItems) -> None:
+        self.list = to_streamed_response_wrapper(
+            line_items.list,
+        )
+
+
+class AsyncLineItemsWithStreamingResponse:
+    def __init__(self, line_items: AsyncLineItems) -> None:
+        self.list = async_to_streamed_response_wrapper(
             line_items.list,
         )

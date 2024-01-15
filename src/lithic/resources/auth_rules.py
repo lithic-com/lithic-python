@@ -6,6 +6,7 @@ from typing import List
 
 import httpx
 
+from .. import _legacy_response
 from ..types import (
     AuthRule,
     AuthRuleRemoveResponse,
@@ -20,7 +21,7 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import (
     AsyncPaginator,
@@ -34,6 +35,10 @@ class AuthRules(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AuthRulesWithRawResponse:
         return AuthRulesWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AuthRulesWithStreamingResponse:
+        return AuthRulesWithStreamingResponse(self)
 
     def create(
         self,
@@ -387,6 +392,10 @@ class AsyncAuthRules(AsyncAPIResource):
     def with_raw_response(self) -> AsyncAuthRulesWithRawResponse:
         return AsyncAuthRulesWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncAuthRulesWithStreamingResponse:
+        return AsyncAuthRulesWithStreamingResponse(self)
+
     async def create(
         self,
         *,
@@ -736,43 +745,87 @@ class AsyncAuthRules(AsyncAPIResource):
 
 class AuthRulesWithRawResponse:
     def __init__(self, auth_rules: AuthRules) -> None:
-        self.create = to_raw_response_wrapper(
+        self.create = _legacy_response.to_raw_response_wrapper(
             auth_rules.create,
         )
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             auth_rules.retrieve,
         )
-        self.update = to_raw_response_wrapper(
+        self.update = _legacy_response.to_raw_response_wrapper(
             auth_rules.update,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             auth_rules.list,
         )
-        self.apply = to_raw_response_wrapper(
+        self.apply = _legacy_response.to_raw_response_wrapper(
             auth_rules.apply,
         )
-        self.remove = to_raw_response_wrapper(
+        self.remove = _legacy_response.to_raw_response_wrapper(
             auth_rules.remove,
         )
 
 
 class AsyncAuthRulesWithRawResponse:
     def __init__(self, auth_rules: AsyncAuthRules) -> None:
-        self.create = async_to_raw_response_wrapper(
+        self.create = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.create,
         )
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
+        self.update = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.update,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.list,
         )
-        self.apply = async_to_raw_response_wrapper(
+        self.apply = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.apply,
         )
-        self.remove = async_to_raw_response_wrapper(
+        self.remove = _legacy_response.async_to_raw_response_wrapper(
+            auth_rules.remove,
+        )
+
+
+class AuthRulesWithStreamingResponse:
+    def __init__(self, auth_rules: AuthRules) -> None:
+        self.create = to_streamed_response_wrapper(
+            auth_rules.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            auth_rules.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            auth_rules.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            auth_rules.list,
+        )
+        self.apply = to_streamed_response_wrapper(
+            auth_rules.apply,
+        )
+        self.remove = to_streamed_response_wrapper(
+            auth_rules.remove,
+        )
+
+
+class AsyncAuthRulesWithStreamingResponse:
+    def __init__(self, auth_rules: AsyncAuthRules) -> None:
+        self.create = async_to_streamed_response_wrapper(
+            auth_rules.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            auth_rules.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            auth_rules.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            auth_rules.list,
+        )
+        self.apply = async_to_streamed_response_wrapper(
+            auth_rules.apply,
+        )
+        self.remove = async_to_streamed_response_wrapper(
             auth_rules.remove,
         )

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -43,9 +44,24 @@ class TestBalances:
         response = client.cards.balances.with_raw_response.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         balance = response.parse()
         assert_matches_type(SyncSinglePage[Balance], balance, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.cards.balances.with_streaming_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            balance = response.parse()
+            assert_matches_type(SyncSinglePage[Balance], balance, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncBalances:
@@ -74,6 +90,21 @@ class TestAsyncBalances:
         response = await client.cards.balances.with_raw_response.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         balance = response.parse()
         assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.cards.balances.with_streaming_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            balance = await response.parse()
+            assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

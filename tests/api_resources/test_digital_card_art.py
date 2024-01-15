@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -33,9 +34,24 @@ class TestDigitalCardArt:
         response = client.digital_card_art.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         digital_card_art = response.parse()
         assert_matches_type(DigitalCardArt, digital_card_art, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.digital_card_art.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            digital_card_art = response.parse()
+            assert_matches_type(DigitalCardArt, digital_card_art, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -54,9 +70,22 @@ class TestDigitalCardArt:
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
         response = client.digital_card_art.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         digital_card_art = response.parse()
         assert_matches_type(SyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.digital_card_art.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            digital_card_art = response.parse()
+            assert_matches_type(SyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncDigitalCardArt:
@@ -76,9 +105,24 @@ class TestAsyncDigitalCardArt:
         response = await client.digital_card_art.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         digital_card_art = response.parse()
         assert_matches_type(DigitalCardArt, digital_card_art, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.digital_card_art.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            digital_card_art = await response.parse()
+            assert_matches_type(DigitalCardArt, digital_card_art, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -97,6 +141,19 @@ class TestAsyncDigitalCardArt:
     @parametrize
     async def test_raw_response_list(self, client: AsyncLithic) -> None:
         response = await client.digital_card_art.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         digital_card_art = response.parse()
         assert_matches_type(AsyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.digital_card_art.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            digital_card_art = await response.parse()
+            assert_matches_type(AsyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -51,9 +52,27 @@ class TestTokenizations:
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate(self, client: Lithic) -> None:
+        with client.tokenizations.with_streaming_response.simulate(
+            cvv="776",
+            expiration_date="08/29",
+            pan="4111111289144142",
+            tokenization_source="APPLE_PAY",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = response.parse()
+            assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncTokenizations:
@@ -92,6 +111,24 @@ class TestAsyncTokenizations:
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate(self, client: AsyncLithic) -> None:
+        async with client.tokenizations.with_streaming_response.simulate(
+            cvv="776",
+            expiration_date="08/29",
+            pan="4111111289144142",
+            tokenization_source="APPLE_PAY",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = await response.parse()
+            assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

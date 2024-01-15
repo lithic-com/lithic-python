@@ -8,7 +8,7 @@ from typing_extensions import Self, Literal, override
 
 import httpx
 
-from . import resources, _exceptions
+from . import resources, _exceptions, _legacy_response
 from ._qs import Querystring
 from .types import APIStatus
 from ._types import (
@@ -29,7 +29,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from ._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import LithicError, APIStatusError
 from ._base_client import (
@@ -85,6 +85,7 @@ class Lithic(SyncAPIClient):
     card_programs: resources.CardPrograms
     digital_card_art: resources.DigitalCardArtResource
     with_raw_response: LithicWithRawResponse
+    with_streaming_response: LithicWithStreamedResponse
 
     # client options
     api_key: str
@@ -204,6 +205,7 @@ class Lithic(SyncAPIClient):
         self.card_programs = resources.CardPrograms(self)
         self.digital_card_art = resources.DigitalCardArtResource(self)
         self.with_raw_response = LithicWithRawResponse(self)
+        self.with_streaming_response = LithicWithStreamedResponse(self)
 
     @property
     @override
@@ -377,6 +379,7 @@ class AsyncLithic(AsyncAPIClient):
     card_programs: resources.AsyncCardPrograms
     digital_card_art: resources.AsyncDigitalCardArtResource
     with_raw_response: AsyncLithicWithRawResponse
+    with_streaming_response: AsyncLithicWithStreamedResponse
 
     # client options
     api_key: str
@@ -496,6 +499,7 @@ class AsyncLithic(AsyncAPIClient):
         self.card_programs = resources.AsyncCardPrograms(self)
         self.digital_card_art = resources.AsyncDigitalCardArtResource(self)
         self.with_raw_response = AsyncLithicWithRawResponse(self)
+        self.with_streaming_response = AsyncLithicWithStreamedResponse(self)
 
     @property
     @override
@@ -671,7 +675,7 @@ class LithicWithRawResponse:
         self.card_programs = resources.CardProgramsWithRawResponse(client.card_programs)
         self.digital_card_art = resources.DigitalCardArtResourceWithRawResponse(client.digital_card_art)
 
-        self.api_status = to_raw_response_wrapper(
+        self.api_status = _legacy_response.to_raw_response_wrapper(
             client.api_status,
         )
 
@@ -702,7 +706,73 @@ class AsyncLithicWithRawResponse:
         self.card_programs = resources.AsyncCardProgramsWithRawResponse(client.card_programs)
         self.digital_card_art = resources.AsyncDigitalCardArtResourceWithRawResponse(client.digital_card_art)
 
-        self.api_status = async_to_raw_response_wrapper(
+        self.api_status = _legacy_response.async_to_raw_response_wrapper(
+            client.api_status,
+        )
+
+
+class LithicWithStreamedResponse:
+    def __init__(self, client: Lithic) -> None:
+        self.accounts = resources.AccountsWithStreamingResponse(client.accounts)
+        self.account_holders = resources.AccountHoldersWithStreamingResponse(client.account_holders)
+        self.auth_rules = resources.AuthRulesWithStreamingResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AuthStreamEnrollmentWithStreamingResponse(client.auth_stream_enrollment)
+        self.tokenization_decisioning = resources.TokenizationDecisioningWithStreamingResponse(
+            client.tokenization_decisioning
+        )
+        self.tokenizations = resources.TokenizationsWithStreamingResponse(client.tokenizations)
+        self.cards = resources.CardsWithStreamingResponse(client.cards)
+        self.balances = resources.BalancesWithStreamingResponse(client.balances)
+        self.aggregate_balances = resources.AggregateBalancesWithStreamingResponse(client.aggregate_balances)
+        self.disputes = resources.DisputesWithStreamingResponse(client.disputes)
+        self.events = resources.EventsWithStreamingResponse(client.events)
+        self.financial_accounts = resources.FinancialAccountsWithStreamingResponse(client.financial_accounts)
+        self.transactions = resources.TransactionsWithStreamingResponse(client.transactions)
+        self.responder_endpoints = resources.ResponderEndpointsWithStreamingResponse(client.responder_endpoints)
+        self.external_bank_accounts = resources.ExternalBankAccountsWithStreamingResponse(client.external_bank_accounts)
+        self.payments = resources.PaymentsWithStreamingResponse(client.payments)
+        self.three_ds = resources.ThreeDSWithStreamingResponse(client.three_ds)
+        self.reports = resources.ReportsWithStreamingResponse(client.reports)
+        self.card_product = resources.CardProductWithStreamingResponse(client.card_product)
+        self.card_programs = resources.CardProgramsWithStreamingResponse(client.card_programs)
+        self.digital_card_art = resources.DigitalCardArtResourceWithStreamingResponse(client.digital_card_art)
+
+        self.api_status = to_streamed_response_wrapper(
+            client.api_status,
+        )
+
+
+class AsyncLithicWithStreamedResponse:
+    def __init__(self, client: AsyncLithic) -> None:
+        self.accounts = resources.AsyncAccountsWithStreamingResponse(client.accounts)
+        self.account_holders = resources.AsyncAccountHoldersWithStreamingResponse(client.account_holders)
+        self.auth_rules = resources.AsyncAuthRulesWithStreamingResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentWithStreamingResponse(
+            client.auth_stream_enrollment
+        )
+        self.tokenization_decisioning = resources.AsyncTokenizationDecisioningWithStreamingResponse(
+            client.tokenization_decisioning
+        )
+        self.tokenizations = resources.AsyncTokenizationsWithStreamingResponse(client.tokenizations)
+        self.cards = resources.AsyncCardsWithStreamingResponse(client.cards)
+        self.balances = resources.AsyncBalancesWithStreamingResponse(client.balances)
+        self.aggregate_balances = resources.AsyncAggregateBalancesWithStreamingResponse(client.aggregate_balances)
+        self.disputes = resources.AsyncDisputesWithStreamingResponse(client.disputes)
+        self.events = resources.AsyncEventsWithStreamingResponse(client.events)
+        self.financial_accounts = resources.AsyncFinancialAccountsWithStreamingResponse(client.financial_accounts)
+        self.transactions = resources.AsyncTransactionsWithStreamingResponse(client.transactions)
+        self.responder_endpoints = resources.AsyncResponderEndpointsWithStreamingResponse(client.responder_endpoints)
+        self.external_bank_accounts = resources.AsyncExternalBankAccountsWithStreamingResponse(
+            client.external_bank_accounts
+        )
+        self.payments = resources.AsyncPaymentsWithStreamingResponse(client.payments)
+        self.three_ds = resources.AsyncThreeDSWithStreamingResponse(client.three_ds)
+        self.reports = resources.AsyncReportsWithStreamingResponse(client.reports)
+        self.card_product = resources.AsyncCardProductWithStreamingResponse(client.card_product)
+        self.card_programs = resources.AsyncCardProgramsWithStreamingResponse(client.card_programs)
+        self.digital_card_art = resources.AsyncDigitalCardArtResourceWithStreamingResponse(client.digital_card_art)
+
+        self.api_status = async_to_streamed_response_wrapper(
             client.api_status,
         )
 

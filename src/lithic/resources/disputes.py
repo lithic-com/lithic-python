@@ -8,6 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
+from .. import _legacy_response
 from ..types import (
     Dispute,
     DisputeEvidence,
@@ -30,7 +31,7 @@ from .._types import (
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import (
     AsyncPaginator,
@@ -44,6 +45,10 @@ class Disputes(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DisputesWithRawResponse:
         return DisputesWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DisputesWithStreamingResponse:
+        return DisputesWithStreamingResponse(self)
 
     def create(
         self,
@@ -563,6 +568,10 @@ class AsyncDisputes(AsyncAPIResource):
     def with_raw_response(self) -> AsyncDisputesWithRawResponse:
         return AsyncDisputesWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncDisputesWithStreamingResponse:
+        return AsyncDisputesWithStreamingResponse(self)
+
     async def create(
         self,
         *,
@@ -1078,61 +1087,123 @@ class AsyncDisputes(AsyncAPIResource):
 
 class DisputesWithRawResponse:
     def __init__(self, disputes: Disputes) -> None:
-        self.create = to_raw_response_wrapper(
+        self.create = _legacy_response.to_raw_response_wrapper(
             disputes.create,
         )
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             disputes.retrieve,
         )
-        self.update = to_raw_response_wrapper(
+        self.update = _legacy_response.to_raw_response_wrapper(
             disputes.update,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             disputes.list,
         )
-        self.delete = to_raw_response_wrapper(
+        self.delete = _legacy_response.to_raw_response_wrapper(
             disputes.delete,
         )
-        self.delete_evidence = to_raw_response_wrapper(
+        self.delete_evidence = _legacy_response.to_raw_response_wrapper(
             disputes.delete_evidence,
         )
-        self.initiate_evidence_upload = to_raw_response_wrapper(
+        self.initiate_evidence_upload = _legacy_response.to_raw_response_wrapper(
             disputes.initiate_evidence_upload,
         )
-        self.list_evidences = to_raw_response_wrapper(
+        self.list_evidences = _legacy_response.to_raw_response_wrapper(
             disputes.list_evidences,
         )
-        self.retrieve_evidence = to_raw_response_wrapper(
+        self.retrieve_evidence = _legacy_response.to_raw_response_wrapper(
             disputes.retrieve_evidence,
         )
 
 
 class AsyncDisputesWithRawResponse:
     def __init__(self, disputes: AsyncDisputes) -> None:
-        self.create = async_to_raw_response_wrapper(
+        self.create = _legacy_response.async_to_raw_response_wrapper(
             disputes.create,
         )
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             disputes.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
+        self.update = _legacy_response.async_to_raw_response_wrapper(
             disputes.update,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
             disputes.list,
         )
-        self.delete = async_to_raw_response_wrapper(
+        self.delete = _legacy_response.async_to_raw_response_wrapper(
             disputes.delete,
         )
-        self.delete_evidence = async_to_raw_response_wrapper(
+        self.delete_evidence = _legacy_response.async_to_raw_response_wrapper(
             disputes.delete_evidence,
         )
-        self.initiate_evidence_upload = async_to_raw_response_wrapper(
+        self.initiate_evidence_upload = _legacy_response.async_to_raw_response_wrapper(
             disputes.initiate_evidence_upload,
         )
-        self.list_evidences = async_to_raw_response_wrapper(
+        self.list_evidences = _legacy_response.async_to_raw_response_wrapper(
             disputes.list_evidences,
         )
-        self.retrieve_evidence = async_to_raw_response_wrapper(
+        self.retrieve_evidence = _legacy_response.async_to_raw_response_wrapper(
+            disputes.retrieve_evidence,
+        )
+
+
+class DisputesWithStreamingResponse:
+    def __init__(self, disputes: Disputes) -> None:
+        self.create = to_streamed_response_wrapper(
+            disputes.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            disputes.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            disputes.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            disputes.list,
+        )
+        self.delete = to_streamed_response_wrapper(
+            disputes.delete,
+        )
+        self.delete_evidence = to_streamed_response_wrapper(
+            disputes.delete_evidence,
+        )
+        self.initiate_evidence_upload = to_streamed_response_wrapper(
+            disputes.initiate_evidence_upload,
+        )
+        self.list_evidences = to_streamed_response_wrapper(
+            disputes.list_evidences,
+        )
+        self.retrieve_evidence = to_streamed_response_wrapper(
+            disputes.retrieve_evidence,
+        )
+
+
+class AsyncDisputesWithStreamingResponse:
+    def __init__(self, disputes: AsyncDisputes) -> None:
+        self.create = async_to_streamed_response_wrapper(
+            disputes.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            disputes.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            disputes.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            disputes.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            disputes.delete,
+        )
+        self.delete_evidence = async_to_streamed_response_wrapper(
+            disputes.delete_evidence,
+        )
+        self.initiate_evidence_upload = async_to_streamed_response_wrapper(
+            disputes.initiate_evidence_upload,
+        )
+        self.list_evidences = async_to_streamed_response_wrapper(
+            disputes.list_evidences,
+        )
+        self.retrieve_evidence = async_to_streamed_response_wrapper(
             disputes.retrieve_evidence,
         )
