@@ -6,12 +6,13 @@ from typing_extensions import Literal
 
 import httpx
 
+from .. import _legacy_response
 from ..types import TokenizationSimulateResponse, tokenization_simulate_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from .._base_client import (
     make_request_options,
 )
@@ -23,6 +24,10 @@ class Tokenizations(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TokenizationsWithRawResponse:
         return TokenizationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> TokenizationsWithStreamingResponse:
+        return TokenizationsWithStreamingResponse(self)
 
     def simulate(
         self,
@@ -104,6 +109,10 @@ class AsyncTokenizations(AsyncAPIResource):
     def with_raw_response(self) -> AsyncTokenizationsWithRawResponse:
         return AsyncTokenizationsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncTokenizationsWithStreamingResponse:
+        return AsyncTokenizationsWithStreamingResponse(self)
+
     async def simulate(
         self,
         *,
@@ -181,13 +190,27 @@ class AsyncTokenizations(AsyncAPIResource):
 
 class TokenizationsWithRawResponse:
     def __init__(self, tokenizations: Tokenizations) -> None:
-        self.simulate = to_raw_response_wrapper(
+        self.simulate = _legacy_response.to_raw_response_wrapper(
             tokenizations.simulate,
         )
 
 
 class AsyncTokenizationsWithRawResponse:
     def __init__(self, tokenizations: AsyncTokenizations) -> None:
-        self.simulate = async_to_raw_response_wrapper(
+        self.simulate = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.simulate,
+        )
+
+
+class TokenizationsWithStreamingResponse:
+    def __init__(self, tokenizations: Tokenizations) -> None:
+        self.simulate = to_streamed_response_wrapper(
+            tokenizations.simulate,
+        )
+
+
+class AsyncTokenizationsWithStreamingResponse:
+    def __init__(self, tokenizations: AsyncTokenizations) -> None:
+        self.simulate = async_to_streamed_response_wrapper(
             tokenizations.simulate,
         )

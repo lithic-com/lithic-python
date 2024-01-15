@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -37,9 +38,22 @@ class TestFinancialAccounts:
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
         response = client.financial_accounts.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         financial_account = response.parse()
         assert_matches_type(SyncSinglePage[FinancialAccount], financial_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.financial_accounts.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            financial_account = response.parse()
+            assert_matches_type(SyncSinglePage[FinancialAccount], financial_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncFinancialAccounts:
@@ -63,6 +77,19 @@ class TestAsyncFinancialAccounts:
     @parametrize
     async def test_raw_response_list(self, client: AsyncLithic) -> None:
         response = await client.financial_accounts.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         financial_account = response.parse()
         assert_matches_type(AsyncSinglePage[FinancialAccount], financial_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.financial_accounts.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            financial_account = await response.parse()
+            assert_matches_type(AsyncSinglePage[FinancialAccount], financial_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import httpx
 
+from ... import _legacy_response
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ...types.cards import AggregateBalanceListResponse, aggregate_balance_list_params
 from ..._base_client import (
@@ -23,6 +24,10 @@ class AggregateBalances(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AggregateBalancesWithRawResponse:
         return AggregateBalancesWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AggregateBalancesWithStreamingResponse:
+        return AggregateBalancesWithStreamingResponse(self)
 
     def list(
         self,
@@ -77,6 +82,10 @@ class AsyncAggregateBalances(AsyncAPIResource):
     def with_raw_response(self) -> AsyncAggregateBalancesWithRawResponse:
         return AsyncAggregateBalancesWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncAggregateBalancesWithStreamingResponse:
+        return AsyncAggregateBalancesWithStreamingResponse(self)
+
     def list(
         self,
         *,
@@ -127,13 +136,27 @@ class AsyncAggregateBalances(AsyncAPIResource):
 
 class AggregateBalancesWithRawResponse:
     def __init__(self, aggregate_balances: AggregateBalances) -> None:
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             aggregate_balances.list,
         )
 
 
 class AsyncAggregateBalancesWithRawResponse:
     def __init__(self, aggregate_balances: AsyncAggregateBalances) -> None:
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
+            aggregate_balances.list,
+        )
+
+
+class AggregateBalancesWithStreamingResponse:
+    def __init__(self, aggregate_balances: AggregateBalances) -> None:
+        self.list = to_streamed_response_wrapper(
+            aggregate_balances.list,
+        )
+
+
+class AsyncAggregateBalancesWithStreamingResponse:
+    def __init__(self, aggregate_balances: AsyncAggregateBalances) -> None:
+        self.list = async_to_streamed_response_wrapper(
             aggregate_balances.list,
         )

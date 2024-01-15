@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -28,9 +29,22 @@ class TestCardProduct:
     @parametrize
     def test_raw_response_credit_detail(self, client: Lithic) -> None:
         response = client.card_product.with_raw_response.credit_detail()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         card_product = response.parse()
         assert_matches_type(CardProductCreditDetailResponse, card_product, path=["response"])
+
+    @parametrize
+    def test_streaming_response_credit_detail(self, client: Lithic) -> None:
+        with client.card_product.with_streaming_response.credit_detail() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card_product = response.parse()
+            assert_matches_type(CardProductCreditDetailResponse, card_product, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncCardProduct:
@@ -46,6 +60,19 @@ class TestAsyncCardProduct:
     @parametrize
     async def test_raw_response_credit_detail(self, client: AsyncLithic) -> None:
         response = await client.card_product.with_raw_response.credit_detail()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         card_product = response.parse()
         assert_matches_type(CardProductCreditDetailResponse, card_product, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_credit_detail(self, client: AsyncLithic) -> None:
+        async with client.card_product.with_streaming_response.credit_detail() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card_product = await response.parse()
+            assert_matches_type(CardProductCreditDetailResponse, card_product, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

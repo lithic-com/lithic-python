@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import httpx
 
+from .. import _legacy_response
 from ..types import AuthStreamSecret
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from .._base_client import (
     make_request_options,
 )
@@ -20,6 +21,10 @@ class AuthStreamEnrollment(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AuthStreamEnrollmentWithRawResponse:
         return AuthStreamEnrollmentWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AuthStreamEnrollmentWithStreamingResponse:
+        return AuthStreamEnrollmentWithStreamingResponse(self)
 
     def retrieve_secret(
         self,
@@ -84,6 +89,10 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
     def with_raw_response(self) -> AsyncAuthStreamEnrollmentWithRawResponse:
         return AsyncAuthStreamEnrollmentWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncAuthStreamEnrollmentWithStreamingResponse:
+        return AsyncAuthStreamEnrollmentWithStreamingResponse(self)
+
     async def retrieve_secret(
         self,
         *,
@@ -144,19 +153,39 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
 
 class AuthStreamEnrollmentWithRawResponse:
     def __init__(self, auth_stream_enrollment: AuthStreamEnrollment) -> None:
-        self.retrieve_secret = to_raw_response_wrapper(
+        self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
             auth_stream_enrollment.retrieve_secret,
         )
-        self.rotate_secret = to_raw_response_wrapper(
+        self.rotate_secret = _legacy_response.to_raw_response_wrapper(
             auth_stream_enrollment.rotate_secret,
         )
 
 
 class AsyncAuthStreamEnrollmentWithRawResponse:
     def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollment) -> None:
-        self.retrieve_secret = async_to_raw_response_wrapper(
+        self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
             auth_stream_enrollment.retrieve_secret,
         )
-        self.rotate_secret = async_to_raw_response_wrapper(
+        self.rotate_secret = _legacy_response.async_to_raw_response_wrapper(
+            auth_stream_enrollment.rotate_secret,
+        )
+
+
+class AuthStreamEnrollmentWithStreamingResponse:
+    def __init__(self, auth_stream_enrollment: AuthStreamEnrollment) -> None:
+        self.retrieve_secret = to_streamed_response_wrapper(
+            auth_stream_enrollment.retrieve_secret,
+        )
+        self.rotate_secret = to_streamed_response_wrapper(
+            auth_stream_enrollment.rotate_secret,
+        )
+
+
+class AsyncAuthStreamEnrollmentWithStreamingResponse:
+    def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollment) -> None:
+        self.retrieve_secret = async_to_streamed_response_wrapper(
+            auth_stream_enrollment.retrieve_secret,
+        )
+        self.rotate_secret = async_to_streamed_response_wrapper(
             auth_stream_enrollment.rotate_secret,
         )

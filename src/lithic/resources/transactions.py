@@ -8,6 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
+from .. import _legacy_response
 from ..types import (
     Transaction,
     TransactionSimulateVoidResponse,
@@ -30,7 +31,7 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import (
     AsyncPaginator,
@@ -44,6 +45,10 @@ class Transactions(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TransactionsWithRawResponse:
         return TransactionsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> TransactionsWithStreamingResponse:
+        return TransactionsWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -621,6 +626,10 @@ class AsyncTransactions(AsyncAPIResource):
     def with_raw_response(self) -> AsyncTransactionsWithRawResponse:
         return AsyncTransactionsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncTransactionsWithStreamingResponse:
+        return AsyncTransactionsWithStreamingResponse(self)
+
     async def retrieve(
         self,
         transaction_token: str,
@@ -1194,61 +1203,123 @@ class AsyncTransactions(AsyncAPIResource):
 
 class TransactionsWithRawResponse:
     def __init__(self, transactions: Transactions) -> None:
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             transactions.retrieve,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             transactions.list,
         )
-        self.simulate_authorization = to_raw_response_wrapper(
+        self.simulate_authorization = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_authorization,
         )
-        self.simulate_authorization_advice = to_raw_response_wrapper(
+        self.simulate_authorization_advice = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_authorization_advice,
         )
-        self.simulate_clearing = to_raw_response_wrapper(
+        self.simulate_clearing = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_clearing,
         )
-        self.simulate_credit_authorization = to_raw_response_wrapper(
+        self.simulate_credit_authorization = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_credit_authorization,
         )
-        self.simulate_return = to_raw_response_wrapper(
+        self.simulate_return = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_return,
         )
-        self.simulate_return_reversal = to_raw_response_wrapper(
+        self.simulate_return_reversal = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_return_reversal,
         )
-        self.simulate_void = to_raw_response_wrapper(
+        self.simulate_void = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_void,
         )
 
 
 class AsyncTransactionsWithRawResponse:
     def __init__(self, transactions: AsyncTransactions) -> None:
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             transactions.retrieve,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
             transactions.list,
         )
-        self.simulate_authorization = async_to_raw_response_wrapper(
+        self.simulate_authorization = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_authorization,
         )
-        self.simulate_authorization_advice = async_to_raw_response_wrapper(
+        self.simulate_authorization_advice = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_authorization_advice,
         )
-        self.simulate_clearing = async_to_raw_response_wrapper(
+        self.simulate_clearing = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_clearing,
         )
-        self.simulate_credit_authorization = async_to_raw_response_wrapper(
+        self.simulate_credit_authorization = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_credit_authorization,
         )
-        self.simulate_return = async_to_raw_response_wrapper(
+        self.simulate_return = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_return,
         )
-        self.simulate_return_reversal = async_to_raw_response_wrapper(
+        self.simulate_return_reversal = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_return_reversal,
         )
-        self.simulate_void = async_to_raw_response_wrapper(
+        self.simulate_void = _legacy_response.async_to_raw_response_wrapper(
+            transactions.simulate_void,
+        )
+
+
+class TransactionsWithStreamingResponse:
+    def __init__(self, transactions: Transactions) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            transactions.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            transactions.list,
+        )
+        self.simulate_authorization = to_streamed_response_wrapper(
+            transactions.simulate_authorization,
+        )
+        self.simulate_authorization_advice = to_streamed_response_wrapper(
+            transactions.simulate_authorization_advice,
+        )
+        self.simulate_clearing = to_streamed_response_wrapper(
+            transactions.simulate_clearing,
+        )
+        self.simulate_credit_authorization = to_streamed_response_wrapper(
+            transactions.simulate_credit_authorization,
+        )
+        self.simulate_return = to_streamed_response_wrapper(
+            transactions.simulate_return,
+        )
+        self.simulate_return_reversal = to_streamed_response_wrapper(
+            transactions.simulate_return_reversal,
+        )
+        self.simulate_void = to_streamed_response_wrapper(
+            transactions.simulate_void,
+        )
+
+
+class AsyncTransactionsWithStreamingResponse:
+    def __init__(self, transactions: AsyncTransactions) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
+            transactions.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            transactions.list,
+        )
+        self.simulate_authorization = async_to_streamed_response_wrapper(
+            transactions.simulate_authorization,
+        )
+        self.simulate_authorization_advice = async_to_streamed_response_wrapper(
+            transactions.simulate_authorization_advice,
+        )
+        self.simulate_clearing = async_to_streamed_response_wrapper(
+            transactions.simulate_clearing,
+        )
+        self.simulate_credit_authorization = async_to_streamed_response_wrapper(
+            transactions.simulate_credit_authorization,
+        )
+        self.simulate_return = async_to_streamed_response_wrapper(
+            transactions.simulate_return,
+        )
+        self.simulate_return_reversal = async_to_streamed_response_wrapper(
+            transactions.simulate_return_reversal,
+        )
+        self.simulate_void = async_to_streamed_response_wrapper(
             transactions.simulate_void,
         )

@@ -6,6 +6,7 @@ from typing_extensions import Literal
 
 import httpx
 
+from .. import _legacy_response
 from ..types import (
     ResponderEndpointStatus,
     ResponderEndpointCreateResponse,
@@ -17,7 +18,7 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from .._base_client import (
     make_request_options,
 )
@@ -29,6 +30,10 @@ class ResponderEndpoints(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> ResponderEndpointsWithRawResponse:
         return ResponderEndpointsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ResponderEndpointsWithStreamingResponse:
+        return ResponderEndpointsWithStreamingResponse(self)
 
     def create(
         self,
@@ -166,6 +171,10 @@ class AsyncResponderEndpoints(AsyncAPIResource):
     def with_raw_response(self) -> AsyncResponderEndpointsWithRawResponse:
         return AsyncResponderEndpointsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncResponderEndpointsWithStreamingResponse:
+        return AsyncResponderEndpointsWithStreamingResponse(self)
+
     async def create(
         self,
         *,
@@ -299,25 +308,51 @@ class AsyncResponderEndpoints(AsyncAPIResource):
 
 class ResponderEndpointsWithRawResponse:
     def __init__(self, responder_endpoints: ResponderEndpoints) -> None:
-        self.create = to_raw_response_wrapper(
+        self.create = _legacy_response.to_raw_response_wrapper(
             responder_endpoints.create,
         )
-        self.delete = to_raw_response_wrapper(
+        self.delete = _legacy_response.to_raw_response_wrapper(
             responder_endpoints.delete,
         )
-        self.check_status = to_raw_response_wrapper(
+        self.check_status = _legacy_response.to_raw_response_wrapper(
             responder_endpoints.check_status,
         )
 
 
 class AsyncResponderEndpointsWithRawResponse:
     def __init__(self, responder_endpoints: AsyncResponderEndpoints) -> None:
-        self.create = async_to_raw_response_wrapper(
+        self.create = _legacy_response.async_to_raw_response_wrapper(
             responder_endpoints.create,
         )
-        self.delete = async_to_raw_response_wrapper(
+        self.delete = _legacy_response.async_to_raw_response_wrapper(
             responder_endpoints.delete,
         )
-        self.check_status = async_to_raw_response_wrapper(
+        self.check_status = _legacy_response.async_to_raw_response_wrapper(
+            responder_endpoints.check_status,
+        )
+
+
+class ResponderEndpointsWithStreamingResponse:
+    def __init__(self, responder_endpoints: ResponderEndpoints) -> None:
+        self.create = to_streamed_response_wrapper(
+            responder_endpoints.create,
+        )
+        self.delete = to_streamed_response_wrapper(
+            responder_endpoints.delete,
+        )
+        self.check_status = to_streamed_response_wrapper(
+            responder_endpoints.check_status,
+        )
+
+
+class AsyncResponderEndpointsWithStreamingResponse:
+    def __init__(self, responder_endpoints: AsyncResponderEndpoints) -> None:
+        self.create = async_to_streamed_response_wrapper(
+            responder_endpoints.create,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            responder_endpoints.delete,
+        )
+        self.check_status = async_to_streamed_response_wrapper(
             responder_endpoints.check_status,
         )

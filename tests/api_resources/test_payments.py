@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -71,9 +72,29 @@ class TestPayments:
             method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.create(
+            amount=1,
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            method="ACH_NEXT_DAY",
+            method_attributes={"sec_code": "CCD"},
+            type="COLLECTION",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentCreateResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
@@ -87,9 +108,24 @@ class TestPayments:
         response = client.payments.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(Payment, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(Payment, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -113,9 +149,22 @@ class TestPayments:
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
         response = client.payments.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_retry(self, client: Lithic) -> None:
@@ -129,9 +178,24 @@ class TestPayments:
         response = client.payments.with_raw_response.retry(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retry(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.retry(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_release(self, client: Lithic) -> None:
@@ -145,9 +209,24 @@ class TestPayments:
         response = client.payments.with_raw_response.simulate_release(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_release(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.simulate_release(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_return(self, client: Lithic) -> None:
@@ -169,9 +248,24 @@ class TestPayments:
         response = client.payments.with_raw_response.simulate_return(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_return(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncPayments:
@@ -222,9 +316,29 @@ class TestAsyncPayments:
             method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create(self, client: AsyncLithic) -> None:
+        async with client.payments.with_streaming_response.create(
+            amount=1,
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            method="ACH_NEXT_DAY",
+            method_attributes={"sec_code": "CCD"},
+            type="COLLECTION",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentCreateResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
@@ -238,9 +352,24 @@ class TestAsyncPayments:
         response = await client.payments.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(Payment, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.payments.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(Payment, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -264,9 +393,22 @@ class TestAsyncPayments:
     @parametrize
     async def test_raw_response_list(self, client: AsyncLithic) -> None:
         response = await client.payments.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.payments.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_retry(self, client: AsyncLithic) -> None:
@@ -280,9 +422,24 @@ class TestAsyncPayments:
         response = await client.payments.with_raw_response.retry(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retry(self, client: AsyncLithic) -> None:
+        async with client.payments.with_streaming_response.retry(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_release(self, client: AsyncLithic) -> None:
@@ -296,9 +453,24 @@ class TestAsyncPayments:
         response = await client.payments.with_raw_response.simulate_release(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_release(self, client: AsyncLithic) -> None:
+        async with client.payments.with_streaming_response.simulate_release(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentSimulateReleaseResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_return(self, client: AsyncLithic) -> None:
@@ -320,6 +492,21 @@ class TestAsyncPayments:
         response = await client.payments.with_raw_response.simulate_return(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payment = response.parse()
         assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_return(self, client: AsyncLithic) -> None:
+        async with client.payments.with_streaming_response.simulate_return(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

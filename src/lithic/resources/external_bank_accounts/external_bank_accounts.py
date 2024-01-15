@@ -8,6 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
+from ... import _legacy_response
 from ...types import (
     OwnerType,
     VerificationMethod,
@@ -24,7 +25,7 @@ from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import required_args, maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import (
     AsyncPaginator,
@@ -35,6 +36,8 @@ from .micro_deposits import (
     AsyncMicroDeposits,
     MicroDepositsWithRawResponse,
     AsyncMicroDepositsWithRawResponse,
+    MicroDepositsWithStreamingResponse,
+    AsyncMicroDepositsWithStreamingResponse,
 )
 
 __all__ = ["ExternalBankAccounts", "AsyncExternalBankAccounts"]
@@ -48,6 +51,10 @@ class ExternalBankAccounts(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> ExternalBankAccountsWithRawResponse:
         return ExternalBankAccountsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ExternalBankAccountsWithStreamingResponse:
+        return ExternalBankAccountsWithStreamingResponse(self)
 
     @overload
     def create(
@@ -387,6 +394,10 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
     def with_raw_response(self) -> AsyncExternalBankAccountsWithRawResponse:
         return AsyncExternalBankAccountsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncExternalBankAccountsWithStreamingResponse:
+        return AsyncExternalBankAccountsWithStreamingResponse(self)
+
     @overload
     async def create(
         self,
@@ -720,16 +731,16 @@ class ExternalBankAccountsWithRawResponse:
     def __init__(self, external_bank_accounts: ExternalBankAccounts) -> None:
         self.micro_deposits = MicroDepositsWithRawResponse(external_bank_accounts.micro_deposits)
 
-        self.create = to_raw_response_wrapper(
+        self.create = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.create,
         )
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.retrieve,
         )
-        self.update = to_raw_response_wrapper(
+        self.update = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.update,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.list,
         )
 
@@ -738,15 +749,51 @@ class AsyncExternalBankAccountsWithRawResponse:
     def __init__(self, external_bank_accounts: AsyncExternalBankAccounts) -> None:
         self.micro_deposits = AsyncMicroDepositsWithRawResponse(external_bank_accounts.micro_deposits)
 
-        self.create = async_to_raw_response_wrapper(
+        self.create = _legacy_response.async_to_raw_response_wrapper(
             external_bank_accounts.create,
         )
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             external_bank_accounts.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
+        self.update = _legacy_response.async_to_raw_response_wrapper(
             external_bank_accounts.update,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
+            external_bank_accounts.list,
+        )
+
+
+class ExternalBankAccountsWithStreamingResponse:
+    def __init__(self, external_bank_accounts: ExternalBankAccounts) -> None:
+        self.micro_deposits = MicroDepositsWithStreamingResponse(external_bank_accounts.micro_deposits)
+
+        self.create = to_streamed_response_wrapper(
+            external_bank_accounts.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            external_bank_accounts.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            external_bank_accounts.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            external_bank_accounts.list,
+        )
+
+
+class AsyncExternalBankAccountsWithStreamingResponse:
+    def __init__(self, external_bank_accounts: AsyncExternalBankAccounts) -> None:
+        self.micro_deposits = AsyncMicroDepositsWithStreamingResponse(external_bank_accounts.micro_deposits)
+
+        self.create = async_to_streamed_response_wrapper(
+            external_bank_accounts.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            external_bank_accounts.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            external_bank_accounts.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
             external_bank_accounts.list,
         )

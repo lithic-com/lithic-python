@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import httpx
 
+from .. import _legacy_response
 from ..types import DigitalCardArt, digital_card_art_list_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import (
     AsyncPaginator,
@@ -23,6 +24,10 @@ class DigitalCardArtResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DigitalCardArtResourceWithRawResponse:
         return DigitalCardArtResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DigitalCardArtResourceWithStreamingResponse:
+        return DigitalCardArtResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -114,6 +119,10 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
     def with_raw_response(self) -> AsyncDigitalCardArtResourceWithRawResponse:
         return AsyncDigitalCardArtResourceWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncDigitalCardArtResourceWithStreamingResponse:
+        return AsyncDigitalCardArtResourceWithStreamingResponse(self)
+
     async def retrieve(
         self,
         digital_card_art_token: str,
@@ -201,19 +210,39 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
 
 class DigitalCardArtResourceWithRawResponse:
     def __init__(self, digital_card_art: DigitalCardArtResource) -> None:
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             digital_card_art.retrieve,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             digital_card_art.list,
         )
 
 
 class AsyncDigitalCardArtResourceWithRawResponse:
     def __init__(self, digital_card_art: AsyncDigitalCardArtResource) -> None:
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             digital_card_art.retrieve,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
+            digital_card_art.list,
+        )
+
+
+class DigitalCardArtResourceWithStreamingResponse:
+    def __init__(self, digital_card_art: DigitalCardArtResource) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            digital_card_art.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            digital_card_art.list,
+        )
+
+
+class AsyncDigitalCardArtResourceWithStreamingResponse:
+    def __init__(self, digital_card_art: AsyncDigitalCardArtResource) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
+            digital_card_art.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
             digital_card_art.list,
         )

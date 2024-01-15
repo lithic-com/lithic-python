@@ -6,14 +6,29 @@ from typing_extensions import Literal
 
 import httpx
 
+from ... import _legacy_response
 from ...types import FinancialAccount, financial_account_list_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
-from .balances import Balances, AsyncBalances, BalancesWithRawResponse, AsyncBalancesWithRawResponse
+from .balances import (
+    Balances,
+    AsyncBalances,
+    BalancesWithRawResponse,
+    AsyncBalancesWithRawResponse,
+    BalancesWithStreamingResponse,
+    AsyncBalancesWithStreamingResponse,
+)
 from ..._compat import cached_property
-from .statements import Statements, AsyncStatements, StatementsWithRawResponse, AsyncStatementsWithRawResponse
+from .statements import (
+    Statements,
+    AsyncStatements,
+    StatementsWithRawResponse,
+    AsyncStatementsWithRawResponse,
+    StatementsWithStreamingResponse,
+    AsyncStatementsWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ..._base_client import (
     AsyncPaginator,
@@ -25,6 +40,8 @@ from .financial_transactions import (
     AsyncFinancialTransactions,
     FinancialTransactionsWithRawResponse,
     AsyncFinancialTransactionsWithRawResponse,
+    FinancialTransactionsWithStreamingResponse,
+    AsyncFinancialTransactionsWithStreamingResponse,
 )
 
 __all__ = ["FinancialAccounts", "AsyncFinancialAccounts"]
@@ -46,6 +63,10 @@ class FinancialAccounts(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> FinancialAccountsWithRawResponse:
         return FinancialAccountsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> FinancialAccountsWithStreamingResponse:
+        return FinancialAccountsWithStreamingResponse(self)
 
     def list(
         self,
@@ -113,6 +134,10 @@ class AsyncFinancialAccounts(AsyncAPIResource):
     def with_raw_response(self) -> AsyncFinancialAccountsWithRawResponse:
         return AsyncFinancialAccountsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncFinancialAccountsWithStreamingResponse:
+        return AsyncFinancialAccountsWithStreamingResponse(self)
+
     def list(
         self,
         *,
@@ -168,7 +193,7 @@ class FinancialAccountsWithRawResponse:
         self.financial_transactions = FinancialTransactionsWithRawResponse(financial_accounts.financial_transactions)
         self.statements = StatementsWithRawResponse(financial_accounts.statements)
 
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             financial_accounts.list,
         )
 
@@ -181,6 +206,32 @@ class AsyncFinancialAccountsWithRawResponse:
         )
         self.statements = AsyncStatementsWithRawResponse(financial_accounts.statements)
 
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
+            financial_accounts.list,
+        )
+
+
+class FinancialAccountsWithStreamingResponse:
+    def __init__(self, financial_accounts: FinancialAccounts) -> None:
+        self.balances = BalancesWithStreamingResponse(financial_accounts.balances)
+        self.financial_transactions = FinancialTransactionsWithStreamingResponse(
+            financial_accounts.financial_transactions
+        )
+        self.statements = StatementsWithStreamingResponse(financial_accounts.statements)
+
+        self.list = to_streamed_response_wrapper(
+            financial_accounts.list,
+        )
+
+
+class AsyncFinancialAccountsWithStreamingResponse:
+    def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
+        self.balances = AsyncBalancesWithStreamingResponse(financial_accounts.balances)
+        self.financial_transactions = AsyncFinancialTransactionsWithStreamingResponse(
+            financial_accounts.financial_transactions
+        )
+        self.statements = AsyncStatementsWithStreamingResponse(financial_accounts.statements)
+
+        self.list = async_to_streamed_response_wrapper(
             financial_accounts.list,
         )

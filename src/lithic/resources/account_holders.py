@@ -7,6 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
+from .. import _legacy_response
 from ..types import (
     AccountHolder,
     AccountHolderDocument,
@@ -22,7 +23,7 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import required_args, maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from .._base_client import (
     make_request_options,
 )
@@ -34,6 +35,10 @@ class AccountHolders(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AccountHoldersWithRawResponse:
         return AccountHoldersWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AccountHoldersWithStreamingResponse:
+        return AccountHoldersWithStreamingResponse(self)
 
     @overload
     def create(
@@ -630,6 +635,10 @@ class AsyncAccountHolders(AsyncAPIResource):
     def with_raw_response(self) -> AsyncAccountHoldersWithRawResponse:
         return AsyncAccountHoldersWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncAccountHoldersWithStreamingResponse:
+        return AsyncAccountHoldersWithStreamingResponse(self)
+
     @overload
     async def create(
         self,
@@ -1222,49 +1231,99 @@ class AsyncAccountHolders(AsyncAPIResource):
 
 class AccountHoldersWithRawResponse:
     def __init__(self, account_holders: AccountHolders) -> None:
-        self.create = to_raw_response_wrapper(
+        self.create = _legacy_response.to_raw_response_wrapper(
             account_holders.create,
         )
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             account_holders.retrieve,
         )
-        self.update = to_raw_response_wrapper(
+        self.update = _legacy_response.to_raw_response_wrapper(
             account_holders.update,
         )
-        self.list_documents = to_raw_response_wrapper(
+        self.list_documents = _legacy_response.to_raw_response_wrapper(
             account_holders.list_documents,
         )
-        self.resubmit = to_raw_response_wrapper(
+        self.resubmit = _legacy_response.to_raw_response_wrapper(
             account_holders.resubmit,
         )
-        self.retrieve_document = to_raw_response_wrapper(
+        self.retrieve_document = _legacy_response.to_raw_response_wrapper(
             account_holders.retrieve_document,
         )
-        self.upload_document = to_raw_response_wrapper(
+        self.upload_document = _legacy_response.to_raw_response_wrapper(
             account_holders.upload_document,
         )
 
 
 class AsyncAccountHoldersWithRawResponse:
     def __init__(self, account_holders: AsyncAccountHolders) -> None:
-        self.create = async_to_raw_response_wrapper(
+        self.create = _legacy_response.async_to_raw_response_wrapper(
             account_holders.create,
         )
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             account_holders.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
+        self.update = _legacy_response.async_to_raw_response_wrapper(
             account_holders.update,
         )
-        self.list_documents = async_to_raw_response_wrapper(
+        self.list_documents = _legacy_response.async_to_raw_response_wrapper(
             account_holders.list_documents,
         )
-        self.resubmit = async_to_raw_response_wrapper(
+        self.resubmit = _legacy_response.async_to_raw_response_wrapper(
             account_holders.resubmit,
         )
-        self.retrieve_document = async_to_raw_response_wrapper(
+        self.retrieve_document = _legacy_response.async_to_raw_response_wrapper(
             account_holders.retrieve_document,
         )
-        self.upload_document = async_to_raw_response_wrapper(
+        self.upload_document = _legacy_response.async_to_raw_response_wrapper(
+            account_holders.upload_document,
+        )
+
+
+class AccountHoldersWithStreamingResponse:
+    def __init__(self, account_holders: AccountHolders) -> None:
+        self.create = to_streamed_response_wrapper(
+            account_holders.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            account_holders.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            account_holders.update,
+        )
+        self.list_documents = to_streamed_response_wrapper(
+            account_holders.list_documents,
+        )
+        self.resubmit = to_streamed_response_wrapper(
+            account_holders.resubmit,
+        )
+        self.retrieve_document = to_streamed_response_wrapper(
+            account_holders.retrieve_document,
+        )
+        self.upload_document = to_streamed_response_wrapper(
+            account_holders.upload_document,
+        )
+
+
+class AsyncAccountHoldersWithStreamingResponse:
+    def __init__(self, account_holders: AsyncAccountHolders) -> None:
+        self.create = async_to_streamed_response_wrapper(
+            account_holders.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            account_holders.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            account_holders.update,
+        )
+        self.list_documents = async_to_streamed_response_wrapper(
+            account_holders.list_documents,
+        )
+        self.resubmit = async_to_streamed_response_wrapper(
+            account_holders.resubmit,
+        )
+        self.retrieve_document = async_to_streamed_response_wrapper(
+            account_holders.retrieve_document,
+        )
+        self.upload_document = async_to_streamed_response_wrapper(
             account_holders.upload_document,
         )

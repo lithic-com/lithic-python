@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import httpx
 
+from ... import _legacy_response
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..._base_client import (
     make_request_options,
 )
@@ -20,6 +21,10 @@ class Decisioning(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DecisioningWithRawResponse:
         return DecisioningWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DecisioningWithStreamingResponse:
+        return DecisioningWithStreamingResponse(self)
 
     def retrieve_secret(
         self,
@@ -84,6 +89,10 @@ class AsyncDecisioning(AsyncAPIResource):
     def with_raw_response(self) -> AsyncDecisioningWithRawResponse:
         return AsyncDecisioningWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncDecisioningWithStreamingResponse:
+        return AsyncDecisioningWithStreamingResponse(self)
+
     async def retrieve_secret(
         self,
         *,
@@ -144,19 +153,39 @@ class AsyncDecisioning(AsyncAPIResource):
 
 class DecisioningWithRawResponse:
     def __init__(self, decisioning: Decisioning) -> None:
-        self.retrieve_secret = to_raw_response_wrapper(
+        self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
             decisioning.retrieve_secret,
         )
-        self.rotate_secret = to_raw_response_wrapper(
+        self.rotate_secret = _legacy_response.to_raw_response_wrapper(
             decisioning.rotate_secret,
         )
 
 
 class AsyncDecisioningWithRawResponse:
     def __init__(self, decisioning: AsyncDecisioning) -> None:
-        self.retrieve_secret = async_to_raw_response_wrapper(
+        self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
             decisioning.retrieve_secret,
         )
-        self.rotate_secret = async_to_raw_response_wrapper(
+        self.rotate_secret = _legacy_response.async_to_raw_response_wrapper(
+            decisioning.rotate_secret,
+        )
+
+
+class DecisioningWithStreamingResponse:
+    def __init__(self, decisioning: Decisioning) -> None:
+        self.retrieve_secret = to_streamed_response_wrapper(
+            decisioning.retrieve_secret,
+        )
+        self.rotate_secret = to_streamed_response_wrapper(
+            decisioning.rotate_secret,
+        )
+
+
+class AsyncDecisioningWithStreamingResponse:
+    def __init__(self, decisioning: AsyncDecisioning) -> None:
+        self.retrieve_secret = async_to_streamed_response_wrapper(
+            decisioning.retrieve_secret,
+        )
+        self.rotate_secret = async_to_streamed_response_wrapper(
             decisioning.rotate_secret,
         )

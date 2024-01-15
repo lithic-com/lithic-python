@@ -3,7 +3,14 @@
 from __future__ import annotations
 
 from ..._compat import cached_property
-from .settlement import Settlement, AsyncSettlement, SettlementWithRawResponse, AsyncSettlementWithRawResponse
+from .settlement import (
+    Settlement,
+    AsyncSettlement,
+    SettlementWithRawResponse,
+    AsyncSettlementWithRawResponse,
+    SettlementWithStreamingResponse,
+    AsyncSettlementWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
 __all__ = ["Reports", "AsyncReports"]
@@ -18,6 +25,10 @@ class Reports(SyncAPIResource):
     def with_raw_response(self) -> ReportsWithRawResponse:
         return ReportsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> ReportsWithStreamingResponse:
+        return ReportsWithStreamingResponse(self)
+
 
 class AsyncReports(AsyncAPIResource):
     @cached_property
@@ -28,6 +39,10 @@ class AsyncReports(AsyncAPIResource):
     def with_raw_response(self) -> AsyncReportsWithRawResponse:
         return AsyncReportsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncReportsWithStreamingResponse:
+        return AsyncReportsWithStreamingResponse(self)
+
 
 class ReportsWithRawResponse:
     def __init__(self, reports: Reports) -> None:
@@ -37,3 +52,13 @@ class ReportsWithRawResponse:
 class AsyncReportsWithRawResponse:
     def __init__(self, reports: AsyncReports) -> None:
         self.settlement = AsyncSettlementWithRawResponse(reports.settlement)
+
+
+class ReportsWithStreamingResponse:
+    def __init__(self, reports: Reports) -> None:
+        self.settlement = SettlementWithStreamingResponse(reports.settlement)
+
+
+class AsyncReportsWithStreamingResponse:
+    def __init__(self, reports: AsyncReports) -> None:
+        self.settlement = AsyncSettlementWithStreamingResponse(reports.settlement)

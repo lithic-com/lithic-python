@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -46,9 +47,25 @@ class TestLineItems:
             "string",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         line_item = response.parse()
         assert_matches_type(SyncCursorPage[LineItemListResponse], line_item, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.financial_accounts.statements.line_items.with_streaming_response.list(
+            "string",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            line_item = response.parse()
+            assert_matches_type(SyncCursorPage[LineItemListResponse], line_item, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncLineItems:
@@ -81,6 +98,22 @@ class TestAsyncLineItems:
             "string",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         line_item = response.parse()
         assert_matches_type(AsyncCursorPage[LineItemListResponse], line_item, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.financial_accounts.statements.line_items.with_streaming_response.list(
+            "string",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            line_item = await response.parse()
+            assert_matches_type(AsyncCursorPage[LineItemListResponse], line_item, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
