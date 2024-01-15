@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -43,9 +44,24 @@ class TestTransactions:
         response = client.transactions.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(Transaction, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -69,9 +85,22 @@ class TestTransactions:
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
         response = client.transactions.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_authorization(self, client: Lithic) -> None:
@@ -104,9 +133,26 @@ class TestTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_authorization(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_authorization_advice(self, client: Lithic) -> None:
@@ -122,9 +168,25 @@ class TestTransactions:
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
             amount=3831,
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_authorization_advice(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_authorization_advice(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+            amount=3831,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_clearing(self, client: Lithic) -> None:
@@ -146,9 +208,24 @@ class TestTransactions:
         response = client.transactions.with_raw_response.simulate_clearing(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_clearing(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_clearing(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_credit_authorization(self, client: Lithic) -> None:
@@ -177,9 +254,26 @@ class TestTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_credit_authorization(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_credit_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_return(self, client: Lithic) -> None:
@@ -197,9 +291,26 @@ class TestTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_return(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_return(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_return_reversal(self, client: Lithic) -> None:
@@ -213,9 +324,24 @@ class TestTransactions:
         response = client.transactions.with_raw_response.simulate_return_reversal(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_return_reversal(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_return_reversal(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate_void(self, client: Lithic) -> None:
@@ -238,9 +364,24 @@ class TestTransactions:
         response = client.transactions.with_raw_response.simulate_void(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_void(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_void(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncTransactions:
@@ -260,9 +401,24 @@ class TestAsyncTransactions:
         response = await client.transactions.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(Transaction, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -286,9 +442,22 @@ class TestAsyncTransactions:
     @parametrize
     async def test_raw_response_list(self, client: AsyncLithic) -> None:
         response = await client.transactions.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_authorization(self, client: AsyncLithic) -> None:
@@ -321,9 +490,26 @@ class TestAsyncTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_authorization(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.simulate_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_authorization_advice(self, client: AsyncLithic) -> None:
@@ -339,9 +525,25 @@ class TestAsyncTransactions:
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
             amount=3831,
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_authorization_advice(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.simulate_authorization_advice(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+            amount=3831,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(TransactionSimulateAuthorizationAdviceResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_clearing(self, client: AsyncLithic) -> None:
@@ -363,9 +565,24 @@ class TestAsyncTransactions:
         response = await client.transactions.with_raw_response.simulate_clearing(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_clearing(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.simulate_clearing(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(TransactionSimulateClearingResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_credit_authorization(self, client: AsyncLithic) -> None:
@@ -394,9 +611,26 @@ class TestAsyncTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_credit_authorization(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.simulate_credit_authorization(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_return(self, client: AsyncLithic) -> None:
@@ -414,9 +648,26 @@ class TestAsyncTransactions:
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_return(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.simulate_return(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_return_reversal(self, client: AsyncLithic) -> None:
@@ -430,9 +681,24 @@ class TestAsyncTransactions:
         response = await client.transactions.with_raw_response.simulate_return_reversal(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_return_reversal(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.simulate_return_reversal(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(TransactionSimulateReturnReversalResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate_void(self, client: AsyncLithic) -> None:
@@ -455,6 +721,21 @@ class TestAsyncTransactions:
         response = await client.transactions.with_raw_response.simulate_void(
             token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         transaction = response.parse()
         assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_void(self, client: AsyncLithic) -> None:
+        async with client.transactions.with_streaming_response.simulate_void(
+            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert_matches_type(TransactionSimulateVoidResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

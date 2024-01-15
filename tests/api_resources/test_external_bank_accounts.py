@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -82,9 +83,31 @@ class TestExternalBankAccounts:
             type="CHECKING",
             verification_method="MANUAL",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
+        with client.external_bank_accounts.with_streaming_response.create(
+            account_number="string",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="BUSINESS",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="MANUAL",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = response.parse()
+            assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_create_overload_2(self, client: Lithic) -> None:
@@ -119,9 +142,27 @@ class TestExternalBankAccounts:
             processor_token="x",
             verification_method="MANUAL",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
+        with client.external_bank_accounts.with_streaming_response.create(
+            owner="x",
+            owner_type="BUSINESS",
+            processor_token="x",
+            verification_method="MANUAL",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = response.parse()
+            assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
@@ -135,9 +176,24 @@ class TestExternalBankAccounts:
         response = client.external_bank_accounts.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.external_bank_accounts.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = response.parse()
+            assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
@@ -173,9 +229,24 @@ class TestExternalBankAccounts:
         response = client.external_bank_accounts.with_raw_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update(self, client: Lithic) -> None:
+        with client.external_bank_accounts.with_streaming_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = response.parse()
+            assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -200,9 +271,24 @@ class TestExternalBankAccounts:
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
         response = client.external_bank_accounts.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.external_bank_accounts.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = response.parse()
+            assert_matches_type(
+                SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncExternalBankAccounts:
@@ -265,9 +351,31 @@ class TestAsyncExternalBankAccounts:
             type="CHECKING",
             verification_method="MANUAL",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_1(self, client: AsyncLithic) -> None:
+        async with client.external_bank_accounts.with_streaming_response.create(
+            account_number="string",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="BUSINESS",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="MANUAL",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = await response.parse()
+            assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_create_overload_2(self, client: AsyncLithic) -> None:
@@ -302,9 +410,27 @@ class TestAsyncExternalBankAccounts:
             processor_token="x",
             verification_method="MANUAL",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, client: AsyncLithic) -> None:
+        async with client.external_bank_accounts.with_streaming_response.create(
+            owner="x",
+            owner_type="BUSINESS",
+            processor_token="x",
+            verification_method="MANUAL",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = await response.parse()
+            assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncLithic) -> None:
@@ -318,9 +444,24 @@ class TestAsyncExternalBankAccounts:
         response = await client.external_bank_accounts.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.external_bank_accounts.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = await response.parse()
+            assert_matches_type(ExternalBankAccountRetrieveResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
@@ -356,9 +497,24 @@ class TestAsyncExternalBankAccounts:
         response = await client.external_bank_accounts.with_raw_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update(self, client: AsyncLithic) -> None:
+        async with client.external_bank_accounts.with_streaming_response.update(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = await response.parse()
+            assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -383,6 +539,21 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_raw_response_list(self, client: AsyncLithic) -> None:
         response = await client.external_bank_accounts.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
         assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.external_bank_accounts.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = await response.parse()
+            assert_matches_type(
+                AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True

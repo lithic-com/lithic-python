@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -36,9 +37,25 @@ class TestStatements:
             "string",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         statement = response.parse()
         assert_matches_type(Statement, statement, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.financial_accounts.statements.with_streaming_response.retrieve(
+            "string",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            statement = response.parse()
+            assert_matches_type(Statement, statement, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -64,9 +81,24 @@ class TestStatements:
         response = client.financial_accounts.statements.with_raw_response.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         statement = response.parse()
         assert_matches_type(SyncCursorPage[Statement], statement, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.financial_accounts.statements.with_streaming_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            statement = response.parse()
+            assert_matches_type(SyncCursorPage[Statement], statement, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncStatements:
@@ -88,9 +120,25 @@ class TestAsyncStatements:
             "string",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         statement = response.parse()
         assert_matches_type(Statement, statement, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.financial_accounts.statements.with_streaming_response.retrieve(
+            "string",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            statement = await response.parse()
+            assert_matches_type(Statement, statement, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -116,6 +164,21 @@ class TestAsyncStatements:
         response = await client.financial_accounts.statements.with_raw_response.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         statement = response.parse()
         assert_matches_type(AsyncCursorPage[Statement], statement, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.financial_accounts.statements.with_streaming_response.list(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            statement = await response.parse()
+            assert_matches_type(AsyncCursorPage[Statement], statement, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

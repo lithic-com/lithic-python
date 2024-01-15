@@ -6,11 +6,12 @@ from typing import List
 
 import httpx
 
+from ... import _legacy_response
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..._base_client import (
     make_request_options,
 )
@@ -23,6 +24,10 @@ class MicroDeposits(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> MicroDepositsWithRawResponse:
         return MicroDepositsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> MicroDepositsWithStreamingResponse:
+        return MicroDepositsWithStreamingResponse(self)
 
     def create(
         self,
@@ -72,6 +77,10 @@ class AsyncMicroDeposits(AsyncAPIResource):
     def with_raw_response(self) -> AsyncMicroDepositsWithRawResponse:
         return AsyncMicroDepositsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncMicroDepositsWithStreamingResponse:
+        return AsyncMicroDepositsWithStreamingResponse(self)
+
     async def create(
         self,
         external_bank_account_token: str,
@@ -117,13 +126,27 @@ class AsyncMicroDeposits(AsyncAPIResource):
 
 class MicroDepositsWithRawResponse:
     def __init__(self, micro_deposits: MicroDeposits) -> None:
-        self.create = to_raw_response_wrapper(
+        self.create = _legacy_response.to_raw_response_wrapper(
             micro_deposits.create,
         )
 
 
 class AsyncMicroDepositsWithRawResponse:
     def __init__(self, micro_deposits: AsyncMicroDeposits) -> None:
-        self.create = async_to_raw_response_wrapper(
+        self.create = _legacy_response.async_to_raw_response_wrapper(
+            micro_deposits.create,
+        )
+
+
+class MicroDepositsWithStreamingResponse:
+    def __init__(self, micro_deposits: MicroDeposits) -> None:
+        self.create = to_streamed_response_wrapper(
+            micro_deposits.create,
+        )
+
+
+class AsyncMicroDepositsWithStreamingResponse:
+    def __init__(self, micro_deposits: AsyncMicroDeposits) -> None:
+        self.create = async_to_streamed_response_wrapper(
             micro_deposits.create,
         )

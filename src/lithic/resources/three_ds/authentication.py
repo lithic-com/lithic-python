@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import httpx
 
+from ... import _legacy_response
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..._base_client import (
     make_request_options,
 )
@@ -25,6 +26,10 @@ class Authentication(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AuthenticationWithRawResponse:
         return AuthenticationWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AuthenticationWithStreamingResponse:
+        return AuthenticationWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -116,6 +121,10 @@ class AsyncAuthentication(AsyncAPIResource):
     def with_raw_response(self) -> AsyncAuthenticationWithRawResponse:
         return AsyncAuthenticationWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncAuthenticationWithStreamingResponse:
+        return AsyncAuthenticationWithStreamingResponse(self)
+
     async def retrieve(
         self,
         three_ds_authentication_token: str,
@@ -203,19 +212,39 @@ class AsyncAuthentication(AsyncAPIResource):
 
 class AuthenticationWithRawResponse:
     def __init__(self, authentication: Authentication) -> None:
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             authentication.retrieve,
         )
-        self.simulate = to_raw_response_wrapper(
+        self.simulate = _legacy_response.to_raw_response_wrapper(
             authentication.simulate,
         )
 
 
 class AsyncAuthenticationWithRawResponse:
     def __init__(self, authentication: AsyncAuthentication) -> None:
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             authentication.retrieve,
         )
-        self.simulate = async_to_raw_response_wrapper(
+        self.simulate = _legacy_response.async_to_raw_response_wrapper(
+            authentication.simulate,
+        )
+
+
+class AuthenticationWithStreamingResponse:
+    def __init__(self, authentication: Authentication) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            authentication.retrieve,
+        )
+        self.simulate = to_streamed_response_wrapper(
+            authentication.simulate,
+        )
+
+
+class AsyncAuthenticationWithStreamingResponse:
+    def __init__(self, authentication: AsyncAuthentication) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
+            authentication.retrieve,
+        )
+        self.simulate = async_to_streamed_response_wrapper(
             authentication.simulate,
         )

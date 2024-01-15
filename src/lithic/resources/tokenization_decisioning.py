@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import httpx
 
+from .. import _legacy_response
 from ..types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from .._base_client import (
     make_request_options,
 )
@@ -20,6 +21,10 @@ class TokenizationDecisioning(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TokenizationDecisioningWithRawResponse:
         return TokenizationDecisioningWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> TokenizationDecisioningWithStreamingResponse:
+        return TokenizationDecisioningWithStreamingResponse(self)
 
     def retrieve_secret(
         self,
@@ -83,6 +88,10 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
     def with_raw_response(self) -> AsyncTokenizationDecisioningWithRawResponse:
         return AsyncTokenizationDecisioningWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncTokenizationDecisioningWithStreamingResponse:
+        return AsyncTokenizationDecisioningWithStreamingResponse(self)
+
     async def retrieve_secret(
         self,
         *,
@@ -142,19 +151,39 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
 
 class TokenizationDecisioningWithRawResponse:
     def __init__(self, tokenization_decisioning: TokenizationDecisioning) -> None:
-        self.retrieve_secret = to_raw_response_wrapper(
+        self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
             tokenization_decisioning.retrieve_secret,
         )
-        self.rotate_secret = to_raw_response_wrapper(
+        self.rotate_secret = _legacy_response.to_raw_response_wrapper(
             tokenization_decisioning.rotate_secret,
         )
 
 
 class AsyncTokenizationDecisioningWithRawResponse:
     def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioning) -> None:
-        self.retrieve_secret = async_to_raw_response_wrapper(
+        self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
             tokenization_decisioning.retrieve_secret,
         )
-        self.rotate_secret = async_to_raw_response_wrapper(
+        self.rotate_secret = _legacy_response.async_to_raw_response_wrapper(
+            tokenization_decisioning.rotate_secret,
+        )
+
+
+class TokenizationDecisioningWithStreamingResponse:
+    def __init__(self, tokenization_decisioning: TokenizationDecisioning) -> None:
+        self.retrieve_secret = to_streamed_response_wrapper(
+            tokenization_decisioning.retrieve_secret,
+        )
+        self.rotate_secret = to_streamed_response_wrapper(
+            tokenization_decisioning.rotate_secret,
+        )
+
+
+class AsyncTokenizationDecisioningWithStreamingResponse:
+    def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioning) -> None:
+        self.retrieve_secret = async_to_streamed_response_wrapper(
+            tokenization_decisioning.retrieve_secret,
+        )
+        self.rotate_secret = async_to_streamed_response_wrapper(
             tokenization_decisioning.rotate_secret,
         )

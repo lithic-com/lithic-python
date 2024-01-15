@@ -8,6 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
+from ... import _legacy_response
 from ...types import (
     Event,
     MessageAttempt,
@@ -18,13 +19,15 @@ from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from .subscriptions import (
     Subscriptions,
     AsyncSubscriptions,
     SubscriptionsWithRawResponse,
     AsyncSubscriptionsWithRawResponse,
+    SubscriptionsWithStreamingResponse,
+    AsyncSubscriptionsWithStreamingResponse,
 )
 from ..._base_client import (
     AsyncPaginator,
@@ -42,6 +45,10 @@ class Events(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> EventsWithRawResponse:
         return EventsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> EventsWithStreamingResponse:
+        return EventsWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -259,6 +266,10 @@ class AsyncEvents(AsyncAPIResource):
     def with_raw_response(self) -> AsyncEventsWithRawResponse:
         return AsyncEventsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncEventsWithStreamingResponse:
+        return AsyncEventsWithStreamingResponse(self)
+
     async def retrieve(
         self,
         event_token: str,
@@ -470,13 +481,13 @@ class EventsWithRawResponse:
     def __init__(self, events: Events) -> None:
         self.subscriptions = SubscriptionsWithRawResponse(events.subscriptions)
 
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             events.retrieve,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             events.list,
         )
-        self.list_attempts = to_raw_response_wrapper(
+        self.list_attempts = _legacy_response.to_raw_response_wrapper(
             events.list_attempts,
         )
 
@@ -485,12 +496,42 @@ class AsyncEventsWithRawResponse:
     def __init__(self, events: AsyncEvents) -> None:
         self.subscriptions = AsyncSubscriptionsWithRawResponse(events.subscriptions)
 
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             events.retrieve,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
             events.list,
         )
-        self.list_attempts = async_to_raw_response_wrapper(
+        self.list_attempts = _legacy_response.async_to_raw_response_wrapper(
+            events.list_attempts,
+        )
+
+
+class EventsWithStreamingResponse:
+    def __init__(self, events: Events) -> None:
+        self.subscriptions = SubscriptionsWithStreamingResponse(events.subscriptions)
+
+        self.retrieve = to_streamed_response_wrapper(
+            events.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            events.list,
+        )
+        self.list_attempts = to_streamed_response_wrapper(
+            events.list_attempts,
+        )
+
+
+class AsyncEventsWithStreamingResponse:
+    def __init__(self, events: AsyncEvents) -> None:
+        self.subscriptions = AsyncSubscriptionsWithStreamingResponse(events.subscriptions)
+
+        self.retrieve = async_to_streamed_response_wrapper(
+            events.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            events.list,
+        )
+        self.list_attempts = async_to_streamed_response_wrapper(
             events.list_attempts,
         )

@@ -7,12 +7,13 @@ from datetime import date
 
 import httpx
 
+from ... import _legacy_response
 from ...types import SettlementDetail, SettlementReport
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import (
     AsyncPaginator,
@@ -27,6 +28,10 @@ class Settlement(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> SettlementWithRawResponse:
         return SettlementWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> SettlementWithStreamingResponse:
+        return SettlementWithStreamingResponse(self)
 
     def list_details(
         self,
@@ -119,6 +124,10 @@ class AsyncSettlement(AsyncAPIResource):
     def with_raw_response(self) -> AsyncSettlementWithRawResponse:
         return AsyncSettlementWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncSettlementWithStreamingResponse:
+        return AsyncSettlementWithStreamingResponse(self)
+
     def list_details(
         self,
         report_date: Union[str, date],
@@ -207,19 +216,39 @@ class AsyncSettlement(AsyncAPIResource):
 
 class SettlementWithRawResponse:
     def __init__(self, settlement: Settlement) -> None:
-        self.list_details = to_raw_response_wrapper(
+        self.list_details = _legacy_response.to_raw_response_wrapper(
             settlement.list_details,
         )
-        self.summary = to_raw_response_wrapper(
+        self.summary = _legacy_response.to_raw_response_wrapper(
             settlement.summary,
         )
 
 
 class AsyncSettlementWithRawResponse:
     def __init__(self, settlement: AsyncSettlement) -> None:
-        self.list_details = async_to_raw_response_wrapper(
+        self.list_details = _legacy_response.async_to_raw_response_wrapper(
             settlement.list_details,
         )
-        self.summary = async_to_raw_response_wrapper(
+        self.summary = _legacy_response.async_to_raw_response_wrapper(
+            settlement.summary,
+        )
+
+
+class SettlementWithStreamingResponse:
+    def __init__(self, settlement: Settlement) -> None:
+        self.list_details = to_streamed_response_wrapper(
+            settlement.list_details,
+        )
+        self.summary = to_streamed_response_wrapper(
+            settlement.summary,
+        )
+
+
+class AsyncSettlementWithStreamingResponse:
+    def __init__(self, settlement: AsyncSettlement) -> None:
+        self.list_details = async_to_streamed_response_wrapper(
+            settlement.list_details,
+        )
+        self.summary = async_to_streamed_response_wrapper(
             settlement.summary,
         )

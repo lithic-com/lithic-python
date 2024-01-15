@@ -13,6 +13,7 @@ from typing_extensions import Literal
 import httpx
 from httpx import URL
 
+from ... import _legacy_response
 from ...types import (
     Card,
     CardSpendLimits,
@@ -30,10 +31,17 @@ from ...types import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform, strip_not_given
-from .balances import Balances, AsyncBalances, BalancesWithRawResponse, AsyncBalancesWithRawResponse
+from .balances import (
+    Balances,
+    AsyncBalances,
+    BalancesWithRawResponse,
+    AsyncBalancesWithRawResponse,
+    BalancesWithStreamingResponse,
+    AsyncBalancesWithStreamingResponse,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ..._base_client import (
     AsyncPaginator,
@@ -45,12 +53,16 @@ from .aggregate_balances import (
     AsyncAggregateBalances,
     AggregateBalancesWithRawResponse,
     AsyncAggregateBalancesWithRawResponse,
+    AggregateBalancesWithStreamingResponse,
+    AsyncAggregateBalancesWithStreamingResponse,
 )
 from .financial_transactions import (
     FinancialTransactions,
     AsyncFinancialTransactions,
     FinancialTransactionsWithRawResponse,
     AsyncFinancialTransactionsWithRawResponse,
+    FinancialTransactionsWithStreamingResponse,
+    AsyncFinancialTransactionsWithStreamingResponse,
 )
 
 __all__ = ["Cards", "AsyncCards"]
@@ -72,6 +84,10 @@ class Cards(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> CardsWithRawResponse:
         return CardsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> CardsWithStreamingResponse:
+        return CardsWithStreamingResponse(self)
 
     def create(
         self,
@@ -915,6 +931,10 @@ class AsyncCards(AsyncAPIResource):
     def with_raw_response(self) -> AsyncCardsWithRawResponse:
         return AsyncCardsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncCardsWithStreamingResponse:
+        return AsyncCardsWithStreamingResponse(self)
+
     async def create(
         self,
         *,
@@ -1746,31 +1766,31 @@ class CardsWithRawResponse:
         self.balances = BalancesWithRawResponse(cards.balances)
         self.financial_transactions = FinancialTransactionsWithRawResponse(cards.financial_transactions)
 
-        self.create = to_raw_response_wrapper(
+        self.create = _legacy_response.to_raw_response_wrapper(
             cards.create,
         )
-        self.retrieve = to_raw_response_wrapper(
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
             cards.retrieve,
         )
-        self.update = to_raw_response_wrapper(
+        self.update = _legacy_response.to_raw_response_wrapper(
             cards.update,
         )
-        self.list = to_raw_response_wrapper(
+        self.list = _legacy_response.to_raw_response_wrapper(
             cards.list,
         )
-        self.embed = to_raw_response_wrapper(
+        self.embed = _legacy_response.to_raw_response_wrapper(
             cards.embed,
         )
-        self.provision = to_raw_response_wrapper(
+        self.provision = _legacy_response.to_raw_response_wrapper(
             cards.provision,
         )
-        self.reissue = to_raw_response_wrapper(
+        self.reissue = _legacy_response.to_raw_response_wrapper(
             cards.reissue,
         )
-        self.renew = to_raw_response_wrapper(
+        self.renew = _legacy_response.to_raw_response_wrapper(
             cards.renew,
         )
-        self.retrieve_spend_limits = to_raw_response_wrapper(
+        self.retrieve_spend_limits = _legacy_response.to_raw_response_wrapper(
             cards.retrieve_spend_limits,
         )
 
@@ -1781,30 +1801,100 @@ class AsyncCardsWithRawResponse:
         self.balances = AsyncBalancesWithRawResponse(cards.balances)
         self.financial_transactions = AsyncFinancialTransactionsWithRawResponse(cards.financial_transactions)
 
-        self.create = async_to_raw_response_wrapper(
+        self.create = _legacy_response.async_to_raw_response_wrapper(
             cards.create,
         )
-        self.retrieve = async_to_raw_response_wrapper(
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             cards.retrieve,
         )
-        self.update = async_to_raw_response_wrapper(
+        self.update = _legacy_response.async_to_raw_response_wrapper(
             cards.update,
         )
-        self.list = async_to_raw_response_wrapper(
+        self.list = _legacy_response.async_to_raw_response_wrapper(
             cards.list,
         )
-        self.embed = async_to_raw_response_wrapper(
+        self.embed = _legacy_response.async_to_raw_response_wrapper(
             cards.embed,
         )
-        self.provision = async_to_raw_response_wrapper(
+        self.provision = _legacy_response.async_to_raw_response_wrapper(
             cards.provision,
         )
-        self.reissue = async_to_raw_response_wrapper(
+        self.reissue = _legacy_response.async_to_raw_response_wrapper(
             cards.reissue,
         )
-        self.renew = async_to_raw_response_wrapper(
+        self.renew = _legacy_response.async_to_raw_response_wrapper(
             cards.renew,
         )
-        self.retrieve_spend_limits = async_to_raw_response_wrapper(
+        self.retrieve_spend_limits = _legacy_response.async_to_raw_response_wrapper(
+            cards.retrieve_spend_limits,
+        )
+
+
+class CardsWithStreamingResponse:
+    def __init__(self, cards: Cards) -> None:
+        self.aggregate_balances = AggregateBalancesWithStreamingResponse(cards.aggregate_balances)
+        self.balances = BalancesWithStreamingResponse(cards.balances)
+        self.financial_transactions = FinancialTransactionsWithStreamingResponse(cards.financial_transactions)
+
+        self.create = to_streamed_response_wrapper(
+            cards.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            cards.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            cards.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            cards.list,
+        )
+        self.embed = to_streamed_response_wrapper(
+            cards.embed,
+        )
+        self.provision = to_streamed_response_wrapper(
+            cards.provision,
+        )
+        self.reissue = to_streamed_response_wrapper(
+            cards.reissue,
+        )
+        self.renew = to_streamed_response_wrapper(
+            cards.renew,
+        )
+        self.retrieve_spend_limits = to_streamed_response_wrapper(
+            cards.retrieve_spend_limits,
+        )
+
+
+class AsyncCardsWithStreamingResponse:
+    def __init__(self, cards: AsyncCards) -> None:
+        self.aggregate_balances = AsyncAggregateBalancesWithStreamingResponse(cards.aggregate_balances)
+        self.balances = AsyncBalancesWithStreamingResponse(cards.balances)
+        self.financial_transactions = AsyncFinancialTransactionsWithStreamingResponse(cards.financial_transactions)
+
+        self.create = async_to_streamed_response_wrapper(
+            cards.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            cards.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            cards.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            cards.list,
+        )
+        self.embed = async_to_streamed_response_wrapper(
+            cards.embed,
+        )
+        self.provision = async_to_streamed_response_wrapper(
+            cards.provision,
+        )
+        self.reissue = async_to_streamed_response_wrapper(
+            cards.reissue,
+        )
+        self.renew = async_to_streamed_response_wrapper(
+            cards.renew,
+        )
+        self.retrieve_spend_limits = async_to_streamed_response_wrapper(
             cards.retrieve_spend_limits,
         )

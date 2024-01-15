@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -35,9 +36,24 @@ class TestAuthentication:
         response = client.three_ds.authentication.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authentication = response.parse()
         assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Lithic) -> None:
+        with client.three_ds.authentication.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            authentication = response.parse()
+            assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_simulate(self, client: Lithic) -> None:
@@ -71,9 +87,34 @@ class TestAuthentication:
                 "currency": "USD",
             },
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authentication = response.parse()
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate(self, client: Lithic) -> None:
+        with client.three_ds.authentication.with_streaming_response.simulate(
+            merchant={
+                "country": "USA",
+                "id": "OODKZAPJVN4YS7O",
+                "mcc": "5812",
+                "name": "COFFEE SHOP",
+            },
+            pan="4111111289144142",
+            transaction={
+                "amount": 100,
+                "currency": "USD",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            authentication = response.parse()
+            assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncAuthentication:
@@ -93,9 +134,24 @@ class TestAsyncAuthentication:
         response = await client.three_ds.authentication.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authentication = response.parse()
         assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
+        async with client.three_ds.authentication.with_streaming_response.retrieve(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            authentication = await response.parse()
+            assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_simulate(self, client: AsyncLithic) -> None:
@@ -129,6 +185,31 @@ class TestAsyncAuthentication:
                 "currency": "USD",
             },
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authentication = response.parse()
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate(self, client: AsyncLithic) -> None:
+        async with client.three_ds.authentication.with_streaming_response.simulate(
+            merchant={
+                "country": "USA",
+                "id": "OODKZAPJVN4YS7O",
+                "mcc": "5812",
+                "name": "COFFEE SHOP",
+            },
+            pan="4111111289144142",
+            transaction={
+                "amount": 100,
+                "currency": "USD",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            authentication = await response.parse()
+            assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
