@@ -65,6 +65,13 @@ class TestSettlement:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_list_details(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `report_date` but received ''"):
+            client.reports.settlement.with_raw_response.list_details(
+                "",
+            )
+
+    @parametrize
     def test_method_summary(self, client: Lithic) -> None:
         settlement = client.reports.settlement.summary(
             parse_date("2019-12-27"),
@@ -94,6 +101,13 @@ class TestSettlement:
             assert_matches_type(SettlementReport, settlement, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_summary(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `report_date` but received ''"):
+            client.reports.settlement.with_raw_response.summary(
+                "",
+            )
 
 
 class TestAsyncSettlement:
@@ -143,6 +157,13 @@ class TestAsyncSettlement:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_list_details(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `report_date` but received ''"):
+            await client.reports.settlement.with_raw_response.list_details(
+                "",
+            )
+
+    @parametrize
     async def test_method_summary(self, client: AsyncLithic) -> None:
         settlement = await client.reports.settlement.summary(
             parse_date("2019-12-27"),
@@ -172,3 +193,10 @@ class TestAsyncSettlement:
             assert_matches_type(SettlementReport, settlement, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_summary(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `report_date` but received ''"):
+            await client.reports.settlement.with_raw_response.summary(
+                "",
+            )

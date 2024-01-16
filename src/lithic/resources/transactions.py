@@ -73,6 +73,8 @@ class Transactions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not transaction_token:
+            raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._get(
             f"/transactions/{transaction_token}",
             options=make_request_options(
@@ -653,6 +655,8 @@ class AsyncTransactions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not transaction_token:
+            raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._get(
             f"/transactions/{transaction_token}",
             options=make_request_options(

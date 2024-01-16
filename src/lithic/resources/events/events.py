@@ -73,6 +73,8 @@ class Events(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_token:
+            raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get(
             f"/events/{event_token}",
             options=make_request_options(
@@ -217,6 +219,8 @@ class Events(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_token:
+            raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get_api_list(
             f"/events/{event_token}/attempts",
             page=SyncCursorPage[MessageAttempt],
@@ -293,6 +297,8 @@ class AsyncEvents(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_token:
+            raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return await self._get(
             f"/events/{event_token}",
             options=make_request_options(
@@ -437,6 +443,8 @@ class AsyncEvents(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_token:
+            raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get_api_list(
             f"/events/{event_token}/attempts",
             page=AsyncCursorPage[MessageAttempt],

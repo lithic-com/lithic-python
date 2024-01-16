@@ -68,6 +68,8 @@ class Accounts(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._get(
             f"/accounts/{account_token}",
             options=make_request_options(
@@ -131,6 +133,8 @@ class Accounts(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._patch(
             f"/accounts/{account_token}",
             body=maybe_transform(
@@ -244,6 +248,8 @@ class Accounts(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._get(
             f"/accounts/{account_token}/spend_limits",
             options=make_request_options(
@@ -289,6 +295,8 @@ class AsyncAccounts(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._get(
             f"/accounts/{account_token}",
             options=make_request_options(
@@ -352,6 +360,8 @@ class AsyncAccounts(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._patch(
             f"/accounts/{account_token}",
             body=maybe_transform(
@@ -465,6 +475,8 @@ class AsyncAccounts(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._get(
             f"/accounts/{account_token}/spend_limits",
             options=make_request_options(

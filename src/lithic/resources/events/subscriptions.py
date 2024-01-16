@@ -146,6 +146,10 @@ class Subscriptions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._get(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -214,6 +218,10 @@ class Subscriptions(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._patch(
             f"/event_subscriptions/{event_subscription_token}",
             body=maybe_transform(
@@ -314,6 +322,10 @@ class Subscriptions(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._delete(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -369,6 +381,10 @@ class Subscriptions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._get_api_list(
             f"/event_subscriptions/{event_subscription_token}/attempts",
             page=SyncCursorPage[MessageAttempt],
@@ -426,6 +442,10 @@ class Subscriptions(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/recover",
             options=make_request_options(
@@ -484,6 +504,10 @@ class Subscriptions(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/replay_missing",
             options=make_request_options(
@@ -526,6 +550,10 @@ class Subscriptions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._get(
             f"/event_subscriptions/{event_subscription_token}/secret",
             options=make_request_options(
@@ -562,6 +590,10 @@ class Subscriptions(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
             options=make_request_options(
@@ -622,6 +654,10 @@ class Subscriptions(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._post(
             f"/simulate/event_subscriptions/{event_subscription_token}/send_example",
             body=maybe_transform(
@@ -751,6 +787,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._get(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -819,6 +859,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._patch(
             f"/event_subscriptions/{event_subscription_token}",
             body=maybe_transform(
@@ -919,6 +963,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._delete(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
@@ -974,6 +1022,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return self._get_api_list(
             f"/event_subscriptions/{event_subscription_token}/attempts",
             page=AsyncCursorPage[MessageAttempt],
@@ -1031,6 +1083,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/recover",
             options=make_request_options(
@@ -1089,6 +1145,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/replay_missing",
             options=make_request_options(
@@ -1131,6 +1191,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._get(
             f"/event_subscriptions/{event_subscription_token}/secret",
             options=make_request_options(
@@ -1167,6 +1231,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
             options=make_request_options(
@@ -1227,6 +1295,10 @@ class AsyncSubscriptions(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not event_subscription_token:
+            raise ValueError(
+                f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
+            )
         return await self._post(
             f"/simulate/event_subscriptions/{event_subscription_token}/send_example",
             body=maybe_transform(

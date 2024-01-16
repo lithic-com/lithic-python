@@ -150,6 +150,8 @@ class Disputes(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._get(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -213,6 +215,8 @@ class Disputes(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._patch(
             f"/disputes/{dispute_token}",
             body=maybe_transform(
@@ -342,6 +346,8 @@ class Disputes(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._delete(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -383,6 +389,10 @@ class Disputes(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
+        if not evidence_token:
+            raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return self._delete(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(
@@ -429,6 +439,8 @@ class Disputes(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._post(
             f"/disputes/{dispute_token}/evidences",
             body=maybe_transform(
@@ -486,6 +498,8 @@ class Disputes(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._get_api_list(
             f"/disputes/{dispute_token}/evidences",
             page=SyncCursorPage[DisputeEvidence],
@@ -532,6 +546,10 @@ class Disputes(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
+        if not evidence_token:
+            raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return self._get(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(
@@ -672,6 +690,8 @@ class AsyncDisputes(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._get(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -735,6 +755,8 @@ class AsyncDisputes(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._patch(
             f"/disputes/{dispute_token}",
             body=maybe_transform(
@@ -864,6 +886,8 @@ class AsyncDisputes(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._delete(
             f"/disputes/{dispute_token}",
             options=make_request_options(
@@ -905,6 +929,10 @@ class AsyncDisputes(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
+        if not evidence_token:
+            raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return await self._delete(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(
@@ -951,6 +979,8 @@ class AsyncDisputes(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._post(
             f"/disputes/{dispute_token}/evidences",
             body=maybe_transform(
@@ -1008,6 +1038,8 @@ class AsyncDisputes(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._get_api_list(
             f"/disputes/{dispute_token}/evidences",
             page=AsyncCursorPage[DisputeEvidence],
@@ -1054,6 +1086,10 @@ class AsyncDisputes(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not dispute_token:
+            raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
+        if not evidence_token:
+            raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return await self._get(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(

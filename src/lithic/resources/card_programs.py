@@ -52,6 +52,8 @@ class CardPrograms(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_program_token:
+            raise ValueError(f"Expected a non-empty value for `card_program_token` but received {card_program_token!r}")
         return self._get(
             f"/card_programs/{card_program_token}",
             options=make_request_options(
@@ -146,6 +148,8 @@ class AsyncCardPrograms(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_program_token:
+            raise ValueError(f"Expected a non-empty value for `card_program_token` but received {card_program_token!r}")
         return await self._get(
             f"/card_programs/{card_program_token}",
             options=make_request_options(
