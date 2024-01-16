@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.31.0 (2024-01-16)
+
+Full Changelog: [v0.30.0...v0.31.0](https://github.com/lithic-com/lithic-python/compare/v0.30.0...v0.31.0)
+
+### Features
+
+* **client:** add support for streaming raw responses ([#323](https://github.com/lithic-com/lithic-python/issues/323)) ([ab894d3](https://github.com/lithic-com/lithic-python/commit/ab894d33ad10b3499150d5e6ecd9fb58fbeb03ea))
+
+
+### Bug Fixes
+
+* **client:** ensure path params are non-empty ([#324](https://github.com/lithic-com/lithic-python/issues/324)) ([c569801](https://github.com/lithic-com/lithic-python/commit/c5698014d94eef9733395a67c7cf380ecc5874f6))
+
+
+### Chores
+
+* **client:** improve debug logging for failed requests ([#320](https://github.com/lithic-com/lithic-python/issues/320)) ([c68b9a6](https://github.com/lithic-com/lithic-python/commit/c68b9a68027f178beb1bde1cae3d69a34ae9100a))
+
+
+### Documentation
+
+* **readme:** improve api reference ([#322](https://github.com/lithic-com/lithic-python/issues/322)) ([fcac257](https://github.com/lithic-com/lithic-python/commit/fcac257751b887ddcbae7c6b0d30f76291892277))
+
 ## 0.30.0 (2024-01-09)
 
 Full Changelog: [v0.29.1...v0.30.0](https://github.com/lithic-com/lithic-python/compare/v0.29.1...v0.30.0)
