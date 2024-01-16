@@ -729,6 +729,13 @@ class TestAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_retrieve(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.retrieve(
+                "",
+            )
+
+    @parametrize
     def test_method_update(self, client: Lithic) -> None:
         account_holder = client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -770,6 +777,13 @@ class TestAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_update(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.update(
+                "",
+            )
+
+    @parametrize
     def test_method_list_documents(self, client: Lithic) -> None:
         account_holder = client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -799,6 +813,13 @@ class TestAccountHolders:
             assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_list_documents(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.list_documents(
+                "",
+            )
 
     @parametrize
     def test_method_resubmit(self, client: Lithic) -> None:
@@ -883,6 +904,30 @@ class TestAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_resubmit(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.resubmit(
+                "",
+                individual={
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+                tos_timestamp="2018-05-29T21:16:05Z",
+                workflow="KYC_ADVANCED",
+            )
+
+    @parametrize
     def test_method_retrieve_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -917,6 +962,20 @@ class TestAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_retrieve_document(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.retrieve_document(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                account_holder_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `document_token` but received ''"):
+            client.account_holders.with_raw_response.retrieve_document(
+                "",
+                account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
+    @parametrize
     def test_method_upload_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -949,6 +1008,14 @@ class TestAccountHolders:
             assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_upload_document(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.upload_document(
+                "",
+                document_type="drivers_license",
+            )
 
 
 class TestAsyncAccountHolders:
@@ -1659,6 +1726,13 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await client.account_holders.with_raw_response.retrieve(
+                "",
+            )
+
+    @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1700,6 +1774,13 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_update(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await client.account_holders.with_raw_response.update(
+                "",
+            )
+
+    @parametrize
     async def test_method_list_documents(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1729,6 +1810,13 @@ class TestAsyncAccountHolders:
             assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_list_documents(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await client.account_holders.with_raw_response.list_documents(
+                "",
+            )
 
     @parametrize
     async def test_method_resubmit(self, client: AsyncLithic) -> None:
@@ -1813,6 +1901,30 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_resubmit(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await client.account_holders.with_raw_response.resubmit(
+                "",
+                individual={
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+12124007676",
+                },
+                tos_timestamp="2018-05-29T21:16:05Z",
+                workflow="KYC_ADVANCED",
+            )
+
+    @parametrize
     async def test_method_retrieve_document(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1847,6 +1959,20 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_retrieve_document(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await client.account_holders.with_raw_response.retrieve_document(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                account_holder_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `document_token` but received ''"):
+            await client.account_holders.with_raw_response.retrieve_document(
+                "",
+                account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
+    @parametrize
     async def test_method_upload_document(self, client: AsyncLithic) -> None:
         account_holder = await client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1879,3 +2005,11 @@ class TestAsyncAccountHolders:
             assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_upload_document(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await client.account_holders.with_raw_response.upload_document(
+                "",
+                document_type="drivers_license",
+            )

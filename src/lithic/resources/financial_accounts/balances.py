@@ -64,6 +64,10 @@ class Balances(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
         return self._get_api_list(
             f"/financial_accounts/{financial_account_token}/balances",
             page=SyncSinglePage[Balance],
@@ -124,6 +128,10 @@ class AsyncBalances(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
         return self._get_api_list(
             f"/financial_accounts/{financial_account_token}/balances",
             page=AsyncSinglePage[Balance],

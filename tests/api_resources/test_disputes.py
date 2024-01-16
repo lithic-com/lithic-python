@@ -106,6 +106,13 @@ class TestDisputes:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_retrieve(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            client.disputes.with_raw_response.retrieve(
+                "",
+            )
+
+    @parametrize
     def test_method_update(self, client: Lithic) -> None:
         dispute = client.disputes.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -146,6 +153,13 @@ class TestDisputes:
             assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_update(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            client.disputes.with_raw_response.update(
+                "",
+            )
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -221,6 +235,13 @@ class TestDisputes:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_delete(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            client.disputes.with_raw_response.delete(
+                "",
+            )
+
+    @parametrize
     def test_method_delete_evidence(self, client: Lithic) -> None:
         dispute = client.disputes.delete_evidence(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -253,6 +274,20 @@ class TestDisputes:
             assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_delete_evidence(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            client.disputes.with_raw_response.delete_evidence(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                dispute_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
+            client.disputes.with_raw_response.delete_evidence(
+                "",
+                dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
     @parametrize
     def test_method_initiate_evidence_upload(self, client: Lithic) -> None:
@@ -292,6 +327,13 @@ class TestDisputes:
             assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_initiate_evidence_upload(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            client.disputes.with_raw_response.initiate_evidence_upload(
+                "",
+            )
 
     @parametrize
     def test_method_list_evidences(self, client: Lithic) -> None:
@@ -337,6 +379,13 @@ class TestDisputes:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_list_evidences(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            client.disputes.with_raw_response.list_evidences(
+                "",
+            )
+
+    @parametrize
     def test_method_retrieve_evidence(self, client: Lithic) -> None:
         dispute = client.disputes.retrieve_evidence(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -369,6 +418,20 @@ class TestDisputes:
             assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve_evidence(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            client.disputes.with_raw_response.retrieve_evidence(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                dispute_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
+            client.disputes.with_raw_response.retrieve_evidence(
+                "",
+                dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
 
 class TestAsyncDisputes:
@@ -456,6 +519,13 @@ class TestAsyncDisputes:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            await client.disputes.with_raw_response.retrieve(
+                "",
+            )
+
+    @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -496,6 +566,13 @@ class TestAsyncDisputes:
             assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            await client.disputes.with_raw_response.update(
+                "",
+            )
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -571,6 +648,13 @@ class TestAsyncDisputes:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_delete(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            await client.disputes.with_raw_response.delete(
+                "",
+            )
+
+    @parametrize
     async def test_method_delete_evidence(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.delete_evidence(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -603,6 +687,20 @@ class TestAsyncDisputes:
             assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_delete_evidence(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            await client.disputes.with_raw_response.delete_evidence(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                dispute_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
+            await client.disputes.with_raw_response.delete_evidence(
+                "",
+                dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
     @parametrize
     async def test_method_initiate_evidence_upload(self, client: AsyncLithic) -> None:
@@ -642,6 +740,13 @@ class TestAsyncDisputes:
             assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_initiate_evidence_upload(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            await client.disputes.with_raw_response.initiate_evidence_upload(
+                "",
+            )
 
     @parametrize
     async def test_method_list_evidences(self, client: AsyncLithic) -> None:
@@ -687,6 +792,13 @@ class TestAsyncDisputes:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_list_evidences(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            await client.disputes.with_raw_response.list_evidences(
+                "",
+            )
+
+    @parametrize
     async def test_method_retrieve_evidence(self, client: AsyncLithic) -> None:
         dispute = await client.disputes.retrieve_evidence(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -719,3 +831,17 @@ class TestAsyncDisputes:
             assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_evidence(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
+            await client.disputes.with_raw_response.retrieve_evidence(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                dispute_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
+            await client.disputes.with_raw_response.retrieve_evidence(
+                "",
+                dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )

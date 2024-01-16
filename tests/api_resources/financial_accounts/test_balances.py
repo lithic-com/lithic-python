@@ -63,6 +63,15 @@ class TestBalances:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_path_params_list(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            client.financial_accounts.balances.with_raw_response.list(
+                "",
+            )
+
 
 class TestAsyncBalances:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -108,3 +117,12 @@ class TestAsyncBalances:
             assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_list(self, client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            await client.financial_accounts.balances.with_raw_response.list(
+                "",
+            )

@@ -129,6 +129,8 @@ class Payments(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._get(
             f"/payments/{payment_token}",
             options=make_request_options(
@@ -232,6 +234,8 @@ class Payments(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
             f"/payments/{payment_token}/retry",
             options=make_request_options(
@@ -427,6 +431,8 @@ class AsyncPayments(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._get(
             f"/payments/{payment_token}",
             options=make_request_options(
@@ -530,6 +536,8 @@ class AsyncPayments(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
             f"/payments/{payment_token}/retry",
             options=make_request_options(

@@ -53,6 +53,13 @@ class TestCreditConfigurations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_retrieve(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            client.accounts.credit_configurations.with_raw_response.retrieve(
+                "",
+            )
+
+    @parametrize
     def test_method_update(self, client: Lithic) -> None:
         credit_configuration = client.accounts.credit_configurations.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -94,6 +101,13 @@ class TestCreditConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_path_params_update(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            client.accounts.credit_configurations.with_raw_response.update(
+                "",
+            )
+
 
 class TestAsyncCreditConfigurations:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -130,6 +144,13 @@ class TestAsyncCreditConfigurations:
             assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            await client.accounts.credit_configurations.with_raw_response.retrieve(
+                "",
+            )
 
     @parametrize
     async def test_method_update(self, client: AsyncLithic) -> None:
@@ -172,3 +193,10 @@ class TestAsyncCreditConfigurations:
             assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            await client.accounts.credit_configurations.with_raw_response.update(
+                "",
+            )

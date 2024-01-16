@@ -247,6 +247,10 @@ class ExternalBankAccounts(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
         return self._get(
             f"/external_bank_accounts/{external_bank_account_token}",
             options=make_request_options(
@@ -294,6 +298,10 @@ class ExternalBankAccounts(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
         return self._patch(
             f"/external_bank_accounts/{external_bank_account_token}",
             body=maybe_transform(
@@ -589,6 +597,10 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
         return await self._get(
             f"/external_bank_accounts/{external_bank_account_token}",
             options=make_request_options(
@@ -636,6 +648,10 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
         return await self._patch(
             f"/external_bank_accounts/{external_bank_account_token}",
             body=maybe_transform(

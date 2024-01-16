@@ -56,6 +56,15 @@ class TestAuthentication:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_retrieve(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `three_ds_authentication_token` but received ''"
+        ):
+            client.three_ds.authentication.with_raw_response.retrieve(
+                "",
+            )
+
+    @parametrize
     def test_method_simulate(self, client: Lithic) -> None:
         authentication = client.three_ds.authentication.simulate(
             merchant={
@@ -152,6 +161,15 @@ class TestAsyncAuthentication:
             assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `three_ds_authentication_token` but received ''"
+        ):
+            await client.three_ds.authentication.with_raw_response.retrieve(
+                "",
+            )
 
     @parametrize
     async def test_method_simulate(self, client: AsyncLithic) -> None:

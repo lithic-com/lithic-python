@@ -64,6 +64,12 @@ class LineItems(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        if not statement_token:
+            raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return self._get_api_list(
             f"/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
             page=SyncCursorPage[LineItemListResponse],
@@ -129,6 +135,12 @@ class AsyncLineItems(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        if not statement_token:
+            raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return self._get_api_list(
             f"/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
             page=AsyncCursorPage[LineItemListResponse],

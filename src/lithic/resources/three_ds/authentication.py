@@ -54,6 +54,10 @@ class Authentication(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not three_ds_authentication_token:
+            raise ValueError(
+                f"Expected a non-empty value for `three_ds_authentication_token` but received {three_ds_authentication_token!r}"
+            )
         return self._get(
             f"/three_ds_authentication/{three_ds_authentication_token}",
             options=make_request_options(
@@ -148,6 +152,10 @@ class AsyncAuthentication(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not three_ds_authentication_token:
+            raise ValueError(
+                f"Expected a non-empty value for `three_ds_authentication_token` but received {three_ds_authentication_token!r}"
+            )
         return await self._get(
             f"/three_ds_authentication/{three_ds_authentication_token}",
             options=make_request_options(

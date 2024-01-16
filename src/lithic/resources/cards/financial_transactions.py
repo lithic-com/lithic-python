@@ -58,6 +58,12 @@ class FinancialTransactions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        if not financial_transaction_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_transaction_token` but received {financial_transaction_token!r}"
+            )
         return self._get(
             f"/cards/{card_token}/financial_transactions/{financial_transaction_token}",
             options=make_request_options(
@@ -114,6 +120,8 @@ class FinancialTransactions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
             f"/cards/{card_token}/financial_transactions",
             page=SyncSinglePage[FinancialTransaction],
@@ -172,6 +180,12 @@ class AsyncFinancialTransactions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        if not financial_transaction_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_transaction_token` but received {financial_transaction_token!r}"
+            )
         return await self._get(
             f"/cards/{card_token}/financial_transactions/{financial_transaction_token}",
             options=make_request_options(
@@ -228,6 +242,8 @@ class AsyncFinancialTransactions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
             f"/cards/{card_token}/financial_transactions",
             page=AsyncSinglePage[FinancialTransaction],

@@ -58,6 +58,22 @@ class TestStatements:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_retrieve(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            client.financial_accounts.statements.with_raw_response.retrieve(
+                "string",
+                financial_account_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `statement_token` but received ''"):
+            client.financial_accounts.statements.with_raw_response.retrieve(
+                "",
+                financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
+    @parametrize
     def test_method_list(self, client: Lithic) -> None:
         statement = client.financial_accounts.statements.list(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -100,6 +116,15 @@ class TestStatements:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_path_params_list(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            client.financial_accounts.statements.with_raw_response.list(
+                "",
+            )
+
 
 class TestAsyncStatements:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -139,6 +164,22 @@ class TestAsyncStatements:
             assert_matches_type(Statement, statement, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            await client.financial_accounts.statements.with_raw_response.retrieve(
+                "string",
+                financial_account_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `statement_token` but received ''"):
+            await client.financial_accounts.statements.with_raw_response.retrieve(
+                "",
+                financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -182,3 +223,12 @@ class TestAsyncStatements:
             assert_matches_type(AsyncCursorPage[Statement], statement, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_list(self, client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            await client.financial_accounts.statements.with_raw_response.list(
+                "",
+            )

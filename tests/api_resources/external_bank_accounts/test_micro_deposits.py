@@ -55,6 +55,16 @@ class TestMicroDeposits:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_path_params_create(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
+        ):
+            client.external_bank_accounts.micro_deposits.with_raw_response.create(
+                "",
+                micro_deposits=[0, 0, 0],
+            )
+
 
 class TestAsyncMicroDeposits:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -94,3 +104,13 @@ class TestAsyncMicroDeposits:
             assert_matches_type(MicroDepositCreateResponse, micro_deposit, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_create(self, client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
+        ):
+            await client.external_bank_accounts.micro_deposits.with_raw_response.create(
+                "",
+                micro_deposits=[0, 0, 0],
+            )

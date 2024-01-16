@@ -64,6 +64,8 @@ class Balances(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
             f"/cards/{card_token}/balances",
             page=SyncSinglePage[Balance],
@@ -124,6 +126,8 @@ class AsyncBalances(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
             f"/cards/{card_token}/balances",
             page=AsyncSinglePage[Balance],
