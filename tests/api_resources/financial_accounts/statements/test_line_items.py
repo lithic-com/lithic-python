@@ -67,6 +67,22 @@ class TestLineItems:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_path_params_list(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            client.financial_accounts.statements.line_items.with_raw_response.list(
+                "string",
+                financial_account_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `statement_token` but received ''"):
+            client.financial_accounts.statements.line_items.with_raw_response.list(
+                "",
+                financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
 
 class TestAsyncLineItems:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -117,3 +133,19 @@ class TestAsyncLineItems:
             assert_matches_type(AsyncCursorPage[LineItemListResponse], line_item, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_list(self, client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `financial_account_token` but received ''"
+        ):
+            await client.financial_accounts.statements.line_items.with_raw_response.list(
+                "string",
+                financial_account_token="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `statement_token` but received ''"):
+            await client.financial_accounts.statements.line_items.with_raw_response.list(
+                "",
+                financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )

@@ -344,6 +344,10 @@ class AccountHolders(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return self._get(
             f"/account_holders/{account_holder_token}",
             options=make_request_options(
@@ -393,6 +397,10 @@ class AccountHolders(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return self._patch(
             f"/account_holders/{account_holder_token}",
             body=maybe_transform(
@@ -450,6 +458,10 @@ class AccountHolders(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return self._get(
             f"/account_holders/{account_holder_token}/documents",
             options=make_request_options(
@@ -502,6 +514,10 @@ class AccountHolders(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return self._post(
             f"/account_holders/{account_holder_token}/resubmit",
             body=maybe_transform(
@@ -559,6 +575,12 @@ class AccountHolders(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
+        if not document_token:
+            raise ValueError(f"Expected a non-empty value for `document_token` but received {document_token!r}")
         return self._get(
             f"/account_holders/{account_holder_token}/documents/{document_token}",
             options=make_request_options(
@@ -613,6 +635,10 @@ class AccountHolders(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return self._post(
             f"/account_holders/{account_holder_token}/documents",
             body=maybe_transform(
@@ -943,6 +969,10 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return await self._get(
             f"/account_holders/{account_holder_token}",
             options=make_request_options(
@@ -992,6 +1022,10 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return await self._patch(
             f"/account_holders/{account_holder_token}",
             body=maybe_transform(
@@ -1049,6 +1083,10 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return await self._get(
             f"/account_holders/{account_holder_token}/documents",
             options=make_request_options(
@@ -1101,6 +1139,10 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return await self._post(
             f"/account_holders/{account_holder_token}/resubmit",
             body=maybe_transform(
@@ -1158,6 +1200,12 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
+        if not document_token:
+            raise ValueError(f"Expected a non-empty value for `document_token` but received {document_token!r}")
         return await self._get(
             f"/account_holders/{account_holder_token}/documents/{document_token}",
             options=make_request_options(
@@ -1212,6 +1260,10 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not account_holder_token:
+            raise ValueError(
+                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
+            )
         return await self._post(
             f"/account_holders/{account_holder_token}/documents",
             body=maybe_transform(

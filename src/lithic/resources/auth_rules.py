@@ -141,6 +141,8 @@ class AuthRules(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._get(
             f"/auth_rules/{auth_rule_token}",
             options=make_request_options(
@@ -195,6 +197,8 @@ class AuthRules(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._put(
             f"/auth_rules/{auth_rule_token}",
             body=maybe_transform(
@@ -308,6 +312,8 @@ class AuthRules(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._post(
             f"/auth_rules/{auth_rule_token}/apply",
             body=maybe_transform(
@@ -497,6 +503,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._get(
             f"/auth_rules/{auth_rule_token}",
             options=make_request_options(
@@ -551,6 +559,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._put(
             f"/auth_rules/{auth_rule_token}",
             body=maybe_transform(
@@ -664,6 +674,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._post(
             f"/auth_rules/{auth_rule_token}/apply",
             body=maybe_transform(

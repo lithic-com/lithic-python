@@ -54,6 +54,13 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_path_params_retrieve(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            client.accounts.with_raw_response.retrieve(
+                "",
+            )
+
     @pytest.mark.skip(reason="Prism returns invalid data")
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
@@ -107,6 +114,14 @@ class TestAccounts:
             assert_matches_type(Account, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism returns invalid data")
+    @parametrize
+    def test_path_params_update(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            client.accounts.with_raw_response.update(
+                "",
+            )
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -175,6 +190,13 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_path_params_retrieve_spend_limits(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            client.accounts.with_raw_response.retrieve_spend_limits(
+                "",
+            )
+
 
 class TestAsyncAccounts:
     strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -211,6 +233,13 @@ class TestAsyncAccounts:
             assert_matches_type(Account, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            await client.accounts.with_raw_response.retrieve(
+                "",
+            )
 
     @pytest.mark.skip(reason="Prism returns invalid data")
     @parametrize
@@ -265,6 +294,14 @@ class TestAsyncAccounts:
             assert_matches_type(Account, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism returns invalid data")
+    @parametrize
+    async def test_path_params_update(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            await client.accounts.with_raw_response.update(
+                "",
+            )
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:
@@ -332,3 +369,10 @@ class TestAsyncAccounts:
             assert_matches_type(AccountSpendLimits, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_spend_limits(self, client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            await client.accounts.with_raw_response.retrieve_spend_limits(
+                "",
+            )

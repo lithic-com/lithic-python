@@ -279,6 +279,8 @@ class Cards(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get(
             f"/cards/{card_token}",
             options=make_request_options(
@@ -368,6 +370,8 @@ class Cards(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._patch(
             f"/cards/{card_token}",
             body=maybe_transform(
@@ -698,6 +702,8 @@ class Cards(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
             f"/cards/{card_token}/provision",
             body=maybe_transform(
@@ -773,6 +779,8 @@ class Cards(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
             f"/cards/{card_token}/reissue",
             body=maybe_transform(
@@ -856,6 +864,8 @@ class Cards(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
             f"/cards/{card_token}/renew",
             body=maybe_transform(
@@ -905,6 +915,8 @@ class Cards(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get(
             f"/cards/{card_token}/spend_limits",
             options=make_request_options(
@@ -1125,6 +1137,8 @@ class AsyncCards(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._get(
             f"/cards/{card_token}",
             options=make_request_options(
@@ -1214,6 +1228,8 @@ class AsyncCards(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._patch(
             f"/cards/{card_token}",
             body=maybe_transform(
@@ -1544,6 +1560,8 @@ class AsyncCards(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
             f"/cards/{card_token}/provision",
             body=maybe_transform(
@@ -1619,6 +1637,8 @@ class AsyncCards(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
             f"/cards/{card_token}/reissue",
             body=maybe_transform(
@@ -1702,6 +1722,8 @@ class AsyncCards(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
             f"/cards/{card_token}/renew",
             body=maybe_transform(
@@ -1751,6 +1773,8 @@ class AsyncCards(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._get(
             f"/cards/{card_token}/spend_limits",
             options=make_request_options(

@@ -54,6 +54,15 @@ class TestDigitalCardArt:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_retrieve(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `digital_card_art_token` but received ''"
+        ):
+            client.digital_card_art.with_raw_response.retrieve(
+                "",
+            )
+
+    @parametrize
     def test_method_list(self, client: Lithic) -> None:
         digital_card_art = client.digital_card_art.list()
         assert_matches_type(SyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
@@ -123,6 +132,15 @@ class TestAsyncDigitalCardArt:
             assert_matches_type(DigitalCardArt, digital_card_art, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `digital_card_art_token` but received ''"
+        ):
+            await client.digital_card_art.with_raw_response.retrieve(
+                "",
+            )
 
     @parametrize
     async def test_method_list(self, client: AsyncLithic) -> None:

@@ -52,6 +52,10 @@ class DigitalCardArtResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not digital_card_art_token:
+            raise ValueError(
+                f"Expected a non-empty value for `digital_card_art_token` but received {digital_card_art_token!r}"
+            )
         return self._get(
             f"/digital_card_art/{digital_card_art_token}",
             options=make_request_options(
@@ -146,6 +150,10 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not digital_card_art_token:
+            raise ValueError(
+                f"Expected a non-empty value for `digital_card_art_token` but received {digital_card_art_token!r}"
+            )
         return await self._get(
             f"/digital_card_art/{digital_card_art_token}",
             options=make_request_options(

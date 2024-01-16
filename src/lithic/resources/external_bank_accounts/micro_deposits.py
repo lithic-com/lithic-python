@@ -56,6 +56,10 @@ class MicroDeposits(SyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
         return self._post(
             f"/external_bank_accounts/{external_bank_account_token}/micro_deposits",
             body=maybe_transform(
@@ -108,6 +112,10 @@ class AsyncMicroDeposits(AsyncAPIResource):
 
           idempotency_key: Specify a custom idempotency key for this request
         """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
         return await self._post(
             f"/external_bank_accounts/{external_bank_account_token}/micro_deposits",
             body=maybe_transform(

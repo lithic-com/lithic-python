@@ -67,6 +67,8 @@ class Settlement(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not report_date:
+            raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get_api_list(
             f"/reports/settlement/details/{report_date}",
             page=SyncCursorPage[SettlementDetail],
@@ -110,6 +112,8 @@ class Settlement(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not report_date:
+            raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get(
             f"/reports/settlement/summary/{report_date}",
             options=make_request_options(
@@ -162,6 +166,8 @@ class AsyncSettlement(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not report_date:
+            raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get_api_list(
             f"/reports/settlement/details/{report_date}",
             page=AsyncCursorPage[SettlementDetail],
@@ -205,6 +211,8 @@ class AsyncSettlement(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not report_date:
+            raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return await self._get(
             f"/reports/settlement/summary/{report_date}",
             options=make_request_options(
