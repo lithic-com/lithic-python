@@ -1123,6 +1123,8 @@ class AsyncDisputes(AsyncAPIResource):
 
 class DisputesWithRawResponse:
     def __init__(self, disputes: Disputes) -> None:
+        self._disputes = disputes
+
         self.create = _legacy_response.to_raw_response_wrapper(
             disputes.create,
         )
@@ -1154,6 +1156,8 @@ class DisputesWithRawResponse:
 
 class AsyncDisputesWithRawResponse:
     def __init__(self, disputes: AsyncDisputes) -> None:
+        self._disputes = disputes
+
         self.create = _legacy_response.async_to_raw_response_wrapper(
             disputes.create,
         )
@@ -1185,6 +1189,8 @@ class AsyncDisputesWithRawResponse:
 
 class DisputesWithStreamingResponse:
     def __init__(self, disputes: Disputes) -> None:
+        self._disputes = disputes
+
         self.create = to_streamed_response_wrapper(
             disputes.create,
         )
@@ -1216,6 +1222,8 @@ class DisputesWithStreamingResponse:
 
 class AsyncDisputesWithStreamingResponse:
     def __init__(self, disputes: AsyncDisputes) -> None:
+        self._disputes = disputes
+
         self.create = async_to_streamed_response_wrapper(
             disputes.create,
         )

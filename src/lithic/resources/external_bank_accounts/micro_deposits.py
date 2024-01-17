@@ -134,6 +134,8 @@ class AsyncMicroDeposits(AsyncAPIResource):
 
 class MicroDepositsWithRawResponse:
     def __init__(self, micro_deposits: MicroDeposits) -> None:
+        self._micro_deposits = micro_deposits
+
         self.create = _legacy_response.to_raw_response_wrapper(
             micro_deposits.create,
         )
@@ -141,6 +143,8 @@ class MicroDepositsWithRawResponse:
 
 class AsyncMicroDepositsWithRawResponse:
     def __init__(self, micro_deposits: AsyncMicroDeposits) -> None:
+        self._micro_deposits = micro_deposits
+
         self.create = _legacy_response.async_to_raw_response_wrapper(
             micro_deposits.create,
         )
@@ -148,6 +152,8 @@ class AsyncMicroDepositsWithRawResponse:
 
 class MicroDepositsWithStreamingResponse:
     def __init__(self, micro_deposits: MicroDeposits) -> None:
+        self._micro_deposits = micro_deposits
+
         self.create = to_streamed_response_wrapper(
             micro_deposits.create,
         )
@@ -155,6 +161,8 @@ class MicroDepositsWithStreamingResponse:
 
 class AsyncMicroDepositsWithStreamingResponse:
     def __init__(self, micro_deposits: AsyncMicroDeposits) -> None:
+        self._micro_deposits = micro_deposits
+
         self.create = async_to_streamed_response_wrapper(
             micro_deposits.create,
         )

@@ -279,6 +279,8 @@ class AsyncFinancialTransactions(AsyncAPIResource):
 
 class FinancialTransactionsWithRawResponse:
     def __init__(self, financial_transactions: FinancialTransactions) -> None:
+        self._financial_transactions = financial_transactions
+
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             financial_transactions.retrieve,
         )
@@ -289,6 +291,8 @@ class FinancialTransactionsWithRawResponse:
 
 class AsyncFinancialTransactionsWithRawResponse:
     def __init__(self, financial_transactions: AsyncFinancialTransactions) -> None:
+        self._financial_transactions = financial_transactions
+
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             financial_transactions.retrieve,
         )
@@ -299,6 +303,8 @@ class AsyncFinancialTransactionsWithRawResponse:
 
 class FinancialTransactionsWithStreamingResponse:
     def __init__(self, financial_transactions: FinancialTransactions) -> None:
+        self._financial_transactions = financial_transactions
+
         self.retrieve = to_streamed_response_wrapper(
             financial_transactions.retrieve,
         )
@@ -309,6 +315,8 @@ class FinancialTransactionsWithStreamingResponse:
 
 class AsyncFinancialTransactionsWithStreamingResponse:
     def __init__(self, financial_transactions: AsyncFinancialTransactions) -> None:
+        self._financial_transactions = financial_transactions
+
         self.retrieve = async_to_streamed_response_wrapper(
             financial_transactions.retrieve,
         )

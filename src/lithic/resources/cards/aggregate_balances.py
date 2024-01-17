@@ -136,6 +136,8 @@ class AsyncAggregateBalances(AsyncAPIResource):
 
 class AggregateBalancesWithRawResponse:
     def __init__(self, aggregate_balances: AggregateBalances) -> None:
+        self._aggregate_balances = aggregate_balances
+
         self.list = _legacy_response.to_raw_response_wrapper(
             aggregate_balances.list,
         )
@@ -143,6 +145,8 @@ class AggregateBalancesWithRawResponse:
 
 class AsyncAggregateBalancesWithRawResponse:
     def __init__(self, aggregate_balances: AsyncAggregateBalances) -> None:
+        self._aggregate_balances = aggregate_balances
+
         self.list = _legacy_response.async_to_raw_response_wrapper(
             aggregate_balances.list,
         )
@@ -150,6 +154,8 @@ class AsyncAggregateBalancesWithRawResponse:
 
 class AggregateBalancesWithStreamingResponse:
     def __init__(self, aggregate_balances: AggregateBalances) -> None:
+        self._aggregate_balances = aggregate_balances
+
         self.list = to_streamed_response_wrapper(
             aggregate_balances.list,
         )
@@ -157,6 +163,8 @@ class AggregateBalancesWithStreamingResponse:
 
 class AsyncAggregateBalancesWithStreamingResponse:
     def __init__(self, aggregate_balances: AsyncAggregateBalances) -> None:
+        self._aggregate_balances = aggregate_balances
+
         self.list = async_to_streamed_response_wrapper(
             aggregate_balances.list,
         )

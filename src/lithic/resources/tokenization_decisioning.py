@@ -151,6 +151,8 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
 
 class TokenizationDecisioningWithRawResponse:
     def __init__(self, tokenization_decisioning: TokenizationDecisioning) -> None:
+        self._tokenization_decisioning = tokenization_decisioning
+
         self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
             tokenization_decisioning.retrieve_secret,
         )
@@ -161,6 +163,8 @@ class TokenizationDecisioningWithRawResponse:
 
 class AsyncTokenizationDecisioningWithRawResponse:
     def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioning) -> None:
+        self._tokenization_decisioning = tokenization_decisioning
+
         self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
             tokenization_decisioning.retrieve_secret,
         )
@@ -171,6 +175,8 @@ class AsyncTokenizationDecisioningWithRawResponse:
 
 class TokenizationDecisioningWithStreamingResponse:
     def __init__(self, tokenization_decisioning: TokenizationDecisioning) -> None:
+        self._tokenization_decisioning = tokenization_decisioning
+
         self.retrieve_secret = to_streamed_response_wrapper(
             tokenization_decisioning.retrieve_secret,
         )
@@ -181,6 +187,8 @@ class TokenizationDecisioningWithStreamingResponse:
 
 class AsyncTokenizationDecisioningWithStreamingResponse:
     def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioning) -> None:
+        self._tokenization_decisioning = tokenization_decisioning
+
         self.retrieve_secret = async_to_streamed_response_wrapper(
             tokenization_decisioning.retrieve_secret,
         )

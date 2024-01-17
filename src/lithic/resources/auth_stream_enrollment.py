@@ -153,6 +153,8 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
 
 class AuthStreamEnrollmentWithRawResponse:
     def __init__(self, auth_stream_enrollment: AuthStreamEnrollment) -> None:
+        self._auth_stream_enrollment = auth_stream_enrollment
+
         self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
             auth_stream_enrollment.retrieve_secret,
         )
@@ -163,6 +165,8 @@ class AuthStreamEnrollmentWithRawResponse:
 
 class AsyncAuthStreamEnrollmentWithRawResponse:
     def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollment) -> None:
+        self._auth_stream_enrollment = auth_stream_enrollment
+
         self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
             auth_stream_enrollment.retrieve_secret,
         )
@@ -173,6 +177,8 @@ class AsyncAuthStreamEnrollmentWithRawResponse:
 
 class AuthStreamEnrollmentWithStreamingResponse:
     def __init__(self, auth_stream_enrollment: AuthStreamEnrollment) -> None:
+        self._auth_stream_enrollment = auth_stream_enrollment
+
         self.retrieve_secret = to_streamed_response_wrapper(
             auth_stream_enrollment.retrieve_secret,
         )
@@ -183,6 +189,8 @@ class AuthStreamEnrollmentWithStreamingResponse:
 
 class AsyncAuthStreamEnrollmentWithStreamingResponse:
     def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollment) -> None:
+        self._auth_stream_enrollment = auth_stream_enrollment
+
         self.retrieve_secret = async_to_streamed_response_wrapper(
             auth_stream_enrollment.retrieve_secret,
         )
