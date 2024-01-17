@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.31.1 (2024-01-17)
+
+Full Changelog: [v0.31.0...v0.31.1](https://github.com/lithic-com/lithic-python/compare/v0.31.0...v0.31.1)
+
+### Features
+
+* **api:** updates ([#329](https://github.com/lithic-com/lithic-python/issues/329)) ([df87083](https://github.com/lithic-com/lithic-python/commit/df870839f6beb7416faa626643bd8ede8b14730b))
+
+
+### Chores
+
+* add write_to_file binary helper method ([#327](https://github.com/lithic-com/lithic-python/issues/327)) ([86d0a5c](https://github.com/lithic-com/lithic-python/commit/86d0a5c7279d67902ba75d73a599bc08894c016a))
+* **internal:** fix typing util function ([#328](https://github.com/lithic-com/lithic-python/issues/328)) ([40c5279](https://github.com/lithic-com/lithic-python/commit/40c52799f31fae46d99580a5f19c9aa0366cbb88))
+* **internal:** updates to proxy helper ([#325](https://github.com/lithic-com/lithic-python/issues/325)) ([9439dcc](https://github.com/lithic-com/lithic-python/commit/9439dcc885ba87841c6197beb005bde1deb22dad))
+
 ## 0.31.0 (2024-01-16)
 
 Full Changelog: [v0.30.0...v0.31.0](https://github.com/lithic-com/lithic-python/compare/v0.30.0...v0.31.0)
