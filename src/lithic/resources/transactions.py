@@ -1207,6 +1207,8 @@ class AsyncTransactions(AsyncAPIResource):
 
 class TransactionsWithRawResponse:
     def __init__(self, transactions: Transactions) -> None:
+        self._transactions = transactions
+
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             transactions.retrieve,
         )
@@ -1238,6 +1240,8 @@ class TransactionsWithRawResponse:
 
 class AsyncTransactionsWithRawResponse:
     def __init__(self, transactions: AsyncTransactions) -> None:
+        self._transactions = transactions
+
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             transactions.retrieve,
         )
@@ -1269,6 +1273,8 @@ class AsyncTransactionsWithRawResponse:
 
 class TransactionsWithStreamingResponse:
     def __init__(self, transactions: Transactions) -> None:
+        self._transactions = transactions
+
         self.retrieve = to_streamed_response_wrapper(
             transactions.retrieve,
         )
@@ -1300,6 +1306,8 @@ class TransactionsWithStreamingResponse:
 
 class AsyncTransactionsWithStreamingResponse:
     def __init__(self, transactions: AsyncTransactions) -> None:
+        self._transactions = transactions
+
         self.retrieve = async_to_streamed_response_wrapper(
             transactions.retrieve,
         )

@@ -190,6 +190,8 @@ class AsyncTokenizations(AsyncAPIResource):
 
 class TokenizationsWithRawResponse:
     def __init__(self, tokenizations: Tokenizations) -> None:
+        self._tokenizations = tokenizations
+
         self.simulate = _legacy_response.to_raw_response_wrapper(
             tokenizations.simulate,
         )
@@ -197,6 +199,8 @@ class TokenizationsWithRawResponse:
 
 class AsyncTokenizationsWithRawResponse:
     def __init__(self, tokenizations: AsyncTokenizations) -> None:
+        self._tokenizations = tokenizations
+
         self.simulate = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.simulate,
         )
@@ -204,6 +208,8 @@ class AsyncTokenizationsWithRawResponse:
 
 class TokenizationsWithStreamingResponse:
     def __init__(self, tokenizations: Tokenizations) -> None:
+        self._tokenizations = tokenizations
+
         self.simulate = to_streamed_response_wrapper(
             tokenizations.simulate,
         )
@@ -211,6 +217,8 @@ class TokenizationsWithStreamingResponse:
 
 class AsyncTokenizationsWithStreamingResponse:
     def __init__(self, tokenizations: AsyncTokenizations) -> None:
+        self._tokenizations = tokenizations
+
         self.simulate = async_to_streamed_response_wrapper(
             tokenizations.simulate,
         )

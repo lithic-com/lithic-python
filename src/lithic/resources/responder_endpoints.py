@@ -308,6 +308,8 @@ class AsyncResponderEndpoints(AsyncAPIResource):
 
 class ResponderEndpointsWithRawResponse:
     def __init__(self, responder_endpoints: ResponderEndpoints) -> None:
+        self._responder_endpoints = responder_endpoints
+
         self.create = _legacy_response.to_raw_response_wrapper(
             responder_endpoints.create,
         )
@@ -321,6 +323,8 @@ class ResponderEndpointsWithRawResponse:
 
 class AsyncResponderEndpointsWithRawResponse:
     def __init__(self, responder_endpoints: AsyncResponderEndpoints) -> None:
+        self._responder_endpoints = responder_endpoints
+
         self.create = _legacy_response.async_to_raw_response_wrapper(
             responder_endpoints.create,
         )
@@ -334,6 +338,8 @@ class AsyncResponderEndpointsWithRawResponse:
 
 class ResponderEndpointsWithStreamingResponse:
     def __init__(self, responder_endpoints: ResponderEndpoints) -> None:
+        self._responder_endpoints = responder_endpoints
+
         self.create = to_streamed_response_wrapper(
             responder_endpoints.create,
         )
@@ -347,6 +353,8 @@ class ResponderEndpointsWithStreamingResponse:
 
 class AsyncResponderEndpointsWithStreamingResponse:
     def __init__(self, responder_endpoints: AsyncResponderEndpoints) -> None:
+        self._responder_endpoints = responder_endpoints
+
         self.create = async_to_streamed_response_wrapper(
             responder_endpoints.create,
         )

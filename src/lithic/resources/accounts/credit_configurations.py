@@ -229,6 +229,8 @@ class AsyncCreditConfigurations(AsyncAPIResource):
 
 class CreditConfigurationsWithRawResponse:
     def __init__(self, credit_configurations: CreditConfigurations) -> None:
+        self._credit_configurations = credit_configurations
+
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             credit_configurations.retrieve,
         )
@@ -239,6 +241,8 @@ class CreditConfigurationsWithRawResponse:
 
 class AsyncCreditConfigurationsWithRawResponse:
     def __init__(self, credit_configurations: AsyncCreditConfigurations) -> None:
+        self._credit_configurations = credit_configurations
+
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             credit_configurations.retrieve,
         )
@@ -249,6 +253,8 @@ class AsyncCreditConfigurationsWithRawResponse:
 
 class CreditConfigurationsWithStreamingResponse:
     def __init__(self, credit_configurations: CreditConfigurations) -> None:
+        self._credit_configurations = credit_configurations
+
         self.retrieve = to_streamed_response_wrapper(
             credit_configurations.retrieve,
         )
@@ -259,6 +265,8 @@ class CreditConfigurationsWithStreamingResponse:
 
 class AsyncCreditConfigurationsWithStreamingResponse:
     def __init__(self, credit_configurations: AsyncCreditConfigurations) -> None:
+        self._credit_configurations = credit_configurations
+
         self.retrieve = async_to_streamed_response_wrapper(
             credit_configurations.retrieve,
         )

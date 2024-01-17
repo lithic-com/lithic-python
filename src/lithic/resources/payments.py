@@ -640,6 +640,8 @@ class AsyncPayments(AsyncAPIResource):
 
 class PaymentsWithRawResponse:
     def __init__(self, payments: Payments) -> None:
+        self._payments = payments
+
         self.create = _legacy_response.to_raw_response_wrapper(
             payments.create,
         )
@@ -662,6 +664,8 @@ class PaymentsWithRawResponse:
 
 class AsyncPaymentsWithRawResponse:
     def __init__(self, payments: AsyncPayments) -> None:
+        self._payments = payments
+
         self.create = _legacy_response.async_to_raw_response_wrapper(
             payments.create,
         )
@@ -684,6 +688,8 @@ class AsyncPaymentsWithRawResponse:
 
 class PaymentsWithStreamingResponse:
     def __init__(self, payments: Payments) -> None:
+        self._payments = payments
+
         self.create = to_streamed_response_wrapper(
             payments.create,
         )
@@ -706,6 +712,8 @@ class PaymentsWithStreamingResponse:
 
 class AsyncPaymentsWithStreamingResponse:
     def __init__(self, payments: AsyncPayments) -> None:
+        self._payments = payments
+
         self.create = async_to_streamed_response_wrapper(
             payments.create,
         )

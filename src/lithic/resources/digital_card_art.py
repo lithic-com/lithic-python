@@ -218,6 +218,8 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
 
 class DigitalCardArtResourceWithRawResponse:
     def __init__(self, digital_card_art: DigitalCardArtResource) -> None:
+        self._digital_card_art = digital_card_art
+
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             digital_card_art.retrieve,
         )
@@ -228,6 +230,8 @@ class DigitalCardArtResourceWithRawResponse:
 
 class AsyncDigitalCardArtResourceWithRawResponse:
     def __init__(self, digital_card_art: AsyncDigitalCardArtResource) -> None:
+        self._digital_card_art = digital_card_art
+
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             digital_card_art.retrieve,
         )
@@ -238,6 +242,8 @@ class AsyncDigitalCardArtResourceWithRawResponse:
 
 class DigitalCardArtResourceWithStreamingResponse:
     def __init__(self, digital_card_art: DigitalCardArtResource) -> None:
+        self._digital_card_art = digital_card_art
+
         self.retrieve = to_streamed_response_wrapper(
             digital_card_art.retrieve,
         )
@@ -248,6 +254,8 @@ class DigitalCardArtResourceWithStreamingResponse:
 
 class AsyncDigitalCardArtResourceWithStreamingResponse:
     def __init__(self, digital_card_art: AsyncDigitalCardArtResource) -> None:
+        self._digital_card_art = digital_card_art
+
         self.retrieve = async_to_streamed_response_wrapper(
             digital_card_art.retrieve,
         )

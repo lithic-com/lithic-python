@@ -1786,9 +1786,7 @@ class AsyncCards(AsyncAPIResource):
 
 class CardsWithRawResponse:
     def __init__(self, cards: Cards) -> None:
-        self.aggregate_balances = AggregateBalancesWithRawResponse(cards.aggregate_balances)
-        self.balances = BalancesWithRawResponse(cards.balances)
-        self.financial_transactions = FinancialTransactionsWithRawResponse(cards.financial_transactions)
+        self._cards = cards
 
         self.create = _legacy_response.to_raw_response_wrapper(
             cards.create,
@@ -1818,12 +1816,22 @@ class CardsWithRawResponse:
             cards.retrieve_spend_limits,
         )
 
+    @cached_property
+    def aggregate_balances(self) -> AggregateBalancesWithRawResponse:
+        return AggregateBalancesWithRawResponse(self._cards.aggregate_balances)
+
+    @cached_property
+    def balances(self) -> BalancesWithRawResponse:
+        return BalancesWithRawResponse(self._cards.balances)
+
+    @cached_property
+    def financial_transactions(self) -> FinancialTransactionsWithRawResponse:
+        return FinancialTransactionsWithRawResponse(self._cards.financial_transactions)
+
 
 class AsyncCardsWithRawResponse:
     def __init__(self, cards: AsyncCards) -> None:
-        self.aggregate_balances = AsyncAggregateBalancesWithRawResponse(cards.aggregate_balances)
-        self.balances = AsyncBalancesWithRawResponse(cards.balances)
-        self.financial_transactions = AsyncFinancialTransactionsWithRawResponse(cards.financial_transactions)
+        self._cards = cards
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
             cards.create,
@@ -1853,12 +1861,22 @@ class AsyncCardsWithRawResponse:
             cards.retrieve_spend_limits,
         )
 
+    @cached_property
+    def aggregate_balances(self) -> AsyncAggregateBalancesWithRawResponse:
+        return AsyncAggregateBalancesWithRawResponse(self._cards.aggregate_balances)
+
+    @cached_property
+    def balances(self) -> AsyncBalancesWithRawResponse:
+        return AsyncBalancesWithRawResponse(self._cards.balances)
+
+    @cached_property
+    def financial_transactions(self) -> AsyncFinancialTransactionsWithRawResponse:
+        return AsyncFinancialTransactionsWithRawResponse(self._cards.financial_transactions)
+
 
 class CardsWithStreamingResponse:
     def __init__(self, cards: Cards) -> None:
-        self.aggregate_balances = AggregateBalancesWithStreamingResponse(cards.aggregate_balances)
-        self.balances = BalancesWithStreamingResponse(cards.balances)
-        self.financial_transactions = FinancialTransactionsWithStreamingResponse(cards.financial_transactions)
+        self._cards = cards
 
         self.create = to_streamed_response_wrapper(
             cards.create,
@@ -1888,12 +1906,22 @@ class CardsWithStreamingResponse:
             cards.retrieve_spend_limits,
         )
 
+    @cached_property
+    def aggregate_balances(self) -> AggregateBalancesWithStreamingResponse:
+        return AggregateBalancesWithStreamingResponse(self._cards.aggregate_balances)
+
+    @cached_property
+    def balances(self) -> BalancesWithStreamingResponse:
+        return BalancesWithStreamingResponse(self._cards.balances)
+
+    @cached_property
+    def financial_transactions(self) -> FinancialTransactionsWithStreamingResponse:
+        return FinancialTransactionsWithStreamingResponse(self._cards.financial_transactions)
+
 
 class AsyncCardsWithStreamingResponse:
     def __init__(self, cards: AsyncCards) -> None:
-        self.aggregate_balances = AsyncAggregateBalancesWithStreamingResponse(cards.aggregate_balances)
-        self.balances = AsyncBalancesWithStreamingResponse(cards.balances)
-        self.financial_transactions = AsyncFinancialTransactionsWithStreamingResponse(cards.financial_transactions)
+        self._cards = cards
 
         self.create = async_to_streamed_response_wrapper(
             cards.create,
@@ -1922,3 +1950,15 @@ class AsyncCardsWithStreamingResponse:
         self.retrieve_spend_limits = async_to_streamed_response_wrapper(
             cards.retrieve_spend_limits,
         )
+
+    @cached_property
+    def aggregate_balances(self) -> AsyncAggregateBalancesWithStreamingResponse:
+        return AsyncAggregateBalancesWithStreamingResponse(self._cards.aggregate_balances)
+
+    @cached_property
+    def balances(self) -> AsyncBalancesWithStreamingResponse:
+        return AsyncBalancesWithStreamingResponse(self._cards.balances)
+
+    @cached_property
+    def financial_transactions(self) -> AsyncFinancialTransactionsWithStreamingResponse:
+        return AsyncFinancialTransactionsWithStreamingResponse(self._cards.financial_transactions)
