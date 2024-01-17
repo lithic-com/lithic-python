@@ -14,6 +14,7 @@ from ..types import (
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
     shared_params,
+    account_holder_list_params,
     account_holder_create_params,
     account_holder_update_params,
     account_holder_resubmit_params,
@@ -24,7 +25,9 @@ from .._utils import required_args, maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ..pagination import SyncSinglePage, AsyncSinglePage
 from .._base_client import (
+    AsyncPaginator,
     make_request_options,
 )
 
@@ -419,6 +422,64 @@ class AccountHolders(SyncAPIResource):
                 idempotency_key=idempotency_key,
             ),
             cast_to=AccountHolderUpdateResponse,
+        )
+
+    def list(
+        self,
+        *,
+        ending_before: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyncSinglePage[AccountHolder]:
+        """
+        Get a list of individual or business account holders and their KYC or KYB
+        evaluation status.
+
+        Args:
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
+
+          external_id: If applicable, represents the external_id associated with the account_holder.
+
+          limit: The number of account_holders to limit the response to.
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/account_holders",
+            page=SyncSinglePage[AccountHolder],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "ending_before": ending_before,
+                        "external_id": external_id,
+                        "limit": limit,
+                        "starting_after": starting_after,
+                    },
+                    account_holder_list_params.AccountHolderListParams,
+                ),
+            ),
+            model=AccountHolder,
         )
 
     def list_documents(
@@ -1046,6 +1107,64 @@ class AsyncAccountHolders(AsyncAPIResource):
             cast_to=AccountHolderUpdateResponse,
         )
 
+    def list(
+        self,
+        *,
+        ending_before: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        starting_after: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AsyncPaginator[AccountHolder, AsyncSinglePage[AccountHolder]]:
+        """
+        Get a list of individual or business account holders and their KYC or KYB
+        evaluation status.
+
+        Args:
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
+
+          external_id: If applicable, represents the external_id associated with the account_holder.
+
+          limit: The number of account_holders to limit the response to.
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/account_holders",
+            page=AsyncSinglePage[AccountHolder],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "ending_before": ending_before,
+                        "external_id": external_id,
+                        "limit": limit,
+                        "starting_after": starting_after,
+                    },
+                    account_holder_list_params.AccountHolderListParams,
+                ),
+            ),
+            model=AccountHolder,
+        )
+
     async def list_documents(
         self,
         account_holder_token: str,
@@ -1292,6 +1411,9 @@ class AccountHoldersWithRawResponse:
         self.update = _legacy_response.to_raw_response_wrapper(
             account_holders.update,
         )
+        self.list = _legacy_response.to_raw_response_wrapper(
+            account_holders.list,
+        )
         self.list_documents = _legacy_response.to_raw_response_wrapper(
             account_holders.list_documents,
         )
@@ -1316,6 +1438,9 @@ class AsyncAccountHoldersWithRawResponse:
         )
         self.update = _legacy_response.async_to_raw_response_wrapper(
             account_holders.update,
+        )
+        self.list = _legacy_response.async_to_raw_response_wrapper(
+            account_holders.list,
         )
         self.list_documents = _legacy_response.async_to_raw_response_wrapper(
             account_holders.list_documents,
@@ -1342,6 +1467,9 @@ class AccountHoldersWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             account_holders.update,
         )
+        self.list = to_streamed_response_wrapper(
+            account_holders.list,
+        )
         self.list_documents = to_streamed_response_wrapper(
             account_holders.list_documents,
         )
@@ -1366,6 +1494,9 @@ class AsyncAccountHoldersWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             account_holders.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            account_holders.list,
         )
         self.list_documents = async_to_streamed_response_wrapper(
             account_holders.list_documents,

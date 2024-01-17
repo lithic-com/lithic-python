@@ -64,6 +64,7 @@ from .card_program_list_params import CardProgramListParams as CardProgramListPa
 from .auth_rule_remove_response import AuthRuleRemoveResponse as AuthRuleRemoveResponse
 from .card_get_embed_url_params import CardGetEmbedURLParams as CardGetEmbedURLParams
 from .responder_endpoint_status import ResponderEndpointStatus as ResponderEndpointStatus
+from .account_holder_list_params import AccountHolderListParams as AccountHolderListParams
 from .card_get_embed_html_params import CardGetEmbedHTMLParams as CardGetEmbedHTMLParams
 from .event_list_attempts_params import EventListAttemptsParams as EventListAttemptsParams
 from .settlement_summary_details import SettlementSummaryDetails as SettlementSummaryDetails

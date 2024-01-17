@@ -16,6 +16,7 @@ from lithic.types import (
     AccountHolderListDocumentsResponse,
 )
 from lithic._client import Lithic, AsyncLithic
+from lithic.pagination import SyncSinglePage, AsyncSinglePage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My Lithic API Key"
@@ -782,6 +783,41 @@ class TestAccountHolders:
             client.account_holders.with_raw_response.update(
                 "",
             )
+
+    @parametrize
+    def test_method_list(self, client: Lithic) -> None:
+        account_holder = client.account_holders.list()
+        assert_matches_type(SyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+    @parametrize
+    def test_method_list_with_all_params(self, client: Lithic) -> None:
+        account_holder = client.account_holders.list(
+            ending_before="string",
+            external_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=0,
+            starting_after="string",
+        )
+        assert_matches_type(SyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+    @parametrize
+    def test_raw_response_list(self, client: Lithic) -> None:
+        response = client.account_holders.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(SyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(SyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_list_documents(self, client: Lithic) -> None:
@@ -1779,6 +1815,41 @@ class TestAsyncAccountHolders:
             await client.account_holders.with_raw_response.update(
                 "",
             )
+
+    @parametrize
+    async def test_method_list(self, client: AsyncLithic) -> None:
+        account_holder = await client.account_holders.list()
+        assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+    @parametrize
+    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
+        account_holder = await client.account_holders.list(
+            ending_before="string",
+            external_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=0,
+            starting_after="string",
+        )
+        assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, client: AsyncLithic) -> None:
+        response = await client.account_holders.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
+        async with client.account_holders.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_list_documents(self, client: AsyncLithic) -> None:

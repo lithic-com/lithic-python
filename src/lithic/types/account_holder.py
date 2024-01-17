@@ -178,7 +178,7 @@ class VerificationApplication(BaseModel):
 
 
 class AccountHolder(BaseModel):
-    token: Optional[str] = None
+    token: str
     """Globally unique identifier for the account holder."""
 
     account_token: Optional[str] = None
