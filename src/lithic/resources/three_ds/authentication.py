@@ -220,6 +220,8 @@ class AsyncAuthentication(AsyncAPIResource):
 
 class AuthenticationWithRawResponse:
     def __init__(self, authentication: Authentication) -> None:
+        self._authentication = authentication
+
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             authentication.retrieve,
         )
@@ -230,6 +232,8 @@ class AuthenticationWithRawResponse:
 
 class AsyncAuthenticationWithRawResponse:
     def __init__(self, authentication: AsyncAuthentication) -> None:
+        self._authentication = authentication
+
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             authentication.retrieve,
         )
@@ -240,6 +244,8 @@ class AsyncAuthenticationWithRawResponse:
 
 class AuthenticationWithStreamingResponse:
     def __init__(self, authentication: Authentication) -> None:
+        self._authentication = authentication
+
         self.retrieve = to_streamed_response_wrapper(
             authentication.retrieve,
         )
@@ -250,6 +256,8 @@ class AuthenticationWithStreamingResponse:
 
 class AsyncAuthenticationWithStreamingResponse:
     def __init__(self, authentication: AsyncAuthentication) -> None:
+        self._authentication = authentication
+
         self.retrieve = async_to_streamed_response_wrapper(
             authentication.retrieve,
         )

@@ -757,6 +757,8 @@ class AsyncAuthRules(AsyncAPIResource):
 
 class AuthRulesWithRawResponse:
     def __init__(self, auth_rules: AuthRules) -> None:
+        self._auth_rules = auth_rules
+
         self.create = _legacy_response.to_raw_response_wrapper(
             auth_rules.create,
         )
@@ -779,6 +781,8 @@ class AuthRulesWithRawResponse:
 
 class AsyncAuthRulesWithRawResponse:
     def __init__(self, auth_rules: AsyncAuthRules) -> None:
+        self._auth_rules = auth_rules
+
         self.create = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.create,
         )
@@ -801,6 +805,8 @@ class AsyncAuthRulesWithRawResponse:
 
 class AuthRulesWithStreamingResponse:
     def __init__(self, auth_rules: AuthRules) -> None:
+        self._auth_rules = auth_rules
+
         self.create = to_streamed_response_wrapper(
             auth_rules.create,
         )
@@ -823,6 +829,8 @@ class AuthRulesWithStreamingResponse:
 
 class AsyncAuthRulesWithStreamingResponse:
     def __init__(self, auth_rules: AsyncAuthRules) -> None:
+        self._auth_rules = auth_rules
+
         self.create = async_to_streamed_response_wrapper(
             auth_rules.create,
         )

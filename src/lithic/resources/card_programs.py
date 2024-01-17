@@ -214,6 +214,8 @@ class AsyncCardPrograms(AsyncAPIResource):
 
 class CardProgramsWithRawResponse:
     def __init__(self, card_programs: CardPrograms) -> None:
+        self._card_programs = card_programs
+
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             card_programs.retrieve,
         )
@@ -224,6 +226,8 @@ class CardProgramsWithRawResponse:
 
 class AsyncCardProgramsWithRawResponse:
     def __init__(self, card_programs: AsyncCardPrograms) -> None:
+        self._card_programs = card_programs
+
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             card_programs.retrieve,
         )
@@ -234,6 +238,8 @@ class AsyncCardProgramsWithRawResponse:
 
 class CardProgramsWithStreamingResponse:
     def __init__(self, card_programs: CardPrograms) -> None:
+        self._card_programs = card_programs
+
         self.retrieve = to_streamed_response_wrapper(
             card_programs.retrieve,
         )
@@ -244,6 +250,8 @@ class CardProgramsWithStreamingResponse:
 
 class AsyncCardProgramsWithStreamingResponse:
     def __init__(self, card_programs: AsyncCardPrograms) -> None:
+        self._card_programs = card_programs
+
         self.retrieve = async_to_streamed_response_wrapper(
             card_programs.retrieve,
         )

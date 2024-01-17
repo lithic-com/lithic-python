@@ -1402,6 +1402,8 @@ class AsyncAccountHolders(AsyncAPIResource):
 
 class AccountHoldersWithRawResponse:
     def __init__(self, account_holders: AccountHolders) -> None:
+        self._account_holders = account_holders
+
         self.create = _legacy_response.to_raw_response_wrapper(
             account_holders.create,
         )
@@ -1430,6 +1432,8 @@ class AccountHoldersWithRawResponse:
 
 class AsyncAccountHoldersWithRawResponse:
     def __init__(self, account_holders: AsyncAccountHolders) -> None:
+        self._account_holders = account_holders
+
         self.create = _legacy_response.async_to_raw_response_wrapper(
             account_holders.create,
         )
@@ -1458,6 +1462,8 @@ class AsyncAccountHoldersWithRawResponse:
 
 class AccountHoldersWithStreamingResponse:
     def __init__(self, account_holders: AccountHolders) -> None:
+        self._account_holders = account_holders
+
         self.create = to_streamed_response_wrapper(
             account_holders.create,
         )
@@ -1486,6 +1492,8 @@ class AccountHoldersWithStreamingResponse:
 
 class AsyncAccountHoldersWithStreamingResponse:
     def __init__(self, account_holders: AsyncAccountHolders) -> None:
+        self._account_holders = account_holders
+
         self.create = async_to_streamed_response_wrapper(
             account_holders.create,
         )

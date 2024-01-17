@@ -153,6 +153,8 @@ class AsyncDecisioning(AsyncAPIResource):
 
 class DecisioningWithRawResponse:
     def __init__(self, decisioning: Decisioning) -> None:
+        self._decisioning = decisioning
+
         self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
             decisioning.retrieve_secret,
         )
@@ -163,6 +165,8 @@ class DecisioningWithRawResponse:
 
 class AsyncDecisioningWithRawResponse:
     def __init__(self, decisioning: AsyncDecisioning) -> None:
+        self._decisioning = decisioning
+
         self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
             decisioning.retrieve_secret,
         )
@@ -173,6 +177,8 @@ class AsyncDecisioningWithRawResponse:
 
 class DecisioningWithStreamingResponse:
     def __init__(self, decisioning: Decisioning) -> None:
+        self._decisioning = decisioning
+
         self.retrieve_secret = to_streamed_response_wrapper(
             decisioning.retrieve_secret,
         )
@@ -183,6 +189,8 @@ class DecisioningWithStreamingResponse:
 
 class AsyncDecisioningWithStreamingResponse:
     def __init__(self, decisioning: AsyncDecisioning) -> None:
+        self._decisioning = decisioning
+
         self.retrieve_secret = async_to_streamed_response_wrapper(
             decisioning.retrieve_secret,
         )

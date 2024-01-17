@@ -273,7 +273,7 @@ class AsyncStatements(AsyncAPIResource):
 
 class StatementsWithRawResponse:
     def __init__(self, statements: Statements) -> None:
-        self.line_items = LineItemsWithRawResponse(statements.line_items)
+        self._statements = statements
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             statements.retrieve,
@@ -282,10 +282,14 @@ class StatementsWithRawResponse:
             statements.list,
         )
 
+    @cached_property
+    def line_items(self) -> LineItemsWithRawResponse:
+        return LineItemsWithRawResponse(self._statements.line_items)
+
 
 class AsyncStatementsWithRawResponse:
     def __init__(self, statements: AsyncStatements) -> None:
-        self.line_items = AsyncLineItemsWithRawResponse(statements.line_items)
+        self._statements = statements
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             statements.retrieve,
@@ -294,10 +298,14 @@ class AsyncStatementsWithRawResponse:
             statements.list,
         )
 
+    @cached_property
+    def line_items(self) -> AsyncLineItemsWithRawResponse:
+        return AsyncLineItemsWithRawResponse(self._statements.line_items)
+
 
 class StatementsWithStreamingResponse:
     def __init__(self, statements: Statements) -> None:
-        self.line_items = LineItemsWithStreamingResponse(statements.line_items)
+        self._statements = statements
 
         self.retrieve = to_streamed_response_wrapper(
             statements.retrieve,
@@ -306,10 +314,14 @@ class StatementsWithStreamingResponse:
             statements.list,
         )
 
+    @cached_property
+    def line_items(self) -> LineItemsWithStreamingResponse:
+        return LineItemsWithStreamingResponse(self._statements.line_items)
+
 
 class AsyncStatementsWithStreamingResponse:
     def __init__(self, statements: AsyncStatements) -> None:
-        self.line_items = AsyncLineItemsWithStreamingResponse(statements.line_items)
+        self._statements = statements
 
         self.retrieve = async_to_streamed_response_wrapper(
             statements.retrieve,
@@ -317,3 +329,7 @@ class AsyncStatementsWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             statements.list,
         )
+
+    @cached_property
+    def line_items(self) -> AsyncLineItemsWithStreamingResponse:
+        return AsyncLineItemsWithStreamingResponse(self._statements.line_items)

@@ -46,19 +46,35 @@ class AsyncReports(AsyncAPIResource):
 
 class ReportsWithRawResponse:
     def __init__(self, reports: Reports) -> None:
-        self.settlement = SettlementWithRawResponse(reports.settlement)
+        self._reports = reports
+
+    @cached_property
+    def settlement(self) -> SettlementWithRawResponse:
+        return SettlementWithRawResponse(self._reports.settlement)
 
 
 class AsyncReportsWithRawResponse:
     def __init__(self, reports: AsyncReports) -> None:
-        self.settlement = AsyncSettlementWithRawResponse(reports.settlement)
+        self._reports = reports
+
+    @cached_property
+    def settlement(self) -> AsyncSettlementWithRawResponse:
+        return AsyncSettlementWithRawResponse(self._reports.settlement)
 
 
 class ReportsWithStreamingResponse:
     def __init__(self, reports: Reports) -> None:
-        self.settlement = SettlementWithStreamingResponse(reports.settlement)
+        self._reports = reports
+
+    @cached_property
+    def settlement(self) -> SettlementWithStreamingResponse:
+        return SettlementWithStreamingResponse(self._reports.settlement)
 
 
 class AsyncReportsWithStreamingResponse:
     def __init__(self, reports: AsyncReports) -> None:
-        self.settlement = AsyncSettlementWithStreamingResponse(reports.settlement)
+        self._reports = reports
+
+    @cached_property
+    def settlement(self) -> AsyncSettlementWithStreamingResponse:
+        return AsyncSettlementWithStreamingResponse(self._reports.settlement)

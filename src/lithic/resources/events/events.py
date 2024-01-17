@@ -487,7 +487,7 @@ class AsyncEvents(AsyncAPIResource):
 
 class EventsWithRawResponse:
     def __init__(self, events: Events) -> None:
-        self.subscriptions = SubscriptionsWithRawResponse(events.subscriptions)
+        self._events = events
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             events.retrieve,
@@ -499,10 +499,14 @@ class EventsWithRawResponse:
             events.list_attempts,
         )
 
+    @cached_property
+    def subscriptions(self) -> SubscriptionsWithRawResponse:
+        return SubscriptionsWithRawResponse(self._events.subscriptions)
+
 
 class AsyncEventsWithRawResponse:
     def __init__(self, events: AsyncEvents) -> None:
-        self.subscriptions = AsyncSubscriptionsWithRawResponse(events.subscriptions)
+        self._events = events
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             events.retrieve,
@@ -514,10 +518,14 @@ class AsyncEventsWithRawResponse:
             events.list_attempts,
         )
 
+    @cached_property
+    def subscriptions(self) -> AsyncSubscriptionsWithRawResponse:
+        return AsyncSubscriptionsWithRawResponse(self._events.subscriptions)
+
 
 class EventsWithStreamingResponse:
     def __init__(self, events: Events) -> None:
-        self.subscriptions = SubscriptionsWithStreamingResponse(events.subscriptions)
+        self._events = events
 
         self.retrieve = to_streamed_response_wrapper(
             events.retrieve,
@@ -529,10 +537,14 @@ class EventsWithStreamingResponse:
             events.list_attempts,
         )
 
+    @cached_property
+    def subscriptions(self) -> SubscriptionsWithStreamingResponse:
+        return SubscriptionsWithStreamingResponse(self._events.subscriptions)
+
 
 class AsyncEventsWithStreamingResponse:
     def __init__(self, events: AsyncEvents) -> None:
-        self.subscriptions = AsyncSubscriptionsWithStreamingResponse(events.subscriptions)
+        self._events = events
 
         self.retrieve = async_to_streamed_response_wrapper(
             events.retrieve,
@@ -543,3 +555,7 @@ class AsyncEventsWithStreamingResponse:
         self.list_attempts = async_to_streamed_response_wrapper(
             events.list_attempts,
         )
+
+    @cached_property
+    def subscriptions(self) -> AsyncSubscriptionsWithStreamingResponse:
+        return AsyncSubscriptionsWithStreamingResponse(self._events.subscriptions)
