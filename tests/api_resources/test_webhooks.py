@@ -11,16 +11,12 @@ import pytest
 import time_machine
 
 from lithic import Lithic, AsyncLithic
-from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestWebhooks:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     timestamp = "1676312382"
     fake_now = datetime.fromtimestamp(float(timestamp), tz=timezone.utc)
@@ -35,20 +31,20 @@ class TestWebhooks:
     secret = "whsec_zlFsbBZ8Xcodlpcu6NDTdSzZRLSdhkst"
 
     @time_machine.travel(fake_now)
-    def test_unwrap(self) -> None:
+    def test_unwrap(self, client: Lithic) -> None:
         payload = self.payload
         headers = self.headers
         secret = self.secret
 
-        self.strict_client.webhooks.unwrap(payload, headers, secret=secret)
+        client.webhooks.unwrap(payload, headers, secret=secret)
 
     @time_machine.travel(fake_now)
-    def test_verify_signature(self) -> None:
+    def test_verify_signature(self, client: Lithic) -> None:
         payload = self.payload
         headers = self.headers
         secret = self.secret
         signature = self.signature
-        verify = self.strict_client.webhooks.verify_signature
+        verify = client.webhooks.verify_signature
 
         assert verify(payload=payload, headers=headers, secret=secret) is None
 
@@ -118,9 +114,7 @@ class TestWebhooks:
 
 
 class TestAsyncWebhooks:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     timestamp = "1676312382"
     fake_now = datetime.fromtimestamp(float(timestamp), tz=timezone.utc)
@@ -135,20 +129,20 @@ class TestAsyncWebhooks:
     secret = "whsec_zlFsbBZ8Xcodlpcu6NDTdSzZRLSdhkst"
 
     @time_machine.travel(fake_now)
-    def test_unwrap(self) -> None:
+    def test_unwrap(self, async_client: AsyncLithic) -> None:
         payload = self.payload
         headers = self.headers
         secret = self.secret
 
-        self.strict_client.webhooks.unwrap(payload, headers, secret=secret)
+        async_client.webhooks.unwrap(payload, headers, secret=secret)
 
     @time_machine.travel(fake_now)
-    def test_verify_signature(self) -> None:
+    def test_verify_signature(self, async_client: Lithic) -> None:
         payload = self.payload
         headers = self.headers
         secret = self.secret
         signature = self.signature
-        verify = self.strict_client.webhooks.verify_signature
+        verify = async_client.webhooks.verify_signature
 
         assert verify(payload=payload, headers=headers, secret=secret) is None
 

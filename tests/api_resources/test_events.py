@@ -11,17 +11,13 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Event, MessageAttempt
 from lithic._utils import parse_datetime
-from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestEvents:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
@@ -151,28 +147,26 @@ class TestEvents:
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
-    def test_method_resend(self) -> None:
-        self.strict_client.events.resend(
+    def test_method_resend(self, client: Lithic) -> None:
+        client.events.resend(
             "string",
             event_subscription_token="string",
         )
 
 
 class TestAsyncEvents:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        event = await client.events.retrieve(
+    async def test_method_retrieve(self, async_client: AsyncLithic) -> None:
+        event = await async_client.events.retrieve(
             "string",
         )
         assert_matches_type(Event, event, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
-        response = await client.events.with_raw_response.retrieve(
+    async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
+        response = await async_client.events.with_raw_response.retrieve(
             "string",
         )
 
@@ -182,8 +176,8 @@ class TestAsyncEvents:
         assert_matches_type(Event, event, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
-        async with client.events.with_streaming_response.retrieve(
+    async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
+        async with async_client.events.with_streaming_response.retrieve(
             "string",
         ) as response:
             assert not response.is_closed
@@ -195,20 +189,20 @@ class TestAsyncEvents:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_token` but received ''"):
-            await client.events.with_raw_response.retrieve(
+            await async_client.events.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    async def test_method_list(self, client: AsyncLithic) -> None:
-        event = await client.events.list()
+    async def test_method_list(self, async_client: AsyncLithic) -> None:
+        event = await async_client.events.list()
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        event = await client.events.list(
+    async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
+        event = await async_client.events.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="string",
@@ -220,8 +214,8 @@ class TestAsyncEvents:
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, client: AsyncLithic) -> None:
-        response = await client.events.with_raw_response.list()
+    async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
+        response = await async_client.events.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -229,8 +223,8 @@ class TestAsyncEvents:
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
-        async with client.events.with_streaming_response.list() as response:
+    async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
+        async with async_client.events.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -240,15 +234,15 @@ class TestAsyncEvents:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_list_attempts(self, client: AsyncLithic) -> None:
-        event = await client.events.list_attempts(
+    async def test_method_list_attempts(self, async_client: AsyncLithic) -> None:
+        event = await async_client.events.list_attempts(
             "string",
         )
         assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
 
     @parametrize
-    async def test_method_list_attempts_with_all_params(self, client: AsyncLithic) -> None:
-        event = await client.events.list_attempts(
+    async def test_method_list_attempts_with_all_params(self, async_client: AsyncLithic) -> None:
+        event = await async_client.events.list_attempts(
             "string",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -260,8 +254,8 @@ class TestAsyncEvents:
         assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
 
     @parametrize
-    async def test_raw_response_list_attempts(self, client: AsyncLithic) -> None:
-        response = await client.events.with_raw_response.list_attempts(
+    async def test_raw_response_list_attempts(self, async_client: AsyncLithic) -> None:
+        response = await async_client.events.with_raw_response.list_attempts(
             "string",
         )
 
@@ -271,8 +265,8 @@ class TestAsyncEvents:
         assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list_attempts(self, client: AsyncLithic) -> None:
-        async with client.events.with_streaming_response.list_attempts(
+    async def test_streaming_response_list_attempts(self, async_client: AsyncLithic) -> None:
+        async with async_client.events.with_streaming_response.list_attempts(
             "string",
         ) as response:
             assert not response.is_closed
@@ -284,15 +278,15 @@ class TestAsyncEvents:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_list_attempts(self, client: AsyncLithic) -> None:
+    async def test_path_params_list_attempts(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_token` but received ''"):
-            await client.events.with_raw_response.list_attempts(
+            await async_client.events.with_raw_response.list_attempts(
                 "",
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
-    async def test_method_resend(self) -> None:
-        await self.strict_client.events.resend(
+    async def test_method_resend(self, async_client: AsyncLithic) -> None:
+        await async_client.events.resend(
             "string",
             event_subscription_token="string",
         )

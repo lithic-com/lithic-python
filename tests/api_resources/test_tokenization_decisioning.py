@@ -10,16 +10,12 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
-from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestTokenizationDecisioning:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_retrieve_secret(self, client: Lithic) -> None:
@@ -75,18 +71,16 @@ class TestTokenizationDecisioning:
 
 
 class TestAsyncTokenizationDecisioning:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve_secret(self, client: AsyncLithic) -> None:
-        tokenization_decisioning = await client.tokenization_decisioning.retrieve_secret()
+    async def test_method_retrieve_secret(self, async_client: AsyncLithic) -> None:
+        tokenization_decisioning = await async_client.tokenization_decisioning.retrieve_secret()
         assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve_secret(self, client: AsyncLithic) -> None:
-        response = await client.tokenization_decisioning.with_raw_response.retrieve_secret()
+    async def test_raw_response_retrieve_secret(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenization_decisioning.with_raw_response.retrieve_secret()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -94,8 +88,8 @@ class TestAsyncTokenizationDecisioning:
         assert_matches_type(TokenizationSecret, tokenization_decisioning, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve_secret(self, client: AsyncLithic) -> None:
-        async with client.tokenization_decisioning.with_streaming_response.retrieve_secret() as response:
+    async def test_streaming_response_retrieve_secret(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenization_decisioning.with_streaming_response.retrieve_secret() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -105,13 +99,13 @@ class TestAsyncTokenizationDecisioning:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_rotate_secret(self, client: AsyncLithic) -> None:
-        tokenization_decisioning = await client.tokenization_decisioning.rotate_secret()
+    async def test_method_rotate_secret(self, async_client: AsyncLithic) -> None:
+        tokenization_decisioning = await async_client.tokenization_decisioning.rotate_secret()
         assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])
 
     @parametrize
-    async def test_raw_response_rotate_secret(self, client: AsyncLithic) -> None:
-        response = await client.tokenization_decisioning.with_raw_response.rotate_secret()
+    async def test_raw_response_rotate_secret(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenization_decisioning.with_raw_response.rotate_secret()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -119,8 +113,8 @@ class TestAsyncTokenizationDecisioning:
         assert_matches_type(TokenizationDecisioningRotateSecretResponse, tokenization_decisioning, path=["response"])
 
     @parametrize
-    async def test_streaming_response_rotate_secret(self, client: AsyncLithic) -> None:
-        async with client.tokenization_decisioning.with_streaming_response.rotate_secret() as response:
+    async def test_streaming_response_rotate_secret(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenization_decisioning.with_streaming_response.rotate_secret() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

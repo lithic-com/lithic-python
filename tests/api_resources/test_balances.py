@@ -11,17 +11,13 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import Balance
 from lithic._utils import parse_datetime
-from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestBalances:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
@@ -59,18 +55,16 @@ class TestBalances:
 
 
 class TestAsyncBalances:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_list(self, client: AsyncLithic) -> None:
-        balance = await client.balances.list()
+    async def test_method_list(self, async_client: AsyncLithic) -> None:
+        balance = await async_client.balances.list()
         assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        balance = await client.balances.list(
+    async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
+        balance = await async_client.balances.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             balance_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             financial_account_type="ISSUING",
@@ -78,8 +72,8 @@ class TestAsyncBalances:
         assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, client: AsyncLithic) -> None:
-        response = await client.balances.with_raw_response.list()
+    async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
+        response = await async_client.balances.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -87,8 +81,8 @@ class TestAsyncBalances:
         assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
-        async with client.balances.with_streaming_response.list() as response:
+    async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
+        async with async_client.balances.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
