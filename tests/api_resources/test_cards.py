@@ -15,17 +15,13 @@ from lithic.types import (
     CardProvisionResponse,
 )
 from lithic._utils import parse_datetime
-from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestCards:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
@@ -254,12 +250,12 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
-    def test_get_embed_html(self) -> None:
-        html = self.strict_client.cards.get_embed_html(token="foo")
+    def test_get_embed_html(self, client: Lithic) -> None:
+        html = client.cards.get_embed_html(token="foo")
         assert "html" in html
 
-    def test_get_embed_url(self) -> None:
-        url = self.strict_client.cards.get_embed_url(token="foo")
+    def test_get_embed_url(self, client: Lithic) -> None:
+        url = client.cards.get_embed_url(token="foo")
         params = set(  # pyright: ignore[reportUnknownVariableType]
             url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
         )
@@ -515,20 +511,18 @@ class TestCards:
 
 
 class TestAsyncCards:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create(self, client: AsyncLithic) -> None:
-        card = await client.cards.create(
+    async def test_method_create(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.create(
             type="VIRTUAL",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params(self, client: AsyncLithic) -> None:
-        card = await client.cards.create(
+    async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.create(
             type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="00000000-0000-0000-1000-000000000000",
@@ -561,8 +555,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_create(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.create(
+    async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.create(
             type="VIRTUAL",
         )
 
@@ -572,8 +566,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.create(
+    async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.create(
             type="VIRTUAL",
         ) as response:
             assert not response.is_closed
@@ -585,15 +579,15 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        card = await client.cards.retrieve(
+    async def test_method_retrieve(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.retrieve(
+    async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -603,8 +597,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.retrieve(
+    async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -616,22 +610,22 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
-            await client.cards.with_raw_response.retrieve(
+            await async_client.cards.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    async def test_method_update(self, client: AsyncLithic) -> None:
-        card = await client.cards.update(
+    async def test_method_update(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
-        card = await client.cards.update(
+    async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             auth_rule_token="string",
             digital_card_art_token="00000000-0000-0000-1000-000000000000",
@@ -644,8 +638,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.update(
+    async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -655,8 +649,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.update(
+    async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -668,20 +662,20 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, client: AsyncLithic) -> None:
+    async def test_path_params_update(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
-            await client.cards.with_raw_response.update(
+            await async_client.cards.with_raw_response.update(
                 "",
             )
 
     @parametrize
-    async def test_method_list(self, client: AsyncLithic) -> None:
-        card = await client.cards.list()
+    async def test_method_list(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.list()
         assert_matches_type(AsyncCursorPage[Card], card, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        card = await client.cards.list(
+    async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -693,8 +687,8 @@ class TestAsyncCards:
         assert_matches_type(AsyncCursorPage[Card], card, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.list()
+    async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -702,8 +696,8 @@ class TestAsyncCards:
         assert_matches_type(AsyncCursorPage[Card], card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.list() as response:
+    async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -713,16 +707,16 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_embed(self, client: AsyncLithic) -> None:
-        card = await client.cards.embed(
+    async def test_method_embed(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.embed(
             embed_request="string",
             hmac="string",
         )
         assert_matches_type(str, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_embed(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.embed(
+    async def test_raw_response_embed(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.embed(
             embed_request="string",
             hmac="string",
         )
@@ -733,8 +727,8 @@ class TestAsyncCards:
         assert_matches_type(str, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_embed(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.embed(
+    async def test_streaming_response_embed(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.embed(
             embed_request="string",
             hmac="string",
         ) as response:
@@ -746,12 +740,12 @@ class TestAsyncCards:
 
         assert cast(Any, response.is_closed) is True
 
-    async def test_get_embed_html(self) -> None:
-        html = await self.strict_client.cards.get_embed_html(token="foo")
+    async def test_get_embed_html(self, async_client: AsyncLithic) -> None:
+        html = await async_client.cards.get_embed_html(token="foo")
         assert "html" in html
 
-    def test_get_embed_url(self) -> None:
-        url = self.strict_client.cards.get_embed_url(token="foo")
+    def test_get_embed_url(self, async_client: Lithic) -> None:
+        url = async_client.cards.get_embed_url(token="foo")
         params = set(  # pyright: ignore[reportUnknownVariableType]
             url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
         )
@@ -759,15 +753,15 @@ class TestAsyncCards:
         assert "embed_request" in params
 
     @parametrize
-    async def test_method_provision(self, client: AsyncLithic) -> None:
-        card = await client.cards.provision(
+    async def test_method_provision(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
     @parametrize
-    async def test_method_provision_with_all_params(self, client: AsyncLithic) -> None:
-        card = await client.cards.provision(
+    async def test_method_provision_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             certificate="U3RhaW5sZXNzIHJvY2tz",
             digital_wallet="GOOGLE_PAY",
@@ -777,8 +771,8 @@ class TestAsyncCards:
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_provision(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.provision(
+    async def test_raw_response_provision(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -788,8 +782,8 @@ class TestAsyncCards:
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_provision(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.provision(
+    async def test_streaming_response_provision(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -801,22 +795,22 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_provision(self, client: AsyncLithic) -> None:
+    async def test_path_params_provision(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
-            await client.cards.with_raw_response.provision(
+            await async_client.cards.with_raw_response.provision(
                 "",
             )
 
     @parametrize
-    async def test_method_reissue(self, client: AsyncLithic) -> None:
-        card = await client.cards.reissue(
+    async def test_method_reissue(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_method_reissue_with_all_params(self, client: AsyncLithic) -> None:
-        card = await client.cards.reissue(
+    async def test_method_reissue_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
@@ -838,8 +832,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_reissue(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.reissue(
+    async def test_raw_response_reissue(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -849,8 +843,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_reissue(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.reissue(
+    async def test_streaming_response_reissue(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.reissue(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -862,15 +856,15 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_reissue(self, client: AsyncLithic) -> None:
+    async def test_path_params_reissue(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
-            await client.cards.with_raw_response.reissue(
+            await async_client.cards.with_raw_response.reissue(
                 "",
             )
 
     @parametrize
-    async def test_method_renew(self, client: AsyncLithic) -> None:
-        card = await client.cards.renew(
+    async def test_method_renew(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.renew(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
@@ -885,8 +879,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_method_renew_with_all_params(self, client: AsyncLithic) -> None:
-        card = await client.cards.renew(
+    async def test_method_renew_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.renew(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
@@ -910,8 +904,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_renew(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.renew(
+    async def test_raw_response_renew(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.renew(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
@@ -930,8 +924,8 @@ class TestAsyncCards:
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_renew(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.renew(
+    async def test_streaming_response_renew(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.renew(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
@@ -952,9 +946,9 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_renew(self, client: AsyncLithic) -> None:
+    async def test_path_params_renew(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
-            await client.cards.with_raw_response.renew(
+            await async_client.cards.with_raw_response.renew(
                 "",
                 shipping_address={
                     "address1": "5 Broad Street",
@@ -968,15 +962,15 @@ class TestAsyncCards:
             )
 
     @parametrize
-    async def test_method_retrieve_spend_limits(self, client: AsyncLithic) -> None:
-        card = await client.cards.retrieve_spend_limits(
+    async def test_method_retrieve_spend_limits(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.retrieve_spend_limits(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardSpendLimits, card, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve_spend_limits(self, client: AsyncLithic) -> None:
-        response = await client.cards.with_raw_response.retrieve_spend_limits(
+    async def test_raw_response_retrieve_spend_limits(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.retrieve_spend_limits(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -986,8 +980,8 @@ class TestAsyncCards:
         assert_matches_type(CardSpendLimits, card, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve_spend_limits(self, client: AsyncLithic) -> None:
-        async with client.cards.with_streaming_response.retrieve_spend_limits(
+    async def test_streaming_response_retrieve_spend_limits(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.retrieve_spend_limits(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -999,8 +993,8 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve_spend_limits(self, client: AsyncLithic) -> None:
+    async def test_path_params_retrieve_spend_limits(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
-            await client.cards.with_raw_response.retrieve_spend_limits(
+            await async_client.cards.with_raw_response.retrieve_spend_limits(
                 "",
             )

@@ -10,16 +10,12 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import BusinessAccount
-from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestCreditConfigurations:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
@@ -110,20 +106,18 @@ class TestCreditConfigurations:
 
 
 class TestAsyncCreditConfigurations:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        credit_configuration = await client.accounts.credit_configurations.retrieve(
+    async def test_method_retrieve(self, async_client: AsyncLithic) -> None:
+        credit_configuration = await async_client.accounts.credit_configurations.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
-        response = await client.accounts.credit_configurations.with_raw_response.retrieve(
+    async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
+        response = await async_client.accounts.credit_configurations.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -133,8 +127,8 @@ class TestAsyncCreditConfigurations:
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
-        async with client.accounts.credit_configurations.with_streaming_response.retrieve(
+    async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
+        async with async_client.accounts.credit_configurations.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -146,22 +140,22 @@ class TestAsyncCreditConfigurations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
-            await client.accounts.credit_configurations.with_raw_response.retrieve(
+            await async_client.accounts.credit_configurations.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    async def test_method_update(self, client: AsyncLithic) -> None:
-        credit_configuration = await client.accounts.credit_configurations.update(
+    async def test_method_update(self, async_client: AsyncLithic) -> None:
+        credit_configuration = await async_client.accounts.credit_configurations.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
-        credit_configuration = await client.accounts.credit_configurations.update(
+    async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
+        credit_configuration = await async_client.accounts.credit_configurations.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             billing_period=0,
             credit_limit=0,
@@ -171,8 +165,8 @@ class TestAsyncCreditConfigurations:
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, client: AsyncLithic) -> None:
-        response = await client.accounts.credit_configurations.with_raw_response.update(
+    async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
+        response = await async_client.accounts.credit_configurations.with_raw_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -182,8 +176,8 @@ class TestAsyncCreditConfigurations:
         assert_matches_type(BusinessAccount, credit_configuration, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, client: AsyncLithic) -> None:
-        async with client.accounts.credit_configurations.with_streaming_response.update(
+    async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
+        async with async_client.accounts.credit_configurations.with_streaming_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -195,8 +189,8 @@ class TestAsyncCreditConfigurations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, client: AsyncLithic) -> None:
+    async def test_path_params_update(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
-            await client.accounts.credit_configurations.with_raw_response.update(
+            await async_client.accounts.credit_configurations.with_raw_response.update(
                 "",
             )

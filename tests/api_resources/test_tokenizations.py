@@ -10,16 +10,12 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import TokenizationSimulateResponse
-from lithic._client import Lithic, AsyncLithic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestTokenizations:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_simulate(self, client: Lithic) -> None:
@@ -76,13 +72,11 @@ class TestTokenizations:
 
 
 class TestAsyncTokenizations:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_simulate(self, client: AsyncLithic) -> None:
-        tokenization = await client.tokenizations.simulate(
+    async def test_method_simulate(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.simulate(
             cvv="776",
             expiration_date="08/29",
             pan="4111111289144142",
@@ -91,8 +85,8 @@ class TestAsyncTokenizations:
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
 
     @parametrize
-    async def test_method_simulate_with_all_params(self, client: AsyncLithic) -> None:
-        tokenization = await client.tokenizations.simulate(
+    async def test_method_simulate_with_all_params(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.simulate(
             cvv="776",
             expiration_date="08/29",
             pan="4111111289144142",
@@ -104,8 +98,8 @@ class TestAsyncTokenizations:
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
 
     @parametrize
-    async def test_raw_response_simulate(self, client: AsyncLithic) -> None:
-        response = await client.tokenizations.with_raw_response.simulate(
+    async def test_raw_response_simulate(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenizations.with_raw_response.simulate(
             cvv="776",
             expiration_date="08/29",
             pan="4111111289144142",
@@ -118,8 +112,8 @@ class TestAsyncTokenizations:
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
 
     @parametrize
-    async def test_streaming_response_simulate(self, client: AsyncLithic) -> None:
-        async with client.tokenizations.with_streaming_response.simulate(
+    async def test_streaming_response_simulate(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenizations.with_streaming_response.simulate(
             cvv="776",
             expiration_date="08/29",
             pan="4111111289144142",
