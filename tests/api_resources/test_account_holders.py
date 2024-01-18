@@ -15,17 +15,13 @@ from lithic.types import (
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
 )
-from lithic._client import Lithic, AsyncLithic
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My Lithic API Key"
 
 
 class TestAccountHolders:
-    strict_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Lithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_create_overload_1(self, client: Lithic) -> None:
@@ -1055,13 +1051,11 @@ class TestAccountHolders:
 
 
 class TestAsyncAccountHolders:
-    strict_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncLithic(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create_overload_1(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.create(
+    async def test_method_create_overload_1(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -1177,8 +1171,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_1(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.create(
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -1316,8 +1310,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_1(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.create(
+    async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.create(
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -1437,8 +1431,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_1(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.create(
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.create(
             beneficial_owner_entities=[
                 {
                     "address": {
@@ -1560,8 +1554,8 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_create_overload_2(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.create(
+    async def test_method_create_overload_2(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -1583,8 +1577,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_2(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.create(
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -1608,8 +1602,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_2(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.create(
+    async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -1635,8 +1629,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_2(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.create(
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -1664,8 +1658,8 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_create_overload_3(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.create(
+    async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -1676,8 +1670,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_3(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.create(
+    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -1697,8 +1691,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_3(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.create(
+    async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.create(
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -1713,8 +1707,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_3(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.create(
+    async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.create(
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -1731,15 +1725,15 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_retrieve(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.retrieve(
+    async def test_method_retrieve(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.retrieve(
+    async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -1749,8 +1743,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.retrieve(
+    async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -1762,22 +1756,22 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, client: AsyncLithic) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await client.account_holders.with_raw_response.retrieve(
+            await async_client.account_holders.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    async def test_method_update(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.update(
+    async def test_method_update(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.update(
+    async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             business_account_token="string",
             email="string",
@@ -1786,8 +1780,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.update(
+    async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -1797,8 +1791,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.update(
+    async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -1810,20 +1804,20 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, client: AsyncLithic) -> None:
+    async def test_path_params_update(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await client.account_holders.with_raw_response.update(
+            await async_client.account_holders.with_raw_response.update(
                 "",
             )
 
     @parametrize
-    async def test_method_list(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.list()
+    async def test_method_list(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.list()
         assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.list(
+    async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.list(
             ending_before="string",
             external_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             limit=0,
@@ -1832,8 +1826,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.list()
+    async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1841,8 +1835,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.list() as response:
+    async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -1852,15 +1846,15 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_list_documents(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.list_documents(
+    async def test_method_list_documents(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_list_documents(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.list_documents(
+    async def test_raw_response_list_documents(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -1870,8 +1864,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderListDocumentsResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list_documents(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.list_documents(
+    async def test_streaming_response_list_documents(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.list_documents(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -1883,15 +1877,15 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_list_documents(self, client: AsyncLithic) -> None:
+    async def test_path_params_list_documents(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await client.account_holders.with_raw_response.list_documents(
+            await async_client.account_holders.with_raw_response.list_documents(
                 "",
             )
 
     @parametrize
-    async def test_method_resubmit(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.resubmit(
+    async def test_method_resubmit(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
@@ -1914,8 +1908,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_resubmit(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.resubmit(
+    async def test_raw_response_resubmit(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
@@ -1942,8 +1936,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolder, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_resubmit(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.resubmit(
+    async def test_streaming_response_resubmit(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.resubmit(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
@@ -1972,9 +1966,9 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_resubmit(self, client: AsyncLithic) -> None:
+    async def test_path_params_resubmit(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await client.account_holders.with_raw_response.resubmit(
+            await async_client.account_holders.with_raw_response.resubmit(
                 "",
                 individual={
                     "address": {
@@ -1996,16 +1990,16 @@ class TestAsyncAccountHolders:
             )
 
     @parametrize
-    async def test_method_retrieve_document(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.retrieve_document(
+    async def test_method_retrieve_document(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve_document(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.retrieve_document(
+    async def test_raw_response_retrieve_document(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -2016,8 +2010,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve_document(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.retrieve_document(
+    async def test_streaming_response_retrieve_document(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.retrieve_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -2030,30 +2024,30 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve_document(self, client: AsyncLithic) -> None:
+    async def test_path_params_retrieve_document(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await client.account_holders.with_raw_response.retrieve_document(
+            await async_client.account_holders.with_raw_response.retrieve_document(
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 account_holder_token="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `document_token` but received ''"):
-            await client.account_holders.with_raw_response.retrieve_document(
+            await async_client.account_holders.with_raw_response.retrieve_document(
                 "",
                 account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @parametrize
-    async def test_method_upload_document(self, client: AsyncLithic) -> None:
-        account_holder = await client.account_holders.upload_document(
+    async def test_method_upload_document(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_upload_document(self, client: AsyncLithic) -> None:
-        response = await client.account_holders.with_raw_response.upload_document(
+    async def test_raw_response_upload_document(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
@@ -2064,8 +2058,8 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_upload_document(self, client: AsyncLithic) -> None:
-        async with client.account_holders.with_streaming_response.upload_document(
+    async def test_streaming_response_upload_document(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.upload_document(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         ) as response:
@@ -2078,9 +2072,9 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_upload_document(self, client: AsyncLithic) -> None:
+    async def test_path_params_upload_document(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await client.account_holders.with_raw_response.upload_document(
+            await async_client.account_holders.with_raw_response.upload_document(
                 "",
                 document_type="drivers_license",
             )
