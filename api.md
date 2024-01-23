@@ -49,6 +49,7 @@ from lithic.types import (
     KYB,
     KYC,
     KYCExempt,
+    AccountHolderCreateResponse,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
 )
@@ -56,7 +57,7 @@ from lithic.types import (
 
 Methods:
 
-- <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
+- <code title="post /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">create</a>(\*\*<a href="src/lithic/types/account_holder_create_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_create_response.py">AccountHolderCreateResponse</a></code>
 - <code title="get /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
 - <code title="patch /account_holders/{account_holder_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">update</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_update_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_update_response.py">AccountHolderUpdateResponse</a></code>
 - <code title="get /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">list</a>(\*\*<a href="src/lithic/types/account_holder_list_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">SyncSinglePage[AccountHolder]</a></code>

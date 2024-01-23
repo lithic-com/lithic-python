@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from lithic.types import (
     AccountHolder,
     AccountHolderDocument,
+    AccountHolderCreateResponse,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
 )
@@ -138,7 +139,7 @@ class TestAccountHolders:
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
@@ -274,10 +275,11 @@ class TestAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
+            external_id="string",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_create_overload_1(self, client: Lithic) -> None:
@@ -398,7 +400,7 @@ class TestAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
@@ -519,7 +521,7 @@ class TestAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -544,7 +546,7 @@ class TestAccountHolders:
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
@@ -567,9 +569,10 @@ class TestAccountHolders:
             },
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
+            external_id="string",
             kyc_passed_timestamp="string",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_create_overload_2(self, client: Lithic) -> None:
@@ -596,7 +599,7 @@ class TestAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
@@ -623,7 +626,7 @@ class TestAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -637,7 +640,7 @@ class TestAccountHolders:
             phone_number="string",
             workflow="KYC_EXEMPT",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
@@ -657,8 +660,9 @@ class TestAccountHolders:
                 "state": "NE",
             },
             business_account_token="string",
+            external_id="string",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_create_overload_3(self, client: Lithic) -> None:
@@ -674,7 +678,7 @@ class TestAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
@@ -690,7 +694,7 @@ class TestAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1168,7 +1172,7 @@ class TestAsyncAccountHolders:
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
@@ -1304,10 +1308,11 @@ class TestAsyncAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
+            external_id="string",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
@@ -1428,7 +1433,7 @@ class TestAsyncAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
@@ -1549,7 +1554,7 @@ class TestAsyncAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = await response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1574,7 +1579,7 @@ class TestAsyncAccountHolders:
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
@@ -1597,9 +1602,10 @@ class TestAsyncAccountHolders:
             },
             tos_timestamp="string",
             workflow="KYC_ADVANCED",
+            external_id="string",
             kyc_passed_timestamp="string",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
@@ -1626,7 +1632,7 @@ class TestAsyncAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
@@ -1653,7 +1659,7 @@ class TestAsyncAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = await response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1667,7 +1673,7 @@ class TestAsyncAccountHolders:
             phone_number="string",
             workflow="KYC_EXEMPT",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
@@ -1687,8 +1693,9 @@ class TestAsyncAccountHolders:
                 "state": "NE",
             },
             business_account_token="string",
+            external_id="string",
         )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
@@ -1704,7 +1711,7 @@ class TestAsyncAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
@@ -1720,7 +1727,7 @@ class TestAsyncAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = await response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

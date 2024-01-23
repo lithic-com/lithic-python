@@ -57,6 +57,9 @@ class SettlementDetail(BaseModel):
     for Visa).
     """
 
+    interchange_fee_extended_precision: int
+    """The total amount of interchange in six-digit extended precision."""
+
     interchange_gross_amount: int
     """The total amount of interchange."""
 
@@ -83,6 +86,19 @@ class SettlementDetail(BaseModel):
     The total amount of settlement impacting transactions (excluding interchange,
     fees, and disputes).
     """
+
+    type: Literal[
+        "CLEARING",
+        "FINANCIAL",
+        "NON-FINANCIAL",
+        "ADJUSTMENT",
+        "CHARGEBACK",
+        "REPRESENTMENT",
+        "PREARBITRATION",
+        "ARBITRATION",
+        "FEE",
+    ]
+    """The type of settlement record."""
 
     updated: datetime
     """Date and time when the transaction first occurred. UTC time zone."""

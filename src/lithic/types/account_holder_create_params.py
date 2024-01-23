@@ -77,6 +77,12 @@ class KYB(TypedDict, total=False):
     workflow: Required[Literal["KYB_BASIC", "KYB_BYO"]]
     """Specifies the type of KYB workflow to run."""
 
+    external_id: str
+    """
+    A user provided id that can be used to link an account holder with an external
+    system
+    """
+
     kyb_passed_timestamp: str
     """
     An RFC 3339 timestamp indicating when precomputed KYC was completed on the
@@ -240,6 +246,12 @@ class KYC(TypedDict, total=False):
     workflow: Required[Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]]
     """Specifies the type of KYC workflow to run."""
 
+    external_id: str
+    """
+    A user provided id that can be used to link an account holder with an external
+    system
+    """
+
     kyc_passed_timestamp: str
     """
     An RFC 3339 timestamp indicating when precomputed KYC was completed on the
@@ -313,6 +325,12 @@ class KYCExempt(TypedDict, total=False):
     Only applicable for customers using the KYC-Exempt workflow to enroll authorized
     users of businesses. Pass the account_token of the enrolled business associated
     with the AUTHORIZED_USER in this field.
+    """
+
+    external_id: str
+    """
+    A user provided id that can be used to link an account holder with an external
+    system
     """
 
 
