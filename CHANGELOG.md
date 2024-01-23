@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.32.0 (2024-01-23)
+
+Full Changelog: [v0.31.1...v0.32.0](https://github.com/lithic-com/lithic-python/compare/v0.31.1...v0.32.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** change account holder creation response, new settlement detail type ([#337](https://github.com/lithic-com/lithic-python/issues/337))
+
+### Features
+
+* **api:** change account holder creation response, new settlement detail type ([#337](https://github.com/lithic-com/lithic-python/issues/337)) ([6d8a046](https://github.com/lithic-com/lithic-python/commit/6d8a046f9b91e9f7ea92239440bb38174d2ca83c))
+
+
+### Chores
+
+* **ci:** rely on Stainless GitHub App for releases ([#334](https://github.com/lithic-com/lithic-python/issues/334)) ([90063d7](https://github.com/lithic-com/lithic-python/commit/90063d766e5946f6735edc412a184f624c6b0807))
+* **internal:** add internal helpers ([#336](https://github.com/lithic-com/lithic-python/issues/336)) ([9849b51](https://github.com/lithic-com/lithic-python/commit/9849b51a40a4f9dcd963d27b2021b0d998fe1364))
+* **internal:** remove redundant client test ([#331](https://github.com/lithic-com/lithic-python/issues/331)) ([18ad2ad](https://github.com/lithic-com/lithic-python/commit/18ad2ad63019d1cc4c48ecb87a64a579e8934dda))
+* **internal:** share client instances between all tests ([#335](https://github.com/lithic-com/lithic-python/issues/335)) ([0fe132a](https://github.com/lithic-com/lithic-python/commit/0fe132a60276eb4a82bf40e70367b8aff2df6505))
+* **internal:** speculative retry-after-ms support ([#332](https://github.com/lithic-com/lithic-python/issues/332)) ([579486a](https://github.com/lithic-com/lithic-python/commit/579486aa985ace86e1832e35dd9d6ac47067b79c))
+* lazy load raw resource class properties ([#333](https://github.com/lithic-com/lithic-python/issues/333)) ([e275233](https://github.com/lithic-com/lithic-python/commit/e275233d607e7bbb311b536ec674be8bf4ce8ea8))
+
 ## 0.31.1 (2024-01-17)
 
 Full Changelog: [v0.31.0...v0.31.1](https://github.com/lithic-com/lithic-python/compare/v0.31.0...v0.31.1)
