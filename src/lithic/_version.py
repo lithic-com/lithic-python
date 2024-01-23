@@ -1,4 +1,4 @@
 # File generated from our OpenAPI spec by Stainless.
 
 __title__ = "lithic"
-__version__ = "0.31.1"  # x-release-please-version
+__version__ = "0.32.0"  # x-release-please-version
