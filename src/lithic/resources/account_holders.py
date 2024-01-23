@@ -11,6 +11,7 @@ from .. import _legacy_response
 from ..types import (
     AccountHolder,
     AccountHolderDocument,
+    AccountHolderCreateResponse,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
     shared_params,
@@ -54,6 +55,7 @@ class AccountHolders(SyncAPIResource):
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
+        external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -63,7 +65,7 @@ class AccountHolders(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
         Program (CIP) and return an `account_token` if the status is accepted or pending
@@ -71,7 +73,7 @@ class AccountHolders(SyncAPIResource):
         immediate response - though in some cases, the response may indicate the
         workflow is under review or further action will be needed to complete the
         account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
+        part of the program that the calling API key manages.
 
         Args:
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
@@ -111,6 +113,9 @@ class AccountHolders(SyncAPIResource):
 
           workflow: Specifies the type of KYB workflow to run.
 
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
           kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
@@ -137,6 +142,7 @@ class AccountHolders(SyncAPIResource):
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
         workflow: Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"],
+        external_id: str | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -145,7 +151,7 @@ class AccountHolders(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
         Program (CIP) and return an `account_token` if the status is accepted or pending
@@ -153,7 +159,7 @@ class AccountHolders(SyncAPIResource):
         immediate response - though in some cases, the response may indicate the
         workflow is under review or further action will be needed to complete the
         account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
+        part of the program that the calling API key manages.
 
         Args:
           individual: Information on individual for whom the account is being opened and KYC is being
@@ -164,6 +170,9 @@ class AccountHolders(SyncAPIResource):
               implementation with Lithic.
 
           workflow: Specifies the type of KYC workflow to run.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
 
           kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               individual with a pass result.
@@ -194,6 +203,7 @@ class AccountHolders(SyncAPIResource):
         workflow: Literal["KYC_EXEMPT"],
         address: shared_params.Address | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -201,7 +211,7 @@ class AccountHolders(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
         Program (CIP) and return an `account_token` if the status is accepted or pending
@@ -209,7 +219,7 @@ class AccountHolders(SyncAPIResource):
         immediate response - though in some cases, the response may indicate the
         workflow is under review or further action will be needed to complete the
         account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
+        part of the program that the calling API key manages.
 
         Args:
           email: The KYC Exempt user's email
@@ -230,6 +240,9 @@ class AccountHolders(SyncAPIResource):
           business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
               users of businesses. Pass the account_token of the enrolled business associated
               with the AUTHORIZED_USER in this field.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
 
           extra_headers: Send extra headers
 
@@ -269,6 +282,7 @@ class AccountHolders(SyncAPIResource):
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"],
+        external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
@@ -287,7 +301,7 @@ class AccountHolders(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         return self._post(
             "/account_holders",
             body=maybe_transform(
@@ -299,6 +313,7 @@ class AccountHolders(SyncAPIResource):
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "workflow": workflow,
+                    "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
                     "website_url": website_url,
                     "individual": individual,
@@ -320,7 +335,7 @@ class AccountHolders(SyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AccountHolder,
+            cast_to=AccountHolderCreateResponse,
         )
 
     def retrieve(
@@ -737,6 +752,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
+        external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -746,7 +762,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
         Program (CIP) and return an `account_token` if the status is accepted or pending
@@ -754,7 +770,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         immediate response - though in some cases, the response may indicate the
         workflow is under review or further action will be needed to complete the
         account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
+        part of the program that the calling API key manages.
 
         Args:
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
@@ -794,6 +810,9 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           workflow: Specifies the type of KYB workflow to run.
 
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
           kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               business with a pass result.
 
@@ -820,6 +839,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
         workflow: Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"],
+        external_id: str | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -828,7 +848,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
         Program (CIP) and return an `account_token` if the status is accepted or pending
@@ -836,7 +856,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         immediate response - though in some cases, the response may indicate the
         workflow is under review or further action will be needed to complete the
         account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
+        part of the program that the calling API key manages.
 
         Args:
           individual: Information on individual for whom the account is being opened and KYC is being
@@ -847,6 +867,9 @@ class AsyncAccountHolders(AsyncAPIResource):
               implementation with Lithic.
 
           workflow: Specifies the type of KYC workflow to run.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
 
           kyc_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
               individual with a pass result.
@@ -877,6 +900,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         workflow: Literal["KYC_EXEMPT"],
         address: shared_params.Address | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -884,7 +908,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
         Program (CIP) and return an `account_token` if the status is accepted or pending
@@ -892,7 +916,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         immediate response - though in some cases, the response may indicate the
         workflow is under review or further action will be needed to complete the
         account creation process. This endpoint can only be used on accounts that are
-        part of the program the calling API key manages.
+        part of the program that the calling API key manages.
 
         Args:
           email: The KYC Exempt user's email
@@ -913,6 +937,9 @@ class AsyncAccountHolders(AsyncAPIResource):
           business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
               users of businesses. Pass the account_token of the enrolled business associated
               with the AUTHORIZED_USER in this field.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
 
           extra_headers: Send extra headers
 
@@ -952,6 +979,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"],
+        external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
@@ -970,7 +998,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
         idempotency_key: str | None = None,
-    ) -> AccountHolder:
+    ) -> AccountHolderCreateResponse:
         return await self._post(
             "/account_holders",
             body=maybe_transform(
@@ -982,6 +1010,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "workflow": workflow,
+                    "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
                     "website_url": website_url,
                     "individual": individual,
@@ -1003,7 +1032,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 timeout=timeout,
                 idempotency_key=idempotency_key,
             ),
-            cast_to=AccountHolder,
+            cast_to=AccountHolderCreateResponse,
         )
 
     async def retrieve(
