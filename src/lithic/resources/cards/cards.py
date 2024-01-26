@@ -28,6 +28,7 @@ from ...types import (
     card_reissue_params,
     card_provision_params,
     card_get_embed_url_params,
+    card_search_by_pan_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform, strip_not_given
@@ -925,6 +926,52 @@ class Cards(SyncAPIResource):
             cast_to=CardSpendLimits,
         )
 
+    def search_by_pan(
+        self,
+        *,
+        pan: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> Card:
+        """Get card configuration such as spend limit and state.
+
+        Customers must be PCI
+        compliant to use this endpoint. Please contact
+        [support@lithic.com](mailto:support@lithic.com) for questions. _Note: this is a
+        `POST` endpoint because it is more secure to send sensitive data in a request
+        body than in a URL._
+
+        Args:
+          pan: The PAN for the card being retrieved.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            "/cards/search_by_pan",
+            body=maybe_transform({"pan": pan}, card_search_by_pan_params.CardSearchByPanParams),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=Card,
+        )
+
 
 class AsyncCards(AsyncAPIResource):
     @cached_property
@@ -1783,6 +1830,52 @@ class AsyncCards(AsyncAPIResource):
             cast_to=CardSpendLimits,
         )
 
+    async def search_by_pan(
+        self,
+        *,
+        pan: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> Card:
+        """Get card configuration such as spend limit and state.
+
+        Customers must be PCI
+        compliant to use this endpoint. Please contact
+        [support@lithic.com](mailto:support@lithic.com) for questions. _Note: this is a
+        `POST` endpoint because it is more secure to send sensitive data in a request
+        body than in a URL._
+
+        Args:
+          pan: The PAN for the card being retrieved.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            "/cards/search_by_pan",
+            body=maybe_transform({"pan": pan}, card_search_by_pan_params.CardSearchByPanParams),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=Card,
+        )
+
 
 class CardsWithRawResponse:
     def __init__(self, cards: Cards) -> None:
@@ -1814,6 +1907,9 @@ class CardsWithRawResponse:
         )
         self.retrieve_spend_limits = _legacy_response.to_raw_response_wrapper(
             cards.retrieve_spend_limits,
+        )
+        self.search_by_pan = _legacy_response.to_raw_response_wrapper(
+            cards.search_by_pan,
         )
 
     @cached_property
@@ -1860,6 +1956,9 @@ class AsyncCardsWithRawResponse:
         self.retrieve_spend_limits = _legacy_response.async_to_raw_response_wrapper(
             cards.retrieve_spend_limits,
         )
+        self.search_by_pan = _legacy_response.async_to_raw_response_wrapper(
+            cards.search_by_pan,
+        )
 
     @cached_property
     def aggregate_balances(self) -> AsyncAggregateBalancesWithRawResponse:
@@ -1905,6 +2004,9 @@ class CardsWithStreamingResponse:
         self.retrieve_spend_limits = to_streamed_response_wrapper(
             cards.retrieve_spend_limits,
         )
+        self.search_by_pan = to_streamed_response_wrapper(
+            cards.search_by_pan,
+        )
 
     @cached_property
     def aggregate_balances(self) -> AggregateBalancesWithStreamingResponse:
@@ -1949,6 +2051,9 @@ class AsyncCardsWithStreamingResponse:
         )
         self.retrieve_spend_limits = async_to_streamed_response_wrapper(
             cards.retrieve_spend_limits,
+        )
+        self.search_by_pan = async_to_streamed_response_wrapper(
+            cards.search_by_pan,
         )
 
     @cached_property

@@ -509,6 +509,37 @@ class TestCards:
                 "",
             )
 
+    @parametrize
+    def test_method_search_by_pan(self, client: Lithic) -> None:
+        card = client.cards.search_by_pan(
+            pan="4111111289144142",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_raw_response_search_by_pan(self, client: Lithic) -> None:
+        response = client.cards.with_raw_response.search_by_pan(
+            pan="4111111289144142",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_streaming_response_search_by_pan(self, client: Lithic) -> None:
+        with client.cards.with_streaming_response.search_by_pan(
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = response.parse()
+            assert_matches_type(Card, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncCards:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -998,3 +1029,34 @@ class TestAsyncCards:
             await async_client.cards.with_raw_response.retrieve_spend_limits(
                 "",
             )
+
+    @parametrize
+    async def test_method_search_by_pan(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.search_by_pan(
+            pan="4111111289144142",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_raw_response_search_by_pan(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.search_by_pan(
+            pan="4111111289144142",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_search_by_pan(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.search_by_pan(
+            pan="4111111289144142",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = await response.parse()
+            assert_matches_type(Card, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
