@@ -147,6 +147,7 @@ Methods:
 - <code title="post /cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="post /cards/{card_token}/renew">client.cards.<a href="./src/lithic/resources/cards/cards.py">renew</a>(card_token, \*\*<a href="src/lithic/types/card_renew_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /cards/{card_token}/spend_limits">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_spend_limits</a>(card_token) -> <a href="./src/lithic/types/card_spend_limits.py">CardSpendLimits</a></code>
+- <code title="post /cards/search_by_pan">client.cards.<a href="./src/lithic/resources/cards/cards.py">search_by_pan</a>(\*\*<a href="src/lithic/types/card_search_by_pan_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
 
