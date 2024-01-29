@@ -15,6 +15,7 @@ from ._client import (
     AsyncStream,
     RequestOptions,
 )
+from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
 from ._exceptions import (
@@ -66,6 +67,7 @@ __all__ = [
     "AsyncLithic",
     "ENVIRONMENTS",
     "file_from_path",
+    "BaseModel",
 ]
 
 _setup_logging()
