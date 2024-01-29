@@ -819,7 +819,7 @@ class TestLithic:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/cards",
-                body=dict(type="SINGLE_USE"),
+                body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -834,7 +834,7 @@ class TestLithic:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/cards",
-                body=dict(type="SINGLE_USE"),
+                body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1634,7 +1634,7 @@ class TestAsyncLithic:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/cards",
-                body=dict(type="SINGLE_USE"),
+                body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1649,7 +1649,7 @@ class TestAsyncLithic:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/cards",
-                body=dict(type="SINGLE_USE"),
+                body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
