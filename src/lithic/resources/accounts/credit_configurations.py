@@ -75,7 +75,6 @@ class CreditConfigurations(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> BusinessAccount:
         """
         Update a Business Accounts credit configuration
@@ -96,8 +95,6 @@ class CreditConfigurations(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
@@ -113,11 +110,7 @@ class CreditConfigurations(SyncAPIResource):
                 credit_configuration_update_params.CreditConfigurationUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BusinessAccount,
         )
@@ -179,7 +172,6 @@ class AsyncCreditConfigurations(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> BusinessAccount:
         """
         Update a Business Accounts credit configuration
@@ -200,8 +192,6 @@ class AsyncCreditConfigurations(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
@@ -217,11 +207,7 @@ class AsyncCreditConfigurations(AsyncAPIResource):
                 credit_configuration_update_params.CreditConfigurationUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BusinessAccount,
         )

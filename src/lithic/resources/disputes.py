@@ -79,7 +79,6 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Dispute:
         """
         Initiate a dispute.
@@ -102,8 +101,6 @@ class Disputes(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/disputes",
@@ -118,11 +115,7 @@ class Disputes(SyncAPIResource):
                 dispute_create_params.DisputeCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Dispute,
         )
@@ -190,7 +183,6 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Dispute:
         """Update dispute.
 
@@ -212,8 +204,6 @@ class Disputes(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
@@ -229,11 +219,7 @@ class Disputes(SyncAPIResource):
                 dispute_update_params.DisputeUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Dispute,
         )
@@ -330,7 +316,6 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Dispute:
         """
         Withdraw dispute.
@@ -343,19 +328,13 @@ class Disputes(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._delete(
             f"/disputes/{dispute_token}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Dispute,
         )
@@ -371,7 +350,6 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> DisputeEvidence:
         """Soft delete evidence for a dispute.
 
@@ -386,8 +364,6 @@ class Disputes(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
@@ -396,11 +372,7 @@ class Disputes(SyncAPIResource):
         return self._delete(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DisputeEvidence,
         )
@@ -416,7 +388,6 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> DisputeEvidence:
         """Use this endpoint to upload evidences for the dispute.
 
@@ -436,8 +407,6 @@ class Disputes(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
@@ -447,11 +416,7 @@ class Disputes(SyncAPIResource):
                 {"filename": filename}, dispute_initiate_evidence_upload_params.DisputeInitiateEvidenceUploadParams
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DisputeEvidence,
         )
@@ -619,7 +584,6 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Dispute:
         """
         Initiate a dispute.
@@ -642,8 +606,6 @@ class AsyncDisputes(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/disputes",
@@ -658,11 +620,7 @@ class AsyncDisputes(AsyncAPIResource):
                 dispute_create_params.DisputeCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Dispute,
         )
@@ -730,7 +688,6 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Dispute:
         """Update dispute.
 
@@ -752,8 +709,6 @@ class AsyncDisputes(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
@@ -769,11 +724,7 @@ class AsyncDisputes(AsyncAPIResource):
                 dispute_update_params.DisputeUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Dispute,
         )
@@ -870,7 +821,6 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Dispute:
         """
         Withdraw dispute.
@@ -883,19 +833,13 @@ class AsyncDisputes(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._delete(
             f"/disputes/{dispute_token}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Dispute,
         )
@@ -911,7 +855,6 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> DisputeEvidence:
         """Soft delete evidence for a dispute.
 
@@ -926,8 +869,6 @@ class AsyncDisputes(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
@@ -936,11 +877,7 @@ class AsyncDisputes(AsyncAPIResource):
         return await self._delete(
             f"/disputes/{dispute_token}/evidences/{evidence_token}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DisputeEvidence,
         )
@@ -956,7 +893,6 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> DisputeEvidence:
         """Use this endpoint to upload evidences for the dispute.
 
@@ -976,8 +912,6 @@ class AsyncDisputes(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
@@ -987,11 +921,7 @@ class AsyncDisputes(AsyncAPIResource):
                 {"filename": filename}, dispute_initiate_evidence_upload_params.DisputeInitiateEvidenceUploadParams
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DisputeEvidence,
         )

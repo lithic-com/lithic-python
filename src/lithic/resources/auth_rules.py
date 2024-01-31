@@ -56,7 +56,6 @@ class AuthRules(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRule:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
@@ -90,8 +89,6 @@ class AuthRules(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/auth_rules",
@@ -108,11 +105,7 @@ class AuthRules(SyncAPIResource):
                 auth_rule_create_params.AuthRuleCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
         )
@@ -165,7 +158,6 @@ class AuthRules(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRule:
         """
         Update the properties associated with an existing authorization rule (Auth
@@ -194,8 +186,6 @@ class AuthRules(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -211,11 +201,7 @@ class AuthRules(SyncAPIResource):
                 auth_rule_update_params.AuthRuleUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
         )
@@ -286,7 +272,6 @@ class AuthRules(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRule:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
@@ -309,8 +294,6 @@ class AuthRules(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -325,11 +308,7 @@ class AuthRules(SyncAPIResource):
                 auth_rule_apply_params.AuthRuleApplyParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
         )
@@ -346,7 +325,6 @@ class AuthRules(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or
@@ -369,8 +347,6 @@ class AuthRules(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._delete(
             "/auth_rules/remove",
@@ -383,11 +359,7 @@ class AuthRules(SyncAPIResource):
                 auth_rule_remove_params.AuthRuleRemoveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRuleRemoveResponse,
         )
@@ -418,7 +390,6 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRule:
         """
         Creates an authorization rule (Auth Rule) and applies it at the program,
@@ -452,8 +423,6 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/auth_rules",
@@ -470,11 +439,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 auth_rule_create_params.AuthRuleCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
         )
@@ -527,7 +492,6 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRule:
         """
         Update the properties associated with an existing authorization rule (Auth
@@ -556,8 +520,6 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -573,11 +535,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 auth_rule_update_params.AuthRuleUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
         )
@@ -648,7 +606,6 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRule:
         """
         Applies an existing authorization rule (Auth Rule) to an program, account, or
@@ -671,8 +628,6 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -687,11 +642,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 auth_rule_apply_params.AuthRuleApplyParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
         )
@@ -708,7 +659,6 @@ class AsyncAuthRules(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthRuleRemoveResponse:
         """
         Remove an existing authorization rule (Auth Rule) from an program, account, or
@@ -731,8 +681,6 @@ class AsyncAuthRules(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._delete(
             "/auth_rules/remove",
@@ -745,11 +693,7 @@ class AsyncAuthRules(AsyncAPIResource):
                 auth_rule_remove_params.AuthRuleRemoveParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRuleRemoveResponse,
         )

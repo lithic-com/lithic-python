@@ -46,7 +46,6 @@ class Tokenizations(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> TokenizationSimulateResponse:
         """
         This endpoint is used to simulate a card's tokenization in the Digital Wallet
@@ -76,8 +75,6 @@ class Tokenizations(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/tokenizations",
@@ -94,11 +91,7 @@ class Tokenizations(SyncAPIResource):
                 tokenization_simulate_params.TokenizationSimulateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TokenizationSimulateResponse,
         )
@@ -130,7 +123,6 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> TokenizationSimulateResponse:
         """
         This endpoint is used to simulate a card's tokenization in the Digital Wallet
@@ -160,8 +152,6 @@ class AsyncTokenizations(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/tokenizations",
@@ -178,11 +168,7 @@ class AsyncTokenizations(AsyncAPIResource):
                 tokenization_simulate_params.TokenizationSimulateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TokenizationSimulateResponse,
         )

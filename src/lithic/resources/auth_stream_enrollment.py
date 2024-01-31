@@ -62,7 +62,6 @@ class AuthStreamEnrollment(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """Generate a new ASA HMAC secret key.
 
@@ -74,11 +73,7 @@ class AuthStreamEnrollment(SyncAPIResource):
         return self._post(
             "/auth_stream/secret/rotate",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
@@ -129,7 +124,6 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """Generate a new ASA HMAC secret key.
 
@@ -141,11 +135,7 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
         return await self._post(
             "/auth_stream/secret/rotate",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
