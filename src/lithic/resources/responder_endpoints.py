@@ -46,7 +46,6 @@ class ResponderEndpoints(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ResponderEndpointCreateResponse:
         """
         Enroll a responder endpoint
@@ -63,8 +62,6 @@ class ResponderEndpoints(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/responder_endpoints",
@@ -76,11 +73,7 @@ class ResponderEndpoints(SyncAPIResource):
                 responder_endpoint_create_params.ResponderEndpointCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ResponderEndpointCreateResponse,
         )
@@ -95,7 +88,6 @@ class ResponderEndpoints(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Disenroll a responder endpoint
@@ -110,8 +102,6 @@ class ResponderEndpoints(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._delete(
             "/responder_endpoints",
@@ -120,7 +110,6 @@ class ResponderEndpoints(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                idempotency_key=idempotency_key,
                 query=maybe_transform({"type": type}, responder_endpoint_delete_params.ResponderEndpointDeleteParams),
             ),
             cast_to=NoneType,
@@ -186,7 +175,6 @@ class AsyncResponderEndpoints(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ResponderEndpointCreateResponse:
         """
         Enroll a responder endpoint
@@ -203,8 +191,6 @@ class AsyncResponderEndpoints(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/responder_endpoints",
@@ -216,11 +202,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
                 responder_endpoint_create_params.ResponderEndpointCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ResponderEndpointCreateResponse,
         )
@@ -235,7 +217,6 @@ class AsyncResponderEndpoints(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Disenroll a responder endpoint
@@ -250,8 +231,6 @@ class AsyncResponderEndpoints(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._delete(
             "/responder_endpoints",
@@ -260,7 +239,6 @@ class AsyncResponderEndpoints(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                idempotency_key=idempotency_key,
                 query=maybe_transform({"type": type}, responder_endpoint_delete_params.ResponderEndpointDeleteParams),
             ),
             cast_to=NoneType,

@@ -78,7 +78,6 @@ class Authentication(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthenticationSimulateResponse:
         """
         Simulates a 3DS authentication request from the payment network as if it came
@@ -96,8 +95,6 @@ class Authentication(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/three_ds_authentication/simulate",
@@ -110,11 +107,7 @@ class Authentication(SyncAPIResource):
                 authentication_simulate_params.AuthenticationSimulateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthenticationSimulateResponse,
         )
@@ -176,7 +169,6 @@ class AsyncAuthentication(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthenticationSimulateResponse:
         """
         Simulates a 3DS authentication request from the payment network as if it came
@@ -194,8 +186,6 @@ class AsyncAuthentication(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/three_ds_authentication/simulate",
@@ -208,11 +198,7 @@ class AsyncAuthentication(AsyncAPIResource):
                 authentication_simulate_params.AuthenticationSimulateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthenticationSimulateResponse,
         )

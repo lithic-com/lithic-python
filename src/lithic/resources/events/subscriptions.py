@@ -77,7 +77,6 @@ class Subscriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Create a new event subscription.
@@ -99,8 +98,6 @@ class Subscriptions(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/event_subscriptions",
@@ -114,11 +111,7 @@ class Subscriptions(SyncAPIResource):
                 subscription_create_params.SubscriptionCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=EventSubscription,
         )
@@ -193,7 +186,6 @@ class Subscriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Update an event subscription.
@@ -215,8 +207,6 @@ class Subscriptions(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -234,11 +224,7 @@ class Subscriptions(SyncAPIResource):
                 subscription_update_params.SubscriptionUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=EventSubscription,
         )
@@ -306,7 +292,6 @@ class Subscriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Delete an event subscription.
@@ -319,8 +304,6 @@ class Subscriptions(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -329,11 +312,7 @@ class Subscriptions(SyncAPIResource):
         return self._delete(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
@@ -420,7 +399,6 @@ class Subscriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Resend all failed messages since a given time.
@@ -439,8 +417,6 @@ class Subscriptions(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -453,7 +429,6 @@ class Subscriptions(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                idempotency_key=idempotency_key,
                 query=maybe_transform(
                     {
                         "begin": begin,
@@ -477,7 +452,6 @@ class Subscriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """Replays messages to the endpoint.
 
@@ -501,8 +475,6 @@ class Subscriptions(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -515,7 +487,6 @@ class Subscriptions(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                idempotency_key=idempotency_key,
                 query=maybe_transform(
                     {
                         "begin": begin,
@@ -572,7 +543,6 @@ class Subscriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """Rotate the secret for an event subscription.
 
@@ -587,8 +557,6 @@ class Subscriptions(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -597,11 +565,7 @@ class Subscriptions(SyncAPIResource):
         return self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
@@ -636,7 +600,6 @@ class Subscriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Send an example message for event.
@@ -651,8 +614,6 @@ class Subscriptions(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -665,11 +626,7 @@ class Subscriptions(SyncAPIResource):
                 subscription_send_simulated_example_params.SubscriptionSendSimulatedExampleParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
@@ -718,7 +675,6 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Create a new event subscription.
@@ -740,8 +696,6 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/event_subscriptions",
@@ -755,11 +709,7 @@ class AsyncSubscriptions(AsyncAPIResource):
                 subscription_create_params.SubscriptionCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=EventSubscription,
         )
@@ -834,7 +784,6 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> EventSubscription:
         """
         Update an event subscription.
@@ -856,8 +805,6 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -875,11 +822,7 @@ class AsyncSubscriptions(AsyncAPIResource):
                 subscription_update_params.SubscriptionUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=EventSubscription,
         )
@@ -947,7 +890,6 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Delete an event subscription.
@@ -960,8 +902,6 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -970,11 +910,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         return await self._delete(
             f"/event_subscriptions/{event_subscription_token}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
@@ -1061,7 +997,6 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Resend all failed messages since a given time.
@@ -1080,8 +1015,6 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -1094,7 +1027,6 @@ class AsyncSubscriptions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                idempotency_key=idempotency_key,
                 query=maybe_transform(
                     {
                         "begin": begin,
@@ -1118,7 +1050,6 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """Replays messages to the endpoint.
 
@@ -1142,8 +1073,6 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -1156,7 +1085,6 @@ class AsyncSubscriptions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                idempotency_key=idempotency_key,
                 query=maybe_transform(
                     {
                         "begin": begin,
@@ -1213,7 +1141,6 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """Rotate the secret for an event subscription.
 
@@ -1228,8 +1155,6 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -1238,11 +1163,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         return await self._post(
             f"/event_subscriptions/{event_subscription_token}/secret/rotate",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
@@ -1277,7 +1198,6 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> None:
         """
         Send an example message for event.
@@ -1292,8 +1212,6 @@ class AsyncSubscriptions(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not event_subscription_token:
             raise ValueError(
@@ -1306,11 +1224,7 @@ class AsyncSubscriptions(AsyncAPIResource):
                 subscription_send_simulated_example_params.SubscriptionSendSimulatedExampleParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )

@@ -40,7 +40,6 @@ class MicroDeposits(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> MicroDepositCreateResponse:
         """
         Verify the external bank account by providing the micro deposit amounts.
@@ -53,8 +52,6 @@ class MicroDeposits(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not external_bank_account_token:
             raise ValueError(
@@ -66,11 +63,7 @@ class MicroDeposits(SyncAPIResource):
                 {"micro_deposits": micro_deposits}, micro_deposit_create_params.MicroDepositCreateParams
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MicroDepositCreateResponse,
         )
@@ -96,7 +89,6 @@ class AsyncMicroDeposits(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> MicroDepositCreateResponse:
         """
         Verify the external bank account by providing the micro deposit amounts.
@@ -109,8 +101,6 @@ class AsyncMicroDeposits(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not external_bank_account_token:
             raise ValueError(
@@ -122,11 +112,7 @@ class AsyncMicroDeposits(AsyncAPIResource):
                 {"micro_deposits": micro_deposits}, micro_deposit_create_params.MicroDepositCreateParams
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MicroDepositCreateResponse,
         )

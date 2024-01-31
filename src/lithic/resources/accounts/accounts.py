@@ -93,7 +93,6 @@ class Accounts(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Account:
         """Update account configuration such as spend limits and verification address.
 
@@ -130,8 +129,6 @@ class Accounts(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
@@ -148,11 +145,7 @@ class Accounts(SyncAPIResource):
                 account_update_params.AccountUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Account,
         )
@@ -320,7 +313,6 @@ class AsyncAccounts(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Account:
         """Update account configuration such as spend limits and verification address.
 
@@ -357,8 +349,6 @@ class AsyncAccounts(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
@@ -375,11 +365,7 @@ class AsyncAccounts(AsyncAPIResource):
                 account_update_params.AccountUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Account,
         )

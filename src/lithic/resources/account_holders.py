@@ -64,7 +64,6 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -130,8 +129,6 @@ class AccountHolders(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -150,7 +147,6 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -186,8 +182,6 @@ class AccountHolders(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -210,7 +204,6 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -251,8 +244,6 @@ class AccountHolders(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -300,7 +291,6 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         return self._post(
             "/account_holders",
@@ -329,11 +319,7 @@ class AccountHolders(SyncAPIResource):
                 account_holder_create_params.AccountHolderCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolderCreateResponse,
         )
@@ -387,7 +373,6 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder.
@@ -412,8 +397,6 @@ class AccountHolders(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_holder_token:
             raise ValueError(
@@ -430,11 +413,7 @@ class AccountHolders(SyncAPIResource):
                 account_holder_update_params.AccountHolderUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolderUpdateResponse,
         )
@@ -559,7 +538,6 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -587,8 +565,6 @@ class AccountHolders(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_holder_token:
             raise ValueError(
@@ -605,11 +581,7 @@ class AccountHolders(SyncAPIResource):
                 account_holder_resubmit_params.AccountHolderResubmitParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolder,
         )
@@ -676,7 +648,6 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -708,8 +679,6 @@ class AccountHolders(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_holder_token:
             raise ValueError(
@@ -722,11 +691,7 @@ class AccountHolders(SyncAPIResource):
                 account_holder_upload_document_params.AccountHolderUploadDocumentParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolderDocument,
         )
@@ -761,7 +726,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -827,8 +791,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -847,7 +809,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -883,8 +844,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -907,7 +866,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -948,8 +906,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -997,7 +953,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = 300,
-        idempotency_key: str | None = None,
     ) -> AccountHolderCreateResponse:
         return await self._post(
             "/account_holders",
@@ -1026,11 +981,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 account_holder_create_params.AccountHolderCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolderCreateResponse,
         )
@@ -1084,7 +1035,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder.
@@ -1109,8 +1059,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_holder_token:
             raise ValueError(
@@ -1127,11 +1075,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 account_holder_update_params.AccountHolderUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolderUpdateResponse,
         )
@@ -1256,7 +1200,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AccountHolder:
         """Resubmit a KYC submission.
 
@@ -1284,8 +1227,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_holder_token:
             raise ValueError(
@@ -1302,11 +1243,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 account_holder_resubmit_params.AccountHolderResubmitParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolder,
         )
@@ -1373,7 +1310,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AccountHolderDocument:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -1405,8 +1341,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not account_holder_token:
             raise ValueError(
@@ -1419,11 +1353,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 account_holder_upload_document_params.AccountHolderUploadDocumentParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountHolderDocument,
         )
