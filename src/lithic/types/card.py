@@ -56,6 +56,12 @@ class Card(BaseModel):
     token: str
     """Globally unique identifier."""
 
+    account_token: str
+    """Globally unique identifier for the account to which the card belongs."""
+
+    card_program_token: str
+    """Globally unique identifier for the card program on which the card exists."""
+
     created: datetime
     """An RFC 3339 timestamp for when the card was created. UTC time zone."""
 
