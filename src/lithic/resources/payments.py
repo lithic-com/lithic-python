@@ -61,7 +61,6 @@ class Payments(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentCreateResponse:
         """
         Initiates a payment between a financial account and an external bank account.
@@ -77,8 +76,6 @@ class Payments(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/payments",
@@ -97,11 +94,7 @@ class Payments(SyncAPIResource):
                 payment_create_params.PaymentCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentCreateResponse,
         )
@@ -218,7 +211,6 @@ class Payments(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentRetryResponse:
         """
         Retry an origination which has been returned.
@@ -231,19 +223,13 @@ class Payments(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
             f"/payments/{payment_token}/retry",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentRetryResponse,
         )
@@ -258,7 +244,6 @@ class Payments(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentSimulateReleaseResponse:
         """
         Simulates a release of a Payment.
@@ -271,8 +256,6 @@ class Payments(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/payments/release",
@@ -280,11 +263,7 @@ class Payments(SyncAPIResource):
                 {"payment_token": payment_token}, payment_simulate_release_params.PaymentSimulateReleaseParams
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentSimulateReleaseResponse,
         )
@@ -300,7 +279,6 @@ class Payments(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentSimulateReturnResponse:
         """
         Simulates a return of a Payment.
@@ -313,8 +291,6 @@ class Payments(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/simulate/payments/return",
@@ -326,11 +302,7 @@ class Payments(SyncAPIResource):
                 payment_simulate_return_params.PaymentSimulateReturnParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentSimulateReturnResponse,
         )
@@ -363,7 +335,6 @@ class AsyncPayments(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentCreateResponse:
         """
         Initiates a payment between a financial account and an external bank account.
@@ -379,8 +350,6 @@ class AsyncPayments(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/payments",
@@ -399,11 +368,7 @@ class AsyncPayments(AsyncAPIResource):
                 payment_create_params.PaymentCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentCreateResponse,
         )
@@ -520,7 +485,6 @@ class AsyncPayments(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentRetryResponse:
         """
         Retry an origination which has been returned.
@@ -533,19 +497,13 @@ class AsyncPayments(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
             f"/payments/{payment_token}/retry",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentRetryResponse,
         )
@@ -560,7 +518,6 @@ class AsyncPayments(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentSimulateReleaseResponse:
         """
         Simulates a release of a Payment.
@@ -573,8 +530,6 @@ class AsyncPayments(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/payments/release",
@@ -582,11 +537,7 @@ class AsyncPayments(AsyncAPIResource):
                 {"payment_token": payment_token}, payment_simulate_release_params.PaymentSimulateReleaseParams
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentSimulateReleaseResponse,
         )
@@ -602,7 +553,6 @@ class AsyncPayments(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> PaymentSimulateReturnResponse:
         """
         Simulates a return of a Payment.
@@ -615,8 +565,6 @@ class AsyncPayments(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/simulate/payments/return",
@@ -628,11 +576,7 @@ class AsyncPayments(AsyncAPIResource):
                 payment_simulate_return_params.PaymentSimulateReturnParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentSimulateReturnResponse,
         )

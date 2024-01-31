@@ -62,7 +62,6 @@ class TokenizationDecisioning(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> TokenizationDecisioningRotateSecretResponse:
         """Generate a new Tokenization Decisioning secret key.
 
@@ -73,11 +72,7 @@ class TokenizationDecisioning(SyncAPIResource):
         return self._post(
             "/tokenization_decisioning/secret/rotate",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TokenizationDecisioningRotateSecretResponse,
         )
@@ -128,7 +123,6 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> TokenizationDecisioningRotateSecretResponse:
         """Generate a new Tokenization Decisioning secret key.
 
@@ -139,11 +133,7 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         return await self._post(
             "/tokenization_decisioning/secret/rotate",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TokenizationDecisioningRotateSecretResponse,
         )

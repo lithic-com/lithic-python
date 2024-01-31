@@ -82,7 +82,6 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -105,8 +104,6 @@ class ExternalBankAccounts(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -129,7 +126,6 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -144,8 +140,6 @@ class ExternalBankAccounts(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -188,7 +182,6 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         return self._post(
             "/external_bank_accounts",
@@ -215,11 +208,7 @@ class ExternalBankAccounts(SyncAPIResource):
                 external_bank_account_create_params.ExternalBankAccountCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ExternalBankAccountCreateResponse,
         )
@@ -277,7 +266,6 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountUpdateResponse:
         """
         Update the external bank account by token.
@@ -295,8 +283,6 @@ class ExternalBankAccounts(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not external_bank_account_token:
             raise ValueError(
@@ -318,11 +304,7 @@ class ExternalBankAccounts(SyncAPIResource):
                 external_bank_account_update_params.ExternalBankAccountUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ExternalBankAccountUpdateResponse,
         )
@@ -432,7 +414,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -455,8 +436,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -479,7 +458,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -494,8 +472,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         ...
 
@@ -538,7 +514,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountCreateResponse:
         return await self._post(
             "/external_bank_accounts",
@@ -565,11 +540,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                 external_bank_account_create_params.ExternalBankAccountCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ExternalBankAccountCreateResponse,
         )
@@ -627,7 +598,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ExternalBankAccountUpdateResponse:
         """
         Update the external bank account by token.
@@ -645,8 +615,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         if not external_bank_account_token:
             raise ValueError(
@@ -668,11 +636,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                 external_bank_account_update_params.ExternalBankAccountUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ExternalBankAccountUpdateResponse,
         )
