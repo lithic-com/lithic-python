@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.34.0 (2024-01-31)
+
+Full Changelog: [v0.33.0...v0.34.0](https://github.com/lithic-com/lithic-python/compare/v0.33.0...v0.34.0)
+
+### Features
+
+* **api:** add `account_token` and `card_program_token` to `Card` ([#347](https://github.com/lithic-com/lithic-python/issues/347)) ([f94944e](https://github.com/lithic-com/lithic-python/commit/f94944e70f2666fd7a57cd8546146931242e78db))
+
 ## 0.33.0 (2024-01-31)
 
 Full Changelog: [v0.32.0...v0.33.0](https://github.com/lithic-com/lithic-python/compare/v0.32.0...v0.33.0)
