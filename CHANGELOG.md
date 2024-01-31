@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.33.0 (2024-01-31)
+
+Full Changelog: [v0.32.0...v0.33.0](https://github.com/lithic-com/lithic-python/compare/v0.32.0...v0.33.0)
+
+### Features
+
+* **api:** add search_by_pan endpoint ([#342](https://github.com/lithic-com/lithic-python/issues/342)) ([2eb8a3c](https://github.com/lithic-com/lithic-python/commit/2eb8a3c4e573a9c9f71ba6ae7a3ab32e63ee0150))
+* **client:** enable follow redirects by default ([#338](https://github.com/lithic-com/lithic-python/issues/338)) ([ec5cddd](https://github.com/lithic-com/lithic-python/commit/ec5cddd8419944fd3bc796232428bb08ab751bef))
+* **client:** support parsing custom response types ([#343](https://github.com/lithic-com/lithic-python/issues/343)) ([ac44618](https://github.com/lithic-com/lithic-python/commit/ac44618a38700b84c95d2cd0c954e5211901a4e7))
+* remove idempotency headers ([#346](https://github.com/lithic-com/lithic-python/issues/346)) ([79049f4](https://github.com/lithic-com/lithic-python/commit/79049f4b235f7e3d23f997f14030b818e69a54b8))
+
+
+### Chores
+
+* **internal:** cast type in mocked test ([#344](https://github.com/lithic-com/lithic-python/issues/344)) ([aa6e754](https://github.com/lithic-com/lithic-python/commit/aa6e75451bb9cbd667a2a6f1d02f2aa741079751))
+* **internal:** enable ruff type checking misuse lint rule ([#341](https://github.com/lithic-com/lithic-python/issues/341)) ([312383f](https://github.com/lithic-com/lithic-python/commit/312383fc2a5a3a0719b795e38093d47d831fa486))
+* **internal:** support multipart data with overlapping keys ([#340](https://github.com/lithic-com/lithic-python/issues/340)) ([e74deea](https://github.com/lithic-com/lithic-python/commit/e74deea8e769d38d147d8581fb238fb179b6ca0d))
+* **internal:** support pre-release versioning ([#345](https://github.com/lithic-com/lithic-python/issues/345)) ([44505cc](https://github.com/lithic-com/lithic-python/commit/44505cca7cf92abd80e75e917fb08dbd55369088))
+
 ## 0.32.0 (2024-01-23)
 
 Full Changelog: [v0.31.1...v0.32.0](https://github.com/lithic-com/lithic-python/compare/v0.31.1...v0.32.0)
