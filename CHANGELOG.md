@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.34.1 (2024-02-04)
+
+Full Changelog: [v0.34.0...v0.34.1](https://github.com/lithic-com/lithic-python/compare/v0.34.0...v0.34.1)
+
+### Bug Fixes
+
+* prevent crash when platform.architecture() is not allowed ([#351](https://github.com/lithic-com/lithic-python/issues/351)) ([fc7fd7b](https://github.com/lithic-com/lithic-python/commit/fc7fd7be6ec4a6e874bb515db810b2d539be8757))
+
+
+### Chores
+
+* **interal:** make link to api.md relative ([#349](https://github.com/lithic-com/lithic-python/issues/349)) ([f85a5e0](https://github.com/lithic-com/lithic-python/commit/f85a5e0b9cb599967951781dfe22801280b9c40f))
+
 ## 0.34.0 (2024-01-31)
 
 Full Changelog: [v0.33.0...v0.34.0](https://github.com/lithic-com/lithic-python/compare/v0.33.0...v0.34.0)
