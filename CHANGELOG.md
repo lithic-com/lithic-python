@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.34.2 (2024-02-06)
+
+Full Changelog: [v0.34.1...v0.34.2](https://github.com/lithic-com/lithic-python/compare/v0.34.1...v0.34.2)
+
+### Bug Fixes
+
+* **types:** loosen most List params types to Iterable ([#355](https://github.com/lithic-com/lithic-python/issues/355)) ([9d94f70](https://github.com/lithic-com/lithic-python/commit/9d94f706b111d82a7fb517ee0215d877754ba690))
+
+
+### Chores
+
+* **internal:** add lint command ([#354](https://github.com/lithic-com/lithic-python/issues/354)) ([2874d3b](https://github.com/lithic-com/lithic-python/commit/2874d3bfe4aab6c726893c8c31fc6fb8bcf45571))
+* **internal:** support serialising iterable types ([#352](https://github.com/lithic-com/lithic-python/issues/352)) ([a09d15c](https://github.com/lithic-com/lithic-python/commit/a09d15c2a3feb9226513d7b598e238de096ba996))
+
 ## 0.34.1 (2024-02-04)
 
 Full Changelog: [v0.34.0...v0.34.1](https://github.com/lithic-com/lithic-python/compare/v0.34.0...v0.34.1)
