@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List, Union, Iterable
 from typing_extensions import Literal, Required, TypedDict
 
 from ..types import shared_params
@@ -21,7 +21,7 @@ __all__ = [
 
 
 class KYB(TypedDict, total=False):
-    beneficial_owner_entities: Required[List[KYBBeneficialOwnerEntity]]
+    beneficial_owner_entities: Required[Iterable[KYBBeneficialOwnerEntity]]
     """List of all entities with >25% ownership in the company.
 
     If no entity or individual owns >25% of the company, and the largest shareholder
@@ -32,7 +32,7 @@ class KYB(TypedDict, total=False):
     must be populated. on entities that should be included.
     """
 
-    beneficial_owner_individuals: Required[List[KYBBeneficialOwnerIndividual]]
+    beneficial_owner_individuals: Required[Iterable[KYBBeneficialOwnerIndividual]]
     """List of all individuals with >25% ownership in the company.
 
     If no entity or individual owns >25% of the company, and the largest shareholder

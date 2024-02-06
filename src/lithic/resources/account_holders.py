@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, overload
+from typing import Iterable, overload
 from typing_extensions import Literal
 
 import httpx
@@ -48,8 +48,8 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity],
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual],
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity],
+        beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual],
         business_entity: account_holder_create_params.KYBBusinessEntity,
         control_person: account_holder_create_params.KYBControlPerson,
         nature_of_business: str,
@@ -263,8 +263,9 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
@@ -710,8 +711,8 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity],
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual],
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity],
+        beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual],
         business_entity: account_holder_create_params.KYBBusinessEntity,
         control_person: account_holder_create_params.KYBControlPerson,
         nature_of_business: str,
@@ -925,8 +926,9 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        beneficial_owner_entities: List[account_holder_create_params.KYBBeneficialOwnerEntity] | NotGiven = NOT_GIVEN,
-        beneficial_owner_individuals: List[account_holder_create_params.KYBBeneficialOwnerIndividual]
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
