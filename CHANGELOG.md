@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.35.0 (2024-02-07)
+
+Full Changelog: [v0.34.2...v0.35.0](https://github.com/lithic-com/lithic-python/compare/v0.34.2...v0.35.0)
+
+### Features
+
+* **api:** updates ([#356](https://github.com/lithic-com/lithic-python/issues/356)) ([1d9d6c7](https://github.com/lithic-com/lithic-python/commit/1d9d6c739a458b6ac8af595fba5f11a2c2fd325f))
+
 ## 0.34.2 (2024-02-06)
 
 Full Changelog: [v0.34.1...v0.34.2](https://github.com/lithic-com/lithic-python/compare/v0.34.1...v0.34.2)
