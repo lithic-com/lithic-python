@@ -165,3 +165,10 @@ class Card(BaseModel):
     field in production. Please contact
     [support@lithic.com](mailto:support@lithic.com) for questions.
     """
+
+    product_id: Optional[str] = None
+    """Only applicable to cards of type `PHYSICAL`.
+
+    This must be configured with Lithic before use. Specifies the configuration
+    (i.e., physical card art) that the card should be manufactured with.
+    """
