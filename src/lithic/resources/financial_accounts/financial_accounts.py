@@ -7,7 +7,7 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from ...types import FinancialAccount, financial_account_list_params
+from ...types import FinancialAccount, financial_account_list_params, financial_account_update_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from .balances import (
@@ -68,11 +68,84 @@ class FinancialAccounts(SyncAPIResource):
     def with_streaming_response(self) -> FinancialAccountsWithStreamingResponse:
         return FinancialAccountsWithStreamingResponse(self)
 
+    def retrieve(
+        self,
+        financial_account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinancialAccount:
+        """
+        Get a financial account
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        return self._get(
+            f"/financial_accounts/{financial_account_token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FinancialAccount,
+        )
+
+    def update(
+        self,
+        financial_account_token: str,
+        *,
+        nickname: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinancialAccount:
+        """
+        Update a financial account
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        return self._patch(
+            f"/financial_accounts/{financial_account_token}",
+            body=maybe_transform({"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FinancialAccount,
+        )
+
     def list(
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
-        type: Literal["ISSUING", "RESERVE"] | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
+        type: Literal["ISSUING", "RESERVE", "OPERATING"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -85,7 +158,9 @@ class FinancialAccounts(SyncAPIResource):
         number.
 
         Args:
-          account_token: List financial accounts for a given account_token
+          account_token: List financial accounts for a given account_token or business_account_token
+
+          business_account_token: List financial accounts for a given business_account_token
 
           type: List financial accounts of a given type
 
@@ -108,6 +183,7 @@ class FinancialAccounts(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "account_token": account_token,
+                        "business_account_token": business_account_token,
                         "type": type,
                     },
                     financial_account_list_params.FinancialAccountListParams,
@@ -138,11 +214,84 @@ class AsyncFinancialAccounts(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncFinancialAccountsWithStreamingResponse:
         return AsyncFinancialAccountsWithStreamingResponse(self)
 
+    async def retrieve(
+        self,
+        financial_account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinancialAccount:
+        """
+        Get a financial account
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        return await self._get(
+            f"/financial_accounts/{financial_account_token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FinancialAccount,
+        )
+
+    async def update(
+        self,
+        financial_account_token: str,
+        *,
+        nickname: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinancialAccount:
+        """
+        Update a financial account
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        return await self._patch(
+            f"/financial_accounts/{financial_account_token}",
+            body=maybe_transform({"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FinancialAccount,
+        )
+
     def list(
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
-        type: Literal["ISSUING", "RESERVE"] | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
+        type: Literal["ISSUING", "RESERVE", "OPERATING"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -155,7 +304,9 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         number.
 
         Args:
-          account_token: List financial accounts for a given account_token
+          account_token: List financial accounts for a given account_token or business_account_token
+
+          business_account_token: List financial accounts for a given business_account_token
 
           type: List financial accounts of a given type
 
@@ -178,6 +329,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "account_token": account_token,
+                        "business_account_token": business_account_token,
                         "type": type,
                     },
                     financial_account_list_params.FinancialAccountListParams,
@@ -191,6 +343,12 @@ class FinancialAccountsWithRawResponse:
     def __init__(self, financial_accounts: FinancialAccounts) -> None:
         self._financial_accounts = financial_accounts
 
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
+            financial_accounts.retrieve,
+        )
+        self.update = _legacy_response.to_raw_response_wrapper(
+            financial_accounts.update,
+        )
         self.list = _legacy_response.to_raw_response_wrapper(
             financial_accounts.list,
         )
@@ -212,6 +370,12 @@ class AsyncFinancialAccountsWithRawResponse:
     def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
         self._financial_accounts = financial_accounts
 
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
+            financial_accounts.retrieve,
+        )
+        self.update = _legacy_response.async_to_raw_response_wrapper(
+            financial_accounts.update,
+        )
         self.list = _legacy_response.async_to_raw_response_wrapper(
             financial_accounts.list,
         )
@@ -233,6 +397,12 @@ class FinancialAccountsWithStreamingResponse:
     def __init__(self, financial_accounts: FinancialAccounts) -> None:
         self._financial_accounts = financial_accounts
 
+        self.retrieve = to_streamed_response_wrapper(
+            financial_accounts.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            financial_accounts.update,
+        )
         self.list = to_streamed_response_wrapper(
             financial_accounts.list,
         )
@@ -254,6 +424,12 @@ class AsyncFinancialAccountsWithStreamingResponse:
     def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
         self._financial_accounts = financial_accounts
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            financial_accounts.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            financial_accounts.update,
+        )
         self.list = async_to_streamed_response_wrapper(
             financial_accounts.list,
         )
