@@ -138,7 +138,7 @@ first_page = await client.cards.list()
 
 print(f"next page cursor: {first_page.starting_after}")  # => "next page cursor: ..."
 for card in first_page.data:
-    print(card.token)
+    print(card.product_id)
 
 # Remove `await` for non-async usage.
 ```
@@ -155,7 +155,7 @@ client = Lithic()
 card = client.cards.create(
     type="VIRTUAL",
 )
-print(card.token)
+print(card.product_id)
 ```
 
 ## Webhook Verification

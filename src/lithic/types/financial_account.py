@@ -16,7 +16,7 @@ class FinancialAccount(BaseModel):
     created: datetime
     """Date and time for when the financial account was first created."""
 
-    type: Literal["ISSUING", "RESERVE"]
+    type: Literal["ISSUING", "RESERVE", "OPERATING"]
     """Type of financial account"""
 
     updated: datetime
@@ -24,6 +24,9 @@ class FinancialAccount(BaseModel):
 
     account_number: Optional[str] = None
     """Account number for your Lithic-assigned bank account number, if applicable."""
+
+    nickname: Optional[str] = None
+    """User-defined nickname for the financial account."""
 
     routing_number: Optional[str] = None
     """Routing number for your Lithic-assigned bank account number, if applicable."""

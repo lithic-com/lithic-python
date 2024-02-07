@@ -268,6 +268,8 @@ from lithic.types import FinancialAccount, FinancialTransaction
 
 Methods:
 
+- <code title="get /financial_accounts/{financial_account_token}">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">retrieve</a>(financial_account_token) -> <a href="./src/lithic/types/financial_account.py">FinancialAccount</a></code>
+- <code title="patch /financial_accounts/{financial_account_token}">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">update</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_account_update_params.py">params</a>) -> <a href="./src/lithic/types/financial_account.py">FinancialAccount</a></code>
 - <code title="get /financial_accounts">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">list</a>(\*\*<a href="src/lithic/types/financial_account_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_account.py">SyncSinglePage[FinancialAccount]</a></code>
 
 ## Balances
