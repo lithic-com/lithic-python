@@ -18,7 +18,7 @@ class AggregateBalance(BaseModel):
     currency: str
     """3-digit alphabetic ISO 4217 code for the local currency of the balance."""
 
-    financial_account_type: Literal["ISSUING", "RESERVE", "OPERATING"]
+    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE"]
     """Type of financial account"""
 
     last_financial_account_token: str

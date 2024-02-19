@@ -8,5 +8,5 @@ __all__ = ["AggregateBalanceListParams"]
 
 
 class AggregateBalanceListParams(TypedDict, total=False):
-    financial_account_type: Literal["ISSUING", "RESERVE"]
+    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE"]
     """Get the aggregate balance for a given Financial Account type."""
