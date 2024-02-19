@@ -16,7 +16,7 @@ class FinancialAccount(BaseModel):
     created: datetime
     """Date and time for when the financial account was first created."""
 
-    type: Literal["ISSUING", "RESERVE", "OPERATING"]
+    type: Literal["ISSUING", "OPERATING", "RESERVE"]
     """Type of financial account"""
 
     updated: datetime

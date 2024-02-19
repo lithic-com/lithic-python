@@ -88,15 +88,15 @@ class SettlementDetail(BaseModel):
     """
 
     type: Literal[
+        "ADJUSTMENT",
+        "ARBITRATION",
+        "CHARGEBACK",
         "CLEARING",
+        "FEE",
         "FINANCIAL",
         "NON-FINANCIAL",
-        "ADJUSTMENT",
-        "CHARGEBACK",
-        "REPRESENTMENT",
         "PREARBITRATION",
-        "ARBITRATION",
-        "FEE",
+        "REPRESENTMENT",
     ]
     """The type of settlement record."""
 
