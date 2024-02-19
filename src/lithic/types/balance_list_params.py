@@ -21,5 +21,5 @@ class BalanceListParams(TypedDict, total=False):
     Defaults to latest available balances
     """
 
-    financial_account_type: Literal["ISSUING", "RESERVE"]
+    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE"]
     """List balances for a given Financial Account type."""
