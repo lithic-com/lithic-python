@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.36.0 (2024-02-19)
+
+Full Changelog: [v0.35.0...v0.36.0](https://github.com/lithic-com/lithic-python/compare/v0.35.0...v0.36.0)
+
+### Features
+
+* **api:** update financial_account_type and documentation ([#363](https://github.com/lithic-com/lithic-python/issues/363)) ([589dd28](https://github.com/lithic-com/lithic-python/commit/589dd28a38513e4627237868d25de960ce0a9d52))
+
+
+### Chores
+
+* **internal:** refactor release environment script ([#361](https://github.com/lithic-com/lithic-python/issues/361)) ([6da0145](https://github.com/lithic-com/lithic-python/commit/6da0145a8b54d879fb3f3401562761014035ec5e))
+* **tests:** add integration test for pagination ([#358](https://github.com/lithic-com/lithic-python/issues/358)) ([8aafef9](https://github.com/lithic-com/lithic-python/commit/8aafef98237f52c61da023db201392df09acb7b8))
+
+
+### Documentation
+
+* add CONTRIBUTING.md ([#360](https://github.com/lithic-com/lithic-python/issues/360)) ([e37f886](https://github.com/lithic-com/lithic-python/commit/e37f886e638f29ec150615e345ec76bcf7f1532d))
+
 ## 0.35.0 (2024-02-07)
 
 Full Changelog: [v0.34.2...v0.35.0](https://github.com/lithic-com/lithic-python/compare/v0.34.2...v0.35.0)
