@@ -57,9 +57,9 @@ class ExternalBankAccountRetrieveResponse(BaseModel):
     verification_attempts: int
     """The number of attempts at verification"""
 
-    verification_method: Literal["MANUAL", "MICRO_DEPOSIT", "PLAID"]
+    verification_method: Literal["MANUAL", "MICRO_DEPOSIT", "PLAID", "PRENOTE"]
 
-    verification_state: Literal["ENABLED", "FAILED_VERIFICATION", "PENDING"]
+    verification_state: Literal["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS", "PENDING"]
 
     account_token: Optional[str] = None
     """Indicates which Lithic account the external account is associated with.

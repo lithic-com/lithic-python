@@ -83,6 +83,7 @@ from .account_holder_resubmit_params import AccountHolderResubmitParams as Accou
 from .account_holder_update_response import AccountHolderUpdateResponse as AccountHolderUpdateResponse
 from .payment_simulate_return_params import PaymentSimulateReturnParams as PaymentSimulateReturnParams
 from .tokenization_simulate_response import TokenizationSimulateResponse as TokenizationSimulateResponse
+from .financial_account_create_params import FinancialAccountCreateParams as FinancialAccountCreateParams
 from .financial_account_update_params import FinancialAccountUpdateParams as FinancialAccountUpdateParams
 from .payment_simulate_release_params import PaymentSimulateReleaseParams as PaymentSimulateReleaseParams
 from .payment_simulate_return_response import PaymentSimulateReturnResponse as PaymentSimulateReturnResponse
@@ -151,4 +152,7 @@ from .transaction_simulate_authorization_advice_response import (
 )
 from .transaction_simulate_credit_authorization_response import (
     TransactionSimulateCreditAuthorizationResponse as TransactionSimulateCreditAuthorizationResponse,
+)
+from .external_bank_account_retry_micro_deposits_response import (
+    ExternalBankAccountRetryMicroDepositsResponse as ExternalBankAccountRetryMicroDepositsResponse,
 )

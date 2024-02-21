@@ -14,6 +14,7 @@ from lithic.types import (
     ExternalBankAccountCreateResponse,
     ExternalBankAccountUpdateResponse,
     ExternalBankAccountRetrieveResponse,
+    ExternalBankAccountRetryMicroDepositsResponse,
 )
 from lithic._utils import parse_date
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -278,7 +279,7 @@ class TestExternalBankAccounts:
             page_size=1,
             starting_after="string",
             states=["CLOSED", "ENABLED", "PAUSED"],
-            verification_states=["ENABLED", "FAILED_VERIFICATION", "PENDING"],
+            verification_states=["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"],
         )
         assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 
@@ -303,6 +304,46 @@ class TestExternalBankAccounts:
             )
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_retry_micro_deposits(self, client: Lithic) -> None:
+        external_bank_account = client.external_bank_accounts.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_raw_response_retry_micro_deposits(self, client: Lithic) -> None:
+        response = client.external_bank_accounts.with_raw_response.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retry_micro_deposits(self, client: Lithic) -> None:
+        with client.external_bank_accounts.with_streaming_response.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = response.parse()
+            assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retry_micro_deposits(self, client: Lithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
+        ):
+            client.external_bank_accounts.with_raw_response.retry_micro_deposits(
+                "",
+            )
 
 
 class TestAsyncExternalBankAccounts:
@@ -562,7 +603,7 @@ class TestAsyncExternalBankAccounts:
             page_size=1,
             starting_after="string",
             states=["CLOSED", "ENABLED", "PAUSED"],
-            verification_states=["ENABLED", "FAILED_VERIFICATION", "PENDING"],
+            verification_states=["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"],
         )
         assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 
@@ -587,3 +628,43 @@ class TestAsyncExternalBankAccounts:
             )
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
+        external_bank_account = await async_client.external_bank_accounts.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
+        response = await async_client.external_bank_accounts.with_raw_response.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
+        async with async_client.external_bank_accounts.with_streaming_response.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = await response.parse()
+            assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(
+            ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
+        ):
+            await async_client.external_bank_accounts.with_raw_response.retry_micro_deposits(
+                "",
+            )

@@ -7,10 +7,10 @@ from typing_extensions import Literal
 from .._models import BaseModel
 from .external_bank_account_address import ExternalBankAccountAddress
 
-__all__ = ["ExternalBankAccountCreateResponse"]
+__all__ = ["ExternalBankAccountRetryMicroDepositsResponse"]
 
 
-class ExternalBankAccountCreateResponse(BaseModel):
+class ExternalBankAccountRetryMicroDepositsResponse(BaseModel):
     token: str
     """
     A globally unique identifier for this record of an external bank account
