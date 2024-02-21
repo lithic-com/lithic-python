@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.37.0 (2024-02-21)
+
+Full Changelog: [v0.36.0...v0.37.0](https://github.com/lithic-com/lithic-python/compare/v0.36.0...v0.37.0)
+
+### Features
+
+* **api:** create financial account and retry microdeposits endpoints ([#366](https://github.com/lithic-com/lithic-python/issues/366)) ([4cc06ec](https://github.com/lithic-com/lithic-python/commit/4cc06eca313e87524174d9b6af615e36c8f5c8dd))
+
+
+### Chores
+
+* **internal:** bump rye to v0.24.0 ([#364](https://github.com/lithic-com/lithic-python/issues/364)) ([ef3b396](https://github.com/lithic-com/lithic-python/commit/ef3b396cfb9f58894506514e889d78168a246489))
+
 ## 0.36.0 (2024-02-19)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/lithic-com/lithic-python/compare/v0.35.0...v0.36.0)
