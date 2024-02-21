@@ -37,4 +37,4 @@ class ExternalBankAccountListParams(TypedDict, total=False):
 
     states: List[Literal["CLOSED", "ENABLED", "PAUSED"]]
 
-    verification_states: List[Literal["ENABLED", "FAILED_VERIFICATION", "PENDING"]]
+    verification_states: List[Literal["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS", "PENDING"]]

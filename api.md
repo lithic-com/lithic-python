@@ -268,6 +268,7 @@ from lithic.types import FinancialAccount, FinancialTransaction
 
 Methods:
 
+- <code title="post /financial_accounts">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">create</a>(\*\*<a href="src/lithic/types/financial_account_create_params.py">params</a>) -> <a href="./src/lithic/types/financial_account.py">FinancialAccount</a></code>
 - <code title="get /financial_accounts/{financial_account_token}">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">retrieve</a>(financial_account_token) -> <a href="./src/lithic/types/financial_account.py">FinancialAccount</a></code>
 - <code title="patch /financial_accounts/{financial_account_token}">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">update</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_account_update_params.py">params</a>) -> <a href="./src/lithic/types/financial_account.py">FinancialAccount</a></code>
 - <code title="get /financial_accounts">client.financial_accounts.<a href="./src/lithic/resources/financial_accounts/financial_accounts.py">list</a>(\*\*<a href="src/lithic/types/financial_account_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_account.py">SyncSinglePage[FinancialAccount]</a></code>
@@ -373,6 +374,7 @@ from lithic.types import (
     ExternalBankAccountRetrieveResponse,
     ExternalBankAccountUpdateResponse,
     ExternalBankAccountListResponse,
+    ExternalBankAccountRetryMicroDepositsResponse,
 )
 ```
 
@@ -382,6 +384,7 @@ Methods:
 - <code title="get /external_bank_accounts/{external_bank_account_token}">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retrieve</a>(external_bank_account_token) -> <a href="./src/lithic/types/external_bank_account_retrieve_response.py">ExternalBankAccountRetrieveResponse</a></code>
 - <code title="patch /external_bank_accounts/{external_bank_account_token}">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">update</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_update_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_update_response.py">ExternalBankAccountUpdateResponse</a></code>
 - <code title="get /external_bank_accounts">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">list</a>(\*\*<a href="src/lithic/types/external_bank_account_list_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_list_response.py">SyncCursorPage[ExternalBankAccountListResponse]</a></code>
+- <code title="post /external_bank_accounts/{external_bank_account_token}/retry_micro_deposits">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retry_micro_deposits</a>(external_bank_account_token) -> <a href="./src/lithic/types/external_bank_account_retry_micro_deposits_response.py">ExternalBankAccountRetryMicroDepositsResponse</a></code>
 
 ## MicroDeposits
 
