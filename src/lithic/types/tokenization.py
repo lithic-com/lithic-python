@@ -1,20 +1,53 @@
 # File generated from our OpenAPI spec by Stainless.
 
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Tokenization"]
+__all__ = ["Tokenization", "Event"]
+
+
+class Event(BaseModel):
+    token: Optional[str] = None
+    """Globally unique identifier for a Tokenization Event"""
+
+    created_at: Optional[datetime] = None
+    """Date and time when the tokenization event first occurred. UTC time zone."""
+
+    result: Optional[
+        Literal[
+            "APPROVED",
+            "DECLINED",
+            "NOTIFICATION_DELIVERED",
+            "REQUIRE_ADDITIONAL_AUTHENTICATION",
+            "TOKEN_ACTIVATED",
+            "TOKEN_CREATED",
+            "TOKEN_DEACTIVATED",
+            "TOKEN_INACTIVE",
+            "TOKEN_STATE_UNKNOWN",
+            "TOKEN_SUSPENDED",
+            "TOKEN_UPDATED",
+        ]
+    ] = None
+    """Enum representing the result of the tokenization event"""
+
+    type: Optional[
+        Literal[
+            "TOKENIZATION_2FA",
+            "TOKENIZATION_AUTHORIZATION",
+            "TOKENIZATION_DECISIONING",
+            "TOKENIZATION_ELIGIBILITY_CHECK",
+            "TOKENIZATION_UPDATED",
+        ]
+    ] = None
+    """Enum representing the type of tokenization event that occurred"""
 
 
 class Tokenization(BaseModel):
     token: str
-    """
-    A fixed-width 23-digit numeric identifier for the Transaction that may be set if
-    the transaction originated from the Mastercard network. This number may be used
-    for dispute tracking.
-    """
+    """Globally unique identifier for a Tokenization"""
 
     account_token: str
     """The account token associated with the card being tokenized."""
@@ -25,10 +58,20 @@ class Tokenization(BaseModel):
     created_at: datetime
     """Date and time when the tokenization first occurred. UTC time zone."""
 
-    status: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"]
+    status: Literal["ACTIVE", "DEACTIVATED", "INACTIVE", "PAUSED", "PENDING_2FA", "PENDING_ACTIVATION", "UNKNOWN"]
     """The status of the tokenization request"""
 
-    token_requestor_name: Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY"]
+    token_requestor_name: Literal[
+        "AMAZON_ONE",
+        "ANDROID_PAY",
+        "APPLE_PAY",
+        "FITBIT_PAY",
+        "GARMIN_PAY",
+        "MICROSOFT_PAY",
+        "SAMSUNG_PAY",
+        "UNKNOWN",
+        "VISA_CHECKOUT",
+    ]
     """The entity that is requested the tokenization. Represents a Digital Wallet."""
 
     token_unique_reference: str
@@ -36,3 +79,6 @@ class Tokenization(BaseModel):
 
     updated_at: datetime
     """Latest date and time when the tokenization was updated. UTC time zone."""
+
+    events: Optional[List[Event]] = None
+    """A list of events related to the tokenization."""
