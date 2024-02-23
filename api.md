@@ -114,11 +114,13 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Tokenization, TokenizationSimulateResponse
+from lithic.types import Tokenization, TokenizationRetrieveResponse, TokenizationSimulateResponse
 ```
 
 Methods:
 
+- <code title="get /tokenizations/{tokenization_token}">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">retrieve</a>(tokenization_token) -> <a href="./src/lithic/types/tokenization_retrieve_response.py">TokenizationRetrieveResponse</a></code>
+- <code title="get /tokenizations">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">list</a>(\*\*<a href="src/lithic/types/tokenization_list_params.py">params</a>) -> <a href="./src/lithic/types/tokenization.py">SyncCursorPage[Tokenization]</a></code>
 - <code title="post /simulate/tokenizations">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">simulate</a>(\*\*<a href="src/lithic/types/tokenization_simulate_params.py">params</a>) -> <a href="./src/lithic/types/tokenization_simulate_response.py">TokenizationSimulateResponse</a></code>
 
 # Cards
