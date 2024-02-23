@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.38.0 (2024-02-23)
+
+Full Changelog: [v0.37.0...v0.38.0](https://github.com/lithic-com/lithic-python/compare/v0.37.0...v0.38.0)
+
+### Features
+
+* **api:** tokenizations ([#369](https://github.com/lithic-com/lithic-python/issues/369)) ([87b5088](https://github.com/lithic-com/lithic-python/commit/87b5088f84a6b200636f80b56d9a188a0e9d66a5))
+
+
+### Chores
+
+* **internal:** update deps ([#367](https://github.com/lithic-com/lithic-python/issues/367)) ([2e8ddb7](https://github.com/lithic-com/lithic-python/commit/2e8ddb70724b9000d652ec2863e997d087ffb73d))
+
 ## 0.37.0 (2024-02-21)
 
 Full Changelog: [v0.36.0...v0.37.0](https://github.com/lithic-com/lithic-python/compare/v0.36.0...v0.37.0)
