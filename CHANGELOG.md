@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.39.0 (2024-02-27)
+
+Full Changelog: [v0.38.0...v0.39.0](https://github.com/lithic-com/lithic-python/compare/v0.38.0...v0.39.0)
+
+### Features
+
+* **api:** updates ([#373](https://github.com/lithic-com/lithic-python/issues/373)) ([08870a1](https://github.com/lithic-com/lithic-python/commit/08870a180f77cbe69ee0a4dfebc48fa5346592ff))
+
+
+### Chores
+
+* **client:** use anyio.sleep instead of asyncio.sleep ([#372](https://github.com/lithic-com/lithic-python/issues/372)) ([203870e](https://github.com/lithic-com/lithic-python/commit/203870e2370fc57ac29eb3dea41501d6115fcd8d))
+* **internal:** bump pyright ([#370](https://github.com/lithic-com/lithic-python/issues/370)) ([f048d0e](https://github.com/lithic-com/lithic-python/commit/f048d0e187f072f030ac647cd2e0da9e41c5eeb6))
+
 ## 0.38.0 (2024-02-23)
 
 Full Changelog: [v0.37.0...v0.38.0](https://github.com/lithic-com/lithic-python/compare/v0.37.0...v0.38.0)
