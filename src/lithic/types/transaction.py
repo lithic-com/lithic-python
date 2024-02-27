@@ -8,7 +8,25 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["Transaction", "Event", "Merchant", "CardholderAuthentication"]
+__all__ = [
+    "Transaction",
+    "Avs",
+    "Event",
+    "Merchant",
+    "Pos",
+    "PosEntryMode",
+    "PosTerminal",
+    "TokenInfo",
+    "CardholderAuthentication",
+]
+
+
+class Avs(BaseModel):
+    address: Optional[str] = None
+    """Cardholder address"""
+
+    zipcode: Optional[str] = None
+    """Cardholder ZIP code"""
 
 
 class Event(BaseModel):
@@ -74,16 +92,13 @@ class Event(BaseModel):
     ]
 
     result: Literal[
-        "ACCOUNT_STATE_TRANSACTION",
         "APPROVED",
         "BANK_CONNECTION_ERROR",
         "BANK_NOT_VERIFIED",
         "CARD_CLOSED",
         "CARD_PAUSED",
+        "DECLINED",
         "FRAUD_ADVICE",
-        "GLOBAL_MONTHLY_LIMIT",
-        "GLOBAL_TRANSACTION_LIMIT",
-        "GLOBAL_WEEKLY_LIMIT",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
         "INSUFFICIENT_FUNDS",
@@ -107,12 +122,6 @@ class Event(BaseModel):
     - `CARD_CLOSED` - Card state was closed at the time of authorization.
     - `CARD_PAUSED` - Card state was paused at the time of authorization.
     - `FRAUD_ADVICE` - Transaction declined due to risk.
-    - `GLOBAL_TRANSACTION_LIMIT` - Platform spend limit exceeded, contact
-      [support@lithic.com](mailto:support@lithic.com).
-    - `GLOBAL_WEEKLY_LIMIT` - Platform spend limit exceeded, contact
-      [support@lithic.com](mailto:support@lithic.com).
-    - `GLOBAL_MONTHLY_LIMIT` - Platform spend limit exceeded, contact
-      [support@lithic.com](mailto:support@lithic.com).
     - `INACTIVE_ACCOUNT` - Account is inactive. Contact
       [support@lithic.com](mailto:support@lithic.com).
     - `INCORRECT_PIN` - PIN verification failed.
@@ -191,6 +200,110 @@ class Merchant(BaseModel):
 
     state: Optional[str] = None
     """Geographic state of card acceptor (see ISO 8583 specs)."""
+
+
+class PosEntryMode(BaseModel):
+    card: Literal["NOT_PRESENT", "PREAUTHORIZED", "PRESENT", "UNKNOWN"]
+    """Card status"""
+
+    cardholder: Literal[
+        "DEFERRED_BILLING",
+        "ELECTRONIC_ORDER",
+        "INSTALLMENT",
+        "MAIL_ORDER",
+        "NOT_PRESENT",
+        "PREAUTHORIZED",
+        "PRESENT",
+        "REOCCURRING",
+        "TELEPHONE_ORDER",
+        "UNKNOWN",
+    ]
+    """Cardholder Presence status"""
+
+    pan: Literal[
+        "AUTO_ENTRY",
+        "BAR_CODE",
+        "CONTACTLESS",
+        "CREDENTIAL_ON_FILE",
+        "ECOMMERCE",
+        "ERROR_KEYED",
+        "ERROR_MAGNETIC_STRIPE",
+        "ICC",
+        "KEY_ENTERED",
+        "MAGNETIC_STRIPE",
+        "MANUAL",
+        "OCR",
+        "SECURE_CARDLESS",
+        "UNKNOWN",
+        "UNSPECIFIED",
+    ]
+    """Method of entry for the PAN"""
+
+    pin_entered: bool
+    """True if the PIN was entered"""
+
+
+class PosTerminal(BaseModel):
+    attended: bool
+    """True if a clerk is present at the sale."""
+
+    card_retention_capable: bool
+    """True if the terminal is capable of partial approval.
+
+    Partial approval is when part of a transaction is approved and another payment
+    must be used for the remainder. Example scenario: A $40 transaction is attempted
+    on a prepaid card with a $25 balance. If partial approval is enabled, $25 can be
+    authorized, at which point the POS will prompt the user for an additional
+    payment of $15.
+    """
+
+    on_premise: bool
+    """True if the sale was made at the place of business (vs. mobile)."""
+
+    operator: Literal["ADMINISTRATIVE", "CARDHOLDER", "CARD_ACCEPTOR", "UNKNOWN"]
+    """The person that is designed to swipe the card"""
+
+    pin_capability: Literal["CAPABLE", "INOPERATIVE", "NOT_CAPABLE", "UNSPECIFIED"]
+    """Status of whether the POS is able to accept PINs"""
+
+    type: Literal[
+        "ADMINISTRATIVE",
+        "ATM",
+        "AUTHORIZATION",
+        "COUPON_MACHINE",
+        "DIAL_TERMINAL",
+        "ECOMMERCE",
+        "ECR",
+        "FUEL_MACHINE",
+        "HOME_TERMINAL",
+        "MICR",
+        "OFF_PREMISE",
+        "PAYMENT",
+        "PDA",
+        "PHONE",
+        "POINT",
+        "POS_TERMINAL",
+        "PUBLIC_UTILITY",
+        "SELF_SERVICE",
+        "TELEVISION",
+        "TELLER",
+        "TRAVELERS_CHECK_MACHINE",
+        "UNKNOWN",
+        "VENDING",
+        "VOICE",
+    ]
+    """POS Type"""
+
+
+class Pos(BaseModel):
+    entry_mode: PosEntryMode
+
+    terminal: PosTerminal
+
+
+class TokenInfo(BaseModel):
+    wallet_type: Optional[Literal["APPLE_PAY", "GOOGLE_PAY", "MASTERPASS", "MERCHANT", "OTHER", "SAMSUNG_PAY"]] = None
+    """Source of the token"""
 
 
 class CardholderAuthentication(BaseModel):
@@ -373,6 +486,8 @@ class Transaction(BaseModel):
     transaction with networks.
     """
 
+    avs: Avs
+
     card_token: str
     """Token for the card used in this transaction."""
 
@@ -408,17 +523,28 @@ class Transaction(BaseModel):
     provider.
     """
 
+    network_risk_score: float
+    """
+    Network-provided score assessing risk level associated with a given
+    authorization. Scores are on a range of 0-999, with 0 representing the lowest
+    risk and 999 representing the highest risk. For Visa transactions, where the raw
+    score has a range of 0-99, Lithic will normalize the score by multiplying the
+    raw score by 10x.
+
+    A score may not be available for all authorizations, and where it is not, this
+    field will be set to null.
+    """
+
+    pos: Pos
+
     result: Literal[
-        "ACCOUNT_STATE_TRANSACTION",
         "APPROVED",
         "BANK_CONNECTION_ERROR",
         "BANK_NOT_VERIFIED",
         "CARD_CLOSED",
         "CARD_PAUSED",
+        "DECLINED",
         "FRAUD_ADVICE",
-        "GLOBAL_MONTHLY_LIMIT",
-        "GLOBAL_TRANSACTION_LIMIT",
-        "GLOBAL_WEEKLY_LIMIT",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
         "INSUFFICIENT_FUNDS",
@@ -438,7 +564,7 @@ class Transaction(BaseModel):
     acquirer fees. This may change over time.
     """
 
-    status: Literal["BOUNCED", "DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
+    status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
     """Status types:
 
     - `DECLINED` - The transaction was declined.
@@ -448,5 +574,7 @@ class Transaction(BaseModel):
     - `SETTLED` - The transaction is complete.
     - `VOIDED` - The merchant has voided the previously pending authorization.
     """
+
+    token_info: TokenInfo
 
     cardholder_authentication: Optional[CardholderAuthentication] = None
