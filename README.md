@@ -13,6 +13,7 @@ The REST API documentation can be found [on docs.lithic.com](https://docs.lithic
 ## Installation
 
 ```sh
+# install from PyPI
 pip install lithic
 ```
 
