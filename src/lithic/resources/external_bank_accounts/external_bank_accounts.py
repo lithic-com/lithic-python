@@ -23,7 +23,11 @@ from ...types import (
     external_bank_account_update_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import required_args, maybe_transform
+from ..._utils import (
+    required_args,
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -554,7 +558,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
     ) -> ExternalBankAccountCreateResponse:
         return await self._post(
             "/external_bank_accounts",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "account_number": account_number,
                     "country": country,
@@ -659,7 +663,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             )
         return await self._patch(
             f"/external_bank_accounts/{external_bank_account_token}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "address": address,
                     "company_id": company_id,

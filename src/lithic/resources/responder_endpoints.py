@@ -15,7 +15,10 @@ from ..types import (
     responder_endpoint_check_status_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -194,7 +197,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
         """
         return await self._post(
             "/responder_endpoints",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "type": type,
                     "url": url,
@@ -239,7 +242,9 @@ class AsyncResponderEndpoints(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"type": type}, responder_endpoint_delete_params.ResponderEndpointDeleteParams),
+                query=await async_maybe_transform(
+                    {"type": type}, responder_endpoint_delete_params.ResponderEndpointDeleteParams
+                ),
             ),
             cast_to=NoneType,
         )
@@ -276,7 +281,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {"type": type}, responder_endpoint_check_status_params.ResponderEndpointCheckStatusParams
                 ),
             ),

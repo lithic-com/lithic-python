@@ -11,7 +11,10 @@ import httpx
 from ... import _legacy_response
 from ...types import Account, AccountSpendLimits, account_list_params, account_update_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -354,7 +357,7 @@ class AsyncAccounts(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._patch(
             f"/accounts/{account_token}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "daily_spend_limit": daily_spend_limit,
                     "lifetime_spend_limit": lifetime_spend_limit,

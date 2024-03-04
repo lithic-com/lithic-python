@@ -11,7 +11,10 @@ import httpx
 from ... import _legacy_response
 from ...types import MessageAttempt, EventSubscription
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -699,7 +702,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         """
         return await self._post(
             "/event_subscriptions",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "url": url,
                     "description": description,
@@ -812,7 +815,7 @@ class AsyncSubscriptions(AsyncAPIResource):
             )
         return await self._patch(
             f"/event_subscriptions/{event_subscription_token}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "url": url,
                     "description": description,
@@ -1027,7 +1030,7 @@ class AsyncSubscriptions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "begin": begin,
                         "end": end,
@@ -1085,7 +1088,7 @@ class AsyncSubscriptions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "begin": begin,
                         "end": end,
@@ -1219,7 +1222,7 @@ class AsyncSubscriptions(AsyncAPIResource):
             )
         return await self._post(
             f"/simulate/event_subscriptions/{event_subscription_token}/send_example",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {"event_type": event_type},
                 subscription_send_simulated_example_params.SubscriptionSendSimulatedExampleParams,
             ),
