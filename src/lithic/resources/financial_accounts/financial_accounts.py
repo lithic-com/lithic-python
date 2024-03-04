@@ -14,7 +14,10 @@ from ...types import (
     financial_account_update_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .balances import (
     Balances,
     AsyncBalances,
@@ -287,7 +290,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         """
         return await self._post(
             "/financial_accounts",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "nickname": nickname,
                     "type": type,
@@ -366,7 +369,9 @@ class AsyncFinancialAccounts(AsyncAPIResource):
             )
         return await self._patch(
             f"/financial_accounts/{financial_account_token}",
-            body=maybe_transform({"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams),
+            body=await async_maybe_transform(
+                {"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

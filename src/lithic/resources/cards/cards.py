@@ -31,7 +31,11 @@ from ...types import (
     card_search_by_pan_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform, strip_not_given
+from ..._utils import (
+    maybe_transform,
+    strip_not_given,
+    async_maybe_transform,
+)
 from .balances import (
     Balances,
     AsyncBalances,
@@ -1089,7 +1093,7 @@ class AsyncCards(AsyncAPIResource):
         """
         return await self._post(
             "/cards",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "type": type,
                     "account_token": account_token,
@@ -1233,7 +1237,7 @@ class AsyncCards(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._patch(
             f"/cards/{card_token}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "auth_rule_token": auth_rule_token,
                     "digital_card_art_token": digital_card_art_token,
@@ -1383,7 +1387,7 @@ class AsyncCards(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "embed_request": embed_request,
                         "hmac": hmac,
@@ -1556,7 +1560,7 @@ class AsyncCards(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
             f"/cards/{card_token}/provision",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "certificate": certificate,
                     "digital_wallet": digital_wallet,
@@ -1626,7 +1630,7 @@ class AsyncCards(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
             f"/cards/{card_token}/reissue",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "carrier": carrier,
                     "product_id": product_id,
@@ -1704,7 +1708,7 @@ class AsyncCards(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
             f"/cards/{card_token}/renew",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "shipping_address": shipping_address,
                     "carrier": carrier,
@@ -1789,7 +1793,7 @@ class AsyncCards(AsyncAPIResource):
         """
         return await self._post(
             "/cards/search_by_pan",
-            body=maybe_transform({"pan": pan}, card_search_by_pan_params.CardSearchByPanParams),
+            body=await async_maybe_transform({"pan": pan}, card_search_by_pan_params.CardSearchByPanParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

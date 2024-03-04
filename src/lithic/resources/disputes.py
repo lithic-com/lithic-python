@@ -28,7 +28,10 @@ from .._types import (
     NotGiven,
     FileTypes,
 )
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -609,7 +612,7 @@ class AsyncDisputes(AsyncAPIResource):
         """
         return await self._post(
             "/disputes",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "amount": amount,
                     "reason": reason,
@@ -714,7 +717,7 @@ class AsyncDisputes(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._patch(
             f"/disputes/{dispute_token}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "amount": amount,
                     "customer_filed_date": customer_filed_date,
@@ -917,7 +920,7 @@ class AsyncDisputes(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._post(
             f"/disputes/{dispute_token}/evidences",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {"filename": filename}, dispute_initiate_evidence_upload_params.DisputeInitiateEvidenceUploadParams
             ),
             options=make_request_options(
