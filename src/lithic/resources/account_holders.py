@@ -22,7 +22,11 @@ from ..types import (
     account_holder_upload_document_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import required_args, maybe_transform
+from .._utils import (
+    required_args,
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -958,7 +962,7 @@ class AsyncAccountHolders(AsyncAPIResource):
     ) -> AccountHolderCreateResponse:
         return await self._post(
             "/account_holders",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "beneficial_owner_entities": beneficial_owner_entities,
                     "beneficial_owner_individuals": beneficial_owner_individuals,
@@ -1068,7 +1072,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             )
         return await self._patch(
             f"/account_holders/{account_holder_token}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "business_account_token": business_account_token,
                     "email": email,
@@ -1236,7 +1240,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             )
         return await self._post(
             f"/account_holders/{account_holder_token}/resubmit",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "individual": individual,
                     "tos_timestamp": tos_timestamp,
@@ -1350,7 +1354,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             )
         return await self._post(
             f"/account_holders/{account_holder_token}/documents",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {"document_type": document_type},
                 account_holder_upload_document_params.AccountHolderUploadDocumentParams,
             ),

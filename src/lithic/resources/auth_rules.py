@@ -18,7 +18,10 @@ from ..types import (
     auth_rule_update_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -426,7 +429,7 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return await self._post(
             "/auth_rules",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
                     "allowed_countries": allowed_countries,
@@ -525,7 +528,7 @@ class AsyncAuthRules(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._put(
             f"/auth_rules/{auth_rule_token}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "allowed_countries": allowed_countries,
                     "allowed_mcc": allowed_mcc,
@@ -633,7 +636,7 @@ class AsyncAuthRules(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._post(
             f"/auth_rules/{auth_rule_token}/apply",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
                     "card_tokens": card_tokens,
@@ -684,7 +687,7 @@ class AsyncAuthRules(AsyncAPIResource):
         """
         return await self._delete(
             "/auth_rules/remove",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
                     "card_tokens": card_tokens,

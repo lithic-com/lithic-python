@@ -21,7 +21,10 @@ from ..types import (
     payment_simulate_release_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -353,7 +356,7 @@ class AsyncPayments(AsyncAPIResource):
         """
         return await self._post(
             "/payments",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "amount": amount,
                     "external_bank_account_token": external_bank_account_token,
@@ -533,7 +536,7 @@ class AsyncPayments(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/payments/release",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {"payment_token": payment_token}, payment_simulate_release_params.PaymentSimulateReleaseParams
             ),
             options=make_request_options(
@@ -568,7 +571,7 @@ class AsyncPayments(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/payments/return",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "payment_token": payment_token,
                     "return_reason_code": return_reason_code,

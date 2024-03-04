@@ -28,7 +28,10 @@ from ..types import (
     transaction_simulate_credit_authorization_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -780,7 +783,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/authorize",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "amount": amount,
                     "descriptor": descriptor,
@@ -833,7 +836,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/authorization_advice",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "token": token,
                     "amount": amount,
@@ -887,7 +890,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/clearing",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "token": token,
                     "amount": amount,
@@ -946,7 +949,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/credit_authorization_advice",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "amount": amount,
                     "descriptor": descriptor,
@@ -997,7 +1000,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/return",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "amount": amount,
                     "descriptor": descriptor,
@@ -1040,7 +1043,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/return_reversal",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {"token": token}, transaction_simulate_return_reversal_params.TransactionSimulateReturnReversalParams
             ),
             options=make_request_options(
@@ -1092,7 +1095,7 @@ class AsyncTransactions(AsyncAPIResource):
         """
         return await self._post(
             "/simulate/void",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "token": token,
                     "amount": amount,
