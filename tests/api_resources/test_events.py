@@ -146,13 +146,6 @@ class TestEvents:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
-    def test_method_resend(self, client: Lithic) -> None:
-        client.events.resend(
-            "string",
-            event_subscription_token="string",
-        )
-
 
 class TestAsyncEvents:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -283,10 +276,3 @@ class TestAsyncEvents:
             await async_client.events.with_raw_response.list_attempts(
                 "",
             )
-
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
-    async def test_method_resend(self, async_client: AsyncLithic) -> None:
-        await async_client.events.resend(
-            "string",
-            event_subscription_token="string",
-        )
