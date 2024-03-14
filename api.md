@@ -150,8 +150,6 @@ Methods:
 - <code title="post /cards/{card_token}/renew">client.cards.<a href="./src/lithic/resources/cards/cards.py">renew</a>(card_token, \*\*<a href="src/lithic/types/card_renew_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /cards/{card_token}/spend_limits">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_spend_limits</a>(card_token) -> <a href="./src/lithic/types/card_spend_limits.py">CardSpendLimits</a></code>
 - <code title="post /cards/search_by_pan">client.cards.<a href="./src/lithic/resources/cards/cards.py">search_by_pan</a>(\*\*<a href="src/lithic/types/card_search_by_pan_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
-- <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
-- <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
 
 ## AggregateBalances
 
@@ -221,7 +219,6 @@ Methods:
 - <code title="post /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">initiate_evidence_upload</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_initiate_evidence_upload_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="get /disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">list_evidences</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_list_evidences_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">SyncCursorPage[DisputeEvidence]</a></code>
 - <code title="get /disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(evidence_token, \*, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
-- <code>client.disputes.<a href="./src/lithic/resources/disputes.py">upload_evidence</a>(\*args) -> None</code>
 
 # Events
 
@@ -236,7 +233,6 @@ Methods:
 - <code title="get /events/{event_token}">client.events.<a href="./src/lithic/resources/events/events.py">retrieve</a>(event_token) -> <a href="./src/lithic/types/event.py">Event</a></code>
 - <code title="get /events">client.events.<a href="./src/lithic/resources/events/events.py">list</a>(\*\*<a href="src/lithic/types/event_list_params.py">params</a>) -> <a href="./src/lithic/types/event.py">SyncCursorPage[Event]</a></code>
 - <code title="get /events/{event_token}/attempts">client.events.<a href="./src/lithic/resources/events/events.py">list_attempts</a>(event_token, \*\*<a href="src/lithic/types/event_list_attempts_params.py">params</a>) -> <a href="./src/lithic/types/message_attempt.py">SyncCursorPage[MessageAttempt]</a></code>
-- <code>client.events.<a href="./src/lithic/resources/events/events.py">resend</a>(\*args) -> None</code>
 
 ## Subscriptions
 
@@ -355,13 +351,6 @@ Methods:
 - <code title="post /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">create</a>(\*\*<a href="src/lithic/types/responder_endpoint_create_params.py">params</a>) -> <a href="./src/lithic/types/responder_endpoint_create_response.py">ResponderEndpointCreateResponse</a></code>
 - <code title="delete /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">delete</a>(\*\*<a href="src/lithic/types/responder_endpoint_delete_params.py">params</a>) -> None</code>
 - <code title="get /responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">check_status</a>(\*\*<a href="src/lithic/types/responder_endpoint_check_status_params.py">params</a>) -> <a href="./src/lithic/types/responder_endpoint_status.py">ResponderEndpointStatus</a></code>
-
-# Webhooks
-
-Methods:
-
-- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">unwrap</a>(\*args) -> object</code>
-- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">verify_signature</a>(\*args) -> None</code>
 
 # ExternalBankAccounts
 
