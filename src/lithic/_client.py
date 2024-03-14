@@ -76,7 +76,6 @@ class Lithic(SyncAPIClient):
     financial_accounts: resources.FinancialAccounts
     transactions: resources.Transactions
     responder_endpoints: resources.ResponderEndpoints
-    webhooks: resources.Webhooks
     external_bank_accounts: resources.ExternalBankAccounts
     payments: resources.Payments
     three_ds: resources.ThreeDS
@@ -194,7 +193,6 @@ class Lithic(SyncAPIClient):
         self.financial_accounts = resources.FinancialAccounts(self)
         self.transactions = resources.Transactions(self)
         self.responder_endpoints = resources.ResponderEndpoints(self)
-        self.webhooks = resources.Webhooks(self)
         self.external_bank_accounts = resources.ExternalBankAccounts(self)
         self.payments = resources.Payments(self)
         self.three_ds = resources.ThreeDS(self)
@@ -368,7 +366,6 @@ class AsyncLithic(AsyncAPIClient):
     financial_accounts: resources.AsyncFinancialAccounts
     transactions: resources.AsyncTransactions
     responder_endpoints: resources.AsyncResponderEndpoints
-    webhooks: resources.AsyncWebhooks
     external_bank_accounts: resources.AsyncExternalBankAccounts
     payments: resources.AsyncPayments
     three_ds: resources.AsyncThreeDS
@@ -486,7 +483,6 @@ class AsyncLithic(AsyncAPIClient):
         self.financial_accounts = resources.AsyncFinancialAccounts(self)
         self.transactions = resources.AsyncTransactions(self)
         self.responder_endpoints = resources.AsyncResponderEndpoints(self)
-        self.webhooks = resources.AsyncWebhooks(self)
         self.external_bank_accounts = resources.AsyncExternalBankAccounts(self)
         self.payments = resources.AsyncPayments(self)
         self.three_ds = resources.AsyncThreeDS(self)

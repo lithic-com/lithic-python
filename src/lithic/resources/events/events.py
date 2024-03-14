@@ -9,13 +9,8 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from ...types import (
-    Event,
-    MessageAttempt,
-    event_list_params,
-    event_list_attempts_params,
-)
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...types import Event, MessageAttempt, event_list_params, event_list_attempts_params
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -244,22 +239,6 @@ class Events(SyncAPIResource):
             model=MessageAttempt,
         )
 
-    def resend(
-        self,
-        event_token: str,
-        *,
-        event_subscription_token: str,
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-    ) -> None:
-        """Resend an event to an event subscription."""
-        self._post(
-            f"/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
-            cast_to=NoneType,
-        )
-
 
 class AsyncEvents(AsyncAPIResource):
     @cached_property
@@ -466,22 +445,6 @@ class AsyncEvents(AsyncAPIResource):
                 ),
             ),
             model=MessageAttempt,
-        )
-
-    async def resend(
-        self,
-        event_token: str,
-        *,
-        event_subscription_token: str,
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-    ) -> None:
-        """Resend an event to an event subscription."""
-        await self._post(
-            f"/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
-            cast_to=NoneType,
         )
 
 
