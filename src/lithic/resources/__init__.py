@@ -64,6 +64,7 @@ from .three_ds import (
     ThreeDSWithStreamingResponse,
     AsyncThreeDSWithStreamingResponse,
 )
+from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import (
     AuthRules,
     AsyncAuthRules,
@@ -254,6 +255,8 @@ __all__ = [
     "AsyncResponderEndpointsWithRawResponse",
     "ResponderEndpointsWithStreamingResponse",
     "AsyncResponderEndpointsWithStreamingResponse",
+    "Webhooks",
+    "AsyncWebhooks",
     "ExternalBankAccounts",
     "AsyncExternalBankAccounts",
     "ExternalBankAccountsWithRawResponse",

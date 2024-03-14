@@ -38,6 +38,7 @@ from .balance_list_params import BalanceListParams as BalanceListParams
 from .card_embed_response import CardEmbedResponse as CardEmbedResponse
 from .card_reissue_params import CardReissueParams as CardReissueParams
 from .dispute_list_params import DisputeListParams as DisputeListParams
+from .event_resend_params import EventResendParams as EventResendParams
 from .payment_list_params import PaymentListParams as PaymentListParams
 from .tokenization_secret import TokenizationSecret as TokenizationSecret
 from .verification_method import VerificationMethod as VerificationMethod
@@ -62,9 +63,11 @@ from .transaction_list_params import TransactionListParams as TransactionListPar
 from .card_program_list_params import CardProgramListParams as CardProgramListParams
 from .tokenization_list_params import TokenizationListParams as TokenizationListParams
 from .auth_rule_remove_response import AuthRuleRemoveResponse as AuthRuleRemoveResponse
+from .card_get_embed_url_params import CardGetEmbedURLParams as CardGetEmbedURLParams
 from .card_search_by_pan_params import CardSearchByPanParams as CardSearchByPanParams
 from .responder_endpoint_status import ResponderEndpointStatus as ResponderEndpointStatus
 from .account_holder_list_params import AccountHolderListParams as AccountHolderListParams
+from .card_get_embed_html_params import CardGetEmbedHTMLParams as CardGetEmbedHTMLParams
 from .event_list_attempts_params import EventListAttemptsParams as EventListAttemptsParams
 from .settlement_summary_details import SettlementSummaryDetails as SettlementSummaryDetails
 from .auth_rule_retrieve_response import AuthRuleRetrieveResponse as AuthRuleRetrieveResponse
