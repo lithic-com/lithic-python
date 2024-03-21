@@ -82,12 +82,14 @@ class Account(BaseModel):
     feature is disabled.
     """
 
-    state: Literal["ACTIVE", "PAUSED"]
+    state: Literal["ACTIVE", "PAUSED", "CLOSED"]
     """Account state:
 
     - `ACTIVE` - Account is able to transact and create new cards.
     - `PAUSED` - Account will not be able to transact or create new cards. It can be
-      set back to `ACTIVE`.
+      set back to `ACTIVE`. `CLOSED` - Account will not be able to transact or
+      create new cards. `CLOSED` cards are also unable to be transitioned to
+      `ACTIVE` or `PAUSED` states.
     """
 
     account_holder: Optional[AccountHolder] = None
