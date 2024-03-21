@@ -21,6 +21,20 @@ class CardProvisionParams(TypedDict, total=False):
     wallet.
     """
 
+    client_device_id: str
+    """
+    Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
+    card is on the Visa network. Stable device identification set by the wallet
+    provider.
+    """
+
+    client_wallet_account_id: str
+    """
+    Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
+    card is on the Visa network. Consumer ID that identifies the wallet account
+    holder entity.
+    """
+
     digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"]
     """Name of digital wallet provider."""
 

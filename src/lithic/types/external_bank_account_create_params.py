@@ -50,6 +50,9 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
 
     doing_business_as: str
 
+    financial_account_token: str
+    """The financial account token of the operating account used to verify the account"""
+
     name: str
 
     user_defined_id: str

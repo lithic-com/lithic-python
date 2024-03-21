@@ -33,8 +33,12 @@ class SubscriptionUpdateParams(TypedDict, total=False):
             "digital_wallet.tokenization_two_factor_authentication_code",
             "dispute.updated",
             "dispute_evidence.upload_failed",
+            "external_bank_account.created",
+            "external_bank_account.updated",
+            "financial_account.created",
             "payment_transaction.created",
             "payment_transaction.updated",
+            "statements.created",
             "three_ds_authentication.created",
             "transfer_transaction.created",
         ]

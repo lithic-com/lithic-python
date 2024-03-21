@@ -78,6 +78,7 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -96,6 +97,8 @@ class ExternalBankAccounts(SyncAPIResource):
               transactions if enabled via Auth Rules.
 
           dob: Date of Birth of the Individual that owns the external bank account
+
+          financial_account_token: The financial account token of the operating account used to verify the account
 
           verification_enforcement: Indicates whether verification was enforced for a given association record. For
               MICRO_DEPOSIT, option to disable verification if the external bank account has
@@ -177,6 +180,7 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -205,6 +209,7 @@ class ExternalBankAccounts(SyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
+                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
@@ -446,6 +451,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -464,6 +470,8 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
               transactions if enabled via Auth Rules.
 
           dob: Date of Birth of the Individual that owns the external bank account
+
+          financial_account_token: The financial account token of the operating account used to verify the account
 
           verification_enforcement: Indicates whether verification was enforced for a given association record. For
               MICRO_DEPOSIT, option to disable verification if the external bank account has
@@ -545,6 +553,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -573,6 +582,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
+                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
