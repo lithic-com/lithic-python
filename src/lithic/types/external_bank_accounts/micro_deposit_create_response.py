@@ -82,6 +82,9 @@ class MicroDepositCreateResponse(BaseModel):
 
     doing_business_as: Optional[str] = None
 
+    financial_account_token: Optional[str] = None
+    """The financial account token of the operating account used to verify the account"""
+
     name: Optional[str] = None
     """The nickname given to this record of External Bank Account"""
 

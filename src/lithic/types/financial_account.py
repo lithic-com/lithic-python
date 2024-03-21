@@ -25,6 +25,9 @@ class FinancialAccount(BaseModel):
     account_number: Optional[str] = None
     """Account number for your Lithic-assigned bank account number, if applicable."""
 
+    account_token: Optional[str] = None
+    """Account token of the financial account if applicable."""
+
     nickname: Optional[str] = None
     """User-defined nickname for the financial account."""
 
