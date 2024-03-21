@@ -30,12 +30,16 @@ class Event(BaseModel):
 
     type: Optional[
         Literal[
+            "ACH_EXCEEDED_THRESHOLD",
             "ACH_INSUFFICIENT_FUNDS",
+            "ACH_INVALID_ACCOUNT",
             "ACH_ORIGINATION_PENDING",
+            "ACH_ORIGINATION_PROCESSED",
             "ACH_ORIGINATION_RELEASED",
             "ACH_RECEIPT_PENDING",
             "ACH_RECEIPT_RELEASED",
             "ACH_RETURN",
+            "ACH_RETURN_PENDING",
             "AUTHORIZATION",
             "AUTHORIZATION_ADVICE",
             "AUTHORIZATION_EXPIRY",

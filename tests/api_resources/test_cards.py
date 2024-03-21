@@ -262,6 +262,8 @@ class TestCards:
         card = client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             certificate="U3RhaW5sZXNzIHJvY2tz",
+            client_device_id="string",
+            client_wallet_account_id="string",
             digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
@@ -771,6 +773,8 @@ class TestAsyncCards:
         card = await async_client.cards.provision(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             certificate="U3RhaW5sZXNzIHJvY2tz",
+            client_device_id="string",
+            client_wallet_account_id="string",
             digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
