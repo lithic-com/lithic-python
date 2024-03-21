@@ -1,5 +1,49 @@
 # Changelog
 
+## 0.40.0 (2024-03-21)
+
+Full Changelog: [v0.39.0...v0.40.0](https://github.com/lithic-com/lithic-python/compare/v0.39.0...v0.40.0)
+
+### Features
+
+* **api:** adds closed state ([#396](https://github.com/lithic-com/lithic-python/issues/396)) ([ce9d732](https://github.com/lithic-com/lithic-python/commit/ce9d732ec90e776b5eea0e77bc880d662921d639))
+* **api:** updates ([#395](https://github.com/lithic-com/lithic-python/issues/395)) ([911d3e2](https://github.com/lithic-com/lithic-python/commit/911d3e24e30e6409e68a44389b58d3be18f7053a))
+
+
+### Performance Improvements
+
+* cache TypeAdapters ([#389](https://github.com/lithic-com/lithic-python/issues/389)) ([16f35fa](https://github.com/lithic-com/lithic-python/commit/16f35fad0bc1f250028991635f39ee34c29c450a))
+
+
+### Chores
+
+* add back examples ([e0eba72](https://github.com/lithic-com/lithic-python/commit/e0eba7230c6256a2b90ea1de7a9e814f80da4398))
+* add back removed code ([36c5c4e](https://github.com/lithic-com/lithic-python/commit/36c5c4e84ee61ca9b9cae51d95c7e9bb1906eec2))
+* **client:** improve error message for invalid http_client argument ([#380](https://github.com/lithic-com/lithic-python/issues/380)) ([0ea3801](https://github.com/lithic-com/lithic-python/commit/0ea38014e414fd60fd461992b52743ce8499ba66))
+* **docs:** add back custom readme code ([23a52b2](https://github.com/lithic-com/lithic-python/commit/23a52b28bcab6293ff4b3a212dbc389026c62a08))
+* **docs:** mention install from git repo ([#377](https://github.com/lithic-com/lithic-python/issues/377)) ([8b6e48c](https://github.com/lithic-com/lithic-python/commit/8b6e48c5f72df0f8380dbde642ccb31c809c9e30))
+* **docs:** temporarily remove custom readme code ([#387](https://github.com/lithic-com/lithic-python/issues/387)) ([93530fd](https://github.com/lithic-com/lithic-python/commit/93530fdc4b004c6ec353a550b9641e37a898c1ef))
+* export NOT_GIVEN sentinel value ([#384](https://github.com/lithic-com/lithic-python/issues/384)) ([841497f](https://github.com/lithic-com/lithic-python/commit/841497faed8a1b22adf6a724eb5b7e936276974e))
+* **internal:** add core support for deserializing into number response ([#381](https://github.com/lithic-com/lithic-python/issues/381)) ([cb5e9d2](https://github.com/lithic-com/lithic-python/commit/cb5e9d27a6bacf861921e49b30cc1abee365530a))
+* **internal:** bump pyright ([#382](https://github.com/lithic-com/lithic-python/issues/382)) ([8aad846](https://github.com/lithic-com/lithic-python/commit/8aad846ffad52816d6ee55ca64aaf3b92649998d))
+* **internal:** formatting change ([#394](https://github.com/lithic-com/lithic-python/issues/394)) ([b9ede81](https://github.com/lithic-com/lithic-python/commit/b9ede81a7b936794160ece4abb9c33e6e41c0285))
+* **internal:** improve deserialisation of discriminated unions ([#385](https://github.com/lithic-com/lithic-python/issues/385)) ([9062866](https://github.com/lithic-com/lithic-python/commit/9062866fa7aa87f9f5c25c401638415ea4986a09))
+* **internal:** loosen input type for util function ([#392](https://github.com/lithic-com/lithic-python/issues/392)) ([1294d5b](https://github.com/lithic-com/lithic-python/commit/1294d5b6766a15dd5956395324dd38ded94adcb0))
+* **internal:** minor core client restructuring ([#374](https://github.com/lithic-com/lithic-python/issues/374)) ([bca5b1c](https://github.com/lithic-com/lithic-python/commit/bca5b1c9b5f65743883ca48b54de22bffd7c6560))
+* **internal:** split up transforms into sync / async ([#378](https://github.com/lithic-com/lithic-python/issues/378)) ([0cecc63](https://github.com/lithic-com/lithic-python/commit/0cecc6324700a8d1b38222ff032b5f492a0e663b))
+* **internal:** support more input types ([#379](https://github.com/lithic-com/lithic-python/issues/379)) ([0cde41d](https://github.com/lithic-com/lithic-python/commit/0cde41d7d8850d1d6bca08fdc1358241d62779de))
+* **internal:** support parsing Annotated types ([#383](https://github.com/lithic-com/lithic-python/issues/383)) ([ded4ec2](https://github.com/lithic-com/lithic-python/commit/ded4ec2ef0ea794238b1658a989701b24d53d465))
+* **internal:** update generated pragma comment ([#391](https://github.com/lithic-com/lithic-python/issues/391)) ([cac2a8b](https://github.com/lithic-com/lithic-python/commit/cac2a8b1319904b4d07a7864d426284ebd557d63))
+* temporarily remove examples for migration ([644a601](https://github.com/lithic-com/lithic-python/commit/644a601cf2c271e5e3c3aff0a5084f14b0e1fb74))
+* temporarily remove various code as part of refactor ([#388](https://github.com/lithic-com/lithic-python/issues/388)) ([306df73](https://github.com/lithic-com/lithic-python/commit/306df733bf153bf89931060cf2c5d9aa170c86ed))
+
+
+### Documentation
+
+* **contributing:** improve wording ([#376](https://github.com/lithic-com/lithic-python/issues/376)) ([ea83617](https://github.com/lithic-com/lithic-python/commit/ea836172c1533eea4008732215b72d3f8ef0065d))
+* fix typo in CONTRIBUTING.md ([#390](https://github.com/lithic-com/lithic-python/issues/390)) ([2fc74c2](https://github.com/lithic-com/lithic-python/commit/2fc74c260e3166ed92c7613f6952604b253d6607))
+* **readme:** document how to make undocumented requests ([#393](https://github.com/lithic-com/lithic-python/issues/393)) ([0fb722f](https://github.com/lithic-com/lithic-python/commit/0fb722fe212c67cdcab814ba68158c74607c94f6))
+
 ## 0.39.0 (2024-02-27)
 
 Full Changelog: [v0.38.0...v0.39.0](https://github.com/lithic-com/lithic-python/compare/v0.38.0...v0.39.0)
