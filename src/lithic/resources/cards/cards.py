@@ -538,6 +538,8 @@ class Cards(SyncAPIResource):
         card_token: str,
         *,
         certificate: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
+        client_device_id: str | NotGiven = NOT_GIVEN,
+        client_wallet_account_id: str | NotGiven = NOT_GIVEN,
         digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
         nonce: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
         nonce_signature: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
@@ -561,6 +563,14 @@ class Cards(SyncAPIResource):
               `activationData` in the response. Apple's public leaf certificate. Base64
               encoded in PEM format with headers `(-----BEGIN CERTIFICATE-----)` and trailers
               omitted. Provided by the device's wallet.
+
+          client_device_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
+              card is on the Visa network. Stable device identification set by the wallet
+              provider.
+
+          client_wallet_account_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
+              card is on the Visa network. Consumer ID that identifies the wallet account
+              holder entity.
 
           digital_wallet: Name of digital wallet provider.
 
@@ -587,6 +597,8 @@ class Cards(SyncAPIResource):
             body=maybe_transform(
                 {
                     "certificate": certificate,
+                    "client_device_id": client_device_id,
+                    "client_wallet_account_id": client_wallet_account_id,
                     "digital_wallet": digital_wallet,
                     "nonce": nonce,
                     "nonce_signature": nonce_signature,
@@ -1291,6 +1303,8 @@ class AsyncCards(AsyncAPIResource):
         card_token: str,
         *,
         certificate: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
+        client_device_id: str | NotGiven = NOT_GIVEN,
+        client_wallet_account_id: str | NotGiven = NOT_GIVEN,
         digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
         nonce: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
         nonce_signature: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
@@ -1314,6 +1328,14 @@ class AsyncCards(AsyncAPIResource):
               `activationData` in the response. Apple's public leaf certificate. Base64
               encoded in PEM format with headers `(-----BEGIN CERTIFICATE-----)` and trailers
               omitted. Provided by the device's wallet.
+
+          client_device_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
+              card is on the Visa network. Stable device identification set by the wallet
+              provider.
+
+          client_wallet_account_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
+              card is on the Visa network. Consumer ID that identifies the wallet account
+              holder entity.
 
           digital_wallet: Name of digital wallet provider.
 
@@ -1340,6 +1362,8 @@ class AsyncCards(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "certificate": certificate,
+                    "client_device_id": client_device_id,
+                    "client_wallet_account_id": client_wallet_account_id,
                     "digital_wallet": digital_wallet,
                     "nonce": nonce,
                     "nonce_signature": nonce_signature,
