@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 from datetime import datetime
 
 from .._models import BaseModel
@@ -16,7 +16,7 @@ class SettlementReport(BaseModel):
     currency: str
     """Three-digit alphabetic ISO 4217 code."""
 
-    details: List[Optional[SettlementSummaryDetails]]
+    details: List[SettlementSummaryDetails]
 
     disputes_gross_amount: int
     """The total gross amount of disputes settlements."""

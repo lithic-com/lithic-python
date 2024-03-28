@@ -27,6 +27,7 @@ class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
         "financial_account.created",
         "payment_transaction.created",
         "payment_transaction.updated",
+        "settlement_report.updated",
         "statements.created",
         "three_ds_authentication.created",
         "transfer_transaction.created",
