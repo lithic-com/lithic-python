@@ -2,7 +2,7 @@
 name = "lithic"
 version = "0.40.0"
 description = "The official Python library for the lithic API"
-readme = "README.md"
+dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
 { name = "Lithic", email = "sdk-feedback@lithic.com" },
@@ -88,7 +88,7 @@ typecheck = { chain = [
 "typecheck:mypy" = "mypy ."
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build]
@@ -98,6 +98,17 @@ include = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/lithic"]
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+# replace relative links with absolute links
+pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
+replacement = '[\1](https://github.com/lithic-com/lithic-python/tree/main/\g<2>)'
 
 [tool.black]
 line-length = 120
