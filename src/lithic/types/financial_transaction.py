@@ -144,7 +144,7 @@ class FinancialTransaction(BaseModel):
     (e.g., cents), including any acquirer fees. This may change over time.
     """
 
-    status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
+    status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "SETTLED", "VOIDED"]
     """Status types:
 
     - `DECLINED` - The card transaction was declined.
@@ -152,6 +152,7 @@ class FinancialTransaction(BaseModel):
       expiration time.
     - `PENDING` - Authorization is pending completion from the merchant or pending
       release from ACH hold period
+    - `RETURNED` - The financial transaction has been returned.
     - `SETTLED` - The financial transaction is completed.
     - `VOIDED` - The merchant has voided the previously pending card authorization.
     """
