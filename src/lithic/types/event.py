@@ -31,6 +31,7 @@ class Event(BaseModel):
         "digital_wallet.tokenization_approval_request",
         "digital_wallet.tokenization_result",
         "digital_wallet.tokenization_two_factor_authentication_code",
+        "digital_wallet.tokenization_two_factor_authentication_code_sent",
         "dispute.updated",
         "dispute_evidence.upload_failed",
         "external_bank_account.created",
@@ -64,6 +65,9 @@ class Event(BaseModel):
     - `digital_wallet.tokenization_two_factor_authentication_code` - A code to be
       passed to an end user to complete digital wallet authentication. See
       https://docs.lithic.com/docs/tokenization-control#digital-wallet-tokenization-auth-code.
+    - `digital_wallet.tokenization_two_factor_authentication_code_sent` -
+      Notification that a two factor authentication code for activating a digital
+      wallet has been sent to the end user.
     """
 
     payload: Dict[str, object]
