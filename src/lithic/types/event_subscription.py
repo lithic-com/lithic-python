@@ -34,6 +34,7 @@ class EventSubscription(BaseModel):
                 "digital_wallet.tokenization_approval_request",
                 "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",
+                "digital_wallet.tokenization_two_factor_authentication_code_sent",
                 "dispute.updated",
                 "dispute_evidence.upload_failed",
                 "external_bank_account.created",
