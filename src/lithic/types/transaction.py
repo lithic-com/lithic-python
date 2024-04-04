@@ -57,6 +57,7 @@ class Event(BaseModel):
             "CARD_EXPIRED",
             "CARD_EXPIRY_DATE_INCORRECT",
             "CARD_INVALID",
+            "CARD_NOT_ACTIVATED",
             "CARD_PAUSED",
             "CARD_PIN_INCORRECT",
             "CARD_RESTRICTED",
