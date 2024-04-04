@@ -453,7 +453,7 @@ class Transaction(BaseModel):
     token: str
     """Globally unique identifier."""
 
-    acquirer_fee: int
+    acquirer_fee: Optional[int] = None
     """
     Fee assessed by the merchant and paid for by the cardholder in the smallest unit
     of the currency. Will be zero if no fee is assessed. Rebates may be transmitted
@@ -473,20 +473,20 @@ class Transaction(BaseModel):
     transaction is settled.
     """
 
-    authorization_amount: int
+    authorization_amount: Optional[int] = None
     """Authorization amount (in cents) of the transaction, including any acquirer fees.
 
     This amount always represents the amount authorized for the transaction,
     unaffected by settlement.
     """
 
-    authorization_code: str
+    authorization_code: Optional[str] = None
     """
     A fixed-width 6-digit numeric identifier that can be used to identify a
     transaction with networks.
     """
 
-    avs: Avs
+    avs: Optional[Avs] = None
 
     card_token: str
     """Token for the card used in this transaction."""
@@ -499,13 +499,13 @@ class Transaction(BaseModel):
 
     merchant: Merchant
 
-    merchant_amount: int
+    merchant_amount: Optional[int] = None
     """
     Analogous to the "amount" property, but will represent the amount in the
     transaction's local currency (smallest unit), including any acquirer fees.
     """
 
-    merchant_authorization_amount: int
+    merchant_authorization_amount: Optional[int] = None
     """
     Analogous to the "authorization_amount" property, but will represent the amount
     in the transaction's local currency (smallest unit), including any acquirer
@@ -523,7 +523,7 @@ class Transaction(BaseModel):
     provider.
     """
 
-    network_risk_score: float
+    network_risk_score: Optional[int] = None
     """
     Network-provided score assessing risk level associated with a given
     authorization. Scores are on a range of 0-999, with 0 representing the lowest
@@ -535,7 +535,7 @@ class Transaction(BaseModel):
     field will be set to null.
     """
 
-    pos: Pos
+    pos: Optional[Pos] = None
 
     result: Literal[
         "APPROVED",
@@ -575,6 +575,6 @@ class Transaction(BaseModel):
     - `VOIDED` - The merchant has voided the previously pending authorization.
     """
 
-    token_info: TokenInfo
+    token_info: Optional[TokenInfo] = None
 
     cardholder_authentication: Optional[CardholderAuthentication] = None
