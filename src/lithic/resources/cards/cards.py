@@ -176,7 +176,7 @@ class Cards(SyncAPIResource):
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
               `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
 
           product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
               before use. Specifies the configuration (i.e., physical card art) that the card
@@ -1052,7 +1052,7 @@ class AsyncCards(AsyncAPIResource):
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
               `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
 
           product_id: Only applicable to cards of type `PHYSICAL`. This must be configured with Lithic
               before use. Specifies the configuration (i.e., physical card art) that the card
