@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.41.0 (2024-04-08)
+
+Full Changelog: [v0.40.0...v0.41.0](https://github.com/lithic-com/lithic-python/compare/v0.40.0...v0.41.0)
+
+### Features
+
+* **api:** add detailed result CARD_NOT_ACTIVATED ([#413](https://github.com/lithic-com/lithic-python/issues/413)) ([c0f2fc0](https://github.com/lithic-com/lithic-python/commit/c0f2fc07dde12c057a821be2ba1c0ec102011203))
+* **api:** add event type digital_wallet.tokenization_two_factor_authentication_code_sent ([#409](https://github.com/lithic-com/lithic-python/issues/409)) ([2431cc1](https://github.com/lithic-com/lithic-python/commit/2431cc1f59d269be9f8f669e918a991b21387e45))
+* **api:** add params spend_limit and spend_velocity ([#412](https://github.com/lithic-com/lithic-python/issues/412)) ([40d9cce](https://github.com/lithic-com/lithic-python/commit/40d9ccec81edd8eb71d53c6e8ee131991fc0385f))
+* **api:** add settlement_report.updated enum ([#402](https://github.com/lithic-com/lithic-python/issues/402)) ([49b6566](https://github.com/lithic-com/lithic-python/commit/49b656605a41fbeb328c1b5bbee6b0a2c3e32540))
+* **api:** update financial transaction status enum ([#405](https://github.com/lithic-com/lithic-python/issues/405)) ([5978972](https://github.com/lithic-com/lithic-python/commit/5978972745d8cc0ee045beb346f85a24def68a00))
+* **api:** update link to encrypted PIN block docs ([#414](https://github.com/lithic-com/lithic-python/issues/414)) ([aefe04e](https://github.com/lithic-com/lithic-python/commit/aefe04e0a3e574bd9dc41097df9c3cd593793f41))
+* **api:** updates ([#403](https://github.com/lithic-com/lithic-python/issues/403)) ([a1f9274](https://github.com/lithic-com/lithic-python/commit/a1f9274e360c09fe9aedf3b91dabbc1dbfad8348))
+* **client:** add DefaultHttpxClient and DefaultAsyncHttpxClient ([#415](https://github.com/lithic-com/lithic-python/issues/415)) ([d264e68](https://github.com/lithic-com/lithic-python/commit/d264e6833705cef6bba38eb704a53545e4fac3ad))
+* **package:** export default constants ([#404](https://github.com/lithic-com/lithic-python/issues/404)) ([aadd2c5](https://github.com/lithic-com/lithic-python/commit/aadd2c558ee1823c5e41218712a25c627bf1f8d3))
+
+
+### Bug Fixes
+
+* **project:** use absolute github links on PyPi ([#406](https://github.com/lithic-com/lithic-python/issues/406)) ([cf279ff](https://github.com/lithic-com/lithic-python/commit/cf279ffc9f52062a1011e1f627c25f1e0af44a95))
+* revert regression with 3.7 support ([#401](https://github.com/lithic-com/lithic-python/issues/401)) ([ca50938](https://github.com/lithic-com/lithic-python/commit/ca509385a92c741d1751582d9d252961de85edcd))
+
+
+### Chores
+
+* **client:** validate that max_retries is not None ([#408](https://github.com/lithic-com/lithic-python/issues/408)) ([a073786](https://github.com/lithic-com/lithic-python/commit/a073786f15200692bde119fa4c64403fddd40fa4))
+* **internal:** defer model build for import latency ([#410](https://github.com/lithic-com/lithic-python/issues/410)) ([48a5b9a](https://github.com/lithic-com/lithic-python/commit/48a5b9a23841d68342e9119663a4f088d2fa9beb))
+* **internal:** streaming updates ([#411](https://github.com/lithic-com/lithic-python/issues/411)) ([42944ef](https://github.com/lithic-com/lithic-python/commit/42944ef792adce6767e7da50dcf596b45a857412))
+
+
+### Documentation
+
+* **contributing:** fix typo ([#397](https://github.com/lithic-com/lithic-python/issues/397)) ([f6ecbee](https://github.com/lithic-com/lithic-python/commit/f6ecbee5c10edec9e1fb5391ce3a22f0fd95d4ad))
+
 ## 0.40.0 (2024-03-21)
 
 Full Changelog: [v0.39.0...v0.40.0](https://github.com/lithic-com/lithic-python/compare/v0.39.0...v0.40.0)
