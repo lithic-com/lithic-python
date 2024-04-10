@@ -32,6 +32,7 @@ class Event(BaseModel):
         "digital_wallet.tokenization_result",
         "digital_wallet.tokenization_two_factor_authentication_code",
         "digital_wallet.tokenization_two_factor_authentication_code_sent",
+        "digital_wallet.tokenization_updated",
         "dispute.updated",
         "dispute_evidence.upload_failed",
         "external_bank_account.created",
@@ -68,6 +69,8 @@ class Event(BaseModel):
     - `digital_wallet.tokenization_two_factor_authentication_code_sent` -
       Notification that a two factor authentication code for activating a digital
       wallet has been sent to the end user.
+    - `digital_wallet.tokenization_updated` - Notification that a digital wallet
+      tokenization's status has changed.
     """
 
     payload: Dict[str, object]
