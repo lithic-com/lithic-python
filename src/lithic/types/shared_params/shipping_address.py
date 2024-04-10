@@ -20,13 +20,15 @@ class ShippingAddress(TypedDict, total=False):
     first_name: Required[str]
     """Customer's first name.
 
-    This will be the first name printed on the physical card.
+    This will be the first name printed on the physical card. The combined length of
+    `first_name` and `last_name` may not exceed 25 characters.
     """
 
     last_name: Required[str]
     """Customer's surname (family name).
 
-    This will be the last name printed on the physical card.
+    This will be the last name printed on the physical card. The combined length of
+    `first_name` and `last_name` may not exceed 25 characters.
     """
 
     postal_code: Required[str]
