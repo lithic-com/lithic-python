@@ -48,7 +48,7 @@ Repository = "https://github.com/lithic-com/lithic-python"
 managed = true
 # version pins are in requirements-dev.lock
 dev-dependencies = [
-    "pyright",
+    "pyright>=1.1.359",
     "mypy",
     "respx",
     "pytest",
