@@ -9,14 +9,12 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    AccountHolder,
-    AccountHolderDocument,
-    AccountHolderCreateResponse,
-    AccountHolderUpdateResponse,
-    AccountHolderListDocumentsResponse,
-)
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
+from lithic.types.account_holder import AccountHolder
+from lithic.types.account_holder_document import AccountHolderDocument
+from lithic.types.account_holder_create_response import AccountHolderCreateResponse
+from lithic.types.account_holder_update_response import AccountHolderUpdateResponse
+from lithic.types.account_holder_list_documents_response import AccountHolderListDocumentsResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

@@ -10,11 +10,6 @@ import httpx
 
 from .. import _legacy_response
 from ..types import (
-    Payment,
-    PaymentRetryResponse,
-    PaymentCreateResponse,
-    PaymentSimulateReturnResponse,
-    PaymentSimulateReleaseResponse,
     payment_list_params,
     payment_create_params,
     payment_simulate_return_params,
@@ -33,6 +28,11 @@ from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ..types.payment import Payment
+from ..types.payment_retry_response import PaymentRetryResponse
+from ..types.payment_create_response import PaymentCreateResponse
+from ..types.payment_simulate_return_response import PaymentSimulateReturnResponse
+from ..types.payment_simulate_release_response import PaymentSimulateReleaseResponse
 
 __all__ = ["Payments", "AsyncPayments"]
 

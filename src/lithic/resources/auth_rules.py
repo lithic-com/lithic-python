@@ -8,9 +8,6 @@ import httpx
 
 from .. import _legacy_response
 from ..types import (
-    AuthRule,
-    AuthRuleRemoveResponse,
-    AuthRuleRetrieveResponse,
     auth_rule_list_params,
     auth_rule_apply_params,
     auth_rule_create_params,
@@ -30,6 +27,9 @@ from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ..types.auth_rule import AuthRule
+from ..types.auth_rule_remove_response import AuthRuleRemoveResponse
+from ..types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
 
 __all__ = ["AuthRules", "AsyncAuthRules"]
 

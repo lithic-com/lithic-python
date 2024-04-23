@@ -18,7 +18,8 @@ from ..._response import to_streamed_response_wrapper, async_to_streamed_respons
 from ..._base_client import (
     make_request_options,
 )
-from ...types.external_bank_accounts import MicroDepositCreateResponse, micro_deposit_create_params
+from ...types.external_bank_accounts import micro_deposit_create_params
+from ...types.external_bank_accounts.micro_deposit_create_response import MicroDepositCreateResponse
 
 __all__ = ["MicroDeposits", "AsyncMicroDeposits"]
 

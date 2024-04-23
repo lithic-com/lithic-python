@@ -9,7 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from ...types import Account, AccountSpendLimits, account_list_params, account_update_params
+from ...types import account_list_params, account_update_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -23,6 +23,7 @@ from ..._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ...types.account import Account
 from .credit_configurations import (
     CreditConfigurations,
     AsyncCreditConfigurations,
@@ -31,6 +32,7 @@ from .credit_configurations import (
     CreditConfigurationsWithStreamingResponse,
     AsyncCreditConfigurationsWithStreamingResponse,
 )
+from ...types.account_spend_limits import AccountSpendLimits
 
 __all__ = ["Accounts", "AsyncAccounts"]
 

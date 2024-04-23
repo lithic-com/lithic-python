@@ -9,12 +9,10 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    AuthRule,
-    AuthRuleRemoveResponse,
-    AuthRuleRetrieveResponse,
-)
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
+from lithic.types.auth_rule import AuthRule
+from lithic.types.auth_rule_remove_response import AuthRuleRemoveResponse
+from lithic.types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

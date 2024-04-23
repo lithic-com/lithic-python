@@ -9,7 +9,6 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from ...types import MessageAttempt, EventSubscription
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -24,7 +23,6 @@ from ..._base_client import (
     make_request_options,
 )
 from ...types.events import (
-    SubscriptionRetrieveSecretResponse,
     subscription_list_params,
     subscription_create_params,
     subscription_update_params,
@@ -33,6 +31,9 @@ from ...types.events import (
     subscription_replay_missing_params,
     subscription_send_simulated_example_params,
 )
+from ...types.message_attempt import MessageAttempt
+from ...types.event_subscription import EventSubscription
+from ...types.events.subscription_retrieve_secret_response import SubscriptionRetrieveSecretResponse
 
 __all__ = ["Subscriptions", "AsyncSubscriptions"]
 

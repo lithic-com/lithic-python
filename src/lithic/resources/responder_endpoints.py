@@ -8,8 +8,6 @@ import httpx
 
 from .. import _legacy_response
 from ..types import (
-    ResponderEndpointStatus,
-    ResponderEndpointCreateResponse,
     responder_endpoint_create_params,
     responder_endpoint_delete_params,
     responder_endpoint_check_status_params,
@@ -25,6 +23,8 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from .._base_client import (
     make_request_options,
 )
+from ..types.responder_endpoint_status import ResponderEndpointStatus
+from ..types.responder_endpoint_create_response import ResponderEndpointCreateResponse
 
 __all__ = ["ResponderEndpoints", "AsyncResponderEndpoints"]
 

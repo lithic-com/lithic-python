@@ -10,10 +10,7 @@ import httpx
 
 from ... import _legacy_response
 from ...types import (
-    Card,
-    CardSpendLimits,
     SpendLimitDuration,
-    CardProvisionResponse,
     shared_params,
     card_list_params,
     card_embed_params,
@@ -48,6 +45,7 @@ from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
+from ...types.card import Card
 from ..._base_client import (
     AsyncPaginator,
     make_request_options,
@@ -68,6 +66,9 @@ from .financial_transactions import (
     FinancialTransactionsWithStreamingResponse,
     AsyncFinancialTransactionsWithStreamingResponse,
 )
+from ...types.card_spend_limits import CardSpendLimits
+from ...types.spend_limit_duration import SpendLimitDuration
+from ...types.card_provision_response import CardProvisionResponse
 
 __all__ = ["Cards", "AsyncCards"]
 

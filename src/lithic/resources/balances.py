@@ -9,7 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from .. import _legacy_response
-from ..types import Balance, balance_list_params
+from ..types import balance_list_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
@@ -20,6 +20,7 @@ from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ..types.balance import Balance
 
 __all__ = ["Balances", "AsyncBalances"]
 

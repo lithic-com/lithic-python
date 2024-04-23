@@ -15,7 +15,8 @@ from ...._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from ....types.financial_accounts.statements import LineItemListResponse, line_item_list_params
+from ....types.financial_accounts.statements import line_item_list_params
+from ....types.financial_accounts.statements.line_item_list_response import LineItemListResponse
 
 __all__ = ["LineItems", "AsyncLineItems"]
 

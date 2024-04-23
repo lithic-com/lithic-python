@@ -10,14 +10,6 @@ import httpx
 
 from .. import _legacy_response
 from ..types import (
-    Transaction,
-    TransactionSimulateVoidResponse,
-    TransactionSimulateReturnResponse,
-    TransactionSimulateClearingResponse,
-    TransactionSimulateAuthorizationResponse,
-    TransactionSimulateReturnReversalResponse,
-    TransactionSimulateAuthorizationAdviceResponse,
-    TransactionSimulateCreditAuthorizationResponse,
     transaction_list_params,
     transaction_simulate_void_params,
     transaction_simulate_return_params,
@@ -40,6 +32,14 @@ from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ..types.transaction import Transaction
+from ..types.transaction_simulate_void_response import TransactionSimulateVoidResponse
+from ..types.transaction_simulate_return_response import TransactionSimulateReturnResponse
+from ..types.transaction_simulate_clearing_response import TransactionSimulateClearingResponse
+from ..types.transaction_simulate_authorization_response import TransactionSimulateAuthorizationResponse
+from ..types.transaction_simulate_return_reversal_response import TransactionSimulateReturnReversalResponse
+from ..types.transaction_simulate_authorization_advice_response import TransactionSimulateAuthorizationAdviceResponse
+from ..types.transaction_simulate_credit_authorization_response import TransactionSimulateCreditAuthorizationResponse
 
 __all__ = ["Transactions", "AsyncTransactions"]
 

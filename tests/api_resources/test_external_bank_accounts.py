@@ -9,15 +9,15 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    ExternalBankAccountListResponse,
-    ExternalBankAccountCreateResponse,
-    ExternalBankAccountUpdateResponse,
-    ExternalBankAccountRetrieveResponse,
-    ExternalBankAccountRetryMicroDepositsResponse,
-)
 from lithic._utils import parse_date
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
+from lithic.types.external_bank_account_list_response import ExternalBankAccountListResponse
+from lithic.types.external_bank_account_create_response import ExternalBankAccountCreateResponse
+from lithic.types.external_bank_account_update_response import ExternalBankAccountUpdateResponse
+from lithic.types.external_bank_account_retrieve_response import ExternalBankAccountRetrieveResponse
+from lithic.types.external_bank_account_retry_micro_deposits_response import (
+    ExternalBankAccountRetryMicroDepositsResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

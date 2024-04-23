@@ -9,11 +9,6 @@ import httpx
 
 from .. import _legacy_response
 from ..types import (
-    AccountHolder,
-    AccountHolderDocument,
-    AccountHolderCreateResponse,
-    AccountHolderUpdateResponse,
-    AccountHolderListDocumentsResponse,
     shared_params,
     account_holder_list_params,
     account_holder_create_params,
@@ -35,6 +30,11 @@ from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ..types.account_holder import AccountHolder
+from ..types.account_holder_document import AccountHolderDocument
+from ..types.account_holder_create_response import AccountHolderCreateResponse
+from ..types.account_holder_update_response import AccountHolderUpdateResponse
+from ..types.account_holder_list_documents_response import AccountHolderListDocumentsResponse
 
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 
