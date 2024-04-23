@@ -5,7 +5,6 @@ from __future__ import annotations
 import httpx
 
 from .. import _legacy_response
-from ..types import AuthStreamSecret
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -13,6 +12,7 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from .._base_client import (
     make_request_options,
 )
+from ..types.auth_stream_secret import AuthStreamSecret
 
 __all__ = ["AuthStreamEnrollment", "AsyncAuthStreamEnrollment"]
 

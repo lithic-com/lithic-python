@@ -10,8 +10,6 @@ import httpx
 
 from .. import _legacy_response
 from ..types import (
-    Dispute,
-    DisputeEvidence,
     dispute_list_params,
     dispute_create_params,
     dispute_update_params,
@@ -31,6 +29,8 @@ from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ..types.dispute import Dispute
+from ..types.dispute_evidence import DisputeEvidence
 
 __all__ = ["Disputes", "AsyncDisputes"]
 

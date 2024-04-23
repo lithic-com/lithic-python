@@ -12,12 +12,6 @@ from ... import _legacy_response
 from ...types import (
     OwnerType,
     VerificationMethod,
-    ExternalBankAccountAddressParam,
-    ExternalBankAccountListResponse,
-    ExternalBankAccountCreateResponse,
-    ExternalBankAccountUpdateResponse,
-    ExternalBankAccountRetrieveResponse,
-    ExternalBankAccountRetryMicroDepositsResponse,
     external_bank_account_list_params,
     external_bank_account_create_params,
     external_bank_account_update_params,
@@ -44,6 +38,14 @@ from .micro_deposits import (
     MicroDepositsWithStreamingResponse,
     AsyncMicroDepositsWithStreamingResponse,
 )
+from ...types.owner_type import OwnerType
+from ...types.verification_method import VerificationMethod
+from ...types.external_bank_account_address_param import ExternalBankAccountAddressParam
+from ...types.external_bank_account_list_response import ExternalBankAccountListResponse
+from ...types.external_bank_account_create_response import ExternalBankAccountCreateResponse
+from ...types.external_bank_account_update_response import ExternalBankAccountUpdateResponse
+from ...types.external_bank_account_retrieve_response import ExternalBankAccountRetrieveResponse
+from ...types.external_bank_account_retry_micro_deposits_response import ExternalBankAccountRetryMicroDepositsResponse
 
 __all__ = ["ExternalBankAccounts", "AsyncExternalBankAccounts"]
 

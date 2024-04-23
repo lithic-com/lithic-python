@@ -9,10 +9,8 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types.three_ds import (
-    AuthenticationRetrieveResponse,
-    AuthenticationSimulateResponse,
-)
+from lithic.types.three_ds.authentication_retrieve_response import AuthenticationRetrieveResponse
+from lithic.types.three_ds.authentication_simulate_response import AuthenticationSimulateResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

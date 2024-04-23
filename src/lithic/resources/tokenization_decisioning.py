@@ -5,7 +5,6 @@ from __future__ import annotations
 import httpx
 
 from .. import _legacy_response
-from ..types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -13,6 +12,8 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from .._base_client import (
     make_request_options,
 )
+from ..types.tokenization_secret import TokenizationSecret
+from ..types.tokenization_decisioning_rotate_secret_response import TokenizationDecisioningRotateSecretResponse
 
 __all__ = ["TokenizationDecisioning", "AsyncTokenizationDecisioning"]
 

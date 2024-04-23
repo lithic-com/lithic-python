@@ -9,10 +9,8 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    ResponderEndpointStatus,
-    ResponderEndpointCreateResponse,
-)
+from lithic.types.responder_endpoint_status import ResponderEndpointStatus
+from lithic.types.responder_endpoint_create_response import ResponderEndpointCreateResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

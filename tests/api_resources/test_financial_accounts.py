@@ -9,10 +9,8 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    FinancialAccount,
-)
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
+from lithic.types.financial_account import FinancialAccount
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

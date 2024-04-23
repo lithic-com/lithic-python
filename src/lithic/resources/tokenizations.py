@@ -9,13 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from .. import _legacy_response
-from ..types import (
-    Tokenization,
-    TokenizationRetrieveResponse,
-    TokenizationSimulateResponse,
-    tokenization_list_params,
-    tokenization_simulate_params,
-)
+from ..types import tokenization_list_params, tokenization_simulate_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -29,6 +23,9 @@ from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ..types.tokenization import Tokenization
+from ..types.tokenization_retrieve_response import TokenizationRetrieveResponse
+from ..types.tokenization_simulate_response import TokenizationSimulateResponse
 
 __all__ = ["Tokenizations", "AsyncTokenizations"]
 
