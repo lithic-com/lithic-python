@@ -491,7 +491,7 @@ Methods:
 - <code title="get /card_programs/{card_program_token}">client.card_programs.<a href="./src/lithic/resources/card_programs.py">retrieve</a>(card_program_token) -> <a href="./src/lithic/types/card_program.py">CardProgram</a></code>
 - <code title="get /card_programs">client.card_programs.<a href="./src/lithic/resources/card_programs.py">list</a>(\*\*<a href="src/lithic/types/card_program_list_params.py">params</a>) -> <a href="./src/lithic/types/card_program.py">SyncCursorPage[CardProgram]</a></code>
 
-# DigitalCardArtResource
+# DigitalCardArt
 
 Types:
 
