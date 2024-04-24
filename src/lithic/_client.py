@@ -10,7 +10,6 @@ import httpx
 
 from . import resources, _exceptions, _legacy_response
 from ._qs import Querystring
-from .types import APIStatus
 from ._types import (
     NOT_GIVEN,
     Body,
@@ -41,6 +40,7 @@ from ._base_client import (
     AsyncHttpxClientWrapper,
     make_request_options,
 )
+from .types.api_status import APIStatus
 
 __all__ = [
     "ENVIRONMENTS",

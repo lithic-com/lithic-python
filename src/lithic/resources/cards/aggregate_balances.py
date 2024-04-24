@@ -11,11 +11,12 @@ from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
-from ...types.cards import AggregateBalanceListResponse, aggregate_balance_list_params
+from ...types.cards import aggregate_balance_list_params
 from ..._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ...types.cards.aggregate_balance_list_response import AggregateBalanceListResponse
 
 __all__ = ["AggregateBalances", "AsyncAggregateBalances"]
 

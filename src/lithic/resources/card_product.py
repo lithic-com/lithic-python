@@ -5,7 +5,6 @@ from __future__ import annotations
 import httpx
 
 from .. import _legacy_response
-from ..types import CardProductCreditDetailResponse
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -13,6 +12,7 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from .._base_client import (
     make_request_options,
 )
+from ..types.card_product_credit_detail_response import CardProductCreditDetailResponse
 
 __all__ = ["CardProduct", "AsyncCardProduct"]
 

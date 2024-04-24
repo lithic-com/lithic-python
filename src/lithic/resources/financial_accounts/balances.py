@@ -8,7 +8,6 @@ from datetime import datetime
 import httpx
 
 from ... import _legacy_response
-from ...types import Balance
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
@@ -19,6 +18,7 @@ from ..._base_client import (
     AsyncPaginator,
     make_request_options,
 )
+from ...types.balance import Balance
 from ...types.financial_accounts import balance_list_params
 
 __all__ = ["Balances", "AsyncBalances"]

@@ -16,11 +16,9 @@ from ..._response import to_streamed_response_wrapper, async_to_streamed_respons
 from ..._base_client import (
     make_request_options,
 )
-from ...types.three_ds import (
-    AuthenticationRetrieveResponse,
-    AuthenticationSimulateResponse,
-    authentication_simulate_params,
-)
+from ...types.three_ds import authentication_simulate_params
+from ...types.three_ds.authentication_retrieve_response import AuthenticationRetrieveResponse
+from ...types.three_ds.authentication_simulate_response import AuthenticationSimulateResponse
 
 __all__ = ["Authentication", "AsyncAuthentication"]
 

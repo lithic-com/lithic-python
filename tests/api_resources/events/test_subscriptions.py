@@ -9,12 +9,11 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import MessageAttempt, EventSubscription
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
-from lithic.types.events import (
-    SubscriptionRetrieveSecretResponse,
-)
+from lithic.types.message_attempt import MessageAttempt
+from lithic.types.event_subscription import EventSubscription
+from lithic.types.events.subscription_retrieve_secret_response import SubscriptionRetrieveSecretResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
