@@ -10,7 +10,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
-from lithic.types.financial_accounts.statements import LineItemListResponse
+from lithic.types.financial_accounts.statements.line_item_list_response import LineItemListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

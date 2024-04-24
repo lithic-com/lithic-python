@@ -26,7 +26,8 @@ from ...._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from ....types.financial_accounts import Statement, statement_list_params
+from ....types.financial_accounts import statement_list_params
+from ....types.financial_accounts.statement import Statement
 
 __all__ = ["Statements", "AsyncStatements"]
 

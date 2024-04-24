@@ -12,7 +12,7 @@ from ..._response import to_streamed_response_wrapper, async_to_streamed_respons
 from ..._base_client import (
     make_request_options,
 )
-from ...types.three_ds import DecisioningRetrieveSecretResponse
+from ...types.three_ds.decisioning_retrieve_secret_response import DecisioningRetrieveSecretResponse
 
 __all__ = ["Decisioning", "AsyncDecisioning"]
 

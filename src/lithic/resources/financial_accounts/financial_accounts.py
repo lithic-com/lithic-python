@@ -8,7 +8,6 @@ import httpx
 
 from ... import _legacy_response
 from ...types import (
-    FinancialAccount,
     financial_account_list_params,
     financial_account_create_params,
     financial_account_update_params,
@@ -51,6 +50,7 @@ from .financial_transactions import (
     FinancialTransactionsWithStreamingResponse,
     AsyncFinancialTransactionsWithStreamingResponse,
 )
+from ...types.financial_account import FinancialAccount
 
 __all__ = ["FinancialAccounts", "AsyncFinancialAccounts"]
 

@@ -9,15 +9,13 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    Payment,
-    PaymentRetryResponse,
-    PaymentCreateResponse,
-    PaymentSimulateReturnResponse,
-    PaymentSimulateReleaseResponse,
-)
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
+from lithic.types.payment import Payment
+from lithic.types.payment_retry_response import PaymentRetryResponse
+from lithic.types.payment_create_response import PaymentCreateResponse
+from lithic.types.payment_simulate_return_response import PaymentSimulateReturnResponse
+from lithic.types.payment_simulate_release_response import PaymentSimulateReleaseResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

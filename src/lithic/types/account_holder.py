@@ -4,8 +4,8 @@ from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from .shared import Address
 from .._models import BaseModel
+from .shared.address import Address
 
 __all__ = [
     "AccountHolder",
