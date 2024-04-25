@@ -31,6 +31,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -45,6 +46,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -62,7 +64,6 @@ class TestExternalBankAccounts:
             company_id="x",
             dob=parse_date("2019-12-27"),
             doing_business_as="string",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="x",
             user_defined_id="string",
             verification_enforcement=True,
@@ -75,6 +76,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -93,6 +95,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -314,6 +317,14 @@ class TestExternalBankAccounts:
         assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
 
     @parametrize
+    def test_method_retry_micro_deposits_with_all_params(self, client: Lithic) -> None:
+        external_bank_account = client.external_bank_accounts.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+    @parametrize
     def test_raw_response_retry_micro_deposits(self, client: Lithic) -> None:
         response = client.external_bank_accounts.with_raw_response.retry_micro_deposits(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -356,6 +367,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -370,6 +382,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -387,7 +400,6 @@ class TestAsyncExternalBankAccounts:
             company_id="x",
             dob=parse_date("2019-12-27"),
             doing_business_as="string",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="x",
             user_defined_id="string",
             verification_enforcement=True,
@@ -400,6 +412,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -418,6 +431,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
             owner_type="BUSINESS",
             routing_number="123456789",
@@ -635,6 +649,14 @@ class TestAsyncExternalBankAccounts:
     async def test_method_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.retry_micro_deposits(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_method_retry_micro_deposits_with_all_params(self, async_client: AsyncLithic) -> None:
+        external_bank_account = await async_client.external_bank_accounts.retry_micro_deposits(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
 
