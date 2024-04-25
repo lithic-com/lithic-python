@@ -25,6 +25,12 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
 
     currency: Required[str]
 
+    financial_account_token: Required[str]
+    """
+    The financial account token of the operating account, which will provide the
+    funds for micro deposits used to verify the account
+    """
+
     owner: Required[str]
 
     owner_type: Required[OwnerType]
@@ -49,9 +55,6 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     """Date of Birth of the Individual that owns the external bank account"""
 
     doing_business_as: str
-
-    financial_account_token: str
-    """The financial account token of the operating account used to verify the account"""
 
     name: str
 

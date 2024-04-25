@@ -167,9 +167,15 @@ Methods:
 
 ## Balances
 
+Types:
+
+```python
+from lithic.types.cards import BalanceListResponse
+```
+
 Methods:
 
-- <code title="get /cards/{card_token}/balances">client.cards.balances.<a href="./src/lithic/resources/cards/balances.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/balance.py">SyncSinglePage[Balance]</a></code>
+- <code title="get /cards/{card_token}/balances">client.cards.balances.<a href="./src/lithic/resources/cards/balances.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/cards/balance_list_response.py">SyncSinglePage[BalanceListResponse]</a></code>
 
 ## FinancialTransactions
 
@@ -277,9 +283,15 @@ Methods:
 
 ## Balances
 
+Types:
+
+```python
+from lithic.types.financial_accounts import BalanceListResponse
+```
+
 Methods:
 
-- <code title="get /financial_accounts/{financial_account_token}/balances">client.financial_accounts.balances.<a href="./src/lithic/resources/financial_accounts/balances.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/balance.py">SyncSinglePage[Balance]</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/balances">client.financial_accounts.balances.<a href="./src/lithic/resources/financial_accounts/balances.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/balance_list_response.py">SyncSinglePage[BalanceListResponse]</a></code>
 
 ## FinancialTransactions
 
@@ -386,7 +398,7 @@ Methods:
 - <code title="get /external_bank_accounts/{external_bank_account_token}">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retrieve</a>(external_bank_account_token) -> <a href="./src/lithic/types/external_bank_account_retrieve_response.py">ExternalBankAccountRetrieveResponse</a></code>
 - <code title="patch /external_bank_accounts/{external_bank_account_token}">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">update</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_update_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_update_response.py">ExternalBankAccountUpdateResponse</a></code>
 - <code title="get /external_bank_accounts">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">list</a>(\*\*<a href="src/lithic/types/external_bank_account_list_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_list_response.py">SyncCursorPage[ExternalBankAccountListResponse]</a></code>
-- <code title="post /external_bank_accounts/{external_bank_account_token}/retry_micro_deposits">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retry_micro_deposits</a>(external_bank_account_token) -> <a href="./src/lithic/types/external_bank_account_retry_micro_deposits_response.py">ExternalBankAccountRetryMicroDepositsResponse</a></code>
+- <code title="post /external_bank_accounts/{external_bank_account_token}/retry_micro_deposits">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retry_micro_deposits</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_retry_micro_deposits_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_retry_micro_deposits_response.py">ExternalBankAccountRetryMicroDepositsResponse</a></code>
 
 ## MicroDeposits
 

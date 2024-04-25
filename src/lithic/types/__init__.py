@@ -149,6 +149,9 @@ from .transaction_simulate_authorization_advice_params import (
 from .transaction_simulate_credit_authorization_params import (
     TransactionSimulateCreditAuthorizationParams as TransactionSimulateCreditAuthorizationParams,
 )
+from .external_bank_account_retry_micro_deposits_params import (
+    ExternalBankAccountRetryMicroDepositsParams as ExternalBankAccountRetryMicroDepositsParams,
+)
 from .transaction_simulate_authorization_advice_response import (
     TransactionSimulateAuthorizationAdviceResponse as TransactionSimulateAuthorizationAdviceResponse,
 )

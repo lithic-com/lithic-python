@@ -18,8 +18,8 @@ from ..._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from ...types.balance import Balance
 from ...types.financial_accounts import balance_list_params
+from ...types.financial_accounts.balance_list_response import BalanceListResponse
 
 __all__ = ["Balances", "AsyncBalances"]
 
@@ -45,7 +45,7 @@ class Balances(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncSinglePage[Balance]:
+    ) -> SyncSinglePage[BalanceListResponse]:
         """
         Get the balances for a given financial account.
 
@@ -70,7 +70,7 @@ class Balances(SyncAPIResource):
             )
         return self._get_api_list(
             f"/financial_accounts/{financial_account_token}/balances",
-            page=SyncSinglePage[Balance],
+            page=SyncSinglePage[BalanceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -84,7 +84,7 @@ class Balances(SyncAPIResource):
                     balance_list_params.BalanceListParams,
                 ),
             ),
-            model=Balance,
+            model=BalanceListResponse,
         )
 
 
@@ -109,7 +109,7 @@ class AsyncBalances(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Balance, AsyncSinglePage[Balance]]:
+    ) -> AsyncPaginator[BalanceListResponse, AsyncSinglePage[BalanceListResponse]]:
         """
         Get the balances for a given financial account.
 
@@ -134,7 +134,7 @@ class AsyncBalances(AsyncAPIResource):
             )
         return self._get_api_list(
             f"/financial_accounts/{financial_account_token}/balances",
-            page=AsyncSinglePage[Balance],
+            page=AsyncSinglePage[BalanceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -148,7 +148,7 @@ class AsyncBalances(AsyncAPIResource):
                     balance_list_params.BalanceListParams,
                 ),
             ),
-            model=Balance,
+            model=BalanceListResponse,
         )
 
 

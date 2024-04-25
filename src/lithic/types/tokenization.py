@@ -80,5 +80,13 @@ class Tokenization(BaseModel):
     updated_at: datetime
     """Latest date and time when the tokenization was updated. UTC time zone."""
 
+    digital_card_art_token: Optional[str] = None
+    """
+    Specifies the digital card art displayed in the user’s digital wallet after
+    tokenization. This will be null if the tokenization was created without an
+    associated digital card art. See
+    [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+    """
+
     events: Optional[List[Event]] = None
     """A list of events related to the tokenization."""
