@@ -66,6 +66,7 @@ class Card(BaseModel):
     """An RFC 3339 timestamp for when the card was created. UTC time zone."""
 
     funding: Funding
+    """Deprecated: Funding account for the card."""
 
     last_four: str
     """Last four digits of the card number."""
