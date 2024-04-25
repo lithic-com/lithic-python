@@ -10,4 +10,4 @@ __all__ = ["PaymentRetryResponse"]
 
 class PaymentRetryResponse(Payment):
     balance: Optional[Balance] = None
-    """Balance of a Financial Account"""
+    """Balance"""

@@ -15,6 +15,7 @@ from ...types import (
     external_bank_account_list_params,
     external_bank_account_create_params,
     external_bank_account_update_params,
+    external_bank_account_retry_micro_deposits_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
@@ -70,6 +71,7 @@ class ExternalBankAccounts(SyncAPIResource):
         account_number: str,
         country: str,
         currency: str,
+        financial_account_token: str,
         owner: str,
         owner_type: OwnerType,
         routing_number: str,
@@ -80,7 +82,6 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -95,12 +96,13 @@ class ExternalBankAccounts(SyncAPIResource):
         Creates an external bank account within a program or Lithic account.
 
         Args:
+          financial_account_token: The financial account token of the operating account, which will provide the
+              funds for micro deposits used to verify the account
+
           address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules.
 
           dob: Date of Birth of the Individual that owns the external bank account
-
-          financial_account_token: The financial account token of the operating account used to verify the account
 
           verification_enforcement: Indicates whether verification was enforced for a given association record. For
               MICRO_DEPOSIT, option to disable verification if the external bank account has
@@ -158,6 +160,7 @@ class ExternalBankAccounts(SyncAPIResource):
             "account_number",
             "country",
             "currency",
+            "financial_account_token",
             "owner",
             "owner_type",
             "routing_number",
@@ -172,6 +175,7 @@ class ExternalBankAccounts(SyncAPIResource):
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         owner: str,
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
@@ -182,7 +186,6 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -201,6 +204,7 @@ class ExternalBankAccounts(SyncAPIResource):
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
+                    "financial_account_token": financial_account_token,
                     "owner": owner,
                     "owner_type": owner_type,
                     "routing_number": routing_number,
@@ -211,7 +215,6 @@ class ExternalBankAccounts(SyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
-                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
@@ -391,6 +394,7 @@ class ExternalBankAccounts(SyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -402,6 +406,9 @@ class ExternalBankAccounts(SyncAPIResource):
         Retry external bank account micro deposit verification.
 
         Args:
+          financial_account_token: The financial account token of the operating account, which will provide the
+              funds for micro deposits used to verify the account
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -416,6 +423,10 @@ class ExternalBankAccounts(SyncAPIResource):
             )
         return self._post(
             f"/external_bank_accounts/{external_bank_account_token}/retry_micro_deposits",
+            body=maybe_transform(
+                {"financial_account_token": financial_account_token},
+                external_bank_account_retry_micro_deposits_params.ExternalBankAccountRetryMicroDepositsParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -443,6 +454,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         account_number: str,
         country: str,
         currency: str,
+        financial_account_token: str,
         owner: str,
         owner_type: OwnerType,
         routing_number: str,
@@ -453,7 +465,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -468,12 +479,13 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         Creates an external bank account within a program or Lithic account.
 
         Args:
+          financial_account_token: The financial account token of the operating account, which will provide the
+              funds for micro deposits used to verify the account
+
           address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules.
 
           dob: Date of Birth of the Individual that owns the external bank account
-
-          financial_account_token: The financial account token of the operating account used to verify the account
 
           verification_enforcement: Indicates whether verification was enforced for a given association record. For
               MICRO_DEPOSIT, option to disable verification if the external bank account has
@@ -531,6 +543,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             "account_number",
             "country",
             "currency",
+            "financial_account_token",
             "owner",
             "owner_type",
             "routing_number",
@@ -545,6 +558,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         owner: str,
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
@@ -555,7 +569,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -574,6 +587,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
+                    "financial_account_token": financial_account_token,
                     "owner": owner,
                     "owner_type": owner_type,
                     "routing_number": routing_number,
@@ -584,7 +598,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
-                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
@@ -764,6 +777,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -775,6 +789,9 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         Retry external bank account micro deposit verification.
 
         Args:
+          financial_account_token: The financial account token of the operating account, which will provide the
+              funds for micro deposits used to verify the account
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -789,6 +806,10 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             )
         return await self._post(
             f"/external_bank_accounts/{external_bank_account_token}/retry_micro_deposits",
+            body=await async_maybe_transform(
+                {"financial_account_token": financial_account_token},
+                external_bank_account_retry_micro_deposits_params.ExternalBankAccountRetryMicroDepositsParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
