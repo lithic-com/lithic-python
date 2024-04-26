@@ -9,8 +9,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types.tokenization_secret import TokenizationSecret
-from lithic.types.tokenization_decisioning_rotate_secret_response import TokenizationDecisioningRotateSecretResponse
+from lithic.types import TokenizationSecret, TokenizationDecisioningRotateSecretResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

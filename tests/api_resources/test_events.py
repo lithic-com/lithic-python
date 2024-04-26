@@ -9,10 +9,9 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
+from lithic.types import Event, MessageAttempt
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
-from lithic.types.event import Event
-from lithic.types.message_attempt import MessageAttempt
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

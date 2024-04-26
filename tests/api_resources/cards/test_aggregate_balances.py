@@ -10,7 +10,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
-from lithic.types.cards.aggregate_balance_list_response import AggregateBalanceListResponse
+from lithic.types.cards import AggregateBalanceListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

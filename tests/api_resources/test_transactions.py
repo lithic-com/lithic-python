@@ -9,20 +9,18 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic._utils import parse_datetime
-from lithic.pagination import SyncCursorPage, AsyncCursorPage
-from lithic.types.transaction import Transaction
-from lithic.types.transaction_simulate_void_response import TransactionSimulateVoidResponse
-from lithic.types.transaction_simulate_return_response import TransactionSimulateReturnResponse
-from lithic.types.transaction_simulate_clearing_response import TransactionSimulateClearingResponse
-from lithic.types.transaction_simulate_authorization_response import TransactionSimulateAuthorizationResponse
-from lithic.types.transaction_simulate_return_reversal_response import TransactionSimulateReturnReversalResponse
-from lithic.types.transaction_simulate_authorization_advice_response import (
+from lithic.types import (
+    Transaction,
+    TransactionSimulateVoidResponse,
+    TransactionSimulateReturnResponse,
+    TransactionSimulateClearingResponse,
+    TransactionSimulateAuthorizationResponse,
+    TransactionSimulateReturnReversalResponse,
     TransactionSimulateAuthorizationAdviceResponse,
-)
-from lithic.types.transaction_simulate_credit_authorization_response import (
     TransactionSimulateCreditAuthorizationResponse,
 )
+from lithic._utils import parse_datetime
+from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
