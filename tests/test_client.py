@@ -17,7 +17,6 @@ from respx import MockRouter
 from pydantic import ValidationError
 
 from lithic import Lithic, AsyncLithic, APIResponseValidationError
-from lithic._client import Lithic, AsyncLithic
 from lithic._models import BaseModel, FinalRequestOptions
 from lithic._constants import RAW_RESPONSE_HEADER
 from lithic._exceptions import LithicError, APIStatusError, APITimeoutError, APIResponseValidationError
