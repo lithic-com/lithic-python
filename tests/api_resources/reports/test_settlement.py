@@ -9,10 +9,9 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
+from lithic.types import SettlementDetail, SettlementReport
 from lithic._utils import parse_date
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
-from lithic.types.settlement_detail import SettlementDetail
-from lithic.types.settlement_report import SettlementReport
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
