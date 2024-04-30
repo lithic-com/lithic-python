@@ -40,4 +40,4 @@ jobs:
         run: |
           rye run python -c 'import lithic'
 
-  
+
