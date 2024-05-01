@@ -296,6 +296,12 @@ class KYCIndividual(TypedDict, total=False):
 
 
 class KYCExempt(TypedDict, total=False):
+    address: Required[shared_params.Address]
+    """
+    KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
     email: Required[str]
     """The KYC Exempt user's email"""
 
@@ -313,12 +319,6 @@ class KYCExempt(TypedDict, total=False):
 
     workflow: Required[Literal["KYC_EXEMPT"]]
     """Specifies the workflow type. This must be 'KYC_EXEMPT'"""
-
-    address: shared_params.Address
-    """
-    KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
-    """
 
     business_account_token: str
     """
