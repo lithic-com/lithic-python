@@ -633,6 +633,13 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_overload_3(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
+            address={
+                "address1": "123 Old Forest Way",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -645,12 +652,6 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
-            email="string",
-            first_name="string",
-            kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
-            workflow="KYC_EXEMPT",
             address={
                 "address1": "123 Old Forest Way",
                 "address2": "string",
@@ -659,6 +660,12 @@ class TestAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
+            email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
+            phone_number="string",
+            workflow="KYC_EXEMPT",
             business_account_token="string",
             external_id="string",
         )
@@ -667,6 +674,13 @@ class TestAccountHolders:
     @parametrize
     def test_raw_response_create_overload_3(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.create(
+            address={
+                "address1": "123 Old Forest Way",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -683,6 +697,13 @@ class TestAccountHolders:
     @parametrize
     def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.create(
+            address={
+                "address1": "123 Old Forest Way",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -1666,6 +1687,13 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
+            address={
+                "address1": "123 Old Forest Way",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -1678,12 +1706,6 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
-            email="string",
-            first_name="string",
-            kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
-            workflow="KYC_EXEMPT",
             address={
                 "address1": "123 Old Forest Way",
                 "address2": "string",
@@ -1692,6 +1714,12 @@ class TestAsyncAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
+            email="string",
+            first_name="string",
+            kyc_exemption_type="AUTHORIZED_USER",
+            last_name="string",
+            phone_number="string",
+            workflow="KYC_EXEMPT",
             business_account_token="string",
             external_id="string",
         )
@@ -1700,6 +1728,13 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.create(
+            address={
+                "address1": "123 Old Forest Way",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",
@@ -1716,6 +1751,13 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.create(
+            address={
+                "address1": "123 Old Forest Way",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
             email="string",
             first_name="string",
             kyc_exemption_type="AUTHORIZED_USER",

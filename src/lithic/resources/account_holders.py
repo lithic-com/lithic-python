@@ -193,13 +193,13 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
+        address: shared_params.Address,
         email: str,
         first_name: str,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
         last_name: str,
         phone_number: str,
         workflow: Literal["KYC_EXEMPT"],
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -219,6 +219,9 @@ class AccountHolders(SyncAPIResource):
         part of the program that the calling API key manages.
 
         Args:
+          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
+              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+
           email: The KYC Exempt user's email
 
           first_name: The KYC Exempt user's first name
@@ -230,9 +233,6 @@ class AccountHolders(SyncAPIResource):
           phone_number: The KYC Exempt user's phone number
 
           workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
-
-          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
           business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
               users of businesses. Pass the account_token of the enrolled business associated
@@ -262,7 +262,7 @@ class AccountHolders(SyncAPIResource):
             "workflow",
         ],
         ["individual", "tos_timestamp", "workflow"],
-        ["email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
+        ["address", "email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
     )
     def create(
         self,
@@ -283,12 +283,12 @@ class AccountHolders(SyncAPIResource):
         website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -313,12 +313,12 @@ class AccountHolders(SyncAPIResource):
                     "website_url": website_url,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
+                    "address": address,
                     "email": email,
                     "first_name": first_name,
                     "kyc_exemption_type": kyc_exemption_type,
                     "last_name": last_name,
                     "phone_number": phone_number,
-                    "address": address,
                     "business_account_token": business_account_token,
                 },
                 account_holder_create_params.AccountHolderCreateParams,
@@ -856,13 +856,13 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
+        address: shared_params.Address,
         email: str,
         first_name: str,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
         last_name: str,
         phone_number: str,
         workflow: Literal["KYC_EXEMPT"],
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -882,6 +882,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         part of the program that the calling API key manages.
 
         Args:
+          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
+              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+
           email: The KYC Exempt user's email
 
           first_name: The KYC Exempt user's first name
@@ -893,9 +896,6 @@ class AsyncAccountHolders(AsyncAPIResource):
           phone_number: The KYC Exempt user's phone number
 
           workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
-
-          address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
 
           business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
               users of businesses. Pass the account_token of the enrolled business associated
@@ -925,7 +925,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             "workflow",
         ],
         ["individual", "tos_timestamp", "workflow"],
-        ["email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
+        ["address", "email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
     )
     async def create(
         self,
@@ -946,12 +946,12 @@ class AsyncAccountHolders(AsyncAPIResource):
         website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        address: shared_params.Address | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -976,12 +976,12 @@ class AsyncAccountHolders(AsyncAPIResource):
                     "website_url": website_url,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
+                    "address": address,
                     "email": email,
                     "first_name": first_name,
                     "kyc_exemption_type": kyc_exemption_type,
                     "last_name": last_name,
                     "phone_number": phone_number,
-                    "address": address,
                     "business_account_token": business_account_token,
                 },
                 account_holder_create_params.AccountHolderCreateParams,

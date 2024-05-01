@@ -71,6 +71,8 @@ class Event(BaseModel):
             "FORMAT_ERROR",
             "INSUFFICIENT_FUNDING_SOURCE_BALANCE",
             "INSUFFICIENT_FUNDS",
+            "INVALID_DRIVER",
+            "INVALID_VEHICLE",
             "LITHIC_SYSTEM_ERROR",
             "LITHIC_SYSTEM_RATE_LIMIT",
             "MALFORMED_ASA_RESPONSE",
