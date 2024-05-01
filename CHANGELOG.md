@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.42.0 (2024-05-01)
+
+Full Changelog: [v0.41.0...v0.42.0](https://github.com/lithic-com/lithic-python/compare/v0.41.0...v0.42.0)
+
+### Features
+
+* **api:** changes to balance-related return types and other API changes ([#432](https://github.com/lithic-com/lithic-python/issues/432)) ([a7045b1](https://github.com/lithic-com/lithic-python/commit/a7045b18518c8524d75bc7539a08f431de21dff1))
+* **api:** updates ([#419](https://github.com/lithic-com/lithic-python/issues/419)) ([70be79c](https://github.com/lithic-com/lithic-python/commit/70be79c6d6370a179805800fbfa5903f29cd8d2d))
+* **api:** updates ([#421](https://github.com/lithic-com/lithic-python/issues/421)) ([5657004](https://github.com/lithic-com/lithic-python/commit/56570041949e6b3f61bdea419d6eb3df6b1cd494))
+* **api:** updates ([#438](https://github.com/lithic-com/lithic-python/issues/438)) ([48a5562](https://github.com/lithic-com/lithic-python/commit/48a5562c2336f2bbb9058631eb22ff83d58a1464))
+* **models:** add to_dict & to_json helper methods ([#416](https://github.com/lithic-com/lithic-python/issues/416)) ([49d5ba1](https://github.com/lithic-com/lithic-python/commit/49d5ba184b2c331b9bdb2d2057ea8971a1646251))
+
+
+### Bug Fixes
+
+* **docs:** doc improvements ([#428](https://github.com/lithic-com/lithic-python/issues/428)) ([549737f](https://github.com/lithic-com/lithic-python/commit/549737f387bab6ed63fd0ee6bdcdc3bb8aab90a4))
+
+
+### Chores
+
+* **client:** log response headers in debug mode ([#435](https://github.com/lithic-com/lithic-python/issues/435)) ([6310797](https://github.com/lithic-com/lithic-python/commit/6310797ea884b2592bc3aa7e3d976161981d34e5))
+* fix typo ([#418](https://github.com/lithic-com/lithic-python/issues/418)) ([79d8921](https://github.com/lithic-com/lithic-python/commit/79d8921b342b72f34a813d03aa2726c8ddc2eeb6))
+* **internal:** add lru_cache helper function ([#422](https://github.com/lithic-com/lithic-python/issues/422)) ([e7a7f23](https://github.com/lithic-com/lithic-python/commit/e7a7f23bd73227a02909f4b34bd434690ac263c4))
+* **internal:** add scripts/test, scripts/mock and add ci job ([#436](https://github.com/lithic-com/lithic-python/issues/436)) ([26b4052](https://github.com/lithic-com/lithic-python/commit/26b4052d88bdbecaaca9bc796860cb064273a466))
+* **internal:** ban usage of lru_cache ([#423](https://github.com/lithic-com/lithic-python/issues/423)) ([b72c88f](https://github.com/lithic-com/lithic-python/commit/b72c88f3cb92ffa9cf8b7f7798c276f540ccbc93))
+* **internal:** bump mock server version to ~5.8.0 ([#437](https://github.com/lithic-com/lithic-python/issues/437)) ([c9d79b4](https://github.com/lithic-com/lithic-python/commit/c9d79b4aad101d69599230b7c842e6da236ef164))
+* **internal:** bump pyright to 1.1.359 ([#424](https://github.com/lithic-com/lithic-python/issues/424)) ([7cbc60f](https://github.com/lithic-com/lithic-python/commit/7cbc60fe6fd23dec9c6c631b8cc9d8695d5eea52))
+* **internal:** formatting ([#420](https://github.com/lithic-com/lithic-python/issues/420)) ([d6dcfe6](https://github.com/lithic-com/lithic-python/commit/d6dcfe6654c607541348850c465578f2c4a32836))
+* **internal:** minor reformatting ([#434](https://github.com/lithic-com/lithic-python/issues/434)) ([fb1f85c](https://github.com/lithic-com/lithic-python/commit/fb1f85cfd0dba0c21cd870d007dee66a4320623b))
+* **internal:** reformat imports ([#433](https://github.com/lithic-com/lithic-python/issues/433)) ([f22b15e](https://github.com/lithic-com/lithic-python/commit/f22b15e326a5d3acb8845ee77ae8f52b5e48d602))
+* **internal:** restructure imports ([#425](https://github.com/lithic-com/lithic-python/issues/425)) ([9d9ab1c](https://github.com/lithic-com/lithic-python/commit/9d9ab1cf28d02f0ad29e06ef29f2466d14b399c2))
+* **internal:** update test helper function ([#431](https://github.com/lithic-com/lithic-python/issues/431)) ([4c2b592](https://github.com/lithic-com/lithic-python/commit/4c2b59227c0762bbe8ed435ea7cf3f3f4f4949c5))
+* **internal:** use actions/checkout@v4 for codeflow ([#430](https://github.com/lithic-com/lithic-python/issues/430)) ([4afd494](https://github.com/lithic-com/lithic-python/commit/4afd49407732feb69de3f21d73fa658e85e02548))
+* rename resource types ([#427](https://github.com/lithic-com/lithic-python/issues/427)) ([9afd708](https://github.com/lithic-com/lithic-python/commit/9afd70880749914dccd8224880712447f60a7a5f))
+* **tests:** rename test file ([#429](https://github.com/lithic-com/lithic-python/issues/429)) ([20380e1](https://github.com/lithic-com/lithic-python/commit/20380e119f9ea9b67daf94e6d9709335195f7942))
+
 ## 0.41.0 (2024-04-08)
 
 Full Changelog: [v0.40.0...v0.41.0](https://github.com/lithic-com/lithic-python/compare/v0.40.0...v0.41.0)
