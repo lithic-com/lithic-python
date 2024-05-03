@@ -268,7 +268,7 @@ client = Lithic(
 )
 
 # Override per-request:
-client.with_options(timeout=5 * 1000).cards.list(
+client.with_options(timeout=5.0).cards.list(
     page_size=10,
 )
 ```
