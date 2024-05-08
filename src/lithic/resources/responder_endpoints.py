@@ -26,17 +26,17 @@ from .._base_client import (
 from ..types.responder_endpoint_status import ResponderEndpointStatus
 from ..types.responder_endpoint_create_response import ResponderEndpointCreateResponse
 
-__all__ = ["ResponderEndpoints", "AsyncResponderEndpoints"]
+__all__ = ["ResponderEndpointsResource", "AsyncResponderEndpointsResource"]
 
 
-class ResponderEndpoints(SyncAPIResource):
+class ResponderEndpointsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ResponderEndpointsWithRawResponse:
-        return ResponderEndpointsWithRawResponse(self)
+    def with_raw_response(self) -> ResponderEndpointsResourceWithRawResponse:
+        return ResponderEndpointsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ResponderEndpointsWithStreamingResponse:
-        return ResponderEndpointsWithStreamingResponse(self)
+    def with_streaming_response(self) -> ResponderEndpointsResourceWithStreamingResponse:
+        return ResponderEndpointsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -158,14 +158,14 @@ class ResponderEndpoints(SyncAPIResource):
         )
 
 
-class AsyncResponderEndpoints(AsyncAPIResource):
+class AsyncResponderEndpointsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncResponderEndpointsWithRawResponse:
-        return AsyncResponderEndpointsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncResponderEndpointsResourceWithRawResponse:
+        return AsyncResponderEndpointsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncResponderEndpointsWithStreamingResponse:
-        return AsyncResponderEndpointsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncResponderEndpointsResourceWithStreamingResponse:
+        return AsyncResponderEndpointsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -289,8 +289,8 @@ class AsyncResponderEndpoints(AsyncAPIResource):
         )
 
 
-class ResponderEndpointsWithRawResponse:
-    def __init__(self, responder_endpoints: ResponderEndpoints) -> None:
+class ResponderEndpointsResourceWithRawResponse:
+    def __init__(self, responder_endpoints: ResponderEndpointsResource) -> None:
         self._responder_endpoints = responder_endpoints
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -304,8 +304,8 @@ class ResponderEndpointsWithRawResponse:
         )
 
 
-class AsyncResponderEndpointsWithRawResponse:
-    def __init__(self, responder_endpoints: AsyncResponderEndpoints) -> None:
+class AsyncResponderEndpointsResourceWithRawResponse:
+    def __init__(self, responder_endpoints: AsyncResponderEndpointsResource) -> None:
         self._responder_endpoints = responder_endpoints
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -319,8 +319,8 @@ class AsyncResponderEndpointsWithRawResponse:
         )
 
 
-class ResponderEndpointsWithStreamingResponse:
-    def __init__(self, responder_endpoints: ResponderEndpoints) -> None:
+class ResponderEndpointsResourceWithStreamingResponse:
+    def __init__(self, responder_endpoints: ResponderEndpointsResource) -> None:
         self._responder_endpoints = responder_endpoints
 
         self.create = to_streamed_response_wrapper(
@@ -334,8 +334,8 @@ class ResponderEndpointsWithStreamingResponse:
         )
 
 
-class AsyncResponderEndpointsWithStreamingResponse:
-    def __init__(self, responder_endpoints: AsyncResponderEndpoints) -> None:
+class AsyncResponderEndpointsResourceWithStreamingResponse:
+    def __init__(self, responder_endpoints: AsyncResponderEndpointsResource) -> None:
         self._responder_endpoints = responder_endpoints
 
         self.create = async_to_streamed_response_wrapper(

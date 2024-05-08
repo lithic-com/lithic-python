@@ -34,17 +34,17 @@ from ..types.payment_create_response import PaymentCreateResponse
 from ..types.payment_simulate_return_response import PaymentSimulateReturnResponse
 from ..types.payment_simulate_release_response import PaymentSimulateReleaseResponse
 
-__all__ = ["Payments", "AsyncPayments"]
+__all__ = ["PaymentsResource", "AsyncPaymentsResource"]
 
 
-class Payments(SyncAPIResource):
+class PaymentsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> PaymentsWithRawResponse:
-        return PaymentsWithRawResponse(self)
+    def with_raw_response(self) -> PaymentsResourceWithRawResponse:
+        return PaymentsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> PaymentsWithStreamingResponse:
-        return PaymentsWithStreamingResponse(self)
+    def with_streaming_response(self) -> PaymentsResourceWithStreamingResponse:
+        return PaymentsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -311,14 +311,14 @@ class Payments(SyncAPIResource):
         )
 
 
-class AsyncPayments(AsyncAPIResource):
+class AsyncPaymentsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncPaymentsWithRawResponse:
-        return AsyncPaymentsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncPaymentsResourceWithRawResponse:
+        return AsyncPaymentsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncPaymentsWithStreamingResponse:
-        return AsyncPaymentsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncPaymentsResourceWithStreamingResponse:
+        return AsyncPaymentsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -585,8 +585,8 @@ class AsyncPayments(AsyncAPIResource):
         )
 
 
-class PaymentsWithRawResponse:
-    def __init__(self, payments: Payments) -> None:
+class PaymentsResourceWithRawResponse:
+    def __init__(self, payments: PaymentsResource) -> None:
         self._payments = payments
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -609,8 +609,8 @@ class PaymentsWithRawResponse:
         )
 
 
-class AsyncPaymentsWithRawResponse:
-    def __init__(self, payments: AsyncPayments) -> None:
+class AsyncPaymentsResourceWithRawResponse:
+    def __init__(self, payments: AsyncPaymentsResource) -> None:
         self._payments = payments
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -633,8 +633,8 @@ class AsyncPaymentsWithRawResponse:
         )
 
 
-class PaymentsWithStreamingResponse:
-    def __init__(self, payments: Payments) -> None:
+class PaymentsResourceWithStreamingResponse:
+    def __init__(self, payments: PaymentsResource) -> None:
         self._payments = payments
 
         self.create = to_streamed_response_wrapper(
@@ -657,8 +657,8 @@ class PaymentsWithStreamingResponse:
         )
 
 
-class AsyncPaymentsWithStreamingResponse:
-    def __init__(self, payments: AsyncPayments) -> None:
+class AsyncPaymentsResourceWithStreamingResponse:
+    def __init__(self, payments: AsyncPaymentsResource) -> None:
         self._payments = payments
 
         self.create = async_to_streamed_response_wrapper(

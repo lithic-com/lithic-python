@@ -22,17 +22,17 @@ from ..._base_client import (
 )
 from ...types.financial_transaction import FinancialTransaction
 
-__all__ = ["FinancialTransactions", "AsyncFinancialTransactions"]
+__all__ = ["FinancialTransactionsResource", "AsyncFinancialTransactionsResource"]
 
 
-class FinancialTransactions(SyncAPIResource):
+class FinancialTransactionsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> FinancialTransactionsWithRawResponse:
-        return FinancialTransactionsWithRawResponse(self)
+    def with_raw_response(self) -> FinancialTransactionsResourceWithRawResponse:
+        return FinancialTransactionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> FinancialTransactionsWithStreamingResponse:
-        return FinancialTransactionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> FinancialTransactionsResourceWithStreamingResponse:
+        return FinancialTransactionsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -147,14 +147,14 @@ class FinancialTransactions(SyncAPIResource):
         )
 
 
-class AsyncFinancialTransactions(AsyncAPIResource):
+class AsyncFinancialTransactionsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncFinancialTransactionsWithRawResponse:
-        return AsyncFinancialTransactionsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncFinancialTransactionsResourceWithRawResponse:
+        return AsyncFinancialTransactionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncFinancialTransactionsWithStreamingResponse:
-        return AsyncFinancialTransactionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncFinancialTransactionsResourceWithStreamingResponse:
+        return AsyncFinancialTransactionsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -269,8 +269,8 @@ class AsyncFinancialTransactions(AsyncAPIResource):
         )
 
 
-class FinancialTransactionsWithRawResponse:
-    def __init__(self, financial_transactions: FinancialTransactions) -> None:
+class FinancialTransactionsResourceWithRawResponse:
+    def __init__(self, financial_transactions: FinancialTransactionsResource) -> None:
         self._financial_transactions = financial_transactions
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -281,8 +281,8 @@ class FinancialTransactionsWithRawResponse:
         )
 
 
-class AsyncFinancialTransactionsWithRawResponse:
-    def __init__(self, financial_transactions: AsyncFinancialTransactions) -> None:
+class AsyncFinancialTransactionsResourceWithRawResponse:
+    def __init__(self, financial_transactions: AsyncFinancialTransactionsResource) -> None:
         self._financial_transactions = financial_transactions
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -293,8 +293,8 @@ class AsyncFinancialTransactionsWithRawResponse:
         )
 
 
-class FinancialTransactionsWithStreamingResponse:
-    def __init__(self, financial_transactions: FinancialTransactions) -> None:
+class FinancialTransactionsResourceWithStreamingResponse:
+    def __init__(self, financial_transactions: FinancialTransactionsResource) -> None:
         self._financial_transactions = financial_transactions
 
         self.retrieve = to_streamed_response_wrapper(
@@ -305,8 +305,8 @@ class FinancialTransactionsWithStreamingResponse:
         )
 
 
-class AsyncFinancialTransactionsWithStreamingResponse:
-    def __init__(self, financial_transactions: AsyncFinancialTransactions) -> None:
+class AsyncFinancialTransactionsResourceWithStreamingResponse:
+    def __init__(self, financial_transactions: AsyncFinancialTransactionsResource) -> None:
         self._financial_transactions = financial_transactions
 
         self.retrieve = async_to_streamed_response_wrapper(

@@ -6,6 +6,8 @@ The Lithic Python library provides convenient access to the Lithic REST API from
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
+It is generated with [Stainless](https://www.stainlessapi.com/).
+
 ## Documentation
 
 The REST API documentation can be found [on docs.lithic.com](https://docs.lithic.com). The full API of this library can be found in [api.md](api.md).
@@ -157,6 +159,29 @@ card = client.cards.create(
     type="VIRTUAL",
 )
 print(card.product_id)
+```
+
+## Webhook Verification
+
+We provide helper methods for verifying that a webhook request came from Lithic, and not a malicious third party.
+
+You can use `lithic.webhooks.verify_signature(body: string, headers, secret?) -> None` or `lithic.webhooks.unwrap(body: string, headers, secret?) -> Payload`,
+both of which will raise an error if the signature is invalid.
+
+Note that the "body" parameter must be the raw JSON string sent from the server (do not parse it first).
+The `.unwrap()` method can parse this JSON for you into a `Payload` object.
+
+For example, in [FastAPI](https://fastapi.tiangolo.com/):
+
+```py
+@app.post('/my-webhook-handler')
+async def handler(request: Request):
+    body = await request.body()
+    secret = os.environ['LITHIC_WEBHOOK_SECRET']  # env var used by default; explicit here.
+    payload = client.webhooks.unwrap(body, request.headers, secret)
+    print(payload)
+
+    return {'ok': True}
 ```
 
 ## Handling errors

@@ -20,17 +20,17 @@ from ...types.three_ds import authentication_simulate_params
 from ...types.three_ds.authentication_retrieve_response import AuthenticationRetrieveResponse
 from ...types.three_ds.authentication_simulate_response import AuthenticationSimulateResponse
 
-__all__ = ["Authentication", "AsyncAuthentication"]
+__all__ = ["AuthenticationResource", "AsyncAuthenticationResource"]
 
 
-class Authentication(SyncAPIResource):
+class AuthenticationResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AuthenticationWithRawResponse:
-        return AuthenticationWithRawResponse(self)
+    def with_raw_response(self) -> AuthenticationResourceWithRawResponse:
+        return AuthenticationResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AuthenticationWithStreamingResponse:
-        return AuthenticationWithStreamingResponse(self)
+    def with_streaming_response(self) -> AuthenticationResourceWithStreamingResponse:
+        return AuthenticationResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -114,14 +114,14 @@ class Authentication(SyncAPIResource):
         )
 
 
-class AsyncAuthentication(AsyncAPIResource):
+class AsyncAuthenticationResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAuthenticationWithRawResponse:
-        return AsyncAuthenticationWithRawResponse(self)
+    def with_raw_response(self) -> AsyncAuthenticationResourceWithRawResponse:
+        return AsyncAuthenticationResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAuthenticationWithStreamingResponse:
-        return AsyncAuthenticationWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncAuthenticationResourceWithStreamingResponse:
+        return AsyncAuthenticationResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -205,8 +205,8 @@ class AsyncAuthentication(AsyncAPIResource):
         )
 
 
-class AuthenticationWithRawResponse:
-    def __init__(self, authentication: Authentication) -> None:
+class AuthenticationResourceWithRawResponse:
+    def __init__(self, authentication: AuthenticationResource) -> None:
         self._authentication = authentication
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -217,8 +217,8 @@ class AuthenticationWithRawResponse:
         )
 
 
-class AsyncAuthenticationWithRawResponse:
-    def __init__(self, authentication: AsyncAuthentication) -> None:
+class AsyncAuthenticationResourceWithRawResponse:
+    def __init__(self, authentication: AsyncAuthenticationResource) -> None:
         self._authentication = authentication
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -229,8 +229,8 @@ class AsyncAuthenticationWithRawResponse:
         )
 
 
-class AuthenticationWithStreamingResponse:
-    def __init__(self, authentication: Authentication) -> None:
+class AuthenticationResourceWithStreamingResponse:
+    def __init__(self, authentication: AuthenticationResource) -> None:
         self._authentication = authentication
 
         self.retrieve = to_streamed_response_wrapper(
@@ -241,8 +241,8 @@ class AuthenticationWithStreamingResponse:
         )
 
 
-class AsyncAuthenticationWithStreamingResponse:
-    def __init__(self, authentication: AsyncAuthentication) -> None:
+class AsyncAuthenticationResourceWithStreamingResponse:
+    def __init__(self, authentication: AsyncAuthenticationResource) -> None:
         self._authentication = authentication
 
         self.retrieve = async_to_streamed_response_wrapper(

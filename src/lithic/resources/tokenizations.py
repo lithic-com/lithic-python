@@ -27,17 +27,17 @@ from ..types.tokenization import Tokenization
 from ..types.tokenization_retrieve_response import TokenizationRetrieveResponse
 from ..types.tokenization_simulate_response import TokenizationSimulateResponse
 
-__all__ = ["Tokenizations", "AsyncTokenizations"]
+__all__ = ["TokenizationsResource", "AsyncTokenizationsResource"]
 
 
-class Tokenizations(SyncAPIResource):
+class TokenizationsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TokenizationsWithRawResponse:
-        return TokenizationsWithRawResponse(self)
+    def with_raw_response(self) -> TokenizationsResourceWithRawResponse:
+        return TokenizationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TokenizationsWithStreamingResponse:
-        return TokenizationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> TokenizationsResourceWithStreamingResponse:
+        return TokenizationsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -209,14 +209,14 @@ class Tokenizations(SyncAPIResource):
         )
 
 
-class AsyncTokenizations(AsyncAPIResource):
+class AsyncTokenizationsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTokenizationsWithRawResponse:
-        return AsyncTokenizationsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTokenizationsResourceWithRawResponse:
+        return AsyncTokenizationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTokenizationsWithStreamingResponse:
-        return AsyncTokenizationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTokenizationsResourceWithStreamingResponse:
+        return AsyncTokenizationsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -388,8 +388,8 @@ class AsyncTokenizations(AsyncAPIResource):
         )
 
 
-class TokenizationsWithRawResponse:
-    def __init__(self, tokenizations: Tokenizations) -> None:
+class TokenizationsResourceWithRawResponse:
+    def __init__(self, tokenizations: TokenizationsResource) -> None:
         self._tokenizations = tokenizations
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -403,8 +403,8 @@ class TokenizationsWithRawResponse:
         )
 
 
-class AsyncTokenizationsWithRawResponse:
-    def __init__(self, tokenizations: AsyncTokenizations) -> None:
+class AsyncTokenizationsResourceWithRawResponse:
+    def __init__(self, tokenizations: AsyncTokenizationsResource) -> None:
         self._tokenizations = tokenizations
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -418,8 +418,8 @@ class AsyncTokenizationsWithRawResponse:
         )
 
 
-class TokenizationsWithStreamingResponse:
-    def __init__(self, tokenizations: Tokenizations) -> None:
+class TokenizationsResourceWithStreamingResponse:
+    def __init__(self, tokenizations: TokenizationsResource) -> None:
         self._tokenizations = tokenizations
 
         self.retrieve = to_streamed_response_wrapper(
@@ -433,8 +433,8 @@ class TokenizationsWithStreamingResponse:
         )
 
 
-class AsyncTokenizationsWithStreamingResponse:
-    def __init__(self, tokenizations: AsyncTokenizations) -> None:
+class AsyncTokenizationsResourceWithStreamingResponse:
+    def __init__(self, tokenizations: AsyncTokenizationsResource) -> None:
         self._tokenizations = tokenizations
 
         self.retrieve = async_to_streamed_response_wrapper(

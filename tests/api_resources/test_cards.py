@@ -250,6 +250,18 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
+    def test_get_embed_html(self, client: Lithic) -> None:
+        html = client.cards.get_embed_html(token="foo")
+        assert "html" in html
+
+    def test_get_embed_url(self, client: Lithic) -> None:
+        url = client.cards.get_embed_url(token="foo")
+        params = set(  # pyright: ignore[reportUnknownVariableType]
+            url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
+        )
+        assert "hmac" in params
+        assert "embed_request" in params
+
     @parametrize
     def test_method_provision(self, client: Lithic) -> None:
         card = client.cards.provision(
@@ -760,6 +772,18 @@ class TestAsyncCards:
             assert_matches_type(str, card, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    async def test_get_embed_html(self, async_client: AsyncLithic) -> None:
+        html = await async_client.cards.get_embed_html(token="foo")
+        assert "html" in html
+
+    def test_get_embed_url(self, async_client: Lithic) -> None:
+        url = async_client.cards.get_embed_url(token="foo")
+        params = set(  # pyright: ignore[reportUnknownVariableType]
+            url.params.keys()  # pyright: ignore[reportUnknownMemberType,reportUnknownArgumentType]
+        )
+        assert "hmac" in params
+        assert "embed_request" in params
 
     @parametrize
     async def test_method_provision(self, async_client: AsyncLithic) -> None:

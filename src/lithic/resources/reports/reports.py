@@ -4,77 +4,77 @@ from __future__ import annotations
 
 from ..._compat import cached_property
 from .settlement import (
-    Settlement,
-    AsyncSettlement,
-    SettlementWithRawResponse,
-    AsyncSettlementWithRawResponse,
-    SettlementWithStreamingResponse,
-    AsyncSettlementWithStreamingResponse,
+    SettlementResource,
+    AsyncSettlementResource,
+    SettlementResourceWithRawResponse,
+    AsyncSettlementResourceWithRawResponse,
+    SettlementResourceWithStreamingResponse,
+    AsyncSettlementResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
-__all__ = ["Reports", "AsyncReports"]
+__all__ = ["ReportsResource", "AsyncReportsResource"]
 
 
-class Reports(SyncAPIResource):
+class ReportsResource(SyncAPIResource):
     @cached_property
-    def settlement(self) -> Settlement:
-        return Settlement(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> ReportsWithRawResponse:
-        return ReportsWithRawResponse(self)
+    def settlement(self) -> SettlementResource:
+        return SettlementResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> ReportsWithStreamingResponse:
-        return ReportsWithStreamingResponse(self)
-
-
-class AsyncReports(AsyncAPIResource):
-    @cached_property
-    def settlement(self) -> AsyncSettlement:
-        return AsyncSettlement(self._client)
+    def with_raw_response(self) -> ReportsResourceWithRawResponse:
+        return ReportsResourceWithRawResponse(self)
 
     @cached_property
-    def with_raw_response(self) -> AsyncReportsWithRawResponse:
-        return AsyncReportsWithRawResponse(self)
+    def with_streaming_response(self) -> ReportsResourceWithStreamingResponse:
+        return ReportsResourceWithStreamingResponse(self)
+
+
+class AsyncReportsResource(AsyncAPIResource):
+    @cached_property
+    def settlement(self) -> AsyncSettlementResource:
+        return AsyncSettlementResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncReportsWithStreamingResponse:
-        return AsyncReportsWithStreamingResponse(self)
+    def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
+        return AsyncReportsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncReportsResourceWithStreamingResponse:
+        return AsyncReportsResourceWithStreamingResponse(self)
 
 
-class ReportsWithRawResponse:
-    def __init__(self, reports: Reports) -> None:
+class ReportsResourceWithRawResponse:
+    def __init__(self, reports: ReportsResource) -> None:
         self._reports = reports
 
     @cached_property
-    def settlement(self) -> SettlementWithRawResponse:
-        return SettlementWithRawResponse(self._reports.settlement)
+    def settlement(self) -> SettlementResourceWithRawResponse:
+        return SettlementResourceWithRawResponse(self._reports.settlement)
 
 
-class AsyncReportsWithRawResponse:
-    def __init__(self, reports: AsyncReports) -> None:
+class AsyncReportsResourceWithRawResponse:
+    def __init__(self, reports: AsyncReportsResource) -> None:
         self._reports = reports
 
     @cached_property
-    def settlement(self) -> AsyncSettlementWithRawResponse:
-        return AsyncSettlementWithRawResponse(self._reports.settlement)
+    def settlement(self) -> AsyncSettlementResourceWithRawResponse:
+        return AsyncSettlementResourceWithRawResponse(self._reports.settlement)
 
 
-class ReportsWithStreamingResponse:
-    def __init__(self, reports: Reports) -> None:
+class ReportsResourceWithStreamingResponse:
+    def __init__(self, reports: ReportsResource) -> None:
         self._reports = reports
 
     @cached_property
-    def settlement(self) -> SettlementWithStreamingResponse:
-        return SettlementWithStreamingResponse(self._reports.settlement)
+    def settlement(self) -> SettlementResourceWithStreamingResponse:
+        return SettlementResourceWithStreamingResponse(self._reports.settlement)
 
 
-class AsyncReportsWithStreamingResponse:
-    def __init__(self, reports: AsyncReports) -> None:
+class AsyncReportsResourceWithStreamingResponse:
+    def __init__(self, reports: AsyncReportsResource) -> None:
         self._reports = reports
 
     @cached_property
-    def settlement(self) -> AsyncSettlementWithStreamingResponse:
-        return AsyncSettlementWithStreamingResponse(self._reports.settlement)
+    def settlement(self) -> AsyncSettlementResourceWithStreamingResponse:
+        return AsyncSettlementResourceWithStreamingResponse(self._reports.settlement)

@@ -31,17 +31,17 @@ from ..types.auth_rule import AuthRule
 from ..types.auth_rule_remove_response import AuthRuleRemoveResponse
 from ..types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
 
-__all__ = ["AuthRules", "AsyncAuthRules"]
+__all__ = ["AuthRulesResource", "AsyncAuthRulesResource"]
 
 
-class AuthRules(SyncAPIResource):
+class AuthRulesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AuthRulesWithRawResponse:
-        return AuthRulesWithRawResponse(self)
+    def with_raw_response(self) -> AuthRulesResourceWithRawResponse:
+        return AuthRulesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AuthRulesWithStreamingResponse:
-        return AuthRulesWithStreamingResponse(self)
+    def with_streaming_response(self) -> AuthRulesResourceWithStreamingResponse:
+        return AuthRulesResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -368,14 +368,14 @@ class AuthRules(SyncAPIResource):
         )
 
 
-class AsyncAuthRules(AsyncAPIResource):
+class AsyncAuthRulesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAuthRulesWithRawResponse:
-        return AsyncAuthRulesWithRawResponse(self)
+    def with_raw_response(self) -> AsyncAuthRulesResourceWithRawResponse:
+        return AsyncAuthRulesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAuthRulesWithStreamingResponse:
-        return AsyncAuthRulesWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncAuthRulesResourceWithStreamingResponse:
+        return AsyncAuthRulesResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -702,8 +702,8 @@ class AsyncAuthRules(AsyncAPIResource):
         )
 
 
-class AuthRulesWithRawResponse:
-    def __init__(self, auth_rules: AuthRules) -> None:
+class AuthRulesResourceWithRawResponse:
+    def __init__(self, auth_rules: AuthRulesResource) -> None:
         self._auth_rules = auth_rules
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -726,8 +726,8 @@ class AuthRulesWithRawResponse:
         )
 
 
-class AsyncAuthRulesWithRawResponse:
-    def __init__(self, auth_rules: AsyncAuthRules) -> None:
+class AsyncAuthRulesResourceWithRawResponse:
+    def __init__(self, auth_rules: AsyncAuthRulesResource) -> None:
         self._auth_rules = auth_rules
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -750,8 +750,8 @@ class AsyncAuthRulesWithRawResponse:
         )
 
 
-class AuthRulesWithStreamingResponse:
-    def __init__(self, auth_rules: AuthRules) -> None:
+class AuthRulesResourceWithStreamingResponse:
+    def __init__(self, auth_rules: AuthRulesResource) -> None:
         self._auth_rules = auth_rules
 
         self.create = to_streamed_response_wrapper(
@@ -774,8 +774,8 @@ class AuthRulesWithStreamingResponse:
         )
 
 
-class AsyncAuthRulesWithStreamingResponse:
-    def __init__(self, auth_rules: AsyncAuthRules) -> None:
+class AsyncAuthRulesResourceWithStreamingResponse:
+    def __init__(self, auth_rules: AsyncAuthRulesResource) -> None:
         self._auth_rules = auth_rules
 
         self.create = async_to_streamed_response_wrapper(

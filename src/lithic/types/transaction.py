@@ -310,7 +310,7 @@ class TokenInfo(BaseModel):
 
 
 class CardholderAuthentication(BaseModel):
-    three_ds_version: Optional[str] = FieldInfo(alias="3ds_version", default=None)
+    _3ds_version: Optional[str] = FieldInfo(alias="3ds_version", default=None)
     """3-D Secure Protocol version. Possible enum values:
 
     - `1`: 3-D Secure Protocol version 1.x applied to the transaction.

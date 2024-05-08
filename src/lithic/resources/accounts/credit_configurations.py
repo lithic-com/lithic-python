@@ -19,17 +19,17 @@ from ..._base_client import (
 from ...types.accounts import credit_configuration_update_params
 from ...types.business_account import BusinessAccount
 
-__all__ = ["CreditConfigurations", "AsyncCreditConfigurations"]
+__all__ = ["CreditConfigurationsResource", "AsyncCreditConfigurationsResource"]
 
 
-class CreditConfigurations(SyncAPIResource):
+class CreditConfigurationsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> CreditConfigurationsWithRawResponse:
-        return CreditConfigurationsWithRawResponse(self)
+    def with_raw_response(self) -> CreditConfigurationsResourceWithRawResponse:
+        return CreditConfigurationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CreditConfigurationsWithStreamingResponse:
-        return CreditConfigurationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> CreditConfigurationsResourceWithStreamingResponse:
+        return CreditConfigurationsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -119,14 +119,14 @@ class CreditConfigurations(SyncAPIResource):
         )
 
 
-class AsyncCreditConfigurations(AsyncAPIResource):
+class AsyncCreditConfigurationsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncCreditConfigurationsWithRawResponse:
-        return AsyncCreditConfigurationsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncCreditConfigurationsResourceWithRawResponse:
+        return AsyncCreditConfigurationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCreditConfigurationsWithStreamingResponse:
-        return AsyncCreditConfigurationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncCreditConfigurationsResourceWithStreamingResponse:
+        return AsyncCreditConfigurationsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -216,8 +216,8 @@ class AsyncCreditConfigurations(AsyncAPIResource):
         )
 
 
-class CreditConfigurationsWithRawResponse:
-    def __init__(self, credit_configurations: CreditConfigurations) -> None:
+class CreditConfigurationsResourceWithRawResponse:
+    def __init__(self, credit_configurations: CreditConfigurationsResource) -> None:
         self._credit_configurations = credit_configurations
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -228,8 +228,8 @@ class CreditConfigurationsWithRawResponse:
         )
 
 
-class AsyncCreditConfigurationsWithRawResponse:
-    def __init__(self, credit_configurations: AsyncCreditConfigurations) -> None:
+class AsyncCreditConfigurationsResourceWithRawResponse:
+    def __init__(self, credit_configurations: AsyncCreditConfigurationsResource) -> None:
         self._credit_configurations = credit_configurations
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -240,8 +240,8 @@ class AsyncCreditConfigurationsWithRawResponse:
         )
 
 
-class CreditConfigurationsWithStreamingResponse:
-    def __init__(self, credit_configurations: CreditConfigurations) -> None:
+class CreditConfigurationsResourceWithStreamingResponse:
+    def __init__(self, credit_configurations: CreditConfigurationsResource) -> None:
         self._credit_configurations = credit_configurations
 
         self.retrieve = to_streamed_response_wrapper(
@@ -252,8 +252,8 @@ class CreditConfigurationsWithStreamingResponse:
         )
 
 
-class AsyncCreditConfigurationsWithStreamingResponse:
-    def __init__(self, credit_configurations: AsyncCreditConfigurations) -> None:
+class AsyncCreditConfigurationsResourceWithStreamingResponse:
+    def __init__(self, credit_configurations: AsyncCreditConfigurationsResource) -> None:
         self._credit_configurations = credit_configurations
 
         self.retrieve = async_to_streamed_response_wrapper(

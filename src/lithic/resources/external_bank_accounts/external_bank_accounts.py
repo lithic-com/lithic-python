@@ -32,12 +32,12 @@ from ..._base_client import (
     make_request_options,
 )
 from .micro_deposits import (
-    MicroDeposits,
-    AsyncMicroDeposits,
-    MicroDepositsWithRawResponse,
-    AsyncMicroDepositsWithRawResponse,
-    MicroDepositsWithStreamingResponse,
-    AsyncMicroDepositsWithStreamingResponse,
+    MicroDepositsResource,
+    AsyncMicroDepositsResource,
+    MicroDepositsResourceWithRawResponse,
+    AsyncMicroDepositsResourceWithRawResponse,
+    MicroDepositsResourceWithStreamingResponse,
+    AsyncMicroDepositsResourceWithStreamingResponse,
 )
 from ...types.owner_type import OwnerType
 from ...types.verification_method import VerificationMethod
@@ -48,21 +48,21 @@ from ...types.external_bank_account_update_response import ExternalBankAccountUp
 from ...types.external_bank_account_retrieve_response import ExternalBankAccountRetrieveResponse
 from ...types.external_bank_account_retry_micro_deposits_response import ExternalBankAccountRetryMicroDepositsResponse
 
-__all__ = ["ExternalBankAccounts", "AsyncExternalBankAccounts"]
+__all__ = ["ExternalBankAccountsResource", "AsyncExternalBankAccountsResource"]
 
 
-class ExternalBankAccounts(SyncAPIResource):
+class ExternalBankAccountsResource(SyncAPIResource):
     @cached_property
-    def micro_deposits(self) -> MicroDeposits:
-        return MicroDeposits(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> ExternalBankAccountsWithRawResponse:
-        return ExternalBankAccountsWithRawResponse(self)
+    def micro_deposits(self) -> MicroDepositsResource:
+        return MicroDepositsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> ExternalBankAccountsWithStreamingResponse:
-        return ExternalBankAccountsWithStreamingResponse(self)
+    def with_raw_response(self) -> ExternalBankAccountsResourceWithRawResponse:
+        return ExternalBankAccountsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ExternalBankAccountsResourceWithStreamingResponse:
+        return ExternalBankAccountsResourceWithStreamingResponse(self)
 
     @overload
     def create(
@@ -434,18 +434,18 @@ class ExternalBankAccounts(SyncAPIResource):
         )
 
 
-class AsyncExternalBankAccounts(AsyncAPIResource):
+class AsyncExternalBankAccountsResource(AsyncAPIResource):
     @cached_property
-    def micro_deposits(self) -> AsyncMicroDeposits:
-        return AsyncMicroDeposits(self._client)
+    def micro_deposits(self) -> AsyncMicroDepositsResource:
+        return AsyncMicroDepositsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncExternalBankAccountsWithRawResponse:
-        return AsyncExternalBankAccountsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncExternalBankAccountsResourceWithRawResponse:
+        return AsyncExternalBankAccountsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncExternalBankAccountsWithStreamingResponse:
-        return AsyncExternalBankAccountsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncExternalBankAccountsResourceWithStreamingResponse:
+        return AsyncExternalBankAccountsResourceWithStreamingResponse(self)
 
     @overload
     async def create(
@@ -817,8 +817,8 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         )
 
 
-class ExternalBankAccountsWithRawResponse:
-    def __init__(self, external_bank_accounts: ExternalBankAccounts) -> None:
+class ExternalBankAccountsResourceWithRawResponse:
+    def __init__(self, external_bank_accounts: ExternalBankAccountsResource) -> None:
         self._external_bank_accounts = external_bank_accounts
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -838,12 +838,12 @@ class ExternalBankAccountsWithRawResponse:
         )
 
     @cached_property
-    def micro_deposits(self) -> MicroDepositsWithRawResponse:
-        return MicroDepositsWithRawResponse(self._external_bank_accounts.micro_deposits)
+    def micro_deposits(self) -> MicroDepositsResourceWithRawResponse:
+        return MicroDepositsResourceWithRawResponse(self._external_bank_accounts.micro_deposits)
 
 
-class AsyncExternalBankAccountsWithRawResponse:
-    def __init__(self, external_bank_accounts: AsyncExternalBankAccounts) -> None:
+class AsyncExternalBankAccountsResourceWithRawResponse:
+    def __init__(self, external_bank_accounts: AsyncExternalBankAccountsResource) -> None:
         self._external_bank_accounts = external_bank_accounts
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -863,12 +863,12 @@ class AsyncExternalBankAccountsWithRawResponse:
         )
 
     @cached_property
-    def micro_deposits(self) -> AsyncMicroDepositsWithRawResponse:
-        return AsyncMicroDepositsWithRawResponse(self._external_bank_accounts.micro_deposits)
+    def micro_deposits(self) -> AsyncMicroDepositsResourceWithRawResponse:
+        return AsyncMicroDepositsResourceWithRawResponse(self._external_bank_accounts.micro_deposits)
 
 
-class ExternalBankAccountsWithStreamingResponse:
-    def __init__(self, external_bank_accounts: ExternalBankAccounts) -> None:
+class ExternalBankAccountsResourceWithStreamingResponse:
+    def __init__(self, external_bank_accounts: ExternalBankAccountsResource) -> None:
         self._external_bank_accounts = external_bank_accounts
 
         self.create = to_streamed_response_wrapper(
@@ -888,12 +888,12 @@ class ExternalBankAccountsWithStreamingResponse:
         )
 
     @cached_property
-    def micro_deposits(self) -> MicroDepositsWithStreamingResponse:
-        return MicroDepositsWithStreamingResponse(self._external_bank_accounts.micro_deposits)
+    def micro_deposits(self) -> MicroDepositsResourceWithStreamingResponse:
+        return MicroDepositsResourceWithStreamingResponse(self._external_bank_accounts.micro_deposits)
 
 
-class AsyncExternalBankAccountsWithStreamingResponse:
-    def __init__(self, external_bank_accounts: AsyncExternalBankAccounts) -> None:
+class AsyncExternalBankAccountsResourceWithStreamingResponse:
+    def __init__(self, external_bank_accounts: AsyncExternalBankAccountsResource) -> None:
         self._external_bank_accounts = external_bank_accounts
 
         self.create = async_to_streamed_response_wrapper(
@@ -913,5 +913,5 @@ class AsyncExternalBankAccountsWithStreamingResponse:
         )
 
     @cached_property
-    def micro_deposits(self) -> AsyncMicroDepositsWithStreamingResponse:
-        return AsyncMicroDepositsWithStreamingResponse(self._external_bank_accounts.micro_deposits)
+    def micro_deposits(self) -> AsyncMicroDepositsResourceWithStreamingResponse:
+        return AsyncMicroDepositsResourceWithStreamingResponse(self._external_bank_accounts.micro_deposits)

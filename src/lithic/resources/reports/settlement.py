@@ -22,17 +22,17 @@ from ...types.reports import settlement_list_details_params
 from ...types.settlement_detail import SettlementDetail
 from ...types.settlement_report import SettlementReport
 
-__all__ = ["Settlement", "AsyncSettlement"]
+__all__ = ["SettlementResource", "AsyncSettlementResource"]
 
 
-class Settlement(SyncAPIResource):
+class SettlementResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> SettlementWithRawResponse:
-        return SettlementWithRawResponse(self)
+    def with_raw_response(self) -> SettlementResourceWithRawResponse:
+        return SettlementResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> SettlementWithStreamingResponse:
-        return SettlementWithStreamingResponse(self)
+    def with_streaming_response(self) -> SettlementResourceWithStreamingResponse:
+        return SettlementResourceWithStreamingResponse(self)
 
     def list_details(
         self,
@@ -124,14 +124,14 @@ class Settlement(SyncAPIResource):
         )
 
 
-class AsyncSettlement(AsyncAPIResource):
+class AsyncSettlementResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncSettlementWithRawResponse:
-        return AsyncSettlementWithRawResponse(self)
+    def with_raw_response(self) -> AsyncSettlementResourceWithRawResponse:
+        return AsyncSettlementResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncSettlementWithStreamingResponse:
-        return AsyncSettlementWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncSettlementResourceWithStreamingResponse:
+        return AsyncSettlementResourceWithStreamingResponse(self)
 
     def list_details(
         self,
@@ -223,8 +223,8 @@ class AsyncSettlement(AsyncAPIResource):
         )
 
 
-class SettlementWithRawResponse:
-    def __init__(self, settlement: Settlement) -> None:
+class SettlementResourceWithRawResponse:
+    def __init__(self, settlement: SettlementResource) -> None:
         self._settlement = settlement
 
         self.list_details = _legacy_response.to_raw_response_wrapper(
@@ -235,8 +235,8 @@ class SettlementWithRawResponse:
         )
 
 
-class AsyncSettlementWithRawResponse:
-    def __init__(self, settlement: AsyncSettlement) -> None:
+class AsyncSettlementResourceWithRawResponse:
+    def __init__(self, settlement: AsyncSettlementResource) -> None:
         self._settlement = settlement
 
         self.list_details = _legacy_response.async_to_raw_response_wrapper(
@@ -247,8 +247,8 @@ class AsyncSettlementWithRawResponse:
         )
 
 
-class SettlementWithStreamingResponse:
-    def __init__(self, settlement: Settlement) -> None:
+class SettlementResourceWithStreamingResponse:
+    def __init__(self, settlement: SettlementResource) -> None:
         self._settlement = settlement
 
         self.list_details = to_streamed_response_wrapper(
@@ -259,8 +259,8 @@ class SettlementWithStreamingResponse:
         )
 
 
-class AsyncSettlementWithStreamingResponse:
-    def __init__(self, settlement: AsyncSettlement) -> None:
+class AsyncSettlementResourceWithStreamingResponse:
+    def __init__(self, settlement: AsyncSettlementResource) -> None:
         self._settlement = settlement
 
         self.list_details = async_to_streamed_response_wrapper(

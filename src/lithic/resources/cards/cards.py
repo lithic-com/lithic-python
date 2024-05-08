@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+import hmac
+import json
+import base64
+import hashlib
 from typing import Union
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing_extensions import Literal
 
 import httpx
+from httpx import URL
 
 from ... import _legacy_response
 from ...types import (
@@ -19,6 +24,7 @@ from ...types import (
     card_update_params,
     card_reissue_params,
     card_provision_params,
+    card_get_embed_url_params,
     card_search_by_pan_params,
 )
 from ..._types import (
@@ -31,15 +37,16 @@ from ..._types import (
 )
 from ..._utils import (
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from .balances import (
-    Balances,
-    AsyncBalances,
-    BalancesWithRawResponse,
-    AsyncBalancesWithRawResponse,
-    BalancesWithStreamingResponse,
-    AsyncBalancesWithStreamingResponse,
+    BalancesResource,
+    AsyncBalancesResource,
+    BalancesResourceWithRawResponse,
+    AsyncBalancesResourceWithRawResponse,
+    BalancesResourceWithStreamingResponse,
+    AsyncBalancesResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -48,51 +55,52 @@ from ...pagination import SyncCursorPage, AsyncCursorPage
 from ...types.card import Card
 from ..._base_client import (
     AsyncPaginator,
+    _merge_mappings,
     make_request_options,
 )
 from .aggregate_balances import (
-    AggregateBalances,
-    AsyncAggregateBalances,
-    AggregateBalancesWithRawResponse,
-    AsyncAggregateBalancesWithRawResponse,
-    AggregateBalancesWithStreamingResponse,
-    AsyncAggregateBalancesWithStreamingResponse,
+    AggregateBalancesResource,
+    AsyncAggregateBalancesResource,
+    AggregateBalancesResourceWithRawResponse,
+    AsyncAggregateBalancesResourceWithRawResponse,
+    AggregateBalancesResourceWithStreamingResponse,
+    AsyncAggregateBalancesResourceWithStreamingResponse,
 )
 from .financial_transactions import (
-    FinancialTransactions,
-    AsyncFinancialTransactions,
-    FinancialTransactionsWithRawResponse,
-    AsyncFinancialTransactionsWithRawResponse,
-    FinancialTransactionsWithStreamingResponse,
-    AsyncFinancialTransactionsWithStreamingResponse,
+    FinancialTransactionsResource,
+    AsyncFinancialTransactionsResource,
+    FinancialTransactionsResourceWithRawResponse,
+    AsyncFinancialTransactionsResourceWithRawResponse,
+    FinancialTransactionsResourceWithStreamingResponse,
+    AsyncFinancialTransactionsResourceWithStreamingResponse,
 )
 from ...types.card_spend_limits import CardSpendLimits
 from ...types.spend_limit_duration import SpendLimitDuration
 from ...types.card_provision_response import CardProvisionResponse
 
-__all__ = ["Cards", "AsyncCards"]
+__all__ = ["CardsResource", "AsyncCardsResource"]
 
 
-class Cards(SyncAPIResource):
+class CardsResource(SyncAPIResource):
     @cached_property
-    def aggregate_balances(self) -> AggregateBalances:
-        return AggregateBalances(self._client)
-
-    @cached_property
-    def balances(self) -> Balances:
-        return Balances(self._client)
+    def aggregate_balances(self) -> AggregateBalancesResource:
+        return AggregateBalancesResource(self._client)
 
     @cached_property
-    def financial_transactions(self) -> FinancialTransactions:
-        return FinancialTransactions(self._client)
+    def balances(self) -> BalancesResource:
+        return BalancesResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> CardsWithRawResponse:
-        return CardsWithRawResponse(self)
+    def financial_transactions(self) -> FinancialTransactionsResource:
+        return FinancialTransactionsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> CardsWithStreamingResponse:
-        return CardsWithStreamingResponse(self)
+    def with_raw_response(self) -> CardsResourceWithRawResponse:
+        return CardsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> CardsResourceWithStreamingResponse:
+        return CardsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -534,6 +542,117 @@ class Cards(SyncAPIResource):
             cast_to=str,
         )
 
+    def get_embed_html(
+        self,
+        *,
+        token: str,
+        css: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        target_origin: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Generates and executes an embed request, returning html you can serve to the
+        user.
+
+        Be aware that this html contains sensitive data whose presence on your server
+        could trigger PCI DSS.
+
+        If your company is not certified PCI compliant, we recommend using
+        `get_embed_url()` instead. You would then pass that returned URL to the
+        frontend, where you can load it via an iframe.
+        """
+        headers = _merge_mappings({"Accept": "text/html"}, extra_headers or {})
+        url = self.get_embed_url(
+            css=css,
+            token=token,
+            expiration=expiration,
+            target_origin=target_origin,
+        )
+        return self._get(
+            str(url),
+            cast_to=str,
+            options=make_request_options(
+                extra_headers=headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+            ),
+        )
+
+    def get_embed_url(
+        self,
+        *,
+        token: str,
+        css: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        target_origin: str | NotGiven = NOT_GIVEN,
+    ) -> URL:
+        """
+        Handling full card PANs and CVV codes requires that you comply with the Payment
+        Card Industry Data Security Standards (PCI DSS). Some clients choose to reduce
+        their compliance obligations by leveraging our embedded card UI solution
+        documented below.
+
+        In this setup, PANs and CVV codes are presented to the end-user via a card UI
+        that we provide, optionally styled in the customer's branding using a specified
+        css stylesheet. A user's browser makes the request directly to api.lithic.com,
+        so card PANs and CVVs never touch the API customer's servers while full card
+        data is displayed to their end-users. The response contains an HTML document.
+        This means that the url for the request can be inserted straight into the `src`
+        attribute of an iframe.
+
+        ```html
+        <iframe
+          id="card-iframe"
+          src="https://sandbox.lithic.com/v1/embed/card?embed_request=eyJjc3MiO...;hmac=r8tx1..."
+          allow="clipboard-write"
+          class="content"
+        ></iframe>
+        ```
+
+        You should compute the request payload on the server side. You can render it (or
+        the whole iframe) on the server or make an ajax call from your front end code,
+        but **do not ever embed your API key into front end code, as doing so introduces
+        a serious security vulnerability**.
+        """
+        # Default expiration of 1 minute from now.
+        if isinstance(expiration, NotGiven):
+            expiration = datetime.now(timezone.utc) + timedelta(minutes=1)
+
+        query = maybe_transform(
+            strip_not_given(
+                {
+                    "css": css,
+                    "token": token,
+                    "expiration": expiration,
+                    "target_origin": target_origin,
+                }
+            ),
+            card_get_embed_url_params.CardGetEmbedURLParams,
+        )
+        serialized = json.dumps(query, sort_keys=True, separators=(",", ":"))
+        params = {
+            "embed_request": base64.b64encode(bytes(serialized, "utf-8")).decode("utf-8"),
+            "hmac": base64.b64encode(
+                hmac.new(
+                    key=bytes(self._client.api_key, "utf-8"),
+                    msg=bytes(serialized, "utf-8"),
+                    digestmod=hashlib.sha256,
+                ).digest()
+            ).decode("utf-8"),
+        }
+
+        # Copied nearly directly from httpx.BaseClient._merge_url
+        base_url = self._client.base_url
+        raw_path = base_url.raw_path + URL("embed/card").raw_path
+        return base_url.copy_with(raw_path=raw_path).copy_merge_params(params)
+
     def provision(
         self,
         card_token: str,
@@ -838,26 +957,26 @@ class Cards(SyncAPIResource):
         )
 
 
-class AsyncCards(AsyncAPIResource):
+class AsyncCardsResource(AsyncAPIResource):
     @cached_property
-    def aggregate_balances(self) -> AsyncAggregateBalances:
-        return AsyncAggregateBalances(self._client)
+    def aggregate_balances(self) -> AsyncAggregateBalancesResource:
+        return AsyncAggregateBalancesResource(self._client)
 
     @cached_property
-    def balances(self) -> AsyncBalances:
-        return AsyncBalances(self._client)
+    def balances(self) -> AsyncBalancesResource:
+        return AsyncBalancesResource(self._client)
 
     @cached_property
-    def financial_transactions(self) -> AsyncFinancialTransactions:
-        return AsyncFinancialTransactions(self._client)
+    def financial_transactions(self) -> AsyncFinancialTransactionsResource:
+        return AsyncFinancialTransactionsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncCardsWithRawResponse:
-        return AsyncCardsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncCardsResourceWithRawResponse:
+        return AsyncCardsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCardsWithStreamingResponse:
-        return AsyncCardsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncCardsResourceWithStreamingResponse:
+        return AsyncCardsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -1299,6 +1418,117 @@ class AsyncCards(AsyncAPIResource):
             cast_to=str,
         )
 
+    async def get_embed_html(
+        self,
+        *,
+        token: str,
+        css: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        target_origin: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Generates and executes an embed request, returning html you can serve to the
+        user.
+
+        Be aware that this html contains sensitive data whose presence on your server
+        could trigger PCI DSS.
+
+        If your company is not certified PCI compliant, we recommend using
+        `get_embed_url()` instead. You would then pass that returned URL to the
+        frontend, where you can load it via an iframe.
+        """
+        headers = _merge_mappings({"Accept": "text/html"}, extra_headers or {})
+        url = self.get_embed_url(
+            css=css,
+            token=token,
+            expiration=expiration,
+            target_origin=target_origin,
+        )
+        return await self._get(
+            str(url),
+            cast_to=str,
+            options=make_request_options(
+                extra_headers=headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+            ),
+        )
+
+    def get_embed_url(
+        self,
+        *,
+        token: str,
+        css: str | NotGiven = NOT_GIVEN,
+        expiration: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        target_origin: str | NotGiven = NOT_GIVEN,
+    ) -> URL:
+        """
+        Handling full card PANs and CVV codes requires that you comply with the Payment
+        Card Industry Data Security Standards (PCI DSS). Some clients choose to reduce
+        their compliance obligations by leveraging our embedded card UI solution
+        documented below.
+
+        In this setup, PANs and CVV codes are presented to the end-user via a card UI
+        that we provide, optionally styled in the customer's branding using a specified
+        css stylesheet. A user's browser makes the request directly to api.lithic.com,
+        so card PANs and CVVs never touch the API customer's servers while full card
+        data is displayed to their end-users. The response contains an HTML document.
+        This means that the url for the request can be inserted straight into the `src`
+        attribute of an iframe.
+
+        ```html
+        <iframe
+          id="card-iframe"
+          src="https://sandbox.lithic.com/v1/embed/card?embed_request=eyJjc3MiO...;hmac=r8tx1..."
+          allow="clipboard-write"
+          class="content"
+        ></iframe>
+        ```
+
+        You should compute the request payload on the server side. You can render it (or
+        the whole iframe) on the server or make an ajax call from your front end code,
+        but **do not ever embed your API key into front end code, as doing so introduces
+        a serious security vulnerability**.
+        """
+        # Default expiration of 1 minute from now.
+        if isinstance(expiration, NotGiven):
+            expiration = datetime.now(timezone.utc) + timedelta(minutes=1)
+
+        query = maybe_transform(
+            strip_not_given(
+                {
+                    "css": css,
+                    "token": token,
+                    "expiration": expiration,
+                    "target_origin": target_origin,
+                }
+            ),
+            card_get_embed_url_params.CardGetEmbedURLParams,
+        )
+        serialized = json.dumps(query, sort_keys=True, separators=(",", ":"))
+        params = {
+            "embed_request": base64.b64encode(bytes(serialized, "utf-8")).decode("utf-8"),
+            "hmac": base64.b64encode(
+                hmac.new(
+                    key=bytes(self._client.api_key, "utf-8"),
+                    msg=bytes(serialized, "utf-8"),
+                    digestmod=hashlib.sha256,
+                ).digest()
+            ).decode("utf-8"),
+        }
+
+        # Copied nearly directly from httpx.BaseClient._merge_url
+        base_url = self._client.base_url
+        raw_path = base_url.raw_path + URL("embed/card").raw_path
+        return base_url.copy_with(raw_path=raw_path).copy_merge_params(params)
+
     async def provision(
         self,
         card_token: str,
@@ -1603,8 +1833,8 @@ class AsyncCards(AsyncAPIResource):
         )
 
 
-class CardsWithRawResponse:
-    def __init__(self, cards: Cards) -> None:
+class CardsResourceWithRawResponse:
+    def __init__(self, cards: CardsResource) -> None:
         self._cards = cards
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -1639,20 +1869,20 @@ class CardsWithRawResponse:
         )
 
     @cached_property
-    def aggregate_balances(self) -> AggregateBalancesWithRawResponse:
-        return AggregateBalancesWithRawResponse(self._cards.aggregate_balances)
+    def aggregate_balances(self) -> AggregateBalancesResourceWithRawResponse:
+        return AggregateBalancesResourceWithRawResponse(self._cards.aggregate_balances)
 
     @cached_property
-    def balances(self) -> BalancesWithRawResponse:
-        return BalancesWithRawResponse(self._cards.balances)
+    def balances(self) -> BalancesResourceWithRawResponse:
+        return BalancesResourceWithRawResponse(self._cards.balances)
 
     @cached_property
-    def financial_transactions(self) -> FinancialTransactionsWithRawResponse:
-        return FinancialTransactionsWithRawResponse(self._cards.financial_transactions)
+    def financial_transactions(self) -> FinancialTransactionsResourceWithRawResponse:
+        return FinancialTransactionsResourceWithRawResponse(self._cards.financial_transactions)
 
 
-class AsyncCardsWithRawResponse:
-    def __init__(self, cards: AsyncCards) -> None:
+class AsyncCardsResourceWithRawResponse:
+    def __init__(self, cards: AsyncCardsResource) -> None:
         self._cards = cards
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -1687,20 +1917,20 @@ class AsyncCardsWithRawResponse:
         )
 
     @cached_property
-    def aggregate_balances(self) -> AsyncAggregateBalancesWithRawResponse:
-        return AsyncAggregateBalancesWithRawResponse(self._cards.aggregate_balances)
+    def aggregate_balances(self) -> AsyncAggregateBalancesResourceWithRawResponse:
+        return AsyncAggregateBalancesResourceWithRawResponse(self._cards.aggregate_balances)
 
     @cached_property
-    def balances(self) -> AsyncBalancesWithRawResponse:
-        return AsyncBalancesWithRawResponse(self._cards.balances)
+    def balances(self) -> AsyncBalancesResourceWithRawResponse:
+        return AsyncBalancesResourceWithRawResponse(self._cards.balances)
 
     @cached_property
-    def financial_transactions(self) -> AsyncFinancialTransactionsWithRawResponse:
-        return AsyncFinancialTransactionsWithRawResponse(self._cards.financial_transactions)
+    def financial_transactions(self) -> AsyncFinancialTransactionsResourceWithRawResponse:
+        return AsyncFinancialTransactionsResourceWithRawResponse(self._cards.financial_transactions)
 
 
-class CardsWithStreamingResponse:
-    def __init__(self, cards: Cards) -> None:
+class CardsResourceWithStreamingResponse:
+    def __init__(self, cards: CardsResource) -> None:
         self._cards = cards
 
         self.create = to_streamed_response_wrapper(
@@ -1735,20 +1965,20 @@ class CardsWithStreamingResponse:
         )
 
     @cached_property
-    def aggregate_balances(self) -> AggregateBalancesWithStreamingResponse:
-        return AggregateBalancesWithStreamingResponse(self._cards.aggregate_balances)
+    def aggregate_balances(self) -> AggregateBalancesResourceWithStreamingResponse:
+        return AggregateBalancesResourceWithStreamingResponse(self._cards.aggregate_balances)
 
     @cached_property
-    def balances(self) -> BalancesWithStreamingResponse:
-        return BalancesWithStreamingResponse(self._cards.balances)
+    def balances(self) -> BalancesResourceWithStreamingResponse:
+        return BalancesResourceWithStreamingResponse(self._cards.balances)
 
     @cached_property
-    def financial_transactions(self) -> FinancialTransactionsWithStreamingResponse:
-        return FinancialTransactionsWithStreamingResponse(self._cards.financial_transactions)
+    def financial_transactions(self) -> FinancialTransactionsResourceWithStreamingResponse:
+        return FinancialTransactionsResourceWithStreamingResponse(self._cards.financial_transactions)
 
 
-class AsyncCardsWithStreamingResponse:
-    def __init__(self, cards: AsyncCards) -> None:
+class AsyncCardsResourceWithStreamingResponse:
+    def __init__(self, cards: AsyncCardsResource) -> None:
         self._cards = cards
 
         self.create = async_to_streamed_response_wrapper(
@@ -1783,13 +2013,13 @@ class AsyncCardsWithStreamingResponse:
         )
 
     @cached_property
-    def aggregate_balances(self) -> AsyncAggregateBalancesWithStreamingResponse:
-        return AsyncAggregateBalancesWithStreamingResponse(self._cards.aggregate_balances)
+    def aggregate_balances(self) -> AsyncAggregateBalancesResourceWithStreamingResponse:
+        return AsyncAggregateBalancesResourceWithStreamingResponse(self._cards.aggregate_balances)
 
     @cached_property
-    def balances(self) -> AsyncBalancesWithStreamingResponse:
-        return AsyncBalancesWithStreamingResponse(self._cards.balances)
+    def balances(self) -> AsyncBalancesResourceWithStreamingResponse:
+        return AsyncBalancesResourceWithStreamingResponse(self._cards.balances)
 
     @cached_property
-    def financial_transactions(self) -> AsyncFinancialTransactionsWithStreamingResponse:
-        return AsyncFinancialTransactionsWithStreamingResponse(self._cards.financial_transactions)
+    def financial_transactions(self) -> AsyncFinancialTransactionsResourceWithStreamingResponse:
+        return AsyncFinancialTransactionsResourceWithStreamingResponse(self._cards.financial_transactions)

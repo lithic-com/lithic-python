@@ -5,108 +5,108 @@ from __future__ import annotations
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from .decisioning import (
-    Decisioning,
-    AsyncDecisioning,
-    DecisioningWithRawResponse,
-    AsyncDecisioningWithRawResponse,
-    DecisioningWithStreamingResponse,
-    AsyncDecisioningWithStreamingResponse,
+    DecisioningResource,
+    AsyncDecisioningResource,
+    DecisioningResourceWithRawResponse,
+    AsyncDecisioningResourceWithRawResponse,
+    DecisioningResourceWithStreamingResponse,
+    AsyncDecisioningResourceWithStreamingResponse,
 )
 from .authentication import (
-    Authentication,
-    AsyncAuthentication,
-    AuthenticationWithRawResponse,
-    AsyncAuthenticationWithRawResponse,
-    AuthenticationWithStreamingResponse,
-    AsyncAuthenticationWithStreamingResponse,
+    AuthenticationResource,
+    AsyncAuthenticationResource,
+    AuthenticationResourceWithRawResponse,
+    AsyncAuthenticationResourceWithRawResponse,
+    AuthenticationResourceWithStreamingResponse,
+    AsyncAuthenticationResourceWithStreamingResponse,
 )
 
-__all__ = ["ThreeDS", "AsyncThreeDS"]
+__all__ = ["ThreeDSResource", "AsyncThreeDSResource"]
 
 
-class ThreeDS(SyncAPIResource):
+class ThreeDSResource(SyncAPIResource):
     @cached_property
-    def authentication(self) -> Authentication:
-        return Authentication(self._client)
-
-    @cached_property
-    def decisioning(self) -> Decisioning:
-        return Decisioning(self._client)
+    def authentication(self) -> AuthenticationResource:
+        return AuthenticationResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> ThreeDSWithRawResponse:
-        return ThreeDSWithRawResponse(self)
+    def decisioning(self) -> DecisioningResource:
+        return DecisioningResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> ThreeDSWithStreamingResponse:
-        return ThreeDSWithStreamingResponse(self)
-
-
-class AsyncThreeDS(AsyncAPIResource):
-    @cached_property
-    def authentication(self) -> AsyncAuthentication:
-        return AsyncAuthentication(self._client)
+    def with_raw_response(self) -> ThreeDSResourceWithRawResponse:
+        return ThreeDSResourceWithRawResponse(self)
 
     @cached_property
-    def decisioning(self) -> AsyncDecisioning:
-        return AsyncDecisioning(self._client)
+    def with_streaming_response(self) -> ThreeDSResourceWithStreamingResponse:
+        return ThreeDSResourceWithStreamingResponse(self)
+
+
+class AsyncThreeDSResource(AsyncAPIResource):
+    @cached_property
+    def authentication(self) -> AsyncAuthenticationResource:
+        return AsyncAuthenticationResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncThreeDSWithRawResponse:
-        return AsyncThreeDSWithRawResponse(self)
+    def decisioning(self) -> AsyncDecisioningResource:
+        return AsyncDecisioningResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncThreeDSWithStreamingResponse:
-        return AsyncThreeDSWithStreamingResponse(self)
+    def with_raw_response(self) -> AsyncThreeDSResourceWithRawResponse:
+        return AsyncThreeDSResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncThreeDSResourceWithStreamingResponse:
+        return AsyncThreeDSResourceWithStreamingResponse(self)
 
 
-class ThreeDSWithRawResponse:
-    def __init__(self, three_ds: ThreeDS) -> None:
+class ThreeDSResourceWithRawResponse:
+    def __init__(self, three_ds: ThreeDSResource) -> None:
         self._three_ds = three_ds
 
     @cached_property
-    def authentication(self) -> AuthenticationWithRawResponse:
-        return AuthenticationWithRawResponse(self._three_ds.authentication)
+    def authentication(self) -> AuthenticationResourceWithRawResponse:
+        return AuthenticationResourceWithRawResponse(self._three_ds.authentication)
 
     @cached_property
-    def decisioning(self) -> DecisioningWithRawResponse:
-        return DecisioningWithRawResponse(self._three_ds.decisioning)
+    def decisioning(self) -> DecisioningResourceWithRawResponse:
+        return DecisioningResourceWithRawResponse(self._three_ds.decisioning)
 
 
-class AsyncThreeDSWithRawResponse:
-    def __init__(self, three_ds: AsyncThreeDS) -> None:
+class AsyncThreeDSResourceWithRawResponse:
+    def __init__(self, three_ds: AsyncThreeDSResource) -> None:
         self._three_ds = three_ds
 
     @cached_property
-    def authentication(self) -> AsyncAuthenticationWithRawResponse:
-        return AsyncAuthenticationWithRawResponse(self._three_ds.authentication)
+    def authentication(self) -> AsyncAuthenticationResourceWithRawResponse:
+        return AsyncAuthenticationResourceWithRawResponse(self._three_ds.authentication)
 
     @cached_property
-    def decisioning(self) -> AsyncDecisioningWithRawResponse:
-        return AsyncDecisioningWithRawResponse(self._three_ds.decisioning)
+    def decisioning(self) -> AsyncDecisioningResourceWithRawResponse:
+        return AsyncDecisioningResourceWithRawResponse(self._three_ds.decisioning)
 
 
-class ThreeDSWithStreamingResponse:
-    def __init__(self, three_ds: ThreeDS) -> None:
+class ThreeDSResourceWithStreamingResponse:
+    def __init__(self, three_ds: ThreeDSResource) -> None:
         self._three_ds = three_ds
 
     @cached_property
-    def authentication(self) -> AuthenticationWithStreamingResponse:
-        return AuthenticationWithStreamingResponse(self._three_ds.authentication)
+    def authentication(self) -> AuthenticationResourceWithStreamingResponse:
+        return AuthenticationResourceWithStreamingResponse(self._three_ds.authentication)
 
     @cached_property
-    def decisioning(self) -> DecisioningWithStreamingResponse:
-        return DecisioningWithStreamingResponse(self._three_ds.decisioning)
+    def decisioning(self) -> DecisioningResourceWithStreamingResponse:
+        return DecisioningResourceWithStreamingResponse(self._three_ds.decisioning)
 
 
-class AsyncThreeDSWithStreamingResponse:
-    def __init__(self, three_ds: AsyncThreeDS) -> None:
+class AsyncThreeDSResourceWithStreamingResponse:
+    def __init__(self, three_ds: AsyncThreeDSResource) -> None:
         self._three_ds = three_ds
 
     @cached_property
-    def authentication(self) -> AsyncAuthenticationWithStreamingResponse:
-        return AsyncAuthenticationWithStreamingResponse(self._three_ds.authentication)
+    def authentication(self) -> AsyncAuthenticationResourceWithStreamingResponse:
+        return AsyncAuthenticationResourceWithStreamingResponse(self._three_ds.authentication)
 
     @cached_property
-    def decisioning(self) -> AsyncDecisioningWithStreamingResponse:
-        return AsyncDecisioningWithStreamingResponse(self._three_ds.decisioning)
+    def decisioning(self) -> AsyncDecisioningResourceWithStreamingResponse:
+        return AsyncDecisioningResourceWithStreamingResponse(self._three_ds.decisioning)

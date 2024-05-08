@@ -18,17 +18,17 @@ from ..._base_client import (
 )
 from ...types.cards.aggregate_balance_list_response import AggregateBalanceListResponse
 
-__all__ = ["AggregateBalances", "AsyncAggregateBalances"]
+__all__ = ["AggregateBalancesResource", "AsyncAggregateBalancesResource"]
 
 
-class AggregateBalances(SyncAPIResource):
+class AggregateBalancesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AggregateBalancesWithRawResponse:
-        return AggregateBalancesWithRawResponse(self)
+    def with_raw_response(self) -> AggregateBalancesResourceWithRawResponse:
+        return AggregateBalancesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AggregateBalancesWithStreamingResponse:
-        return AggregateBalancesWithStreamingResponse(self)
+    def with_streaming_response(self) -> AggregateBalancesResourceWithStreamingResponse:
+        return AggregateBalancesResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -78,14 +78,14 @@ class AggregateBalances(SyncAPIResource):
         )
 
 
-class AsyncAggregateBalances(AsyncAPIResource):
+class AsyncAggregateBalancesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAggregateBalancesWithRawResponse:
-        return AsyncAggregateBalancesWithRawResponse(self)
+    def with_raw_response(self) -> AsyncAggregateBalancesResourceWithRawResponse:
+        return AsyncAggregateBalancesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAggregateBalancesWithStreamingResponse:
-        return AsyncAggregateBalancesWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncAggregateBalancesResourceWithStreamingResponse:
+        return AsyncAggregateBalancesResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -135,8 +135,8 @@ class AsyncAggregateBalances(AsyncAPIResource):
         )
 
 
-class AggregateBalancesWithRawResponse:
-    def __init__(self, aggregate_balances: AggregateBalances) -> None:
+class AggregateBalancesResourceWithRawResponse:
+    def __init__(self, aggregate_balances: AggregateBalancesResource) -> None:
         self._aggregate_balances = aggregate_balances
 
         self.list = _legacy_response.to_raw_response_wrapper(
@@ -144,8 +144,8 @@ class AggregateBalancesWithRawResponse:
         )
 
 
-class AsyncAggregateBalancesWithRawResponse:
-    def __init__(self, aggregate_balances: AsyncAggregateBalances) -> None:
+class AsyncAggregateBalancesResourceWithRawResponse:
+    def __init__(self, aggregate_balances: AsyncAggregateBalancesResource) -> None:
         self._aggregate_balances = aggregate_balances
 
         self.list = _legacy_response.async_to_raw_response_wrapper(
@@ -153,8 +153,8 @@ class AsyncAggregateBalancesWithRawResponse:
         )
 
 
-class AggregateBalancesWithStreamingResponse:
-    def __init__(self, aggregate_balances: AggregateBalances) -> None:
+class AggregateBalancesResourceWithStreamingResponse:
+    def __init__(self, aggregate_balances: AggregateBalancesResource) -> None:
         self._aggregate_balances = aggregate_balances
 
         self.list = to_streamed_response_wrapper(
@@ -162,8 +162,8 @@ class AggregateBalancesWithStreamingResponse:
         )
 
 
-class AsyncAggregateBalancesWithStreamingResponse:
-    def __init__(self, aggregate_balances: AsyncAggregateBalances) -> None:
+class AsyncAggregateBalancesResourceWithStreamingResponse:
+    def __init__(self, aggregate_balances: AsyncAggregateBalancesResource) -> None:
         self._aggregate_balances = aggregate_balances
 
         self.list = async_to_streamed_response_wrapper(

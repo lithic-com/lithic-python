@@ -41,17 +41,17 @@ from ..types.transaction_simulate_return_reversal_response import TransactionSim
 from ..types.transaction_simulate_authorization_advice_response import TransactionSimulateAuthorizationAdviceResponse
 from ..types.transaction_simulate_credit_authorization_response import TransactionSimulateCreditAuthorizationResponse
 
-__all__ = ["Transactions", "AsyncTransactions"]
+__all__ = ["TransactionsResource", "AsyncTransactionsResource"]
 
 
-class Transactions(SyncAPIResource):
+class TransactionsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TransactionsWithRawResponse:
-        return TransactionsWithRawResponse(self)
+    def with_raw_response(self) -> TransactionsResourceWithRawResponse:
+        return TransactionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TransactionsWithStreamingResponse:
-        return TransactionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> TransactionsResourceWithStreamingResponse:
+        return TransactionsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -577,14 +577,14 @@ class Transactions(SyncAPIResource):
         )
 
 
-class AsyncTransactions(AsyncAPIResource):
+class AsyncTransactionsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTransactionsWithRawResponse:
-        return AsyncTransactionsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTransactionsResourceWithRawResponse:
+        return AsyncTransactionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTransactionsWithStreamingResponse:
-        return AsyncTransactionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTransactionsResourceWithStreamingResponse:
+        return AsyncTransactionsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -1110,8 +1110,8 @@ class AsyncTransactions(AsyncAPIResource):
         )
 
 
-class TransactionsWithRawResponse:
-    def __init__(self, transactions: Transactions) -> None:
+class TransactionsResourceWithRawResponse:
+    def __init__(self, transactions: TransactionsResource) -> None:
         self._transactions = transactions
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -1143,8 +1143,8 @@ class TransactionsWithRawResponse:
         )
 
 
-class AsyncTransactionsWithRawResponse:
-    def __init__(self, transactions: AsyncTransactions) -> None:
+class AsyncTransactionsResourceWithRawResponse:
+    def __init__(self, transactions: AsyncTransactionsResource) -> None:
         self._transactions = transactions
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -1176,8 +1176,8 @@ class AsyncTransactionsWithRawResponse:
         )
 
 
-class TransactionsWithStreamingResponse:
-    def __init__(self, transactions: Transactions) -> None:
+class TransactionsResourceWithStreamingResponse:
+    def __init__(self, transactions: TransactionsResource) -> None:
         self._transactions = transactions
 
         self.retrieve = to_streamed_response_wrapper(
@@ -1209,8 +1209,8 @@ class TransactionsWithStreamingResponse:
         )
 
 
-class AsyncTransactionsWithStreamingResponse:
-    def __init__(self, transactions: AsyncTransactions) -> None:
+class AsyncTransactionsResourceWithStreamingResponse:
+    def __init__(self, transactions: AsyncTransactionsResource) -> None:
         self._transactions = transactions
 
         self.retrieve = async_to_streamed_response_wrapper(

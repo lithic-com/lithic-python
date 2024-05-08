@@ -15,17 +15,17 @@ from .._base_client import (
 from ..types.tokenization_secret import TokenizationSecret
 from ..types.tokenization_decisioning_rotate_secret_response import TokenizationDecisioningRotateSecretResponse
 
-__all__ = ["TokenizationDecisioning", "AsyncTokenizationDecisioning"]
+__all__ = ["TokenizationDecisioningResource", "AsyncTokenizationDecisioningResource"]
 
 
-class TokenizationDecisioning(SyncAPIResource):
+class TokenizationDecisioningResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TokenizationDecisioningWithRawResponse:
-        return TokenizationDecisioningWithRawResponse(self)
+    def with_raw_response(self) -> TokenizationDecisioningResourceWithRawResponse:
+        return TokenizationDecisioningResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TokenizationDecisioningWithStreamingResponse:
-        return TokenizationDecisioningWithStreamingResponse(self)
+    def with_streaming_response(self) -> TokenizationDecisioningResourceWithStreamingResponse:
+        return TokenizationDecisioningResourceWithStreamingResponse(self)
 
     def retrieve_secret(
         self,
@@ -79,14 +79,14 @@ class TokenizationDecisioning(SyncAPIResource):
         )
 
 
-class AsyncTokenizationDecisioning(AsyncAPIResource):
+class AsyncTokenizationDecisioningResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTokenizationDecisioningWithRawResponse:
-        return AsyncTokenizationDecisioningWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTokenizationDecisioningResourceWithRawResponse:
+        return AsyncTokenizationDecisioningResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTokenizationDecisioningWithStreamingResponse:
-        return AsyncTokenizationDecisioningWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTokenizationDecisioningResourceWithStreamingResponse:
+        return AsyncTokenizationDecisioningResourceWithStreamingResponse(self)
 
     async def retrieve_secret(
         self,
@@ -140,8 +140,8 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         )
 
 
-class TokenizationDecisioningWithRawResponse:
-    def __init__(self, tokenization_decisioning: TokenizationDecisioning) -> None:
+class TokenizationDecisioningResourceWithRawResponse:
+    def __init__(self, tokenization_decisioning: TokenizationDecisioningResource) -> None:
         self._tokenization_decisioning = tokenization_decisioning
 
         self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
@@ -152,8 +152,8 @@ class TokenizationDecisioningWithRawResponse:
         )
 
 
-class AsyncTokenizationDecisioningWithRawResponse:
-    def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioning) -> None:
+class AsyncTokenizationDecisioningResourceWithRawResponse:
+    def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioningResource) -> None:
         self._tokenization_decisioning = tokenization_decisioning
 
         self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
@@ -164,8 +164,8 @@ class AsyncTokenizationDecisioningWithRawResponse:
         )
 
 
-class TokenizationDecisioningWithStreamingResponse:
-    def __init__(self, tokenization_decisioning: TokenizationDecisioning) -> None:
+class TokenizationDecisioningResourceWithStreamingResponse:
+    def __init__(self, tokenization_decisioning: TokenizationDecisioningResource) -> None:
         self._tokenization_decisioning = tokenization_decisioning
 
         self.retrieve_secret = to_streamed_response_wrapper(
@@ -176,8 +176,8 @@ class TokenizationDecisioningWithStreamingResponse:
         )
 
 
-class AsyncTokenizationDecisioningWithStreamingResponse:
-    def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioning) -> None:
+class AsyncTokenizationDecisioningResourceWithStreamingResponse:
+    def __init__(self, tokenization_decisioning: AsyncTokenizationDecisioningResource) -> None:
         self._tokenization_decisioning = tokenization_decisioning
 
         self.retrieve_secret = async_to_streamed_response_wrapper(
