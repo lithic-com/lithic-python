@@ -21,17 +21,17 @@ from ..._base_client import (
 from ...types.financial_accounts import balance_list_params
 from ...types.financial_accounts.balance_list_response import BalanceListResponse
 
-__all__ = ["Balances", "AsyncBalances"]
+__all__ = ["BalancesResource", "AsyncBalancesResource"]
 
 
-class Balances(SyncAPIResource):
+class BalancesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> BalancesWithRawResponse:
-        return BalancesWithRawResponse(self)
+    def with_raw_response(self) -> BalancesResourceWithRawResponse:
+        return BalancesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> BalancesWithStreamingResponse:
-        return BalancesWithStreamingResponse(self)
+    def with_streaming_response(self) -> BalancesResourceWithStreamingResponse:
+        return BalancesResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -88,14 +88,14 @@ class Balances(SyncAPIResource):
         )
 
 
-class AsyncBalances(AsyncAPIResource):
+class AsyncBalancesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncBalancesWithRawResponse:
-        return AsyncBalancesWithRawResponse(self)
+    def with_raw_response(self) -> AsyncBalancesResourceWithRawResponse:
+        return AsyncBalancesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncBalancesWithStreamingResponse:
-        return AsyncBalancesWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncBalancesResourceWithStreamingResponse:
+        return AsyncBalancesResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -152,8 +152,8 @@ class AsyncBalances(AsyncAPIResource):
         )
 
 
-class BalancesWithRawResponse:
-    def __init__(self, balances: Balances) -> None:
+class BalancesResourceWithRawResponse:
+    def __init__(self, balances: BalancesResource) -> None:
         self._balances = balances
 
         self.list = _legacy_response.to_raw_response_wrapper(
@@ -161,8 +161,8 @@ class BalancesWithRawResponse:
         )
 
 
-class AsyncBalancesWithRawResponse:
-    def __init__(self, balances: AsyncBalances) -> None:
+class AsyncBalancesResourceWithRawResponse:
+    def __init__(self, balances: AsyncBalancesResource) -> None:
         self._balances = balances
 
         self.list = _legacy_response.async_to_raw_response_wrapper(
@@ -170,8 +170,8 @@ class AsyncBalancesWithRawResponse:
         )
 
 
-class BalancesWithStreamingResponse:
-    def __init__(self, balances: Balances) -> None:
+class BalancesResourceWithStreamingResponse:
+    def __init__(self, balances: BalancesResource) -> None:
         self._balances = balances
 
         self.list = to_streamed_response_wrapper(
@@ -179,8 +179,8 @@ class BalancesWithStreamingResponse:
         )
 
 
-class AsyncBalancesWithStreamingResponse:
-    def __init__(self, balances: AsyncBalances) -> None:
+class AsyncBalancesResourceWithStreamingResponse:
+    def __init__(self, balances: AsyncBalancesResource) -> None:
         self._balances = balances
 
         self.list = async_to_streamed_response_wrapper(

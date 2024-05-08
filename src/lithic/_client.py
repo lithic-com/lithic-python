@@ -20,7 +20,6 @@ from ._types import (
     NotGiven,
     Transport,
     ProxiesTypes,
-    AsyncTransport,
     RequestOptions,
 )
 from ._utils import (
@@ -33,11 +32,8 @@ from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import LithicError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
-    DEFAULT_CONNECTION_LIMITS,
     SyncAPIClient,
     AsyncAPIClient,
-    SyncHttpxClientWrapper,
-    AsyncHttpxClientWrapper,
     make_request_options,
 )
 from .types.api_status import APIStatus
@@ -62,26 +58,27 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Lithic(SyncAPIClient):
-    accounts: resources.Accounts
-    account_holders: resources.AccountHolders
-    auth_rules: resources.AuthRules
-    auth_stream_enrollment: resources.AuthStreamEnrollment
-    tokenization_decisioning: resources.TokenizationDecisioning
-    tokenizations: resources.Tokenizations
-    cards: resources.Cards
-    balances: resources.Balances
-    aggregate_balances: resources.AggregateBalances
-    disputes: resources.Disputes
-    events: resources.Events
-    financial_accounts: resources.FinancialAccounts
-    transactions: resources.Transactions
-    responder_endpoints: resources.ResponderEndpoints
-    external_bank_accounts: resources.ExternalBankAccounts
-    payments: resources.Payments
-    three_ds: resources.ThreeDS
-    reports: resources.Reports
-    card_product: resources.CardProduct
-    card_programs: resources.CardPrograms
+    accounts: resources.AccountsResource
+    account_holders: resources.AccountHoldersResource
+    auth_rules: resources.AuthRulesResource
+    auth_stream_enrollment: resources.AuthStreamEnrollmentResource
+    tokenization_decisioning: resources.TokenizationDecisioningResource
+    tokenizations: resources.TokenizationsResource
+    cards: resources.CardsResource
+    balances: resources.BalancesResource
+    aggregate_balances: resources.AggregateBalancesResource
+    disputes: resources.DisputesResource
+    events: resources.EventsResource
+    financial_accounts: resources.FinancialAccountsResource
+    transactions: resources.TransactionsResource
+    responder_endpoints: resources.ResponderEndpointsResource
+    webhooks: resources.WebhooksResource
+    external_bank_accounts: resources.ExternalBankAccountsResource
+    payments: resources.PaymentsResource
+    three_ds: resources.ThreeDSResource
+    reports: resources.ReportsResource
+    card_product: resources.CardProductResource
+    card_programs: resources.CardProgramsResource
     digital_card_art: resources.DigitalCardArtResource
     with_raw_response: LithicWithRawResponse
     with_streaming_response: LithicWithStreamedResponse
@@ -107,12 +104,6 @@ class Lithic(SyncAPIClient):
         # We provide a `DefaultHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
         # See the [httpx documentation](https://www.python-httpx.org/api/#client) for more details.
         http_client: httpx.Client | None = None,
-        # See httpx documentation for [custom transports](https://www.python-httpx.org/advanced/#custom-transports)
-        transport: Transport | None = None,
-        # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
-        proxies: ProxiesTypes | None = None,
-        # See httpx documentation for [limits](https://www.python-httpx.org/advanced/#pool-limit-configuration)
-        connection_pool_limits: httpx.Limits | None = None,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
         # if the API responds with invalid data for the expected schema.
@@ -173,34 +164,32 @@ class Lithic(SyncAPIClient):
             max_retries=max_retries,
             timeout=timeout,
             http_client=http_client,
-            transport=transport,
-            proxies=proxies,
-            limits=connection_pool_limits,
             custom_headers=default_headers,
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = resources.Accounts(self)
-        self.account_holders = resources.AccountHolders(self)
-        self.auth_rules = resources.AuthRules(self)
-        self.auth_stream_enrollment = resources.AuthStreamEnrollment(self)
-        self.tokenization_decisioning = resources.TokenizationDecisioning(self)
-        self.tokenizations = resources.Tokenizations(self)
-        self.cards = resources.Cards(self)
-        self.balances = resources.Balances(self)
-        self.aggregate_balances = resources.AggregateBalances(self)
-        self.disputes = resources.Disputes(self)
-        self.events = resources.Events(self)
-        self.financial_accounts = resources.FinancialAccounts(self)
-        self.transactions = resources.Transactions(self)
-        self.responder_endpoints = resources.ResponderEndpoints(self)
-        self.external_bank_accounts = resources.ExternalBankAccounts(self)
-        self.payments = resources.Payments(self)
-        self.three_ds = resources.ThreeDS(self)
-        self.reports = resources.Reports(self)
-        self.card_product = resources.CardProduct(self)
-        self.card_programs = resources.CardPrograms(self)
+        self.accounts = resources.AccountsResource(self)
+        self.account_holders = resources.AccountHoldersResource(self)
+        self.auth_rules = resources.AuthRulesResource(self)
+        self.auth_stream_enrollment = resources.AuthStreamEnrollmentResource(self)
+        self.tokenization_decisioning = resources.TokenizationDecisioningResource(self)
+        self.tokenizations = resources.TokenizationsResource(self)
+        self.cards = resources.CardsResource(self)
+        self.balances = resources.BalancesResource(self)
+        self.aggregate_balances = resources.AggregateBalancesResource(self)
+        self.disputes = resources.DisputesResource(self)
+        self.events = resources.EventsResource(self)
+        self.financial_accounts = resources.FinancialAccountsResource(self)
+        self.transactions = resources.TransactionsResource(self)
+        self.responder_endpoints = resources.ResponderEndpointsResource(self)
+        self.webhooks = resources.WebhooksResource(self)
+        self.external_bank_accounts = resources.ExternalBankAccountsResource(self)
+        self.payments = resources.PaymentsResource(self)
+        self.three_ds = resources.ThreeDSResource(self)
+        self.reports = resources.ReportsResource(self)
+        self.card_product = resources.CardProductResource(self)
+        self.card_programs = resources.CardProgramsResource(self)
         self.digital_card_art = resources.DigitalCardArtResource(self)
         self.with_raw_response = LithicWithRawResponse(self)
         self.with_streaming_response = LithicWithStreamedResponse(self)
@@ -235,7 +224,6 @@ class Lithic(SyncAPIClient):
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
-        connection_pool_limits: httpx.Limits | None = None,
         max_retries: int | NotGiven = NOT_GIVEN,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
@@ -264,24 +252,7 @@ class Lithic(SyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
 
-        if connection_pool_limits is not None:
-            if http_client is not None:
-                raise ValueError("The 'http_client' argument is mutually exclusive with 'connection_pool_limits'")
-
-            if not isinstance(self._client, SyncHttpxClientWrapper):
-                raise ValueError(
-                    "A custom HTTP client has been set and is mutually exclusive with the 'connection_pool_limits' argument"
-                )
-
-            http_client = None
-        else:
-            if self._limits is not DEFAULT_CONNECTION_LIMITS:
-                connection_pool_limits = self._limits
-            else:
-                connection_pool_limits = None
-
-            http_client = http_client or self._client
-
+        http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
             webhook_secret=webhook_secret or self.webhook_secret,
@@ -289,7 +260,6 @@ class Lithic(SyncAPIClient):
             environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
-            connection_pool_limits=connection_pool_limits,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
             default_headers=headers,
             default_query=params,
@@ -354,26 +324,27 @@ class Lithic(SyncAPIClient):
 
 
 class AsyncLithic(AsyncAPIClient):
-    accounts: resources.AsyncAccounts
-    account_holders: resources.AsyncAccountHolders
-    auth_rules: resources.AsyncAuthRules
-    auth_stream_enrollment: resources.AsyncAuthStreamEnrollment
-    tokenization_decisioning: resources.AsyncTokenizationDecisioning
-    tokenizations: resources.AsyncTokenizations
-    cards: resources.AsyncCards
-    balances: resources.AsyncBalances
-    aggregate_balances: resources.AsyncAggregateBalances
-    disputes: resources.AsyncDisputes
-    events: resources.AsyncEvents
-    financial_accounts: resources.AsyncFinancialAccounts
-    transactions: resources.AsyncTransactions
-    responder_endpoints: resources.AsyncResponderEndpoints
-    external_bank_accounts: resources.AsyncExternalBankAccounts
-    payments: resources.AsyncPayments
-    three_ds: resources.AsyncThreeDS
-    reports: resources.AsyncReports
-    card_product: resources.AsyncCardProduct
-    card_programs: resources.AsyncCardPrograms
+    accounts: resources.AsyncAccountsResource
+    account_holders: resources.AsyncAccountHoldersResource
+    auth_rules: resources.AsyncAuthRulesResource
+    auth_stream_enrollment: resources.AsyncAuthStreamEnrollmentResource
+    tokenization_decisioning: resources.AsyncTokenizationDecisioningResource
+    tokenizations: resources.AsyncTokenizationsResource
+    cards: resources.AsyncCardsResource
+    balances: resources.AsyncBalancesResource
+    aggregate_balances: resources.AsyncAggregateBalancesResource
+    disputes: resources.AsyncDisputesResource
+    events: resources.AsyncEventsResource
+    financial_accounts: resources.AsyncFinancialAccountsResource
+    transactions: resources.AsyncTransactionsResource
+    responder_endpoints: resources.AsyncResponderEndpointsResource
+    webhooks: resources.AsyncWebhooksResource
+    external_bank_accounts: resources.AsyncExternalBankAccountsResource
+    payments: resources.AsyncPaymentsResource
+    three_ds: resources.AsyncThreeDSResource
+    reports: resources.AsyncReportsResource
+    card_product: resources.AsyncCardProductResource
+    card_programs: resources.AsyncCardProgramsResource
     digital_card_art: resources.AsyncDigitalCardArtResource
     with_raw_response: AsyncLithicWithRawResponse
     with_streaming_response: AsyncLithicWithStreamedResponse
@@ -399,12 +370,6 @@ class AsyncLithic(AsyncAPIClient):
         # We provide a `DefaultAsyncHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
         # See the [httpx documentation](https://www.python-httpx.org/api/#asyncclient) for more details.
         http_client: httpx.AsyncClient | None = None,
-        # See httpx documentation for [custom transports](https://www.python-httpx.org/advanced/#custom-transports)
-        transport: AsyncTransport | None = None,
-        # See httpx documentation for [proxies](https://www.python-httpx.org/advanced/#http-proxying)
-        proxies: ProxiesTypes | None = None,
-        # See httpx documentation for [limits](https://www.python-httpx.org/advanced/#pool-limit-configuration)
-        connection_pool_limits: httpx.Limits | None = None,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
         # if the API responds with invalid data for the expected schema.
@@ -465,34 +430,32 @@ class AsyncLithic(AsyncAPIClient):
             max_retries=max_retries,
             timeout=timeout,
             http_client=http_client,
-            transport=transport,
-            proxies=proxies,
-            limits=connection_pool_limits,
             custom_headers=default_headers,
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = resources.AsyncAccounts(self)
-        self.account_holders = resources.AsyncAccountHolders(self)
-        self.auth_rules = resources.AsyncAuthRules(self)
-        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollment(self)
-        self.tokenization_decisioning = resources.AsyncTokenizationDecisioning(self)
-        self.tokenizations = resources.AsyncTokenizations(self)
-        self.cards = resources.AsyncCards(self)
-        self.balances = resources.AsyncBalances(self)
-        self.aggregate_balances = resources.AsyncAggregateBalances(self)
-        self.disputes = resources.AsyncDisputes(self)
-        self.events = resources.AsyncEvents(self)
-        self.financial_accounts = resources.AsyncFinancialAccounts(self)
-        self.transactions = resources.AsyncTransactions(self)
-        self.responder_endpoints = resources.AsyncResponderEndpoints(self)
-        self.external_bank_accounts = resources.AsyncExternalBankAccounts(self)
-        self.payments = resources.AsyncPayments(self)
-        self.three_ds = resources.AsyncThreeDS(self)
-        self.reports = resources.AsyncReports(self)
-        self.card_product = resources.AsyncCardProduct(self)
-        self.card_programs = resources.AsyncCardPrograms(self)
+        self.accounts = resources.AsyncAccountsResource(self)
+        self.account_holders = resources.AsyncAccountHoldersResource(self)
+        self.auth_rules = resources.AsyncAuthRulesResource(self)
+        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResource(self)
+        self.tokenization_decisioning = resources.AsyncTokenizationDecisioningResource(self)
+        self.tokenizations = resources.AsyncTokenizationsResource(self)
+        self.cards = resources.AsyncCardsResource(self)
+        self.balances = resources.AsyncBalancesResource(self)
+        self.aggregate_balances = resources.AsyncAggregateBalancesResource(self)
+        self.disputes = resources.AsyncDisputesResource(self)
+        self.events = resources.AsyncEventsResource(self)
+        self.financial_accounts = resources.AsyncFinancialAccountsResource(self)
+        self.transactions = resources.AsyncTransactionsResource(self)
+        self.responder_endpoints = resources.AsyncResponderEndpointsResource(self)
+        self.webhooks = resources.AsyncWebhooksResource(self)
+        self.external_bank_accounts = resources.AsyncExternalBankAccountsResource(self)
+        self.payments = resources.AsyncPaymentsResource(self)
+        self.three_ds = resources.AsyncThreeDSResource(self)
+        self.reports = resources.AsyncReportsResource(self)
+        self.card_product = resources.AsyncCardProductResource(self)
+        self.card_programs = resources.AsyncCardProgramsResource(self)
         self.digital_card_art = resources.AsyncDigitalCardArtResource(self)
         self.with_raw_response = AsyncLithicWithRawResponse(self)
         self.with_streaming_response = AsyncLithicWithStreamedResponse(self)
@@ -527,7 +490,6 @@ class AsyncLithic(AsyncAPIClient):
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
-        connection_pool_limits: httpx.Limits | None = None,
         max_retries: int | NotGiven = NOT_GIVEN,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
@@ -556,24 +518,7 @@ class AsyncLithic(AsyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
 
-        if connection_pool_limits is not None:
-            if http_client is not None:
-                raise ValueError("The 'http_client' argument is mutually exclusive with 'connection_pool_limits'")
-
-            if not isinstance(self._client, AsyncHttpxClientWrapper):
-                raise ValueError(
-                    "A custom HTTP client has been set and is mutually exclusive with the 'connection_pool_limits' argument"
-                )
-
-            http_client = None
-        else:
-            if self._limits is not DEFAULT_CONNECTION_LIMITS:
-                connection_pool_limits = self._limits
-            else:
-                connection_pool_limits = None
-
-            http_client = http_client or self._client
-
+        http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
             webhook_secret=webhook_secret or self.webhook_secret,
@@ -581,7 +526,6 @@ class AsyncLithic(AsyncAPIClient):
             environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
-            connection_pool_limits=connection_pool_limits,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
             default_headers=headers,
             default_query=params,
@@ -647,28 +591,32 @@ class AsyncLithic(AsyncAPIClient):
 
 class LithicWithRawResponse:
     def __init__(self, client: Lithic) -> None:
-        self.accounts = resources.AccountsWithRawResponse(client.accounts)
-        self.account_holders = resources.AccountHoldersWithRawResponse(client.account_holders)
-        self.auth_rules = resources.AuthRulesWithRawResponse(client.auth_rules)
-        self.auth_stream_enrollment = resources.AuthStreamEnrollmentWithRawResponse(client.auth_stream_enrollment)
-        self.tokenization_decisioning = resources.TokenizationDecisioningWithRawResponse(
+        self.accounts = resources.AccountsResourceWithRawResponse(client.accounts)
+        self.account_holders = resources.AccountHoldersResourceWithRawResponse(client.account_holders)
+        self.auth_rules = resources.AuthRulesResourceWithRawResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AuthStreamEnrollmentResourceWithRawResponse(
+            client.auth_stream_enrollment
+        )
+        self.tokenization_decisioning = resources.TokenizationDecisioningResourceWithRawResponse(
             client.tokenization_decisioning
         )
-        self.tokenizations = resources.TokenizationsWithRawResponse(client.tokenizations)
-        self.cards = resources.CardsWithRawResponse(client.cards)
-        self.balances = resources.BalancesWithRawResponse(client.balances)
-        self.aggregate_balances = resources.AggregateBalancesWithRawResponse(client.aggregate_balances)
-        self.disputes = resources.DisputesWithRawResponse(client.disputes)
-        self.events = resources.EventsWithRawResponse(client.events)
-        self.financial_accounts = resources.FinancialAccountsWithRawResponse(client.financial_accounts)
-        self.transactions = resources.TransactionsWithRawResponse(client.transactions)
-        self.responder_endpoints = resources.ResponderEndpointsWithRawResponse(client.responder_endpoints)
-        self.external_bank_accounts = resources.ExternalBankAccountsWithRawResponse(client.external_bank_accounts)
-        self.payments = resources.PaymentsWithRawResponse(client.payments)
-        self.three_ds = resources.ThreeDSWithRawResponse(client.three_ds)
-        self.reports = resources.ReportsWithRawResponse(client.reports)
-        self.card_product = resources.CardProductWithRawResponse(client.card_product)
-        self.card_programs = resources.CardProgramsWithRawResponse(client.card_programs)
+        self.tokenizations = resources.TokenizationsResourceWithRawResponse(client.tokenizations)
+        self.cards = resources.CardsResourceWithRawResponse(client.cards)
+        self.balances = resources.BalancesResourceWithRawResponse(client.balances)
+        self.aggregate_balances = resources.AggregateBalancesResourceWithRawResponse(client.aggregate_balances)
+        self.disputes = resources.DisputesResourceWithRawResponse(client.disputes)
+        self.events = resources.EventsResourceWithRawResponse(client.events)
+        self.financial_accounts = resources.FinancialAccountsResourceWithRawResponse(client.financial_accounts)
+        self.transactions = resources.TransactionsResourceWithRawResponse(client.transactions)
+        self.responder_endpoints = resources.ResponderEndpointsResourceWithRawResponse(client.responder_endpoints)
+        self.external_bank_accounts = resources.ExternalBankAccountsResourceWithRawResponse(
+            client.external_bank_accounts
+        )
+        self.payments = resources.PaymentsResourceWithRawResponse(client.payments)
+        self.three_ds = resources.ThreeDSResourceWithRawResponse(client.three_ds)
+        self.reports = resources.ReportsResourceWithRawResponse(client.reports)
+        self.card_product = resources.CardProductResourceWithRawResponse(client.card_product)
+        self.card_programs = resources.CardProgramsResourceWithRawResponse(client.card_programs)
         self.digital_card_art = resources.DigitalCardArtResourceWithRawResponse(client.digital_card_art)
 
         self.api_status = _legacy_response.to_raw_response_wrapper(
@@ -678,28 +626,32 @@ class LithicWithRawResponse:
 
 class AsyncLithicWithRawResponse:
     def __init__(self, client: AsyncLithic) -> None:
-        self.accounts = resources.AsyncAccountsWithRawResponse(client.accounts)
-        self.account_holders = resources.AsyncAccountHoldersWithRawResponse(client.account_holders)
-        self.auth_rules = resources.AsyncAuthRulesWithRawResponse(client.auth_rules)
-        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentWithRawResponse(client.auth_stream_enrollment)
-        self.tokenization_decisioning = resources.AsyncTokenizationDecisioningWithRawResponse(
+        self.accounts = resources.AsyncAccountsResourceWithRawResponse(client.accounts)
+        self.account_holders = resources.AsyncAccountHoldersResourceWithRawResponse(client.account_holders)
+        self.auth_rules = resources.AsyncAuthRulesResourceWithRawResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResourceWithRawResponse(
+            client.auth_stream_enrollment
+        )
+        self.tokenization_decisioning = resources.AsyncTokenizationDecisioningResourceWithRawResponse(
             client.tokenization_decisioning
         )
-        self.tokenizations = resources.AsyncTokenizationsWithRawResponse(client.tokenizations)
-        self.cards = resources.AsyncCardsWithRawResponse(client.cards)
-        self.balances = resources.AsyncBalancesWithRawResponse(client.balances)
-        self.aggregate_balances = resources.AsyncAggregateBalancesWithRawResponse(client.aggregate_balances)
-        self.disputes = resources.AsyncDisputesWithRawResponse(client.disputes)
-        self.events = resources.AsyncEventsWithRawResponse(client.events)
-        self.financial_accounts = resources.AsyncFinancialAccountsWithRawResponse(client.financial_accounts)
-        self.transactions = resources.AsyncTransactionsWithRawResponse(client.transactions)
-        self.responder_endpoints = resources.AsyncResponderEndpointsWithRawResponse(client.responder_endpoints)
-        self.external_bank_accounts = resources.AsyncExternalBankAccountsWithRawResponse(client.external_bank_accounts)
-        self.payments = resources.AsyncPaymentsWithRawResponse(client.payments)
-        self.three_ds = resources.AsyncThreeDSWithRawResponse(client.three_ds)
-        self.reports = resources.AsyncReportsWithRawResponse(client.reports)
-        self.card_product = resources.AsyncCardProductWithRawResponse(client.card_product)
-        self.card_programs = resources.AsyncCardProgramsWithRawResponse(client.card_programs)
+        self.tokenizations = resources.AsyncTokenizationsResourceWithRawResponse(client.tokenizations)
+        self.cards = resources.AsyncCardsResourceWithRawResponse(client.cards)
+        self.balances = resources.AsyncBalancesResourceWithRawResponse(client.balances)
+        self.aggregate_balances = resources.AsyncAggregateBalancesResourceWithRawResponse(client.aggregate_balances)
+        self.disputes = resources.AsyncDisputesResourceWithRawResponse(client.disputes)
+        self.events = resources.AsyncEventsResourceWithRawResponse(client.events)
+        self.financial_accounts = resources.AsyncFinancialAccountsResourceWithRawResponse(client.financial_accounts)
+        self.transactions = resources.AsyncTransactionsResourceWithRawResponse(client.transactions)
+        self.responder_endpoints = resources.AsyncResponderEndpointsResourceWithRawResponse(client.responder_endpoints)
+        self.external_bank_accounts = resources.AsyncExternalBankAccountsResourceWithRawResponse(
+            client.external_bank_accounts
+        )
+        self.payments = resources.AsyncPaymentsResourceWithRawResponse(client.payments)
+        self.three_ds = resources.AsyncThreeDSResourceWithRawResponse(client.three_ds)
+        self.reports = resources.AsyncReportsResourceWithRawResponse(client.reports)
+        self.card_product = resources.AsyncCardProductResourceWithRawResponse(client.card_product)
+        self.card_programs = resources.AsyncCardProgramsResourceWithRawResponse(client.card_programs)
         self.digital_card_art = resources.AsyncDigitalCardArtResourceWithRawResponse(client.digital_card_art)
 
         self.api_status = _legacy_response.async_to_raw_response_wrapper(
@@ -709,28 +661,32 @@ class AsyncLithicWithRawResponse:
 
 class LithicWithStreamedResponse:
     def __init__(self, client: Lithic) -> None:
-        self.accounts = resources.AccountsWithStreamingResponse(client.accounts)
-        self.account_holders = resources.AccountHoldersWithStreamingResponse(client.account_holders)
-        self.auth_rules = resources.AuthRulesWithStreamingResponse(client.auth_rules)
-        self.auth_stream_enrollment = resources.AuthStreamEnrollmentWithStreamingResponse(client.auth_stream_enrollment)
-        self.tokenization_decisioning = resources.TokenizationDecisioningWithStreamingResponse(
+        self.accounts = resources.AccountsResourceWithStreamingResponse(client.accounts)
+        self.account_holders = resources.AccountHoldersResourceWithStreamingResponse(client.account_holders)
+        self.auth_rules = resources.AuthRulesResourceWithStreamingResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AuthStreamEnrollmentResourceWithStreamingResponse(
+            client.auth_stream_enrollment
+        )
+        self.tokenization_decisioning = resources.TokenizationDecisioningResourceWithStreamingResponse(
             client.tokenization_decisioning
         )
-        self.tokenizations = resources.TokenizationsWithStreamingResponse(client.tokenizations)
-        self.cards = resources.CardsWithStreamingResponse(client.cards)
-        self.balances = resources.BalancesWithStreamingResponse(client.balances)
-        self.aggregate_balances = resources.AggregateBalancesWithStreamingResponse(client.aggregate_balances)
-        self.disputes = resources.DisputesWithStreamingResponse(client.disputes)
-        self.events = resources.EventsWithStreamingResponse(client.events)
-        self.financial_accounts = resources.FinancialAccountsWithStreamingResponse(client.financial_accounts)
-        self.transactions = resources.TransactionsWithStreamingResponse(client.transactions)
-        self.responder_endpoints = resources.ResponderEndpointsWithStreamingResponse(client.responder_endpoints)
-        self.external_bank_accounts = resources.ExternalBankAccountsWithStreamingResponse(client.external_bank_accounts)
-        self.payments = resources.PaymentsWithStreamingResponse(client.payments)
-        self.three_ds = resources.ThreeDSWithStreamingResponse(client.three_ds)
-        self.reports = resources.ReportsWithStreamingResponse(client.reports)
-        self.card_product = resources.CardProductWithStreamingResponse(client.card_product)
-        self.card_programs = resources.CardProgramsWithStreamingResponse(client.card_programs)
+        self.tokenizations = resources.TokenizationsResourceWithStreamingResponse(client.tokenizations)
+        self.cards = resources.CardsResourceWithStreamingResponse(client.cards)
+        self.balances = resources.BalancesResourceWithStreamingResponse(client.balances)
+        self.aggregate_balances = resources.AggregateBalancesResourceWithStreamingResponse(client.aggregate_balances)
+        self.disputes = resources.DisputesResourceWithStreamingResponse(client.disputes)
+        self.events = resources.EventsResourceWithStreamingResponse(client.events)
+        self.financial_accounts = resources.FinancialAccountsResourceWithStreamingResponse(client.financial_accounts)
+        self.transactions = resources.TransactionsResourceWithStreamingResponse(client.transactions)
+        self.responder_endpoints = resources.ResponderEndpointsResourceWithStreamingResponse(client.responder_endpoints)
+        self.external_bank_accounts = resources.ExternalBankAccountsResourceWithStreamingResponse(
+            client.external_bank_accounts
+        )
+        self.payments = resources.PaymentsResourceWithStreamingResponse(client.payments)
+        self.three_ds = resources.ThreeDSResourceWithStreamingResponse(client.three_ds)
+        self.reports = resources.ReportsResourceWithStreamingResponse(client.reports)
+        self.card_product = resources.CardProductResourceWithStreamingResponse(client.card_product)
+        self.card_programs = resources.CardProgramsResourceWithStreamingResponse(client.card_programs)
         self.digital_card_art = resources.DigitalCardArtResourceWithStreamingResponse(client.digital_card_art)
 
         self.api_status = to_streamed_response_wrapper(
@@ -740,32 +696,38 @@ class LithicWithStreamedResponse:
 
 class AsyncLithicWithStreamedResponse:
     def __init__(self, client: AsyncLithic) -> None:
-        self.accounts = resources.AsyncAccountsWithStreamingResponse(client.accounts)
-        self.account_holders = resources.AsyncAccountHoldersWithStreamingResponse(client.account_holders)
-        self.auth_rules = resources.AsyncAuthRulesWithStreamingResponse(client.auth_rules)
-        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentWithStreamingResponse(
+        self.accounts = resources.AsyncAccountsResourceWithStreamingResponse(client.accounts)
+        self.account_holders = resources.AsyncAccountHoldersResourceWithStreamingResponse(client.account_holders)
+        self.auth_rules = resources.AsyncAuthRulesResourceWithStreamingResponse(client.auth_rules)
+        self.auth_stream_enrollment = resources.AsyncAuthStreamEnrollmentResourceWithStreamingResponse(
             client.auth_stream_enrollment
         )
-        self.tokenization_decisioning = resources.AsyncTokenizationDecisioningWithStreamingResponse(
+        self.tokenization_decisioning = resources.AsyncTokenizationDecisioningResourceWithStreamingResponse(
             client.tokenization_decisioning
         )
-        self.tokenizations = resources.AsyncTokenizationsWithStreamingResponse(client.tokenizations)
-        self.cards = resources.AsyncCardsWithStreamingResponse(client.cards)
-        self.balances = resources.AsyncBalancesWithStreamingResponse(client.balances)
-        self.aggregate_balances = resources.AsyncAggregateBalancesWithStreamingResponse(client.aggregate_balances)
-        self.disputes = resources.AsyncDisputesWithStreamingResponse(client.disputes)
-        self.events = resources.AsyncEventsWithStreamingResponse(client.events)
-        self.financial_accounts = resources.AsyncFinancialAccountsWithStreamingResponse(client.financial_accounts)
-        self.transactions = resources.AsyncTransactionsWithStreamingResponse(client.transactions)
-        self.responder_endpoints = resources.AsyncResponderEndpointsWithStreamingResponse(client.responder_endpoints)
-        self.external_bank_accounts = resources.AsyncExternalBankAccountsWithStreamingResponse(
+        self.tokenizations = resources.AsyncTokenizationsResourceWithStreamingResponse(client.tokenizations)
+        self.cards = resources.AsyncCardsResourceWithStreamingResponse(client.cards)
+        self.balances = resources.AsyncBalancesResourceWithStreamingResponse(client.balances)
+        self.aggregate_balances = resources.AsyncAggregateBalancesResourceWithStreamingResponse(
+            client.aggregate_balances
+        )
+        self.disputes = resources.AsyncDisputesResourceWithStreamingResponse(client.disputes)
+        self.events = resources.AsyncEventsResourceWithStreamingResponse(client.events)
+        self.financial_accounts = resources.AsyncFinancialAccountsResourceWithStreamingResponse(
+            client.financial_accounts
+        )
+        self.transactions = resources.AsyncTransactionsResourceWithStreamingResponse(client.transactions)
+        self.responder_endpoints = resources.AsyncResponderEndpointsResourceWithStreamingResponse(
+            client.responder_endpoints
+        )
+        self.external_bank_accounts = resources.AsyncExternalBankAccountsResourceWithStreamingResponse(
             client.external_bank_accounts
         )
-        self.payments = resources.AsyncPaymentsWithStreamingResponse(client.payments)
-        self.three_ds = resources.AsyncThreeDSWithStreamingResponse(client.three_ds)
-        self.reports = resources.AsyncReportsWithStreamingResponse(client.reports)
-        self.card_product = resources.AsyncCardProductWithStreamingResponse(client.card_product)
-        self.card_programs = resources.AsyncCardProgramsWithStreamingResponse(client.card_programs)
+        self.payments = resources.AsyncPaymentsResourceWithStreamingResponse(client.payments)
+        self.three_ds = resources.AsyncThreeDSResourceWithStreamingResponse(client.three_ds)
+        self.reports = resources.AsyncReportsResourceWithStreamingResponse(client.reports)
+        self.card_product = resources.AsyncCardProductResourceWithStreamingResponse(client.card_product)
+        self.card_programs = resources.AsyncCardProgramsResourceWithStreamingResponse(client.card_programs)
         self.digital_card_art = resources.AsyncDigitalCardArtResourceWithStreamingResponse(client.digital_card_art)
 
         self.api_status = async_to_streamed_response_wrapper(

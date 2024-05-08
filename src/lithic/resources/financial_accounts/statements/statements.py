@@ -12,12 +12,12 @@ from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import maybe_transform
 from ...._compat import cached_property
 from .line_items import (
-    LineItems,
-    AsyncLineItems,
-    LineItemsWithRawResponse,
-    AsyncLineItemsWithRawResponse,
-    LineItemsWithStreamingResponse,
-    AsyncLineItemsWithStreamingResponse,
+    LineItemsResource,
+    AsyncLineItemsResource,
+    LineItemsResourceWithRawResponse,
+    AsyncLineItemsResourceWithRawResponse,
+    LineItemsResourceWithStreamingResponse,
+    AsyncLineItemsResourceWithStreamingResponse,
 )
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -29,21 +29,21 @@ from ...._base_client import (
 from ....types.financial_accounts import statement_list_params
 from ....types.financial_accounts.statement import Statement
 
-__all__ = ["Statements", "AsyncStatements"]
+__all__ = ["StatementsResource", "AsyncStatementsResource"]
 
 
-class Statements(SyncAPIResource):
+class StatementsResource(SyncAPIResource):
     @cached_property
-    def line_items(self) -> LineItems:
-        return LineItems(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> StatementsWithRawResponse:
-        return StatementsWithRawResponse(self)
+    def line_items(self) -> LineItemsResource:
+        return LineItemsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> StatementsWithStreamingResponse:
-        return StatementsWithStreamingResponse(self)
+    def with_raw_response(self) -> StatementsResourceWithRawResponse:
+        return StatementsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> StatementsResourceWithStreamingResponse:
+        return StatementsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -152,18 +152,18 @@ class Statements(SyncAPIResource):
         )
 
 
-class AsyncStatements(AsyncAPIResource):
+class AsyncStatementsResource(AsyncAPIResource):
     @cached_property
-    def line_items(self) -> AsyncLineItems:
-        return AsyncLineItems(self._client)
+    def line_items(self) -> AsyncLineItemsResource:
+        return AsyncLineItemsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncStatementsWithRawResponse:
-        return AsyncStatementsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncStatementsResourceWithRawResponse:
+        return AsyncStatementsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncStatementsWithStreamingResponse:
-        return AsyncStatementsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncStatementsResourceWithStreamingResponse:
+        return AsyncStatementsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -272,8 +272,8 @@ class AsyncStatements(AsyncAPIResource):
         )
 
 
-class StatementsWithRawResponse:
-    def __init__(self, statements: Statements) -> None:
+class StatementsResourceWithRawResponse:
+    def __init__(self, statements: StatementsResource) -> None:
         self._statements = statements
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -284,12 +284,12 @@ class StatementsWithRawResponse:
         )
 
     @cached_property
-    def line_items(self) -> LineItemsWithRawResponse:
-        return LineItemsWithRawResponse(self._statements.line_items)
+    def line_items(self) -> LineItemsResourceWithRawResponse:
+        return LineItemsResourceWithRawResponse(self._statements.line_items)
 
 
-class AsyncStatementsWithRawResponse:
-    def __init__(self, statements: AsyncStatements) -> None:
+class AsyncStatementsResourceWithRawResponse:
+    def __init__(self, statements: AsyncStatementsResource) -> None:
         self._statements = statements
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -300,12 +300,12 @@ class AsyncStatementsWithRawResponse:
         )
 
     @cached_property
-    def line_items(self) -> AsyncLineItemsWithRawResponse:
-        return AsyncLineItemsWithRawResponse(self._statements.line_items)
+    def line_items(self) -> AsyncLineItemsResourceWithRawResponse:
+        return AsyncLineItemsResourceWithRawResponse(self._statements.line_items)
 
 
-class StatementsWithStreamingResponse:
-    def __init__(self, statements: Statements) -> None:
+class StatementsResourceWithStreamingResponse:
+    def __init__(self, statements: StatementsResource) -> None:
         self._statements = statements
 
         self.retrieve = to_streamed_response_wrapper(
@@ -316,12 +316,12 @@ class StatementsWithStreamingResponse:
         )
 
     @cached_property
-    def line_items(self) -> LineItemsWithStreamingResponse:
-        return LineItemsWithStreamingResponse(self._statements.line_items)
+    def line_items(self) -> LineItemsResourceWithStreamingResponse:
+        return LineItemsResourceWithStreamingResponse(self._statements.line_items)
 
 
-class AsyncStatementsWithStreamingResponse:
-    def __init__(self, statements: AsyncStatements) -> None:
+class AsyncStatementsResourceWithStreamingResponse:
+    def __init__(self, statements: AsyncStatementsResource) -> None:
         self._statements = statements
 
         self.retrieve = async_to_streamed_response_wrapper(
@@ -332,5 +332,5 @@ class AsyncStatementsWithStreamingResponse:
         )
 
     @cached_property
-    def line_items(self) -> AsyncLineItemsWithStreamingResponse:
-        return AsyncLineItemsWithStreamingResponse(self._statements.line_items)
+    def line_items(self) -> AsyncLineItemsResourceWithStreamingResponse:
+        return AsyncLineItemsResourceWithStreamingResponse(self._statements.line_items)

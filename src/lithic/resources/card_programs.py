@@ -18,17 +18,17 @@ from .._base_client import (
 )
 from ..types.card_program import CardProgram
 
-__all__ = ["CardPrograms", "AsyncCardPrograms"]
+__all__ = ["CardProgramsResource", "AsyncCardProgramsResource"]
 
 
-class CardPrograms(SyncAPIResource):
+class CardProgramsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> CardProgramsWithRawResponse:
-        return CardProgramsWithRawResponse(self)
+    def with_raw_response(self) -> CardProgramsResourceWithRawResponse:
+        return CardProgramsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CardProgramsWithStreamingResponse:
-        return CardProgramsWithStreamingResponse(self)
+    def with_streaming_response(self) -> CardProgramsResourceWithStreamingResponse:
+        return CardProgramsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -117,14 +117,14 @@ class CardPrograms(SyncAPIResource):
         )
 
 
-class AsyncCardPrograms(AsyncAPIResource):
+class AsyncCardProgramsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncCardProgramsWithRawResponse:
-        return AsyncCardProgramsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncCardProgramsResourceWithRawResponse:
+        return AsyncCardProgramsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCardProgramsWithStreamingResponse:
-        return AsyncCardProgramsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncCardProgramsResourceWithStreamingResponse:
+        return AsyncCardProgramsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -213,8 +213,8 @@ class AsyncCardPrograms(AsyncAPIResource):
         )
 
 
-class CardProgramsWithRawResponse:
-    def __init__(self, card_programs: CardPrograms) -> None:
+class CardProgramsResourceWithRawResponse:
+    def __init__(self, card_programs: CardProgramsResource) -> None:
         self._card_programs = card_programs
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -225,8 +225,8 @@ class CardProgramsWithRawResponse:
         )
 
 
-class AsyncCardProgramsWithRawResponse:
-    def __init__(self, card_programs: AsyncCardPrograms) -> None:
+class AsyncCardProgramsResourceWithRawResponse:
+    def __init__(self, card_programs: AsyncCardProgramsResource) -> None:
         self._card_programs = card_programs
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -237,8 +237,8 @@ class AsyncCardProgramsWithRawResponse:
         )
 
 
-class CardProgramsWithStreamingResponse:
-    def __init__(self, card_programs: CardPrograms) -> None:
+class CardProgramsResourceWithStreamingResponse:
+    def __init__(self, card_programs: CardProgramsResource) -> None:
         self._card_programs = card_programs
 
         self.retrieve = to_streamed_response_wrapper(
@@ -249,8 +249,8 @@ class CardProgramsWithStreamingResponse:
         )
 
 
-class AsyncCardProgramsWithStreamingResponse:
-    def __init__(self, card_programs: AsyncCardPrograms) -> None:
+class AsyncCardProgramsResourceWithStreamingResponse:
+    def __init__(self, card_programs: AsyncCardProgramsResource) -> None:
         self._card_programs = card_programs
 
         self.retrieve = async_to_streamed_response_wrapper(

@@ -14,17 +14,17 @@ from .._base_client import (
 )
 from ..types.auth_stream_secret import AuthStreamSecret
 
-__all__ = ["AuthStreamEnrollment", "AsyncAuthStreamEnrollment"]
+__all__ = ["AuthStreamEnrollmentResource", "AsyncAuthStreamEnrollmentResource"]
 
 
-class AuthStreamEnrollment(SyncAPIResource):
+class AuthStreamEnrollmentResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AuthStreamEnrollmentWithRawResponse:
-        return AuthStreamEnrollmentWithRawResponse(self)
+    def with_raw_response(self) -> AuthStreamEnrollmentResourceWithRawResponse:
+        return AuthStreamEnrollmentResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AuthStreamEnrollmentWithStreamingResponse:
-        return AuthStreamEnrollmentWithStreamingResponse(self)
+    def with_streaming_response(self) -> AuthStreamEnrollmentResourceWithStreamingResponse:
+        return AuthStreamEnrollmentResourceWithStreamingResponse(self)
 
     def retrieve_secret(
         self,
@@ -79,14 +79,14 @@ class AuthStreamEnrollment(SyncAPIResource):
         )
 
 
-class AsyncAuthStreamEnrollment(AsyncAPIResource):
+class AsyncAuthStreamEnrollmentResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAuthStreamEnrollmentWithRawResponse:
-        return AsyncAuthStreamEnrollmentWithRawResponse(self)
+    def with_raw_response(self) -> AsyncAuthStreamEnrollmentResourceWithRawResponse:
+        return AsyncAuthStreamEnrollmentResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAuthStreamEnrollmentWithStreamingResponse:
-        return AsyncAuthStreamEnrollmentWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncAuthStreamEnrollmentResourceWithStreamingResponse:
+        return AsyncAuthStreamEnrollmentResourceWithStreamingResponse(self)
 
     async def retrieve_secret(
         self,
@@ -141,8 +141,8 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
         )
 
 
-class AuthStreamEnrollmentWithRawResponse:
-    def __init__(self, auth_stream_enrollment: AuthStreamEnrollment) -> None:
+class AuthStreamEnrollmentResourceWithRawResponse:
+    def __init__(self, auth_stream_enrollment: AuthStreamEnrollmentResource) -> None:
         self._auth_stream_enrollment = auth_stream_enrollment
 
         self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
@@ -153,8 +153,8 @@ class AuthStreamEnrollmentWithRawResponse:
         )
 
 
-class AsyncAuthStreamEnrollmentWithRawResponse:
-    def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollment) -> None:
+class AsyncAuthStreamEnrollmentResourceWithRawResponse:
+    def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollmentResource) -> None:
         self._auth_stream_enrollment = auth_stream_enrollment
 
         self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
@@ -165,8 +165,8 @@ class AsyncAuthStreamEnrollmentWithRawResponse:
         )
 
 
-class AuthStreamEnrollmentWithStreamingResponse:
-    def __init__(self, auth_stream_enrollment: AuthStreamEnrollment) -> None:
+class AuthStreamEnrollmentResourceWithStreamingResponse:
+    def __init__(self, auth_stream_enrollment: AuthStreamEnrollmentResource) -> None:
         self._auth_stream_enrollment = auth_stream_enrollment
 
         self.retrieve_secret = to_streamed_response_wrapper(
@@ -177,8 +177,8 @@ class AuthStreamEnrollmentWithStreamingResponse:
         )
 
 
-class AsyncAuthStreamEnrollmentWithStreamingResponse:
-    def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollment) -> None:
+class AsyncAuthStreamEnrollmentResourceWithStreamingResponse:
+    def __init__(self, auth_stream_enrollment: AsyncAuthStreamEnrollmentResource) -> None:
         self._auth_stream_enrollment = auth_stream_enrollment
 
         self.retrieve_secret = async_to_streamed_response_wrapper(

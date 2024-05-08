@@ -16,7 +16,16 @@ from ..types import (
     dispute_list_evidences_params,
     dispute_initiate_evidence_upload_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import (
+    NOT_GIVEN,
+    Body,
+    Omit,
+    Query,
+    Headers,
+    NoneType,
+    NotGiven,
+    FileTypes,
+)
 from .._utils import (
     maybe_transform,
     async_maybe_transform,
@@ -32,17 +41,17 @@ from .._base_client import (
 from ..types.dispute import Dispute
 from ..types.dispute_evidence import DisputeEvidence
 
-__all__ = ["Disputes", "AsyncDisputes"]
+__all__ = ["DisputesResource", "AsyncDisputesResource"]
 
 
-class Disputes(SyncAPIResource):
+class DisputesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> DisputesWithRawResponse:
-        return DisputesWithRawResponse(self)
+    def with_raw_response(self) -> DisputesResourceWithRawResponse:
+        return DisputesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> DisputesWithStreamingResponse:
-        return DisputesWithStreamingResponse(self)
+    def with_streaming_response(self) -> DisputesResourceWithStreamingResponse:
+        return DisputesResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -517,15 +526,37 @@ class Disputes(SyncAPIResource):
             cast_to=DisputeEvidence,
         )
 
+    def upload_evidence(
+        self,
+        dispute_token: str,
+        file: FileTypes,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> None:
+        """
+        Initiates the Dispute Evidence Upload, then uploads the file to the returned
+        `upload_url`.
+        """
+        payload = self._client.disputes.initiate_evidence_upload(
+            dispute_token, extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body
+        )
+        if not payload.upload_url:
+            raise ValueError("Missing 'upload_url' from response payload")
+        files = {"file": file}
+        options = make_request_options(extra_headers={"Authorization": Omit()})
+        self._put(payload.upload_url, cast_to=NoneType, body=None, files=files, options=options)
 
-class AsyncDisputes(AsyncAPIResource):
+
+class AsyncDisputesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncDisputesWithRawResponse:
-        return AsyncDisputesWithRawResponse(self)
+    def with_raw_response(self) -> AsyncDisputesResourceWithRawResponse:
+        return AsyncDisputesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncDisputesWithStreamingResponse:
-        return AsyncDisputesWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncDisputesResourceWithStreamingResponse:
+        return AsyncDisputesResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -1000,9 +1031,31 @@ class AsyncDisputes(AsyncAPIResource):
             cast_to=DisputeEvidence,
         )
 
+    async def upload_evidence(
+        self,
+        dispute_token: str,
+        file: FileTypes,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+    ) -> None:
+        """
+        Initiates the Dispute Evidence Upload, then uploads the file to the returned
+        `upload_url`.
+        """
+        payload = await self._client.disputes.initiate_evidence_upload(
+            dispute_token, extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body
+        )
+        if not payload.upload_url:
+            raise ValueError("Missing 'upload_url' from response payload")
+        files = {"file": file}
+        options = make_request_options(extra_headers={"Authorization": Omit()})
+        await self._put(payload.upload_url, cast_to=NoneType, body=None, files=files, options=options)
 
-class DisputesWithRawResponse:
-    def __init__(self, disputes: Disputes) -> None:
+
+class DisputesResourceWithRawResponse:
+    def __init__(self, disputes: DisputesResource) -> None:
         self._disputes = disputes
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -1034,8 +1087,8 @@ class DisputesWithRawResponse:
         )
 
 
-class AsyncDisputesWithRawResponse:
-    def __init__(self, disputes: AsyncDisputes) -> None:
+class AsyncDisputesResourceWithRawResponse:
+    def __init__(self, disputes: AsyncDisputesResource) -> None:
         self._disputes = disputes
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -1067,8 +1120,8 @@ class AsyncDisputesWithRawResponse:
         )
 
 
-class DisputesWithStreamingResponse:
-    def __init__(self, disputes: Disputes) -> None:
+class DisputesResourceWithStreamingResponse:
+    def __init__(self, disputes: DisputesResource) -> None:
         self._disputes = disputes
 
         self.create = to_streamed_response_wrapper(
@@ -1100,8 +1153,8 @@ class DisputesWithStreamingResponse:
         )
 
 
-class AsyncDisputesWithStreamingResponse:
-    def __init__(self, disputes: AsyncDisputes) -> None:
+class AsyncDisputesResourceWithStreamingResponse:
+    def __init__(self, disputes: AsyncDisputesResource) -> None:
         self._disputes = disputes
 
         self.create = async_to_streamed_response_wrapper(

@@ -36,17 +36,17 @@ from ..types.account_holder_create_response import AccountHolderCreateResponse
 from ..types.account_holder_update_response import AccountHolderUpdateResponse
 from ..types.account_holder_list_documents_response import AccountHolderListDocumentsResponse
 
-__all__ = ["AccountHolders", "AsyncAccountHolders"]
+__all__ = ["AccountHoldersResource", "AsyncAccountHoldersResource"]
 
 
-class AccountHolders(SyncAPIResource):
+class AccountHoldersResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AccountHoldersWithRawResponse:
-        return AccountHoldersWithRawResponse(self)
+    def with_raw_response(self) -> AccountHoldersResourceWithRawResponse:
+        return AccountHoldersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AccountHoldersWithStreamingResponse:
-        return AccountHoldersWithStreamingResponse(self)
+    def with_streaming_response(self) -> AccountHoldersResourceWithStreamingResponse:
+        return AccountHoldersResourceWithStreamingResponse(self)
 
     @overload
     def create(
@@ -702,14 +702,14 @@ class AccountHolders(SyncAPIResource):
         )
 
 
-class AsyncAccountHolders(AsyncAPIResource):
+class AsyncAccountHoldersResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAccountHoldersWithRawResponse:
-        return AsyncAccountHoldersWithRawResponse(self)
+    def with_raw_response(self) -> AsyncAccountHoldersResourceWithRawResponse:
+        return AsyncAccountHoldersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAccountHoldersWithStreamingResponse:
-        return AsyncAccountHoldersWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncAccountHoldersResourceWithStreamingResponse:
+        return AsyncAccountHoldersResourceWithStreamingResponse(self)
 
     @overload
     async def create(
@@ -1365,8 +1365,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         )
 
 
-class AccountHoldersWithRawResponse:
-    def __init__(self, account_holders: AccountHolders) -> None:
+class AccountHoldersResourceWithRawResponse:
+    def __init__(self, account_holders: AccountHoldersResource) -> None:
         self._account_holders = account_holders
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -1395,8 +1395,8 @@ class AccountHoldersWithRawResponse:
         )
 
 
-class AsyncAccountHoldersWithRawResponse:
-    def __init__(self, account_holders: AsyncAccountHolders) -> None:
+class AsyncAccountHoldersResourceWithRawResponse:
+    def __init__(self, account_holders: AsyncAccountHoldersResource) -> None:
         self._account_holders = account_holders
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -1425,8 +1425,8 @@ class AsyncAccountHoldersWithRawResponse:
         )
 
 
-class AccountHoldersWithStreamingResponse:
-    def __init__(self, account_holders: AccountHolders) -> None:
+class AccountHoldersResourceWithStreamingResponse:
+    def __init__(self, account_holders: AccountHoldersResource) -> None:
         self._account_holders = account_holders
 
         self.create = to_streamed_response_wrapper(
@@ -1455,8 +1455,8 @@ class AccountHoldersWithStreamingResponse:
         )
 
 
-class AsyncAccountHoldersWithStreamingResponse:
-    def __init__(self, account_holders: AsyncAccountHolders) -> None:
+class AsyncAccountHoldersResourceWithStreamingResponse:
+    def __init__(self, account_holders: AsyncAccountHoldersResource) -> None:
         self._account_holders = account_holders
 
         self.create = async_to_streamed_response_wrapper(

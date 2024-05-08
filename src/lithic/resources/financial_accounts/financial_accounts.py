@@ -18,21 +18,21 @@ from ..._utils import (
     async_maybe_transform,
 )
 from .balances import (
-    Balances,
-    AsyncBalances,
-    BalancesWithRawResponse,
-    AsyncBalancesWithRawResponse,
-    BalancesWithStreamingResponse,
-    AsyncBalancesWithStreamingResponse,
+    BalancesResource,
+    AsyncBalancesResource,
+    BalancesResourceWithRawResponse,
+    AsyncBalancesResourceWithRawResponse,
+    BalancesResourceWithStreamingResponse,
+    AsyncBalancesResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
 from .statements import (
-    Statements,
-    AsyncStatements,
-    StatementsWithRawResponse,
-    AsyncStatementsWithRawResponse,
-    StatementsWithStreamingResponse,
-    AsyncStatementsWithStreamingResponse,
+    StatementsResource,
+    AsyncStatementsResource,
+    StatementsResourceWithRawResponse,
+    AsyncStatementsResourceWithRawResponse,
+    StatementsResourceWithStreamingResponse,
+    AsyncStatementsResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -41,40 +41,40 @@ from ..._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from .statements.statements import Statements, AsyncStatements
+from .statements.statements import StatementsResource, AsyncStatementsResource
 from .financial_transactions import (
-    FinancialTransactions,
-    AsyncFinancialTransactions,
-    FinancialTransactionsWithRawResponse,
-    AsyncFinancialTransactionsWithRawResponse,
-    FinancialTransactionsWithStreamingResponse,
-    AsyncFinancialTransactionsWithStreamingResponse,
+    FinancialTransactionsResource,
+    AsyncFinancialTransactionsResource,
+    FinancialTransactionsResourceWithRawResponse,
+    AsyncFinancialTransactionsResourceWithRawResponse,
+    FinancialTransactionsResourceWithStreamingResponse,
+    AsyncFinancialTransactionsResourceWithStreamingResponse,
 )
 from ...types.financial_account import FinancialAccount
 
-__all__ = ["FinancialAccounts", "AsyncFinancialAccounts"]
+__all__ = ["FinancialAccountsResource", "AsyncFinancialAccountsResource"]
 
 
-class FinancialAccounts(SyncAPIResource):
+class FinancialAccountsResource(SyncAPIResource):
     @cached_property
-    def balances(self) -> Balances:
-        return Balances(self._client)
-
-    @cached_property
-    def financial_transactions(self) -> FinancialTransactions:
-        return FinancialTransactions(self._client)
+    def balances(self) -> BalancesResource:
+        return BalancesResource(self._client)
 
     @cached_property
-    def statements(self) -> Statements:
-        return Statements(self._client)
+    def financial_transactions(self) -> FinancialTransactionsResource:
+        return FinancialTransactionsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> FinancialAccountsWithRawResponse:
-        return FinancialAccountsWithRawResponse(self)
+    def statements(self) -> StatementsResource:
+        return StatementsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> FinancialAccountsWithStreamingResponse:
-        return FinancialAccountsWithStreamingResponse(self)
+    def with_raw_response(self) -> FinancialAccountsResourceWithRawResponse:
+        return FinancialAccountsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> FinancialAccountsResourceWithStreamingResponse:
+        return FinancialAccountsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -242,26 +242,26 @@ class FinancialAccounts(SyncAPIResource):
         )
 
 
-class AsyncFinancialAccounts(AsyncAPIResource):
+class AsyncFinancialAccountsResource(AsyncAPIResource):
     @cached_property
-    def balances(self) -> AsyncBalances:
-        return AsyncBalances(self._client)
+    def balances(self) -> AsyncBalancesResource:
+        return AsyncBalancesResource(self._client)
 
     @cached_property
-    def financial_transactions(self) -> AsyncFinancialTransactions:
-        return AsyncFinancialTransactions(self._client)
+    def financial_transactions(self) -> AsyncFinancialTransactionsResource:
+        return AsyncFinancialTransactionsResource(self._client)
 
     @cached_property
-    def statements(self) -> AsyncStatements:
-        return AsyncStatements(self._client)
+    def statements(self) -> AsyncStatementsResource:
+        return AsyncStatementsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncFinancialAccountsWithRawResponse:
-        return AsyncFinancialAccountsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncFinancialAccountsResourceWithRawResponse:
+        return AsyncFinancialAccountsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncFinancialAccountsWithStreamingResponse:
-        return AsyncFinancialAccountsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncFinancialAccountsResourceWithStreamingResponse:
+        return AsyncFinancialAccountsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -431,8 +431,8 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         )
 
 
-class FinancialAccountsWithRawResponse:
-    def __init__(self, financial_accounts: FinancialAccounts) -> None:
+class FinancialAccountsResourceWithRawResponse:
+    def __init__(self, financial_accounts: FinancialAccountsResource) -> None:
         self._financial_accounts = financial_accounts
 
         self.create = _legacy_response.to_raw_response_wrapper(
@@ -449,20 +449,20 @@ class FinancialAccountsWithRawResponse:
         )
 
     @cached_property
-    def balances(self) -> BalancesWithRawResponse:
-        return BalancesWithRawResponse(self._financial_accounts.balances)
+    def balances(self) -> BalancesResourceWithRawResponse:
+        return BalancesResourceWithRawResponse(self._financial_accounts.balances)
 
     @cached_property
-    def financial_transactions(self) -> FinancialTransactionsWithRawResponse:
-        return FinancialTransactionsWithRawResponse(self._financial_accounts.financial_transactions)
+    def financial_transactions(self) -> FinancialTransactionsResourceWithRawResponse:
+        return FinancialTransactionsResourceWithRawResponse(self._financial_accounts.financial_transactions)
 
     @cached_property
-    def statements(self) -> StatementsWithRawResponse:
-        return StatementsWithRawResponse(self._financial_accounts.statements)
+    def statements(self) -> StatementsResourceWithRawResponse:
+        return StatementsResourceWithRawResponse(self._financial_accounts.statements)
 
 
-class AsyncFinancialAccountsWithRawResponse:
-    def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
+class AsyncFinancialAccountsResourceWithRawResponse:
+    def __init__(self, financial_accounts: AsyncFinancialAccountsResource) -> None:
         self._financial_accounts = financial_accounts
 
         self.create = _legacy_response.async_to_raw_response_wrapper(
@@ -479,20 +479,20 @@ class AsyncFinancialAccountsWithRawResponse:
         )
 
     @cached_property
-    def balances(self) -> AsyncBalancesWithRawResponse:
-        return AsyncBalancesWithRawResponse(self._financial_accounts.balances)
+    def balances(self) -> AsyncBalancesResourceWithRawResponse:
+        return AsyncBalancesResourceWithRawResponse(self._financial_accounts.balances)
 
     @cached_property
-    def financial_transactions(self) -> AsyncFinancialTransactionsWithRawResponse:
-        return AsyncFinancialTransactionsWithRawResponse(self._financial_accounts.financial_transactions)
+    def financial_transactions(self) -> AsyncFinancialTransactionsResourceWithRawResponse:
+        return AsyncFinancialTransactionsResourceWithRawResponse(self._financial_accounts.financial_transactions)
 
     @cached_property
-    def statements(self) -> AsyncStatementsWithRawResponse:
-        return AsyncStatementsWithRawResponse(self._financial_accounts.statements)
+    def statements(self) -> AsyncStatementsResourceWithRawResponse:
+        return AsyncStatementsResourceWithRawResponse(self._financial_accounts.statements)
 
 
-class FinancialAccountsWithStreamingResponse:
-    def __init__(self, financial_accounts: FinancialAccounts) -> None:
+class FinancialAccountsResourceWithStreamingResponse:
+    def __init__(self, financial_accounts: FinancialAccountsResource) -> None:
         self._financial_accounts = financial_accounts
 
         self.create = to_streamed_response_wrapper(
@@ -509,20 +509,20 @@ class FinancialAccountsWithStreamingResponse:
         )
 
     @cached_property
-    def balances(self) -> BalancesWithStreamingResponse:
-        return BalancesWithStreamingResponse(self._financial_accounts.balances)
+    def balances(self) -> BalancesResourceWithStreamingResponse:
+        return BalancesResourceWithStreamingResponse(self._financial_accounts.balances)
 
     @cached_property
-    def financial_transactions(self) -> FinancialTransactionsWithStreamingResponse:
-        return FinancialTransactionsWithStreamingResponse(self._financial_accounts.financial_transactions)
+    def financial_transactions(self) -> FinancialTransactionsResourceWithStreamingResponse:
+        return FinancialTransactionsResourceWithStreamingResponse(self._financial_accounts.financial_transactions)
 
     @cached_property
-    def statements(self) -> StatementsWithStreamingResponse:
-        return StatementsWithStreamingResponse(self._financial_accounts.statements)
+    def statements(self) -> StatementsResourceWithStreamingResponse:
+        return StatementsResourceWithStreamingResponse(self._financial_accounts.statements)
 
 
-class AsyncFinancialAccountsWithStreamingResponse:
-    def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
+class AsyncFinancialAccountsResourceWithStreamingResponse:
+    def __init__(self, financial_accounts: AsyncFinancialAccountsResource) -> None:
         self._financial_accounts = financial_accounts
 
         self.create = async_to_streamed_response_wrapper(
@@ -539,13 +539,13 @@ class AsyncFinancialAccountsWithStreamingResponse:
         )
 
     @cached_property
-    def balances(self) -> AsyncBalancesWithStreamingResponse:
-        return AsyncBalancesWithStreamingResponse(self._financial_accounts.balances)
+    def balances(self) -> AsyncBalancesResourceWithStreamingResponse:
+        return AsyncBalancesResourceWithStreamingResponse(self._financial_accounts.balances)
 
     @cached_property
-    def financial_transactions(self) -> AsyncFinancialTransactionsWithStreamingResponse:
-        return AsyncFinancialTransactionsWithStreamingResponse(self._financial_accounts.financial_transactions)
+    def financial_transactions(self) -> AsyncFinancialTransactionsResourceWithStreamingResponse:
+        return AsyncFinancialTransactionsResourceWithStreamingResponse(self._financial_accounts.financial_transactions)
 
     @cached_property
-    def statements(self) -> AsyncStatementsWithStreamingResponse:
-        return AsyncStatementsWithStreamingResponse(self._financial_accounts.statements)
+    def statements(self) -> AsyncStatementsResourceWithStreamingResponse:
+        return AsyncStatementsResourceWithStreamingResponse(self._financial_accounts.statements)

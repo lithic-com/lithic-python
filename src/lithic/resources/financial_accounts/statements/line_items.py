@@ -18,17 +18,17 @@ from ...._base_client import (
 from ....types.financial_accounts.statements import line_item_list_params
 from ....types.financial_accounts.statements.line_item_list_response import LineItemListResponse
 
-__all__ = ["LineItems", "AsyncLineItems"]
+__all__ = ["LineItemsResource", "AsyncLineItemsResource"]
 
 
-class LineItems(SyncAPIResource):
+class LineItemsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> LineItemsWithRawResponse:
-        return LineItemsWithRawResponse(self)
+    def with_raw_response(self) -> LineItemsResourceWithRawResponse:
+        return LineItemsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> LineItemsWithStreamingResponse:
-        return LineItemsWithStreamingResponse(self)
+    def with_streaming_response(self) -> LineItemsResourceWithStreamingResponse:
+        return LineItemsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -92,14 +92,14 @@ class LineItems(SyncAPIResource):
         )
 
 
-class AsyncLineItems(AsyncAPIResource):
+class AsyncLineItemsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncLineItemsWithRawResponse:
-        return AsyncLineItemsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncLineItemsResourceWithRawResponse:
+        return AsyncLineItemsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncLineItemsWithStreamingResponse:
-        return AsyncLineItemsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncLineItemsResourceWithStreamingResponse:
+        return AsyncLineItemsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -163,8 +163,8 @@ class AsyncLineItems(AsyncAPIResource):
         )
 
 
-class LineItemsWithRawResponse:
-    def __init__(self, line_items: LineItems) -> None:
+class LineItemsResourceWithRawResponse:
+    def __init__(self, line_items: LineItemsResource) -> None:
         self._line_items = line_items
 
         self.list = _legacy_response.to_raw_response_wrapper(
@@ -172,8 +172,8 @@ class LineItemsWithRawResponse:
         )
 
 
-class AsyncLineItemsWithRawResponse:
-    def __init__(self, line_items: AsyncLineItems) -> None:
+class AsyncLineItemsResourceWithRawResponse:
+    def __init__(self, line_items: AsyncLineItemsResource) -> None:
         self._line_items = line_items
 
         self.list = _legacy_response.async_to_raw_response_wrapper(
@@ -181,8 +181,8 @@ class AsyncLineItemsWithRawResponse:
         )
 
 
-class LineItemsWithStreamingResponse:
-    def __init__(self, line_items: LineItems) -> None:
+class LineItemsResourceWithStreamingResponse:
+    def __init__(self, line_items: LineItemsResource) -> None:
         self._line_items = line_items
 
         self.list = to_streamed_response_wrapper(
@@ -190,8 +190,8 @@ class LineItemsWithStreamingResponse:
         )
 
 
-class AsyncLineItemsWithStreamingResponse:
-    def __init__(self, line_items: AsyncLineItems) -> None:
+class AsyncLineItemsResourceWithStreamingResponse:
+    def __init__(self, line_items: AsyncLineItemsResource) -> None:
         self._line_items = line_items
 
         self.list = async_to_streamed_response_wrapper(

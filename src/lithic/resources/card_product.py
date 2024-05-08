@@ -14,17 +14,17 @@ from .._base_client import (
 )
 from ..types.card_product_credit_detail_response import CardProductCreditDetailResponse
 
-__all__ = ["CardProduct", "AsyncCardProduct"]
+__all__ = ["CardProductResource", "AsyncCardProductResource"]
 
 
-class CardProduct(SyncAPIResource):
+class CardProductResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> CardProductWithRawResponse:
-        return CardProductWithRawResponse(self)
+    def with_raw_response(self) -> CardProductResourceWithRawResponse:
+        return CardProductResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CardProductWithStreamingResponse:
-        return CardProductWithStreamingResponse(self)
+    def with_streaming_response(self) -> CardProductResourceWithStreamingResponse:
+        return CardProductResourceWithStreamingResponse(self)
 
     def credit_detail(
         self,
@@ -46,14 +46,14 @@ class CardProduct(SyncAPIResource):
         )
 
 
-class AsyncCardProduct(AsyncAPIResource):
+class AsyncCardProductResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncCardProductWithRawResponse:
-        return AsyncCardProductWithRawResponse(self)
+    def with_raw_response(self) -> AsyncCardProductResourceWithRawResponse:
+        return AsyncCardProductResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCardProductWithStreamingResponse:
-        return AsyncCardProductWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncCardProductResourceWithStreamingResponse:
+        return AsyncCardProductResourceWithStreamingResponse(self)
 
     async def credit_detail(
         self,
@@ -75,8 +75,8 @@ class AsyncCardProduct(AsyncAPIResource):
         )
 
 
-class CardProductWithRawResponse:
-    def __init__(self, card_product: CardProduct) -> None:
+class CardProductResourceWithRawResponse:
+    def __init__(self, card_product: CardProductResource) -> None:
         self._card_product = card_product
 
         self.credit_detail = _legacy_response.to_raw_response_wrapper(
@@ -84,8 +84,8 @@ class CardProductWithRawResponse:
         )
 
 
-class AsyncCardProductWithRawResponse:
-    def __init__(self, card_product: AsyncCardProduct) -> None:
+class AsyncCardProductResourceWithRawResponse:
+    def __init__(self, card_product: AsyncCardProductResource) -> None:
         self._card_product = card_product
 
         self.credit_detail = _legacy_response.async_to_raw_response_wrapper(
@@ -93,8 +93,8 @@ class AsyncCardProductWithRawResponse:
         )
 
 
-class CardProductWithStreamingResponse:
-    def __init__(self, card_product: CardProduct) -> None:
+class CardProductResourceWithStreamingResponse:
+    def __init__(self, card_product: CardProductResource) -> None:
         self._card_product = card_product
 
         self.credit_detail = to_streamed_response_wrapper(
@@ -102,8 +102,8 @@ class CardProductWithStreamingResponse:
         )
 
 
-class AsyncCardProductWithStreamingResponse:
-    def __init__(self, card_product: AsyncCardProduct) -> None:
+class AsyncCardProductResourceWithStreamingResponse:
+    def __init__(self, card_product: AsyncCardProductResource) -> None:
         self._card_product = card_product
 
         self.credit_detail = async_to_streamed_response_wrapper(

@@ -25,30 +25,30 @@ from ..._base_client import (
 )
 from ...types.account import Account
 from .credit_configurations import (
-    CreditConfigurations,
-    AsyncCreditConfigurations,
-    CreditConfigurationsWithRawResponse,
-    AsyncCreditConfigurationsWithRawResponse,
-    CreditConfigurationsWithStreamingResponse,
-    AsyncCreditConfigurationsWithStreamingResponse,
+    CreditConfigurationsResource,
+    AsyncCreditConfigurationsResource,
+    CreditConfigurationsResourceWithRawResponse,
+    AsyncCreditConfigurationsResourceWithRawResponse,
+    CreditConfigurationsResourceWithStreamingResponse,
+    AsyncCreditConfigurationsResourceWithStreamingResponse,
 )
 from ...types.account_spend_limits import AccountSpendLimits
 
-__all__ = ["Accounts", "AsyncAccounts"]
+__all__ = ["AccountsResource", "AsyncAccountsResource"]
 
 
-class Accounts(SyncAPIResource):
+class AccountsResource(SyncAPIResource):
     @cached_property
-    def credit_configurations(self) -> CreditConfigurations:
-        return CreditConfigurations(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> AccountsWithRawResponse:
-        return AccountsWithRawResponse(self)
+    def credit_configurations(self) -> CreditConfigurationsResource:
+        return CreditConfigurationsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> AccountsWithStreamingResponse:
-        return AccountsWithStreamingResponse(self)
+    def with_raw_response(self) -> AccountsResourceWithRawResponse:
+        return AccountsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AccountsResourceWithStreamingResponse:
+        return AccountsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -257,18 +257,18 @@ class Accounts(SyncAPIResource):
         )
 
 
-class AsyncAccounts(AsyncAPIResource):
+class AsyncAccountsResource(AsyncAPIResource):
     @cached_property
-    def credit_configurations(self) -> AsyncCreditConfigurations:
-        return AsyncCreditConfigurations(self._client)
+    def credit_configurations(self) -> AsyncCreditConfigurationsResource:
+        return AsyncCreditConfigurationsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncAccountsWithRawResponse:
-        return AsyncAccountsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncAccountsResourceWithRawResponse:
+        return AsyncAccountsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAccountsWithStreamingResponse:
-        return AsyncAccountsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncAccountsResourceWithStreamingResponse:
+        return AsyncAccountsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -477,8 +477,8 @@ class AsyncAccounts(AsyncAPIResource):
         )
 
 
-class AccountsWithRawResponse:
-    def __init__(self, accounts: Accounts) -> None:
+class AccountsResourceWithRawResponse:
+    def __init__(self, accounts: AccountsResource) -> None:
         self._accounts = accounts
 
         self.retrieve = _legacy_response.to_raw_response_wrapper(
@@ -495,12 +495,12 @@ class AccountsWithRawResponse:
         )
 
     @cached_property
-    def credit_configurations(self) -> CreditConfigurationsWithRawResponse:
-        return CreditConfigurationsWithRawResponse(self._accounts.credit_configurations)
+    def credit_configurations(self) -> CreditConfigurationsResourceWithRawResponse:
+        return CreditConfigurationsResourceWithRawResponse(self._accounts.credit_configurations)
 
 
-class AsyncAccountsWithRawResponse:
-    def __init__(self, accounts: AsyncAccounts) -> None:
+class AsyncAccountsResourceWithRawResponse:
+    def __init__(self, accounts: AsyncAccountsResource) -> None:
         self._accounts = accounts
 
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
@@ -517,12 +517,12 @@ class AsyncAccountsWithRawResponse:
         )
 
     @cached_property
-    def credit_configurations(self) -> AsyncCreditConfigurationsWithRawResponse:
-        return AsyncCreditConfigurationsWithRawResponse(self._accounts.credit_configurations)
+    def credit_configurations(self) -> AsyncCreditConfigurationsResourceWithRawResponse:
+        return AsyncCreditConfigurationsResourceWithRawResponse(self._accounts.credit_configurations)
 
 
-class AccountsWithStreamingResponse:
-    def __init__(self, accounts: Accounts) -> None:
+class AccountsResourceWithStreamingResponse:
+    def __init__(self, accounts: AccountsResource) -> None:
         self._accounts = accounts
 
         self.retrieve = to_streamed_response_wrapper(
@@ -539,12 +539,12 @@ class AccountsWithStreamingResponse:
         )
 
     @cached_property
-    def credit_configurations(self) -> CreditConfigurationsWithStreamingResponse:
-        return CreditConfigurationsWithStreamingResponse(self._accounts.credit_configurations)
+    def credit_configurations(self) -> CreditConfigurationsResourceWithStreamingResponse:
+        return CreditConfigurationsResourceWithStreamingResponse(self._accounts.credit_configurations)
 
 
-class AsyncAccountsWithStreamingResponse:
-    def __init__(self, accounts: AsyncAccounts) -> None:
+class AsyncAccountsResourceWithStreamingResponse:
+    def __init__(self, accounts: AsyncAccountsResource) -> None:
         self._accounts = accounts
 
         self.retrieve = async_to_streamed_response_wrapper(
@@ -561,5 +561,5 @@ class AsyncAccountsWithStreamingResponse:
         )
 
     @cached_property
-    def credit_configurations(self) -> AsyncCreditConfigurationsWithStreamingResponse:
-        return AsyncCreditConfigurationsWithStreamingResponse(self._accounts.credit_configurations)
+    def credit_configurations(self) -> AsyncCreditConfigurationsResourceWithStreamingResponse:
+        return AsyncCreditConfigurationsResourceWithStreamingResponse(self._accounts.credit_configurations)

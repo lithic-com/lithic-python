@@ -14,17 +14,17 @@ from ..._base_client import (
 )
 from ...types.three_ds.decisioning_retrieve_secret_response import DecisioningRetrieveSecretResponse
 
-__all__ = ["Decisioning", "AsyncDecisioning"]
+__all__ = ["DecisioningResource", "AsyncDecisioningResource"]
 
 
-class Decisioning(SyncAPIResource):
+class DecisioningResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> DecisioningWithRawResponse:
-        return DecisioningWithRawResponse(self)
+    def with_raw_response(self) -> DecisioningResourceWithRawResponse:
+        return DecisioningResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> DecisioningWithStreamingResponse:
-        return DecisioningWithStreamingResponse(self)
+    def with_streaming_response(self) -> DecisioningResourceWithStreamingResponse:
+        return DecisioningResourceWithStreamingResponse(self)
 
     def retrieve_secret(
         self,
@@ -79,14 +79,14 @@ class Decisioning(SyncAPIResource):
         )
 
 
-class AsyncDecisioning(AsyncAPIResource):
+class AsyncDecisioningResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncDecisioningWithRawResponse:
-        return AsyncDecisioningWithRawResponse(self)
+    def with_raw_response(self) -> AsyncDecisioningResourceWithRawResponse:
+        return AsyncDecisioningResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncDecisioningWithStreamingResponse:
-        return AsyncDecisioningWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncDecisioningResourceWithStreamingResponse:
+        return AsyncDecisioningResourceWithStreamingResponse(self)
 
     async def retrieve_secret(
         self,
@@ -141,8 +141,8 @@ class AsyncDecisioning(AsyncAPIResource):
         )
 
 
-class DecisioningWithRawResponse:
-    def __init__(self, decisioning: Decisioning) -> None:
+class DecisioningResourceWithRawResponse:
+    def __init__(self, decisioning: DecisioningResource) -> None:
         self._decisioning = decisioning
 
         self.retrieve_secret = _legacy_response.to_raw_response_wrapper(
@@ -153,8 +153,8 @@ class DecisioningWithRawResponse:
         )
 
 
-class AsyncDecisioningWithRawResponse:
-    def __init__(self, decisioning: AsyncDecisioning) -> None:
+class AsyncDecisioningResourceWithRawResponse:
+    def __init__(self, decisioning: AsyncDecisioningResource) -> None:
         self._decisioning = decisioning
 
         self.retrieve_secret = _legacy_response.async_to_raw_response_wrapper(
@@ -165,8 +165,8 @@ class AsyncDecisioningWithRawResponse:
         )
 
 
-class DecisioningWithStreamingResponse:
-    def __init__(self, decisioning: Decisioning) -> None:
+class DecisioningResourceWithStreamingResponse:
+    def __init__(self, decisioning: DecisioningResource) -> None:
         self._decisioning = decisioning
 
         self.retrieve_secret = to_streamed_response_wrapper(
@@ -177,8 +177,8 @@ class DecisioningWithStreamingResponse:
         )
 
 
-class AsyncDecisioningWithStreamingResponse:
-    def __init__(self, decisioning: AsyncDecisioning) -> None:
+class AsyncDecisioningResourceWithStreamingResponse:
+    def __init__(self, decisioning: AsyncDecisioningResource) -> None:
         self._decisioning = decisioning
 
         self.retrieve_secret = async_to_streamed_response_wrapper(
