@@ -12,7 +12,9 @@ from .. import _legacy_response
 from ..types import (
     payment_list_params,
     payment_create_params,
+    payment_simulate_action_params,
     payment_simulate_return_params,
+    payment_simulate_receipt_params,
     payment_simulate_release_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -31,7 +33,9 @@ from .._base_client import (
 from ..types.payment import Payment
 from ..types.payment_retry_response import PaymentRetryResponse
 from ..types.payment_create_response import PaymentCreateResponse
+from ..types.payment_simulate_action_response import PaymentSimulateActionResponse
 from ..types.payment_simulate_return_response import PaymentSimulateReturnResponse
+from ..types.payment_simulate_receipt_response import PaymentSimulateReceiptResponse
 from ..types.payment_simulate_release_response import PaymentSimulateReleaseResponse
 
 __all__ = ["Payments", "AsyncPayments"]
@@ -237,6 +241,122 @@ class Payments(SyncAPIResource):
             cast_to=PaymentRetryResponse,
         )
 
+    def simulate_action(
+        self,
+        payment_token: str,
+        *,
+        event_type: Literal[
+            "ACH_ORIGINATION_REVIEWED",
+            "ACH_ORIGINATION_RELEASED",
+            "ACH_ORIGINATION_PROCESSED",
+            "ACH_ORIGINATION_SETTLED",
+            "ACH_RECEIPT_SETTLED",
+            "ACH_RETURN_INITIATED",
+            "ACH_RETURN_PROCESSED",
+        ],
+        decline_reason: Literal[
+            "PROGRAM_TRANSACTION_LIMITS_EXCEEDED", "PROGRAM_DAILY_LIMITS_EXCEEDED", "PROGRAM_MONTHLY_LIMITS_EXCEEDED"
+        ]
+        | NotGiven = NOT_GIVEN,
+        return_reason_code: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PaymentSimulateActionResponse:
+        """
+        Simulate payment lifecycle event
+
+        Args:
+          event_type: Event Type
+
+          decline_reason: Decline reason
+
+          return_reason_code: Return Reason Code
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
+        return self._post(
+            f"/simulate/payments/{payment_token}/action",
+            body=maybe_transform(
+                {
+                    "event_type": event_type,
+                    "decline_reason": decline_reason,
+                    "return_reason_code": return_reason_code,
+                },
+                payment_simulate_action_params.PaymentSimulateActionParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentSimulateActionResponse,
+        )
+
+    def simulate_receipt(
+        self,
+        *,
+        token: str,
+        amount: int,
+        financial_account_token: str,
+        receipt_type: Literal["RECEIPT_CREDIT", "RECEIPT_DEBIT"],
+        memo: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PaymentSimulateReceiptResponse:
+        """
+        Simulates a receipt of a Payment.
+
+        Args:
+          token: Payment token
+
+          amount: Amount
+
+          financial_account_token: Financial Account Token
+
+          receipt_type: Receipt Type
+
+          memo: Memo
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/simulate/payments/receipt",
+            body=maybe_transform(
+                {
+                    "token": token,
+                    "amount": amount,
+                    "financial_account_token": financial_account_token,
+                    "receipt_type": receipt_type,
+                    "memo": memo,
+                },
+                payment_simulate_receipt_params.PaymentSimulateReceiptParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentSimulateReceiptResponse,
+        )
+
     def simulate_release(
         self,
         *,
@@ -252,6 +372,8 @@ class Payments(SyncAPIResource):
         Simulates a release of a Payment.
 
         Args:
+          payment_token: Payment Token
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -287,6 +409,10 @@ class Payments(SyncAPIResource):
         Simulates a return of a Payment.
 
         Args:
+          payment_token: Payment Token
+
+          return_reason_code: Return Reason Code
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -511,6 +637,122 @@ class AsyncPayments(AsyncAPIResource):
             cast_to=PaymentRetryResponse,
         )
 
+    async def simulate_action(
+        self,
+        payment_token: str,
+        *,
+        event_type: Literal[
+            "ACH_ORIGINATION_REVIEWED",
+            "ACH_ORIGINATION_RELEASED",
+            "ACH_ORIGINATION_PROCESSED",
+            "ACH_ORIGINATION_SETTLED",
+            "ACH_RECEIPT_SETTLED",
+            "ACH_RETURN_INITIATED",
+            "ACH_RETURN_PROCESSED",
+        ],
+        decline_reason: Literal[
+            "PROGRAM_TRANSACTION_LIMITS_EXCEEDED", "PROGRAM_DAILY_LIMITS_EXCEEDED", "PROGRAM_MONTHLY_LIMITS_EXCEEDED"
+        ]
+        | NotGiven = NOT_GIVEN,
+        return_reason_code: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PaymentSimulateActionResponse:
+        """
+        Simulate payment lifecycle event
+
+        Args:
+          event_type: Event Type
+
+          decline_reason: Decline reason
+
+          return_reason_code: Return Reason Code
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
+        return await self._post(
+            f"/simulate/payments/{payment_token}/action",
+            body=await async_maybe_transform(
+                {
+                    "event_type": event_type,
+                    "decline_reason": decline_reason,
+                    "return_reason_code": return_reason_code,
+                },
+                payment_simulate_action_params.PaymentSimulateActionParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentSimulateActionResponse,
+        )
+
+    async def simulate_receipt(
+        self,
+        *,
+        token: str,
+        amount: int,
+        financial_account_token: str,
+        receipt_type: Literal["RECEIPT_CREDIT", "RECEIPT_DEBIT"],
+        memo: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PaymentSimulateReceiptResponse:
+        """
+        Simulates a receipt of a Payment.
+
+        Args:
+          token: Payment token
+
+          amount: Amount
+
+          financial_account_token: Financial Account Token
+
+          receipt_type: Receipt Type
+
+          memo: Memo
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/simulate/payments/receipt",
+            body=await async_maybe_transform(
+                {
+                    "token": token,
+                    "amount": amount,
+                    "financial_account_token": financial_account_token,
+                    "receipt_type": receipt_type,
+                    "memo": memo,
+                },
+                payment_simulate_receipt_params.PaymentSimulateReceiptParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentSimulateReceiptResponse,
+        )
+
     async def simulate_release(
         self,
         *,
@@ -526,6 +768,8 @@ class AsyncPayments(AsyncAPIResource):
         Simulates a release of a Payment.
 
         Args:
+          payment_token: Payment Token
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -561,6 +805,10 @@ class AsyncPayments(AsyncAPIResource):
         Simulates a return of a Payment.
 
         Args:
+          payment_token: Payment Token
+
+          return_reason_code: Return Reason Code
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -601,6 +849,12 @@ class PaymentsWithRawResponse:
         self.retry = _legacy_response.to_raw_response_wrapper(
             payments.retry,
         )
+        self.simulate_action = _legacy_response.to_raw_response_wrapper(
+            payments.simulate_action,
+        )
+        self.simulate_receipt = _legacy_response.to_raw_response_wrapper(
+            payments.simulate_receipt,
+        )
         self.simulate_release = _legacy_response.to_raw_response_wrapper(
             payments.simulate_release,
         )
@@ -624,6 +878,12 @@ class AsyncPaymentsWithRawResponse:
         )
         self.retry = _legacy_response.async_to_raw_response_wrapper(
             payments.retry,
+        )
+        self.simulate_action = _legacy_response.async_to_raw_response_wrapper(
+            payments.simulate_action,
+        )
+        self.simulate_receipt = _legacy_response.async_to_raw_response_wrapper(
+            payments.simulate_receipt,
         )
         self.simulate_release = _legacy_response.async_to_raw_response_wrapper(
             payments.simulate_release,
@@ -649,6 +909,12 @@ class PaymentsWithStreamingResponse:
         self.retry = to_streamed_response_wrapper(
             payments.retry,
         )
+        self.simulate_action = to_streamed_response_wrapper(
+            payments.simulate_action,
+        )
+        self.simulate_receipt = to_streamed_response_wrapper(
+            payments.simulate_receipt,
+        )
         self.simulate_release = to_streamed_response_wrapper(
             payments.simulate_release,
         )
@@ -672,6 +938,12 @@ class AsyncPaymentsWithStreamingResponse:
         )
         self.retry = async_to_streamed_response_wrapper(
             payments.retry,
+        )
+        self.simulate_action = async_to_streamed_response_wrapper(
+            payments.simulate_action,
+        )
+        self.simulate_receipt = async_to_streamed_response_wrapper(
+            payments.simulate_receipt,
         )
         self.simulate_release = async_to_streamed_response_wrapper(
             payments.simulate_release,
