@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.43.0 (2024-05-29)
+
+Full Changelog: [v0.42.0...v0.43.0](https://github.com/lithic-com/lithic-python/compare/v0.42.0...v0.43.0)
+
+### Features
+
+* **api:** updates ([#453](https://github.com/lithic-com/lithic-python/issues/453)) ([3c46bf1](https://github.com/lithic-com/lithic-python/commit/3c46bf1f48a8fbd78f2f9061e7524d0159f022f4))
+
+
+### Chores
+
+* **ci:** update rye install location ([#448](https://github.com/lithic-com/lithic-python/issues/448)) ([a7361a5](https://github.com/lithic-com/lithic-python/commit/a7361a5cccf2c82ecc92e0ec14d37ece1ada41db))
+* **ci:** update rye install location ([#449](https://github.com/lithic-com/lithic-python/issues/449)) ([f5b5e22](https://github.com/lithic-com/lithic-python/commit/f5b5e226244c65febf50fc15cc9cde9c6f33046b))
+* **docs:** add SECURITY.md ([#444](https://github.com/lithic-com/lithic-python/issues/444)) ([a3ff562](https://github.com/lithic-com/lithic-python/commit/a3ff562896feabf54cf8cc419842c92f7cfbf041))
+* **internal:** add slightly better logging to scripts ([#446](https://github.com/lithic-com/lithic-python/issues/446)) ([e0478b3](https://github.com/lithic-com/lithic-python/commit/e0478b3f8918168b520bf13c6442c1ba1fa8b6ce))
+* **internal:** bump pydantic dependency ([#445](https://github.com/lithic-com/lithic-python/issues/445)) ([007cfaa](https://github.com/lithic-com/lithic-python/commit/007cfaa3f9fde230ee77eb6f3f9a1bfacdf37f75))
+* **internal:** bump pyright ([#450](https://github.com/lithic-com/lithic-python/issues/450)) ([3b790a6](https://github.com/lithic-com/lithic-python/commit/3b790a66bccbbdc2392ffe1a11808a1cbb298333))
+* **internal:** update bootstrap script ([#452](https://github.com/lithic-com/lithic-python/issues/452)) ([066564f](https://github.com/lithic-com/lithic-python/commit/066564fa9559635f374ae51deadf48c6cfc68e9d))
+* **tests:** update some example values ([#447](https://github.com/lithic-com/lithic-python/issues/447)) ([b88c2a4](https://github.com/lithic-com/lithic-python/commit/b88c2a47f7aa06fc88a017087927a1677838be66))
+
+
+### Documentation
+
+* **contributing:** update references to rye-up.com ([#451](https://github.com/lithic-com/lithic-python/issues/451)) ([7ac824e](https://github.com/lithic-com/lithic-python/commit/7ac824e027eae3c81827cdaae8c301a95610c95d))
+* **readme:** fix misleading timeout example value ([#439](https://github.com/lithic-com/lithic-python/issues/439)) ([74afd3f](https://github.com/lithic-com/lithic-python/commit/74afd3f4fa1706b789b4e3899e9b7c18d525555a))
+
 ## 0.42.0 (2024-05-01)
 
 Full Changelog: [v0.41.0...v0.42.0](https://github.com/lithic-com/lithic-python/compare/v0.41.0...v0.42.0)
