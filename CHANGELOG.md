@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.44.0 (2024-05-29)
+
+Full Changelog: [v0.43.0...v0.44.0](https://github.com/lithic-com/lithic-python/compare/v0.43.0...v0.44.0)
+
+### Features
+
+* **api:** add simulate_receipt and simulate_action endpoints ([#454](https://github.com/lithic-com/lithic-python/issues/454)) ([d7058ec](https://github.com/lithic-com/lithic-python/commit/d7058ec8baa28401874770232408571c0fe8e81d))
+
 ## 0.43.0 (2024-05-29)
 
 Full Changelog: [v0.42.0...v0.43.0](https://github.com/lithic-com/lithic-python/compare/v0.42.0...v0.43.0)
