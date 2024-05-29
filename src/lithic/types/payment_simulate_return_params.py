@@ -9,5 +9,7 @@ __all__ = ["PaymentSimulateReturnParams"]
 
 class PaymentSimulateReturnParams(TypedDict, total=False):
     payment_token: Required[str]
+    """Payment Token"""
 
     return_reason_code: str
+    """Return Reason Code"""

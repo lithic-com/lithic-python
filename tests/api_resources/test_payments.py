@@ -13,7 +13,9 @@ from lithic.types import (
     Payment,
     PaymentRetryResponse,
     PaymentCreateResponse,
+    PaymentSimulateActionResponse,
     PaymentSimulateReturnResponse,
+    PaymentSimulateReceiptResponse,
     PaymentSimulateReleaseResponse,
 )
 from lithic._utils import parse_datetime
@@ -226,6 +228,109 @@ class TestPayments:
             )
 
     @parametrize
+    def test_method_simulate_action(self, client: Lithic) -> None:
+        payment = client.payments.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+        )
+        assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+    @parametrize
+    def test_method_simulate_action_with_all_params(self, client: Lithic) -> None:
+        payment = client.payments.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+            decline_reason="PROGRAM_TRANSACTION_LIMITS_EXCEEDED",
+            return_reason_code="string",
+        )
+        assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_action(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_action(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_simulate_action(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
+            client.payments.with_raw_response.simulate_action(
+                "",
+                event_type="ACH_ORIGINATION_REVIEWED",
+            )
+
+    @parametrize
+    def test_method_simulate_receipt(self, client: Lithic) -> None:
+        payment = client.payments.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+        )
+        assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+    @parametrize
+    def test_method_simulate_receipt_with_all_params(self, client: Lithic) -> None:
+        payment = client.payments.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+            memo="string",
+        )
+        assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_receipt(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_receipt(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     def test_method_simulate_release(self, client: Lithic) -> None:
         payment = client.payments.simulate_release(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -267,7 +372,7 @@ class TestPayments:
     def test_method_simulate_return_with_all_params(self, client: Lithic) -> None:
         payment = client.payments.simulate_return(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            return_reason_code="string",
+            return_reason_code="R12",
         )
         assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
 
@@ -500,6 +605,109 @@ class TestAsyncPayments:
             )
 
     @parametrize
+    async def test_method_simulate_action(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+        )
+        assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_action_with_all_params(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+            decline_reason="PROGRAM_TRANSACTION_LIMITS_EXCEEDED",
+            return_reason_code="string",
+        )
+        assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_action(self, async_client: AsyncLithic) -> None:
+        response = await async_client.payments.with_raw_response.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_action(self, async_client: AsyncLithic) -> None:
+        async with async_client.payments.with_streaming_response.simulate_action(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_type="ACH_ORIGINATION_REVIEWED",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_simulate_action(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
+            await async_client.payments.with_raw_response.simulate_action(
+                "",
+                event_type="ACH_ORIGINATION_REVIEWED",
+            )
+
+    @parametrize
+    async def test_method_simulate_receipt(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+        )
+        assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_receipt_with_all_params(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+            memo="string",
+        )
+        assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_receipt(self, async_client: AsyncLithic) -> None:
+        response = await async_client.payments.with_raw_response.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_receipt(self, async_client: AsyncLithic) -> None:
+        async with async_client.payments.with_streaming_response.simulate_receipt(
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=0,
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            receipt_type="RECEIPT_CREDIT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     async def test_method_simulate_release(self, async_client: AsyncLithic) -> None:
         payment = await async_client.payments.simulate_release(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -541,7 +749,7 @@ class TestAsyncPayments:
     async def test_method_simulate_return_with_all_params(self, async_client: AsyncLithic) -> None:
         payment = await async_client.payments.simulate_return(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            return_reason_code="string",
+            return_reason_code="R12",
         )
         assert_matches_type(PaymentSimulateReturnResponse, payment, path=["response"])
 
