@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -9,8 +8,11 @@ __all__ = ["PaymentSimulateReleaseResponse"]
 
 
 class PaymentSimulateReleaseResponse(BaseModel):
-    debugging_request_id: Optional[str] = None
+    debugging_request_id: str
+    """Debugging Request Id"""
 
-    result: Optional[Literal["APPROVED", "DECLINED"]] = None
+    result: Literal["APPROVED", "DECLINED"]
+    """Request Result"""
 
-    transaction_event_token: Optional[str] = None
+    transaction_event_token: str
+    """Transaction Event Token"""
