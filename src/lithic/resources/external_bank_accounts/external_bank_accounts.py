@@ -71,7 +71,6 @@ class ExternalBankAccounts(SyncAPIResource):
         account_number: str,
         country: str,
         currency: str,
-        financial_account_token: str,
         owner: str,
         owner_type: OwnerType,
         routing_number: str,
@@ -82,6 +81,7 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -96,18 +96,41 @@ class ExternalBankAccounts(SyncAPIResource):
         Creates an external bank account within a program or Lithic account.
 
         Args:
-          financial_account_token: The financial account token of the operating account, which will provide the
-              funds for micro deposits used to verify the account
+          account_number: Routing Number
 
-          address: Address used during Address Verification Service (AVS) checks during
-              transactions if enabled via Auth Rules.
+          country: The country that the bank account is located in using ISO 3166-1. We will only
+              accept USA bank accounts e.g., USA
+
+          currency: currency of the external account 3-digit alphabetic ISO 4217 code
+
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          routing_number: Routing Number
+
+          type: Account Type
+
+          verification_method: Verification Method
+
+          account_token: Indicates which Lithic account the external account is associated with. For
+              external accounts that are associated with the program, account_token field
+              returned will be null
+
+          address: Address
+
+          company_id: Optional field that helps identify bank accounts in receipts
 
           dob: Date of Birth of the Individual that owns the external bank account
 
-          verification_enforcement: Indicates whether verification was enforced for a given association record. For
-              MICRO_DEPOSIT, option to disable verification if the external bank account has
-              already been verified before. By default, verification will be required unless
-              users pass in a value of false
+          doing_business_as: Doing Business As
+
+          financial_account_token: The financial account token of the operating account to fund the micro deposits
+
+          name: The nickname given to this record of External Bank Account
+
+          user_defined_id: User Defined ID
 
           extra_headers: Send extra headers
 
@@ -143,7 +166,24 @@ class ExternalBankAccounts(SyncAPIResource):
         Creates an external bank account within a program or Lithic account.
 
         Args:
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          verification_method: Verification Method
+
+          account_token: Indicates which Lithic account the external account is associated with. For
+              external accounts that are associated with the program, account_token field
+              returned will be null
+
+          company_id: Optional field that helps identify bank accounts in receipts
+
           dob: Date of Birth of the Individual that owns the external bank account
+
+          doing_business_as: Doing Business As
+
+          user_defined_id: User Defined ID
 
           extra_headers: Send extra headers
 
@@ -160,7 +200,6 @@ class ExternalBankAccounts(SyncAPIResource):
             "account_number",
             "country",
             "currency",
-            "financial_account_token",
             "owner",
             "owner_type",
             "routing_number",
@@ -175,7 +214,6 @@ class ExternalBankAccounts(SyncAPIResource):
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         owner: str,
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
@@ -186,6 +224,7 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -204,7 +243,6 @@ class ExternalBankAccounts(SyncAPIResource):
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
-                    "financial_account_token": financial_account_token,
                     "owner": owner,
                     "owner_type": owner_type,
                     "routing_number": routing_number,
@@ -215,6 +253,7 @@ class ExternalBankAccounts(SyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
+                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
@@ -286,10 +325,22 @@ class ExternalBankAccounts(SyncAPIResource):
         Update the external bank account by token.
 
         Args:
-          address: Address used during Address Verification Service (AVS) checks during
-              transactions if enabled via Auth Rules.
+          address: Address
+
+          company_id: Optional field that helps identify bank accounts in receipts
 
           dob: Date of Birth of the Individual that owns the external bank account
+
+          doing_business_as: Doing Business As
+
+          name: The nickname given to this record of External Bank Account
+
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          user_defined_id: User Defined ID
 
           extra_headers: Send extra headers
 
@@ -334,8 +385,8 @@ class ExternalBankAccounts(SyncAPIResource):
         owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        states: List[Literal["CLOSED", "ENABLED", "PAUSED"]] | NotGiven = NOT_GIVEN,
-        verification_states: List[Literal["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS", "PENDING"]]
+        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | NotGiven = NOT_GIVEN,
+        verification_states: List[Literal["PENDING", "ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"]]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -406,9 +457,6 @@ class ExternalBankAccounts(SyncAPIResource):
         Retry external bank account micro deposit verification.
 
         Args:
-          financial_account_token: The financial account token of the operating account, which will provide the
-              funds for micro deposits used to verify the account
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -454,7 +502,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         account_number: str,
         country: str,
         currency: str,
-        financial_account_token: str,
         owner: str,
         owner_type: OwnerType,
         routing_number: str,
@@ -465,6 +512,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -479,18 +527,41 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         Creates an external bank account within a program or Lithic account.
 
         Args:
-          financial_account_token: The financial account token of the operating account, which will provide the
-              funds for micro deposits used to verify the account
+          account_number: Routing Number
 
-          address: Address used during Address Verification Service (AVS) checks during
-              transactions if enabled via Auth Rules.
+          country: The country that the bank account is located in using ISO 3166-1. We will only
+              accept USA bank accounts e.g., USA
+
+          currency: currency of the external account 3-digit alphabetic ISO 4217 code
+
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          routing_number: Routing Number
+
+          type: Account Type
+
+          verification_method: Verification Method
+
+          account_token: Indicates which Lithic account the external account is associated with. For
+              external accounts that are associated with the program, account_token field
+              returned will be null
+
+          address: Address
+
+          company_id: Optional field that helps identify bank accounts in receipts
 
           dob: Date of Birth of the Individual that owns the external bank account
 
-          verification_enforcement: Indicates whether verification was enforced for a given association record. For
-              MICRO_DEPOSIT, option to disable verification if the external bank account has
-              already been verified before. By default, verification will be required unless
-              users pass in a value of false
+          doing_business_as: Doing Business As
+
+          financial_account_token: The financial account token of the operating account to fund the micro deposits
+
+          name: The nickname given to this record of External Bank Account
+
+          user_defined_id: User Defined ID
 
           extra_headers: Send extra headers
 
@@ -526,7 +597,24 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         Creates an external bank account within a program or Lithic account.
 
         Args:
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          verification_method: Verification Method
+
+          account_token: Indicates which Lithic account the external account is associated with. For
+              external accounts that are associated with the program, account_token field
+              returned will be null
+
+          company_id: Optional field that helps identify bank accounts in receipts
+
           dob: Date of Birth of the Individual that owns the external bank account
+
+          doing_business_as: Doing Business As
+
+          user_defined_id: User Defined ID
 
           extra_headers: Send extra headers
 
@@ -543,7 +631,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             "account_number",
             "country",
             "currency",
-            "financial_account_token",
             "owner",
             "owner_type",
             "routing_number",
@@ -558,7 +645,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         owner: str,
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
@@ -569,6 +655,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -587,7 +674,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
-                    "financial_account_token": financial_account_token,
                     "owner": owner,
                     "owner_type": owner_type,
                     "routing_number": routing_number,
@@ -598,6 +684,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
+                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
@@ -669,10 +756,22 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         Update the external bank account by token.
 
         Args:
-          address: Address used during Address Verification Service (AVS) checks during
-              transactions if enabled via Auth Rules.
+          address: Address
+
+          company_id: Optional field that helps identify bank accounts in receipts
 
           dob: Date of Birth of the Individual that owns the external bank account
+
+          doing_business_as: Doing Business As
+
+          name: The nickname given to this record of External Bank Account
+
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          user_defined_id: User Defined ID
 
           extra_headers: Send extra headers
 
@@ -717,8 +816,8 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        states: List[Literal["CLOSED", "ENABLED", "PAUSED"]] | NotGiven = NOT_GIVEN,
-        verification_states: List[Literal["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS", "PENDING"]]
+        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | NotGiven = NOT_GIVEN,
+        verification_states: List[Literal["PENDING", "ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"]]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -789,9 +888,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         Retry external bank account micro deposit verification.
 
         Args:
-          financial_account_token: The financial account token of the operating account, which will provide the
-              funds for micro deposits used to verify the account
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request

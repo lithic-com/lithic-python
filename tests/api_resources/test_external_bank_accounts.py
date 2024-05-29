@@ -31,9 +31,8 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -46,9 +45,8 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -57,15 +55,16 @@ class TestExternalBankAccounts:
                 "address1": "x",
                 "address2": "x",
                 "city": "x",
-                "country": "USD",
-                "postal_code": "11201",
                 "state": "xx",
+                "postal_code": "11201",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
-            doing_business_as="string",
+            doing_business_as="x",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="x",
-            user_defined_id="string",
+            user_defined_id="x",
             verification_enforcement=True,
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
@@ -76,9 +75,8 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -95,9 +93,8 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -114,7 +111,7 @@ class TestExternalBankAccounts:
     def test_method_create_overload_2(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
         )
@@ -124,14 +121,14 @@ class TestExternalBankAccounts:
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="x",
             dob=parse_date("2019-12-27"),
-            doing_business_as="string",
-            user_defined_id="string",
+            doing_business_as="x",
+            user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
@@ -139,7 +136,7 @@ class TestExternalBankAccounts:
     def test_raw_response_create_overload_2(self, client: Lithic) -> None:
         response = client.external_bank_accounts.with_raw_response.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
         )
@@ -153,7 +150,7 @@ class TestExternalBankAccounts:
     def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
         with client.external_bank_accounts.with_streaming_response.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
         ) as response:
@@ -220,17 +217,17 @@ class TestExternalBankAccounts:
                 "address1": "x",
                 "address2": "x",
                 "city": "x",
-                "country": "USD",
-                "postal_code": "11201",
                 "state": "xx",
+                "postal_code": "11201",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
-            doing_business_as="string",
+            doing_business_as="x",
             name="x",
             owner="x",
-            owner_type="BUSINESS",
-            user_defined_id="string",
+            owner_type="INDIVIDUAL",
+            user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
@@ -279,11 +276,11 @@ class TestExternalBankAccounts:
             account_types=["CHECKING", "SAVINGS"],
             countries=["string", "string", "string"],
             ending_before="string",
-            owner_types=["BUSINESS", "INDIVIDUAL"],
+            owner_types=["INDIVIDUAL", "BUSINESS"],
             page_size=1,
             starting_after="string",
-            states=["CLOSED", "ENABLED", "PAUSED"],
-            verification_states=["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"],
+            states=["ENABLED", "CLOSED", "PAUSED"],
+            verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
         assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 
@@ -367,9 +364,8 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -382,9 +378,8 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -393,15 +388,16 @@ class TestAsyncExternalBankAccounts:
                 "address1": "x",
                 "address2": "x",
                 "city": "x",
-                "country": "USD",
-                "postal_code": "11201",
                 "state": "xx",
+                "postal_code": "11201",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
-            doing_business_as="string",
+            doing_business_as="x",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="x",
-            user_defined_id="string",
+            user_defined_id="x",
             verification_enforcement=True,
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
@@ -412,9 +408,8 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -431,9 +426,8 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
             verification_method="MANUAL",
@@ -450,7 +444,7 @@ class TestAsyncExternalBankAccounts:
     async def test_method_create_overload_2(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
         )
@@ -460,14 +454,14 @@ class TestAsyncExternalBankAccounts:
     async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="x",
             dob=parse_date("2019-12-27"),
-            doing_business_as="string",
-            user_defined_id="string",
+            doing_business_as="x",
+            user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
 
@@ -475,7 +469,7 @@ class TestAsyncExternalBankAccounts:
     async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         response = await async_client.external_bank_accounts.with_raw_response.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
         )
@@ -489,7 +483,7 @@ class TestAsyncExternalBankAccounts:
     async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         async with async_client.external_bank_accounts.with_streaming_response.create(
             owner="x",
-            owner_type="BUSINESS",
+            owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
         ) as response:
@@ -556,17 +550,17 @@ class TestAsyncExternalBankAccounts:
                 "address1": "x",
                 "address2": "x",
                 "city": "x",
-                "country": "USD",
-                "postal_code": "11201",
                 "state": "xx",
+                "postal_code": "11201",
+                "country": "USD",
             },
             company_id="x",
             dob=parse_date("2019-12-27"),
-            doing_business_as="string",
+            doing_business_as="x",
             name="x",
             owner="x",
-            owner_type="BUSINESS",
-            user_defined_id="string",
+            owner_type="INDIVIDUAL",
+            user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
@@ -615,11 +609,11 @@ class TestAsyncExternalBankAccounts:
             account_types=["CHECKING", "SAVINGS"],
             countries=["string", "string", "string"],
             ending_before="string",
-            owner_types=["BUSINESS", "INDIVIDUAL"],
+            owner_types=["INDIVIDUAL", "BUSINESS"],
             page_size=1,
             starting_after="string",
-            states=["CLOSED", "ENABLED", "PAUSED"],
-            verification_states=["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"],
+            states=["ENABLED", "CLOSED", "PAUSED"],
+            verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
         assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 

@@ -33,7 +33,7 @@ class KYB(TypedDict, total=False):
     """
 
     beneficial_owner_individuals: Required[Iterable[KYBBeneficialOwnerIndividual]]
-    """List of all individuals with >25% ownership in the company.
+    """List of all direct and indirect individuals with >25% ownership in the company.
 
     If no entity or individual owns >25% of the company, and the largest shareholder
     is an individual, please identify them in this field. See
