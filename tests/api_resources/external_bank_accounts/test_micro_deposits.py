@@ -21,7 +21,7 @@ class TestMicroDeposits:
     def test_method_create(self, client: Lithic) -> None:
         micro_deposit = client.external_bank_accounts.micro_deposits.create(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            micro_deposits=[0, 0, 0],
+            micro_deposits=[0, 0],
         )
         assert_matches_type(MicroDepositCreateResponse, micro_deposit, path=["response"])
 
@@ -29,7 +29,7 @@ class TestMicroDeposits:
     def test_raw_response_create(self, client: Lithic) -> None:
         response = client.external_bank_accounts.micro_deposits.with_raw_response.create(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            micro_deposits=[0, 0, 0],
+            micro_deposits=[0, 0],
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestMicroDeposits:
     def test_streaming_response_create(self, client: Lithic) -> None:
         with client.external_bank_accounts.micro_deposits.with_streaming_response.create(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            micro_deposits=[0, 0, 0],
+            micro_deposits=[0, 0],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -58,7 +58,7 @@ class TestMicroDeposits:
         ):
             client.external_bank_accounts.micro_deposits.with_raw_response.create(
                 "",
-                micro_deposits=[0, 0, 0],
+                micro_deposits=[0, 0],
             )
 
 
@@ -69,7 +69,7 @@ class TestAsyncMicroDeposits:
     async def test_method_create(self, async_client: AsyncLithic) -> None:
         micro_deposit = await async_client.external_bank_accounts.micro_deposits.create(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            micro_deposits=[0, 0, 0],
+            micro_deposits=[0, 0],
         )
         assert_matches_type(MicroDepositCreateResponse, micro_deposit, path=["response"])
 
@@ -77,7 +77,7 @@ class TestAsyncMicroDeposits:
     async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
         response = await async_client.external_bank_accounts.micro_deposits.with_raw_response.create(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            micro_deposits=[0, 0, 0],
+            micro_deposits=[0, 0],
         )
 
         assert response.is_closed is True
@@ -89,7 +89,7 @@ class TestAsyncMicroDeposits:
     async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
         async with async_client.external_bank_accounts.micro_deposits.with_streaming_response.create(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            micro_deposits=[0, 0, 0],
+            micro_deposits=[0, 0],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -106,5 +106,5 @@ class TestAsyncMicroDeposits:
         ):
             await async_client.external_bank_accounts.micro_deposits.with_raw_response.create(
                 "",
-                micro_deposits=[0, 0, 0],
+                micro_deposits=[0, 0],
             )

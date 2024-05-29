@@ -68,11 +68,10 @@ class Event(BaseModel):
             "CUSTOM_ASA_RESULT",
             "DECLINED",
             "DO_NOT_HONOR",
+            "DRIVER_NUMBER_INVALID",
             "FORMAT_ERROR",
             "INSUFFICIENT_FUNDING_SOURCE_BALANCE",
             "INSUFFICIENT_FUNDS",
-            "INVALID_DRIVER",
-            "INVALID_VEHICLE",
             "LITHIC_SYSTEM_ERROR",
             "LITHIC_SYSTEM_RATE_LIMIT",
             "MALFORMED_ASA_RESPONSE",
@@ -91,6 +90,7 @@ class Event(BaseModel):
             "TRANSACTION_NOT_PERMITTED_TO_ISSUER_OR_CARDHOLDER",
             "TRANSACTION_PREVIOUSLY_COMPLETED",
             "UNAUTHORIZED_MERCHANT",
+            "VEHICLE_NUMBER_INVALID",
         ]
     ]
 

@@ -4,4 +4,4 @@ from typing_extensions import Literal
 
 __all__ = ["OwnerType"]
 
-OwnerType = Literal["BUSINESS", "INDIVIDUAL"]
+OwnerType = Literal["INDIVIDUAL", "BUSINESS"]
