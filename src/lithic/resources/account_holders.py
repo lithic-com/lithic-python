@@ -87,9 +87,9 @@ class AccountHolders(SyncAPIResource):
               empty list. However, either this parameter or `beneficial_owner_individuals`
               must be populated. on entities that should be included.
 
-          beneficial_owner_individuals: List of all individuals with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an
-              individual, please identify them in this field. See
+          beneficial_owner_individuals: List of all direct and indirect individuals with >25% ownership in the company.
+              If no entity or individual owns >25% of the company, and the largest shareholder
+              is an individual, please identify them in this field. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section I) for more background on individuals that should be included. If no
               individual is an entity, pass in an empty list. However, either this parameter
@@ -750,9 +750,9 @@ class AsyncAccountHolders(AsyncAPIResource):
               empty list. However, either this parameter or `beneficial_owner_individuals`
               must be populated. on entities that should be included.
 
-          beneficial_owner_individuals: List of all individuals with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an
-              individual, please identify them in this field. See
+          beneficial_owner_individuals: List of all direct and indirect individuals with >25% ownership in the company.
+              If no entity or individual owns >25% of the company, and the largest shareholder
+              is an individual, please identify them in this field. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section I) for more background on individuals that should be included. If no
               individual is an entity, pass in an empty list. However, either this parameter

@@ -15,25 +15,31 @@ __all__ = ["ExternalBankAccountUpdateParams"]
 
 class ExternalBankAccountUpdateParams(TypedDict, total=False):
     address: ExternalBankAccountAddressParam
-    """
-    Address used during Address Verification Service (AVS) checks during
-    transactions if enabled via Auth Rules.
-    """
+    """Address"""
 
     company_id: str
+    """Optional field that helps identify bank accounts in receipts"""
 
     dob: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
     """Date of Birth of the Individual that owns the external bank account"""
 
     doing_business_as: str
+    """Doing Business As"""
 
     name: str
+    """The nickname given to this record of External Bank Account"""
 
     owner: str
+    """Legal Name of the business or individual who owns the external account.
+
+    This will appear in statements
+    """
 
     owner_type: OwnerType
+    """Owner Type"""
 
     user_defined_id: str
+    """User Defined ID"""
 
 
 ExternalBankAccountAddress = ExternalBankAccountAddressParam

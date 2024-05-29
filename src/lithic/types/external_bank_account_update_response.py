@@ -47,19 +47,25 @@ class ExternalBankAccountUpdateResponse(BaseModel):
     """
 
     owner_type: Literal["BUSINESS", "INDIVIDUAL"]
+    """Owner Type"""
 
     routing_number: str
+    """Routing Number"""
 
-    state: Literal["CLOSED", "ENABLED", "PAUSED"]
+    state: Literal["ENABLED", "CLOSED", "PAUSED"]
+    """Account State"""
 
     type: Literal["CHECKING", "SAVINGS"]
+    """Account Type"""
 
     verification_attempts: int
     """The number of attempts at verification"""
 
     verification_method: Literal["MANUAL", "MICRO_DEPOSIT", "PLAID", "PRENOTE"]
+    """Verification Method"""
 
-    verification_state: Literal["ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS", "PENDING"]
+    verification_state: Literal["PENDING", "ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"]
+    """Verification State"""
 
     account_token: Optional[str] = None
     """Indicates which Lithic account the external account is associated with.
@@ -69,10 +75,7 @@ class ExternalBankAccountUpdateResponse(BaseModel):
     """
 
     address: Optional[ExternalBankAccountAddress] = None
-    """
-    Address used during Address Verification Service (AVS) checks during
-    transactions if enabled via Auth Rules.
-    """
+    """Address"""
 
     company_id: Optional[str] = None
     """Optional field that helps identify bank accounts in receipts"""
@@ -81,17 +84,16 @@ class ExternalBankAccountUpdateResponse(BaseModel):
     """Date of Birth of the Individual that owns the external bank account"""
 
     doing_business_as: Optional[str] = None
+    """Doing Business As"""
 
     financial_account_token: Optional[str] = None
-    """
-    The financial account token of the operating account, which will provide the
-    funds for micro deposits used to verify the account
-    """
+    """The financial account token of the operating account to fund the micro deposits"""
 
     name: Optional[str] = None
     """The nickname given to this record of External Bank Account"""
 
     user_defined_id: Optional[str] = None
+    """User Defined ID"""
 
     verification_failed_reason: Optional[str] = None
     """Optional free text description of the reason for the failed verification.
