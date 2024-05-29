@@ -4,10 +4,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["PaymentSimulateReturnResponse"]
+__all__ = ["PaymentSimulateActionResponse"]
 
 
-class PaymentSimulateReturnResponse(BaseModel):
+class PaymentSimulateActionResponse(BaseModel):
     debugging_request_id: str
     """Debugging Request Id"""
 

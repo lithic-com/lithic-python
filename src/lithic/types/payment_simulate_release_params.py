@@ -9,3 +9,4 @@ __all__ = ["PaymentSimulateReleaseParams"]
 
 class PaymentSimulateReleaseParams(TypedDict, total=False):
     payment_token: Required[str]
+    """Payment Token"""
