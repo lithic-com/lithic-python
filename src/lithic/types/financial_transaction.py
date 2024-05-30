@@ -26,8 +26,8 @@ class Event(BaseModel):
         List[
             Literal[
                 "APPROVED",
-                "INSUFFICIENT_FUNDS",
-                "INVALID_ACCOUNT",
+                "FUNDS_INSUFFICIENT",
+                "ACCOUNT_INVALID",
                 "PROGRAM_TRANSACTION_LIMITS_EXCEEDED",
                 "PROGRAM_DAILY_LIMITS_EXCEEDED",
                 "PROGRAM_MONTHLY_LIMITS_EXCEEDED",
