@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.45.0 (2024-05-30)
+
+Full Changelog: [v0.44.0...v0.45.0](https://github.com/lithic-com/lithic-python/compare/v0.44.0...v0.45.0)
+
+### Features
+
+* **api:** update detailed_results enum values ([#456](https://github.com/lithic-com/lithic-python/issues/456)) ([16837ea](https://github.com/lithic-com/lithic-python/commit/16837ea02d6782bd8f3b8446199507f59947d6b0))
+
 ## 0.44.0 (2024-05-29)
 
 Full Changelog: [v0.43.0...v0.44.0](https://github.com/lithic-com/lithic-python/compare/v0.43.0...v0.44.0)
