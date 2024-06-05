@@ -22,20 +22,6 @@ class Event(BaseModel):
     created: Optional[datetime] = None
     """Date and time when the financial event occurred. UTC time zone."""
 
-    detailed_results: Optional[
-        List[
-            Literal[
-                "APPROVED",
-                "FUNDS_INSUFFICIENT",
-                "ACCOUNT_INVALID",
-                "PROGRAM_TRANSACTION_LIMITS_EXCEEDED",
-                "PROGRAM_DAILY_LIMITS_EXCEEDED",
-                "PROGRAM_MONTHLY_LIMITS_EXCEEDED",
-            ]
-        ]
-    ] = None
-    """More detailed reasons for the event"""
-
     result: Optional[Literal["APPROVED", "DECLINED"]] = None
     """
     APPROVED financial events were successful while DECLINED financial events were
@@ -167,14 +153,13 @@ class FinancialTransaction(BaseModel):
     status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "SETTLED", "VOIDED"]
     """Status types:
 
-    - `DECLINED` - The card transaction was declined.
-    - `EXPIRED` - Lithic reversed the card authorization as it has passed its
-      expiration time.
-    - `PENDING` - Authorization is pending completion from the merchant or pending
-      release from ACH hold period
-    - `RETURNED` - The financial transaction has been returned.
-    - `SETTLED` - The financial transaction is completed.
-    - `VOIDED` - The merchant has voided the previously pending card authorization.
+    - `DECLINED` - The transaction was declined.
+    - `EXPIRED` - The authorization as it has passed its expiration time. Card
+      transaction only.
+    - `PENDING` - The transaction is expected to settle.
+    - `RETURNED` - The transaction has been returned.
+    - `SETTLED` - The transaction is completed.
+    - `VOIDED` - The transaction was voided. Card transaction only.
     """
 
     updated: datetime

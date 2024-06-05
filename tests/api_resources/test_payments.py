@@ -34,13 +34,7 @@ class TestPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         )
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
@@ -52,13 +46,7 @@ class TestPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="string",
@@ -73,13 +61,7 @@ class TestPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         )
 
@@ -95,13 +77,7 @@ class TestPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         ) as response:
             assert not response.is_closed
@@ -240,7 +216,7 @@ class TestPayments:
         payment = client.payments.simulate_action(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
-            decline_reason="PROGRAM_TRANSACTION_LIMITS_EXCEEDED",
+            decline_reason="PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
             return_reason_code="string",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
@@ -411,13 +387,7 @@ class TestAsyncPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         )
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
@@ -429,13 +399,7 @@ class TestAsyncPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="string",
@@ -450,13 +414,7 @@ class TestAsyncPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         )
 
@@ -472,13 +430,7 @@ class TestAsyncPayments:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             method="ACH_NEXT_DAY",
-            method_attributes={
-                "company_id": "string",
-                "receipt_routing_number": "string",
-                "retries": 0,
-                "return_reason_code": "string",
-                "sec_code": "CCD",
-            },
+            method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
         ) as response:
             assert not response.is_closed
@@ -617,7 +569,7 @@ class TestAsyncPayments:
         payment = await async_client.payments.simulate_action(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
-            decline_reason="PROGRAM_TRANSACTION_LIMITS_EXCEEDED",
+            decline_reason="PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
             return_reason_code="string",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
