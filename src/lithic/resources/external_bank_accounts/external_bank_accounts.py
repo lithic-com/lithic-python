@@ -15,6 +15,7 @@ from ...types import (
     external_bank_account_list_params,
     external_bank_account_create_params,
     external_bank_account_update_params,
+    external_bank_account_retry_prenote_params,
     external_bank_account_retry_micro_deposits_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -46,6 +47,7 @@ from ...types.external_bank_account_list_response import ExternalBankAccountList
 from ...types.external_bank_account_create_response import ExternalBankAccountCreateResponse
 from ...types.external_bank_account_update_response import ExternalBankAccountUpdateResponse
 from ...types.external_bank_account_retrieve_response import ExternalBankAccountRetrieveResponse
+from ...types.external_bank_account_retry_prenote_response import ExternalBankAccountRetryPrenoteResponse
 from ...types.external_bank_account_retry_micro_deposits_response import ExternalBankAccountRetryMicroDepositsResponse
 
 __all__ = ["ExternalBankAccounts", "AsyncExternalBankAccounts"]
@@ -481,6 +483,46 @@ class ExternalBankAccounts(SyncAPIResource):
             cast_to=ExternalBankAccountRetryMicroDepositsResponse,
         )
 
+    def retry_prenote(
+        self,
+        external_bank_account_token: str,
+        *,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ExternalBankAccountRetryPrenoteResponse:
+        """
+        Retry external bank account prenote verification.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
+        return self._post(
+            f"/external_bank_accounts/{external_bank_account_token}/retry_prenote",
+            body=maybe_transform(
+                {"financial_account_token": financial_account_token},
+                external_bank_account_retry_prenote_params.ExternalBankAccountRetryPrenoteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExternalBankAccountRetryPrenoteResponse,
+        )
+
 
 class AsyncExternalBankAccounts(AsyncAPIResource):
     @cached_property
@@ -912,6 +954,46 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             cast_to=ExternalBankAccountRetryMicroDepositsResponse,
         )
 
+    async def retry_prenote(
+        self,
+        external_bank_account_token: str,
+        *,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ExternalBankAccountRetryPrenoteResponse:
+        """
+        Retry external bank account prenote verification.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
+        return await self._post(
+            f"/external_bank_accounts/{external_bank_account_token}/retry_prenote",
+            body=await async_maybe_transform(
+                {"financial_account_token": financial_account_token},
+                external_bank_account_retry_prenote_params.ExternalBankAccountRetryPrenoteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExternalBankAccountRetryPrenoteResponse,
+        )
+
 
 class ExternalBankAccountsWithRawResponse:
     def __init__(self, external_bank_accounts: ExternalBankAccounts) -> None:
@@ -931,6 +1013,9 @@ class ExternalBankAccountsWithRawResponse:
         )
         self.retry_micro_deposits = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.retry_micro_deposits,
+        )
+        self.retry_prenote = _legacy_response.to_raw_response_wrapper(
+            external_bank_accounts.retry_prenote,
         )
 
     @cached_property
@@ -957,6 +1042,9 @@ class AsyncExternalBankAccountsWithRawResponse:
         self.retry_micro_deposits = _legacy_response.async_to_raw_response_wrapper(
             external_bank_accounts.retry_micro_deposits,
         )
+        self.retry_prenote = _legacy_response.async_to_raw_response_wrapper(
+            external_bank_accounts.retry_prenote,
+        )
 
     @cached_property
     def micro_deposits(self) -> AsyncMicroDepositsWithRawResponse:
@@ -982,6 +1070,9 @@ class ExternalBankAccountsWithStreamingResponse:
         self.retry_micro_deposits = to_streamed_response_wrapper(
             external_bank_accounts.retry_micro_deposits,
         )
+        self.retry_prenote = to_streamed_response_wrapper(
+            external_bank_accounts.retry_prenote,
+        )
 
     @cached_property
     def micro_deposits(self) -> MicroDepositsWithStreamingResponse:
@@ -1006,6 +1097,9 @@ class AsyncExternalBankAccountsWithStreamingResponse:
         )
         self.retry_micro_deposits = async_to_streamed_response_wrapper(
             external_bank_accounts.retry_micro_deposits,
+        )
+        self.retry_prenote = async_to_streamed_response_wrapper(
+            external_bank_accounts.retry_prenote,
         )
 
     @cached_property

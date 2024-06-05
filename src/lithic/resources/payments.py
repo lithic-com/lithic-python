@@ -255,7 +255,7 @@ class Payments(SyncAPIResource):
             "ACH_RETURN_PROCESSED",
         ],
         decline_reason: Literal[
-            "PROGRAM_TRANSACTION_LIMITS_EXCEEDED", "PROGRAM_DAILY_LIMITS_EXCEEDED", "PROGRAM_MONTHLY_LIMITS_EXCEEDED"
+            "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
         ]
         | NotGiven = NOT_GIVEN,
         return_reason_code: str | NotGiven = NOT_GIVEN,
@@ -651,7 +651,7 @@ class AsyncPayments(AsyncAPIResource):
             "ACH_RETURN_PROCESSED",
         ],
         decline_reason: Literal[
-            "PROGRAM_TRANSACTION_LIMITS_EXCEEDED", "PROGRAM_DAILY_LIMITS_EXCEEDED", "PROGRAM_MONTHLY_LIMITS_EXCEEDED"
+            "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
         ]
         | NotGiven = NOT_GIVEN,
         return_reason_code: str | NotGiven = NOT_GIVEN,

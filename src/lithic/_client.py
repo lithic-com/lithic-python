@@ -81,7 +81,6 @@ class Lithic(SyncAPIClient):
     payments: resources.Payments
     three_ds: resources.ThreeDS
     reports: resources.Reports
-    card_product: resources.CardProduct
     card_programs: resources.CardPrograms
     digital_card_art: resources.DigitalCardArtResource
     with_raw_response: LithicWithRawResponse
@@ -201,7 +200,6 @@ class Lithic(SyncAPIClient):
         self.payments = resources.Payments(self)
         self.three_ds = resources.ThreeDS(self)
         self.reports = resources.Reports(self)
-        self.card_product = resources.CardProduct(self)
         self.card_programs = resources.CardPrograms(self)
         self.digital_card_art = resources.DigitalCardArtResource(self)
         self.with_raw_response = LithicWithRawResponse(self)
@@ -375,7 +373,6 @@ class AsyncLithic(AsyncAPIClient):
     payments: resources.AsyncPayments
     three_ds: resources.AsyncThreeDS
     reports: resources.AsyncReports
-    card_product: resources.AsyncCardProduct
     card_programs: resources.AsyncCardPrograms
     digital_card_art: resources.AsyncDigitalCardArtResource
     with_raw_response: AsyncLithicWithRawResponse
@@ -495,7 +492,6 @@ class AsyncLithic(AsyncAPIClient):
         self.payments = resources.AsyncPayments(self)
         self.three_ds = resources.AsyncThreeDS(self)
         self.reports = resources.AsyncReports(self)
-        self.card_product = resources.AsyncCardProduct(self)
         self.card_programs = resources.AsyncCardPrograms(self)
         self.digital_card_art = resources.AsyncDigitalCardArtResource(self)
         self.with_raw_response = AsyncLithicWithRawResponse(self)
@@ -671,7 +667,6 @@ class LithicWithRawResponse:
         self.payments = resources.PaymentsWithRawResponse(client.payments)
         self.three_ds = resources.ThreeDSWithRawResponse(client.three_ds)
         self.reports = resources.ReportsWithRawResponse(client.reports)
-        self.card_product = resources.CardProductWithRawResponse(client.card_product)
         self.card_programs = resources.CardProgramsWithRawResponse(client.card_programs)
         self.digital_card_art = resources.DigitalCardArtResourceWithRawResponse(client.digital_card_art)
 
@@ -702,7 +697,6 @@ class AsyncLithicWithRawResponse:
         self.payments = resources.AsyncPaymentsWithRawResponse(client.payments)
         self.three_ds = resources.AsyncThreeDSWithRawResponse(client.three_ds)
         self.reports = resources.AsyncReportsWithRawResponse(client.reports)
-        self.card_product = resources.AsyncCardProductWithRawResponse(client.card_product)
         self.card_programs = resources.AsyncCardProgramsWithRawResponse(client.card_programs)
         self.digital_card_art = resources.AsyncDigitalCardArtResourceWithRawResponse(client.digital_card_art)
 
@@ -733,7 +727,6 @@ class LithicWithStreamedResponse:
         self.payments = resources.PaymentsWithStreamingResponse(client.payments)
         self.three_ds = resources.ThreeDSWithStreamingResponse(client.three_ds)
         self.reports = resources.ReportsWithStreamingResponse(client.reports)
-        self.card_product = resources.CardProductWithStreamingResponse(client.card_product)
         self.card_programs = resources.CardProgramsWithStreamingResponse(client.card_programs)
         self.digital_card_art = resources.DigitalCardArtResourceWithStreamingResponse(client.digital_card_art)
 
@@ -768,7 +761,6 @@ class AsyncLithicWithStreamedResponse:
         self.payments = resources.AsyncPaymentsWithStreamingResponse(client.payments)
         self.three_ds = resources.AsyncThreeDSWithStreamingResponse(client.three_ds)
         self.reports = resources.AsyncReportsWithStreamingResponse(client.reports)
-        self.card_product = resources.AsyncCardProductWithStreamingResponse(client.card_product)
         self.card_programs = resources.AsyncCardProgramsWithStreamingResponse(client.card_programs)
         self.digital_card_art = resources.AsyncDigitalCardArtResourceWithStreamingResponse(client.digital_card_art)
 
