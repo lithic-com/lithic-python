@@ -22,7 +22,7 @@ class PaymentSimulateActionParams(TypedDict, total=False):
     """Event Type"""
 
     decline_reason: Literal[
-        "PROGRAM_TRANSACTION_LIMITS_EXCEEDED", "PROGRAM_DAILY_LIMITS_EXCEEDED", "PROGRAM_MONTHLY_LIMITS_EXCEEDED"
+        "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
     ]
     """Decline reason"""
 

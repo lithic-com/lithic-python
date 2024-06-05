@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -71,6 +72,12 @@ class Account(BaseModel):
 
     This is the same as the account_token returned by the enroll endpoint. If using
     this parameter, do not include pagination.
+    """
+
+    created: Optional[datetime] = None
+    """Timestamp of when the account was created.
+
+    For accounts created before 2023-05-11, this field will be null.
     """
 
     spend_limit: SpendLimit

@@ -148,10 +148,14 @@ class VerificationApplication(BaseModel):
     created: Optional[datetime] = None
     """Timestamp of when the application was created."""
 
-    status: Optional[Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
-    """
-    KYC and KYB evaluation states. Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT`
-    are only applicable for the `ADVANCED` workflow.
+    status: Optional[Literal["ACCEPTED", "PENDING_REVIEW", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
+    """KYC and KYB evaluation states.
+
+    Note:
+
+    - `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
+      `KYC_ADVANCED` workflow.
+    - `PENDING_REVIEW` is only applicable for the `KYB_BASIC` workflow.
     """
 
     status_reasons: Optional[
@@ -261,12 +265,16 @@ class AccountHolder(BaseModel):
     > Primary phone of Account Holder, entered in E.164 format.
     """
 
-    status: Optional[Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
-    """<Deprecated.
+    status: Optional[Literal["ACCEPTED", "PENDING_REVIEW", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
+    """<Deprecated. Use verification_application.status instead>
 
-    Use verification_application.status instead> KYC and KYB evaluation states.
-    Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
-    `ADVANCED` workflow.
+    KYC and KYB evaluation states.
+
+    Note:
+
+    - `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
+      `KYC_ADVANCED` workflow.
+    - `PENDING_REVIEW` is only applicable for the `KYB_BASIC` workflow.
     """
 
     status_reasons: Optional[

@@ -16,10 +16,14 @@ class AccountHolderCreateResponse(BaseModel):
     account_token: str
     """Globally unique identifier for the account."""
 
-    status: Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]
-    """
-    KYC and KYB evaluation states. Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT`
-    are only applicable for the `ADVANCED` workflow.
+    status: Literal["ACCEPTED", "PENDING_REVIEW", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]
+    """KYC and KYB evaluation states.
+
+    Note:
+
+    - `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
+      `KYC_ADVANCED` workflow.
+    - `PENDING_REVIEW` is only applicable for the `KYB_BASIC` workflow.
     """
 
     status_reasons: List[

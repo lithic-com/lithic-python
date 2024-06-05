@@ -8,14 +8,6 @@ from .balances import (
     BalancesWithStreamingResponse,
     AsyncBalancesWithStreamingResponse,
 )
-from .statements import (
-    Statements,
-    AsyncStatements,
-    StatementsWithRawResponse,
-    AsyncStatementsWithRawResponse,
-    StatementsWithStreamingResponse,
-    AsyncStatementsWithStreamingResponse,
-)
 from .financial_accounts import (
     FinancialAccounts,
     AsyncFinancialAccounts,
@@ -46,12 +38,6 @@ __all__ = [
     "AsyncFinancialTransactionsWithRawResponse",
     "FinancialTransactionsWithStreamingResponse",
     "AsyncFinancialTransactionsWithStreamingResponse",
-    "Statements",
-    "AsyncStatements",
-    "StatementsWithRawResponse",
-    "AsyncStatementsWithRawResponse",
-    "StatementsWithStreamingResponse",
-    "AsyncStatementsWithStreamingResponse",
     "FinancialAccounts",
     "AsyncFinancialAccounts",
     "FinancialAccountsWithRawResponse",

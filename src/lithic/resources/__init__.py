@@ -72,14 +72,6 @@ from .auth_rules import (
     AuthRulesWithStreamingResponse,
     AsyncAuthRulesWithStreamingResponse,
 )
-from .card_product import (
-    CardProduct,
-    AsyncCardProduct,
-    CardProductWithRawResponse,
-    AsyncCardProductWithRawResponse,
-    CardProductWithStreamingResponse,
-    AsyncCardProductWithStreamingResponse,
-)
 from .transactions import (
     Transactions,
     AsyncTransactions,
@@ -278,12 +270,6 @@ __all__ = [
     "AsyncReportsWithRawResponse",
     "ReportsWithStreamingResponse",
     "AsyncReportsWithStreamingResponse",
-    "CardProduct",
-    "AsyncCardProduct",
-    "CardProductWithRawResponse",
-    "AsyncCardProductWithRawResponse",
-    "CardProductWithStreamingResponse",
-    "AsyncCardProductWithStreamingResponse",
     "CardPrograms",
     "AsyncCardPrograms",
     "CardProgramsWithRawResponse",
