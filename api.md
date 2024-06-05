@@ -26,17 +26,10 @@ from lithic.types import Account, AccountSpendLimits, BusinessAccount
 
 Methods:
 
-- <code title="get /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/account.py">Account</a></code>
-- <code title="patch /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">update</a>(account_token, \*\*<a href="src/lithic/types/account_update_params.py">params</a>) -> <a href="./src/lithic/types/account.py">Account</a></code>
-- <code title="get /accounts">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncCursorPage[Account]</a></code>
-- <code title="get /accounts/{account_token}/spend_limits">client.accounts.<a href="./src/lithic/resources/accounts/accounts.py">retrieve_spend_limits</a>(account_token) -> <a href="./src/lithic/types/account_spend_limits.py">AccountSpendLimits</a></code>
-
-## CreditConfigurations
-
-Methods:
-
-- <code title="get /accounts/{account_token}/credit_configuration">client.accounts.credit_configurations.<a href="./src/lithic/resources/accounts/credit_configurations.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/business_account.py">BusinessAccount</a></code>
-- <code title="patch /accounts/{account_token}/credit_configuration">client.accounts.credit_configurations.<a href="./src/lithic/resources/accounts/credit_configurations.py">update</a>(account_token, \*\*<a href="src/lithic/types/accounts/credit_configuration_update_params.py">params</a>) -> <a href="./src/lithic/types/business_account.py">BusinessAccount</a></code>
+- <code title="get /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/account.py">Account</a></code>
+- <code title="patch /accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">update</a>(account_token, \*\*<a href="src/lithic/types/account_update_params.py">params</a>) -> <a href="./src/lithic/types/account.py">Account</a></code>
+- <code title="get /accounts">client.accounts.<a href="./src/lithic/resources/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncCursorPage[Account]</a></code>
+- <code title="get /accounts/{account_token}/spend_limits">client.accounts.<a href="./src/lithic/resources/accounts.py">retrieve_spend_limits</a>(account_token) -> <a href="./src/lithic/types/account_spend_limits.py">AccountSpendLimits</a></code>
 
 # AccountHolders
 
@@ -300,31 +293,6 @@ Methods:
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_transaction_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
-## Statements
-
-Types:
-
-```python
-from lithic.types.financial_accounts import Statement
-```
-
-Methods:
-
-- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">retrieve</a>(statement_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/statement.py">Statement</a></code>
-- <code title="get /financial_accounts/{financial_account_token}/statements">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statement_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statement.py">SyncCursorPage[Statement]</a></code>
-
-### LineItems
-
-Types:
-
-```python
-from lithic.types.financial_accounts.statements import LineItemListResponse
-```
-
-Methods:
-
-- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(statement_token, \*, financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statements/line_item_list_response.py">SyncCursorPage[LineItemListResponse]</a></code>
-
 # Transactions
 
 Types:
@@ -389,6 +357,7 @@ from lithic.types import (
     ExternalBankAccountUpdateResponse,
     ExternalBankAccountListResponse,
     ExternalBankAccountRetryMicroDepositsResponse,
+    ExternalBankAccountRetryPrenoteResponse,
 )
 ```
 
@@ -399,6 +368,7 @@ Methods:
 - <code title="patch /external_bank_accounts/{external_bank_account_token}">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">update</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_update_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_update_response.py">ExternalBankAccountUpdateResponse</a></code>
 - <code title="get /external_bank_accounts">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">list</a>(\*\*<a href="src/lithic/types/external_bank_account_list_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_list_response.py">SyncCursorPage[ExternalBankAccountListResponse]</a></code>
 - <code title="post /external_bank_accounts/{external_bank_account_token}/retry_micro_deposits">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retry_micro_deposits</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_retry_micro_deposits_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_retry_micro_deposits_response.py">ExternalBankAccountRetryMicroDepositsResponse</a></code>
+- <code title="post /external_bank_accounts/{external_bank_account_token}/retry_prenote">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retry_prenote</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_retry_prenote_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_retry_prenote_response.py">ExternalBankAccountRetryPrenoteResponse</a></code>
 
 ## MicroDeposits
 
@@ -481,18 +451,6 @@ Methods:
 
 - <code title="get /reports/settlement/details/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">list_details</a>(report_date, \*\*<a href="src/lithic/types/reports/settlement_list_details_params.py">params</a>) -> <a href="./src/lithic/types/settlement_detail.py">SyncCursorPage[SettlementDetail]</a></code>
 - <code title="get /reports/settlement/summary/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">summary</a>(report_date) -> <a href="./src/lithic/types/settlement_report.py">SettlementReport</a></code>
-
-# CardProduct
-
-Types:
-
-```python
-from lithic.types import CardProductCreditDetailResponse
-```
-
-Methods:
-
-- <code title="get /card_product/credit_detail">client.card_product.<a href="./src/lithic/resources/card_product.py">credit_detail</a>() -> <a href="./src/lithic/types/card_product_credit_detail_response.py">CardProductCreditDetailResponse</a></code>
 
 # CardPrograms
 

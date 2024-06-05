@@ -8,40 +8,28 @@ from typing_extensions import Literal
 
 import httpx
 
-from ... import _legacy_response
-from ...types import account_list_params, account_update_params
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
+from .. import _legacy_response
+from ..types import account_list_params, account_update_params
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ...pagination import SyncCursorPage, AsyncCursorPage
-from ..._base_client import (
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ..pagination import SyncCursorPage, AsyncCursorPage
+from .._base_client import (
     AsyncPaginator,
     make_request_options,
 )
-from ...types.account import Account
-from .credit_configurations import (
-    CreditConfigurations,
-    AsyncCreditConfigurations,
-    CreditConfigurationsWithRawResponse,
-    AsyncCreditConfigurationsWithRawResponse,
-    CreditConfigurationsWithStreamingResponse,
-    AsyncCreditConfigurationsWithStreamingResponse,
-)
-from ...types.account_spend_limits import AccountSpendLimits
+from ..types.account import Account
+from ..types.account_spend_limits import AccountSpendLimits
 
 __all__ = ["Accounts", "AsyncAccounts"]
 
 
 class Accounts(SyncAPIResource):
-    @cached_property
-    def credit_configurations(self) -> CreditConfigurations:
-        return CreditConfigurations(self._client)
-
     @cached_property
     def with_raw_response(self) -> AccountsWithRawResponse:
         return AccountsWithRawResponse(self)
@@ -258,10 +246,6 @@ class Accounts(SyncAPIResource):
 
 
 class AsyncAccounts(AsyncAPIResource):
-    @cached_property
-    def credit_configurations(self) -> AsyncCreditConfigurations:
-        return AsyncCreditConfigurations(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncAccountsWithRawResponse:
         return AsyncAccountsWithRawResponse(self)
@@ -494,10 +478,6 @@ class AccountsWithRawResponse:
             accounts.retrieve_spend_limits,
         )
 
-    @cached_property
-    def credit_configurations(self) -> CreditConfigurationsWithRawResponse:
-        return CreditConfigurationsWithRawResponse(self._accounts.credit_configurations)
-
 
 class AsyncAccountsWithRawResponse:
     def __init__(self, accounts: AsyncAccounts) -> None:
@@ -515,10 +495,6 @@ class AsyncAccountsWithRawResponse:
         self.retrieve_spend_limits = _legacy_response.async_to_raw_response_wrapper(
             accounts.retrieve_spend_limits,
         )
-
-    @cached_property
-    def credit_configurations(self) -> AsyncCreditConfigurationsWithRawResponse:
-        return AsyncCreditConfigurationsWithRawResponse(self._accounts.credit_configurations)
 
 
 class AccountsWithStreamingResponse:
@@ -538,10 +514,6 @@ class AccountsWithStreamingResponse:
             accounts.retrieve_spend_limits,
         )
 
-    @cached_property
-    def credit_configurations(self) -> CreditConfigurationsWithStreamingResponse:
-        return CreditConfigurationsWithStreamingResponse(self._accounts.credit_configurations)
-
 
 class AsyncAccountsWithStreamingResponse:
     def __init__(self, accounts: AsyncAccounts) -> None:
@@ -559,7 +531,3 @@ class AsyncAccountsWithStreamingResponse:
         self.retrieve_spend_limits = async_to_streamed_response_wrapper(
             accounts.retrieve_spend_limits,
         )
-
-    @cached_property
-    def credit_configurations(self) -> AsyncCreditConfigurationsWithStreamingResponse:
-        return AsyncCreditConfigurationsWithStreamingResponse(self._accounts.credit_configurations)
