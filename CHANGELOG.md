@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.46.0 (2024-06-05)
+
+Full Changelog: [v0.45.0...v0.46.0](https://github.com/lithic-com/lithic-python/compare/v0.45.0...v0.46.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** remove some endpoints and other API updates ([#458](https://github.com/lithic-com/lithic-python/issues/458))
+
+### Features
+
+* **api:** remove some endpoints and other API updates ([#458](https://github.com/lithic-com/lithic-python/issues/458)) ([378e64e](https://github.com/lithic-com/lithic-python/commit/378e64e62cb91c45a3d6bdf3c2ccc21a66d4b1de))
+
 ## 0.45.0 (2024-05-30)
 
 Full Changelog: [v0.44.0...v0.45.0](https://github.com/lithic-com/lithic-python/compare/v0.44.0...v0.45.0)
