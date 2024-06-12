@@ -90,7 +90,7 @@ class ExternalBankAccountRetryMicroDepositsResponse(BaseModel):
     """The financial account token of the operating account to fund the micro deposits"""
 
     name: Optional[str] = None
-    """The nickname given to this record of External Bank Account"""
+    """The nickname for this External Bank Account"""
 
     user_defined_id: Optional[str] = None
     """User Defined ID"""

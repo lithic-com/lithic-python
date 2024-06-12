@@ -143,6 +143,7 @@ class Payments(SyncAPIResource):
         self,
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        category: Literal["ACH"] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         financial_account_token: str | NotGiven = NOT_GIVEN,
@@ -194,6 +195,7 @@ class Payments(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "begin": begin,
+                        "category": category,
                         "end": end,
                         "ending_before": ending_before,
                         "financial_account_token": financial_account_token,
@@ -539,6 +541,7 @@ class AsyncPayments(AsyncAPIResource):
         self,
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        category: Literal["ACH"] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         financial_account_token: str | NotGiven = NOT_GIVEN,
@@ -590,6 +593,7 @@ class AsyncPayments(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "begin": begin,
+                        "category": category,
                         "end": end,
                         "ending_before": ending_before,
                         "financial_account_token": financial_account_token,
