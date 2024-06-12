@@ -140,6 +140,7 @@ reportImplicitOverride = true
 
 reportImportCycles = false
 reportPrivateUsage = false
+reportOverlappingOverload = false
 
 
 [tool.ruff]

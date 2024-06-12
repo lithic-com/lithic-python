@@ -466,3 +466,17 @@ Methods:
 
 - <code title="get /digital_card_art/{digital_card_art_token}">client.digital_card_art.<a href="./src/lithic/resources/digital_card_art.py">retrieve</a>(digital_card_art_token) -> <a href="./src/lithic/types/digital_card_art.py">DigitalCardArt</a></code>
 - <code title="get /digital_card_art">client.digital_card_art.<a href="./src/lithic/resources/digital_card_art.py">list</a>(\*\*<a href="src/lithic/types/digital_card_art_list_params.py">params</a>) -> <a href="./src/lithic/types/digital_card_art.py">SyncCursorPage[DigitalCardArt]</a></code>
+
+# BookTransfers
+
+Types:
+
+```python
+from lithic.types import BookTransferResponse
+```
+
+Methods:
+
+- <code title="post /book_transfers">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">create</a>(\*\*<a href="src/lithic/types/book_transfer_create_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
+- <code title="get /book_transfers/{book_transfer_token}">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">retrieve</a>(book_transfer_token) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
+- <code title="get /book_transfers">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">list</a>(\*\*<a href="src/lithic/types/book_transfer_list_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">SyncCursorPage[BookTransferResponse]</a></code>

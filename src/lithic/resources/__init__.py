@@ -96,6 +96,14 @@ from .tokenizations import (
     TokenizationsWithStreamingResponse,
     AsyncTokenizationsWithStreamingResponse,
 )
+from .book_transfers import (
+    BookTransfers,
+    AsyncBookTransfers,
+    BookTransfersWithRawResponse,
+    AsyncBookTransfersWithRawResponse,
+    BookTransfersWithStreamingResponse,
+    AsyncBookTransfersWithStreamingResponse,
+)
 from .account_holders import (
     AccountHolders,
     AsyncAccountHolders,
@@ -282,4 +290,10 @@ __all__ = [
     "AsyncDigitalCardArtResourceWithRawResponse",
     "DigitalCardArtResourceWithStreamingResponse",
     "AsyncDigitalCardArtResourceWithStreamingResponse",
+    "BookTransfers",
+    "AsyncBookTransfers",
+    "BookTransfersWithRawResponse",
+    "AsyncBookTransfersWithRawResponse",
+    "BookTransfersWithStreamingResponse",
+    "AsyncBookTransfersWithStreamingResponse",
 ]
