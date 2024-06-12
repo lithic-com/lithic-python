@@ -27,7 +27,7 @@ class ExternalBankAccountUpdateParams(TypedDict, total=False):
     """Doing Business As"""
 
     name: str
-    """The nickname given to this record of External Bank Account"""
+    """The nickname for this External Bank Account"""
 
     owner: str
     """Legal Name of the business or individual who owns the external account.
