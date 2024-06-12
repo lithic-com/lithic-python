@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.47.0 (2024-06-12)
+
+Full Changelog: [v0.46.0...v0.47.0](https://github.com/lithic-com/lithic-python/compare/v0.46.0...v0.47.0)
+
+### Features
+
+* **api:** updates ([#460](https://github.com/lithic-com/lithic-python/issues/460)) ([f685c2d](https://github.com/lithic-com/lithic-python/commit/f685c2dbe5931a73a4e747228930f298270116fc))
+
 ## 0.46.0 (2024-06-05)
 
 Full Changelog: [v0.45.0...v0.46.0](https://github.com/lithic-com/lithic-python/compare/v0.45.0...v0.46.0)
