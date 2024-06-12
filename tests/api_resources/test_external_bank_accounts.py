@@ -164,6 +164,86 @@ class TestExternalBankAccounts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_create_overload_3(self, client: Lithic) -> None:
+        external_bank_account = client.external_bank_accounts.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
+        )
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
+        external_bank_account = client.external_bank_accounts.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            address={
+                "address1": "x",
+                "address2": "x",
+                "city": "x",
+                "state": "xx",
+                "postal_code": "11201",
+                "country": "USD",
+            },
+            company_id="x",
+            dob=parse_date("2019-12-27"),
+            doing_business_as="x",
+            name="x",
+            user_defined_id="x",
+        )
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_raw_response_create_overload_3(self, client: Lithic) -> None:
+        response = client.external_bank_accounts.with_raw_response.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
+        with client.external_bank_accounts.with_streaming_response.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = response.parse()
+            assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -535,6 +615,86 @@ class TestAsyncExternalBankAccounts:
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            external_bank_account = await response.parse()
+            assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
+        external_bank_account = await async_client.external_bank_accounts.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
+        )
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
+        external_bank_account = await async_client.external_bank_accounts.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            address={
+                "address1": "x",
+                "address2": "x",
+                "city": "x",
+                "state": "xx",
+                "postal_code": "11201",
+                "country": "USD",
+            },
+            company_id="x",
+            dob=parse_date("2019-12-27"),
+            doing_business_as="x",
+            name="x",
+            user_defined_id="x",
+        )
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+        response = await async_client.external_bank_accounts.with_raw_response.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        external_bank_account = response.parse()
+        assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+        async with async_client.external_bank_accounts.with_streaming_response.create(
+            account_number="12345678901234567",
+            country="USD",
+            currency="USD",
+            owner="x",
+            owner_type="INDIVIDUAL",
+            routing_number="123456789",
+            type="CHECKING",
+            verification_method="EXTERNALLY_VERIFIED",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -4,4 +4,4 @@ from typing_extensions import Literal
 
 __all__ = ["VerificationMethod"]
 
-VerificationMethod = Literal["MANUAL", "MICRO_DEPOSIT", "PLAID", "PRENOTE"]
+VerificationMethod = Literal["MANUAL", "MICRO_DEPOSIT", "PLAID", "PRENOTE", "EXTERNALLY_VERIFIED"]
