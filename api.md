@@ -21,7 +21,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Account, AccountSpendLimits, BusinessAccount
+from lithic.types import Account, AccountSpendLimits
 ```
 
 Methods:
@@ -124,7 +124,6 @@ Types:
 from lithic.types import (
     Card,
     CardSpendLimits,
-    EmbedRequestParams,
     SpendLimitDuration,
     CardEmbedResponse,
     CardProvisionResponse,
@@ -491,3 +490,4 @@ Methods:
 - <code title="post /book_transfers">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">create</a>(\*\*<a href="src/lithic/types/book_transfer_create_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
 - <code title="get /book_transfers/{book_transfer_token}">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">retrieve</a>(book_transfer_token) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
 - <code title="get /book_transfers">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">list</a>(\*\*<a href="src/lithic/types/book_transfer_list_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">SyncCursorPage[BookTransferResponse]</a></code>
+- <code title="post /book_transfers/{book_transfer_token}/reverse">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">reverse</a>(book_transfer_token, \*\*<a href="src/lithic/types/book_transfer_reverse_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>

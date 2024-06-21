@@ -86,6 +86,8 @@ class MethodAttributes(BaseModel):
 
     sec_code: Literal["CCD", "PPD", "WEB"]
 
+    trace_numbers: List[Optional[str]]
+
 
 class Payment(BaseModel):
     token: str

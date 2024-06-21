@@ -9,7 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from .. import _legacy_response
-from ..types import book_transfer_list_params, book_transfer_create_params
+from ..types import book_transfer_list_params, book_transfer_create_params, book_transfer_reverse_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -259,6 +259,45 @@ class BookTransfers(SyncAPIResource):
             model=BookTransferResponse,
         )
 
+    def reverse(
+        self,
+        book_transfer_token: str,
+        *,
+        memo: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BookTransferResponse:
+        """
+        Reverse a book transfer
+
+        Args:
+          memo: Optional descriptor for the reversal.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not book_transfer_token:
+            raise ValueError(
+                f"Expected a non-empty value for `book_transfer_token` but received {book_transfer_token!r}"
+            )
+        return self._post(
+            f"/book_transfers/{book_transfer_token}/reverse",
+            body=maybe_transform({"memo": memo}, book_transfer_reverse_params.BookTransferReverseParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BookTransferResponse,
+        )
+
 
 class AsyncBookTransfers(AsyncAPIResource):
     @cached_property
@@ -491,6 +530,45 @@ class AsyncBookTransfers(AsyncAPIResource):
             model=BookTransferResponse,
         )
 
+    async def reverse(
+        self,
+        book_transfer_token: str,
+        *,
+        memo: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BookTransferResponse:
+        """
+        Reverse a book transfer
+
+        Args:
+          memo: Optional descriptor for the reversal.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not book_transfer_token:
+            raise ValueError(
+                f"Expected a non-empty value for `book_transfer_token` but received {book_transfer_token!r}"
+            )
+        return await self._post(
+            f"/book_transfers/{book_transfer_token}/reverse",
+            body=await async_maybe_transform({"memo": memo}, book_transfer_reverse_params.BookTransferReverseParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BookTransferResponse,
+        )
+
 
 class BookTransfersWithRawResponse:
     def __init__(self, book_transfers: BookTransfers) -> None:
@@ -504,6 +582,9 @@ class BookTransfersWithRawResponse:
         )
         self.list = _legacy_response.to_raw_response_wrapper(
             book_transfers.list,
+        )
+        self.reverse = _legacy_response.to_raw_response_wrapper(
+            book_transfers.reverse,
         )
 
 
@@ -520,6 +601,9 @@ class AsyncBookTransfersWithRawResponse:
         self.list = _legacy_response.async_to_raw_response_wrapper(
             book_transfers.list,
         )
+        self.reverse = _legacy_response.async_to_raw_response_wrapper(
+            book_transfers.reverse,
+        )
 
 
 class BookTransfersWithStreamingResponse:
@@ -535,6 +619,9 @@ class BookTransfersWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             book_transfers.list,
         )
+        self.reverse = to_streamed_response_wrapper(
+            book_transfers.reverse,
+        )
 
 
 class AsyncBookTransfersWithStreamingResponse:
@@ -549,4 +636,7 @@ class AsyncBookTransfersWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             book_transfers.list,
+        )
+        self.reverse = async_to_streamed_response_wrapper(
+            book_transfers.reverse,
         )
