@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.48.0 (2024-06-21)
+
+Full Changelog: [v0.47.0...v0.48.0](https://github.com/lithic-com/lithic-python/compare/v0.47.0...v0.48.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** remove unused event type 'statement.created'
+* **api:** remove unused business account type
+* **api:** remove unused embed request params type
+* **api:** updates ([#466](https://github.com/lithic-com/lithic-python/issues/466))
+
+### Features
+
+* **api:** add 'reverse' method for book transfers ([0e94cdb](https://github.com/lithic-com/lithic-python/commit/0e94cdb2e8acf61560aa56def695acdbe982f4f6))
+* **api:** add field 'trace numbers' to payment method attribute model ([0e94cdb](https://github.com/lithic-com/lithic-python/commit/0e94cdb2e8acf61560aa56def695acdbe982f4f6))
+* **api:** remove unused business account type ([0e94cdb](https://github.com/lithic-com/lithic-python/commit/0e94cdb2e8acf61560aa56def695acdbe982f4f6))
+* **api:** remove unused embed request params type ([0e94cdb](https://github.com/lithic-com/lithic-python/commit/0e94cdb2e8acf61560aa56def695acdbe982f4f6))
+* **api:** remove unused event type 'statement.created' ([0e94cdb](https://github.com/lithic-com/lithic-python/commit/0e94cdb2e8acf61560aa56def695acdbe982f4f6))
+* **api:** updates ([#466](https://github.com/lithic-com/lithic-python/issues/466)) ([0e94cdb](https://github.com/lithic-com/lithic-python/commit/0e94cdb2e8acf61560aa56def695acdbe982f4f6))
+
+
+### Bug Fixes
+
+* **client/async:** avoid blocking io call for platform headers ([#465](https://github.com/lithic-com/lithic-python/issues/465)) ([67c2ce2](https://github.com/lithic-com/lithic-python/commit/67c2ce23c63f599a3fe1eedf1e777099599fe4df))
+
+
+### Chores
+
+* **internal:** add a `default_query` method ([#463](https://github.com/lithic-com/lithic-python/issues/463)) ([37cd9bd](https://github.com/lithic-com/lithic-python/commit/37cd9bd8459b9f3856cc168a52b6a9032906dedb))
+
 ## 0.47.0 (2024-06-12)
 
 Full Changelog: [v0.46.0...v0.47.0](https://github.com/lithic-com/lithic-python/compare/v0.46.0...v0.47.0)
