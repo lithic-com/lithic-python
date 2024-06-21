@@ -63,8 +63,8 @@ from .transaction_list_params import TransactionListParams as TransactionListPar
 from .card_program_list_params import CardProgramListParams as CardProgramListParams
 from .tokenization_list_params import TokenizationListParams as TokenizationListParams
 from .auth_rule_remove_response import AuthRuleRemoveResponse as AuthRuleRemoveResponse
-from .card_get_embed_url_params import CardGetEmbedURLParams as CardGetEmbedURLParams
 from .book_transfer_list_params import BookTransferListParams as BookTransferListParams
+from .card_get_embed_url_params import CardGetEmbedURLParams as CardGetEmbedURLParams
 from .card_search_by_pan_params import CardSearchByPanParams as CardSearchByPanParams
 from .responder_endpoint_status import ResponderEndpointStatus as ResponderEndpointStatus
 from .account_holder_list_params import AccountHolderListParams as AccountHolderListParams
