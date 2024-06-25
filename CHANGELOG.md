@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.48.1 (2024-06-25)
+
+Full Changelog: [v0.48.0...v0.48.1](https://github.com/lithic-com/lithic-python/compare/v0.48.0...v0.48.1)
+
+### Bug Fixes
+
+* **docs:** fix link to advanced python httpx docs ([#469](https://github.com/lithic-com/lithic-python/issues/469)) ([f1683b5](https://github.com/lithic-com/lithic-python/commit/f1683b57a0ed2c810f61833d8675923252bd9e2b))
+
+
+### Chores
+
+* formatting ([#467](https://github.com/lithic-com/lithic-python/issues/467)) ([4754798](https://github.com/lithic-com/lithic-python/commit/47547988ccef6b3b4b141c31c76f6a7a05366be4))
+
 ## 0.48.0 (2024-06-21)
 
 Full Changelog: [v0.47.0...v0.48.0](https://github.com/lithic-com/lithic-python/compare/v0.47.0...v0.48.0)
