@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.48.2 (2024-06-26)
+
+Full Changelog: [v0.48.1...v0.48.2](https://github.com/lithic-com/lithic-python/compare/v0.48.1...v0.48.2)
+
+### Bug Fixes
+
+* temporarily patch upstream version to fix broken release flow ([#470](https://github.com/lithic-com/lithic-python/issues/470)) ([ca18455](https://github.com/lithic-com/lithic-python/commit/ca1845557fc0c28fb48857092dd06e8d8e540540))
+
 ## 0.48.1 (2024-06-25)
 
 Full Changelog: [v0.48.0...v0.48.1](https://github.com/lithic-com/lithic-python/compare/v0.48.0...v0.48.1)
