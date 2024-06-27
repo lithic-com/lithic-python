@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.48.4 (2024-06-27)
+
+Full Changelog: [v0.48.3...v0.48.4](https://github.com/lithic-com/lithic-python/compare/v0.48.3...v0.48.4)
+
+### Chores
+
+* **deps:** bump anyio to v4.4.0 ([#474](https://github.com/lithic-com/lithic-python/issues/474)) ([13d1520](https://github.com/lithic-com/lithic-python/commit/13d1520aac5539f2ee7f1a5e8c89d76fc452025b))
+
 ## 0.48.3 (2024-06-27)
 
 Full Changelog: [v0.48.2...v0.48.3](https://github.com/lithic-com/lithic-python/compare/v0.48.2...v0.48.3)
