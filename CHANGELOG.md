@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.48.3 (2024-06-27)
+
+Full Changelog: [v0.48.2...v0.48.3](https://github.com/lithic-com/lithic-python/compare/v0.48.2...v0.48.3)
+
+### Bug Fixes
+
+* **build:** include more files in sdist builds ([#472](https://github.com/lithic-com/lithic-python/issues/472)) ([9f173fd](https://github.com/lithic-com/lithic-python/commit/9f173fdcf6f3db1e937ae90fbcf7b850b87479c7))
+
 ## 0.48.2 (2024-06-26)
 
 Full Changelog: [v0.48.1...v0.48.2](https://github.com/lithic-com/lithic-python/compare/v0.48.1...v0.48.2)
