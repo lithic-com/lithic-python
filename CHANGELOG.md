@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.48.5 (2024-07-02)
+
+Full Changelog: [v0.48.4...v0.48.5](https://github.com/lithic-com/lithic-python/compare/v0.48.4...v0.48.5)
+
+### Bug Fixes
+
+* **client:** always respect content-type multipart/form-data if provided ([#481](https://github.com/lithic-com/lithic-python/issues/481)) ([cb58f98](https://github.com/lithic-com/lithic-python/commit/cb58f9816cb9ebc88f8d00aadc77140eb3afbae9))
+
+
+### Chores
+
+* gitignore test server logs ([#478](https://github.com/lithic-com/lithic-python/issues/478)) ([333ec59](https://github.com/lithic-com/lithic-python/commit/333ec59ef57c99e92b47e5508acd79fa9f0ce4dc))
+* **internal:** add helper method for constructing `BaseModel`s ([#480](https://github.com/lithic-com/lithic-python/issues/480)) ([037c807](https://github.com/lithic-com/lithic-python/commit/037c80726879b13c983f458c6f5f6a78176c9ec1))
+* **internal:** add reflection helper function ([#476](https://github.com/lithic-com/lithic-python/issues/476)) ([4d84125](https://github.com/lithic-com/lithic-python/commit/4d841255b4ada2f1315f292f6a869550b4db7477))
+* **internal:** add rich as a dev dependency ([#479](https://github.com/lithic-com/lithic-python/issues/479)) ([a7843c1](https://github.com/lithic-com/lithic-python/commit/a7843c146f920484fd75e6a94d2310cb6cd5d0d9))
+
 ## 0.48.4 (2024-06-27)
 
 Full Changelog: [v0.48.3...v0.48.4](https://github.com/lithic-com/lithic-python/compare/v0.48.3...v0.48.4)
