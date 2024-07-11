@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.48.6 (2024-07-11)
+
+Full Changelog: [v0.48.5...v0.48.6](https://github.com/lithic-com/lithic-python/compare/v0.48.5...v0.48.6)
+
+### Chores
+
+* **ci:** also run workflows for PRs targeting `next` ([#487](https://github.com/lithic-com/lithic-python/issues/487)) ([dd74e55](https://github.com/lithic-com/lithic-python/commit/dd74e5533fac8962ff69837c177462721a4a8710))
+* **ci:** update rye to v0.35.0 ([#482](https://github.com/lithic-com/lithic-python/issues/482)) ([30f2c5b](https://github.com/lithic-com/lithic-python/commit/30f2c5b716e74cae4178267b4959496c33fe5335))
+* **internal:** add helper function ([#485](https://github.com/lithic-com/lithic-python/issues/485)) ([e688304](https://github.com/lithic-com/lithic-python/commit/e6883042caa64572f8fcb06fcc1ba6db823c652c))
+* **internal:** minor import restructuring ([#488](https://github.com/lithic-com/lithic-python/issues/488)) ([10206cf](https://github.com/lithic-com/lithic-python/commit/10206cfb133a0631f011638eb8b746d08a8eb67f))
+* **internal:** minor request options handling changes ([#484](https://github.com/lithic-com/lithic-python/issues/484)) ([1f8293c](https://github.com/lithic-com/lithic-python/commit/1f8293cc4e4a1bea29c21ccfe715edc7acdf53c7))
+* **internal:** update mypy ([#486](https://github.com/lithic-com/lithic-python/issues/486)) ([f05d7a1](https://github.com/lithic-com/lithic-python/commit/f05d7a17bac4ea11826b7117283b218368b88592))
+
+
+### Documentation
+
+* **examples:** use named params more ([#490](https://github.com/lithic-com/lithic-python/issues/490)) ([f42beef](https://github.com/lithic-com/lithic-python/commit/f42beef8c98751bc2d64b02253eb4c9c14759422))
+
 ## 0.48.5 (2024-07-02)
 
 Full Changelog: [v0.48.4...v0.48.5](https://github.com/lithic-com/lithic-python/compare/v0.48.4...v0.48.5)

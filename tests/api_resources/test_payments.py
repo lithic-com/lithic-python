@@ -49,8 +49,8 @@ class TestPayments:
             method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memo="string",
-            user_defined_id="string",
+            memo="memo",
+            user_defined_id="user_defined_id",
         )
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
 
@@ -137,11 +137,11 @@ class TestPayments:
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             category="ACH",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page_size=1,
             result="APPROVED",
-            starting_after="string",
+            starting_after="starting_after",
             status="DECLINED",
         )
         assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
@@ -207,7 +207,7 @@ class TestPayments:
     @parametrize
     def test_method_simulate_action(self, client: Lithic) -> None:
         payment = client.payments.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
@@ -215,17 +215,17 @@ class TestPayments:
     @parametrize
     def test_method_simulate_action_with_all_params(self, client: Lithic) -> None:
         payment = client.payments.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
             decline_reason="PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
-            return_reason_code="string",
+            return_reason_code="return_reason_code",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
 
     @parametrize
     def test_raw_response_simulate_action(self, client: Lithic) -> None:
         response = client.payments.with_raw_response.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
         )
 
@@ -237,7 +237,7 @@ class TestPayments:
     @parametrize
     def test_streaming_response_simulate_action(self, client: Lithic) -> None:
         with client.payments.with_streaming_response.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
         ) as response:
             assert not response.is_closed
@@ -252,7 +252,7 @@ class TestPayments:
     def test_path_params_simulate_action(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
             client.payments.with_raw_response.simulate_action(
-                "",
+                payment_token="",
                 event_type="ACH_ORIGINATION_REVIEWED",
             )
 
@@ -273,7 +273,7 @@ class TestPayments:
             amount=0,
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt_type="RECEIPT_CREDIT",
-            memo="string",
+            memo="memo",
         )
         assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
 
@@ -403,8 +403,8 @@ class TestAsyncPayments:
             method_attributes={"sec_code": "CCD"},
             type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memo="string",
-            user_defined_id="string",
+            memo="memo",
+            user_defined_id="user_defined_id",
         )
         assert_matches_type(PaymentCreateResponse, payment, path=["response"])
 
@@ -491,11 +491,11 @@ class TestAsyncPayments:
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             category="ACH",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page_size=1,
             result="APPROVED",
-            starting_after="string",
+            starting_after="starting_after",
             status="DECLINED",
         )
         assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
@@ -561,7 +561,7 @@ class TestAsyncPayments:
     @parametrize
     async def test_method_simulate_action(self, async_client: AsyncLithic) -> None:
         payment = await async_client.payments.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
@@ -569,17 +569,17 @@ class TestAsyncPayments:
     @parametrize
     async def test_method_simulate_action_with_all_params(self, async_client: AsyncLithic) -> None:
         payment = await async_client.payments.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
             decline_reason="PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
-            return_reason_code="string",
+            return_reason_code="return_reason_code",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
 
     @parametrize
     async def test_raw_response_simulate_action(self, async_client: AsyncLithic) -> None:
         response = await async_client.payments.with_raw_response.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
         )
 
@@ -591,7 +591,7 @@ class TestAsyncPayments:
     @parametrize
     async def test_streaming_response_simulate_action(self, async_client: AsyncLithic) -> None:
         async with async_client.payments.with_streaming_response.simulate_action(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
         ) as response:
             assert not response.is_closed
@@ -606,7 +606,7 @@ class TestAsyncPayments:
     async def test_path_params_simulate_action(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
             await async_client.payments.with_raw_response.simulate_action(
-                "",
+                payment_token="",
                 event_type="ACH_ORIGINATION_REVIEWED",
             )
 
@@ -627,7 +627,7 @@ class TestAsyncPayments:
             amount=0,
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt_type="RECEIPT_CREDIT",
-            memo="string",
+            memo="memo",
         )
         assert_matches_type(PaymentSimulateReceiptResponse, payment, path=["response"])
 

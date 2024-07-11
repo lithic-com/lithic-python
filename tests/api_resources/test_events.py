@@ -22,14 +22,14 @@ class TestEvents:
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
         event = client.events.retrieve(
-            "string",
+            "event_token",
         )
         assert_matches_type(Event, event, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
         response = client.events.with_raw_response.retrieve(
-            "string",
+            "event_token",
         )
 
         assert response.is_closed is True
@@ -40,7 +40,7 @@ class TestEvents:
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
         with client.events.with_streaming_response.retrieve(
-            "string",
+            "event_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -67,10 +67,10 @@ class TestEvents:
         event = client.events.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             with_content=True,
         )
         assert_matches_type(SyncCursorPage[Event], event, path=["response"])
@@ -98,19 +98,19 @@ class TestEvents:
     @parametrize
     def test_method_list_attempts(self, client: Lithic) -> None:
         event = client.events.list_attempts(
-            "string",
+            event_token="event_token",
         )
         assert_matches_type(SyncCursorPage[MessageAttempt], event, path=["response"])
 
     @parametrize
     def test_method_list_attempts_with_all_params(self, client: Lithic) -> None:
         event = client.events.list_attempts(
-            "string",
+            event_token="event_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             status="FAILED",
         )
         assert_matches_type(SyncCursorPage[MessageAttempt], event, path=["response"])
@@ -118,7 +118,7 @@ class TestEvents:
     @parametrize
     def test_raw_response_list_attempts(self, client: Lithic) -> None:
         response = client.events.with_raw_response.list_attempts(
-            "string",
+            event_token="event_token",
         )
 
         assert response.is_closed is True
@@ -129,7 +129,7 @@ class TestEvents:
     @parametrize
     def test_streaming_response_list_attempts(self, client: Lithic) -> None:
         with client.events.with_streaming_response.list_attempts(
-            "string",
+            event_token="event_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -143,7 +143,7 @@ class TestEvents:
     def test_path_params_list_attempts(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_token` but received ''"):
             client.events.with_raw_response.list_attempts(
-                "",
+                event_token="",
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
@@ -160,14 +160,14 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncLithic) -> None:
         event = await async_client.events.retrieve(
-            "string",
+            "event_token",
         )
         assert_matches_type(Event, event, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.with_raw_response.retrieve(
-            "string",
+            "event_token",
         )
 
         assert response.is_closed is True
@@ -178,7 +178,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
         async with async_client.events.with_streaming_response.retrieve(
-            "string",
+            "event_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -205,10 +205,10 @@ class TestAsyncEvents:
         event = await async_client.events.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             with_content=True,
         )
         assert_matches_type(AsyncCursorPage[Event], event, path=["response"])
@@ -236,19 +236,19 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_list_attempts(self, async_client: AsyncLithic) -> None:
         event = await async_client.events.list_attempts(
-            "string",
+            event_token="event_token",
         )
         assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
 
     @parametrize
     async def test_method_list_attempts_with_all_params(self, async_client: AsyncLithic) -> None:
         event = await async_client.events.list_attempts(
-            "string",
+            event_token="event_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             status="FAILED",
         )
         assert_matches_type(AsyncCursorPage[MessageAttempt], event, path=["response"])
@@ -256,7 +256,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_raw_response_list_attempts(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.with_raw_response.list_attempts(
-            "string",
+            event_token="event_token",
         )
 
         assert response.is_closed is True
@@ -267,7 +267,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_streaming_response_list_attempts(self, async_client: AsyncLithic) -> None:
         async with async_client.events.with_streaming_response.list_attempts(
-            "string",
+            event_token="event_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -281,7 +281,7 @@ class TestAsyncEvents:
     async def test_path_params_list_attempts(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_token` but received ''"):
             await async_client.events.with_raw_response.list_attempts(
-                "",
+                event_token="",
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")

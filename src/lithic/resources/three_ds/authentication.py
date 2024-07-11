@@ -13,9 +13,7 @@ from ..._utils import (
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.three_ds import authentication_simulate_params
 from ...types.three_ds.authentication_retrieve_response import AuthenticationRetrieveResponse
 from ...types.three_ds.authentication_simulate_response import AuthenticationSimulateResponse

@@ -20,7 +20,7 @@ class TestMicroDeposits:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         micro_deposit = client.external_bank_accounts.micro_deposits.create(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0],
         )
         assert_matches_type(MicroDepositCreateResponse, micro_deposit, path=["response"])
@@ -28,7 +28,7 @@ class TestMicroDeposits:
     @parametrize
     def test_raw_response_create(self, client: Lithic) -> None:
         response = client.external_bank_accounts.micro_deposits.with_raw_response.create(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0],
         )
 
@@ -40,7 +40,7 @@ class TestMicroDeposits:
     @parametrize
     def test_streaming_response_create(self, client: Lithic) -> None:
         with client.external_bank_accounts.micro_deposits.with_streaming_response.create(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0],
         ) as response:
             assert not response.is_closed
@@ -57,7 +57,7 @@ class TestMicroDeposits:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             client.external_bank_accounts.micro_deposits.with_raw_response.create(
-                "",
+                external_bank_account_token="",
                 micro_deposits=[0, 0],
             )
 
@@ -68,7 +68,7 @@ class TestAsyncMicroDeposits:
     @parametrize
     async def test_method_create(self, async_client: AsyncLithic) -> None:
         micro_deposit = await async_client.external_bank_accounts.micro_deposits.create(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0],
         )
         assert_matches_type(MicroDepositCreateResponse, micro_deposit, path=["response"])
@@ -76,7 +76,7 @@ class TestAsyncMicroDeposits:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
         response = await async_client.external_bank_accounts.micro_deposits.with_raw_response.create(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0],
         )
 
@@ -88,7 +88,7 @@ class TestAsyncMicroDeposits:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
         async with async_client.external_bank_accounts.micro_deposits.with_streaming_response.create(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             micro_deposits=[0, 0],
         ) as response:
             assert not response.is_closed
@@ -105,6 +105,6 @@ class TestAsyncMicroDeposits:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             await async_client.external_bank_accounts.micro_deposits.with_raw_response.create(
-                "",
+                external_bank_account_token="",
                 micro_deposits=[0, 0],
             )
