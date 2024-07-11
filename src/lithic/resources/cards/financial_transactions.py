@@ -16,10 +16,7 @@ from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ...types.cards import financial_transaction_list_params
-from ..._base_client import (
-    AsyncPaginator,
-    make_request_options,
-)
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.financial_transaction import FinancialTransaction
 
 __all__ = ["FinancialTransactions", "AsyncFinancialTransactions"]
