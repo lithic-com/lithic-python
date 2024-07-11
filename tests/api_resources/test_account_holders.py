@@ -148,46 +148,46 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
+                    "dba_business_name": "dba_business_name",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
+                    "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
                 },
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
+                    "dba_business_name": "dba_business_name",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
+                    "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
                 },
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
+                    "dba_business_name": "dba_business_name",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
+                    "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
                 },
             ],
@@ -195,7 +195,7 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -211,7 +211,7 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -227,7 +227,7 @@ class TestAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -244,22 +244,22 @@ class TestAccountHolders:
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
+                    "address2": "address2",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
                     "state": "NE",
                 },
-                "dba_business_name": "string",
+                "dba_business_name": "dba_business_name",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "parent_company": "string",
+                "parent_company": "parent_company",
                 "phone_numbers": ["+12124007676"],
             },
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
+                    "address2": "address2",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -275,7 +275,7 @@ class TestAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
-            external_id="string",
+            external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
         )
@@ -543,7 +543,7 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
@@ -554,7 +554,7 @@ class TestAccountHolders:
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
+                    "address2": "address2",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -567,10 +567,10 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
-            external_id="string",
-            kyc_passed_timestamp="string",
+            external_id="external_id",
+            kyc_passed_timestamp="kyc_passed_timestamp",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -592,7 +592,7 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
         )
 
@@ -619,7 +619,7 @@ class TestAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
         ) as response:
             assert not response.is_closed
@@ -640,11 +640,11 @@ class TestAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
@@ -654,20 +654,20 @@ class TestAccountHolders:
         account_holder = client.account_holders.create(
             address={
                 "address1": "123 Old Forest Way",
-                "address2": "string",
+                "address2": "address2",
                 "city": "Omaha",
                 "country": "USA",
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
-            business_account_token="string",
-            external_id="string",
+            business_account_token="business_account_token",
+            external_id="external_id",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -681,11 +681,11 @@ class TestAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
         )
 
@@ -704,11 +704,11 @@ class TestAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
         ) as response:
             assert not response.is_closed
@@ -760,24 +760,24 @@ class TestAccountHolders:
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
         account_holder = client.account_holders.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         account_holder = client.account_holders.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            business_account_token="string",
-            email="string",
-            phone_number="string",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            business_account_token="business_account_token",
+            email="email",
+            phone_number="phone_number",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -788,7 +788,7 @@ class TestAccountHolders:
     @parametrize
     def test_streaming_response_update(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -802,7 +802,7 @@ class TestAccountHolders:
     def test_path_params_update(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.update(
-                "",
+                account_holder_token="",
             )
 
     @parametrize
@@ -813,10 +813,10 @@ class TestAccountHolders:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         account_holder = client.account_holders.list(
-            ending_before="string",
+            ending_before="ending_before",
             external_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             limit=0,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(SyncSinglePage[AccountHolder], account_holder, path=["response"])
 
@@ -881,7 +881,7 @@ class TestAccountHolders:
     @parametrize
     def test_method_resubmit(self, client: Lithic) -> None:
         account_holder = client.account_holders.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -905,7 +905,7 @@ class TestAccountHolders:
     @parametrize
     def test_raw_response_resubmit(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -933,7 +933,7 @@ class TestAccountHolders:
     @parametrize
     def test_streaming_response_resubmit(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -964,7 +964,7 @@ class TestAccountHolders:
     def test_path_params_resubmit(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.resubmit(
-                "",
+                account_holder_token="",
                 individual={
                     "address": {
                         "address1": "123 Old Forest Way",
@@ -987,7 +987,7 @@ class TestAccountHolders:
     @parametrize
     def test_method_retrieve_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.retrieve_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
@@ -995,7 +995,7 @@ class TestAccountHolders:
     @parametrize
     def test_raw_response_retrieve_document(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.retrieve_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -1007,7 +1007,7 @@ class TestAccountHolders:
     @parametrize
     def test_streaming_response_retrieve_document(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.retrieve_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -1022,20 +1022,20 @@ class TestAccountHolders:
     def test_path_params_retrieve_document(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.retrieve_document(
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 account_holder_token="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `document_token` but received ''"):
             client.account_holders.with_raw_response.retrieve_document(
-                "",
+                document_token="",
                 account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @parametrize
     def test_method_upload_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
@@ -1043,7 +1043,7 @@ class TestAccountHolders:
     @parametrize
     def test_raw_response_upload_document(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
 
@@ -1055,7 +1055,7 @@ class TestAccountHolders:
     @parametrize
     def test_streaming_response_upload_document(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         ) as response:
             assert not response.is_closed
@@ -1070,7 +1070,7 @@ class TestAccountHolders:
     def test_path_params_upload_document(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.upload_document(
-                "",
+                account_holder_token="",
                 document_type="drivers_license",
             )
 
@@ -1202,46 +1202,46 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
+                    "dba_business_name": "dba_business_name",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
+                    "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
                 },
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
+                    "dba_business_name": "dba_business_name",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
+                    "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
                 },
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
                         "state": "NE",
                     },
-                    "dba_business_name": "string",
+                    "dba_business_name": "dba_business_name",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "parent_company": "string",
+                    "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
                 },
             ],
@@ -1249,7 +1249,7 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -1265,7 +1265,7 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -1281,7 +1281,7 @@ class TestAsyncAccountHolders:
                 {
                     "address": {
                         "address1": "123 Old Forest Way",
-                        "address2": "string",
+                        "address2": "address2",
                         "city": "Omaha",
                         "country": "USA",
                         "postal_code": "68022",
@@ -1298,22 +1298,22 @@ class TestAsyncAccountHolders:
             business_entity={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
+                    "address2": "address2",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
                     "state": "NE",
                 },
-                "dba_business_name": "string",
+                "dba_business_name": "dba_business_name",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "parent_company": "string",
+                "parent_company": "parent_company",
                 "phone_numbers": ["+12124007676"],
             },
             control_person={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
+                    "address2": "address2",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -1329,7 +1329,7 @@ class TestAsyncAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
-            external_id="string",
+            external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
         )
@@ -1597,7 +1597,7 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
@@ -1608,7 +1608,7 @@ class TestAsyncAccountHolders:
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
-                    "address2": "string",
+                    "address2": "address2",
                     "city": "Omaha",
                     "country": "USA",
                     "postal_code": "68022",
@@ -1621,10 +1621,10 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
-            external_id="string",
-            kyc_passed_timestamp="string",
+            external_id="external_id",
+            kyc_passed_timestamp="kyc_passed_timestamp",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -1646,7 +1646,7 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
         )
 
@@ -1673,7 +1673,7 @@ class TestAsyncAccountHolders:
                 "last_name": "Bombadil",
                 "phone_number": "+12124007676",
             },
-            tos_timestamp="string",
+            tos_timestamp="tos_timestamp",
             workflow="KYC_ADVANCED",
         ) as response:
             assert not response.is_closed
@@ -1694,11 +1694,11 @@ class TestAsyncAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
@@ -1708,20 +1708,20 @@ class TestAsyncAccountHolders:
         account_holder = await async_client.account_holders.create(
             address={
                 "address1": "123 Old Forest Way",
-                "address2": "string",
+                "address2": "address2",
                 "city": "Omaha",
                 "country": "USA",
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
-            business_account_token="string",
-            external_id="string",
+            business_account_token="business_account_token",
+            external_id="external_id",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -1735,11 +1735,11 @@ class TestAsyncAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
         )
 
@@ -1758,11 +1758,11 @@ class TestAsyncAccountHolders:
                 "postal_code": "68022",
                 "state": "NE",
             },
-            email="string",
-            first_name="string",
+            email="email",
+            first_name="first_name",
             kyc_exemption_type="AUTHORIZED_USER",
-            last_name="string",
-            phone_number="string",
+            last_name="last_name",
+            phone_number="phone_number",
             workflow="KYC_EXEMPT",
         ) as response:
             assert not response.is_closed
@@ -1814,24 +1814,24 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_update(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            business_account_token="string",
-            email="string",
-            phone_number="string",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            business_account_token="business_account_token",
+            email="email",
+            phone_number="phone_number",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -1842,7 +1842,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1856,7 +1856,7 @@ class TestAsyncAccountHolders:
     async def test_path_params_update(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.update(
-                "",
+                account_holder_token="",
             )
 
     @parametrize
@@ -1867,10 +1867,10 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.list(
-            ending_before="string",
+            ending_before="ending_before",
             external_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             limit=0,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(AsyncSinglePage[AccountHolder], account_holder, path=["response"])
 
@@ -1935,7 +1935,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_resubmit(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -1959,7 +1959,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_raw_response_resubmit(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -1987,7 +1987,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_streaming_response_resubmit(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.resubmit(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -2018,7 +2018,7 @@ class TestAsyncAccountHolders:
     async def test_path_params_resubmit(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.resubmit(
-                "",
+                account_holder_token="",
                 individual={
                     "address": {
                         "address1": "123 Old Forest Way",
@@ -2041,7 +2041,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_retrieve_document(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.retrieve_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
@@ -2049,7 +2049,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_raw_response_retrieve_document(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.retrieve_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -2061,7 +2061,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_streaming_response_retrieve_document(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.retrieve_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -2076,20 +2076,20 @@ class TestAsyncAccountHolders:
     async def test_path_params_retrieve_document(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.retrieve_document(
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 account_holder_token="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `document_token` but received ''"):
             await async_client.account_holders.with_raw_response.retrieve_document(
-                "",
+                document_token="",
                 account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @parametrize
     async def test_method_upload_document(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
@@ -2097,7 +2097,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_raw_response_upload_document(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         )
 
@@ -2109,7 +2109,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_streaming_response_upload_document(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.upload_document(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="drivers_license",
         ) as response:
             assert not response.is_closed
@@ -2124,6 +2124,6 @@ class TestAsyncAccountHolders:
     async def test_path_params_upload_document(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.upload_document(
-                "",
+                account_holder_token="",
                 document_type="drivers_license",
             )

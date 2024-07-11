@@ -33,7 +33,7 @@ class TestSubscriptions:
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.create(
             url="https://example.com",
-            description="string",
+            description="description",
             disabled=True,
             event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
@@ -66,14 +66,14 @@ class TestSubscriptions:
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.retrieve(
-            "string",
+            "event_subscription_token",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.retrieve(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -84,7 +84,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.retrieve(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -106,7 +106,7 @@ class TestSubscriptions:
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
@@ -114,9 +114,9 @@ class TestSubscriptions:
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
-            description="string",
+            description="description",
             disabled=True,
             event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
@@ -125,7 +125,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_update(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
         )
 
@@ -137,7 +137,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_update(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
         ) as response:
             assert not response.is_closed
@@ -154,7 +154,7 @@ class TestSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             client.events.subscriptions.with_raw_response.update(
-                "",
+                event_subscription_token="",
                 url="https://example.com",
             )
 
@@ -166,9 +166,9 @@ class TestSubscriptions:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.list(
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(SyncCursorPage[EventSubscription], subscription, path=["response"])
 
@@ -196,7 +196,7 @@ class TestSubscriptions:
     @parametrize
     def test_method_delete(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.delete(
-            "string",
+            "event_subscription_token",
         )
         assert subscription is None
 
@@ -204,7 +204,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_delete(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.delete(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -216,7 +216,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_delete(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.delete(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -239,19 +239,19 @@ class TestSubscriptions:
     @parametrize
     def test_method_list_attempts(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert_matches_type(SyncCursorPage[MessageAttempt], subscription, path=["response"])
 
     @parametrize
     def test_method_list_attempts_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             status="FAILED",
         )
         assert_matches_type(SyncCursorPage[MessageAttempt], subscription, path=["response"])
@@ -259,7 +259,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_list_attempts(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -270,7 +270,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_list_attempts(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -286,14 +286,14 @@ class TestSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             client.events.subscriptions.with_raw_response.list_attempts(
-                "",
+                event_subscription_token="",
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_recover(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert subscription is None
 
@@ -301,7 +301,7 @@ class TestSubscriptions:
     @parametrize
     def test_method_recover_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
@@ -311,7 +311,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_recover(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -323,7 +323,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_recover(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -340,14 +340,14 @@ class TestSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             client.events.subscriptions.with_raw_response.recover(
-                "",
+                event_subscription_token="",
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     def test_method_replay_missing(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert subscription is None
 
@@ -355,7 +355,7 @@ class TestSubscriptions:
     @parametrize
     def test_method_replay_missing_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
@@ -365,7 +365,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_replay_missing(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -377,7 +377,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_replay_missing(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -394,20 +394,20 @@ class TestSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             client.events.subscriptions.with_raw_response.replay_missing(
-                "",
+                event_subscription_token="",
             )
 
     @parametrize
     def test_method_retrieve_secret(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.retrieve_secret(
-            "string",
+            "event_subscription_token",
         )
         assert_matches_type(SubscriptionRetrieveSecretResponse, subscription, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve_secret(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.retrieve_secret(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -418,7 +418,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_retrieve_secret(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.retrieve_secret(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -441,7 +441,7 @@ class TestSubscriptions:
     @parametrize
     def test_method_rotate_secret(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.rotate_secret(
-            "string",
+            "event_subscription_token",
         )
         assert subscription is None
 
@@ -449,7 +449,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_rotate_secret(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.rotate_secret(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -461,7 +461,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_rotate_secret(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.rotate_secret(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -484,14 +484,14 @@ class TestSubscriptions:
     @parametrize
     def test_method_send_simulated_example(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert subscription is None
 
     @parametrize
     def test_method_send_simulated_example_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
             event_type="account_holder.created",
         )
         assert subscription is None
@@ -499,7 +499,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_send_simulated_example(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -510,7 +510,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_send_simulated_example(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -526,7 +526,7 @@ class TestSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             client.events.subscriptions.with_raw_response.send_simulated_example(
-                "",
+                event_subscription_token="",
             )
 
 
@@ -544,7 +544,7 @@ class TestAsyncSubscriptions:
     async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.create(
             url="https://example.com",
-            description="string",
+            description="description",
             disabled=True,
             event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
@@ -577,14 +577,14 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.retrieve(
-            "string",
+            "event_subscription_token",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.retrieve(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -595,7 +595,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.retrieve(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -617,7 +617,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_update(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
@@ -625,9 +625,9 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
-            description="string",
+            description="description",
             disabled=True,
             event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
         )
@@ -636,7 +636,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
         )
 
@@ -648,7 +648,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.update(
-            "string",
+            event_subscription_token="event_subscription_token",
             url="https://example.com",
         ) as response:
             assert not response.is_closed
@@ -665,7 +665,7 @@ class TestAsyncSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             await async_client.events.subscriptions.with_raw_response.update(
-                "",
+                event_subscription_token="",
                 url="https://example.com",
             )
 
@@ -677,9 +677,9 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.list(
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(AsyncCursorPage[EventSubscription], subscription, path=["response"])
 
@@ -707,7 +707,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_delete(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.delete(
-            "string",
+            "event_subscription_token",
         )
         assert subscription is None
 
@@ -715,7 +715,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.delete(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -727,7 +727,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.delete(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -750,19 +750,19 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_list_attempts(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert_matches_type(AsyncCursorPage[MessageAttempt], subscription, path=["response"])
 
     @parametrize
     async def test_method_list_attempts_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             status="FAILED",
         )
         assert_matches_type(AsyncCursorPage[MessageAttempt], subscription, path=["response"])
@@ -770,7 +770,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_list_attempts(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -781,7 +781,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_list_attempts(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.list_attempts(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -797,14 +797,14 @@ class TestAsyncSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             await async_client.events.subscriptions.with_raw_response.list_attempts(
-                "",
+                event_subscription_token="",
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_recover(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert subscription is None
 
@@ -812,7 +812,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_recover_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
@@ -822,7 +822,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_recover(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -834,7 +834,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_recover(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.recover(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -851,14 +851,14 @@ class TestAsyncSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             await async_client.events.subscriptions.with_raw_response.recover(
-                "",
+                event_subscription_token="",
             )
 
     @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
     @parametrize
     async def test_method_replay_missing(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert subscription is None
 
@@ -866,7 +866,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_replay_missing_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
@@ -876,7 +876,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_replay_missing(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -888,7 +888,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_replay_missing(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.replay_missing(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -905,20 +905,20 @@ class TestAsyncSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             await async_client.events.subscriptions.with_raw_response.replay_missing(
-                "",
+                event_subscription_token="",
             )
 
     @parametrize
     async def test_method_retrieve_secret(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.retrieve_secret(
-            "string",
+            "event_subscription_token",
         )
         assert_matches_type(SubscriptionRetrieveSecretResponse, subscription, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve_secret(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.retrieve_secret(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -929,7 +929,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_retrieve_secret(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.retrieve_secret(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -952,7 +952,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_rotate_secret(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.rotate_secret(
-            "string",
+            "event_subscription_token",
         )
         assert subscription is None
 
@@ -960,7 +960,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_rotate_secret(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.rotate_secret(
-            "string",
+            "event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -972,7 +972,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_rotate_secret(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.rotate_secret(
-            "string",
+            "event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -995,14 +995,14 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_send_simulated_example(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
         assert subscription is None
 
     @parametrize
     async def test_method_send_simulated_example_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
             event_type="account_holder.created",
         )
         assert subscription is None
@@ -1010,7 +1010,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_send_simulated_example(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
         )
 
         assert response.is_closed is True
@@ -1021,7 +1021,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_send_simulated_example(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.send_simulated_example(
-            "string",
+            event_subscription_token="event_subscription_token",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1037,5 +1037,5 @@ class TestAsyncSubscriptions:
             ValueError, match=r"Expected a non-empty value for `event_subscription_token` but received ''"
         ):
             await async_client.events.subscriptions.with_raw_response.send_simulated_example(
-                "",
+                event_subscription_token="",
             )
