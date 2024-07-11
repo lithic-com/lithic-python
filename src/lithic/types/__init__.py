@@ -140,6 +140,12 @@ from .transaction_simulate_authorization_params import (
 from .external_bank_account_retry_prenote_params import (
     ExternalBankAccountRetryPrenoteParams as ExternalBankAccountRetryPrenoteParams,
 )
+from .tokenization_resend_activation_code_params import (
+    TokenizationResendActivationCodeParams as TokenizationResendActivationCodeParams,
+)
+from .tokenization_update_digital_card_art_params import (
+    TokenizationUpdateDigitalCardArtParams as TokenizationUpdateDigitalCardArtParams,
+)
 from .transaction_simulate_authorization_response import (
     TransactionSimulateAuthorizationResponse as TransactionSimulateAuthorizationResponse,
 )
@@ -148,6 +154,9 @@ from .transaction_simulate_return_reversal_params import (
 )
 from .external_bank_account_retry_prenote_response import (
     ExternalBankAccountRetryPrenoteResponse as ExternalBankAccountRetryPrenoteResponse,
+)
+from .tokenization_update_digital_card_art_response import (
+    TokenizationUpdateDigitalCardArtResponse as TokenizationUpdateDigitalCardArtResponse,
 )
 from .transaction_simulate_return_reversal_response import (
     TransactionSimulateReturnReversalResponse as TransactionSimulateReturnReversalResponse,

@@ -32,6 +32,9 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     currency: Required[str]
     """currency of the external account 3-digit alphabetic ISO 4217 code"""
 
+    financial_account_token: Required[str]
+    """The financial account token of the operating account to fund the micro deposits"""
+
     owner: Required[str]
     """Legal Name of the business or individual who owns the external account.
 
@@ -68,9 +71,6 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
 
     doing_business_as: str
     """Doing Business As"""
-
-    financial_account_token: str
-    """The financial account token of the operating account to fund the micro deposits"""
 
     name: str
     """The nickname for this External Bank Account"""
