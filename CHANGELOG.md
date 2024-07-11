@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.49.0 (2024-07-11)
+
+Full Changelog: [v0.48.6...v0.49.0](https://github.com/lithic-com/lithic-python/compare/v0.48.6...v0.49.0)
+
+### Features
+
+* **api:** param 'financial_account_token' for 'external_bank_accounts.create()' is now required ([#491](https://github.com/lithic-com/lithic-python/issues/491)) ([1b8968d](https://github.com/lithic-com/lithic-python/commit/1b8968d86dd8d9d1f17a624f7e43669c6874a760))
+
 ## 0.48.6 (2024-07-11)
 
 Full Changelog: [v0.48.5...v0.48.6](https://github.com/lithic-com/lithic-python/compare/v0.48.5...v0.48.6)
