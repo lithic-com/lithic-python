@@ -14,10 +14,7 @@ from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
-from ..._base_client import (
-    AsyncPaginator,
-    make_request_options,
-)
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.financial_accounts import balance_list_params
 from ...types.financial_accounts.balance_list_response import BalanceListResponse
 
