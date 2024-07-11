@@ -25,10 +25,7 @@ from .subscriptions import (
     SubscriptionsWithStreamingResponse,
     AsyncSubscriptionsWithStreamingResponse,
 )
-from ..._base_client import (
-    AsyncPaginator,
-    make_request_options,
-)
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.message_attempt import MessageAttempt
 
 __all__ = ["Events", "AsyncEvents"]

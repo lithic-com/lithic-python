@@ -53,11 +53,7 @@ from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ...types.card import Card
-from ..._base_client import (
-    AsyncPaginator,
-    _merge_mappings,
-    make_request_options,
-)
+from ..._base_client import AsyncPaginator, _merge_mappings, make_request_options
 from .aggregate_balances import (
     AggregateBalances,
     AsyncAggregateBalances,

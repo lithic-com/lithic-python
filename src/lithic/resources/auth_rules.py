@@ -23,10 +23,7 @@ from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import (
-    AsyncPaginator,
-    make_request_options,
-)
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.auth_rule import AuthRule
 from ..types.auth_rule_remove_response import AuthRuleRemoveResponse
 from ..types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
