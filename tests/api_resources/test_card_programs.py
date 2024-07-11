@@ -64,9 +64,9 @@ class TestCardPrograms:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         card_program = client.card_programs.list(
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(SyncCursorPage[CardProgram], card_program, path=["response"])
 
@@ -140,9 +140,9 @@ class TestAsyncCardPrograms:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         card_program = await async_client.card_programs.list(
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(AsyncCursorPage[CardProgram], card_program, path=["response"])
 

@@ -73,9 +73,9 @@ class TestTokenizations:
             begin=parse_date("2019-12-27"),
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=parse_date("2019-12-27"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(SyncCursorPage[Tokenization], tokenization, path=["response"])
 
@@ -206,9 +206,9 @@ class TestAsyncTokenizations:
             begin=parse_date("2019-12-27"),
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=parse_date("2019-12-27"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(AsyncCursorPage[Tokenization], tokenization, path=["response"])
 
