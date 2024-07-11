@@ -61,7 +61,7 @@ class TestAccounts:
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
         account = client.accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Account, account, path=["response"])
 
@@ -69,18 +69,18 @@ class TestAccounts:
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         account = client.accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             daily_spend_limit=1000,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
             state="ACTIVE",
             verification_address={
-                "address1": "string",
-                "address2": "string",
-                "city": "string",
-                "country": "string",
-                "postal_code": "string",
-                "state": "string",
+                "address1": "address1",
+                "address2": "address2",
+                "city": "city",
+                "country": "country",
+                "postal_code": "postal_code",
+                "state": "state",
             },
         )
         assert_matches_type(Account, account, path=["response"])
@@ -89,7 +89,7 @@ class TestAccounts:
     @parametrize
     def test_raw_response_update(self, client: Lithic) -> None:
         response = client.accounts.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -101,7 +101,7 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_update(self, client: Lithic) -> None:
         with client.accounts.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -116,7 +116,7 @@ class TestAccounts:
     def test_path_params_update(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
             client.accounts.with_raw_response.update(
-                "",
+                account_token="",
             )
 
     @parametrize
@@ -129,9 +129,9 @@ class TestAccounts:
         account = client.accounts.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(SyncCursorPage[Account], account, path=["response"])
 
@@ -239,7 +239,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_update(self, async_client: AsyncLithic) -> None:
         account = await async_client.accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Account, account, path=["response"])
 
@@ -247,18 +247,18 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         account = await async_client.accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             daily_spend_limit=1000,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
             state="ACTIVE",
             verification_address={
-                "address1": "string",
-                "address2": "string",
-                "city": "string",
-                "country": "string",
-                "postal_code": "string",
-                "state": "string",
+                "address1": "address1",
+                "address2": "address2",
+                "city": "city",
+                "country": "country",
+                "postal_code": "postal_code",
+                "state": "state",
             },
         )
         assert_matches_type(Account, account, path=["response"])
@@ -267,7 +267,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
         response = await async_client.accounts.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -279,7 +279,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
         async with async_client.accounts.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -294,7 +294,7 @@ class TestAsyncAccounts:
     async def test_path_params_update(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
             await async_client.accounts.with_raw_response.update(
-                "",
+                account_token="",
             )
 
     @parametrize
@@ -307,9 +307,9 @@ class TestAsyncAccounts:
         account = await async_client.accounts.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(AsyncCursorPage[Account], account, path=["response"])
 

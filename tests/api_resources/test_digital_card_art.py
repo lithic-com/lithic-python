@@ -66,9 +66,9 @@ class TestDigitalCardArt:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         digital_card_art = client.digital_card_art.list(
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(SyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
 
@@ -144,9 +144,9 @@ class TestAsyncDigitalCardArt:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         digital_card_art = await async_client.digital_card_art.list(
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(AsyncCursorPage[DigitalCardArt], digital_card_art, path=["response"])
 

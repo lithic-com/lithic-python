@@ -286,14 +286,14 @@ class TestExternalBankAccounts:
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             address={
                 "address1": "x",
                 "address2": "x",
@@ -315,7 +315,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_raw_response_update(self, client: Lithic) -> None:
         response = client.external_bank_accounts.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -326,7 +326,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_streaming_response_update(self, client: Lithic) -> None:
         with client.external_bank_accounts.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -342,7 +342,7 @@ class TestExternalBankAccounts:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             client.external_bank_accounts.with_raw_response.update(
-                "",
+                external_bank_account_token="",
             )
 
     @parametrize
@@ -356,10 +356,10 @@ class TestExternalBankAccounts:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_types=["CHECKING", "SAVINGS"],
             countries=["string", "string", "string"],
-            ending_before="string",
+            ending_before="ending_before",
             owner_types=["INDIVIDUAL", "BUSINESS"],
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             states=["ENABLED", "CLOSED", "PAUSED"],
             verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
@@ -390,14 +390,14 @@ class TestExternalBankAccounts:
     @parametrize
     def test_method_retry_micro_deposits(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
 
     @parametrize
     def test_method_retry_micro_deposits_with_all_params(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
@@ -405,7 +405,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_raw_response_retry_micro_deposits(self, client: Lithic) -> None:
         response = client.external_bank_accounts.with_raw_response.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -416,7 +416,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_streaming_response_retry_micro_deposits(self, client: Lithic) -> None:
         with client.external_bank_accounts.with_streaming_response.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -432,20 +432,20 @@ class TestExternalBankAccounts:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             client.external_bank_accounts.with_raw_response.retry_micro_deposits(
-                "",
+                external_bank_account_token="",
             )
 
     @parametrize
     def test_method_retry_prenote(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
 
     @parametrize
     def test_method_retry_prenote_with_all_params(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
@@ -453,7 +453,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_raw_response_retry_prenote(self, client: Lithic) -> None:
         response = client.external_bank_accounts.with_raw_response.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -464,7 +464,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_streaming_response_retry_prenote(self, client: Lithic) -> None:
         with client.external_bank_accounts.with_streaming_response.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -480,7 +480,7 @@ class TestExternalBankAccounts:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             client.external_bank_accounts.with_raw_response.retry_prenote(
-                "",
+                external_bank_account_token="",
             )
 
 
@@ -747,14 +747,14 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_method_update(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             address={
                 "address1": "x",
                 "address2": "x",
@@ -776,7 +776,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
         response = await async_client.external_bank_accounts.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -787,7 +787,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
         async with async_client.external_bank_accounts.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -803,7 +803,7 @@ class TestAsyncExternalBankAccounts:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             await async_client.external_bank_accounts.with_raw_response.update(
-                "",
+                external_bank_account_token="",
             )
 
     @parametrize
@@ -817,10 +817,10 @@ class TestAsyncExternalBankAccounts:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_types=["CHECKING", "SAVINGS"],
             countries=["string", "string", "string"],
-            ending_before="string",
+            ending_before="ending_before",
             owner_types=["INDIVIDUAL", "BUSINESS"],
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             states=["ENABLED", "CLOSED", "PAUSED"],
             verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
         )
@@ -851,14 +851,14 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_method_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
 
     @parametrize
     async def test_method_retry_micro_deposits_with_all_params(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryMicroDepositsResponse, external_bank_account, path=["response"])
@@ -866,7 +866,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_raw_response_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
         response = await async_client.external_bank_accounts.with_raw_response.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -877,7 +877,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_streaming_response_retry_micro_deposits(self, async_client: AsyncLithic) -> None:
         async with async_client.external_bank_accounts.with_streaming_response.retry_micro_deposits(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -893,20 +893,20 @@ class TestAsyncExternalBankAccounts:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             await async_client.external_bank_accounts.with_raw_response.retry_micro_deposits(
-                "",
+                external_bank_account_token="",
             )
 
     @parametrize
     async def test_method_retry_prenote(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
 
     @parametrize
     async def test_method_retry_prenote_with_all_params(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
@@ -914,7 +914,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_raw_response_retry_prenote(self, async_client: AsyncLithic) -> None:
         response = await async_client.external_bank_accounts.with_raw_response.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -925,7 +925,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_streaming_response_retry_prenote(self, async_client: AsyncLithic) -> None:
         async with async_client.external_bank_accounts.with_streaming_response.retry_prenote(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -941,5 +941,5 @@ class TestAsyncExternalBankAccounts:
             ValueError, match=r"Expected a non-empty value for `external_bank_account_token` but received ''"
         ):
             await async_client.external_bank_accounts.with_raw_response.retry_prenote(
-                "",
+                external_bank_account_token="",
             )

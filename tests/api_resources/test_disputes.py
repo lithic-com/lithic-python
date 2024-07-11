@@ -38,7 +38,7 @@ class TestDisputes:
             reason="FRAUD_CARD_PRESENT",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
             customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
-            customer_note="string",
+            customer_note="customer_note",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
 
@@ -111,17 +111,17 @@ class TestDisputes:
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
         dispute = client.disputes.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
             customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            customer_note="string",
+            customer_note="customer_note",
             reason="ATM_CASH_MISDISPENSE",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -129,7 +129,7 @@ class TestDisputes:
     @parametrize
     def test_raw_response_update(self, client: Lithic) -> None:
         response = client.disputes.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -140,7 +140,7 @@ class TestDisputes:
     @parametrize
     def test_streaming_response_update(self, client: Lithic) -> None:
         with client.disputes.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -154,7 +154,7 @@ class TestDisputes:
     def test_path_params_update(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             client.disputes.with_raw_response.update(
-                "",
+                dispute_token="",
             )
 
     @parametrize
@@ -167,9 +167,9 @@ class TestDisputes:
         dispute = client.disputes.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             status="ARBITRATION",
             transaction_tokens=[
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -240,7 +240,7 @@ class TestDisputes:
     @parametrize
     def test_method_delete_evidence(self, client: Lithic) -> None:
         dispute = client.disputes.delete_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
@@ -248,7 +248,7 @@ class TestDisputes:
     @parametrize
     def test_raw_response_delete_evidence(self, client: Lithic) -> None:
         response = client.disputes.with_raw_response.delete_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -260,7 +260,7 @@ class TestDisputes:
     @parametrize
     def test_streaming_response_delete_evidence(self, client: Lithic) -> None:
         with client.disputes.with_streaming_response.delete_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -275,35 +275,35 @@ class TestDisputes:
     def test_path_params_delete_evidence(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             client.disputes.with_raw_response.delete_evidence(
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 dispute_token="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
             client.disputes.with_raw_response.delete_evidence(
-                "",
+                evidence_token="",
                 dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @parametrize
     def test_method_initiate_evidence_upload(self, client: Lithic) -> None:
         dispute = client.disputes.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
     def test_method_initiate_evidence_upload_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            filename="string",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            filename="filename",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
     def test_raw_response_initiate_evidence_upload(self, client: Lithic) -> None:
         response = client.disputes.with_raw_response.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -314,7 +314,7 @@ class TestDisputes:
     @parametrize
     def test_streaming_response_initiate_evidence_upload(self, client: Lithic) -> None:
         with client.disputes.with_streaming_response.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -328,32 +328,32 @@ class TestDisputes:
     def test_path_params_initiate_evidence_upload(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             client.disputes.with_raw_response.initiate_evidence_upload(
-                "",
+                dispute_token="",
             )
 
     @parametrize
     def test_method_list_evidences(self, client: Lithic) -> None:
         dispute = client.disputes.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(SyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
     @parametrize
     def test_method_list_evidences_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(SyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
     @parametrize
     def test_raw_response_list_evidences(self, client: Lithic) -> None:
         response = client.disputes.with_raw_response.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -364,7 +364,7 @@ class TestDisputes:
     @parametrize
     def test_streaming_response_list_evidences(self, client: Lithic) -> None:
         with client.disputes.with_streaming_response.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -378,13 +378,13 @@ class TestDisputes:
     def test_path_params_list_evidences(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             client.disputes.with_raw_response.list_evidences(
-                "",
+                dispute_token="",
             )
 
     @parametrize
     def test_method_retrieve_evidence(self, client: Lithic) -> None:
         dispute = client.disputes.retrieve_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
@@ -392,7 +392,7 @@ class TestDisputes:
     @parametrize
     def test_raw_response_retrieve_evidence(self, client: Lithic) -> None:
         response = client.disputes.with_raw_response.retrieve_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -404,7 +404,7 @@ class TestDisputes:
     @parametrize
     def test_streaming_response_retrieve_evidence(self, client: Lithic) -> None:
         with client.disputes.with_streaming_response.retrieve_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -419,13 +419,13 @@ class TestDisputes:
     def test_path_params_retrieve_evidence(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             client.disputes.with_raw_response.retrieve_evidence(
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 dispute_token="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
             client.disputes.with_raw_response.retrieve_evidence(
-                "",
+                evidence_token="",
                 dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
@@ -449,7 +449,7 @@ class TestAsyncDisputes:
             reason="FRAUD_CARD_PRESENT",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
             customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
-            customer_note="string",
+            customer_note="customer_note",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
 
@@ -522,17 +522,17 @@ class TestAsyncDisputes:
     @parametrize
     async def test_method_update(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
             customer_filed_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            customer_note="string",
+            customer_note="customer_note",
             reason="ATM_CASH_MISDISPENSE",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -540,7 +540,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
         response = await async_client.disputes.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -551,7 +551,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
         async with async_client.disputes.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -565,7 +565,7 @@ class TestAsyncDisputes:
     async def test_path_params_update(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             await async_client.disputes.with_raw_response.update(
-                "",
+                dispute_token="",
             )
 
     @parametrize
@@ -578,9 +578,9 @@ class TestAsyncDisputes:
         dispute = await async_client.disputes.list(
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             status="ARBITRATION",
             transaction_tokens=[
                 "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -651,7 +651,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_method_delete_evidence(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.delete_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
@@ -659,7 +659,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_raw_response_delete_evidence(self, async_client: AsyncLithic) -> None:
         response = await async_client.disputes.with_raw_response.delete_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -671,7 +671,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_streaming_response_delete_evidence(self, async_client: AsyncLithic) -> None:
         async with async_client.disputes.with_streaming_response.delete_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -686,35 +686,35 @@ class TestAsyncDisputes:
     async def test_path_params_delete_evidence(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             await async_client.disputes.with_raw_response.delete_evidence(
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 dispute_token="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
             await async_client.disputes.with_raw_response.delete_evidence(
-                "",
+                evidence_token="",
                 dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @parametrize
     async def test_method_initiate_evidence_upload(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
     async def test_method_initiate_evidence_upload_with_all_params(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            filename="string",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            filename="filename",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
 
     @parametrize
     async def test_raw_response_initiate_evidence_upload(self, async_client: AsyncLithic) -> None:
         response = await async_client.disputes.with_raw_response.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -725,7 +725,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_streaming_response_initiate_evidence_upload(self, async_client: AsyncLithic) -> None:
         async with async_client.disputes.with_streaming_response.initiate_evidence_upload(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -739,32 +739,32 @@ class TestAsyncDisputes:
     async def test_path_params_initiate_evidence_upload(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             await async_client.disputes.with_raw_response.initiate_evidence_upload(
-                "",
+                dispute_token="",
             )
 
     @parametrize
     async def test_method_list_evidences(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AsyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
     @parametrize
     async def test_method_list_evidences_with_all_params(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
         )
         assert_matches_type(AsyncCursorPage[DisputeEvidence], dispute, path=["response"])
 
     @parametrize
     async def test_raw_response_list_evidences(self, async_client: AsyncLithic) -> None:
         response = await async_client.disputes.with_raw_response.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -775,7 +775,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_streaming_response_list_evidences(self, async_client: AsyncLithic) -> None:
         async with async_client.disputes.with_streaming_response.list_evidences(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -789,13 +789,13 @@ class TestAsyncDisputes:
     async def test_path_params_list_evidences(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             await async_client.disputes.with_raw_response.list_evidences(
-                "",
+                dispute_token="",
             )
 
     @parametrize
     async def test_method_retrieve_evidence(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.retrieve_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(DisputeEvidence, dispute, path=["response"])
@@ -803,7 +803,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_raw_response_retrieve_evidence(self, async_client: AsyncLithic) -> None:
         response = await async_client.disputes.with_raw_response.retrieve_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -815,7 +815,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_streaming_response_retrieve_evidence(self, async_client: AsyncLithic) -> None:
         async with async_client.disputes.with_streaming_response.retrieve_evidence(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -830,12 +830,12 @@ class TestAsyncDisputes:
     async def test_path_params_retrieve_evidence(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_token` but received ''"):
             await async_client.disputes.with_raw_response.retrieve_evidence(
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                evidence_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 dispute_token="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `evidence_token` but received ''"):
             await async_client.disputes.with_raw_response.retrieve_evidence(
-                "",
+                evidence_token="",
                 dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )

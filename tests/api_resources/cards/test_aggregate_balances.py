@@ -26,8 +26,8 @@ class TestAggregateBalances:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         aggregate_balance = client.cards.aggregate_balances.list(
-            account_token="string",
-            business_account_token="string",
+            account_token="account_token",
+            business_account_token="business_account_token",
         )
         assert_matches_type(SyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
 
@@ -63,8 +63,8 @@ class TestAsyncAggregateBalances:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         aggregate_balance = await async_client.cards.aggregate_balances.list(
-            account_token="string",
-            business_account_token="string",
+            account_token="account_token",
+            business_account_token="business_account_token",
         )
         assert_matches_type(AsyncSinglePage[AggregateBalanceListResponse], aggregate_balance, path=["response"])
 

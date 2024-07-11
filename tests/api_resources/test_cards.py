@@ -36,12 +36,12 @@ class TestCards:
             type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            carrier={"qr_code_url": "string"},
+            carrier={"qr_code_url": "qr_code_url"},
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             exp_month="06",
             exp_year="2027",
             memo="New Card",
-            pin="string",
+            pin="pin",
             product_id="1",
             replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
@@ -129,18 +129,18 @@ class TestCards:
     @parametrize
     def test_method_update(self, client: Lithic) -> None:
         card = client.cards.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         card = client.cards.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            auth_rule_token="string",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auth_rule_token="auth_rule_token",
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="Updated Name",
-            pin="string",
+            pin="pin",
             spend_limit=100,
             spend_limit_duration="FOREVER",
             state="OPEN",
@@ -150,7 +150,7 @@ class TestCards:
     @parametrize
     def test_raw_response_update(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -161,7 +161,7 @@ class TestCards:
     @parametrize
     def test_streaming_response_update(self, client: Lithic) -> None:
         with client.cards.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -175,7 +175,7 @@ class TestCards:
     def test_path_params_update(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             client.cards.with_raw_response.update(
-                "",
+                card_token="",
             )
 
     @parametrize
@@ -189,9 +189,9 @@ class TestCards:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             state="CLOSED",
         )
         assert_matches_type(SyncCursorPage[Card], card, path=["response"])
@@ -219,16 +219,16 @@ class TestCards:
     @parametrize
     def test_method_embed(self, client: Lithic) -> None:
         card = client.cards.embed(
-            embed_request="string",
-            hmac="string",
+            embed_request="embed_request",
+            hmac="hmac",
         )
         assert_matches_type(str, card, path=["response"])
 
     @parametrize
     def test_raw_response_embed(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.embed(
-            embed_request="string",
-            hmac="string",
+            embed_request="embed_request",
+            hmac="hmac",
         )
 
         assert response.is_closed is True
@@ -239,8 +239,8 @@ class TestCards:
     @parametrize
     def test_streaming_response_embed(self, client: Lithic) -> None:
         with client.cards.with_streaming_response.embed(
-            embed_request="string",
-            hmac="string",
+            embed_request="embed_request",
+            hmac="hmac",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -253,17 +253,17 @@ class TestCards:
     @parametrize
     def test_method_provision(self, client: Lithic) -> None:
         card = client.cards.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
     @parametrize
     def test_method_provision_with_all_params(self, client: Lithic) -> None:
         card = client.cards.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             certificate="U3RhaW5sZXNzIHJvY2tz",
-            client_device_id="string",
-            client_wallet_account_id="string",
+            client_device_id="client_device_id",
+            client_wallet_account_id="client_wallet_account_id",
             digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
@@ -273,7 +273,7 @@ class TestCards:
     @parametrize
     def test_raw_response_provision(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -284,7 +284,7 @@ class TestCards:
     @parametrize
     def test_streaming_response_provision(self, client: Lithic) -> None:
         with client.cards.with_streaming_response.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -298,20 +298,20 @@ class TestCards:
     def test_path_params_provision(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             client.cards.with_raw_response.provision(
-                "",
+                card_token="",
             )
 
     @parametrize
     def test_method_reissue(self, client: Lithic) -> None:
         card = client.cards.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     def test_method_reissue_with_all_params(self, client: Lithic) -> None:
         card = client.cards.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
             shipping_address={
@@ -334,7 +334,7 @@ class TestCards:
     @parametrize
     def test_raw_response_reissue(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -345,7 +345,7 @@ class TestCards:
     @parametrize
     def test_streaming_response_reissue(self, client: Lithic) -> None:
         with client.cards.with_streaming_response.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -359,13 +359,13 @@ class TestCards:
     def test_path_params_reissue(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             client.cards.with_raw_response.reissue(
-                "",
+                card_token="",
             )
 
     @parametrize
     def test_method_renew(self, client: Lithic) -> None:
         card = client.cards.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -381,7 +381,7 @@ class TestCards:
     @parametrize
     def test_method_renew_with_all_params(self, client: Lithic) -> None:
         card = client.cards.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "address2": "Unit 5A",
@@ -406,7 +406,7 @@ class TestCards:
     @parametrize
     def test_raw_response_renew(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -426,7 +426,7 @@ class TestCards:
     @parametrize
     def test_streaming_response_renew(self, client: Lithic) -> None:
         with client.cards.with_streaming_response.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -449,7 +449,7 @@ class TestCards:
     def test_path_params_renew(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             client.cards.with_raw_response.renew(
-                "",
+                card_token="",
                 shipping_address={
                     "address1": "5 Broad Street",
                     "city": "NEW YORK",
@@ -547,12 +547,12 @@ class TestAsyncCards:
             type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            carrier={"qr_code_url": "string"},
+            carrier={"qr_code_url": "qr_code_url"},
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             exp_month="06",
             exp_year="2027",
             memo="New Card",
-            pin="string",
+            pin="pin",
             product_id="1",
             replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
@@ -640,18 +640,18 @@ class TestAsyncCards:
     @parametrize
     async def test_method_update(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            auth_rule_token="string",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auth_rule_token="auth_rule_token",
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="Updated Name",
-            pin="string",
+            pin="pin",
             spend_limit=100,
             spend_limit_duration="FOREVER",
             state="OPEN",
@@ -661,7 +661,7 @@ class TestAsyncCards:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
         response = await async_client.cards.with_raw_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -672,7 +672,7 @@ class TestAsyncCards:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
         async with async_client.cards.with_streaming_response.update(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -686,7 +686,7 @@ class TestAsyncCards:
     async def test_path_params_update(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             await async_client.cards.with_raw_response.update(
-                "",
+                card_token="",
             )
 
     @parametrize
@@ -700,9 +700,9 @@ class TestAsyncCards:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
-            ending_before="string",
+            ending_before="ending_before",
             page_size=1,
-            starting_after="string",
+            starting_after="starting_after",
             state="CLOSED",
         )
         assert_matches_type(AsyncCursorPage[Card], card, path=["response"])
@@ -730,16 +730,16 @@ class TestAsyncCards:
     @parametrize
     async def test_method_embed(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.embed(
-            embed_request="string",
-            hmac="string",
+            embed_request="embed_request",
+            hmac="hmac",
         )
         assert_matches_type(str, card, path=["response"])
 
     @parametrize
     async def test_raw_response_embed(self, async_client: AsyncLithic) -> None:
         response = await async_client.cards.with_raw_response.embed(
-            embed_request="string",
-            hmac="string",
+            embed_request="embed_request",
+            hmac="hmac",
         )
 
         assert response.is_closed is True
@@ -750,8 +750,8 @@ class TestAsyncCards:
     @parametrize
     async def test_streaming_response_embed(self, async_client: AsyncLithic) -> None:
         async with async_client.cards.with_streaming_response.embed(
-            embed_request="string",
-            hmac="string",
+            embed_request="embed_request",
+            hmac="hmac",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -764,17 +764,17 @@ class TestAsyncCards:
     @parametrize
     async def test_method_provision(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardProvisionResponse, card, path=["response"])
 
     @parametrize
     async def test_method_provision_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             certificate="U3RhaW5sZXNzIHJvY2tz",
-            client_device_id="string",
-            client_wallet_account_id="string",
+            client_device_id="client_device_id",
+            client_wallet_account_id="client_wallet_account_id",
             digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
@@ -784,7 +784,7 @@ class TestAsyncCards:
     @parametrize
     async def test_raw_response_provision(self, async_client: AsyncLithic) -> None:
         response = await async_client.cards.with_raw_response.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -795,7 +795,7 @@ class TestAsyncCards:
     @parametrize
     async def test_streaming_response_provision(self, async_client: AsyncLithic) -> None:
         async with async_client.cards.with_streaming_response.provision(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -809,20 +809,20 @@ class TestAsyncCards:
     async def test_path_params_provision(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             await async_client.cards.with_raw_response.provision(
-                "",
+                card_token="",
             )
 
     @parametrize
     async def test_method_reissue(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     async def test_method_reissue_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
             shipping_address={
@@ -845,7 +845,7 @@ class TestAsyncCards:
     @parametrize
     async def test_raw_response_reissue(self, async_client: AsyncLithic) -> None:
         response = await async_client.cards.with_raw_response.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -856,7 +856,7 @@ class TestAsyncCards:
     @parametrize
     async def test_streaming_response_reissue(self, async_client: AsyncLithic) -> None:
         async with async_client.cards.with_streaming_response.reissue(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -870,13 +870,13 @@ class TestAsyncCards:
     async def test_path_params_reissue(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             await async_client.cards.with_raw_response.reissue(
-                "",
+                card_token="",
             )
 
     @parametrize
     async def test_method_renew(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -892,7 +892,7 @@ class TestAsyncCards:
     @parametrize
     async def test_method_renew_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "address2": "Unit 5A",
@@ -917,7 +917,7 @@ class TestAsyncCards:
     @parametrize
     async def test_raw_response_renew(self, async_client: AsyncLithic) -> None:
         response = await async_client.cards.with_raw_response.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -937,7 +937,7 @@ class TestAsyncCards:
     @parametrize
     async def test_streaming_response_renew(self, async_client: AsyncLithic) -> None:
         async with async_client.cards.with_streaming_response.renew(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -960,7 +960,7 @@ class TestAsyncCards:
     async def test_path_params_renew(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             await async_client.cards.with_raw_response.renew(
-                "",
+                card_token="",
                 shipping_address={
                     "address1": "5 Broad Street",
                     "city": "NEW YORK",
