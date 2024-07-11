@@ -107,14 +107,25 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Tokenization, TokenizationRetrieveResponse, TokenizationSimulateResponse
+from lithic.types import (
+    Tokenization,
+    TokenizationRetrieveResponse,
+    TokenizationSimulateResponse,
+    TokenizationUpdateDigitalCardArtResponse,
+)
 ```
 
 Methods:
 
 - <code title="get /tokenizations/{tokenization_token}">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">retrieve</a>(tokenization_token) -> <a href="./src/lithic/types/tokenization_retrieve_response.py">TokenizationRetrieveResponse</a></code>
 - <code title="get /tokenizations">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">list</a>(\*\*<a href="src/lithic/types/tokenization_list_params.py">params</a>) -> <a href="./src/lithic/types/tokenization.py">SyncCursorPage[Tokenization]</a></code>
+- <code title="post /tokenizations/{tokenization_token}/activate">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">activate</a>(tokenization_token) -> None</code>
+- <code title="post /tokenizations/{tokenization_token}/deactivate">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">deactivate</a>(tokenization_token) -> None</code>
+- <code title="post /tokenizations/{tokenization_token}/pause">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">pause</a>(tokenization_token) -> None</code>
+- <code title="post /tokenizations/{tokenization_token}/resend_activation_code">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">resend_activation_code</a>(tokenization_token, \*\*<a href="src/lithic/types/tokenization_resend_activation_code_params.py">params</a>) -> None</code>
 - <code title="post /simulate/tokenizations">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">simulate</a>(\*\*<a href="src/lithic/types/tokenization_simulate_params.py">params</a>) -> <a href="./src/lithic/types/tokenization_simulate_response.py">TokenizationSimulateResponse</a></code>
+- <code title="post /tokenizations/{tokenization_token}/unpause">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">unpause</a>(tokenization_token) -> None</code>
+- <code title="post /tokenizations/{tokenization_token}/update_digital_card_art">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">update_digital_card_art</a>(tokenization_token, \*\*<a href="src/lithic/types/tokenization_update_digital_card_art_params.py">params</a>) -> <a href="./src/lithic/types/tokenization_update_digital_card_art_response.py">TokenizationUpdateDigitalCardArtResponse</a></code>
 
 # Cards
 
