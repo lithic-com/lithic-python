@@ -9,8 +9,13 @@ from typing_extensions import Literal
 import httpx
 
 from .. import _legacy_response
-from ..types import tokenization_list_params, tokenization_simulate_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..types import (
+    tokenization_list_params,
+    tokenization_simulate_params,
+    tokenization_resend_activation_code_params,
+    tokenization_update_digital_card_art_params,
+)
+from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import (
     maybe_transform,
     async_maybe_transform,
@@ -23,6 +28,7 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.tokenization import Tokenization
 from ..types.tokenization_retrieve_response import TokenizationRetrieveResponse
 from ..types.tokenization_simulate_response import TokenizationSimulateResponse
+from ..types.tokenization_update_digital_card_art_response import TokenizationUpdateDigitalCardArtResponse
 
 __all__ = ["Tokenizations", "AsyncTokenizations"]
 
@@ -138,6 +144,179 @@ class Tokenizations(SyncAPIResource):
             model=Tokenization,
         )
 
+    def activate(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to activate a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network activates the tokenization, the state will
+        be updated and a tokenization.updated event will be sent. The endpoint may only
+        be used on digital wallet tokenizations with status `INACTIVE`,
+        `PENDING_ACTIVATION`, or `PENDING_2FA`. This will put the tokenization in an
+        active state, and transactions will be allowed. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            f"/tokenizations/{tokenization_token}/activate",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def deactivate(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to deactivate a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network deactivates the tokenization, the state will
+        be updated and a tokenization.updated event will be sent. Transactions attemped
+        with a deactivated tokenization will be declined. If the target is a digital
+        wallet tokenization, it will be removed from its device. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            f"/tokenizations/{tokenization_token}/deactivate",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def pause(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to pause a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network pauses the tokenization, the state will be
+        updated and a tokenization.updated event will be sent. The endpoint may only be
+        used on tokenizations with status `ACTIVE`. Transactions attemped with a paused
+        tokenization will be declined. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            f"/tokenizations/{tokenization_token}/pause",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def resend_activation_code(
+        self,
+        tokenization_token: str,
+        *,
+        activation_method_type: Literal["EMAIL_TO_CARDHOLDER_ADDRESS", "TEXT_TO_CARDHOLDER_NUMBER"]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        This endpoint is used to ask the card network to send another activation code to
+        a cardholder that has already tried tokenizing a card. A successful response
+        indicates that the request was successfully delivered to the card network. The
+        endpoint may only be used on Mastercard digital wallet tokenizations with status
+        `INACTIVE`, `PENDING_ACTIVATION`, or `PENDING_2FA`. The network will send a new
+        activation code to the one of the contact methods provided in the initial
+        tokenization flow. If a user fails to enter the code correctly 3 times, the
+        contact method will not be eligible for resending the activation code, and the
+        cardholder must restart the provision process. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          activation_method_type: The communication method that the user has selected to use to receive the
+              authentication code. Supported Values: Sms = "TEXT_TO_CARDHOLDER_NUMBER". Email
+              = "EMAIL_TO_CARDHOLDER_ADDRESS"
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            f"/tokenizations/{tokenization_token}/resend_activation_code",
+            body=maybe_transform(
+                {"activation_method_type": activation_method_type},
+                tokenization_resend_activation_code_params.TokenizationResendActivationCodeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def simulate(
         self,
         *,
@@ -203,6 +382,96 @@ class Tokenizations(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TokenizationSimulateResponse,
+        )
+
+    def unpause(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to unpause a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network unpauses the tokenization, the state will be
+        updated and a tokenization.updated event will be sent. The endpoint may only be
+        used on tokenizations with status `PAUSED`. This will put the tokenization in an
+        active state, and transactions may resume. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            f"/tokenizations/{tokenization_token}/unpause",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def update_digital_card_art(
+        self,
+        tokenization_token: str,
+        *,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> TokenizationUpdateDigitalCardArtResponse:
+        """
+        This endpoint is used update the digital card art for a digital wallet
+        tokenization. A successful response indicates that the card network has updated
+        the tokenization's art, and the tokenization's `digital_cart_art_token` field
+        was updated. The endpoint may not be used on tokenizations with status
+        `DEACTIVATED`. Note that this updates the art for one specific tokenization, not
+        all tokenizations for a card. New tokenizations for a card will be created with
+        the art referenced in the card object's `digital_card_art_token` field. Reach
+        out at [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet for
+              a tokenization. This artwork must be approved by the network and configured by
+              Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            f"/tokenizations/{tokenization_token}/update_digital_card_art",
+            body=maybe_transform(
+                {"digital_card_art_token": digital_card_art_token},
+                tokenization_update_digital_card_art_params.TokenizationUpdateDigitalCardArtParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationUpdateDigitalCardArtResponse,
         )
 
 
@@ -317,6 +586,179 @@ class AsyncTokenizations(AsyncAPIResource):
             model=Tokenization,
         )
 
+    async def activate(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to activate a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network activates the tokenization, the state will
+        be updated and a tokenization.updated event will be sent. The endpoint may only
+        be used on digital wallet tokenizations with status `INACTIVE`,
+        `PENDING_ACTIVATION`, or `PENDING_2FA`. This will put the tokenization in an
+        active state, and transactions will be allowed. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            f"/tokenizations/{tokenization_token}/activate",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def deactivate(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to deactivate a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network deactivates the tokenization, the state will
+        be updated and a tokenization.updated event will be sent. Transactions attemped
+        with a deactivated tokenization will be declined. If the target is a digital
+        wallet tokenization, it will be removed from its device. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            f"/tokenizations/{tokenization_token}/deactivate",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def pause(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to pause a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network pauses the tokenization, the state will be
+        updated and a tokenization.updated event will be sent. The endpoint may only be
+        used on tokenizations with status `ACTIVE`. Transactions attemped with a paused
+        tokenization will be declined. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            f"/tokenizations/{tokenization_token}/pause",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def resend_activation_code(
+        self,
+        tokenization_token: str,
+        *,
+        activation_method_type: Literal["EMAIL_TO_CARDHOLDER_ADDRESS", "TEXT_TO_CARDHOLDER_NUMBER"]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        This endpoint is used to ask the card network to send another activation code to
+        a cardholder that has already tried tokenizing a card. A successful response
+        indicates that the request was successfully delivered to the card network. The
+        endpoint may only be used on Mastercard digital wallet tokenizations with status
+        `INACTIVE`, `PENDING_ACTIVATION`, or `PENDING_2FA`. The network will send a new
+        activation code to the one of the contact methods provided in the initial
+        tokenization flow. If a user fails to enter the code correctly 3 times, the
+        contact method will not be eligible for resending the activation code, and the
+        cardholder must restart the provision process. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          activation_method_type: The communication method that the user has selected to use to receive the
+              authentication code. Supported Values: Sms = "TEXT_TO_CARDHOLDER_NUMBER". Email
+              = "EMAIL_TO_CARDHOLDER_ADDRESS"
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            f"/tokenizations/{tokenization_token}/resend_activation_code",
+            body=await async_maybe_transform(
+                {"activation_method_type": activation_method_type},
+                tokenization_resend_activation_code_params.TokenizationResendActivationCodeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def simulate(
         self,
         *,
@@ -384,6 +826,96 @@ class AsyncTokenizations(AsyncAPIResource):
             cast_to=TokenizationSimulateResponse,
         )
 
+    async def unpause(
+        self,
+        tokenization_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """This endpoint is used to ask the card network to unpause a tokenization.
+
+        A
+        successful response indicates that the request was successfully delivered to the
+        card network. When the card network unpauses the tokenization, the state will be
+        updated and a tokenization.updated event will be sent. The endpoint may only be
+        used on tokenizations with status `PAUSED`. This will put the tokenization in an
+        active state, and transactions may resume. Reach out at
+        [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            f"/tokenizations/{tokenization_token}/unpause",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def update_digital_card_art(
+        self,
+        tokenization_token: str,
+        *,
+        digital_card_art_token: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> TokenizationUpdateDigitalCardArtResponse:
+        """
+        This endpoint is used update the digital card art for a digital wallet
+        tokenization. A successful response indicates that the card network has updated
+        the tokenization's art, and the tokenization's `digital_cart_art_token` field
+        was updated. The endpoint may not be used on tokenizations with status
+        `DEACTIVATED`. Note that this updates the art for one specific tokenization, not
+        all tokenizations for a card. New tokenizations for a card will be created with
+        the art referenced in the card object's `digital_card_art_token` field. Reach
+        out at [lithic.com/contact](https://lithic.com/contact) for more information.
+
+        Args:
+          digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet for
+              a tokenization. This artwork must be approved by the network and configured by
+              Lithic to use. See
+              [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            f"/tokenizations/{tokenization_token}/update_digital_card_art",
+            body=await async_maybe_transform(
+                {"digital_card_art_token": digital_card_art_token},
+                tokenization_update_digital_card_art_params.TokenizationUpdateDigitalCardArtParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationUpdateDigitalCardArtResponse,
+        )
+
 
 class TokenizationsWithRawResponse:
     def __init__(self, tokenizations: Tokenizations) -> None:
@@ -395,8 +927,26 @@ class TokenizationsWithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             tokenizations.list,
         )
+        self.activate = _legacy_response.to_raw_response_wrapper(
+            tokenizations.activate,
+        )
+        self.deactivate = _legacy_response.to_raw_response_wrapper(
+            tokenizations.deactivate,
+        )
+        self.pause = _legacy_response.to_raw_response_wrapper(
+            tokenizations.pause,
+        )
+        self.resend_activation_code = _legacy_response.to_raw_response_wrapper(
+            tokenizations.resend_activation_code,
+        )
         self.simulate = _legacy_response.to_raw_response_wrapper(
             tokenizations.simulate,
+        )
+        self.unpause = _legacy_response.to_raw_response_wrapper(
+            tokenizations.unpause,
+        )
+        self.update_digital_card_art = _legacy_response.to_raw_response_wrapper(
+            tokenizations.update_digital_card_art,
         )
 
 
@@ -410,8 +960,26 @@ class AsyncTokenizationsWithRawResponse:
         self.list = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.list,
         )
+        self.activate = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.activate,
+        )
+        self.deactivate = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.deactivate,
+        )
+        self.pause = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.pause,
+        )
+        self.resend_activation_code = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.resend_activation_code,
+        )
         self.simulate = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.simulate,
+        )
+        self.unpause = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.unpause,
+        )
+        self.update_digital_card_art = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.update_digital_card_art,
         )
 
 
@@ -425,8 +993,26 @@ class TokenizationsWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             tokenizations.list,
         )
+        self.activate = to_streamed_response_wrapper(
+            tokenizations.activate,
+        )
+        self.deactivate = to_streamed_response_wrapper(
+            tokenizations.deactivate,
+        )
+        self.pause = to_streamed_response_wrapper(
+            tokenizations.pause,
+        )
+        self.resend_activation_code = to_streamed_response_wrapper(
+            tokenizations.resend_activation_code,
+        )
         self.simulate = to_streamed_response_wrapper(
             tokenizations.simulate,
+        )
+        self.unpause = to_streamed_response_wrapper(
+            tokenizations.unpause,
+        )
+        self.update_digital_card_art = to_streamed_response_wrapper(
+            tokenizations.update_digital_card_art,
         )
 
 
@@ -440,6 +1026,24 @@ class AsyncTokenizationsWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             tokenizations.list,
         )
+        self.activate = async_to_streamed_response_wrapper(
+            tokenizations.activate,
+        )
+        self.deactivate = async_to_streamed_response_wrapper(
+            tokenizations.deactivate,
+        )
+        self.pause = async_to_streamed_response_wrapper(
+            tokenizations.pause,
+        )
+        self.resend_activation_code = async_to_streamed_response_wrapper(
+            tokenizations.resend_activation_code,
+        )
         self.simulate = async_to_streamed_response_wrapper(
             tokenizations.simulate,
+        )
+        self.unpause = async_to_streamed_response_wrapper(
+            tokenizations.unpause,
+        )
+        self.update_digital_card_art = async_to_streamed_response_wrapper(
+            tokenizations.update_digital_card_art,
         )
