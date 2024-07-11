@@ -13,6 +13,7 @@ from lithic.types import (
     Tokenization,
     TokenizationRetrieveResponse,
     TokenizationSimulateResponse,
+    TokenizationUpdateDigitalCardArtResponse,
 )
 from lithic._utils import parse_date
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -100,6 +101,166 @@ class TestTokenizations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_activate(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.activate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    def test_raw_response_activate(self, client: Lithic) -> None:
+        response = client.tokenizations.with_raw_response.activate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    def test_streaming_response_activate(self, client: Lithic) -> None:
+        with client.tokenizations.with_streaming_response.activate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_activate(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            client.tokenizations.with_raw_response.activate(
+                "",
+            )
+
+    @parametrize
+    def test_method_deactivate(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.deactivate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    def test_raw_response_deactivate(self, client: Lithic) -> None:
+        response = client.tokenizations.with_raw_response.deactivate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    def test_streaming_response_deactivate(self, client: Lithic) -> None:
+        with client.tokenizations.with_streaming_response.deactivate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_deactivate(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            client.tokenizations.with_raw_response.deactivate(
+                "",
+            )
+
+    @parametrize
+    def test_method_pause(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.pause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    def test_raw_response_pause(self, client: Lithic) -> None:
+        response = client.tokenizations.with_raw_response.pause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    def test_streaming_response_pause(self, client: Lithic) -> None:
+        with client.tokenizations.with_streaming_response.pause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_pause(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            client.tokenizations.with_raw_response.pause(
+                "",
+            )
+
+    @parametrize
+    def test_method_resend_activation_code(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    def test_method_resend_activation_code_with_all_params(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            activation_method_type="TEXT_TO_CARDHOLDER_NUMBER",
+        )
+        assert tokenization is None
+
+    @parametrize
+    def test_raw_response_resend_activation_code(self, client: Lithic) -> None:
+        response = client.tokenizations.with_raw_response.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    def test_streaming_response_resend_activation_code(self, client: Lithic) -> None:
+        with client.tokenizations.with_streaming_response.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_resend_activation_code(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            client.tokenizations.with_raw_response.resend_activation_code(
+                tokenization_token="",
+            )
+
+    @parametrize
     def test_method_simulate(self, client: Lithic) -> None:
         tokenization = client.tokenizations.simulate(
             cvv="776",
@@ -151,6 +312,90 @@ class TestTokenizations:
             assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_unpause(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.unpause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    def test_raw_response_unpause(self, client: Lithic) -> None:
+        response = client.tokenizations.with_raw_response.unpause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    def test_streaming_response_unpause(self, client: Lithic) -> None:
+        with client.tokenizations.with_streaming_response.unpause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_unpause(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            client.tokenizations.with_raw_response.unpause(
+                "",
+            )
+
+    @parametrize
+    def test_method_update_digital_card_art(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+    @parametrize
+    def test_method_update_digital_card_art_with_all_params(self, client: Lithic) -> None:
+        tokenization = client.tokenizations.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_digital_card_art(self, client: Lithic) -> None:
+        response = client.tokenizations.with_raw_response.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_digital_card_art(self, client: Lithic) -> None:
+        with client.tokenizations.with_streaming_response.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = response.parse()
+            assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_update_digital_card_art(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            client.tokenizations.with_raw_response.update_digital_card_art(
+                tokenization_token="",
+            )
 
 
 class TestAsyncTokenizations:
@@ -233,6 +478,166 @@ class TestAsyncTokenizations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_method_activate(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.activate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    async def test_raw_response_activate(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenizations.with_raw_response.activate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    async def test_streaming_response_activate(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenizations.with_streaming_response.activate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = await response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_activate(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            await async_client.tokenizations.with_raw_response.activate(
+                "",
+            )
+
+    @parametrize
+    async def test_method_deactivate(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.deactivate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    async def test_raw_response_deactivate(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenizations.with_raw_response.deactivate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    async def test_streaming_response_deactivate(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenizations.with_streaming_response.deactivate(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = await response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_deactivate(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            await async_client.tokenizations.with_raw_response.deactivate(
+                "",
+            )
+
+    @parametrize
+    async def test_method_pause(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.pause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    async def test_raw_response_pause(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenizations.with_raw_response.pause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    async def test_streaming_response_pause(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenizations.with_streaming_response.pause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = await response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_pause(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            await async_client.tokenizations.with_raw_response.pause(
+                "",
+            )
+
+    @parametrize
+    async def test_method_resend_activation_code(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    async def test_method_resend_activation_code_with_all_params(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            activation_method_type="TEXT_TO_CARDHOLDER_NUMBER",
+        )
+        assert tokenization is None
+
+    @parametrize
+    async def test_raw_response_resend_activation_code(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenizations.with_raw_response.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    async def test_streaming_response_resend_activation_code(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenizations.with_streaming_response.resend_activation_code(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = await response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_resend_activation_code(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            await async_client.tokenizations.with_raw_response.resend_activation_code(
+                tokenization_token="",
+            )
+
+    @parametrize
     async def test_method_simulate(self, async_client: AsyncLithic) -> None:
         tokenization = await async_client.tokenizations.simulate(
             cvv="776",
@@ -284,3 +689,87 @@ class TestAsyncTokenizations:
             assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_unpause(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.unpause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert tokenization is None
+
+    @parametrize
+    async def test_raw_response_unpause(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenizations.with_raw_response.unpause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert tokenization is None
+
+    @parametrize
+    async def test_streaming_response_unpause(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenizations.with_streaming_response.unpause(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = await response.parse()
+            assert tokenization is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_unpause(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            await async_client.tokenizations.with_raw_response.unpause(
+                "",
+            )
+
+    @parametrize
+    async def test_method_update_digital_card_art(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+    @parametrize
+    async def test_method_update_digital_card_art_with_all_params(self, async_client: AsyncLithic) -> None:
+        tokenization = await async_client.tokenizations.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_digital_card_art(self, async_client: AsyncLithic) -> None:
+        response = await async_client.tokenizations.with_raw_response.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tokenization = response.parse()
+        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_digital_card_art(self, async_client: AsyncLithic) -> None:
+        async with async_client.tokenizations.with_streaming_response.update_digital_card_art(
+            tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tokenization = await response.parse()
+            assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update_digital_card_art(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tokenization_token` but received ''"):
+            await async_client.tokenizations.with_raw_response.update_digital_card_art(
+                tokenization_token="",
+            )

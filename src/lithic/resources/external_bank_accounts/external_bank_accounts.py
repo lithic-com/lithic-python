@@ -70,6 +70,7 @@ class ExternalBankAccounts(SyncAPIResource):
         account_number: str,
         country: str,
         currency: str,
+        financial_account_token: str,
         owner: str,
         owner_type: OwnerType,
         routing_number: str,
@@ -80,7 +81,6 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -101,6 +101,8 @@ class ExternalBankAccounts(SyncAPIResource):
               accept USA bank accounts e.g., USA
 
           currency: currency of the external account 3-digit alphabetic ISO 4217 code
+
+          financial_account_token: The financial account token of the operating account to fund the micro deposits
 
           owner: Legal Name of the business or individual who owns the external account. This
               will appear in statements
@@ -124,8 +126,6 @@ class ExternalBankAccounts(SyncAPIResource):
           dob: Date of Birth of the Individual that owns the external bank account
 
           doing_business_as: Doing Business As
-
-          financial_account_token: The financial account token of the operating account to fund the micro deposits
 
           name: The nickname for this External Bank Account
 
@@ -273,6 +273,7 @@ class ExternalBankAccounts(SyncAPIResource):
             "account_number",
             "country",
             "currency",
+            "financial_account_token",
             "owner",
             "owner_type",
             "routing_number",
@@ -280,6 +281,16 @@ class ExternalBankAccounts(SyncAPIResource):
             "verification_method",
         ],
         ["owner", "owner_type", "processor_token", "verification_method"],
+        [
+            "account_number",
+            "country",
+            "currency",
+            "owner",
+            "owner_type",
+            "routing_number",
+            "type",
+            "verification_method",
+        ],
     )
     def create(
         self,
@@ -287,6 +298,7 @@ class ExternalBankAccounts(SyncAPIResource):
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         owner: str,
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
@@ -297,7 +309,6 @@ class ExternalBankAccounts(SyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -316,6 +327,7 @@ class ExternalBankAccounts(SyncAPIResource):
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
+                    "financial_account_token": financial_account_token,
                     "owner": owner,
                     "owner_type": owner_type,
                     "routing_number": routing_number,
@@ -326,7 +338,6 @@ class ExternalBankAccounts(SyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
-                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
@@ -615,6 +626,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         account_number: str,
         country: str,
         currency: str,
+        financial_account_token: str,
         owner: str,
         owner_type: OwnerType,
         routing_number: str,
@@ -625,7 +637,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -646,6 +657,8 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
               accept USA bank accounts e.g., USA
 
           currency: currency of the external account 3-digit alphabetic ISO 4217 code
+
+          financial_account_token: The financial account token of the operating account to fund the micro deposits
 
           owner: Legal Name of the business or individual who owns the external account. This
               will appear in statements
@@ -669,8 +682,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
           dob: Date of Birth of the Individual that owns the external bank account
 
           doing_business_as: Doing Business As
-
-          financial_account_token: The financial account token of the operating account to fund the micro deposits
 
           name: The nickname for this External Bank Account
 
@@ -818,6 +829,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             "account_number",
             "country",
             "currency",
+            "financial_account_token",
             "owner",
             "owner_type",
             "routing_number",
@@ -825,6 +837,16 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             "verification_method",
         ],
         ["owner", "owner_type", "processor_token", "verification_method"],
+        [
+            "account_number",
+            "country",
+            "currency",
+            "owner",
+            "owner_type",
+            "routing_number",
+            "type",
+            "verification_method",
+        ],
     )
     async def create(
         self,
@@ -832,6 +854,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         account_number: str | NotGiven = NOT_GIVEN,
         country: str | NotGiven = NOT_GIVEN,
         currency: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | NotGiven = NOT_GIVEN,
         owner: str,
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
@@ -842,7 +865,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         company_id: str | NotGiven = NOT_GIVEN,
         dob: Union[str, date] | NotGiven = NOT_GIVEN,
         doing_business_as: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         verification_enforcement: bool | NotGiven = NOT_GIVEN,
@@ -861,6 +883,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "account_number": account_number,
                     "country": country,
                     "currency": currency,
+                    "financial_account_token": financial_account_token,
                     "owner": owner,
                     "owner_type": owner_type,
                     "routing_number": routing_number,
@@ -871,7 +894,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "company_id": company_id,
                     "dob": dob,
                     "doing_business_as": doing_business_as,
-                    "financial_account_token": financial_account_token,
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
