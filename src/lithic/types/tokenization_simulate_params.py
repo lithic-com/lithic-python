@@ -17,7 +17,7 @@ class TokenizationSimulateParams(TypedDict, total=False):
     pan: Required[str]
     """The sixteen digit card number."""
 
-    tokenization_source: Required[Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY"]]
+    tokenization_source: Required[Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY", "MERCHANT"]]
     """The source of the tokenization request."""
 
     account_score: int
@@ -30,6 +30,12 @@ class TokenizationSimulateParams(TypedDict, total=False):
     """
     The device score (1-5) that represents how the Digital Wallet's view on how
     reputable an end user's device is.
+    """
+
+    entity: str
+    """
+    Optional field to specify the token requestor name for a merchant token
+    simulation. Ignored when tokenization_source is not MERCHANT.
     """
 
     wallet_recommended_decision: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"]

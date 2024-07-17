@@ -77,6 +77,7 @@ class TestTokenizations:
             ending_before="ending_before",
             page_size=1,
             starting_after="starting_after",
+            tokenization_channel="DIGITAL_WALLET",
         )
         assert_matches_type(SyncCursorPage[Tokenization], tokenization, path=["response"])
 
@@ -279,6 +280,7 @@ class TestTokenizations:
             tokenization_source="APPLE_PAY",
             account_score=5,
             device_score=5,
+            entity="entity",
             wallet_recommended_decision="APPROVED",
         )
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
@@ -454,6 +456,7 @@ class TestAsyncTokenizations:
             ending_before="ending_before",
             page_size=1,
             starting_after="starting_after",
+            tokenization_channel="DIGITAL_WALLET",
         )
         assert_matches_type(AsyncCursorPage[Tokenization], tokenization, path=["response"])
 
@@ -656,6 +659,7 @@ class TestAsyncTokenizations:
             tokenization_source="APPLE_PAY",
             account_score=5,
             device_score=5,
+            entity="entity",
             wallet_recommended_decision="APPROVED",
         )
         assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])

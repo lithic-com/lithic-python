@@ -66,6 +66,7 @@ class FinancialAccounts(SyncAPIResource):
         nickname: str,
         type: Literal["OPERATING"],
         account_token: str | NotGiven = NOT_GIVEN,
+        is_for_benefit_of: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -92,6 +93,7 @@ class FinancialAccounts(SyncAPIResource):
                     "nickname": nickname,
                     "type": type,
                     "account_token": account_token,
+                    "is_for_benefit_of": is_for_benefit_of,
                 },
                 financial_account_create_params.FinancialAccountCreateParams,
             ),
@@ -249,6 +251,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         nickname: str,
         type: Literal["OPERATING"],
         account_token: str | NotGiven = NOT_GIVEN,
+        is_for_benefit_of: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -275,6 +278,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                     "nickname": nickname,
                     "type": type,
                     "account_token": account_token,
+                    "is_for_benefit_of": is_for_benefit_of,
                 },
                 financial_account_create_params.FinancialAccountCreateParams,
             ),
