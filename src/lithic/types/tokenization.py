@@ -65,17 +65,25 @@ class Tokenization(BaseModel):
         "AMAZON_ONE",
         "ANDROID_PAY",
         "APPLE_PAY",
+        "FACEBOOK",
         "FITBIT_PAY",
         "GARMIN_PAY",
         "MICROSOFT_PAY",
+        "NETFLIX",
         "SAMSUNG_PAY",
         "UNKNOWN",
         "VISA_CHECKOUT",
     ]
-    """The entity that is requested the tokenization. Represents a Digital Wallet."""
+    """The entity that requested the tokenization.
+
+    Represents a Digital Wallet or merchant.
+    """
 
     token_unique_reference: str
     """The network's unique reference for the tokenization."""
+
+    tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT"]
+    """The channel through which the tokenization was made."""
 
     updated_at: datetime
     """Latest date and time when the tokenization was updated. UTC time zone."""

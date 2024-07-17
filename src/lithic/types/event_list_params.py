@@ -55,6 +55,11 @@ class EventListParams(TypedDict, total=False):
             "settlement_report.updated",
             "three_ds_authentication.created",
             "transfer_transaction.created",
+            "tokenization.approval_request",
+            "tokenization.result",
+            "tokenization.two_factor_authentication_code",
+            "tokenization.two_factor_authentication_code_sent",
+            "tokenization.updated",
         ]
     ]
     """Event types to filter events by."""
