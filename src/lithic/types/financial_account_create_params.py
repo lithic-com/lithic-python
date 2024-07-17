@@ -13,3 +13,5 @@ class FinancialAccountCreateParams(TypedDict, total=False):
     type: Required[Literal["OPERATING"]]
 
     account_token: str
+
+    is_for_benefit_of: bool

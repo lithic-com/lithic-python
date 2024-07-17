@@ -75,6 +75,11 @@ class Subscriptions(SyncAPIResource):
                 "settlement_report.updated",
                 "three_ds_authentication.created",
                 "transfer_transaction.created",
+                "tokenization.approval_request",
+                "tokenization.result",
+                "tokenization.two_factor_authentication_code",
+                "tokenization.two_factor_authentication_code_sent",
+                "tokenization.updated",
             ]
         ]
         | NotGiven = NOT_GIVEN,
@@ -190,6 +195,11 @@ class Subscriptions(SyncAPIResource):
                 "settlement_report.updated",
                 "three_ds_authentication.created",
                 "transfer_transaction.created",
+                "tokenization.approval_request",
+                "tokenization.result",
+                "tokenization.two_factor_authentication_code",
+                "tokenization.two_factor_authentication_code_sent",
+                "tokenization.updated",
             ]
         ]
         | NotGiven = NOT_GIVEN,
@@ -611,6 +621,11 @@ class Subscriptions(SyncAPIResource):
             "settlement_report.updated",
             "three_ds_authentication.created",
             "transfer_transaction.created",
+            "tokenization.approval_request",
+            "tokenization.result",
+            "tokenization.two_factor_authentication_code",
+            "tokenization.two_factor_authentication_code_sent",
+            "tokenization.updated",
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -691,6 +706,11 @@ class AsyncSubscriptions(AsyncAPIResource):
                 "settlement_report.updated",
                 "three_ds_authentication.created",
                 "transfer_transaction.created",
+                "tokenization.approval_request",
+                "tokenization.result",
+                "tokenization.two_factor_authentication_code",
+                "tokenization.two_factor_authentication_code_sent",
+                "tokenization.updated",
             ]
         ]
         | NotGiven = NOT_GIVEN,
@@ -806,6 +826,11 @@ class AsyncSubscriptions(AsyncAPIResource):
                 "settlement_report.updated",
                 "three_ds_authentication.created",
                 "transfer_transaction.created",
+                "tokenization.approval_request",
+                "tokenization.result",
+                "tokenization.two_factor_authentication_code",
+                "tokenization.two_factor_authentication_code_sent",
+                "tokenization.updated",
             ]
         ]
         | NotGiven = NOT_GIVEN,
@@ -1227,6 +1252,11 @@ class AsyncSubscriptions(AsyncAPIResource):
             "settlement_report.updated",
             "three_ds_authentication.created",
             "transfer_transaction.created",
+            "tokenization.approval_request",
+            "tokenization.result",
+            "tokenization.two_factor_authentication_code",
+            "tokenization.two_factor_authentication_code_sent",
+            "tokenization.updated",
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
