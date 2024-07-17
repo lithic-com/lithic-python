@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.50.0 (2024-07-17)
+
+Full Changelog: [v0.49.0...v0.50.0](https://github.com/lithic-com/lithic-python/compare/v0.49.0...v0.50.0)
+
+### Features
+
+* **api:** updates ([#496](https://github.com/lithic-com/lithic-python/issues/496)) ([09c15d3](https://github.com/lithic-com/lithic-python/commit/09c15d3599e699d8510c8946d6cb5b12089b2292))
+
+
+### Chores
+
+* **docs:** minor update to formatting of API link in README ([#495](https://github.com/lithic-com/lithic-python/issues/495)) ([4f1dd78](https://github.com/lithic-com/lithic-python/commit/4f1dd786d3f4973c34cf1b47fa6d18bb28815ecb))
+* **internal:** minor options / compat functions updates ([#493](https://github.com/lithic-com/lithic-python/issues/493)) ([05b1935](https://github.com/lithic-com/lithic-python/commit/05b1935597ecb49c9730df2f6117617da71af210))
+
 ## 0.49.0 (2024-07-11)
 
 Full Changelog: [v0.48.6...v0.49.0](https://github.com/lithic-com/lithic-python/compare/v0.48.6...v0.49.0)
