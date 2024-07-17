@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import date
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -38,4 +38,10 @@ class TokenizationListParams(TypedDict, total=False):
     begin.
 
     Used to retrieve the next page of results after this item.
+    """
+
+    tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT"]
+    """Filter for tokenizations by tokenization channel.
+
+    If this is not specified, only DIGITAL_WALLET tokenizations will be returned.
     """

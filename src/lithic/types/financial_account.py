@@ -16,6 +16,9 @@ class FinancialAccount(BaseModel):
     created: datetime
     """Date and time for when the financial account was first created."""
 
+    is_for_benefit_of: bool
+    """Whether the financial account holds funds for benefit of another party."""
+
     type: Literal["ISSUING", "OPERATING", "RESERVE"]
     """Type of financial account"""
 

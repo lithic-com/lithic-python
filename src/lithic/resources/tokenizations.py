@@ -85,6 +85,7 @@ class Tokenizations(SyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
+        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -112,6 +113,9 @@ class Tokenizations(SyncAPIResource):
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
 
+          tokenization_channel: Filter for tokenizations by tokenization channel. If this is not specified, only
+              DIGITAL_WALLET tokenizations will be returned.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -137,6 +141,7 @@ class Tokenizations(SyncAPIResource):
                         "ending_before": ending_before,
                         "page_size": page_size,
                         "starting_after": starting_after,
+                        "tokenization_channel": tokenization_channel,
                     },
                     tokenization_list_params.TokenizationListParams,
                 ),
@@ -323,9 +328,10 @@ class Tokenizations(SyncAPIResource):
         cvv: str,
         expiration_date: str,
         pan: str,
-        tokenization_source: Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY"],
+        tokenization_source: Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY", "MERCHANT"],
         account_score: int | NotGiven = NOT_GIVEN,
         device_score: int | NotGiven = NOT_GIVEN,
+        entity: str | NotGiven = NOT_GIVEN,
         wallet_recommended_decision: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -354,6 +360,9 @@ class Tokenizations(SyncAPIResource):
           device_score: The device score (1-5) that represents how the Digital Wallet's view on how
               reputable an end user's device is.
 
+          entity: Optional field to specify the token requestor name for a merchant token
+              simulation. Ignored when tokenization_source is not MERCHANT.
+
           wallet_recommended_decision: The decision that the Digital Wallet's recommend
 
           extra_headers: Send extra headers
@@ -374,6 +383,7 @@ class Tokenizations(SyncAPIResource):
                     "tokenization_source": tokenization_source,
                     "account_score": account_score,
                     "device_score": device_score,
+                    "entity": entity,
                     "wallet_recommended_decision": wallet_recommended_decision,
                 },
                 tokenization_simulate_params.TokenizationSimulateParams,
@@ -527,6 +537,7 @@ class AsyncTokenizations(AsyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
+        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -554,6 +565,9 @@ class AsyncTokenizations(AsyncAPIResource):
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
 
+          tokenization_channel: Filter for tokenizations by tokenization channel. If this is not specified, only
+              DIGITAL_WALLET tokenizations will be returned.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -579,6 +593,7 @@ class AsyncTokenizations(AsyncAPIResource):
                         "ending_before": ending_before,
                         "page_size": page_size,
                         "starting_after": starting_after,
+                        "tokenization_channel": tokenization_channel,
                     },
                     tokenization_list_params.TokenizationListParams,
                 ),
@@ -765,9 +780,10 @@ class AsyncTokenizations(AsyncAPIResource):
         cvv: str,
         expiration_date: str,
         pan: str,
-        tokenization_source: Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY"],
+        tokenization_source: Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY", "MERCHANT"],
         account_score: int | NotGiven = NOT_GIVEN,
         device_score: int | NotGiven = NOT_GIVEN,
+        entity: str | NotGiven = NOT_GIVEN,
         wallet_recommended_decision: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -796,6 +812,9 @@ class AsyncTokenizations(AsyncAPIResource):
           device_score: The device score (1-5) that represents how the Digital Wallet's view on how
               reputable an end user's device is.
 
+          entity: Optional field to specify the token requestor name for a merchant token
+              simulation. Ignored when tokenization_source is not MERCHANT.
+
           wallet_recommended_decision: The decision that the Digital Wallet's recommend
 
           extra_headers: Send extra headers
@@ -816,6 +835,7 @@ class AsyncTokenizations(AsyncAPIResource):
                     "tokenization_source": tokenization_source,
                     "account_score": account_score,
                     "device_score": device_score,
+                    "entity": entity,
                     "wallet_recommended_decision": wallet_recommended_decision,
                 },
                 tokenization_simulate_params.TokenizationSimulateParams,

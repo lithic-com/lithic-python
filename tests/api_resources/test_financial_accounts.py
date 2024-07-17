@@ -34,6 +34,7 @@ class TestFinancialAccounts:
             nickname="nickname",
             type="OPERATING",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            is_for_benefit_of=True,
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 
@@ -203,6 +204,7 @@ class TestAsyncFinancialAccounts:
             nickname="nickname",
             type="OPERATING",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            is_for_benefit_of=True,
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 
