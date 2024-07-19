@@ -8,8 +8,16 @@ from typing_extensions import Literal
 
 import httpx
 
-from .. import _legacy_response
-from ..types import (
+from ... import _legacy_response
+from .events import (
+    Events,
+    AsyncEvents,
+    EventsWithRawResponse,
+    AsyncEventsWithRawResponse,
+    EventsWithStreamingResponse,
+    AsyncEventsWithStreamingResponse,
+)
+from ...types import (
     transaction_list_params,
     transaction_simulate_void_params,
     transaction_simulate_return_params,
@@ -19,29 +27,46 @@ from ..types import (
     transaction_simulate_authorization_advice_params,
     transaction_simulate_credit_authorization_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.transaction import Transaction
-from ..types.transaction_simulate_void_response import TransactionSimulateVoidResponse
-from ..types.transaction_simulate_return_response import TransactionSimulateReturnResponse
-from ..types.transaction_simulate_clearing_response import TransactionSimulateClearingResponse
-from ..types.transaction_simulate_authorization_response import TransactionSimulateAuthorizationResponse
-from ..types.transaction_simulate_return_reversal_response import TransactionSimulateReturnReversalResponse
-from ..types.transaction_simulate_authorization_advice_response import TransactionSimulateAuthorizationAdviceResponse
-from ..types.transaction_simulate_credit_authorization_response import TransactionSimulateCreditAuthorizationResponse
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ...pagination import SyncCursorPage, AsyncCursorPage
+from .events.events import Events, AsyncEvents
+from ..._base_client import AsyncPaginator, make_request_options
+from ...types.transaction import Transaction
+from .enhanced_commercial_data import (
+    EnhancedCommercialData,
+    AsyncEnhancedCommercialData,
+    EnhancedCommercialDataWithRawResponse,
+    AsyncEnhancedCommercialDataWithRawResponse,
+    EnhancedCommercialDataWithStreamingResponse,
+    AsyncEnhancedCommercialDataWithStreamingResponse,
+)
+from ...types.transaction_simulate_void_response import TransactionSimulateVoidResponse
+from ...types.transaction_simulate_return_response import TransactionSimulateReturnResponse
+from ...types.transaction_simulate_clearing_response import TransactionSimulateClearingResponse
+from ...types.transaction_simulate_authorization_response import TransactionSimulateAuthorizationResponse
+from ...types.transaction_simulate_return_reversal_response import TransactionSimulateReturnReversalResponse
+from ...types.transaction_simulate_authorization_advice_response import TransactionSimulateAuthorizationAdviceResponse
+from ...types.transaction_simulate_credit_authorization_response import TransactionSimulateCreditAuthorizationResponse
 
 __all__ = ["Transactions", "AsyncTransactions"]
 
 
 class Transactions(SyncAPIResource):
+    @cached_property
+    def enhanced_commercial_data(self) -> EnhancedCommercialData:
+        return EnhancedCommercialData(self._client)
+
+    @cached_property
+    def events(self) -> Events:
+        return Events(self._client)
+
     @cached_property
     def with_raw_response(self) -> TransactionsWithRawResponse:
         return TransactionsWithRawResponse(self)
@@ -576,6 +601,14 @@ class Transactions(SyncAPIResource):
 
 
 class AsyncTransactions(AsyncAPIResource):
+    @cached_property
+    def enhanced_commercial_data(self) -> AsyncEnhancedCommercialData:
+        return AsyncEnhancedCommercialData(self._client)
+
+    @cached_property
+    def events(self) -> AsyncEvents:
+        return AsyncEvents(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncTransactionsWithRawResponse:
         return AsyncTransactionsWithRawResponse(self)
@@ -1141,6 +1174,14 @@ class TransactionsWithRawResponse:
             transactions.simulate_void,
         )
 
+    @cached_property
+    def enhanced_commercial_data(self) -> EnhancedCommercialDataWithRawResponse:
+        return EnhancedCommercialDataWithRawResponse(self._transactions.enhanced_commercial_data)
+
+    @cached_property
+    def events(self) -> EventsWithRawResponse:
+        return EventsWithRawResponse(self._transactions.events)
+
 
 class AsyncTransactionsWithRawResponse:
     def __init__(self, transactions: AsyncTransactions) -> None:
@@ -1173,6 +1214,14 @@ class AsyncTransactionsWithRawResponse:
         self.simulate_void = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_void,
         )
+
+    @cached_property
+    def enhanced_commercial_data(self) -> AsyncEnhancedCommercialDataWithRawResponse:
+        return AsyncEnhancedCommercialDataWithRawResponse(self._transactions.enhanced_commercial_data)
+
+    @cached_property
+    def events(self) -> AsyncEventsWithRawResponse:
+        return AsyncEventsWithRawResponse(self._transactions.events)
 
 
 class TransactionsWithStreamingResponse:
@@ -1207,6 +1256,14 @@ class TransactionsWithStreamingResponse:
             transactions.simulate_void,
         )
 
+    @cached_property
+    def enhanced_commercial_data(self) -> EnhancedCommercialDataWithStreamingResponse:
+        return EnhancedCommercialDataWithStreamingResponse(self._transactions.enhanced_commercial_data)
+
+    @cached_property
+    def events(self) -> EventsWithStreamingResponse:
+        return EventsWithStreamingResponse(self._transactions.events)
+
 
 class AsyncTransactionsWithStreamingResponse:
     def __init__(self, transactions: AsyncTransactions) -> None:
@@ -1239,3 +1296,11 @@ class AsyncTransactionsWithStreamingResponse:
         self.simulate_void = async_to_streamed_response_wrapper(
             transactions.simulate_void,
         )
+
+    @cached_property
+    def enhanced_commercial_data(self) -> AsyncEnhancedCommercialDataWithStreamingResponse:
+        return AsyncEnhancedCommercialDataWithStreamingResponse(self._transactions.enhanced_commercial_data)
+
+    @cached_property
+    def events(self) -> AsyncEventsWithStreamingResponse:
+        return AsyncEventsWithStreamingResponse(self._transactions.events)

@@ -322,15 +322,41 @@ from lithic.types import (
 
 Methods:
 
-- <code title="get /transactions/{transaction_token}">client.transactions.<a href="./src/lithic/resources/transactions.py">retrieve</a>(transaction_token) -> <a href="./src/lithic/types/transaction.py">Transaction</a></code>
-- <code title="get /transactions">client.transactions.<a href="./src/lithic/resources/transactions.py">list</a>(\*\*<a href="src/lithic/types/transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction.py">SyncCursorPage[Transaction]</a></code>
-- <code title="post /simulate/authorize">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_response.py">TransactionSimulateAuthorizationResponse</a></code>
-- <code title="post /simulate/authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_authorization_advice</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_advice_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_advice_response.py">TransactionSimulateAuthorizationAdviceResponse</a></code>
-- <code title="post /simulate/clearing">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_clearing</a>(\*\*<a href="src/lithic/types/transaction_simulate_clearing_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_clearing_response.py">TransactionSimulateClearingResponse</a></code>
-- <code title="post /simulate/credit_authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_credit_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_credit_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_credit_authorization_response.py">TransactionSimulateCreditAuthorizationResponse</a></code>
-- <code title="post /simulate/return">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_return</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_response.py">TransactionSimulateReturnResponse</a></code>
-- <code title="post /simulate/return_reversal">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_return_reversal</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_reversal_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_reversal_response.py">TransactionSimulateReturnReversalResponse</a></code>
-- <code title="post /simulate/void">client.transactions.<a href="./src/lithic/resources/transactions.py">simulate_void</a>(\*\*<a href="src/lithic/types/transaction_simulate_void_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_void_response.py">TransactionSimulateVoidResponse</a></code>
+- <code title="get /transactions/{transaction_token}">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">retrieve</a>(transaction_token) -> <a href="./src/lithic/types/transaction.py">Transaction</a></code>
+- <code title="get /transactions">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">list</a>(\*\*<a href="src/lithic/types/transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction.py">SyncCursorPage[Transaction]</a></code>
+- <code title="post /simulate/authorize">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_response.py">TransactionSimulateAuthorizationResponse</a></code>
+- <code title="post /simulate/authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_authorization_advice</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_advice_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_advice_response.py">TransactionSimulateAuthorizationAdviceResponse</a></code>
+- <code title="post /simulate/clearing">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_clearing</a>(\*\*<a href="src/lithic/types/transaction_simulate_clearing_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_clearing_response.py">TransactionSimulateClearingResponse</a></code>
+- <code title="post /simulate/credit_authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_credit_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_credit_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_credit_authorization_response.py">TransactionSimulateCreditAuthorizationResponse</a></code>
+- <code title="post /simulate/return">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_return</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_response.py">TransactionSimulateReturnResponse</a></code>
+- <code title="post /simulate/return_reversal">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_return_reversal</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_reversal_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_reversal_response.py">TransactionSimulateReturnReversalResponse</a></code>
+- <code title="post /simulate/void">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_void</a>(\*\*<a href="src/lithic/types/transaction_simulate_void_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_void_response.py">TransactionSimulateVoidResponse</a></code>
+
+## EnhancedCommercialData
+
+Types:
+
+```python
+from lithic.types.transactions import EnhancedCommercialDataRetrieveResponse
+```
+
+Methods:
+
+- <code title="get /transactions/{transaction_token}/enhanced_commercial_data">client.transactions.enhanced_commercial_data.<a href="./src/lithic/resources/transactions/enhanced_commercial_data.py">retrieve</a>(transaction_token) -> <a href="./src/lithic/types/transactions/enhanced_commercial_data_retrieve_response.py">EnhancedCommercialDataRetrieveResponse</a></code>
+
+## Events
+
+### EnhancedCommercialData
+
+Types:
+
+```python
+from lithic.types.transactions.events import EnhancedData
+```
+
+Methods:
+
+- <code title="get /transactions/events/{event_token}/enhanced_commercial_data">client.transactions.events.enhanced_commercial_data.<a href="./src/lithic/resources/transactions/events/enhanced_commercial_data.py">retrieve</a>(event_token) -> <a href="./src/lithic/types/transactions/events/enhanced_data.py">EnhancedData</a></code>
 
 # ResponderEndpoints
 
