@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.51.0 (2024-07-19)
+
+Full Changelog: [v0.50.0...v0.51.0](https://github.com/lithic-com/lithic-python/compare/v0.50.0...v0.51.0)
+
+### Features
+
+* **api:** add method to retrieve a transaction's enhanced commercial data ([#500](https://github.com/lithic-com/lithic-python/issues/500)) ([f0662e9](https://github.com/lithic-com/lithic-python/commit/f0662e94eb1fdb0d7b6213fcae5482c2cabf2322))
+
+
+### Chores
+
+* **ci:** limit release doctor target branches ([#499](https://github.com/lithic-com/lithic-python/issues/499)) ([4fa41c9](https://github.com/lithic-com/lithic-python/commit/4fa41c93f84847ca0e89ea4a474712798e0cf3a8))
+* **docs:** document how to do per-request http client customization ([#497](https://github.com/lithic-com/lithic-python/issues/497)) ([bae139d](https://github.com/lithic-com/lithic-python/commit/bae139d73fa75f9a76c09f6bae6f1fd697679eee))
+
 ## 0.50.0 (2024-07-17)
 
 Full Changelog: [v0.49.0...v0.50.0](https://github.com/lithic-com/lithic-python/compare/v0.49.0...v0.50.0)
