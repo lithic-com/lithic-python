@@ -88,7 +88,7 @@ List methods in the Lithic API are paginated.
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
 ```python
-import lithic
+from lithic import Lithic
 
 client = Lithic()
 
@@ -104,7 +104,7 @@ Or, asynchronously:
 
 ```python
 import asyncio
-import lithic
+from lithic import AsyncLithic
 
 client = AsyncLithic()
 
