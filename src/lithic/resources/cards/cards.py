@@ -297,7 +297,6 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        auth_rule_token: str | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
@@ -320,9 +319,6 @@ class Cards(SyncAPIResource):
         undone._
 
         Args:
-          auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
-              with the card.
-
           digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
               after tokenization. This artwork must be approved by Mastercard and configured
               by Lithic to use. See
@@ -379,7 +375,6 @@ class Cards(SyncAPIResource):
             f"/cards/{card_token}",
             body=maybe_transform(
                 {
-                    "auth_rule_token": auth_rule_token,
                     "digital_card_art_token": digital_card_art_token,
                     "memo": memo,
                     "pin": pin,
@@ -1173,7 +1168,6 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        auth_rule_token: str | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
@@ -1196,9 +1190,6 @@ class AsyncCards(AsyncAPIResource):
         undone._
 
         Args:
-          auth_rule_token: Identifier for any Auth Rules that will be applied to transactions taking place
-              with the card.
-
           digital_card_art_token: Specifies the digital card art to be displayed in the user’s digital wallet
               after tokenization. This artwork must be approved by Mastercard and configured
               by Lithic to use. See
@@ -1255,7 +1246,6 @@ class AsyncCards(AsyncAPIResource):
             f"/cards/{card_token}",
             body=await async_maybe_transform(
                 {
-                    "auth_rule_token": auth_rule_token,
                     "digital_card_art_token": digital_card_art_token,
                     "memo": memo,
                     "pin": pin,
