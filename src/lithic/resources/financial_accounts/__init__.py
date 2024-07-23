@@ -8,6 +8,14 @@ from .balances import (
     BalancesWithStreamingResponse,
     AsyncBalancesWithStreamingResponse,
 )
+from .statements import (
+    Statements,
+    AsyncStatements,
+    StatementsWithRawResponse,
+    AsyncStatementsWithRawResponse,
+    StatementsWithStreamingResponse,
+    AsyncStatementsWithStreamingResponse,
+)
 from .financial_accounts import (
     FinancialAccounts,
     AsyncFinancialAccounts,
@@ -15,6 +23,14 @@ from .financial_accounts import (
     AsyncFinancialAccountsWithRawResponse,
     FinancialAccountsWithStreamingResponse,
     AsyncFinancialAccountsWithStreamingResponse,
+)
+from .credit_configuration import (
+    CreditConfiguration,
+    AsyncCreditConfiguration,
+    CreditConfigurationWithRawResponse,
+    AsyncCreditConfigurationWithRawResponse,
+    CreditConfigurationWithStreamingResponse,
+    AsyncCreditConfigurationWithStreamingResponse,
 )
 from .financial_transactions import (
     FinancialTransactions,
@@ -38,6 +54,18 @@ __all__ = [
     "AsyncFinancialTransactionsWithRawResponse",
     "FinancialTransactionsWithStreamingResponse",
     "AsyncFinancialTransactionsWithStreamingResponse",
+    "CreditConfiguration",
+    "AsyncCreditConfiguration",
+    "CreditConfigurationWithRawResponse",
+    "AsyncCreditConfigurationWithRawResponse",
+    "CreditConfigurationWithStreamingResponse",
+    "AsyncCreditConfigurationWithStreamingResponse",
+    "Statements",
+    "AsyncStatements",
+    "StatementsWithRawResponse",
+    "AsyncStatementsWithRawResponse",
+    "StatementsWithStreamingResponse",
+    "AsyncStatementsWithStreamingResponse",
     "FinancialAccounts",
     "AsyncFinancialAccounts",
     "FinancialAccountsWithRawResponse",

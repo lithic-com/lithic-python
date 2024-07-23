@@ -106,6 +106,11 @@ class Account(BaseModel):
     account_holder: Optional[AccountHolder] = None
 
     auth_rule_tokens: Optional[List[str]] = None
-    """List of identifiers for the Auth Rule(s) that are applied on the account."""
+    """
+    List of identifiers for the Auth Rule(s) that are applied on the account. This
+    field is deprecated and will no longer be populated in the `account_holder`
+    object. The key will be removed from the schema in a future release. Use the
+    `/auth_rules` endpoints to fetch Auth Rule information instead.
+    """
 
     verification_address: Optional[VerificationAddress] = None
