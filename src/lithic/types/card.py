@@ -132,7 +132,12 @@ class Card(BaseModel):
     """
 
     auth_rule_tokens: Optional[List[str]] = None
-    """List of identifiers for the Auth Rule(s) that are applied on the card."""
+    """
+    List of identifiers for the Auth Rule(s) that are applied on the card. This
+    field is deprecated and will no longer be populated in the `Card` object. The
+    key will be removed from the schema in a future release. Use the `/auth_rules`
+    endpoints to fetch Auth Rule information instead.
+    """
 
     cvv: Optional[str] = None
     """Three digit cvv printed on the back of the card."""
