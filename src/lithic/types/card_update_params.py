@@ -10,12 +10,6 @@ __all__ = ["CardUpdateParams"]
 
 
 class CardUpdateParams(TypedDict, total=False):
-    auth_rule_token: str
-    """
-    Identifier for any Auth Rules that will be applied to transactions taking place
-    with the card.
-    """
-
     digital_card_art_token: str
     """
     Specifies the digital card art to be displayed in the user’s digital wallet

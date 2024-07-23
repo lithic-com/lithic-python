@@ -303,6 +303,44 @@ Methods:
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_transaction_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
 - <code title="get /financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
+## CreditConfiguration
+
+Types:
+
+```python
+from lithic.types.financial_accounts import FinancialAccountCreditConfig
+```
+
+Methods:
+
+- <code title="get /financial_accounts/{financial_account_token}/credit_configuration">client.financial_accounts.credit_configuration.<a href="./src/lithic/resources/financial_accounts/credit_configuration.py">retrieve</a>(financial_account_token) -> <a href="./src/lithic/types/financial_accounts/financial_account_credit_config.py">FinancialAccountCreditConfig</a></code>
+- <code title="patch /financial_accounts/{financial_account_token}/credit_configuration">client.financial_accounts.credit_configuration.<a href="./src/lithic/resources/financial_accounts/credit_configuration.py">update</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/credit_configuration_update_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/financial_account_credit_config.py">FinancialAccountCreditConfig</a></code>
+
+## Statements
+
+Types:
+
+```python
+from lithic.types.financial_accounts import Statement, Statements
+```
+
+Methods:
+
+- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">retrieve</a>(statement_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/statement.py">Statement</a></code>
+- <code title="get /financial_accounts/{financial_account_token}/statements">client.financial_accounts.statements.<a href="./src/lithic/resources/financial_accounts/statements/statements.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statement_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statement.py">SyncCursorPage[Statement]</a></code>
+
+### LineItems
+
+Types:
+
+```python
+from lithic.types.financial_accounts.statements import StatementLineItems, LineItemListResponse
+```
+
+Methods:
+
+- <code title="get /financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(statement_token, \*, financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statements/line_item_list_response.py">SyncCursorPage[LineItemListResponse]</a></code>
+
 # Transactions
 
 Types:

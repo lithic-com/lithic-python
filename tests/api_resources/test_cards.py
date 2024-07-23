@@ -137,7 +137,6 @@ class TestCards:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         card = client.cards.update(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            auth_rule_token="auth_rule_token",
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="Updated Name",
             pin="pin",
@@ -660,7 +659,6 @@ class TestAsyncCards:
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.update(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            auth_rule_token="auth_rule_token",
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="Updated Name",
             pin="pin",
