@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.52.0 (2024-07-23)
+
+Full Changelog: [v0.51.0...v0.52.0](https://github.com/lithic-com/lithic-python/compare/v0.51.0...v0.52.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** deprecate 'auth rule token' in 'card' and 'account holder' models ([#504](https://github.com/lithic-com/lithic-python/issues/504))
+
+### Features
+
+* **api:** deprecate 'auth rule token' in 'card' and 'account holder' models ([#504](https://github.com/lithic-com/lithic-python/issues/504)) ([9cf5402](https://github.com/lithic-com/lithic-python/commit/9cf5402a24342280b2c84804111afa7258f5f5e8))
+
+
+### Chores
+
+* **tests:** update prism version ([#503](https://github.com/lithic-com/lithic-python/issues/503)) ([dddf991](https://github.com/lithic-com/lithic-python/commit/dddf9912af30d785cab29ae5145c0d0452ceed6a))
+
+
+### Documentation
+
+* **readme:** fix example snippet imports ([#501](https://github.com/lithic-com/lithic-python/issues/501)) ([c037ec0](https://github.com/lithic-com/lithic-python/commit/c037ec0e646fd2b3d0d51c74d4cecdd330fd4aef))
+
 ## 0.51.0 (2024-07-19)
 
 Full Changelog: [v0.50.0...v0.51.0](https://github.com/lithic-com/lithic-python/compare/v0.50.0...v0.51.0)
