@@ -98,8 +98,9 @@ class Settlement(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SettlementReport:
-        """
-        Get the settlement report for a specified report date.
+        """Get the settlement report for a specified report date.
+
+        Not available in sandbox.
 
         Args:
           extra_headers: Send extra headers
@@ -197,8 +198,9 @@ class AsyncSettlement(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SettlementReport:
-        """
-        Get the settlement report for a specified report date.
+        """Get the settlement report for a specified report date.
+
+        Not available in sandbox.
 
         Args:
           extra_headers: Send extra headers
