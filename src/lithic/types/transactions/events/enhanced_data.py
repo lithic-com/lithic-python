@@ -40,10 +40,10 @@ class Common(BaseModel):
     tax: CommonTax
 
     customer_reference_number: Optional[str] = None
-    """An optional customer identifier."""
+    """A customer identifier."""
 
     merchant_reference_number: Optional[str] = None
-    """An optional merchant identifier."""
+    """A merchant identifier."""
 
     order_date: Optional[date] = None
     """The date of the order."""
@@ -203,20 +203,20 @@ class Fleet(BaseModel):
 
     driver_number: Optional[str] = None
     """
-    The driver number entered into at the terminal at the time of sale, with leading
-    zeroes stripped.
+    The driver number entered into the terminal at the time of sale, with leading
+    zeros stripped.
     """
 
     odometer: Optional[int] = None
-    """The odometer reading entered into at the terminal at the time of sale."""
+    """The odometer reading entered into the terminal at the time of sale."""
 
     service_type: Optional[Literal["UNKNOWN", "UNDEFINED", "SELF_SERVICE", "FULL_SERVICE", "NON_FUEL_ONLY"]] = None
     """The type of fuel service."""
 
     vehicle_number: Optional[str] = None
     """
-    The vehicle number entered into at the terminal at the time of sale, with
-    leading zeroes stripped.
+    The vehicle number entered into the terminal at the time of sale, with leading
+    zeros stripped.
     """
 
 
