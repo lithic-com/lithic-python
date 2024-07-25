@@ -35,8 +35,10 @@ class EnhancedCommercialData(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EnhancedCommercialDataRetrieveResponse:
-        """
-        Get all L2/L3 enhanced commercial data associated with a transaction.
+        """Get all L2/L3 enhanced commercial data associated with a transaction.
+
+        Not
+        available in sandbox.
 
         Args:
           extra_headers: Send extra headers
@@ -78,8 +80,10 @@ class AsyncEnhancedCommercialData(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EnhancedCommercialDataRetrieveResponse:
-        """
-        Get all L2/L3 enhanced commercial data associated with a transaction.
+        """Get all L2/L3 enhanced commercial data associated with a transaction.
+
+        Not
+        available in sandbox.
 
         Args:
           extra_headers: Send extra headers

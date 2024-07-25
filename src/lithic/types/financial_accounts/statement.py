@@ -92,9 +92,6 @@ class Statement(BaseModel):
     financial_account_token: str
     """Globally unique identifier for a financial account"""
 
-    next_statement_date: date
-    """Date of when the next statement will be created"""
-
     payment_due_date: date
     """Date when the payment is due"""
 
