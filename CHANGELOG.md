@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.53.0 (2024-07-26)
+
+Full Changelog: [v0.52.0...v0.53.0](https://github.com/lithic-com/lithic-python/compare/v0.52.0...v0.53.0)
+
+### Features
+
+* **api:** add method to fetch the extended credit for a given credit product ([#507](https://github.com/lithic-com/lithic-python/issues/507)) ([fb874a3](https://github.com/lithic-com/lithic-python/commit/fb874a30fd7d197d61797e0b4b764d6808689b61))
+
+
+### Chores
+
+* **docs:** set of improvements ([#505](https://github.com/lithic-com/lithic-python/issues/505)) ([501a976](https://github.com/lithic-com/lithic-python/commit/501a976aded81e32ef3d32f87fbda44c772a72a1))
+
 ## 0.52.0 (2024-07-23)
 
 Full Changelog: [v0.51.0...v0.52.0](https://github.com/lithic-com/lithic-python/compare/v0.51.0...v0.52.0)
