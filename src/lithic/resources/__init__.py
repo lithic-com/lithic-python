@@ -112,6 +112,14 @@ from .account_holders import (
     AccountHoldersWithStreamingResponse,
     AsyncAccountHoldersWithStreamingResponse,
 )
+from .credit_products import (
+    CreditProducts,
+    AsyncCreditProducts,
+    CreditProductsWithRawResponse,
+    AsyncCreditProductsWithRawResponse,
+    CreditProductsWithStreamingResponse,
+    AsyncCreditProductsWithStreamingResponse,
+)
 from .digital_card_art import (
     DigitalCardArtResource,
     AsyncDigitalCardArtResource,
@@ -296,4 +304,10 @@ __all__ = [
     "AsyncBookTransfersWithRawResponse",
     "BookTransfersWithStreamingResponse",
     "AsyncBookTransfersWithStreamingResponse",
+    "CreditProducts",
+    "AsyncCreditProducts",
+    "CreditProductsWithRawResponse",
+    "AsyncCreditProductsWithRawResponse",
+    "CreditProductsWithStreamingResponse",
+    "AsyncCreditProductsWithStreamingResponse",
 ]
