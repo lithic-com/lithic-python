@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.53.1 (2024-07-29)
+
+Full Changelog: [v0.53.0...v0.53.1](https://github.com/lithic-com/lithic-python/compare/v0.53.0...v0.53.1)
+
+### Bug Fixes
+
+* **client:** correctly apply client level timeout for account holders ([#510](https://github.com/lithic-com/lithic-python/issues/510)) ([9ec85e1](https://github.com/lithic-com/lithic-python/commit/9ec85e1938eac38b15b729734bcd5b54ea41aebb))
+
+
+### Chores
+
+* **internal:** add type construction helper ([#508](https://github.com/lithic-com/lithic-python/issues/508)) ([a0cfd29](https://github.com/lithic-com/lithic-python/commit/a0cfd29050d60cae1d8c2fb5f48b71973b57f76c))
+
 ## 0.53.0 (2024-07-26)
 
 Full Changelog: [v0.52.0...v0.53.0](https://github.com/lithic-com/lithic-python/compare/v0.52.0...v0.53.0)
