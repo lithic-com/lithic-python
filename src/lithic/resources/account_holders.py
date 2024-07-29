@@ -18,6 +18,7 @@ from ..types import (
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
+    is_given,
     required_args,
     maybe_transform,
     async_maybe_transform,
@@ -25,6 +26,7 @@ from .._utils import (
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from .._constants import DEFAULT_TIMEOUT
 from ..pagination import SyncSinglePage, AsyncSinglePage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.account_holder import AccountHolder
@@ -64,7 +66,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -146,7 +148,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -202,7 +204,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -289,8 +291,10 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 300
         return self._post(
             "/account_holders",
             body=maybe_transform(
@@ -724,7 +728,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -806,7 +810,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -862,7 +866,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
         Run an individual or business's information through the Customer Identification
@@ -949,8 +953,10 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = 300,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
+        if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
+            timeout = 300
         return await self._post(
             "/account_holders",
             body=await async_maybe_transform(
