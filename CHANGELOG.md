@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.54.0 (2024-08-05)
+
+Full Changelog: [v0.53.1...v0.54.0](https://github.com/lithic-com/lithic-python/compare/v0.53.1...v0.54.0)
+
+### Features
+
+* **api:** add event type 'statements.created' ([#518](https://github.com/lithic-com/lithic-python/issues/518)) ([2dd6b21](https://github.com/lithic-com/lithic-python/commit/2dd6b21b40b9387900b75061c35bb391aeb7f790))
+* **client:** add `retries_taken` to raw response class ([#514](https://github.com/lithic-com/lithic-python/issues/514)) ([2d797d0](https://github.com/lithic-com/lithic-python/commit/2d797d0f7451d48a427d8d0429cf01244865385f))
+
+
+### Chores
+
+* add transactions example ([#515](https://github.com/lithic-com/lithic-python/issues/515)) ([7a53618](https://github.com/lithic-com/lithic-python/commit/7a53618d7455fca0f7b8202a0702ef9f7924563b))
+* **ci:** run transactions example ([#517](https://github.com/lithic-com/lithic-python/issues/517)) ([76054d7](https://github.com/lithic-com/lithic-python/commit/76054d72a5ff1e2eeed60aedd8fcd9ea845691a3))
+* **internal:** bump pyright ([#513](https://github.com/lithic-com/lithic-python/issues/513)) ([c79e2e8](https://github.com/lithic-com/lithic-python/commit/c79e2e840db333844aebf72fe2107babcc1786bf))
+* **internal:** test updates ([#516](https://github.com/lithic-com/lithic-python/issues/516)) ([dc4b527](https://github.com/lithic-com/lithic-python/commit/dc4b5270d33c1c4c21200f5f336ec84b35c441f0))
+* **internal:** use `TypeAlias` marker for type assignments ([#511](https://github.com/lithic-com/lithic-python/issues/511)) ([d339158](https://github.com/lithic-com/lithic-python/commit/d339158b8caa71cfd52e09417b8e14e3e59d4ec4))
+
 ## 0.53.1 (2024-07-29)
 
 Full Changelog: [v0.53.0...v0.53.1](https://github.com/lithic-com/lithic-python/compare/v0.53.0...v0.53.1)
