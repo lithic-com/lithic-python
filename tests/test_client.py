@@ -17,6 +17,7 @@ from respx import MockRouter
 from pydantic import ValidationError
 
 from lithic import Lithic, AsyncLithic, APIResponseValidationError
+from lithic._types import Omit
 from lithic._models import BaseModel, FinalRequestOptions
 from lithic._constants import RAW_RESPONSE_HEADER
 from lithic._exceptions import LithicError, APIStatusError, APITimeoutError, APIResponseValidationError
@@ -327,7 +328,8 @@ class TestLithic:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(LithicError):
-            client2 = Lithic(base_url=base_url, api_key=None, _strict_response_validation=True)
+            with update_env(**{"LITHIC_API_KEY": Omit()}):
+                client2 = Lithic(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
@@ -1152,7 +1154,8 @@ class TestAsyncLithic:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(LithicError):
-            client2 = AsyncLithic(base_url=base_url, api_key=None, _strict_response_validation=True)
+            with update_env(**{"LITHIC_API_KEY": Omit()}):
+                client2 = AsyncLithic(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
