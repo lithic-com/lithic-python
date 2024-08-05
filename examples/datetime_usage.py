@@ -1,4 +1,8 @@
-#!/usr/bin/env -S poetry run python
+#!/usr/bin/env -S rye run python
+
+# To run this example locally
+#   1. Install Rye and setup a Python virtual environment: ./scripts/bootstrap
+#   2. Run the example: LITHIC_API_KEY=<your_api_key> rye run python examples/datetime_usage.py
 
 from datetime import datetime
 
