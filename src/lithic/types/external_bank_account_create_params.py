@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import date
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 from .owner_type import OwnerType
@@ -177,7 +177,7 @@ class ExternallyVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     """User Defined ID"""
 
 
-ExternalBankAccountCreateParams = Union[
+ExternalBankAccountCreateParams: TypeAlias = Union[
     BankVerifiedCreateBankAccountAPIRequest,
     PlaidCreateBankAccountAPIRequest,
     ExternallyVerifiedCreateBankAccountAPIRequest,
