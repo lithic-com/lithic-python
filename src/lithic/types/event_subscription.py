@@ -29,6 +29,7 @@ class EventSubscription(BaseModel):
                 "balance.updated",
                 "card.created",
                 "card.renewed",
+                "card.reissued",
                 "card.shipped",
                 "card_transaction.updated",
                 "digital_wallet.tokenization_approval_request",
