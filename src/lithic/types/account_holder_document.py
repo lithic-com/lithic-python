@@ -44,9 +44,9 @@ class AccountHolderDocument(BaseModel):
     account_holder_token: Optional[str] = None
     """Globally unique identifier for the account holder."""
 
-    document_type: Optional[
-        Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]
-    ] = None
+    document_type: Optional[Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]] = (
+        None
+    )
     """Type of documentation to be submitted for verification."""
 
     required_document_uploads: Optional[List[RequiredDocumentUpload]] = None
