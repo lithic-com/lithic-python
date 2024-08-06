@@ -125,16 +125,14 @@ class PageInfo:
         self,
         *,
         url: URL,
-    ) -> None:
-        ...
+    ) -> None: ...
 
     @overload
     def __init__(
         self,
         *,
         params: Query,
-    ) -> None:
-        ...
+    ) -> None: ...
 
     def __init__(
         self,
@@ -167,8 +165,7 @@ class BasePage(GenericModel, Generic[_T]):
             return False
         return self.next_page_info() is not None
 
-    def next_page_info(self) -> Optional[PageInfo]:
-        ...
+    def next_page_info(self) -> Optional[PageInfo]: ...
 
     def _get_page_items(self) -> Iterable[_T]:  # type: ignore[empty-body]
         ...
@@ -904,8 +901,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         *,
         stream: Literal[True],
         stream_cls: Type[_StreamT],
-    ) -> _StreamT:
-        ...
+    ) -> _StreamT: ...
 
     @overload
     def request(
@@ -915,8 +911,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         remaining_retries: Optional[int] = None,
         *,
         stream: Literal[False] = False,
-    ) -> ResponseT:
-        ...
+    ) -> ResponseT: ...
 
     @overload
     def request(
@@ -927,8 +922,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         *,
         stream: bool = False,
         stream_cls: Type[_StreamT] | None = None,
-    ) -> ResponseT | _StreamT:
-        ...
+    ) -> ResponseT | _StreamT: ...
 
     def request(
         self,
@@ -1171,8 +1165,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         cast_to: Type[ResponseT],
         options: RequestOptions = {},
         stream: Literal[False] = False,
-    ) -> ResponseT:
-        ...
+    ) -> ResponseT: ...
 
     @overload
     def get(
@@ -1183,8 +1176,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         options: RequestOptions = {},
         stream: Literal[True],
         stream_cls: type[_StreamT],
-    ) -> _StreamT:
-        ...
+    ) -> _StreamT: ...
 
     @overload
     def get(
@@ -1195,8 +1187,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         options: RequestOptions = {},
         stream: bool,
         stream_cls: type[_StreamT] | None = None,
-    ) -> ResponseT | _StreamT:
-        ...
+    ) -> ResponseT | _StreamT: ...
 
     def get(
         self,
@@ -1222,8 +1213,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         options: RequestOptions = {},
         files: RequestFiles | None = None,
         stream: Literal[False] = False,
-    ) -> ResponseT:
-        ...
+    ) -> ResponseT: ...
 
     @overload
     def post(
@@ -1236,8 +1226,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         files: RequestFiles | None = None,
         stream: Literal[True],
         stream_cls: type[_StreamT],
-    ) -> _StreamT:
-        ...
+    ) -> _StreamT: ...
 
     @overload
     def post(
@@ -1250,8 +1239,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         files: RequestFiles | None = None,
         stream: bool,
         stream_cls: type[_StreamT] | None = None,
-    ) -> ResponseT | _StreamT:
-        ...
+    ) -> ResponseT | _StreamT: ...
 
     def post(
         self,
@@ -1484,8 +1472,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         *,
         stream: Literal[False] = False,
         remaining_retries: Optional[int] = None,
-    ) -> ResponseT:
-        ...
+    ) -> ResponseT: ...
 
     @overload
     async def request(
@@ -1496,8 +1483,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         stream: Literal[True],
         stream_cls: type[_AsyncStreamT],
         remaining_retries: Optional[int] = None,
-    ) -> _AsyncStreamT:
-        ...
+    ) -> _AsyncStreamT: ...
 
     @overload
     async def request(
@@ -1508,8 +1494,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         stream: bool,
         stream_cls: type[_AsyncStreamT] | None = None,
         remaining_retries: Optional[int] = None,
-    ) -> ResponseT | _AsyncStreamT:
-        ...
+    ) -> ResponseT | _AsyncStreamT: ...
 
     async def request(
         self,
@@ -1738,8 +1723,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         cast_to: Type[ResponseT],
         options: RequestOptions = {},
         stream: Literal[False] = False,
-    ) -> ResponseT:
-        ...
+    ) -> ResponseT: ...
 
     @overload
     async def get(
@@ -1750,8 +1734,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         options: RequestOptions = {},
         stream: Literal[True],
         stream_cls: type[_AsyncStreamT],
-    ) -> _AsyncStreamT:
-        ...
+    ) -> _AsyncStreamT: ...
 
     @overload
     async def get(
@@ -1762,8 +1745,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         options: RequestOptions = {},
         stream: bool,
         stream_cls: type[_AsyncStreamT] | None = None,
-    ) -> ResponseT | _AsyncStreamT:
-        ...
+    ) -> ResponseT | _AsyncStreamT: ...
 
     async def get(
         self,
@@ -1787,8 +1769,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         files: RequestFiles | None = None,
         options: RequestOptions = {},
         stream: Literal[False] = False,
-    ) -> ResponseT:
-        ...
+    ) -> ResponseT: ...
 
     @overload
     async def post(
@@ -1801,8 +1782,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         options: RequestOptions = {},
         stream: Literal[True],
         stream_cls: type[_AsyncStreamT],
-    ) -> _AsyncStreamT:
-        ...
+    ) -> _AsyncStreamT: ...
 
     @overload
     async def post(
@@ -1815,8 +1795,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         options: RequestOptions = {},
         stream: bool,
         stream_cls: type[_AsyncStreamT] | None = None,
-    ) -> ResponseT | _AsyncStreamT:
-        ...
+    ) -> ResponseT | _AsyncStreamT: ...
 
     async def post(
         self,
