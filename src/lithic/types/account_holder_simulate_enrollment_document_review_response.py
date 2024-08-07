@@ -5,17 +5,14 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AccountHolderDocument", "RequiredDocumentUpload"]
+__all__ = ["AccountHolderSimulateEnrollmentDocumentReviewResponse", "RequiredDocumentUpload"]
 
 
 class RequiredDocumentUpload(BaseModel):
-    token: Optional[str] = None
-    """Globally unique identifier for the document upload."""
-
     image_type: Optional[Literal["back", "front"]] = None
     """Type of image to upload."""
 
-    status: Optional[Literal["COMPLETED", "FAILED", "PENDING_UPLOAD", "UPLOADED"]] = None
+    status: Optional[Literal["COMPLETED", "FAILED", "PENDING", "UPLOADED"]] = None
     """Status of document image upload."""
 
     status_reasons: Optional[
@@ -30,6 +27,7 @@ class RequiredDocumentUpload(BaseModel):
             ]
         ]
     ] = None
+    """Reasons for document image upload status."""
 
     upload_url: Optional[str] = None
     """URL to upload document image to.
@@ -40,38 +38,17 @@ class RequiredDocumentUpload(BaseModel):
     """
 
 
-class AccountHolderDocument(BaseModel):
+class AccountHolderSimulateEnrollmentDocumentReviewResponse(BaseModel):
     token: Optional[str] = None
     """Globally unique identifier for the document."""
 
     account_holder_token: Optional[str] = None
     """Globally unique identifier for the account holder."""
 
-    document_type: Optional[
-        Literal[
-            "EIN_LETTER",
-            "TAX_RETURN",
-            "OPERATING_AGREEMENT",
-            "CERTIFICATE_OF_FORMATION",
-            "DRIVERS_LICENSE",
-            "PASSPORT",
-            "PASSPORT_CARD",
-            "CERTIFICATE_OF_GOOD_STANDING",
-            "ARTICLES_OF_INCORPORATION",
-            "ARTICLES_OF_ORGANIZATION",
-            "BYLAWS",
-            "GOVERNMENT_BUSINESS_LICENSE",
-            "PARTNERSHIP_AGREEMENT",
-            "SS4_FORM",
-            "BANK_STATEMENT",
-            "UTILITY_BILL_STATEMENT",
-            "SSN_CARD",
-            "ITIN_LETTER",
-        ]
-    ] = None
+    document_type: Optional[Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"]] = (
+        None
+    )
     """Type of documentation to be submitted for verification."""
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
-
     required_document_uploads: Optional[List[RequiredDocumentUpload]] = None
+    """List of required document images to upload."""

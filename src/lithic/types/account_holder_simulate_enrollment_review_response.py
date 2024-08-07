@@ -5,24 +5,60 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
-from .shared.address import Address
 
 __all__ = [
-    "AccountHolder",
+    "AccountHolderSimulateEnrollmentReviewResponse",
     "BeneficialOwnerEntity",
+    "BeneficialOwnerEntityAddress",
     "BeneficialOwnerIndividual",
+    "BeneficialOwnerIndividualAddress",
     "BusinessEntity",
+    "BusinessEntityAddress",
     "ControlPerson",
+    "ControlPersonAddress",
     "Individual",
+    "IndividualAddress",
     "RequiredDocument",
     "VerificationApplication",
 ]
 
 
-class BeneficialOwnerEntity(BaseModel):
-    address: Address
+class BeneficialOwnerEntityAddress(BaseModel):
+    address1: str
+    """Valid deliverable address (no PO boxes)."""
+
+    city: str
+    """Name of city."""
+
+    country: str
+    """Valid country code.
+
+    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
+    three-character format.
     """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
+
+    postal_code: str
+    """Valid postal code.
+
+    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
+    nine-digit ZIP+4.
+    """
+
+    state: str
+    """Valid state code.
+
+    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
+    two-character format.
+    """
+
+    address2: Optional[str] = None
+    """Unit or apartment number (if applicable)."""
+
+
+class BeneficialOwnerEntity(BaseModel):
+    address: BeneficialOwnerEntityAddress
+    """
+    Business''s physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
     """
 
@@ -48,25 +84,58 @@ class BeneficialOwnerEntity(BaseModel):
     (if applicable).
     """
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
-
     parent_company: Optional[str] = None
     """Parent company name (if applicable)."""
+
+
+class BeneficialOwnerIndividualAddress(BaseModel):
+    address1: str
+    """Valid deliverable address (no PO boxes)."""
+
+    city: str
+    """Name of city."""
+
+    country: str
+    """Valid country code.
+
+    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
+    three-character format.
+    """
+
+    postal_code: str
+    """Valid postal code.
+
+    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
+    nine-digit ZIP+4.
+    """
+
+    state: str
+    """Valid state code.
+
+    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
+    two-character format.
+    """
+
+    address2: Optional[str] = None
+    """Unit or apartment number (if applicable)."""
 
 
 class BeneficialOwnerIndividual(BaseModel):
-    address: Optional[Address] = None
-    """Individual's current address"""
+    address: Optional[BeneficialOwnerIndividualAddress] = None
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
 
     dob: Optional[str] = None
     """Individual's date of birth, as an RFC 3339 date."""
 
     email: Optional[str] = None
-    """Individual's email address."""
+    """Individual's email address.
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
+    If utilizing Lithic for chargeback processing, this customer email address may
+    be used to communicate dispute status and resolution.
+    """
 
     first_name: Optional[str] = None
     """Individual's first name, as it appears on government-issued identity documents."""
@@ -78,10 +147,42 @@ class BeneficialOwnerIndividual(BaseModel):
     """Individual's phone number, entered in E.164 format."""
 
 
-class BusinessEntity(BaseModel):
-    address: Address
+class BusinessEntityAddress(BaseModel):
+    address1: str
+    """Valid deliverable address (no PO boxes)."""
+
+    city: str
+    """Name of city."""
+
+    country: str
+    """Valid country code.
+
+    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
+    three-character format.
     """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
+
+    postal_code: str
+    """Valid postal code.
+
+    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
+    nine-digit ZIP+4.
+    """
+
+    state: str
+    """Valid state code.
+
+    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
+    two-character format.
+    """
+
+    address2: Optional[str] = None
+    """Unit or apartment number (if applicable)."""
+
+
+class BusinessEntity(BaseModel):
+    address: BusinessEntityAddress
+    """
+    Business''s physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
     """
 
@@ -107,25 +208,58 @@ class BusinessEntity(BaseModel):
     (if applicable).
     """
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
-
     parent_company: Optional[str] = None
     """Parent company name (if applicable)."""
 
 
+class ControlPersonAddress(BaseModel):
+    address1: str
+    """Valid deliverable address (no PO boxes)."""
+
+    city: str
+    """Name of city."""
+
+    country: str
+    """Valid country code.
+
+    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
+    three-character format.
+    """
+
+    postal_code: str
+    """Valid postal code.
+
+    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
+    nine-digit ZIP+4.
+    """
+
+    state: str
+    """Valid state code.
+
+    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
+    two-character format.
+    """
+
+    address2: Optional[str] = None
+    """Unit or apartment number (if applicable)."""
+
+
 class ControlPerson(BaseModel):
-    address: Optional[Address] = None
-    """Individual's current address"""
+    address: Optional[ControlPersonAddress] = None
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
 
     dob: Optional[str] = None
     """Individual's date of birth, as an RFC 3339 date."""
 
     email: Optional[str] = None
-    """Individual's email address."""
+    """Individual's email address.
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
+    If utilizing Lithic for chargeback processing, this customer email address may
+    be used to communicate dispute status and resolution.
+    """
 
     first_name: Optional[str] = None
     """Individual's first name, as it appears on government-issued identity documents."""
@@ -137,18 +271,54 @@ class ControlPerson(BaseModel):
     """Individual's phone number, entered in E.164 format."""
 
 
+class IndividualAddress(BaseModel):
+    address1: str
+    """Valid deliverable address (no PO boxes)."""
+
+    city: str
+    """Name of city."""
+
+    country: str
+    """Valid country code.
+
+    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
+    three-character format.
+    """
+
+    postal_code: str
+    """Valid postal code.
+
+    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
+    nine-digit ZIP+4.
+    """
+
+    state: str
+    """Valid state code.
+
+    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
+    two-character format.
+    """
+
+    address2: Optional[str] = None
+    """Unit or apartment number (if applicable)."""
+
+
 class Individual(BaseModel):
-    address: Optional[Address] = None
-    """Individual's current address"""
+    address: Optional[IndividualAddress] = None
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
 
     dob: Optional[str] = None
     """Individual's date of birth, as an RFC 3339 date."""
 
     email: Optional[str] = None
-    """Individual's email address."""
+    """Individual's email address.
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
+    If utilizing Lithic for chargeback processing, this customer email address may
+    be used to communicate dispute status and resolution.
+    """
 
     first_name: Optional[str] = None
     """Individual's first name, as it appears on government-issued identity documents."""
@@ -181,14 +351,11 @@ class VerificationApplication(BaseModel):
     created: Optional[datetime] = None
     """Timestamp of when the application was created."""
 
-    status: Optional[Literal["ACCEPTED", "PENDING_REVIEW", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
+    status: Optional[Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
     """KYC and KYB evaluation states.
 
-    Note:
-
-    - `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
-      `KYC_ADVANCED` workflow.
-    - `PENDING_REVIEW` is only applicable for the `KYB_BASIC` workflow.
+    Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
+    `ADVANCED` workflow.
     """
 
     status_reasons: Optional[
@@ -214,8 +381,8 @@ class VerificationApplication(BaseModel):
     """Timestamp of when the application was last updated."""
 
 
-class AccountHolder(BaseModel):
-    token: str
+class AccountHolderSimulateEnrollmentReviewResponse(BaseModel):
+    token: Optional[str] = None
     """Globally unique identifier for the account holder."""
 
     account_token: Optional[str] = None
@@ -248,13 +415,17 @@ class AccountHolder(BaseModel):
     """
 
     control_person: Optional[ControlPerson] = None
-    """
-    Only present when user_type == "BUSINESS". An individual with significant
-    responsibility for managing the legal entity (e.g., a Chief Executive Officer,
-    Chief Financial Officer, Chief Operating Officer, Managing Member, General
-    Partner, President, Vice President, or Treasurer). This can be an executive, or
-    someone who will have program-wide access to the cards that Lithic will provide.
-    In some cases, this individual could also be a beneficial owner listed above.
+    """Only present when user_type == "BUSINESS".
+
+    An individual with significant responsibility for managing the legal entity
+    (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
+    Officer,
+
+    Managing Member, General Partner, President, Vice President, or Treasurer). This
+    can be an executive, or someone who will have program-wide access
+
+    to the cards that Lithic will provide. In some cases, this individual could also
+    be a beneficial owner listed above.
     """
 
     created: Optional[datetime] = None
@@ -269,7 +440,10 @@ class AccountHolder(BaseModel):
     """
 
     exemption_type: Optional[Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"]] = None
-    """The type of KYC exemption for a KYC-Exempt Account Holder."""
+    """The type of KYC exemption for a KYC-Exempt Account Holder.
+
+    "None" if the account holder is not KYC-Exempt.
+    """
 
     external_id: Optional[str] = None
     """
@@ -304,16 +478,13 @@ class AccountHolder(BaseModel):
     A list of documents required for the account holder to be approved.
     """
 
-    status: Optional[Literal["ACCEPTED", "PENDING_REVIEW", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
+    status: Optional[Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
     """<Deprecated. Use verification_application.status instead>
 
     KYC and KYB evaluation states.
 
-    Note:
-
-    - `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
-      `KYC_ADVANCED` workflow.
-    - `PENDING_REVIEW` is only applicable for the `KYB_BASIC` workflow.
+    Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
+    `ADVANCED` workflow.
     """
 
     status_reasons: Optional[
@@ -341,9 +512,11 @@ class AccountHolder(BaseModel):
     user_type: Optional[Literal["BUSINESS", "INDIVIDUAL"]] = None
     """The type of Account Holder.
 
-    If the type is "INDIVIDUAL", the "individual" attribute will be present. If the
-    type is "BUSINESS" then the "business_entity", "control_person",
+    If the type is "INDIVIDUAL", the "individual" attribute will be present.
+
+    If the type is "BUSINESS" then the "business_entity", "control_person",
     "beneficial_owner_individuals", "beneficial_owner_entities",
+
     "nature_of_business", and "website_url" attributes will be present.
     """
 
