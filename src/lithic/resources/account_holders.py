@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, overload
+from typing import List, Iterable, overload
 from typing_extensions import Literal
 
 import httpx
@@ -15,6 +15,8 @@ from ..types import (
     account_holder_update_params,
     account_holder_resubmit_params,
     account_holder_upload_document_params,
+    account_holder_simulate_enrollment_review_params,
+    account_holder_simulate_enrollment_document_review_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
@@ -34,6 +36,10 @@ from ..types.account_holder_document import AccountHolderDocument
 from ..types.account_holder_create_response import AccountHolderCreateResponse
 from ..types.account_holder_update_response import AccountHolderUpdateResponse
 from ..types.account_holder_list_documents_response import AccountHolderListDocumentsResponse
+from ..types.account_holder_simulate_enrollment_review_response import AccountHolderSimulateEnrollmentReviewResponse
+from ..types.account_holder_simulate_enrollment_document_review_response import (
+    AccountHolderSimulateEnrollmentDocumentReviewResponse,
+)
 
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 
@@ -640,11 +646,149 @@ class AccountHolders(SyncAPIResource):
             cast_to=AccountHolderDocument,
         )
 
+    def simulate_enrollment_document_review(
+        self,
+        *,
+        document_upload_token: str | NotGiven = NOT_GIVEN,
+        status: Literal["UPLOADED", "ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
+        status_reasons: List[
+            Literal["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderSimulateEnrollmentDocumentReviewResponse:
+        """
+        Simulates a review for an account holder document upload.
+
+        Args:
+          document_upload_token: The account holder document upload which to perform the simulation upon.
+
+          status: An account holder document's upload status for use within the simulation.
+
+          status_reasons: Status reason that will be associated with the simulated account holder status.
+              Only required for a `REJECTED` status.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/simulate/account_holders/enrollment_document_review",
+            body=maybe_transform(
+                {
+                    "document_upload_token": document_upload_token,
+                    "status": status,
+                    "status_reasons": status_reasons,
+                },
+                account_holder_simulate_enrollment_document_review_params.AccountHolderSimulateEnrollmentDocumentReviewParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountHolderSimulateEnrollmentDocumentReviewResponse,
+        )
+
+    def simulate_enrollment_review(
+        self,
+        *,
+        account_holder_token: str | NotGiven = NOT_GIVEN,
+        status: Literal["ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
+        status_reasons: List[
+            Literal[
+                "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
+                "CONTROL_PERSON_BLOCKLIST_ALERT_FAILURE",
+                "CONTROL_PERSON_ID_VERIFICATION_FAILURE",
+                "CONTROL_PERSON_DOB_VERIFICATION_FAILURE",
+                "CONTROL_PERSON_NAME_VERIFICATION_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_DOB_VERIFICATION_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_BLOCKLIST_ALERT_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_ID_VERIFICATION_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_NAME_VERIFICATION_FAILURE",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderSimulateEnrollmentReviewResponse:
+        """Simulates an enrollment review for an account holder.
+
+        This endpoint is only
+        applicable for workflows that may required intervention such as `KYB_BASIC` or
+        `KYC_ADVANCED`.
+
+        Args:
+          account_holder_token: The account holder which to perform the simulation upon.
+
+          status: An account holder's status for use within the simulation.
+
+          status_reasons: Status reason that will be associated with the simulated account holder status.
+              Only required for a `REJECTED` status.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/simulate/account_holders/enrollment_review",
+            body=maybe_transform(
+                {
+                    "account_holder_token": account_holder_token,
+                    "status": status,
+                    "status_reasons": status_reasons,
+                },
+                account_holder_simulate_enrollment_review_params.AccountHolderSimulateEnrollmentReviewParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountHolderSimulateEnrollmentReviewResponse,
+        )
+
     def upload_document(
         self,
         account_holder_token: str,
         *,
-        document_type: Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"],
+        document_type: Literal[
+            "EIN_LETTER",
+            "TAX_RETURN",
+            "OPERATING_AGREEMENT",
+            "CERTIFICATE_OF_FORMATION",
+            "DRIVERS_LICENSE",
+            "PASSPORT",
+            "PASSPORT_CARD",
+            "CERTIFICATE_OF_GOOD_STANDING",
+            "ARTICLES_OF_INCORPORATION",
+            "ARTICLES_OF_ORGANIZATION",
+            "BYLAWS",
+            "GOVERNMENT_BUSINESS_LICENSE",
+            "PARTNERSHIP_AGREEMENT",
+            "SS4_FORM",
+            "BANK_STATEMENT",
+            "UTILITY_BILL_STATEMENT",
+            "SSN_CARD",
+            "ITIN_LETTER",
+        ]
+        | NotGiven = NOT_GIVEN,
+        entity_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -673,7 +817,9 @@ class AccountHolders(SyncAPIResource):
         verification.
 
         Args:
-          document_type: Type of the document to upload.
+          document_type: The type of document to upload
+
+          entity_token: Globally unique identifier for the entity.
 
           extra_headers: Send extra headers
 
@@ -690,7 +836,10 @@ class AccountHolders(SyncAPIResource):
         return self._post(
             f"/account_holders/{account_holder_token}/documents",
             body=maybe_transform(
-                {"document_type": document_type},
+                {
+                    "document_type": document_type,
+                    "entity_token": entity_token,
+                },
                 account_holder_upload_document_params.AccountHolderUploadDocumentParams,
             ),
             options=make_request_options(
@@ -1302,11 +1451,149 @@ class AsyncAccountHolders(AsyncAPIResource):
             cast_to=AccountHolderDocument,
         )
 
+    async def simulate_enrollment_document_review(
+        self,
+        *,
+        document_upload_token: str | NotGiven = NOT_GIVEN,
+        status: Literal["UPLOADED", "ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
+        status_reasons: List[
+            Literal["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderSimulateEnrollmentDocumentReviewResponse:
+        """
+        Simulates a review for an account holder document upload.
+
+        Args:
+          document_upload_token: The account holder document upload which to perform the simulation upon.
+
+          status: An account holder document's upload status for use within the simulation.
+
+          status_reasons: Status reason that will be associated with the simulated account holder status.
+              Only required for a `REJECTED` status.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/simulate/account_holders/enrollment_document_review",
+            body=await async_maybe_transform(
+                {
+                    "document_upload_token": document_upload_token,
+                    "status": status,
+                    "status_reasons": status_reasons,
+                },
+                account_holder_simulate_enrollment_document_review_params.AccountHolderSimulateEnrollmentDocumentReviewParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountHolderSimulateEnrollmentDocumentReviewResponse,
+        )
+
+    async def simulate_enrollment_review(
+        self,
+        *,
+        account_holder_token: str | NotGiven = NOT_GIVEN,
+        status: Literal["ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
+        status_reasons: List[
+            Literal[
+                "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
+                "CONTROL_PERSON_BLOCKLIST_ALERT_FAILURE",
+                "CONTROL_PERSON_ID_VERIFICATION_FAILURE",
+                "CONTROL_PERSON_DOB_VERIFICATION_FAILURE",
+                "CONTROL_PERSON_NAME_VERIFICATION_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_DOB_VERIFICATION_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_BLOCKLIST_ALERT_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_ID_VERIFICATION_FAILURE",
+                "BENEFICIAL_OWNER_INDIVIDUAL_NAME_VERIFICATION_FAILURE",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderSimulateEnrollmentReviewResponse:
+        """Simulates an enrollment review for an account holder.
+
+        This endpoint is only
+        applicable for workflows that may required intervention such as `KYB_BASIC` or
+        `KYC_ADVANCED`.
+
+        Args:
+          account_holder_token: The account holder which to perform the simulation upon.
+
+          status: An account holder's status for use within the simulation.
+
+          status_reasons: Status reason that will be associated with the simulated account holder status.
+              Only required for a `REJECTED` status.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/simulate/account_holders/enrollment_review",
+            body=await async_maybe_transform(
+                {
+                    "account_holder_token": account_holder_token,
+                    "status": status,
+                    "status_reasons": status_reasons,
+                },
+                account_holder_simulate_enrollment_review_params.AccountHolderSimulateEnrollmentReviewParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountHolderSimulateEnrollmentReviewResponse,
+        )
+
     async def upload_document(
         self,
         account_holder_token: str,
         *,
-        document_type: Literal["commercial_license", "drivers_license", "passport", "passport_card", "visa"],
+        document_type: Literal[
+            "EIN_LETTER",
+            "TAX_RETURN",
+            "OPERATING_AGREEMENT",
+            "CERTIFICATE_OF_FORMATION",
+            "DRIVERS_LICENSE",
+            "PASSPORT",
+            "PASSPORT_CARD",
+            "CERTIFICATE_OF_GOOD_STANDING",
+            "ARTICLES_OF_INCORPORATION",
+            "ARTICLES_OF_ORGANIZATION",
+            "BYLAWS",
+            "GOVERNMENT_BUSINESS_LICENSE",
+            "PARTNERSHIP_AGREEMENT",
+            "SS4_FORM",
+            "BANK_STATEMENT",
+            "UTILITY_BILL_STATEMENT",
+            "SSN_CARD",
+            "ITIN_LETTER",
+        ]
+        | NotGiven = NOT_GIVEN,
+        entity_token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1335,7 +1622,9 @@ class AsyncAccountHolders(AsyncAPIResource):
         verification.
 
         Args:
-          document_type: Type of the document to upload.
+          document_type: The type of document to upload
+
+          entity_token: Globally unique identifier for the entity.
 
           extra_headers: Send extra headers
 
@@ -1352,7 +1641,10 @@ class AsyncAccountHolders(AsyncAPIResource):
         return await self._post(
             f"/account_holders/{account_holder_token}/documents",
             body=await async_maybe_transform(
-                {"document_type": document_type},
+                {
+                    "document_type": document_type,
+                    "entity_token": entity_token,
+                },
                 account_holder_upload_document_params.AccountHolderUploadDocumentParams,
             ),
             options=make_request_options(
@@ -1387,6 +1679,12 @@ class AccountHoldersWithRawResponse:
         self.retrieve_document = _legacy_response.to_raw_response_wrapper(
             account_holders.retrieve_document,
         )
+        self.simulate_enrollment_document_review = _legacy_response.to_raw_response_wrapper(
+            account_holders.simulate_enrollment_document_review,
+        )
+        self.simulate_enrollment_review = _legacy_response.to_raw_response_wrapper(
+            account_holders.simulate_enrollment_review,
+        )
         self.upload_document = _legacy_response.to_raw_response_wrapper(
             account_holders.upload_document,
         )
@@ -1416,6 +1714,12 @@ class AsyncAccountHoldersWithRawResponse:
         )
         self.retrieve_document = _legacy_response.async_to_raw_response_wrapper(
             account_holders.retrieve_document,
+        )
+        self.simulate_enrollment_document_review = _legacy_response.async_to_raw_response_wrapper(
+            account_holders.simulate_enrollment_document_review,
+        )
+        self.simulate_enrollment_review = _legacy_response.async_to_raw_response_wrapper(
+            account_holders.simulate_enrollment_review,
         )
         self.upload_document = _legacy_response.async_to_raw_response_wrapper(
             account_holders.upload_document,
@@ -1447,6 +1751,12 @@ class AccountHoldersWithStreamingResponse:
         self.retrieve_document = to_streamed_response_wrapper(
             account_holders.retrieve_document,
         )
+        self.simulate_enrollment_document_review = to_streamed_response_wrapper(
+            account_holders.simulate_enrollment_document_review,
+        )
+        self.simulate_enrollment_review = to_streamed_response_wrapper(
+            account_holders.simulate_enrollment_review,
+        )
         self.upload_document = to_streamed_response_wrapper(
             account_holders.upload_document,
         )
@@ -1476,6 +1786,12 @@ class AsyncAccountHoldersWithStreamingResponse:
         )
         self.retrieve_document = async_to_streamed_response_wrapper(
             account_holders.retrieve_document,
+        )
+        self.simulate_enrollment_document_review = async_to_streamed_response_wrapper(
+            account_holders.simulate_enrollment_document_review,
+        )
+        self.simulate_enrollment_review = async_to_streamed_response_wrapper(
+            account_holders.simulate_enrollment_review,
         )
         self.upload_document = async_to_streamed_response_wrapper(
             account_holders.upload_document,
