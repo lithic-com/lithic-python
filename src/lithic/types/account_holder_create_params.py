@@ -124,6 +124,9 @@ class KYBBeneficialOwnerEntity(TypedDict, total=False):
     (if applicable).
     """
 
+    entity_token: str
+    """Globally unique identifier for the entity."""
+
     parent_company: str
     """Parent company name (if applicable)."""
 
@@ -190,6 +193,9 @@ class KYBBusinessEntity(TypedDict, total=False):
     Any name that the business operates under that is not its legal business name
     (if applicable).
     """
+
+    entity_token: str
+    """Globally unique identifier for the entity."""
 
     parent_company: str
     """Parent company name (if applicable)."""
