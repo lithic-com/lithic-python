@@ -12,7 +12,7 @@ class AccountStanding(BaseModel):
     period_number: int
     """Current overall period number"""
 
-    state: Literal["STANDARD", "PROMO", "PENALTY"]
+    period_state: Literal["STANDARD", "PROMO", "PENALTY"]
 
 
 class PeriodTotals(BaseModel):

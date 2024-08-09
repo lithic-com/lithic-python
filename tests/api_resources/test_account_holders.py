@@ -15,6 +15,8 @@ from lithic.types import (
     AccountHolderCreateResponse,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
+    AccountHolderSimulateEnrollmentReviewResponse,
+    AccountHolderSimulateEnrollmentDocumentReviewResponse,
 )
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
 
@@ -159,6 +161,7 @@ class TestAccountHolders:
                     "legal_business_name": "Acme, Inc.",
                     "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
                 {
                     "address": {
@@ -174,6 +177,7 @@ class TestAccountHolders:
                     "legal_business_name": "Acme, Inc.",
                     "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
                 {
                     "address": {
@@ -189,6 +193,7 @@ class TestAccountHolders:
                     "legal_business_name": "Acme, Inc.",
                     "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
             ],
             beneficial_owner_individuals=[
@@ -255,6 +260,7 @@ class TestAccountHolders:
                 "legal_business_name": "Acme, Inc.",
                 "parent_company": "parent_company",
                 "phone_numbers": ["+12124007676"],
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             control_person={
                 "address": {
@@ -1033,10 +1039,92 @@ class TestAccountHolders:
             )
 
     @parametrize
+    def test_method_simulate_enrollment_document_review(self, client: Lithic) -> None:
+        account_holder = client.account_holders.simulate_enrollment_document_review()
+        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_method_simulate_enrollment_document_review_with_all_params(self, client: Lithic) -> None:
+        account_holder = client.account_holders.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+            status_reasons=["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"],
+        )
+        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
+        response = client.account_holders.with_raw_response.simulate_enrollment_document_review()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.simulate_enrollment_document_review() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(
+                AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_simulate_enrollment_review(self, client: Lithic) -> None:
+        account_holder = client.account_holders.simulate_enrollment_review()
+        assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_method_simulate_enrollment_review_with_all_params(self, client: Lithic) -> None:
+        account_holder = client.account_holders.simulate_enrollment_review(
+            account_holder_token="1415964d-4400-4d79-9fb3-eee0faaee4e4",
+            status="ACCEPTED",
+            status_reasons=[
+                "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
+            ],
+        )
+        assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_enrollment_review(self, client: Lithic) -> None:
+        response = client.account_holders.with_raw_response.simulate_enrollment_review()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_enrollment_review(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.simulate_enrollment_review() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     def test_method_upload_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="drivers_license",
+        )
+        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+    @parametrize
+    def test_method_upload_document_with_all_params(self, client: Lithic) -> None:
+        account_holder = client.account_holders.upload_document(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="EIN_LETTER",
+            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
@@ -1044,7 +1132,6 @@ class TestAccountHolders:
     def test_raw_response_upload_document(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="drivers_license",
         )
 
         assert response.is_closed is True
@@ -1056,7 +1143,6 @@ class TestAccountHolders:
     def test_streaming_response_upload_document(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="drivers_license",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1071,7 +1157,6 @@ class TestAccountHolders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.upload_document(
                 account_holder_token="",
-                document_type="drivers_license",
             )
 
 
@@ -1213,6 +1298,7 @@ class TestAsyncAccountHolders:
                     "legal_business_name": "Acme, Inc.",
                     "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
                 {
                     "address": {
@@ -1228,6 +1314,7 @@ class TestAsyncAccountHolders:
                     "legal_business_name": "Acme, Inc.",
                     "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
                 {
                     "address": {
@@ -1243,6 +1330,7 @@ class TestAsyncAccountHolders:
                     "legal_business_name": "Acme, Inc.",
                     "parent_company": "parent_company",
                     "phone_numbers": ["+12124007676"],
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
             ],
             beneficial_owner_individuals=[
@@ -1309,6 +1397,7 @@ class TestAsyncAccountHolders:
                 "legal_business_name": "Acme, Inc.",
                 "parent_company": "parent_company",
                 "phone_numbers": ["+12124007676"],
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             control_person={
                 "address": {
@@ -2087,10 +2176,92 @@ class TestAsyncAccountHolders:
             )
 
     @parametrize
+    async def test_method_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.simulate_enrollment_document_review()
+        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_enrollment_document_review_with_all_params(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+            status_reasons=["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"],
+        )
+        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.simulate_enrollment_document_review()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.simulate_enrollment_document_review() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(
+                AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_simulate_enrollment_review(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.simulate_enrollment_review()
+        assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_enrollment_review_with_all_params(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.simulate_enrollment_review(
+            account_holder_token="1415964d-4400-4d79-9fb3-eee0faaee4e4",
+            status="ACCEPTED",
+            status_reasons=[
+                "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
+            ],
+        )
+        assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_enrollment_review(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.simulate_enrollment_review()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_enrollment_review(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.simulate_enrollment_review() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     async def test_method_upload_document(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="drivers_license",
+        )
+        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+
+    @parametrize
+    async def test_method_upload_document_with_all_params(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.upload_document(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="EIN_LETTER",
+            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
 
@@ -2098,7 +2269,6 @@ class TestAsyncAccountHolders:
     async def test_raw_response_upload_document(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="drivers_license",
         )
 
         assert response.is_closed is True
@@ -2110,7 +2280,6 @@ class TestAsyncAccountHolders:
     async def test_streaming_response_upload_document(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document_type="drivers_license",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2125,5 +2294,4 @@ class TestAsyncAccountHolders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.upload_document(
                 account_holder_token="",
-                document_type="drivers_license",
             )

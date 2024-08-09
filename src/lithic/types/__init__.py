@@ -164,6 +164,9 @@ from .transaction_simulate_return_reversal_response import (
 from .tokenization_decisioning_rotate_secret_response import (
     TokenizationDecisioningRotateSecretResponse as TokenizationDecisioningRotateSecretResponse,
 )
+from .account_holder_simulate_enrollment_review_params import (
+    AccountHolderSimulateEnrollmentReviewParams as AccountHolderSimulateEnrollmentReviewParams,
+)
 from .transaction_simulate_authorization_advice_params import (
     TransactionSimulateAuthorizationAdviceParams as TransactionSimulateAuthorizationAdviceParams,
 )
@@ -173,6 +176,9 @@ from .transaction_simulate_credit_authorization_params import (
 from .external_bank_account_retry_micro_deposits_params import (
     ExternalBankAccountRetryMicroDepositsParams as ExternalBankAccountRetryMicroDepositsParams,
 )
+from .account_holder_simulate_enrollment_review_response import (
+    AccountHolderSimulateEnrollmentReviewResponse as AccountHolderSimulateEnrollmentReviewResponse,
+)
 from .transaction_simulate_authorization_advice_response import (
     TransactionSimulateAuthorizationAdviceResponse as TransactionSimulateAuthorizationAdviceResponse,
 )
@@ -181,4 +187,10 @@ from .transaction_simulate_credit_authorization_response import (
 )
 from .external_bank_account_retry_micro_deposits_response import (
     ExternalBankAccountRetryMicroDepositsResponse as ExternalBankAccountRetryMicroDepositsResponse,
+)
+from .account_holder_simulate_enrollment_document_review_params import (
+    AccountHolderSimulateEnrollmentDocumentReviewParams as AccountHolderSimulateEnrollmentDocumentReviewParams,
+)
+from .account_holder_simulate_enrollment_document_review_response import (
+    AccountHolderSimulateEnrollmentDocumentReviewResponse as AccountHolderSimulateEnrollmentDocumentReviewResponse,
 )
