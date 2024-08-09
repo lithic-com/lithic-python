@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.55.1 (2024-08-09)
+
+Full Changelog: [v0.55.0...v0.55.1](https://github.com/lithic-com/lithic-python/compare/v0.55.0...v0.55.1)
+
+### Chores
+
+* **ci:** bump prism mock server version ([#526](https://github.com/lithic-com/lithic-python/issues/526)) ([c610f81](https://github.com/lithic-com/lithic-python/commit/c610f8115d65667e99f373946ba44357dde506c7))
+
 ## 0.55.0 (2024-08-09)
 
 Full Changelog: [v0.54.0...v0.55.0](https://github.com/lithic-com/lithic-python/compare/v0.54.0...v0.55.0)
