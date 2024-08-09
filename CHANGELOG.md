@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.55.0 (2024-08-09)
+
+Full Changelog: [v0.54.0...v0.55.0](https://github.com/lithic-com/lithic-python/compare/v0.54.0...v0.55.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** rename property 'financial_accounts.statement.AccountStanding.state' to 'period_state' ([#525](https://github.com/lithic-com/lithic-python/issues/525))
+
+### Features
+
+* **api:** add event type 'card.reissued' ([#521](https://github.com/lithic-com/lithic-python/issues/521)) ([87e7ab3](https://github.com/lithic-com/lithic-python/commit/87e7ab36383282e64d12422574c8f95929165324))
+* **api:** add methods to simulate enrollment review and enrollment document review ([#523](https://github.com/lithic-com/lithic-python/issues/523)) ([4e4515f](https://github.com/lithic-com/lithic-python/commit/4e4515f793f0d2004156ebbc86741716e01778ad))
+* **api:** rename property 'financial_accounts.statement.AccountStanding.state' to 'period_state' ([#525](https://github.com/lithic-com/lithic-python/issues/525)) ([909ecac](https://github.com/lithic-com/lithic-python/commit/909ecace7a7c00b2bcf9deb13a05d8e3642f9356))
+
+
+### Chores
+
+* **internal:** bump ruff version ([#519](https://github.com/lithic-com/lithic-python/issues/519)) ([bba5c95](https://github.com/lithic-com/lithic-python/commit/bba5c95e67449658db54a1d8e79fb0063b5ff0a8))
+* **internal:** update pydantic compat helper function ([#522](https://github.com/lithic-com/lithic-python/issues/522)) ([99d987f](https://github.com/lithic-com/lithic-python/commit/99d987f2887abcd9005377f7491a4da228ad082f))
+* **internal:** updates ([#524](https://github.com/lithic-com/lithic-python/issues/524)) ([9645382](https://github.com/lithic-com/lithic-python/commit/964538237afaa3073af632e4363d059aaba29427))
+
 ## 0.54.0 (2024-08-05)
 
 Full Changelog: [v0.53.1...v0.54.0](https://github.com/lithic-com/lithic-python/compare/v0.53.1...v0.54.0)
