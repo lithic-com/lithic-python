@@ -226,7 +226,7 @@ class TestTokenizations:
     def test_method_resend_activation_code_with_all_params(self, client: Lithic) -> None:
         tokenization = client.tokenizations.resend_activation_code(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            activation_method_type="TEXT_TO_CARDHOLDER_NUMBER",
+            activation_method_type="EMAIL_TO_CARDHOLDER_ADDRESS",
         )
         assert tokenization is None
 
@@ -605,7 +605,7 @@ class TestAsyncTokenizations:
     async def test_method_resend_activation_code_with_all_params(self, async_client: AsyncLithic) -> None:
         tokenization = await async_client.tokenizations.resend_activation_code(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            activation_method_type="TEXT_TO_CARDHOLDER_NUMBER",
+            activation_method_type="EMAIL_TO_CARDHOLDER_ADDRESS",
         )
         assert tokenization is None
 
