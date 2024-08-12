@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.56.0 (2024-08-12)
+
+Full Changelog: [v0.55.0...v0.56.0](https://github.com/lithic-com/lithic-python/compare/v0.55.0...v0.56.0)
+
+### Features
+
+* **api:** add property `Account.cardholder_currency` ([#529](https://github.com/lithic-com/lithic-python/issues/529)) ([26f0669](https://github.com/lithic-com/lithic-python/commit/26f0669a8efe806df97dbb91836d00bdd51a0564))
+* **api:** add property `Card.cardholder_currency` ([26f0669](https://github.com/lithic-com/lithic-python/commit/26f0669a8efe806df97dbb91836d00bdd51a0564))
+* **api:** add property `CardProgram.cardholder_currencies` ([26f0669](https://github.com/lithic-com/lithic-python/commit/26f0669a8efe806df97dbb91836d00bdd51a0564))
+* **api:** add property `CardProgram.cardholder_currency` ([26f0669](https://github.com/lithic-com/lithic-python/commit/26f0669a8efe806df97dbb91836d00bdd51a0564))
+
+
+### Chores
+
+* **ci:** bump prism mock server version ([#526](https://github.com/lithic-com/lithic-python/issues/526)) ([c610f81](https://github.com/lithic-com/lithic-python/commit/c610f8115d65667e99f373946ba44357dde506c7))
+* **internal:** ensure package is importable in lint cmd ([#528](https://github.com/lithic-com/lithic-python/issues/528)) ([194b0d7](https://github.com/lithic-com/lithic-python/commit/194b0d720fd9f01e12705e7792a2dfdcafefa44b))
+
 ## 0.55.0 (2024-08-09)
 
 Full Changelog: [v0.54.0...v0.55.0](https://github.com/lithic-com/lithic-python/compare/v0.54.0...v0.55.0)
