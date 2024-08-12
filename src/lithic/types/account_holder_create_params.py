@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import List, Union, Iterable
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-from ..types import shared_params
+from .shared_params.address import Address
 
 __all__ = [
     "AccountHolderCreateParams",
@@ -96,7 +96,7 @@ class KYB(TypedDict, total=False):
 
 
 class KYBBeneficialOwnerEntity(TypedDict, total=False):
-    address: Required[shared_params.Address]
+    address: Required[Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
@@ -132,7 +132,7 @@ class KYBBeneficialOwnerEntity(TypedDict, total=False):
 
 
 class KYBBeneficialOwnerIndividual(TypedDict, total=False):
-    address: Required[shared_params.Address]
+    address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -166,7 +166,7 @@ class KYBBeneficialOwnerIndividual(TypedDict, total=False):
 
 
 class KYBBusinessEntity(TypedDict, total=False):
-    address: Required[shared_params.Address]
+    address: Required[Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
@@ -202,7 +202,7 @@ class KYBBusinessEntity(TypedDict, total=False):
 
 
 class KYBControlPerson(TypedDict, total=False):
-    address: Required[shared_params.Address]
+    address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -268,7 +268,7 @@ class KYC(TypedDict, total=False):
 
 
 class KYCIndividual(TypedDict, total=False):
-    address: Required[shared_params.Address]
+    address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
@@ -302,7 +302,7 @@ class KYCIndividual(TypedDict, total=False):
 
 
 class KYCExempt(TypedDict, total=False):
-    address: Required[shared_params.Address]
+    address: Required[Address]
     """
     KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.

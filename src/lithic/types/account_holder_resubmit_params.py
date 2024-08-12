@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-from ..types import shared_params
+from .shared_params.address import Address
 
 __all__ = ["AccountHolderResubmitParams", "Individual"]
 
@@ -27,7 +27,7 @@ class AccountHolderResubmitParams(TypedDict, total=False):
 
 
 class Individual(TypedDict, total=False):
-    address: Required[shared_params.Address]
+    address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.

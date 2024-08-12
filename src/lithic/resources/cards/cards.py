@@ -16,7 +16,6 @@ from httpx import URL
 from ... import _legacy_response
 from ...types import (
     SpendLimitDuration,
-    shared_params,
     card_list_params,
     card_embed_params,
     card_renew_params,
@@ -72,7 +71,9 @@ from .financial_transactions import (
 )
 from ...types.card_spend_limits import CardSpendLimits
 from ...types.spend_limit_duration import SpendLimitDuration
+from ...types.shared_params.carrier import Carrier
 from ...types.card_provision_response import CardProvisionResponse
+from ...types.shared_params.shipping_address import ShippingAddress
 
 __all__ = ["Cards", "AsyncCards"]
 
@@ -104,7 +105,7 @@ class Cards(SyncAPIResource):
         type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
-        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
@@ -112,7 +113,7 @@ class Cards(SyncAPIResource):
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         replacement_for: str | NotGiven = NOT_GIVEN,
-        shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
+        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
@@ -726,9 +727,9 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
-        shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
+        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -796,8 +797,8 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        shipping_address: shared_params.ShippingAddress,
-        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        shipping_address: ShippingAddress,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
@@ -975,7 +976,7 @@ class AsyncCards(AsyncAPIResource):
         type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
-        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
@@ -983,7 +984,7 @@ class AsyncCards(AsyncAPIResource):
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         replacement_for: str | NotGiven = NOT_GIVEN,
-        shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
+        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
@@ -1597,9 +1598,9 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
-        shipping_address: shared_params.ShippingAddress | NotGiven = NOT_GIVEN,
+        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1667,8 +1668,8 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        shipping_address: shared_params.ShippingAddress,
-        carrier: shared_params.Carrier | NotGiven = NOT_GIVEN,
+        shipping_address: ShippingAddress,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
