@@ -26,7 +26,7 @@ class TestDisputes:
     def test_method_create(self, client: Lithic) -> None:
         dispute = client.disputes.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -35,7 +35,7 @@ class TestDisputes:
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         dispute = client.disputes.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
             customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
             customer_note="customer_note",
@@ -46,7 +46,7 @@ class TestDisputes:
     def test_raw_response_create(self, client: Lithic) -> None:
         response = client.disputes.with_raw_response.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
 
@@ -59,7 +59,7 @@ class TestDisputes:
     def test_streaming_response_create(self, client: Lithic) -> None:
         with client.disputes.with_streaming_response.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         ) as response:
             assert not response.is_closed
@@ -437,7 +437,7 @@ class TestAsyncDisputes:
     async def test_method_create(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
         assert_matches_type(Dispute, dispute, path=["response"])
@@ -446,7 +446,7 @@ class TestAsyncDisputes:
     async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
             customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
             customer_note="customer_note",
@@ -457,7 +457,7 @@ class TestAsyncDisputes:
     async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
         response = await async_client.disputes.with_raw_response.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
 
@@ -470,7 +470,7 @@ class TestAsyncDisputes:
     async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
         async with async_client.disputes.with_streaming_response.create(
             amount=10000,
-            reason="FRAUD_CARD_PRESENT",
+            reason="ATM_CASH_MISDISPENSE",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         ) as response:
             assert not response.is_closed
