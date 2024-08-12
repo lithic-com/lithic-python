@@ -4,16 +4,17 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-from ..types import shared_params
+from .shared_params.carrier import Carrier
+from .shared_params.shipping_address import ShippingAddress
 
 __all__ = ["CardRenewParams"]
 
 
 class CardRenewParams(TypedDict, total=False):
-    shipping_address: Required[shared_params.ShippingAddress]
+    shipping_address: Required[ShippingAddress]
     """The shipping address this card will be sent to."""
 
-    carrier: shared_params.Carrier
+    carrier: Carrier
     """If omitted, the previous carrier will be used."""
 
     exp_month: str
