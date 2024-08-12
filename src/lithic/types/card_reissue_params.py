@@ -4,13 +4,14 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
-from ..types import shared_params
+from .shared_params.carrier import Carrier
+from .shared_params.shipping_address import ShippingAddress
 
 __all__ = ["CardReissueParams"]
 
 
 class CardReissueParams(TypedDict, total=False):
-    carrier: shared_params.Carrier
+    carrier: Carrier
     """If omitted, the previous carrier will be used."""
 
     product_id: str
@@ -20,7 +21,7 @@ class CardReissueParams(TypedDict, total=False):
     to cards of type `PHYSICAL`. This must be configured with Lithic before use.
     """
 
-    shipping_address: shared_params.ShippingAddress
+    shipping_address: ShippingAddress
     """If omitted, the previous shipping address will be used."""
 
     shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
