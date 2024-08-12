@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-from ..types import shared_params
 from .spend_limit_duration import SpendLimitDuration
+from .shared_params.carrier import Carrier
+from .shared_params.shipping_address import ShippingAddress
 
 __all__ = ["CardCreateParams"]
 
@@ -45,7 +46,7 @@ class CardCreateParams(TypedDict, total=False):
     test creating cards on specific card programs.
     """
 
-    carrier: shared_params.Carrier
+    carrier: Carrier
 
     digital_card_art_token: str
     """
@@ -96,7 +97,7 @@ class CardCreateParams(TypedDict, total=False):
     Globally unique identifier for the card that this physical card will replace.
     """
 
-    shipping_address: shared_params.ShippingAddress
+    shipping_address: ShippingAddress
 
     shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
     """Shipping method for the card.

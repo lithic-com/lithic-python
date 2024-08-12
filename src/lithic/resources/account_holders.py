@@ -9,7 +9,6 @@ import httpx
 
 from .. import _legacy_response
 from ..types import (
-    shared_params,
     account_holder_list_params,
     account_holder_create_params,
     account_holder_update_params,
@@ -32,6 +31,7 @@ from .._constants import DEFAULT_TIMEOUT
 from ..pagination import SyncSinglePage, AsyncSinglePage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.account_holder import AccountHolder
+from ..types.shared_params.address import Address
 from ..types.account_holder_document import AccountHolderDocument
 from ..types.account_holder_create_response import AccountHolderCreateResponse
 from ..types.account_holder_update_response import AccountHolderUpdateResponse
@@ -196,7 +196,7 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        address: shared_params.Address,
+        address: Address,
         email: str,
         first_name: str,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
@@ -285,7 +285,7 @@ class AccountHolders(SyncAPIResource):
         website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
+        address: Address | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
@@ -1001,7 +1001,7 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        address: shared_params.Address,
+        address: Address,
         email: str,
         first_name: str,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"],
@@ -1090,7 +1090,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         website_url: str | NotGiven = NOT_GIVEN,
         individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        address: shared_params.Address | NotGiven = NOT_GIVEN,
+        address: Address | NotGiven = NOT_GIVEN,
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
