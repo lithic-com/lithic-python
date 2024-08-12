@@ -139,6 +139,9 @@ class Card(BaseModel):
     endpoints to fetch Auth Rule information instead.
     """
 
+    cardholder_currency: Optional[str] = None
+    """3-digit alphabetic ISO 4217 code for the currency of the cardholder."""
+
     cvv: Optional[str] = None
     """Three digit cvv printed on the back of the card."""
 

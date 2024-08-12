@@ -113,4 +113,7 @@ class Account(BaseModel):
     `/auth_rules` endpoints to fetch Auth Rule information instead.
     """
 
+    cardholder_currency: Optional[str] = None
+    """3-digit alphabetic ISO 4217 code for the currency of the cardholder."""
+
     verification_address: Optional[VerificationAddress] = None
