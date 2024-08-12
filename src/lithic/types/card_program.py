@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
@@ -22,3 +23,12 @@ class CardProgram(BaseModel):
 
     pan_range_start: str
     """The first digits of the card number that this card program starts with."""
+
+    cardholder_currency: Optional[str] = None
+    """3-digit alphabetic ISO 4217 code for the currency of the cardholder."""
+
+    settlement_currencies: Optional[List[str]] = None
+    """
+    List of 3-digit alphabetic ISO 4217 codes for the currencies that the card
+    program supports for settlement.
+    """
