@@ -842,7 +842,7 @@ class TestLithic:
 
         respx_mock.post("/cards").mock(side_effect=retry_handler)
 
-        response = client.cards.with_raw_response.create(type="VIRTUAL")
+        response = client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
 
         assert response.retries_taken == failures_before_success
 
@@ -865,7 +865,7 @@ class TestLithic:
 
         respx_mock.post("/cards").mock(side_effect=retry_handler)
 
-        with client.cards.with_streaming_response.create(type="VIRTUAL") as response:
+        with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
             assert response.retries_taken == failures_before_success
 
 
@@ -1689,7 +1689,7 @@ class TestAsyncLithic:
 
         respx_mock.post("/cards").mock(side_effect=retry_handler)
 
-        response = await client.cards.with_raw_response.create(type="VIRTUAL")
+        response = await client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
 
         assert response.retries_taken == failures_before_success
 
@@ -1713,5 +1713,5 @@ class TestAsyncLithic:
 
         respx_mock.post("/cards").mock(side_effect=retry_handler)
 
-        async with client.cards.with_streaming_response.create(type="VIRTUAL") as response:
+        async with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
             assert response.retries_taken == failures_before_success

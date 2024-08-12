@@ -64,8 +64,8 @@ class TestAuthentication:
     def test_method_simulate(self, client: Lithic) -> None:
         authentication = client.three_ds.authentication.simulate(
             merchant={
-                "country": "USA",
                 "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
                 "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
@@ -81,8 +81,8 @@ class TestAuthentication:
     def test_raw_response_simulate(self, client: Lithic) -> None:
         response = client.three_ds.authentication.with_raw_response.simulate(
             merchant={
-                "country": "USA",
                 "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
                 "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
@@ -102,8 +102,8 @@ class TestAuthentication:
     def test_streaming_response_simulate(self, client: Lithic) -> None:
         with client.three_ds.authentication.with_streaming_response.simulate(
             merchant={
-                "country": "USA",
                 "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
                 "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
@@ -169,8 +169,8 @@ class TestAsyncAuthentication:
     async def test_method_simulate(self, async_client: AsyncLithic) -> None:
         authentication = await async_client.three_ds.authentication.simulate(
             merchant={
-                "country": "USA",
                 "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
                 "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
@@ -186,8 +186,8 @@ class TestAsyncAuthentication:
     async def test_raw_response_simulate(self, async_client: AsyncLithic) -> None:
         response = await async_client.three_ds.authentication.with_raw_response.simulate(
             merchant={
-                "country": "USA",
                 "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
                 "mcc": "5812",
                 "name": "COFFEE SHOP",
             },
@@ -207,8 +207,8 @@ class TestAsyncAuthentication:
     async def test_streaming_response_simulate(self, async_client: AsyncLithic) -> None:
         async with async_client.three_ds.authentication.with_streaming_response.simulate(
             merchant={
-                "country": "USA",
                 "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
                 "mcc": "5812",
                 "name": "COFFEE SHOP",
             },

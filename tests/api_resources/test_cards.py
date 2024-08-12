@@ -26,14 +26,14 @@ class TestCards:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         card = client.cards.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         card = client.cards.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             carrier={"qr_code_url": "qr_code_url"},
@@ -46,20 +46,20 @@ class TestCards:
             replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
-                "address2": "Unit 25A",
                 "city": "NEW YORK",
                 "country": "USA",
-                "email": "johnny@appleseed.com",
                 "first_name": "Michael",
                 "last_name": "Bluth",
-                "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
                 "postal_code": "10001-1809",
                 "state": "NY",
+                "address2": "Unit 25A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
             },
             shipping_method="2_DAY",
             spend_limit=1000,
-            spend_limit_duration="TRANSACTION",
+            spend_limit_duration="ANNUALLY",
             state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
@@ -67,7 +67,7 @@ class TestCards:
     @parametrize
     def test_raw_response_create(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
         )
 
         assert response.is_closed is True
@@ -78,7 +78,7 @@ class TestCards:
     @parametrize
     def test_streaming_response_create(self, client: Lithic) -> None:
         with client.cards.with_streaming_response.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -141,8 +141,8 @@ class TestCards:
             memo="Updated Name",
             pin="pin",
             spend_limit=100,
-            spend_limit_duration="FOREVER",
-            state="OPEN",
+            spend_limit_duration="ANNUALLY",
+            state="CLOSED",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -275,7 +275,7 @@ class TestCards:
             certificate="U3RhaW5sZXNzIHJvY2tz",
             client_device_id="client_device_id",
             client_wallet_account_id="client_wallet_account_id",
-            digital_wallet="GOOGLE_PAY",
+            digital_wallet="APPLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -327,18 +327,18 @@ class TestCards:
             product_id="100",
             shipping_address={
                 "address1": "5 Broad Street",
-                "address2": "Unit 5A",
                 "city": "NEW YORK",
                 "country": "USA",
-                "email": "johnny@appleseed.com",
                 "first_name": "Janet",
                 "last_name": "Yellen",
-                "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
                 "postal_code": "10001",
                 "state": "NY",
+                "address2": "Unit 5A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
             },
-            shipping_method="STANDARD",
+            shipping_method="2-DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -395,22 +395,22 @@ class TestCards:
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
-                "address2": "Unit 5A",
                 "city": "NEW YORK",
                 "country": "USA",
-                "email": "johnny@appleseed.com",
                 "first_name": "Janet",
                 "last_name": "Yellen",
-                "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
                 "postal_code": "10001",
                 "state": "NY",
+                "address2": "Unit 5A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             exp_month="06",
             exp_year="2027",
             product_id="100",
-            shipping_method="STANDARD",
+            shipping_method="2-DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -548,14 +548,14 @@ class TestAsyncCards:
     @parametrize
     async def test_method_create(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             carrier={"qr_code_url": "qr_code_url"},
@@ -568,20 +568,20 @@ class TestAsyncCards:
             replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
-                "address2": "Unit 25A",
                 "city": "NEW YORK",
                 "country": "USA",
-                "email": "johnny@appleseed.com",
                 "first_name": "Michael",
                 "last_name": "Bluth",
-                "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
                 "postal_code": "10001-1809",
                 "state": "NY",
+                "address2": "Unit 25A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
             },
             shipping_method="2_DAY",
             spend_limit=1000,
-            spend_limit_duration="TRANSACTION",
+            spend_limit_duration="ANNUALLY",
             state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
@@ -589,7 +589,7 @@ class TestAsyncCards:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
         response = await async_client.cards.with_raw_response.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
         )
 
         assert response.is_closed is True
@@ -600,7 +600,7 @@ class TestAsyncCards:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
         async with async_client.cards.with_streaming_response.create(
-            type="VIRTUAL",
+            type="MERCHANT_LOCKED",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -663,8 +663,8 @@ class TestAsyncCards:
             memo="Updated Name",
             pin="pin",
             spend_limit=100,
-            spend_limit_duration="FOREVER",
-            state="OPEN",
+            spend_limit_duration="ANNUALLY",
+            state="CLOSED",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -797,7 +797,7 @@ class TestAsyncCards:
             certificate="U3RhaW5sZXNzIHJvY2tz",
             client_device_id="client_device_id",
             client_wallet_account_id="client_wallet_account_id",
-            digital_wallet="GOOGLE_PAY",
+            digital_wallet="APPLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -849,18 +849,18 @@ class TestAsyncCards:
             product_id="100",
             shipping_address={
                 "address1": "5 Broad Street",
-                "address2": "Unit 5A",
                 "city": "NEW YORK",
                 "country": "USA",
-                "email": "johnny@appleseed.com",
                 "first_name": "Janet",
                 "last_name": "Yellen",
-                "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
                 "postal_code": "10001",
                 "state": "NY",
+                "address2": "Unit 5A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
             },
-            shipping_method="STANDARD",
+            shipping_method="2-DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -917,22 +917,22 @@ class TestAsyncCards:
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             shipping_address={
                 "address1": "5 Broad Street",
-                "address2": "Unit 5A",
                 "city": "NEW YORK",
                 "country": "USA",
-                "email": "johnny@appleseed.com",
                 "first_name": "Janet",
                 "last_name": "Yellen",
-                "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
                 "postal_code": "10001",
                 "state": "NY",
+                "address2": "Unit 5A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+12124007676",
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             exp_month="06",
             exp_year="2027",
             product_id="100",
-            shipping_method="STANDARD",
+            shipping_method="2-DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
