@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
@@ -44,3 +44,6 @@ class SettlementReport(BaseModel):
 
     updated: datetime
     """Date and time when the transaction first occurred. UTC time zone."""
+
+    is_complete: Optional[bool] = None
+    """Indicates that all data expected on the given report date is available."""
