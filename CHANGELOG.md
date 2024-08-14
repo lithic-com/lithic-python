@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.57.0 (2024-08-14)
+
+Full Changelog: [v0.56.0...v0.57.0](https://github.com/lithic-com/lithic-python/compare/v0.56.0...v0.57.0)
+
+### Features
+
+* **api:** add SettlementReport property `is_complete` ([#533](https://github.com/lithic-com/lithic-python/issues/533)) ([cd57de3](https://github.com/lithic-com/lithic-python/commit/cd57de388f103180e76e29774d98543ba9bcbf99))
+
+
+### Chores
+
+* **examples:** minor formatting changes ([#532](https://github.com/lithic-com/lithic-python/issues/532)) ([1094602](https://github.com/lithic-com/lithic-python/commit/109460229154cf71f28bf15550b7d1694dea3acb))
+* **internal:** update some imports ([#530](https://github.com/lithic-com/lithic-python/issues/530)) ([10a7b9a](https://github.com/lithic-com/lithic-python/commit/10a7b9ad72308394e6318610c5bb1f5ad1a99b76))
+
 ## 0.56.0 (2024-08-12)
 
 Full Changelog: [v0.55.0...v0.56.0](https://github.com/lithic-com/lithic-python/compare/v0.55.0...v0.56.0)
