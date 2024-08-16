@@ -30,6 +30,9 @@ class StatementListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
+    include_initial_statements: bool
+    """Whether to include the initial statement. It is not included by default."""
+
     page_size: int
     """Page size (for pagination)."""
 

@@ -91,6 +91,7 @@ class Statements(SyncAPIResource):
         begin: Union[str, date] | NotGiven = NOT_GIVEN,
         end: Union[str, date] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
+        include_initial_statements: bool | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -114,6 +115,8 @@ class Statements(SyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          include_initial_statements: Whether to include the initial statement. It is not included by default.
 
           page_size: Page size (for pagination).
 
@@ -145,6 +148,7 @@ class Statements(SyncAPIResource):
                         "begin": begin,
                         "end": end,
                         "ending_before": ending_before,
+                        "include_initial_statements": include_initial_statements,
                         "page_size": page_size,
                         "starting_after": starting_after,
                     },
@@ -217,6 +221,7 @@ class AsyncStatements(AsyncAPIResource):
         begin: Union[str, date] | NotGiven = NOT_GIVEN,
         end: Union[str, date] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
+        include_initial_statements: bool | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -240,6 +245,8 @@ class AsyncStatements(AsyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          include_initial_statements: Whether to include the initial statement. It is not included by default.
 
           page_size: Page size (for pagination).
 
@@ -271,6 +278,7 @@ class AsyncStatements(AsyncAPIResource):
                         "begin": begin,
                         "end": end,
                         "ending_before": ending_before,
+                        "include_initial_statements": include_initial_statements,
                         "page_size": page_size,
                         "starting_after": starting_after,
                     },
