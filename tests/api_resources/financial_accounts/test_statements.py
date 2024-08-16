@@ -83,6 +83,7 @@ class TestStatements:
             begin=parse_date("2019-12-27"),
             end=parse_date("2019-12-27"),
             ending_before="ending_before",
+            include_initial_statements=True,
             page_size=1,
             starting_after="starting_after",
         )
@@ -189,6 +190,7 @@ class TestAsyncStatements:
             begin=parse_date("2019-12-27"),
             end=parse_date("2019-12-27"),
             ending_before="ending_before",
+            include_initial_statements=True,
             page_size=1,
             starting_after="starting_after",
         )
