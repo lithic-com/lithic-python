@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.58.0 (2024-08-16)
+
+Full Changelog: [v0.57.0...v0.58.0](https://github.com/lithic-com/lithic-python/compare/v0.57.0...v0.58.0)
+
+### Features
+
+* **api:** add StatementListParams property include_initial_statements ([#536](https://github.com/lithic-com/lithic-python/issues/536)) ([6a24d16](https://github.com/lithic-com/lithic-python/commit/6a24d1651e83b778c1d6d9a13c40f5e0f0c232f5))
+
+
+### Chores
+
+* **internal:** use different 32bit detection method ([#534](https://github.com/lithic-com/lithic-python/issues/534)) ([1e1f813](https://github.com/lithic-com/lithic-python/commit/1e1f8134789f1af66b5a719c339643256c37e89f))
+
 ## 0.57.0 (2024-08-14)
 
 Full Changelog: [v0.56.0...v0.57.0](https://github.com/lithic-com/lithic-python/compare/v0.56.0...v0.57.0)
