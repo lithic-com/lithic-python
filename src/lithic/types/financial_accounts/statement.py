@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import date, datetime
 from typing_extensions import Literal
 
@@ -110,3 +111,9 @@ class Statement(BaseModel):
     """Timestamp of when the statement was updated"""
 
     ytd_totals: YtdTotals
+
+    next_payment_due_date: Optional[date] = None
+    """Date when the next payment is due"""
+
+    next_statement_end_date: Optional[date] = None
+    """Date when the next billing period will end"""
