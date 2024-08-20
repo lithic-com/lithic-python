@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.59.0 (2024-08-20)
+
+Full Changelog: [v0.58.0...v0.59.0](https://github.com/lithic-com/lithic-python/compare/v0.58.0...v0.59.0)
+
+### Features
+
+* **api:** add property `next_payment_end_date` and `next_payment_due_date` to Statement model ([#541](https://github.com/lithic-com/lithic-python/issues/541)) ([eba1a51](https://github.com/lithic-com/lithic-python/commit/eba1a51e018b4acc7ba5d6b3989309fd01e8b18b))
+
+
+### Chores
+
+* **ci:** also run pydantic v1 tests ([#540](https://github.com/lithic-com/lithic-python/issues/540)) ([c48e5c4](https://github.com/lithic-com/lithic-python/commit/c48e5c472c802ab5dae8e64aa618285fd082e146))
+* **client:** fix parsing union responses when non-json is returned ([#539](https://github.com/lithic-com/lithic-python/issues/539)) ([139cfd8](https://github.com/lithic-com/lithic-python/commit/139cfd890603c29a11c58c0b605e0234c4a35bcd))
+* **docs:** update state description on Card ([#537](https://github.com/lithic-com/lithic-python/issues/537)) ([73f607e](https://github.com/lithic-com/lithic-python/commit/73f607ec9f8c662a4254bfb11db7a5c1da537efc))
+
 ## 0.58.0 (2024-08-16)
 
 Full Changelog: [v0.57.0...v0.58.0](https://github.com/lithic-com/lithic-python/compare/v0.57.0...v0.58.0)
