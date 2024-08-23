@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.60.0 (2024-08-23)
+
+Full Changelog: [v0.59.0...v0.60.0](https://github.com/lithic-com/lithic-python/compare/v0.59.0...v0.60.0)
+
+### Features
+
+* **api:** new book_transfer_transaction events and Settlement Report field deprecations ([#542](https://github.com/lithic-com/lithic-python/issues/542)) ([2e73d68](https://github.com/lithic-com/lithic-python/commit/2e73d68e66378b75c3069635c9a7375113b3dbb0))
+
 ## 0.59.0 (2024-08-20)
 
 Full Changelog: [v0.58.0...v0.59.0](https://github.com/lithic-com/lithic-python/compare/v0.58.0...v0.59.0)
