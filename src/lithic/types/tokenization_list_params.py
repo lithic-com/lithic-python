@@ -40,7 +40,7 @@ class TokenizationListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT"]
+    tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "ALL"]
     """Filter for tokenizations by tokenization channel.
 
     If this is not specified, only DIGITAL_WALLET tokenizations will be returned.
