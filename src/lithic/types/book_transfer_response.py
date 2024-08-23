@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -22,6 +22,9 @@ class Event(BaseModel):
     created: datetime
     """Date and time when the financial event occurred. UTC time zone."""
 
+    detailed_results: List[Literal["APPROVED", "FUNDS_INSUFFICIENT"]]
+    """Detailed Results"""
+
     memo: str
     """Memo for the transfer."""
 
@@ -35,10 +38,7 @@ class Event(BaseModel):
     """The program specific subtype code for the specified category/type."""
 
     type: str
-    """Subtype of the book transfer"""
-
-    detailed_results: Optional[List[Literal["APPROVED", "FUNDS_INSUFFICIENT"]]] = None
-    """Detailed Results"""
+    """Type of the book transfer"""
 
 
 class BookTransferResponse(BaseModel):
