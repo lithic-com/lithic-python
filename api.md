@@ -512,6 +512,7 @@ from lithic.types.three_ds import DecisioningRetrieveSecretResponse
 
 Methods:
 
+- <code title="post /three_ds_decisioning/challenge_response">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">challenge_response</a>(\*\*<a href="src/lithic/types/three_ds/decisioning_challenge_response_params.py">params</a>) -> None</code>
 - <code title="get /three_ds_decisioning/secret">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/three_ds/decisioning_retrieve_secret_response.py">DecisioningRetrieveSecretResponse</a></code>
 - <code title="post /three_ds_decisioning/secret/rotate">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">rotate_secret</a>() -> None</code>
 
