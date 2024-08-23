@@ -24,6 +24,7 @@ class Event(BaseModel):
         "account_holder.updated",
         "account_holder.verification",
         "balance.updated",
+        "book_transfer_transaction.created",
         "card.created",
         "card.renewed",
         "card.reissued",
