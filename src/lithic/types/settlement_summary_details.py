@@ -9,6 +9,9 @@ __all__ = ["SettlementSummaryDetails"]
 
 
 class SettlementSummaryDetails(BaseModel):
+    currency: Optional[str] = None
+    """ISO 4217 alpha 3 code."""
+
     disputes_gross_amount: Optional[int] = None
     """The total gross amount of disputes settlements."""
 
