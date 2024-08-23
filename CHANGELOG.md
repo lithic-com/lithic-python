@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.61.0 (2024-08-23)
+
+Full Changelog: [v0.60.0...v0.61.0](https://github.com/lithic-com/lithic-python/compare/v0.60.0...v0.61.0)
+
+### Features
+
+* **api:** add endpoints and webhooks for 3DS challenge decisions and challenges ([#544](https://github.com/lithic-com/lithic-python/issues/544)) ([c5437be](https://github.com/lithic-com/lithic-python/commit/c5437be23dd46461391419ca02e5a63c62ac1d81))
+
 ## 0.60.0 (2024-08-23)
 
 Full Changelog: [v0.59.0...v0.60.0](https://github.com/lithic-com/lithic-python/compare/v0.59.0...v0.60.0)
