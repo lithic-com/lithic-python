@@ -320,7 +320,7 @@ class AuthenticationRetrieveResponse(BaseModel):
     account_type: Optional[Literal["CREDIT", "DEBIT", "NOT_APPLICABLE"]] = None
     """Type of account/card that is being used for the transaction.
 
-    Maps to EMV 3DS field acctType.
+    Maps to EMV 3DS field `acctType`.
     """
 
     authentication_result: Optional[Literal["DECLINE", "SUCCESS"]] = None
