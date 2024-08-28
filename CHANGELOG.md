@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.62.0 (2024-08-28)
+
+Full Changelog: [v0.61.0...v0.62.0](https://github.com/lithic-com/lithic-python/compare/v0.61.0...v0.62.0)
+
+### Features
+
+* **api:** add 'pin status' and 'pending_commands' to Card model ([#548](https://github.com/lithic-com/lithic-python/issues/548)) ([659ecca](https://github.com/lithic-com/lithic-python/commit/659ecca973405b11f78fd04b9f57c01574fa5e09))
+
+
+### Chores
+
+* **docs:** minor edits ([#546](https://github.com/lithic-com/lithic-python/issues/546)) ([ae3ebc5](https://github.com/lithic-com/lithic-python/commit/ae3ebc5885874122a2f444bcf1f2e004885adb6b))
+
 ## 0.61.0 (2024-08-23)
 
 Full Changelog: [v0.60.0...v0.61.0](https://github.com/lithic-com/lithic-python/compare/v0.60.0...v0.61.0)
