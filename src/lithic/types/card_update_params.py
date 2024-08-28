@@ -28,8 +28,15 @@ class CardUpdateParams(TypedDict, total=False):
     pin: str
     """Encrypted PIN block (in base64).
 
-    Only applies to cards of type `PHYSICAL` and `VIRTUAL`. See
-    [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
+    Only applies to cards of type `PHYSICAL` and `VIRTUAL`. Changing PIN also resets
+    PIN status to `OK`. See
+    [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
+    """
+
+    pin_status: Literal["OK"]
+    """Indicates if a card is blocked due a PIN status issue (e.g.
+
+    excessive incorrect attempts). Can only be set to `OK` to unblock a card.
     """
 
     spend_limit: int
