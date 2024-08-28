@@ -71,6 +71,12 @@ class Card(BaseModel):
     last_four: str
     """Last four digits of the card number."""
 
+    pin_status: Literal["OK", "BLOCKED", "NOT_SET"]
+    """Indicates if a card is blocked due a PIN status issue (e.g.
+
+    excessive incorrect attempts).
+    """
+
     spend_limit: int
     """Amount (in cents) to limit approved authorizations.
 
@@ -174,6 +180,13 @@ class Card(BaseModel):
     the card number). Customers must be PCI compliant to have PAN returned as a
     field in production. Please contact
     [support@lithic.com](mailto:support@lithic.com) for questions.
+    """
+
+    pending_commands: Optional[List[str]] = None
+    """
+    Indicates if there are offline PIN changes pending card interaction with an
+    offline PIN terminal. Possible commands are: CHANGE_PIN, UNBLOCK_PIN. Applicable
+    only to cards issued in markets supporting offline PINs.
     """
 
     product_id: Optional[str] = None
