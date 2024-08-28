@@ -294,6 +294,7 @@ class Cards(SyncAPIResource):
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        pin_status: Literal["OK"] | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
@@ -322,8 +323,11 @@ class Cards(SyncAPIResource):
               store JSON data as it can cause unexpected behavior.
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
-              `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
+              `VIRTUAL`. Changing PIN also resets PIN status to `OK`. See
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
+
+          pin_status: Indicates if a card is blocked due a PIN status issue (e.g. excessive incorrect
+              attempts). Can only be set to `OK` to unblock a card.
 
           spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
               the spend limit will be declined. Note that a spend limit of 0 is effectively no
@@ -372,6 +376,7 @@ class Cards(SyncAPIResource):
                     "digital_card_art_token": digital_card_art_token,
                     "memo": memo,
                     "pin": pin,
+                    "pin_status": pin_status,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
                     "state": state,
@@ -1054,6 +1059,7 @@ class AsyncCards(AsyncAPIResource):
         digital_card_art_token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
+        pin_status: Literal["OK"] | NotGiven = NOT_GIVEN,
         spend_limit: int | NotGiven = NOT_GIVEN,
         spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
@@ -1082,8 +1088,11 @@ class AsyncCards(AsyncAPIResource):
               store JSON data as it can cause unexpected behavior.
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
-              `VIRTUAL`. See
-              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block-enterprise).
+              `VIRTUAL`. Changing PIN also resets PIN status to `OK`. See
+              [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
+
+          pin_status: Indicates if a card is blocked due a PIN status issue (e.g. excessive incorrect
+              attempts). Can only be set to `OK` to unblock a card.
 
           spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
               the spend limit will be declined. Note that a spend limit of 0 is effectively no
@@ -1132,6 +1141,7 @@ class AsyncCards(AsyncAPIResource):
                     "digital_card_art_token": digital_card_art_token,
                     "memo": memo,
                     "pin": pin,
+                    "pin_status": pin_status,
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
                     "state": state,
