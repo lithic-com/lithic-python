@@ -11,14 +11,13 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import (
     AccountHolder,
-    AccountHolderDocument,
     AccountHolderCreateResponse,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
     AccountHolderSimulateEnrollmentReviewResponse,
-    AccountHolderSimulateEnrollmentDocumentReviewResponse,
 )
 from lithic.pagination import SyncSinglePage, AsyncSinglePage
+from lithic.types.shared import Document
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -38,6 +37,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -50,6 +50,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -62,6 +63,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -119,6 +121,7 @@ class TestAccountHolders:
                     "postal_code": "68022",
                     "state": "NE",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
@@ -156,11 +159,11 @@ class TestAccountHolders:
                         "state": "NE",
                         "address2": "address2",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "parent_company": "parent_company",
                 },
                 {
@@ -172,11 +175,11 @@ class TestAccountHolders:
                         "state": "NE",
                         "address2": "address2",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "parent_company": "parent_company",
                 },
                 {
@@ -188,11 +191,11 @@ class TestAccountHolders:
                         "state": "NE",
                         "address2": "address2",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "parent_company": "parent_company",
                 },
             ],
@@ -255,11 +258,11 @@ class TestAccountHolders:
                     "state": "NE",
                     "address2": "address2",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
                 "dba_business_name": "dba_business_name",
-                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "parent_company": "parent_company",
             },
             control_person={
@@ -299,6 +302,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -311,6 +315,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -323,6 +328,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -380,6 +386,7 @@ class TestAccountHolders:
                     "postal_code": "68022",
                     "state": "NE",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
@@ -420,6 +427,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -432,6 +440,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -444,6 +453,7 @@ class TestAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -501,6 +511,7 @@ class TestAccountHolders:
                     "postal_code": "68022",
                     "state": "NE",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
@@ -996,7 +1007,7 @@ class TestAccountHolders:
             document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve_document(self, client: Lithic) -> None:
@@ -1008,7 +1019,7 @@ class TestAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve_document(self, client: Lithic) -> None:
@@ -1020,7 +1031,7 @@ class TestAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = response.parse()
-            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+            assert_matches_type(Document, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1041,7 +1052,7 @@ class TestAccountHolders:
     @parametrize
     def test_method_simulate_enrollment_document_review(self, client: Lithic) -> None:
         account_holder = client.account_holders.simulate_enrollment_document_review()
-        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_method_simulate_enrollment_document_review_with_all_params(self, client: Lithic) -> None:
@@ -1050,7 +1061,7 @@ class TestAccountHolders:
             status="UPLOADED",
             status_reasons=["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"],
         )
-        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
@@ -1059,7 +1070,7 @@ class TestAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_streaming_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
@@ -1068,9 +1079,7 @@ class TestAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = response.parse()
-            assert_matches_type(
-                AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"]
-            )
+            assert_matches_type(Document, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1116,39 +1125,36 @@ class TestAccountHolders:
     def test_method_upload_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
-
-    @parametrize
-    def test_method_upload_document_with_all_params(self, client: Lithic) -> None:
-        account_holder = client.account_holders.upload_document(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
             entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_upload_document(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="EIN_LETTER",
+            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_streaming_response_upload_document(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="EIN_LETTER",
+            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = response.parse()
-            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+            assert_matches_type(Document, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1157,6 +1163,8 @@ class TestAccountHolders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.upload_document(
                 account_holder_token="",
+                document_type="EIN_LETTER",
+                entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
 
@@ -1175,6 +1183,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1187,6 +1196,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1199,6 +1209,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1256,6 +1267,7 @@ class TestAsyncAccountHolders:
                     "postal_code": "68022",
                     "state": "NE",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
@@ -1293,11 +1305,11 @@ class TestAsyncAccountHolders:
                         "state": "NE",
                         "address2": "address2",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "parent_company": "parent_company",
                 },
                 {
@@ -1309,11 +1321,11 @@ class TestAsyncAccountHolders:
                         "state": "NE",
                         "address2": "address2",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "parent_company": "parent_company",
                 },
                 {
@@ -1325,11 +1337,11 @@ class TestAsyncAccountHolders:
                         "state": "NE",
                         "address2": "address2",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "parent_company": "parent_company",
                 },
             ],
@@ -1392,11 +1404,11 @@ class TestAsyncAccountHolders:
                     "state": "NE",
                     "address2": "address2",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
                 "dba_business_name": "dba_business_name",
-                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "parent_company": "parent_company",
             },
             control_person={
@@ -1436,6 +1448,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1448,6 +1461,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1460,6 +1474,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1517,6 +1532,7 @@ class TestAsyncAccountHolders:
                     "postal_code": "68022",
                     "state": "NE",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
@@ -1557,6 +1573,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1569,6 +1586,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1581,6 +1599,7 @@ class TestAsyncAccountHolders:
                         "postal_code": "68022",
                         "state": "NE",
                     },
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
@@ -1638,6 +1657,7 @@ class TestAsyncAccountHolders:
                     "postal_code": "68022",
                     "state": "NE",
                 },
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
                 "phone_numbers": ["+12124007676"],
@@ -2133,7 +2153,7 @@ class TestAsyncAccountHolders:
             document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve_document(self, async_client: AsyncLithic) -> None:
@@ -2145,7 +2165,7 @@ class TestAsyncAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve_document(self, async_client: AsyncLithic) -> None:
@@ -2157,7 +2177,7 @@ class TestAsyncAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = await response.parse()
-            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+            assert_matches_type(Document, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2178,7 +2198,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.simulate_enrollment_document_review()
-        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_method_simulate_enrollment_document_review_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -2187,7 +2207,7 @@ class TestAsyncAccountHolders:
             status="UPLOADED",
             status_reasons=["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"],
         )
-        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
@@ -2196,7 +2216,7 @@ class TestAsyncAccountHolders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_streaming_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
@@ -2205,9 +2225,7 @@ class TestAsyncAccountHolders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = await response.parse()
-            assert_matches_type(
-                AccountHolderSimulateEnrollmentDocumentReviewResponse, account_holder, path=["response"]
-            )
+            assert_matches_type(Document, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2253,39 +2271,36 @@ class TestAsyncAccountHolders:
     async def test_method_upload_document(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
-
-    @parametrize
-    async def test_method_upload_document_with_all_params(self, async_client: AsyncLithic) -> None:
-        account_holder = await async_client.account_holders.upload_document(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
             entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_upload_document(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="EIN_LETTER",
+            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account_holder = response.parse()
-        assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+        assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_streaming_response_upload_document(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            document_type="EIN_LETTER",
+            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account_holder = await response.parse()
-            assert_matches_type(AccountHolderDocument, account_holder, path=["response"])
+            assert_matches_type(Document, account_holder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2294,4 +2309,6 @@ class TestAsyncAccountHolders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.upload_document(
                 account_holder_token="",
+                document_type="EIN_LETTER",
+                entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )

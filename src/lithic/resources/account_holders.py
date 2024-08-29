@@ -31,15 +31,12 @@ from .._constants import DEFAULT_TIMEOUT
 from ..pagination import SyncSinglePage, AsyncSinglePage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.account_holder import AccountHolder
+from ..types.shared.document import Document
 from ..types.shared_params.address import Address
-from ..types.account_holder_document import AccountHolderDocument
 from ..types.account_holder_create_response import AccountHolderCreateResponse
 from ..types.account_holder_update_response import AccountHolderUpdateResponse
 from ..types.account_holder_list_documents_response import AccountHolderListDocumentsResponse
 from ..types.account_holder_simulate_enrollment_review_response import AccountHolderSimulateEnrollmentReviewResponse
-from ..types.account_holder_simulate_enrollment_document_review_response import (
-    AccountHolderSimulateEnrollmentDocumentReviewResponse,
-)
 
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 
@@ -606,7 +603,7 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolderDocument:
+    ) -> Document:
         """
         Check the status of an account holder document upload, or retrieve the upload
         URLs to process your image uploads.
@@ -643,7 +640,7 @@ class AccountHolders(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountHolderDocument,
+            cast_to=Document,
         )
 
     def simulate_enrollment_document_review(
@@ -661,7 +658,7 @@ class AccountHolders(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolderSimulateEnrollmentDocumentReviewResponse:
+    ) -> Document:
         """
         Simulates a review for an account holder document upload.
 
@@ -694,7 +691,7 @@ class AccountHolders(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountHolderSimulateEnrollmentDocumentReviewResponse,
+            cast_to=Document,
         )
 
     def simulate_enrollment_review(
@@ -786,16 +783,15 @@ class AccountHolders(SyncAPIResource):
             "UTILITY_BILL_STATEMENT",
             "SSN_CARD",
             "ITIN_LETTER",
-        ]
-        | NotGiven = NOT_GIVEN,
-        entity_token: str | NotGiven = NOT_GIVEN,
+        ],
+        entity_token: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolderDocument:
+    ) -> Document:
         """
         Use this endpoint to identify which type of supported government-issued
         documentation you will upload for further verification. It will return two URLs
@@ -845,7 +841,7 @@ class AccountHolders(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountHolderDocument,
+            cast_to=Document,
         )
 
 
@@ -1411,7 +1407,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolderDocument:
+    ) -> Document:
         """
         Check the status of an account holder document upload, or retrieve the upload
         URLs to process your image uploads.
@@ -1448,7 +1444,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountHolderDocument,
+            cast_to=Document,
         )
 
     async def simulate_enrollment_document_review(
@@ -1466,7 +1462,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolderSimulateEnrollmentDocumentReviewResponse:
+    ) -> Document:
         """
         Simulates a review for an account holder document upload.
 
@@ -1499,7 +1495,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountHolderSimulateEnrollmentDocumentReviewResponse,
+            cast_to=Document,
         )
 
     async def simulate_enrollment_review(
@@ -1591,16 +1587,15 @@ class AsyncAccountHolders(AsyncAPIResource):
             "UTILITY_BILL_STATEMENT",
             "SSN_CARD",
             "ITIN_LETTER",
-        ]
-        | NotGiven = NOT_GIVEN,
-        entity_token: str | NotGiven = NOT_GIVEN,
+        ],
+        entity_token: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolderDocument:
+    ) -> Document:
         """
         Use this endpoint to identify which type of supported government-issued
         documentation you will upload for further verification. It will return two URLs
@@ -1650,7 +1645,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountHolderDocument,
+            cast_to=Document,
         )
 
 

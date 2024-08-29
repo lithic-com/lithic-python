@@ -102,6 +102,9 @@ class KYBBeneficialOwnerEntity(TypedDict, total=False):
     acceptable; APO/FPO are acceptable.
     """
 
+    entity_token: Required[str]
+    """Globally unique identifier for the entity."""
+
     government_id: Required[str]
     """Government-issued identification number.
 
@@ -123,9 +126,6 @@ class KYBBeneficialOwnerEntity(TypedDict, total=False):
     Any name that the business operates under that is not its legal business name
     (if applicable).
     """
-
-    entity_token: str
-    """Globally unique identifier for the entity."""
 
     parent_company: str
     """Parent company name (if applicable)."""
@@ -172,6 +172,9 @@ class KYBBusinessEntity(TypedDict, total=False):
     acceptable; APO/FPO are acceptable.
     """
 
+    entity_token: Required[str]
+    """Globally unique identifier for the entity."""
+
     government_id: Required[str]
     """Government-issued identification number.
 
@@ -193,9 +196,6 @@ class KYBBusinessEntity(TypedDict, total=False):
     Any name that the business operates under that is not its legal business name
     (if applicable).
     """
-
-    entity_token: str
-    """Globally unique identifier for the entity."""
 
     parent_company: str
     """Parent company name (if applicable)."""

@@ -26,6 +26,9 @@ class BeneficialOwnerEntity(BaseModel):
     acceptable; APO/FPO are acceptable.
     """
 
+    entity_token: str
+    """Globally unique identifier for the entity."""
+
     government_id: str
     """Government-issued identification number.
 
@@ -48,33 +51,30 @@ class BeneficialOwnerEntity(BaseModel):
     (if applicable).
     """
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
-
     parent_company: Optional[str] = None
     """Parent company name (if applicable)."""
 
 
 class BeneficialOwnerIndividual(BaseModel):
-    address: Optional[Address] = None
+    address: Address
     """Individual's current address"""
 
-    dob: Optional[str] = None
+    dob: str
     """Individual's date of birth, as an RFC 3339 date."""
 
-    email: Optional[str] = None
+    email: str
     """Individual's email address."""
 
-    entity_token: Optional[str] = None
+    entity_token: str
     """Globally unique identifier for the entity."""
 
-    first_name: Optional[str] = None
+    first_name: str
     """Individual's first name, as it appears on government-issued identity documents."""
 
-    last_name: Optional[str] = None
+    last_name: str
     """Individual's last name, as it appears on government-issued identity documents."""
 
-    phone_number: Optional[str] = None
+    phone_number: str
     """Individual's phone number, entered in E.164 format."""
 
 
@@ -85,6 +85,9 @@ class BusinessEntity(BaseModel):
     acceptable; APO/FPO are acceptable.
     """
 
+    entity_token: str
+    """Globally unique identifier for the entity."""
+
     government_id: str
     """Government-issued identification number.
 
@@ -107,56 +110,53 @@ class BusinessEntity(BaseModel):
     (if applicable).
     """
 
-    entity_token: Optional[str] = None
-    """Globally unique identifier for the entity."""
-
     parent_company: Optional[str] = None
     """Parent company name (if applicable)."""
 
 
 class ControlPerson(BaseModel):
-    address: Optional[Address] = None
+    address: Address
     """Individual's current address"""
 
-    dob: Optional[str] = None
+    dob: str
     """Individual's date of birth, as an RFC 3339 date."""
 
-    email: Optional[str] = None
+    email: str
     """Individual's email address."""
 
-    entity_token: Optional[str] = None
+    entity_token: str
     """Globally unique identifier for the entity."""
 
-    first_name: Optional[str] = None
+    first_name: str
     """Individual's first name, as it appears on government-issued identity documents."""
 
-    last_name: Optional[str] = None
+    last_name: str
     """Individual's last name, as it appears on government-issued identity documents."""
 
-    phone_number: Optional[str] = None
+    phone_number: str
     """Individual's phone number, entered in E.164 format."""
 
 
 class Individual(BaseModel):
-    address: Optional[Address] = None
+    address: Address
     """Individual's current address"""
 
-    dob: Optional[str] = None
+    dob: str
     """Individual's date of birth, as an RFC 3339 date."""
 
-    email: Optional[str] = None
+    email: str
     """Individual's email address."""
 
-    entity_token: Optional[str] = None
+    entity_token: str
     """Globally unique identifier for the entity."""
 
-    first_name: Optional[str] = None
+    first_name: str
     """Individual's first name, as it appears on government-issued identity documents."""
 
-    last_name: Optional[str] = None
+    last_name: str
     """Individual's last name, as it appears on government-issued identity documents."""
 
-    phone_number: Optional[str] = None
+    phone_number: str
     """Individual's phone number, entered in E.164 format."""
 
 
@@ -218,6 +218,9 @@ class AccountHolder(BaseModel):
     token: str
     """Globally unique identifier for the account holder."""
 
+    created: datetime
+    """Timestamp of when the account holder was created."""
+
     account_token: Optional[str] = None
     """Globally unique identifier for the account."""
 
@@ -256,9 +259,6 @@ class AccountHolder(BaseModel):
     someone who will have program-wide access to the cards that Lithic will provide.
     In some cases, this individual could also be a beneficial owner listed above.
     """
-
-    created: Optional[datetime] = None
-    """Timestamp of when the account holder was created."""
 
     email: Optional[str] = None
     """
