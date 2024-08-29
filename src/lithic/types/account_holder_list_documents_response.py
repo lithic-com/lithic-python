@@ -3,10 +3,10 @@
 from typing import List, Optional
 
 from .._models import BaseModel
-from .account_holder_document import AccountHolderDocument
+from .shared.document import Document
 
 __all__ = ["AccountHolderListDocumentsResponse"]
 
 
 class AccountHolderListDocumentsResponse(BaseModel):
-    data: Optional[List[AccountHolderDocument]] = None
+    data: Optional[List[Document]] = None

@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from lithic.types import Address, Carrier, ShippingAddress
+from lithic.types import Address, Carrier, Document, ShippingAddress
 ```
 
 # Lithic
@@ -38,14 +38,12 @@ Types:
 ```python
 from lithic.types import (
     AccountHolder,
-    AccountHolderDocument,
     KYB,
     KYC,
     KYCExempt,
     AccountHolderCreateResponse,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
-    AccountHolderSimulateEnrollmentDocumentReviewResponse,
     AccountHolderSimulateEnrollmentReviewResponse,
 )
 ```
@@ -58,10 +56,10 @@ Methods:
 - <code title="get /account_holders">client.account_holders.<a href="./src/lithic/resources/account_holders.py">list</a>(\*\*<a href="src/lithic/types/account_holder_list_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">SyncSinglePage[AccountHolder]</a></code>
 - <code title="get /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">list_documents</a>(account_holder_token) -> <a href="./src/lithic/types/account_holder_list_documents_response.py">AccountHolderListDocumentsResponse</a></code>
 - <code title="post /account_holders/{account_holder_token}/resubmit">client.account_holders.<a href="./src/lithic/resources/account_holders.py">resubmit</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_resubmit_params.py">params</a>) -> <a href="./src/lithic/types/account_holder.py">AccountHolder</a></code>
-- <code title="get /account_holders/{account_holder_token}/documents/{document_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve_document</a>(document_token, \*, account_holder_token) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
-- <code title="post /simulate/account_holders/enrollment_document_review">client.account_holders.<a href="./src/lithic/resources/account_holders.py">simulate_enrollment_document_review</a>(\*\*<a href="src/lithic/types/account_holder_simulate_enrollment_document_review_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_simulate_enrollment_document_review_response.py">AccountHolderSimulateEnrollmentDocumentReviewResponse</a></code>
+- <code title="get /account_holders/{account_holder_token}/documents/{document_token}">client.account_holders.<a href="./src/lithic/resources/account_holders.py">retrieve_document</a>(document_token, \*, account_holder_token) -> <a href="./src/lithic/types/shared/document.py">Document</a></code>
+- <code title="post /simulate/account_holders/enrollment_document_review">client.account_holders.<a href="./src/lithic/resources/account_holders.py">simulate_enrollment_document_review</a>(\*\*<a href="src/lithic/types/account_holder_simulate_enrollment_document_review_params.py">params</a>) -> <a href="./src/lithic/types/shared/document.py">Document</a></code>
 - <code title="post /simulate/account_holders/enrollment_review">client.account_holders.<a href="./src/lithic/resources/account_holders.py">simulate_enrollment_review</a>(\*\*<a href="src/lithic/types/account_holder_simulate_enrollment_review_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_simulate_enrollment_review_response.py">AccountHolderSimulateEnrollmentReviewResponse</a></code>
-- <code title="post /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">upload_document</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_upload_document_params.py">params</a>) -> <a href="./src/lithic/types/account_holder_document.py">AccountHolderDocument</a></code>
+- <code title="post /account_holders/{account_holder_token}/documents">client.account_holders.<a href="./src/lithic/resources/account_holders.py">upload_document</a>(account_holder_token, \*\*<a href="src/lithic/types/account_holder_upload_document_params.py">params</a>) -> <a href="./src/lithic/types/shared/document.py">Document</a></code>
 
 # AuthRules
 

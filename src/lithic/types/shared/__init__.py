@@ -2,4 +2,5 @@
 
 from .address import Address as Address
 from .carrier import Carrier as Carrier
+from .document import Document as Document
 from .shipping_address import ShippingAddress as ShippingAddress
