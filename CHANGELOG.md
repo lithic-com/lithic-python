@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.63.0 (2024-08-29)
+
+Full Changelog: [v0.62.0...v0.63.0](https://github.com/lithic-com/lithic-python/compare/v0.62.0...v0.63.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** add shared model Document ([#549](https://github.com/lithic-com/lithic-python/issues/549))
+
+### Features
+
+* **api:** add shared model Document ([#549](https://github.com/lithic-com/lithic-python/issues/549)) ([f8195c8](https://github.com/lithic-com/lithic-python/commit/f8195c87414265fe2955fdc773a88981c771bcfc))
+
 ## 0.62.0 (2024-08-28)
 
 Full Changelog: [v0.61.0...v0.62.0](https://github.com/lithic-com/lithic-python/compare/v0.61.0...v0.62.0)
