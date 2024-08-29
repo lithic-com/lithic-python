@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from .card import Card as Card
 from .event import Event as Event
-from .shared import Address as Address, Carrier as Carrier, ShippingAddress as ShippingAddress
+from .shared import Address as Address, Carrier as Carrier, Document as Document, ShippingAddress as ShippingAddress
 from .account import Account as Account
 from .balance import Balance as Balance
 from .dispute import Dispute as Dispute
@@ -53,7 +53,6 @@ from .payment_create_params import PaymentCreateParams as PaymentCreateParams
 from .auth_rule_apply_params import AuthRuleApplyParams as AuthRuleApplyParams
 from .book_transfer_response import BookTransferResponse as BookTransferResponse
 from .payment_retry_response import PaymentRetryResponse as PaymentRetryResponse
-from .account_holder_document import AccountHolderDocument as AccountHolderDocument
 from .auth_rule_create_params import AuthRuleCreateParams as AuthRuleCreateParams
 from .auth_rule_remove_params import AuthRuleRemoveParams as AuthRuleRemoveParams
 from .auth_rule_update_params import AuthRuleUpdateParams as AuthRuleUpdateParams
@@ -190,7 +189,4 @@ from .external_bank_account_retry_micro_deposits_response import (
 )
 from .account_holder_simulate_enrollment_document_review_params import (
     AccountHolderSimulateEnrollmentDocumentReviewParams as AccountHolderSimulateEnrollmentDocumentReviewParams,
-)
-from .account_holder_simulate_enrollment_document_review_response import (
-    AccountHolderSimulateEnrollmentDocumentReviewResponse as AccountHolderSimulateEnrollmentDocumentReviewResponse,
 )
