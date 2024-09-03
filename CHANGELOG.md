@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.64.0 (2024-09-03)
+
+Full Changelog: [v0.63.0...v0.64.0](https://github.com/lithic-com/lithic-python/compare/v0.63.0...v0.64.0)
+
+### Features
+
+* **api:** declare AccountHolderBusinessResponse and remove entity_token from BusinessEntity ([#551](https://github.com/lithic-com/lithic-python/issues/551)) ([6e6aff0](https://github.com/lithic-com/lithic-python/commit/6e6aff04db80cc58ebd32c1531147639b8bd1d83))
+
 ## 0.63.0 (2024-08-29)
 
 Full Changelog: [v0.62.0...v0.63.0](https://github.com/lithic-com/lithic-python/compare/v0.62.0...v0.63.0)
