@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, overload
+from typing import List, Union, Iterable, overload
+from datetime import datetime
 from typing_extensions import Literal
 
 import httpx
@@ -427,9 +428,16 @@ class AccountHolders(SyncAPIResource):
     def list(
         self,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        legal_business_name: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -443,12 +451,32 @@ class AccountHolders(SyncAPIResource):
         evaluation status.
 
         Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
+              will be included. UTC time zone.
+
+          email: Email address of the account holder. The query must be an exact match, case
+              insensitive.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified time
+              will be included. UTC time zone.
+
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
           external_id: If applicable, represents the external_id associated with the account_holder.
 
+          first_name: (Individual Account Holders only) The first name of the account holder. The
+              query is case insensitive and supports partial matches.
+
+          last_name: (Individual Account Holders only) The last name of the account holder. The query
+              is case insensitive and supports partial matches.
+
+          legal_business_name: (Business Account Holders only) The legal business name of the account holder.
+              The query is case insensitive and supports partial matches.
+
           limit: The number of account_holders to limit the response to.
+
+          phone_number: Phone number of the account holder. The query must be an exact match.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -471,9 +499,16 @@ class AccountHolders(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "begin": begin,
+                        "email": email,
+                        "end": end,
                         "ending_before": ending_before,
                         "external_id": external_id,
+                        "first_name": first_name,
+                        "last_name": last_name,
+                        "legal_business_name": legal_business_name,
                         "limit": limit,
+                        "phone_number": phone_number,
                         "starting_after": starting_after,
                     },
                     account_holder_list_params.AccountHolderListParams,
@@ -1231,9 +1266,16 @@ class AsyncAccountHolders(AsyncAPIResource):
     def list(
         self,
         *,
+        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        legal_business_name: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1247,12 +1289,32 @@ class AsyncAccountHolders(AsyncAPIResource):
         evaluation status.
 
         Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
+              will be included. UTC time zone.
+
+          email: Email address of the account holder. The query must be an exact match, case
+              insensitive.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified time
+              will be included. UTC time zone.
+
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
           external_id: If applicable, represents the external_id associated with the account_holder.
 
+          first_name: (Individual Account Holders only) The first name of the account holder. The
+              query is case insensitive and supports partial matches.
+
+          last_name: (Individual Account Holders only) The last name of the account holder. The query
+              is case insensitive and supports partial matches.
+
+          legal_business_name: (Business Account Holders only) The legal business name of the account holder.
+              The query is case insensitive and supports partial matches.
+
           limit: The number of account_holders to limit the response to.
+
+          phone_number: Phone number of the account holder. The query must be an exact match.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -1275,9 +1337,16 @@ class AsyncAccountHolders(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "begin": begin,
+                        "email": email,
+                        "end": end,
                         "ending_before": ending_before,
                         "external_id": external_id,
+                        "first_name": first_name,
+                        "last_name": last_name,
+                        "legal_business_name": legal_business_name,
                         "limit": limit,
+                        "phone_number": phone_number,
                         "starting_after": starting_after,
                     },
                     account_holder_list_params.AccountHolderListParams,
