@@ -102,9 +102,6 @@ class KYBBeneficialOwnerEntity(TypedDict, total=False):
     acceptable; APO/FPO are acceptable.
     """
 
-    entity_token: Required[str]
-    """Globally unique identifier for the entity."""
-
     government_id: Required[str]
     """Government-issued identification number.
 
@@ -171,9 +168,6 @@ class KYBBusinessEntity(TypedDict, total=False):
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable.
     """
-
-    entity_token: Required[str]
-    """Globally unique identifier for the entity."""
 
     government_id: Required[str]
     """Government-issued identification number.

@@ -26,6 +26,12 @@ class BeneficialOwnerEntity(BaseModel):
     acceptable; APO/FPO are acceptable.
     """
 
+    dba_business_name: str
+    """
+    Any name that the business operates under that is not its legal business name
+    (if applicable).
+    """
+
     entity_token: str
     """Globally unique identifier for the entity."""
 
@@ -43,12 +49,6 @@ class BeneficialOwnerEntity(BaseModel):
     """
     One or more of the business's phone number(s), entered as a list in E.164
     format.
-    """
-
-    dba_business_name: Optional[str] = None
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
     """
 
     parent_company: Optional[str] = None
@@ -85,6 +85,12 @@ class BusinessEntity(BaseModel):
     acceptable; APO/FPO are acceptable.
     """
 
+    dba_business_name: str
+    """
+    Any name that the business operates under that is not its legal business name
+    (if applicable).
+    """
+
     entity_token: str
     """Globally unique identifier for the entity."""
 
@@ -102,12 +108,6 @@ class BusinessEntity(BaseModel):
     """
     One or more of the business's phone number(s), entered as a list in E.164
     format.
-    """
-
-    dba_business_name: Optional[str] = None
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
     """
 
     parent_company: Optional[str] = None
