@@ -14,13 +14,13 @@ from lithic.types import APIStatus
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestTopLevel:
+class TestClient:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_api_status(self, client: Lithic) -> None:
-        top_level = client.api_status()
-        assert_matches_type(APIStatus, top_level, path=["response"])
+        client_ = client.api_status()
+        assert_matches_type(APIStatus, client_, path=["response"])
 
     @parametrize
     def test_raw_response_api_status(self, client: Lithic) -> None:
@@ -28,8 +28,8 @@ class TestTopLevel:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        top_level = response.parse()
-        assert_matches_type(APIStatus, top_level, path=["response"])
+        client_ = response.parse()
+        assert_matches_type(APIStatus, client_, path=["response"])
 
     @parametrize
     def test_streaming_response_api_status(self, client: Lithic) -> None:
@@ -37,19 +37,19 @@ class TestTopLevel:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            top_level = response.parse()
-            assert_matches_type(APIStatus, top_level, path=["response"])
+            client_ = response.parse()
+            assert_matches_type(APIStatus, client_, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncTopLevel:
+class TestAsyncClient:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_api_status(self, async_client: AsyncLithic) -> None:
-        top_level = await async_client.api_status()
-        assert_matches_type(APIStatus, top_level, path=["response"])
+        client = await async_client.api_status()
+        assert_matches_type(APIStatus, client, path=["response"])
 
     @parametrize
     async def test_raw_response_api_status(self, async_client: AsyncLithic) -> None:
@@ -57,8 +57,8 @@ class TestAsyncTopLevel:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        top_level = response.parse()
-        assert_matches_type(APIStatus, top_level, path=["response"])
+        client = response.parse()
+        assert_matches_type(APIStatus, client, path=["response"])
 
     @parametrize
     async def test_streaming_response_api_status(self, async_client: AsyncLithic) -> None:
@@ -66,7 +66,7 @@ class TestAsyncTopLevel:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            top_level = await response.parse()
-            assert_matches_type(APIStatus, top_level, path=["response"])
+            client = await response.parse()
+            assert_matches_type(APIStatus, client, path=["response"])
 
         assert cast(Any, response.is_closed) is True
