@@ -220,7 +220,7 @@ class AccountHolders(SyncAPIResource):
 
         Args:
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+              acceptable; APO/FPO are acceptable.
 
           email: The KYC Exempt user's email
 
@@ -1058,7 +1058,7 @@ class AsyncAccountHolders(AsyncAPIResource):
 
         Args:
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+              acceptable; APO/FPO are acceptable.
 
           email: The KYC Exempt user's email
 
