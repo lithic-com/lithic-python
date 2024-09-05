@@ -34,7 +34,8 @@ class ShippingAddress(TypedDict, total=False):
     postal_code: Required[str]
     """Postal code (formerly zipcode).
 
-    For US addresses, either five-digit zipcode or nine-digit "ZIP+4".
+    For US addresses, either five-digit postal code or nine-digit postal code
+    (ZIP+4) using the format 12345-1234.
     """
 
     state: Required[str]
