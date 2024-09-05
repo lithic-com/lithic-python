@@ -51,8 +51,9 @@ class VerificationAddress(BaseModel):
     postal_code: str
     """Valid postal code.
 
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
+    Only USA postal codes (ZIP codes) are currently supported, entered as a
+    five-digit postal code or nine-digit postal code (ZIP+4) using the format
+    12345-1234.
     """
 
     state: str
