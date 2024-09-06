@@ -14,3 +14,6 @@ class CreditConfigurationUpdateParams(TypedDict, total=False):
     """Globally unique identifier for the credit product"""
 
     external_bank_account_token: str
+
+    tier: str
+    """Tier to assign to a financial account"""
