@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.65.0 (2024-09-06)
+
+Full Changelog: [v0.64.0...v0.65.0](https://github.com/lithic-com/lithic-python/compare/v0.64.0...v0.65.0)
+
+### Features
+
+* **api:** add tier and state to financial_accounts ([#557](https://github.com/lithic-com/lithic-python/issues/557)) ([9bad05b](https://github.com/lithic-com/lithic-python/commit/9bad05bb6a9973bcc6bc627b1568e93f25c0d0e5))
+
+
+### Chores
+
+* **docs:** update description for postal codes ([#556](https://github.com/lithic-com/lithic-python/issues/556)) ([993f718](https://github.com/lithic-com/lithic-python/commit/993f718f25d45e56e1736c757329b28981bc3866))
+* pyproject.toml formatting changes ([#553](https://github.com/lithic-com/lithic-python/issues/553)) ([e1cb673](https://github.com/lithic-com/lithic-python/commit/e1cb673600044649d4027a86620eccfcae88e4b4))
+* **test:** change test name ([#555](https://github.com/lithic-com/lithic-python/issues/555)) ([ada39fe](https://github.com/lithic-com/lithic-python/commit/ada39fea44d9bee99a6b64c4ce72085e4dcbae99))
+
 ## 0.64.0 (2024-09-03)
 
 Full Changelog: [v0.63.0...v0.64.0](https://github.com/lithic-com/lithic-python/compare/v0.63.0...v0.64.0)
