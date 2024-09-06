@@ -71,6 +71,7 @@ class CreditConfiguration(SyncAPIResource):
         credit_limit: int | NotGiven = NOT_GIVEN,
         credit_product_token: str | NotGiven = NOT_GIVEN,
         external_bank_account_token: str | NotGiven = NOT_GIVEN,
+        tier: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -83,6 +84,8 @@ class CreditConfiguration(SyncAPIResource):
 
         Args:
           credit_product_token: Globally unique identifier for the credit product
+
+          tier: Tier to assign to a financial account
 
           extra_headers: Send extra headers
 
@@ -103,6 +106,7 @@ class CreditConfiguration(SyncAPIResource):
                     "credit_limit": credit_limit,
                     "credit_product_token": credit_product_token,
                     "external_bank_account_token": external_bank_account_token,
+                    "tier": tier,
                 },
                 credit_configuration_update_params.CreditConfigurationUpdateParams,
             ),
@@ -164,6 +168,7 @@ class AsyncCreditConfiguration(AsyncAPIResource):
         credit_limit: int | NotGiven = NOT_GIVEN,
         credit_product_token: str | NotGiven = NOT_GIVEN,
         external_bank_account_token: str | NotGiven = NOT_GIVEN,
+        tier: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -176,6 +181,8 @@ class AsyncCreditConfiguration(AsyncAPIResource):
 
         Args:
           credit_product_token: Globally unique identifier for the credit product
+
+          tier: Tier to assign to a financial account
 
           extra_headers: Send extra headers
 
@@ -196,6 +203,7 @@ class AsyncCreditConfiguration(AsyncAPIResource):
                     "credit_limit": credit_limit,
                     "credit_product_token": credit_product_token,
                     "external_bank_account_token": external_bank_account_token,
+                    "tier": tier,
                 },
                 credit_configuration_update_params.CreditConfigurationUpdateParams,
             ),

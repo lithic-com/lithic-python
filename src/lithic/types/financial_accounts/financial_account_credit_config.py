@@ -17,3 +17,9 @@ class FinancialAccountCreditConfig(BaseModel):
     """Globally unique identifier for the credit product"""
 
     external_bank_account_token: Optional[str] = None
+
+    financial_account_state: Optional[str] = None
+    """State of the financial account"""
+
+    tier: Optional[str] = None
+    """Tier assigned to the financial account"""
