@@ -71,6 +71,7 @@ class TestCreditConfiguration:
             credit_limit=0,
             credit_product_token="credit_product_token",
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            tier="x",
         )
         assert_matches_type(FinancialAccountCreditConfig, credit_configuration, path=["response"])
 
@@ -165,6 +166,7 @@ class TestAsyncCreditConfiguration:
             credit_limit=0,
             credit_product_token="credit_product_token",
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            tier="x",
         )
         assert_matches_type(FinancialAccountCreditConfig, credit_configuration, path=["response"])
 
