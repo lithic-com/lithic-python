@@ -69,10 +69,21 @@ class Transactions(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> TransactionsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return TransactionsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> TransactionsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return TransactionsWithStreamingResponse(self)
 
     def retrieve(
@@ -611,10 +622,21 @@ class AsyncTransactions(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncTransactionsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncTransactionsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncTransactionsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncTransactionsWithStreamingResponse(self)
 
     async def retrieve(

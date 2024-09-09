@@ -36,10 +36,21 @@ class Statements(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> StatementsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return StatementsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> StatementsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return StatementsWithStreamingResponse(self)
 
     def retrieve(
@@ -166,10 +177,21 @@ class AsyncStatements(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncStatementsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncStatementsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncStatementsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncStatementsWithStreamingResponse(self)
 
     async def retrieve(

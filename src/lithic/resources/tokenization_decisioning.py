@@ -19,10 +19,21 @@ __all__ = ["TokenizationDecisioning", "AsyncTokenizationDecisioning"]
 class TokenizationDecisioning(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TokenizationDecisioningWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return TokenizationDecisioningWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> TokenizationDecisioningWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return TokenizationDecisioningWithStreamingResponse(self)
 
     def retrieve_secret(
@@ -80,10 +91,21 @@ class TokenizationDecisioning(SyncAPIResource):
 class AsyncTokenizationDecisioning(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncTokenizationDecisioningWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncTokenizationDecisioningWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncTokenizationDecisioningWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncTokenizationDecisioningWithStreamingResponse(self)
 
     async def retrieve_secret(

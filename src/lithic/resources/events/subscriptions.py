@@ -38,10 +38,21 @@ __all__ = ["Subscriptions", "AsyncSubscriptions"]
 class Subscriptions(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> SubscriptionsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return SubscriptionsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> SubscriptionsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return SubscriptionsWithStreamingResponse(self)
 
     def create(
@@ -678,10 +689,21 @@ class Subscriptions(SyncAPIResource):
 class AsyncSubscriptions(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncSubscriptionsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncSubscriptionsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncSubscriptionsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncSubscriptionsWithStreamingResponse(self)
 
     async def create(

@@ -28,10 +28,21 @@ __all__ = ["BookTransfers", "AsyncBookTransfers"]
 class BookTransfers(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> BookTransfersWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return BookTransfersWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> BookTransfersWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return BookTransfersWithStreamingResponse(self)
 
     def create(
@@ -299,10 +310,21 @@ class BookTransfers(SyncAPIResource):
 class AsyncBookTransfers(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncBookTransfersWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncBookTransfersWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncBookTransfersWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncBookTransfersWithStreamingResponse(self)
 
     async def create(
