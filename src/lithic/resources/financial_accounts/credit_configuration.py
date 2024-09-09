@@ -23,10 +23,21 @@ __all__ = ["CreditConfiguration", "AsyncCreditConfiguration"]
 class CreditConfiguration(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> CreditConfigurationWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return CreditConfigurationWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> CreditConfigurationWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return CreditConfigurationWithStreamingResponse(self)
 
     def retrieve(
@@ -120,10 +131,21 @@ class CreditConfiguration(SyncAPIResource):
 class AsyncCreditConfiguration(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncCreditConfigurationWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncCreditConfigurationWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncCreditConfigurationWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncCreditConfigurationWithStreamingResponse(self)
 
     async def retrieve(

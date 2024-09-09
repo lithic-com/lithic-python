@@ -25,10 +25,21 @@ __all__ = ["Decisioning", "AsyncDecisioning"]
 class Decisioning(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DecisioningWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return DecisioningWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> DecisioningWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return DecisioningWithStreamingResponse(self)
 
     def challenge_response(
@@ -133,10 +144,21 @@ class Decisioning(SyncAPIResource):
 class AsyncDecisioning(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncDecisioningWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncDecisioningWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncDecisioningWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncDecisioningWithStreamingResponse(self)
 
     async def challenge_response(

@@ -57,10 +57,21 @@ class ExternalBankAccounts(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> ExternalBankAccountsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return ExternalBankAccountsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> ExternalBankAccountsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return ExternalBankAccountsWithStreamingResponse(self)
 
     @overload
@@ -613,10 +624,21 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncExternalBankAccountsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncExternalBankAccountsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncExternalBankAccountsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncExternalBankAccountsWithStreamingResponse(self)
 
     @overload

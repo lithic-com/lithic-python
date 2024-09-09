@@ -30,10 +30,21 @@ __all__ = ["ResponderEndpoints", "AsyncResponderEndpoints"]
 class ResponderEndpoints(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> ResponderEndpointsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return ResponderEndpointsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> ResponderEndpointsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return ResponderEndpointsWithStreamingResponse(self)
 
     def create(
@@ -159,10 +170,21 @@ class ResponderEndpoints(SyncAPIResource):
 class AsyncResponderEndpoints(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncResponderEndpointsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncResponderEndpointsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncResponderEndpointsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncResponderEndpointsWithStreamingResponse(self)
 
     async def create(

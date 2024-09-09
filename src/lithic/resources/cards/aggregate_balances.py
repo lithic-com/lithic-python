@@ -21,10 +21,21 @@ __all__ = ["AggregateBalances", "AsyncAggregateBalances"]
 class AggregateBalances(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AggregateBalancesWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AggregateBalancesWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AggregateBalancesWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AggregateBalancesWithStreamingResponse(self)
 
     def list(
@@ -78,10 +89,21 @@ class AggregateBalances(SyncAPIResource):
 class AsyncAggregateBalances(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncAggregateBalancesWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncAggregateBalancesWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncAggregateBalancesWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncAggregateBalancesWithStreamingResponse(self)
 
     def list(

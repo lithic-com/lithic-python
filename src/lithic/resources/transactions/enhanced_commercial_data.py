@@ -18,10 +18,21 @@ __all__ = ["EnhancedCommercialData", "AsyncEnhancedCommercialData"]
 class EnhancedCommercialData(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> EnhancedCommercialDataWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return EnhancedCommercialDataWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> EnhancedCommercialDataWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return EnhancedCommercialDataWithStreamingResponse(self)
 
     def retrieve(
@@ -63,10 +74,21 @@ class EnhancedCommercialData(SyncAPIResource):
 class AsyncEnhancedCommercialData(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncEnhancedCommercialDataWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncEnhancedCommercialDataWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncEnhancedCommercialDataWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncEnhancedCommercialDataWithStreamingResponse(self)
 
     async def retrieve(

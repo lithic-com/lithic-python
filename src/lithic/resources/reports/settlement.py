@@ -25,10 +25,21 @@ __all__ = ["Settlement", "AsyncSettlement"]
 class Settlement(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> SettlementWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return SettlementWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> SettlementWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return SettlementWithStreamingResponse(self)
 
     def list_details(
@@ -125,10 +136,21 @@ class Settlement(SyncAPIResource):
 class AsyncSettlement(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncSettlementWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncSettlementWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncSettlementWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncSettlementWithStreamingResponse(self)
 
     def list_details(
