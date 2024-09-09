@@ -21,10 +21,21 @@ __all__ = ["CardPrograms", "AsyncCardPrograms"]
 class CardPrograms(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> CardProgramsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return CardProgramsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> CardProgramsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return CardProgramsWithStreamingResponse(self)
 
     def retrieve(
@@ -117,10 +128,21 @@ class CardPrograms(SyncAPIResource):
 class AsyncCardPrograms(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncCardProgramsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncCardProgramsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncCardProgramsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncCardProgramsWithStreamingResponse(self)
 
     async def retrieve(

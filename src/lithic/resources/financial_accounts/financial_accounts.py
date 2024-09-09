@@ -79,10 +79,21 @@ class FinancialAccounts(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> FinancialAccountsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return FinancialAccountsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> FinancialAccountsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return FinancialAccountsWithStreamingResponse(self)
 
     def create(
@@ -272,10 +283,21 @@ class AsyncFinancialAccounts(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncFinancialAccountsWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncFinancialAccountsWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncFinancialAccountsWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncFinancialAccountsWithStreamingResponse(self)
 
     async def create(

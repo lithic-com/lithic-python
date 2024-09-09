@@ -21,10 +21,21 @@ __all__ = ["DigitalCardArtResource", "AsyncDigitalCardArtResource"]
 class DigitalCardArtResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DigitalCardArtResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return DigitalCardArtResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> DigitalCardArtResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return DigitalCardArtResourceWithStreamingResponse(self)
 
     def retrieve(
@@ -119,10 +130,21 @@ class DigitalCardArtResource(SyncAPIResource):
 class AsyncDigitalCardArtResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncDigitalCardArtResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncDigitalCardArtResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncDigitalCardArtResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
+        """
         return AsyncDigitalCardArtResourceWithStreamingResponse(self)
 
     async def retrieve(
