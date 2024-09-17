@@ -63,7 +63,7 @@ class EnhancedCommercialData(SyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._get(
-            f"/transactions/{transaction_token}/enhanced_commercial_data",
+            f"/v1/transactions/{transaction_token}/enhanced_commercial_data",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -119,7 +119,7 @@ class AsyncEnhancedCommercialData(AsyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._get(
-            f"/transactions/{transaction_token}/enhanced_commercial_data",
+            f"/v1/transactions/{transaction_token}/enhanced_commercial_data",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

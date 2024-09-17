@@ -311,7 +311,7 @@ class AccountHolders(SyncAPIResource):
         if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
             timeout = 300
         return self._post(
-            "/account_holders",
+            "/v1/account_holders",
             body=maybe_transform(
                 {
                     "beneficial_owner_entities": beneficial_owner_entities,
@@ -371,7 +371,7 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._get(
-            f"/account_holders/{account_holder_token}",
+            f"/v1/account_holders/{account_holder_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -421,7 +421,7 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._patch(
-            f"/account_holders/{account_holder_token}",
+            f"/v1/account_holders/{account_holder_token}",
             body=maybe_transform(
                 {
                     "business_account_token": business_account_token,
@@ -501,7 +501,7 @@ class AccountHolders(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/account_holders",
+            "/v1/account_holders",
             page=SyncSinglePage[AccountHolder],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -570,7 +570,7 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._get(
-            f"/account_holders/{account_holder_token}/documents",
+            f"/v1/account_holders/{account_holder_token}/documents",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -623,7 +623,7 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._post(
-            f"/account_holders/{account_holder_token}/resubmit",
+            f"/v1/account_holders/{account_holder_token}/resubmit",
             body=maybe_transform(
                 {
                     "individual": individual,
@@ -682,7 +682,7 @@ class AccountHolders(SyncAPIResource):
         if not document_token:
             raise ValueError(f"Expected a non-empty value for `document_token` but received {document_token!r}")
         return self._get(
-            f"/account_holders/{account_holder_token}/documents/{document_token}",
+            f"/v1/account_holders/{account_holder_token}/documents/{document_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -725,7 +725,7 @@ class AccountHolders(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/account_holders/enrollment_document_review",
+            "/v1/simulate/account_holders/enrollment_document_review",
             body=maybe_transform(
                 {
                     "document_upload_token": document_upload_token,
@@ -791,7 +791,7 @@ class AccountHolders(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/account_holders/enrollment_review",
+            "/v1/simulate/account_holders/enrollment_review",
             body=maybe_transform(
                 {
                     "account_holder_token": account_holder_token,
@@ -876,7 +876,7 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._post(
-            f"/account_holders/{account_holder_token}/documents",
+            f"/v1/account_holders/{account_holder_token}/documents",
             body=maybe_transform(
                 {
                     "document_type": document_type,
@@ -1160,7 +1160,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
             timeout = 300
         return await self._post(
-            "/account_holders",
+            "/v1/account_holders",
             body=await async_maybe_transform(
                 {
                     "beneficial_owner_entities": beneficial_owner_entities,
@@ -1220,7 +1220,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._get(
-            f"/account_holders/{account_holder_token}",
+            f"/v1/account_holders/{account_holder_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1270,7 +1270,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._patch(
-            f"/account_holders/{account_holder_token}",
+            f"/v1/account_holders/{account_holder_token}",
             body=await async_maybe_transform(
                 {
                     "business_account_token": business_account_token,
@@ -1350,7 +1350,7 @@ class AsyncAccountHolders(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/account_holders",
+            "/v1/account_holders",
             page=AsyncSinglePage[AccountHolder],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -1419,7 +1419,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._get(
-            f"/account_holders/{account_holder_token}/documents",
+            f"/v1/account_holders/{account_holder_token}/documents",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1472,7 +1472,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._post(
-            f"/account_holders/{account_holder_token}/resubmit",
+            f"/v1/account_holders/{account_holder_token}/resubmit",
             body=await async_maybe_transform(
                 {
                     "individual": individual,
@@ -1531,7 +1531,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         if not document_token:
             raise ValueError(f"Expected a non-empty value for `document_token` but received {document_token!r}")
         return await self._get(
-            f"/account_holders/{account_holder_token}/documents/{document_token}",
+            f"/v1/account_holders/{account_holder_token}/documents/{document_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1574,7 +1574,7 @@ class AsyncAccountHolders(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/account_holders/enrollment_document_review",
+            "/v1/simulate/account_holders/enrollment_document_review",
             body=await async_maybe_transform(
                 {
                     "document_upload_token": document_upload_token,
@@ -1640,7 +1640,7 @@ class AsyncAccountHolders(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/account_holders/enrollment_review",
+            "/v1/simulate/account_holders/enrollment_review",
             body=await async_maybe_transform(
                 {
                     "account_holder_token": account_holder_token,
@@ -1725,7 +1725,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._post(
-            f"/account_holders/{account_holder_token}/documents",
+            f"/v1/account_holders/{account_holder_token}/documents",
             body=await async_maybe_transform(
                 {
                     "document_type": document_type,

@@ -237,7 +237,7 @@ class Cards(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/cards",
+            "/v1/cards",
             body=maybe_transform(
                 {
                     "type": type,
@@ -291,7 +291,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get(
-            f"/cards/{card_token}",
+            f"/v1/cards/{card_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -381,7 +381,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._patch(
-            f"/cards/{card_token}",
+            f"/v1/cards/{card_token}",
             body=maybe_transform(
                 {
                     "digital_card_art_token": digital_card_art_token,
@@ -448,7 +448,7 @@ class Cards(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/cards",
+            "/v1/cards",
             page=SyncCursorPage[Card],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -526,7 +526,7 @@ class Cards(SyncAPIResource):
         """
         extra_headers = {"Accept": "text/html", **(extra_headers or {})}
         return self._get(
-            "/embed/card",
+            "/v1/embed/card",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -603,7 +603,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
-            f"/cards/{card_token}/provision",
+            f"/v1/cards/{card_token}/provision",
             body=maybe_transform(
                 {
                     "certificate": certificate,
@@ -675,7 +675,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
-            f"/cards/{card_token}/reissue",
+            f"/v1/cards/{card_token}/reissue",
             body=maybe_transform(
                 {
                     "carrier": carrier,
@@ -753,7 +753,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
-            f"/cards/{card_token}/renew",
+            f"/v1/cards/{card_token}/renew",
             body=maybe_transform(
                 {
                     "shipping_address": shipping_address,
@@ -800,7 +800,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get(
-            f"/cards/{card_token}/spend_limits",
+            f"/v1/cards/{card_token}/spend_limits",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -838,7 +838,7 @@ class Cards(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/cards/search_by_pan",
+            "/v1/cards/search_by_pan",
             body=maybe_transform({"pan": pan}, card_search_by_pan_params.CardSearchByPanParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1013,7 +1013,7 @@ class AsyncCards(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/cards",
+            "/v1/cards",
             body=await async_maybe_transform(
                 {
                     "type": type,
@@ -1067,7 +1067,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._get(
-            f"/cards/{card_token}",
+            f"/v1/cards/{card_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1157,7 +1157,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._patch(
-            f"/cards/{card_token}",
+            f"/v1/cards/{card_token}",
             body=await async_maybe_transform(
                 {
                     "digital_card_art_token": digital_card_art_token,
@@ -1224,7 +1224,7 @@ class AsyncCards(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/cards",
+            "/v1/cards",
             page=AsyncCursorPage[Card],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -1302,7 +1302,7 @@ class AsyncCards(AsyncAPIResource):
         """
         extra_headers = {"Accept": "text/html", **(extra_headers or {})}
         return await self._get(
-            "/embed/card",
+            "/v1/embed/card",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1379,7 +1379,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
-            f"/cards/{card_token}/provision",
+            f"/v1/cards/{card_token}/provision",
             body=await async_maybe_transform(
                 {
                     "certificate": certificate,
@@ -1451,7 +1451,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
-            f"/cards/{card_token}/reissue",
+            f"/v1/cards/{card_token}/reissue",
             body=await async_maybe_transform(
                 {
                     "carrier": carrier,
@@ -1529,7 +1529,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
-            f"/cards/{card_token}/renew",
+            f"/v1/cards/{card_token}/renew",
             body=await async_maybe_transform(
                 {
                     "shipping_address": shipping_address,
@@ -1576,7 +1576,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._get(
-            f"/cards/{card_token}/spend_limits",
+            f"/v1/cards/{card_token}/spend_limits",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1614,7 +1614,7 @@ class AsyncCards(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/cards/search_by_pan",
+            "/v1/cards/search_by_pan",
             body=await async_maybe_transform({"pan": pan}, card_search_by_pan_params.CardSearchByPanParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

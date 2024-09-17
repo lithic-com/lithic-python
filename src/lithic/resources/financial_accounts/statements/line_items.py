@@ -84,7 +84,7 @@ class LineItems(SyncAPIResource):
         if not statement_token:
             raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return self._get_api_list(
-            f"/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
+            f"/v1/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
             page=SyncCursorPage[LineItemListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -170,7 +170,7 @@ class AsyncLineItems(AsyncAPIResource):
         if not statement_token:
             raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return self._get_api_list(
-            f"/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
+            f"/v1/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
             page=AsyncCursorPage[LineItemListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,

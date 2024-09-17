@@ -79,7 +79,7 @@ class Settlement(SyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get_api_list(
-            f"/reports/settlement/details/{report_date}",
+            f"/v1/reports/settlement/details/{report_date}",
             page=SyncCursorPage[SettlementDetail],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -125,7 +125,7 @@ class Settlement(SyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get(
-            f"/reports/settlement/summary/{report_date}",
+            f"/v1/reports/settlement/summary/{report_date}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -190,7 +190,7 @@ class AsyncSettlement(AsyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get_api_list(
-            f"/reports/settlement/details/{report_date}",
+            f"/v1/reports/settlement/details/{report_date}",
             page=AsyncCursorPage[SettlementDetail],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -236,7 +236,7 @@ class AsyncSettlement(AsyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return await self._get(
-            f"/reports/settlement/summary/{report_date}",
+            f"/v1/reports/settlement/summary/{report_date}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
