@@ -85,11 +85,11 @@ class BookTransferResponse(BaseModel):
     (e.g., cents).
     """
 
-    status: Literal["DECLINED", "PENDING", "SETTLED"]
+    status: Literal["DECLINED", "REVERSED", "SETTLED"]
     """Status types: \\** `DECLINED` - The transfer was declined.
 
-    - `PENDING` - The transfer is pending release from a hold. \\** `SETTLED` - The
-      transfer is completed.
+    - `REVERSED` - The transfer was reversed \\** `SETTLED` - The transfer is
+      completed.
     """
 
     to_financial_account_token: object

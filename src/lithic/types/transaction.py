@@ -7,11 +7,21 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .shared.currency import Currency
 
 __all__ = [
     "Transaction",
+    "Amounts",
+    "AmountsCardholder",
+    "AmountsHold",
+    "AmountsMerchant",
+    "AmountsSettlement",
     "Avs",
     "Event",
+    "EventAmounts",
+    "EventAmountsCardholder",
+    "EventAmountsMerchant",
+    "EventAmountsSettlement",
     "Merchant",
     "Pos",
     "PosEntryMode",
@@ -19,6 +29,66 @@ __all__ = [
     "TokenInfo",
     "CardholderAuthentication",
 ]
+
+
+class AmountsCardholder(BaseModel):
+    amount: int
+
+    conversion_rate: str
+
+    currency: Currency
+    """ISO 4217 currency.
+
+    Its enumerants are ISO 4217 currencies except for some special currencies like
+    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    :attr:`Currency.usd`.
+    """
+
+
+class AmountsHold(BaseModel):
+    amount: int
+
+    currency: Currency
+    """ISO 4217 currency.
+
+    Its enumerants are ISO 4217 currencies except for some special currencies like
+    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    :attr:`Currency.usd`.
+    """
+
+
+class AmountsMerchant(BaseModel):
+    amount: int
+
+    currency: Currency
+    """ISO 4217 currency.
+
+    Its enumerants are ISO 4217 currencies except for some special currencies like
+    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    :attr:`Currency.usd`.
+    """
+
+
+class AmountsSettlement(BaseModel):
+    amount: int
+
+    currency: Currency
+    """ISO 4217 currency.
+
+    Its enumerants are ISO 4217 currencies except for some special currencies like
+    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    :attr:`Currency.usd`.
+    """
+
+
+class Amounts(BaseModel):
+    cardholder: AmountsCardholder
+
+    hold: AmountsHold
+
+    merchant: AmountsMerchant
+
+    settlement: AmountsSettlement
 
 
 class Avs(BaseModel):
@@ -29,12 +99,62 @@ class Avs(BaseModel):
     """Cardholder ZIP code"""
 
 
+class EventAmountsCardholder(BaseModel):
+    amount: int
+
+    conversion_rate: str
+
+    currency: Currency
+    """ISO 4217 currency.
+
+    Its enumerants are ISO 4217 currencies except for some special currencies like
+    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    :attr:`Currency.usd`.
+    """
+
+
+class EventAmountsMerchant(BaseModel):
+    amount: int
+
+    currency: Currency
+    """ISO 4217 currency.
+
+    Its enumerants are ISO 4217 currencies except for some special currencies like
+    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    :attr:`Currency.usd`.
+    """
+
+
+class EventAmountsSettlement(BaseModel):
+    amount: int
+
+    conversion_rate: str
+
+    currency: Currency
+    """ISO 4217 currency.
+
+    Its enumerants are ISO 4217 currencies except for some special currencies like
+    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    :attr:`Currency.usd`.
+    """
+
+
+class EventAmounts(BaseModel):
+    cardholder: EventAmountsCardholder
+
+    merchant: EventAmountsMerchant
+
+    settlement: Optional[EventAmountsSettlement] = None
+
+
 class Event(BaseModel):
     token: str
     """Globally unique identifier."""
 
     amount: int
     """Amount of the transaction event (in cents), including any acquirer fees."""
+
+    amounts: EventAmounts
 
     created: datetime
     """RFC 3339 date and time this event entered the system. UTC time zone."""
@@ -476,6 +596,8 @@ class Transaction(BaseModel):
     transaction is settled.
     """
 
+    amounts: Amounts
+
     authorization_amount: Optional[int] = None
     """Authorization amount (in cents) of the transaction, including any acquirer fees.
 
@@ -579,5 +701,8 @@ class Transaction(BaseModel):
     """
 
     token_info: Optional[TokenInfo] = None
+
+    updated: datetime
+    """Date and time when the transaction last updated. UTC time zone."""
 
     cardholder_authentication: Optional[CardholderAuthentication] = None
