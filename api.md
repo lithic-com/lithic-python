@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from lithic.types import Address, Carrier, Document, ShippingAddress
+from lithic.types import Address, Carrier, Currency, Document, ShippingAddress
 ```
 
 # Lithic

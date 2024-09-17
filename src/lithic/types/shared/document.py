@@ -9,6 +9,9 @@ __all__ = ["Document", "RequiredDocumentUpload"]
 
 
 class RequiredDocumentUpload(BaseModel):
+    token: str
+    """Globally unique identifier for the document upload."""
+
     image_type: Literal["FRONT", "BACK"]
     """Type of image to upload."""
 
@@ -64,6 +67,9 @@ class Document(BaseModel):
         "ITIN_LETTER",
     ]
     """Type of documentation to be submitted for verification."""
+
+    entity_token: str
+    """Globally unique identifier for an entity."""
 
     required_document_uploads: List[RequiredDocumentUpload]
     """Represents a single image of the document to upload."""
