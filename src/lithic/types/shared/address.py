@@ -17,24 +17,15 @@ class Address(BaseModel):
     country: str
     """Valid country code.
 
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
+    USA and CAN are supported, entered in uppercase ISO 3166-1 alpha-3
     three-character format.
     """
 
     postal_code: str
-    """Valid postal code.
-
-    Only USA postal codes (ZIP codes) are currently supported, entered as a
-    five-digit postal code or nine-digit postal code (ZIP+4) using the format
-    12345-1234.
-    """
+    """Valid postal code."""
 
     state: str
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
+    """Valid state code."""
 
     address2: Optional[str] = None
     """Unit or apartment number (if applicable)."""
