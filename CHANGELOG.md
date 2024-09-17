@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.66.0 (2024-09-17)
+
+Full Changelog: [v0.65.0...v0.66.0](https://github.com/lithic-com/lithic-python/compare/v0.65.0...v0.66.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** updates book transfer status, updates to transactions, add currency model ([#564](https://github.com/lithic-com/lithic-python/issues/564))
+
+### Features
+
+* **api:** updates book transfer status, updates to transactions, add currency model ([#564](https://github.com/lithic-com/lithic-python/issues/564)) ([49a3a63](https://github.com/lithic-com/lithic-python/commit/49a3a631806d3327535511f27173f48f95628927))
+
+
+### Chores
+
+* add docstrings to raw response properties ([#558](https://github.com/lithic-com/lithic-python/issues/558)) ([15eec4c](https://github.com/lithic-com/lithic-python/commit/15eec4cbdfeaa5a94b49732f8dbbec4a85fcfb83))
+* **internal:** bump pyright / mypy version ([#563](https://github.com/lithic-com/lithic-python/issues/563)) ([325561c](https://github.com/lithic-com/lithic-python/commit/325561c6d8892397c6072765a06ee6e5f52d08f0))
+* **internal:** bump ruff ([#562](https://github.com/lithic-com/lithic-python/issues/562)) ([8a34fc1](https://github.com/lithic-com/lithic-python/commit/8a34fc12683c70a2bd623db503f09f78ab612baf))
+
+
+### Documentation
+
+* **readme:** add section on determining installed version ([#560](https://github.com/lithic-com/lithic-python/issues/560)) ([05ba523](https://github.com/lithic-com/lithic-python/commit/05ba523f6c882d5627998119624f15a593d9d3c8))
+* update CONTRIBUTING.md ([#561](https://github.com/lithic-com/lithic-python/issues/561)) ([1ac232c](https://github.com/lithic-com/lithic-python/commit/1ac232c528d0e45425be75af244c2aafa916d165))
+
 ## 0.65.0 (2024-09-06)
 
 Full Changelog: [v0.64.0...v0.65.0](https://github.com/lithic-com/lithic-python/compare/v0.64.0...v0.65.0)
