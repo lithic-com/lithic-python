@@ -79,7 +79,7 @@ class Tokenizations(SyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return self._get(
-            f"/tokenizations/{tokenization_token}",
+            f"/v1/tokenizations/{tokenization_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -136,7 +136,7 @@ class Tokenizations(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/tokenizations",
+            "/v1/tokenizations",
             page=SyncCursorPage[Tokenization],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -194,7 +194,7 @@ class Tokenizations(SyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return self._post(
-            f"/tokenizations/{tokenization_token}/activate",
+            f"/v1/tokenizations/{tokenization_token}/activate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -236,7 +236,7 @@ class Tokenizations(SyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return self._post(
-            f"/tokenizations/{tokenization_token}/deactivate",
+            f"/v1/tokenizations/{tokenization_token}/deactivate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -277,7 +277,7 @@ class Tokenizations(SyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return self._post(
-            f"/tokenizations/{tokenization_token}/pause",
+            f"/v1/tokenizations/{tokenization_token}/pause",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -311,8 +311,8 @@ class Tokenizations(SyncAPIResource):
 
         Args:
           activation_method_type: The communication method that the user has selected to use to receive the
-              authentication code. Supported Values: Sms = "TEXT_TO_CARDHOLDER_NUMBER". Email
-              = "EMAIL_TO_CARDHOLDER_ADDRESS"
+              authentication code. Supported Values: Sms = 'TEXT_TO_CARDHOLDER_NUMBER'. Email
+              = 'EMAIL_TO_CARDHOLDER_ADDRESS'
 
           extra_headers: Send extra headers
 
@@ -325,7 +325,7 @@ class Tokenizations(SyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return self._post(
-            f"/tokenizations/{tokenization_token}/resend_activation_code",
+            f"/v1/tokenizations/{tokenization_token}/resend_activation_code",
             body=maybe_transform(
                 {"activation_method_type": activation_method_type},
                 tokenization_resend_activation_code_params.TokenizationResendActivationCodeParams,
@@ -388,7 +388,7 @@ class Tokenizations(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/tokenizations",
+            "/v1/simulate/tokenizations",
             body=maybe_transform(
                 {
                     "cvv": cvv,
@@ -441,7 +441,7 @@ class Tokenizations(SyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return self._post(
-            f"/tokenizations/{tokenization_token}/unpause",
+            f"/v1/tokenizations/{tokenization_token}/unpause",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -487,7 +487,7 @@ class Tokenizations(SyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return self._post(
-            f"/tokenizations/{tokenization_token}/update_digital_card_art",
+            f"/v1/tokenizations/{tokenization_token}/update_digital_card_art",
             body=maybe_transform(
                 {"digital_card_art_token": digital_card_art_token},
                 tokenization_update_digital_card_art_params.TokenizationUpdateDigitalCardArtParams,
@@ -545,7 +545,7 @@ class AsyncTokenizations(AsyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return await self._get(
-            f"/tokenizations/{tokenization_token}",
+            f"/v1/tokenizations/{tokenization_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -602,7 +602,7 @@ class AsyncTokenizations(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/tokenizations",
+            "/v1/tokenizations",
             page=AsyncCursorPage[Tokenization],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -660,7 +660,7 @@ class AsyncTokenizations(AsyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return await self._post(
-            f"/tokenizations/{tokenization_token}/activate",
+            f"/v1/tokenizations/{tokenization_token}/activate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -702,7 +702,7 @@ class AsyncTokenizations(AsyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return await self._post(
-            f"/tokenizations/{tokenization_token}/deactivate",
+            f"/v1/tokenizations/{tokenization_token}/deactivate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -743,7 +743,7 @@ class AsyncTokenizations(AsyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return await self._post(
-            f"/tokenizations/{tokenization_token}/pause",
+            f"/v1/tokenizations/{tokenization_token}/pause",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -777,8 +777,8 @@ class AsyncTokenizations(AsyncAPIResource):
 
         Args:
           activation_method_type: The communication method that the user has selected to use to receive the
-              authentication code. Supported Values: Sms = "TEXT_TO_CARDHOLDER_NUMBER". Email
-              = "EMAIL_TO_CARDHOLDER_ADDRESS"
+              authentication code. Supported Values: Sms = 'TEXT_TO_CARDHOLDER_NUMBER'. Email
+              = 'EMAIL_TO_CARDHOLDER_ADDRESS'
 
           extra_headers: Send extra headers
 
@@ -791,7 +791,7 @@ class AsyncTokenizations(AsyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return await self._post(
-            f"/tokenizations/{tokenization_token}/resend_activation_code",
+            f"/v1/tokenizations/{tokenization_token}/resend_activation_code",
             body=await async_maybe_transform(
                 {"activation_method_type": activation_method_type},
                 tokenization_resend_activation_code_params.TokenizationResendActivationCodeParams,
@@ -854,7 +854,7 @@ class AsyncTokenizations(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/tokenizations",
+            "/v1/simulate/tokenizations",
             body=await async_maybe_transform(
                 {
                     "cvv": cvv,
@@ -907,7 +907,7 @@ class AsyncTokenizations(AsyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return await self._post(
-            f"/tokenizations/{tokenization_token}/unpause",
+            f"/v1/tokenizations/{tokenization_token}/unpause",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -953,7 +953,7 @@ class AsyncTokenizations(AsyncAPIResource):
         if not tokenization_token:
             raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
         return await self._post(
-            f"/tokenizations/{tokenization_token}/update_digital_card_art",
+            f"/v1/tokenizations/{tokenization_token}/update_digital_card_art",
             body=await async_maybe_transform(
                 {"digital_card_art_token": digital_card_art_token},
                 tokenization_update_digital_card_art_params.TokenizationUpdateDigitalCardArtParams,

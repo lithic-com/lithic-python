@@ -81,7 +81,7 @@ class Events(SyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get(
-            f"/events/{event_token}",
+            f"/v1/events/{event_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -174,7 +174,7 @@ class Events(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/events",
+            "/v1/events",
             page=SyncCursorPage[Event],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -243,7 +243,7 @@ class Events(SyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get_api_list(
-            f"/events/{event_token}/attempts",
+            f"/v1/events/{event_token}/attempts",
             page=SyncCursorPage[MessageAttempt],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -332,7 +332,7 @@ class AsyncEvents(AsyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return await self._get(
-            f"/events/{event_token}",
+            f"/v1/events/{event_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -425,7 +425,7 @@ class AsyncEvents(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/events",
+            "/v1/events",
             page=AsyncCursorPage[Event],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -494,7 +494,7 @@ class AsyncEvents(AsyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get_api_list(
-            f"/events/{event_token}/attempts",
+            f"/v1/events/{event_token}/attempts",
             page=AsyncCursorPage[MessageAttempt],
             options=make_request_options(
                 extra_headers=extra_headers,

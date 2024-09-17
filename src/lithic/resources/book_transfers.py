@@ -130,7 +130,7 @@ class BookTransfers(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/book_transfers",
+            "/v1/book_transfers",
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -178,7 +178,7 @@ class BookTransfers(SyncAPIResource):
                 f"Expected a non-empty value for `book_transfer_token` but received {book_transfer_token!r}"
             )
         return self._get(
-            f"/book_transfers/{book_transfer_token}",
+            f"/v1/book_transfers/{book_transfer_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -242,7 +242,7 @@ class BookTransfers(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/book_transfers",
+            "/v1/book_transfers",
             page=SyncCursorPage[BookTransferResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -298,7 +298,7 @@ class BookTransfers(SyncAPIResource):
                 f"Expected a non-empty value for `book_transfer_token` but received {book_transfer_token!r}"
             )
         return self._post(
-            f"/book_transfers/{book_transfer_token}/reverse",
+            f"/v1/book_transfers/{book_transfer_token}/reverse",
             body=maybe_transform({"memo": memo}, book_transfer_reverse_params.BookTransferReverseParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -412,7 +412,7 @@ class AsyncBookTransfers(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/book_transfers",
+            "/v1/book_transfers",
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -460,7 +460,7 @@ class AsyncBookTransfers(AsyncAPIResource):
                 f"Expected a non-empty value for `book_transfer_token` but received {book_transfer_token!r}"
             )
         return await self._get(
-            f"/book_transfers/{book_transfer_token}",
+            f"/v1/book_transfers/{book_transfer_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -524,7 +524,7 @@ class AsyncBookTransfers(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/book_transfers",
+            "/v1/book_transfers",
             page=AsyncCursorPage[BookTransferResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -580,7 +580,7 @@ class AsyncBookTransfers(AsyncAPIResource):
                 f"Expected a non-empty value for `book_transfer_token` but received {book_transfer_token!r}"
             )
         return await self._post(
-            f"/book_transfers/{book_transfer_token}/reverse",
+            f"/v1/book_transfers/{book_transfer_token}/reverse",
             body=await async_maybe_transform({"memo": memo}, book_transfer_reverse_params.BookTransferReverseParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

@@ -68,7 +68,7 @@ class CreditConfiguration(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get(
-            f"/financial_accounts/{financial_account_token}/credit_configuration",
+            f"/v1/financial_accounts/{financial_account_token}/credit_configuration",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -111,7 +111,7 @@ class CreditConfiguration(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._patch(
-            f"/financial_accounts/{financial_account_token}/credit_configuration",
+            f"/v1/financial_accounts/{financial_account_token}/credit_configuration",
             body=maybe_transform(
                 {
                     "credit_limit": credit_limit,
@@ -176,7 +176,7 @@ class AsyncCreditConfiguration(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._get(
-            f"/financial_accounts/{financial_account_token}/credit_configuration",
+            f"/v1/financial_accounts/{financial_account_token}/credit_configuration",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -219,7 +219,7 @@ class AsyncCreditConfiguration(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._patch(
-            f"/financial_accounts/{financial_account_token}/credit_configuration",
+            f"/v1/financial_accounts/{financial_account_token}/credit_configuration",
             body=await async_maybe_transform(
                 {
                     "credit_limit": credit_limit,

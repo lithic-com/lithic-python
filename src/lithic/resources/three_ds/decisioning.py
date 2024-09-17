@@ -74,7 +74,7 @@ class Decisioning(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/three_ds_decisioning/challenge_response",
+            "/v1/three_ds_decisioning/challenge_response",
             body=maybe_transform(
                 {
                     "token": token,
@@ -108,7 +108,7 @@ class Decisioning(SyncAPIResource):
         for more detail about verifying 3DS Decisioning requests.
         """
         return self._get(
-            "/three_ds_decisioning/secret",
+            "/v1/three_ds_decisioning/secret",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -133,7 +133,7 @@ class Decisioning(SyncAPIResource):
         request to retrieve the new secret key.
         """
         return self._post(
-            "/three_ds_decisioning/secret/rotate",
+            "/v1/three_ds_decisioning/secret/rotate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -193,7 +193,7 @@ class AsyncDecisioning(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/three_ds_decisioning/challenge_response",
+            "/v1/three_ds_decisioning/challenge_response",
             body=await async_maybe_transform(
                 {
                     "token": token,
@@ -227,7 +227,7 @@ class AsyncDecisioning(AsyncAPIResource):
         for more detail about verifying 3DS Decisioning requests.
         """
         return await self._get(
-            "/three_ds_decisioning/secret",
+            "/v1/three_ds_decisioning/secret",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -252,7 +252,7 @@ class AsyncDecisioning(AsyncAPIResource):
         request to retrieve the new secret key.
         """
         return await self._post(
-            "/three_ds_decisioning/secret/rotate",
+            "/v1/three_ds_decisioning/secret/rotate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

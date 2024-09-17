@@ -112,7 +112,7 @@ class Transactions(SyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._get(
-            f"/transactions/{transaction_token}",
+            f"/v1/transactions/{transaction_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -171,7 +171,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/transactions",
+            "/v1/transactions",
             page=SyncCursorPage[Transaction],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -283,7 +283,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/authorize",
+            "/v1/simulate/authorize",
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -336,7 +336,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/authorization_advice",
+            "/v1/simulate/authorization_advice",
             body=maybe_transform(
                 {
                     "token": token,
@@ -390,7 +390,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/clearing",
+            "/v1/simulate/clearing",
             body=maybe_transform(
                 {
                     "token": token,
@@ -449,7 +449,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/credit_authorization_advice",
+            "/v1/simulate/credit_authorization_advice",
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -500,7 +500,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/return",
+            "/v1/simulate/return",
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -543,7 +543,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/return_reversal",
+            "/v1/simulate/return_reversal",
             body=maybe_transform(
                 {"token": token}, transaction_simulate_return_reversal_params.TransactionSimulateReturnReversalParams
             ),
@@ -595,7 +595,7 @@ class Transactions(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/void",
+            "/v1/simulate/void",
             body=maybe_transform(
                 {
                     "token": token,
@@ -665,7 +665,7 @@ class AsyncTransactions(AsyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._get(
-            f"/transactions/{transaction_token}",
+            f"/v1/transactions/{transaction_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -724,7 +724,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/transactions",
+            "/v1/transactions",
             page=AsyncCursorPage[Transaction],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -836,7 +836,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/authorize",
+            "/v1/simulate/authorize",
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -889,7 +889,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/authorization_advice",
+            "/v1/simulate/authorization_advice",
             body=await async_maybe_transform(
                 {
                     "token": token,
@@ -943,7 +943,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/clearing",
+            "/v1/simulate/clearing",
             body=await async_maybe_transform(
                 {
                     "token": token,
@@ -1002,7 +1002,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/credit_authorization_advice",
+            "/v1/simulate/credit_authorization_advice",
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -1053,7 +1053,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/return",
+            "/v1/simulate/return",
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -1096,7 +1096,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/return_reversal",
+            "/v1/simulate/return_reversal",
             body=await async_maybe_transform(
                 {"token": token}, transaction_simulate_return_reversal_params.TransactionSimulateReturnReversalParams
             ),
@@ -1148,7 +1148,7 @@ class AsyncTransactions(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/void",
+            "/v1/simulate/void",
             body=await async_maybe_transform(
                 {
                     "token": token,

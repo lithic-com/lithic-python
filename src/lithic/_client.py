@@ -56,8 +56,8 @@ __all__ = [
 ]
 
 ENVIRONMENTS: Dict[str, str] = {
-    "production": "https://api.lithic.com/v1",
-    "sandbox": "https://sandbox.lithic.com/v1",
+    "production": "https://api.lithic.com",
+    "sandbox": "https://sandbox.lithic.com",
 }
 
 
@@ -316,7 +316,7 @@ class Lithic(SyncAPIClient):
     ) -> APIStatus:
         """Status of api"""
         return self.get(
-            "/status",
+            "/v1/status",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -612,7 +612,7 @@ class AsyncLithic(AsyncAPIClient):
     ) -> APIStatus:
         """Status of api"""
         return await self.get(
-            "/status",
+            "/v1/status",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

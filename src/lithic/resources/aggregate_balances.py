@@ -67,7 +67,7 @@ class AggregateBalances(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/aggregate_balances",
+            "/v1/aggregate_balances",
             page=SyncSinglePage[AggregateBalance],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -130,7 +130,7 @@ class AsyncAggregateBalances(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/aggregate_balances",
+            "/v1/aggregate_balances",
             page=AsyncSinglePage[AggregateBalance],
             options=make_request_options(
                 extra_headers=extra_headers,

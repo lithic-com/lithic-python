@@ -78,7 +78,7 @@ class AuthRules(SyncAPIResource):
               Rule.
 
           allowed_countries: Countries in which the Auth Rule permits transactions. Note that Lithic
-              maintains a list of countries in which all transactions are blocked; "allowing"
+              maintains a list of countries in which all transactions are blocked; 'allowing'
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
           allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
@@ -102,7 +102,7 @@ class AuthRules(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/auth_rules",
+            "/v1/auth_rules",
             body=maybe_transform(
                 {
                     "account_tokens": account_tokens,
@@ -148,7 +148,7 @@ class AuthRules(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._get(
-            f"/auth_rules/{auth_rule_token}",
+            f"/v1/auth_rules/{auth_rule_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -201,7 +201,7 @@ class AuthRules(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._put(
-            f"/auth_rules/{auth_rule_token}",
+            f"/v1/auth_rules/{auth_rule_token}",
             body=maybe_transform(
                 {
                     "allowed_countries": allowed_countries,
@@ -251,7 +251,7 @@ class AuthRules(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/auth_rules",
+            "/v1/auth_rules",
             page=SyncCursorPage[AuthRule],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -309,7 +309,7 @@ class AuthRules(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._post(
-            f"/auth_rules/{auth_rule_token}/apply",
+            f"/v1/auth_rules/{auth_rule_token}/apply",
             body=maybe_transform(
                 {
                     "account_tokens": account_tokens,
@@ -360,7 +360,7 @@ class AuthRules(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._delete(
-            "/auth_rules/remove",
+            "/v1/auth_rules/remove",
             body=maybe_transform(
                 {
                     "account_tokens": account_tokens,
@@ -423,7 +423,7 @@ class AsyncAuthRules(AsyncAPIResource):
               Rule.
 
           allowed_countries: Countries in which the Auth Rule permits transactions. Note that Lithic
-              maintains a list of countries in which all transactions are blocked; "allowing"
+              maintains a list of countries in which all transactions are blocked; 'allowing'
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
           allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
@@ -447,7 +447,7 @@ class AsyncAuthRules(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/auth_rules",
+            "/v1/auth_rules",
             body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
@@ -493,7 +493,7 @@ class AsyncAuthRules(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._get(
-            f"/auth_rules/{auth_rule_token}",
+            f"/v1/auth_rules/{auth_rule_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -546,7 +546,7 @@ class AsyncAuthRules(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._put(
-            f"/auth_rules/{auth_rule_token}",
+            f"/v1/auth_rules/{auth_rule_token}",
             body=await async_maybe_transform(
                 {
                     "allowed_countries": allowed_countries,
@@ -596,7 +596,7 @@ class AsyncAuthRules(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/auth_rules",
+            "/v1/auth_rules",
             page=AsyncCursorPage[AuthRule],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -654,7 +654,7 @@ class AsyncAuthRules(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._post(
-            f"/auth_rules/{auth_rule_token}/apply",
+            f"/v1/auth_rules/{auth_rule_token}/apply",
             body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
@@ -705,7 +705,7 @@ class AsyncAuthRules(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._delete(
-            "/auth_rules/remove",
+            "/v1/auth_rules/remove",
             body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,

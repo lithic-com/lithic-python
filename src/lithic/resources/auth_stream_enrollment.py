@@ -55,7 +55,7 @@ class AuthStreamEnrollment(SyncAPIResource):
         for more detail about verifying ASA webhooks.
         """
         return self._get(
-            "/auth_stream/secret",
+            "/v1/auth_stream/secret",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -80,7 +80,7 @@ class AuthStreamEnrollment(SyncAPIResource):
         request to retrieve the new secret key.
         """
         return self._post(
-            "/auth_stream/secret/rotate",
+            "/v1/auth_stream/secret/rotate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -128,7 +128,7 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
         for more detail about verifying ASA webhooks.
         """
         return await self._get(
-            "/auth_stream/secret",
+            "/v1/auth_stream/secret",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -153,7 +153,7 @@ class AsyncAuthStreamEnrollment(AsyncAPIResource):
         request to retrieve the new secret key.
         """
         return await self._post(
-            "/auth_stream/secret/rotate",
+            "/v1/auth_stream/secret/rotate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

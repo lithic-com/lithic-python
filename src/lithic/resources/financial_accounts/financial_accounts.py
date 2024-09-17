@@ -123,7 +123,7 @@ class FinancialAccounts(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/financial_accounts",
+            "/v1/financial_accounts",
             body=maybe_transform(
                 {
                     "nickname": nickname,
@@ -167,7 +167,7 @@ class FinancialAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get(
-            f"/financial_accounts/{financial_account_token}",
+            f"/v1/financial_accounts/{financial_account_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -203,7 +203,7 @@ class FinancialAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._patch(
-            f"/financial_accounts/{financial_account_token}",
+            f"/v1/financial_accounts/{financial_account_token}",
             body=maybe_transform({"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -244,7 +244,7 @@ class FinancialAccounts(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/financial_accounts",
+            "/v1/financial_accounts",
             page=SyncSinglePage[FinancialAccount],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -327,7 +327,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/financial_accounts",
+            "/v1/financial_accounts",
             body=await async_maybe_transform(
                 {
                     "nickname": nickname,
@@ -371,7 +371,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._get(
-            f"/financial_accounts/{financial_account_token}",
+            f"/v1/financial_accounts/{financial_account_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -407,7 +407,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._patch(
-            f"/financial_accounts/{financial_account_token}",
+            f"/v1/financial_accounts/{financial_account_token}",
             body=await async_maybe_transform(
                 {"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams
             ),
@@ -450,7 +450,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/financial_accounts",
+            "/v1/financial_accounts",
             page=AsyncSinglePage[FinancialAccount],
             options=make_request_options(
                 extra_headers=extra_headers,
