@@ -75,7 +75,7 @@ class Balances(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
-            f"/cards/{card_token}/balances",
+            f"/v1/cards/{card_token}/balances",
             page=SyncSinglePage[BalanceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -148,7 +148,7 @@ class AsyncBalances(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
-            f"/cards/{card_token}/balances",
+            f"/v1/cards/{card_token}/balances",
             page=AsyncSinglePage[BalanceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,

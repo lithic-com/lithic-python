@@ -225,13 +225,13 @@ class AccountHolder(BaseModel):
     """Globally unique identifier for the account."""
 
     beneficial_owner_entities: Optional[List[BeneficialOwnerEntity]] = None
-    """Only present when user_type == "BUSINESS".
+    """Only present when user_type == 'BUSINESS'.
 
     List of all entities with >25% ownership in the company.
     """
 
     beneficial_owner_individuals: Optional[List[BeneficialOwnerIndividual]] = None
-    """Only present when user_type == "BUSINESS".
+    """Only present when user_type == 'BUSINESS'.
 
     List of all individuals with >25% ownership in the company.
     """
@@ -244,7 +244,7 @@ class AccountHolder(BaseModel):
     """
 
     business_entity: Optional[BusinessEntity] = None
-    """Only present when user_type == "BUSINESS".
+    """Only present when user_type == 'BUSINESS'.
 
     Information about the business for which the account is being opened and KYB is
     being run.
@@ -252,7 +252,7 @@ class AccountHolder(BaseModel):
 
     control_person: Optional[ControlPerson] = None
     """
-    Only present when user_type == "BUSINESS". An individual with significant
+    Only present when user_type == 'BUSINESS'. An individual with significant
     responsibility for managing the legal entity (e.g., a Chief Executive Officer,
     Chief Financial Officer, Chief Operating Officer, Managing Member, General
     Partner, President, Vice President, or Treasurer). This can be an executive, or
@@ -262,8 +262,8 @@ class AccountHolder(BaseModel):
 
     email: Optional[str] = None
     """
-    < Deprecated. Use control_person.email when user_type == "BUSINESS". Use
-    individual.phone_number when user_type == "INDIVIDUAL".
+    < Deprecated. Use control_person.email when user_type == 'BUSINESS'. Use
+    individual.phone_number when user_type == 'INDIVIDUAL'.
 
     > Primary email of Account Holder.
     """
@@ -278,28 +278,28 @@ class AccountHolder(BaseModel):
     """
 
     individual: Optional[Individual] = None
-    """Only present when user_type == "INDIVIDUAL".
+    """Only present when user_type == 'INDIVIDUAL'.
 
     Information about the individual for which the account is being opened and KYC
     is being run.
     """
 
     nature_of_business: Optional[str] = None
-    """Only present when user_type == "BUSINESS".
+    """Only present when user_type == 'BUSINESS'.
 
     User-submitted description of the business.
     """
 
     phone_number: Optional[str] = None
     """
-    < Deprecated. Use control_person.phone_number when user_type == "BUSINESS". Use
-    individual.phone_number when user_type == "INDIVIDUAL".
+    < Deprecated. Use control_person.phone_number when user_type == 'BUSINESS'. Use
+    individual.phone_number when user_type == 'INDIVIDUAL'.
 
     > Primary phone of Account Holder, entered in E.164 format.
     """
 
     required_documents: Optional[List[RequiredDocument]] = None
-    """Only present for "KYB_BASIC" and "KYC_ADVANCED" workflows.
+    """Only present for 'KYB_BASIC' and 'KYC_ADVANCED' workflows.
 
     A list of documents required for the account holder to be approved.
     """
@@ -341,14 +341,14 @@ class AccountHolder(BaseModel):
     user_type: Optional[Literal["BUSINESS", "INDIVIDUAL"]] = None
     """The type of Account Holder.
 
-    If the type is "INDIVIDUAL", the "individual" attribute will be present. If the
-    type is "BUSINESS" then the "business_entity", "control_person",
-    "beneficial_owner_individuals", "beneficial_owner_entities",
-    "nature_of_business", and "website_url" attributes will be present.
+    If the type is 'INDIVIDUAL', the 'individual' attribute will be present. If the
+    type is 'BUSINESS' then the 'business_entity', 'control_person',
+    'beneficial_owner_individuals', 'beneficial_owner_entities',
+    'nature_of_business', and 'website_url' attributes will be present.
     """
 
     verification_application: Optional[VerificationApplication] = None
     """Information about the most recent identity verification attempt"""
 
     website_url: Optional[str] = None
-    """Only present when user_type == "BUSINESS". Business's primary website."""
+    """Only present when user_type == 'BUSINESS'. Business's primary website."""

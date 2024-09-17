@@ -77,7 +77,7 @@ class Balances(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/financial_accounts/{financial_account_token}/balances",
+            f"/v1/financial_accounts/{financial_account_token}/balances",
             page=SyncSinglePage[BalanceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -152,7 +152,7 @@ class AsyncBalances(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/financial_accounts/{financial_account_token}/balances",
+            f"/v1/financial_accounts/{financial_account_token}/balances",
             page=AsyncSinglePage[BalanceListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,

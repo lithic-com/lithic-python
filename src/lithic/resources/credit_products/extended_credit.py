@@ -61,7 +61,7 @@ class ExtendedCreditResource(SyncAPIResource):
         if not credit_product_id:
             raise ValueError(f"Expected a non-empty value for `credit_product_id` but received {credit_product_id!r}")
         return self._get(
-            f"/credit_products/{credit_product_id}/extended_credit",
+            f"/v1/credit_products/{credit_product_id}/extended_credit",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -115,7 +115,7 @@ class AsyncExtendedCreditResource(AsyncAPIResource):
         if not credit_product_id:
             raise ValueError(f"Expected a non-empty value for `credit_product_id` but received {credit_product_id!r}")
         return await self._get(
-            f"/credit_products/{credit_product_id}/extended_credit",
+            f"/v1/credit_products/{credit_product_id}/extended_credit",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

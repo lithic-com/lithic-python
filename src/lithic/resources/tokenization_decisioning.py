@@ -56,7 +56,7 @@ class TokenizationDecisioning(SyncAPIResource):
         detail about verifying Tokenization Decisioning requests.
         """
         return self._get(
-            "/tokenization_decisioning/secret",
+            "/v1/tokenization_decisioning/secret",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -80,7 +80,7 @@ class TokenizationDecisioning(SyncAPIResource):
         to this endpoint.
         """
         return self._post(
-            "/tokenization_decisioning/secret/rotate",
+            "/v1/tokenization_decisioning/secret/rotate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -128,7 +128,7 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         detail about verifying Tokenization Decisioning requests.
         """
         return await self._get(
-            "/tokenization_decisioning/secret",
+            "/v1/tokenization_decisioning/secret",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -152,7 +152,7 @@ class AsyncTokenizationDecisioning(AsyncAPIResource):
         to this endpoint.
         """
         return await self._post(
-            "/tokenization_decisioning/secret/rotate",
+            "/v1/tokenization_decisioning/secret/rotate",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

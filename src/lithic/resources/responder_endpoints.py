@@ -76,7 +76,7 @@ class ResponderEndpoints(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/responder_endpoints",
+            "/v1/responder_endpoints",
             body=maybe_transform(
                 {
                     "type": type,
@@ -116,7 +116,7 @@ class ResponderEndpoints(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._delete(
-            "/responder_endpoints",
+            "/v1/responder_endpoints",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -153,7 +153,7 @@ class ResponderEndpoints(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/responder_endpoints",
+            "/v1/responder_endpoints",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -216,7 +216,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/responder_endpoints",
+            "/v1/responder_endpoints",
             body=await async_maybe_transform(
                 {
                     "type": type,
@@ -256,7 +256,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._delete(
-            "/responder_endpoints",
+            "/v1/responder_endpoints",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -295,7 +295,7 @@ class AsyncResponderEndpoints(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/responder_endpoints",
+            "/v1/responder_endpoints",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

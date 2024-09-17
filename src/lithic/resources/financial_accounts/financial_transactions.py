@@ -75,7 +75,7 @@ class FinancialTransactions(SyncAPIResource):
                 f"Expected a non-empty value for `financial_transaction_token` but received {financial_transaction_token!r}"
             )
         return self._get(
-            f"/financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}",
+            f"/v1/financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -135,7 +135,7 @@ class FinancialTransactions(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/financial_accounts/{financial_account_token}/financial_transactions",
+            f"/v1/financial_accounts/{financial_account_token}/financial_transactions",
             page=SyncSinglePage[FinancialTransaction],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -212,7 +212,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_transaction_token` but received {financial_transaction_token!r}"
             )
         return await self._get(
-            f"/financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}",
+            f"/v1/financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -272,7 +272,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/financial_accounts/{financial_account_token}/financial_transactions",
+            f"/v1/financial_accounts/{financial_account_token}/financial_transactions",
             page=AsyncSinglePage[FinancialTransaction],
             options=make_request_options(
                 extra_headers=extra_headers,
