@@ -93,7 +93,7 @@ class Payments(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/payments",
+            "/v1/payments",
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -140,7 +140,7 @@ class Payments(SyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._get(
-            f"/payments/{payment_token}",
+            f"/v1/payments/{payment_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -193,7 +193,7 @@ class Payments(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/payments",
+            "/v1/payments",
             page=SyncCursorPage[Payment],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -244,7 +244,7 @@ class Payments(SyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
-            f"/payments/{payment_token}/retry",
+            f"/v1/payments/{payment_token}/retry",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -297,7 +297,7 @@ class Payments(SyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
-            f"/simulate/payments/{payment_token}/action",
+            f"/v1/simulate/payments/{payment_token}/action",
             body=maybe_transform(
                 {
                     "event_type": event_type,
@@ -350,7 +350,7 @@ class Payments(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/payments/receipt",
+            "/v1/simulate/payments/receipt",
             body=maybe_transform(
                 {
                     "token": token,
@@ -393,7 +393,7 @@ class Payments(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/payments/release",
+            "/v1/simulate/payments/release",
             body=maybe_transform(
                 {"payment_token": payment_token}, payment_simulate_release_params.PaymentSimulateReleaseParams
             ),
@@ -432,7 +432,7 @@ class Payments(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/simulate/payments/return",
+            "/v1/simulate/payments/return",
             body=maybe_transform(
                 {
                     "payment_token": payment_token,
@@ -502,7 +502,7 @@ class AsyncPayments(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/payments",
+            "/v1/payments",
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -549,7 +549,7 @@ class AsyncPayments(AsyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._get(
-            f"/payments/{payment_token}",
+            f"/v1/payments/{payment_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -602,7 +602,7 @@ class AsyncPayments(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/payments",
+            "/v1/payments",
             page=AsyncCursorPage[Payment],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -653,7 +653,7 @@ class AsyncPayments(AsyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
-            f"/payments/{payment_token}/retry",
+            f"/v1/payments/{payment_token}/retry",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -706,7 +706,7 @@ class AsyncPayments(AsyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
-            f"/simulate/payments/{payment_token}/action",
+            f"/v1/simulate/payments/{payment_token}/action",
             body=await async_maybe_transform(
                 {
                     "event_type": event_type,
@@ -759,7 +759,7 @@ class AsyncPayments(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/payments/receipt",
+            "/v1/simulate/payments/receipt",
             body=await async_maybe_transform(
                 {
                     "token": token,
@@ -802,7 +802,7 @@ class AsyncPayments(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/payments/release",
+            "/v1/simulate/payments/release",
             body=await async_maybe_transform(
                 {"payment_token": payment_token}, payment_simulate_release_params.PaymentSimulateReleaseParams
             ),
@@ -841,7 +841,7 @@ class AsyncPayments(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/simulate/payments/return",
+            "/v1/simulate/payments/return",
             body=await async_maybe_transform(
                 {
                     "payment_token": payment_token,

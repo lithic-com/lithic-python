@@ -64,7 +64,7 @@ class CardPrograms(SyncAPIResource):
         if not card_program_token:
             raise ValueError(f"Expected a non-empty value for `card_program_token` but received {card_program_token!r}")
         return self._get(
-            f"/card_programs/{card_program_token}",
+            f"/v1/card_programs/{card_program_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -105,7 +105,7 @@ class CardPrograms(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/card_programs",
+            "/v1/card_programs",
             page=SyncCursorPage[CardProgram],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -171,7 +171,7 @@ class AsyncCardPrograms(AsyncAPIResource):
         if not card_program_token:
             raise ValueError(f"Expected a non-empty value for `card_program_token` but received {card_program_token!r}")
         return await self._get(
-            f"/card_programs/{card_program_token}",
+            f"/v1/card_programs/{card_program_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -212,7 +212,7 @@ class AsyncCardPrograms(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/card_programs",
+            "/v1/card_programs",
             page=AsyncCursorPage[CardProgram],
             options=make_request_options(
                 extra_headers=extra_headers,

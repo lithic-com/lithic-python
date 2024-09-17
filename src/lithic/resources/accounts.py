@@ -72,7 +72,7 @@ class Accounts(SyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._get(
-            f"/accounts/{account_token}",
+            f"/v1/accounts/{account_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -134,7 +134,7 @@ class Accounts(SyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._patch(
-            f"/accounts/{account_token}",
+            f"/v1/accounts/{account_token}",
             body=maybe_transform(
                 {
                     "daily_spend_limit": daily_spend_limit,
@@ -194,7 +194,7 @@ class Accounts(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/accounts",
+            "/v1/accounts",
             page=SyncCursorPage[Account],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -245,7 +245,7 @@ class Accounts(SyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._get(
-            f"/accounts/{account_token}/spend_limits",
+            f"/v1/accounts/{account_token}/spend_limits",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -299,7 +299,7 @@ class AsyncAccounts(AsyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._get(
-            f"/accounts/{account_token}",
+            f"/v1/accounts/{account_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -361,7 +361,7 @@ class AsyncAccounts(AsyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._patch(
-            f"/accounts/{account_token}",
+            f"/v1/accounts/{account_token}",
             body=await async_maybe_transform(
                 {
                     "daily_spend_limit": daily_spend_limit,
@@ -421,7 +421,7 @@ class AsyncAccounts(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/accounts",
+            "/v1/accounts",
             page=AsyncCursorPage[Account],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -472,7 +472,7 @@ class AsyncAccounts(AsyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._get(
-            f"/accounts/{account_token}/spend_limits",
+            f"/v1/accounts/{account_token}/spend_limits",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

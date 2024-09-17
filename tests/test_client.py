@@ -552,7 +552,7 @@ class TestLithic:
                 Lithic(api_key=api_key, _strict_response_validation=True, environment="production")
 
             client = Lithic(base_url=None, api_key=api_key, _strict_response_validation=True, environment="production")
-            assert str(client.base_url).startswith("https://api.lithic.com/v1")
+            assert str(client.base_url).startswith("https://api.lithic.com")
 
     @pytest.mark.parametrize(
         "client",
@@ -798,11 +798,11 @@ class TestLithic:
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/cards").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/cards").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/cards",
+                "/v1/cards",
                 body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -813,11 +813,11 @@ class TestLithic:
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/cards").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/cards").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/cards",
+                "/v1/cards",
                 body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -840,7 +840,7 @@ class TestLithic:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/cards").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         response = client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
 
@@ -863,7 +863,7 @@ class TestLithic:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/cards").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
             assert response.retries_taken == failures_before_success
@@ -1382,7 +1382,7 @@ class TestAsyncLithic:
             client = AsyncLithic(
                 base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
             )
-            assert str(client.base_url).startswith("https://api.lithic.com/v1")
+            assert str(client.base_url).startswith("https://api.lithic.com")
 
     @pytest.mark.parametrize(
         "client",
@@ -1642,11 +1642,11 @@ class TestAsyncLithic:
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/cards").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/cards").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/cards",
+                "/v1/cards",
                 body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1657,11 +1657,11 @@ class TestAsyncLithic:
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/cards").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/cards").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/cards",
+                "/v1/cards",
                 body=cast(object, dict(type="SINGLE_USE")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1687,7 +1687,7 @@ class TestAsyncLithic:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/cards").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         response = await client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
 
@@ -1711,7 +1711,7 @@ class TestAsyncLithic:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/cards").mock(side_effect=retry_handler)
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         async with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
             assert response.retries_taken == failures_before_success

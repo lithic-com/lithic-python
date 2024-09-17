@@ -332,7 +332,7 @@ class ExternalBankAccounts(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ExternalBankAccountCreateResponse:
         return self._post(
-            "/external_bank_accounts",
+            "/v1/external_bank_accounts",
             body=maybe_transform(
                 {
                     "account_number": account_number,
@@ -390,7 +390,7 @@ class ExternalBankAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return self._get(
-            f"/external_bank_accounts/{external_bank_account_token}",
+            f"/v1/external_bank_accounts/{external_bank_account_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -450,7 +450,7 @@ class ExternalBankAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return self._patch(
-            f"/external_bank_accounts/{external_bank_account_token}",
+            f"/v1/external_bank_accounts/{external_bank_account_token}",
             body=maybe_transform(
                 {
                     "address": address,
@@ -511,7 +511,7 @@ class ExternalBankAccounts(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/external_bank_accounts",
+            "/v1/external_bank_accounts",
             page=SyncCursorPage[ExternalBankAccountListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -565,7 +565,7 @@ class ExternalBankAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return self._post(
-            f"/external_bank_accounts/{external_bank_account_token}/retry_micro_deposits",
+            f"/v1/external_bank_accounts/{external_bank_account_token}/retry_micro_deposits",
             body=maybe_transform(
                 {"financial_account_token": financial_account_token},
                 external_bank_account_retry_micro_deposits_params.ExternalBankAccountRetryMicroDepositsParams,
@@ -605,7 +605,7 @@ class ExternalBankAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return self._post(
-            f"/external_bank_accounts/{external_bank_account_token}/retry_prenote",
+            f"/v1/external_bank_accounts/{external_bank_account_token}/retry_prenote",
             body=maybe_transform(
                 {"financial_account_token": financial_account_token},
                 external_bank_account_retry_prenote_params.ExternalBankAccountRetryPrenoteParams,
@@ -899,7 +899,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ExternalBankAccountCreateResponse:
         return await self._post(
-            "/external_bank_accounts",
+            "/v1/external_bank_accounts",
             body=await async_maybe_transform(
                 {
                     "account_number": account_number,
@@ -957,7 +957,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return await self._get(
-            f"/external_bank_accounts/{external_bank_account_token}",
+            f"/v1/external_bank_accounts/{external_bank_account_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1017,7 +1017,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return await self._patch(
-            f"/external_bank_accounts/{external_bank_account_token}",
+            f"/v1/external_bank_accounts/{external_bank_account_token}",
             body=await async_maybe_transform(
                 {
                     "address": address,
@@ -1078,7 +1078,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/external_bank_accounts",
+            "/v1/external_bank_accounts",
             page=AsyncCursorPage[ExternalBankAccountListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -1132,7 +1132,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return await self._post(
-            f"/external_bank_accounts/{external_bank_account_token}/retry_micro_deposits",
+            f"/v1/external_bank_accounts/{external_bank_account_token}/retry_micro_deposits",
             body=await async_maybe_transform(
                 {"financial_account_token": financial_account_token},
                 external_bank_account_retry_micro_deposits_params.ExternalBankAccountRetryMicroDepositsParams,
@@ -1172,7 +1172,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return await self._post(
-            f"/external_bank_accounts/{external_bank_account_token}/retry_prenote",
+            f"/v1/external_bank_accounts/{external_bank_account_token}/retry_prenote",
             body=await async_maybe_transform(
                 {"financial_account_token": financial_account_token},
                 external_bank_account_retry_prenote_params.ExternalBankAccountRetryPrenoteParams,

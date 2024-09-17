@@ -71,7 +71,7 @@ class MicroDeposits(SyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return self._post(
-            f"/external_bank_accounts/{external_bank_account_token}/micro_deposits",
+            f"/v1/external_bank_accounts/{external_bank_account_token}/micro_deposits",
             body=maybe_transform(
                 {"micro_deposits": micro_deposits}, micro_deposit_create_params.MicroDepositCreateParams
             ),
@@ -131,7 +131,7 @@ class AsyncMicroDeposits(AsyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return await self._post(
-            f"/external_bank_accounts/{external_bank_account_token}/micro_deposits",
+            f"/v1/external_bank_accounts/{external_bank_account_token}/micro_deposits",
             body=await async_maybe_transform(
                 {"micro_deposits": micro_deposits}, micro_deposit_create_params.MicroDepositCreateParams
             ),

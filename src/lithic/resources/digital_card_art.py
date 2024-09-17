@@ -66,7 +66,7 @@ class DigitalCardArtResource(SyncAPIResource):
                 f"Expected a non-empty value for `digital_card_art_token` but received {digital_card_art_token!r}"
             )
         return self._get(
-            f"/digital_card_art/{digital_card_art_token}",
+            f"/v1/digital_card_art/{digital_card_art_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -107,7 +107,7 @@ class DigitalCardArtResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/digital_card_art",
+            "/v1/digital_card_art",
             page=SyncCursorPage[DigitalCardArt],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -175,7 +175,7 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
                 f"Expected a non-empty value for `digital_card_art_token` but received {digital_card_art_token!r}"
             )
         return await self._get(
-            f"/digital_card_art/{digital_card_art_token}",
+            f"/v1/digital_card_art/{digital_card_art_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -216,7 +216,7 @@ class AsyncDigitalCardArtResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/digital_card_art",
+            "/v1/digital_card_art",
             page=AsyncCursorPage[DigitalCardArt],
             options=make_request_options(
                 extra_headers=extra_headers,

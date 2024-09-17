@@ -69,7 +69,7 @@ class Authentication(SyncAPIResource):
                 f"Expected a non-empty value for `three_ds_authentication_token` but received {three_ds_authentication_token!r}"
             )
         return self._get(
-            f"/three_ds_authentication/{three_ds_authentication_token}",
+            f"/v1/three_ds_authentication/{three_ds_authentication_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -107,7 +107,7 @@ class Authentication(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/three_ds_authentication/simulate",
+            "/v1/three_ds_authentication/simulate",
             body=maybe_transform(
                 {
                     "merchant": merchant,
@@ -171,7 +171,7 @@ class AsyncAuthentication(AsyncAPIResource):
                 f"Expected a non-empty value for `three_ds_authentication_token` but received {three_ds_authentication_token!r}"
             )
         return await self._get(
-            f"/three_ds_authentication/{three_ds_authentication_token}",
+            f"/v1/three_ds_authentication/{three_ds_authentication_token}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -209,7 +209,7 @@ class AsyncAuthentication(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/three_ds_authentication/simulate",
+            "/v1/three_ds_authentication/simulate",
             body=await async_maybe_transform(
                 {
                     "merchant": merchant,
