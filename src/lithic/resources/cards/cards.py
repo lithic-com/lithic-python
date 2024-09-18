@@ -658,7 +658,7 @@ class Cards(SyncAPIResource):
 
         # Copied nearly directly from httpx.BaseClient._merge_url
         base_url = self._client.base_url
-        raw_path = base_url.raw_path + URL("embed/card").raw_path
+        raw_path = base_url.raw_path + URL("v1/embed/card").raw_path
         return base_url.copy_with(raw_path=raw_path).copy_merge_params(params)
 
     def provision(
@@ -1545,7 +1545,7 @@ class AsyncCards(AsyncAPIResource):
 
         # Copied nearly directly from httpx.BaseClient._merge_url
         base_url = self._client.base_url
-        raw_path = base_url.raw_path + URL("embed/card").raw_path
+        raw_path = base_url.raw_path + URL("v1/embed/card").raw_path
         return base_url.copy_with(raw_path=raw_path).copy_merge_params(params)
 
     async def provision(
