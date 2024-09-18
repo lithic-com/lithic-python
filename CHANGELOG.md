@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.66.1 (2024-09-18)
+
+Full Changelog: [v0.66.0...v0.66.1](https://github.com/lithic-com/lithic-python/compare/v0.66.0...v0.66.1)
+
+### Chores
+
+* **internal:** specify API version for each endpoints instead of hardcoded in base URLs ([#565](https://github.com/lithic-com/lithic-python/issues/565)) ([ad2d835](https://github.com/lithic-com/lithic-python/commit/ad2d83572ced963baa45eb99d43750b9e89b523a))
+* **tests:** fix get_embed_url to specify /v1/ prefix ([f84ec12](https://github.com/lithic-com/lithic-python/commit/f84ec125a08f95c526bddf6130588a5ee340547b))
+
 ## 0.66.0 (2024-09-17)
 
 Full Changelog: [v0.65.0...v0.66.0](https://github.com/lithic-com/lithic-python/compare/v0.65.0...v0.66.0)
