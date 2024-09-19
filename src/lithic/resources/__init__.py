@@ -129,6 +129,14 @@ from .digital_card_art import (
     DigitalCardArtResourceWithStreamingResponse,
     AsyncDigitalCardArtResourceWithStreamingResponse,
 )
+from .external_payments import (
+    ExternalPayments,
+    AsyncExternalPayments,
+    ExternalPaymentsWithRawResponse,
+    AsyncExternalPaymentsWithRawResponse,
+    ExternalPaymentsWithStreamingResponse,
+    AsyncExternalPaymentsWithStreamingResponse,
+)
 from .aggregate_balances import (
     AggregateBalances,
     AsyncAggregateBalances,
@@ -313,4 +321,10 @@ __all__ = [
     "AsyncCreditProductsWithRawResponse",
     "CreditProductsWithStreamingResponse",
     "AsyncCreditProductsWithStreamingResponse",
+    "ExternalPayments",
+    "AsyncExternalPayments",
+    "ExternalPaymentsWithRawResponse",
+    "AsyncExternalPaymentsWithRawResponse",
+    "ExternalPaymentsWithStreamingResponse",
+    "AsyncExternalPaymentsWithStreamingResponse",
 ]

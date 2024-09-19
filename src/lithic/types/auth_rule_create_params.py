@@ -21,7 +21,7 @@ class AuthRuleCreateParams(TypedDict, total=False):
     """Countries in which the Auth Rule permits transactions.
 
     Note that Lithic maintains a list of countries in which all transactions are
-    blocked; 'allowing' those countries in an Auth Rule does not override the
+    blocked; "allowing" those countries in an Auth Rule does not override the
     Lithic-wide restrictions.
     """
 

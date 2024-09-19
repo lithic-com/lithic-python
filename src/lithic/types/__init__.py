@@ -7,15 +7,19 @@ from .event import Event as Event
 from .shared import (
     Address as Address,
     Carrier as Carrier,
+    AuthRule as AuthRule,
     Currency as Currency,
     Document as Document,
     ShippingAddress as ShippingAddress,
+    VelocityLimitParams as VelocityLimitParams,
+    AccountFinancialAccountType as AccountFinancialAccountType,
+    InstanceFinancialAccountType as InstanceFinancialAccountType,
+    VelocityLimitParamsPeriodWindow as VelocityLimitParamsPeriodWindow,
 )
 from .account import Account as Account
 from .balance import Balance as Balance
 from .dispute import Dispute as Dispute
 from .payment import Payment as Payment
-from .auth_rule import AuthRule as AuthRule
 from .api_status import APIStatus as APIStatus
 from .owner_type import OwnerType as OwnerType
 from .transaction import Transaction as Transaction
@@ -26,12 +30,14 @@ from .message_attempt import MessageAttempt as MessageAttempt
 from .card_list_params import CardListParams as CardListParams
 from .digital_card_art import DigitalCardArt as DigitalCardArt
 from .dispute_evidence import DisputeEvidence as DisputeEvidence
+from .external_payment import ExternalPayment as ExternalPayment
 from .aggregate_balance import AggregateBalance as AggregateBalance
 from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .card_renew_params import CardRenewParams as CardRenewParams
 from .card_spend_limits import CardSpendLimits as CardSpendLimits
 from .event_list_params import EventListParams as EventListParams
 from .financial_account import FinancialAccount as FinancialAccount
+from .required_document import RequiredDocument as RequiredDocument
 from .settlement_detail import SettlementDetail as SettlementDetail
 from .settlement_report import SettlementReport as SettlementReport
 from .auth_stream_secret import AuthStreamSecret as AuthStreamSecret
@@ -82,6 +88,7 @@ from .account_holder_create_params import AccountHolderCreateParams as AccountHo
 from .account_holder_update_params import AccountHolderUpdateParams as AccountHolderUpdateParams
 from .book_transfer_reverse_params import BookTransferReverseParams as BookTransferReverseParams
 from .digital_card_art_list_params import DigitalCardArtListParams as DigitalCardArtListParams
+from .external_payment_list_params import ExternalPaymentListParams as ExternalPaymentListParams
 from .tokenization_simulate_params import TokenizationSimulateParams as TokenizationSimulateParams
 from .aggregate_balance_list_params import AggregateBalanceListParams as AggregateBalanceListParams
 from .dispute_list_evidences_params import DisputeListEvidencesParams as DisputeListEvidencesParams
@@ -90,10 +97,15 @@ from .financial_account_list_params import FinancialAccountListParams as Financi
 from .account_holder_create_response import AccountHolderCreateResponse as AccountHolderCreateResponse
 from .account_holder_resubmit_params import AccountHolderResubmitParams as AccountHolderResubmitParams
 from .account_holder_update_response import AccountHolderUpdateResponse as AccountHolderUpdateResponse
+from .external_payment_cancel_params import ExternalPaymentCancelParams as ExternalPaymentCancelParams
+from .external_payment_create_params import ExternalPaymentCreateParams as ExternalPaymentCreateParams
+from .external_payment_settle_params import ExternalPaymentSettleParams as ExternalPaymentSettleParams
 from .payment_simulate_action_params import PaymentSimulateActionParams as PaymentSimulateActionParams
 from .payment_simulate_return_params import PaymentSimulateReturnParams as PaymentSimulateReturnParams
 from .tokenization_retrieve_response import TokenizationRetrieveResponse as TokenizationRetrieveResponse
 from .tokenization_simulate_response import TokenizationSimulateResponse as TokenizationSimulateResponse
+from .external_payment_release_params import ExternalPaymentReleaseParams as ExternalPaymentReleaseParams
+from .external_payment_reverse_params import ExternalPaymentReverseParams as ExternalPaymentReverseParams
 from .financial_account_create_params import FinancialAccountCreateParams as FinancialAccountCreateParams
 from .financial_account_update_params import FinancialAccountUpdateParams as FinancialAccountUpdateParams
 from .payment_simulate_receipt_params import PaymentSimulateReceiptParams as PaymentSimulateReceiptParams
