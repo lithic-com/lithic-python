@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.67.0 (2024-09-19)
+
+Full Changelog: [v0.66.2...v0.67.0](https://github.com/lithic-com/lithic-python/compare/v0.66.2...v0.67.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** update model `FinancialAccount` ([#572](https://github.com/lithic-com/lithic-python/issues/572))
+
+### Features
+
+* **api:** update model `FinancialAccount` ([#572](https://github.com/lithic-com/lithic-python/issues/572)) ([6b056cb](https://github.com/lithic-com/lithic-python/commit/6b056cbb34fbaf67194d1739d582d4951306c589))
+* **client:** send retry count header ([#570](https://github.com/lithic-com/lithic-python/issues/570)) ([c65ffea](https://github.com/lithic-com/lithic-python/commit/c65ffea747bd137142f61da9605cf4483f456604))
+
 ## 0.66.2 (2024-09-19)
 
 Full Changelog: [v0.66.1...v0.66.2](https://github.com/lithic-com/lithic-python/compare/v0.66.1...v0.66.2)
