@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.66.2 (2024-09-19)
+
+Full Changelog: [v0.66.1...v0.66.2](https://github.com/lithic-com/lithic-python/compare/v0.66.1...v0.66.2)
+
+### Bug Fixes
+
+* **client:** handle domains with underscores ([#568](https://github.com/lithic-com/lithic-python/issues/568)) ([82cdfb0](https://github.com/lithic-com/lithic-python/commit/82cdfb06be0e282d90853b64924dd5ae5f7c8d11))
+
 ## 0.66.1 (2024-09-18)
 
 Full Changelog: [v0.66.0...v0.66.1](https://github.com/lithic-com/lithic-python/compare/v0.66.0...v0.66.1)
