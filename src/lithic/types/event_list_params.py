@@ -52,6 +52,8 @@ class EventListParams(TypedDict, total=False):
             "dispute_evidence.upload_failed",
             "external_bank_account.created",
             "external_bank_account.updated",
+            "external_payment.created",
+            "external_payment.updated",
             "financial_account.created",
             "financial_account.updated",
             "payment_transaction.created",

@@ -5,6 +5,7 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .required_document import RequiredDocument
 
 __all__ = ["AccountHolderCreateResponse"]
 
@@ -50,4 +51,10 @@ class AccountHolderCreateResponse(BaseModel):
     """
     Customer-provided token that indicates a relationship with an object outside of
     the Lithic ecosystem.
+    """
+
+    required_documents: Optional[List[RequiredDocument]] = None
+    """Only present for "KYB_BASIC" and "KYC_ADVANCED" workflows.
+
+    A list of documents required for the account holder to be approved.
     """

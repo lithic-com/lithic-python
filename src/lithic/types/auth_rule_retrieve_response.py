@@ -3,7 +3,7 @@
 from typing import List, Optional
 
 from .._models import BaseModel
-from .auth_rule import AuthRule
+from .shared.auth_rule import AuthRule
 
 __all__ = ["AuthRuleRetrieveResponse"]
 

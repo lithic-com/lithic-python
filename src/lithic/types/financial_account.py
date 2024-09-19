@@ -6,33 +6,43 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["FinancialAccount"]
+__all__ = ["FinancialAccount", "CreditConfiguration"]
+
+
+class CreditConfiguration(BaseModel):
+    credit_limit: Optional[int] = None
+
+    credit_product_token: Optional[str] = None
+    """Globally unique identifier for the credit product"""
+
+    external_bank_account_token: Optional[str] = None
+
+    tier: Optional[str] = None
+    """Tier assigned to the financial account"""
+
+    financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT"]] = None
+    """State of the financial account"""
 
 
 class FinancialAccount(BaseModel):
     token: str
-    """Globally unique identifier for the financial account."""
-
-    created: datetime
-    """Date and time for when the financial account was first created."""
-
-    is_for_benefit_of: bool
-    """Whether the financial account holds funds for benefit of another party."""
-
-    type: Literal["ISSUING", "OPERATING", "RESERVE"]
-    """Type of financial account"""
-
-    updated: datetime
-    """Date and time for when the financial account was last updated."""
-
-    account_number: Optional[str] = None
-    """Account number for your Lithic-assigned bank account number, if applicable."""
+    """Globally unique identifier for the account"""
 
     account_token: Optional[str] = None
-    """Account token of the financial account if applicable."""
+
+    created: datetime
+
+    credit_configuration: Optional[CreditConfiguration] = None
+
+    is_for_benefit_of: bool
+    """Whether financial account is for the benefit of another entity"""
 
     nickname: Optional[str] = None
-    """User-defined nickname for the financial account."""
+
+    type: Literal["ISSUING", "RESERVE", "OPERATING"]
+
+    updated: datetime
+
+    account_number: Optional[str] = None
 
     routing_number: Optional[str] = None
-    """Routing number for your Lithic-assigned bank account number, if applicable."""
