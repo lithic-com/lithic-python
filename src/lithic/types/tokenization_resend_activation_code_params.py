@@ -11,6 +11,6 @@ class TokenizationResendActivationCodeParams(TypedDict, total=False):
     activation_method_type: Literal["EMAIL_TO_CARDHOLDER_ADDRESS", "TEXT_TO_CARDHOLDER_NUMBER"]
     """
     The communication method that the user has selected to use to receive the
-    authentication code. Supported Values: Sms = 'TEXT_TO_CARDHOLDER_NUMBER'. Email
-    = 'EMAIL_TO_CARDHOLDER_ADDRESS'
+    authentication code. Supported Values: Sms = "TEXT_TO_CARDHOLDER_NUMBER". Email
+    = "EMAIL_TO_CARDHOLDER_ADDRESS"
     """

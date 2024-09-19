@@ -1,7 +1,18 @@
 # Shared Types
 
 ```python
-from lithic.types import Address, Carrier, Currency, Document, ShippingAddress
+from lithic.types import (
+    AccountFinancialAccountType,
+    Address,
+    AuthRule,
+    Carrier,
+    Currency,
+    Document,
+    InstanceFinancialAccountType,
+    ShippingAddress,
+    VelocityLimitParams,
+    VelocityLimitParamsPeriodWindow,
+)
 ```
 
 # Lithic
@@ -41,6 +52,7 @@ from lithic.types import (
     KYB,
     KYC,
     KYCExempt,
+    RequiredDocument,
     AccountHolderCreateResponse,
     AccountHolderUpdateResponse,
     AccountHolderListDocumentsResponse,
@@ -66,17 +78,45 @@ Methods:
 Types:
 
 ```python
-from lithic.types import AuthRule, AuthRuleRetrieveResponse, AuthRuleRemoveResponse
+from lithic.types import AuthRuleRetrieveResponse, AuthRuleRemoveResponse
 ```
 
 Methods:
 
-- <code title="post /v1/auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">create</a>(\*\*<a href="src/lithic/types/auth_rule_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
-- <code title="get /v1/auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rule_retrieve_response.py">AuthRuleRetrieveResponse</a></code>
-- <code title="put /v1/auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
-- <code title="get /v1/auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">list</a>(\*\*<a href="src/lithic/types/auth_rule_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">SyncCursorPage[AuthRule]</a></code>
-- <code title="post /v1/auth_rules/{auth_rule_token}/apply">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule.py">AuthRule</a></code>
-- <code title="delete /v1/auth_rules/remove">client.auth_rules.<a href="./src/lithic/resources/auth_rules.py">remove</a>(\*\*<a href="src/lithic/types/auth_rule_remove_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_remove_response.py">AuthRuleRemoveResponse</a></code>
+- <code title="post /v1/auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">create</a>(\*\*<a href="src/lithic/types/auth_rule_create_params.py">params</a>) -> <a href="./src/lithic/types/shared/auth_rule.py">AuthRule</a></code>
+- <code title="get /v1/auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rule_retrieve_response.py">AuthRuleRetrieveResponse</a></code>
+- <code title="put /v1/auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_update_params.py">params</a>) -> <a href="./src/lithic/types/shared/auth_rule.py">AuthRule</a></code>
+- <code title="get /v1/auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">list</a>(\*\*<a href="src/lithic/types/auth_rule_list_params.py">params</a>) -> <a href="./src/lithic/types/shared/auth_rule.py">SyncCursorPage[AuthRule]</a></code>
+- <code title="post /v1/auth_rules/{auth_rule_token}/apply">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_apply_params.py">params</a>) -> <a href="./src/lithic/types/shared/auth_rule.py">AuthRule</a></code>
+- <code title="delete /v1/auth_rules/remove">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">remove</a>(\*\*<a href="src/lithic/types/auth_rule_remove_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_remove_response.py">AuthRuleRemoveResponse</a></code>
+
+## V2
+
+Types:
+
+```python
+from lithic.types.auth_rules import (
+    V2CreateResponse,
+    V2RetrieveResponse,
+    V2UpdateResponse,
+    V2ListResponse,
+    V2ApplyResponse,
+    V2DraftResponse,
+    V2PromoteResponse,
+    V2ReportResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">create</a>(\*\*<a href="src/lithic/types/auth_rules/v2_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_create_response.py">V2CreateResponse</a></code>
+- <code title="get /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_response.py">V2RetrieveResponse</a></code>
+- <code title="patch /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_update_response.py">V2UpdateResponse</a></code>
+- <code title="get /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">list</a>(\*\*<a href="src/lithic/types/auth_rules/v2_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_list_response.py">SyncCursorPage[V2ListResponse]</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/apply">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_apply_response.py">V2ApplyResponse</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_draft_response.py">V2DraftResponse</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_promote_response.py">V2PromoteResponse</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">report</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_report_response.py">V2ReportResponse</a></code>
 
 # AuthStreamEnrollment
 
@@ -572,3 +612,21 @@ from lithic.types.credit_products import ExtendedCredit
 Methods:
 
 - <code title="get /v1/credit_products/{credit_product_id}/extended_credit">client.credit_products.extended_credit.<a href="./src/lithic/resources/credit_products/extended_credit.py">retrieve</a>(credit_product_id) -> <a href="./src/lithic/types/credit_products/extended_credit.py">ExtendedCredit</a></code>
+
+# ExternalPayments
+
+Types:
+
+```python
+from lithic.types import ExternalPayment
+```
+
+Methods:
+
+- <code title="post /v1/external_payments">client.external_payments.<a href="./src/lithic/resources/external_payments.py">create</a>(\*\*<a href="src/lithic/types/external_payment_create_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
+- <code title="get /v1/external_payments/{external_payment_token}">client.external_payments.<a href="./src/lithic/resources/external_payments.py">retrieve</a>(external_payment_token) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
+- <code title="get /v1/external_payments">client.external_payments.<a href="./src/lithic/resources/external_payments.py">list</a>(\*\*<a href="src/lithic/types/external_payment_list_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">SyncCursorPage[ExternalPayment]</a></code>
+- <code title="post /v1/external_payments/{external_payment_token}/cancel">client.external_payments.<a href="./src/lithic/resources/external_payments.py">cancel</a>(external_payment_token, \*\*<a href="src/lithic/types/external_payment_cancel_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
+- <code title="post /v1/external_payments/{external_payment_token}/release">client.external_payments.<a href="./src/lithic/resources/external_payments.py">release</a>(external_payment_token, \*\*<a href="src/lithic/types/external_payment_release_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
+- <code title="post /v1/external_payments/{external_payment_token}/reverse">client.external_payments.<a href="./src/lithic/resources/external_payments.py">reverse</a>(external_payment_token, \*\*<a href="src/lithic/types/external_payment_reverse_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
+- <code title="post /v1/external_payments/{external_payment_token}/settle">client.external_payments.<a href="./src/lithic/resources/external_payments.py">settle</a>(external_payment_token, \*\*<a href="src/lithic/types/external_payment_settle_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>

@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 
@@ -18,8 +19,8 @@ class FinancialAccountCreditConfig(BaseModel):
 
     external_bank_account_token: Optional[str] = None
 
-    financial_account_state: Optional[str] = None
-    """State of the financial account"""
-
     tier: Optional[str] = None
     """Tier assigned to the financial account"""
+
+    financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT"]] = None
+    """State of the financial account"""

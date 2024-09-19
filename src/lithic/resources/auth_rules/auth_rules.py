@@ -6,32 +6,44 @@ from typing import List
 
 import httpx
 
-from .. import _legacy_response
-from ..types import (
+from ... import _legacy_response
+from .v2 import (
+    V2,
+    AsyncV2,
+    V2WithRawResponse,
+    AsyncV2WithRawResponse,
+    V2WithStreamingResponse,
+    AsyncV2WithStreamingResponse,
+)
+from ...types import (
     auth_rule_list_params,
     auth_rule_apply_params,
     auth_rule_create_params,
     auth_rule_remove_params,
     auth_rule_update_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.auth_rule import AuthRule
-from ..types.auth_rule_remove_response import AuthRuleRemoveResponse
-from ..types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ...pagination import SyncCursorPage, AsyncCursorPage
+from ..._base_client import AsyncPaginator, make_request_options
+from ...types.shared.auth_rule import AuthRule
+from ...types.auth_rule_remove_response import AuthRuleRemoveResponse
+from ...types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
 
 __all__ = ["AuthRules", "AsyncAuthRules"]
 
 
 class AuthRules(SyncAPIResource):
+    @cached_property
+    def v2(self) -> V2:
+        return V2(self._client)
+
     @cached_property
     def with_raw_response(self) -> AuthRulesWithRawResponse:
         """
@@ -78,7 +90,7 @@ class AuthRules(SyncAPIResource):
               Rule.
 
           allowed_countries: Countries in which the Auth Rule permits transactions. Note that Lithic
-              maintains a list of countries in which all transactions are blocked; 'allowing'
+              maintains a list of countries in which all transactions are blocked; "allowing"
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
           allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
@@ -378,6 +390,10 @@ class AuthRules(SyncAPIResource):
 
 class AsyncAuthRules(AsyncAPIResource):
     @cached_property
+    def v2(self) -> AsyncV2:
+        return AsyncV2(self._client)
+
+    @cached_property
     def with_raw_response(self) -> AsyncAuthRulesWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
@@ -423,7 +439,7 @@ class AsyncAuthRules(AsyncAPIResource):
               Rule.
 
           allowed_countries: Countries in which the Auth Rule permits transactions. Note that Lithic
-              maintains a list of countries in which all transactions are blocked; 'allowing'
+              maintains a list of countries in which all transactions are blocked; "allowing"
               those countries in an Auth Rule does not override the Lithic-wide restrictions.
 
           allowed_mcc: Merchant category codes for which the Auth Rule permits transactions.
@@ -744,6 +760,10 @@ class AuthRulesWithRawResponse:
             auth_rules.remove,
         )
 
+    @cached_property
+    def v2(self) -> V2WithRawResponse:
+        return V2WithRawResponse(self._auth_rules.v2)
+
 
 class AsyncAuthRulesWithRawResponse:
     def __init__(self, auth_rules: AsyncAuthRules) -> None:
@@ -767,6 +787,10 @@ class AsyncAuthRulesWithRawResponse:
         self.remove = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.remove,
         )
+
+    @cached_property
+    def v2(self) -> AsyncV2WithRawResponse:
+        return AsyncV2WithRawResponse(self._auth_rules.v2)
 
 
 class AuthRulesWithStreamingResponse:
@@ -792,6 +816,10 @@ class AuthRulesWithStreamingResponse:
             auth_rules.remove,
         )
 
+    @cached_property
+    def v2(self) -> V2WithStreamingResponse:
+        return V2WithStreamingResponse(self._auth_rules.v2)
+
 
 class AsyncAuthRulesWithStreamingResponse:
     def __init__(self, auth_rules: AsyncAuthRules) -> None:
@@ -815,3 +843,7 @@ class AsyncAuthRulesWithStreamingResponse:
         self.remove = async_to_streamed_response_wrapper(
             auth_rules.remove,
         )
+
+    @cached_property
+    def v2(self) -> AsyncV2WithStreamingResponse:
+        return AsyncV2WithStreamingResponse(self._auth_rules.v2)
