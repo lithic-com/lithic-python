@@ -845,6 +845,7 @@ class TestLithic:
         response = client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
 
         assert response.retries_taken == failures_before_success
+        assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
@@ -867,6 +868,7 @@ class TestLithic:
 
         with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
             assert response.retries_taken == failures_before_success
+            assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
 
 class TestAsyncLithic:
@@ -1692,6 +1694,7 @@ class TestAsyncLithic:
         response = await client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
 
         assert response.retries_taken == failures_before_success
+        assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
@@ -1715,3 +1718,4 @@ class TestAsyncLithic:
 
         async with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
             assert response.retries_taken == failures_before_success
+            assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
