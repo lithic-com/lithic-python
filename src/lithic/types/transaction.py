@@ -40,7 +40,7 @@ class AmountsCardholder(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
     :attr:`Currency.usd`.
     """
 
@@ -52,7 +52,7 @@ class AmountsHold(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
     :attr:`Currency.usd`.
     """
 
@@ -64,7 +64,7 @@ class AmountsMerchant(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
     :attr:`Currency.usd`.
     """
 
@@ -76,7 +76,7 @@ class AmountsSettlement(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
     :attr:`Currency.usd`.
     """
 
@@ -108,7 +108,7 @@ class EventAmountsCardholder(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
     :attr:`Currency.usd`.
     """
 
@@ -120,7 +120,7 @@ class EventAmountsMerchant(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
     :attr:`Currency.usd`.
     """
 
@@ -134,7 +134,7 @@ class EventAmountsSettlement(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase cureency code e.g. :attr:`Currency.eur`,
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
     :attr:`Currency.usd`.
     """
 
