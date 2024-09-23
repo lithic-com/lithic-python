@@ -52,5 +52,5 @@ class ExternalPaymentListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED"]
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
     """Book transfer status to be returned."""
