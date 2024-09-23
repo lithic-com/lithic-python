@@ -69,7 +69,7 @@ class ExternalPayment(BaseModel):
 
     settled_amount: int
 
-    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED"]
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
 
     updated: datetime
 
