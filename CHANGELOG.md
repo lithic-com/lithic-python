@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.68.0 (2024-09-23)
+
+Full Changelog: [v0.67.0...v0.68.0](https://github.com/lithic-com/lithic-python/compare/v0.67.0...v0.68.0)
+
+### Features
+
+* **api:** add `canceled` to `transaction_status` enum values ([#575](https://github.com/lithic-com/lithic-python/issues/575)) ([d10002b](https://github.com/lithic-com/lithic-python/commit/d10002bc752692bd81d4f0af527d36ddb06e5c40))
+
+
+### Chores
+
+* **internal:** update pydantic v1 compat helpers ([#573](https://github.com/lithic-com/lithic-python/issues/573)) ([90fa3a1](https://github.com/lithic-com/lithic-python/commit/90fa3a1e0393271448cf808a7157cfc0734d6ecf))
+
 ## 0.67.0 (2024-09-19)
 
 Full Changelog: [v0.66.2...v0.67.0](https://github.com/lithic-com/lithic-python/compare/v0.66.2...v0.67.0)
