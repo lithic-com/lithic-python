@@ -162,6 +162,7 @@ class Event(BaseModel):
     detailed_results: List[
         Literal[
             "ACCOUNT_DAILY_SPEND_LIMIT_EXCEEDED",
+            "ACCOUNT_DELINQUENT",
             "ACCOUNT_INACTIVE",
             "ACCOUNT_LIFETIME_SPEND_LIMIT_EXCEEDED",
             "ACCOUNT_MONTHLY_SPEND_LIMIT_EXCEEDED",
