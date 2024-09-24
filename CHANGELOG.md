@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.69.0 (2024-09-24)
+
+Full Changelog: [v0.68.0...v0.69.0](https://github.com/lithic-com/lithic-python/compare/v0.68.0...v0.69.0)
+
+### Features
+
+* **api:** add `ACCOUNT_DELINQUENT` to `detailed_results` enum ([#576](https://github.com/lithic-com/lithic-python/issues/576)) ([b4f8760](https://github.com/lithic-com/lithic-python/commit/b4f87609de5ba24d05778c87f7fae71ae21a01bd))
+
 ## 0.68.0 (2024-09-23)
 
 Full Changelog: [v0.67.0...v0.68.0](https://github.com/lithic-com/lithic-python/compare/v0.67.0...v0.68.0)
