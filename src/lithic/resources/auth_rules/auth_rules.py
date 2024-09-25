@@ -35,6 +35,7 @@ from ..._base_client import AsyncPaginator, make_request_options
 from ...types.shared.auth_rule import AuthRule
 from ...types.auth_rule_remove_response import AuthRuleRemoveResponse
 from ...types.auth_rule_retrieve_response import AuthRuleRetrieveResponse
+from ...types.auth_rule_migrate_v1_to_v2_response import AuthRuleMigrateV1ToV2Response
 
 __all__ = ["AuthRules", "AsyncAuthRules"]
 
@@ -334,6 +335,47 @@ class AuthRules(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
+        )
+
+    def migrate_v1_to_v2(
+        self,
+        auth_rule_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AuthRuleMigrateV1ToV2Response:
+        """Migrates an existing V1 authorization rule to a V2 authorization rule.
+
+        This will
+        alter the internal structure of the Auth Rule such that it becomes a V2
+        Authorization Rule that can be operated on through the /v2/auth_rules endpoints.
+
+        After a V1 Auth Rule has been migrated, it can no longer be operated on through
+        the /v1/auth_rules/\\** endpoints. Eventually, Lithic will deprecate the
+        /v1/auth_rules endpoints and migrate all existing V1 Auth Rules to V2 Auth
+        Rules.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return self._post(
+            f"/v1/auth_rules/{auth_rule_token}/migrate",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthRuleMigrateV1ToV2Response,
         )
 
     def remove(
@@ -685,6 +727,47 @@ class AsyncAuthRules(AsyncAPIResource):
             cast_to=AuthRule,
         )
 
+    async def migrate_v1_to_v2(
+        self,
+        auth_rule_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AuthRuleMigrateV1ToV2Response:
+        """Migrates an existing V1 authorization rule to a V2 authorization rule.
+
+        This will
+        alter the internal structure of the Auth Rule such that it becomes a V2
+        Authorization Rule that can be operated on through the /v2/auth_rules endpoints.
+
+        After a V1 Auth Rule has been migrated, it can no longer be operated on through
+        the /v1/auth_rules/\\** endpoints. Eventually, Lithic will deprecate the
+        /v1/auth_rules endpoints and migrate all existing V1 Auth Rules to V2 Auth
+        Rules.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return await self._post(
+            f"/v1/auth_rules/{auth_rule_token}/migrate",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthRuleMigrateV1ToV2Response,
+        )
+
     async def remove(
         self,
         *,
@@ -756,6 +839,9 @@ class AuthRulesWithRawResponse:
         self.apply = _legacy_response.to_raw_response_wrapper(
             auth_rules.apply,
         )
+        self.migrate_v1_to_v2 = _legacy_response.to_raw_response_wrapper(
+            auth_rules.migrate_v1_to_v2,
+        )
         self.remove = _legacy_response.to_raw_response_wrapper(
             auth_rules.remove,
         )
@@ -783,6 +869,9 @@ class AsyncAuthRulesWithRawResponse:
         )
         self.apply = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.apply,
+        )
+        self.migrate_v1_to_v2 = _legacy_response.async_to_raw_response_wrapper(
+            auth_rules.migrate_v1_to_v2,
         )
         self.remove = _legacy_response.async_to_raw_response_wrapper(
             auth_rules.remove,
@@ -812,6 +901,9 @@ class AuthRulesWithStreamingResponse:
         self.apply = to_streamed_response_wrapper(
             auth_rules.apply,
         )
+        self.migrate_v1_to_v2 = to_streamed_response_wrapper(
+            auth_rules.migrate_v1_to_v2,
+        )
         self.remove = to_streamed_response_wrapper(
             auth_rules.remove,
         )
@@ -839,6 +931,9 @@ class AsyncAuthRulesWithStreamingResponse:
         )
         self.apply = async_to_streamed_response_wrapper(
             auth_rules.apply,
+        )
+        self.migrate_v1_to_v2 = async_to_streamed_response_wrapper(
+            auth_rules.migrate_v1_to_v2,
         )
         self.remove = async_to_streamed_response_wrapper(
             auth_rules.remove,
