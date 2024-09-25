@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.70.0 (2024-09-25)
+
+Full Changelog: [v0.69.0...v0.70.0](https://github.com/lithic-com/lithic-python/compare/v0.69.0...v0.70.0)
+
+### Features
+
+* **api:** adds endpoint for migrating auth rules from v1 to V2. marks v1 auth rules as deprecated ([#581](https://github.com/lithic-com/lithic-python/issues/581)) ([71cfe49](https://github.com/lithic-com/lithic-python/commit/71cfe4931afb9baa511cd61a17f454dc0ab534cf))
+* **client:** allow overriding retry count header ([#580](https://github.com/lithic-com/lithic-python/issues/580)) ([ee6b2a9](https://github.com/lithic-com/lithic-python/commit/ee6b2a941b12d1b49fe080d053be5e800628de18))
+
+
+### Chores
+
+* **internal:** use `typing_extensions.overload` instead of `typing` ([#578](https://github.com/lithic-com/lithic-python/issues/578)) ([186a97c](https://github.com/lithic-com/lithic-python/commit/186a97c2d44ba71b7528b478d20e695fcce4f174))
+
 ## 0.69.0 (2024-09-24)
 
 Full Changelog: [v0.68.0...v0.69.0](https://github.com/lithic-com/lithic-python/compare/v0.68.0...v0.69.0)
