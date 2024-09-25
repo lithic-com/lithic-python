@@ -850,6 +850,56 @@ class TestLithic:
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
+    def test_omit_retry_count_header(
+        self, client: Lithic, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
+
+        response = client.cards.with_raw_response.create(
+            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": Omit()}
+        )
+
+        assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_overwrite_retry_count_header(
+        self, client: Lithic, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
+
+        response = client.cards.with_raw_response.create(
+            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": "42"}
+        )
+
+        assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
     def test_retries_taken_new_response_class(
         self, client: Lithic, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
@@ -1695,6 +1745,58 @@ class TestAsyncLithic:
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.asyncio
+    async def test_omit_retry_count_header(
+        self, async_client: AsyncLithic, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
+
+        response = await client.cards.with_raw_response.create(
+            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": Omit()}
+        )
+
+        assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.asyncio
+    async def test_overwrite_retry_count_header(
+        self, async_client: AsyncLithic, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
+
+        response = await client.cards.with_raw_response.create(
+            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": "42"}
+        )
+
+        assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
     @mock.patch("lithic._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
