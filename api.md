@@ -78,7 +78,11 @@ Methods:
 Types:
 
 ```python
-from lithic.types import AuthRuleRetrieveResponse, AuthRuleRemoveResponse
+from lithic.types import (
+    AuthRuleRetrieveResponse,
+    AuthRuleMigrateV1ToV2Response,
+    AuthRuleRemoveResponse,
+)
 ```
 
 Methods:
@@ -88,6 +92,7 @@ Methods:
 - <code title="put /v1/auth_rules/{auth_rule_token}">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_update_params.py">params</a>) -> <a href="./src/lithic/types/shared/auth_rule.py">AuthRule</a></code>
 - <code title="get /v1/auth_rules">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">list</a>(\*\*<a href="src/lithic/types/auth_rule_list_params.py">params</a>) -> <a href="./src/lithic/types/shared/auth_rule.py">SyncCursorPage[AuthRule]</a></code>
 - <code title="post /v1/auth_rules/{auth_rule_token}/apply">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rule_apply_params.py">params</a>) -> <a href="./src/lithic/types/shared/auth_rule.py">AuthRule</a></code>
+- <code title="post /v1/auth_rules/{auth_rule_token}/migrate">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">migrate_v1_to_v2</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rule_migrate_v1_to_v2_response.py">AuthRuleMigrateV1ToV2Response</a></code>
 - <code title="delete /v1/auth_rules/remove">client.auth_rules.<a href="./src/lithic/resources/auth_rules/auth_rules.py">remove</a>(\*\*<a href="src/lithic/types/auth_rule_remove_params.py">params</a>) -> <a href="./src/lithic/types/auth_rule_remove_response.py">AuthRuleRemoveResponse</a></code>
 
 ## V2

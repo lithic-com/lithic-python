@@ -40,8 +40,8 @@ class AmountsCardholder(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
-    :attr:`Currency.usd`.
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`EUR`,
+    :attr:`USD`.
     """
 
 
@@ -52,8 +52,8 @@ class AmountsHold(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
-    :attr:`Currency.usd`.
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`EUR`,
+    :attr:`USD`.
     """
 
 
@@ -64,8 +64,8 @@ class AmountsMerchant(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
-    :attr:`Currency.usd`.
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`EUR`,
+    :attr:`USD`.
     """
 
 
@@ -76,8 +76,8 @@ class AmountsSettlement(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
-    :attr:`Currency.usd`.
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`EUR`,
+    :attr:`USD`.
     """
 
 
@@ -108,8 +108,8 @@ class EventAmountsCardholder(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
-    :attr:`Currency.usd`.
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`EUR`,
+    :attr:`USD`.
     """
 
 
@@ -120,8 +120,8 @@ class EventAmountsMerchant(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
-    :attr:`Currency.usd`.
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`EUR`,
+    :attr:`USD`.
     """
 
 
@@ -134,8 +134,8 @@ class EventAmountsSettlement(BaseModel):
     """ISO 4217 currency.
 
     Its enumerants are ISO 4217 currencies except for some special currencies like
-    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`Currency.eur`,
-    :attr:`Currency.usd`.
+    ``XXX`. Enumerants names are lowercase currency code e.g. :attr:`EUR`,
+    :attr:`USD`.
     """
 
 
@@ -300,6 +300,9 @@ class Event(BaseModel):
     - `RETURN_REVERSAL` - A refund has been reversed (e.g., when a merchant reverses
       an incorrect refund).
     """
+
+    effective_polarity: Optional[Literal["CREDIT", "DEBIT"]] = None
+    """Indicates whether the transaction event is a credit or debit to the account."""
 
 
 class Merchant(BaseModel):
