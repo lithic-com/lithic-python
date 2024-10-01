@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.71.0 (2024-10-01)
+
+Full Changelog: [v0.70.0...v0.71.0](https://github.com/lithic-com/lithic-python/compare/v0.70.0...v0.71.0)
+
+### Features
+
+* **api:** add Management Operations and Loan Tapes API ([#582](https://github.com/lithic-com/lithic-python/issues/582)) ([34cdf6a](https://github.com/lithic-com/lithic-python/commit/34cdf6a68e8eecc1b0d78c9d9dcc1dc197ef3d66))
+
 ## 0.70.0 (2024-09-25)
 
 Full Changelog: [v0.69.0...v0.70.0](https://github.com/lithic-com/lithic-python/compare/v0.69.0...v0.70.0)
