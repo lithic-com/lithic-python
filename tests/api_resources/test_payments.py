@@ -134,7 +134,9 @@ class TestPayments:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         payment = client.payments.list(
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             category="ACH",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="ending_before",
@@ -488,7 +490,9 @@ class TestAsyncPayments:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         payment = await async_client.payments.list(
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             category="ACH",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="ending_before",

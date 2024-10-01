@@ -86,6 +86,7 @@ class Lithic(SyncAPIClient):
     book_transfers: resources.BookTransfers
     credit_products: resources.CreditProducts
     external_payments: resources.ExternalPayments
+    management_operations: resources.ManagementOperations
     with_raw_response: LithicWithRawResponse
     with_streaming_response: LithicWithStreamedResponse
 
@@ -208,6 +209,7 @@ class Lithic(SyncAPIClient):
         self.book_transfers = resources.BookTransfers(self)
         self.credit_products = resources.CreditProducts(self)
         self.external_payments = resources.ExternalPayments(self)
+        self.management_operations = resources.ManagementOperations(self)
         self.with_raw_response = LithicWithRawResponse(self)
         self.with_streaming_response = LithicWithStreamedResponse(self)
 
@@ -384,6 +386,7 @@ class AsyncLithic(AsyncAPIClient):
     book_transfers: resources.AsyncBookTransfers
     credit_products: resources.AsyncCreditProducts
     external_payments: resources.AsyncExternalPayments
+    management_operations: resources.AsyncManagementOperations
     with_raw_response: AsyncLithicWithRawResponse
     with_streaming_response: AsyncLithicWithStreamedResponse
 
@@ -506,6 +509,7 @@ class AsyncLithic(AsyncAPIClient):
         self.book_transfers = resources.AsyncBookTransfers(self)
         self.credit_products = resources.AsyncCreditProducts(self)
         self.external_payments = resources.AsyncExternalPayments(self)
+        self.management_operations = resources.AsyncManagementOperations(self)
         self.with_raw_response = AsyncLithicWithRawResponse(self)
         self.with_streaming_response = AsyncLithicWithStreamedResponse(self)
 
@@ -684,6 +688,7 @@ class LithicWithRawResponse:
         self.book_transfers = resources.BookTransfersWithRawResponse(client.book_transfers)
         self.credit_products = resources.CreditProductsWithRawResponse(client.credit_products)
         self.external_payments = resources.ExternalPaymentsWithRawResponse(client.external_payments)
+        self.management_operations = resources.ManagementOperationsWithRawResponse(client.management_operations)
 
         self.api_status = _legacy_response.to_raw_response_wrapper(
             client.api_status,
@@ -717,6 +722,7 @@ class AsyncLithicWithRawResponse:
         self.book_transfers = resources.AsyncBookTransfersWithRawResponse(client.book_transfers)
         self.credit_products = resources.AsyncCreditProductsWithRawResponse(client.credit_products)
         self.external_payments = resources.AsyncExternalPaymentsWithRawResponse(client.external_payments)
+        self.management_operations = resources.AsyncManagementOperationsWithRawResponse(client.management_operations)
 
         self.api_status = _legacy_response.async_to_raw_response_wrapper(
             client.api_status,
@@ -750,6 +756,7 @@ class LithicWithStreamedResponse:
         self.book_transfers = resources.BookTransfersWithStreamingResponse(client.book_transfers)
         self.credit_products = resources.CreditProductsWithStreamingResponse(client.credit_products)
         self.external_payments = resources.ExternalPaymentsWithStreamingResponse(client.external_payments)
+        self.management_operations = resources.ManagementOperationsWithStreamingResponse(client.management_operations)
 
         self.api_status = to_streamed_response_wrapper(
             client.api_status,
@@ -787,6 +794,9 @@ class AsyncLithicWithStreamedResponse:
         self.book_transfers = resources.AsyncBookTransfersWithStreamingResponse(client.book_transfers)
         self.credit_products = resources.AsyncCreditProductsWithStreamingResponse(client.credit_products)
         self.external_payments = resources.AsyncExternalPaymentsWithStreamingResponse(client.external_payments)
+        self.management_operations = resources.AsyncManagementOperationsWithStreamingResponse(
+            client.management_operations
+        )
 
         self.api_status = async_to_streamed_response_wrapper(
             client.api_status,

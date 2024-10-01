@@ -18,6 +18,8 @@ class ExternalPaymentListParams(TypedDict, total=False):
     Only entries created after the specified time will be included. UTC time zone.
     """
 
+    business_account_token: str
+
     category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]
     """External Payment category to be returned."""
 

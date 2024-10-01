@@ -6,46 +6,144 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["Statement", "AccountStanding", "PeriodTotals", "YtdTotals"]
+__all__ = [
+    "Statement",
+    "AccountStanding",
+    "AmountDue",
+    "PeriodTotals",
+    "YtdTotals",
+    "InterestDetails",
+    "InterestDetailsDailyBalanceAmounts",
+    "InterestDetailsEffectiveApr",
+    "InterestDetailsInterestForPeriod",
+]
 
 
 class AccountStanding(BaseModel):
+    consecutive_full_payments_made: int
+    """Number of consecutive full payments made"""
+
+    consecutive_minimum_payments_made: int
+    """Number of consecutive minimum payments made"""
+
+    consecutive_minimum_payments_missed: int
+    """Number of consecutive minimum payments missed"""
+
+    days_past_due: int
+    """Number of days past due"""
+
+    has_grace: bool
+    """Whether the account currently has grace or not"""
+
     period_number: int
     """Current overall period number"""
 
     period_state: Literal["STANDARD", "PROMO", "PENALTY"]
 
 
+class AmountDue(BaseModel):
+    amount: int
+    """Payment due at the end of the billing period in cents.
+
+    Negative amount indicates something is owed. If the amount owed is positive
+    there was a net credit. If auto-collections are enabled this is the amount that
+    will be requested on the payment due date
+    """
+
+    past_due: int
+    """Amount past due for statement in cents"""
+
+
 class PeriodTotals(BaseModel):
     balance_transfers: int
+    """Opening balance transferred from previous account in cents"""
 
     cash_advances: int
+    """ATM and cashback transactions in cents"""
 
     credits: int
+    """
+    Volume of credit management operation transactions less any balance transfers in
+    cents
+    """
 
     fees: int
+    """Volume of debit management operation transactions less any interest in cents"""
 
     interest: int
+    """Interest accrued in cents"""
 
     payments: int
+    """Any funds transfers which affective the balance in cents"""
 
     purchases: int
+    """Net card transaction volume less any cash advances in cents"""
 
 
 class YtdTotals(BaseModel):
     balance_transfers: int
+    """Opening balance transferred from previous account in cents"""
 
     cash_advances: int
+    """ATM and cashback transactions in cents"""
 
     credits: int
+    """
+    Volume of credit management operation transactions less any balance transfers in
+    cents
+    """
 
     fees: int
+    """Volume of debit management operation transactions less any interest in cents"""
 
     interest: int
+    """Interest accrued in cents"""
 
     payments: int
+    """Any funds transfers which affective the balance in cents"""
 
     purchases: int
+    """Net card transaction volume less any cash advances in cents"""
+
+
+class InterestDetailsDailyBalanceAmounts(BaseModel):
+    balance_transfers: str
+
+    cash_advances: str
+
+    purchases: str
+
+
+class InterestDetailsEffectiveApr(BaseModel):
+    balance_transfers: str
+
+    cash_advances: str
+
+    purchases: str
+
+
+class InterestDetailsInterestForPeriod(BaseModel):
+    balance_transfers: str
+
+    cash_advances: str
+
+    purchases: str
+
+
+class InterestDetails(BaseModel):
+    actual_interest_charged: int
+
+    daily_balance_amounts: InterestDetailsDailyBalanceAmounts
+
+    effective_apr: InterestDetailsEffectiveApr
+
+    interest_calculation_method: Literal["DAILY", "AVERAGE_DAILY"]
+
+    interest_for_period: InterestDetailsInterestForPeriod
+
+    minimum_interest_charged: Optional[int] = None
+
+    prime_rate: Optional[str] = None
 
 
 class Statement(BaseModel):
@@ -54,29 +152,16 @@ class Statement(BaseModel):
 
     account_standing: AccountStanding
 
-    amount_due: int
-    """Payment due at the end of the billing period.
-
-    Negative amount indicates something is owed. If the amount owed is positive
-    (e.g., there was a net credit), then payment should be returned to the
-    cardholder via ACH.
-    """
-
-    amount_past_due: int
-    """Payment past due at the end of the billing period."""
+    amount_due: AmountDue
 
     available_credit: int
-    """Amount of credit available to spend"""
+    """Amount of credit available to spend in cents"""
 
     created: datetime
     """Timestamp of when the statement was created"""
 
     credit_limit: int
-    """For prepay accounts, this is the minimum prepay balance that must be maintained.
-
-    For charge card accounts, this is the maximum credit balance extended by a
-    lender.
-    """
+    """This is the maximum credit balance extended by the lender in cents"""
 
     credit_product_token: str
     """Globally unique identifier for a credit product"""
@@ -87,7 +172,7 @@ class Statement(BaseModel):
     ending_balance: int
     """Balance at the end of the billing period.
 
-    For charge cards, this should be the same at the statement amount due.
+    For charge cards, this should be the same at the statement amount due in cents
     """
 
     financial_account_token: str
@@ -111,6 +196,8 @@ class Statement(BaseModel):
     """Timestamp of when the statement was updated"""
 
     ytd_totals: YtdTotals
+
+    interest_details: Optional[InterestDetails] = None
 
     next_payment_due_date: Optional[date] = None
     """Date when the next payment is due"""

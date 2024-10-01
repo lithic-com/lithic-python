@@ -161,6 +161,14 @@ from .responder_endpoints import (
     ResponderEndpointsWithStreamingResponse,
     AsyncResponderEndpointsWithStreamingResponse,
 )
+from .management_operations import (
+    ManagementOperations,
+    AsyncManagementOperations,
+    ManagementOperationsWithRawResponse,
+    AsyncManagementOperationsWithRawResponse,
+    ManagementOperationsWithStreamingResponse,
+    AsyncManagementOperationsWithStreamingResponse,
+)
 from .auth_stream_enrollment import (
     AuthStreamEnrollment,
     AsyncAuthStreamEnrollment,
@@ -327,4 +335,10 @@ __all__ = [
     "AsyncExternalPaymentsWithRawResponse",
     "ExternalPaymentsWithStreamingResponse",
     "AsyncExternalPaymentsWithStreamingResponse",
+    "ManagementOperations",
+    "AsyncManagementOperations",
+    "ManagementOperationsWithRawResponse",
+    "AsyncManagementOperationsWithRawResponse",
+    "ManagementOperationsWithStreamingResponse",
+    "AsyncManagementOperationsWithStreamingResponse",
 ]
