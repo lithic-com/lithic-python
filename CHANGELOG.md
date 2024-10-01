@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.72.0 (2024-10-01)
+
+Full Changelog: [v0.71.0...v0.72.0](https://github.com/lithic-com/lithic-python/compare/v0.71.0...v0.72.0)
+
+### Features
+
+* **api:** rename `loan_tape_response.statement_balance` to `previous_statement_balance` ([#587](https://github.com/lithic-com/lithic-python/issues/587)) ([57b648e](https://github.com/lithic-com/lithic-python/commit/57b648e29e213d87b395421e5571f9b89cd640f1))
+
+
+### Documentation
+
+* fix typo in fenced code block language ([#586](https://github.com/lithic-com/lithic-python/issues/586)) ([5e8dbb4](https://github.com/lithic-com/lithic-python/commit/5e8dbb42879f28d8437f7b8634c375ee8a8095e7))
+* improve and reference contributing documentation ([#584](https://github.com/lithic-com/lithic-python/issues/584)) ([aa350d9](https://github.com/lithic-com/lithic-python/commit/aa350d92d0a722303e24de3baedd2e4a126db583))
+
 ## 0.71.0 (2024-10-01)
 
 Full Changelog: [v0.70.0...v0.71.0](https://github.com/lithic-com/lithic-python/compare/v0.70.0...v0.71.0)
