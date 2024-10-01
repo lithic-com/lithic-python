@@ -127,7 +127,9 @@ class TestBookTransfers:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         book_transfer = client.book_transfers.list(
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             category="BALANCE_OR_FUNDING",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="ending_before",
@@ -315,7 +317,9 @@ class TestAsyncBookTransfers:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         book_transfer = await async_client.book_transfers.list(
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             category="BALANCE_OR_FUNDING",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="ending_before",
