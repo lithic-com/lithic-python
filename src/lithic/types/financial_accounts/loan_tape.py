@@ -16,7 +16,7 @@ __all__ = [
     "MinimumPaymentBalance",
     "PaymentAllocation",
     "PeriodTotals",
-    "StatementBalance",
+    "PreviousStatementBalance",
     "YtdTotals",
 ]
 
@@ -133,7 +133,7 @@ class PeriodTotals(BaseModel):
     """Net card transaction volume less any cash advances in cents"""
 
 
-class StatementBalance(BaseModel):
+class PreviousStatementBalance(BaseModel):
     amount: int
 
     remaining: int
@@ -223,7 +223,7 @@ class LoanTape(BaseModel):
 
     period_totals: PeriodTotals
 
-    statement_balance: StatementBalance
+    previous_statement_balance: PreviousStatementBalance
 
     updated: datetime.datetime
     """Timestamp of when the loan tape was updated"""
