@@ -26,6 +26,14 @@ from .balances import (
     AsyncBalancesWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .loan_tapes import (
+    LoanTapes,
+    AsyncLoanTapes,
+    LoanTapesWithRawResponse,
+    AsyncLoanTapesWithRawResponse,
+    LoanTapesWithStreamingResponse,
+    AsyncLoanTapesWithStreamingResponse,
+)
 from .statements import (
     Statements,
     AsyncStatements,
@@ -76,6 +84,10 @@ class FinancialAccounts(SyncAPIResource):
     @cached_property
     def statements(self) -> Statements:
         return Statements(self._client)
+
+    @cached_property
+    def loan_tapes(self) -> LoanTapes:
+        return LoanTapes(self._client)
 
     @cached_property
     def with_raw_response(self) -> FinancialAccountsWithRawResponse:
@@ -280,6 +292,10 @@ class AsyncFinancialAccounts(AsyncAPIResource):
     @cached_property
     def statements(self) -> AsyncStatements:
         return AsyncStatements(self._client)
+
+    @cached_property
+    def loan_tapes(self) -> AsyncLoanTapes:
+        return AsyncLoanTapes(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncFinancialAccountsWithRawResponse:
@@ -503,6 +519,10 @@ class FinancialAccountsWithRawResponse:
     def statements(self) -> StatementsWithRawResponse:
         return StatementsWithRawResponse(self._financial_accounts.statements)
 
+    @cached_property
+    def loan_tapes(self) -> LoanTapesWithRawResponse:
+        return LoanTapesWithRawResponse(self._financial_accounts.loan_tapes)
+
 
 class AsyncFinancialAccountsWithRawResponse:
     def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
@@ -536,6 +556,10 @@ class AsyncFinancialAccountsWithRawResponse:
     @cached_property
     def statements(self) -> AsyncStatementsWithRawResponse:
         return AsyncStatementsWithRawResponse(self._financial_accounts.statements)
+
+    @cached_property
+    def loan_tapes(self) -> AsyncLoanTapesWithRawResponse:
+        return AsyncLoanTapesWithRawResponse(self._financial_accounts.loan_tapes)
 
 
 class FinancialAccountsWithStreamingResponse:
@@ -571,6 +595,10 @@ class FinancialAccountsWithStreamingResponse:
     def statements(self) -> StatementsWithStreamingResponse:
         return StatementsWithStreamingResponse(self._financial_accounts.statements)
 
+    @cached_property
+    def loan_tapes(self) -> LoanTapesWithStreamingResponse:
+        return LoanTapesWithStreamingResponse(self._financial_accounts.loan_tapes)
+
 
 class AsyncFinancialAccountsWithStreamingResponse:
     def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
@@ -604,3 +632,7 @@ class AsyncFinancialAccountsWithStreamingResponse:
     @cached_property
     def statements(self) -> AsyncStatementsWithStreamingResponse:
         return AsyncStatementsWithStreamingResponse(self._financial_accounts.statements)
+
+    @cached_property
+    def loan_tapes(self) -> AsyncLoanTapesWithStreamingResponse:
+        return AsyncLoanTapesWithStreamingResponse(self._financial_accounts.loan_tapes)

@@ -384,6 +384,19 @@ Methods:
 
 - <code title="get /v1/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(statement_token, \*, financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statements/line_item_list_response.py">SyncCursorPage[LineItemListResponse]</a></code>
 
+## LoanTapes
+
+Types:
+
+```python
+from lithic.types.financial_accounts import LoanTape
+```
+
+Methods:
+
+- <code title="get /v1/financial_accounts/{financial_account_token}/loan_tapes/{loan_tape_token}">client.financial_accounts.loan_tapes.<a href="./src/lithic/resources/financial_accounts/loan_tapes.py">retrieve</a>(loan_tape_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/loan_tape.py">LoanTape</a></code>
+- <code title="get /v1/financial_accounts/{financial_account_token}/loan_tapes">client.financial_accounts.loan_tapes.<a href="./src/lithic/resources/financial_accounts/loan_tapes.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/loan_tape_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/loan_tape.py">SyncCursorPage[LoanTape]</a></code>
+
 # Transactions
 
 Types:
@@ -635,3 +648,18 @@ Methods:
 - <code title="post /v1/external_payments/{external_payment_token}/release">client.external_payments.<a href="./src/lithic/resources/external_payments.py">release</a>(external_payment_token, \*\*<a href="src/lithic/types/external_payment_release_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
 - <code title="post /v1/external_payments/{external_payment_token}/reverse">client.external_payments.<a href="./src/lithic/resources/external_payments.py">reverse</a>(external_payment_token, \*\*<a href="src/lithic/types/external_payment_reverse_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
 - <code title="post /v1/external_payments/{external_payment_token}/settle">client.external_payments.<a href="./src/lithic/resources/external_payments.py">settle</a>(external_payment_token, \*\*<a href="src/lithic/types/external_payment_settle_params.py">params</a>) -> <a href="./src/lithic/types/external_payment.py">ExternalPayment</a></code>
+
+# ManagementOperations
+
+Types:
+
+```python
+from lithic.types import ManagementOperationTransaction
+```
+
+Methods:
+
+- <code title="post /v1/management_operations">client.management_operations.<a href="./src/lithic/resources/management_operations.py">create</a>(\*\*<a href="src/lithic/types/management_operation_create_params.py">params</a>) -> <a href="./src/lithic/types/management_operation_transaction.py">ManagementOperationTransaction</a></code>
+- <code title="get /v1/management_operations/{management_operation_token}">client.management_operations.<a href="./src/lithic/resources/management_operations.py">retrieve</a>(management_operation_token) -> <a href="./src/lithic/types/management_operation_transaction.py">ManagementOperationTransaction</a></code>
+- <code title="get /v1/management_operations">client.management_operations.<a href="./src/lithic/resources/management_operations.py">list</a>(\*\*<a href="src/lithic/types/management_operation_list_params.py">params</a>) -> <a href="./src/lithic/types/management_operation_transaction.py">SyncCursorPage[ManagementOperationTransaction]</a></code>
+- <code title="post /v1/management_operations/{management_operation_token}/reverse">client.management_operations.<a href="./src/lithic/resources/management_operations.py">reverse</a>(management_operation_token, \*\*<a href="src/lithic/types/management_operation_reverse_params.py">params</a>) -> <a href="./src/lithic/types/management_operation_transaction.py">ManagementOperationTransaction</a></code>

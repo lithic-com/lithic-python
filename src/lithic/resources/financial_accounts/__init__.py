@@ -8,6 +8,14 @@ from .balances import (
     BalancesWithStreamingResponse,
     AsyncBalancesWithStreamingResponse,
 )
+from .loan_tapes import (
+    LoanTapes,
+    AsyncLoanTapes,
+    LoanTapesWithRawResponse,
+    AsyncLoanTapesWithRawResponse,
+    LoanTapesWithStreamingResponse,
+    AsyncLoanTapesWithStreamingResponse,
+)
 from .statements import (
     Statements,
     AsyncStatements,
@@ -66,6 +74,12 @@ __all__ = [
     "AsyncStatementsWithRawResponse",
     "StatementsWithStreamingResponse",
     "AsyncStatementsWithStreamingResponse",
+    "LoanTapes",
+    "AsyncLoanTapes",
+    "LoanTapesWithRawResponse",
+    "AsyncLoanTapesWithRawResponse",
+    "LoanTapesWithStreamingResponse",
+    "AsyncLoanTapesWithStreamingResponse",
     "FinancialAccounts",
     "AsyncFinancialAccounts",
     "FinancialAccountsWithRawResponse",

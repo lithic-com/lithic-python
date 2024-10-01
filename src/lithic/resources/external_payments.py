@@ -144,6 +144,7 @@ class ExternalPayments(SyncAPIResource):
         self,
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]
         | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -207,6 +208,7 @@ class ExternalPayments(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "begin": begin,
+                        "business_account_token": business_account_token,
                         "category": category,
                         "end": end,
                         "ending_before": ending_before,
@@ -513,6 +515,7 @@ class AsyncExternalPayments(AsyncAPIResource):
         self,
         *,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]
         | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -576,6 +579,7 @@ class AsyncExternalPayments(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "begin": begin,
+                        "business_account_token": business_account_token,
                         "category": category,
                         "end": end,
                         "ending_before": ending_before,

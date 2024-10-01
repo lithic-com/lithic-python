@@ -12,11 +12,15 @@ __all__ = ["PaymentListParams"]
 
 
 class PaymentListParams(TypedDict, total=False):
+    account_token: str
+
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
     Only entries created after the specified time will be included. UTC time zone.
     """
+
+    business_account_token: str
 
     category: Literal["ACH"]
 
