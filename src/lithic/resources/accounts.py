@@ -95,13 +95,11 @@ class Accounts(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """Update account configuration such as spend limits and verification address.
+        """Update account configuration such as state or spend limits.
 
-        Can
-        only be run on accounts that are part of the program managed by this API key.
-
-        Accounts that are in the `PAUSED` state will not be able to transact or create
-        new cards.
+        Can only be run on
+        accounts that are part of the program managed by this API key. Accounts that are
+        in the `PAUSED` state will not be able to transact or create new cards.
 
         Args:
           daily_spend_limit: Amount (in cents) for the account's daily spend limit. By default the daily
@@ -121,7 +119,9 @@ class Accounts(SyncAPIResource):
           state: Account states.
 
           verification_address: Address used during Address Verification Service (AVS) checks during
-              transactions if enabled via Auth Rules.
+              transactions if enabled via Auth Rules. This field is deprecated as AVS checks
+              are no longer supported by Authorization Rules. The field will be removed from
+              the schema in a future release.
 
           extra_headers: Send extra headers
 
@@ -322,13 +322,11 @@ class AsyncAccounts(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """Update account configuration such as spend limits and verification address.
+        """Update account configuration such as state or spend limits.
 
-        Can
-        only be run on accounts that are part of the program managed by this API key.
-
-        Accounts that are in the `PAUSED` state will not be able to transact or create
-        new cards.
+        Can only be run on
+        accounts that are part of the program managed by this API key. Accounts that are
+        in the `PAUSED` state will not be able to transact or create new cards.
 
         Args:
           daily_spend_limit: Amount (in cents) for the account's daily spend limit. By default the daily
@@ -348,7 +346,9 @@ class AsyncAccounts(AsyncAPIResource):
           state: Account states.
 
           verification_address: Address used during Address Verification Service (AVS) checks during
-              transactions if enabled via Auth Rules.
+              transactions if enabled via Auth Rules. This field is deprecated as AVS checks
+              are no longer supported by Authorization Rules. The field will be removed from
+              the schema in a future release.
 
           extra_headers: Send extra headers
 

@@ -171,6 +171,9 @@ class LoanTape(BaseModel):
 
     account_standing: AccountStanding
 
+    available_credit: int
+    """Amount of credit available to spend in cents"""
+
     balance_due: BalanceDue
     """Amount due for the prior billing cycle.
 
@@ -205,6 +208,9 @@ class LoanTape(BaseModel):
     """Date of transactions that this loan tape covers"""
 
     day_totals: DayTotals
+
+    ending_balance: int
+    """Balance at the end of the day"""
 
     excess_credits: int
     """Excess credits in the form of provisional credits, payments, or purchase
