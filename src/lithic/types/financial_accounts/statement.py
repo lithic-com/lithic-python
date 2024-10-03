@@ -192,6 +192,8 @@ class Statement(BaseModel):
     statement_start_date: date
     """Date when the billing period began"""
 
+    statement_type: Literal["INITIAL", "PERIOD_END"]
+
     updated: datetime
     """Timestamp of when the statement was updated"""
 
