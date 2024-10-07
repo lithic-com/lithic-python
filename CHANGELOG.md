@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.72.1 (2024-10-07)
+
+Full Changelog: [v0.72.0...v0.72.1](https://github.com/lithic-com/lithic-python/compare/v0.72.0...v0.72.1)
+
+### Bug Fixes
+
+* **client:** avoid OverflowError with very large retry counts ([#591](https://github.com/lithic-com/lithic-python/issues/591)) ([aa81a86](https://github.com/lithic-com/lithic-python/commit/aa81a8699e8832bd79ed0ab04e7de299b89ecb41))
+
+
+### Chores
+
+* **api:** small updates to verification addresses and Statement and LoanTape fields ([#588](https://github.com/lithic-com/lithic-python/issues/588)) ([98d9c01](https://github.com/lithic-com/lithic-python/commit/98d9c019116591254e1595a932ebc54f88e8c323))
+* **internal:** add support for parsing bool response content ([#590](https://github.com/lithic-com/lithic-python/issues/590)) ([1cb2aa4](https://github.com/lithic-com/lithic-python/commit/1cb2aa44f9259d6ae834554ac10b016f56c89313))
+
 ## 0.72.0 (2024-10-01)
 
 Full Changelog: [v0.71.0...v0.72.0](https://github.com/lithic-com/lithic-python/compare/v0.71.0...v0.72.0)
