@@ -692,10 +692,21 @@ class AccountHolders(SyncAPIResource):
     def simulate_enrollment_document_review(
         self,
         *,
-        document_upload_token: str | NotGiven = NOT_GIVEN,
-        status: Literal["UPLOADED", "ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
-        status_reasons: List[
-            Literal["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"]
+        document_upload_token: str,
+        status: Literal["UPLOADED", "ACCEPTED", "REJECTED", "PARTIAL_APPROVAL"],
+        accepted_entity_status_reasons: List[str] | NotGiven = NOT_GIVEN,
+        status_reason: Literal[
+            "DOCUMENT_MISSING_REQUIRED_DATA",
+            "DOCUMENT_UPLOAD_TOO_BLURRY",
+            "FILE_SIZE_TOO_LARGE",
+            "INVALID_DOCUMENT_TYPE",
+            "INVALID_DOCUMENT_UPLOAD",
+            "INVALID_ENTITY",
+            "DOCUMENT_EXPIRED",
+            "DOCUMENT_ISSUED_GREATER_THAN_30_DAYS",
+            "DOCUMENT_TYPE_NOT_SUPPORTED",
+            "UNKNOWN_FAILURE_REASON",
+            "UNKNOWN_ERROR",
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -713,8 +724,10 @@ class AccountHolders(SyncAPIResource):
 
           status: An account holder document's upload status for use within the simulation.
 
-          status_reasons: Status reason that will be associated with the simulated account holder status.
-              Only required for a `REJECTED` status.
+          accepted_entity_status_reasons: A list of status reasons associated with a KYB account holder in PENDING_REVIEW
+
+          status_reason: Status reason that will be associated with the simulated account holder status.
+              Only required for a `REJECTED` status or `PARTIAL_APPROVAL` status.
 
           extra_headers: Send extra headers
 
@@ -730,7 +743,8 @@ class AccountHolders(SyncAPIResource):
                 {
                     "document_upload_token": document_upload_token,
                     "status": status,
-                    "status_reasons": status_reasons,
+                    "accepted_entity_status_reasons": accepted_entity_status_reasons,
+                    "status_reason": status_reason,
                 },
                 account_holder_simulate_enrollment_document_review_params.AccountHolderSimulateEnrollmentDocumentReviewParams,
             ),
@@ -750,6 +764,12 @@ class AccountHolders(SyncAPIResource):
                 "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
                 "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
                 "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_BUSINESS_OFFICERS_NOT_MATCHED",
+                "PRIMARY_BUSINESS_ENTITY_SOS_FILING_INACTIVE",
+                "PRIMARY_BUSINESS_ENTITY_SOS_NOT_MATCHED",
+                "PRIMARY_BUSINESS_ENTITY_CMRA_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_WATCHLIST_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_REGISTERED_AGENT_FAILURE",
                 "CONTROL_PERSON_BLOCKLIST_ALERT_FAILURE",
                 "CONTROL_PERSON_ID_VERIFICATION_FAILURE",
                 "CONTROL_PERSON_DOB_VERIFICATION_FAILURE",
@@ -1541,10 +1561,21 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def simulate_enrollment_document_review(
         self,
         *,
-        document_upload_token: str | NotGiven = NOT_GIVEN,
-        status: Literal["UPLOADED", "ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
-        status_reasons: List[
-            Literal["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"]
+        document_upload_token: str,
+        status: Literal["UPLOADED", "ACCEPTED", "REJECTED", "PARTIAL_APPROVAL"],
+        accepted_entity_status_reasons: List[str] | NotGiven = NOT_GIVEN,
+        status_reason: Literal[
+            "DOCUMENT_MISSING_REQUIRED_DATA",
+            "DOCUMENT_UPLOAD_TOO_BLURRY",
+            "FILE_SIZE_TOO_LARGE",
+            "INVALID_DOCUMENT_TYPE",
+            "INVALID_DOCUMENT_UPLOAD",
+            "INVALID_ENTITY",
+            "DOCUMENT_EXPIRED",
+            "DOCUMENT_ISSUED_GREATER_THAN_30_DAYS",
+            "DOCUMENT_TYPE_NOT_SUPPORTED",
+            "UNKNOWN_FAILURE_REASON",
+            "UNKNOWN_ERROR",
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1562,8 +1593,10 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           status: An account holder document's upload status for use within the simulation.
 
-          status_reasons: Status reason that will be associated with the simulated account holder status.
-              Only required for a `REJECTED` status.
+          accepted_entity_status_reasons: A list of status reasons associated with a KYB account holder in PENDING_REVIEW
+
+          status_reason: Status reason that will be associated with the simulated account holder status.
+              Only required for a `REJECTED` status or `PARTIAL_APPROVAL` status.
 
           extra_headers: Send extra headers
 
@@ -1579,7 +1612,8 @@ class AsyncAccountHolders(AsyncAPIResource):
                 {
                     "document_upload_token": document_upload_token,
                     "status": status,
-                    "status_reasons": status_reasons,
+                    "accepted_entity_status_reasons": accepted_entity_status_reasons,
+                    "status_reason": status_reason,
                 },
                 account_holder_simulate_enrollment_document_review_params.AccountHolderSimulateEnrollmentDocumentReviewParams,
             ),
@@ -1599,6 +1633,12 @@ class AsyncAccountHolders(AsyncAPIResource):
                 "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
                 "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
                 "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_BUSINESS_OFFICERS_NOT_MATCHED",
+                "PRIMARY_BUSINESS_ENTITY_SOS_FILING_INACTIVE",
+                "PRIMARY_BUSINESS_ENTITY_SOS_NOT_MATCHED",
+                "PRIMARY_BUSINESS_ENTITY_CMRA_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_WATCHLIST_FAILURE",
+                "PRIMARY_BUSINESS_ENTITY_REGISTERED_AGENT_FAILURE",
                 "CONTROL_PERSON_BLOCKLIST_ALERT_FAILURE",
                 "CONTROL_PERSON_ID_VERIFICATION_FAILURE",
                 "CONTROL_PERSON_DOB_VERIFICATION_FAILURE",

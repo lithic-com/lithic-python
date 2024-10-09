@@ -231,6 +231,9 @@ class LoanTape(BaseModel):
 
     previous_statement_balance: PreviousStatementBalance
 
+    starting_balance: int
+    """Balance at the start of the day"""
+
     updated: datetime.datetime
     """Timestamp of when the loan tape was updated"""
 
