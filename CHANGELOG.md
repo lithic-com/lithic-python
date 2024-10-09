@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.73.0 (2024-10-09)
+
+Full Changelog: [v0.72.1...v0.73.0](https://github.com/lithic-com/lithic-python/compare/v0.72.1...v0.73.0)
+
+### Features
+
+* **api:** small updates to Documents, AccountHolders and LoanTapes ([#594](https://github.com/lithic-com/lithic-python/issues/594)) ([7011e2d](https://github.com/lithic-com/lithic-python/commit/7011e2daf1bd763a1fb795657b98b98e2b47d08a))
+
+
+### Chores
+
+* add repr to PageInfo class ([#592](https://github.com/lithic-com/lithic-python/issues/592)) ([39f389b](https://github.com/lithic-com/lithic-python/commit/39f389b88edcd503a3747c59cf3a3c960cf7dc7c))
+
 ## 0.72.1 (2024-10-07)
 
 Full Changelog: [v0.72.0...v0.72.1](https://github.com/lithic-com/lithic-python/compare/v0.72.0...v0.72.1)
