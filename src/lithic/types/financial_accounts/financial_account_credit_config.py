@@ -24,3 +24,5 @@ class FinancialAccountCreditConfig(BaseModel):
 
     financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT"]] = None
     """State of the financial account"""
+
+    is_spend_blocked: Optional[bool] = None

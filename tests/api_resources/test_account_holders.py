@@ -1043,7 +1043,10 @@ class TestAccountHolders:
 
     @parametrize
     def test_method_simulate_enrollment_document_review(self, client: Lithic) -> None:
-        account_holder = client.account_holders.simulate_enrollment_document_review()
+        account_holder = client.account_holders.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+        )
         assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
@@ -1051,13 +1054,17 @@ class TestAccountHolders:
         account_holder = client.account_holders.simulate_enrollment_document_review(
             document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
-            status_reasons=["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"],
+            accepted_entity_status_reasons=["string", "string", "string"],
+            status_reason="DOCUMENT_MISSING_REQUIRED_DATA",
         )
         assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     def test_raw_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
-        response = client.account_holders.with_raw_response.simulate_enrollment_document_review()
+        response = client.account_holders.with_raw_response.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1066,7 +1073,10 @@ class TestAccountHolders:
 
     @parametrize
     def test_streaming_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
-        with client.account_holders.with_streaming_response.simulate_enrollment_document_review() as response:
+        with client.account_holders.with_streaming_response.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -2180,7 +2190,10 @@ class TestAsyncAccountHolders:
 
     @parametrize
     async def test_method_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
-        account_holder = await async_client.account_holders.simulate_enrollment_document_review()
+        account_holder = await async_client.account_holders.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+        )
         assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
@@ -2188,13 +2201,17 @@ class TestAsyncAccountHolders:
         account_holder = await async_client.account_holders.simulate_enrollment_document_review(
             document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
-            status_reasons=["DOCUMENT_MISSING_REQUIRED_DATA", "DOCUMENT_UPLOAD_TOO_BLURRY", "INVALID_DOCUMENT_TYPE"],
+            accepted_entity_status_reasons=["string", "string", "string"],
+            status_reason="DOCUMENT_MISSING_REQUIRED_DATA",
         )
         assert_matches_type(Document, account_holder, path=["response"])
 
     @parametrize
     async def test_raw_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
-        response = await async_client.account_holders.with_raw_response.simulate_enrollment_document_review()
+        response = await async_client.account_holders.with_raw_response.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2203,7 +2220,10 @@ class TestAsyncAccountHolders:
 
     @parametrize
     async def test_streaming_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
-        async with async_client.account_holders.with_streaming_response.simulate_enrollment_document_review() as response:
+        async with async_client.account_holders.with_streaming_response.simulate_enrollment_document_review(
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
+            status="UPLOADED",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
