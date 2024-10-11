@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ... import _legacy_response
@@ -82,6 +84,7 @@ class Authentication(SyncAPIResource):
         merchant: authentication_simulate_params.Merchant,
         pan: str,
         transaction: authentication_simulate_params.Transaction,
+        card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -98,6 +101,9 @@ class Authentication(SyncAPIResource):
         Args:
           pan: Sixteen digit card number.
 
+          card_expiry_check: When set will use the following values as part of the Simulated Authentication.
+              When not set defaults to MATCH
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -113,6 +119,7 @@ class Authentication(SyncAPIResource):
                     "merchant": merchant,
                     "pan": pan,
                     "transaction": transaction,
+                    "card_expiry_check": card_expiry_check,
                 },
                 authentication_simulate_params.AuthenticationSimulateParams,
             ),
@@ -184,6 +191,7 @@ class AsyncAuthentication(AsyncAPIResource):
         merchant: authentication_simulate_params.Merchant,
         pan: str,
         transaction: authentication_simulate_params.Transaction,
+        card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -200,6 +208,9 @@ class AsyncAuthentication(AsyncAPIResource):
         Args:
           pan: Sixteen digit card number.
 
+          card_expiry_check: When set will use the following values as part of the Simulated Authentication.
+              When not set defaults to MATCH
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -215,6 +226,7 @@ class AsyncAuthentication(AsyncAPIResource):
                     "merchant": merchant,
                     "pan": pan,
                     "transaction": transaction,
+                    "card_expiry_check": card_expiry_check,
                 },
                 authentication_simulate_params.AuthenticationSimulateParams,
             ),

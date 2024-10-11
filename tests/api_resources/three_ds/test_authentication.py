@@ -78,6 +78,24 @@ class TestAuthentication:
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
 
     @parametrize
+    def test_method_simulate_with_all_params(self, client: Lithic) -> None:
+        authentication = client.three_ds.authentication.simulate(
+            merchant={
+                "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
+                "mcc": "5812",
+                "name": "COFFEE SHOP",
+            },
+            pan="4111111289144142",
+            transaction={
+                "amount": 100,
+                "currency": "USD",
+            },
+            card_expiry_check="MATCH",
+        )
+        assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
+    @parametrize
     def test_raw_response_simulate(self, client: Lithic) -> None:
         response = client.three_ds.authentication.with_raw_response.simulate(
             merchant={
@@ -179,6 +197,24 @@ class TestAsyncAuthentication:
                 "amount": 100,
                 "currency": "USD",
             },
+        )
+        assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_with_all_params(self, async_client: AsyncLithic) -> None:
+        authentication = await async_client.three_ds.authentication.simulate(
+            merchant={
+                "id": "OODKZAPJVN4YS7O",
+                "country": "USA",
+                "mcc": "5812",
+                "name": "COFFEE SHOP",
+            },
+            pan="4111111289144142",
+            transaction={
+                "amount": 100,
+                "currency": "USD",
+            },
+            card_expiry_check="MATCH",
         )
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
 

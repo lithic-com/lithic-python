@@ -9,9 +9,11 @@ from ..._models import BaseModel
 __all__ = [
     "LoanTape",
     "AccountStanding",
-    "BalanceDue",
-    "BalanceNextDue",
-    "BalancePastDue",
+    "Balances",
+    "BalancesDue",
+    "BalancesNextStatementDue",
+    "BalancesPastDue",
+    "BalancesPastStatementsDue",
     "DayTotals",
     "MinimumPaymentBalance",
     "PaymentAllocation",
@@ -43,7 +45,7 @@ class AccountStanding(BaseModel):
     period_state: Literal["STANDARD", "PROMO", "PENALTY"]
 
 
-class BalanceDue(BaseModel):
+class BalancesDue(BaseModel):
     fees: int
 
     interest: int
@@ -51,7 +53,7 @@ class BalanceDue(BaseModel):
     principal: int
 
 
-class BalanceNextDue(BaseModel):
+class BalancesNextStatementDue(BaseModel):
     fees: int
 
     interest: int
@@ -59,12 +61,42 @@ class BalanceNextDue(BaseModel):
     principal: int
 
 
-class BalancePastDue(BaseModel):
+class BalancesPastDue(BaseModel):
     fees: int
 
     interest: int
 
     principal: int
+
+
+class BalancesPastStatementsDue(BaseModel):
+    fees: int
+
+    interest: int
+
+    principal: int
+
+
+class Balances(BaseModel):
+    due: BalancesDue
+    """Amount due for the prior billing cycle.
+
+    Any amounts not fully paid off on this due date will be considered past due the
+    next day
+    """
+
+    next_statement_due: BalancesNextStatementDue
+    """Amount due for the current billing cycle.
+
+    Any amounts not paid off by early payments or credits will be considered due at
+    the end of the current billing period
+    """
+
+    past_due: BalancesPastDue
+    """Amount not paid off on previous due dates"""
+
+    past_statements_due: BalancesPastStatementsDue
+    """Amount due for the past billing cycles."""
 
 
 class DayTotals(BaseModel):
@@ -174,22 +206,7 @@ class LoanTape(BaseModel):
     available_credit: int
     """Amount of credit available to spend in cents"""
 
-    balance_due: BalanceDue
-    """Amount due for the prior billing cycle.
-
-    Any amounts not fully paid off on this due date will be considered past due the
-    next day
-    """
-
-    balance_next_due: BalanceNextDue
-    """Amount due for the current billing cycle.
-
-    Any amounts not paid off by early payments or credits will be considered due at
-    the end of the current billing period
-    """
-
-    balance_past_due: BalancePastDue
-    """Amount not paid off on previous due dates"""
+    balances: Balances
 
     created: datetime.datetime
     """Timestamp of when the loan tape was created"""
