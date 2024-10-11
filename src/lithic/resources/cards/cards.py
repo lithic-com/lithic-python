@@ -180,8 +180,7 @@ class Cards(SyncAPIResource):
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date will be generated.
 
-          memo: Friendly name to identify the card. We recommend against using this field to
-              store JSON data as it can cause unexpected behavior.
+          memo: Friendly name to identify the card.
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
               `VIRTUAL`. See
@@ -337,8 +336,7 @@ class Cards(SyncAPIResource):
               by Lithic to use. See
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
-          memo: Friendly name to identify the card. We recommend against using this field to
-              store JSON data as it can cause unexpected behavior.
+          memo: Friendly name to identify the card.
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
               `VIRTUAL`. Changing PIN also resets PIN status to `OK`. See
@@ -1067,8 +1065,7 @@ class AsyncCards(AsyncAPIResource):
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date will be generated.
 
-          memo: Friendly name to identify the card. We recommend against using this field to
-              store JSON data as it can cause unexpected behavior.
+          memo: Friendly name to identify the card.
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
               `VIRTUAL`. See
@@ -1224,8 +1221,7 @@ class AsyncCards(AsyncAPIResource):
               by Lithic to use. See
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
-          memo: Friendly name to identify the card. We recommend against using this field to
-              store JSON data as it can cause unexpected behavior.
+          memo: Friendly name to identify the card.
 
           pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
               `VIRTUAL`. Changing PIN also resets PIN status to `OK`. See
