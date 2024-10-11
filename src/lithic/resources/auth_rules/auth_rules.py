@@ -350,9 +350,11 @@ class AuthRules(SyncAPIResource):
     ) -> AuthRuleMigrateV1ToV2Response:
         """Migrates an existing V1 authorization rule to a V2 authorization rule.
 
-        This will
-        alter the internal structure of the Auth Rule such that it becomes a V2
-        Authorization Rule that can be operated on through the /v2/auth_rules endpoints.
+        Depending
+        on the configuration of the V1 Auth Rule, this will yield one or two V2
+        authorization rules. This endpoint will alter the internal structure of the Auth
+        Rule such that the resulting rules become a V2 Authorization Rule that can be
+        operated on through the /v2/auth_rules endpoints.
 
         After a V1 Auth Rule has been migrated, it can no longer be operated on through
         the /v1/auth_rules/\\** endpoints. Eventually, Lithic will deprecate the
@@ -740,9 +742,11 @@ class AsyncAuthRules(AsyncAPIResource):
     ) -> AuthRuleMigrateV1ToV2Response:
         """Migrates an existing V1 authorization rule to a V2 authorization rule.
 
-        This will
-        alter the internal structure of the Auth Rule such that it becomes a V2
-        Authorization Rule that can be operated on through the /v2/auth_rules endpoints.
+        Depending
+        on the configuration of the V1 Auth Rule, this will yield one or two V2
+        authorization rules. This endpoint will alter the internal structure of the Auth
+        Rule such that the resulting rules become a V2 Authorization Rule that can be
+        operated on through the /v2/auth_rules endpoints.
 
         After a V1 Auth Rule has been migrated, it can no longer be operated on through
         the /v1/auth_rules/\\** endpoints. Eventually, Lithic will deprecate the

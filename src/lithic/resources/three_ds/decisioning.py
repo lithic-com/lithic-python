@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ... import _legacy_response
@@ -16,8 +14,15 @@ from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..._base_client import make_request_options
-from ...types.three_ds import decisioning_challenge_response_params
+from ...types.three_ds import (
+    ChallengeResult,
+    decisioning_challenge_response_params,
+    decisioning_simulate_challenge_params,
+    decisioning_simulate_challenge_response_params,
+)
+from ...types.three_ds.challenge_result import ChallengeResult
 from ...types.three_ds.decisioning_retrieve_secret_response import DecisioningRetrieveSecretResponse
+from ...types.three_ds.decisioning_simulate_challenge_response import DecisioningSimulateChallengeResponse
 
 __all__ = ["Decisioning", "AsyncDecisioning"]
 
@@ -46,7 +51,7 @@ class Decisioning(SyncAPIResource):
         self,
         *,
         token: str,
-        challenge_response: Literal["APPROVE", "DECLINE_BY_CUSTOMER"],
+        challenge_response: ChallengeResult,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -140,6 +145,92 @@ class Decisioning(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def simulate_challenge(
+        self,
+        *,
+        token: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DecisioningSimulateChallengeResponse:
+        """
+        Simulates a 3DS authentication challenge request from the payment network as if
+        it came from an ACS. Requires being configured for 3DS Customer Decisioning, and
+        enrolled with Lithic's Challenge solution.
+
+        Args:
+          token: A unique token returned as part of a /v1/three_ds_authentication/simulate call
+              that responded with a CHALLENGE_REQUESTED status.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/three_ds_decisioning/simulate/challenge",
+            body=maybe_transform(
+                {"token": token}, decisioning_simulate_challenge_params.DecisioningSimulateChallengeParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DecisioningSimulateChallengeResponse,
+        )
+
+    def simulate_challenge_response(
+        self,
+        *,
+        token: str,
+        challenge_response: ChallengeResult,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Endpoint for responding to a 3DS Challenge initiated by a call to
+        /v1/three_ds_decisioning/simulate/challenge
+
+        Args:
+          token: Globally unique identifier for the 3DS authentication. This token is sent as
+              part of the initial 3DS Decisioning Request and as part of the 3DS Challenge
+              Event in the [ThreeDSAuthentication](#/components/schemas/ThreeDSAuthentication)
+              object
+
+          challenge_response: Whether the Cardholder has Approved or Declined the issued Challenge
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/three_ds_decisioning/simulate/challenge_response",
+            body=maybe_transform(
+                {
+                    "token": token,
+                    "challenge_response": challenge_response,
+                },
+                decisioning_simulate_challenge_response_params.DecisioningSimulateChallengeResponseParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
 
 class AsyncDecisioning(AsyncAPIResource):
     @cached_property
@@ -165,7 +256,7 @@ class AsyncDecisioning(AsyncAPIResource):
         self,
         *,
         token: str,
-        challenge_response: Literal["APPROVE", "DECLINE_BY_CUSTOMER"],
+        challenge_response: ChallengeResult,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -259,6 +350,92 @@ class AsyncDecisioning(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def simulate_challenge(
+        self,
+        *,
+        token: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DecisioningSimulateChallengeResponse:
+        """
+        Simulates a 3DS authentication challenge request from the payment network as if
+        it came from an ACS. Requires being configured for 3DS Customer Decisioning, and
+        enrolled with Lithic's Challenge solution.
+
+        Args:
+          token: A unique token returned as part of a /v1/three_ds_authentication/simulate call
+              that responded with a CHALLENGE_REQUESTED status.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/three_ds_decisioning/simulate/challenge",
+            body=await async_maybe_transform(
+                {"token": token}, decisioning_simulate_challenge_params.DecisioningSimulateChallengeParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DecisioningSimulateChallengeResponse,
+        )
+
+    async def simulate_challenge_response(
+        self,
+        *,
+        token: str,
+        challenge_response: ChallengeResult,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Endpoint for responding to a 3DS Challenge initiated by a call to
+        /v1/three_ds_decisioning/simulate/challenge
+
+        Args:
+          token: Globally unique identifier for the 3DS authentication. This token is sent as
+              part of the initial 3DS Decisioning Request and as part of the 3DS Challenge
+              Event in the [ThreeDSAuthentication](#/components/schemas/ThreeDSAuthentication)
+              object
+
+          challenge_response: Whether the Cardholder has Approved or Declined the issued Challenge
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/three_ds_decisioning/simulate/challenge_response",
+            body=await async_maybe_transform(
+                {
+                    "token": token,
+                    "challenge_response": challenge_response,
+                },
+                decisioning_simulate_challenge_response_params.DecisioningSimulateChallengeResponseParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
 
 class DecisioningWithRawResponse:
     def __init__(self, decisioning: Decisioning) -> None:
@@ -272,6 +449,12 @@ class DecisioningWithRawResponse:
         )
         self.rotate_secret = _legacy_response.to_raw_response_wrapper(
             decisioning.rotate_secret,
+        )
+        self.simulate_challenge = _legacy_response.to_raw_response_wrapper(
+            decisioning.simulate_challenge,
+        )
+        self.simulate_challenge_response = _legacy_response.to_raw_response_wrapper(
+            decisioning.simulate_challenge_response,
         )
 
 
@@ -288,6 +471,12 @@ class AsyncDecisioningWithRawResponse:
         self.rotate_secret = _legacy_response.async_to_raw_response_wrapper(
             decisioning.rotate_secret,
         )
+        self.simulate_challenge = _legacy_response.async_to_raw_response_wrapper(
+            decisioning.simulate_challenge,
+        )
+        self.simulate_challenge_response = _legacy_response.async_to_raw_response_wrapper(
+            decisioning.simulate_challenge_response,
+        )
 
 
 class DecisioningWithStreamingResponse:
@@ -303,6 +492,12 @@ class DecisioningWithStreamingResponse:
         self.rotate_secret = to_streamed_response_wrapper(
             decisioning.rotate_secret,
         )
+        self.simulate_challenge = to_streamed_response_wrapper(
+            decisioning.simulate_challenge,
+        )
+        self.simulate_challenge_response = to_streamed_response_wrapper(
+            decisioning.simulate_challenge_response,
+        )
 
 
 class AsyncDecisioningWithStreamingResponse:
@@ -317,4 +512,10 @@ class AsyncDecisioningWithStreamingResponse:
         )
         self.rotate_secret = async_to_streamed_response_wrapper(
             decisioning.rotate_secret,
+        )
+        self.simulate_challenge = async_to_streamed_response_wrapper(
+            decisioning.simulate_challenge,
+        )
+        self.simulate_challenge_response = async_to_streamed_response_wrapper(
+            decisioning.simulate_challenge_response,
         )
