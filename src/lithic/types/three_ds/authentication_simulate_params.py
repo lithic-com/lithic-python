@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["AuthenticationSimulateParams", "Merchant", "Transaction"]
 
@@ -14,6 +14,12 @@ class AuthenticationSimulateParams(TypedDict, total=False):
     """Sixteen digit card number."""
 
     transaction: Required[Transaction]
+
+    card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"]
+    """When set will use the following values as part of the Simulated Authentication.
+
+    When not set defaults to MATCH
+    """
 
 
 class Merchant(TypedDict, total=False):

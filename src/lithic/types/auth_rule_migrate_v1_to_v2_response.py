@@ -8,18 +8,19 @@ from .shared.velocity_limit_params import VelocityLimitParams
 
 __all__ = [
     "AuthRuleMigrateV1ToV2Response",
-    "CurrentVersion",
-    "CurrentVersionParameters",
-    "CurrentVersionParametersConditionalBlockParameters",
-    "CurrentVersionParametersConditionalBlockParametersCondition",
-    "DraftVersion",
-    "DraftVersionParameters",
-    "DraftVersionParametersConditionalBlockParameters",
-    "DraftVersionParametersConditionalBlockParametersCondition",
+    "AuthRuleMigrateV1ToV2ResponseItem",
+    "AuthRuleMigrateV1ToV2ResponseItemCurrentVersion",
+    "AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParameters",
+    "AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParametersConditionalBlockParameters",
+    "AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParametersConditionalBlockParametersCondition",
+    "AuthRuleMigrateV1ToV2ResponseItemDraftVersion",
+    "AuthRuleMigrateV1ToV2ResponseItemDraftVersionParameters",
+    "AuthRuleMigrateV1ToV2ResponseItemDraftVersionParametersConditionalBlockParameters",
+    "AuthRuleMigrateV1ToV2ResponseItemDraftVersionParametersConditionalBlockParametersCondition",
 ]
 
 
-class CurrentVersionParametersConditionalBlockParametersCondition(BaseModel):
+class AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParametersConditionalBlockParametersCondition(BaseModel):
     attribute: Optional[
         Literal[
             "MCC",
@@ -44,15 +45,17 @@ class CurrentVersionParametersConditionalBlockParametersCondition(BaseModel):
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 
-class CurrentVersionParametersConditionalBlockParameters(BaseModel):
-    conditions: List[CurrentVersionParametersConditionalBlockParametersCondition]
+class AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParametersConditionalBlockParameters(BaseModel):
+    conditions: List[AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParametersConditionalBlockParametersCondition]
 
 
-CurrentVersionParameters: TypeAlias = Union[CurrentVersionParametersConditionalBlockParameters, VelocityLimitParams]
+AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParameters: TypeAlias = Union[
+    AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParametersConditionalBlockParameters, VelocityLimitParams
+]
 
 
-class CurrentVersion(BaseModel):
-    parameters: CurrentVersionParameters
+class AuthRuleMigrateV1ToV2ResponseItemCurrentVersion(BaseModel):
+    parameters: AuthRuleMigrateV1ToV2ResponseItemCurrentVersionParameters
     """Parameters for the current version of the Auth Rule"""
 
     version: int
@@ -62,7 +65,7 @@ class CurrentVersion(BaseModel):
     """
 
 
-class DraftVersionParametersConditionalBlockParametersCondition(BaseModel):
+class AuthRuleMigrateV1ToV2ResponseItemDraftVersionParametersConditionalBlockParametersCondition(BaseModel):
     attribute: Optional[
         Literal[
             "MCC",
@@ -87,15 +90,17 @@ class DraftVersionParametersConditionalBlockParametersCondition(BaseModel):
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 
-class DraftVersionParametersConditionalBlockParameters(BaseModel):
-    conditions: List[DraftVersionParametersConditionalBlockParametersCondition]
+class AuthRuleMigrateV1ToV2ResponseItemDraftVersionParametersConditionalBlockParameters(BaseModel):
+    conditions: List[AuthRuleMigrateV1ToV2ResponseItemDraftVersionParametersConditionalBlockParametersCondition]
 
 
-DraftVersionParameters: TypeAlias = Union[DraftVersionParametersConditionalBlockParameters, VelocityLimitParams]
+AuthRuleMigrateV1ToV2ResponseItemDraftVersionParameters: TypeAlias = Union[
+    AuthRuleMigrateV1ToV2ResponseItemDraftVersionParametersConditionalBlockParameters, VelocityLimitParams
+]
 
 
-class DraftVersion(BaseModel):
-    parameters: DraftVersionParameters
+class AuthRuleMigrateV1ToV2ResponseItemDraftVersion(BaseModel):
+    parameters: AuthRuleMigrateV1ToV2ResponseItemDraftVersionParameters
     """Parameters for the current version of the Auth Rule"""
 
     version: int
@@ -105,7 +110,7 @@ class DraftVersion(BaseModel):
     """
 
 
-class AuthRuleMigrateV1ToV2Response(BaseModel):
+class AuthRuleMigrateV1ToV2ResponseItem(BaseModel):
     token: str
 
     account_tokens: List[str]
@@ -114,9 +119,9 @@ class AuthRuleMigrateV1ToV2Response(BaseModel):
     card_tokens: List[str]
     """Card tokens to which the Auth Rule applies."""
 
-    current_version: Optional[CurrentVersion] = None
+    current_version: Optional[AuthRuleMigrateV1ToV2ResponseItemCurrentVersion] = None
 
-    draft_version: Optional[DraftVersion] = None
+    draft_version: Optional[AuthRuleMigrateV1ToV2ResponseItemDraftVersion] = None
 
     program_level: bool
     """Whether the Auth Rule applies to all authorizations on the card program."""
@@ -126,3 +131,6 @@ class AuthRuleMigrateV1ToV2Response(BaseModel):
 
     type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
     """The type of Auth Rule"""
+
+
+AuthRuleMigrateV1ToV2Response: TypeAlias = List[AuthRuleMigrateV1ToV2ResponseItem]

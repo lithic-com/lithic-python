@@ -563,7 +563,12 @@ Methods:
 Types:
 
 ```python
-from lithic.types.three_ds import DecisioningRetrieveSecretResponse
+from lithic.types.three_ds import (
+    ChallengeResponse,
+    ChallengeResult,
+    DecisioningRetrieveSecretResponse,
+    DecisioningSimulateChallengeResponse,
+)
 ```
 
 Methods:
@@ -571,6 +576,8 @@ Methods:
 - <code title="post /v1/three_ds_decisioning/challenge_response">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">challenge_response</a>(\*\*<a href="src/lithic/types/three_ds/decisioning_challenge_response_params.py">params</a>) -> None</code>
 - <code title="get /v1/three_ds_decisioning/secret">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/three_ds/decisioning_retrieve_secret_response.py">DecisioningRetrieveSecretResponse</a></code>
 - <code title="post /v1/three_ds_decisioning/secret/rotate">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">rotate_secret</a>() -> None</code>
+- <code title="post /v1/three_ds_decisioning/simulate/challenge">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">simulate_challenge</a>(\*\*<a href="src/lithic/types/three_ds/decisioning_simulate_challenge_params.py">params</a>) -> <a href="./src/lithic/types/three_ds/decisioning_simulate_challenge_response.py">DecisioningSimulateChallengeResponse</a></code>
+- <code title="post /v1/three_ds_decisioning/simulate/challenge_response">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">simulate_challenge_response</a>(\*\*<a href="src/lithic/types/three_ds/decisioning_simulate_challenge_response_params.py">params</a>) -> None</code>
 
 # Reports
 

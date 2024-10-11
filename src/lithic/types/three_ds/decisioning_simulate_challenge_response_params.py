@@ -6,10 +6,10 @@ from typing_extensions import Required, TypedDict
 
 from .challenge_result import ChallengeResult
 
-__all__ = ["DecisioningChallengeResponseParams"]
+__all__ = ["DecisioningSimulateChallengeResponseParams"]
 
 
-class DecisioningChallengeResponseParams(TypedDict, total=False):
+class DecisioningSimulateChallengeResponseParams(TypedDict, total=False):
     token: Required[str]
     """Globally unique identifier for the 3DS authentication.
 

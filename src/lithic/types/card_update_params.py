@@ -19,11 +19,7 @@ class CardUpdateParams(TypedDict, total=False):
     """
 
     memo: str
-    """Friendly name to identify the card.
-
-    We recommend against using this field to store JSON data as it can cause
-    unexpected behavior.
-    """
+    """Friendly name to identify the card."""
 
     pin: str
     """Encrypted PIN block (in base64).

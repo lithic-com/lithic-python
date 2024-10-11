@@ -4,12 +4,14 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["AuthenticationSimulateResponse"]
+__all__ = ["DecisioningSimulateChallengeResponse"]
 
 
-class AuthenticationSimulateResponse(BaseModel):
+class DecisioningSimulateChallengeResponse(BaseModel):
     token: Optional[str] = None
     """
     A unique token to reference this transaction with later calls to void or clear
-    the authorization.
+    the authorization. This token is used in
+    /v1/three_ds_decisioning/simulate/challenge_response to Approve or Decline the
+    authentication
     """
