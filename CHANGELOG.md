@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.74.0 (2024-10-11)
+
+Full Changelog: [v0.73.0...v0.74.0](https://github.com/lithic-com/lithic-python/compare/v0.73.0...v0.74.0)
+
+### Features
+
+* **api:** updates to documentation and addition of new 3DS simulation methods ([#595](https://github.com/lithic-com/lithic-python/issues/595)) ([041dc26](https://github.com/lithic-com/lithic-python/commit/041dc265c1943e8186e2901533129159dae99348))
+
 ## 0.73.0 (2024-10-09)
 
 Full Changelog: [v0.72.1...v0.73.0](https://github.com/lithic-com/lithic-python/compare/v0.72.1...v0.73.0)
