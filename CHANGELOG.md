@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.74.1 (2024-10-18)
+
+Full Changelog: [v0.74.0...v0.74.1](https://github.com/lithic-com/lithic-python/compare/v0.74.0...v0.74.1)
+
+### Chores
+
+* **internal:** bump ruff dependency ([#599](https://github.com/lithic-com/lithic-python/issues/599)) ([dbc528b](https://github.com/lithic-com/lithic-python/commit/dbc528be4ae82d0808f217562b98579b6361a401))
+* **internal:** update test syntax ([#597](https://github.com/lithic-com/lithic-python/issues/597)) ([65c3fef](https://github.com/lithic-com/lithic-python/commit/65c3fef432217abbc707687389377a28dea5c511))
+
 ## 0.74.0 (2024-10-11)
 
 Full Changelog: [v0.73.0...v0.74.0](https://github.com/lithic-com/lithic-python/compare/v0.73.0...v0.74.0)
