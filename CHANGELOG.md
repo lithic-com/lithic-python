@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.75.0 (2024-10-22)
+
+Full Changelog: [v0.74.1...v0.75.0](https://github.com/lithic-com/lithic-python/compare/v0.74.1...v0.75.0)
+
+### Features
+
+* **api:** removes `transfer_transaction.created` webhook and updates to VerificationApplication ([#603](https://github.com/lithic-com/lithic-python/issues/603)) ([b387f32](https://github.com/lithic-com/lithic-python/commit/b387f32b6922b6318273ce15bca3f5cdf1992b1e))
+
+
+### Chores
+
+* **internal:** remove unused black config ([#601](https://github.com/lithic-com/lithic-python/issues/601)) ([73a28e5](https://github.com/lithic-com/lithic-python/commit/73a28e5071d404ef16d69ae3d153789a4c4b1208))
+
 ## 0.74.1 (2024-10-21)
 
 Full Changelog: [v0.74.0...v0.74.1](https://github.com/lithic-com/lithic-python/compare/v0.74.0...v0.74.1)
