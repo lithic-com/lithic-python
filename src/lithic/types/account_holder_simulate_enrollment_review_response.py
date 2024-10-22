@@ -331,49 +331,47 @@ class Individual(BaseModel):
 
 
 class VerificationApplication(BaseModel):
-    created: Optional[datetime] = None
+    created: datetime
     """Timestamp of when the application was created."""
 
-    status: Optional[Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
+    status: Literal["ACCEPTED", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]
     """KYC and KYB evaluation states.
 
     Note: `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
     `ADVANCED` workflow.
     """
 
-    status_reasons: Optional[
-        List[
-            Literal[
-                "ADDRESS_VERIFICATION_FAILURE",
-                "AGE_THRESHOLD_FAILURE",
-                "COMPLETE_VERIFICATION_FAILURE",
-                "DOB_VERIFICATION_FAILURE",
-                "ID_VERIFICATION_FAILURE",
-                "MAX_DOCUMENT_ATTEMPTS",
-                "MAX_RESUBMISSION_ATTEMPTS",
-                "NAME_VERIFICATION_FAILURE",
-                "OTHER_VERIFICATION_FAILURE",
-                "RISK_THRESHOLD_FAILURE",
-                "WATCHLIST_ALERT_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_BUSINESS_OFFICERS_NOT_MATCHED",
-                "PRIMARY_BUSINESS_ENTITY_SOS_FILING_INACTIVE",
-                "PRIMARY_BUSINESS_ENTITY_SOS_NOT_MATCHED",
-                "PRIMARY_BUSINESS_ENTITY_CMRA_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_WATCHLIST_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_REGISTERED_AGENT_FAILURE",
-                "CONTROL_PERSON_BLOCKLIST_ALERT_FAILURE",
-                "CONTROL_PERSON_ID_VERIFICATION_FAILURE",
-                "CONTROL_PERSON_DOB_VERIFICATION_FAILURE",
-                "CONTROL_PERSON_NAME_VERIFICATION_FAILURE",
-            ]
+    status_reasons: List[
+        Literal[
+            "ADDRESS_VERIFICATION_FAILURE",
+            "AGE_THRESHOLD_FAILURE",
+            "COMPLETE_VERIFICATION_FAILURE",
+            "DOB_VERIFICATION_FAILURE",
+            "ID_VERIFICATION_FAILURE",
+            "MAX_DOCUMENT_ATTEMPTS",
+            "MAX_RESUBMISSION_ATTEMPTS",
+            "NAME_VERIFICATION_FAILURE",
+            "OTHER_VERIFICATION_FAILURE",
+            "RISK_THRESHOLD_FAILURE",
+            "WATCHLIST_ALERT_FAILURE",
+            "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
+            "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
+            "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
+            "PRIMARY_BUSINESS_ENTITY_BUSINESS_OFFICERS_NOT_MATCHED",
+            "PRIMARY_BUSINESS_ENTITY_SOS_FILING_INACTIVE",
+            "PRIMARY_BUSINESS_ENTITY_SOS_NOT_MATCHED",
+            "PRIMARY_BUSINESS_ENTITY_CMRA_FAILURE",
+            "PRIMARY_BUSINESS_ENTITY_WATCHLIST_FAILURE",
+            "PRIMARY_BUSINESS_ENTITY_REGISTERED_AGENT_FAILURE",
+            "CONTROL_PERSON_BLOCKLIST_ALERT_FAILURE",
+            "CONTROL_PERSON_ID_VERIFICATION_FAILURE",
+            "CONTROL_PERSON_DOB_VERIFICATION_FAILURE",
+            "CONTROL_PERSON_NAME_VERIFICATION_FAILURE",
         ]
-    ] = None
+    ]
     """Reason for the evaluation status."""
 
-    updated: Optional[datetime] = None
+    updated: datetime
     """Timestamp of when the application was last updated."""
 
 
