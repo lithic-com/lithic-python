@@ -131,7 +131,7 @@ class InterestDetailsInterestForPeriod(BaseModel):
 
 
 class InterestDetails(BaseModel):
-    actual_interest_charged: int
+    actual_interest_charged: Optional[int] = None
 
     daily_balance_amounts: InterestDetailsDailyBalanceAmounts
 
@@ -141,9 +141,9 @@ class InterestDetails(BaseModel):
 
     interest_for_period: InterestDetailsInterestForPeriod
 
-    minimum_interest_charged: Optional[int] = None
-
     prime_rate: Optional[str] = None
+
+    minimum_interest_charged: Optional[int] = None
 
 
 class Statement(BaseModel):

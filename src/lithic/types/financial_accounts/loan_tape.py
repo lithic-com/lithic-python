@@ -15,6 +15,10 @@ __all__ = [
     "BalancesPastDue",
     "BalancesPastStatementsDue",
     "DayTotals",
+    "InterestDetails",
+    "InterestDetailsDailyBalanceAmounts",
+    "InterestDetailsEffectiveApr",
+    "InterestDetailsInterestForPeriod",
     "MinimumPaymentBalance",
     "PaymentAllocation",
     "PeriodTotals",
@@ -123,6 +127,46 @@ class DayTotals(BaseModel):
 
     purchases: int
     """Net card transaction volume less any cash advances in cents"""
+
+
+class InterestDetailsDailyBalanceAmounts(BaseModel):
+    balance_transfers: str
+
+    cash_advances: str
+
+    purchases: str
+
+
+class InterestDetailsEffectiveApr(BaseModel):
+    balance_transfers: str
+
+    cash_advances: str
+
+    purchases: str
+
+
+class InterestDetailsInterestForPeriod(BaseModel):
+    balance_transfers: str
+
+    cash_advances: str
+
+    purchases: str
+
+
+class InterestDetails(BaseModel):
+    actual_interest_charged: Optional[int] = None
+
+    daily_balance_amounts: InterestDetailsDailyBalanceAmounts
+
+    effective_apr: InterestDetailsEffectiveApr
+
+    interest_calculation_method: Literal["DAILY", "AVERAGE_DAILY"]
+
+    interest_for_period: InterestDetailsInterestForPeriod
+
+    prime_rate: Optional[str] = None
+
+    minimum_interest_charged: Optional[int] = None
 
 
 class MinimumPaymentBalance(BaseModel):
@@ -239,6 +283,8 @@ class LoanTape(BaseModel):
 
     financial_account_token: str
     """Globally unique identifier for a financial account"""
+
+    interest_details: Optional[InterestDetails] = None
 
     minimum_payment_balance: MinimumPaymentBalance
 
