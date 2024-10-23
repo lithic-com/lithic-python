@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.76.0 (2024-10-23)
+
+Full Changelog: [v0.75.0...v0.76.0](https://github.com/lithic-com/lithic-python/compare/v0.75.0...v0.76.0)
+
+### Features
+
+* **api:** add `interest_details` properties to LoanTapes ([#604](https://github.com/lithic-com/lithic-python/issues/604)) ([365001b](https://github.com/lithic-com/lithic-python/commit/365001ba8a147e1f9c5547e19305163693e1f5ed))
+
 ## 0.75.0 (2024-10-22)
 
 Full Changelog: [v0.74.1...v0.75.0](https://github.com/lithic-com/lithic-python/compare/v0.74.1...v0.75.0)
