@@ -415,6 +415,7 @@ class Event(BaseModel):
             "MERCHANT_LOCKED_CARD_ATTEMPTED_ELSEWHERE",
             "MERCHANT_NOT_PERMITTED",
             "OVER_REVERSAL_ATTEMPTED",
+            "PIN_BLOCKED",
             "PROGRAM_CARD_SPEND_LIMIT_EXCEEDED",
             "PROGRAM_SUSPENDED",
             "PROGRAM_USAGE_RESTRICTION",
