@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.76.1 (2024-10-24)
+
+Full Changelog: [v0.76.0...v0.76.1](https://github.com/lithic-com/lithic-python/compare/v0.76.0...v0.76.1)
+
+### Chores
+
+* **api:** add `PIN_BLOCKED` to `detailed_results` property on Event ([#606](https://github.com/lithic-com/lithic-python/issues/606)) ([ac9985f](https://github.com/lithic-com/lithic-python/commit/ac9985f9f1fefb9fae7db90f8095492db0cff738))
+* **api:** adds new result types to Transactions and Events ([#608](https://github.com/lithic-com/lithic-python/issues/608)) ([ff13e35](https://github.com/lithic-com/lithic-python/commit/ff13e35c1f4d760c34d870a5f6da972c57d4968a))
+
 ## 0.76.0 (2024-10-23)
 
 Full Changelog: [v0.75.0...v0.76.0](https://github.com/lithic-com/lithic-python/compare/v0.75.0...v0.76.0)
