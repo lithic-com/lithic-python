@@ -441,19 +441,24 @@ class Event(BaseModel):
         "BANK_NOT_VERIFIED",
         "CARD_CLOSED",
         "CARD_PAUSED",
+        "DECLINED",
         "FRAUD_ADVICE",
+        "IGNORED_TTL_EXPIRY",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
         "INVALID_CARD_DETAILS",
         "INSUFFICIENT_FUNDS",
+        "INSUFFICIENT_FUNDS_PRELOAD",
+        "INVALID_TRANSACTION",
         "MERCHANT_BLACKLIST",
+        "ORIGINAL_NOT_FOUND",
+        "PREVIOUSLY_COMPLETED",
         "SINGLE_USE_RECHARGED",
         "SWITCH_INOPERATIVE_ADVICE",
         "UNAUTHORIZED_MERCHANT",
         "UNKNOWN_HOST_TIMEOUT",
         "USER_TRANSACTION_LIMIT",
     ]
-    """Result of the transaction."""
 
     type: Literal[
         "AUTHORIZATION",
@@ -564,6 +569,7 @@ class Transaction(BaseModel):
     pos: Pos
 
     result: Literal[
+        "ACCOUNT_STATE_TRANSACTION_FAIL",
         "APPROVED",
         "BANK_CONNECTION_ERROR",
         "BANK_NOT_VERIFIED",
@@ -571,18 +577,22 @@ class Transaction(BaseModel):
         "CARD_PAUSED",
         "DECLINED",
         "FRAUD_ADVICE",
+        "IGNORED_TTL_EXPIRY",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
-        "INSUFFICIENT_FUNDS",
         "INVALID_CARD_DETAILS",
+        "INSUFFICIENT_FUNDS",
+        "INSUFFICIENT_FUNDS_PRELOAD",
+        "INVALID_TRANSACTION",
         "MERCHANT_BLACKLIST",
+        "ORIGINAL_NOT_FOUND",
+        "PREVIOUSLY_COMPLETED",
         "SINGLE_USE_RECHARGED",
         "SWITCH_INOPERATIVE_ADVICE",
         "UNAUTHORIZED_MERCHANT",
         "UNKNOWN_HOST_TIMEOUT",
         "USER_TRANSACTION_LIMIT",
     ]
-    """`APPROVED` or decline reason. See Event result types"""
 
     settled_amount: int
     """
