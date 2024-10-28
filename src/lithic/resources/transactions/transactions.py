@@ -97,8 +97,10 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
-        """
-        Get specific card transaction.
+        """Get a specific card transaction.
+
+        All amounts are in the smallest unit of their
+        respective currency (e.g., cents for USD).
 
         Args:
           extra_headers: Send extra headers
@@ -137,8 +139,10 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncCursorPage[Transaction]:
-        """
-        List card transactions.
+        """List card transactions.
+
+        All amounts are in the smallest unit of their respective
+        currency (e.g., cents for USD) and inclusive of any acquirer fees.
 
         Args:
           account_token: Filters for transactions associated with a specific account.
@@ -650,8 +654,10 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Transaction:
-        """
-        Get specific card transaction.
+        """Get a specific card transaction.
+
+        All amounts are in the smallest unit of their
+        respective currency (e.g., cents for USD).
 
         Args:
           extra_headers: Send extra headers
@@ -690,8 +696,10 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Transaction, AsyncCursorPage[Transaction]]:
-        """
-        List card transactions.
+        """List card transactions.
+
+        All amounts are in the smallest unit of their respective
+        currency (e.g., cents for USD) and inclusive of any acquirer fees.
 
         Args:
           account_token: Filters for transactions associated with a specific account.

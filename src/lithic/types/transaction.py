@@ -33,12 +33,12 @@ __all__ = [
 
 class AmountsCardholder(BaseModel):
     amount: int
-    """The aggregate settled amount in the cardholder's local currency."""
+    """The aggregate settled amount in the cardholder billing currency."""
 
     conversion_rate: str
     """
     The conversion rate used to convert the merchant amount to the cardholder
-    amount.
+    billing amount.
     """
 
     currency: Currency
@@ -51,7 +51,10 @@ class AmountsCardholder(BaseModel):
 
 class AmountsHold(BaseModel):
     amount: int
-    """The aggregate pending amount in the anticipated settlement currency."""
+    """
+    The aggregate authorization amount of the transaction in the anticipated
+    settlement currency.
+    """
 
     currency: Currency
     """ISO 4217 currency.
@@ -63,7 +66,7 @@ class AmountsHold(BaseModel):
 
 class AmountsMerchant(BaseModel):
     amount: int
-    """The aggregate settled amount in the merchant's local currency."""
+    """The aggregate settled amount in the merchant currency."""
 
     currency: Currency
     """ISO 4217 currency.
@@ -311,12 +314,12 @@ class TokenInfo(BaseModel):
 
 class EventAmountsCardholder(BaseModel):
     amount: int
-    """The amount in the cardholder's local currency."""
+    """The amount in the cardholder billing currency."""
 
     conversion_rate: str
     """
     The conversion rate used to convert the merchant amount to the cardholder
-    amount.
+    billing amount.
     """
 
     currency: Currency
@@ -329,7 +332,7 @@ class EventAmountsCardholder(BaseModel):
 
 class EventAmountsMerchant(BaseModel):
     amount: int
-    """The amount in the merchant's local currency."""
+    """The amount in the merchant currency."""
 
     currency: Currency
     """ISO 4217 currency.
@@ -341,7 +344,7 @@ class EventAmountsMerchant(BaseModel):
 
 class EventAmountsSettlement(BaseModel):
     amount: int
-    """The amount in the settlement currency."""
+    """Amount of the event, if it is financial, in the settlement currency."""
 
     conversion_rate: str
     """Conversion rate used to convert the merchant amount to the settlement amount."""
@@ -367,7 +370,7 @@ class Event(BaseModel):
     """Transaction event identifier."""
 
     amount: int
-    """Amount of the transaction event (in cents), including any acquirer fees."""
+    """Amount of the event in the settlement currency."""
 
     amounts: EventAmounts
 
@@ -500,19 +503,18 @@ class Transaction(BaseModel):
     """
 
     amount: int
-    """Authorization amount of the transaction (in cents), including any acquirer fees.
-
-    This may change over time, and will represent the settled amount once the
-    transaction is settled.
+    """
+    When the transaction is pending, this represents the authorization amount of the
+    transaction in the anticipated settlement currency. Once the transaction has
+    settled, this field represents the settled amount in the settlement currency.
     """
 
     amounts: Amounts
 
     authorization_amount: Optional[int] = None
-    """Authorization amount (in cents) of the transaction, including any acquirer fees.
-
-    This amount always represents the amount authorized for the transaction,
-    unaffected by settlement.
+    """
+    The authorization amount of the transaction in the anticipated settlement
+    currency.
     """
 
     authorization_code: Optional[str] = None
@@ -534,17 +536,10 @@ class Transaction(BaseModel):
     merchant: Merchant
 
     merchant_amount: Optional[int] = None
-    """
-    Analogous to the 'amount' property, but will represent the amount in the
-    transaction's local currency (smallest unit), including any acquirer fees.
-    """
+    """Analogous to the 'amount', but in the merchant currency."""
 
     merchant_authorization_amount: Optional[int] = None
-    """
-    Analogous to the 'authorization_amount' property, but will represent the amount
-    in the transaction's local currency (smallest unit), including any acquirer
-    fees.
-    """
+    """Analogous to the 'authorization_amount', but in the merchant currency."""
 
     merchant_currency: str
     """3-digit alphabetic ISO 4217 code for the local currency of the transaction."""
@@ -595,10 +590,7 @@ class Transaction(BaseModel):
     ]
 
     settled_amount: int
-    """
-    Amount of the transaction that has been settled (in cents), including any
-    acquirer fees. This may change over time.
-    """
+    """The settled amount of the transaction in the settlement currency."""
 
     status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
     """Status of the transaction."""
