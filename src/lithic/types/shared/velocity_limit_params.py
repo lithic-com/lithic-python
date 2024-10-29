@@ -29,7 +29,10 @@ class VelocityLimitParams(BaseModel):
     filters: Filters
 
     period: Union[float, VelocityLimitParamsPeriodWindow]
-    """The size of the trailing window to calculate Spend Velocity over in seconds."""
+    """The size of the trailing window to calculate Spend Velocity over in seconds.
+
+    The minimum value is 10 seconds, and the maximum value is 2678400 seconds.
+    """
 
     scope: Literal["CARD", "ACCOUNT"]
 
