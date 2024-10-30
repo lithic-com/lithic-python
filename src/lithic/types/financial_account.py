@@ -10,6 +10,9 @@ __all__ = ["FinancialAccount", "CreditConfiguration"]
 
 
 class CreditConfiguration(BaseModel):
+    charged_off_reason: Optional[Literal["DELINQUENT", "FRAUD"]] = None
+    """Reason for the financial account being marked as Charged Off"""
+
     credit_limit: Optional[int] = None
 
     credit_product_token: Optional[str] = None
@@ -17,11 +20,13 @@ class CreditConfiguration(BaseModel):
 
     external_bank_account_token: Optional[str] = None
 
+    financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT", "CHARGED_OFF"]] = None
+    """State of the financial account"""
+
+    is_spend_blocked: bool
+
     tier: Optional[str] = None
     """Tier assigned to the financial account"""
-
-    financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT"]] = None
-    """State of the financial account"""
 
 
 class FinancialAccount(BaseModel):
