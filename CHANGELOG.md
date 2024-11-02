@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.77.1 (2024-11-02)
+
+Full Changelog: [v0.77.0...v0.77.1](https://github.com/lithic-com/lithic-python/compare/v0.77.0...v0.77.1)
+
+### Bug Fixes
+
+* don't use dicts as iterables in transform ([#615](https://github.com/lithic-com/lithic-python/issues/615)) ([65456d4](https://github.com/lithic-com/lithic-python/commit/65456d4c5131474d7c37232f0f09f4e497e1da80))
+
+
+### Chores
+
+* **api:** adds `charge_off` functionality to FinancialAccounts ([#613](https://github.com/lithic-com/lithic-python/issues/613)) ([44895bb](https://github.com/lithic-com/lithic-python/commit/44895bb85c8ad0bf84c606312a0006e2a4312fe3))
+* **docs:** updates to documentation for V2 AuthRules ([#611](https://github.com/lithic-com/lithic-python/issues/611)) ([8931217](https://github.com/lithic-com/lithic-python/commit/8931217fd1d63933098b570d427af45e2c9e92cd))
+* **internal:** bump mypy ([#614](https://github.com/lithic-com/lithic-python/issues/614)) ([717b3f3](https://github.com/lithic-com/lithic-python/commit/717b3f3e45cae0b30468109c99278c6969b28a6e))
+
 ## 0.77.0 (2024-10-28)
 
 Full Changelog: [v0.76.0...v0.77.0](https://github.com/lithic-com/lithic-python/compare/v0.76.0...v0.77.0)
