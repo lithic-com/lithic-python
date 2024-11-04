@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.77.2 (2024-11-04)
+
+Full Changelog: [v0.77.1...v0.77.2](https://github.com/lithic-com/lithic-python/compare/v0.77.1...v0.77.2)
+
+### Bug Fixes
+
+* support json safe serialization for basemodel subclasses ([#616](https://github.com/lithic-com/lithic-python/issues/616)) ([be1d3e3](https://github.com/lithic-com/lithic-python/commit/be1d3e37630d91b600da7399d5871c3479f0ab98))
+
 ## 0.77.1 (2024-11-02)
 
 Full Changelog: [v0.77.0...v0.77.1](https://github.com/lithic-com/lithic-python/compare/v0.77.0...v0.77.1)
