@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.78.0 (2024-11-05)
+
+Full Changelog: [v0.77.2...v0.78.0](https://github.com/lithic-com/lithic-python/compare/v0.77.2...v0.78.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** removes AuthRules V1 ([#620](https://github.com/lithic-com/lithic-python/issues/620))
+
+### Features
+
+* **api:** removes AuthRules V1 ([#620](https://github.com/lithic-com/lithic-python/issues/620)) ([e415592](https://github.com/lithic-com/lithic-python/commit/e41559205443f329cd17f3e3da51b7f429c3f7f5))
+* **project:** drop support for Python 3.7 ([#618](https://github.com/lithic-com/lithic-python/issues/618)) ([733aa30](https://github.com/lithic-com/lithic-python/commit/733aa30202e4766bbb8ed7af54a8e5e0a32ee9b4))
+
 ## 0.77.2 (2024-11-04)
 
 Full Changelog: [v0.77.1...v0.77.2](https://github.com/lithic-com/lithic-python/compare/v0.77.1...v0.77.2)
