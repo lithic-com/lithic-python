@@ -307,7 +307,7 @@ class FinancialAccounts(SyncAPIResource):
             raise ValueError(
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
-        return self._patch(
+        return self._post(
             f"/v1/financial_accounts/{financial_account_token}/charge_off",
             body=maybe_transform(
                 {"reason": reason}, financial_account_charge_off_params.FinancialAccountChargeOffParams
@@ -558,7 +558,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
             raise ValueError(
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
-        return await self._patch(
+        return await self._post(
             f"/v1/financial_accounts/{financial_account_token}/charge_off",
             body=await async_maybe_transform(
                 {"reason": reason}, financial_account_charge_off_params.FinancialAccountChargeOffParams
