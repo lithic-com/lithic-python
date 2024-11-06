@@ -123,6 +123,7 @@ class Cards(SyncAPIResource):
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
+        replacement_account_token: str | NotGiven = NOT_GIVEN,
         replacement_for: str | NotGiven = NOT_GIVEN,
         shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
@@ -190,6 +191,12 @@ class Cards(SyncAPIResource):
               before use. Specifies the configuration (i.e., physical card art) that the card
               should be manufactured with.
 
+          replacement_account_token: Restricted field limited to select use cases. Lithic will reach out directly if
+              this field should be used. Globally unique identifier for the replacement card's
+              account. If this field is specified, `replacement_for` must also be specified.
+              If `replacement_for` is specified and this field is omitted, the replacement
+              card's account will be inferred from the card being replaced.
+
           replacement_for: Only applicable to cards of type `PHYSICAL`. Globally unique identifier for the
               card that this physical card will replace.
 
@@ -256,6 +263,7 @@ class Cards(SyncAPIResource):
                     "memo": memo,
                     "pin": pin,
                     "product_id": product_id,
+                    "replacement_account_token": replacement_account_token,
                     "replacement_for": replacement_for,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
@@ -1008,6 +1016,7 @@ class AsyncCards(AsyncAPIResource):
         memo: str | NotGiven = NOT_GIVEN,
         pin: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
+        replacement_account_token: str | NotGiven = NOT_GIVEN,
         replacement_for: str | NotGiven = NOT_GIVEN,
         shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
@@ -1075,6 +1084,12 @@ class AsyncCards(AsyncAPIResource):
               before use. Specifies the configuration (i.e., physical card art) that the card
               should be manufactured with.
 
+          replacement_account_token: Restricted field limited to select use cases. Lithic will reach out directly if
+              this field should be used. Globally unique identifier for the replacement card's
+              account. If this field is specified, `replacement_for` must also be specified.
+              If `replacement_for` is specified and this field is omitted, the replacement
+              card's account will be inferred from the card being replaced.
+
           replacement_for: Only applicable to cards of type `PHYSICAL`. Globally unique identifier for the
               card that this physical card will replace.
 
@@ -1141,6 +1156,7 @@ class AsyncCards(AsyncAPIResource):
                     "memo": memo,
                     "pin": pin,
                     "product_id": product_id,
+                    "replacement_account_token": replacement_account_token,
                     "replacement_for": replacement_for,
                     "shipping_address": shipping_address,
                     "shipping_method": shipping_method,
