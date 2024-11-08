@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import List, Union, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from .velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
 from ..shared.velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
 
 __all__ = ["VelocityLimitParams", "Filters"]
