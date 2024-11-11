@@ -26,8 +26,7 @@ import os
 from lithic import Lithic
 
 client = Lithic(
-    # This is the default and can be omitted
-    api_key=os.environ.get("LITHIC_API_KEY"),
+    api_key=os.environ.get("LITHIC_API_KEY"),  # This is the default and can be omitted
     # defaults to "production".
     environment="sandbox",
 )
@@ -53,8 +52,7 @@ import asyncio
 from lithic import AsyncLithic
 
 client = AsyncLithic(
-    # This is the default and can be omitted
-    api_key=os.environ.get("LITHIC_API_KEY"),
+    api_key=os.environ.get("LITHIC_API_KEY"),  # This is the default and can be omitted
     # defaults to "production".
     environment="sandbox",
 )
