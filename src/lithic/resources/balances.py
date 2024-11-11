@@ -47,6 +47,7 @@ class Balances(SyncAPIResource):
         *,
         account_token: str | NotGiven = NOT_GIVEN,
         balance_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -56,13 +57,15 @@ class Balances(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncSinglePage[Balance]:
         """
-        Get the balances for a program or a given end-user account
+        Get the balances for a program, business, or a given end-user account
 
         Args:
           account_token: List balances for all financial accounts of a given account_token.
 
           balance_date: UTC date and time of the balances to retrieve. Defaults to latest available
               balances
+
+          business_account_token: List balances for all financial accounts of a given business_account_token.
 
           financial_account_type: List balances for a given Financial Account type.
 
@@ -86,6 +89,7 @@ class Balances(SyncAPIResource):
                     {
                         "account_token": account_token,
                         "balance_date": balance_date,
+                        "business_account_token": business_account_token,
                         "financial_account_type": financial_account_type,
                     },
                     balance_list_params.BalanceListParams,
@@ -120,6 +124,7 @@ class AsyncBalances(AsyncAPIResource):
         *,
         account_token: str | NotGiven = NOT_GIVEN,
         balance_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -129,13 +134,15 @@ class AsyncBalances(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Balance, AsyncSinglePage[Balance]]:
         """
-        Get the balances for a program or a given end-user account
+        Get the balances for a program, business, or a given end-user account
 
         Args:
           account_token: List balances for all financial accounts of a given account_token.
 
           balance_date: UTC date and time of the balances to retrieve. Defaults to latest available
               balances
+
+          business_account_token: List balances for all financial accounts of a given business_account_token.
 
           financial_account_type: List balances for a given Financial Account type.
 
@@ -159,6 +166,7 @@ class AsyncBalances(AsyncAPIResource):
                     {
                         "account_token": account_token,
                         "balance_date": balance_date,
+                        "business_account_token": business_account_token,
                         "financial_account_type": financial_account_type,
                     },
                     balance_list_params.BalanceListParams,

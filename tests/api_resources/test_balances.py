@@ -29,6 +29,7 @@ class TestBalances:
         balance = client.balances.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             balance_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_type="ISSUING",
         )
         assert_matches_type(SyncSinglePage[Balance], balance, path=["response"])
@@ -67,6 +68,7 @@ class TestAsyncBalances:
         balance = await async_client.balances.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             balance_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_type="ISSUING",
         )
         assert_matches_type(AsyncSinglePage[Balance], balance, path=["response"])
