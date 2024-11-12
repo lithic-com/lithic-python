@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.78.1 (2024-11-12)
+
+Full Changelog: [v0.78.0...v0.78.1](https://github.com/lithic-com/lithic-python/compare/v0.78.0...v0.78.1)
+
+### Bug Fixes
+
+* don't use dicts as iterables in transform ([#627](https://github.com/lithic-com/lithic-python/issues/627)) ([717c8a9](https://github.com/lithic-com/lithic-python/commit/717c8a97db21965f95299cc97cfd96a16960ed18))
+
+
+### Chores
+
+* **api:** add business_account_token param for listing Balances ([#625](https://github.com/lithic-com/lithic-python/issues/625)) ([7513850](https://github.com/lithic-com/lithic-python/commit/75138504756e0cf60fb86f04b2ced22351325d13))
+* **api:** adds replacement_account_token to Card create parameters ([#623](https://github.com/lithic-com/lithic-python/issues/623)) ([79071df](https://github.com/lithic-com/lithic-python/commit/79071df7bd89ecf6f1fe887a5a8a45a75345efc1))
+* **internal:** cleanup duplicate import ([#624](https://github.com/lithic-com/lithic-python/issues/624)) ([d067e5e](https://github.com/lithic-com/lithic-python/commit/d067e5e7a10b4f229e3a6c0dbed3de879771f1c3))
+* **tests:** adjust retry timeout values ([#621](https://github.com/lithic-com/lithic-python/issues/621)) ([1a732a9](https://github.com/lithic-com/lithic-python/commit/1a732a9d3c0bdce3603f005a4b49f252d495dd85))
+
+
+### Documentation
+
+* move comments in example snippets ([#626](https://github.com/lithic-com/lithic-python/issues/626)) ([d49933a](https://github.com/lithic-com/lithic-python/commit/d49933a2c275ca79599e7884f8d6dfe82b3c7ae6))
+
 ## 0.78.0 (2024-11-05)
 
 Full Changelog: [v0.77.2...v0.78.0](https://github.com/lithic-com/lithic-python/compare/v0.77.2...v0.78.0)
