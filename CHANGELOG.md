@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.79.0 (2024-11-14)
+
+Full Changelog: [v0.78.1...v0.79.0](https://github.com/lithic-com/lithic-python/compare/v0.78.1...v0.79.0)
+
+### Features
+
+* **api:** adds PrimeRates API ([#628](https://github.com/lithic-com/lithic-python/issues/628)) ([f0a2272](https://github.com/lithic-com/lithic-python/commit/f0a22728c090d593b483c562c61adaa71cd0221e))
+
 ## 0.78.1 (2024-11-12)
 
 Full Changelog: [v0.78.0...v0.78.1](https://github.com/lithic-com/lithic-python/compare/v0.78.0...v0.78.1)
