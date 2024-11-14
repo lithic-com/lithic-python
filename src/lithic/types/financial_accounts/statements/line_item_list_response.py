@@ -18,6 +18,7 @@ class LineItemListResponse(BaseModel):
 
     category: Literal[
         "ACH",
+        "BALANCE_OR_FUNDING",
         "CARD",
         "EXTERNAL_ACH",
         "EXTERNAL_CHECK",
@@ -56,6 +57,7 @@ class LineItemListResponse(BaseModel):
         "BALANCE_INQUIRY",
         "BILLING_ERROR",
         "BILLING_ERROR_REVERSAL",
+        "CARD_TO_CARD",
         "CASH_BACK",
         "CASH_BACK_REVERSAL",
         "CLEARING",
