@@ -37,7 +37,7 @@ class ExtendedCreditResource(SyncAPIResource):
 
     def retrieve(
         self,
-        credit_product_id: str,
+        credit_product_token: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -58,10 +58,12 @@ class ExtendedCreditResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not credit_product_id:
-            raise ValueError(f"Expected a non-empty value for `credit_product_id` but received {credit_product_id!r}")
+        if not credit_product_token:
+            raise ValueError(
+                f"Expected a non-empty value for `credit_product_token` but received {credit_product_token!r}"
+            )
         return self._get(
-            f"/v1/credit_products/{credit_product_id}/extended_credit",
+            f"/v1/credit_products/{credit_product_token}/extended_credit",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -91,7 +93,7 @@ class AsyncExtendedCreditResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        credit_product_id: str,
+        credit_product_token: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -112,10 +114,12 @@ class AsyncExtendedCreditResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not credit_product_id:
-            raise ValueError(f"Expected a non-empty value for `credit_product_id` but received {credit_product_id!r}")
+        if not credit_product_token:
+            raise ValueError(
+                f"Expected a non-empty value for `credit_product_token` but received {credit_product_token!r}"
+            )
         return await self._get(
-            f"/v1/credit_products/{credit_product_id}/extended_credit",
+            f"/v1/credit_products/{credit_product_token}/extended_credit",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

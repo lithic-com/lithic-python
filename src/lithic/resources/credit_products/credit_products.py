@@ -4,6 +4,14 @@ from __future__ import annotations
 
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .prime_rates import (
+    PrimeRates,
+    AsyncPrimeRates,
+    PrimeRatesWithRawResponse,
+    AsyncPrimeRatesWithRawResponse,
+    PrimeRatesWithStreamingResponse,
+    AsyncPrimeRatesWithStreamingResponse,
+)
 from .extended_credit import (
     ExtendedCreditResource,
     AsyncExtendedCreditResource,
@@ -20,6 +28,10 @@ class CreditProducts(SyncAPIResource):
     @cached_property
     def extended_credit(self) -> ExtendedCreditResource:
         return ExtendedCreditResource(self._client)
+
+    @cached_property
+    def prime_rates(self) -> PrimeRates:
+        return PrimeRates(self._client)
 
     @cached_property
     def with_raw_response(self) -> CreditProductsWithRawResponse:
@@ -45,6 +57,10 @@ class AsyncCreditProducts(AsyncAPIResource):
     @cached_property
     def extended_credit(self) -> AsyncExtendedCreditResource:
         return AsyncExtendedCreditResource(self._client)
+
+    @cached_property
+    def prime_rates(self) -> AsyncPrimeRates:
+        return AsyncPrimeRates(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncCreditProductsWithRawResponse:
@@ -74,6 +90,10 @@ class CreditProductsWithRawResponse:
     def extended_credit(self) -> ExtendedCreditResourceWithRawResponse:
         return ExtendedCreditResourceWithRawResponse(self._credit_products.extended_credit)
 
+    @cached_property
+    def prime_rates(self) -> PrimeRatesWithRawResponse:
+        return PrimeRatesWithRawResponse(self._credit_products.prime_rates)
+
 
 class AsyncCreditProductsWithRawResponse:
     def __init__(self, credit_products: AsyncCreditProducts) -> None:
@@ -82,6 +102,10 @@ class AsyncCreditProductsWithRawResponse:
     @cached_property
     def extended_credit(self) -> AsyncExtendedCreditResourceWithRawResponse:
         return AsyncExtendedCreditResourceWithRawResponse(self._credit_products.extended_credit)
+
+    @cached_property
+    def prime_rates(self) -> AsyncPrimeRatesWithRawResponse:
+        return AsyncPrimeRatesWithRawResponse(self._credit_products.prime_rates)
 
 
 class CreditProductsWithStreamingResponse:
@@ -92,6 +116,10 @@ class CreditProductsWithStreamingResponse:
     def extended_credit(self) -> ExtendedCreditResourceWithStreamingResponse:
         return ExtendedCreditResourceWithStreamingResponse(self._credit_products.extended_credit)
 
+    @cached_property
+    def prime_rates(self) -> PrimeRatesWithStreamingResponse:
+        return PrimeRatesWithStreamingResponse(self._credit_products.prime_rates)
+
 
 class AsyncCreditProductsWithStreamingResponse:
     def __init__(self, credit_products: AsyncCreditProducts) -> None:
@@ -100,3 +128,7 @@ class AsyncCreditProductsWithStreamingResponse:
     @cached_property
     def extended_credit(self) -> AsyncExtendedCreditResourceWithStreamingResponse:
         return AsyncExtendedCreditResourceWithStreamingResponse(self._credit_products.extended_credit)
+
+    @cached_property
+    def prime_rates(self) -> AsyncPrimeRatesWithStreamingResponse:
+        return AsyncPrimeRatesWithStreamingResponse(self._credit_products.prime_rates)
