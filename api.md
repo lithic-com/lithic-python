@@ -628,7 +628,20 @@ from lithic.types.credit_products import ExtendedCredit
 
 Methods:
 
-- <code title="get /v1/credit_products/{credit_product_id}/extended_credit">client.credit_products.extended_credit.<a href="./src/lithic/resources/credit_products/extended_credit.py">retrieve</a>(credit_product_id) -> <a href="./src/lithic/types/credit_products/extended_credit.py">ExtendedCredit</a></code>
+- <code title="get /v1/credit_products/{credit_product_token}/extended_credit">client.credit_products.extended_credit.<a href="./src/lithic/resources/credit_products/extended_credit.py">retrieve</a>(credit_product_token) -> <a href="./src/lithic/types/credit_products/extended_credit.py">ExtendedCredit</a></code>
+
+## PrimeRates
+
+Types:
+
+```python
+from lithic.types.credit_products import PrimeRateRetrieveResponse
+```
+
+Methods:
+
+- <code title="post /v1/credit_products/{credit_product_token}/prime_rates">client.credit_products.prime_rates.<a href="./src/lithic/resources/credit_products/prime_rates.py">create</a>(credit_product_token, \*\*<a href="src/lithic/types/credit_products/prime_rate_create_params.py">params</a>) -> None</code>
+- <code title="get /v1/credit_products/{credit_product_token}/prime_rates">client.credit_products.prime_rates.<a href="./src/lithic/resources/credit_products/prime_rates.py">retrieve</a>(credit_product_token, \*\*<a href="src/lithic/types/credit_products/prime_rate_retrieve_params.py">params</a>) -> <a href="./src/lithic/types/credit_products/prime_rate_retrieve_response.py">PrimeRateRetrieveResponse</a></code>
 
 # ExternalPayments
 
