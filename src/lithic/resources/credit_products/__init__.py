@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .prime_rates import (
+    PrimeRates,
+    AsyncPrimeRates,
+    PrimeRatesWithRawResponse,
+    AsyncPrimeRatesWithRawResponse,
+    PrimeRatesWithStreamingResponse,
+    AsyncPrimeRatesWithStreamingResponse,
+)
 from .credit_products import (
     CreditProducts,
     AsyncCreditProducts,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncExtendedCreditResourceWithRawResponse",
     "ExtendedCreditResourceWithStreamingResponse",
     "AsyncExtendedCreditResourceWithStreamingResponse",
+    "PrimeRates",
+    "AsyncPrimeRates",
+    "PrimeRatesWithRawResponse",
+    "AsyncPrimeRatesWithRawResponse",
+    "PrimeRatesWithStreamingResponse",
+    "AsyncPrimeRatesWithStreamingResponse",
     "CreditProducts",
     "AsyncCreditProducts",
     "CreditProductsWithRawResponse",
