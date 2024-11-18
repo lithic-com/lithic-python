@@ -171,11 +171,7 @@ class TestDisputes:
             page_size=1,
             starting_after="starting_after",
             status="ARBITRATION",
-            transaction_tokens=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            transaction_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
 
@@ -582,11 +578,7 @@ class TestAsyncDisputes:
             page_size=1,
             starting_after="starting_after",
             status="ARBITRATION",
-            transaction_tokens=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            transaction_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
 

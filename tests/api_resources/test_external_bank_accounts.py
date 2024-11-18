@@ -357,14 +357,14 @@ class TestExternalBankAccounts:
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_types=["CHECKING", "SAVINGS"],
-            countries=["string", "string", "string"],
+            account_types=["CHECKING"],
+            countries=["string"],
             ending_before="ending_before",
-            owner_types=["INDIVIDUAL", "BUSINESS"],
+            owner_types=["INDIVIDUAL"],
             page_size=1,
             starting_after="starting_after",
-            states=["ENABLED", "CLOSED", "PAUSED"],
-            verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
+            states=["ENABLED"],
+            verification_states=["PENDING"],
         )
         assert_matches_type(SyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 
@@ -821,14 +821,14 @@ class TestAsyncExternalBankAccounts:
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.list(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_types=["CHECKING", "SAVINGS"],
-            countries=["string", "string", "string"],
+            account_types=["CHECKING"],
+            countries=["string"],
             ending_before="ending_before",
-            owner_types=["INDIVIDUAL", "BUSINESS"],
+            owner_types=["INDIVIDUAL"],
             page_size=1,
             starting_after="starting_after",
-            states=["ENABLED", "CLOSED", "PAUSED"],
-            verification_states=["PENDING", "ENABLED", "FAILED_VERIFICATION"],
+            states=["ENABLED"],
+            verification_states=["PENDING"],
         )
         assert_matches_type(AsyncCursorPage[ExternalBankAccountListResponse], external_bank_account, path=["response"])
 
