@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.79.1 (2024-11-18)
+
+Full Changelog: [v0.79.0...v0.79.1](https://github.com/lithic-com/lithic-python/compare/v0.79.0...v0.79.1)
+
+### Bug Fixes
+
+* **asyncify:** avoid hanging process under certain conditions ([#632](https://github.com/lithic-com/lithic-python/issues/632)) ([a588059](https://github.com/lithic-com/lithic-python/commit/a588059fb8e877c9b174ce665991c5ade57dc49d))
+
+
+### Chores
+
+* **tests:** limit array example length ([#630](https://github.com/lithic-com/lithic-python/issues/630)) ([015e1cb](https://github.com/lithic-com/lithic-python/commit/015e1cb414358c2a90a21453d1854328caa0d968))
+
 ## 0.79.0 (2024-11-14)
 
 Full Changelog: [v0.78.1...v0.79.0](https://github.com/lithic-com/lithic-python/compare/v0.78.1...v0.79.0)
