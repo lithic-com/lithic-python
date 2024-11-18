@@ -35,7 +35,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
+            event_types=["account_holder.created"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -118,7 +118,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
+            event_types=["account_holder.created"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -546,7 +546,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
+            event_types=["account_holder.created"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -629,7 +629,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created", "account_holder.updated", "account_holder.verification"],
+            event_types=["account_holder.created"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 

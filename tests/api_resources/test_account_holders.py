@@ -41,31 +41,7 @@ class TestAccountHolders:
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -81,35 +57,7 @@ class TestAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -161,37 +109,7 @@ class TestAccountHolders:
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
                     "parent_company": "parent_company",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -209,39 +127,7 @@ class TestAccountHolders:
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
                     "phone_number": "+12124007676",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -298,31 +184,7 @@ class TestAccountHolders:
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -338,35 +200,7 @@ class TestAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -419,31 +253,7 @@ class TestAccountHolders:
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -459,35 +269,7 @@ class TestAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -1054,7 +836,7 @@ class TestAccountHolders:
         account_holder = client.account_holders.simulate_enrollment_document_review(
             document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
-            accepted_entity_status_reasons=["string", "string", "string"],
+            accepted_entity_status_reasons=["string"],
             status_reason="DOCUMENT_MISSING_REQUIRED_DATA",
         )
         assert_matches_type(Document, account_holder, path=["response"])
@@ -1095,11 +877,7 @@ class TestAccountHolders:
         account_holder = client.account_holders.simulate_enrollment_review(
             account_holder_token="1415964d-4400-4d79-9fb3-eee0faaee4e4",
             status="ACCEPTED",
-            status_reasons=[
-                "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
-            ],
+            status_reasons=["PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE"],
         )
         assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
 
@@ -1188,31 +966,7 @@ class TestAsyncAccountHolders:
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -1228,35 +982,7 @@ class TestAsyncAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -1308,37 +1034,7 @@ class TestAsyncAccountHolders:
                     "phone_numbers": ["+12124007676"],
                     "dba_business_name": "dba_business_name",
                     "parent_company": "parent_company",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -1356,39 +1052,7 @@ class TestAsyncAccountHolders:
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
                     "phone_number": "+12124007676",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -1445,31 +1109,7 @@ class TestAsyncAccountHolders:
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -1485,35 +1125,7 @@ class TestAsyncAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -1566,31 +1178,7 @@ class TestAsyncAccountHolders:
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
                     "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
-                },
+                }
             ],
             beneficial_owner_individuals=[
                 {
@@ -1606,35 +1194,7 @@ class TestAsyncAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                },
+                }
             ],
             business_entity={
                 "address": {
@@ -2201,7 +1761,7 @@ class TestAsyncAccountHolders:
         account_holder = await async_client.account_holders.simulate_enrollment_document_review(
             document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
-            accepted_entity_status_reasons=["string", "string", "string"],
+            accepted_entity_status_reasons=["string"],
             status_reason="DOCUMENT_MISSING_REQUIRED_DATA",
         )
         assert_matches_type(Document, account_holder, path=["response"])
@@ -2242,11 +1802,7 @@ class TestAsyncAccountHolders:
         account_holder = await async_client.account_holders.simulate_enrollment_review(
             account_holder_token="1415964d-4400-4d79-9fb3-eee0faaee4e4",
             status="ACCEPTED",
-            status_reasons=[
-                "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_ADDRESS_VERIFICATION_FAILURE",
-                "PRIMARY_BUSINESS_ENTITY_NAME_VERIFICATION_FAILURE",
-            ],
+            status_reasons=["PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE"],
         )
         assert_matches_type(AccountHolderSimulateEnrollmentReviewResponse, account_holder, path=["response"])
 
