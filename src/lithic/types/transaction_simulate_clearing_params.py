@@ -12,11 +12,15 @@ class TransactionSimulateClearingParams(TypedDict, total=False):
     """The transaction token returned from the /v1/simulate/authorize response."""
 
     amount: int
-    """Amount (in cents) to complete.
+    """Amount (in cents) to clear.
 
-    Typically this will match the original authorization, but may be more or less.
+    Typically this will match the amount in the original authorization, but can be
+    higher or lower. The sign of this amount will automatically match the sign of
+    the original authorization's amount. For example, entering 100 in this field
+    will result in a -100 amount in the transaction, if the original authorization
+    is a credit authorization.
 
-    If no amount is supplied to this endpoint, the amount of the transaction will be
-    captured. Any transaction that has any amount completed at all do not have
-    access to this behavior.
+    If `amount` is not set, the full amount of the transaction will be cleared.
+    Transactions that have already cleared, either partially or fully, cannot be
+    cleared again using this endpoint.
     """

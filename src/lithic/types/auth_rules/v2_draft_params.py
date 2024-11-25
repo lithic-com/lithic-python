@@ -68,7 +68,7 @@ class ParametersConditionalBlockParametersCondition(TypedDict, total=False):
     operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]
     """The operation to apply to the attribute"""
 
-    value: Union[str, float, List[str]]
+    value: Union[str, int, List[str]]
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 

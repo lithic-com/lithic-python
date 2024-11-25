@@ -13,7 +13,7 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
 
     For credit authorizations and financial credit authorizations, any value entered
     will be converted into a negative amount in the simulated transaction. For
-    example, entering 100 in this field will appear as a -100 amount in the
+    example, entering 100 in this field will result in a -100 amount in the
     transaction. For balance inquiries, this field must be set to 0.
     """
 
@@ -65,12 +65,12 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
 
     - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
       clearing step is required to settle the transaction.
-    - `BALANCE_INQUIRY` is a $0 authorization that includes a request for the
-      balance held on the card, and is most typically seen when a cardholder
-      requests to view a card's balance at an ATM.
+    - `BALANCE_INQUIRY` is a $0 authorization requesting the balance held on the
+      card, and is most often observed when a cardholder requests to view a card's
+      balance at an ATM.
     - `CREDIT_AUTHORIZATION` is a dual message request from a merchant to authorize
-      a refund or credit, meaning a subsequent clearing step is required to settle
-      the transaction.
+      a refund, meaning a subsequent clearing step is required to settle the
+      transaction.
     - `FINANCIAL_AUTHORIZATION` is a single message request from a merchant to debit
       funds immediately (such as an ATM withdrawal), and no subsequent clearing is
       required to settle the transaction.
