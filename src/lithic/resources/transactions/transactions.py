@@ -226,19 +226,20 @@ class Transactions(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateAuthorizationResponse:
         """
-        Simulates an authorization request from the payment network as if it came from a
-        merchant acquirer. If you're configured for ASA, simulating auths requires your
-        ASA client to be set up properly (respond with a valid JSON to the ASA request).
-        For users that are not configured for ASA, a daily transaction limit of $5000
-        USD is applied by default. This limit can be modified via the
+        Simulates an authorization request from the card network as if it came from a
+        merchant acquirer. If you are configured for ASA, simulating authorizations
+        requires your ASA client to be set up properly, i.e. be able to respond to the
+        ASA request with a valid JSON. For users that are not configured for ASA, a
+        daily transaction limit of $5000 USD is applied by default. You can update this
+        limit via the
         [update account](https://docs.lithic.com/reference/patchaccountbytoken)
         endpoint.
 
         Args:
           amount: Amount (in cents) to authorize. For credit authorizations and financial credit
               authorizations, any value entered will be converted into a negative amount in
-              the simulated transaction. For example, entering 100 in this field will appear
-              as a -100 amount in the transaction. For balance inquiries, this field must be
+              the simulated transaction. For example, entering 100 in this field will result
+              in a -100 amount in the transaction. For balance inquiries, this field must be
               set to 0.
 
           descriptor: Merchant descriptor.
@@ -265,12 +266,12 @@ class Transactions(SyncAPIResource):
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
                 clearing step is required to settle the transaction.
-              - `BALANCE_INQUIRY` is a $0 authorization that includes a request for the
-                balance held on the card, and is most typically seen when a cardholder
-                requests to view a card's balance at an ATM.
+              - `BALANCE_INQUIRY` is a $0 authorization requesting the balance held on the
+                card, and is most often observed when a cardholder requests to view a card's
+                balance at an ATM.
               - `CREDIT_AUTHORIZATION` is a dual message request from a merchant to authorize
-                a refund or credit, meaning a subsequent clearing step is required to settle
-                the transaction.
+                a refund, meaning a subsequent clearing step is required to settle the
+                transaction.
               - `FINANCIAL_AUTHORIZATION` is a single message request from a merchant to debit
                 funds immediately (such as an ATM withdrawal), and no subsequent clearing is
                 required to settle the transaction.
@@ -321,12 +322,12 @@ class Transactions(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateAuthorizationAdviceResponse:
         """
-        Simulates an authorization advice request from the payment network as if it came
-        from a merchant acquirer. An authorization advice request changes the amount of
-        the transaction.
+        Simulates an authorization advice from the card network as if it came from a
+        merchant acquirer. An authorization advice changes the pending amount of the
+        transaction.
 
         Args:
-          token: The transaction token returned from the /v1/simulate/authorize response.
+          token: The transaction token returned from the /v1/simulate/authorize. response.
 
           amount: Amount (in cents) to authorize. This amount will override the transaction's
               amount that was originally set by /v1/simulate/authorize.
@@ -366,24 +367,27 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateClearingResponse:
-        """Clears an existing authorization.
+        """Clears an existing authorization, either debit or credit.
 
-        After this event, the transaction is no longer
-        pending.
+        After this event, the
+        transaction transitions from `PENDING` to `SETTLED` status.
 
-        If no `amount` is supplied to this endpoint, the amount of the transaction will
-        be captured. Any transaction that has any amount completed at all do not have
-        access to this behavior.
+        If `amount` is not set, the full amount of the transaction will be cleared.
+        Transactions that have already cleared, either partially or fully, cannot be
+        cleared again using this endpoint.
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.
 
-          amount: Amount (in cents) to complete. Typically this will match the original
-              authorization, but may be more or less.
+          amount: Amount (in cents) to clear. Typically this will match the amount in the original
+              authorization, but can be higher or lower. The sign of this amount will
+              automatically match the sign of the original authorization's amount. For
+              example, entering 100 in this field will result in a -100 amount in the
+              transaction, if the original authorization is a credit authorization.
 
-              If no amount is supplied to this endpoint, the amount of the transaction will be
-              captured. Any transaction that has any amount completed at all do not have
-              access to this behavior.
+              If `amount` is not set, the full amount of the transaction will be cleared.
+              Transactions that have already cleared, either partially or fully, cannot be
+              cleared again using this endpoint.
 
           extra_headers: Send extra headers
 
@@ -423,11 +427,10 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateCreditAuthorizationResponse:
-        """Simulates a credit authorization advice message from the payment network.
+        """Simulates a credit authorization advice from the card network.
 
-        This
-        message indicates that a credit authorization was approved on your behalf by the
-        network.
+        This message
+        indicates that the network approved a credit authorization on your behalf.
 
         Args:
           amount: Amount (in cents). Any value entered will be converted into a negative amount in
@@ -483,10 +486,11 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateReturnResponse:
-        """Returns (aka refunds) an amount back to a card.
+        """Returns, or refunds, an amount back to a card.
 
-        Returns are cleared immediately
-        and do not spend time in a `PENDING` state.
+        Returns simulated via this
+        endpoint clear immediately, without prior authorization, and result in a
+        `SETTLED` transaction status.
 
         Args:
           amount: Amount (in cents) to authorize.
@@ -530,10 +534,11 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateReturnReversalResponse:
-        """
-        Voids a settled credit transaction – i.e., a transaction with a negative amount
-        and `SETTLED` status. These can be credit authorizations that have already
-        cleared or financial credit authorizations.
+        """Reverses a return, i.e.
+
+        a credit transaction with a `SETTLED` status. Returns
+        can be financial credit authorizations, or credit authorizations that have
+        cleared.
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.
@@ -570,19 +575,18 @@ class Transactions(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateVoidResponse:
-        """Voids an existing, uncleared (aka pending) authorization.
+        """Voids a pending authorization.
 
-        If amount is not sent
-        the full amount will be voided. Cannot be used on partially completed
-        transactions, but can be used on partially voided transactions. _Note that
-        simulating an authorization expiry on credit authorizations or credit
-        authorization advice is not currently supported but will be added soon._
+        If `amount` is not set, the full amount will be
+        voided. Can be used on partially voided transactions but not partially cleared
+        transactions. _Simulating an authorization expiry on credit authorizations or
+        credit authorization advice is not currently supported but will be added soon._
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.
 
-          amount: Amount (in cents) to void. Typically this will match the original authorization,
-              but may be less.
+          amount: Amount (in cents) to void. Typically this will match the amount in the original
+              authorization, but can be less.
 
           type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
 
@@ -783,19 +787,20 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateAuthorizationResponse:
         """
-        Simulates an authorization request from the payment network as if it came from a
-        merchant acquirer. If you're configured for ASA, simulating auths requires your
-        ASA client to be set up properly (respond with a valid JSON to the ASA request).
-        For users that are not configured for ASA, a daily transaction limit of $5000
-        USD is applied by default. This limit can be modified via the
+        Simulates an authorization request from the card network as if it came from a
+        merchant acquirer. If you are configured for ASA, simulating authorizations
+        requires your ASA client to be set up properly, i.e. be able to respond to the
+        ASA request with a valid JSON. For users that are not configured for ASA, a
+        daily transaction limit of $5000 USD is applied by default. You can update this
+        limit via the
         [update account](https://docs.lithic.com/reference/patchaccountbytoken)
         endpoint.
 
         Args:
           amount: Amount (in cents) to authorize. For credit authorizations and financial credit
               authorizations, any value entered will be converted into a negative amount in
-              the simulated transaction. For example, entering 100 in this field will appear
-              as a -100 amount in the transaction. For balance inquiries, this field must be
+              the simulated transaction. For example, entering 100 in this field will result
+              in a -100 amount in the transaction. For balance inquiries, this field must be
               set to 0.
 
           descriptor: Merchant descriptor.
@@ -822,12 +827,12 @@ class AsyncTransactions(AsyncAPIResource):
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
                 clearing step is required to settle the transaction.
-              - `BALANCE_INQUIRY` is a $0 authorization that includes a request for the
-                balance held on the card, and is most typically seen when a cardholder
-                requests to view a card's balance at an ATM.
+              - `BALANCE_INQUIRY` is a $0 authorization requesting the balance held on the
+                card, and is most often observed when a cardholder requests to view a card's
+                balance at an ATM.
               - `CREDIT_AUTHORIZATION` is a dual message request from a merchant to authorize
-                a refund or credit, meaning a subsequent clearing step is required to settle
-                the transaction.
+                a refund, meaning a subsequent clearing step is required to settle the
+                transaction.
               - `FINANCIAL_AUTHORIZATION` is a single message request from a merchant to debit
                 funds immediately (such as an ATM withdrawal), and no subsequent clearing is
                 required to settle the transaction.
@@ -878,12 +883,12 @@ class AsyncTransactions(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateAuthorizationAdviceResponse:
         """
-        Simulates an authorization advice request from the payment network as if it came
-        from a merchant acquirer. An authorization advice request changes the amount of
-        the transaction.
+        Simulates an authorization advice from the card network as if it came from a
+        merchant acquirer. An authorization advice changes the pending amount of the
+        transaction.
 
         Args:
-          token: The transaction token returned from the /v1/simulate/authorize response.
+          token: The transaction token returned from the /v1/simulate/authorize. response.
 
           amount: Amount (in cents) to authorize. This amount will override the transaction's
               amount that was originally set by /v1/simulate/authorize.
@@ -923,24 +928,27 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateClearingResponse:
-        """Clears an existing authorization.
+        """Clears an existing authorization, either debit or credit.
 
-        After this event, the transaction is no longer
-        pending.
+        After this event, the
+        transaction transitions from `PENDING` to `SETTLED` status.
 
-        If no `amount` is supplied to this endpoint, the amount of the transaction will
-        be captured. Any transaction that has any amount completed at all do not have
-        access to this behavior.
+        If `amount` is not set, the full amount of the transaction will be cleared.
+        Transactions that have already cleared, either partially or fully, cannot be
+        cleared again using this endpoint.
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.
 
-          amount: Amount (in cents) to complete. Typically this will match the original
-              authorization, but may be more or less.
+          amount: Amount (in cents) to clear. Typically this will match the amount in the original
+              authorization, but can be higher or lower. The sign of this amount will
+              automatically match the sign of the original authorization's amount. For
+              example, entering 100 in this field will result in a -100 amount in the
+              transaction, if the original authorization is a credit authorization.
 
-              If no amount is supplied to this endpoint, the amount of the transaction will be
-              captured. Any transaction that has any amount completed at all do not have
-              access to this behavior.
+              If `amount` is not set, the full amount of the transaction will be cleared.
+              Transactions that have already cleared, either partially or fully, cannot be
+              cleared again using this endpoint.
 
           extra_headers: Send extra headers
 
@@ -980,11 +988,10 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateCreditAuthorizationResponse:
-        """Simulates a credit authorization advice message from the payment network.
+        """Simulates a credit authorization advice from the card network.
 
-        This
-        message indicates that a credit authorization was approved on your behalf by the
-        network.
+        This message
+        indicates that the network approved a credit authorization on your behalf.
 
         Args:
           amount: Amount (in cents). Any value entered will be converted into a negative amount in
@@ -1040,10 +1047,11 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateReturnResponse:
-        """Returns (aka refunds) an amount back to a card.
+        """Returns, or refunds, an amount back to a card.
 
-        Returns are cleared immediately
-        and do not spend time in a `PENDING` state.
+        Returns simulated via this
+        endpoint clear immediately, without prior authorization, and result in a
+        `SETTLED` transaction status.
 
         Args:
           amount: Amount (in cents) to authorize.
@@ -1087,10 +1095,11 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateReturnReversalResponse:
-        """
-        Voids a settled credit transaction – i.e., a transaction with a negative amount
-        and `SETTLED` status. These can be credit authorizations that have already
-        cleared or financial credit authorizations.
+        """Reverses a return, i.e.
+
+        a credit transaction with a `SETTLED` status. Returns
+        can be financial credit authorizations, or credit authorizations that have
+        cleared.
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.
@@ -1127,19 +1136,18 @@ class AsyncTransactions(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TransactionSimulateVoidResponse:
-        """Voids an existing, uncleared (aka pending) authorization.
+        """Voids a pending authorization.
 
-        If amount is not sent
-        the full amount will be voided. Cannot be used on partially completed
-        transactions, but can be used on partially voided transactions. _Note that
-        simulating an authorization expiry on credit authorizations or credit
-        authorization advice is not currently supported but will be added soon._
+        If `amount` is not set, the full amount will be
+        voided. Can be used on partially voided transactions but not partially cleared
+        transactions. _Simulating an authorization expiry on credit authorizations or
+        credit authorization advice is not currently supported but will be added soon._
 
         Args:
           token: The transaction token returned from the /v1/simulate/authorize response.
 
-          amount: Amount (in cents) to void. Typically this will match the original authorization,
-              but may be less.
+          amount: Amount (in cents) to void. Typically this will match the amount in the original
+              authorization, but can be less.
 
           type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
 
