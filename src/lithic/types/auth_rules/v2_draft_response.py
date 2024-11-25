@@ -71,7 +71,7 @@ class CurrentVersionParametersConditionalBlockParametersCondition(BaseModel):
     ] = None
     """The operation to apply to the attribute"""
 
-    value: Union[str, float, List[str], None] = None
+    value: Union[str, int, List[str], None] = None
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 
@@ -145,7 +145,7 @@ class DraftVersionParametersConditionalBlockParametersCondition(BaseModel):
     ] = None
     """The operation to apply to the attribute"""
 
-    value: Union[str, float, List[str], None] = None
+    value: Union[str, int, List[str], None] = None
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 
@@ -169,6 +169,7 @@ class DraftVersion(BaseModel):
 
 class V2DraftResponse(BaseModel):
     token: str
+    """Auth Rule Token"""
 
     account_tokens: List[str]
     """Account tokens to which the Auth Rule applies."""

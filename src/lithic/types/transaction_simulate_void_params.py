@@ -14,7 +14,8 @@ class TransactionSimulateVoidParams(TypedDict, total=False):
     amount: int
     """Amount (in cents) to void.
 
-    Typically this will match the original authorization, but may be less.
+    Typically this will match the amount in the original authorization, but can be
+    less.
     """
 
     type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"]

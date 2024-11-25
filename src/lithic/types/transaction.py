@@ -33,12 +33,15 @@ __all__ = [
 
 class AmountsCardholder(BaseModel):
     amount: int
-    """The aggregate settled amount in the cardholder billing currency."""
+    """
+    The estimated settled amount of the transaction in the cardholder billing
+    currency.
+    """
 
     conversion_rate: str
     """
-    The conversion rate used to convert the merchant amount to the cardholder
-    billing amount.
+    The exchange rate used to convert the merchant amount to the cardholder billing
+    amount.
     """
 
     currency: Currency
@@ -51,10 +54,7 @@ class AmountsCardholder(BaseModel):
 
 class AmountsHold(BaseModel):
     amount: int
-    """
-    The aggregate authorization amount of the transaction in the anticipated
-    settlement currency.
-    """
+    """The pending amount of the transaction in the anticipated settlement currency."""
 
     currency: Currency
     """ISO 4217 currency.
@@ -66,7 +66,7 @@ class AmountsHold(BaseModel):
 
 class AmountsMerchant(BaseModel):
     amount: int
-    """The aggregate settled amount in the merchant currency."""
+    """The settled amount of the transaction in the merchant currency."""
 
     currency: Currency
     """ISO 4217 currency.
@@ -78,7 +78,7 @@ class AmountsMerchant(BaseModel):
 
 class AmountsSettlement(BaseModel):
     amount: int
-    """The aggregate settled amount in the settlement currency."""
+    """The settled amount of the transaction in the settlement currency."""
 
     currency: Currency
     """ISO 4217 currency.
@@ -314,12 +314,12 @@ class TokenInfo(BaseModel):
 
 class EventAmountsCardholder(BaseModel):
     amount: int
-    """The amount in the cardholder billing currency."""
+    """Amount of the event in the cardholder billing currency."""
 
     conversion_rate: str
     """
-    The conversion rate used to convert the merchant amount to the cardholder
-    billing amount.
+    Exchange rate used to convert the merchant amount to the cardholder billing
+    amount.
     """
 
     currency: Currency
@@ -332,7 +332,7 @@ class EventAmountsCardholder(BaseModel):
 
 class EventAmountsMerchant(BaseModel):
     amount: int
-    """The amount in the merchant currency."""
+    """Amount of the event in the merchant currency."""
 
     currency: Currency
     """ISO 4217 currency.
@@ -344,10 +344,13 @@ class EventAmountsMerchant(BaseModel):
 
 class EventAmountsSettlement(BaseModel):
     amount: int
-    """Amount of the event, if it is financial, in the settlement currency."""
+    """Amount of the event, if it is financial, in the settlement currency.
+
+    Non-financial events do not contain this amount because they do not move funds.
+    """
 
     conversion_rate: str
-    """Conversion rate used to convert the merchant amount to the settlement amount."""
+    """Exchange rate used to convert the merchant amount to the settlement amount."""
 
     currency: Currency
     """ISO 4217 currency.
