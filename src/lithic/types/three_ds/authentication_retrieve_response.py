@@ -124,14 +124,14 @@ class MerchantRiskIndicator(BaseModel):
     Maps to EMV 3DS field deliveryTimeframe.
     """
 
-    gift_card_amount: Optional[float] = None
+    gift_card_amount: Optional[int] = None
     """
     In prepaid or gift card purchase transactions, purchase amount total in major
     units (e.g., a purchase of USD $205.10 would be 205). Maps to EMV 3DS field
     giftCardAmount.
     """
 
-    gift_card_count: Optional[float] = None
+    gift_card_count: Optional[int] = None
     """
     In prepaid or gift card purchase transactions, count of individual prepaid or
     gift cards/codes purchased. Maps to EMV 3DS field giftCardCount.
@@ -218,7 +218,7 @@ class AdditionalData(BaseModel):
     authentication request to be low risk or not.
     """
 
-    network_risk_score: Optional[float] = None
+    network_risk_score: Optional[int] = None
     """
     Mastercard only: Assessment by the network of the authentication risk level,
     with a higher value indicating a higher amount of risk.

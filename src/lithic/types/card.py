@@ -121,7 +121,7 @@ class Card(BaseModel):
     manufactured.
     """
 
-    type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"]
+    type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"]
     """Card types:
 
     - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
@@ -134,6 +134,10 @@ class Card(BaseModel):
     - `SINGLE_USE` - Card is closed upon first successful authorization.
     - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
       successfully authorizes the card.
+    - `UNLOCKED` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please use
+      VIRTUAL instead.
+    - `DIGITAL_WALLET` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please
+      use VIRTUAL instead.
     """
 
     auth_rule_tokens: Optional[List[str]] = None
@@ -190,4 +194,10 @@ class Card(BaseModel):
 
     This must be configured with Lithic before use. Specifies the configuration
     (i.e., physical card art) that the card should be manufactured with.
+    """
+
+    replacement_for: Optional[str] = None
+    """
+    If the card is a replacement for another card, the globally unique identifier
+    for the card that was replaced.
     """

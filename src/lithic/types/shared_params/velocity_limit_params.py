@@ -29,7 +29,7 @@ class Filters(TypedDict, total=False):
 class VelocityLimitParams(TypedDict, total=False):
     filters: Required[Filters]
 
-    period: Required[Union[float, VelocityLimitParamsPeriodWindow]]
+    period: Required[Union[int, VelocityLimitParamsPeriodWindow]]
     """The size of the trailing window to calculate Spend Velocity over in seconds.
 
     The minimum value is 10 seconds, and the maximum value is 2678400 seconds.
@@ -37,14 +37,14 @@ class VelocityLimitParams(TypedDict, total=False):
 
     scope: Required[Literal["CARD", "ACCOUNT"]]
 
-    limit_amount: Optional[float]
+    limit_amount: Optional[int]
     """
     The maximum amount of spend velocity allowed in the period in minor units (the
     smallest unit of a currency, e.g. cents for USD). Transactions exceeding this
     limit will be declined.
     """
 
-    limit_count: Optional[float]
+    limit_count: Optional[int]
     """
     The number of spend velocity impacting transactions may not exceed this limit in
     the period. Transactions exceeding this limit will be declined. A spend velocity

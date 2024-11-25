@@ -106,7 +106,7 @@ class Cards(SyncAPIResource):
     def create(
         self,
         *,
-        type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"],
+        type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
         carrier: Carrier | NotGiven = NOT_GIVEN,
@@ -150,6 +150,10 @@ class Cards(SyncAPIResource):
               - `SINGLE_USE` - Card is closed upon first successful authorization.
               - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
                 successfully authorizes the card.
+              - `UNLOCKED` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please use
+                VIRTUAL instead.
+              - `DIGITAL_WALLET` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please
+                use VIRTUAL instead.
 
           account_token: Globally unique identifier for the account that the card will be associated
               with. Required for programs enrolling users using the
@@ -888,7 +892,7 @@ class AsyncCards(AsyncAPIResource):
     async def create(
         self,
         *,
-        type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL"],
+        type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"],
         account_token: str | NotGiven = NOT_GIVEN,
         card_program_token: str | NotGiven = NOT_GIVEN,
         carrier: Carrier | NotGiven = NOT_GIVEN,
@@ -932,6 +936,10 @@ class AsyncCards(AsyncAPIResource):
               - `SINGLE_USE` - Card is closed upon first successful authorization.
               - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
                 successfully authorizes the card.
+              - `UNLOCKED` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please use
+                VIRTUAL instead.
+              - `DIGITAL_WALLET` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please
+                use VIRTUAL instead.
 
           account_token: Globally unique identifier for the account that the card will be associated
               with. Required for programs enrolling users using the
