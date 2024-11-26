@@ -10,6 +10,7 @@ from .v2 import (
     V2WithStreamingResponse,
     AsyncV2WithStreamingResponse,
 )
+from .v2.v2 import V2, AsyncV2
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 

@@ -102,3 +102,6 @@ class SettlementDetail(BaseModel):
 
     updated: datetime
     """Date and time when the transaction first occurred. UTC time zone."""
+
+    fee_description: Optional[str] = None
+    """Network's description of a fee, only present on records with type `FEE`."""

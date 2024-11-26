@@ -94,14 +94,27 @@ from lithic.types.auth_rules import (
 
 Methods:
 
-- <code title="post /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">create</a>(\*\*<a href="src/lithic/types/auth_rules/v2_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_create_response.py">V2CreateResponse</a></code>
-- <code title="get /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_response.py">V2RetrieveResponse</a></code>
-- <code title="patch /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_update_response.py">V2UpdateResponse</a></code>
-- <code title="get /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">list</a>(\*\*<a href="src/lithic/types/auth_rules/v2_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_list_response.py">SyncCursorPage[V2ListResponse]</a></code>
-- <code title="post /v2/auth_rules/{auth_rule_token}/apply">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_apply_response.py">V2ApplyResponse</a></code>
-- <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_draft_response.py">V2DraftResponse</a></code>
-- <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_promote_response.py">V2PromoteResponse</a></code>
-- <code title="post /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2.py">report</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_report_response.py">V2ReportResponse</a></code>
+- <code title="post /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">create</a>(\*\*<a href="src/lithic/types/auth_rules/v2_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_create_response.py">V2CreateResponse</a></code>
+- <code title="get /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_response.py">V2RetrieveResponse</a></code>
+- <code title="patch /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_update_response.py">V2UpdateResponse</a></code>
+- <code title="get /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">list</a>(\*\*<a href="src/lithic/types/auth_rules/v2_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_list_response.py">SyncCursorPage[V2ListResponse]</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/apply">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_apply_response.py">V2ApplyResponse</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_draft_response.py">V2DraftResponse</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_promote_response.py">V2PromoteResponse</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">report</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_report_response.py">V2ReportResponse</a></code>
+
+### Backtests
+
+Types:
+
+```python
+from lithic.types.auth_rules.v2 import BacktestResults, BacktestCreateResponse
+```
+
+Methods:
+
+- <code title="post /v2/auth_rules/{auth_rule_token}/backtests">client.auth_rules.v2.backtests.<a href="./src/lithic/resources/auth_rules/v2/backtests.py">create</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2/backtest_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2/backtest_create_response.py">BacktestCreateResponse</a></code>
+- <code title="get /v2/auth_rules/{auth_rule_token}/backtests/{auth_rule_backtest_token}">client.auth_rules.v2.backtests.<a href="./src/lithic/resources/auth_rules/v2/backtests.py">retrieve</a>(auth_rule_backtest_token, \*, auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2/backtest_results.py">BacktestResults</a></code>
 
 # AuthStreamEnrollment
 
