@@ -7,32 +7,44 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ... import _legacy_response
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
+from .... import _legacy_response
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import (
     required_args,
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ...pagination import SyncCursorPage, AsyncCursorPage
-from ..._base_client import AsyncPaginator, make_request_options
-from ...types.auth_rules import v2_list_params, v2_apply_params, v2_draft_params, v2_create_params, v2_update_params
-from ...types.auth_rules.v2_list_response import V2ListResponse
-from ...types.auth_rules.v2_apply_response import V2ApplyResponse
-from ...types.auth_rules.v2_draft_response import V2DraftResponse
-from ...types.auth_rules.v2_create_response import V2CreateResponse
-from ...types.auth_rules.v2_report_response import V2ReportResponse
-from ...types.auth_rules.v2_update_response import V2UpdateResponse
-from ...types.auth_rules.v2_promote_response import V2PromoteResponse
-from ...types.auth_rules.v2_retrieve_response import V2RetrieveResponse
+from .backtests import (
+    Backtests,
+    AsyncBacktests,
+    BacktestsWithRawResponse,
+    AsyncBacktestsWithRawResponse,
+    BacktestsWithStreamingResponse,
+    AsyncBacktestsWithStreamingResponse,
+)
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ....pagination import SyncCursorPage, AsyncCursorPage
+from ...._base_client import AsyncPaginator, make_request_options
+from ....types.auth_rules import v2_list_params, v2_apply_params, v2_draft_params, v2_create_params, v2_update_params
+from ....types.auth_rules.v2_list_response import V2ListResponse
+from ....types.auth_rules.v2_apply_response import V2ApplyResponse
+from ....types.auth_rules.v2_draft_response import V2DraftResponse
+from ....types.auth_rules.v2_create_response import V2CreateResponse
+from ....types.auth_rules.v2_report_response import V2ReportResponse
+from ....types.auth_rules.v2_update_response import V2UpdateResponse
+from ....types.auth_rules.v2_promote_response import V2PromoteResponse
+from ....types.auth_rules.v2_retrieve_response import V2RetrieveResponse
 
 __all__ = ["V2", "AsyncV2"]
 
 
 class V2(SyncAPIResource):
+    @cached_property
+    def backtests(self) -> Backtests:
+        return Backtests(self._client)
+
     @cached_property
     def with_raw_response(self) -> V2WithRawResponse:
         """
@@ -615,6 +627,10 @@ class V2(SyncAPIResource):
 
 
 class AsyncV2(AsyncAPIResource):
+    @cached_property
+    def backtests(self) -> AsyncBacktests:
+        return AsyncBacktests(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncV2WithRawResponse:
         """
@@ -1225,6 +1241,10 @@ class V2WithRawResponse:
             v2.report,
         )
 
+    @cached_property
+    def backtests(self) -> BacktestsWithRawResponse:
+        return BacktestsWithRawResponse(self._v2.backtests)
+
 
 class AsyncV2WithRawResponse:
     def __init__(self, v2: AsyncV2) -> None:
@@ -1254,6 +1274,10 @@ class AsyncV2WithRawResponse:
         self.report = _legacy_response.async_to_raw_response_wrapper(
             v2.report,
         )
+
+    @cached_property
+    def backtests(self) -> AsyncBacktestsWithRawResponse:
+        return AsyncBacktestsWithRawResponse(self._v2.backtests)
 
 
 class V2WithStreamingResponse:
@@ -1285,6 +1309,10 @@ class V2WithStreamingResponse:
             v2.report,
         )
 
+    @cached_property
+    def backtests(self) -> BacktestsWithStreamingResponse:
+        return BacktestsWithStreamingResponse(self._v2.backtests)
+
 
 class AsyncV2WithStreamingResponse:
     def __init__(self, v2: AsyncV2) -> None:
@@ -1314,3 +1342,7 @@ class AsyncV2WithStreamingResponse:
         self.report = async_to_streamed_response_wrapper(
             v2.report,
         )
+
+    @cached_property
+    def backtests(self) -> AsyncBacktestsWithStreamingResponse:
+        return AsyncBacktestsWithStreamingResponse(self._v2.backtests)
