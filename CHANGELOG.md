@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.80.1 (2024-11-28)
+
+Full Changelog: [v0.80.0...v0.80.1](https://github.com/lithic-com/lithic-python/compare/v0.80.0...v0.80.1)
+
+### Bug Fixes
+
+* **client:** compat with new httpx 0.28.0 release ([#640](https://github.com/lithic-com/lithic-python/issues/640)) ([2e3c03d](https://github.com/lithic-com/lithic-python/commit/2e3c03d072a9c4a8a3d76414c3d1a64b5359f057))
+
 ## 0.80.0 (2024-11-28)
 
 Full Changelog: [v0.79.1...v0.80.0](https://github.com/lithic-com/lithic-python/compare/v0.79.1...v0.80.0)
