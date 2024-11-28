@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.80.0 (2024-11-28)
+
+Full Changelog: [v0.79.1...v0.80.0](https://github.com/lithic-com/lithic-python/compare/v0.79.1...v0.80.0)
+
+### Features
+
+* **api:** updates to Auth Rules numeric types, new Card Types and Authorization Rule Backtests ([#637](https://github.com/lithic-com/lithic-python/issues/637)) ([6436634](https://github.com/lithic-com/lithic-python/commit/6436634a1a0ccc9b6ec070c2553bdb45ab656dd6))
+
+
+### Chores
+
+* **api:** add backtest methods to AuthRules ([#638](https://github.com/lithic-com/lithic-python/issues/638)) ([8125eac](https://github.com/lithic-com/lithic-python/commit/8125eac6b6bb5e448f8641c362a334f0eab5a5fa))
+* **internal:** exclude mypy from running on tests ([#639](https://github.com/lithic-com/lithic-python/issues/639)) ([9ad6f0b](https://github.com/lithic-com/lithic-python/commit/9ad6f0bbf8ffc74641f018adaa1cc99e80be1d12))
+* **internal:** fix compat model_dump method when warnings are passed ([#633](https://github.com/lithic-com/lithic-python/issues/633)) ([eb6c135](https://github.com/lithic-com/lithic-python/commit/eb6c135106a0e11e15aa6245db72a019ea90668e))
+* remove now unused `cached-property` dep ([#636](https://github.com/lithic-com/lithic-python/issues/636)) ([78321ef](https://github.com/lithic-com/lithic-python/commit/78321efbac2e6da20afb852d6bf38fa371751d99))
+
+
+### Documentation
+
+* add info log level to readme ([#635](https://github.com/lithic-com/lithic-python/issues/635)) ([aed46f6](https://github.com/lithic-com/lithic-python/commit/aed46f67456c19cf389275607f593e8e269e3237))
+
 ## 0.79.1 (2024-11-18)
 
 Full Changelog: [v0.79.0...v0.79.1](https://github.com/lithic-com/lithic-python/compare/v0.79.0...v0.79.1)
