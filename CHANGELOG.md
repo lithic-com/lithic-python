@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.80.2 (2024-12-04)
+
+Full Changelog: [v0.80.1...v0.80.2](https://github.com/lithic-com/lithic-python/compare/v0.80.1...v0.80.2)
+
+### Chores
+
+* **internal:** bump pyright ([#642](https://github.com/lithic-com/lithic-python/issues/642)) ([69d8957](https://github.com/lithic-com/lithic-python/commit/69d895702fe674b8554580e9346ad266b7057cb3))
+* make the `Omit` type public ([#644](https://github.com/lithic-com/lithic-python/issues/644)) ([095008f](https://github.com/lithic-com/lithic-python/commit/095008f17b01d4cc0ec76cb0f84aaf0e5bdc60de))
+
 ## 0.80.1 (2024-11-28)
 
 Full Changelog: [v0.80.0...v0.80.1](https://github.com/lithic-com/lithic-python/compare/v0.80.0...v0.80.1)
