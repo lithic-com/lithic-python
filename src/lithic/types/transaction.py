@@ -28,6 +28,7 @@ __all__ = [
     "EventAmountsCardholder",
     "EventAmountsMerchant",
     "EventAmountsSettlement",
+    "EventRuleResult",
 ]
 
 
@@ -368,6 +369,77 @@ class EventAmounts(BaseModel):
     settlement: Optional[EventAmountsSettlement] = None
 
 
+class EventRuleResult(BaseModel):
+    auth_rule_token: Optional[str] = None
+    """The Auth Rule Token associated with the rule from which the decline originated.
+
+    If this is set to null, then the decline was not associated with a
+    customer-configured Auth Rule. This may happen in cases where a transaction is
+    declined due to a Lithic-configured security or compliance rule, for example.
+    """
+
+    explanation: Optional[str] = None
+    """A human-readable explanation outlining the motivation for the rule's decline."""
+
+    name: Optional[str] = None
+    """The name for the rule, if any was configured."""
+
+    result: Literal[
+        "ACCOUNT_DAILY_SPEND_LIMIT_EXCEEDED",
+        "ACCOUNT_DELINQUENT",
+        "ACCOUNT_INACTIVE",
+        "ACCOUNT_LIFETIME_SPEND_LIMIT_EXCEEDED",
+        "ACCOUNT_MONTHLY_SPEND_LIMIT_EXCEEDED",
+        "ACCOUNT_UNDER_REVIEW",
+        "ADDRESS_INCORRECT",
+        "APPROVED",
+        "AUTH_RULE_ALLOWED_COUNTRY",
+        "AUTH_RULE_ALLOWED_MCC",
+        "AUTH_RULE_BLOCKED_COUNTRY",
+        "AUTH_RULE_BLOCKED_MCC",
+        "CARD_CLOSED",
+        "CARD_CRYPTOGRAM_VALIDATION_FAILURE",
+        "CARD_EXPIRED",
+        "CARD_EXPIRY_DATE_INCORRECT",
+        "CARD_INVALID",
+        "CARD_NOT_ACTIVATED",
+        "CARD_PAUSED",
+        "CARD_PIN_INCORRECT",
+        "CARD_RESTRICTED",
+        "CARD_SECURITY_CODE_INCORRECT",
+        "CARD_SPEND_LIMIT_EXCEEDED",
+        "CONTACT_CARD_ISSUER",
+        "CUSTOMER_ASA_TIMEOUT",
+        "CUSTOM_ASA_RESULT",
+        "DECLINED",
+        "DO_NOT_HONOR",
+        "DRIVER_NUMBER_INVALID",
+        "FORMAT_ERROR",
+        "INSUFFICIENT_FUNDING_SOURCE_BALANCE",
+        "INSUFFICIENT_FUNDS",
+        "LITHIC_SYSTEM_ERROR",
+        "LITHIC_SYSTEM_RATE_LIMIT",
+        "MALFORMED_ASA_RESPONSE",
+        "MERCHANT_INVALID",
+        "MERCHANT_LOCKED_CARD_ATTEMPTED_ELSEWHERE",
+        "MERCHANT_NOT_PERMITTED",
+        "OVER_REVERSAL_ATTEMPTED",
+        "PIN_BLOCKED",
+        "PROGRAM_CARD_SPEND_LIMIT_EXCEEDED",
+        "PROGRAM_SUSPENDED",
+        "PROGRAM_USAGE_RESTRICTION",
+        "REVERSAL_UNMATCHED",
+        "SECURITY_VIOLATION",
+        "SINGLE_USE_CARD_REATTEMPTED",
+        "TRANSACTION_INVALID",
+        "TRANSACTION_NOT_PERMITTED_TO_ACQUIRER_OR_TERMINAL",
+        "TRANSACTION_NOT_PERMITTED_TO_ISSUER_OR_CARDHOLDER",
+        "TRANSACTION_PREVIOUSLY_COMPLETED",
+        "UNAUTHORIZED_MERCHANT",
+        "VEHICLE_NUMBER_INVALID",
+    ]
+
+
 class Event(BaseModel):
     token: str
     """Transaction event identifier."""
@@ -483,6 +555,8 @@ class Event(BaseModel):
         "RETURN_REVERSAL",
     ]
     """Type of transaction event"""
+
+    rule_results: Optional[List[EventRuleResult]] = None
 
 
 class Transaction(BaseModel):
