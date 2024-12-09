@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.81.0 (2024-12-09)
+
+Full Changelog: [v0.80.1...v0.81.0](https://github.com/lithic-com/lithic-python/compare/v0.80.1...v0.81.0)
+
+### Features
+
+* **api:** adds EventRuleResult to Transaction Events ([#646](https://github.com/lithic-com/lithic-python/issues/646)) ([51de0e6](https://github.com/lithic-com/lithic-python/commit/51de0e605212aef46aac02d5a45fa7f591630629))
+
+
+### Chores
+
+* **internal:** bump pydantic dependency ([#645](https://github.com/lithic-com/lithic-python/issues/645)) ([b55feb0](https://github.com/lithic-com/lithic-python/commit/b55feb0d12f89d50830ce285ae48e56fd129c7c2))
+* **internal:** bump pyright ([#642](https://github.com/lithic-com/lithic-python/issues/642)) ([69d8957](https://github.com/lithic-com/lithic-python/commit/69d895702fe674b8554580e9346ad266b7057cb3))
+* make the `Omit` type public ([#644](https://github.com/lithic-com/lithic-python/issues/644)) ([095008f](https://github.com/lithic-com/lithic-python/commit/095008f17b01d4cc0ec76cb0f84aaf0e5bdc60de))
+
 ## 0.80.1 (2024-11-28)
 
 Full Changelog: [v0.80.0...v0.80.1](https://github.com/lithic-com/lithic-python/compare/v0.80.0...v0.80.1)
