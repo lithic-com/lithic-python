@@ -20,6 +20,8 @@ from .account import Account as Account
 from .balance import Balance as Balance
 from .dispute import Dispute as Dispute
 from .payment import Payment as Payment
+from .kyb_param import KYBParam as KYBParam
+from .kyc_param import KYCParam as KYCParam
 from .api_status import APIStatus as APIStatus
 from .owner_type import OwnerType as OwnerType
 from .transaction import Transaction as Transaction
@@ -31,6 +33,7 @@ from .card_list_params import CardListParams as CardListParams
 from .digital_card_art import DigitalCardArt as DigitalCardArt
 from .dispute_evidence import DisputeEvidence as DisputeEvidence
 from .external_payment import ExternalPayment as ExternalPayment
+from .kyc_exempt_param import KYCExemptParam as KYCExemptParam
 from .aggregate_balance import AggregateBalance as AggregateBalance
 from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .card_renew_params import CardRenewParams as CardRenewParams
