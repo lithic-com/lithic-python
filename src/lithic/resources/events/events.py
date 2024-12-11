@@ -281,7 +281,7 @@ class Events(SyncAPIResource):
     ) -> None:
         """Resend an event to an event subscription."""
         self._post(
-            f"/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
+            f"/v1/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=NoneType,
         )
@@ -537,7 +537,7 @@ class AsyncEvents(AsyncAPIResource):
     ) -> None:
         """Resend an event to an event subscription."""
         await self._post(
-            f"/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
+            f"/v1/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
             options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body),
             cast_to=NoneType,
         )
