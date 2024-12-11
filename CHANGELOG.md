@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.81.1 (2024-12-11)
+
+Full Changelog: [v0.81.0...v0.81.1](https://github.com/lithic-com/lithic-python/compare/v0.81.0...v0.81.1)
+
+### Bug Fixes
+
+* events.resend was missing v1 url prefix ([8c53c3c](https://github.com/lithic-com/lithic-python/commit/8c53c3c18f9ccefd64b722802521b35b84716f5d))
+
+
+### Documentation
+
+* **readme:** fix http client proxies example ([#647](https://github.com/lithic-com/lithic-python/issues/647)) ([8fac1ff](https://github.com/lithic-com/lithic-python/commit/8fac1ffdf8ebe994c02ac57b72a9fddc7c701b2e))
+
 ## 0.81.0 (2024-12-09)
 
 Full Changelog: [v0.80.1...v0.81.0](https://github.com/lithic-com/lithic-python/compare/v0.80.1...v0.81.0)
