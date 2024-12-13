@@ -9,14 +9,6 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from .events import (
-    Events,
-    AsyncEvents,
-    EventsWithRawResponse,
-    AsyncEventsWithRawResponse,
-    EventsWithStreamingResponse,
-    AsyncEventsWithStreamingResponse,
-)
 from ...types import (
     transaction_list_params,
     transaction_simulate_void_params,
@@ -36,7 +28,14 @@ from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
-from .events.events import Events, AsyncEvents
+from .events.events import (
+    Events,
+    AsyncEvents,
+    EventsWithRawResponse,
+    AsyncEventsWithRawResponse,
+    EventsWithStreamingResponse,
+    AsyncEventsWithStreamingResponse,
+)
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.transaction import Transaction
 from .enhanced_commercial_data import (
