@@ -209,6 +209,7 @@ class Transactions(SyncAPIResource):
         merchant_amount: int | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
+        pin: str | NotGiven = NOT_GIVEN,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -261,6 +262,8 @@ class Transactions(SyncAPIResource):
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
 
+          pin: Simulate entering a PIN. If omitted, PIN check will not be performed.
+
           status: Type of event to simulate.
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
@@ -298,6 +301,7 @@ class Transactions(SyncAPIResource):
                     "merchant_amount": merchant_amount,
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
+                    "pin": pin,
                     "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
@@ -770,6 +774,7 @@ class AsyncTransactions(AsyncAPIResource):
         merchant_amount: int | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
+        pin: str | NotGiven = NOT_GIVEN,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -822,6 +827,8 @@ class AsyncTransactions(AsyncAPIResource):
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
 
+          pin: Simulate entering a PIN. If omitted, PIN check will not be performed.
+
           status: Type of event to simulate.
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
@@ -859,6 +866,7 @@ class AsyncTransactions(AsyncAPIResource):
                     "merchant_amount": merchant_amount,
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
+                    "pin": pin,
                     "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,

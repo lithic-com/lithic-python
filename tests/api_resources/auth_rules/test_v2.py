@@ -38,6 +38,7 @@ class TestV2:
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
             parameters={
                 "conditions": [
                     {
@@ -86,6 +87,7 @@ class TestV2:
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
             parameters={
                 "conditions": [
                     {
@@ -134,6 +136,8 @@ class TestV2:
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             program_level=True,
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
             parameters={
                 "conditions": [
                     {
@@ -220,6 +224,7 @@ class TestV2:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            name="name",
             state="INACTIVE",
         )
         assert_matches_type(V2UpdateResponse, v2, path=["response"])
@@ -380,6 +385,15 @@ class TestV2:
         v2 = client.auth_rules.v2.apply(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             program_level=True,
+        )
+        assert_matches_type(V2ApplyResponse, v2, path=["response"])
+
+    @parametrize
+    def test_method_apply_with_all_params_overload_3(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.apply(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            program_level=True,
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(V2ApplyResponse, v2, path=["response"])
 
@@ -562,6 +576,7 @@ class TestAsyncV2:
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
             parameters={
                 "conditions": [
                     {
@@ -610,6 +625,7 @@ class TestAsyncV2:
     async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
             parameters={
                 "conditions": [
                     {
@@ -658,6 +674,8 @@ class TestAsyncV2:
     async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             program_level=True,
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
             parameters={
                 "conditions": [
                     {
@@ -744,6 +762,7 @@ class TestAsyncV2:
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            name="name",
             state="INACTIVE",
         )
         assert_matches_type(V2UpdateResponse, v2, path=["response"])
@@ -904,6 +923,15 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.apply(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             program_level=True,
+        )
+        assert_matches_type(V2ApplyResponse, v2, path=["response"])
+
+    @parametrize
+    async def test_method_apply_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.apply(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            program_level=True,
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(V2ApplyResponse, v2, path=["response"])
 
