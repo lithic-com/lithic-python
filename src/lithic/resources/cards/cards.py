@@ -25,6 +25,7 @@ from ...types import (
     card_provision_params,
     card_get_embed_url_params,
     card_search_by_pan_params,
+    card_convert_physical_params,
 )
 from ..._types import (
     NOT_GIVEN,
@@ -140,7 +141,7 @@ class Cards(SyncAPIResource):
     ) -> Card:
         """Create a new virtual or physical card.
 
-        Parameters `pin`, `shipping_address`, and
+        Parameters `shipping_address` and
         `product_id` only apply to physical cards.
 
         Args:
@@ -187,7 +188,7 @@ class Cards(SyncAPIResource):
 
           memo: Friendly name to identify the card.
 
-          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
+          pin: Encrypted PIN block (in base64). Applies to cards of type `PHYSICAL` and
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
 
@@ -201,8 +202,9 @@ class Cards(SyncAPIResource):
               If `replacement_for` is specified and this field is omitted, the replacement
               card's account will be inferred from the card being replaced.
 
-          replacement_for: Only applicable to cards of type `PHYSICAL`. Globally unique identifier for the
-              card that this physical card will replace.
+          replacement_for: Globally unique identifier for the card that this card will replace. If the card
+              type is `PHYSICAL` it will be replaced by a `PHYSICAL` card. If the card type is
+              `VIRTUAL` it will be replaced by a `VIRTUAL` card.
 
           shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
               options besides `STANDARD` require additional permissions.
@@ -337,7 +339,7 @@ class Cards(SyncAPIResource):
         """Update the specified properties of the card.
 
         Unsupplied properties will remain
-        unchanged. `pin` parameter only applies to physical cards.
+        unchanged.
 
         _Note: setting a card to a `CLOSED` state is a final action that cannot be
         undone._
@@ -488,6 +490,84 @@ class Cards(SyncAPIResource):
             model=Card,
         )
 
+    def convert_physical(
+        self,
+        card_token: str,
+        *,
+        shipping_address: ShippingAddress,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
+        product_id: str | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Card:
+        """Convert a virtual card into a physical card and manufacture it.
+
+        Customer must
+        supply relevant fields for physical card creation including `product_id`,
+        `carrier`, `shipping_method`, and `shipping_address`. The card token will be
+        unchanged. The card's type will be altered to `PHYSICAL`. The card will be set
+        to state `PENDING_FULFILLMENT` and fulfilled at next fulfillment cycle. Virtual
+        cards created on card programs which do not support physical cards cannot be
+        converted. The card program cannot be changed as part of the conversion. Cards
+        must be in a state of either `OPEN` or `PAUSED` to be converted. Only applies to
+        cards of type `VIRTUAL` (or existing cards with deprecated types of
+        `DIGITAL_WALLET` and `UNLOCKED`).
+
+        Args:
+          shipping_address: The shipping address this card will be sent to.
+
+          carrier: If omitted, the previous carrier will be used.
+
+          product_id: Specifies the configuration (e.g. physical card art) that the card should be
+              manufactured with, and only applies to cards of type `PHYSICAL`. This must be
+              configured with Lithic before use.
+
+          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
+              additional permissions.
+
+              - `STANDARD` - USPS regular mail or similar international option, with no
+                tracking
+              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
+                with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
+              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+                tracking
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return self._post(
+            f"/v1/cards/{card_token}/convert_physical",
+            body=maybe_transform(
+                {
+                    "shipping_address": shipping_address,
+                    "carrier": carrier,
+                    "product_id": product_id,
+                    "shipping_method": shipping_method,
+                },
+                card_convert_physical_params.CardConvertPhysicalParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Card,
+        )
+
     def embed(
         self,
         *,
@@ -510,9 +590,10 @@ class Cards(SyncAPIResource):
         that we provide, optionally styled in the customer's branding using a specified
         css stylesheet. A user's browser makes the request directly to api.lithic.com,
         so card PANs and CVVs never touch the API customer's servers while full card
-        data is displayed to their end-users. The response contains an HTML document.
-        This means that the url for the request can be inserted straight into the `src`
-        attribute of an iframe.
+        data is displayed to their end-users. The response contains an HTML document
+        (see Embedded Card UI or Changelog for upcoming changes in January). This means
+        that the url for the request can be inserted straight into the `src` attribute
+        of an iframe.
 
         ```html
         <iframe
@@ -765,10 +846,12 @@ class Cards(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Card:
-        """
-        Initiate print and shipment of a duplicate physical card.
+        """Initiate print and shipment of a duplicate physical card (e.g.
 
-        Only applies to cards of type `PHYSICAL`.
+        card is
+        physically damaged). The PAN, expiry, and CVC2 will remain the same and the
+        original card can continue to be used until the new card is activated. A card
+        can be reissued a maximum of 8 times. Only applies to cards of type `PHYSICAL`.
 
         Args:
           carrier: If omitted, the previous carrier will be used.
@@ -838,9 +921,11 @@ class Cards(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Card:
         """
-        Initiate print and shipment of a renewed physical card.
-
-        Only applies to cards of type `PHYSICAL`.
+        Creates a new card with the same card token and PAN, but updated expiry and CVC2
+        code. The original card will keep working for card-present transactions until
+        the new card is activated. For card-not-present transactions, the original card
+        details (expiry, CVC2) will also keep working until the new card is activated.
+        Applies to card types `PHYSICAL` and `VIRTUAL`.
 
         Args:
           shipping_address: The shipping address this card will be sent to.
@@ -1037,7 +1122,7 @@ class AsyncCards(AsyncAPIResource):
     ) -> Card:
         """Create a new virtual or physical card.
 
-        Parameters `pin`, `shipping_address`, and
+        Parameters `shipping_address` and
         `product_id` only apply to physical cards.
 
         Args:
@@ -1084,7 +1169,7 @@ class AsyncCards(AsyncAPIResource):
 
           memo: Friendly name to identify the card.
 
-          pin: Encrypted PIN block (in base64). Only applies to cards of type `PHYSICAL` and
+          pin: Encrypted PIN block (in base64). Applies to cards of type `PHYSICAL` and
               `VIRTUAL`. See
               [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
 
@@ -1098,8 +1183,9 @@ class AsyncCards(AsyncAPIResource):
               If `replacement_for` is specified and this field is omitted, the replacement
               card's account will be inferred from the card being replaced.
 
-          replacement_for: Only applicable to cards of type `PHYSICAL`. Globally unique identifier for the
-              card that this physical card will replace.
+          replacement_for: Globally unique identifier for the card that this card will replace. If the card
+              type is `PHYSICAL` it will be replaced by a `PHYSICAL` card. If the card type is
+              `VIRTUAL` it will be replaced by a `VIRTUAL` card.
 
           shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
               options besides `STANDARD` require additional permissions.
@@ -1234,7 +1320,7 @@ class AsyncCards(AsyncAPIResource):
         """Update the specified properties of the card.
 
         Unsupplied properties will remain
-        unchanged. `pin` parameter only applies to physical cards.
+        unchanged.
 
         _Note: setting a card to a `CLOSED` state is a final action that cannot be
         undone._
@@ -1385,6 +1471,84 @@ class AsyncCards(AsyncAPIResource):
             model=Card,
         )
 
+    async def convert_physical(
+        self,
+        card_token: str,
+        *,
+        shipping_address: ShippingAddress,
+        carrier: Carrier | NotGiven = NOT_GIVEN,
+        product_id: str | NotGiven = NOT_GIVEN,
+        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Card:
+        """Convert a virtual card into a physical card and manufacture it.
+
+        Customer must
+        supply relevant fields for physical card creation including `product_id`,
+        `carrier`, `shipping_method`, and `shipping_address`. The card token will be
+        unchanged. The card's type will be altered to `PHYSICAL`. The card will be set
+        to state `PENDING_FULFILLMENT` and fulfilled at next fulfillment cycle. Virtual
+        cards created on card programs which do not support physical cards cannot be
+        converted. The card program cannot be changed as part of the conversion. Cards
+        must be in a state of either `OPEN` or `PAUSED` to be converted. Only applies to
+        cards of type `VIRTUAL` (or existing cards with deprecated types of
+        `DIGITAL_WALLET` and `UNLOCKED`).
+
+        Args:
+          shipping_address: The shipping address this card will be sent to.
+
+          carrier: If omitted, the previous carrier will be used.
+
+          product_id: Specifies the configuration (e.g. physical card art) that the card should be
+              manufactured with, and only applies to cards of type `PHYSICAL`. This must be
+              configured with Lithic before use.
+
+          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
+              additional permissions.
+
+              - `STANDARD` - USPS regular mail or similar international option, with no
+                tracking
+              - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
+                with tracking
+              - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
+              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
+              - `2_DAY` - FedEx 2-day shipping, with tracking
+              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+                tracking
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return await self._post(
+            f"/v1/cards/{card_token}/convert_physical",
+            body=await async_maybe_transform(
+                {
+                    "shipping_address": shipping_address,
+                    "carrier": carrier,
+                    "product_id": product_id,
+                    "shipping_method": shipping_method,
+                },
+                card_convert_physical_params.CardConvertPhysicalParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Card,
+        )
+
     async def embed(
         self,
         *,
@@ -1407,9 +1571,10 @@ class AsyncCards(AsyncAPIResource):
         that we provide, optionally styled in the customer's branding using a specified
         css stylesheet. A user's browser makes the request directly to api.lithic.com,
         so card PANs and CVVs never touch the API customer's servers while full card
-        data is displayed to their end-users. The response contains an HTML document.
-        This means that the url for the request can be inserted straight into the `src`
-        attribute of an iframe.
+        data is displayed to their end-users. The response contains an HTML document
+        (see Embedded Card UI or Changelog for upcoming changes in January). This means
+        that the url for the request can be inserted straight into the `src` attribute
+        of an iframe.
 
         ```html
         <iframe
@@ -1662,10 +1827,12 @@ class AsyncCards(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Card:
-        """
-        Initiate print and shipment of a duplicate physical card.
+        """Initiate print and shipment of a duplicate physical card (e.g.
 
-        Only applies to cards of type `PHYSICAL`.
+        card is
+        physically damaged). The PAN, expiry, and CVC2 will remain the same and the
+        original card can continue to be used until the new card is activated. A card
+        can be reissued a maximum of 8 times. Only applies to cards of type `PHYSICAL`.
 
         Args:
           carrier: If omitted, the previous carrier will be used.
@@ -1735,9 +1902,11 @@ class AsyncCards(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Card:
         """
-        Initiate print and shipment of a renewed physical card.
-
-        Only applies to cards of type `PHYSICAL`.
+        Creates a new card with the same card token and PAN, but updated expiry and CVC2
+        code. The original card will keep working for card-present transactions until
+        the new card is activated. For card-not-present transactions, the original card
+        details (expiry, CVC2) will also keep working until the new card is activated.
+        Applies to card types `PHYSICAL` and `VIRTUAL`.
 
         Args:
           shipping_address: The shipping address this card will be sent to.
@@ -1888,6 +2057,9 @@ class CardsWithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             cards.list,
         )
+        self.convert_physical = _legacy_response.to_raw_response_wrapper(
+            cards.convert_physical,
+        )
         self.embed = _legacy_response.to_raw_response_wrapper(
             cards.embed,
         )
@@ -1935,6 +2107,9 @@ class AsyncCardsWithRawResponse:
         )
         self.list = _legacy_response.async_to_raw_response_wrapper(
             cards.list,
+        )
+        self.convert_physical = _legacy_response.async_to_raw_response_wrapper(
+            cards.convert_physical,
         )
         self.embed = _legacy_response.async_to_raw_response_wrapper(
             cards.embed,
@@ -1984,6 +2159,9 @@ class CardsWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             cards.list,
         )
+        self.convert_physical = to_streamed_response_wrapper(
+            cards.convert_physical,
+        )
         self.embed = to_streamed_response_wrapper(
             cards.embed,
         )
@@ -2031,6 +2209,9 @@ class AsyncCardsWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             cards.list,
+        )
+        self.convert_physical = async_to_streamed_response_wrapper(
+            cards.convert_physical,
         )
         self.embed = async_to_streamed_response_wrapper(
             cards.embed,

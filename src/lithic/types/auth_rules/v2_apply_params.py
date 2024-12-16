@@ -27,6 +27,9 @@ class ApplyAuthRuleRequestProgramLevel(TypedDict, total=False):
     program_level: Required[bool]
     """Whether the Auth Rule applies to all authorizations on the card program."""
 
+    excluded_card_tokens: List[str]
+    """Card tokens to which the Auth Rule does not apply."""
+
 
 V2ApplyParams: TypeAlias = Union[
     ApplyAuthRuleRequestAccountTokens, ApplyAuthRuleRequestCardTokens, ApplyAuthRuleRequestProgramLevel

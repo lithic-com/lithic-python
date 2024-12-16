@@ -54,6 +54,9 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
     must be used for the remainder.
     """
 
+    pin: str
+    """Simulate entering a PIN. If omitted, PIN check will not be performed."""
+
     status: Literal[
         "AUTHORIZATION",
         "BALANCE_INQUIRY",
