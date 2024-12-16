@@ -34,6 +34,8 @@ class ManagementOperationCreateParams(TypedDict, total=False):
             "LATE_PAYMENT_REVERSAL",
             "BILLING_ERROR_REVERSAL",
             "PROVISIONAL_CREDIT_REVERSAL",
+            "RETURNED_PAYMENT",
+            "RETURNED_PAYMENT_REVERSAL",
         ]
     ]
 

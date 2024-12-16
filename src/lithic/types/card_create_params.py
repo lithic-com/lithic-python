@@ -80,7 +80,7 @@ class CardCreateParams(TypedDict, total=False):
     pin: str
     """Encrypted PIN block (in base64).
 
-    Only applies to cards of type `PHYSICAL` and `VIRTUAL`. See
+    Applies to cards of type `PHYSICAL` and `VIRTUAL`. See
     [Encrypted PIN Block](https://docs.lithic.com/docs/cards#encrypted-pin-block).
     """
 
@@ -102,9 +102,10 @@ class CardCreateParams(TypedDict, total=False):
     """
 
     replacement_for: str
-    """Only applicable to cards of type `PHYSICAL`.
+    """Globally unique identifier for the card that this card will replace.
 
-    Globally unique identifier for the card that this physical card will replace.
+    If the card type is `PHYSICAL` it will be replaced by a `PHYSICAL` card. If the
+    card type is `VIRTUAL` it will be replaced by a `VIRTUAL` card.
     """
 
     shipping_address: ShippingAddress

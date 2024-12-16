@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from ..shared_params.velocity_limit_params import VelocityLimitParams
@@ -28,6 +28,9 @@ class CreateAuthRuleRequestAccountTokens(TypedDict, total=False):
     account_tokens: Required[List[str]]
     """Account tokens to which the Auth Rule applies."""
 
+    name: Optional[str]
+    """Auth Rule Name"""
+
     parameters: CreateAuthRuleRequestAccountTokensParameters
     """Parameters for the current version of the Auth Rule"""
 
@@ -46,6 +49,8 @@ class CreateAuthRuleRequestAccountTokensParametersConditionalBlockParametersCond
         "PAN_ENTRY_MODE",
         "TRANSACTION_AMOUNT",
         "RISK_SCORE",
+        "CARD_TRANSACTION_COUNT_1H",
+        "CARD_TRANSACTION_COUNT_24H",
     ]
     """The attribute to target.
 
@@ -78,6 +83,10 @@ class CreateAuthRuleRequestAccountTokensParametersConditionalBlockParametersCond
       lowest risk and 999 representing the highest risk. For Visa transactions,
       where the raw score has a range of 0-99, Lithic will normalize the score by
       multiplying the raw score by 10x.
+    - `CARD_TRANSACTION_COUNT_1H`: The number of transactions on the card in the
+      trailing hour up and until the authorization.
+    - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
+      trailing 24 hours up and until the authorization.
     """
 
     operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]
@@ -100,6 +109,9 @@ class CreateAuthRuleRequestCardTokens(TypedDict, total=False):
     card_tokens: Required[List[str]]
     """Card tokens to which the Auth Rule applies."""
 
+    name: Optional[str]
+    """Auth Rule Name"""
+
     parameters: CreateAuthRuleRequestCardTokensParameters
     """Parameters for the current version of the Auth Rule"""
 
@@ -118,6 +130,8 @@ class CreateAuthRuleRequestCardTokensParametersConditionalBlockParametersConditi
         "PAN_ENTRY_MODE",
         "TRANSACTION_AMOUNT",
         "RISK_SCORE",
+        "CARD_TRANSACTION_COUNT_1H",
+        "CARD_TRANSACTION_COUNT_24H",
     ]
     """The attribute to target.
 
@@ -150,6 +164,10 @@ class CreateAuthRuleRequestCardTokensParametersConditionalBlockParametersConditi
       lowest risk and 999 representing the highest risk. For Visa transactions,
       where the raw score has a range of 0-99, Lithic will normalize the score by
       multiplying the raw score by 10x.
+    - `CARD_TRANSACTION_COUNT_1H`: The number of transactions on the card in the
+      trailing hour up and until the authorization.
+    - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
+      trailing 24 hours up and until the authorization.
     """
 
     operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]
@@ -172,6 +190,12 @@ class CreateAuthRuleRequestProgramLevel(TypedDict, total=False):
     program_level: Required[bool]
     """Whether the Auth Rule applies to all authorizations on the card program."""
 
+    excluded_card_tokens: List[str]
+    """Card tokens to which the Auth Rule does not apply."""
+
+    name: Optional[str]
+    """Auth Rule Name"""
+
     parameters: CreateAuthRuleRequestProgramLevelParameters
     """Parameters for the current version of the Auth Rule"""
 
@@ -190,6 +214,8 @@ class CreateAuthRuleRequestProgramLevelParametersConditionalBlockParametersCondi
         "PAN_ENTRY_MODE",
         "TRANSACTION_AMOUNT",
         "RISK_SCORE",
+        "CARD_TRANSACTION_COUNT_1H",
+        "CARD_TRANSACTION_COUNT_24H",
     ]
     """The attribute to target.
 
@@ -222,6 +248,10 @@ class CreateAuthRuleRequestProgramLevelParametersConditionalBlockParametersCondi
       lowest risk and 999 representing the highest risk. For Visa transactions,
       where the raw score has a range of 0-99, Lithic will normalize the score by
       multiplying the raw score by 10x.
+    - `CARD_TRANSACTION_COUNT_1H`: The number of transactions on the card in the
+      trailing hour up and until the authorization.
+    - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
+      trailing 24 hours up and until the authorization.
     """
 
     operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]

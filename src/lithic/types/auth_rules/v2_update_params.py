@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, TypedDict
 
 __all__ = ["V2UpdateParams"]
 
 
 class V2UpdateParams(TypedDict, total=False):
+    name: Optional[str]
+    """Auth Rule Name"""
+
     state: Literal["INACTIVE"]
     """The desired state of the Auth Rule.
 
