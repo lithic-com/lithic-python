@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.82.0 (2024-12-18)
+
+Full Changelog: [v0.81.1...v0.82.0](https://github.com/lithic-com/lithic-python/compare/v0.81.1...v0.82.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** removes AccountHolder `resubmit` endpoint and `KYC_ADVANCED` workflow ([#659](https://github.com/lithic-com/lithic-python/issues/659))
+
+### Features
+
+* **api:** removes AccountHolder `resubmit` endpoint and `KYC_ADVANCED` workflow ([#659](https://github.com/lithic-com/lithic-python/issues/659)) ([8b181ca](https://github.com/lithic-com/lithic-python/commit/8b181ca9ab1e09309d22f0c2de9ec41cb6b448dc))
+* generate more types that are used as request bodies ([#649](https://github.com/lithic-com/lithic-python/issues/649)) ([413bb22](https://github.com/lithic-com/lithic-python/commit/413bb22511b1f28190eae3da910bac35fb1de841))
+
+
+### Chores
+
+* **api:** new ConvertPhysical endpoint to convert a virtual card to a physical card ([#656](https://github.com/lithic-com/lithic-python/issues/656)) ([6412dcd](https://github.com/lithic-com/lithic-python/commit/6412dcd78bae44cd35a742c357ec1e56948144e1))
+* **internal:** add support for TypeAliasType ([#652](https://github.com/lithic-com/lithic-python/issues/652)) ([988f2a0](https://github.com/lithic-com/lithic-python/commit/988f2a016c98cef5a3558c08f8568af27776a0fb))
+* **internal:** bump pyright ([#651](https://github.com/lithic-com/lithic-python/issues/651)) ([1406b81](https://github.com/lithic-com/lithic-python/commit/1406b81f7ca5e58d787afa86b723f4f271d361a4))
+* **internal:** fix some typos ([#658](https://github.com/lithic-com/lithic-python/issues/658)) ([79baa5d](https://github.com/lithic-com/lithic-python/commit/79baa5d8fa228ee9f9575e264b8022e2c609f44a))
+* **internal:** remove some duplicated imports ([#653](https://github.com/lithic-com/lithic-python/issues/653)) ([c446d74](https://github.com/lithic-com/lithic-python/commit/c446d74a9fd059d45d93966dd63894a68a76a965))
+* **internal:** updated imports ([#654](https://github.com/lithic-com/lithic-python/issues/654)) ([b0b1b64](https://github.com/lithic-com/lithic-python/commit/b0b1b644dcc1db989c22ba9def0fa4712e2e18d3))
+
+
+### Documentation
+
+* **readme:** example snippet for client context manager ([#657](https://github.com/lithic-com/lithic-python/issues/657)) ([4ca06b8](https://github.com/lithic-com/lithic-python/commit/4ca06b884448c3737fda47e1343814d20714d5ea))
+
 ## 0.81.1 (2024-12-11)
 
 Full Changelog: [v0.81.0...v0.81.1](https://github.com/lithic-com/lithic-python/compare/v0.81.0...v0.81.1)

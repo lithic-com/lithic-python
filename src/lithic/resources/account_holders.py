@@ -13,7 +13,6 @@ from ..types import (
     account_holder_list_params,
     account_holder_create_params,
     account_holder_update_params,
-    account_holder_resubmit_params,
     account_holder_upload_document_params,
     account_holder_simulate_enrollment_review_params,
     account_holder_simulate_enrollment_document_review_params,
@@ -155,7 +154,7 @@ class AccountHolders(SyncAPIResource):
         *,
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
-        workflow: Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"],
+        workflow: Literal["KYC_BASIC", "KYC_BYO"],
         external_id: str | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -286,9 +285,7 @@ class AccountHolders(SyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
-        workflow: Literal["KYB_BASIC", "KYB_BYO"]
-        | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
-        | Literal["KYC_EXEMPT"],
+        workflow: Literal["KYB_BASIC", "KYB_BYO"] | Literal["KYC_BASIC", "KYC_BYO"] | Literal["KYC_EXEMPT"],
         external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
@@ -577,67 +574,6 @@ class AccountHolders(SyncAPIResource):
             cast_to=AccountHolderListDocumentsResponse,
         )
 
-    def resubmit(
-        self,
-        account_holder_token: str,
-        *,
-        individual: account_holder_resubmit_params.Individual,
-        tos_timestamp: str,
-        workflow: Literal["KYC_ADVANCED"],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolder:
-        """Resubmit a KYC submission.
-
-        This endpoint should be used in cases where a KYC
-        submission returned a `PENDING_RESUBMIT` result, meaning one or more critical
-        KYC fields may have been mis-entered and the individual's identity has not yet
-        been successfully verified. This step must be completed in order to proceed with
-        the KYC evaluation.
-
-        Two resubmission attempts are permitted via this endpoint before a `REJECTED`
-        status is returned and the account creation process is ended.
-
-        Args:
-          individual: Information on individual for whom the account is being opened and KYC is being
-              re-run.
-
-          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
-              legal agreements (e.g., cardholder terms) as agreed upon during API customer's
-              implementation with Lithic.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_holder_token:
-            raise ValueError(
-                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
-            )
-        return self._post(
-            f"/v1/account_holders/{account_holder_token}/resubmit",
-            body=maybe_transform(
-                {
-                    "individual": individual,
-                    "tos_timestamp": tos_timestamp,
-                    "workflow": workflow,
-                },
-                account_holder_resubmit_params.AccountHolderResubmitParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AccountHolder,
-        )
-
     def retrieve_document(
         self,
         document_token: str,
@@ -791,8 +727,7 @@ class AccountHolders(SyncAPIResource):
         """Simulates an enrollment review for an account holder.
 
         This endpoint is only
-        applicable for workflows that may required intervention such as `KYB_BASIC` or
-        `KYC_ADVANCED`.
+        applicable for workflows that may required intervention such as `KYB_BASIC`.
 
         Args:
           account_holder_token: The account holder which to perform the simulation upon.
@@ -1024,7 +959,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         *,
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
-        workflow: Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"],
+        workflow: Literal["KYC_BASIC", "KYC_BYO"],
         external_id: str | NotGiven = NOT_GIVEN,
         kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1155,9 +1090,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
-        workflow: Literal["KYB_BASIC", "KYB_BYO"]
-        | Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]
-        | Literal["KYC_EXEMPT"],
+        workflow: Literal["KYB_BASIC", "KYB_BYO"] | Literal["KYC_BASIC", "KYC_BYO"] | Literal["KYC_EXEMPT"],
         external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
@@ -1446,67 +1379,6 @@ class AsyncAccountHolders(AsyncAPIResource):
             cast_to=AccountHolderListDocumentsResponse,
         )
 
-    async def resubmit(
-        self,
-        account_holder_token: str,
-        *,
-        individual: account_holder_resubmit_params.Individual,
-        tos_timestamp: str,
-        workflow: Literal["KYC_ADVANCED"],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountHolder:
-        """Resubmit a KYC submission.
-
-        This endpoint should be used in cases where a KYC
-        submission returned a `PENDING_RESUBMIT` result, meaning one or more critical
-        KYC fields may have been mis-entered and the individual's identity has not yet
-        been successfully verified. This step must be completed in order to proceed with
-        the KYC evaluation.
-
-        Two resubmission attempts are permitted via this endpoint before a `REJECTED`
-        status is returned and the account creation process is ended.
-
-        Args:
-          individual: Information on individual for whom the account is being opened and KYC is being
-              re-run.
-
-          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
-              legal agreements (e.g., cardholder terms) as agreed upon during API customer's
-              implementation with Lithic.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_holder_token:
-            raise ValueError(
-                f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
-            )
-        return await self._post(
-            f"/v1/account_holders/{account_holder_token}/resubmit",
-            body=await async_maybe_transform(
-                {
-                    "individual": individual,
-                    "tos_timestamp": tos_timestamp,
-                    "workflow": workflow,
-                },
-                account_holder_resubmit_params.AccountHolderResubmitParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AccountHolder,
-        )
-
     async def retrieve_document(
         self,
         document_token: str,
@@ -1660,8 +1532,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         """Simulates an enrollment review for an account holder.
 
         This endpoint is only
-        applicable for workflows that may required intervention such as `KYB_BASIC` or
-        `KYC_ADVANCED`.
+        applicable for workflows that may required intervention such as `KYB_BASIC`.
 
         Args:
           account_holder_token: The account holder which to perform the simulation upon.
@@ -1799,9 +1670,6 @@ class AccountHoldersWithRawResponse:
         self.list_documents = _legacy_response.to_raw_response_wrapper(
             account_holders.list_documents,
         )
-        self.resubmit = _legacy_response.to_raw_response_wrapper(
-            account_holders.resubmit,
-        )
         self.retrieve_document = _legacy_response.to_raw_response_wrapper(
             account_holders.retrieve_document,
         )
@@ -1834,9 +1702,6 @@ class AsyncAccountHoldersWithRawResponse:
         )
         self.list_documents = _legacy_response.async_to_raw_response_wrapper(
             account_holders.list_documents,
-        )
-        self.resubmit = _legacy_response.async_to_raw_response_wrapper(
-            account_holders.resubmit,
         )
         self.retrieve_document = _legacy_response.async_to_raw_response_wrapper(
             account_holders.retrieve_document,
@@ -1871,9 +1736,6 @@ class AccountHoldersWithStreamingResponse:
         self.list_documents = to_streamed_response_wrapper(
             account_holders.list_documents,
         )
-        self.resubmit = to_streamed_response_wrapper(
-            account_holders.resubmit,
-        )
         self.retrieve_document = to_streamed_response_wrapper(
             account_holders.retrieve_document,
         )
@@ -1906,9 +1768,6 @@ class AsyncAccountHoldersWithStreamingResponse:
         )
         self.list_documents = async_to_streamed_response_wrapper(
             account_holders.list_documents,
-        )
-        self.resubmit = async_to_streamed_response_wrapper(
-            account_holders.resubmit,
         )
         self.retrieve_document = async_to_streamed_response_wrapper(
             account_holders.retrieve_document,

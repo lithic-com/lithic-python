@@ -56,7 +56,7 @@ class TestCards:
                 "address2": "Unit 25A",
                 "email": "johnny@appleseed.com",
                 "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             shipping_method="2_DAY",
             spend_limit=1000,
@@ -218,6 +218,103 @@ class TestCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_convert_physical(self, client: Lithic) -> None:
+        card = client.cards.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_method_convert_physical_with_all_params(self, client: Lithic) -> None:
+        card = client.cards.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+                "address2": "Unit 5A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+15555555555",
+            },
+            carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
+            product_id="100",
+            shipping_method="2-DAY",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_raw_response_convert_physical(self, client: Lithic) -> None:
+        response = client.cards.with_raw_response.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_streaming_response_convert_physical(self, client: Lithic) -> None:
+        with client.cards.with_streaming_response.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = response.parse()
+            assert_matches_type(Card, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_convert_physical(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
+            client.cards.with_raw_response.convert_physical(
+                card_token="",
+                shipping_address={
+                    "address1": "5 Broad Street",
+                    "city": "NEW YORK",
+                    "country": "USA",
+                    "first_name": "Janet",
+                    "last_name": "Yellen",
+                    "postal_code": "10001",
+                    "state": "NY",
+                },
+            )
+
+    @parametrize
     def test_method_embed(self, client: Lithic) -> None:
         card = client.cards.embed(
             embed_request="embed_request",
@@ -338,7 +435,7 @@ class TestCards:
                 "address2": "Unit 5A",
                 "email": "johnny@appleseed.com",
                 "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             shipping_method="2-DAY",
         )
@@ -406,7 +503,7 @@ class TestCards:
                 "address2": "Unit 5A",
                 "email": "johnny@appleseed.com",
                 "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             exp_month="06",
@@ -580,7 +677,7 @@ class TestAsyncCards:
                 "address2": "Unit 25A",
                 "email": "johnny@appleseed.com",
                 "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             shipping_method="2_DAY",
             spend_limit=1000,
@@ -742,6 +839,103 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_method_convert_physical(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_method_convert_physical_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+                "address2": "Unit 5A",
+                "email": "johnny@appleseed.com",
+                "line2_text": "The Bluth Company",
+                "phone_number": "+15555555555",
+            },
+            carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
+            product_id="100",
+            shipping_method="2-DAY",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_raw_response_convert_physical(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_convert_physical(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.convert_physical(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            shipping_address={
+                "address1": "5 Broad Street",
+                "city": "NEW YORK",
+                "country": "USA",
+                "first_name": "Janet",
+                "last_name": "Yellen",
+                "postal_code": "10001",
+                "state": "NY",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = await response.parse()
+            assert_matches_type(Card, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_convert_physical(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
+            await async_client.cards.with_raw_response.convert_physical(
+                card_token="",
+                shipping_address={
+                    "address1": "5 Broad Street",
+                    "city": "NEW YORK",
+                    "country": "USA",
+                    "first_name": "Janet",
+                    "last_name": "Yellen",
+                    "postal_code": "10001",
+                    "state": "NY",
+                },
+            )
+
+    @parametrize
     async def test_method_embed(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.embed(
             embed_request="embed_request",
@@ -862,7 +1056,7 @@ class TestAsyncCards:
                 "address2": "Unit 5A",
                 "email": "johnny@appleseed.com",
                 "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             shipping_method="2-DAY",
         )
@@ -930,7 +1124,7 @@ class TestAsyncCards:
                 "address2": "Unit 5A",
                 "email": "johnny@appleseed.com",
                 "line2_text": "The Bluth Company",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             exp_month="06",

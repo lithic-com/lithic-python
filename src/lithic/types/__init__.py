@@ -20,6 +20,8 @@ from .account import Account as Account
 from .balance import Balance as Balance
 from .dispute import Dispute as Dispute
 from .payment import Payment as Payment
+from .kyb_param import KYBParam as KYBParam
+from .kyc_param import KYCParam as KYCParam
 from .api_status import APIStatus as APIStatus
 from .owner_type import OwnerType as OwnerType
 from .transaction import Transaction as Transaction
@@ -31,6 +33,7 @@ from .card_list_params import CardListParams as CardListParams
 from .digital_card_art import DigitalCardArt as DigitalCardArt
 from .dispute_evidence import DisputeEvidence as DisputeEvidence
 from .external_payment import ExternalPayment as ExternalPayment
+from .kyc_exempt_param import KYCExemptParam as KYCExemptParam
 from .aggregate_balance import AggregateBalance as AggregateBalance
 from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .card_renew_params import CardRenewParams as CardRenewParams
@@ -80,6 +83,7 @@ from .book_transfer_create_params import BookTransferCreateParams as BookTransfe
 from .account_holder_create_params import AccountHolderCreateParams as AccountHolderCreateParams
 from .account_holder_update_params import AccountHolderUpdateParams as AccountHolderUpdateParams
 from .book_transfer_reverse_params import BookTransferReverseParams as BookTransferReverseParams
+from .card_convert_physical_params import CardConvertPhysicalParams as CardConvertPhysicalParams
 from .digital_card_art_list_params import DigitalCardArtListParams as DigitalCardArtListParams
 from .external_payment_list_params import ExternalPaymentListParams as ExternalPaymentListParams
 from .tokenization_simulate_params import TokenizationSimulateParams as TokenizationSimulateParams
@@ -88,7 +92,6 @@ from .dispute_list_evidences_params import DisputeListEvidencesParams as Dispute
 from .external_bank_account_address import ExternalBankAccountAddress as ExternalBankAccountAddress
 from .financial_account_list_params import FinancialAccountListParams as FinancialAccountListParams
 from .account_holder_create_response import AccountHolderCreateResponse as AccountHolderCreateResponse
-from .account_holder_resubmit_params import AccountHolderResubmitParams as AccountHolderResubmitParams
 from .account_holder_update_response import AccountHolderUpdateResponse as AccountHolderUpdateResponse
 from .external_payment_cancel_params import ExternalPaymentCancelParams as ExternalPaymentCancelParams
 from .external_payment_create_params import ExternalPaymentCreateParams as ExternalPaymentCreateParams

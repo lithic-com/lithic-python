@@ -100,6 +100,8 @@ class LineItemListResponse(BaseModel):
         "RETURN_REVERSAL",
         "TRANSFER",
         "TRANSFER_INSUFFICIENT_FUNDS",
+        "RETURNED_PAYMENT",
+        "RETURNED_PAYMENT_REVERSAL",
     ]
 
     financial_account_token: str

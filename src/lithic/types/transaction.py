@@ -28,6 +28,10 @@ __all__ = [
     "EventAmountsCardholder",
     "EventAmountsMerchant",
     "EventAmountsSettlement",
+    "EventNetworkInfo",
+    "EventNetworkInfoAcquirer",
+    "EventNetworkInfoMastercard",
+    "EventNetworkInfoVisa",
     "EventRuleResult",
 ]
 
@@ -369,6 +373,44 @@ class EventAmounts(BaseModel):
     settlement: Optional[EventAmountsSettlement] = None
 
 
+class EventNetworkInfoAcquirer(BaseModel):
+    acquirer_reference_number: Optional[str] = None
+    """
+    Identifier assigned by the acquirer, applicable to dual-message transactions
+    only. The acquirer reference number (ARN) is only populated once a transaction
+    has been cleared, and it is not available in all transactions (such as automated
+    fuel dispenser transactions). A single transaction can contain multiple ARNs if
+    the merchant sends multiple clearings.
+    """
+
+    retrieval_reference_number: Optional[str] = None
+    """Identifier assigned by the acquirer."""
+
+
+class EventNetworkInfoMastercard(BaseModel):
+    banknet_reference_number: Optional[str] = None
+    """Identifier assigned by Mastercard."""
+
+    switch_serial_number: Optional[str] = None
+    """
+    Identifier assigned by Mastercard, applicable to single-message transactions
+    only.
+    """
+
+
+class EventNetworkInfoVisa(BaseModel):
+    transaction_id: Optional[str] = None
+    """Identifier assigned by Visa."""
+
+
+class EventNetworkInfo(BaseModel):
+    acquirer: Optional[EventNetworkInfoAcquirer] = None
+
+    mastercard: Optional[EventNetworkInfoMastercard] = None
+
+    visa: Optional[EventNetworkInfoVisa] = None
+
+
 class EventRuleResult(BaseModel):
     auth_rule_token: Optional[str] = None
     """The Auth Rule Token associated with the rule from which the decline originated.
@@ -438,6 +480,7 @@ class EventRuleResult(BaseModel):
         "UNAUTHORIZED_MERCHANT",
         "VEHICLE_NUMBER_INVALID",
     ]
+    """The detailed_result associated with this rule's decline."""
 
 
 class Event(BaseModel):
@@ -512,6 +555,17 @@ class Event(BaseModel):
     effective_polarity: Literal["CREDIT", "DEBIT"]
     """Indicates whether the transaction event is a credit or debit to the account."""
 
+    network_info: Optional[EventNetworkInfo] = None
+    """Information provided by the card network in each event.
+
+    This includes common identifiers shared between you, Lithic, the card network
+    and in some cases the acquirer. These identifiers often link together events
+    within the same transaction lifecycle and can be used to locate a particular
+    transaction, such as during processing of disputes. Not all fields are available
+    in all events, and the presence of these fields is dependent on the card network
+    and the event type.
+    """
+
     result: Literal[
         "ACCOUNT_STATE_TRANSACTION_FAIL",
         "APPROVED",
@@ -538,6 +592,8 @@ class Event(BaseModel):
         "USER_TRANSACTION_LIMIT",
     ]
 
+    rule_results: List[EventRuleResult]
+
     type: Literal[
         "AUTHORIZATION",
         "AUTHORIZATION_ADVICE",
@@ -555,8 +611,6 @@ class Event(BaseModel):
         "RETURN_REVERSAL",
     ]
     """Type of transaction event"""
-
-    rule_results: Optional[List[EventRuleResult]] = None
 
 
 class Transaction(BaseModel):

@@ -35,14 +35,6 @@ from .loan_tapes import (
     LoanTapesWithStreamingResponse,
     AsyncLoanTapesWithStreamingResponse,
 )
-from .statements import (
-    Statements,
-    AsyncStatements,
-    StatementsWithRawResponse,
-    AsyncStatementsWithRawResponse,
-    StatementsWithStreamingResponse,
-    AsyncStatementsWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncSinglePage, AsyncSinglePage
@@ -55,7 +47,14 @@ from .credit_configuration import (
     CreditConfigurationWithStreamingResponse,
     AsyncCreditConfigurationWithStreamingResponse,
 )
-from .statements.statements import Statements, AsyncStatements
+from .statements.statements import (
+    Statements,
+    AsyncStatements,
+    StatementsWithRawResponse,
+    AsyncStatementsWithRawResponse,
+    StatementsWithStreamingResponse,
+    AsyncStatementsWithStreamingResponse,
+)
 from .financial_transactions import (
     FinancialTransactions,
     AsyncFinancialTransactions,

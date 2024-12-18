@@ -18,6 +18,7 @@ class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
         "card.created",
         "card.renewed",
         "card.reissued",
+        "card.converted",
         "card.shipped",
         "card_transaction.updated",
         "digital_wallet.tokenization_approval_request",

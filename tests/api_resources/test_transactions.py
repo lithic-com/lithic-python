@@ -125,6 +125,7 @@ class TestTransactions:
             merchant_amount=0,
             merchant_currency="GBP",
             partial_approval_capable=True,
+            pin="1234",
             status="AUTHORIZATION",
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
@@ -487,6 +488,7 @@ class TestAsyncTransactions:
             merchant_amount=0,
             merchant_currency="GBP",
             partial_approval_capable=True,
+            pin="1234",
             status="AUTHORIZATION",
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])

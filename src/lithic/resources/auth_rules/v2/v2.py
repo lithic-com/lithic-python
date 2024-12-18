@@ -69,6 +69,7 @@ class V2(SyncAPIResource):
         self,
         *,
         account_tokens: List[str],
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -83,6 +84,8 @@ class V2(SyncAPIResource):
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
+
+          name: Auth Rule Name
 
           parameters: Parameters for the current version of the Auth Rule
 
@@ -103,6 +106,7 @@ class V2(SyncAPIResource):
         self,
         *,
         card_tokens: List[str],
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -117,6 +121,8 @@ class V2(SyncAPIResource):
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
+
+          name: Auth Rule Name
 
           parameters: Parameters for the current version of the Auth Rule
 
@@ -137,6 +143,8 @@ class V2(SyncAPIResource):
         self,
         *,
         program_level: bool,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -151,6 +159,10 @@ class V2(SyncAPIResource):
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
+
+          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+
+          name: Auth Rule Name
 
           parameters: Parameters for the current version of the Auth Rule
 
@@ -171,10 +183,12 @@ class V2(SyncAPIResource):
         self,
         *,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -187,10 +201,12 @@ class V2(SyncAPIResource):
             body=maybe_transform(
                 {
                     "account_tokens": account_tokens,
+                    "name": name,
                     "parameters": parameters,
                     "type": type,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
+                    "excluded_card_tokens": excluded_card_tokens,
                 },
                 v2_create_params.V2CreateParams,
             ),
@@ -237,6 +253,7 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -249,6 +266,8 @@ class V2(SyncAPIResource):
         Updates an authorization rule's properties
 
         Args:
+          name: Auth Rule Name
+
           state: The desired state of the Auth Rule.
 
               Note that only deactivating an Auth Rule through this endpoint is supported at
@@ -267,7 +286,13 @@ class V2(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._patch(
             f"/v2/auth_rules/{auth_rule_token}",
-            body=maybe_transform({"state": state}, v2_update_params.V2UpdateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "state": state,
+                },
+                v2_update_params.V2UpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -407,6 +432,7 @@ class V2(SyncAPIResource):
         auth_rule_token: str,
         *,
         program_level: bool,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -423,6 +449,8 @@ class V2(SyncAPIResource):
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
+
+          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           extra_headers: Send extra headers
 
@@ -442,6 +470,7 @@ class V2(SyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -458,6 +487,7 @@ class V2(SyncAPIResource):
                     "account_tokens": account_tokens,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
+                    "excluded_card_tokens": excluded_card_tokens,
                 },
                 v2_apply_params.V2ApplyParams,
             ),
@@ -655,6 +685,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         account_tokens: List[str],
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -669,6 +700,8 @@ class AsyncV2(AsyncAPIResource):
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
+
+          name: Auth Rule Name
 
           parameters: Parameters for the current version of the Auth Rule
 
@@ -689,6 +722,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         card_tokens: List[str],
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -703,6 +737,8 @@ class AsyncV2(AsyncAPIResource):
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
+
+          name: Auth Rule Name
 
           parameters: Parameters for the current version of the Auth Rule
 
@@ -723,6 +759,8 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         program_level: bool,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -737,6 +775,10 @@ class AsyncV2(AsyncAPIResource):
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
+
+          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+
+          name: Auth Rule Name
 
           parameters: Parameters for the current version of the Auth Rule
 
@@ -757,10 +799,12 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -773,10 +817,12 @@ class AsyncV2(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
+                    "name": name,
                     "parameters": parameters,
                     "type": type,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
+                    "excluded_card_tokens": excluded_card_tokens,
                 },
                 v2_create_params.V2CreateParams,
             ),
@@ -823,6 +869,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -835,6 +882,8 @@ class AsyncV2(AsyncAPIResource):
         Updates an authorization rule's properties
 
         Args:
+          name: Auth Rule Name
+
           state: The desired state of the Auth Rule.
 
               Note that only deactivating an Auth Rule through this endpoint is supported at
@@ -853,7 +902,13 @@ class AsyncV2(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._patch(
             f"/v2/auth_rules/{auth_rule_token}",
-            body=await async_maybe_transform({"state": state}, v2_update_params.V2UpdateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "state": state,
+                },
+                v2_update_params.V2UpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -993,6 +1048,7 @@ class AsyncV2(AsyncAPIResource):
         auth_rule_token: str,
         *,
         program_level: bool,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1009,6 +1065,8 @@ class AsyncV2(AsyncAPIResource):
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
+
+          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           extra_headers: Send extra headers
 
@@ -1028,6 +1086,7 @@ class AsyncV2(AsyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1044,6 +1103,7 @@ class AsyncV2(AsyncAPIResource):
                     "account_tokens": account_tokens,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
+                    "excluded_card_tokens": excluded_card_tokens,
                 },
                 v2_apply_params.V2ApplyParams,
             ),

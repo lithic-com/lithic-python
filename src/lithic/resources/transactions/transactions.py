@@ -9,14 +9,6 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from .events import (
-    Events,
-    AsyncEvents,
-    EventsWithRawResponse,
-    AsyncEventsWithRawResponse,
-    EventsWithStreamingResponse,
-    AsyncEventsWithStreamingResponse,
-)
 from ...types import (
     transaction_list_params,
     transaction_simulate_void_params,
@@ -36,7 +28,14 @@ from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
-from .events.events import Events, AsyncEvents
+from .events.events import (
+    Events,
+    AsyncEvents,
+    EventsWithRawResponse,
+    AsyncEventsWithRawResponse,
+    EventsWithStreamingResponse,
+    AsyncEventsWithStreamingResponse,
+)
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.transaction import Transaction
 from .enhanced_commercial_data import (
@@ -210,6 +209,7 @@ class Transactions(SyncAPIResource):
         merchant_amount: int | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
+        pin: str | NotGiven = NOT_GIVEN,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -262,6 +262,8 @@ class Transactions(SyncAPIResource):
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
 
+          pin: Simulate entering a PIN. If omitted, PIN check will not be performed.
+
           status: Type of event to simulate.
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
@@ -299,6 +301,7 @@ class Transactions(SyncAPIResource):
                     "merchant_amount": merchant_amount,
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
+                    "pin": pin,
                     "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
@@ -771,6 +774,7 @@ class AsyncTransactions(AsyncAPIResource):
         merchant_amount: int | NotGiven = NOT_GIVEN,
         merchant_currency: str | NotGiven = NOT_GIVEN,
         partial_approval_capable: bool | NotGiven = NOT_GIVEN,
+        pin: str | NotGiven = NOT_GIVEN,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -823,6 +827,8 @@ class AsyncTransactions(AsyncAPIResource):
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
 
+          pin: Simulate entering a PIN. If omitted, PIN check will not be performed.
+
           status: Type of event to simulate.
 
               - `AUTHORIZATION` is a dual message purchase authorization, meaning a subsequent
@@ -860,6 +866,7 @@ class AsyncTransactions(AsyncAPIResource):
                     "merchant_amount": merchant_amount,
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
+                    "pin": pin,
                     "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,

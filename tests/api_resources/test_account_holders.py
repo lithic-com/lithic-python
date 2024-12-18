@@ -40,7 +40,7 @@ class TestAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                 }
             ],
             beneficial_owner_individuals=[
@@ -69,7 +69,7 @@ class TestAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
             },
             control_person={
                 "address": {
@@ -106,7 +106,7 @@ class TestAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                     "dba_business_name": "dba_business_name",
                     "parent_company": "parent_company",
                 }
@@ -126,7 +126,7 @@ class TestAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
+                    "phone_number": "+15555555555",
                 }
             ],
             business_entity={
@@ -140,7 +140,7 @@ class TestAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
                 "dba_business_name": "dba_business_name",
                 "parent_company": "parent_company",
             },
@@ -158,7 +158,7 @@ class TestAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
@@ -183,7 +183,7 @@ class TestAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                 }
             ],
             beneficial_owner_individuals=[
@@ -212,7 +212,7 @@ class TestAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
             },
             control_person={
                 "address": {
@@ -252,7 +252,7 @@ class TestAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                 }
             ],
             beneficial_owner_individuals=[
@@ -281,7 +281,7 @@ class TestAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
             },
             control_person={
                 "address": {
@@ -325,10 +325,10 @@ class TestAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -349,10 +349,10 @@ class TestAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
             external_id="external_id",
             kyc_passed_timestamp="kyc_passed_timestamp",
         )
@@ -374,10 +374,10 @@ class TestAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
 
         assert response.is_closed is True
@@ -401,10 +401,10 @@ class TestAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -670,112 +670,6 @@ class TestAccountHolders:
             )
 
     @parametrize
-    def test_method_resubmit(self, client: Lithic) -> None:
-        account_holder = client.account_holders.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    def test_raw_response_resubmit(self, client: Lithic) -> None:
-        response = client.account_holders.with_raw_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    def test_streaming_response_resubmit(self, client: Lithic) -> None:
-        with client.account_holders.with_streaming_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            account_holder = response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_resubmit(self, client: Lithic) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            client.account_holders.with_raw_response.resubmit(
-                account_holder_token="",
-                individual={
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
-                },
-                tos_timestamp="2018-05-29T21:16:05Z",
-                workflow="KYC_ADVANCED",
-            )
-
-    @parametrize
     def test_method_retrieve_document(self, client: Lithic) -> None:
         account_holder = client.account_holders.retrieve_document(
             document_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -965,7 +859,7 @@ class TestAsyncAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                 }
             ],
             beneficial_owner_individuals=[
@@ -994,7 +888,7 @@ class TestAsyncAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
             },
             control_person={
                 "address": {
@@ -1031,7 +925,7 @@ class TestAsyncAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                     "dba_business_name": "dba_business_name",
                     "parent_company": "parent_company",
                 }
@@ -1051,7 +945,7 @@ class TestAsyncAccountHolders:
                     "first_name": "Tom",
                     "government_id": "111-23-1412",
                     "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
+                    "phone_number": "+15555555555",
                 }
             ],
             business_entity={
@@ -1065,7 +959,7 @@ class TestAsyncAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
                 "dba_business_name": "dba_business_name",
                 "parent_company": "parent_company",
             },
@@ -1083,7 +977,7 @@ class TestAsyncAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
@@ -1108,7 +1002,7 @@ class TestAsyncAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                 }
             ],
             beneficial_owner_individuals=[
@@ -1137,7 +1031,7 @@ class TestAsyncAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
             },
             control_person={
                 "address": {
@@ -1177,7 +1071,7 @@ class TestAsyncAccountHolders:
                     },
                     "government_id": "114-123-1513",
                     "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+12124007676"],
+                    "phone_numbers": ["+15555555555"],
                 }
             ],
             beneficial_owner_individuals=[
@@ -1206,7 +1100,7 @@ class TestAsyncAccountHolders:
                 },
                 "government_id": "114-123-1513",
                 "legal_business_name": "Acme, Inc.",
-                "phone_numbers": ["+12124007676"],
+                "phone_numbers": ["+15555555555"],
             },
             control_person={
                 "address": {
@@ -1250,10 +1144,10 @@ class TestAsyncAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -1274,10 +1168,10 @@ class TestAsyncAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
             external_id="external_id",
             kyc_passed_timestamp="kyc_passed_timestamp",
         )
@@ -1299,10 +1193,10 @@ class TestAsyncAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
 
         assert response.is_closed is True
@@ -1326,10 +1220,10 @@ class TestAsyncAccountHolders:
                 "first_name": "Tom",
                 "government_id": "111-23-1412",
                 "last_name": "Bombadil",
-                "phone_number": "+12124007676",
+                "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1592,112 +1486,6 @@ class TestAsyncAccountHolders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.list_documents(
                 "",
-            )
-
-    @parametrize
-    async def test_method_resubmit(self, async_client: AsyncLithic) -> None:
-        account_holder = await async_client.account_holders.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    async def test_raw_response_resubmit(self, async_client: AsyncLithic) -> None:
-        response = await async_client.account_holders.with_raw_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_resubmit(self, async_client: AsyncLithic) -> None:
-        async with async_client.account_holders.with_streaming_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+12124007676",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            account_holder = await response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_resubmit(self, async_client: AsyncLithic) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await async_client.account_holders.with_raw_response.resubmit(
-                account_holder_token="",
-                individual={
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+12124007676",
-                },
-                tos_timestamp="2018-05-29T21:16:05Z",
-                workflow="KYC_ADVANCED",
             )
 
     @parametrize

@@ -31,6 +31,8 @@ class CurrentVersionParametersConditionalBlockParametersCondition(BaseModel):
             "PAN_ENTRY_MODE",
             "TRANSACTION_AMOUNT",
             "RISK_SCORE",
+            "CARD_TRANSACTION_COUNT_1H",
+            "CARD_TRANSACTION_COUNT_24H",
         ]
     ] = None
     """The attribute to target.
@@ -64,6 +66,10 @@ class CurrentVersionParametersConditionalBlockParametersCondition(BaseModel):
       lowest risk and 999 representing the highest risk. For Visa transactions,
       where the raw score has a range of 0-99, Lithic will normalize the score by
       multiplying the raw score by 10x.
+    - `CARD_TRANSACTION_COUNT_1H`: The number of transactions on the card in the
+      trailing hour up and until the authorization.
+    - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
+      trailing 24 hours up and until the authorization.
     """
 
     operation: Optional[
@@ -105,6 +111,8 @@ class DraftVersionParametersConditionalBlockParametersCondition(BaseModel):
             "PAN_ENTRY_MODE",
             "TRANSACTION_AMOUNT",
             "RISK_SCORE",
+            "CARD_TRANSACTION_COUNT_1H",
+            "CARD_TRANSACTION_COUNT_24H",
         ]
     ] = None
     """The attribute to target.
@@ -138,6 +146,10 @@ class DraftVersionParametersConditionalBlockParametersCondition(BaseModel):
       lowest risk and 999 representing the highest risk. For Visa transactions,
       where the raw score has a range of 0-99, Lithic will normalize the score by
       multiplying the raw score by 10x.
+    - `CARD_TRANSACTION_COUNT_1H`: The number of transactions on the card in the
+      trailing hour up and until the authorization.
+    - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
+      trailing 24 hours up and until the authorization.
     """
 
     operation: Optional[
@@ -181,6 +193,9 @@ class V2ApplyResponse(BaseModel):
 
     draft_version: Optional[DraftVersion] = None
 
+    name: Optional[str] = None
+    """Auth Rule Name"""
+
     program_level: bool
     """Whether the Auth Rule applies to all authorizations on the card program."""
 
@@ -189,3 +204,6 @@ class V2ApplyResponse(BaseModel):
 
     type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
     """The type of Auth Rule"""
+
+    excluded_card_tokens: Optional[List[str]] = None
+    """Card tokens to which the Auth Rule does not apply."""

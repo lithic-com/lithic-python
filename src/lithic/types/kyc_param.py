@@ -6,24 +6,7 @@ from typing_extensions import Literal, Required, TypedDict
 
 from .shared_params.address import Address
 
-__all__ = ["AccountHolderResubmitParams", "Individual"]
-
-
-class AccountHolderResubmitParams(TypedDict, total=False):
-    individual: Required[Individual]
-    """
-    Information on individual for whom the account is being opened and KYC is being
-    re-run.
-    """
-
-    tos_timestamp: Required[str]
-    """
-    An RFC 3339 timestamp indicating when the account holder accepted the applicable
-    legal agreements (e.g., cardholder terms) as agreed upon during API customer's
-    implementation with Lithic.
-    """
-
-    workflow: Required[Literal["KYC_ADVANCED"]]
+__all__ = ["KYCParam", "Individual"]
 
 
 class Individual(TypedDict, total=False):
@@ -58,3 +41,35 @@ class Individual(TypedDict, total=False):
 
     phone_number: Required[str]
     """Individual's phone number, entered in E.164 format."""
+
+
+class KYCParam(TypedDict, total=False):
+    individual: Required[Individual]
+    """
+    Information on individual for whom the account is being opened and KYC is being
+    run.
+    """
+
+    tos_timestamp: Required[str]
+    """
+    An RFC 3339 timestamp indicating when the account holder accepted the applicable
+    legal agreements (e.g., cardholder terms) as agreed upon during API customer's
+    implementation with Lithic.
+    """
+
+    workflow: Required[Literal["KYC_BASIC", "KYC_BYO"]]
+    """Specifies the type of KYC workflow to run."""
+
+    external_id: str
+    """
+    A user provided id that can be used to link an account holder with an external
+    system
+    """
+
+    kyc_passed_timestamp: str
+    """
+    An RFC 3339 timestamp indicating when precomputed KYC was completed on the
+    individual with a pass result.
+
+    This field is required only if workflow type is `KYC_BYO`.
+    """
