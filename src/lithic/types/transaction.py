@@ -480,6 +480,7 @@ class EventRuleResult(BaseModel):
         "UNAUTHORIZED_MERCHANT",
         "VEHICLE_NUMBER_INVALID",
     ]
+    """The detailed_result associated with this rule's decline."""
 
 
 class Event(BaseModel):
@@ -554,6 +555,17 @@ class Event(BaseModel):
     effective_polarity: Literal["CREDIT", "DEBIT"]
     """Indicates whether the transaction event is a credit or debit to the account."""
 
+    network_info: Optional[EventNetworkInfo] = None
+    """Information provided by the card network in each event.
+
+    This includes common identifiers shared between you, Lithic, the card network
+    and in some cases the acquirer. These identifiers often link together events
+    within the same transaction lifecycle and can be used to locate a particular
+    transaction, such as during processing of disputes. Not all fields are available
+    in all events, and the presence of these fields is dependent on the card network
+    and the event type.
+    """
+
     result: Literal[
         "ACCOUNT_STATE_TRANSACTION_FAIL",
         "APPROVED",
@@ -580,6 +592,8 @@ class Event(BaseModel):
         "USER_TRANSACTION_LIMIT",
     ]
 
+    rule_results: List[EventRuleResult]
+
     type: Literal[
         "AUTHORIZATION",
         "AUTHORIZATION_ADVICE",
@@ -597,21 +611,6 @@ class Event(BaseModel):
         "RETURN_REVERSAL",
     ]
     """Type of transaction event"""
-
-    network_info: Optional[EventNetworkInfo] = None
-    """Information provided by the card network in each event.
-
-    This includes common identifiers shared between you, Lithic, the card network
-    and in some cases the acquirer. These identifiers often link together events
-    within the same transaction lifecycle and can be used to locate a particular
-    transaction, such as during processing of disputes. Not all fields are available
-    in all events, and the presence of these fields is dependent on the card network
-    and the event type.
-
-    Now available in sandbox, and available in production on December 17th, 2024.
-    """
-
-    rule_results: Optional[List[EventRuleResult]] = None
 
 
 class Transaction(BaseModel):
