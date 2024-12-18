@@ -169,8 +169,6 @@ class VerificationApplication(BaseModel):
 
     Note:
 
-    - `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
-      `KYC_ADVANCED` workflow.
     - `PENDING_REVIEW` is only applicable for the `KYB_BASIC` workflow.
     """
 
@@ -282,7 +280,7 @@ class AccountHolder(BaseModel):
     """
 
     required_documents: Optional[List[RequiredDocument]] = None
-    """Only present for "KYB_BASIC" and "KYC_ADVANCED" workflows.
+    """Only present for "KYB_BASIC" workflow.
 
     A list of documents required for the account holder to be approved.
     """
@@ -294,8 +292,6 @@ class AccountHolder(BaseModel):
 
     Note:
 
-    - `PENDING_RESUBMIT` and `PENDING_DOCUMENT` are only applicable for the
-      `KYC_ADVANCED` workflow.
     - `PENDING_REVIEW` is only applicable for the `KYB_BASIC` workflow.
     """
 

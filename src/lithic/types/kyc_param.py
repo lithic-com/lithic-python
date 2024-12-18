@@ -57,7 +57,7 @@ class KYCParam(TypedDict, total=False):
     implementation with Lithic.
     """
 
-    workflow: Required[Literal["KYC_ADVANCED", "KYC_BASIC", "KYC_BYO"]]
+    workflow: Required[Literal["KYC_BASIC", "KYC_BYO"]]
     """Specifies the type of KYC workflow to run."""
 
     external_id: str
