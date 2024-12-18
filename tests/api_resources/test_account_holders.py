@@ -328,7 +328,7 @@ class TestAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -352,7 +352,7 @@ class TestAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
             external_id="external_id",
             kyc_passed_timestamp="kyc_passed_timestamp",
         )
@@ -377,7 +377,7 @@ class TestAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
 
         assert response.is_closed is True
@@ -404,7 +404,7 @@ class TestAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -667,112 +667,6 @@ class TestAccountHolders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.list_documents(
                 "",
-            )
-
-    @parametrize
-    def test_method_resubmit(self, client: Lithic) -> None:
-        account_holder = client.account_holders.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+15555555555",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    def test_raw_response_resubmit(self, client: Lithic) -> None:
-        response = client.account_holders.with_raw_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+15555555555",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    def test_streaming_response_resubmit(self, client: Lithic) -> None:
-        with client.account_holders.with_streaming_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+15555555555",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            account_holder = response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_resubmit(self, client: Lithic) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            client.account_holders.with_raw_response.resubmit(
-                account_holder_token="",
-                individual={
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+15555555555",
-                },
-                tos_timestamp="2018-05-29T21:16:05Z",
-                workflow="KYC_ADVANCED",
             )
 
     @parametrize
@@ -1253,7 +1147,7 @@ class TestAsyncAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
@@ -1277,7 +1171,7 @@ class TestAsyncAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
             external_id="external_id",
             kyc_passed_timestamp="kyc_passed_timestamp",
         )
@@ -1302,7 +1196,7 @@ class TestAsyncAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         )
 
         assert response.is_closed is True
@@ -1329,7 +1223,7 @@ class TestAsyncAccountHolders:
                 "phone_number": "+15555555555",
             },
             tos_timestamp="tos_timestamp",
-            workflow="KYC_ADVANCED",
+            workflow="KYC_BASIC",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1592,112 +1486,6 @@ class TestAsyncAccountHolders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.list_documents(
                 "",
-            )
-
-    @parametrize
-    async def test_method_resubmit(self, async_client: AsyncLithic) -> None:
-        account_holder = await async_client.account_holders.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+15555555555",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    async def test_raw_response_resubmit(self, async_client: AsyncLithic) -> None:
-        response = await async_client.account_holders.with_raw_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+15555555555",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        account_holder = response.parse()
-        assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_resubmit(self, async_client: AsyncLithic) -> None:
-        async with async_client.account_holders.with_streaming_response.resubmit(
-            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            individual={
-                "address": {
-                    "address1": "123 Old Forest Way",
-                    "city": "Omaha",
-                    "country": "USA",
-                    "postal_code": "68022",
-                    "state": "NE",
-                },
-                "dob": "1991-03-08 08:00:00",
-                "email": "tom@middle-earth.com",
-                "first_name": "Tom",
-                "government_id": "111-23-1412",
-                "last_name": "Bombadil",
-                "phone_number": "+15555555555",
-            },
-            tos_timestamp="2018-05-29T21:16:05Z",
-            workflow="KYC_ADVANCED",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            account_holder = await response.parse()
-            assert_matches_type(AccountHolder, account_holder, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_resubmit(self, async_client: AsyncLithic) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
-            await async_client.account_holders.with_raw_response.resubmit(
-                account_holder_token="",
-                individual={
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dob": "1991-03-08 08:00:00",
-                    "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
-                    "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
-                    "phone_number": "+15555555555",
-                },
-                tos_timestamp="2018-05-29T21:16:05Z",
-                workflow="KYC_ADVANCED",
             )
 
     @parametrize
