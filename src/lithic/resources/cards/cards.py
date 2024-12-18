@@ -850,8 +850,9 @@ class Cards(SyncAPIResource):
 
         card is
         physically damaged). The PAN, expiry, and CVC2 will remain the same and the
-        original card can continue to be used until the new card is activated. A card
-        can be reissued a maximum of 8 times. Only applies to cards of type `PHYSICAL`.
+        original card can continue to be used until the new card is activated. Only
+        applies to cards of type `PHYSICAL`. A card can be replaced or renewed a total
+        of 8 times.
 
         Args:
           carrier: If omitted, the previous carrier will be used.
@@ -925,7 +926,8 @@ class Cards(SyncAPIResource):
         code. The original card will keep working for card-present transactions until
         the new card is activated. For card-not-present transactions, the original card
         details (expiry, CVC2) will also keep working until the new card is activated.
-        Applies to card types `PHYSICAL` and `VIRTUAL`.
+        Applies to card types `PHYSICAL` and `VIRTUAL`. A card can be replaced or
+        renewed a total of 8 times.
 
         Args:
           shipping_address: The shipping address this card will be sent to.
@@ -1831,8 +1833,9 @@ class AsyncCards(AsyncAPIResource):
 
         card is
         physically damaged). The PAN, expiry, and CVC2 will remain the same and the
-        original card can continue to be used until the new card is activated. A card
-        can be reissued a maximum of 8 times. Only applies to cards of type `PHYSICAL`.
+        original card can continue to be used until the new card is activated. Only
+        applies to cards of type `PHYSICAL`. A card can be replaced or renewed a total
+        of 8 times.
 
         Args:
           carrier: If omitted, the previous carrier will be used.
@@ -1906,7 +1909,8 @@ class AsyncCards(AsyncAPIResource):
         code. The original card will keep working for card-present transactions until
         the new card is activated. For card-not-present transactions, the original card
         details (expiry, CVC2) will also keep working until the new card is activated.
-        Applies to card types `PHYSICAL` and `VIRTUAL`.
+        Applies to card types `PHYSICAL` and `VIRTUAL`. A card can be replaced or
+        renewed a total of 8 times.
 
         Args:
           shipping_address: The shipping address this card will be sent to.
