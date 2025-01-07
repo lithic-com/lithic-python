@@ -33,7 +33,7 @@ class TestExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -48,7 +48,7 @@ class TestExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -62,10 +62,10 @@ class TestExternalBankAccounts:
                 "state": "xx",
                 "address2": "x",
             },
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
-            name="x",
+            name="name",
             user_defined_id="x",
             verification_enforcement=True,
         )
@@ -78,7 +78,7 @@ class TestExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -97,7 +97,7 @@ class TestExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -114,7 +114,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_method_create_overload_2(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
@@ -124,12 +124,12 @@ class TestExternalBankAccounts:
     @parametrize
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
         external_bank_account = client.external_bank_accounts.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
             user_defined_id="x",
@@ -139,7 +139,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_raw_response_create_overload_2(self, client: Lithic) -> None:
         response = client.external_bank_accounts.with_raw_response.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
@@ -153,7 +153,7 @@ class TestExternalBankAccounts:
     @parametrize
     def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
         with client.external_bank_accounts.with_streaming_response.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
@@ -172,7 +172,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -186,7 +186,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -200,10 +200,10 @@ class TestExternalBankAccounts:
                 "state": "xx",
                 "address2": "x",
             },
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
-            name="x",
+            name="name",
             user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
@@ -214,7 +214,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -232,7 +232,7 @@ class TestExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -305,11 +305,11 @@ class TestExternalBankAccounts:
                 "state": "xx",
                 "address2": "x",
             },
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
-            name="x",
-            owner="x",
+            name="name",
+            owner="owner",
             owner_type="INDIVIDUAL",
             user_defined_id="x",
         )
@@ -497,7 +497,7 @@ class TestAsyncExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -512,7 +512,7 @@ class TestAsyncExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -526,10 +526,10 @@ class TestAsyncExternalBankAccounts:
                 "state": "xx",
                 "address2": "x",
             },
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
-            name="x",
+            name="name",
             user_defined_id="x",
             verification_enforcement=True,
         )
@@ -542,7 +542,7 @@ class TestAsyncExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -561,7 +561,7 @@ class TestAsyncExternalBankAccounts:
             country="USD",
             currency="USD",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -578,7 +578,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_method_create_overload_2(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
@@ -588,12 +588,12 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
         external_bank_account = await async_client.external_bank_accounts.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
             user_defined_id="x",
@@ -603,7 +603,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         response = await async_client.external_bank_accounts.with_raw_response.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
@@ -617,7 +617,7 @@ class TestAsyncExternalBankAccounts:
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         async with async_client.external_bank_accounts.with_streaming_response.create(
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             processor_token="x",
             verification_method="MANUAL",
@@ -636,7 +636,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -650,7 +650,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -664,10 +664,10 @@ class TestAsyncExternalBankAccounts:
                 "state": "xx",
                 "address2": "x",
             },
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
-            name="x",
+            name="name",
             user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountCreateResponse, external_bank_account, path=["response"])
@@ -678,7 +678,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -696,7 +696,7 @@ class TestAsyncExternalBankAccounts:
             account_number="12345678901234567",
             country="USD",
             currency="USD",
-            owner="x",
+            owner="owner",
             owner_type="INDIVIDUAL",
             routing_number="123456789",
             type="CHECKING",
@@ -769,11 +769,11 @@ class TestAsyncExternalBankAccounts:
                 "state": "xx",
                 "address2": "x",
             },
-            company_id="x",
+            company_id="sq",
             dob=parse_date("2019-12-27"),
             doing_business_as="x",
-            name="x",
-            owner="x",
+            name="name",
+            owner="owner",
             owner_type="INDIVIDUAL",
             user_defined_id="x",
         )
