@@ -332,7 +332,7 @@ card = response.parse()  # get the object that `cards.create()` would have retur
 print(card.token)
 ```
 
-These methods return a [`LegagcyAPIResponse`](https://github.com/lithic-com/lithic-python/tree/main/src/lithic/_legacy_response.py) object. This is a legacy class as we're changing it slightly in the next major version.
+These methods return a [`LegacyAPIResponse`](https://github.com/lithic-com/lithic-python/tree/main/src/lithic/_legacy_response.py) object. This is a legacy class as we're changing it slightly in the next major version.
 
 For the sync client this will mostly be the same with the exception
 of `content` & `text` will be methods instead of properties. In the
