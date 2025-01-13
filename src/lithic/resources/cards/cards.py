@@ -212,11 +212,11 @@ class Cards(SyncAPIResource):
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
 
-          spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
-              the spend limit will be declined. Note that a spend limit of 0 is effectively no
-              limit, and should only be used to reset or remove a prior limit. Only a limit of
-              1 or above will result in declined transactions due to checks against the card
-              limit.
+          spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
+              $1,000 limit). Transaction requests above the spend limit will be declined. Note
+              that a spend limit of 0 is effectively no limit, and should only be used to
+              reset or remove a prior limit. Only a limit of 1 or above will result in
+              declined transactions due to checks against the card limit.
 
           spend_limit_duration:
               Spend limit duration values:
@@ -352,11 +352,11 @@ class Cards(SyncAPIResource):
           pin_status: Indicates if a card is blocked due a PIN status issue (e.g. excessive incorrect
               attempts). Can only be set to `OK` to unblock a card.
 
-          spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
-              the spend limit will be declined. Note that a spend limit of 0 is effectively no
-              limit, and should only be used to reset or remove a prior limit. Only a limit of
-              1 or above will result in declined transactions due to checks against the card
-              limit.
+          spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
+              $1,000 limit). Transaction requests above the spend limit will be declined. Note
+              that a spend limit of 0 is effectively no limit, and should only be used to
+              reset or remove a prior limit. Only a limit of 1 or above will result in
+              declined transactions due to checks against the card limit.
 
           spend_limit_duration:
               Spend limit duration values:
@@ -508,9 +508,9 @@ class Cards(SyncAPIResource):
         to state `PENDING_FULFILLMENT` and fulfilled at next fulfillment cycle. Virtual
         cards created on card programs which do not support physical cards cannot be
         converted. The card program cannot be changed as part of the conversion. Cards
-        must be in a state of either `OPEN` or `PAUSED` to be converted. Only applies to
-        cards of type `VIRTUAL` (or existing cards with deprecated types of
-        `DIGITAL_WALLET` and `UNLOCKED`).
+        must be in an `OPEN` state to be converted. Only applies to cards of type
+        `VIRTUAL` (or existing cards with deprecated types of `DIGITAL_WALLET` and
+        `UNLOCKED`).
 
         Args:
           shipping_address: The shipping address this card will be sent to.
@@ -1084,11 +1084,11 @@ class AsyncCards(AsyncAPIResource):
               - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
                 tracking
 
-          spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
-              the spend limit will be declined. Note that a spend limit of 0 is effectively no
-              limit, and should only be used to reset or remove a prior limit. Only a limit of
-              1 or above will result in declined transactions due to checks against the card
-              limit.
+          spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
+              $1,000 limit). Transaction requests above the spend limit will be declined. Note
+              that a spend limit of 0 is effectively no limit, and should only be used to
+              reset or remove a prior limit. Only a limit of 1 or above will result in
+              declined transactions due to checks against the card limit.
 
           spend_limit_duration:
               Spend limit duration values:
@@ -1224,11 +1224,11 @@ class AsyncCards(AsyncAPIResource):
           pin_status: Indicates if a card is blocked due a PIN status issue (e.g. excessive incorrect
               attempts). Can only be set to `OK` to unblock a card.
 
-          spend_limit: Amount (in cents) to limit approved authorizations. Transaction requests above
-              the spend limit will be declined. Note that a spend limit of 0 is effectively no
-              limit, and should only be used to reset or remove a prior limit. Only a limit of
-              1 or above will result in declined transactions due to checks against the card
-              limit.
+          spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
+              $1,000 limit). Transaction requests above the spend limit will be declined. Note
+              that a spend limit of 0 is effectively no limit, and should only be used to
+              reset or remove a prior limit. Only a limit of 1 or above will result in
+              declined transactions due to checks against the card limit.
 
           spend_limit_duration:
               Spend limit duration values:
@@ -1380,9 +1380,9 @@ class AsyncCards(AsyncAPIResource):
         to state `PENDING_FULFILLMENT` and fulfilled at next fulfillment cycle. Virtual
         cards created on card programs which do not support physical cards cannot be
         converted. The card program cannot be changed as part of the conversion. Cards
-        must be in a state of either `OPEN` or `PAUSED` to be converted. Only applies to
-        cards of type `VIRTUAL` (or existing cards with deprecated types of
-        `DIGITAL_WALLET` and `UNLOCKED`).
+        must be in an `OPEN` state to be converted. Only applies to cards of type
+        `VIRTUAL` (or existing cards with deprecated types of `DIGITAL_WALLET` and
+        `UNLOCKED`).
 
         Args:
           shipping_address: The shipping address this card will be sent to.
