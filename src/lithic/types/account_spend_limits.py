@@ -11,7 +11,7 @@ class AvailableSpendLimit(BaseModel):
     daily: Optional[int] = None
     """
     The available spend limit (in cents) relative to the daily limit configured on
-    the Account.
+    the Account (e.g. 100000 would be a $1,000 limit).
     """
 
     lifetime: Optional[int] = None

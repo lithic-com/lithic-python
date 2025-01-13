@@ -28,6 +28,7 @@ class AccountHolderUploadDocumentParams(TypedDict, total=False):
             "UTILITY_BILL_STATEMENT",
             "SSN_CARD",
             "ITIN_LETTER",
+            "FINCEN_BOI_REPORT",
         ]
     ]
     """The type of document to upload"""

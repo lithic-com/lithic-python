@@ -78,9 +78,10 @@ class Card(BaseModel):
     """
 
     spend_limit: int
-    """Amount (in cents) to limit approved authorizations.
+    """Amount (in cents) to limit approved authorizations (e.g.
 
-    Transaction requests above the spend limit will be declined.
+    100000 would be a $1,000 limit). Transaction requests above the spend limit will
+    be declined.
     """
 
     spend_limit_duration: SpendLimitDuration

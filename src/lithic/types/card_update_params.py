@@ -36,12 +36,12 @@ class CardUpdateParams(TypedDict, total=False):
     """
 
     spend_limit: int
-    """Amount (in cents) to limit approved authorizations.
+    """Amount (in cents) to limit approved authorizations (e.g.
 
-    Transaction requests above the spend limit will be declined. Note that a spend
-    limit of 0 is effectively no limit, and should only be used to reset or remove a
-    prior limit. Only a limit of 1 or above will result in declined transactions due
-    to checks against the card limit.
+    100000 would be a $1,000 limit). Transaction requests above the spend limit will
+    be declined. Note that a spend limit of 0 is effectively no limit, and should
+    only be used to reset or remove a prior limit. Only a limit of 1 or above will
+    result in declined transactions due to checks against the card limit.
     """
 
     spend_limit_duration: SpendLimitDuration
