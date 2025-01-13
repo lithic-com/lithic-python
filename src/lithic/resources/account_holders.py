@@ -83,12 +83,13 @@ class AccountHolders(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP). All calls to this endpoint will return an immediate response -
-        though in some cases, the response may indicate the enrollment is under review
-        or further action will be needed to complete the account enrollment process.
-        This endpoint can only be used on accounts that are part of the program that the
-        calling API key manages.
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the enrollment is under review or further action will be needed to
+        complete the account enrollment process. This endpoint can only be used on
+        accounts that are part of the program that the calling API key manages.
 
         Args:
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
@@ -165,12 +166,13 @@ class AccountHolders(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP). All calls to this endpoint will return an immediate response -
-        though in some cases, the response may indicate the enrollment is under review
-        or further action will be needed to complete the account enrollment process.
-        This endpoint can only be used on accounts that are part of the program that the
-        calling API key manages.
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the enrollment is under review or further action will be needed to
+        complete the account enrollment process. This endpoint can only be used on
+        accounts that are part of the program that the calling API key manages.
 
         Args:
           individual: Information on individual for whom the account is being opened and KYC is being
@@ -221,12 +223,13 @@ class AccountHolders(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP). All calls to this endpoint will return an immediate response -
-        though in some cases, the response may indicate the enrollment is under review
-        or further action will be needed to complete the account enrollment process.
-        This endpoint can only be used on accounts that are part of the program that the
-        calling API key manages.
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the enrollment is under review or further action will be needed to
+        complete the account enrollment process. This endpoint can only be used on
+        accounts that are part of the program that the calling API key manages.
 
         Args:
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -240,7 +243,7 @@ class AccountHolders(SyncAPIResource):
 
           last_name: The KYC Exempt user's last name
 
-          phone_number: The KYC Exempt user's phone number
+          phone_number: The KYC Exempt user's phone number, entered in E.164 format.
 
           workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
 
@@ -784,6 +787,7 @@ class AccountHolders(SyncAPIResource):
             "UTILITY_BILL_STATEMENT",
             "SSN_CARD",
             "ITIN_LETTER",
+            "FINCEN_BOI_REPORT",
         ],
         entity_token: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -888,12 +892,13 @@ class AsyncAccountHolders(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP). All calls to this endpoint will return an immediate response -
-        though in some cases, the response may indicate the enrollment is under review
-        or further action will be needed to complete the account enrollment process.
-        This endpoint can only be used on accounts that are part of the program that the
-        calling API key manages.
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the enrollment is under review or further action will be needed to
+        complete the account enrollment process. This endpoint can only be used on
+        accounts that are part of the program that the calling API key manages.
 
         Args:
           beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
@@ -970,12 +975,13 @@ class AsyncAccountHolders(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP). All calls to this endpoint will return an immediate response -
-        though in some cases, the response may indicate the enrollment is under review
-        or further action will be needed to complete the account enrollment process.
-        This endpoint can only be used on accounts that are part of the program that the
-        calling API key manages.
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the enrollment is under review or further action will be needed to
+        complete the account enrollment process. This endpoint can only be used on
+        accounts that are part of the program that the calling API key manages.
 
         Args:
           individual: Information on individual for whom the account is being opened and KYC is being
@@ -1026,12 +1032,13 @@ class AsyncAccountHolders(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderCreateResponse:
         """
-        Run an individual or business's information through the Customer Identification
-        Program (CIP). All calls to this endpoint will return an immediate response -
-        though in some cases, the response may indicate the enrollment is under review
-        or further action will be needed to complete the account enrollment process.
-        This endpoint can only be used on accounts that are part of the program that the
-        calling API key manages.
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the enrollment is under review or further action will be needed to
+        complete the account enrollment process. This endpoint can only be used on
+        accounts that are part of the program that the calling API key manages.
 
         Args:
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -1045,7 +1052,7 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           last_name: The KYC Exempt user's last name
 
-          phone_number: The KYC Exempt user's phone number
+          phone_number: The KYC Exempt user's phone number, entered in E.164 format.
 
           workflow: Specifies the workflow type. This must be 'KYC_EXEMPT'
 
@@ -1589,6 +1596,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             "UTILITY_BILL_STATEMENT",
             "SSN_CARD",
             "ITIN_LETTER",
+            "FINCEN_BOI_REPORT",
         ],
         entity_token: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

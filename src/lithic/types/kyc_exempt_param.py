@@ -29,7 +29,7 @@ class KYCExemptParam(TypedDict, total=False):
     """The KYC Exempt user's last name"""
 
     phone_number: Required[str]
-    """The KYC Exempt user's phone number"""
+    """The KYC Exempt user's phone number, entered in E.164 format."""
 
     workflow: Required[Literal["KYC_EXEMPT"]]
     """Specifies the workflow type. This must be 'KYC_EXEMPT'"""
