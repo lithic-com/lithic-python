@@ -51,3 +51,6 @@ class TransactionListParams(TypedDict, total=False):
 
     Used to retrieve the next page of results after this item.
     """
+
+    status: Literal["PENDING", "VOIDED", "SETTLED", "DECLINED", "EXPIRED"]
+    """Filters for transactions using transaction status field."""

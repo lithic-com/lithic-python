@@ -11,7 +11,7 @@ class AvailableSpendLimit(BaseModel):
     annually: Optional[int] = None
     """
     The available spend limit (in cents) relative to the annual limit configured on
-    the Card.
+    the Card (e.g. 100000 would be a $1,000 limit).
     """
 
     forever: Optional[int] = None

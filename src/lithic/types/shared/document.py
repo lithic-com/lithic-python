@@ -89,6 +89,7 @@ class Document(BaseModel):
         "UTILITY_BILL_STATEMENT",
         "SSN_CARD",
         "ITIN_LETTER",
+        "FINCEN_BOI_REPORT",
     ]
     """Type of documentation to be submitted for verification of an account holder"""
 

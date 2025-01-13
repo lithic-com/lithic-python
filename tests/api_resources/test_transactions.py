@@ -82,6 +82,7 @@ class TestTransactions:
             page_size=1,
             result="APPROVED",
             starting_after="starting_after",
+            status="PENDING",
         )
         assert_matches_type(SyncCursorPage[Transaction], transaction, path=["response"])
 
@@ -445,6 +446,7 @@ class TestAsyncTransactions:
             page_size=1,
             result="APPROVED",
             starting_after="starting_after",
+            status="PENDING",
         )
         assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
 
