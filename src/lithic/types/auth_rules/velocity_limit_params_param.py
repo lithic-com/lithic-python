@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing import List, Union, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from ..shared.velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
+from .velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
 
-__all__ = ["VelocityLimitParams", "Filters"]
+__all__ = ["VelocityLimitParamsParam", "Filters"]
 
 
 class Filters(TypedDict, total=False):
@@ -26,7 +26,7 @@ class Filters(TypedDict, total=False):
     """
 
 
-class VelocityLimitParams(TypedDict, total=False):
+class VelocityLimitParamsParam(TypedDict, total=False):
     filters: Required[Filters]
 
     period: Required[Union[int, VelocityLimitParamsPeriodWindow]]
