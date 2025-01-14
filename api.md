@@ -4,14 +4,11 @@
 from lithic.types import (
     AccountFinancialAccountType,
     Address,
-    AuthRule,
     Carrier,
     Currency,
     Document,
     InstanceFinancialAccountType,
     ShippingAddress,
-    VelocityLimitParams,
-    VelocityLimitParamsPeriodWindow,
 )
 ```
 
@@ -80,6 +77,12 @@ Types:
 
 ```python
 from lithic.types.auth_rules import (
+    AuthRule,
+    AuthRuleCondition,
+    ConditionalAttribute,
+    ConditionalBlockParameters,
+    VelocityLimitParams,
+    VelocityLimitParamsPeriodWindow,
     V2CreateResponse,
     V2RetrieveResponse,
     V2UpdateResponse,

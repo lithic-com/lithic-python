@@ -7,14 +7,11 @@ from .event import Event as Event
 from .shared import (
     Address as Address,
     Carrier as Carrier,
-    AuthRule as AuthRule,
     Currency as Currency,
     Document as Document,
     ShippingAddress as ShippingAddress,
-    VelocityLimitParams as VelocityLimitParams,
     AccountFinancialAccountType as AccountFinancialAccountType,
     InstanceFinancialAccountType as InstanceFinancialAccountType,
-    VelocityLimitParamsPeriodWindow as VelocityLimitParamsPeriodWindow,
 )
 from .account import Account as Account
 from .balance import Balance as Balance
