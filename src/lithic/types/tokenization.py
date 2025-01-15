@@ -58,6 +58,9 @@ class Tokenization(BaseModel):
     created_at: datetime
     """Date and time when the tokenization first occurred. UTC time zone."""
 
+    dpan: Optional[str] = None
+    """The network's dynamic pan for the tokenized transaction."""
+
     status: Literal["ACTIVE", "DEACTIVATED", "INACTIVE", "PAUSED", "PENDING_2FA", "PENDING_ACTIVATION", "UNKNOWN"]
     """The status of the tokenization request"""
 
