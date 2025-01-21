@@ -1,5 +1,58 @@
 # Changelog
 
+## 0.82.0 (2025-01-21)
+
+Full Changelog: [v0.81.1...v0.82.0](https://github.com/lithic-com/lithic-python/compare/v0.81.1...v0.82.0)
+
+### ⚠ BREAKING CHANGES
+
+* **types:** improve auth rules types ([#671](https://github.com/lithic-com/lithic-python/issues/671))
+* **api:** removes AccountHolder `resubmit` endpoint and `KYC_ADVANCED` workflow ([#659](https://github.com/lithic-com/lithic-python/issues/659))
+
+### Features
+
+* **api:** removes AccountHolder `resubmit` endpoint and `KYC_ADVANCED` workflow ([#659](https://github.com/lithic-com/lithic-python/issues/659)) ([8b181ca](https://github.com/lithic-com/lithic-python/commit/8b181ca9ab1e09309d22f0c2de9ec41cb6b448dc))
+* generate more types that are used as request bodies ([#649](https://github.com/lithic-com/lithic-python/issues/649)) ([413bb22](https://github.com/lithic-com/lithic-python/commit/413bb22511b1f28190eae3da910bac35fb1de841))
+* **types:** improve auth rules types ([#671](https://github.com/lithic-com/lithic-python/issues/671)) ([5748bc0](https://github.com/lithic-com/lithic-python/commit/5748bc033592204bc983d8adea36df51b59671df))
+
+
+### Bug Fixes
+
+* **client:** only call .close() when needed ([#664](https://github.com/lithic-com/lithic-python/issues/664)) ([f6528df](https://github.com/lithic-com/lithic-python/commit/f6528dfd841d00157a50c9b0dbd9e4a61baae530))
+* correctly handle deserialising `cls` fields ([#668](https://github.com/lithic-com/lithic-python/issues/668)) ([2ce887f](https://github.com/lithic-com/lithic-python/commit/2ce887f68604500c0c7ff0f5a0a3e2da6f9f7d02))
+* reuse model in pagination items type ([#679](https://github.com/lithic-com/lithic-python/issues/679)) ([150965a](https://github.com/lithic-com/lithic-python/commit/150965ac048661778ba5becd99cdcde0903d5e71))
+* **tests:** make test_get_platform less flaky ([#675](https://github.com/lithic-com/lithic-python/issues/675)) ([2dff4e0](https://github.com/lithic-com/lithic-python/commit/2dff4e0609c7226f61d7ff503c3d9a6abe08f895))
+
+
+### Chores
+
+* add back compat aliases for LineItemListResponse ([1e7eb6d](https://github.com/lithic-com/lithic-python/commit/1e7eb6daf16f95888ff30f020f954afd0faf55a3))
+* add missing isclass check ([#661](https://github.com/lithic-com/lithic-python/issues/661)) ([e572151](https://github.com/lithic-com/lithic-python/commit/e572151d763b4ef9a27748bc0f6ddc088e35b29b))
+* **api:** new ConvertPhysical endpoint to convert a virtual card to a physical card ([#656](https://github.com/lithic-com/lithic-python/issues/656)) ([6412dcd](https://github.com/lithic-com/lithic-python/commit/6412dcd78bae44cd35a742c357ec1e56948144e1))
+* **api:** updates to documentation and additional filter for status on Transactions ([#669](https://github.com/lithic-com/lithic-python/issues/669)) ([2e69678](https://github.com/lithic-com/lithic-python/commit/2e69678de96264a5d2ba7b38cf07ffa76823e3f1))
+* bump license year ([#660](https://github.com/lithic-com/lithic-python/issues/660)) ([b76a630](https://github.com/lithic-com/lithic-python/commit/b76a6307f08bc628e382638e33f07cac12160826))
+* **docs:** updates documentation for DPANs ([#677](https://github.com/lithic-com/lithic-python/issues/677)) ([1fd8a18](https://github.com/lithic-com/lithic-python/commit/1fd8a184d28568eb4990a73746c440889325b6fa))
+* **internal:** add support for TypeAliasType ([#652](https://github.com/lithic-com/lithic-python/issues/652)) ([988f2a0](https://github.com/lithic-com/lithic-python/commit/988f2a016c98cef5a3558c08f8568af27776a0fb))
+* **internal:** avoid pytest-asyncio deprecation warning ([#676](https://github.com/lithic-com/lithic-python/issues/676)) ([f1a31f3](https://github.com/lithic-com/lithic-python/commit/f1a31f34ebe689b048f889b3ef0d470dc5defda4))
+* **internal:** bump httpx dependency ([#662](https://github.com/lithic-com/lithic-python/issues/662)) ([767729e](https://github.com/lithic-com/lithic-python/commit/767729e44232516426fc018e9189e9a8d2ab48c5))
+* **internal:** bump pyright ([#651](https://github.com/lithic-com/lithic-python/issues/651)) ([1406b81](https://github.com/lithic-com/lithic-python/commit/1406b81f7ca5e58d787afa86b723f4f271d361a4))
+* **internal:** bump pyright dependency ([#672](https://github.com/lithic-com/lithic-python/issues/672)) ([77a255c](https://github.com/lithic-com/lithic-python/commit/77a255cb547c13d3b87127d096f628513dceb63f))
+* **internal:** fix some typos ([#658](https://github.com/lithic-com/lithic-python/issues/658)) ([79baa5d](https://github.com/lithic-com/lithic-python/commit/79baa5d8fa228ee9f9575e264b8022e2c609f44a))
+* **internal:** minor style changes ([#680](https://github.com/lithic-com/lithic-python/issues/680)) ([b1fb9fb](https://github.com/lithic-com/lithic-python/commit/b1fb9fbbe878bb1779db0ca23959565dcff929e1))
+* **internal:** remove some duplicated imports ([#653](https://github.com/lithic-com/lithic-python/issues/653)) ([c446d74](https://github.com/lithic-com/lithic-python/commit/c446d74a9fd059d45d93966dd63894a68a76a965))
+* **internal:** update deps ([#670](https://github.com/lithic-com/lithic-python/issues/670)) ([2eddffd](https://github.com/lithic-com/lithic-python/commit/2eddffdab2e6180f9f5b5f6848d3e8bbe45567fd))
+* **internal:** update examples ([#663](https://github.com/lithic-com/lithic-python/issues/663)) ([7e704cf](https://github.com/lithic-com/lithic-python/commit/7e704cf7776ff4beb47beb397a846333c3843617))
+* **internal:** updated imports ([#654](https://github.com/lithic-com/lithic-python/issues/654)) ([b0b1b64](https://github.com/lithic-com/lithic-python/commit/b0b1b644dcc1db989c22ba9def0fa4712e2e18d3))
+
+
+### Documentation
+
+* fix typos ([#665](https://github.com/lithic-com/lithic-python/issues/665)) ([b0de6d4](https://github.com/lithic-com/lithic-python/commit/b0de6d41f28cd60e8adfdcca389699a3c608156f))
+* more typo fixes ([#666](https://github.com/lithic-com/lithic-python/issues/666)) ([f97e3bc](https://github.com/lithic-com/lithic-python/commit/f97e3bc55387ed862cf40d357051c896a28ad375))
+* **raw responses:** fix duplicate `the` ([#674](https://github.com/lithic-com/lithic-python/issues/674)) ([9bc6a5e](https://github.com/lithic-com/lithic-python/commit/9bc6a5e8b9cbcb8e69497f4fef32f3ba2d7f2d1f))
+* **readme:** example snippet for client context manager ([#657](https://github.com/lithic-com/lithic-python/issues/657)) ([4ca06b8](https://github.com/lithic-com/lithic-python/commit/4ca06b884448c3737fda47e1343814d20714d5ea))
+* **readme:** fix misplaced period ([#667](https://github.com/lithic-com/lithic-python/issues/667)) ([51bdab7](https://github.com/lithic-com/lithic-python/commit/51bdab75952ec5716dab38b61c7c87cc8cda63fc))
+
 ## 0.81.1 (2024-12-11)
 
 Full Changelog: [v0.81.0...v0.81.1](https://github.com/lithic-com/lithic-python/compare/v0.81.0...v0.81.1)
