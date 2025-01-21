@@ -13,7 +13,7 @@ from ...._response import to_streamed_response_wrapper, async_to_streamed_respon
 from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.financial_accounts.statements import line_item_list_params
-from ....types.financial_accounts.statements.line_item_list_response import LineItemListResponse
+from ....types.financial_accounts.statements.statement_line_items import Data
 
 __all__ = ["LineItems", "AsyncLineItems"]
 
@@ -52,7 +52,7 @@ class LineItems(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[LineItemListResponse]:
+    ) -> SyncCursorPage[Data]:
         """
         List the line items for a given statement within a given financial account.
 
@@ -85,7 +85,7 @@ class LineItems(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return self._get_api_list(
             f"/v1/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
-            page=SyncCursorPage[LineItemListResponse],
+            page=SyncCursorPage[Data],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -100,7 +100,7 @@ class LineItems(SyncAPIResource):
                     line_item_list_params.LineItemListParams,
                 ),
             ),
-            model=LineItemListResponse,
+            model=Data,
         )
 
 
@@ -138,7 +138,7 @@ class AsyncLineItems(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[LineItemListResponse, AsyncCursorPage[LineItemListResponse]]:
+    ) -> AsyncPaginator[Data, AsyncCursorPage[Data]]:
         """
         List the line items for a given statement within a given financial account.
 
@@ -171,7 +171,7 @@ class AsyncLineItems(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return self._get_api_list(
             f"/v1/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items",
-            page=AsyncCursorPage[LineItemListResponse],
+            page=AsyncCursorPage[Data],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -186,7 +186,7 @@ class AsyncLineItems(AsyncAPIResource):
                     line_item_list_params.LineItemListParams,
                 ),
             ),
-            model=LineItemListResponse,
+            model=Data,
         )
 
 

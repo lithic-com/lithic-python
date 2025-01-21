@@ -378,12 +378,12 @@ Methods:
 Types:
 
 ```python
-from lithic.types.financial_accounts.statements import StatementLineItems, LineItemListResponse
+from lithic.types.financial_accounts.statements import StatementLineItems
 ```
 
 Methods:
 
-- <code title="get /v1/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(statement_token, \*, financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/statements/line_item_list_response.py">SyncCursorPage[LineItemListResponse]</a></code>
+- <code title="get /v1/financial_accounts/{financial_account_token}/statements/{statement_token}/line_items">client.financial_accounts.statements.line_items.<a href="./src/lithic/resources/financial_accounts/statements/line_items.py">list</a>(statement_token, \*, financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/statements/line_item_list_params.py">params</a>) -> SyncCursorPage[Data]</code>
 
 ## LoanTapes
 
