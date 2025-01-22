@@ -101,3 +101,6 @@ class Tokenization(BaseModel):
 
     events: Optional[List[Event]] = None
     """A list of events related to the tokenization."""
+
+    payment_account_reference_id: Optional[str] = None
+    """The network's unique reference for the card that is tokenized."""
