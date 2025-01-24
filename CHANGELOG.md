@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.83.0 (2025-01-24)
+
+Full Changelog: [v0.82.0...v0.83.0](https://github.com/lithic-com/lithic-python/compare/v0.82.0...v0.83.0)
+
+### Features
+
+* **api:** adds additional fields to TransactionEvents ([#684](https://github.com/lithic-com/lithic-python/issues/684)) ([90da354](https://github.com/lithic-com/lithic-python/commit/90da35429ab778882fac77ba4e886c017d5f5b78))
+
+
+### Chores
+
+* **api:** additional field added to 3DS Responses and Tokenization ([#681](https://github.com/lithic-com/lithic-python/issues/681)) ([08d4bad](https://github.com/lithic-com/lithic-python/commit/08d4bade198e712e59a598fdb35bab06907d05a8))
+* **internal:** minor formatting changes ([#683](https://github.com/lithic-com/lithic-python/issues/683)) ([3fd3619](https://github.com/lithic-com/lithic-python/commit/3fd3619639a433be49b8cdf27d0e92f8caaf0fe7))
+
 ## 0.82.0 (2025-01-21)
 
 Full Changelog: [v0.81.1...v0.82.0](https://github.com/lithic-com/lithic-python/compare/v0.81.1...v0.82.0)
