@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.84.0 (2025-01-28)
+
+Full Changelog: [v0.83.0...v0.84.0](https://github.com/lithic-com/lithic-python/compare/v0.83.0...v0.84.0)
+
+### Features
+
+* **api:** adds additional request types for updating an Auth Rule ([#685](https://github.com/lithic-com/lithic-python/issues/685)) ([ed36107](https://github.com/lithic-com/lithic-python/commit/ed36107a5fa860fa1a87dfb73d58966759624b29))
+
 ## 0.83.0 (2025-01-24)
 
 Full Changelog: [v0.82.0...v0.83.0](https://github.com/lithic-com/lithic-python/compare/v0.82.0...v0.83.0)
