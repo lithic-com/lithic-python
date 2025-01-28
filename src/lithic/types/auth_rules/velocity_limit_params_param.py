@@ -32,7 +32,8 @@ class VelocityLimitParamsParam(TypedDict, total=False):
     period: Required[Union[int, VelocityLimitParamsPeriodWindow]]
     """The size of the trailing window to calculate Spend Velocity over in seconds.
 
-    The minimum value is 10 seconds, and the maximum value is 2678400 seconds.
+    The minimum value is 10 seconds, and the maximum value is 2678400 seconds (31
+    days).
     """
 
     scope: Required[Literal["CARD", "ACCOUNT"]]
