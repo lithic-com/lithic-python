@@ -13,7 +13,7 @@ __all__ = ["V2DraftParams", "Parameters"]
 
 class V2DraftParams(TypedDict, total=False):
     parameters: Optional[Parameters]
-    """Parameters for the current version of the Auth Rule"""
+    """Parameters for the Auth Rule"""
 
 
 Parameters: TypeAlias = Union[ConditionalBlockParametersParam, VelocityLimitParamsParam]
