@@ -27,7 +27,7 @@ class CreateAuthRuleRequestAccountTokens(TypedDict, total=False):
     """Auth Rule Name"""
 
     parameters: CreateAuthRuleRequestAccountTokensParameters
-    """Parameters for the current version of the Auth Rule"""
+    """Parameters for the Auth Rule"""
 
     type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
     """The type of Auth Rule"""
@@ -46,7 +46,7 @@ class CreateAuthRuleRequestCardTokens(TypedDict, total=False):
     """Auth Rule Name"""
 
     parameters: CreateAuthRuleRequestCardTokensParameters
-    """Parameters for the current version of the Auth Rule"""
+    """Parameters for the Auth Rule"""
 
     type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
     """The type of Auth Rule"""
@@ -66,7 +66,7 @@ class CreateAuthRuleRequestProgramLevel(TypedDict, total=False):
     """Auth Rule Name"""
 
     parameters: CreateAuthRuleRequestProgramLevelParameters
-    """Parameters for the current version of the Auth Rule"""
+    """Parameters for the Auth Rule"""
 
     type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
     """The type of Auth Rule"""

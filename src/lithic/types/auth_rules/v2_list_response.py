@@ -14,7 +14,7 @@ CurrentVersionParameters: TypeAlias = Union[ConditionalBlockParameters, Velocity
 
 class CurrentVersion(BaseModel):
     parameters: CurrentVersionParameters
-    """Parameters for the current version of the Auth Rule"""
+    """Parameters for the Auth Rule"""
 
     version: int
     """
@@ -28,7 +28,7 @@ DraftVersionParameters: TypeAlias = Union[ConditionalBlockParameters, VelocityLi
 
 class DraftVersion(BaseModel):
     parameters: DraftVersionParameters
-    """Parameters for the current version of the Auth Rule"""
+    """Parameters for the Auth Rule"""
 
     version: int
     """

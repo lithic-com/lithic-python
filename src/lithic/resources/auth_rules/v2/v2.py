@@ -8,7 +8,7 @@ from typing_extensions import Literal, overload
 import httpx
 
 from .... import _legacy_response
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ...._utils import (
     required_args,
     maybe_transform,
@@ -87,7 +87,7 @@ class V2(SyncAPIResource):
 
           name: Auth Rule Name
 
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           type: The type of Auth Rule
 
@@ -124,7 +124,7 @@ class V2(SyncAPIResource):
 
           name: Auth Rule Name
 
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           type: The type of Auth Rule
 
@@ -164,7 +164,7 @@ class V2(SyncAPIResource):
 
           name: Auth Rule Name
 
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           type: The type of Auth Rule
 
@@ -228,7 +228,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2RetrieveResponse:
         """
-        Fetches an authorization rule by its token
+        Fetches a V2 authorization rule by its token
 
         Args:
           extra_headers: Send extra headers
@@ -249,10 +249,12 @@ class V2(SyncAPIResource):
             cast_to=V2RetrieveResponse,
         )
 
+    @overload
     def update(
         self,
         auth_rule_token: str,
         *,
+        account_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -263,9 +265,15 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates an authorization rule's properties
+        Updates a V2 authorization rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
 
         Args:
+          account_tokens: Account tokens to which the Auth Rule applies.
+
           name: Auth Rule Name
 
           state: The desired state of the Auth Rule.
@@ -282,14 +290,126 @@ class V2(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def update(
+        self,
+        auth_rule_token: str,
+        *,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
+        """
+        Updates a V2 authorization rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
+
+        Args:
+          card_tokens: Card tokens to which the Auth Rule applies.
+
+          name: Auth Rule Name
+
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        auth_rule_token: str,
+        *,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        program_level: bool | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
+        """
+        Updates a V2 authorization rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
+
+        Args:
+          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+
+          name: Auth Rule Name
+
+          program_level: Whether the Auth Rule applies to all authorizations on the card program.
+
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    def update(
+        self,
+        auth_rule_token: str,
+        *,
+        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        program_level: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._patch(
             f"/v2/auth_rules/{auth_rule_token}",
             body=maybe_transform(
                 {
+                    "account_tokens": account_tokens,
                     "name": name,
                     "state": state,
+                    "card_tokens": card_tokens,
+                    "excluded_card_tokens": excluded_card_tokens,
+                    "program_level": program_level,
                 },
                 v2_update_params.V2UpdateParams,
             ),
@@ -360,6 +480,39 @@ class V2(SyncAPIResource):
             model=V2ListResponse,
         )
 
+    def delete(
+        self,
+        auth_rule_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Deletes a V2 authorization rule
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return self._delete(
+            f"/v2/auth_rules/{auth_rule_token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     @overload
     def apply(
         self,
@@ -374,11 +527,10 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates an authorization rules with a card program, the provided account(s)
+        Associates a V2 authorization rule with a card program, the provided account(s)
         or card(s).
 
-        This endpoint will replace any existing associations with the provided list of
-        entities.
+        Prefer using the `PATCH` method for this operation.
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
@@ -407,11 +559,10 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates an authorization rules with a card program, the provided account(s)
+        Associates a V2 authorization rule with a card program, the provided account(s)
         or card(s).
 
-        This endpoint will replace any existing associations with the provided list of
-        entities.
+        Prefer using the `PATCH` method for this operation.
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
@@ -441,11 +592,10 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates an authorization rules with a card program, the provided account(s)
+        Associates a V2 authorization rule with a card program, the provided account(s)
         or card(s).
 
-        This endpoint will replace any existing associations with the provided list of
-        entities.
+        Prefer using the `PATCH` method for this operation.
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
@@ -510,14 +660,13 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2DraftResponse:
         """
-        Creates a new draft version of an authorization rules that will be ran in shadow
-        mode.
+        Creates a new draft version of a rule that will be ran in shadow mode.
 
         This can also be utilized to reset the draft parameters, causing a draft version
         to no longer be ran in shadow mode.
 
         Args:
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           extra_headers: Send extra headers
 
@@ -550,7 +699,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2PromoteResponse:
         """
-        Promotes a draft version of an authorization rule to the currently active
+        Promotes the draft version of an authorization rule to the currently active
         version such that it is enforced in the authorization stream.
 
         Args:
@@ -703,7 +852,7 @@ class AsyncV2(AsyncAPIResource):
 
           name: Auth Rule Name
 
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           type: The type of Auth Rule
 
@@ -740,7 +889,7 @@ class AsyncV2(AsyncAPIResource):
 
           name: Auth Rule Name
 
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           type: The type of Auth Rule
 
@@ -780,7 +929,7 @@ class AsyncV2(AsyncAPIResource):
 
           name: Auth Rule Name
 
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           type: The type of Auth Rule
 
@@ -844,7 +993,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2RetrieveResponse:
         """
-        Fetches an authorization rule by its token
+        Fetches a V2 authorization rule by its token
 
         Args:
           extra_headers: Send extra headers
@@ -865,10 +1014,12 @@ class AsyncV2(AsyncAPIResource):
             cast_to=V2RetrieveResponse,
         )
 
+    @overload
     async def update(
         self,
         auth_rule_token: str,
         *,
+        account_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -879,9 +1030,15 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates an authorization rule's properties
+        Updates a V2 authorization rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
 
         Args:
+          account_tokens: Account tokens to which the Auth Rule applies.
+
           name: Auth Rule Name
 
           state: The desired state of the Auth Rule.
@@ -898,14 +1055,126 @@ class AsyncV2(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def update(
+        self,
+        auth_rule_token: str,
+        *,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
+        """
+        Updates a V2 authorization rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
+
+        Args:
+          card_tokens: Card tokens to which the Auth Rule applies.
+
+          name: Auth Rule Name
+
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        auth_rule_token: str,
+        *,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        program_level: bool | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
+        """
+        Updates a V2 authorization rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
+
+        Args:
+          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+
+          name: Auth Rule Name
+
+          program_level: Whether the Auth Rule applies to all authorizations on the card program.
+
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    async def update(
+        self,
+        auth_rule_token: str,
+        *,
+        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        program_level: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._patch(
             f"/v2/auth_rules/{auth_rule_token}",
             body=await async_maybe_transform(
                 {
+                    "account_tokens": account_tokens,
                     "name": name,
                     "state": state,
+                    "card_tokens": card_tokens,
+                    "excluded_card_tokens": excluded_card_tokens,
+                    "program_level": program_level,
                 },
                 v2_update_params.V2UpdateParams,
             ),
@@ -976,6 +1245,39 @@ class AsyncV2(AsyncAPIResource):
             model=V2ListResponse,
         )
 
+    async def delete(
+        self,
+        auth_rule_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Deletes a V2 authorization rule
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return await self._delete(
+            f"/v2/auth_rules/{auth_rule_token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     @overload
     async def apply(
         self,
@@ -990,11 +1292,10 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates an authorization rules with a card program, the provided account(s)
+        Associates a V2 authorization rule with a card program, the provided account(s)
         or card(s).
 
-        This endpoint will replace any existing associations with the provided list of
-        entities.
+        Prefer using the `PATCH` method for this operation.
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
@@ -1023,11 +1324,10 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates an authorization rules with a card program, the provided account(s)
+        Associates a V2 authorization rule with a card program, the provided account(s)
         or card(s).
 
-        This endpoint will replace any existing associations with the provided list of
-        entities.
+        Prefer using the `PATCH` method for this operation.
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
@@ -1057,11 +1357,10 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates an authorization rules with a card program, the provided account(s)
+        Associates a V2 authorization rule with a card program, the provided account(s)
         or card(s).
 
-        This endpoint will replace any existing associations with the provided list of
-        entities.
+        Prefer using the `PATCH` method for this operation.
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
@@ -1126,14 +1425,13 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2DraftResponse:
         """
-        Creates a new draft version of an authorization rules that will be ran in shadow
-        mode.
+        Creates a new draft version of a rule that will be ran in shadow mode.
 
         This can also be utilized to reset the draft parameters, causing a draft version
         to no longer be ran in shadow mode.
 
         Args:
-          parameters: Parameters for the current version of the Auth Rule
+          parameters: Parameters for the Auth Rule
 
           extra_headers: Send extra headers
 
@@ -1166,7 +1464,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2PromoteResponse:
         """
-        Promotes a draft version of an authorization rule to the currently active
+        Promotes the draft version of an authorization rule to the currently active
         version such that it is enforced in the authorization stream.
 
         Args:
@@ -1288,6 +1586,9 @@ class V2WithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             v2.list,
         )
+        self.delete = _legacy_response.to_raw_response_wrapper(
+            v2.delete,
+        )
         self.apply = _legacy_response.to_raw_response_wrapper(
             v2.apply,
         )
@@ -1321,6 +1622,9 @@ class AsyncV2WithRawResponse:
         )
         self.list = _legacy_response.async_to_raw_response_wrapper(
             v2.list,
+        )
+        self.delete = _legacy_response.async_to_raw_response_wrapper(
+            v2.delete,
         )
         self.apply = _legacy_response.async_to_raw_response_wrapper(
             v2.apply,
@@ -1356,6 +1660,9 @@ class V2WithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             v2.list,
         )
+        self.delete = to_streamed_response_wrapper(
+            v2.delete,
+        )
         self.apply = to_streamed_response_wrapper(
             v2.apply,
         )
@@ -1389,6 +1696,9 @@ class AsyncV2WithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             v2.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            v2.delete,
         )
         self.apply = async_to_streamed_response_wrapper(
             v2.apply,
