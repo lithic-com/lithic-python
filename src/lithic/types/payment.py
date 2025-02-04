@@ -39,6 +39,7 @@ class Event(BaseModel):
         "ACH_RECEIPT_SETTLED",
         "ACH_RETURN_INITIATED",
         "ACH_RETURN_PROCESSED",
+        "ACH_RETURN_SETTLED",
     ]
     """Event types:
 
@@ -58,6 +59,8 @@ class Event(BaseModel):
     - `ACH_RECEIPT_SETTLED` - ACH receipt funds have settled.
     - `ACH_RECEIPT_RELEASED` - ACH receipt released from pending to available
       balance.
+    - `ACH_RETURN_SETTLED` - ACH receipt return settled by the Receiving Depository
+      Financial Institution.
     """
 
     detailed_results: Optional[

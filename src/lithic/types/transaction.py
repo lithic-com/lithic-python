@@ -389,16 +389,14 @@ class EventNetworkInfoAcquirer(BaseModel):
 
 class EventNetworkInfoMastercard(BaseModel):
     banknet_reference_number: Optional[str] = None
-    """Identifier assigned by Mastercard."""
+    """Identifier assigned by Mastercard.
 
-    switch_serial_number: Optional[str] = None
-    """
-    Identifier assigned by Mastercard, applicable to single-message transactions
-    only.
+    Guaranteed by Mastercard to be unique for any transaction within a specific
+    financial network on any processing day.
     """
 
     original_banknet_reference_number: Optional[str] = None
-    """[Available on January 28th] Identifier assigned by Mastercard.
+    """Identifier assigned by Mastercard.
 
     Matches the `banknet_reference_number` of a prior related event. May be
     populated in authorization reversals, incremental authorizations (authorization
@@ -413,24 +411,34 @@ class EventNetworkInfoMastercard(BaseModel):
     """
 
     original_switch_serial_number: Optional[str] = None
-    """[Available on January 28th] Identifier assigned by Mastercard.
+    """Identifier assigned by Mastercard.
 
     Matches the `switch_serial_number` of a prior related event. May be populated in
     returns and return reversals. Applicable to single-message transactions only.
     """
 
+    switch_serial_number: Optional[str] = None
+    """
+    Identifier assigned by Mastercard, applicable to single-message transactions
+    only.
+    """
+
 
 class EventNetworkInfoVisa(BaseModel):
-    transaction_id: Optional[str] = None
-    """Identifier assigned by Visa."""
-
     original_transaction_id: Optional[str] = None
-    """[Available on January 28th] Identifier assigned by Visa.
+    """Identifier assigned by Visa.
 
     Matches the `transaction_id` of a prior related event. May be populated in
     incremental authorizations (authorization requests that augment a previously
     authorized amount), authorization advices, financial authorizations, and
     clearings.
+    """
+
+    transaction_id: Optional[str] = None
+    """Identifier assigned by Visa to link original messages to subsequent messages.
+
+    Guaranteed by Visa to be unique for each original authorization and financial
+    authorization.
     """
 
 
