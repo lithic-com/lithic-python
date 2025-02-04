@@ -323,7 +323,7 @@ class AuthenticationRetrieveResponse(BaseModel):
     Maps to EMV 3DS field `acctType`.
     """
 
-    authentication_result: Optional[Literal["DECLINE", "SUCCESS"]] = None
+    authentication_result: Literal["DECLINE", "SUCCESS", "PENDING_CHALLENGE", "PENDING_DECISION"]
     """Indicates the outcome of the 3DS authentication process."""
 
     card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"]
@@ -427,6 +427,9 @@ class AuthenticationRetrieveResponse(BaseModel):
 
     Present if the channel is 'BROWSER'.
     """
+
+    challenge_orchestrated_by: Optional[Literal["LITHIC", "CUSTOMER", "NO_CHALLENGE"]] = None
+    """Entity that orchestrates the challenge."""
 
     three_ri_request_type: Optional[
         Literal[
