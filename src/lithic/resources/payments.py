@@ -267,6 +267,7 @@ class Payments(SyncAPIResource):
             "ACH_RECEIPT_SETTLED",
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
+            "ACH_RETURN_SETTLED",
         ],
         decline_reason: Literal[
             "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
@@ -680,6 +681,7 @@ class AsyncPayments(AsyncAPIResource):
             "ACH_RECEIPT_SETTLED",
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
+            "ACH_RETURN_SETTLED",
         ],
         decline_reason: Literal[
             "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
