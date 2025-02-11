@@ -66,6 +66,7 @@ class EventListParams(TypedDict, total=False):
             "settlement_report.updated",
             "statements.created",
             "three_ds_authentication.created",
+            "three_ds_authentication.updated",
             "tokenization.approval_request",
             "tokenization.result",
             "tokenization.two_factor_authentication_code",

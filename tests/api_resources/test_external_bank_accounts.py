@@ -311,6 +311,7 @@ class TestExternalBankAccounts:
             name="name",
             owner="owner",
             owner_type="INDIVIDUAL",
+            type="CHECKING",
             user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
@@ -775,6 +776,7 @@ class TestAsyncExternalBankAccounts:
             name="name",
             owner="owner",
             owner_type="INDIVIDUAL",
+            type="CHECKING",
             user_defined_id="x",
         )
         assert_matches_type(ExternalBankAccountUpdateResponse, external_bank_account, path=["response"])
