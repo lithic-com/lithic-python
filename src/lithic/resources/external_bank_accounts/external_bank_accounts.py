@@ -408,6 +408,7 @@ class ExternalBankAccounts(SyncAPIResource):
         name: str | NotGiven = NOT_GIVEN,
         owner: str | NotGiven = NOT_GIVEN,
         owner_type: OwnerType | NotGiven = NOT_GIVEN,
+        type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -460,6 +461,7 @@ class ExternalBankAccounts(SyncAPIResource):
                     "name": name,
                     "owner": owner,
                     "owner_type": owner_type,
+                    "type": type,
                     "user_defined_id": user_defined_id,
                 },
                 external_bank_account_update_params.ExternalBankAccountUpdateParams,
@@ -975,6 +977,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         name: str | NotGiven = NOT_GIVEN,
         owner: str | NotGiven = NOT_GIVEN,
         owner_type: OwnerType | NotGiven = NOT_GIVEN,
+        type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1027,6 +1030,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "name": name,
                     "owner": owner,
                     "owner_type": owner_type,
+                    "type": type,
                     "user_defined_id": user_defined_id,
                 },
                 external_bank_account_update_params.ExternalBankAccountUpdateParams,
