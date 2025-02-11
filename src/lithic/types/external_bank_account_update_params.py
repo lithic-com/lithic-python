@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import date
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .owner_type import OwnerType
@@ -37,6 +37,8 @@ class ExternalBankAccountUpdateParams(TypedDict, total=False):
 
     owner_type: OwnerType
     """Owner Type"""
+
+    type: Literal["CHECKING", "SAVINGS"]
 
     user_defined_id: str
     """User Defined ID"""
