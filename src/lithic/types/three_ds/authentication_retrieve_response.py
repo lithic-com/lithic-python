@@ -16,6 +16,7 @@ __all__ = [
     "AdditionalData",
     "App",
     "Browser",
+    "ChallengeMetadata",
     "Transaction",
 ]
 
@@ -276,6 +277,14 @@ class Browser(BaseModel):
     """Content of the HTTP user-agent header. Maps to EMV 3DS field browserUserAgent."""
 
 
+class ChallengeMetadata(BaseModel):
+    method_type: Literal["SMS_OTP", "OUT_OF_BAND"]
+    """The type of challenge method used for authentication."""
+
+    phone_number: Optional[str] = None
+    """The phone number used for delivering the OTP. Relevant only for SMS_OTP method."""
+
+
 class Transaction(BaseModel):
     amount: float
     """Amount of the purchase in minor units of currency with all punctuation removed.
@@ -350,11 +359,6 @@ class AuthenticationRetrieveResponse(BaseModel):
     created: datetime
     """Date and time when the authentication was created in Lithic's system."""
 
-    decision_made_by: Optional[Literal["CUSTOMER_ENDPOINT", "LITHIC_DEFAULT", "LITHIC_RULES", "NETWORK", "UNKNOWN"]] = (
-        None
-    )
-    """Entity that made the authentication decision."""
-
     merchant: Merchant
     """
     Object containing data about the merchant involved in the e-commerce
@@ -428,8 +432,16 @@ class AuthenticationRetrieveResponse(BaseModel):
     Present if the channel is 'BROWSER'.
     """
 
+    challenge_metadata: Optional[ChallengeMetadata] = None
+    """Metadata about the challenge method and delivery."""
+
     challenge_orchestrated_by: Optional[Literal["LITHIC", "CUSTOMER", "NO_CHALLENGE"]] = None
     """Entity that orchestrates the challenge."""
+
+    decision_made_by: Optional[Literal["CUSTOMER_ENDPOINT", "LITHIC_DEFAULT", "LITHIC_RULES", "NETWORK", "UNKNOWN"]] = (
+        None
+    )
+    """Entity that made the authentication decision."""
 
     three_ri_request_type: Optional[
         Literal[
