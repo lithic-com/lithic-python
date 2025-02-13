@@ -24,10 +24,12 @@ from pydantic import ValidationError
 
 from lithic import Lithic, AsyncLithic, APIResponseValidationError
 from lithic._types import Omit
+from lithic._utils import maybe_transform
 from lithic._models import BaseModel, FinalRequestOptions
 from lithic._constants import RAW_RESPONSE_HEADER
 from lithic._exceptions import LithicError, APIStatusError, APITimeoutError, APIResponseValidationError
 from lithic._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
+from lithic.types.card_create_params import CardCreateParams
 
 from .utils import update_env
 
@@ -822,7 +824,7 @@ class TestLithic:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/v1/cards",
-                body=cast(object, dict(type="SINGLE_USE")),
+                body=cast(object, maybe_transform(dict(type="SINGLE_USE"), CardCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -837,7 +839,7 @@ class TestLithic:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/v1/cards",
-                body=cast(object, dict(type="SINGLE_USE")),
+                body=cast(object, maybe_transform(dict(type="SINGLE_USE"), CardCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1740,7 +1742,7 @@ class TestAsyncLithic:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/v1/cards",
-                body=cast(object, dict(type="SINGLE_USE")),
+                body=cast(object, maybe_transform(dict(type="SINGLE_USE"), CardCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1755,7 +1757,7 @@ class TestAsyncLithic:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/v1/cards",
-                body=cast(object, dict(type="SINGLE_USE")),
+                body=cast(object, maybe_transform(dict(type="SINGLE_USE"), CardCreateParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
