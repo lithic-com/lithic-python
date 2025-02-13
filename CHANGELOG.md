@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.85.0 (2025-02-13)
+
+Full Changelog: [v0.84.0...v0.85.0](https://github.com/lithic-com/lithic-python/compare/v0.84.0...v0.85.0)
+
+### Features
+
+* **client:** send `X-Stainless-Read-Timeout` header ([#691](https://github.com/lithic-com/lithic-python/issues/691)) ([43d6692](https://github.com/lithic-com/lithic-python/commit/43d66921603b533dc9348da4f2bd1eb80826ecec))
+* **pagination:** avoid fetching when has_more: false ([#693](https://github.com/lithic-com/lithic-python/issues/693)) ([705157b](https://github.com/lithic-com/lithic-python/commit/705157bd63c08bfa026647e8f90ab4fc90e46158))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#696](https://github.com/lithic-com/lithic-python/issues/696)) ([41d8601](https://github.com/lithic-com/lithic-python/commit/41d8601b544757e7a7a0769245fbc5ca9142f442))
+
+
+### Chores
+
+* **api:** new 3DS Event and new `challenge_metadata` property on Authentications ([#695](https://github.com/lithic-com/lithic-python/issues/695)) ([f0dcb60](https://github.com/lithic-com/lithic-python/commit/f0dcb605baaa3f89e866182d84e001846428d955))
+* **api:** new PaymentEventType for ACH Returns and small updates to 3DS AuthenticationResult ([#690](https://github.com/lithic-com/lithic-python/issues/690)) ([ab6b3e5](https://github.com/lithic-com/lithic-python/commit/ab6b3e5acb1e2f7614f60441b03348abf4217f19))
+* **internal:** bummp ruff dependency ([#689](https://github.com/lithic-com/lithic-python/issues/689)) ([2d0fc56](https://github.com/lithic-com/lithic-python/commit/2d0fc56ef5c8b93e94a5dab4bf214f75dc8731f3))
+* **internal:** change default timeout to an int ([#687](https://github.com/lithic-com/lithic-python/issues/687)) ([1bb4e70](https://github.com/lithic-com/lithic-python/commit/1bb4e70cc4afa33d8bf1861c31315dfe64eea0d2))
+* **internal:** fix type traversing dictionary params ([#692](https://github.com/lithic-com/lithic-python/issues/692)) ([ad99873](https://github.com/lithic-com/lithic-python/commit/ad998734859dcbdae451a38bc26711a854f0edb7))
+* **internal:** minor type handling changes ([#694](https://github.com/lithic-com/lithic-python/issues/694)) ([dfc6046](https://github.com/lithic-com/lithic-python/commit/dfc6046874c04b0873c555f6562208c328e74810))
+
 ## 0.84.0 (2025-01-28)
 
 Full Changelog: [v0.83.0...v0.84.0](https://github.com/lithic-com/lithic-python/compare/v0.83.0...v0.84.0)
