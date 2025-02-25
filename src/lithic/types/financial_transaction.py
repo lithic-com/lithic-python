@@ -83,6 +83,7 @@ class Event(BaseModel):
             "FINANCIAL_CREDIT_AUTHORIZATION",
             "INTEREST",
             "INTEREST_REVERSAL",
+            "INTERNAL_ADJUSTMENT",
             "LATE_PAYMENT",
             "LATE_PAYMENT_REVERSAL",
             "PROVISIONAL_CREDIT",
@@ -101,11 +102,12 @@ class FinancialTransaction(BaseModel):
     token: str
     """Globally unique identifier."""
 
-    category: Literal["ACH", "CARD", "TRANSFER"]
+    category: Literal["ACH", "CARD", "INTERNAL", "TRANSFER"]
     """Status types:
 
     - `CARD` - Issuing card transaction.
     - `ACH` - Transaction over ACH.
+    - `INTERNAL` - Transaction for internal adjustment.
     - `TRANSFER` - Internal transfer of funds between financial accounts in your
       program.
     """
