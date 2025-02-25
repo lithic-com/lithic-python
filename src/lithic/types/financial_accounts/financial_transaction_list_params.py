@@ -18,7 +18,7 @@ class FinancialTransactionListParams(TypedDict, total=False):
     Only entries created after the specified time will be included. UTC time zone.
     """
 
-    category: Literal["ACH", "CARD", "TRANSFER"]
+    category: Literal["ACH", "CARD", "INTERNAL", "TRANSFER"]
     """Financial Transaction category to be returned."""
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
