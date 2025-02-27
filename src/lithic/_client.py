@@ -153,7 +153,7 @@ class Lithic(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous lithic client instance.
+        """Construct a new synchronous Lithic client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `api_key` from `LITHIC_API_KEY`
@@ -453,7 +453,7 @@ class AsyncLithic(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async lithic client instance.
+        """Construct a new async AsyncLithic client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `api_key` from `LITHIC_API_KEY`
