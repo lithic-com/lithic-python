@@ -47,6 +47,9 @@ class AuthRuleConditionParam(TypedDict, total=False):
       trailing hour up and until the authorization.
     - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
       trailing 24 hours up and until the authorization.
+    - `CARD_STATE`: The current state of the card associated with the transaction.
+      Valid values are `CLOSED`, `OPEN`, `PAUSED`, `PENDING_ACTIVATION`,
+      `PENDING_FULFILLMENT`.
     """
 
     operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]

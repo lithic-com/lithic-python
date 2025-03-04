@@ -44,6 +44,9 @@ class FinancialAccount(BaseModel):
 
     nickname: Optional[str] = None
 
+    status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"]
+    """Status of the financial account"""
+
     type: Literal["ISSUING", "RESERVE", "OPERATING"]
 
     updated: datetime
@@ -51,3 +54,8 @@ class FinancialAccount(BaseModel):
     account_number: Optional[str] = None
 
     routing_number: Optional[str] = None
+
+    status_change_reason: Optional[
+        Literal["CHARGED_OFF_DELINQUENT", "CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "DELINQUENT"]
+    ] = None
+    """Reason for the financial account status change"""

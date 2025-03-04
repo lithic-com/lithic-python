@@ -44,7 +44,10 @@ class Merchant(TypedDict, total=False):
     """
 
     name: Required[str]
-    """Merchant descriptor, corresponds to `descriptor` in authorization."""
+    """Merchant descriptor, corresponds to `descriptor` in authorization.
+
+    If CHALLENGE keyword is included, Lithic will trigger a challenge.
+    """
 
 
 class Transaction(TypedDict, total=False):

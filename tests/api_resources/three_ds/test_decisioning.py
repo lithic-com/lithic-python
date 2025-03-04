@@ -11,7 +11,6 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types.three_ds import (
     DecisioningRetrieveSecretResponse,
-    DecisioningSimulateChallengeResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -104,72 +103,6 @@ class TestDecisioning:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_method_simulate_challenge(self, client: Lithic) -> None:
-        decisioning = client.three_ds.decisioning.simulate_challenge()
-        assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-    @parametrize
-    def test_method_simulate_challenge_with_all_params(self, client: Lithic) -> None:
-        decisioning = client.three_ds.decisioning.simulate_challenge(
-            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
-        )
-        assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-    @parametrize
-    def test_raw_response_simulate_challenge(self, client: Lithic) -> None:
-        response = client.three_ds.decisioning.with_raw_response.simulate_challenge()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        decisioning = response.parse()
-        assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-    @parametrize
-    def test_streaming_response_simulate_challenge(self, client: Lithic) -> None:
-        with client.three_ds.decisioning.with_streaming_response.simulate_challenge() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            decisioning = response.parse()
-            assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_simulate_challenge_response(self, client: Lithic) -> None:
-        decisioning = client.three_ds.decisioning.simulate_challenge_response(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            challenge_response="APPROVE",
-        )
-        assert decisioning is None
-
-    @parametrize
-    def test_raw_response_simulate_challenge_response(self, client: Lithic) -> None:
-        response = client.three_ds.decisioning.with_raw_response.simulate_challenge_response(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            challenge_response="APPROVE",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        decisioning = response.parse()
-        assert decisioning is None
-
-    @parametrize
-    def test_streaming_response_simulate_challenge_response(self, client: Lithic) -> None:
-        with client.three_ds.decisioning.with_streaming_response.simulate_challenge_response(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            challenge_response="APPROVE",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            decisioning = response.parse()
-            assert decisioning is None
-
-        assert cast(Any, response.is_closed) is True
-
 
 class TestAsyncDecisioning:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -250,72 +183,6 @@ class TestAsyncDecisioning:
     @parametrize
     async def test_streaming_response_rotate_secret(self, async_client: AsyncLithic) -> None:
         async with async_client.three_ds.decisioning.with_streaming_response.rotate_secret() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            decisioning = await response.parse()
-            assert decisioning is None
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_simulate_challenge(self, async_client: AsyncLithic) -> None:
-        decisioning = await async_client.three_ds.decisioning.simulate_challenge()
-        assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-    @parametrize
-    async def test_method_simulate_challenge_with_all_params(self, async_client: AsyncLithic) -> None:
-        decisioning = await async_client.three_ds.decisioning.simulate_challenge(
-            token="fabd829d-7f7b-4432-a8f2-07ea4889aaac",
-        )
-        assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-    @parametrize
-    async def test_raw_response_simulate_challenge(self, async_client: AsyncLithic) -> None:
-        response = await async_client.three_ds.decisioning.with_raw_response.simulate_challenge()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        decisioning = response.parse()
-        assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_simulate_challenge(self, async_client: AsyncLithic) -> None:
-        async with async_client.three_ds.decisioning.with_streaming_response.simulate_challenge() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            decisioning = await response.parse()
-            assert_matches_type(DecisioningSimulateChallengeResponse, decisioning, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_simulate_challenge_response(self, async_client: AsyncLithic) -> None:
-        decisioning = await async_client.three_ds.decisioning.simulate_challenge_response(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            challenge_response="APPROVE",
-        )
-        assert decisioning is None
-
-    @parametrize
-    async def test_raw_response_simulate_challenge_response(self, async_client: AsyncLithic) -> None:
-        response = await async_client.three_ds.decisioning.with_raw_response.simulate_challenge_response(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            challenge_response="APPROVE",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        decisioning = response.parse()
-        assert decisioning is None
-
-    @parametrize
-    async def test_streaming_response_simulate_challenge_response(self, async_client: AsyncLithic) -> None:
-        async with async_client.three_ds.decisioning.with_streaming_response.simulate_challenge_response(
-            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            challenge_response="APPROVE",
-        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

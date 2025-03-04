@@ -542,24 +542,94 @@ class TestAccountHolders:
             )
 
     @parametrize
-    def test_method_update(self, client: Lithic) -> None:
+    def test_method_update_overload_1(self, client: Lithic) -> None:
         account_holder = client.account_holders.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params(self, client: Lithic) -> None:
+    def test_method_update_with_all_params_overload_1(self, client: Lithic) -> None:
         account_holder = client.account_holders.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            business_account_token="business_account_token",
-            email="email",
-            phone_number="phone_number",
+            beneficial_owner_entities=[
+                {
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "address2",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dba_business_name": "dba_business_name",
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "parent_company": "parent_company",
+                    "phone_numbers": ["+15555555555"],
+                }
+            ],
+            beneficial_owner_individuals=[
+                {
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "address2",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+15555555555",
+                }
+            ],
+            business_entity={
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "address2",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dba_business_name": "dba_business_name",
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "parent_company": "parent_company",
+                "phone_numbers": ["+15555555555"],
+            },
+            control_person={
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "address2",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+15555555555",
+            },
+            external_id="external_id",
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            website_url="www.mybusiness.com",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_raw_response_update(self, client: Lithic) -> None:
+    def test_raw_response_update_overload_1(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -570,7 +640,7 @@ class TestAccountHolders:
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_streaming_response_update(self, client: Lithic) -> None:
+    def test_streaming_response_update_overload_1(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -583,7 +653,129 @@ class TestAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_update(self, client: Lithic) -> None:
+    def test_path_params_update_overload_1(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.update(
+                account_holder_token="",
+            )
+
+    @parametrize
+    def test_method_update_overload_2(self, client: Lithic) -> None:
+        account_holder = client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_2(self, client: Lithic) -> None:
+        account_holder = client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_id="external_id",
+            individual={
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "address2",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+15555555555",
+            },
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_2(self, client: Lithic) -> None:
+        response = client.account_holders.with_raw_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_2(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_update_overload_2(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            client.account_holders.with_raw_response.update(
+                account_holder_token="",
+            )
+
+    @parametrize
+    def test_method_update_overload_3(self, client: Lithic) -> None:
+        account_holder = client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_3(self, client: Lithic) -> None:
+        account_holder = client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            address={
+                "address1": "123 Old Forest Way",
+                "address2": "address2",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
+            business_account_token="business_account_token",
+            email="email",
+            first_name="first_name",
+            last_name="last_name",
+            legal_business_name="legal_business_name",
+            phone_number="phone_number",
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_3(self, client: Lithic) -> None:
+        response = client.account_holders.with_raw_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_3(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_update_overload_3(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             client.account_holders.with_raw_response.update(
                 account_holder_token="",
@@ -1361,24 +1553,94 @@ class TestAsyncAccountHolders:
             )
 
     @parametrize
-    async def test_method_update(self, async_client: AsyncLithic) -> None:
+    async def test_method_update_overload_1(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
+    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            business_account_token="business_account_token",
-            email="email",
-            phone_number="phone_number",
+            beneficial_owner_entities=[
+                {
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "address2",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dba_business_name": "dba_business_name",
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "parent_company": "parent_company",
+                    "phone_numbers": ["+15555555555"],
+                }
+            ],
+            beneficial_owner_individuals=[
+                {
+                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "address2": "address2",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+15555555555",
+                }
+            ],
+            business_entity={
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "address2",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dba_business_name": "dba_business_name",
+                "government_id": "114-123-1513",
+                "legal_business_name": "Acme, Inc.",
+                "parent_company": "parent_company",
+                "phone_numbers": ["+15555555555"],
+            },
+            control_person={
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "address2",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+15555555555",
+            },
+            external_id="external_id",
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            website_url="www.mybusiness.com",
         )
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
+    async def test_raw_response_update_overload_1(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -1389,7 +1651,7 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
+    async def test_streaming_response_update_overload_1(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -1402,7 +1664,129 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncLithic) -> None:
+    async def test_path_params_update_overload_1(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await async_client.account_holders.with_raw_response.update(
+                account_holder_token="",
+            )
+
+    @parametrize
+    async def test_method_update_overload_2(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_id="external_id",
+            individual={
+                "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "address2": "address2",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+15555555555",
+            },
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_2(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_2(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update_overload_2(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
+            await async_client.account_holders.with_raw_response.update(
+                account_holder_token="",
+            )
+
+    @parametrize
+    async def test_method_update_overload_3(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            address={
+                "address1": "123 Old Forest Way",
+                "address2": "address2",
+                "city": "Omaha",
+                "country": "USA",
+                "postal_code": "68022",
+                "state": "NE",
+            },
+            business_account_token="business_account_token",
+            email="email",
+            first_name="first_name",
+            last_name="last_name",
+            legal_business_name="legal_business_name",
+            phone_number="phone_number",
+        )
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_3(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_3(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.update(
+            account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderUpdateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update_overload_3(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_holder_token` but received ''"):
             await async_client.account_holders.with_raw_response.update(
                 account_holder_token="",
