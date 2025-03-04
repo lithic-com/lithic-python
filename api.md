@@ -46,7 +46,9 @@ Types:
 ```python
 from lithic.types import (
     AccountHolder,
+    AddressUpdate,
     KYB,
+    KYBBusinessEntity,
     KYC,
     KYCExempt,
     RequiredDocument,
@@ -544,6 +546,7 @@ Methods:
 
 - <code title="get /v1/three_ds_authentication/{three_ds_authentication_token}">client.three_ds.authentication.<a href="./src/lithic/resources/three_ds/authentication.py">retrieve</a>(three_ds_authentication_token) -> <a href="./src/lithic/types/three_ds/authentication_retrieve_response.py">AuthenticationRetrieveResponse</a></code>
 - <code title="post /v1/three_ds_authentication/simulate">client.three_ds.authentication.<a href="./src/lithic/resources/three_ds/authentication.py">simulate</a>(\*\*<a href="src/lithic/types/three_ds/authentication_simulate_params.py">params</a>) -> <a href="./src/lithic/types/three_ds/authentication_simulate_response.py">AuthenticationSimulateResponse</a></code>
+- <code title="post /v1/three_ds_decisioning/simulate/enter_otp">client.three_ds.authentication.<a href="./src/lithic/resources/three_ds/authentication.py">simulate_otp_entry</a>(\*\*<a href="src/lithic/types/three_ds/authentication_simulate_otp_entry_params.py">params</a>) -> None</code>
 
 ## Decisioning
 
@@ -554,7 +557,6 @@ from lithic.types.three_ds import (
     ChallengeResponse,
     ChallengeResult,
     DecisioningRetrieveSecretResponse,
-    DecisioningSimulateChallengeResponse,
 )
 ```
 
@@ -563,8 +565,6 @@ Methods:
 - <code title="post /v1/three_ds_decisioning/challenge_response">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">challenge_response</a>(\*\*<a href="src/lithic/types/three_ds/decisioning_challenge_response_params.py">params</a>) -> None</code>
 - <code title="get /v1/three_ds_decisioning/secret">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">retrieve_secret</a>() -> <a href="./src/lithic/types/three_ds/decisioning_retrieve_secret_response.py">DecisioningRetrieveSecretResponse</a></code>
 - <code title="post /v1/three_ds_decisioning/secret/rotate">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">rotate_secret</a>() -> None</code>
-- <code title="post /v1/three_ds_decisioning/simulate/challenge">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">simulate_challenge</a>(\*\*<a href="src/lithic/types/three_ds/decisioning_simulate_challenge_params.py">params</a>) -> <a href="./src/lithic/types/three_ds/decisioning_simulate_challenge_response.py">DecisioningSimulateChallengeResponse</a></code>
-- <code title="post /v1/three_ds_decisioning/simulate/challenge_response">client.three_ds.decisioning.<a href="./src/lithic/resources/three_ds/decisioning.py">simulate_challenge_response</a>(\*\*<a href="src/lithic/types/three_ds/decisioning_simulate_challenge_response_params.py">params</a>) -> None</code>
 
 # Reports
 
@@ -578,8 +578,21 @@ from lithic.types import SettlementDetail, SettlementReport, SettlementSummaryDe
 
 Methods:
 
-- <code title="get /v1/reports/settlement/details/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">list_details</a>(report_date, \*\*<a href="src/lithic/types/reports/settlement_list_details_params.py">params</a>) -> <a href="./src/lithic/types/settlement_detail.py">SyncCursorPage[SettlementDetail]</a></code>
-- <code title="get /v1/reports/settlement/summary/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement.py">summary</a>(report_date) -> <a href="./src/lithic/types/settlement_report.py">SettlementReport</a></code>
+- <code title="get /v1/reports/settlement/details/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement/settlement.py">list_details</a>(report_date, \*\*<a href="src/lithic/types/reports/settlement_list_details_params.py">params</a>) -> <a href="./src/lithic/types/settlement_detail.py">SyncCursorPage[SettlementDetail]</a></code>
+- <code title="get /v1/reports/settlement/summary/{report_date}">client.reports.settlement.<a href="./src/lithic/resources/reports/settlement/settlement.py">summary</a>(report_date) -> <a href="./src/lithic/types/settlement_report.py">SettlementReport</a></code>
+
+### NetworkTotals
+
+Types:
+
+```python
+from lithic.types.reports.settlement import NetworkTotalRetrieveResponse, NetworkTotalListResponse
+```
+
+Methods:
+
+- <code title="get /v1/reports/settlement/network_totals/{token}">client.reports.settlement.network_totals.<a href="./src/lithic/resources/reports/settlement/network_totals.py">retrieve</a>(token) -> <a href="./src/lithic/types/reports/settlement/network_total_retrieve_response.py">NetworkTotalRetrieveResponse</a></code>
+- <code title="get /v1/reports/settlement/network_totals">client.reports.settlement.network_totals.<a href="./src/lithic/resources/reports/settlement/network_totals.py">list</a>(\*\*<a href="src/lithic/types/reports/settlement/network_total_list_params.py">params</a>) -> <a href="./src/lithic/types/reports/settlement/network_total_list_response.py">SyncCursorPage[NetworkTotalListResponse]</a></code>
 
 # CardPrograms
 

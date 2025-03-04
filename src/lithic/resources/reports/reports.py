@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from ..._compat import cached_property
-from .settlement import (
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from .settlement.settlement import (
     Settlement,
     AsyncSettlement,
     SettlementWithRawResponse,
@@ -11,7 +12,6 @@ from .settlement import (
     SettlementWithStreamingResponse,
     AsyncSettlementWithStreamingResponse,
 )
-from ..._resource import SyncAPIResource, AsyncAPIResource
 
 __all__ = ["Reports", "AsyncReports"]
 
