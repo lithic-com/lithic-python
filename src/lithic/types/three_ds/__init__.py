@@ -10,12 +10,6 @@ from .decisioning_retrieve_secret_response import DecisioningRetrieveSecretRespo
 from .decisioning_challenge_response_params import (
     DecisioningChallengeResponseParams as DecisioningChallengeResponseParams,
 )
-from .decisioning_simulate_challenge_params import (
-    DecisioningSimulateChallengeParams as DecisioningSimulateChallengeParams,
-)
-from .decisioning_simulate_challenge_response import (
-    DecisioningSimulateChallengeResponse as DecisioningSimulateChallengeResponse,
-)
-from .decisioning_simulate_challenge_response_params import (
-    DecisioningSimulateChallengeResponseParams as DecisioningSimulateChallengeResponseParams,
+from .authentication_simulate_otp_entry_params import (
+    AuthenticationSimulateOtpEntryParams as AuthenticationSimulateOtpEntryParams,
 )

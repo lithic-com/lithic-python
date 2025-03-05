@@ -50,10 +50,12 @@ from .card_embed_response import CardEmbedResponse as CardEmbedResponse
 from .card_reissue_params import CardReissueParams as CardReissueParams
 from .dispute_list_params import DisputeListParams as DisputeListParams
 from .event_resend_params import EventResendParams as EventResendParams
+from .kyb_business_entity import KYBBusinessEntity as KYBBusinessEntity
 from .payment_list_params import PaymentListParams as PaymentListParams
 from .tokenization_secret import TokenizationSecret as TokenizationSecret
 from .verification_method import VerificationMethod as VerificationMethod
 from .account_spend_limits import AccountSpendLimits as AccountSpendLimits
+from .address_update_param import AddressUpdateParam as AddressUpdateParam
 from .spend_limit_duration import SpendLimitDuration as SpendLimitDuration
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams
