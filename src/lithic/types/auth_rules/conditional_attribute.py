@@ -16,4 +16,5 @@ ConditionalAttribute: TypeAlias = Literal[
     "RISK_SCORE",
     "CARD_TRANSACTION_COUNT_1H",
     "CARD_TRANSACTION_COUNT_24H",
+    "CARD_STATE",
 ]
