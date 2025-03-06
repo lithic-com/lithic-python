@@ -46,6 +46,9 @@ class AuthRuleCondition(BaseModel):
       trailing hour up and until the authorization.
     - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
       trailing 24 hours up and until the authorization.
+    - `CARD_STATE`: The current state of the card associated with the transaction.
+      Valid values are `CLOSED`, `OPEN`, `PAUSED`, `PENDING_ACTIVATION`,
+      `PENDING_FULFILLMENT`.
     """
 
     operation: Optional[

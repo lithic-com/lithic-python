@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.86.0 (2025-03-06)
+
+Full Changelog: [v0.85.0...v0.86.0](https://github.com/lithic-com/lithic-python/compare/v0.85.0...v0.86.0)
+
+### Features
+
+* **api:** new Settlement API endpoints and changes to update Account Holder endpoint ([#705](https://github.com/lithic-com/lithic-python/issues/705)) ([adccabb](https://github.com/lithic-com/lithic-python/commit/adccabbec1e63fe8bf74c18bdccc21c3f16ea142))
+* **client:** allow passing `NotGiven` for body ([#697](https://github.com/lithic-com/lithic-python/issues/697)) ([0291f1f](https://github.com/lithic-com/lithic-python/commit/0291f1fa45b0813e995f042d4483c75324f03de0))
+
+
+### Bug Fixes
+
+* **client:** mark some request bodies as optional ([0291f1f](https://github.com/lithic-com/lithic-python/commit/0291f1fa45b0813e995f042d4483c75324f03de0))
+* **internal:** skip failing transaction example ([df1bd93](https://github.com/lithic-com/lithic-python/commit/df1bd93a57fe01df54dc51476238523bf0c1ec54))
+
+
+### Chores
+
+* **api:** adds new `Internal` Category for FinancialTransactions ([#701](https://github.com/lithic-com/lithic-python/issues/701)) ([17c0aa5](https://github.com/lithic-com/lithic-python/commit/17c0aa5eccc116d6d24ff10b6b3500b632a3c000))
+* **docs:** update client docstring ([#703](https://github.com/lithic-com/lithic-python/issues/703)) ([a00fdff](https://github.com/lithic-com/lithic-python/commit/a00fdff57f4a593cb27ac988c08a18b7586ba690))
+* **internal:** fix devcontainers setup ([#699](https://github.com/lithic-com/lithic-python/issues/699)) ([2a59b0b](https://github.com/lithic-com/lithic-python/commit/2a59b0be559f29d3da58658bd690a7f9d3a91d49))
+* **internal:** properly set __pydantic_private__ ([#700](https://github.com/lithic-com/lithic-python/issues/700)) ([e7db283](https://github.com/lithic-com/lithic-python/commit/e7db283b63cc1158150e7067545de655a9236690))
+
+
+### Documentation
+
+* update URLs from stainlessapi.com to stainless.com ([#702](https://github.com/lithic-com/lithic-python/issues/702)) ([84efefd](https://github.com/lithic-com/lithic-python/commit/84efefd92f231fec34d96845dcaf9a9ae2c4bd53))
+
+
+### Refactors
+
+* **client:** remove deprecated http client options ([#704](https://github.com/lithic-com/lithic-python/issues/704)) ([c745a2b](https://github.com/lithic-com/lithic-python/commit/c745a2b593ec7487810f0c5e4522e55e49602f4a))
+
 ## 0.85.0 (2025-02-13)
 
 Full Changelog: [v0.84.0...v0.85.0](https://github.com/lithic-com/lithic-python/compare/v0.84.0...v0.85.0)

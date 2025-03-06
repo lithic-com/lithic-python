@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import Any, List, Union, Iterable, cast
 from datetime import datetime
 from typing_extensions import Literal, overload
 
@@ -32,6 +32,7 @@ from ..pagination import SyncSinglePage, AsyncSinglePage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.account_holder import AccountHolder
 from ..types.shared.document import Document
+from ..types.address_update_param import AddressUpdateParam
 from ..types.shared_params.address import Address
 from ..types.account_holder_create_response import AccountHolderCreateResponse
 from ..types.account_holder_update_response import AccountHolderUpdateResponse
@@ -378,13 +379,20 @@ class AccountHolders(SyncAPIResource):
             cast_to=AccountHolder,
         )
 
+    @overload
     def update(
         self,
         account_holder_token: str,
         *,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
+        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
+        | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        nature_of_business: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -393,20 +401,52 @@ class AccountHolders(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderUpdateResponse:
         """
-        Update the information associated with a particular account holder.
+        Update the information associated with a particular account holder (including
+        business owners and control persons associated to a business account). If Lithic
+        is performing KYB or KYC and additional verification is required we will run the
+        individual's or business's updated information again and return whether the
+        status is accepted or pending (i.e., further action required). All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the workflow is under review or further action will be needed to
+        complete the evaluation process. This endpoint can only be used on existing
+        accounts that are part of the program that the calling API key manages.
 
         Args:
-          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
-              users of businesses. Pass the account_token of the enrolled business associated
-              with the AUTHORIZED_USER in this field.
+          beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
+              individual owns >25% of the company, and the largest shareholder is an entity,
+              please identify them in this field. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)(Section
+              I) for more background. If no business owner is an entity, pass in an empty
+              list. However, either this parameter or `beneficial_owner_individuals` must be
+              populated. on entities that should be included.
 
-          email: Account holder's email address. The primary purpose of this field is for
-              cardholder identification and verification during the digital wallet
-              tokenization process.
+          beneficial_owner_individuals: List of all individuals with >25% ownership in the company. If no entity or
+              individual owns >25% of the company, and the largest shareholder is an
+              individual, please identify them in this field. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)(Section
+              I) for more background on individuals that should be included. If no individual
+              is an entity, pass in an empty list. However, either this parameter or
+              `beneficial_owner_entities` must be populated.
 
-          phone_number: Account holder's phone number, entered in E.164 format. The primary purpose of
-              this field is for cardholder identification and verification during the digital
-              wallet tokenization process.
+          business_entity: Information for business for which the account is being opened and KYB is being
+              run.
+
+          control_person: An individual with significant responsibility for managing the legal entity
+              (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
+              Officer, Managing Member, General Partner, President, Vice President, or
+              Treasurer). This can be an executive, or someone who will have program-wide
+              access to the cards that Lithic will provide. In some cases, this individual
+              could also be a beneficial owner listed above. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+              (Section II) for more background.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
+          nature_of_business: Short description of the company's line of business (i.e., what does the company
+              do?).
+
+          website_url: Company website URL.
 
           extra_headers: Send extra headers
 
@@ -416,24 +456,173 @@ class AccountHolders(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def update(
+        self,
+        account_holder_token: str,
+        *,
+        external_id: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderUpdateResponse:
+        """
+        Update the information associated with a particular account holder (including
+        business owners and control persons associated to a business account). If Lithic
+        is performing KYB or KYC and additional verification is required we will run the
+        individual's or business's updated information again and return whether the
+        status is accepted or pending (i.e., further action required). All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the workflow is under review or further action will be needed to
+        complete the evaluation process. This endpoint can only be used on existing
+        accounts that are part of the program that the calling API key manages.
+
+        Args:
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
+          individual: Information on the individual for whom the account is being opened and KYC is
+              being run.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        account_holder_token: str,
+        *,
+        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        legal_business_name: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderUpdateResponse:
+        """
+        Update the information associated with a particular account holder (including
+        business owners and control persons associated to a business account). If Lithic
+        is performing KYB or KYC and additional verification is required we will run the
+        individual's or business's updated information again and return whether the
+        status is accepted or pending (i.e., further action required). All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the workflow is under review or further action will be needed to
+        complete the evaluation process. This endpoint can only be used on existing
+        accounts that are part of the program that the calling API key manages.
+
+        Args:
+          address: Allowed for: KYC-Exempt, BYO-KYC, BYO-KYB.
+
+          business_account_token: Allowed for: KYC-Exempt, BYO-KYC. The token of the business account to which the
+              account holder is associated.
+
+          email: Allowed for all Account Holders. Account holder's email address. The primary
+              purpose of this field is for cardholder identification and verification during
+              the digital wallet tokenization process.
+
+          first_name: Allowed for KYC-Exempt, BYO-KYC. Account holder's first name.
+
+          last_name: Allowed for KYC-Exempt, BYO-KYC. Account holder's last name.
+
+          legal_business_name: Allowed for BYO-KYB. Legal business name of the account holder.
+
+          phone_number: Allowed for all Account Holders. Account holder's phone number, entered in E.164
+              format. The primary purpose of this field is for cardholder identification and
+              verification during the digital wallet tokenization process.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    def update(
+        self,
+        account_holder_token: str,
+        *,
+        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
+        | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        nature_of_business: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
+        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        legal_business_name: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderUpdateResponse:
         if not account_holder_token:
             raise ValueError(
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
-        return self._patch(
-            f"/v1/account_holders/{account_holder_token}",
-            body=maybe_transform(
-                {
-                    "business_account_token": business_account_token,
-                    "email": email,
-                    "phone_number": phone_number,
-                },
-                account_holder_update_params.AccountHolderUpdateParams,
+        return cast(
+            AccountHolderUpdateResponse,
+            self._patch(
+                f"/v1/account_holders/{account_holder_token}",
+                body=maybe_transform(
+                    {
+                        "beneficial_owner_entities": beneficial_owner_entities,
+                        "beneficial_owner_individuals": beneficial_owner_individuals,
+                        "business_entity": business_entity,
+                        "control_person": control_person,
+                        "external_id": external_id,
+                        "nature_of_business": nature_of_business,
+                        "website_url": website_url,
+                        "individual": individual,
+                        "address": address,
+                        "business_account_token": business_account_token,
+                        "email": email,
+                        "first_name": first_name,
+                        "last_name": last_name,
+                        "legal_business_name": legal_business_name,
+                        "phone_number": phone_number,
+                    },
+                    account_holder_update_params.AccountHolderUpdateParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, AccountHolderUpdateResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AccountHolderUpdateResponse,
         )
 
     def list(
@@ -1187,13 +1376,20 @@ class AsyncAccountHolders(AsyncAPIResource):
             cast_to=AccountHolder,
         )
 
+    @overload
     async def update(
         self,
         account_holder_token: str,
         *,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
+        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
+        | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        nature_of_business: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1202,20 +1398,52 @@ class AsyncAccountHolders(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountHolderUpdateResponse:
         """
-        Update the information associated with a particular account holder.
+        Update the information associated with a particular account holder (including
+        business owners and control persons associated to a business account). If Lithic
+        is performing KYB or KYC and additional verification is required we will run the
+        individual's or business's updated information again and return whether the
+        status is accepted or pending (i.e., further action required). All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the workflow is under review or further action will be needed to
+        complete the evaluation process. This endpoint can only be used on existing
+        accounts that are part of the program that the calling API key manages.
 
         Args:
-          business_account_token: Only applicable for customers using the KYC-Exempt workflow to enroll authorized
-              users of businesses. Pass the account_token of the enrolled business associated
-              with the AUTHORIZED_USER in this field.
+          beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
+              individual owns >25% of the company, and the largest shareholder is an entity,
+              please identify them in this field. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)(Section
+              I) for more background. If no business owner is an entity, pass in an empty
+              list. However, either this parameter or `beneficial_owner_individuals` must be
+              populated. on entities that should be included.
 
-          email: Account holder's email address. The primary purpose of this field is for
-              cardholder identification and verification during the digital wallet
-              tokenization process.
+          beneficial_owner_individuals: List of all individuals with >25% ownership in the company. If no entity or
+              individual owns >25% of the company, and the largest shareholder is an
+              individual, please identify them in this field. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)(Section
+              I) for more background on individuals that should be included. If no individual
+              is an entity, pass in an empty list. However, either this parameter or
+              `beneficial_owner_entities` must be populated.
 
-          phone_number: Account holder's phone number, entered in E.164 format. The primary purpose of
-              this field is for cardholder identification and verification during the digital
-              wallet tokenization process.
+          business_entity: Information for business for which the account is being opened and KYB is being
+              run.
+
+          control_person: An individual with significant responsibility for managing the legal entity
+              (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
+              Officer, Managing Member, General Partner, President, Vice President, or
+              Treasurer). This can be an executive, or someone who will have program-wide
+              access to the cards that Lithic will provide. In some cases, this individual
+              could also be a beneficial owner listed above. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+              (Section II) for more background.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
+          nature_of_business: Short description of the company's line of business (i.e., what does the company
+              do?).
+
+          website_url: Company website URL.
 
           extra_headers: Send extra headers
 
@@ -1225,24 +1453,173 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def update(
+        self,
+        account_holder_token: str,
+        *,
+        external_id: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderUpdateResponse:
+        """
+        Update the information associated with a particular account holder (including
+        business owners and control persons associated to a business account). If Lithic
+        is performing KYB or KYC and additional verification is required we will run the
+        individual's or business's updated information again and return whether the
+        status is accepted or pending (i.e., further action required). All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the workflow is under review or further action will be needed to
+        complete the evaluation process. This endpoint can only be used on existing
+        accounts that are part of the program that the calling API key manages.
+
+        Args:
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
+          individual: Information on the individual for whom the account is being opened and KYC is
+              being run.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        account_holder_token: str,
+        *,
+        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        legal_business_name: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderUpdateResponse:
+        """
+        Update the information associated with a particular account holder (including
+        business owners and control persons associated to a business account). If Lithic
+        is performing KYB or KYC and additional verification is required we will run the
+        individual's or business's updated information again and return whether the
+        status is accepted or pending (i.e., further action required). All calls to this
+        endpoint will return an immediate response - though in some cases, the response
+        may indicate the workflow is under review or further action will be needed to
+        complete the evaluation process. This endpoint can only be used on existing
+        accounts that are part of the program that the calling API key manages.
+
+        Args:
+          address: Allowed for: KYC-Exempt, BYO-KYC, BYO-KYB.
+
+          business_account_token: Allowed for: KYC-Exempt, BYO-KYC. The token of the business account to which the
+              account holder is associated.
+
+          email: Allowed for all Account Holders. Account holder's email address. The primary
+              purpose of this field is for cardholder identification and verification during
+              the digital wallet tokenization process.
+
+          first_name: Allowed for KYC-Exempt, BYO-KYC. Account holder's first name.
+
+          last_name: Allowed for KYC-Exempt, BYO-KYC. Account holder's last name.
+
+          legal_business_name: Allowed for BYO-KYB. Legal business name of the account holder.
+
+          phone_number: Allowed for all Account Holders. Account holder's phone number, entered in E.164
+              format. The primary purpose of this field is for cardholder identification and
+              verification during the digital wallet tokenization process.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    async def update(
+        self,
+        account_holder_token: str,
+        *,
+        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
+        beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
+        | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        nature_of_business: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
+        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        legal_business_name: str | NotGiven = NOT_GIVEN,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderUpdateResponse:
         if not account_holder_token:
             raise ValueError(
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
-        return await self._patch(
-            f"/v1/account_holders/{account_holder_token}",
-            body=await async_maybe_transform(
-                {
-                    "business_account_token": business_account_token,
-                    "email": email,
-                    "phone_number": phone_number,
-                },
-                account_holder_update_params.AccountHolderUpdateParams,
+        return cast(
+            AccountHolderUpdateResponse,
+            await self._patch(
+                f"/v1/account_holders/{account_holder_token}",
+                body=await async_maybe_transform(
+                    {
+                        "beneficial_owner_entities": beneficial_owner_entities,
+                        "beneficial_owner_individuals": beneficial_owner_individuals,
+                        "business_entity": business_entity,
+                        "control_person": control_person,
+                        "external_id": external_id,
+                        "nature_of_business": nature_of_business,
+                        "website_url": website_url,
+                        "individual": individual,
+                        "address": address,
+                        "business_account_token": business_account_token,
+                        "email": email,
+                        "first_name": first_name,
+                        "last_name": last_name,
+                        "legal_business_name": legal_business_name,
+                        "phone_number": phone_number,
+                    },
+                    account_holder_update_params.AccountHolderUpdateParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, AccountHolderUpdateResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AccountHolderUpdateResponse,
         )
 
     def list(

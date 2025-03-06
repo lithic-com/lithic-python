@@ -7,22 +7,34 @@ from datetime import date
 
 import httpx
 
-from ... import _legacy_response
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ...pagination import SyncCursorPage, AsyncCursorPage
-from ..._base_client import AsyncPaginator, make_request_options
-from ...types.reports import settlement_list_details_params
-from ...types.settlement_detail import SettlementDetail
-from ...types.settlement_report import SettlementReport
+from .... import _legacy_response
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import maybe_transform
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ....pagination import SyncCursorPage, AsyncCursorPage
+from .network_totals import (
+    NetworkTotals,
+    AsyncNetworkTotals,
+    NetworkTotalsWithRawResponse,
+    AsyncNetworkTotalsWithRawResponse,
+    NetworkTotalsWithStreamingResponse,
+    AsyncNetworkTotalsWithStreamingResponse,
+)
+from ...._base_client import AsyncPaginator, make_request_options
+from ....types.reports import settlement_list_details_params
+from ....types.settlement_detail import SettlementDetail
+from ....types.settlement_report import SettlementReport
 
 __all__ = ["Settlement", "AsyncSettlement"]
 
 
 class Settlement(SyncAPIResource):
+    @cached_property
+    def network_totals(self) -> NetworkTotals:
+        return NetworkTotals(self._client)
+
     @cached_property
     def with_raw_response(self) -> SettlementWithRawResponse:
         """
@@ -134,6 +146,10 @@ class Settlement(SyncAPIResource):
 
 
 class AsyncSettlement(AsyncAPIResource):
+    @cached_property
+    def network_totals(self) -> AsyncNetworkTotals:
+        return AsyncNetworkTotals(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncSettlementWithRawResponse:
         """
@@ -255,6 +271,10 @@ class SettlementWithRawResponse:
             settlement.summary,
         )
 
+    @cached_property
+    def network_totals(self) -> NetworkTotalsWithRawResponse:
+        return NetworkTotalsWithRawResponse(self._settlement.network_totals)
+
 
 class AsyncSettlementWithRawResponse:
     def __init__(self, settlement: AsyncSettlement) -> None:
@@ -266,6 +286,10 @@ class AsyncSettlementWithRawResponse:
         self.summary = _legacy_response.async_to_raw_response_wrapper(
             settlement.summary,
         )
+
+    @cached_property
+    def network_totals(self) -> AsyncNetworkTotalsWithRawResponse:
+        return AsyncNetworkTotalsWithRawResponse(self._settlement.network_totals)
 
 
 class SettlementWithStreamingResponse:
@@ -279,6 +303,10 @@ class SettlementWithStreamingResponse:
             settlement.summary,
         )
 
+    @cached_property
+    def network_totals(self) -> NetworkTotalsWithStreamingResponse:
+        return NetworkTotalsWithStreamingResponse(self._settlement.network_totals)
+
 
 class AsyncSettlementWithStreamingResponse:
     def __init__(self, settlement: AsyncSettlement) -> None:
@@ -290,3 +318,7 @@ class AsyncSettlementWithStreamingResponse:
         self.summary = async_to_streamed_response_wrapper(
             settlement.summary,
         )
+
+    @cached_property
+    def network_totals(self) -> AsyncNetworkTotalsWithStreamingResponse:
+        return AsyncNetworkTotalsWithStreamingResponse(self._settlement.network_totals)

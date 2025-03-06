@@ -6,86 +6,18 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 from .required_document import RequiredDocument
+from .kyb_business_entity import KYBBusinessEntity
 
 __all__ = [
     "AccountHolderSimulateEnrollmentReviewResponse",
-    "BeneficialOwnerEntity",
-    "BeneficialOwnerEntityAddress",
     "BeneficialOwnerIndividual",
     "BeneficialOwnerIndividualAddress",
-    "BusinessEntity",
-    "BusinessEntityAddress",
     "ControlPerson",
     "ControlPersonAddress",
     "Individual",
     "IndividualAddress",
     "VerificationApplication",
 ]
-
-
-class BeneficialOwnerEntityAddress(BaseModel):
-    address1: str
-    """Valid deliverable address (no PO boxes)."""
-
-    city: str
-    """Name of city."""
-
-    country: str
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: str
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: str
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: Optional[str] = None
-    """Unit or apartment number (if applicable)."""
-
-
-class BeneficialOwnerEntity(BaseModel):
-    address: BeneficialOwnerEntityAddress
-    """
-    Business''s physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: str
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: str
-    """Legal (formal) business name."""
-
-    phone_numbers: List[str]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: Optional[str] = None
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: Optional[str] = None
-    """Parent company name (if applicable)."""
 
 
 class BeneficialOwnerIndividualAddress(BaseModel):
@@ -145,71 +77,6 @@ class BeneficialOwnerIndividual(BaseModel):
 
     phone_number: Optional[str] = None
     """Individual's phone number, entered in E.164 format."""
-
-
-class BusinessEntityAddress(BaseModel):
-    address1: str
-    """Valid deliverable address (no PO boxes)."""
-
-    city: str
-    """Name of city."""
-
-    country: str
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
-    """
-
-    postal_code: str
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: str
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
-    """
-
-    address2: Optional[str] = None
-    """Unit or apartment number (if applicable)."""
-
-
-class BusinessEntity(BaseModel):
-    address: BusinessEntityAddress
-    """
-    Business''s physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: str
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: str
-    """Legal (formal) business name."""
-
-    phone_numbers: List[str]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: Optional[str] = None
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: Optional[str] = None
-    """Parent company name (if applicable)."""
 
 
 class ControlPersonAddress(BaseModel):
@@ -382,7 +249,7 @@ class AccountHolderSimulateEnrollmentReviewResponse(BaseModel):
     account_token: Optional[str] = None
     """Globally unique identifier for the account."""
 
-    beneficial_owner_entities: Optional[List[BeneficialOwnerEntity]] = None
+    beneficial_owner_entities: Optional[List[KYBBusinessEntity]] = None
     """Only present when user_type == "BUSINESS".
 
     List of all entities with >25% ownership in the company.
@@ -401,7 +268,7 @@ class AccountHolderSimulateEnrollmentReviewResponse(BaseModel):
     with the AUTHORIZED_USER in this field.
     """
 
-    business_entity: Optional[BusinessEntity] = None
+    business_entity: Optional[KYBBusinessEntity] = None
     """Only present when user_type == "BUSINESS".
 
     Information about the business for which the account is being opened and KYB is

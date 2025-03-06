@@ -51,6 +51,8 @@ class Event(BaseModel):
         "management_operation.updated",
         "payment_transaction.created",
         "payment_transaction.updated",
+        "internal_transaction.created",
+        "internal_transaction.updated",
         "settlement_report.updated",
         "statements.created",
         "three_ds_authentication.created",
