@@ -34,7 +34,10 @@ class Data(BaseModel):
     """Timestamp of when the line item was generated"""
 
     currency: str
-    """3-digit alphabetic ISO 4217 code for the settling currency of the transaction"""
+    """
+    3-character alphabetic ISO 4217 code for the settling currency of the
+    transaction
+    """
 
     effective_date: date
     """Date that the transaction effected the account balance"""

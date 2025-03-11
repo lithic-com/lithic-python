@@ -25,10 +25,10 @@ class CardProgram(BaseModel):
     """The first digits of the card number that this card program starts with."""
 
     cardholder_currency: Optional[str] = None
-    """3-digit alphabetic ISO 4217 code for the currency of the cardholder."""
+    """3-character alphabetic ISO 4217 code for the currency of the cardholder."""
 
     settlement_currencies: Optional[List[str]] = None
     """
-    List of 3-digit alphabetic ISO 4217 codes for the currencies that the card
+    List of 3-character alphabetic ISO 4217 codes for the currencies that the card
     program supports for settlement.
     """

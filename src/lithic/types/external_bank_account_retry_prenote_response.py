@@ -34,7 +34,7 @@ class ExternalBankAccountRetryPrenoteResponse(BaseModel):
     """
 
     currency: str
-    """currency of the external account 3-digit alphabetic ISO 4217 code"""
+    """currency of the external account 3-character alphabetic ISO 4217 code"""
 
     last_four: str
     """The last 4 digits of the bank account.

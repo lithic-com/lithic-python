@@ -41,7 +41,7 @@ class SettlementDetail(BaseModel):
     """Date and time when the transaction first occurred. UTC time zone."""
 
     currency: str
-    """Three-digit alphabetic ISO 4217 code."""
+    """Three-character alphabetic ISO 4217 code."""
 
     disputes_gross_amount: int
     """The total gross amount of disputes settlements."""

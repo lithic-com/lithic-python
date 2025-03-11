@@ -15,7 +15,7 @@ class AggregateBalanceListResponse(BaseModel):
     """Date and time for when the balance was first created."""
 
     currency: str
-    """3-digit alphabetic ISO 4217 code for the local currency of the balance."""
+    """3-character alphabetic ISO 4217 code for the local currency of the balance."""
 
     last_card_token: str
     """
