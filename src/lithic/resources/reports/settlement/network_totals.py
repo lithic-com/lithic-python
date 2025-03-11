@@ -54,10 +54,9 @@ class NetworkTotals(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> NetworkTotalRetrieveResponse:
-        """(Available March 4, 2025) Retrieve a specific network total record by token.
+        """Retrieve a specific network total record by token.
 
-        Not
-        available in sandbox.
+        Not available in sandbox.
 
         Args:
           extra_headers: Send extra headers
@@ -99,10 +98,9 @@ class NetworkTotals(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncCursorPage[NetworkTotalListResponse]:
-        """(Available March 4, 2025) List network total records with optional filters.
+        """List network total records with optional filters.
 
-        Not
-        available in sandbox.
+        Not available in sandbox.
 
         Args:
           begin: Datetime in RFC 3339 format. Only entries created after the specified time will
@@ -200,10 +198,9 @@ class AsyncNetworkTotals(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> NetworkTotalRetrieveResponse:
-        """(Available March 4, 2025) Retrieve a specific network total record by token.
+        """Retrieve a specific network total record by token.
 
-        Not
-        available in sandbox.
+        Not available in sandbox.
 
         Args:
           extra_headers: Send extra headers
@@ -245,10 +242,9 @@ class AsyncNetworkTotals(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[NetworkTotalListResponse, AsyncCursorPage[NetworkTotalListResponse]]:
-        """(Available March 4, 2025) List network total records with optional filters.
+        """List network total records with optional filters.
 
-        Not
-        available in sandbox.
+        Not available in sandbox.
 
         Args:
           begin: Datetime in RFC 3339 format. Only entries created after the specified time will
