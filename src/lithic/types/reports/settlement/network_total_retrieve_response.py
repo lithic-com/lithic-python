@@ -36,7 +36,7 @@ class NetworkTotalRetrieveResponse(BaseModel):
     """RFC 3339 timestamp for when the record was created. UTC time zone."""
 
     currency: str
-    """Three-digit alphabetic ISO 4217 code."""
+    """3-character alphabetic ISO 4217 code."""
 
     institution_id: str
     """The institution that activity occurred on.

@@ -14,7 +14,7 @@ class SettlementReport(BaseModel):
     """Date and time when the transaction first occurred. UTC time zone."""
 
     currency: str
-    """Three-digit alphabetic ISO 4217 code.
+    """3-character alphabetic ISO 4217 code.
 
     (This field is deprecated and will be removed in a future version of the API.)
     """

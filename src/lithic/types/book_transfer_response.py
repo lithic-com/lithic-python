@@ -55,7 +55,10 @@ class BookTransferResponse(BaseModel):
     """Date and time when the transfer occurred. UTC time zone."""
 
     currency: str
-    """3-digit alphabetic ISO 4217 code for the settling currency of the transaction."""
+    """
+    3-character alphabetic ISO 4217 code for the settling currency of the
+    transaction.
+    """
 
     events: List[Event]
     """A list of all financial events that have modified this transfer."""

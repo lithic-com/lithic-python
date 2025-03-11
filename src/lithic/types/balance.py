@@ -16,7 +16,7 @@ class Balance(BaseModel):
     """Date and time for when the balance was first created."""
 
     currency: str
-    """3-digit alphabetic ISO 4217 code for the local currency of the balance."""
+    """3-character alphabetic ISO 4217 code for the local currency of the balance."""
 
     financial_account_token: str
     """Globally unique identifier for the financial account that holds this balance."""

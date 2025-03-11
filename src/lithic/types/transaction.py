@@ -50,11 +50,7 @@ class AmountsCardholder(BaseModel):
     """
 
     currency: Currency
-    """ISO 4217 currency.
-
-    Its enumerants are ISO 4217 currencies except for some special currencies like
-    `XXX`. Enumerants names are lowercase currency code e.g. `EUR`, `USD`.
-    """
+    """3-character alphabetic ISO 4217 currency"""
 
 
 class AmountsHold(BaseModel):
@@ -62,11 +58,7 @@ class AmountsHold(BaseModel):
     """The pending amount of the transaction in the anticipated settlement currency."""
 
     currency: Currency
-    """ISO 4217 currency.
-
-    Its enumerants are ISO 4217 currencies except for some special currencies like
-    `XXX`. Enumerants names are lowercase currency code e.g. `EUR`, `USD`.
-    """
+    """3-character alphabetic ISO 4217 currency"""
 
 
 class AmountsMerchant(BaseModel):
@@ -74,11 +66,7 @@ class AmountsMerchant(BaseModel):
     """The settled amount of the transaction in the merchant currency."""
 
     currency: Currency
-    """ISO 4217 currency.
-
-    Its enumerants are ISO 4217 currencies except for some special currencies like
-    `XXX`. Enumerants names are lowercase currency code e.g. `EUR`, `USD`.
-    """
+    """3-character alphabetic ISO 4217 currency"""
 
 
 class AmountsSettlement(BaseModel):
@@ -86,11 +74,7 @@ class AmountsSettlement(BaseModel):
     """The settled amount of the transaction in the settlement currency."""
 
     currency: Currency
-    """ISO 4217 currency.
-
-    Its enumerants are ISO 4217 currencies except for some special currencies like
-    `XXX`. Enumerants names are lowercase currency code e.g. `EUR`, `USD`.
-    """
+    """3-character alphabetic ISO 4217 currency"""
 
 
 class Amounts(BaseModel):
@@ -328,11 +312,7 @@ class EventAmountsCardholder(BaseModel):
     """
 
     currency: Currency
-    """ISO 4217 currency.
-
-    Its enumerants are ISO 4217 currencies except for some special currencies like
-    `XXX`. Enumerants names are lowercase currency code e.g. `EUR`, `USD`.
-    """
+    """3-character alphabetic ISO 4217 currency"""
 
 
 class EventAmountsMerchant(BaseModel):
@@ -340,11 +320,7 @@ class EventAmountsMerchant(BaseModel):
     """Amount of the event in the merchant currency."""
 
     currency: Currency
-    """ISO 4217 currency.
-
-    Its enumerants are ISO 4217 currencies except for some special currencies like
-    `XXX`. Enumerants names are lowercase currency code e.g. `EUR`, `USD`.
-    """
+    """3-character alphabetic ISO 4217 currency"""
 
 
 class EventAmountsSettlement(BaseModel):
@@ -358,11 +334,7 @@ class EventAmountsSettlement(BaseModel):
     """Exchange rate used to convert the merchant amount to the settlement amount."""
 
     currency: Currency
-    """ISO 4217 currency.
-
-    Its enumerants are ISO 4217 currencies except for some special currencies like
-    `XXX`. Enumerants names are lowercase currency code e.g. `EUR`, `USD`.
-    """
+    """3-character alphabetic ISO 4217 currency"""
 
 
 class EventAmounts(BaseModel):
@@ -714,7 +686,7 @@ class Transaction(BaseModel):
     """Analogous to the 'authorization_amount', but in the merchant currency."""
 
     merchant_currency: str
-    """3-digit alphabetic ISO 4217 code for the local currency of the transaction."""
+    """3-character alphabetic ISO 4217 code for the local currency of the transaction."""
 
     network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]] = None
     """Card network of the authorization.
