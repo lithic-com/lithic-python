@@ -11,6 +11,19 @@ __all__ = ["VelocityLimitParamsParam", "Filters"]
 
 
 class Filters(TypedDict, total=False):
+    exclude_countries: Optional[List[str]]
+    """ISO-3166-1 alpha-3 Country Codes to exclude from the velocity calculation.
+
+    Transactions matching any of the provided will be excluded from the calculated
+    velocity.
+    """
+
+    exclude_mccs: Optional[List[str]]
+    """Merchant Category Codes to exclude from the velocity calculation.
+
+    Transactions matching this MCC will be excluded from the calculated velocity.
+    """
+
     include_countries: Optional[List[str]]
     """ISO-3166-1 alpha-3 Country Codes to include in the velocity calculation.
 
