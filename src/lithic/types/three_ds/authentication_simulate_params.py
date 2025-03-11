@@ -55,4 +55,4 @@ class Transaction(TypedDict, total=False):
     """Amount (in cents) to authenticate."""
 
     currency: Required[str]
-    """3-digit alphabetic ISO 4217 currency code."""
+    """3-character alphabetic ISO 4217 currency code."""

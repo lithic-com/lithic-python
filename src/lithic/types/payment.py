@@ -103,7 +103,7 @@ class Payment(BaseModel):
     """Date and time when the payment first occurred. UTC time zone."""
 
     currency: str
-    """3-digit alphabetic ISO 4217 code for the settling currency of the payment."""
+    """3-character alphabetic ISO 4217 code for the settling currency of the payment."""
 
     descriptor: str
     """
