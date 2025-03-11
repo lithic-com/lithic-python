@@ -116,7 +116,10 @@ class FinancialTransaction(BaseModel):
     """Date and time when the financial transaction first occurred. UTC time zone."""
 
     currency: str
-    """3-digit alphabetic ISO 4217 code for the settling currency of the transaction."""
+    """
+    3-character alphabetic ISO 4217 code for the settling currency of the
+    transaction.
+    """
 
     descriptor: str
     """

@@ -115,6 +115,6 @@ class Account(BaseModel):
     """
 
     cardholder_currency: Optional[str] = None
-    """3-digit alphabetic ISO 4217 code for the currency of the cardholder."""
+    """3-character alphabetic ISO 4217 code for the currency of the cardholder."""
 
     verification_address: Optional[VerificationAddress] = None

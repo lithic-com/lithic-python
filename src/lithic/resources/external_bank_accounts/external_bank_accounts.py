@@ -111,7 +111,7 @@ class ExternalBankAccounts(SyncAPIResource):
           country: The country that the bank account is located in using ISO 3166-1. We will only
               accept USA bank accounts e.g., USA
 
-          currency: currency of the external account 3-digit alphabetic ISO 4217 code
+          currency: currency of the external account 3-character alphabetic ISO 4217 code
 
           financial_account_token: The financial account token of the operating account to fund the micro deposits
 
@@ -240,7 +240,7 @@ class ExternalBankAccounts(SyncAPIResource):
           country: The country that the bank account is located in using ISO 3166-1. We will only
               accept USA bank accounts e.g., USA
 
-          currency: currency of the external account 3-digit alphabetic ISO 4217 code
+          currency: currency of the external account 3-character alphabetic ISO 4217 code
 
           owner: Legal Name of the business or individual who owns the external account. This
               will appear in statements
@@ -680,7 +680,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
           country: The country that the bank account is located in using ISO 3166-1. We will only
               accept USA bank accounts e.g., USA
 
-          currency: currency of the external account 3-digit alphabetic ISO 4217 code
+          currency: currency of the external account 3-character alphabetic ISO 4217 code
 
           financial_account_token: The financial account token of the operating account to fund the micro deposits
 
@@ -809,7 +809,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
           country: The country that the bank account is located in using ISO 3166-1. We will only
               accept USA bank accounts e.g., USA
 
-          currency: currency of the external account 3-digit alphabetic ISO 4217 code
+          currency: currency of the external account 3-character alphabetic ISO 4217 code
 
           owner: Legal Name of the business or individual who owns the external account. This
               will appear in statements
