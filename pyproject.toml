@@ -38,7 +38,6 @@ Homepage = "https://github.com/lithic-com/lithic-python"
 Repository = "https://github.com/lithic-com/lithic-python"
 
 
-
 [tool.rye]
 managed = true
 # version pins are in requirements-dev.lock
