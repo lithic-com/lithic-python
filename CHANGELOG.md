@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.86.1 (2025-03-14)
+
+Full Changelog: [v0.86.0...v0.86.1](https://github.com/lithic-com/lithic-python/compare/v0.86.0...v0.86.1)
+
+### Bug Fixes
+
+* **types:** handle more discriminated union shapes ([#713](https://github.com/lithic-com/lithic-python/issues/713)) ([eb8c941](https://github.com/lithic-com/lithic-python/commit/eb8c941ab542757530dc5ec9ff1eba7a89aeac74))
+
+
+### Chores
+
+* **internal:** bump rye to 0.44.0 ([#712](https://github.com/lithic-com/lithic-python/issues/712)) ([0ac2afe](https://github.com/lithic-com/lithic-python/commit/0ac2afe1892ff69251a97e92cae24bcd1532598f))
+* **internal:** remove extra empty newlines ([#710](https://github.com/lithic-com/lithic-python/issues/710)) ([83aedda](https://github.com/lithic-com/lithic-python/commit/83aeddafa2aa3904f46017a026219d640a6c3da6))
+
 ## 0.86.0 (2025-03-12)
 
 Full Changelog: [v0.85.0...v0.86.0](https://github.com/lithic-com/lithic-python/compare/v0.85.0...v0.86.0)
