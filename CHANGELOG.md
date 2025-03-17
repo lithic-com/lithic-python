@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.86.2 (2025-03-17)
+
+Full Changelog: [v0.86.1...v0.86.2](https://github.com/lithic-com/lithic-python/compare/v0.86.1...v0.86.2)
+
+### Bug Fixes
+
+* **ci:** ensure pip is always available ([#714](https://github.com/lithic-com/lithic-python/issues/714)) ([9e8255b](https://github.com/lithic-com/lithic-python/commit/9e8255bea3ac68a124f7a445170d5b665eb39c17))
+* **ci:** remove publishing patch ([#716](https://github.com/lithic-com/lithic-python/issues/716)) ([92f82b9](https://github.com/lithic-com/lithic-python/commit/92f82b9ccb0fc2b7e58aaa04220734ccf4f71976))
+
 ## 0.86.1 (2025-03-14)
 
 Full Changelog: [v0.86.0...v0.86.1](https://github.com/lithic-com/lithic-python/compare/v0.86.0...v0.86.1)
