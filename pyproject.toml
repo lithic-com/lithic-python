@@ -1,6 +1,6 @@
 [project]
 name = "lithic"
-version = "0.86.1"
+version = "0.86.2"
 description = "The official Python library for the lithic API"
 dynamic = ["readme"]
 license = "Apache-2.0"
