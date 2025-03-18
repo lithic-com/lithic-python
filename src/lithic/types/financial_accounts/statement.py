@@ -178,7 +178,7 @@ class Statement(BaseModel):
     financial_account_token: str
     """Globally unique identifier for a financial account"""
 
-    payment_due_date: date
+    payment_due_date: Optional[date] = None
     """Date when the payment is due"""
 
     period_totals: PeriodTotals
@@ -192,7 +192,7 @@ class Statement(BaseModel):
     statement_start_date: date
     """Date when the billing period began"""
 
-    statement_type: Literal["INITIAL", "PERIOD_END"]
+    statement_type: Literal["INITIAL", "PERIOD_END", "FINAL"]
 
     updated: datetime
     """Timestamp of when the statement was updated"""

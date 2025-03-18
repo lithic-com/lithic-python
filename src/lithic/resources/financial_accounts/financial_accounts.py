@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -11,7 +12,7 @@ from ...types import (
     financial_account_list_params,
     financial_account_create_params,
     financial_account_update_params,
-    financial_account_charge_off_params,
+    financial_account_update_status_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
@@ -64,7 +65,6 @@ from .financial_transactions import (
     AsyncFinancialTransactionsWithStreamingResponse,
 )
 from ...types.financial_account import FinancialAccount
-from ...types.financial_accounts.financial_account_credit_config import FinancialAccountCreditConfig
 
 __all__ = ["FinancialAccounts", "AsyncFinancialAccounts"]
 
@@ -276,23 +276,28 @@ class FinancialAccounts(SyncAPIResource):
             model=FinancialAccount,
         )
 
-    def charge_off(
+    def update_status(
         self,
         financial_account_token: str,
         *,
-        reason: Literal["DELINQUENT", "FRAUD"],
+        status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
+        status_change_reason: Optional[
+            Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]
+        ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FinancialAccountCreditConfig:
+    ) -> FinancialAccount:
         """
-        Update issuing account state to charged off
+        Update financial account status
 
         Args:
-          reason: Reason for the financial account being marked as Charged Off
+          status: Status of the financial account
+
+          status_change_reason: Reason for the financial account status change
 
           extra_headers: Send extra headers
 
@@ -307,14 +312,18 @@ class FinancialAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._post(
-            f"/v1/financial_accounts/{financial_account_token}/charge_off",
+            f"/v1/financial_accounts/{financial_account_token}/update_status",
             body=maybe_transform(
-                {"reason": reason}, financial_account_charge_off_params.FinancialAccountChargeOffParams
+                {
+                    "status": status,
+                    "status_change_reason": status_change_reason,
+                },
+                financial_account_update_status_params.FinancialAccountUpdateStatusParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FinancialAccountCreditConfig,
+            cast_to=FinancialAccount,
         )
 
 
@@ -527,23 +536,28 @@ class AsyncFinancialAccounts(AsyncAPIResource):
             model=FinancialAccount,
         )
 
-    async def charge_off(
+    async def update_status(
         self,
         financial_account_token: str,
         *,
-        reason: Literal["DELINQUENT", "FRAUD"],
+        status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
+        status_change_reason: Optional[
+            Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]
+        ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> FinancialAccountCreditConfig:
+    ) -> FinancialAccount:
         """
-        Update issuing account state to charged off
+        Update financial account status
 
         Args:
-          reason: Reason for the financial account being marked as Charged Off
+          status: Status of the financial account
+
+          status_change_reason: Reason for the financial account status change
 
           extra_headers: Send extra headers
 
@@ -558,14 +572,18 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._post(
-            f"/v1/financial_accounts/{financial_account_token}/charge_off",
+            f"/v1/financial_accounts/{financial_account_token}/update_status",
             body=await async_maybe_transform(
-                {"reason": reason}, financial_account_charge_off_params.FinancialAccountChargeOffParams
+                {
+                    "status": status,
+                    "status_change_reason": status_change_reason,
+                },
+                financial_account_update_status_params.FinancialAccountUpdateStatusParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FinancialAccountCreditConfig,
+            cast_to=FinancialAccount,
         )
 
 
@@ -585,8 +603,8 @@ class FinancialAccountsWithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             financial_accounts.list,
         )
-        self.charge_off = _legacy_response.to_raw_response_wrapper(
-            financial_accounts.charge_off,
+        self.update_status = _legacy_response.to_raw_response_wrapper(
+            financial_accounts.update_status,
         )
 
     @cached_property
@@ -626,8 +644,8 @@ class AsyncFinancialAccountsWithRawResponse:
         self.list = _legacy_response.async_to_raw_response_wrapper(
             financial_accounts.list,
         )
-        self.charge_off = _legacy_response.async_to_raw_response_wrapper(
-            financial_accounts.charge_off,
+        self.update_status = _legacy_response.async_to_raw_response_wrapper(
+            financial_accounts.update_status,
         )
 
     @cached_property
@@ -667,8 +685,8 @@ class FinancialAccountsWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             financial_accounts.list,
         )
-        self.charge_off = to_streamed_response_wrapper(
-            financial_accounts.charge_off,
+        self.update_status = to_streamed_response_wrapper(
+            financial_accounts.update_status,
         )
 
     @cached_property
@@ -708,8 +726,8 @@ class AsyncFinancialAccountsWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             financial_accounts.list,
         )
-        self.charge_off = async_to_streamed_response_wrapper(
-            financial_accounts.charge_off,
+        self.update_status = async_to_streamed_response_wrapper(
+            financial_accounts.update_status,
         )
 
     @cached_property

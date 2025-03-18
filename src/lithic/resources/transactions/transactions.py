@@ -19,7 +19,7 @@ from ...types import (
     transaction_simulate_authorization_advice_params,
     transaction_simulate_credit_authorization_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
     async_maybe_transform,
@@ -200,6 +200,39 @@ class Transactions(SyncAPIResource):
                 ),
             ),
             model=Transaction,
+        )
+
+    def expire_authorization(
+        self,
+        transaction_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Expire authorization
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not transaction_token:
+            raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
+        return self._post(
+            f"/v1/transactions/{transaction_token}/expire_authorization",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def simulate_authorization(
@@ -771,6 +804,39 @@ class AsyncTransactions(AsyncAPIResource):
             model=Transaction,
         )
 
+    async def expire_authorization(
+        self,
+        transaction_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Expire authorization
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not transaction_token:
+            raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
+        return await self._post(
+            f"/v1/transactions/{transaction_token}/expire_authorization",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def simulate_authorization(
         self,
         *,
@@ -1205,6 +1271,9 @@ class TransactionsWithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             transactions.list,
         )
+        self.expire_authorization = _legacy_response.to_raw_response_wrapper(
+            transactions.expire_authorization,
+        )
         self.simulate_authorization = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_authorization,
         )
@@ -1245,6 +1314,9 @@ class AsyncTransactionsWithRawResponse:
         )
         self.list = _legacy_response.async_to_raw_response_wrapper(
             transactions.list,
+        )
+        self.expire_authorization = _legacy_response.async_to_raw_response_wrapper(
+            transactions.expire_authorization,
         )
         self.simulate_authorization = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_authorization,
@@ -1287,6 +1359,9 @@ class TransactionsWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             transactions.list,
         )
+        self.expire_authorization = to_streamed_response_wrapper(
+            transactions.expire_authorization,
+        )
         self.simulate_authorization = to_streamed_response_wrapper(
             transactions.simulate_authorization,
         )
@@ -1327,6 +1402,9 @@ class AsyncTransactionsWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             transactions.list,
+        )
+        self.expire_authorization = async_to_streamed_response_wrapper(
+            transactions.expire_authorization,
         )
         self.simulate_authorization = async_to_streamed_response_wrapper(
             transactions.simulate_authorization,

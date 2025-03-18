@@ -31,6 +31,7 @@ class Event(BaseModel):
         "LATE_PAYMENT",
         "BILLING_ERROR",
         "PROVISIONAL_CREDIT",
+        "LOSS_WRITE_OFF",
         "CASH_BACK_REVERSAL",
         "CURRENCY_CONVERSION_REVERSAL",
         "INTEREST_REVERSAL",
