@@ -107,6 +107,44 @@ class TestTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_expire_authorization(self, client: Lithic) -> None:
+        transaction = client.transactions.expire_authorization(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert transaction is None
+
+    @parametrize
+    def test_raw_response_expire_authorization(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.expire_authorization(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert transaction is None
+
+    @parametrize
+    def test_streaming_response_expire_authorization(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.expire_authorization(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = response.parse()
+            assert transaction is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_expire_authorization(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_token` but received ''"):
+            client.transactions.with_raw_response.expire_authorization(
+                "",
+            )
+
+    @parametrize
     def test_method_simulate_authorization(self, client: Lithic) -> None:
         transaction = client.transactions.simulate_authorization(
             amount=3831,
@@ -469,6 +507,44 @@ class TestAsyncTransactions:
             assert_matches_type(AsyncCursorPage[Transaction], transaction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_expire_authorization(self, async_client: AsyncLithic) -> None:
+        transaction = await async_client.transactions.expire_authorization(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert transaction is None
+
+    @parametrize
+    async def test_raw_response_expire_authorization(self, async_client: AsyncLithic) -> None:
+        response = await async_client.transactions.with_raw_response.expire_authorization(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert transaction is None
+
+    @parametrize
+    async def test_streaming_response_expire_authorization(self, async_client: AsyncLithic) -> None:
+        async with async_client.transactions.with_streaming_response.expire_authorization(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            transaction = await response.parse()
+            assert transaction is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_expire_authorization(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_token` but received ''"):
+            await async_client.transactions.with_raw_response.expire_authorization(
+                "",
+            )
 
     @parametrize
     async def test_method_simulate_authorization(self, async_client: AsyncLithic) -> None:
