@@ -4,4 +4,6 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["InstanceFinancialAccountType"]
 
-InstanceFinancialAccountType: TypeAlias = Literal["ISSUING", "RESERVE", "OPERATING"]
+InstanceFinancialAccountType: TypeAlias = Literal[
+    "ISSUING", "RESERVE", "OPERATING", "CHARGED_OFF_FEES", "CHARGED_OFF_INTEREST", "CHARGED_OFF_PRINCIPAL"
+]
