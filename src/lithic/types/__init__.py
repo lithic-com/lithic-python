@@ -120,7 +120,6 @@ from .external_bank_account_address_param import ExternalBankAccountAddressParam
 from .external_bank_account_create_params import ExternalBankAccountCreateParams as ExternalBankAccountCreateParams
 from .external_bank_account_list_response import ExternalBankAccountListResponse as ExternalBankAccountListResponse
 from .external_bank_account_update_params import ExternalBankAccountUpdateParams as ExternalBankAccountUpdateParams
-from .financial_account_charge_off_params import FinancialAccountChargeOffParams as FinancialAccountChargeOffParams
 from .management_operation_reverse_params import ManagementOperationReverseParams as ManagementOperationReverseParams
 from .transaction_simulate_clearing_params import TransactionSimulateClearingParams as TransactionSimulateClearingParams
 from .transaction_simulate_return_response import TransactionSimulateReturnResponse as TransactionSimulateReturnResponse
@@ -135,6 +134,9 @@ from .external_bank_account_update_response import (
 )
 from .account_holder_list_documents_response import (
     AccountHolderListDocumentsResponse as AccountHolderListDocumentsResponse,
+)
+from .financial_account_update_status_params import (
+    FinancialAccountUpdateStatusParams as FinancialAccountUpdateStatusParams,
 )
 from .responder_endpoint_check_status_params import (
     ResponderEndpointCheckStatusParams as ResponderEndpointCheckStatusParams,

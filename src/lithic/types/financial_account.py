@@ -47,7 +47,9 @@ class FinancialAccount(BaseModel):
     status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"]
     """Status of the financial account"""
 
-    type: Literal["ISSUING", "RESERVE", "OPERATING"]
+    type: Literal[
+        "ISSUING", "RESERVE", "OPERATING", "CHARGED_OFF_FEES", "CHARGED_OFF_INTEREST", "CHARGED_OFF_PRINCIPAL"
+    ]
 
     updated: datetime
 
