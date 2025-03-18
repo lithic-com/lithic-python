@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.87.0 (2025-03-18)
+
+Full Changelog: [v0.86.2...v0.87.0](https://github.com/lithic-com/lithic-python/compare/v0.86.2...v0.87.0)
+
+### Features
+
+* **api:** updates to 2 `FinancialAccounts` endpoints and new `ExpireAuthorization` endpoint ([#717](https://github.com/lithic-com/lithic-python/issues/717)) ([bc684e0](https://github.com/lithic-com/lithic-python/commit/bc684e0c336e7b243c371ad14b8cfdde619414c3))
+
 ## 0.86.2 (2025-03-17)
 
 Full Changelog: [v0.86.1...v0.86.2](https://github.com/lithic-com/lithic-python/compare/v0.86.1...v0.86.2)
