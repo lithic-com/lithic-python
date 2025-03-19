@@ -31,6 +31,28 @@ jobs:
       - name: Run lints
         run: ./scripts/lint
 
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    if: github.repository == 'lithic-com/lithic-python'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rye
+        run: |
+          curl -sSf https://rye.astral.sh/get | bash
+          echo "$HOME/.rye/shims" >> $GITHUB_PATH
+        env:
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
+
+      - name: Bootstrap
+        run: ./scripts/bootstrap
+
+      - name: Run tests
+        run: ./scripts/test
+
   examples:
     name: examples
     runs-on: ubuntu-latest
