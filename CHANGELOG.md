@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.87.1 (2025-03-19)
+
+Full Changelog: [v0.87.0...v0.87.1](https://github.com/lithic-com/lithic-python/compare/v0.87.0...v0.87.1)
+
+### Chores
+
+* **internal:** update .stats.yml ([#719](https://github.com/lithic-com/lithic-python/issues/719)) ([71a42c0](https://github.com/lithic-com/lithic-python/commit/71a42c0f2604c81f87fb0ee82a13017d6d758008))
+
 ## 0.87.0 (2025-03-18)
 
 Full Changelog: [v0.86.2...v0.87.0](https://github.com/lithic-com/lithic-python/compare/v0.86.2...v0.87.0)
