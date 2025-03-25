@@ -14,7 +14,11 @@ ConditionalAttribute: TypeAlias = Literal[
     "PAN_ENTRY_MODE",
     "TRANSACTION_AMOUNT",
     "RISK_SCORE",
+    "CARD_TRANSACTION_COUNT_15M",
     "CARD_TRANSACTION_COUNT_1H",
     "CARD_TRANSACTION_COUNT_24H",
     "CARD_STATE",
+    "PIN_ENTERED",
+    "PIN_STATUS",
+    "WALLET_TYPE",
 ]
