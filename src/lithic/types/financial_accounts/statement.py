@@ -9,6 +9,7 @@ from ..._models import BaseModel
 __all__ = [
     "Statement",
     "AccountStanding",
+    "AccountStandingFinancialAccountState",
     "AmountDue",
     "PeriodTotals",
     "YtdTotals",
@@ -17,6 +18,16 @@ __all__ = [
     "InterestDetailsEffectiveApr",
     "InterestDetailsInterestForPeriod",
 ]
+
+
+class AccountStandingFinancialAccountState(BaseModel):
+    status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"]
+    """Status of the financial account"""
+
+    status_change_reason: Optional[
+        Literal["CHARGED_OFF_DELINQUENT", "CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "DELINQUENT"]
+    ] = None
+    """Reason for the financial account status change"""
 
 
 class AccountStanding(BaseModel):
@@ -31,6 +42,9 @@ class AccountStanding(BaseModel):
 
     days_past_due: int
     """Number of days past due"""
+
+    financial_account_state: AccountStandingFinancialAccountState
+    """Information about the financial account state"""
 
     has_grace: bool
     """Whether the account currently has grace or not"""
