@@ -192,7 +192,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_method_delete(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.delete(
@@ -200,7 +200,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_raw_response_delete(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.delete(
@@ -212,7 +212,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_streaming_response_delete(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.delete(
@@ -226,7 +226,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_path_params_delete(self, client: Lithic) -> None:
         with pytest.raises(
@@ -289,7 +289,7 @@ class TestSubscriptions:
                 event_subscription_token="",
             )
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_method_recover(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.recover(
@@ -297,7 +297,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_method_recover_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.recover(
@@ -307,7 +307,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_raw_response_recover(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.recover(
@@ -319,7 +319,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_streaming_response_recover(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.recover(
@@ -333,7 +333,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_path_params_recover(self, client: Lithic) -> None:
         with pytest.raises(
@@ -343,7 +343,7 @@ class TestSubscriptions:
                 event_subscription_token="",
             )
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_method_replay_missing(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.replay_missing(
@@ -351,7 +351,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_method_replay_missing_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.replay_missing(
@@ -361,7 +361,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_raw_response_replay_missing(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.replay_missing(
@@ -373,7 +373,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_streaming_response_replay_missing(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.replay_missing(
@@ -387,7 +387,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_path_params_replay_missing(self, client: Lithic) -> None:
         with pytest.raises(
@@ -437,7 +437,7 @@ class TestSubscriptions:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_method_rotate_secret(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.rotate_secret(
@@ -445,7 +445,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_raw_response_rotate_secret(self, client: Lithic) -> None:
         response = client.events.subscriptions.with_raw_response.rotate_secret(
@@ -457,7 +457,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_streaming_response_rotate_secret(self, client: Lithic) -> None:
         with client.events.subscriptions.with_streaming_response.rotate_secret(
@@ -471,7 +471,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     def test_path_params_rotate_secret(self, client: Lithic) -> None:
         with pytest.raises(
@@ -703,7 +703,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_method_delete(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.delete(
@@ -711,7 +711,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.delete(
@@ -723,7 +723,7 @@ class TestAsyncSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.delete(
@@ -737,7 +737,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncLithic) -> None:
         with pytest.raises(
@@ -800,7 +800,7 @@ class TestAsyncSubscriptions:
                 event_subscription_token="",
             )
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_method_recover(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.recover(
@@ -808,7 +808,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_method_recover_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.recover(
@@ -818,7 +818,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_raw_response_recover(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.recover(
@@ -830,7 +830,7 @@ class TestAsyncSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_streaming_response_recover(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.recover(
@@ -844,7 +844,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_path_params_recover(self, async_client: AsyncLithic) -> None:
         with pytest.raises(
@@ -854,7 +854,7 @@ class TestAsyncSubscriptions:
                 event_subscription_token="",
             )
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_method_replay_missing(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.replay_missing(
@@ -862,7 +862,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_method_replay_missing_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.replay_missing(
@@ -872,7 +872,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_raw_response_replay_missing(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.replay_missing(
@@ -884,7 +884,7 @@ class TestAsyncSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_streaming_response_replay_missing(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.replay_missing(
@@ -898,7 +898,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_path_params_replay_missing(self, async_client: AsyncLithic) -> None:
         with pytest.raises(
@@ -948,7 +948,7 @@ class TestAsyncSubscriptions:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_method_rotate_secret(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.rotate_secret(
@@ -956,7 +956,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_raw_response_rotate_secret(self, async_client: AsyncLithic) -> None:
         response = await async_client.events.subscriptions.with_raw_response.rotate_secret(
@@ -968,7 +968,7 @@ class TestAsyncSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_streaming_response_rotate_secret(self, async_client: AsyncLithic) -> None:
         async with async_client.events.subscriptions.with_streaming_response.rotate_secret(
@@ -982,7 +982,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism Mock server doesnt want Accept header, but server requires it.")
+    @pytest.mark.skip(reason="Prism Mock server doesn't want Accept header, but server requires it.")
     @parametrize
     async def test_path_params_rotate_secret(self, async_client: AsyncLithic) -> None:
         with pytest.raises(
