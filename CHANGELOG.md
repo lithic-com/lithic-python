@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.87.1 (2025-03-27)
+
+Full Changelog: [v0.87.0...v0.87.1](https://github.com/lithic-com/lithic-python/compare/v0.87.0...v0.87.1)
+
+### Bug Fixes
+
+* **types:** add missing total=False ([#723](https://github.com/lithic-com/lithic-python/issues/723)) ([8fa5021](https://github.com/lithic-com/lithic-python/commit/8fa502151127f8b9a5f5d9ad915c6f99f48cbeb9))
+
+
+### Chores
+
+* **api:** new attribute targets for Auth Rules and new Financial Account State schema ([#721](https://github.com/lithic-com/lithic-python/issues/721)) ([8ec0990](https://github.com/lithic-com/lithic-python/commit/8ec09902524a403201f81eae3e5b549afbe34a29))
+* fix typos ([#722](https://github.com/lithic-com/lithic-python/issues/722)) ([5542c78](https://github.com/lithic-com/lithic-python/commit/5542c7833c2594651ae07a734d26ee3b80d865c7))
+* **internal:** codegen related update ([#724](https://github.com/lithic-com/lithic-python/issues/724)) ([b7f9419](https://github.com/lithic-com/lithic-python/commit/b7f9419ca0c5bc3f2d066078156440b5dc81ce3d))
+* **internal:** update .stats.yml ([#719](https://github.com/lithic-com/lithic-python/issues/719)) ([71a42c0](https://github.com/lithic-com/lithic-python/commit/71a42c0f2604c81f87fb0ee82a13017d6d758008))
+
 ## 0.87.0 (2025-03-18)
 
 Full Changelog: [v0.86.2...v0.87.0](https://github.com/lithic-com/lithic-python/compare/v0.86.2...v0.87.0)
