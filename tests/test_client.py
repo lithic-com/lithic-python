@@ -1675,7 +1675,7 @@ class TestAsyncLithic:
         import threading
 
         from lithic._utils import asyncify
-        from lithic._base_client import get_platform 
+        from lithic._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
