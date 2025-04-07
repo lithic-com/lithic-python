@@ -54,6 +54,7 @@ jobs:
   examples:
     name: examples
     runs-on: ubuntu-latest
+    if: github.repository == 'lithic-com/lithic-python'
 
     steps:
       - uses: actions/checkout@v4
