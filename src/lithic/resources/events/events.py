@@ -26,6 +26,14 @@ from .subscriptions import (
     AsyncSubscriptionsWithStreamingResponse,
 )
 from ..._base_client import AsyncPaginator, make_request_options
+from .event_subscriptions import (
+    EventSubscriptions,
+    AsyncEventSubscriptions,
+    EventSubscriptionsWithRawResponse,
+    AsyncEventSubscriptionsWithRawResponse,
+    EventSubscriptionsWithStreamingResponse,
+    AsyncEventSubscriptionsWithStreamingResponse,
+)
 from ...types.message_attempt import MessageAttempt
 
 __all__ = ["Events", "AsyncEvents"]
@@ -35,6 +43,10 @@ class Events(SyncAPIResource):
     @cached_property
     def subscriptions(self) -> Subscriptions:
         return Subscriptions(self._client)
+
+    @cached_property
+    def event_subscriptions(self) -> EventSubscriptions:
+        return EventSubscriptions(self._client)
 
     @cached_property
     def with_raw_response(self) -> EventsWithRawResponse:
@@ -295,6 +307,10 @@ class AsyncEvents(AsyncAPIResource):
     @cached_property
     def subscriptions(self) -> AsyncSubscriptions:
         return AsyncSubscriptions(self._client)
+
+    @cached_property
+    def event_subscriptions(self) -> AsyncEventSubscriptions:
+        return AsyncEventSubscriptions(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncEventsWithRawResponse:
@@ -569,6 +585,10 @@ class EventsWithRawResponse:
     def subscriptions(self) -> SubscriptionsWithRawResponse:
         return SubscriptionsWithRawResponse(self._events.subscriptions)
 
+    @cached_property
+    def event_subscriptions(self) -> EventSubscriptionsWithRawResponse:
+        return EventSubscriptionsWithRawResponse(self._events.event_subscriptions)
+
 
 class AsyncEventsWithRawResponse:
     def __init__(self, events: AsyncEvents) -> None:
@@ -587,6 +607,10 @@ class AsyncEventsWithRawResponse:
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsWithRawResponse:
         return AsyncSubscriptionsWithRawResponse(self._events.subscriptions)
+
+    @cached_property
+    def event_subscriptions(self) -> AsyncEventSubscriptionsWithRawResponse:
+        return AsyncEventSubscriptionsWithRawResponse(self._events.event_subscriptions)
 
 
 class EventsWithStreamingResponse:
@@ -607,6 +631,10 @@ class EventsWithStreamingResponse:
     def subscriptions(self) -> SubscriptionsWithStreamingResponse:
         return SubscriptionsWithStreamingResponse(self._events.subscriptions)
 
+    @cached_property
+    def event_subscriptions(self) -> EventSubscriptionsWithStreamingResponse:
+        return EventSubscriptionsWithStreamingResponse(self._events.event_subscriptions)
+
 
 class AsyncEventsWithStreamingResponse:
     def __init__(self, events: AsyncEvents) -> None:
@@ -625,3 +653,7 @@ class AsyncEventsWithStreamingResponse:
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsWithStreamingResponse:
         return AsyncSubscriptionsWithStreamingResponse(self._events.subscriptions)
+
+    @cached_property
+    def event_subscriptions(self) -> AsyncEventSubscriptionsWithStreamingResponse:
+        return AsyncEventSubscriptionsWithStreamingResponse(self._events.event_subscriptions)

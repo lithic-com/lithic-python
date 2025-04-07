@@ -315,6 +315,12 @@ Methods:
 - <code title="post /v1/event_subscriptions/{event_subscription_token}/secret/rotate">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">rotate_secret</a>(event_subscription_token) -> None</code>
 - <code title="post /v1/simulate/event_subscriptions/{event_subscription_token}/send_example">client.events.subscriptions.<a href="./src/lithic/resources/events/subscriptions.py">send_simulated_example</a>(event_subscription_token, \*\*<a href="src/lithic/types/events/subscription_send_simulated_example_params.py">params</a>) -> None</code>
 
+## EventSubscriptions
+
+Methods:
+
+- <code title="post /v1/events/{event_token}/event_subscriptions/{event_subscription_token}/resend">client.events.event_subscriptions.<a href="./src/lithic/resources/events/event_subscriptions.py">resend</a>(event_subscription_token, \*, event_token) -> None</code>
+
 # FinancialAccounts
 
 Types:

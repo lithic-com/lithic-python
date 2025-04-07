@@ -32,10 +32,10 @@ class AccountStandingFinancialAccountState(BaseModel):
     status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"]
     """Status of the financial account"""
 
-    status_change_reason: Optional[
+    substatus: Optional[
         Literal["CHARGED_OFF_DELINQUENT", "CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "DELINQUENT"]
     ] = None
-    """Reason for the financial account status change"""
+    """Substatus for the financial account"""
 
 
 class AccountStanding(BaseModel):

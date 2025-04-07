@@ -7,40 +7,7 @@ from typing_extensions import Literal, Required, TypedDict
 
 from .shared_params.address import Address
 
-__all__ = ["KYBParam", "BeneficialOwnerEntity", "BeneficialOwnerIndividual", "BusinessEntity", "ControlPerson"]
-
-
-class BeneficialOwnerEntity(TypedDict, total=False):
-    address: Required[Address]
-    """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: Required[str]
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: Required[str]
-    """Legal (formal) business name."""
-
-    phone_numbers: Required[List[str]]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: str
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: str
-    """Parent company name (if applicable)."""
+__all__ = ["KYBParam", "BeneficialOwnerIndividual", "BusinessEntity", "ControlPerson", "BeneficialOwnerEntity"]
 
 
 class BeneficialOwnerIndividual(TypedDict, total=False):
@@ -144,27 +111,47 @@ class ControlPerson(TypedDict, total=False):
     """Individual's phone number, entered in E.164 format."""
 
 
-class KYBParam(TypedDict, total=False):
-    beneficial_owner_entities: Required[Iterable[BeneficialOwnerEntity]]
-    """List of all entities with >25% ownership in the company.
-
-    If no entity or individual owns >25% of the company, and the largest shareholder
-    is an entity, please identify them in this field. See
-    [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-    (Section I) for more background. If no business owner is an entity, pass in an
-    empty list. However, either this parameter or `beneficial_owner_individuals`
-    must be populated. on entities that should be included.
+class BeneficialOwnerEntity(TypedDict, total=False):
+    address: Required[Address]
+    """
+    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable.
     """
 
+    government_id: Required[str]
+    """Government-issued identification number.
+
+    US Federal Employer Identification Numbers (EIN) are currently supported,
+    entered as full nine-digits, with or without hyphens.
+    """
+
+    legal_business_name: Required[str]
+    """Legal (formal) business name."""
+
+    phone_numbers: Required[List[str]]
+    """
+    One or more of the business's phone number(s), entered as a list in E.164
+    format.
+    """
+
+    dba_business_name: str
+    """
+    Any name that the business operates under that is not its legal business name
+    (if applicable).
+    """
+
+    parent_company: str
+    """Parent company name (if applicable)."""
+
+
+class KYBParam(TypedDict, total=False):
     beneficial_owner_individuals: Required[Iterable[BeneficialOwnerIndividual]]
     """List of all direct and indirect individuals with >25% ownership in the company.
 
-    If no entity or individual owns >25% of the company, and the largest shareholder
-    is an individual, please identify them in this field. See
+    If no individual owns >25% of the company, please identify the largest
+    shareholder in this field. See
     [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-    (Section I) for more background on individuals that should be included. If no
-    individual is an entity, pass in an empty list. However, either this parameter
-    or `beneficial_owner_entities` must be populated.
+    (Section I) for more background on individuals that should be included.
     """
 
     business_entity: Required[BusinessEntity]
@@ -200,6 +187,9 @@ class KYBParam(TypedDict, total=False):
 
     workflow: Required[Literal["KYB_BASIC", "KYB_BYO"]]
     """Specifies the type of KYB workflow to run."""
+
+    beneficial_owner_entities: Iterable[BeneficialOwnerEntity]
+    """Deprecated."""
 
     external_id: str
     """

@@ -29,20 +29,6 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_overload_1(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
@@ -94,23 +80,6 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
@@ -163,6 +132,23 @@ class TestAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
+            beneficial_owner_entities=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                        "address2": "address2",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+15555555555"],
+                    "dba_business_name": "dba_business_name",
+                    "parent_company": "parent_company",
+                }
+            ],
             external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
@@ -172,20 +158,6 @@ class TestAccountHolders:
     @parametrize
     def test_raw_response_create_overload_1(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
@@ -241,20 +213,6 @@ class TestAccountHolders:
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
@@ -1040,20 +998,6 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_overload_1(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
@@ -1105,23 +1049,6 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
@@ -1174,6 +1101,23 @@ class TestAsyncAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
+            beneficial_owner_entities=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                        "address2": "address2",
+                    },
+                    "government_id": "114-123-1513",
+                    "legal_business_name": "Acme, Inc.",
+                    "phone_numbers": ["+15555555555"],
+                    "dba_business_name": "dba_business_name",
+                    "parent_company": "parent_company",
+                }
+            ],
             external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             website_url="www.mybusiness.com",
@@ -1183,20 +1127,6 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
@@ -1252,20 +1182,6 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.create(
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "address": {
