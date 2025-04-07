@@ -10,10 +10,10 @@ from .shared_params.address import Address
 __all__ = [
     "AccountHolderCreateParams",
     "KYB",
-    "KYBBeneficialOwnerEntity",
     "KYBBeneficialOwnerIndividual",
     "KYBBusinessEntity",
     "KYBControlPerson",
+    "KYBBeneficialOwnerEntity",
     "KYC",
     "KYCIndividual",
     "KYCExempt",
@@ -21,26 +21,13 @@ __all__ = [
 
 
 class KYB(TypedDict, total=False):
-    beneficial_owner_entities: Required[Iterable[KYBBeneficialOwnerEntity]]
-    """List of all entities with >25% ownership in the company.
-
-    If no entity or individual owns >25% of the company, and the largest shareholder
-    is an entity, please identify them in this field. See
-    [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-    (Section I) for more background. If no business owner is an entity, pass in an
-    empty list. However, either this parameter or `beneficial_owner_individuals`
-    must be populated. on entities that should be included.
-    """
-
     beneficial_owner_individuals: Required[Iterable[KYBBeneficialOwnerIndividual]]
     """List of all direct and indirect individuals with >25% ownership in the company.
 
-    If no entity or individual owns >25% of the company, and the largest shareholder
-    is an individual, please identify them in this field. See
+    If no individual owns >25% of the company, please identify the largest
+    shareholder in this field. See
     [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-    (Section I) for more background on individuals that should be included. If no
-    individual is an entity, pass in an empty list. However, either this parameter
-    or `beneficial_owner_entities` must be populated.
+    (Section I) for more background on individuals that should be included.
     """
 
     business_entity: Required[KYBBusinessEntity]
@@ -77,6 +64,9 @@ class KYB(TypedDict, total=False):
     workflow: Required[Literal["KYB_BASIC", "KYB_BYO"]]
     """Specifies the type of KYB workflow to run."""
 
+    beneficial_owner_entities: Iterable[KYBBeneficialOwnerEntity]
+    """Deprecated."""
+
     external_id: str
     """
     A user provided id that can be used to link an account holder with an external
@@ -93,39 +83,6 @@ class KYB(TypedDict, total=False):
 
     website_url: str
     """Company website URL."""
-
-
-class KYBBeneficialOwnerEntity(TypedDict, total=False):
-    address: Required[Address]
-    """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: Required[str]
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: Required[str]
-    """Legal (formal) business name."""
-
-    phone_numbers: Required[List[str]]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: str
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: str
-    """Parent company name (if applicable)."""
 
 
 class KYBBeneficialOwnerIndividual(TypedDict, total=False):
@@ -227,6 +184,39 @@ class KYBControlPerson(TypedDict, total=False):
 
     phone_number: str
     """Individual's phone number, entered in E.164 format."""
+
+
+class KYBBeneficialOwnerEntity(TypedDict, total=False):
+    address: Required[Address]
+    """
+    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable.
+    """
+
+    government_id: Required[str]
+    """Government-issued identification number.
+
+    US Federal Employer Identification Numbers (EIN) are currently supported,
+    entered as full nine-digits, with or without hyphens.
+    """
+
+    legal_business_name: Required[str]
+    """Legal (formal) business name."""
+
+    phone_numbers: Required[List[str]]
+    """
+    One or more of the business's phone number(s), entered as a list in E.164
+    format.
+    """
+
+    dba_business_name: str
+    """
+    Any name that the business operates under that is not its legal business name
+    (if applicable).
+    """
+
+    parent_company: str
+    """Parent company name (if applicable)."""
 
 
 class KYC(TypedDict, total=False):

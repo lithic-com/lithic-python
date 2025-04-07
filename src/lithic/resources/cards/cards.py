@@ -490,7 +490,7 @@ class Cards(SyncAPIResource):
         shipping_address: ShippingAddress,
         carrier: Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -521,8 +521,8 @@ class Cards(SyncAPIResource):
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be
               configured with Lithic before use.
 
-          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
-              additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking
@@ -719,7 +719,7 @@ class Cards(SyncAPIResource):
         carrier: Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -745,8 +745,8 @@ class Cards(SyncAPIResource):
 
           shipping_address: If omitted, the previous shipping address will be used.
 
-          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
-              additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking
@@ -794,7 +794,7 @@ class Cards(SyncAPIResource):
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -803,13 +803,17 @@ class Cards(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Card:
-        """
-        Creates a new card with the same card token and PAN, but updated expiry and CVC2
-        code. The original card will keep working for card-present transactions until
-        the new card is activated. For card-not-present transactions, the original card
-        details (expiry, CVC2) will also keep working until the new card is activated.
-        Applies to card types `PHYSICAL` and `VIRTUAL`. A card can be replaced or
-        renewed a total of 8 times.
+        """Applies to card types `PHYSICAL` and `VIRTUAL`.
+
+        For `PHYSICAL`, creates a new
+        card with the same card token and PAN, but updated expiry and CVC2 code. The
+        original card will keep working for card-present transactions until the new card
+        is activated. For card-not-present transactions, the original card details
+        (expiry, CVC2) will also keep working until the new card is activated. A
+        `PHYSICAL` card can be replaced or renewed a total of 8 times. For `VIRTUAL`,
+        the card will retain the same card token and PAN and receive an updated expiry
+        and CVC2 code. `product_id`, `shipping_method`, `shipping_address`, `carrier`
+        are only relevant for renewing `PHYSICAL` cards.
 
         Args:
           shipping_address: The shipping address this card will be sent to.
@@ -826,8 +830,8 @@ class Cards(SyncAPIResource):
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be
               configured with Lithic before use.
 
-          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
-              additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking
@@ -1362,7 +1366,7 @@ class AsyncCards(AsyncAPIResource):
         shipping_address: ShippingAddress,
         carrier: Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1393,8 +1397,8 @@ class AsyncCards(AsyncAPIResource):
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be
               configured with Lithic before use.
 
-          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
-              additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking
@@ -1591,7 +1595,7 @@ class AsyncCards(AsyncAPIResource):
         carrier: Carrier | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
         shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1617,8 +1621,8 @@ class AsyncCards(AsyncAPIResource):
 
           shipping_address: If omitted, the previous shipping address will be used.
 
-          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
-              additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking
@@ -1666,7 +1670,7 @@ class AsyncCards(AsyncAPIResource):
         exp_month: str | NotGiven = NOT_GIVEN,
         exp_year: str | NotGiven = NOT_GIVEN,
         product_id: str | NotGiven = NOT_GIVEN,
-        shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1675,13 +1679,17 @@ class AsyncCards(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Card:
-        """
-        Creates a new card with the same card token and PAN, but updated expiry and CVC2
-        code. The original card will keep working for card-present transactions until
-        the new card is activated. For card-not-present transactions, the original card
-        details (expiry, CVC2) will also keep working until the new card is activated.
-        Applies to card types `PHYSICAL` and `VIRTUAL`. A card can be replaced or
-        renewed a total of 8 times.
+        """Applies to card types `PHYSICAL` and `VIRTUAL`.
+
+        For `PHYSICAL`, creates a new
+        card with the same card token and PAN, but updated expiry and CVC2 code. The
+        original card will keep working for card-present transactions until the new card
+        is activated. For card-not-present transactions, the original card details
+        (expiry, CVC2) will also keep working until the new card is activated. A
+        `PHYSICAL` card can be replaced or renewed a total of 8 times. For `VIRTUAL`,
+        the card will retain the same card token and PAN and receive an updated expiry
+        and CVC2 code. `product_id`, `shipping_method`, `shipping_address`, `carrier`
+        are only relevant for renewing `PHYSICAL` cards.
 
         Args:
           shipping_address: The shipping address this card will be sent to.
@@ -1698,8 +1706,8 @@ class AsyncCards(AsyncAPIResource):
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be
               configured with Lithic before use.
 
-          shipping_method: Shipping method for the card. Use of options besides `STANDARD` require
-              additional permissions.
+          shipping_method: Shipping method for the card. Only applies to cards of type PHYSICAL. Use of
+              options besides `STANDARD` require additional permissions.
 
               - `STANDARD` - USPS regular mail or similar international option, with no
                 tracking

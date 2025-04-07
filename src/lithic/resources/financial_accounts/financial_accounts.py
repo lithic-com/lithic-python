@@ -281,9 +281,7 @@ class FinancialAccounts(SyncAPIResource):
         financial_account_token: str,
         *,
         status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
-        status_change_reason: Optional[
-            Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]
-        ],
+        substatus: Optional[Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -297,7 +295,7 @@ class FinancialAccounts(SyncAPIResource):
         Args:
           status: Status of the financial account
 
-          status_change_reason: Reason for the financial account status change
+          substatus: Substatus for the financial account
 
           extra_headers: Send extra headers
 
@@ -316,7 +314,7 @@ class FinancialAccounts(SyncAPIResource):
             body=maybe_transform(
                 {
                     "status": status,
-                    "status_change_reason": status_change_reason,
+                    "substatus": substatus,
                 },
                 financial_account_update_status_params.FinancialAccountUpdateStatusParams,
             ),
@@ -541,9 +539,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         financial_account_token: str,
         *,
         status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
-        status_change_reason: Optional[
-            Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]
-        ],
+        substatus: Optional[Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -557,7 +553,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         Args:
           status: Status of the financial account
 
-          status_change_reason: Reason for the financial account status change
+          substatus: Substatus for the financial account
 
           extra_headers: Send extra headers
 
@@ -576,7 +572,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "status": status,
-                    "status_change_reason": status_change_reason,
+                    "substatus": substatus,
                 },
                 financial_account_update_status_params.FinancialAccountUpdateStatusParams,
             ),

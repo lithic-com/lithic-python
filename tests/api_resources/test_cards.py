@@ -252,7 +252,7 @@ class TestCards:
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
-            shipping_method="2-DAY",
+            shipping_method="2_DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -425,7 +425,7 @@ class TestCards:
                 "line2_text": "The Bluth Company",
                 "phone_number": "+15555555555",
             },
-            shipping_method="2-DAY",
+            shipping_method="2_DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -497,7 +497,7 @@ class TestCards:
             exp_month="06",
             exp_year="2027",
             product_id="100",
-            shipping_method="2-DAY",
+            shipping_method="2_DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -861,7 +861,7 @@ class TestAsyncCards:
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
-            shipping_method="2-DAY",
+            shipping_method="2_DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -1034,7 +1034,7 @@ class TestAsyncCards:
                 "line2_text": "The Bluth Company",
                 "phone_number": "+15555555555",
             },
-            shipping_method="2-DAY",
+            shipping_method="2_DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -1106,7 +1106,7 @@ class TestAsyncCards:
             exp_month="06",
             exp_year="2027",
             product_id="100",
-            shipping_method="2-DAY",
+            shipping_method="2_DAY",
         )
         assert_matches_type(Card, card, path=["response"])
 
