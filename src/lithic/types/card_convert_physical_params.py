@@ -24,10 +24,11 @@ class CardConvertPhysicalParams(TypedDict, total=False):
     to cards of type `PHYSICAL`. This must be configured with Lithic before use.
     """
 
-    shipping_method: Literal["2-DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+    shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
     """Shipping method for the card.
 
-    Use of options besides `STANDARD` require additional permissions.
+    Only applies to cards of type PHYSICAL. Use of options besides `STANDARD`
+    require additional permissions.
 
     - `STANDARD` - USPS regular mail or similar international option, with no
       tracking

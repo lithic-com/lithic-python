@@ -191,7 +191,7 @@ class TestFinancialAccounts:
         financial_account = client.financial_accounts.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status="OPEN",
-            status_change_reason="CHARGED_OFF_FRAUD",
+            substatus="CHARGED_OFF_FRAUD",
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 
@@ -200,7 +200,7 @@ class TestFinancialAccounts:
         response = client.financial_accounts.with_raw_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status="OPEN",
-            status_change_reason="CHARGED_OFF_FRAUD",
+            substatus="CHARGED_OFF_FRAUD",
         )
 
         assert response.is_closed is True
@@ -213,7 +213,7 @@ class TestFinancialAccounts:
         with client.financial_accounts.with_streaming_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status="OPEN",
-            status_change_reason="CHARGED_OFF_FRAUD",
+            substatus="CHARGED_OFF_FRAUD",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -231,7 +231,7 @@ class TestFinancialAccounts:
             client.financial_accounts.with_raw_response.update_status(
                 financial_account_token="",
                 status="OPEN",
-                status_change_reason="CHARGED_OFF_FRAUD",
+                substatus="CHARGED_OFF_FRAUD",
             )
 
 
@@ -409,7 +409,7 @@ class TestAsyncFinancialAccounts:
         financial_account = await async_client.financial_accounts.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status="OPEN",
-            status_change_reason="CHARGED_OFF_FRAUD",
+            substatus="CHARGED_OFF_FRAUD",
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 
@@ -418,7 +418,7 @@ class TestAsyncFinancialAccounts:
         response = await async_client.financial_accounts.with_raw_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status="OPEN",
-            status_change_reason="CHARGED_OFF_FRAUD",
+            substatus="CHARGED_OFF_FRAUD",
         )
 
         assert response.is_closed is True
@@ -431,7 +431,7 @@ class TestAsyncFinancialAccounts:
         async with async_client.financial_accounts.with_streaming_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status="OPEN",
-            status_change_reason="CHARGED_OFF_FRAUD",
+            substatus="CHARGED_OFF_FRAUD",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -449,5 +449,5 @@ class TestAsyncFinancialAccounts:
             await async_client.financial_accounts.with_raw_response.update_status(
                 financial_account_token="",
                 status="OPEN",
-                status_change_reason="CHARGED_OFF_FRAUD",
+                substatus="CHARGED_OFF_FRAUD",
             )

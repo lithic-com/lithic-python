@@ -66,13 +66,14 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity],
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual],
         business_entity: account_holder_create_params.KYBBusinessEntity,
         control_person: account_holder_create_params.KYBControlPerson,
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
@@ -93,21 +94,11 @@ class AccountHolders(SyncAPIResource):
         accounts that are part of the program that the calling API key manages.
 
         Args:
-          beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an entity,
-              please identify them in this field. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background. If no business owner is an entity, pass in an
-              empty list. However, either this parameter or `beneficial_owner_individuals`
-              must be populated. on entities that should be included.
-
           beneficial_owner_individuals: List of all direct and indirect individuals with >25% ownership in the company.
-              If no entity or individual owns >25% of the company, and the largest shareholder
-              is an individual, please identify them in this field. See
+              If no individual owns >25% of the company, please identify the largest
+              shareholder in this field. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background on individuals that should be included. If no
-              individual is an entity, pass in an empty list. However, either this parameter
-              or `beneficial_owner_entities` must be populated.
+              (Section I) for more background on individuals that should be included.
 
           business_entity: Information for business for which the account is being opened and KYB is being
               run.
@@ -129,6 +120,8 @@ class AccountHolders(SyncAPIResource):
               implementation with Lithic.
 
           workflow: Specifies the type of KYB workflow to run.
+
+          beneficial_owner_entities: Deprecated.
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
@@ -267,7 +260,6 @@ class AccountHolders(SyncAPIResource):
 
     @required_args(
         [
-            "beneficial_owner_entities",
             "beneficial_owner_individuals",
             "business_entity",
             "control_person",
@@ -281,8 +273,6 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
@@ -290,6 +280,8 @@ class AccountHolders(SyncAPIResource):
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"] | Literal["KYC_BASIC", "KYC_BYO"] | Literal["KYC_EXEMPT"],
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
@@ -315,13 +307,13 @@ class AccountHolders(SyncAPIResource):
             "/v1/account_holders",
             body=maybe_transform(
                 {
-                    "beneficial_owner_entities": beneficial_owner_entities,
                     "beneficial_owner_individuals": beneficial_owner_individuals,
                     "business_entity": business_entity,
                     "control_person": control_person,
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "workflow": workflow,
+                    "beneficial_owner_entities": beneficial_owner_entities,
                     "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
                     "website_url": website_url,
@@ -1063,13 +1055,14 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity],
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual],
         business_entity: account_holder_create_params.KYBBusinessEntity,
         control_person: account_holder_create_params.KYBControlPerson,
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
@@ -1090,21 +1083,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         accounts that are part of the program that the calling API key manages.
 
         Args:
-          beneficial_owner_entities: List of all entities with >25% ownership in the company. If no entity or
-              individual owns >25% of the company, and the largest shareholder is an entity,
-              please identify them in this field. See
-              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background. If no business owner is an entity, pass in an
-              empty list. However, either this parameter or `beneficial_owner_individuals`
-              must be populated. on entities that should be included.
-
           beneficial_owner_individuals: List of all direct and indirect individuals with >25% ownership in the company.
-              If no entity or individual owns >25% of the company, and the largest shareholder
-              is an individual, please identify them in this field. See
+              If no individual owns >25% of the company, please identify the largest
+              shareholder in this field. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
-              (Section I) for more background on individuals that should be included. If no
-              individual is an entity, pass in an empty list. However, either this parameter
-              or `beneficial_owner_entities` must be populated.
+              (Section I) for more background on individuals that should be included.
 
           business_entity: Information for business for which the account is being opened and KYB is being
               run.
@@ -1126,6 +1109,8 @@ class AsyncAccountHolders(AsyncAPIResource):
               implementation with Lithic.
 
           workflow: Specifies the type of KYB workflow to run.
+
+          beneficial_owner_entities: Deprecated.
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
@@ -1264,7 +1249,6 @@ class AsyncAccountHolders(AsyncAPIResource):
 
     @required_args(
         [
-            "beneficial_owner_entities",
             "beneficial_owner_individuals",
             "business_entity",
             "control_person",
@@ -1278,8 +1262,6 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
         business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
@@ -1287,6 +1269,8 @@ class AsyncAccountHolders(AsyncAPIResource):
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"] | Literal["KYC_BASIC", "KYC_BYO"] | Literal["KYC_EXEMPT"],
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
+        | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
         kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
         website_url: str | NotGiven = NOT_GIVEN,
@@ -1312,13 +1296,13 @@ class AsyncAccountHolders(AsyncAPIResource):
             "/v1/account_holders",
             body=await async_maybe_transform(
                 {
-                    "beneficial_owner_entities": beneficial_owner_entities,
                     "beneficial_owner_individuals": beneficial_owner_individuals,
                     "business_entity": business_entity,
                     "control_person": control_person,
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "workflow": workflow,
+                    "beneficial_owner_entities": beneficial_owner_entities,
                     "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
                     "website_url": website_url,
