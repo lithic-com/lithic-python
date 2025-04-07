@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.88.0 (2025-04-07)
+
+Full Changelog: [v0.87.1...v0.88.0](https://github.com/lithic-com/lithic-python/compare/v0.87.1...v0.88.0)
+
+### Features
+
+* **api:** new resend endpoint for Event Subscriptions ([#729](https://github.com/lithic-com/lithic-python/issues/729)) ([8d5e634](https://github.com/lithic-com/lithic-python/commit/8d5e6343610762cb6362c15d52f53635d440dfa4))
+
+
+### Chores
+
+* internal codegen changes ([30d680f](https://github.com/lithic-com/lithic-python/commit/30d680f54263574ca236ad1095ab1775196beae1))
+* internal codegen changes ([54766ec](https://github.com/lithic-com/lithic-python/commit/54766ec079921166182a3bf8cb01e575591379bf))
+* **internal:** only run examples workflow in main repo ([#728](https://github.com/lithic-com/lithic-python/issues/728)) ([4789b73](https://github.com/lithic-com/lithic-python/commit/4789b7322178e77e925c66d95c911dd09e6f6e84))
+* **internal:** remove trailing character ([#727](https://github.com/lithic-com/lithic-python/issues/727)) ([b2f78a5](https://github.com/lithic-com/lithic-python/commit/b2f78a54322e3758fea084c1f2cc893c40d44b59))
+
 ## 0.87.1 (2025-03-27)
 
 Full Changelog: [v0.87.0...v0.87.1](https://github.com/lithic-com/lithic-python/compare/v0.87.0...v0.87.1)
