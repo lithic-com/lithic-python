@@ -206,10 +206,7 @@ class AccountHolder(BaseModel):
     """Globally unique identifier for the account."""
 
     beneficial_owner_entities: Optional[List[BeneficialOwnerEntity]] = None
-    """Only present when user_type == "BUSINESS".
-
-    List of all entities with >25% ownership in the company.
-    """
+    """Deprecated. Only present when user_type == "BUSINESS"."""
 
     beneficial_owner_individuals: Optional[List[BeneficialOwnerIndividual]] = None
     """Only present when user_type == "BUSINESS".
