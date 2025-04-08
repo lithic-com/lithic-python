@@ -768,7 +768,7 @@ class TestLithic:
 
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
-        response = client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
+        response = client.cards.with_raw_response.create(type="VIRTUAL")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -793,7 +793,7 @@ class TestLithic:
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         response = client.cards.with_raw_response.create(
-            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": Omit()}
+            type="VIRTUAL", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -818,7 +818,7 @@ class TestLithic:
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         response = client.cards.with_raw_response.create(
-            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": "42"}
+            type="VIRTUAL", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -842,7 +842,7 @@ class TestLithic:
 
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
-        with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
+        with client.cards.with_streaming_response.create(type="VIRTUAL") as response:
             assert response.retries_taken == failures_before_success
             assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
@@ -1582,7 +1582,7 @@ class TestAsyncLithic:
 
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
-        response = await client.cards.with_raw_response.create(type="MERCHANT_LOCKED")
+        response = await client.cards.with_raw_response.create(type="VIRTUAL")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1608,7 +1608,7 @@ class TestAsyncLithic:
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         response = await client.cards.with_raw_response.create(
-            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": Omit()}
+            type="VIRTUAL", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1634,7 +1634,7 @@ class TestAsyncLithic:
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
         response = await client.cards.with_raw_response.create(
-            type="MERCHANT_LOCKED", extra_headers={"x-stainless-retry-count": "42"}
+            type="VIRTUAL", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1659,7 +1659,7 @@ class TestAsyncLithic:
 
         respx_mock.post("/v1/cards").mock(side_effect=retry_handler)
 
-        async with client.cards.with_streaming_response.create(type="MERCHANT_LOCKED") as response:
+        async with client.cards.with_streaming_response.create(type="VIRTUAL") as response:
             assert response.retries_taken == failures_before_success
             assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
