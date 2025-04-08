@@ -152,7 +152,7 @@ from lithic import Lithic
 client = Lithic()
 
 card = client.cards.create(
-    type="MERCHANT_LOCKED",
+    type="VIRTUAL",
 )
 print(card.product_id)
 ```
