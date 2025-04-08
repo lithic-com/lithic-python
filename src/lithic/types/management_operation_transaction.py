@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["ManagementOperationTransaction", "Event"]
+__all__ = ["ManagementOperationTransaction", "Event", "TransactionSeries"]
 
 
 class Event(BaseModel):
@@ -45,6 +45,14 @@ class Event(BaseModel):
     subtype: Optional[str] = None
 
 
+class TransactionSeries(BaseModel):
+    related_transaction_event_token: Optional[str] = None
+
+    related_transaction_token: Optional[str] = None
+
+    type: str
+
+
 class ManagementOperationTransaction(BaseModel):
     token: str
 
@@ -67,6 +75,8 @@ class ManagementOperationTransaction(BaseModel):
     settled_amount: int
 
     status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+
+    transaction_series: Optional[TransactionSeries] = None
 
     updated: datetime
 

@@ -22,25 +22,15 @@ __all__ = [
 
 class KYBPatchRequest(TypedDict, total=False):
     beneficial_owner_entities: Iterable[KYBPatchRequestBeneficialOwnerEntity]
-    """List of all entities with >25% ownership in the company.
-
-    If no entity or individual owns >25% of the company, and the largest shareholder
-    is an entity, please identify them in this field. See
-    [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)(Section
-    I) for more background. If no business owner is an entity, pass in an empty
-    list. However, either this parameter or `beneficial_owner_individuals` must be
-    populated. on entities that should be included.
-    """
+    """Deprecated."""
 
     beneficial_owner_individuals: Iterable[KYBPatchRequestBeneficialOwnerIndividual]
-    """List of all individuals with >25% ownership in the company.
-
-    If no entity or individual owns >25% of the company, and the largest shareholder
-    is an individual, please identify them in this field. See
-    [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)(Section
-    I) for more background on individuals that should be included. If no individual
-    is an entity, pass in an empty list. However, either this parameter or
-    `beneficial_owner_entities` must be populated.
+    """
+    List of all direct and indirect individuals with 25% or more ownership in the
+    company. If no individual owns 25% of the company, please identify the largest
+    shareholder in this field. See
+    [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+    (Section I) for more background on individuals that should be included.
     """
 
     business_entity: KYBPatchRequestBusinessEntity
