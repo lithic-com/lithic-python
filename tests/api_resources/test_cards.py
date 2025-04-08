@@ -26,14 +26,14 @@ class TestCards:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         card = client.cards.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         card = client.cards.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             carrier={"qr_code_url": "qr_code_url"},
@@ -60,7 +60,7 @@ class TestCards:
             },
             shipping_method="2_DAY",
             spend_limit=1000,
-            spend_limit_duration="ANNUALLY",
+            spend_limit_duration="TRANSACTION",
             state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
@@ -68,7 +68,7 @@ class TestCards:
     @parametrize
     def test_raw_response_create(self, client: Lithic) -> None:
         response = client.cards.with_raw_response.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
         )
 
         assert response.is_closed is True
@@ -79,7 +79,7 @@ class TestCards:
     @parametrize
     def test_streaming_response_create(self, client: Lithic) -> None:
         with client.cards.with_streaming_response.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -143,8 +143,8 @@ class TestCards:
             pin="pin",
             pin_status="OK",
             spend_limit=100,
-            spend_limit_duration="ANNUALLY",
-            state="CLOSED",
+            spend_limit_duration="FOREVER",
+            state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -252,7 +252,7 @@ class TestCards:
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
-            shipping_method="2_DAY",
+            shipping_method="STANDARD",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -374,7 +374,7 @@ class TestCards:
             certificate="U3RhaW5sZXNzIHJvY2tz",
             client_device_id="client_device_id",
             client_wallet_account_id="client_wallet_account_id",
-            digital_wallet="APPLE_PAY",
+            digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -437,7 +437,7 @@ class TestCards:
                 "line2_text": "The Bluth Company",
                 "phone_number": "+15555555555",
             },
-            shipping_method="2_DAY",
+            shipping_method="STANDARD",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -509,7 +509,7 @@ class TestCards:
             exp_month="06",
             exp_year="2027",
             product_id="100",
-            shipping_method="2_DAY",
+            shipping_method="STANDARD",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -647,14 +647,14 @@ class TestAsyncCards:
     @parametrize
     async def test_method_create(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
         )
         assert_matches_type(Card, card, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             carrier={"qr_code_url": "qr_code_url"},
@@ -681,7 +681,7 @@ class TestAsyncCards:
             },
             shipping_method="2_DAY",
             spend_limit=1000,
-            spend_limit_duration="ANNUALLY",
+            spend_limit_duration="TRANSACTION",
             state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
@@ -689,7 +689,7 @@ class TestAsyncCards:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
         response = await async_client.cards.with_raw_response.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
         )
 
         assert response.is_closed is True
@@ -700,7 +700,7 @@ class TestAsyncCards:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
         async with async_client.cards.with_streaming_response.create(
-            type="MERCHANT_LOCKED",
+            type="VIRTUAL",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -764,8 +764,8 @@ class TestAsyncCards:
             pin="pin",
             pin_status="OK",
             spend_limit=100,
-            spend_limit_duration="ANNUALLY",
-            state="CLOSED",
+            spend_limit_duration="FOREVER",
+            state="OPEN",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -873,7 +873,7 @@ class TestAsyncCards:
             },
             carrier={"qr_code_url": "https://lithic.com/activate-card/1"},
             product_id="100",
-            shipping_method="2_DAY",
+            shipping_method="STANDARD",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -995,7 +995,7 @@ class TestAsyncCards:
             certificate="U3RhaW5sZXNzIHJvY2tz",
             client_device_id="client_device_id",
             client_wallet_account_id="client_wallet_account_id",
-            digital_wallet="APPLE_PAY",
+            digital_wallet="GOOGLE_PAY",
             nonce="U3RhaW5sZXNzIHJvY2tz",
             nonce_signature="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -1058,7 +1058,7 @@ class TestAsyncCards:
                 "line2_text": "The Bluth Company",
                 "phone_number": "+15555555555",
             },
-            shipping_method="2_DAY",
+            shipping_method="STANDARD",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -1130,7 +1130,7 @@ class TestAsyncCards:
             exp_month="06",
             exp_year="2027",
             product_id="100",
-            shipping_method="2_DAY",
+            shipping_method="STANDARD",
         )
         assert_matches_type(Card, card, path=["response"])
 
