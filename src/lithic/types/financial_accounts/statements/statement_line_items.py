@@ -99,6 +99,7 @@ class Data(BaseModel):
         "INTERNAL_ADJUSTMENT",
         "LATE_PAYMENT",
         "LATE_PAYMENT_REVERSAL",
+        "LOSS_WRITE_OFF",
         "PROVISIONAL_CREDIT",
         "PROVISIONAL_CREDIT_REVERSAL",
         "RETURN",

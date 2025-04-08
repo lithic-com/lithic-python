@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
+from datetime import date, datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -158,3 +158,6 @@ class Payment(BaseModel):
     """Date and time when the financial transaction was last updated. UTC time zone."""
 
     user_defined_id: Optional[str] = None
+
+    expected_release_date: Optional[date] = None
+    """Date when the financial transaction expected to be released after settlement"""

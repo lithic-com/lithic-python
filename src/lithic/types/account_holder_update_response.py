@@ -253,15 +253,16 @@ class KYBKYCPatchResponse(BaseModel):
     """Globally unique identifier for the account."""
 
     beneficial_owner_entities: Optional[List[KYBBusinessEntity]] = None
-    """Only present when user_type == "BUSINESS".
-
-    List of all entities with >25% ownership in the company.
-    """
+    """Deprecated."""
 
     beneficial_owner_individuals: Optional[List[KybkycPatchResponseBeneficialOwnerIndividual]] = None
     """Only present when user_type == "BUSINESS".
 
-    List of all individuals with >25% ownership in the company.
+    List of all direct and indirect individuals with 25% or more ownership in the
+    company. If no individual owns 25% of the company, please identify the largest
+    shareholder in this field. See
+    [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+    (Section I) for more background on individuals that should be included.
     """
 
     business_account_token: Optional[str] = None
@@ -392,9 +393,8 @@ class KYBKYCPatchResponse(BaseModel):
     If the type is "INDIVIDUAL", the "individual" attribute will be present.
 
     If the type is "BUSINESS" then the "business_entity", "control_person",
-    "beneficial_owner_individuals", "beneficial_owner_entities",
-
-    "nature_of_business", and "website_url" attributes will be present.
+    "beneficial_owner_individuals", "nature_of_business", and "website_url"
+    attributes will be present.
     """
 
     verification_application: Optional[KYBKYCPatchResponseVerificationApplication] = None
