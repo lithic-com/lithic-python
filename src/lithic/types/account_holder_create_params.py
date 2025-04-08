@@ -22,9 +22,9 @@ __all__ = [
 
 class KYB(TypedDict, total=False):
     beneficial_owner_individuals: Required[Iterable[KYBBeneficialOwnerIndividual]]
-    """List of all direct and indirect individuals with >25% ownership in the company.
-
-    If no individual owns >25% of the company, please identify the largest
+    """
+    List of all direct and indirect individuals with 25% or more ownership in the
+    company. If no individual owns 25% of the company, please identify the largest
     shareholder in this field. See
     [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
     (Section I) for more background on individuals that should be included.
