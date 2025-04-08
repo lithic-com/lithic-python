@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.89.0 (2025-04-08)
+
+Full Changelog: [v0.88.0...v0.89.0](https://github.com/lithic-com/lithic-python/compare/v0.88.0...v0.89.0)
+
+### Features
+
+* **api:** introduce TransactionSeries and update ShippingMethod fields ([#732](https://github.com/lithic-com/lithic-python/issues/732)) ([a1c98cf](https://github.com/lithic-com/lithic-python/commit/a1c98cf2de62f4bdbe49722d4760588557097822))
+
 ## 0.88.0 (2025-04-07)
 
 Full Changelog: [v0.87.1...v0.88.0](https://github.com/lithic-com/lithic-python/compare/v0.87.1...v0.88.0)
