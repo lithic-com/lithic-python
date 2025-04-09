@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.90.0 (2025-04-09)
+
+Full Changelog: [v0.89.0...v0.90.0](https://github.com/lithic-com/lithic-python/compare/v0.89.0...v0.90.0)
+
+### Features
+
+* **api:** manual updates ([6800098](https://github.com/lithic-com/lithic-python/commit/6800098f32ba1d88183219c9cc822a6e57670632))
+
+
+### Chores
+
+* configure new SDK language ([4a3c8b4](https://github.com/lithic-com/lithic-python/commit/4a3c8b431da736f617049f3e6b989a14635c09c6))
+* **internal:** expand CI branch coverage ([#736](https://github.com/lithic-com/lithic-python/issues/736)) ([01cf49e](https://github.com/lithic-com/lithic-python/commit/01cf49e2ae2fb20a52ce88d21368cd05b2b48dc6))
+* **tests:** improve enum examples ([#734](https://github.com/lithic-com/lithic-python/issues/734)) ([cd17f0d](https://github.com/lithic-com/lithic-python/commit/cd17f0d1a1152b464fba5d96f368289e14fe1a41))
+
 ## 0.89.0 (2025-04-08)
 
 Full Changelog: [v0.88.0...v0.89.0](https://github.com/lithic-com/lithic-python/compare/v0.88.0...v0.89.0)
