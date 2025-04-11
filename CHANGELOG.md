@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.90.2 (2025-04-11)
+
+Full Changelog: [v0.90.1...v0.90.2](https://github.com/lithic-com/lithic-python/compare/v0.90.1...v0.90.2)
+
+### Bug Fixes
+
+* **perf:** optimize some hot paths ([38a0b73](https://github.com/lithic-com/lithic-python/commit/38a0b73924a199070b59b685c5db7fdbc4b22150))
+
 ## 0.90.1 (2025-04-11)
 
 Full Changelog: [v0.90.0...v0.90.1](https://github.com/lithic-com/lithic-python/compare/v0.90.0...v0.90.1)
