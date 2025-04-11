@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.90.1 (2025-04-11)
+
+Full Changelog: [v0.90.0...v0.90.1](https://github.com/lithic-com/lithic-python/compare/v0.90.0...v0.90.1)
+
+### Bug Fixes
+
+* **perf:** skip traversing types for NotGiven values ([5c6a919](https://github.com/lithic-com/lithic-python/commit/5c6a9196fab4c1cfcfdc64689088570df57c2245))
+
+
+### Chores
+
+* **internal:** reduce CI branch coverage ([cf29bc0](https://github.com/lithic-com/lithic-python/commit/cf29bc098038e00d1a332b156cc1b192e0b1cad1))
+
 ## 0.90.0 (2025-04-09)
 
 Full Changelog: [v0.89.0...v0.90.0](https://github.com/lithic-com/lithic-python/compare/v0.89.0...v0.90.0)
