@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.90.3 (2025-04-14)
+
+Full Changelog: [v0.90.2...v0.90.3](https://github.com/lithic-com/lithic-python/compare/v0.90.2...v0.90.3)
+
+### Chores
+
+* **client:** minor internal fixes ([67e2aa9](https://github.com/lithic-com/lithic-python/commit/67e2aa9108a631f0c97fea32cd8e4519944f0ffd))
+* **internal:** update pyright settings ([04ac3ad](https://github.com/lithic-com/lithic-python/commit/04ac3adac96fd5c2fc7d6eb0db21e396f0764d63))
+
 ## 0.90.2 (2025-04-11)
 
 Full Changelog: [v0.90.1...v0.90.2](https://github.com/lithic-com/lithic-python/compare/v0.90.1...v0.90.2)
