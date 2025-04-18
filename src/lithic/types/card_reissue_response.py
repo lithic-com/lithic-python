@@ -5,9 +5,8 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
-from .spend_limit_duration import SpendLimitDuration
 
-__all__ = ["Card", "Funding"]
+__all__ = ["CardReissueResponse", "Funding"]
 
 
 class Funding(BaseModel):
@@ -29,19 +28,15 @@ class Funding(BaseModel):
     state: Literal["DELETED", "ENABLED", "PENDING"]
     """State of funding source.
 
-    Funding source states:
-
-    - `ENABLED` - The funding account is available to use for card creation and
-      transactions.
-    - `PENDING` - The funding account is still being verified e.g. bank
-      micro-deposits verification.
-    - `DELETED` - The founding account has been deleted.
+    Funding source states: _ `ENABLED` - The funding account is available to use for
+    card creation and transactions. _ `PENDING` - The funding account is still being
+    verified e.g. bank micro-deposits verification. \\** `DELETED` - The founding
+    account has been deleted.
     """
 
     type: Literal["DEPOSITORY_CHECKING", "DEPOSITORY_SAVINGS"]
-    """Types of funding source:
+    """Types of funding source: \\** `DEPOSITORY_CHECKING` - Bank checking account.
 
-    - `DEPOSITORY_CHECKING` - Bank checking account.
     - `DEPOSITORY_SAVINGS` - Bank savings account.
     """
 
@@ -52,7 +47,7 @@ class Funding(BaseModel):
     """The nickname given to the `FundingAccount` or `null` if it has no nickname."""
 
 
-class Card(BaseModel):
+class CardReissueResponse(BaseModel):
     token: str
     """Globally unique identifier."""
 
@@ -84,70 +79,48 @@ class Card(BaseModel):
     be declined.
     """
 
-    spend_limit_duration: SpendLimitDuration
-    """Spend limit duration values:
-
-    - `ANNUALLY` - Card will authorize transactions up to spend limit for the
-      trailing year.
-    - `FOREVER` - Card will authorize only up to spend limit for the entire lifetime
-      of the card.
-    - `MONTHLY` - Card will authorize transactions up to spend limit for the
-      trailing month. To support recurring monthly payments, which can occur on
-      different day every month, the time window we consider for monthly velocity
-      starts 6 days after the current calendar date one month prior.
-    - `TRANSACTION` - Card will authorize multiple transactions if each individual
-      transaction is under the spend limit.
-    """
+    spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION", "DAILY"]
+    """Spend limit duration"""
 
     state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"]
-    """Card state values:
+    """Card state values: \\** `CLOSED` - Card will no longer approve authorizations.
 
-    - `CLOSED` - Card will no longer approve authorizations. Closing a card cannot
-      be undone.
-    - `OPEN` - Card will approve authorizations (if they match card and account
-      parameters).
-    - `PAUSED` - Card will decline authorizations, but can be resumed at a later
-      time.
-    - `PENDING_FULFILLMENT` - The initial state for cards of type `PHYSICAL`. The
-      card is provisioned pending manufacturing and fulfillment. Cards in this state
-      can accept authorizations for e-commerce purchases, but not for "Card Present"
-      purchases where the physical card itself is present.
-    - `PENDING_ACTIVATION` - At regular intervals, cards of type `PHYSICAL` in state
-      `PENDING_FULFILLMENT` are sent to the card production warehouse and updated to
-      state `PENDING_ACTIVATION` . Similar to `PENDING_FULFILLMENT`, cards in this
-      state can be used for e-commerce transactions or can be added to mobile
-      wallets. API clients should update the card's state to `OPEN` only after the
-      cardholder confirms receipt of the card.
-
+    Closing a card cannot be undone. _ `OPEN` - Card will approve authorizations (if
+    they match card and account parameters). _ `PAUSED` - Card will decline
+    authorizations, but can be resumed at a later time. _ `PENDING_FULFILLMENT` -
+    The initial state for cards of type `PHYSICAL`. The card is provisioned pending
+    manufacturing and fulfillment. Cards in this state can accept authorizations for
+    e-commerce purchases, but not for "Card Present" purchases where the physical
+    card itself is present. _ `PENDING_ACTIVATION` - At regular intervals, cards of
+    type `PHYSICAL` in state `PENDING_FULFILLMENT` are sent to the card production
+    warehouse and updated to state `PENDING_ACTIVATION`. Similar to
+    `PENDING_FULFILLMENT`, cards in this state can be used for e-commerce
+    transactions or can be added to mobile wallets. API clients should update the
+    card's state to `OPEN` only after the cardholder confirms receipt of the card.
     In sandbox, the same daily batch fulfillment occurs, but no cards are actually
     manufactured.
     """
 
     type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"]
-    """Card types:
-
-    - `VIRTUAL` - Card will authorize at any merchant and can be added to a digital
-      wallet like Apple Pay or Google Pay (if the card program is digital
-      wallet-enabled).
-    - `PHYSICAL` - Manufactured and sent to the cardholder. We offer white label
-      branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe functionality.
-      Reach out at [lithic.com/contact](https://lithic.com/contact) for more
-      information.
-    - `SINGLE_USE` - Card is closed upon first successful authorization.
-    - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
-      successfully authorizes the card.
-    - `UNLOCKED` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please use
-      VIRTUAL instead.
-    - `DIGITAL_WALLET` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please
-      use VIRTUAL instead.
+    """
+    Card types: _ `VIRTUAL` - Card will authorize at any merchant and can be added
+    to a digital wallet like Apple Pay or Google Pay (if the card program is digital
+    wallet-enabled). _ `PHYSICAL` - Manufactured and sent to the cardholder. We
+    offer white label branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe
+    functionality. _ `SINGLE_USE` - Card is closed upon first successful
+    authorization. _ `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first
+    merchant that successfully authorizes the card. _ `UNLOCKED` - _[Deprecated]_
+    Similar behavior to VIRTUAL cards, please use VIRTUAL instead. _
+    `DIGITAL_WALLET` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please use
+    VIRTUAL instead.
     """
 
     auth_rule_tokens: Optional[List[str]] = None
-    """
-    List of identifiers for the Auth Rule(s) that are applied on the card. This
-    field is deprecated and will no longer be populated in the `Card` object. The
-    key will be removed from the schema in a future release. Use the `/auth_rules`
-    endpoints to fetch Auth Rule information instead.
+    """List of identifiers for the Auth Rule(s) that are applied on the card.
+
+    This field is deprecated and will no longer be populated in the `Card` object.
+    The key will be removed from the schema in a future release. Use the
+    `/auth_rules` endpoints to fetch Auth Rule information instead.
     """
 
     cardholder_currency: Optional[str] = None
@@ -158,10 +131,9 @@ class Card(BaseModel):
 
     digital_card_art_token: Optional[str] = None
     """
-    Specifies the digital card art to be displayed in the user’s digital wallet
+    Specifies the digital card art to be displayed in the user's digital wallet
     after tokenization. This artwork must be approved by Mastercard and configured
-    by Lithic to use. See
-    [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
+    by Lithic to use.
     """
 
     exp_month: Optional[str] = None
@@ -171,7 +143,7 @@ class Card(BaseModel):
     """Four digit (yyyy) expiry year."""
 
     hostname: Optional[str] = None
-    """Hostname of card’s locked merchant (will be empty if not applicable)."""
+    """Hostname of card's locked merchant (will be empty if not applicable)."""
 
     memo: Optional[str] = None
     """Friendly name to identify the card."""
@@ -180,8 +152,7 @@ class Card(BaseModel):
     """Primary Account Number (PAN) (i.e.
 
     the card number). Customers must be PCI compliant to have PAN returned as a
-    field in production. Please contact
-    [support@lithic.com](mailto:support@lithic.com) for questions.
+    field in production. Please contact support@lithic.com for questions.
     """
 
     pending_commands: Optional[List[str]] = None

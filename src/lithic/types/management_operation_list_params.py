@@ -20,7 +20,9 @@ class ManagementOperationListParams(TypedDict, total=False):
 
     business_account_token: str
 
-    category: Literal["MANAGEMENT_FEE", "MANAGEMENT_DISPUTE", "MANAGEMENT_REWARD", "MANAGEMENT_ADJUSTMENT"]
+    category: Literal[
+        "MANAGEMENT_FEE", "MANAGEMENT_DISPUTE", "MANAGEMENT_REWARD", "MANAGEMENT_ADJUSTMENT", "MANAGEMENT_DISBURSEMENT"
+    ]
     """Management operation category to be returned."""
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]

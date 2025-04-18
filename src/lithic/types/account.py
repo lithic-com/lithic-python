@@ -76,10 +76,7 @@ class Account(BaseModel):
     """
 
     created: Optional[datetime] = None
-    """Timestamp of when the account was created.
-
-    For accounts created before 2023-05-11, this field will be null.
-    """
+    """Timestamp of when the account was created."""
 
     spend_limit: SpendLimit
     """
