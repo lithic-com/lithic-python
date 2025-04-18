@@ -33,6 +33,10 @@ __all__ = [
     "EventNetworkInfoMastercard",
     "EventNetworkInfoVisa",
     "EventRuleResult",
+    "EventNetworkSpecificData",
+    "EventNetworkSpecificDataMastercard",
+    "EventNetworkSpecificDataMastercardOnBehalfServiceResult",
+    "EventNetworkSpecificDataVisa",
 ]
 
 
@@ -284,6 +288,12 @@ class PosTerminal(BaseModel):
     ]
     """POS Type"""
 
+    acceptor_terminal_id: Optional[str] = None
+    """
+    Uniquely identifies a terminal at the card acceptor location of acquiring
+    institutions or merchant POS Systems
+    """
+
 
 class Pos(BaseModel):
     entry_mode: PosEntryMode
@@ -494,6 +504,46 @@ class EventRuleResult(BaseModel):
     """The detailed_result associated with this rule's decline."""
 
 
+class EventNetworkSpecificDataMastercardOnBehalfServiceResult(BaseModel):
+    result_1: str
+    """Indicates the results of the service processing."""
+
+    result_2: str
+    """Identifies the results of the service processing."""
+
+    service: str
+    """Indicates the service performed on the transaction."""
+
+
+class EventNetworkSpecificDataMastercard(BaseModel):
+    ecommerce_security_level_indicator: Optional[str] = None
+    """Indicates the electronic commerce security level and UCAF collection."""
+
+    on_behalf_service_result: Optional[List[EventNetworkSpecificDataMastercardOnBehalfServiceResult]] = None
+    """The On-behalf Service performed on the transaction and the results.
+
+    Contains all applicable, on-behalf service results that were performed on a
+    given transaction.
+    """
+
+    transaction_type_identifier: Optional[str] = None
+    """Indicates the type of additional transaction purpose."""
+
+
+class EventNetworkSpecificDataVisa(BaseModel):
+    business_application_identifier: Optional[str] = None
+    """
+    Identifies the purpose or category of a transaction, used to classify and
+    process transactions according to Visa’s rules.
+    """
+
+
+class EventNetworkSpecificData(BaseModel):
+    mastercard: EventNetworkSpecificDataMastercard
+
+    visa: EventNetworkSpecificDataVisa
+
+
 class Event(BaseModel):
     token: str
     """Transaction event identifier."""
@@ -624,6 +674,8 @@ class Event(BaseModel):
         "RETURN_REVERSAL",
     ]
     """Type of transaction event"""
+
+    network_specific_data: Optional[EventNetworkSpecificData] = None
 
 
 class Transaction(BaseModel):

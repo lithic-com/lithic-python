@@ -28,7 +28,7 @@ class TestManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ManagementOperationTransaction, management_operation, path=["response"])
@@ -40,7 +40,7 @@ class TestManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="memo",
@@ -56,7 +56,7 @@ class TestManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -72,7 +72,7 @@ class TestManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -227,7 +227,7 @@ class TestAsyncManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ManagementOperationTransaction, management_operation, path=["response"])
@@ -239,7 +239,7 @@ class TestAsyncManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="memo",
@@ -255,7 +255,7 @@ class TestAsyncManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -271,7 +271,7 @@ class TestAsyncManagementOperations:
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
-            event_type="CASH_BACK",
+            event_type="LOSS_WRITE_OFF",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed

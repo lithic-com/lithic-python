@@ -86,9 +86,6 @@ class Dispute(BaseModel):
     representment_date: Optional[datetime] = None
     """Date the representment was received."""
 
-    resolution_amount: Optional[int] = None
-    """Resolution amount net of network fees."""
-
     resolution_date: Optional[datetime] = None
     """Date that the dispute was resolved."""
 

@@ -95,6 +95,7 @@ class Event(BaseModel):
             "TRANSFER_INSUFFICIENT_FUNDS",
             "RETURNED_PAYMENT",
             "RETURNED_PAYMENT_REVERSAL",
+            "LITHIC_NETWORK_PAYMENT",
         ]
     ] = None
 
