@@ -88,15 +88,17 @@ class AccountHolders(SyncAPIResource):
         Create an account holder and initiate the appropriate onboarding workflow.
         Account holders and accounts have a 1:1 relationship. When an account holder is
         successfully created an associated account is also created. All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the enrollment is under review or further action will be needed to
-        complete the account enrollment process. This endpoint can only be used on
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
 
         Args:
-          beneficial_owner_individuals: List of all direct and indirect individuals with 25% or more ownership in the
-              company. If no individual owns 25% of the company, please identify the largest
-              shareholder in this field. See
+          beneficial_owner_individuals: You must submit a list of all direct and indirect individuals with 25% or more
+              ownership in the company. A maximum of 4 beneficial owners can be submitted. If
+              no individual owns 25% of the company you do not need to send beneficial owner
+              information. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section I) for more background on individuals that should be included.
 
@@ -163,10 +165,11 @@ class AccountHolders(SyncAPIResource):
         Create an account holder and initiate the appropriate onboarding workflow.
         Account holders and accounts have a 1:1 relationship. When an account holder is
         successfully created an associated account is also created. All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the enrollment is under review or further action will be needed to
-        complete the account enrollment process. This endpoint can only be used on
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
 
         Args:
           individual: Information on individual for whom the account is being opened and KYC is being
@@ -220,10 +223,11 @@ class AccountHolders(SyncAPIResource):
         Create an account holder and initiate the appropriate onboarding workflow.
         Account holders and accounts have a 1:1 relationship. When an account holder is
         successfully created an associated account is also created. All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the enrollment is under review or further action will be needed to
-        complete the account enrollment process. This endpoint can only be used on
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
 
         Args:
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -398,17 +402,19 @@ class AccountHolders(SyncAPIResource):
         is performing KYB or KYC and additional verification is required we will run the
         individual's or business's updated information again and return whether the
         status is accepted or pending (i.e., further action required). All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the workflow is under review or further action will be needed to
-        complete the evaluation process. This endpoint can only be used on existing
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on existing accounts that are part of
+        the program that the calling API key manages.
 
         Args:
           beneficial_owner_entities: Deprecated.
 
-          beneficial_owner_individuals: List of all direct and indirect individuals with 25% or more ownership in the
-              company. If no individual owns 25% of the company, please identify the largest
-              shareholder in this field. See
+          beneficial_owner_individuals: You must submit a list of all direct and indirect individuals with 25% or more
+              ownership in the company. A maximum of 4 beneficial owners can be submitted. If
+              no individual owns 25% of the company you do not need to send beneficial owner
+              information. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section I) for more background on individuals that should be included.
 
@@ -462,10 +468,11 @@ class AccountHolders(SyncAPIResource):
         is performing KYB or KYC and additional verification is required we will run the
         individual's or business's updated information again and return whether the
         status is accepted or pending (i.e., further action required). All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the workflow is under review or further action will be needed to
-        complete the evaluation process. This endpoint can only be used on existing
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on existing accounts that are part of
+        the program that the calling API key manages.
 
         Args:
           external_id: A user provided id that can be used to link an account holder with an external
@@ -509,10 +516,11 @@ class AccountHolders(SyncAPIResource):
         is performing KYB or KYC and additional verification is required we will run the
         individual's or business's updated information again and return whether the
         status is accepted or pending (i.e., further action required). All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the workflow is under review or further action will be needed to
-        complete the evaluation process. This endpoint can only be used on existing
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on existing accounts that are part of
+        the program that the calling API key manages.
 
         Args:
           address: Allowed for: KYC-Exempt, BYO-KYC, BYO-KYB.
@@ -1069,15 +1077,17 @@ class AsyncAccountHolders(AsyncAPIResource):
         Create an account holder and initiate the appropriate onboarding workflow.
         Account holders and accounts have a 1:1 relationship. When an account holder is
         successfully created an associated account is also created. All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the enrollment is under review or further action will be needed to
-        complete the account enrollment process. This endpoint can only be used on
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
 
         Args:
-          beneficial_owner_individuals: List of all direct and indirect individuals with 25% or more ownership in the
-              company. If no individual owns 25% of the company, please identify the largest
-              shareholder in this field. See
+          beneficial_owner_individuals: You must submit a list of all direct and indirect individuals with 25% or more
+              ownership in the company. A maximum of 4 beneficial owners can be submitted. If
+              no individual owns 25% of the company you do not need to send beneficial owner
+              information. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section I) for more background on individuals that should be included.
 
@@ -1144,10 +1154,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         Create an account holder and initiate the appropriate onboarding workflow.
         Account holders and accounts have a 1:1 relationship. When an account holder is
         successfully created an associated account is also created. All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the enrollment is under review or further action will be needed to
-        complete the account enrollment process. This endpoint can only be used on
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
 
         Args:
           individual: Information on individual for whom the account is being opened and KYC is being
@@ -1201,10 +1212,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         Create an account holder and initiate the appropriate onboarding workflow.
         Account holders and accounts have a 1:1 relationship. When an account holder is
         successfully created an associated account is also created. All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the enrollment is under review or further action will be needed to
-        complete the account enrollment process. This endpoint can only be used on
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
 
         Args:
           address: KYC Exempt user's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -1379,17 +1391,19 @@ class AsyncAccountHolders(AsyncAPIResource):
         is performing KYB or KYC and additional verification is required we will run the
         individual's or business's updated information again and return whether the
         status is accepted or pending (i.e., further action required). All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the workflow is under review or further action will be needed to
-        complete the evaluation process. This endpoint can only be used on existing
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on existing accounts that are part of
+        the program that the calling API key manages.
 
         Args:
           beneficial_owner_entities: Deprecated.
 
-          beneficial_owner_individuals: List of all direct and indirect individuals with 25% or more ownership in the
-              company. If no individual owns 25% of the company, please identify the largest
-              shareholder in this field. See
+          beneficial_owner_individuals: You must submit a list of all direct and indirect individuals with 25% or more
+              ownership in the company. A maximum of 4 beneficial owners can be submitted. If
+              no individual owns 25% of the company you do not need to send beneficial owner
+              information. See
               [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
               (Section I) for more background on individuals that should be included.
 
@@ -1443,10 +1457,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         is performing KYB or KYC and additional verification is required we will run the
         individual's or business's updated information again and return whether the
         status is accepted or pending (i.e., further action required). All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the workflow is under review or further action will be needed to
-        complete the evaluation process. This endpoint can only be used on existing
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on existing accounts that are part of
+        the program that the calling API key manages.
 
         Args:
           external_id: A user provided id that can be used to link an account holder with an external
@@ -1490,10 +1505,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         is performing KYB or KYC and additional verification is required we will run the
         individual's or business's updated information again and return whether the
         status is accepted or pending (i.e., further action required). All calls to this
-        endpoint will return an immediate response - though in some cases, the response
-        may indicate the workflow is under review or further action will be needed to
-        complete the evaluation process. This endpoint can only be used on existing
-        accounts that are part of the program that the calling API key manages.
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on existing accounts that are part of
+        the program that the calling API key manages.
 
         Args:
           address: Allowed for: KYC-Exempt, BYO-KYC, BYO-KYB.

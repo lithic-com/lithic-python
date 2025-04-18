@@ -14,7 +14,15 @@ __all__ = ["ManagementOperationCreateParams"]
 class ManagementOperationCreateParams(TypedDict, total=False):
     amount: Required[int]
 
-    category: Required[Literal["MANAGEMENT_FEE", "MANAGEMENT_DISPUTE", "MANAGEMENT_REWARD", "MANAGEMENT_ADJUSTMENT"]]
+    category: Required[
+        Literal[
+            "MANAGEMENT_FEE",
+            "MANAGEMENT_DISPUTE",
+            "MANAGEMENT_REWARD",
+            "MANAGEMENT_ADJUSTMENT",
+            "MANAGEMENT_DISBURSEMENT",
+        ]
+    ]
 
     direction: Required[Literal["CREDIT", "DEBIT"]]
 
@@ -22,21 +30,25 @@ class ManagementOperationCreateParams(TypedDict, total=False):
 
     event_type: Required[
         Literal[
-            "CASH_BACK",
-            "CURRENCY_CONVERSION",
-            "INTEREST",
-            "LATE_PAYMENT",
-            "BILLING_ERROR",
-            "PROVISIONAL_CREDIT",
             "LOSS_WRITE_OFF",
+            "CASH_BACK",
             "CASH_BACK_REVERSAL",
+            "CURRENCY_CONVERSION",
             "CURRENCY_CONVERSION_REVERSAL",
+            "INTEREST",
             "INTEREST_REVERSAL",
+            "LATE_PAYMENT",
             "LATE_PAYMENT_REVERSAL",
+            "BILLING_ERROR",
             "BILLING_ERROR_REVERSAL",
+            "PROVISIONAL_CREDIT",
             "PROVISIONAL_CREDIT_REVERSAL",
             "RETURNED_PAYMENT",
             "RETURNED_PAYMENT_REVERSAL",
+            "DISPUTE_WON",
+            "DISPUTE_WON_REVERSAL",
+            "DISBURSE",
+            "DISBURSE_REVERSAL",
         ]
     ]
 

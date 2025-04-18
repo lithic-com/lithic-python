@@ -28,6 +28,7 @@ class Data(BaseModel):
         "MANAGEMENT_DISPUTE",
         "MANAGEMENT_FEE",
         "MANAGEMENT_REWARD",
+        "MANAGEMENT_DISBURSEMENT",
     ]
 
     created: datetime
@@ -108,6 +109,7 @@ class Data(BaseModel):
         "TRANSFER_INSUFFICIENT_FUNDS",
         "RETURNED_PAYMENT",
         "RETURNED_PAYMENT_REVERSAL",
+        "LITHIC_NETWORK_PAYMENT",
     ]
 
     financial_account_token: str

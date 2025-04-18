@@ -336,7 +336,7 @@ class Payments(SyncAPIResource):
         Simulates a receipt of a Payment.
 
         Args:
-          token: Payment token
+          token: Customer-generated payment token used to uniquely identify the simulated payment
 
           amount: Amount
 
@@ -750,7 +750,7 @@ class AsyncPayments(AsyncAPIResource):
         Simulates a receipt of a Payment.
 
         Args:
-          token: Payment token
+          token: Customer-generated payment token used to uniquely identify the simulated payment
 
           amount: Amount
 

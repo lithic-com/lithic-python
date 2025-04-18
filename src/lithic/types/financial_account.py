@@ -48,7 +48,14 @@ class FinancialAccount(BaseModel):
     """Status of the financial account"""
 
     type: Literal[
-        "ISSUING", "RESERVE", "OPERATING", "CHARGED_OFF_FEES", "CHARGED_OFF_INTEREST", "CHARGED_OFF_PRINCIPAL"
+        "ISSUING",
+        "RESERVE",
+        "OPERATING",
+        "CHARGED_OFF_FEES",
+        "CHARGED_OFF_INTEREST",
+        "CHARGED_OFF_PRINCIPAL",
+        "SECURITY",
+        "PROGRAM_RECEIVABLES",
     ]
 
     updated: datetime

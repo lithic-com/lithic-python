@@ -9,7 +9,9 @@ __all__ = ["PaymentSimulateReceiptParams"]
 
 class PaymentSimulateReceiptParams(TypedDict, total=False):
     token: Required[str]
-    """Payment token"""
+    """
+    Customer-generated payment token used to uniquely identify the simulated payment
+    """
 
     amount: Required[int]
     """Amount"""

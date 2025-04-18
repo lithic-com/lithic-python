@@ -25,21 +25,25 @@ class Event(BaseModel):
     result: Literal["APPROVED", "DECLINED"]
 
     type: Literal[
-        "CASH_BACK",
-        "CURRENCY_CONVERSION",
-        "INTEREST",
-        "LATE_PAYMENT",
-        "BILLING_ERROR",
-        "PROVISIONAL_CREDIT",
         "LOSS_WRITE_OFF",
+        "CASH_BACK",
         "CASH_BACK_REVERSAL",
+        "CURRENCY_CONVERSION",
         "CURRENCY_CONVERSION_REVERSAL",
+        "INTEREST",
         "INTEREST_REVERSAL",
+        "LATE_PAYMENT",
         "LATE_PAYMENT_REVERSAL",
+        "BILLING_ERROR",
         "BILLING_ERROR_REVERSAL",
+        "PROVISIONAL_CREDIT",
         "PROVISIONAL_CREDIT_REVERSAL",
         "RETURNED_PAYMENT",
         "RETURNED_PAYMENT_REVERSAL",
+        "DISPUTE_WON",
+        "DISPUTE_WON_REVERSAL",
+        "DISBURSE",
+        "DISBURSE_REVERSAL",
     ]
 
     subtype: Optional[str] = None
@@ -56,7 +60,9 @@ class TransactionSeries(BaseModel):
 class ManagementOperationTransaction(BaseModel):
     token: str
 
-    category: Literal["MANAGEMENT_FEE", "MANAGEMENT_DISPUTE", "MANAGEMENT_REWARD", "MANAGEMENT_ADJUSTMENT"]
+    category: Literal[
+        "MANAGEMENT_FEE", "MANAGEMENT_DISPUTE", "MANAGEMENT_REWARD", "MANAGEMENT_ADJUSTMENT", "MANAGEMENT_DISBURSEMENT"
+    ]
 
     created: datetime
 
