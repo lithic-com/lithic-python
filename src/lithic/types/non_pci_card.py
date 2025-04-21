@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["CardListResponse", "Funding"]
+__all__ = ["NonPCICard", "Funding"]
 
 
 class Funding(BaseModel):
@@ -47,7 +47,7 @@ class Funding(BaseModel):
     """The nickname given to the `FundingAccount` or `null` if it has no nickname."""
 
 
-class CardListResponse(BaseModel):
+class NonPCICard(BaseModel):
     token: str
     """Globally unique identifier."""
 
