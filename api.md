@@ -178,34 +178,28 @@ Types:
 
 ```python
 from lithic.types import (
+    Card,
     CardSpendLimits,
+    NonPCICard,
     SpendLimitDuration,
-    CardCreateResponse,
-    CardRetrieveResponse,
-    CardUpdateResponse,
-    CardListResponse,
-    CardConvertPhysicalResponse,
     CardEmbedResponse,
     CardProvisionResponse,
-    CardReissueResponse,
-    CardRenewResponse,
-    CardSearchByPanResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /v1/cards">client.cards.<a href="./src/lithic/resources/cards/cards.py">create</a>(\*\*<a href="src/lithic/types/card_create_params.py">params</a>) -> <a href="./src/lithic/types/card_create_response.py">CardCreateResponse</a></code>
-- <code title="get /v1/cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve</a>(card_token) -> <a href="./src/lithic/types/card_retrieve_response.py">CardRetrieveResponse</a></code>
-- <code title="patch /v1/cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards/cards.py">update</a>(card_token, \*\*<a href="src/lithic/types/card_update_params.py">params</a>) -> <a href="./src/lithic/types/card_update_response.py">CardUpdateResponse</a></code>
-- <code title="get /v1/cards">client.cards.<a href="./src/lithic/resources/cards/cards.py">list</a>(\*\*<a href="src/lithic/types/card_list_params.py">params</a>) -> <a href="./src/lithic/types/card_list_response.py">SyncCursorPage[CardListResponse]</a></code>
-- <code title="post /v1/cards/{card_token}/convert_physical">client.cards.<a href="./src/lithic/resources/cards/cards.py">convert_physical</a>(card_token, \*\*<a href="src/lithic/types/card_convert_physical_params.py">params</a>) -> <a href="./src/lithic/types/card_convert_physical_response.py">CardConvertPhysicalResponse</a></code>
+- <code title="post /v1/cards">client.cards.<a href="./src/lithic/resources/cards/cards.py">create</a>(\*\*<a href="src/lithic/types/card_create_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="get /v1/cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve</a>(card_token) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="patch /v1/cards/{card_token}">client.cards.<a href="./src/lithic/resources/cards/cards.py">update</a>(card_token, \*\*<a href="src/lithic/types/card_update_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="get /v1/cards">client.cards.<a href="./src/lithic/resources/cards/cards.py">list</a>(\*\*<a href="src/lithic/types/card_list_params.py">params</a>) -> <a href="./src/lithic/types/non_pci_card.py">SyncCursorPage[NonPCICard]</a></code>
+- <code title="post /v1/cards/{card_token}/convert_physical">client.cards.<a href="./src/lithic/resources/cards/cards.py">convert_physical</a>(card_token, \*\*<a href="src/lithic/types/card_convert_physical_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /v1/embed/card">client.cards.<a href="./src/lithic/resources/cards/cards.py">embed</a>(\*\*<a href="src/lithic/types/card_embed_params.py">params</a>) -> str</code>
 - <code title="post /v1/cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
-- <code title="post /v1/cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card_reissue_response.py">CardReissueResponse</a></code>
-- <code title="post /v1/cards/{card_token}/renew">client.cards.<a href="./src/lithic/resources/cards/cards.py">renew</a>(card_token, \*\*<a href="src/lithic/types/card_renew_params.py">params</a>) -> <a href="./src/lithic/types/card_renew_response.py">CardRenewResponse</a></code>
+- <code title="post /v1/cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="post /v1/cards/{card_token}/renew">client.cards.<a href="./src/lithic/resources/cards/cards.py">renew</a>(card_token, \*\*<a href="src/lithic/types/card_renew_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /v1/cards/{card_token}/spend_limits">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_spend_limits</a>(card_token) -> <a href="./src/lithic/types/card_spend_limits.py">CardSpendLimits</a></code>
-- <code title="post /v1/cards/search_by_pan">client.cards.<a href="./src/lithic/resources/cards/cards.py">search_by_pan</a>(\*\*<a href="src/lithic/types/card_search_by_pan_params.py">params</a>) -> <a href="./src/lithic/types/card_search_by_pan_response.py">CardSearchByPanResponse</a></code>
+- <code title="post /v1/cards/search_by_pan">client.cards.<a href="./src/lithic/resources/cards/cards.py">search_by_pan</a>(\*\*<a href="src/lithic/types/card_search_by_pan_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
 

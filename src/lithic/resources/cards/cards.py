@@ -52,6 +52,7 @@ from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ...pagination import SyncCursorPage, AsyncCursorPage
+from ...types.card import Card
 from ..._base_client import AsyncPaginator, _merge_mappings, make_request_options
 from .aggregate_balances import (
     AggregateBalances,
@@ -61,6 +62,7 @@ from .aggregate_balances import (
     AggregateBalancesWithStreamingResponse,
     AsyncAggregateBalancesWithStreamingResponse,
 )
+from ...types.non_pci_card import NonPCICard
 from .financial_transactions import (
     FinancialTransactions,
     AsyncFinancialTransactions,
@@ -70,17 +72,9 @@ from .financial_transactions import (
     AsyncFinancialTransactionsWithStreamingResponse,
 )
 from ...types.card_spend_limits import CardSpendLimits
-from ...types.card_list_response import CardListResponse
-from ...types.card_renew_response import CardRenewResponse
-from ...types.card_create_response import CardCreateResponse
-from ...types.card_update_response import CardUpdateResponse
 from ...types.spend_limit_duration import SpendLimitDuration
-from ...types.card_reissue_response import CardReissueResponse
 from ...types.shared_params.carrier import Carrier
-from ...types.card_retrieve_response import CardRetrieveResponse
 from ...types.card_provision_response import CardProvisionResponse
-from ...types.card_search_by_pan_response import CardSearchByPanResponse
-from ...types.card_convert_physical_response import CardConvertPhysicalResponse
 from ...types.shared_params.shipping_address import ShippingAddress
 
 __all__ = ["Cards", "AsyncCards"]
@@ -145,7 +139,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardCreateResponse:
+    ) -> Card:
         """Create a new virtual or physical card.
 
         Parameters `shipping_address` and
@@ -289,7 +283,7 @@ class Cards(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardCreateResponse,
+            cast_to=Card,
         )
 
     def retrieve(
@@ -302,7 +296,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardRetrieveResponse:
+    ) -> Card:
         """
         Get card configuration such as spend limit and state.
 
@@ -322,7 +316,7 @@ class Cards(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardRetrieveResponse,
+            cast_to=Card,
         )
 
     def update(
@@ -342,7 +336,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardUpdateResponse:
+    ) -> Card:
         """Update the specified properties of the card.
 
         Unsupplied properties will remain
@@ -423,7 +417,7 @@ class Cards(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardUpdateResponse,
+            cast_to=Card,
         )
 
     def list(
@@ -442,7 +436,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[CardListResponse]:
+    ) -> SyncCursorPage[NonPCICard]:
         """
         List cards.
 
@@ -475,7 +469,7 @@ class Cards(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/cards",
-            page=SyncCursorPage[CardListResponse],
+            page=SyncCursorPage[NonPCICard],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -494,7 +488,7 @@ class Cards(SyncAPIResource):
                     card_list_params.CardListParams,
                 ),
             ),
-            model=CardListResponse,
+            model=NonPCICard,
         )
 
     def convert_physical(
@@ -512,7 +506,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardConvertPhysicalResponse:
+    ) -> Card:
         """Convert a virtual card into a physical card and manufacture it.
 
         Customer must
@@ -572,7 +566,7 @@ class Cards(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardConvertPhysicalResponse,
+            cast_to=Card,
         )
 
     def embed(
@@ -852,7 +846,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardReissueResponse:
+    ) -> Card:
         """Initiate print and shipment of a duplicate physical card (e.g.
 
         card is
@@ -907,7 +901,7 @@ class Cards(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardReissueResponse,
+            cast_to=Card,
         )
 
     def renew(
@@ -927,7 +921,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardRenewResponse:
+    ) -> Card:
         """Applies to card types `PHYSICAL` and `VIRTUAL`.
 
         For `PHYSICAL`, creates a new
@@ -994,7 +988,7 @@ class Cards(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardRenewResponse,
+            cast_to=Card,
         )
 
     def retrieve_spend_limits(
@@ -1043,7 +1037,7 @@ class Cards(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardSearchByPanResponse:
+    ) -> Card:
         """Get card configuration such as spend limit and state.
 
         Customers must be PCI
@@ -1069,7 +1063,7 @@ class Cards(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardSearchByPanResponse,
+            cast_to=Card,
         )
 
 
@@ -1132,7 +1126,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardCreateResponse:
+    ) -> Card:
         """Create a new virtual or physical card.
 
         Parameters `shipping_address` and
@@ -1276,7 +1270,7 @@ class AsyncCards(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardCreateResponse,
+            cast_to=Card,
         )
 
     async def retrieve(
@@ -1289,7 +1283,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardRetrieveResponse:
+    ) -> Card:
         """
         Get card configuration such as spend limit and state.
 
@@ -1309,7 +1303,7 @@ class AsyncCards(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardRetrieveResponse,
+            cast_to=Card,
         )
 
     async def update(
@@ -1329,7 +1323,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardUpdateResponse:
+    ) -> Card:
         """Update the specified properties of the card.
 
         Unsupplied properties will remain
@@ -1410,7 +1404,7 @@ class AsyncCards(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardUpdateResponse,
+            cast_to=Card,
         )
 
     def list(
@@ -1429,7 +1423,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[CardListResponse, AsyncCursorPage[CardListResponse]]:
+    ) -> AsyncPaginator[NonPCICard, AsyncCursorPage[NonPCICard]]:
         """
         List cards.
 
@@ -1462,7 +1456,7 @@ class AsyncCards(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/cards",
-            page=AsyncCursorPage[CardListResponse],
+            page=AsyncCursorPage[NonPCICard],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1481,7 +1475,7 @@ class AsyncCards(AsyncAPIResource):
                     card_list_params.CardListParams,
                 ),
             ),
-            model=CardListResponse,
+            model=NonPCICard,
         )
 
     async def convert_physical(
@@ -1499,7 +1493,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardConvertPhysicalResponse:
+    ) -> Card:
         """Convert a virtual card into a physical card and manufacture it.
 
         Customer must
@@ -1559,7 +1553,7 @@ class AsyncCards(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardConvertPhysicalResponse,
+            cast_to=Card,
         )
 
     async def embed(
@@ -1839,7 +1833,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardReissueResponse:
+    ) -> Card:
         """Initiate print and shipment of a duplicate physical card (e.g.
 
         card is
@@ -1894,7 +1888,7 @@ class AsyncCards(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardReissueResponse,
+            cast_to=Card,
         )
 
     async def renew(
@@ -1914,7 +1908,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardRenewResponse:
+    ) -> Card:
         """Applies to card types `PHYSICAL` and `VIRTUAL`.
 
         For `PHYSICAL`, creates a new
@@ -1981,7 +1975,7 @@ class AsyncCards(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardRenewResponse,
+            cast_to=Card,
         )
 
     async def retrieve_spend_limits(
@@ -2030,7 +2024,7 @@ class AsyncCards(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CardSearchByPanResponse:
+    ) -> Card:
         """Get card configuration such as spend limit and state.
 
         Customers must be PCI
@@ -2056,7 +2050,7 @@ class AsyncCards(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CardSearchByPanResponse,
+            cast_to=Card,
         )
 
 
