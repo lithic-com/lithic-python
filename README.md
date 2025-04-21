@@ -154,7 +154,6 @@ client = Lithic()
 card = client.cards.create(
     type="VIRTUAL",
 )
-print(card.product_id)
 ```
 
 ## Handling errors
