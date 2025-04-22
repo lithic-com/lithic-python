@@ -22,10 +22,7 @@ from ._types import (
     ProxiesTypes,
     RequestOptions,
 )
-from ._utils import (
-    is_given,
-    get_async_library,
-)
+from ._utils import is_given, get_async_library
 from ._version import __version__
 from ._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from .resources import (
