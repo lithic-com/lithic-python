@@ -16,20 +16,8 @@ from ..types import (
     dispute_list_evidences_params,
     dispute_initiate_evidence_upload_params,
 )
-from .._types import (
-    NOT_GIVEN,
-    Body,
-    Omit,
-    Query,
-    Headers,
-    NoneType,
-    NotGiven,
-    FileTypes,
-)
-from .._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from .._types import NOT_GIVEN, Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
