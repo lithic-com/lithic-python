@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.90.3 (2025-04-22)
+
+Full Changelog: [v0.90.2...v0.90.3](https://github.com/lithic-com/lithic-python/compare/v0.90.2...v0.90.3)
+
+### Bug Fixes
+
+* **pydantic v1:** more robust ModelField.annotation check ([51c8dc0](https://github.com/lithic-com/lithic-python/commit/51c8dc0757b022b0a02640f306b62ce1b7e0660c))
+
+
+### Chores
+
+* **internal:** fix list file params ([5290c3d](https://github.com/lithic-com/lithic-python/commit/5290c3dc1d6a0c4060fd446aea9bed0f95d24882))
+* **internal:** import reformatting ([e098e06](https://github.com/lithic-com/lithic-python/commit/e098e0665ad97c68b486b3b80ddce23dc18aa664))
+* **internal:** refactor retries to not use recursion ([f38895a](https://github.com/lithic-com/lithic-python/commit/f38895a05dcc1ed6f862f8b60084c73c473f6c8c))
+
 ## 0.90.2 (2025-04-11)
 
 Full Changelog: [v0.90.1...v0.90.2](https://github.com/lithic-com/lithic-python/compare/v0.90.1...v0.90.2)
