@@ -27,19 +27,8 @@ from ...types import (
     card_search_by_pan_params,
     card_convert_physical_params,
 )
-from ..._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NotGiven,
-    Base64FileInput,
-)
-from ..._utils import (
-    maybe_transform,
-    strip_not_given,
-    async_maybe_transform,
-)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, Base64FileInput
+from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
 from .balances import (
     Balances,
     AsyncBalances,
