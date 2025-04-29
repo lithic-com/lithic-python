@@ -67,6 +67,7 @@ class BookTransferCreateParams(TypedDict, total=False):
             "INACTIVITY_FEE_DOWN",
             "PROVISIONAL_CREDIT",
             "DISPUTE_WON",
+            "SERVICE",
             "TRANSFER",
         ]
     ]
