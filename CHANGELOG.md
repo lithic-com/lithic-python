@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.91.0 (2025-04-29)
+
+Full Changelog: [v0.90.3...v0.91.0](https://github.com/lithic-com/lithic-python/compare/v0.90.3...v0.91.0)
+
+### Features
+
+* **api:** adds new merchant lock Auth Rule ([649c467](https://github.com/lithic-com/lithic-python/commit/649c467ede30d36ab20edb8df90afb7a9c69b8eb))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([0f14461](https://github.com/lithic-com/lithic-python/commit/0f144611e50f58ad31d3a8d7cc508f46be86c698))
+* **ci:** only use depot for staging repos ([3c98e4a](https://github.com/lithic-com/lithic-python/commit/3c98e4af4ca05552fcfa4181917cdd7cd3f27b30))
+* **ci:** run on more branches and use depot runners ([0e3086d](https://github.com/lithic-com/lithic-python/commit/0e3086d630295afedb1f2925cee8ef660ff90853))
+* **internal:** minor formatting changes ([b8f48c2](https://github.com/lithic-com/lithic-python/commit/b8f48c2c07fc10aa924e5c7f729596312749fbe8))
+
 ## 0.90.3 (2025-04-22)
 
 Full Changelog: [v0.90.2...v0.90.3](https://github.com/lithic-com/lithic-python/compare/v0.90.2...v0.90.3)
