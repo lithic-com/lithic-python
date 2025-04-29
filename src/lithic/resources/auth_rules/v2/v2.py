@@ -67,7 +67,7 @@ class V2(SyncAPIResource):
         account_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,7 +104,7 @@ class V2(SyncAPIResource):
         card_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -142,7 +142,7 @@ class V2(SyncAPIResource):
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -181,7 +181,7 @@ class V2(SyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
@@ -422,6 +422,7 @@ class V2(SyncAPIResource):
         card_token: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        scope: Literal["PROGRAM", "ACCOUNT", "CARD"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -442,6 +443,8 @@ class V2(SyncAPIResource):
               Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          scope: Only return Authorization Rules that are bound to the provided scope;
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -468,6 +471,7 @@ class V2(SyncAPIResource):
                         "card_token": card_token,
                         "ending_before": ending_before,
                         "page_size": page_size,
+                        "scope": scope,
                         "starting_after": starting_after,
                     },
                     v2_list_params.V2ListParams,
@@ -832,7 +836,7 @@ class AsyncV2(AsyncAPIResource):
         account_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -869,7 +873,7 @@ class AsyncV2(AsyncAPIResource):
         card_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -907,7 +911,7 @@ class AsyncV2(AsyncAPIResource):
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -946,7 +950,7 @@ class AsyncV2(AsyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
@@ -1187,6 +1191,7 @@ class AsyncV2(AsyncAPIResource):
         card_token: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        scope: Literal["PROGRAM", "ACCOUNT", "CARD"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1207,6 +1212,8 @@ class AsyncV2(AsyncAPIResource):
               Used to retrieve the previous page of results before this item.
 
           page_size: Page size (for pagination).
+
+          scope: Only return Authorization Rules that are bound to the provided scope;
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -1233,6 +1240,7 @@ class AsyncV2(AsyncAPIResource):
                         "card_token": card_token,
                         "ending_before": ending_before,
                         "page_size": page_size,
+                        "scope": scope,
                         "starting_after": starting_after,
                     },
                     v2_list_params.V2ListParams,
