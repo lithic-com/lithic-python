@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .velocity_limit_params_param import VelocityLimitParamsParam
@@ -12,10 +12,16 @@ __all__ = [
     "V2CreateParams",
     "CreateAuthRuleRequestAccountTokens",
     "CreateAuthRuleRequestAccountTokensParameters",
+    "CreateAuthRuleRequestAccountTokensParametersMerchantLockParameters",
+    "CreateAuthRuleRequestAccountTokensParametersMerchantLockParametersMerchant",
     "CreateAuthRuleRequestCardTokens",
     "CreateAuthRuleRequestCardTokensParameters",
+    "CreateAuthRuleRequestCardTokensParametersMerchantLockParameters",
+    "CreateAuthRuleRequestCardTokensParametersMerchantLockParametersMerchant",
     "CreateAuthRuleRequestProgramLevel",
     "CreateAuthRuleRequestProgramLevelParameters",
+    "CreateAuthRuleRequestProgramLevelParametersMerchantLockParameters",
+    "CreateAuthRuleRequestProgramLevelParametersMerchantLockParametersMerchant",
 ]
 
 
@@ -29,12 +35,44 @@ class CreateAuthRuleRequestAccountTokens(TypedDict, total=False):
     parameters: CreateAuthRuleRequestAccountTokensParameters
     """Parameters for the Auth Rule"""
 
-    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
+    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"]
     """The type of Auth Rule"""
 
 
+class CreateAuthRuleRequestAccountTokensParametersMerchantLockParametersMerchant(TypedDict, total=False):
+    comment: str
+    """
+    A comment or explanation about the merchant, used internally for rule management
+    purposes.
+    """
+
+    descriptor: str
+    """
+    Short description of the merchant, often used to provide more human-readable
+    context about the transaction merchant. This is typically the name or label
+    shown on transaction summaries.
+    """
+
+    merchant_id: str
+    """Unique alphanumeric identifier for the payment card acceptor (merchant).
+
+    This attribute specifies the merchant entity that will be locked or referenced
+    for authorization rules.
+    """
+
+
+class CreateAuthRuleRequestAccountTokensParametersMerchantLockParameters(TypedDict, total=False):
+    merchants: Required[Iterable[CreateAuthRuleRequestAccountTokensParametersMerchantLockParametersMerchant]]
+    """
+    A list of merchant locks defining specific merchants or groups of merchants
+    (based on descriptors or IDs) that the lock applies to.
+    """
+
+
 CreateAuthRuleRequestAccountTokensParameters: TypeAlias = Union[
-    ConditionalBlockParametersParam, VelocityLimitParamsParam
+    ConditionalBlockParametersParam,
+    VelocityLimitParamsParam,
+    CreateAuthRuleRequestAccountTokensParametersMerchantLockParameters,
 ]
 
 
@@ -48,11 +86,45 @@ class CreateAuthRuleRequestCardTokens(TypedDict, total=False):
     parameters: CreateAuthRuleRequestCardTokensParameters
     """Parameters for the Auth Rule"""
 
-    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
+    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"]
     """The type of Auth Rule"""
 
 
-CreateAuthRuleRequestCardTokensParameters: TypeAlias = Union[ConditionalBlockParametersParam, VelocityLimitParamsParam]
+class CreateAuthRuleRequestCardTokensParametersMerchantLockParametersMerchant(TypedDict, total=False):
+    comment: str
+    """
+    A comment or explanation about the merchant, used internally for rule management
+    purposes.
+    """
+
+    descriptor: str
+    """
+    Short description of the merchant, often used to provide more human-readable
+    context about the transaction merchant. This is typically the name or label
+    shown on transaction summaries.
+    """
+
+    merchant_id: str
+    """Unique alphanumeric identifier for the payment card acceptor (merchant).
+
+    This attribute specifies the merchant entity that will be locked or referenced
+    for authorization rules.
+    """
+
+
+class CreateAuthRuleRequestCardTokensParametersMerchantLockParameters(TypedDict, total=False):
+    merchants: Required[Iterable[CreateAuthRuleRequestCardTokensParametersMerchantLockParametersMerchant]]
+    """
+    A list of merchant locks defining specific merchants or groups of merchants
+    (based on descriptors or IDs) that the lock applies to.
+    """
+
+
+CreateAuthRuleRequestCardTokensParameters: TypeAlias = Union[
+    ConditionalBlockParametersParam,
+    VelocityLimitParamsParam,
+    CreateAuthRuleRequestCardTokensParametersMerchantLockParameters,
+]
 
 
 class CreateAuthRuleRequestProgramLevel(TypedDict, total=False):
@@ -68,12 +140,44 @@ class CreateAuthRuleRequestProgramLevel(TypedDict, total=False):
     parameters: CreateAuthRuleRequestProgramLevelParameters
     """Parameters for the Auth Rule"""
 
-    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
+    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"]
     """The type of Auth Rule"""
 
 
+class CreateAuthRuleRequestProgramLevelParametersMerchantLockParametersMerchant(TypedDict, total=False):
+    comment: str
+    """
+    A comment or explanation about the merchant, used internally for rule management
+    purposes.
+    """
+
+    descriptor: str
+    """
+    Short description of the merchant, often used to provide more human-readable
+    context about the transaction merchant. This is typically the name or label
+    shown on transaction summaries.
+    """
+
+    merchant_id: str
+    """Unique alphanumeric identifier for the payment card acceptor (merchant).
+
+    This attribute specifies the merchant entity that will be locked or referenced
+    for authorization rules.
+    """
+
+
+class CreateAuthRuleRequestProgramLevelParametersMerchantLockParameters(TypedDict, total=False):
+    merchants: Required[Iterable[CreateAuthRuleRequestProgramLevelParametersMerchantLockParametersMerchant]]
+    """
+    A list of merchant locks defining specific merchants or groups of merchants
+    (based on descriptors or IDs) that the lock applies to.
+    """
+
+
 CreateAuthRuleRequestProgramLevelParameters: TypeAlias = Union[
-    ConditionalBlockParametersParam, VelocityLimitParamsParam
+    ConditionalBlockParametersParam,
+    VelocityLimitParamsParam,
+    CreateAuthRuleRequestProgramLevelParametersMerchantLockParameters,
 ]
 
 V2CreateParams: TypeAlias = Union[

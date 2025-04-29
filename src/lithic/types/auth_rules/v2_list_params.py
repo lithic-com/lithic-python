@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["V2ListParams"]
 
@@ -22,6 +22,9 @@ class V2ListParams(TypedDict, total=False):
 
     page_size: int
     """Page size (for pagination)."""
+
+    scope: Literal["PROGRAM", "ACCOUNT", "CARD"]
+    """Only return Authorization Rules that are bound to the provided scope;"""
 
     starting_after: str
     """A cursor representing an item's token after which a page of results should

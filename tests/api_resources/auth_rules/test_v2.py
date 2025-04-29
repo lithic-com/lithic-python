@@ -370,6 +370,7 @@ class TestV2:
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             ending_before="ending_before",
             page_size=1,
+            scope="PROGRAM",
             starting_after="starting_after",
         )
         assert_matches_type(SyncCursorPage[V2ListResponse], v2, path=["response"])
@@ -1044,6 +1045,7 @@ class TestAsyncV2:
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             ending_before="ending_before",
             page_size=1,
+            scope="PROGRAM",
             starting_after="starting_after",
         )
         assert_matches_type(AsyncCursorPage[V2ListResponse], v2, path=["response"])

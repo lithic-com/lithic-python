@@ -7,9 +7,52 @@ from ..._models import BaseModel
 from .velocity_limit_params import VelocityLimitParams
 from .conditional_block_parameters import ConditionalBlockParameters
 
-__all__ = ["V2PromoteResponse", "CurrentVersion", "CurrentVersionParameters", "DraftVersion", "DraftVersionParameters"]
+__all__ = [
+    "V2PromoteResponse",
+    "CurrentVersion",
+    "CurrentVersionParameters",
+    "CurrentVersionParametersMerchantLockParameters",
+    "CurrentVersionParametersMerchantLockParametersMerchant",
+    "DraftVersion",
+    "DraftVersionParameters",
+    "DraftVersionParametersMerchantLockParameters",
+    "DraftVersionParametersMerchantLockParametersMerchant",
+]
 
-CurrentVersionParameters: TypeAlias = Union[ConditionalBlockParameters, VelocityLimitParams]
+
+class CurrentVersionParametersMerchantLockParametersMerchant(BaseModel):
+    comment: Optional[str] = None
+    """
+    A comment or explanation about the merchant, used internally for rule management
+    purposes.
+    """
+
+    descriptor: Optional[str] = None
+    """
+    Short description of the merchant, often used to provide more human-readable
+    context about the transaction merchant. This is typically the name or label
+    shown on transaction summaries.
+    """
+
+    merchant_id: Optional[str] = None
+    """Unique alphanumeric identifier for the payment card acceptor (merchant).
+
+    This attribute specifies the merchant entity that will be locked or referenced
+    for authorization rules.
+    """
+
+
+class CurrentVersionParametersMerchantLockParameters(BaseModel):
+    merchants: List[CurrentVersionParametersMerchantLockParametersMerchant]
+    """
+    A list of merchant locks defining specific merchants or groups of merchants
+    (based on descriptors or IDs) that the lock applies to.
+    """
+
+
+CurrentVersionParameters: TypeAlias = Union[
+    ConditionalBlockParameters, VelocityLimitParams, CurrentVersionParametersMerchantLockParameters
+]
 
 
 class CurrentVersion(BaseModel):
@@ -23,7 +66,39 @@ class CurrentVersion(BaseModel):
     """
 
 
-DraftVersionParameters: TypeAlias = Union[ConditionalBlockParameters, VelocityLimitParams]
+class DraftVersionParametersMerchantLockParametersMerchant(BaseModel):
+    comment: Optional[str] = None
+    """
+    A comment or explanation about the merchant, used internally for rule management
+    purposes.
+    """
+
+    descriptor: Optional[str] = None
+    """
+    Short description of the merchant, often used to provide more human-readable
+    context about the transaction merchant. This is typically the name or label
+    shown on transaction summaries.
+    """
+
+    merchant_id: Optional[str] = None
+    """Unique alphanumeric identifier for the payment card acceptor (merchant).
+
+    This attribute specifies the merchant entity that will be locked or referenced
+    for authorization rules.
+    """
+
+
+class DraftVersionParametersMerchantLockParameters(BaseModel):
+    merchants: List[DraftVersionParametersMerchantLockParametersMerchant]
+    """
+    A list of merchant locks defining specific merchants or groups of merchants
+    (based on descriptors or IDs) that the lock applies to.
+    """
+
+
+DraftVersionParameters: TypeAlias = Union[
+    ConditionalBlockParameters, VelocityLimitParams, DraftVersionParametersMerchantLockParameters
+]
 
 
 class DraftVersion(BaseModel):
@@ -60,7 +135,7 @@ class V2PromoteResponse(BaseModel):
     state: Literal["ACTIVE", "INACTIVE"]
     """The state of the Auth Rule"""
 
-    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT"]
+    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"]
     """The type of Auth Rule"""
 
     excluded_card_tokens: Optional[List[str]] = None
