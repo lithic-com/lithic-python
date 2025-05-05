@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.91.1 (2025-05-05)
+
+Full Changelog: [v0.91.0...v0.91.1](https://github.com/lithic-com/lithic-python/compare/v0.91.0...v0.91.1)
+
+### Bug Fixes
+
+* **internals:** fix servers entry for /v2/auth_rules.get ([bb2cd8d](https://github.com/lithic-com/lithic-python/commit/bb2cd8d459021e49069f6faf1ce5d234008b8c28))
+
+
+### Chores
+
+* use lazy imports for resources ([d6d6bf1](https://github.com/lithic-com/lithic-python/commit/d6d6bf14435b10814c42e1ef8f604c7e29ac68cf))
+
 ## 0.91.0 (2025-04-29)
 
 Full Changelog: [v0.90.3...v0.91.0](https://github.com/lithic-com/lithic-python/compare/v0.90.3...v0.91.0)
