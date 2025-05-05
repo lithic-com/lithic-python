@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Union, Mapping, cast
+from typing import TYPE_CHECKING, Any, Dict, Union, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -23,25 +23,9 @@ from ._types import (
     RequestOptions,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
 from ._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from .resources import (
-    accounts,
-    balances,
-    disputes,
-    payments,
-    card_programs,
-    tokenizations,
-    book_transfers,
-    account_holders,
-    digital_card_art,
-    external_payments,
-    aggregate_balances,
-    responder_endpoints,
-    management_operations,
-    auth_stream_enrollment,
-    tokenization_decisioning,
-)
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import LithicError, APIStatusError
 from ._base_client import (
@@ -50,16 +34,59 @@ from ._base_client import (
     AsyncAPIClient,
     make_request_options,
 )
-from .resources.cards import cards
-from .resources.events import events
 from .types.api_status import APIStatus
-from .resources.reports import reports
-from .resources.three_ds import three_ds
-from .resources.auth_rules import auth_rules
-from .resources.transactions import transactions
-from .resources.credit_products import credit_products
-from .resources.financial_accounts import financial_accounts
-from .resources.external_bank_accounts import external_bank_accounts
+
+if TYPE_CHECKING:
+    from .resources import (
+        cards,
+        events,
+        reports,
+        accounts,
+        balances,
+        disputes,
+        payments,
+        three_ds,
+        auth_rules,
+        transactions,
+        card_programs,
+        tokenizations,
+        book_transfers,
+        account_holders,
+        credit_products,
+        digital_card_art,
+        external_payments,
+        aggregate_balances,
+        financial_accounts,
+        responder_endpoints,
+        management_operations,
+        auth_stream_enrollment,
+        external_bank_accounts,
+        tokenization_decisioning,
+    )
+    from .resources.accounts import Accounts, AsyncAccounts
+    from .resources.balances import Balances, AsyncBalances
+    from .resources.disputes import Disputes, AsyncDisputes
+    from .resources.payments import Payments, AsyncPayments
+    from .resources.cards.cards import Cards, AsyncCards
+    from .resources.card_programs import CardPrograms, AsyncCardPrograms
+    from .resources.events.events import Events, AsyncEvents
+    from .resources.tokenizations import Tokenizations, AsyncTokenizations
+    from .resources.book_transfers import BookTransfers, AsyncBookTransfers
+    from .resources.account_holders import AccountHolders, AsyncAccountHolders
+    from .resources.reports.reports import Reports, AsyncReports
+    from .resources.digital_card_art import DigitalCardArtResource, AsyncDigitalCardArtResource
+    from .resources.external_payments import ExternalPayments, AsyncExternalPayments
+    from .resources.three_ds.three_ds import ThreeDS, AsyncThreeDS
+    from .resources.aggregate_balances import AggregateBalances, AsyncAggregateBalances
+    from .resources.responder_endpoints import ResponderEndpoints, AsyncResponderEndpoints
+    from .resources.auth_rules.auth_rules import AuthRules, AsyncAuthRules
+    from .resources.management_operations import ManagementOperations, AsyncManagementOperations
+    from .resources.auth_stream_enrollment import AuthStreamEnrollment, AsyncAuthStreamEnrollment
+    from .resources.tokenization_decisioning import TokenizationDecisioning, AsyncTokenizationDecisioning
+    from .resources.transactions.transactions import Transactions, AsyncTransactions
+    from .resources.credit_products.credit_products import CreditProducts, AsyncCreditProducts
+    from .resources.financial_accounts.financial_accounts import FinancialAccounts, AsyncFinancialAccounts
+    from .resources.external_bank_accounts.external_bank_accounts import ExternalBankAccounts, AsyncExternalBankAccounts
 
 __all__ = [
     "ENVIRONMENTS",
@@ -80,33 +107,6 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Lithic(SyncAPIClient):
-    accounts: accounts.Accounts
-    account_holders: account_holders.AccountHolders
-    auth_rules: auth_rules.AuthRules
-    auth_stream_enrollment: auth_stream_enrollment.AuthStreamEnrollment
-    tokenization_decisioning: tokenization_decisioning.TokenizationDecisioning
-    tokenizations: tokenizations.Tokenizations
-    cards: cards.Cards
-    balances: balances.Balances
-    aggregate_balances: aggregate_balances.AggregateBalances
-    disputes: disputes.Disputes
-    events: events.Events
-    financial_accounts: financial_accounts.FinancialAccounts
-    transactions: transactions.Transactions
-    responder_endpoints: responder_endpoints.ResponderEndpoints
-    external_bank_accounts: external_bank_accounts.ExternalBankAccounts
-    payments: payments.Payments
-    three_ds: three_ds.ThreeDS
-    reports: reports.Reports
-    card_programs: card_programs.CardPrograms
-    digital_card_art: digital_card_art.DigitalCardArtResource
-    book_transfers: book_transfers.BookTransfers
-    credit_products: credit_products.CreditProducts
-    external_payments: external_payments.ExternalPayments
-    management_operations: management_operations.ManagementOperations
-    with_raw_response: LithicWithRawResponse
-    with_streaming_response: LithicWithStreamedResponse
-
     # client options
     api_key: str
     webhook_secret: str | None
@@ -193,32 +193,157 @@ class Lithic(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = accounts.Accounts(self)
-        self.account_holders = account_holders.AccountHolders(self)
-        self.auth_rules = auth_rules.AuthRules(self)
-        self.auth_stream_enrollment = auth_stream_enrollment.AuthStreamEnrollment(self)
-        self.tokenization_decisioning = tokenization_decisioning.TokenizationDecisioning(self)
-        self.tokenizations = tokenizations.Tokenizations(self)
-        self.cards = cards.Cards(self)
-        self.balances = balances.Balances(self)
-        self.aggregate_balances = aggregate_balances.AggregateBalances(self)
-        self.disputes = disputes.Disputes(self)
-        self.events = events.Events(self)
-        self.financial_accounts = financial_accounts.FinancialAccounts(self)
-        self.transactions = transactions.Transactions(self)
-        self.responder_endpoints = responder_endpoints.ResponderEndpoints(self)
-        self.external_bank_accounts = external_bank_accounts.ExternalBankAccounts(self)
-        self.payments = payments.Payments(self)
-        self.three_ds = three_ds.ThreeDS(self)
-        self.reports = reports.Reports(self)
-        self.card_programs = card_programs.CardPrograms(self)
-        self.digital_card_art = digital_card_art.DigitalCardArtResource(self)
-        self.book_transfers = book_transfers.BookTransfers(self)
-        self.credit_products = credit_products.CreditProducts(self)
-        self.external_payments = external_payments.ExternalPayments(self)
-        self.management_operations = management_operations.ManagementOperations(self)
-        self.with_raw_response = LithicWithRawResponse(self)
-        self.with_streaming_response = LithicWithStreamedResponse(self)
+    @cached_property
+    def accounts(self) -> Accounts:
+        from .resources.accounts import Accounts
+
+        return Accounts(self)
+
+    @cached_property
+    def account_holders(self) -> AccountHolders:
+        from .resources.account_holders import AccountHolders
+
+        return AccountHolders(self)
+
+    @cached_property
+    def auth_rules(self) -> AuthRules:
+        from .resources.auth_rules import AuthRules
+
+        return AuthRules(self)
+
+    @cached_property
+    def auth_stream_enrollment(self) -> AuthStreamEnrollment:
+        from .resources.auth_stream_enrollment import AuthStreamEnrollment
+
+        return AuthStreamEnrollment(self)
+
+    @cached_property
+    def tokenization_decisioning(self) -> TokenizationDecisioning:
+        from .resources.tokenization_decisioning import TokenizationDecisioning
+
+        return TokenizationDecisioning(self)
+
+    @cached_property
+    def tokenizations(self) -> Tokenizations:
+        from .resources.tokenizations import Tokenizations
+
+        return Tokenizations(self)
+
+    @cached_property
+    def cards(self) -> Cards:
+        from .resources.cards import Cards
+
+        return Cards(self)
+
+    @cached_property
+    def balances(self) -> Balances:
+        from .resources.balances import Balances
+
+        return Balances(self)
+
+    @cached_property
+    def aggregate_balances(self) -> AggregateBalances:
+        from .resources.aggregate_balances import AggregateBalances
+
+        return AggregateBalances(self)
+
+    @cached_property
+    def disputes(self) -> Disputes:
+        from .resources.disputes import Disputes
+
+        return Disputes(self)
+
+    @cached_property
+    def events(self) -> Events:
+        from .resources.events import Events
+
+        return Events(self)
+
+    @cached_property
+    def financial_accounts(self) -> FinancialAccounts:
+        from .resources.financial_accounts import FinancialAccounts
+
+        return FinancialAccounts(self)
+
+    @cached_property
+    def transactions(self) -> Transactions:
+        from .resources.transactions import Transactions
+
+        return Transactions(self)
+
+    @cached_property
+    def responder_endpoints(self) -> ResponderEndpoints:
+        from .resources.responder_endpoints import ResponderEndpoints
+
+        return ResponderEndpoints(self)
+
+    @cached_property
+    def external_bank_accounts(self) -> ExternalBankAccounts:
+        from .resources.external_bank_accounts import ExternalBankAccounts
+
+        return ExternalBankAccounts(self)
+
+    @cached_property
+    def payments(self) -> Payments:
+        from .resources.payments import Payments
+
+        return Payments(self)
+
+    @cached_property
+    def three_ds(self) -> ThreeDS:
+        from .resources.three_ds import ThreeDS
+
+        return ThreeDS(self)
+
+    @cached_property
+    def reports(self) -> Reports:
+        from .resources.reports import Reports
+
+        return Reports(self)
+
+    @cached_property
+    def card_programs(self) -> CardPrograms:
+        from .resources.card_programs import CardPrograms
+
+        return CardPrograms(self)
+
+    @cached_property
+    def digital_card_art(self) -> DigitalCardArtResource:
+        from .resources.digital_card_art import DigitalCardArtResource
+
+        return DigitalCardArtResource(self)
+
+    @cached_property
+    def book_transfers(self) -> BookTransfers:
+        from .resources.book_transfers import BookTransfers
+
+        return BookTransfers(self)
+
+    @cached_property
+    def credit_products(self) -> CreditProducts:
+        from .resources.credit_products import CreditProducts
+
+        return CreditProducts(self)
+
+    @cached_property
+    def external_payments(self) -> ExternalPayments:
+        from .resources.external_payments import ExternalPayments
+
+        return ExternalPayments(self)
+
+    @cached_property
+    def management_operations(self) -> ManagementOperations:
+        from .resources.management_operations import ManagementOperations
+
+        return ManagementOperations(self)
+
+    @cached_property
+    def with_raw_response(self) -> LithicWithRawResponse:
+        return LithicWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> LithicWithStreamedResponse:
+        return LithicWithStreamedResponse(self)
 
     @property
     @override
@@ -350,33 +475,6 @@ class Lithic(SyncAPIClient):
 
 
 class AsyncLithic(AsyncAPIClient):
-    accounts: accounts.AsyncAccounts
-    account_holders: account_holders.AsyncAccountHolders
-    auth_rules: auth_rules.AsyncAuthRules
-    auth_stream_enrollment: auth_stream_enrollment.AsyncAuthStreamEnrollment
-    tokenization_decisioning: tokenization_decisioning.AsyncTokenizationDecisioning
-    tokenizations: tokenizations.AsyncTokenizations
-    cards: cards.AsyncCards
-    balances: balances.AsyncBalances
-    aggregate_balances: aggregate_balances.AsyncAggregateBalances
-    disputes: disputes.AsyncDisputes
-    events: events.AsyncEvents
-    financial_accounts: financial_accounts.AsyncFinancialAccounts
-    transactions: transactions.AsyncTransactions
-    responder_endpoints: responder_endpoints.AsyncResponderEndpoints
-    external_bank_accounts: external_bank_accounts.AsyncExternalBankAccounts
-    payments: payments.AsyncPayments
-    three_ds: three_ds.AsyncThreeDS
-    reports: reports.AsyncReports
-    card_programs: card_programs.AsyncCardPrograms
-    digital_card_art: digital_card_art.AsyncDigitalCardArtResource
-    book_transfers: book_transfers.AsyncBookTransfers
-    credit_products: credit_products.AsyncCreditProducts
-    external_payments: external_payments.AsyncExternalPayments
-    management_operations: management_operations.AsyncManagementOperations
-    with_raw_response: AsyncLithicWithRawResponse
-    with_streaming_response: AsyncLithicWithStreamedResponse
-
     # client options
     api_key: str
     webhook_secret: str | None
@@ -463,32 +561,157 @@ class AsyncLithic(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = accounts.AsyncAccounts(self)
-        self.account_holders = account_holders.AsyncAccountHolders(self)
-        self.auth_rules = auth_rules.AsyncAuthRules(self)
-        self.auth_stream_enrollment = auth_stream_enrollment.AsyncAuthStreamEnrollment(self)
-        self.tokenization_decisioning = tokenization_decisioning.AsyncTokenizationDecisioning(self)
-        self.tokenizations = tokenizations.AsyncTokenizations(self)
-        self.cards = cards.AsyncCards(self)
-        self.balances = balances.AsyncBalances(self)
-        self.aggregate_balances = aggregate_balances.AsyncAggregateBalances(self)
-        self.disputes = disputes.AsyncDisputes(self)
-        self.events = events.AsyncEvents(self)
-        self.financial_accounts = financial_accounts.AsyncFinancialAccounts(self)
-        self.transactions = transactions.AsyncTransactions(self)
-        self.responder_endpoints = responder_endpoints.AsyncResponderEndpoints(self)
-        self.external_bank_accounts = external_bank_accounts.AsyncExternalBankAccounts(self)
-        self.payments = payments.AsyncPayments(self)
-        self.three_ds = three_ds.AsyncThreeDS(self)
-        self.reports = reports.AsyncReports(self)
-        self.card_programs = card_programs.AsyncCardPrograms(self)
-        self.digital_card_art = digital_card_art.AsyncDigitalCardArtResource(self)
-        self.book_transfers = book_transfers.AsyncBookTransfers(self)
-        self.credit_products = credit_products.AsyncCreditProducts(self)
-        self.external_payments = external_payments.AsyncExternalPayments(self)
-        self.management_operations = management_operations.AsyncManagementOperations(self)
-        self.with_raw_response = AsyncLithicWithRawResponse(self)
-        self.with_streaming_response = AsyncLithicWithStreamedResponse(self)
+    @cached_property
+    def accounts(self) -> AsyncAccounts:
+        from .resources.accounts import AsyncAccounts
+
+        return AsyncAccounts(self)
+
+    @cached_property
+    def account_holders(self) -> AsyncAccountHolders:
+        from .resources.account_holders import AsyncAccountHolders
+
+        return AsyncAccountHolders(self)
+
+    @cached_property
+    def auth_rules(self) -> AsyncAuthRules:
+        from .resources.auth_rules import AsyncAuthRules
+
+        return AsyncAuthRules(self)
+
+    @cached_property
+    def auth_stream_enrollment(self) -> AsyncAuthStreamEnrollment:
+        from .resources.auth_stream_enrollment import AsyncAuthStreamEnrollment
+
+        return AsyncAuthStreamEnrollment(self)
+
+    @cached_property
+    def tokenization_decisioning(self) -> AsyncTokenizationDecisioning:
+        from .resources.tokenization_decisioning import AsyncTokenizationDecisioning
+
+        return AsyncTokenizationDecisioning(self)
+
+    @cached_property
+    def tokenizations(self) -> AsyncTokenizations:
+        from .resources.tokenizations import AsyncTokenizations
+
+        return AsyncTokenizations(self)
+
+    @cached_property
+    def cards(self) -> AsyncCards:
+        from .resources.cards import AsyncCards
+
+        return AsyncCards(self)
+
+    @cached_property
+    def balances(self) -> AsyncBalances:
+        from .resources.balances import AsyncBalances
+
+        return AsyncBalances(self)
+
+    @cached_property
+    def aggregate_balances(self) -> AsyncAggregateBalances:
+        from .resources.aggregate_balances import AsyncAggregateBalances
+
+        return AsyncAggregateBalances(self)
+
+    @cached_property
+    def disputes(self) -> AsyncDisputes:
+        from .resources.disputes import AsyncDisputes
+
+        return AsyncDisputes(self)
+
+    @cached_property
+    def events(self) -> AsyncEvents:
+        from .resources.events import AsyncEvents
+
+        return AsyncEvents(self)
+
+    @cached_property
+    def financial_accounts(self) -> AsyncFinancialAccounts:
+        from .resources.financial_accounts import AsyncFinancialAccounts
+
+        return AsyncFinancialAccounts(self)
+
+    @cached_property
+    def transactions(self) -> AsyncTransactions:
+        from .resources.transactions import AsyncTransactions
+
+        return AsyncTransactions(self)
+
+    @cached_property
+    def responder_endpoints(self) -> AsyncResponderEndpoints:
+        from .resources.responder_endpoints import AsyncResponderEndpoints
+
+        return AsyncResponderEndpoints(self)
+
+    @cached_property
+    def external_bank_accounts(self) -> AsyncExternalBankAccounts:
+        from .resources.external_bank_accounts import AsyncExternalBankAccounts
+
+        return AsyncExternalBankAccounts(self)
+
+    @cached_property
+    def payments(self) -> AsyncPayments:
+        from .resources.payments import AsyncPayments
+
+        return AsyncPayments(self)
+
+    @cached_property
+    def three_ds(self) -> AsyncThreeDS:
+        from .resources.three_ds import AsyncThreeDS
+
+        return AsyncThreeDS(self)
+
+    @cached_property
+    def reports(self) -> AsyncReports:
+        from .resources.reports import AsyncReports
+
+        return AsyncReports(self)
+
+    @cached_property
+    def card_programs(self) -> AsyncCardPrograms:
+        from .resources.card_programs import AsyncCardPrograms
+
+        return AsyncCardPrograms(self)
+
+    @cached_property
+    def digital_card_art(self) -> AsyncDigitalCardArtResource:
+        from .resources.digital_card_art import AsyncDigitalCardArtResource
+
+        return AsyncDigitalCardArtResource(self)
+
+    @cached_property
+    def book_transfers(self) -> AsyncBookTransfers:
+        from .resources.book_transfers import AsyncBookTransfers
+
+        return AsyncBookTransfers(self)
+
+    @cached_property
+    def credit_products(self) -> AsyncCreditProducts:
+        from .resources.credit_products import AsyncCreditProducts
+
+        return AsyncCreditProducts(self)
+
+    @cached_property
+    def external_payments(self) -> AsyncExternalPayments:
+        from .resources.external_payments import AsyncExternalPayments
+
+        return AsyncExternalPayments(self)
+
+    @cached_property
+    def management_operations(self) -> AsyncManagementOperations:
+        from .resources.management_operations import AsyncManagementOperations
+
+        return AsyncManagementOperations(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncLithicWithRawResponse:
+        return AsyncLithicWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncLithicWithStreamedResponse:
+        return AsyncLithicWithStreamedResponse(self)
 
     @property
     @override
@@ -620,175 +843,623 @@ class AsyncLithic(AsyncAPIClient):
 
 
 class LithicWithRawResponse:
+    _client: Lithic
+
     def __init__(self, client: Lithic) -> None:
-        self.accounts = accounts.AccountsWithRawResponse(client.accounts)
-        self.account_holders = account_holders.AccountHoldersWithRawResponse(client.account_holders)
-        self.auth_rules = auth_rules.AuthRulesWithRawResponse(client.auth_rules)
-        self.auth_stream_enrollment = auth_stream_enrollment.AuthStreamEnrollmentWithRawResponse(
-            client.auth_stream_enrollment
-        )
-        self.tokenization_decisioning = tokenization_decisioning.TokenizationDecisioningWithRawResponse(
-            client.tokenization_decisioning
-        )
-        self.tokenizations = tokenizations.TokenizationsWithRawResponse(client.tokenizations)
-        self.cards = cards.CardsWithRawResponse(client.cards)
-        self.balances = balances.BalancesWithRawResponse(client.balances)
-        self.aggregate_balances = aggregate_balances.AggregateBalancesWithRawResponse(client.aggregate_balances)
-        self.disputes = disputes.DisputesWithRawResponse(client.disputes)
-        self.events = events.EventsWithRawResponse(client.events)
-        self.financial_accounts = financial_accounts.FinancialAccountsWithRawResponse(client.financial_accounts)
-        self.transactions = transactions.TransactionsWithRawResponse(client.transactions)
-        self.responder_endpoints = responder_endpoints.ResponderEndpointsWithRawResponse(client.responder_endpoints)
-        self.external_bank_accounts = external_bank_accounts.ExternalBankAccountsWithRawResponse(
-            client.external_bank_accounts
-        )
-        self.payments = payments.PaymentsWithRawResponse(client.payments)
-        self.three_ds = three_ds.ThreeDSWithRawResponse(client.three_ds)
-        self.reports = reports.ReportsWithRawResponse(client.reports)
-        self.card_programs = card_programs.CardProgramsWithRawResponse(client.card_programs)
-        self.digital_card_art = digital_card_art.DigitalCardArtResourceWithRawResponse(client.digital_card_art)
-        self.book_transfers = book_transfers.BookTransfersWithRawResponse(client.book_transfers)
-        self.credit_products = credit_products.CreditProductsWithRawResponse(client.credit_products)
-        self.external_payments = external_payments.ExternalPaymentsWithRawResponse(client.external_payments)
-        self.management_operations = management_operations.ManagementOperationsWithRawResponse(
-            client.management_operations
-        )
+        self._client = client
 
         self.api_status = _legacy_response.to_raw_response_wrapper(
             client.api_status,
         )
 
+    @cached_property
+    def accounts(self) -> accounts.AccountsWithRawResponse:
+        from .resources.accounts import AccountsWithRawResponse
+
+        return AccountsWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def account_holders(self) -> account_holders.AccountHoldersWithRawResponse:
+        from .resources.account_holders import AccountHoldersWithRawResponse
+
+        return AccountHoldersWithRawResponse(self._client.account_holders)
+
+    @cached_property
+    def auth_rules(self) -> auth_rules.AuthRulesWithRawResponse:
+        from .resources.auth_rules import AuthRulesWithRawResponse
+
+        return AuthRulesWithRawResponse(self._client.auth_rules)
+
+    @cached_property
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AuthStreamEnrollmentWithRawResponse:
+        from .resources.auth_stream_enrollment import AuthStreamEnrollmentWithRawResponse
+
+        return AuthStreamEnrollmentWithRawResponse(self._client.auth_stream_enrollment)
+
+    @cached_property
+    def tokenization_decisioning(self) -> tokenization_decisioning.TokenizationDecisioningWithRawResponse:
+        from .resources.tokenization_decisioning import TokenizationDecisioningWithRawResponse
+
+        return TokenizationDecisioningWithRawResponse(self._client.tokenization_decisioning)
+
+    @cached_property
+    def tokenizations(self) -> tokenizations.TokenizationsWithRawResponse:
+        from .resources.tokenizations import TokenizationsWithRawResponse
+
+        return TokenizationsWithRawResponse(self._client.tokenizations)
+
+    @cached_property
+    def cards(self) -> cards.CardsWithRawResponse:
+        from .resources.cards import CardsWithRawResponse
+
+        return CardsWithRawResponse(self._client.cards)
+
+    @cached_property
+    def balances(self) -> balances.BalancesWithRawResponse:
+        from .resources.balances import BalancesWithRawResponse
+
+        return BalancesWithRawResponse(self._client.balances)
+
+    @cached_property
+    def aggregate_balances(self) -> aggregate_balances.AggregateBalancesWithRawResponse:
+        from .resources.aggregate_balances import AggregateBalancesWithRawResponse
+
+        return AggregateBalancesWithRawResponse(self._client.aggregate_balances)
+
+    @cached_property
+    def disputes(self) -> disputes.DisputesWithRawResponse:
+        from .resources.disputes import DisputesWithRawResponse
+
+        return DisputesWithRawResponse(self._client.disputes)
+
+    @cached_property
+    def events(self) -> events.EventsWithRawResponse:
+        from .resources.events import EventsWithRawResponse
+
+        return EventsWithRawResponse(self._client.events)
+
+    @cached_property
+    def financial_accounts(self) -> financial_accounts.FinancialAccountsWithRawResponse:
+        from .resources.financial_accounts import FinancialAccountsWithRawResponse
+
+        return FinancialAccountsWithRawResponse(self._client.financial_accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.TransactionsWithRawResponse:
+        from .resources.transactions import TransactionsWithRawResponse
+
+        return TransactionsWithRawResponse(self._client.transactions)
+
+    @cached_property
+    def responder_endpoints(self) -> responder_endpoints.ResponderEndpointsWithRawResponse:
+        from .resources.responder_endpoints import ResponderEndpointsWithRawResponse
+
+        return ResponderEndpointsWithRawResponse(self._client.responder_endpoints)
+
+    @cached_property
+    def external_bank_accounts(self) -> external_bank_accounts.ExternalBankAccountsWithRawResponse:
+        from .resources.external_bank_accounts import ExternalBankAccountsWithRawResponse
+
+        return ExternalBankAccountsWithRawResponse(self._client.external_bank_accounts)
+
+    @cached_property
+    def payments(self) -> payments.PaymentsWithRawResponse:
+        from .resources.payments import PaymentsWithRawResponse
+
+        return PaymentsWithRawResponse(self._client.payments)
+
+    @cached_property
+    def three_ds(self) -> three_ds.ThreeDSWithRawResponse:
+        from .resources.three_ds import ThreeDSWithRawResponse
+
+        return ThreeDSWithRawResponse(self._client.three_ds)
+
+    @cached_property
+    def reports(self) -> reports.ReportsWithRawResponse:
+        from .resources.reports import ReportsWithRawResponse
+
+        return ReportsWithRawResponse(self._client.reports)
+
+    @cached_property
+    def card_programs(self) -> card_programs.CardProgramsWithRawResponse:
+        from .resources.card_programs import CardProgramsWithRawResponse
+
+        return CardProgramsWithRawResponse(self._client.card_programs)
+
+    @cached_property
+    def digital_card_art(self) -> digital_card_art.DigitalCardArtResourceWithRawResponse:
+        from .resources.digital_card_art import DigitalCardArtResourceWithRawResponse
+
+        return DigitalCardArtResourceWithRawResponse(self._client.digital_card_art)
+
+    @cached_property
+    def book_transfers(self) -> book_transfers.BookTransfersWithRawResponse:
+        from .resources.book_transfers import BookTransfersWithRawResponse
+
+        return BookTransfersWithRawResponse(self._client.book_transfers)
+
+    @cached_property
+    def credit_products(self) -> credit_products.CreditProductsWithRawResponse:
+        from .resources.credit_products import CreditProductsWithRawResponse
+
+        return CreditProductsWithRawResponse(self._client.credit_products)
+
+    @cached_property
+    def external_payments(self) -> external_payments.ExternalPaymentsWithRawResponse:
+        from .resources.external_payments import ExternalPaymentsWithRawResponse
+
+        return ExternalPaymentsWithRawResponse(self._client.external_payments)
+
+    @cached_property
+    def management_operations(self) -> management_operations.ManagementOperationsWithRawResponse:
+        from .resources.management_operations import ManagementOperationsWithRawResponse
+
+        return ManagementOperationsWithRawResponse(self._client.management_operations)
+
 
 class AsyncLithicWithRawResponse:
+    _client: AsyncLithic
+
     def __init__(self, client: AsyncLithic) -> None:
-        self.accounts = accounts.AsyncAccountsWithRawResponse(client.accounts)
-        self.account_holders = account_holders.AsyncAccountHoldersWithRawResponse(client.account_holders)
-        self.auth_rules = auth_rules.AsyncAuthRulesWithRawResponse(client.auth_rules)
-        self.auth_stream_enrollment = auth_stream_enrollment.AsyncAuthStreamEnrollmentWithRawResponse(
-            client.auth_stream_enrollment
-        )
-        self.tokenization_decisioning = tokenization_decisioning.AsyncTokenizationDecisioningWithRawResponse(
-            client.tokenization_decisioning
-        )
-        self.tokenizations = tokenizations.AsyncTokenizationsWithRawResponse(client.tokenizations)
-        self.cards = cards.AsyncCardsWithRawResponse(client.cards)
-        self.balances = balances.AsyncBalancesWithRawResponse(client.balances)
-        self.aggregate_balances = aggregate_balances.AsyncAggregateBalancesWithRawResponse(client.aggregate_balances)
-        self.disputes = disputes.AsyncDisputesWithRawResponse(client.disputes)
-        self.events = events.AsyncEventsWithRawResponse(client.events)
-        self.financial_accounts = financial_accounts.AsyncFinancialAccountsWithRawResponse(client.financial_accounts)
-        self.transactions = transactions.AsyncTransactionsWithRawResponse(client.transactions)
-        self.responder_endpoints = responder_endpoints.AsyncResponderEndpointsWithRawResponse(
-            client.responder_endpoints
-        )
-        self.external_bank_accounts = external_bank_accounts.AsyncExternalBankAccountsWithRawResponse(
-            client.external_bank_accounts
-        )
-        self.payments = payments.AsyncPaymentsWithRawResponse(client.payments)
-        self.three_ds = three_ds.AsyncThreeDSWithRawResponse(client.three_ds)
-        self.reports = reports.AsyncReportsWithRawResponse(client.reports)
-        self.card_programs = card_programs.AsyncCardProgramsWithRawResponse(client.card_programs)
-        self.digital_card_art = digital_card_art.AsyncDigitalCardArtResourceWithRawResponse(client.digital_card_art)
-        self.book_transfers = book_transfers.AsyncBookTransfersWithRawResponse(client.book_transfers)
-        self.credit_products = credit_products.AsyncCreditProductsWithRawResponse(client.credit_products)
-        self.external_payments = external_payments.AsyncExternalPaymentsWithRawResponse(client.external_payments)
-        self.management_operations = management_operations.AsyncManagementOperationsWithRawResponse(
-            client.management_operations
-        )
+        self._client = client
 
         self.api_status = _legacy_response.async_to_raw_response_wrapper(
             client.api_status,
         )
 
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsWithRawResponse:
+        from .resources.accounts import AsyncAccountsWithRawResponse
+
+        return AsyncAccountsWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def account_holders(self) -> account_holders.AsyncAccountHoldersWithRawResponse:
+        from .resources.account_holders import AsyncAccountHoldersWithRawResponse
+
+        return AsyncAccountHoldersWithRawResponse(self._client.account_holders)
+
+    @cached_property
+    def auth_rules(self) -> auth_rules.AsyncAuthRulesWithRawResponse:
+        from .resources.auth_rules import AsyncAuthRulesWithRawResponse
+
+        return AsyncAuthRulesWithRawResponse(self._client.auth_rules)
+
+    @cached_property
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithRawResponse:
+        from .resources.auth_stream_enrollment import AsyncAuthStreamEnrollmentWithRawResponse
+
+        return AsyncAuthStreamEnrollmentWithRawResponse(self._client.auth_stream_enrollment)
+
+    @cached_property
+    def tokenization_decisioning(self) -> tokenization_decisioning.AsyncTokenizationDecisioningWithRawResponse:
+        from .resources.tokenization_decisioning import AsyncTokenizationDecisioningWithRawResponse
+
+        return AsyncTokenizationDecisioningWithRawResponse(self._client.tokenization_decisioning)
+
+    @cached_property
+    def tokenizations(self) -> tokenizations.AsyncTokenizationsWithRawResponse:
+        from .resources.tokenizations import AsyncTokenizationsWithRawResponse
+
+        return AsyncTokenizationsWithRawResponse(self._client.tokenizations)
+
+    @cached_property
+    def cards(self) -> cards.AsyncCardsWithRawResponse:
+        from .resources.cards import AsyncCardsWithRawResponse
+
+        return AsyncCardsWithRawResponse(self._client.cards)
+
+    @cached_property
+    def balances(self) -> balances.AsyncBalancesWithRawResponse:
+        from .resources.balances import AsyncBalancesWithRawResponse
+
+        return AsyncBalancesWithRawResponse(self._client.balances)
+
+    @cached_property
+    def aggregate_balances(self) -> aggregate_balances.AsyncAggregateBalancesWithRawResponse:
+        from .resources.aggregate_balances import AsyncAggregateBalancesWithRawResponse
+
+        return AsyncAggregateBalancesWithRawResponse(self._client.aggregate_balances)
+
+    @cached_property
+    def disputes(self) -> disputes.AsyncDisputesWithRawResponse:
+        from .resources.disputes import AsyncDisputesWithRawResponse
+
+        return AsyncDisputesWithRawResponse(self._client.disputes)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsWithRawResponse:
+        from .resources.events import AsyncEventsWithRawResponse
+
+        return AsyncEventsWithRawResponse(self._client.events)
+
+    @cached_property
+    def financial_accounts(self) -> financial_accounts.AsyncFinancialAccountsWithRawResponse:
+        from .resources.financial_accounts import AsyncFinancialAccountsWithRawResponse
+
+        return AsyncFinancialAccountsWithRawResponse(self._client.financial_accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.AsyncTransactionsWithRawResponse:
+        from .resources.transactions import AsyncTransactionsWithRawResponse
+
+        return AsyncTransactionsWithRawResponse(self._client.transactions)
+
+    @cached_property
+    def responder_endpoints(self) -> responder_endpoints.AsyncResponderEndpointsWithRawResponse:
+        from .resources.responder_endpoints import AsyncResponderEndpointsWithRawResponse
+
+        return AsyncResponderEndpointsWithRawResponse(self._client.responder_endpoints)
+
+    @cached_property
+    def external_bank_accounts(self) -> external_bank_accounts.AsyncExternalBankAccountsWithRawResponse:
+        from .resources.external_bank_accounts import AsyncExternalBankAccountsWithRawResponse
+
+        return AsyncExternalBankAccountsWithRawResponse(self._client.external_bank_accounts)
+
+    @cached_property
+    def payments(self) -> payments.AsyncPaymentsWithRawResponse:
+        from .resources.payments import AsyncPaymentsWithRawResponse
+
+        return AsyncPaymentsWithRawResponse(self._client.payments)
+
+    @cached_property
+    def three_ds(self) -> three_ds.AsyncThreeDSWithRawResponse:
+        from .resources.three_ds import AsyncThreeDSWithRawResponse
+
+        return AsyncThreeDSWithRawResponse(self._client.three_ds)
+
+    @cached_property
+    def reports(self) -> reports.AsyncReportsWithRawResponse:
+        from .resources.reports import AsyncReportsWithRawResponse
+
+        return AsyncReportsWithRawResponse(self._client.reports)
+
+    @cached_property
+    def card_programs(self) -> card_programs.AsyncCardProgramsWithRawResponse:
+        from .resources.card_programs import AsyncCardProgramsWithRawResponse
+
+        return AsyncCardProgramsWithRawResponse(self._client.card_programs)
+
+    @cached_property
+    def digital_card_art(self) -> digital_card_art.AsyncDigitalCardArtResourceWithRawResponse:
+        from .resources.digital_card_art import AsyncDigitalCardArtResourceWithRawResponse
+
+        return AsyncDigitalCardArtResourceWithRawResponse(self._client.digital_card_art)
+
+    @cached_property
+    def book_transfers(self) -> book_transfers.AsyncBookTransfersWithRawResponse:
+        from .resources.book_transfers import AsyncBookTransfersWithRawResponse
+
+        return AsyncBookTransfersWithRawResponse(self._client.book_transfers)
+
+    @cached_property
+    def credit_products(self) -> credit_products.AsyncCreditProductsWithRawResponse:
+        from .resources.credit_products import AsyncCreditProductsWithRawResponse
+
+        return AsyncCreditProductsWithRawResponse(self._client.credit_products)
+
+    @cached_property
+    def external_payments(self) -> external_payments.AsyncExternalPaymentsWithRawResponse:
+        from .resources.external_payments import AsyncExternalPaymentsWithRawResponse
+
+        return AsyncExternalPaymentsWithRawResponse(self._client.external_payments)
+
+    @cached_property
+    def management_operations(self) -> management_operations.AsyncManagementOperationsWithRawResponse:
+        from .resources.management_operations import AsyncManagementOperationsWithRawResponse
+
+        return AsyncManagementOperationsWithRawResponse(self._client.management_operations)
+
 
 class LithicWithStreamedResponse:
+    _client: Lithic
+
     def __init__(self, client: Lithic) -> None:
-        self.accounts = accounts.AccountsWithStreamingResponse(client.accounts)
-        self.account_holders = account_holders.AccountHoldersWithStreamingResponse(client.account_holders)
-        self.auth_rules = auth_rules.AuthRulesWithStreamingResponse(client.auth_rules)
-        self.auth_stream_enrollment = auth_stream_enrollment.AuthStreamEnrollmentWithStreamingResponse(
-            client.auth_stream_enrollment
-        )
-        self.tokenization_decisioning = tokenization_decisioning.TokenizationDecisioningWithStreamingResponse(
-            client.tokenization_decisioning
-        )
-        self.tokenizations = tokenizations.TokenizationsWithStreamingResponse(client.tokenizations)
-        self.cards = cards.CardsWithStreamingResponse(client.cards)
-        self.balances = balances.BalancesWithStreamingResponse(client.balances)
-        self.aggregate_balances = aggregate_balances.AggregateBalancesWithStreamingResponse(client.aggregate_balances)
-        self.disputes = disputes.DisputesWithStreamingResponse(client.disputes)
-        self.events = events.EventsWithStreamingResponse(client.events)
-        self.financial_accounts = financial_accounts.FinancialAccountsWithStreamingResponse(client.financial_accounts)
-        self.transactions = transactions.TransactionsWithStreamingResponse(client.transactions)
-        self.responder_endpoints = responder_endpoints.ResponderEndpointsWithStreamingResponse(
-            client.responder_endpoints
-        )
-        self.external_bank_accounts = external_bank_accounts.ExternalBankAccountsWithStreamingResponse(
-            client.external_bank_accounts
-        )
-        self.payments = payments.PaymentsWithStreamingResponse(client.payments)
-        self.three_ds = three_ds.ThreeDSWithStreamingResponse(client.three_ds)
-        self.reports = reports.ReportsWithStreamingResponse(client.reports)
-        self.card_programs = card_programs.CardProgramsWithStreamingResponse(client.card_programs)
-        self.digital_card_art = digital_card_art.DigitalCardArtResourceWithStreamingResponse(client.digital_card_art)
-        self.book_transfers = book_transfers.BookTransfersWithStreamingResponse(client.book_transfers)
-        self.credit_products = credit_products.CreditProductsWithStreamingResponse(client.credit_products)
-        self.external_payments = external_payments.ExternalPaymentsWithStreamingResponse(client.external_payments)
-        self.management_operations = management_operations.ManagementOperationsWithStreamingResponse(
-            client.management_operations
-        )
+        self._client = client
 
         self.api_status = to_streamed_response_wrapper(
             client.api_status,
         )
 
+    @cached_property
+    def accounts(self) -> accounts.AccountsWithStreamingResponse:
+        from .resources.accounts import AccountsWithStreamingResponse
+
+        return AccountsWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def account_holders(self) -> account_holders.AccountHoldersWithStreamingResponse:
+        from .resources.account_holders import AccountHoldersWithStreamingResponse
+
+        return AccountHoldersWithStreamingResponse(self._client.account_holders)
+
+    @cached_property
+    def auth_rules(self) -> auth_rules.AuthRulesWithStreamingResponse:
+        from .resources.auth_rules import AuthRulesWithStreamingResponse
+
+        return AuthRulesWithStreamingResponse(self._client.auth_rules)
+
+    @cached_property
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AuthStreamEnrollmentWithStreamingResponse:
+        from .resources.auth_stream_enrollment import AuthStreamEnrollmentWithStreamingResponse
+
+        return AuthStreamEnrollmentWithStreamingResponse(self._client.auth_stream_enrollment)
+
+    @cached_property
+    def tokenization_decisioning(self) -> tokenization_decisioning.TokenizationDecisioningWithStreamingResponse:
+        from .resources.tokenization_decisioning import TokenizationDecisioningWithStreamingResponse
+
+        return TokenizationDecisioningWithStreamingResponse(self._client.tokenization_decisioning)
+
+    @cached_property
+    def tokenizations(self) -> tokenizations.TokenizationsWithStreamingResponse:
+        from .resources.tokenizations import TokenizationsWithStreamingResponse
+
+        return TokenizationsWithStreamingResponse(self._client.tokenizations)
+
+    @cached_property
+    def cards(self) -> cards.CardsWithStreamingResponse:
+        from .resources.cards import CardsWithStreamingResponse
+
+        return CardsWithStreamingResponse(self._client.cards)
+
+    @cached_property
+    def balances(self) -> balances.BalancesWithStreamingResponse:
+        from .resources.balances import BalancesWithStreamingResponse
+
+        return BalancesWithStreamingResponse(self._client.balances)
+
+    @cached_property
+    def aggregate_balances(self) -> aggregate_balances.AggregateBalancesWithStreamingResponse:
+        from .resources.aggregate_balances import AggregateBalancesWithStreamingResponse
+
+        return AggregateBalancesWithStreamingResponse(self._client.aggregate_balances)
+
+    @cached_property
+    def disputes(self) -> disputes.DisputesWithStreamingResponse:
+        from .resources.disputes import DisputesWithStreamingResponse
+
+        return DisputesWithStreamingResponse(self._client.disputes)
+
+    @cached_property
+    def events(self) -> events.EventsWithStreamingResponse:
+        from .resources.events import EventsWithStreamingResponse
+
+        return EventsWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def financial_accounts(self) -> financial_accounts.FinancialAccountsWithStreamingResponse:
+        from .resources.financial_accounts import FinancialAccountsWithStreamingResponse
+
+        return FinancialAccountsWithStreamingResponse(self._client.financial_accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.TransactionsWithStreamingResponse:
+        from .resources.transactions import TransactionsWithStreamingResponse
+
+        return TransactionsWithStreamingResponse(self._client.transactions)
+
+    @cached_property
+    def responder_endpoints(self) -> responder_endpoints.ResponderEndpointsWithStreamingResponse:
+        from .resources.responder_endpoints import ResponderEndpointsWithStreamingResponse
+
+        return ResponderEndpointsWithStreamingResponse(self._client.responder_endpoints)
+
+    @cached_property
+    def external_bank_accounts(self) -> external_bank_accounts.ExternalBankAccountsWithStreamingResponse:
+        from .resources.external_bank_accounts import ExternalBankAccountsWithStreamingResponse
+
+        return ExternalBankAccountsWithStreamingResponse(self._client.external_bank_accounts)
+
+    @cached_property
+    def payments(self) -> payments.PaymentsWithStreamingResponse:
+        from .resources.payments import PaymentsWithStreamingResponse
+
+        return PaymentsWithStreamingResponse(self._client.payments)
+
+    @cached_property
+    def three_ds(self) -> three_ds.ThreeDSWithStreamingResponse:
+        from .resources.three_ds import ThreeDSWithStreamingResponse
+
+        return ThreeDSWithStreamingResponse(self._client.three_ds)
+
+    @cached_property
+    def reports(self) -> reports.ReportsWithStreamingResponse:
+        from .resources.reports import ReportsWithStreamingResponse
+
+        return ReportsWithStreamingResponse(self._client.reports)
+
+    @cached_property
+    def card_programs(self) -> card_programs.CardProgramsWithStreamingResponse:
+        from .resources.card_programs import CardProgramsWithStreamingResponse
+
+        return CardProgramsWithStreamingResponse(self._client.card_programs)
+
+    @cached_property
+    def digital_card_art(self) -> digital_card_art.DigitalCardArtResourceWithStreamingResponse:
+        from .resources.digital_card_art import DigitalCardArtResourceWithStreamingResponse
+
+        return DigitalCardArtResourceWithStreamingResponse(self._client.digital_card_art)
+
+    @cached_property
+    def book_transfers(self) -> book_transfers.BookTransfersWithStreamingResponse:
+        from .resources.book_transfers import BookTransfersWithStreamingResponse
+
+        return BookTransfersWithStreamingResponse(self._client.book_transfers)
+
+    @cached_property
+    def credit_products(self) -> credit_products.CreditProductsWithStreamingResponse:
+        from .resources.credit_products import CreditProductsWithStreamingResponse
+
+        return CreditProductsWithStreamingResponse(self._client.credit_products)
+
+    @cached_property
+    def external_payments(self) -> external_payments.ExternalPaymentsWithStreamingResponse:
+        from .resources.external_payments import ExternalPaymentsWithStreamingResponse
+
+        return ExternalPaymentsWithStreamingResponse(self._client.external_payments)
+
+    @cached_property
+    def management_operations(self) -> management_operations.ManagementOperationsWithStreamingResponse:
+        from .resources.management_operations import ManagementOperationsWithStreamingResponse
+
+        return ManagementOperationsWithStreamingResponse(self._client.management_operations)
+
 
 class AsyncLithicWithStreamedResponse:
+    _client: AsyncLithic
+
     def __init__(self, client: AsyncLithic) -> None:
-        self.accounts = accounts.AsyncAccountsWithStreamingResponse(client.accounts)
-        self.account_holders = account_holders.AsyncAccountHoldersWithStreamingResponse(client.account_holders)
-        self.auth_rules = auth_rules.AsyncAuthRulesWithStreamingResponse(client.auth_rules)
-        self.auth_stream_enrollment = auth_stream_enrollment.AsyncAuthStreamEnrollmentWithStreamingResponse(
-            client.auth_stream_enrollment
-        )
-        self.tokenization_decisioning = tokenization_decisioning.AsyncTokenizationDecisioningWithStreamingResponse(
-            client.tokenization_decisioning
-        )
-        self.tokenizations = tokenizations.AsyncTokenizationsWithStreamingResponse(client.tokenizations)
-        self.cards = cards.AsyncCardsWithStreamingResponse(client.cards)
-        self.balances = balances.AsyncBalancesWithStreamingResponse(client.balances)
-        self.aggregate_balances = aggregate_balances.AsyncAggregateBalancesWithStreamingResponse(
-            client.aggregate_balances
-        )
-        self.disputes = disputes.AsyncDisputesWithStreamingResponse(client.disputes)
-        self.events = events.AsyncEventsWithStreamingResponse(client.events)
-        self.financial_accounts = financial_accounts.AsyncFinancialAccountsWithStreamingResponse(
-            client.financial_accounts
-        )
-        self.transactions = transactions.AsyncTransactionsWithStreamingResponse(client.transactions)
-        self.responder_endpoints = responder_endpoints.AsyncResponderEndpointsWithStreamingResponse(
-            client.responder_endpoints
-        )
-        self.external_bank_accounts = external_bank_accounts.AsyncExternalBankAccountsWithStreamingResponse(
-            client.external_bank_accounts
-        )
-        self.payments = payments.AsyncPaymentsWithStreamingResponse(client.payments)
-        self.three_ds = three_ds.AsyncThreeDSWithStreamingResponse(client.three_ds)
-        self.reports = reports.AsyncReportsWithStreamingResponse(client.reports)
-        self.card_programs = card_programs.AsyncCardProgramsWithStreamingResponse(client.card_programs)
-        self.digital_card_art = digital_card_art.AsyncDigitalCardArtResourceWithStreamingResponse(
-            client.digital_card_art
-        )
-        self.book_transfers = book_transfers.AsyncBookTransfersWithStreamingResponse(client.book_transfers)
-        self.credit_products = credit_products.AsyncCreditProductsWithStreamingResponse(client.credit_products)
-        self.external_payments = external_payments.AsyncExternalPaymentsWithStreamingResponse(client.external_payments)
-        self.management_operations = management_operations.AsyncManagementOperationsWithStreamingResponse(
-            client.management_operations
-        )
+        self._client = client
 
         self.api_status = async_to_streamed_response_wrapper(
             client.api_status,
         )
+
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsWithStreamingResponse:
+        from .resources.accounts import AsyncAccountsWithStreamingResponse
+
+        return AsyncAccountsWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def account_holders(self) -> account_holders.AsyncAccountHoldersWithStreamingResponse:
+        from .resources.account_holders import AsyncAccountHoldersWithStreamingResponse
+
+        return AsyncAccountHoldersWithStreamingResponse(self._client.account_holders)
+
+    @cached_property
+    def auth_rules(self) -> auth_rules.AsyncAuthRulesWithStreamingResponse:
+        from .resources.auth_rules import AsyncAuthRulesWithStreamingResponse
+
+        return AsyncAuthRulesWithStreamingResponse(self._client.auth_rules)
+
+    @cached_property
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithStreamingResponse:
+        from .resources.auth_stream_enrollment import AsyncAuthStreamEnrollmentWithStreamingResponse
+
+        return AsyncAuthStreamEnrollmentWithStreamingResponse(self._client.auth_stream_enrollment)
+
+    @cached_property
+    def tokenization_decisioning(self) -> tokenization_decisioning.AsyncTokenizationDecisioningWithStreamingResponse:
+        from .resources.tokenization_decisioning import AsyncTokenizationDecisioningWithStreamingResponse
+
+        return AsyncTokenizationDecisioningWithStreamingResponse(self._client.tokenization_decisioning)
+
+    @cached_property
+    def tokenizations(self) -> tokenizations.AsyncTokenizationsWithStreamingResponse:
+        from .resources.tokenizations import AsyncTokenizationsWithStreamingResponse
+
+        return AsyncTokenizationsWithStreamingResponse(self._client.tokenizations)
+
+    @cached_property
+    def cards(self) -> cards.AsyncCardsWithStreamingResponse:
+        from .resources.cards import AsyncCardsWithStreamingResponse
+
+        return AsyncCardsWithStreamingResponse(self._client.cards)
+
+    @cached_property
+    def balances(self) -> balances.AsyncBalancesWithStreamingResponse:
+        from .resources.balances import AsyncBalancesWithStreamingResponse
+
+        return AsyncBalancesWithStreamingResponse(self._client.balances)
+
+    @cached_property
+    def aggregate_balances(self) -> aggregate_balances.AsyncAggregateBalancesWithStreamingResponse:
+        from .resources.aggregate_balances import AsyncAggregateBalancesWithStreamingResponse
+
+        return AsyncAggregateBalancesWithStreamingResponse(self._client.aggregate_balances)
+
+    @cached_property
+    def disputes(self) -> disputes.AsyncDisputesWithStreamingResponse:
+        from .resources.disputes import AsyncDisputesWithStreamingResponse
+
+        return AsyncDisputesWithStreamingResponse(self._client.disputes)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsWithStreamingResponse:
+        from .resources.events import AsyncEventsWithStreamingResponse
+
+        return AsyncEventsWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def financial_accounts(self) -> financial_accounts.AsyncFinancialAccountsWithStreamingResponse:
+        from .resources.financial_accounts import AsyncFinancialAccountsWithStreamingResponse
+
+        return AsyncFinancialAccountsWithStreamingResponse(self._client.financial_accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.AsyncTransactionsWithStreamingResponse:
+        from .resources.transactions import AsyncTransactionsWithStreamingResponse
+
+        return AsyncTransactionsWithStreamingResponse(self._client.transactions)
+
+    @cached_property
+    def responder_endpoints(self) -> responder_endpoints.AsyncResponderEndpointsWithStreamingResponse:
+        from .resources.responder_endpoints import AsyncResponderEndpointsWithStreamingResponse
+
+        return AsyncResponderEndpointsWithStreamingResponse(self._client.responder_endpoints)
+
+    @cached_property
+    def external_bank_accounts(self) -> external_bank_accounts.AsyncExternalBankAccountsWithStreamingResponse:
+        from .resources.external_bank_accounts import AsyncExternalBankAccountsWithStreamingResponse
+
+        return AsyncExternalBankAccountsWithStreamingResponse(self._client.external_bank_accounts)
+
+    @cached_property
+    def payments(self) -> payments.AsyncPaymentsWithStreamingResponse:
+        from .resources.payments import AsyncPaymentsWithStreamingResponse
+
+        return AsyncPaymentsWithStreamingResponse(self._client.payments)
+
+    @cached_property
+    def three_ds(self) -> three_ds.AsyncThreeDSWithStreamingResponse:
+        from .resources.three_ds import AsyncThreeDSWithStreamingResponse
+
+        return AsyncThreeDSWithStreamingResponse(self._client.three_ds)
+
+    @cached_property
+    def reports(self) -> reports.AsyncReportsWithStreamingResponse:
+        from .resources.reports import AsyncReportsWithStreamingResponse
+
+        return AsyncReportsWithStreamingResponse(self._client.reports)
+
+    @cached_property
+    def card_programs(self) -> card_programs.AsyncCardProgramsWithStreamingResponse:
+        from .resources.card_programs import AsyncCardProgramsWithStreamingResponse
+
+        return AsyncCardProgramsWithStreamingResponse(self._client.card_programs)
+
+    @cached_property
+    def digital_card_art(self) -> digital_card_art.AsyncDigitalCardArtResourceWithStreamingResponse:
+        from .resources.digital_card_art import AsyncDigitalCardArtResourceWithStreamingResponse
+
+        return AsyncDigitalCardArtResourceWithStreamingResponse(self._client.digital_card_art)
+
+    @cached_property
+    def book_transfers(self) -> book_transfers.AsyncBookTransfersWithStreamingResponse:
+        from .resources.book_transfers import AsyncBookTransfersWithStreamingResponse
+
+        return AsyncBookTransfersWithStreamingResponse(self._client.book_transfers)
+
+    @cached_property
+    def credit_products(self) -> credit_products.AsyncCreditProductsWithStreamingResponse:
+        from .resources.credit_products import AsyncCreditProductsWithStreamingResponse
+
+        return AsyncCreditProductsWithStreamingResponse(self._client.credit_products)
+
+    @cached_property
+    def external_payments(self) -> external_payments.AsyncExternalPaymentsWithStreamingResponse:
+        from .resources.external_payments import AsyncExternalPaymentsWithStreamingResponse
+
+        return AsyncExternalPaymentsWithStreamingResponse(self._client.external_payments)
+
+    @cached_property
+    def management_operations(self) -> management_operations.AsyncManagementOperationsWithStreamingResponse:
+        from .resources.management_operations import AsyncManagementOperationsWithStreamingResponse
+
+        return AsyncManagementOperationsWithStreamingResponse(self._client.management_operations)
 
 
 Client = Lithic
