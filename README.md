@@ -142,20 +142,6 @@ for card in first_page.data:
 # Remove `await` for non-async usage.
 ```
 
-## Nested params
-
-Nested parameters are dictionaries, typed using `TypedDict`, for example:
-
-```python
-from lithic import Lithic
-
-client = Lithic()
-
-card = client.cards.create(
-    type="VIRTUAL",
-)
-```
-
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `lithic.APIConnectionError` is raised.
@@ -173,7 +159,7 @@ client = Lithic()
 
 try:
     client.cards.create(
-        type="an_incorrect_type",
+        type="MERCHANT_LOCKED",
     )
 except lithic.APIConnectionError as e:
     print("The server could not be reached")
