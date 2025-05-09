@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.91.2 (2025-05-09)
+
+Full Changelog: [v0.91.1...v0.91.2](https://github.com/lithic-com/lithic-python/compare/v0.91.1...v0.91.2)
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([bca9fdd](https://github.com/lithic-com/lithic-python/commit/bca9fdd588d1c683a21e4d9da78e8816637f61b9))
+
+
+### Chores
+
+* **internal:** avoid errors for isinstance checks on proxies ([76f685a](https://github.com/lithic-com/lithic-python/commit/76f685a24c7ca01c003d9b32be71eadf397a1bd0))
+
+
+### Documentation
+
+* remove or fix invalid readme examples ([9402b87](https://github.com/lithic-com/lithic-python/commit/9402b87c62b52b79c1d4d18460e78736f4e8598d))
+
 ## 0.91.1 (2025-05-05)
 
 Full Changelog: [v0.91.0...v0.91.1](https://github.com/lithic-com/lithic-python/compare/v0.91.0...v0.91.1)
