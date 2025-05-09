@@ -142,20 +142,6 @@ for card in first_page.data:
 # Remove `await` for non-async usage.
 ```
 
-## Nested params
-
-Nested parameters are dictionaries, typed using `TypedDict`, for example:
-
-```python
-from lithic import Lithic
-
-client = Lithic()
-
-card = client.cards.create(
-    type="VIRTUAL",
-)
-```
-
 ## Webhook Verification
 
 We provide helper methods for verifying that a webhook request came from Lithic, and not a malicious third party.
@@ -196,7 +182,7 @@ client = Lithic()
 
 try:
     client.cards.create(
-        type="an_incorrect_type",
+        type="MERCHANT_LOCKED",
     )
 except lithic.APIConnectionError as e:
     print("The server could not be reached")
