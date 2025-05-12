@@ -29,6 +29,7 @@ class Data(BaseModel):
         "MANAGEMENT_FEE",
         "MANAGEMENT_REWARD",
         "MANAGEMENT_DISBURSEMENT",
+        "PROGRAM_FUNDING",
     ]
 
     created: datetime

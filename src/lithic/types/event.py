@@ -45,6 +45,7 @@ class Event(BaseModel):
         "external_payment.updated",
         "financial_account.created",
         "financial_account.updated",
+        "funding_event.created",
         "loan_tape.created",
         "loan_tape.updated",
         "management_operation.created",
