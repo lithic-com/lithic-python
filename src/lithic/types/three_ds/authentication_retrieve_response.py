@@ -292,6 +292,12 @@ class Transaction(BaseModel):
     Maps to EMV 3DS field purchaseAmount.
     """
 
+    cardholder_amount: Optional[float] = None
+    """Approximate amount of the purchase in minor units of cardholder currency.
+
+    Derived from `amount` using a daily conversion rate.
+    """
+
     currency: str
     """Currency of the purchase. Maps to EMV 3DS field purchaseCurrency."""
 

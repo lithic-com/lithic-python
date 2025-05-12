@@ -30,6 +30,7 @@ __all__ = [
     "EventAmountsSettlement",
     "EventNetworkInfo",
     "EventNetworkInfoAcquirer",
+    "EventNetworkInfoAmex",
     "EventNetworkInfoMastercard",
     "EventNetworkInfoVisa",
     "EventRuleResult",
@@ -156,6 +157,9 @@ class CardholderAuthentication(BaseModel):
 
     (deprecated, use `authentication_result`)
     """
+
+    authentication_method: Optional[Literal["FRICTIONLESS", "CHALLENGE", "NONE"]] = None
+    """Indicates the method used to authenticate the cardholder."""
 
 
 class Merchant(BaseModel):
@@ -369,6 +373,24 @@ class EventNetworkInfoAcquirer(BaseModel):
     """Identifier assigned by the acquirer."""
 
 
+class EventNetworkInfoAmex(BaseModel):
+    original_transaction_id: Optional[str] = None
+    """Identifier assigned by American Express.
+
+    Matches the `transaction_id` of a prior related event. May be populated in
+    incremental authorizations (authorization requests that augment a previously
+    authorized amount), authorization advices, financial authorizations, and
+    clearings.
+    """
+
+    transaction_id: Optional[str] = None
+    """
+    Identifier assigned by American Express to link original messages to subsequent
+    messages. Guaranteed by American Express to be unique for each original
+    authorization and financial authorization.
+    """
+
+
 class EventNetworkInfoMastercard(BaseModel):
     banknet_reference_number: Optional[str] = None
     """Identifier assigned by Mastercard.
@@ -426,6 +448,8 @@ class EventNetworkInfoVisa(BaseModel):
 
 class EventNetworkInfo(BaseModel):
     acquirer: Optional[EventNetworkInfoAcquirer] = None
+
+    amex: Optional[EventNetworkInfoAmex] = None
 
     mastercard: Optional[EventNetworkInfoMastercard] = None
 
@@ -740,12 +764,11 @@ class Transaction(BaseModel):
     merchant_currency: str
     """3-character alphabetic ISO 4217 code for the local currency of the transaction."""
 
-    network: Optional[Literal["INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]] = None
+    network: Optional[Literal["AMEX", "INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]] = None
     """Card network of the authorization.
 
-    Can be `INTERLINK`, `MAESTRO`, `MASTERCARD`, `VISA`, or `UNKNOWN`. Value is
-    `UNKNOWN` when Lithic cannot determine the network code from the upstream
-    provider.
+    Value is `UNKNOWN` when Lithic cannot determine the network code from the
+    upstream provider.
     """
 
     network_risk_score: Optional[int] = None

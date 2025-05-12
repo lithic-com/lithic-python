@@ -33,6 +33,9 @@ class CardListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
+    memo: str
+    """Returns cards containing the specified partial or full memo text."""
+
     page_size: int
     """Page size (for pagination)."""
 
