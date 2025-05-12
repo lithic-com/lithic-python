@@ -416,6 +416,7 @@ class Cards(SyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
+        memo: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | NotGiven = NOT_GIVEN,
@@ -440,6 +441,8 @@ class Cards(SyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          memo: Returns cards containing the specified partial or full memo text.
 
           page_size: Page size (for pagination).
 
@@ -470,6 +473,7 @@ class Cards(SyncAPIResource):
                         "begin": begin,
                         "end": end,
                         "ending_before": ending_before,
+                        "memo": memo,
                         "page_size": page_size,
                         "starting_after": starting_after,
                         "state": state,
@@ -1403,6 +1407,7 @@ class AsyncCards(AsyncAPIResource):
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         end: Union[str, datetime] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
+        memo: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | NotGiven = NOT_GIVEN,
@@ -1427,6 +1432,8 @@ class AsyncCards(AsyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          memo: Returns cards containing the specified partial or full memo text.
 
           page_size: Page size (for pagination).
 
@@ -1457,6 +1464,7 @@ class AsyncCards(AsyncAPIResource):
                         "begin": begin,
                         "end": end,
                         "ending_before": ending_before,
+                        "memo": memo,
                         "page_size": page_size,
                         "starting_after": starting_after,
                         "state": state,
