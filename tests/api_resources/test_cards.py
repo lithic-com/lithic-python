@@ -14,6 +14,7 @@ from lithic.types import (
     NonPCICard,
     CardSpendLimits,
     CardProvisionResponse,
+    CardWebProvisionResponse,
 )
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -630,6 +631,52 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_method_web_provision(self, client: Lithic) -> None:
+        card = client.cards.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+    @parametrize
+    def test_method_web_provision_with_all_params(self, client: Lithic) -> None:
+        card = client.cards.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_wallet="APPLE_PAY",
+        )
+        assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+    @parametrize
+    def test_raw_response_web_provision(self, client: Lithic) -> None:
+        response = client.cards.with_raw_response.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+    @parametrize
+    def test_streaming_response_web_provision(self, client: Lithic) -> None:
+        with client.cards.with_streaming_response.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = response.parse()
+            assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_web_provision(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
+            client.cards.with_raw_response.web_provision(
+                card_token="",
+            )
+
 
 class TestAsyncCards:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -1239,3 +1286,49 @@ class TestAsyncCards:
             assert_matches_type(Card, card, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_web_provision(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+    @parametrize
+    async def test_method_web_provision_with_all_params(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_wallet="APPLE_PAY",
+        )
+        assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+    @parametrize
+    async def test_raw_response_web_provision(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_web_provision(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.web_provision(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = await response.parse()
+            assert_matches_type(CardWebProvisionResponse, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_web_provision(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
+            await async_client.cards.with_raw_response.web_provision(
+                card_token="",
+            )
