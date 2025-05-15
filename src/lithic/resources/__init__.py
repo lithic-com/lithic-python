@@ -105,6 +105,14 @@ from .book_transfers import (
     BookTransfersWithStreamingResponse,
     AsyncBookTransfersWithStreamingResponse,
 )
+from .funding_events import (
+    FundingEvents,
+    AsyncFundingEvents,
+    FundingEventsWithRawResponse,
+    AsyncFundingEventsWithRawResponse,
+    FundingEventsWithStreamingResponse,
+    AsyncFundingEventsWithStreamingResponse,
+)
 from .account_holders import (
     AccountHolders,
     AsyncAccountHolders,
@@ -341,4 +349,10 @@ __all__ = [
     "AsyncManagementOperationsWithRawResponse",
     "ManagementOperationsWithStreamingResponse",
     "AsyncManagementOperationsWithStreamingResponse",
+    "FundingEvents",
+    "AsyncFundingEvents",
+    "FundingEventsWithRawResponse",
+    "AsyncFundingEventsWithRawResponse",
+    "FundingEventsWithStreamingResponse",
+    "AsyncFundingEventsWithStreamingResponse",
 ]

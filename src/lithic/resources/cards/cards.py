@@ -25,6 +25,7 @@ from ...types import (
     card_provision_params,
     card_get_embed_url_params,
     card_search_by_pan_params,
+    card_web_provision_params,
     card_convert_physical_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, Base64FileInput
@@ -64,6 +65,7 @@ from ...types.card_spend_limits import CardSpendLimits
 from ...types.spend_limit_duration import SpendLimitDuration
 from ...types.shared_params.carrier import Carrier
 from ...types.card_provision_response import CardProvisionResponse
+from ...types.card_web_provision_response import CardWebProvisionResponse
 from ...types.shared_params.shipping_address import ShippingAddress
 
 __all__ = ["Cards", "AsyncCards"]
@@ -1059,6 +1061,48 @@ class Cards(SyncAPIResource):
             cast_to=Card,
         )
 
+    def web_provision(
+        self,
+        card_token: str,
+        *,
+        digital_wallet: Literal["APPLE_PAY"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CardWebProvisionResponse:
+        """
+        Allow your cardholders to directly add payment cards to the device's digital
+        wallet from a browser on the web. Currently only suported for Apple Pay.
+
+        This requires some additional setup and configuration. Please
+        [Contact Us](https://lithic.com/contact) or your Customer Success representative
+        for more information.
+
+        Args:
+          digital_wallet: Name of digital wallet provider.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return self._post(
+            f"/v1/cards/{card_token}/web_provision",
+            body=maybe_transform({"digital_wallet": digital_wallet}, card_web_provision_params.CardWebProvisionParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CardWebProvisionResponse,
+        )
+
 
 class AsyncCards(AsyncAPIResource):
     @cached_property
@@ -2050,6 +2094,50 @@ class AsyncCards(AsyncAPIResource):
             cast_to=Card,
         )
 
+    async def web_provision(
+        self,
+        card_token: str,
+        *,
+        digital_wallet: Literal["APPLE_PAY"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CardWebProvisionResponse:
+        """
+        Allow your cardholders to directly add payment cards to the device's digital
+        wallet from a browser on the web. Currently only suported for Apple Pay.
+
+        This requires some additional setup and configuration. Please
+        [Contact Us](https://lithic.com/contact) or your Customer Success representative
+        for more information.
+
+        Args:
+          digital_wallet: Name of digital wallet provider.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return await self._post(
+            f"/v1/cards/{card_token}/web_provision",
+            body=await async_maybe_transform(
+                {"digital_wallet": digital_wallet}, card_web_provision_params.CardWebProvisionParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CardWebProvisionResponse,
+        )
+
 
 class CardsWithRawResponse:
     def __init__(self, cards: Cards) -> None:
@@ -2087,6 +2175,9 @@ class CardsWithRawResponse:
         )
         self.search_by_pan = _legacy_response.to_raw_response_wrapper(
             cards.search_by_pan,
+        )
+        self.web_provision = _legacy_response.to_raw_response_wrapper(
+            cards.web_provision,
         )
 
     @cached_property
@@ -2139,6 +2230,9 @@ class AsyncCardsWithRawResponse:
         self.search_by_pan = _legacy_response.async_to_raw_response_wrapper(
             cards.search_by_pan,
         )
+        self.web_provision = _legacy_response.async_to_raw_response_wrapper(
+            cards.web_provision,
+        )
 
     @cached_property
     def aggregate_balances(self) -> AsyncAggregateBalancesWithRawResponse:
@@ -2190,6 +2284,9 @@ class CardsWithStreamingResponse:
         self.search_by_pan = to_streamed_response_wrapper(
             cards.search_by_pan,
         )
+        self.web_provision = to_streamed_response_wrapper(
+            cards.web_provision,
+        )
 
     @cached_property
     def aggregate_balances(self) -> AggregateBalancesWithStreamingResponse:
@@ -2240,6 +2337,9 @@ class AsyncCardsWithStreamingResponse:
         )
         self.search_by_pan = async_to_streamed_response_wrapper(
             cards.search_by_pan,
+        )
+        self.web_provision = async_to_streamed_response_wrapper(
+            cards.web_provision,
         )
 
     @cached_property
