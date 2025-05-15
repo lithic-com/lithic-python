@@ -184,6 +184,7 @@ from lithic.types import (
     SpendLimitDuration,
     CardEmbedResponse,
     CardProvisionResponse,
+    CardWebProvisionResponse,
 )
 ```
 
@@ -200,6 +201,7 @@ Methods:
 - <code title="post /v1/cards/{card_token}/renew">client.cards.<a href="./src/lithic/resources/cards/cards.py">renew</a>(card_token, \*\*<a href="src/lithic/types/card_renew_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="get /v1/cards/{card_token}/spend_limits">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_spend_limits</a>(card_token) -> <a href="./src/lithic/types/card_spend_limits.py">CardSpendLimits</a></code>
 - <code title="post /v1/cards/search_by_pan">client.cards.<a href="./src/lithic/resources/cards/cards.py">search_by_pan</a>(\*\*<a href="src/lithic/types/card_search_by_pan_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="post /v1/cards/{card_token}/web_provision">client.cards.<a href="./src/lithic/resources/cards/cards.py">web_provision</a>(card_token, \*\*<a href="src/lithic/types/card_web_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_web_provision_response.py">CardWebProvisionResponse</a></code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
 
@@ -713,3 +715,21 @@ Methods:
 - <code title="get /v1/management_operations/{management_operation_token}">client.management_operations.<a href="./src/lithic/resources/management_operations.py">retrieve</a>(management_operation_token) -> <a href="./src/lithic/types/management_operation_transaction.py">ManagementOperationTransaction</a></code>
 - <code title="get /v1/management_operations">client.management_operations.<a href="./src/lithic/resources/management_operations.py">list</a>(\*\*<a href="src/lithic/types/management_operation_list_params.py">params</a>) -> <a href="./src/lithic/types/management_operation_transaction.py">SyncCursorPage[ManagementOperationTransaction]</a></code>
 - <code title="post /v1/management_operations/{management_operation_token}/reverse">client.management_operations.<a href="./src/lithic/resources/management_operations.py">reverse</a>(management_operation_token, \*\*<a href="src/lithic/types/management_operation_reverse_params.py">params</a>) -> <a href="./src/lithic/types/management_operation_transaction.py">ManagementOperationTransaction</a></code>
+
+# FundingEvents
+
+Types:
+
+```python
+from lithic.types import (
+    FundingEventRetrieveResponse,
+    FundingEventListResponse,
+    FundingEventRetrieveDetailsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/funding_events/{funding_event_token}">client.funding_events.<a href="./src/lithic/resources/funding_events.py">retrieve</a>(funding_event_token) -> <a href="./src/lithic/types/funding_event_retrieve_response.py">FundingEventRetrieveResponse</a></code>
+- <code title="get /v1/funding_events">client.funding_events.<a href="./src/lithic/resources/funding_events.py">list</a>(\*\*<a href="src/lithic/types/funding_event_list_params.py">params</a>) -> <a href="./src/lithic/types/funding_event_list_response.py">SyncCursorPage[FundingEventListResponse]</a></code>
+- <code title="get /v1/funding_events/{funding_event_token}/details">client.funding_events.<a href="./src/lithic/resources/funding_events.py">retrieve_details</a>(funding_event_token) -> <a href="./src/lithic/types/funding_event_retrieve_details_response.py">FundingEventRetrieveDetailsResponse</a></code>

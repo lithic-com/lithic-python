@@ -52,6 +52,7 @@ if TYPE_CHECKING:
         card_programs,
         tokenizations,
         book_transfers,
+        funding_events,
         account_holders,
         credit_products,
         digital_card_art,
@@ -73,6 +74,7 @@ if TYPE_CHECKING:
     from .resources.events.events import Events, AsyncEvents
     from .resources.tokenizations import Tokenizations, AsyncTokenizations
     from .resources.book_transfers import BookTransfers, AsyncBookTransfers
+    from .resources.funding_events import FundingEvents, AsyncFundingEvents
     from .resources.account_holders import AccountHolders, AsyncAccountHolders
     from .resources.reports.reports import Reports, AsyncReports
     from .resources.digital_card_art import DigitalCardArtResource, AsyncDigitalCardArtResource
@@ -338,6 +340,12 @@ class Lithic(SyncAPIClient):
 
         return ManagementOperations(self)
 
+    @cached_property
+    def funding_events(self) -> FundingEvents:
+        from .resources.funding_events import FundingEvents
+
+        return FundingEvents(self)
+    
     @cached_property
     def webhooks(self) -> webhooks.Webhooks:
         from .resources.webhooks import Webhooks
@@ -713,6 +721,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncManagementOperations(self)
 
     @cached_property
+    def funding_events(self) -> AsyncFundingEvents:
+        from .resources.funding_events import AsyncFundingEvents
+
+        return AsyncFundingEvents(self)
+
+    @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooks:
         from .resources.webhooks import AsyncWebhooks
 
@@ -1009,6 +1023,12 @@ class LithicWithRawResponse:
 
         return ManagementOperationsWithRawResponse(self._client.management_operations)
 
+    @cached_property
+    def funding_events(self) -> funding_events.FundingEventsWithRawResponse:
+        from .resources.funding_events import FundingEventsWithRawResponse
+
+        return FundingEventsWithRawResponse(self._client.funding_events)
+
 
 class AsyncLithicWithRawResponse:
     _client: AsyncLithic
@@ -1163,6 +1183,12 @@ class AsyncLithicWithRawResponse:
         from .resources.management_operations import AsyncManagementOperationsWithRawResponse
 
         return AsyncManagementOperationsWithRawResponse(self._client.management_operations)
+
+    @cached_property
+    def funding_events(self) -> funding_events.AsyncFundingEventsWithRawResponse:
+        from .resources.funding_events import AsyncFundingEventsWithRawResponse
+
+        return AsyncFundingEventsWithRawResponse(self._client.funding_events)
 
 
 class LithicWithStreamedResponse:
@@ -1319,6 +1345,12 @@ class LithicWithStreamedResponse:
 
         return ManagementOperationsWithStreamingResponse(self._client.management_operations)
 
+    @cached_property
+    def funding_events(self) -> funding_events.FundingEventsWithStreamingResponse:
+        from .resources.funding_events import FundingEventsWithStreamingResponse
+
+        return FundingEventsWithStreamingResponse(self._client.funding_events)
+
 
 class AsyncLithicWithStreamedResponse:
     _client: AsyncLithic
@@ -1473,6 +1505,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.management_operations import AsyncManagementOperationsWithStreamingResponse
 
         return AsyncManagementOperationsWithStreamingResponse(self._client.management_operations)
+
+    @cached_property
+    def funding_events(self) -> funding_events.AsyncFundingEventsWithStreamingResponse:
+        from .resources.funding_events import AsyncFundingEventsWithStreamingResponse
+
+        return AsyncFundingEventsWithStreamingResponse(self._client.funding_events)
 
 
 Client = Lithic
