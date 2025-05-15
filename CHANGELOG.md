@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.93.0 (2025-05-15)
+
+Full Changelog: [v0.92.0...v0.93.0](https://github.com/lithic-com/lithic-python/compare/v0.92.0...v0.93.0)
+
+### Features
+
+* **api:** new Funding Events and Card Web Provision API's ([324431e](https://github.com/lithic-com/lithic-python/commit/324431e3c83e7d89f93306900efb800ce1d9a594))
+
+
+### Chores
+
+* **ci:** fix installation instructions ([bd69296](https://github.com/lithic-com/lithic-python/commit/bd6929642e12a8dac9a208163def5f331a8dc6a9))
+* **ci:** upload sdks to package manager ([0882964](https://github.com/lithic-com/lithic-python/commit/0882964277d7cf21b177f2088c00e2c79d312b45))
+
 ## 0.92.0 (2025-05-12)
 
 Full Changelog: [v0.91.2...v0.92.0](https://github.com/lithic-com/lithic-python/compare/v0.91.2...v0.92.0)
