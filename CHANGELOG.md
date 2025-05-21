@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.93.1 (2025-05-21)
+
+Full Changelog: [v0.93.0...v0.93.1](https://github.com/lithic-com/lithic-python/compare/v0.93.0...v0.93.1)
+
+### Chores
+
+* **docs:** grammar improvements ([c8610fe](https://github.com/lithic-com/lithic-python/commit/c8610fed4efbb18a63cabbe75596d001922bce29))
+
 ## 0.93.0 (2025-05-15)
 
 Full Changelog: [v0.92.0...v0.93.0](https://github.com/lithic-com/lithic-python/compare/v0.92.0...v0.93.0)
