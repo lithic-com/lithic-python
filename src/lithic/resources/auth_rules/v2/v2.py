@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import List, Optional
 from typing_extensions import Literal, overload
 
@@ -513,6 +514,7 @@ class V2(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     def apply(
         self,
@@ -545,6 +547,7 @@ class V2(SyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     def apply(
         self,
@@ -577,6 +580,7 @@ class V2(SyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     def apply(
         self,
@@ -612,6 +616,7 @@ class V2(SyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @required_args(["account_tokens"], ["card_tokens"], ["program_level"])
     def apply(
         self,
@@ -1282,6 +1287,7 @@ class AsyncV2(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     async def apply(
         self,
@@ -1314,6 +1320,7 @@ class AsyncV2(AsyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     async def apply(
         self,
@@ -1346,6 +1353,7 @@ class AsyncV2(AsyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     async def apply(
         self,
@@ -1381,6 +1389,7 @@ class AsyncV2(AsyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @required_args(["account_tokens"], ["card_tokens"], ["program_level"])
     async def apply(
         self,
@@ -1593,8 +1602,10 @@ class V2WithRawResponse:
         self.delete = _legacy_response.to_raw_response_wrapper(
             v2.delete,
         )
-        self.apply = _legacy_response.to_raw_response_wrapper(
-            v2.apply,
+        self.apply = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.to_raw_response_wrapper(
+                v2.apply  # pyright: ignore[reportDeprecated],
+            )
         )
         self.draft = _legacy_response.to_raw_response_wrapper(
             v2.draft,
@@ -1630,8 +1641,10 @@ class AsyncV2WithRawResponse:
         self.delete = _legacy_response.async_to_raw_response_wrapper(
             v2.delete,
         )
-        self.apply = _legacy_response.async_to_raw_response_wrapper(
-            v2.apply,
+        self.apply = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.async_to_raw_response_wrapper(
+                v2.apply  # pyright: ignore[reportDeprecated],
+            )
         )
         self.draft = _legacy_response.async_to_raw_response_wrapper(
             v2.draft,
@@ -1667,8 +1680,10 @@ class V2WithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             v2.delete,
         )
-        self.apply = to_streamed_response_wrapper(
-            v2.apply,
+        self.apply = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                v2.apply  # pyright: ignore[reportDeprecated],
+            )
         )
         self.draft = to_streamed_response_wrapper(
             v2.draft,
@@ -1704,8 +1719,10 @@ class AsyncV2WithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             v2.delete,
         )
-        self.apply = async_to_streamed_response_wrapper(
-            v2.apply,
+        self.apply = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                v2.apply  # pyright: ignore[reportDeprecated],
+            )
         )
         self.draft = async_to_streamed_response_wrapper(
             v2.draft,
