@@ -13,7 +13,7 @@ class RequiredDocument(BaseModel):
 
     status_reasons: List[str]
     """
-    rovides the status reasons that will be satisfied by providing one of the valid
+    Provides the status reasons that will be satisfied by providing one of the valid
     documents.
     """
 
