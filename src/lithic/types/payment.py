@@ -48,7 +48,7 @@ class Event(BaseModel):
     - `ACH_ORIGINATION_REVIEWED` - ACH origination has completed the review process.
     - `ACH_ORIGINATION_CANCELLED` - ACH origination has been cancelled.
     - `ACH_ORIGINATION_PROCESSED` - ACH origination has been processed and sent to
-      the fed.
+      the Federal Reserve.
     - `ACH_ORIGINATION_SETTLED` - ACH origination has settled.
     - `ACH_ORIGINATION_RELEASED` - ACH origination released from pending to
       available balance.

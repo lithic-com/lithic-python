@@ -68,7 +68,8 @@ class V2(SyncAPIResource):
         account_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,7 +78,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2CreateResponse:
         """
-        Creates a new V2 authorization rule in draft mode
+        Creates a new V2 Auth rule in draft mode
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
@@ -86,7 +87,13 @@ class V2(SyncAPIResource):
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule
+          type: The type of Auth Rule. Effectively determines the event stream during which it
+              will be evaluated.
+
+              - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -105,7 +112,8 @@ class V2(SyncAPIResource):
         card_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -114,7 +122,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2CreateResponse:
         """
-        Creates a new V2 authorization rule in draft mode
+        Creates a new V2 Auth rule in draft mode
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
@@ -123,7 +131,13 @@ class V2(SyncAPIResource):
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule
+          type: The type of Auth Rule. Effectively determines the event stream during which it
+              will be evaluated.
+
+              - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -143,7 +157,8 @@ class V2(SyncAPIResource):
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -152,7 +167,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2CreateResponse:
         """
-        Creates a new V2 authorization rule in draft mode
+        Creates a new V2 Auth rule in draft mode
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
@@ -163,7 +178,13 @@ class V2(SyncAPIResource):
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule
+          type: The type of Auth Rule. Effectively determines the event stream during which it
+              will be evaluated.
+
+              - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -182,7 +203,8 @@ class V2(SyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
@@ -225,7 +247,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2RetrieveResponse:
         """
-        Fetches a V2 authorization rule by its token
+        Fetches a V2 Auth rule by its token
 
         Args:
           extra_headers: Send extra headers
@@ -262,7 +284,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates a V2 authorization rule's properties
+        Updates a V2 Auth rule's properties
 
         If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
         is provided, this will replace existing associations with the provided list of
@@ -305,7 +327,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates a V2 authorization rule's properties
+        Updates a V2 Auth rule's properties
 
         If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
         is provided, this will replace existing associations with the provided list of
@@ -349,7 +371,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates a V2 authorization rule's properties
+        Updates a V2 Auth rule's properties
 
         If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
         is provided, this will replace existing associations with the provided list of
@@ -422,6 +444,7 @@ class V2(SyncAPIResource):
         account_token: str | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         scope: Literal["PROGRAM", "ACCOUNT", "CARD"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
@@ -433,19 +456,21 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncCursorPage[V2ListResponse]:
         """
-        Lists V2 authorization rules
+        Lists V2 Auth rules
 
         Args:
-          account_token: Only return Authorization Rules that are bound to the provided account token.
+          account_token: Only return Auth Rules that are bound to the provided account token.
 
-          card_token: Only return Authorization Rules that are bound to the provided card token.
+          card_token: Only return Auth Rules that are bound to the provided card token.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
+          event_stream: Only return Auth rules that are executed during the provided event stream.
+
           page_size: Page size (for pagination).
 
-          scope: Only return Authorization Rules that are bound to the provided scope;
+          scope: Only return Auth Rules that are bound to the provided scope.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -471,6 +496,7 @@ class V2(SyncAPIResource):
                         "account_token": account_token,
                         "card_token": card_token,
                         "ending_before": ending_before,
+                        "event_stream": event_stream,
                         "page_size": page_size,
                         "scope": scope,
                         "starting_after": starting_after,
@@ -493,7 +519,7 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Deletes a V2 authorization rule
+        Deletes a V2 Auth rule
 
         Args:
           extra_headers: Send extra headers
@@ -529,8 +555,8 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates a V2 authorization rule with a card program, the provided account(s)
-        or card(s).
+        Associates a V2 Auth rule with a card program, the provided account(s) or
+        card(s).
 
         Prefer using the `PATCH` method for this operation.
 
@@ -562,8 +588,8 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates a V2 authorization rule with a card program, the provided account(s)
-        or card(s).
+        Associates a V2 Auth rule with a card program, the provided account(s) or
+        card(s).
 
         Prefer using the `PATCH` method for this operation.
 
@@ -596,8 +622,8 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates a V2 authorization rule with a card program, the provided account(s)
-        or card(s).
+        Associates a V2 Auth rule with a card program, the provided account(s) or
+        card(s).
 
         Prefer using the `PATCH` method for this operation.
 
@@ -704,8 +730,8 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2PromoteResponse:
         """
-        Promotes the draft version of an authorization rule to the currently active
-        version such that it is enforced in the authorization stream.
+        Promotes the draft version of an Auth rule to the currently active version such
+        that it is enforced in the respective stream.
 
         Args:
           extra_headers: Send extra headers
@@ -738,26 +764,25 @@ class V2(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ReportResponse:
         """
-        Requests a performance report of an authorization rule to be asynchronously
-        generated. Reports can only be run on rules in draft or active mode and will
-        included approved and declined statistics as well as examples. The generated
-        report will be delivered asynchronously through a webhook with `event_type` =
+        Requests a performance report of an Auth rule to be asynchronously generated.
+        Reports can only be run on rules in draft or active mode and will included
+        approved and declined statistics as well as examples. The generated report will
+        be delivered asynchronously through a webhook with `event_type` =
         `auth_rules.performance_report.created`. See the docs on setting up
         [webhook subscriptions](https://docs.lithic.com/docs/events-api).
 
-        Reports are generated based on data collected by Lithic's authorization
-        processing system in the trailing week. The performance of the auth rule will be
-        assessed on the configuration of the auth rule at the time the report is
-        requested. This implies that if a performance report is requested, right after
-        updating an auth rule, depending on the number of authorizations processed for a
-        card program, it may be the case that no data is available for the report.
-        Therefore Lithic recommends to decouple making updates to an Auth Rule, and
-        requesting performance reports.
+        Reports are generated based on data collected by Lithic's processing system in
+        the trailing week. The performance of the auth rule will be assessed on the
+        configuration of the auth rule at the time the report is requested. This implies
+        that if a performance report is requested, right after updating an auth rule,
+        depending on the number of events processed for a card program, it may be the
+        case that no data is available for the report. Therefore Lithic recommends to
+        decouple making updates to an Auth Rule, and requesting performance reports.
 
         To make this concrete, consider the following example:
 
-        1. At time `t`, a new Auth Rule is created, and applies to all authorizations on
-           a card program. The Auth Rule has not yet been promoted, causing the draft
+        1. At time `t`, a new Auth Rule is created, and applies to all auth events on a
+           card program. The Auth Rule has not yet been promoted, causing the draft
            version of the rule to be applied in shadow mode.
         2. At time `t + 1 hour` a performance report is requested for the Auth Rule.
            This performance report will _only_ contain data for the Auth Rule being
@@ -772,17 +797,17 @@ class V2(SyncAPIResource):
            `t + 2 hours`.
         4. At time `t + 3 hours` a new version of the rule is drafted by calling the
            `/v2/auth_rules/{auth_rule_token}/draft` endpoint. If a performance report is
-           requested right at this moment, it will only contain data for authorizations
-           to which both the active version and the draft version is applied. Lithic
-           does this to ensure that performance reports represent a fair comparison
-           between rules. Because there may be no authorizations in this window, and
-           because there may be some lag before data is available in a performance
-           report, the requested performance report could contain no to little data.
+           requested right at this moment, it will only contain data for events to which
+           both the active version and the draft version is applied. Lithic does this to
+           ensure that performance reports represent a fair comparison between rules.
+           Because there may be no events in this window, and because there may be some
+           lag before data is available in a performance report, the requested
+           performance report could contain no to little data.
         5. At time `t + 4 hours` another performance report is requested: this time the
            performance report will contain data from the window between `t + 3 hours`
-           and `t + 4 hours`, for any authorizations to which both the current version
-           of the authorization rule (in enforcing mode) and the draft version of the
-           authorization rule (in shadow mode) applied.
+           and `t + 4 hours`, for any events to which both the current version of the
+           Auth rule (in enforcing mode) and the draft version of the Auth rule (in
+           shadow mode) applied.
 
         Note that generating a report may take up to 15 minutes and that delivery is not
         guaranteed. Customers are required to have created an event subscription to
@@ -841,7 +866,8 @@ class AsyncV2(AsyncAPIResource):
         account_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -850,7 +876,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2CreateResponse:
         """
-        Creates a new V2 authorization rule in draft mode
+        Creates a new V2 Auth rule in draft mode
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
@@ -859,7 +885,13 @@ class AsyncV2(AsyncAPIResource):
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule
+          type: The type of Auth Rule. Effectively determines the event stream during which it
+              will be evaluated.
+
+              - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -878,7 +910,8 @@ class AsyncV2(AsyncAPIResource):
         card_tokens: List[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -887,7 +920,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2CreateResponse:
         """
-        Creates a new V2 authorization rule in draft mode
+        Creates a new V2 Auth rule in draft mode
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
@@ -896,7 +929,13 @@ class AsyncV2(AsyncAPIResource):
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule
+          type: The type of Auth Rule. Effectively determines the event stream during which it
+              will be evaluated.
+
+              - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -916,7 +955,8 @@ class AsyncV2(AsyncAPIResource):
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -925,7 +965,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2CreateResponse:
         """
-        Creates a new V2 authorization rule in draft mode
+        Creates a new V2 Auth rule in draft mode
 
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
@@ -936,7 +976,13 @@ class AsyncV2(AsyncAPIResource):
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule
+          type: The type of Auth Rule. Effectively determines the event stream during which it
+              will be evaluated.
+
+              - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -955,7 +1001,8 @@ class AsyncV2(AsyncAPIResource):
         account_tokens: List[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK"] | NotGiven = NOT_GIVEN,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        | NotGiven = NOT_GIVEN,
         card_tokens: List[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
@@ -998,7 +1045,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2RetrieveResponse:
         """
-        Fetches a V2 authorization rule by its token
+        Fetches a V2 Auth rule by its token
 
         Args:
           extra_headers: Send extra headers
@@ -1035,7 +1082,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates a V2 authorization rule's properties
+        Updates a V2 Auth rule's properties
 
         If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
         is provided, this will replace existing associations with the provided list of
@@ -1078,7 +1125,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates a V2 authorization rule's properties
+        Updates a V2 Auth rule's properties
 
         If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
         is provided, this will replace existing associations with the provided list of
@@ -1122,7 +1169,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2UpdateResponse:
         """
-        Updates a V2 authorization rule's properties
+        Updates a V2 Auth rule's properties
 
         If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
         is provided, this will replace existing associations with the provided list of
@@ -1195,6 +1242,7 @@ class AsyncV2(AsyncAPIResource):
         account_token: str | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         scope: Literal["PROGRAM", "ACCOUNT", "CARD"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
@@ -1206,19 +1254,21 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[V2ListResponse, AsyncCursorPage[V2ListResponse]]:
         """
-        Lists V2 authorization rules
+        Lists V2 Auth rules
 
         Args:
-          account_token: Only return Authorization Rules that are bound to the provided account token.
+          account_token: Only return Auth Rules that are bound to the provided account token.
 
-          card_token: Only return Authorization Rules that are bound to the provided card token.
+          card_token: Only return Auth Rules that are bound to the provided card token.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
+          event_stream: Only return Auth rules that are executed during the provided event stream.
+
           page_size: Page size (for pagination).
 
-          scope: Only return Authorization Rules that are bound to the provided scope;
+          scope: Only return Auth Rules that are bound to the provided scope.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -1244,6 +1294,7 @@ class AsyncV2(AsyncAPIResource):
                         "account_token": account_token,
                         "card_token": card_token,
                         "ending_before": ending_before,
+                        "event_stream": event_stream,
                         "page_size": page_size,
                         "scope": scope,
                         "starting_after": starting_after,
@@ -1266,7 +1317,7 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Deletes a V2 authorization rule
+        Deletes a V2 Auth rule
 
         Args:
           extra_headers: Send extra headers
@@ -1302,8 +1353,8 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates a V2 authorization rule with a card program, the provided account(s)
-        or card(s).
+        Associates a V2 Auth rule with a card program, the provided account(s) or
+        card(s).
 
         Prefer using the `PATCH` method for this operation.
 
@@ -1335,8 +1386,8 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates a V2 authorization rule with a card program, the provided account(s)
-        or card(s).
+        Associates a V2 Auth rule with a card program, the provided account(s) or
+        card(s).
 
         Prefer using the `PATCH` method for this operation.
 
@@ -1369,8 +1420,8 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ApplyResponse:
         """
-        Associates a V2 authorization rule with a card program, the provided account(s)
-        or card(s).
+        Associates a V2 Auth rule with a card program, the provided account(s) or
+        card(s).
 
         Prefer using the `PATCH` method for this operation.
 
@@ -1477,8 +1528,8 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2PromoteResponse:
         """
-        Promotes the draft version of an authorization rule to the currently active
-        version such that it is enforced in the authorization stream.
+        Promotes the draft version of an Auth rule to the currently active version such
+        that it is enforced in the respective stream.
 
         Args:
           extra_headers: Send extra headers
@@ -1511,26 +1562,25 @@ class AsyncV2(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ReportResponse:
         """
-        Requests a performance report of an authorization rule to be asynchronously
-        generated. Reports can only be run on rules in draft or active mode and will
-        included approved and declined statistics as well as examples. The generated
-        report will be delivered asynchronously through a webhook with `event_type` =
+        Requests a performance report of an Auth rule to be asynchronously generated.
+        Reports can only be run on rules in draft or active mode and will included
+        approved and declined statistics as well as examples. The generated report will
+        be delivered asynchronously through a webhook with `event_type` =
         `auth_rules.performance_report.created`. See the docs on setting up
         [webhook subscriptions](https://docs.lithic.com/docs/events-api).
 
-        Reports are generated based on data collected by Lithic's authorization
-        processing system in the trailing week. The performance of the auth rule will be
-        assessed on the configuration of the auth rule at the time the report is
-        requested. This implies that if a performance report is requested, right after
-        updating an auth rule, depending on the number of authorizations processed for a
-        card program, it may be the case that no data is available for the report.
-        Therefore Lithic recommends to decouple making updates to an Auth Rule, and
-        requesting performance reports.
+        Reports are generated based on data collected by Lithic's processing system in
+        the trailing week. The performance of the auth rule will be assessed on the
+        configuration of the auth rule at the time the report is requested. This implies
+        that if a performance report is requested, right after updating an auth rule,
+        depending on the number of events processed for a card program, it may be the
+        case that no data is available for the report. Therefore Lithic recommends to
+        decouple making updates to an Auth Rule, and requesting performance reports.
 
         To make this concrete, consider the following example:
 
-        1. At time `t`, a new Auth Rule is created, and applies to all authorizations on
-           a card program. The Auth Rule has not yet been promoted, causing the draft
+        1. At time `t`, a new Auth Rule is created, and applies to all auth events on a
+           card program. The Auth Rule has not yet been promoted, causing the draft
            version of the rule to be applied in shadow mode.
         2. At time `t + 1 hour` a performance report is requested for the Auth Rule.
            This performance report will _only_ contain data for the Auth Rule being
@@ -1545,17 +1595,17 @@ class AsyncV2(AsyncAPIResource):
            `t + 2 hours`.
         4. At time `t + 3 hours` a new version of the rule is drafted by calling the
            `/v2/auth_rules/{auth_rule_token}/draft` endpoint. If a performance report is
-           requested right at this moment, it will only contain data for authorizations
-           to which both the active version and the draft version is applied. Lithic
-           does this to ensure that performance reports represent a fair comparison
-           between rules. Because there may be no authorizations in this window, and
-           because there may be some lag before data is available in a performance
-           report, the requested performance report could contain no to little data.
+           requested right at this moment, it will only contain data for events to which
+           both the active version and the draft version is applied. Lithic does this to
+           ensure that performance reports represent a fair comparison between rules.
+           Because there may be no events in this window, and because there may be some
+           lag before data is available in a performance report, the requested
+           performance report could contain no to little data.
         5. At time `t + 4 hours` another performance report is requested: this time the
            performance report will contain data from the window between `t + 3 hours`
-           and `t + 4 hours`, for any authorizations to which both the current version
-           of the authorization rule (in enforcing mode) and the draft version of the
-           authorization rule (in shadow mode) applied.
+           and `t + 4 hours`, for any events to which both the current version of the
+           Auth rule (in enforcing mode) and the draft version of the Auth rule (in
+           shadow mode) applied.
 
         Note that generating a report may take up to 15 minutes and that delivery is not
         guaranteed. Customers are required to have created an event subscription to

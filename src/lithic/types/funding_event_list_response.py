@@ -6,13 +6,13 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["FundingEventListResponse", "SettlementBreakdown"]
+__all__ = ["FundingEventListResponse", "NetworkSettlementSummary"]
 
 
-class SettlementBreakdown(BaseModel):
-    amount: int
+class NetworkSettlementSummary(BaseModel):
+    network_settlement_date: date
 
-    settlement_date: date
+    settled_gross_amount: int
 
 
 class FundingEventListResponse(BaseModel):
@@ -23,7 +23,10 @@ class FundingEventListResponse(BaseModel):
     """Collection resource type"""
 
     collection_tokens: List[str]
-    """IDs of collections"""
+    """
+    IDs of collections, further information can be gathered from the appropriate
+    collection API based on collection_resource_type
+    """
 
     created: datetime
     """Time of the creation"""
@@ -31,11 +34,11 @@ class FundingEventListResponse(BaseModel):
     high_watermark: datetime
     """Time of the high watermark"""
 
+    network_settlement_summary: List[NetworkSettlementSummary]
+    """Network settlement summary breakdown by network settlement date"""
+
     previous_high_watermark: datetime
     """Time of the previous high watermark"""
-
-    settlement_breakdowns: List[SettlementBreakdown]
-    """List of settlements"""
 
     updated: datetime
     """Time of the update"""
