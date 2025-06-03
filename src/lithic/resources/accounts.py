@@ -117,8 +117,8 @@ class Accounts(SyncAPIResource):
 
           verification_address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules. This field is deprecated as AVS checks
-              are no longer supported by Authorization Rules. The field will be removed from
-              the schema in a future release.
+              are no longer supported by Auth Rules. The field will be removed from the schema
+              in a future release.
 
           extra_headers: Send extra headers
 
@@ -344,8 +344,8 @@ class AsyncAccounts(AsyncAPIResource):
 
           verification_address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules. This field is deprecated as AVS checks
-              are no longer supported by Authorization Rules. The field will be removed from
-              the schema in a future release.
+              are no longer supported by Auth Rules. The field will be removed from the schema
+              in a future release.
 
           extra_headers: Send extra headers
 
