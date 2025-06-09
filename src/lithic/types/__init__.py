@@ -192,6 +192,9 @@ from .tokenization_decisioning_rotate_secret_response import (
 from .account_holder_simulate_enrollment_review_params import (
     AccountHolderSimulateEnrollmentReviewParams as AccountHolderSimulateEnrollmentReviewParams,
 )
+from .financial_account_register_account_number_params import (
+    FinancialAccountRegisterAccountNumberParams as FinancialAccountRegisterAccountNumberParams,
+)
 from .transaction_simulate_authorization_advice_params import (
     TransactionSimulateAuthorizationAdviceParams as TransactionSimulateAuthorizationAdviceParams,
 )

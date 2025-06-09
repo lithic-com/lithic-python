@@ -13,8 +13,9 @@ from ...types import (
     financial_account_create_params,
     financial_account_update_params,
     financial_account_update_status_params,
+    financial_account_register_account_number_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import maybe_transform, async_maybe_transform
 from .balances import (
     Balances,
@@ -271,6 +272,46 @@ class FinancialAccounts(SyncAPIResource):
                 ),
             ),
             model=FinancialAccount,
+        )
+
+    def register_account_number(
+        self,
+        financial_account_token: str,
+        *,
+        account_number: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Register account number
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        return self._post(
+            f"/v1/financial_accounts/{financial_account_token}/register_account_number",
+            body=maybe_transform(
+                {"account_number": account_number},
+                financial_account_register_account_number_params.FinancialAccountRegisterAccountNumberParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def update_status(
@@ -531,6 +572,46 @@ class AsyncFinancialAccounts(AsyncAPIResource):
             model=FinancialAccount,
         )
 
+    async def register_account_number(
+        self,
+        financial_account_token: str,
+        *,
+        account_number: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Register account number
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not financial_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
+            )
+        return await self._post(
+            f"/v1/financial_accounts/{financial_account_token}/register_account_number",
+            body=await async_maybe_transform(
+                {"account_number": account_number},
+                financial_account_register_account_number_params.FinancialAccountRegisterAccountNumberParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def update_status(
         self,
         financial_account_token: str,
@@ -596,6 +677,9 @@ class FinancialAccountsWithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             financial_accounts.list,
         )
+        self.register_account_number = _legacy_response.to_raw_response_wrapper(
+            financial_accounts.register_account_number,
+        )
         self.update_status = _legacy_response.to_raw_response_wrapper(
             financial_accounts.update_status,
         )
@@ -636,6 +720,9 @@ class AsyncFinancialAccountsWithRawResponse:
         )
         self.list = _legacy_response.async_to_raw_response_wrapper(
             financial_accounts.list,
+        )
+        self.register_account_number = _legacy_response.async_to_raw_response_wrapper(
+            financial_accounts.register_account_number,
         )
         self.update_status = _legacy_response.async_to_raw_response_wrapper(
             financial_accounts.update_status,
@@ -678,6 +765,9 @@ class FinancialAccountsWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             financial_accounts.list,
         )
+        self.register_account_number = to_streamed_response_wrapper(
+            financial_accounts.register_account_number,
+        )
         self.update_status = to_streamed_response_wrapper(
             financial_accounts.update_status,
         )
@@ -718,6 +808,9 @@ class AsyncFinancialAccountsWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             financial_accounts.list,
+        )
+        self.register_account_number = async_to_streamed_response_wrapper(
+            financial_accounts.register_account_number,
         )
         self.update_status = async_to_streamed_response_wrapper(
             financial_accounts.update_status,
