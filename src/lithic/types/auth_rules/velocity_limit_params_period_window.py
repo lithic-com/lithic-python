@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["VelocityLimitParamsPeriodWindow"]
 
-VelocityLimitParamsPeriodWindow: TypeAlias = Literal["DAY", "WEEK", "MONTH"]
+VelocityLimitParamsPeriodWindow: TypeAlias = Literal["DAY", "WEEK", "MONTH", "YEAR"]

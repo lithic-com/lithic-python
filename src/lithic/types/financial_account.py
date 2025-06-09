@@ -56,6 +56,7 @@ class FinancialAccount(BaseModel):
         "CHARGED_OFF_PRINCIPAL",
         "SECURITY",
         "PROGRAM_RECEIVABLES",
+        "COLLECTION",
     ]
 
     updated: datetime

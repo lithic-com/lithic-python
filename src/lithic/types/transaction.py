@@ -119,7 +119,9 @@ class CardholderAuthentication(BaseModel):
     authentication_result: Literal["ATTEMPTS", "DECLINE", "NONE", "SUCCESS"]
     """Indicates what the outcome of the 3DS authentication process is."""
 
-    decision_made_by: Literal["CUSTOMER_ENDPOINT", "LITHIC_DEFAULT", "LITHIC_RULES", "NETWORK", "UNKNOWN"]
+    decision_made_by: Literal[
+        "CUSTOMER_RULES", "CUSTOMER_ENDPOINT", "LITHIC_DEFAULT", "LITHIC_RULES", "NETWORK", "UNKNOWN"
+    ]
     """Indicates which party made the 3DS authentication decision."""
 
     liability_shift: Literal["3DS_AUTHENTICATED", "ACQUIRER_EXEMPTION", "NONE", "TOKEN_AUTHENTICATED"]
