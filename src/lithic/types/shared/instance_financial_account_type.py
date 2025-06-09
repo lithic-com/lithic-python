@@ -13,4 +13,5 @@ InstanceFinancialAccountType: TypeAlias = Literal[
     "CHARGED_OFF_PRINCIPAL",
     "SECURITY",
     "PROGRAM_RECEIVABLES",
+    "COLLECTION",
 ]
