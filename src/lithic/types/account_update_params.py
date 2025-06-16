@@ -33,7 +33,7 @@ class AccountUpdateParams(TypedDict, total=False):
     $5,000.
     """
 
-    state: Literal["ACTIVE", "PAUSED"]
+    state: Literal["ACTIVE", "PAUSED", "CLOSED"]
     """Account states."""
 
     verification_address: VerificationAddress
