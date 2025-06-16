@@ -83,7 +83,7 @@ class Accounts(SyncAPIResource):
         daily_spend_limit: int | NotGiven = NOT_GIVEN,
         lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
         monthly_spend_limit: int | NotGiven = NOT_GIVEN,
-        state: Literal["ACTIVE", "PAUSED"] | NotGiven = NOT_GIVEN,
+        state: Literal["ACTIVE", "PAUSED", "CLOSED"] | NotGiven = NOT_GIVEN,
         verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -310,7 +310,7 @@ class AsyncAccounts(AsyncAPIResource):
         daily_spend_limit: int | NotGiven = NOT_GIVEN,
         lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
         monthly_spend_limit: int | NotGiven = NOT_GIVEN,
-        state: Literal["ACTIVE", "PAUSED"] | NotGiven = NOT_GIVEN,
+        state: Literal["ACTIVE", "PAUSED", "CLOSED"] | NotGiven = NOT_GIVEN,
         verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
