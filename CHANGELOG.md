@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.94.0 (2025-06-23)
+
+Full Changelog: [v0.93.0...v0.94.0](https://github.com/lithic-com/lithic-python/compare/v0.93.0...v0.94.0)
+
+### Features
+
+* **api:** add CLOSED account state option and UNVERIFIED verification method ([b9b15ca](https://github.com/lithic-com/lithic-python/commit/b9b15ca5320605b194b8ac12a9b7a476b6c90027))
+* **client:** add follow_redirects request option ([35e3181](https://github.com/lithic-com/lithic-python/commit/35e31812c2b8c7a1ff943ec7eccc8496d5dd923e))
+* **client:** add support for aiohttp ([b675627](https://github.com/lithic-com/lithic-python/commit/b675627fd898667a17e37ed036c0a7a1ba4b9d9b))
+* **client:** adds endpoint to register an account number on a Financial Account ([9fec4b1](https://github.com/lithic-com/lithic-python/commit/9fec4b13649f8e8ca11733ed0f9a3d8dc7034834))
+* **client:** adds support for 3DS to Auth Rules ([843f8ef](https://github.com/lithic-com/lithic-python/commit/843f8ef3ef8c09643a2179531886c4b0fecbd325))
+
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([1c23f45](https://github.com/lithic-com/lithic-python/commit/1c23f4513b0fe2d7578844f08da8684bb56e449b))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([6fbce26](https://github.com/lithic-com/lithic-python/commit/6fbce267364552f360519cd6c58c7cbf324d99de))
+
+
+### Chores
+
+* **api:** mark some methods as deprecated ([7cd8d1b](https://github.com/lithic-com/lithic-python/commit/7cd8d1b5a8afcc9754a0c703d0c975999be958f4))
+* **ci:** enable for pull requests ([96f3f23](https://github.com/lithic-com/lithic-python/commit/96f3f2381da359a7c9db41db9b2988d9b731063c))
+* **docs:** grammar improvements ([c8610fe](https://github.com/lithic-com/lithic-python/commit/c8610fed4efbb18a63cabbe75596d001922bce29))
+* **docs:** remove reference to rye shell ([3375bf9](https://github.com/lithic-com/lithic-python/commit/3375bf9b3fc3aaf2349e8c68e310472390339fb1))
+* **internal:** update conftest.py ([3607c50](https://github.com/lithic-com/lithic-python/commit/3607c50cf548acd5fa4587b2e86f6b93fbc924aa))
+* **readme:** update badges ([5a08ed9](https://github.com/lithic-com/lithic-python/commit/5a08ed9d58d64d3998a5837b37f8db71a47951c4))
+* **tests:** add tests for httpx client instantiation & proxies ([5b5cda3](https://github.com/lithic-com/lithic-python/commit/5b5cda365c0c6cbf1a6c440c02c8fd5f71915d24))
+* **tests:** run tests in parallel ([62bce48](https://github.com/lithic-com/lithic-python/commit/62bce4878f34851b7f3e7938e6f702ac176b278a))
+* **tests:** skip some failing tests on the latest python versions ([45e57bc](https://github.com/lithic-com/lithic-python/commit/45e57bc33bafb6c2dd7f14d492ee3265c37b8cc2))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([6df47f4](https://github.com/lithic-com/lithic-python/commit/6df47f4032acaab9c51f29193b8114885dffbcc6))
+
 ## 0.93.0 (2025-05-15)
 
 Full Changelog: [v0.92.0...v0.93.0](https://github.com/lithic-com/lithic-python/compare/v0.92.0...v0.93.0)
