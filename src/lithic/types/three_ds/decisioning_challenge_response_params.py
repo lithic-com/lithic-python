@@ -11,12 +11,10 @@ __all__ = ["DecisioningChallengeResponseParams"]
 
 class DecisioningChallengeResponseParams(TypedDict, total=False):
     token: Required[str]
-    """Globally unique identifier for the 3DS authentication.
-
-    This token is sent as part of the initial 3DS Decisioning Request and as part of
-    the 3DS Challenge Event in the
-    [ThreeDSAuthentication](#/components/schemas/ThreeDSAuthentication) object
+    """
+    Globally unique identifier for 3DS Authentication that resulted in
+    PENDING_CHALLENGE authentication result.
     """
 
     challenge_response: Required[ChallengeResult]
-    """Whether the Cardholder has Approved or Declined the issued Challenge"""
+    """Whether the Cardholder has approved or declined the issued Challenge"""

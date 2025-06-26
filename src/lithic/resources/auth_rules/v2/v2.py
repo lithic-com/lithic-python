@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import typing_extensions
-from typing import List, Optional
+from typing import List, Union, Optional
+from datetime import date
 from typing_extensions import Literal, overload
 
 import httpx
@@ -24,7 +25,14 @@ from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import AsyncPaginator, make_request_options
-from ....types.auth_rules import v2_list_params, v2_apply_params, v2_draft_params, v2_create_params, v2_update_params
+from ....types.auth_rules import (
+    v2_list_params,
+    v2_apply_params,
+    v2_draft_params,
+    v2_create_params,
+    v2_update_params,
+    v2_retrieve_report_params,
+)
 from ....types.auth_rules.v2_list_response import V2ListResponse
 from ....types.auth_rules.v2_apply_response import V2ApplyResponse
 from ....types.auth_rules.v2_draft_response import V2DraftResponse
@@ -33,6 +41,7 @@ from ....types.auth_rules.v2_report_response import V2ReportResponse
 from ....types.auth_rules.v2_update_response import V2UpdateResponse
 from ....types.auth_rules.v2_promote_response import V2PromoteResponse
 from ....types.auth_rules.v2_retrieve_response import V2RetrieveResponse
+from ....types.auth_rules.v2_retrieve_report_response import V2RetrieveReportResponse
 
 __all__ = ["V2", "AsyncV2"]
 
@@ -752,6 +761,7 @@ class V2(SyncAPIResource):
             cast_to=V2PromoteResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def report(
         self,
         auth_rule_token: str,
@@ -763,11 +773,13 @@ class V2(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ReportResponse:
-        """
-        Requests a performance report of an Auth rule to be asynchronously generated.
-        Reports can only be run on rules in draft or active mode and will included
-        approved and declined statistics as well as examples. The generated report will
-        be delivered asynchronously through a webhook with `event_type` =
+        """This endpoint is deprecated and will be removed in the future.
+
+        Requests a
+        performance report of an Auth rule to be asynchronously generated. Reports can
+        only be run on rules in draft or active mode and will included approved and
+        declined statistics as well as examples. The generated report will be delivered
+        asynchronously through a webhook with `event_type` =
         `auth_rules.performance_report.created`. See the docs on setting up
         [webhook subscriptions](https://docs.lithic.com/docs/events-api).
 
@@ -832,6 +844,67 @@ class V2(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=V2ReportResponse,
+        )
+
+    def retrieve_report(
+        self,
+        auth_rule_token: str,
+        *,
+        begin: Union[str, date],
+        end: Union[str, date],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2RetrieveReportResponse:
+        """
+        Retrieves a performance report for an Auth rule containing daily statistics and
+        evaluation outcomes.
+
+        **Time Range Limitations:**
+
+        - Reports are supported for the past 3 months only
+        - Maximum interval length is 1 month
+        - Report data is available only through the previous day in UTC (current day
+          data is not available)
+
+        The report provides daily statistics for both current and draft versions of the
+        Auth rule, including approval, decline, and challenge counts along with sample
+        events.
+
+        Args:
+          begin: Start date for the report
+
+          end: End date for the report
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return self._get(
+            f"/v2/auth_rules/{auth_rule_token}/report",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                    },
+                    v2_retrieve_report_params.V2RetrieveReportParams,
+                ),
+            ),
+            cast_to=V2RetrieveReportResponse,
         )
 
 
@@ -1550,6 +1623,7 @@ class AsyncV2(AsyncAPIResource):
             cast_to=V2PromoteResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def report(
         self,
         auth_rule_token: str,
@@ -1561,11 +1635,13 @@ class AsyncV2(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> V2ReportResponse:
-        """
-        Requests a performance report of an Auth rule to be asynchronously generated.
-        Reports can only be run on rules in draft or active mode and will included
-        approved and declined statistics as well as examples. The generated report will
-        be delivered asynchronously through a webhook with `event_type` =
+        """This endpoint is deprecated and will be removed in the future.
+
+        Requests a
+        performance report of an Auth rule to be asynchronously generated. Reports can
+        only be run on rules in draft or active mode and will included approved and
+        declined statistics as well as examples. The generated report will be delivered
+        asynchronously through a webhook with `event_type` =
         `auth_rules.performance_report.created`. See the docs on setting up
         [webhook subscriptions](https://docs.lithic.com/docs/events-api).
 
@@ -1632,6 +1708,67 @@ class AsyncV2(AsyncAPIResource):
             cast_to=V2ReportResponse,
         )
 
+    async def retrieve_report(
+        self,
+        auth_rule_token: str,
+        *,
+        begin: Union[str, date],
+        end: Union[str, date],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2RetrieveReportResponse:
+        """
+        Retrieves a performance report for an Auth rule containing daily statistics and
+        evaluation outcomes.
+
+        **Time Range Limitations:**
+
+        - Reports are supported for the past 3 months only
+        - Maximum interval length is 1 month
+        - Report data is available only through the previous day in UTC (current day
+          data is not available)
+
+        The report provides daily statistics for both current and draft versions of the
+        Auth rule, including approval, decline, and challenge counts along with sample
+        events.
+
+        Args:
+          begin: Start date for the report
+
+          end: End date for the report
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return await self._get(
+            f"/v2/auth_rules/{auth_rule_token}/report",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "begin": begin,
+                        "end": end,
+                    },
+                    v2_retrieve_report_params.V2RetrieveReportParams,
+                ),
+            ),
+            cast_to=V2RetrieveReportResponse,
+        )
+
 
 class V2WithRawResponse:
     def __init__(self, v2: V2) -> None:
@@ -1663,8 +1800,13 @@ class V2WithRawResponse:
         self.promote = _legacy_response.to_raw_response_wrapper(
             v2.promote,
         )
-        self.report = _legacy_response.to_raw_response_wrapper(
-            v2.report,
+        self.report = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.to_raw_response_wrapper(
+                v2.report  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.retrieve_report = _legacy_response.to_raw_response_wrapper(
+            v2.retrieve_report,
         )
 
     @cached_property
@@ -1702,8 +1844,13 @@ class AsyncV2WithRawResponse:
         self.promote = _legacy_response.async_to_raw_response_wrapper(
             v2.promote,
         )
-        self.report = _legacy_response.async_to_raw_response_wrapper(
-            v2.report,
+        self.report = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.async_to_raw_response_wrapper(
+                v2.report  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.retrieve_report = _legacy_response.async_to_raw_response_wrapper(
+            v2.retrieve_report,
         )
 
     @cached_property
@@ -1741,8 +1888,13 @@ class V2WithStreamingResponse:
         self.promote = to_streamed_response_wrapper(
             v2.promote,
         )
-        self.report = to_streamed_response_wrapper(
-            v2.report,
+        self.report = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                v2.report  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.retrieve_report = to_streamed_response_wrapper(
+            v2.retrieve_report,
         )
 
     @cached_property
@@ -1780,8 +1932,13 @@ class AsyncV2WithStreamingResponse:
         self.promote = async_to_streamed_response_wrapper(
             v2.promote,
         )
-        self.report = async_to_streamed_response_wrapper(
-            v2.report,
+        self.report = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                v2.report  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.retrieve_report = async_to_streamed_response_wrapper(
+            v2.retrieve_report,
         )
 
     @cached_property

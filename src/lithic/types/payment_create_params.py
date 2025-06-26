@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["PaymentCreateParams", "MethodAttributes"]
@@ -33,3 +34,5 @@ class PaymentCreateParams(TypedDict, total=False):
 
 class MethodAttributes(TypedDict, total=False):
     sec_code: Required[Literal["CCD", "PPD", "WEB"]]
+
+    addenda: Optional[str]

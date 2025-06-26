@@ -71,8 +71,8 @@ class TestAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
         )
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
@@ -88,8 +88,8 @@ class TestAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
             card_expiry_check="MATCH",
         )
@@ -106,8 +106,8 @@ class TestAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
         )
 
@@ -127,8 +127,8 @@ class TestAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
         ) as response:
             assert not response.is_closed
@@ -230,8 +230,8 @@ class TestAsyncAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
         )
         assert_matches_type(AuthenticationSimulateResponse, authentication, path=["response"])
@@ -247,8 +247,8 @@ class TestAsyncAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
             card_expiry_check="MATCH",
         )
@@ -265,8 +265,8 @@ class TestAsyncAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
         )
 
@@ -286,8 +286,8 @@ class TestAsyncAuthentication:
             },
             pan="4111111289144142",
             transaction={
-                "amount": 100,
-                "currency": "USD",
+                "amount": 0,
+                "currency": "GBP",
             },
         ) as response:
             assert not response.is_closed

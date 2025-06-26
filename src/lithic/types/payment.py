@@ -91,6 +91,8 @@ class MethodAttributes(BaseModel):
 
     trace_numbers: List[Optional[str]]
 
+    addenda: Optional[str] = None
+
 
 class Payment(BaseModel):
     token: str
