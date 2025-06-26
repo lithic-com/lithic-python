@@ -275,6 +275,80 @@ class ExternalBankAccounts(SyncAPIResource):
         """
         ...
 
+    @overload
+    def create(
+        self,
+        *,
+        account_number: str,
+        country: str,
+        currency: str,
+        owner: str,
+        owner_type: OwnerType,
+        routing_number: str,
+        type: Literal["CHECKING", "SAVINGS"],
+        verification_method: Literal["UNVERIFIED"],
+        account_token: str | NotGiven = NOT_GIVEN,
+        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
+        company_id: str | NotGiven = NOT_GIVEN,
+        dob: Union[str, date] | NotGiven = NOT_GIVEN,
+        doing_business_as: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ExternalBankAccountCreateResponse:
+        """
+        Creates an external bank account within a program or Lithic account.
+
+        Args:
+          account_number: Account Number
+
+          country: The country that the bank account is located in using ISO 3166-1. We will only
+              accept USA bank accounts e.g., USA
+
+          currency: currency of the external account 3-character alphabetic ISO 4217 code
+
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          routing_number: Routing Number
+
+          type: Account Type
+
+          verification_method: Verification Method
+
+          account_token: Indicates which Lithic account the external account is associated with. For
+              external accounts that are associated with the program, account_token field
+              returned will be null
+
+          address: Address
+
+          company_id: Optional field that helps identify bank accounts in receipts
+
+          dob: Date of Birth of the Individual that owns the external bank account
+
+          doing_business_as: Doing Business As
+
+          name: The nickname for this External Bank Account
+
+          user_defined_id: User Defined ID
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(
         [
             "account_number",
@@ -310,7 +384,7 @@ class ExternalBankAccounts(SyncAPIResource):
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
         type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
-        verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"],
+        verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"] | Literal["UNVERIFIED"],
         account_token: str | NotGiven = NOT_GIVEN,
         address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
         company_id: str | NotGiven = NOT_GIVEN,
@@ -844,6 +918,80 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         """
         ...
 
+    @overload
+    async def create(
+        self,
+        *,
+        account_number: str,
+        country: str,
+        currency: str,
+        owner: str,
+        owner_type: OwnerType,
+        routing_number: str,
+        type: Literal["CHECKING", "SAVINGS"],
+        verification_method: Literal["UNVERIFIED"],
+        account_token: str | NotGiven = NOT_GIVEN,
+        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
+        company_id: str | NotGiven = NOT_GIVEN,
+        dob: Union[str, date] | NotGiven = NOT_GIVEN,
+        doing_business_as: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        user_defined_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ExternalBankAccountCreateResponse:
+        """
+        Creates an external bank account within a program or Lithic account.
+
+        Args:
+          account_number: Account Number
+
+          country: The country that the bank account is located in using ISO 3166-1. We will only
+              accept USA bank accounts e.g., USA
+
+          currency: currency of the external account 3-character alphabetic ISO 4217 code
+
+          owner: Legal Name of the business or individual who owns the external account. This
+              will appear in statements
+
+          owner_type: Owner Type
+
+          routing_number: Routing Number
+
+          type: Account Type
+
+          verification_method: Verification Method
+
+          account_token: Indicates which Lithic account the external account is associated with. For
+              external accounts that are associated with the program, account_token field
+              returned will be null
+
+          address: Address
+
+          company_id: Optional field that helps identify bank accounts in receipts
+
+          dob: Date of Birth of the Individual that owns the external bank account
+
+          doing_business_as: Doing Business As
+
+          name: The nickname for this External Bank Account
+
+          user_defined_id: User Defined ID
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
     @required_args(
         [
             "account_number",
@@ -879,7 +1027,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         owner_type: OwnerType,
         routing_number: str | NotGiven = NOT_GIVEN,
         type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
-        verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"],
+        verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"] | Literal["UNVERIFIED"],
         account_token: str | NotGiven = NOT_GIVEN,
         address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
         company_id: str | NotGiven = NOT_GIVEN,

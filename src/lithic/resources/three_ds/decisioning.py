@@ -50,16 +50,20 @@ class Decisioning(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        """
-        Card program's response to a 3DS Challenge Request (CReq)
+        """Card program's response to a 3DS Challenge Request.
+
+        Challenge Request is emitted
+        as a webhook
+        [three_ds_authentication.challenge](https://docs.lithic.com/reference/post_three-ds-authentication-challenge)
+        and your Card Program needs to be configured with Out of Band (OOB) Challenges
+        in order to receive it (see https://docs.lithic.com/docs/3ds-challenge-flow for
+        more information).
 
         Args:
-          token: Globally unique identifier for the 3DS authentication. This token is sent as
-              part of the initial 3DS Decisioning Request and as part of the 3DS Challenge
-              Event in the [ThreeDSAuthentication](#/components/schemas/ThreeDSAuthentication)
-              object
+          token: Globally unique identifier for 3DS Authentication that resulted in
+              PENDING_CHALLENGE authentication result.
 
-          challenge_response: Whether the Cardholder has Approved or Declined the issued Challenge
+          challenge_response: Whether the Cardholder has approved or declined the issued Challenge
 
           extra_headers: Send extra headers
 
@@ -169,16 +173,20 @@ class AsyncDecisioning(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
-        """
-        Card program's response to a 3DS Challenge Request (CReq)
+        """Card program's response to a 3DS Challenge Request.
+
+        Challenge Request is emitted
+        as a webhook
+        [three_ds_authentication.challenge](https://docs.lithic.com/reference/post_three-ds-authentication-challenge)
+        and your Card Program needs to be configured with Out of Band (OOB) Challenges
+        in order to receive it (see https://docs.lithic.com/docs/3ds-challenge-flow for
+        more information).
 
         Args:
-          token: Globally unique identifier for the 3DS authentication. This token is sent as
-              part of the initial 3DS Decisioning Request and as part of the 3DS Challenge
-              Event in the [ThreeDSAuthentication](#/components/schemas/ThreeDSAuthentication)
-              object
+          token: Globally unique identifier for 3DS Authentication that resulted in
+              PENDING_CHALLENGE authentication result.
 
-          challenge_response: Whether the Cardholder has Approved or Declined the issued Challenge
+          challenge_response: Whether the Cardholder has approved or declined the issued Challenge
 
           extra_headers: Send extra headers
 

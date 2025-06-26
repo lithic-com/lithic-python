@@ -206,10 +206,12 @@ class Cards(SyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
               $1,000 limit). Transaction requests above the spend limit will be declined. Note
@@ -532,10 +534,12 @@ class Cards(SyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           extra_headers: Send extra headers
 
@@ -867,10 +871,12 @@ class Cards(SyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           extra_headers: Send extra headers
 
@@ -952,10 +958,12 @@ class Cards(SyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           extra_headers: Send extra headers
 
@@ -1239,10 +1247,12 @@ class AsyncCards(AsyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
               $1,000 limit). Transaction requests above the spend limit will be declined. Note
@@ -1565,10 +1575,12 @@ class AsyncCards(AsyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           extra_headers: Send extra headers
 
@@ -1900,10 +1912,12 @@ class AsyncCards(AsyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           extra_headers: Send extra headers
 
@@ -1985,10 +1999,12 @@ class AsyncCards(AsyncAPIResource):
               - `STANDARD_WITH_TRACKING` - USPS regular mail or similar international option,
                 with tracking
               - `PRIORITY` - USPS Priority, 1-3 day shipping, with tracking
-              - `EXPRESS` - FedEx Express, 3-day shipping, with tracking
-              - `2_DAY` - FedEx 2-day shipping, with tracking
-              - `EXPEDITED` - FedEx Standard Overnight or similar international option, with
+              - `EXPRESS` - FedEx or UPS depending on card manufacturer, Express, 3-day
+                shipping, with tracking
+              - `2_DAY` - FedEx or UPS depending on card manufacturer, 2-day shipping, with
                 tracking
+              - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
+                or similar international option, with tracking
 
           extra_headers: Send extra headers
 

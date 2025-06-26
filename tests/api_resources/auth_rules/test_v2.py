@@ -9,6 +9,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
+from lithic._utils import parse_date
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 from lithic.types.auth_rules import (
     V2ListResponse,
@@ -19,6 +20,7 @@ from lithic.types.auth_rules import (
     V2UpdateResponse,
     V2PromoteResponse,
     V2RetrieveResponse,
+    V2RetrieveReportResponse,
 )
 
 # pyright: reportDeprecated=false
@@ -682,16 +684,19 @@ class TestV2:
 
     @parametrize
     def test_method_report(self, client: Lithic) -> None:
-        v2 = client.auth_rules.v2.report(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            v2 = client.auth_rules.v2.report(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(V2ReportResponse, v2, path=["response"])
 
     @parametrize
     def test_raw_response_report(self, client: Lithic) -> None:
-        response = client.auth_rules.v2.with_raw_response.report(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.auth_rules.v2.with_raw_response.report(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -700,22 +705,70 @@ class TestV2:
 
     @parametrize
     def test_streaming_response_report(self, client: Lithic) -> None:
-        with client.auth_rules.v2.with_streaming_response.report(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.auth_rules.v2.with_streaming_response.report(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            v2 = response.parse()
-            assert_matches_type(V2ReportResponse, v2, path=["response"])
+                v2 = response.parse()
+                assert_matches_type(V2ReportResponse, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_report(self, client: Lithic) -> None:
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+                client.auth_rules.v2.with_raw_response.report(
+                    "",
+                )
+
+    @parametrize
+    def test_method_retrieve_report(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.retrieve_report(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_date("2019-12-27"),
+            end=parse_date("2019-12-27"),
+        )
+        assert_matches_type(V2RetrieveReportResponse, v2, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_report(self, client: Lithic) -> None:
+        response = client.auth_rules.v2.with_raw_response.retrieve_report(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_date("2019-12-27"),
+            end=parse_date("2019-12-27"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(V2RetrieveReportResponse, v2, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_report(self, client: Lithic) -> None:
+        with client.auth_rules.v2.with_streaming_response.retrieve_report(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_date("2019-12-27"),
+            end=parse_date("2019-12-27"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = response.parse()
+            assert_matches_type(V2RetrieveReportResponse, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve_report(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
-            client.auth_rules.v2.with_raw_response.report(
-                "",
+            client.auth_rules.v2.with_raw_response.retrieve_report(
+                auth_rule_token="",
+                begin=parse_date("2019-12-27"),
+                end=parse_date("2019-12-27"),
             )
 
 
@@ -1377,16 +1430,19 @@ class TestAsyncV2:
 
     @parametrize
     async def test_method_report(self, async_client: AsyncLithic) -> None:
-        v2 = await async_client.auth_rules.v2.report(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            v2 = await async_client.auth_rules.v2.report(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(V2ReportResponse, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_report(self, async_client: AsyncLithic) -> None:
-        response = await async_client.auth_rules.v2.with_raw_response.report(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.auth_rules.v2.with_raw_response.report(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1395,20 +1451,68 @@ class TestAsyncV2:
 
     @parametrize
     async def test_streaming_response_report(self, async_client: AsyncLithic) -> None:
-        async with async_client.auth_rules.v2.with_streaming_response.report(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.auth_rules.v2.with_streaming_response.report(
+                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            v2 = await response.parse()
-            assert_matches_type(V2ReportResponse, v2, path=["response"])
+                v2 = await response.parse()
+                assert_matches_type(V2ReportResponse, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_report(self, async_client: AsyncLithic) -> None:
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+                await async_client.auth_rules.v2.with_raw_response.report(
+                    "",
+                )
+
+    @parametrize
+    async def test_method_retrieve_report(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.retrieve_report(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_date("2019-12-27"),
+            end=parse_date("2019-12-27"),
+        )
+        assert_matches_type(V2RetrieveReportResponse, v2, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_report(self, async_client: AsyncLithic) -> None:
+        response = await async_client.auth_rules.v2.with_raw_response.retrieve_report(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_date("2019-12-27"),
+            end=parse_date("2019-12-27"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(V2RetrieveReportResponse, v2, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_report(self, async_client: AsyncLithic) -> None:
+        async with async_client.auth_rules.v2.with_streaming_response.retrieve_report(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_date("2019-12-27"),
+            end=parse_date("2019-12-27"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = await response.parse()
+            assert_matches_type(V2RetrieveReportResponse, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_report(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
-            await async_client.auth_rules.v2.with_raw_response.report(
-                "",
+            await async_client.auth_rules.v2.with_raw_response.retrieve_report(
+                auth_rule_token="",
+                begin=parse_date("2019-12-27"),
+                end=parse_date("2019-12-27"),
             )
