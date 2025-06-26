@@ -8,6 +8,14 @@ from .cards import (
     CardsWithStreamingResponse,
     AsyncCardsWithStreamingResponse,
 )
+from .fraud import (
+    Fraud,
+    AsyncFraud,
+    FraudWithRawResponse,
+    AsyncFraudWithRawResponse,
+    FraudWithStreamingResponse,
+    AsyncFraudWithStreamingResponse,
+)
 from .events import (
     Events,
     AsyncEvents,
@@ -352,4 +360,10 @@ __all__ = [
     "AsyncFundingEventsWithRawResponse",
     "FundingEventsWithStreamingResponse",
     "AsyncFundingEventsWithStreamingResponse",
+    "Fraud",
+    "AsyncFraud",
+    "FraudWithRawResponse",
+    "AsyncFraudWithRawResponse",
+    "FraudWithStreamingResponse",
+    "AsyncFraudWithStreamingResponse",
 ]

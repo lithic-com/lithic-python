@@ -9,11 +9,13 @@ __all__ = ["AuthenticationSimulateParams", "Merchant", "Transaction"]
 
 class AuthenticationSimulateParams(TypedDict, total=False):
     merchant: Required[Merchant]
+    """Merchant information for the simulated transaction"""
 
     pan: Required[str]
     """Sixteen digit card number."""
 
     transaction: Required[Transaction]
+    """Transaction details for the simulation"""
 
     card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"]
     """When set will use the following values as part of the Simulated Authentication.

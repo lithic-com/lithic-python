@@ -83,6 +83,7 @@ from lithic.types.auth_rules import (
     AuthRuleCondition,
     ConditionalAttribute,
     ConditionalBlockParameters,
+    RuleStats,
     VelocityLimitParams,
     VelocityLimitParamsPeriodWindow,
     V2CreateResponse,
@@ -93,6 +94,7 @@ from lithic.types.auth_rules import (
     V2DraftResponse,
     V2PromoteResponse,
     V2ReportResponse,
+    V2RetrieveReportResponse,
 )
 ```
 
@@ -107,6 +109,7 @@ Methods:
 - <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_draft_response.py">V2DraftResponse</a></code>
 - <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_promote_response.py">V2PromoteResponse</a></code>
 - <code title="post /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">report</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_report_response.py">V2ReportResponse</a></code>
+- <code title="get /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_report</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_report_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_report_response.py">V2RetrieveReportResponse</a></code>
 
 ### Backtests
 
@@ -723,3 +726,18 @@ Methods:
 - <code title="get /v1/funding_events/{funding_event_token}">client.funding_events.<a href="./src/lithic/resources/funding_events.py">retrieve</a>(funding_event_token) -> <a href="./src/lithic/types/funding_event_retrieve_response.py">FundingEventRetrieveResponse</a></code>
 - <code title="get /v1/funding_events">client.funding_events.<a href="./src/lithic/resources/funding_events.py">list</a>(\*\*<a href="src/lithic/types/funding_event_list_params.py">params</a>) -> <a href="./src/lithic/types/funding_event_list_response.py">SyncCursorPage[FundingEventListResponse]</a></code>
 - <code title="get /v1/funding_events/{funding_event_token}/details">client.funding_events.<a href="./src/lithic/resources/funding_events.py">retrieve_details</a>(funding_event_token) -> <a href="./src/lithic/types/funding_event_retrieve_details_response.py">FundingEventRetrieveDetailsResponse</a></code>
+
+# Fraud
+
+## Transactions
+
+Types:
+
+```python
+from lithic.types.fraud import TransactionRetrieveResponse, TransactionReportResponse
+```
+
+Methods:
+
+- <code title="get /v1/fraud/transactions/{transaction_token}">client.fraud.transactions.<a href="./src/lithic/resources/fraud/transactions.py">retrieve</a>(transaction_token) -> <a href="./src/lithic/types/fraud/transaction_retrieve_response.py">TransactionRetrieveResponse</a></code>
+- <code title="post /v1/fraud/transactions/{transaction_token}">client.fraud.transactions.<a href="./src/lithic/resources/fraud/transactions.py">report</a>(transaction_token, \*\*<a href="src/lithic/types/fraud/transaction_report_params.py">params</a>) -> <a href="./src/lithic/types/fraud/transaction_report_response.py">TransactionReportResponse</a></code>

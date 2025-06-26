@@ -39,6 +39,7 @@ from .types.api_status import APIStatus
 if TYPE_CHECKING:
     from .resources import (
         cards,
+        fraud,
         events,
         reports,
         accounts,
@@ -69,6 +70,7 @@ if TYPE_CHECKING:
     from .resources.disputes import Disputes, AsyncDisputes
     from .resources.payments import Payments, AsyncPayments
     from .resources.cards.cards import Cards, AsyncCards
+    from .resources.fraud.fraud import Fraud, AsyncFraud
     from .resources.card_programs import CardPrograms, AsyncCardPrograms
     from .resources.events.events import Events, AsyncEvents
     from .resources.tokenizations import Tokenizations, AsyncTokenizations
@@ -344,6 +346,12 @@ class Lithic(SyncAPIClient):
         from .resources.funding_events import FundingEvents
 
         return FundingEvents(self)
+
+    @cached_property
+    def fraud(self) -> Fraud:
+        from .resources.fraud import Fraud
+
+        return Fraud(self)
 
     @cached_property
     def with_raw_response(self) -> LithicWithRawResponse:
@@ -720,6 +728,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncFundingEvents(self)
 
     @cached_property
+    def fraud(self) -> AsyncFraud:
+        from .resources.fraud import AsyncFraud
+
+        return AsyncFraud(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncLithicWithRawResponse:
         return AsyncLithicWithRawResponse(self)
 
@@ -1016,6 +1030,12 @@ class LithicWithRawResponse:
 
         return FundingEventsWithRawResponse(self._client.funding_events)
 
+    @cached_property
+    def fraud(self) -> fraud.FraudWithRawResponse:
+        from .resources.fraud import FraudWithRawResponse
+
+        return FraudWithRawResponse(self._client.fraud)
+
 
 class AsyncLithicWithRawResponse:
     _client: AsyncLithic
@@ -1176,6 +1196,12 @@ class AsyncLithicWithRawResponse:
         from .resources.funding_events import AsyncFundingEventsWithRawResponse
 
         return AsyncFundingEventsWithRawResponse(self._client.funding_events)
+
+    @cached_property
+    def fraud(self) -> fraud.AsyncFraudWithRawResponse:
+        from .resources.fraud import AsyncFraudWithRawResponse
+
+        return AsyncFraudWithRawResponse(self._client.fraud)
 
 
 class LithicWithStreamedResponse:
@@ -1338,6 +1364,12 @@ class LithicWithStreamedResponse:
 
         return FundingEventsWithStreamingResponse(self._client.funding_events)
 
+    @cached_property
+    def fraud(self) -> fraud.FraudWithStreamingResponse:
+        from .resources.fraud import FraudWithStreamingResponse
+
+        return FraudWithStreamingResponse(self._client.fraud)
+
 
 class AsyncLithicWithStreamedResponse:
     _client: AsyncLithic
@@ -1498,6 +1530,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.funding_events import AsyncFundingEventsWithStreamingResponse
 
         return AsyncFundingEventsWithStreamingResponse(self._client.funding_events)
+
+    @cached_property
+    def fraud(self) -> fraud.AsyncFraudWithStreamingResponse:
+        from .resources.fraud import AsyncFraudWithStreamingResponse
+
+        return AsyncFraudWithStreamingResponse(self._client.fraud)
 
 
 Client = Lithic

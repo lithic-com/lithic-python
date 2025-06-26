@@ -9,7 +9,4 @@ __all__ = ["AuthenticationSimulateResponse"]
 
 class AuthenticationSimulateResponse(BaseModel):
     token: Optional[str] = None
-    """
-    A unique token to reference this transaction with later calls to void or clear
-    the authorization.
-    """
+    """Globally unique identifier for the 3DS authentication."""

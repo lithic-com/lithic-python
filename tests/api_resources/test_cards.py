@@ -37,16 +37,16 @@ class TestCards:
         card = client.cards.create(
             type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_program_token="00000000-0000-0000-1000-000000000000",
             carrier={"qr_code_url": "qr_code_url"},
-            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
             memo="New Card",
             pin="pin",
             product_id="1",
-            replacement_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            replacement_account_token="00000000-0000-0000-2000-000000000000",
+            replacement_for="00000000-0000-0000-1000-000000000000",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -140,7 +140,7 @@ class TestCards:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         card = client.cards.update(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             memo="Updated Name",
             pin="pin",
             pin_status="OK",
@@ -695,16 +695,16 @@ class TestAsyncCards:
         card = await async_client.cards.create(
             type="VIRTUAL",
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_program_token="00000000-0000-0000-1000-000000000000",
             carrier={"qr_code_url": "qr_code_url"},
-            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             exp_month="06",
             exp_year="2027",
             memo="New Card",
             pin="pin",
             product_id="1",
-            replacement_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            replacement_account_token="00000000-0000-0000-2000-000000000000",
+            replacement_for="00000000-0000-0000-1000-000000000000",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -798,7 +798,7 @@ class TestAsyncCards:
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.update(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="00000000-0000-0000-1000-000000000000",
             memo="Updated Name",
             pin="pin",
             pin_status="OK",

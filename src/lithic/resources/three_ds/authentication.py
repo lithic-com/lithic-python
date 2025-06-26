@@ -98,7 +98,11 @@ class Authentication(SyncAPIResource):
         has a valid phone number configured to receive the OTP code via SMS.
 
         Args:
+          merchant: Merchant information for the simulated transaction
+
           pan: Sixteen digit card number.
+
+          transaction: Transaction details for the simulation
 
           card_expiry_check: When set will use the following values as part of the Simulated Authentication.
               When not set defaults to MATCH
@@ -143,9 +147,9 @@ class Authentication(SyncAPIResource):
         """Endpoint for simulating entering OTP into 3DS Challenge UI.
 
         A call to
-        /v1/three_ds_authentication/simulate that resulted in triggered SMS-OTP
-        challenge must precede. Only a single attempt is supported; upon entering OTP,
-        the challenge is either approved or declined.
+        [/v1/three_ds_authentication/simulate](https://docs.lithic.com/reference/postsimulateauthentication)
+        that resulted in triggered SMS-OTP challenge must precede. Only a single attempt
+        is supported; upon entering OTP, the challenge is either approved or declined.
 
         Args:
           token: A unique token returned as part of a /v1/three_ds_authentication/simulate call
@@ -255,7 +259,11 @@ class AsyncAuthentication(AsyncAPIResource):
         has a valid phone number configured to receive the OTP code via SMS.
 
         Args:
+          merchant: Merchant information for the simulated transaction
+
           pan: Sixteen digit card number.
+
+          transaction: Transaction details for the simulation
 
           card_expiry_check: When set will use the following values as part of the Simulated Authentication.
               When not set defaults to MATCH
@@ -300,9 +308,9 @@ class AsyncAuthentication(AsyncAPIResource):
         """Endpoint for simulating entering OTP into 3DS Challenge UI.
 
         A call to
-        /v1/three_ds_authentication/simulate that resulted in triggered SMS-OTP
-        challenge must precede. Only a single attempt is supported; upon entering OTP,
-        the challenge is either approved or declined.
+        [/v1/three_ds_authentication/simulate](https://docs.lithic.com/reference/postsimulateauthentication)
+        that resulted in triggered SMS-OTP challenge must precede. Only a single attempt
+        is supported; upon entering OTP, the challenge is either approved or declined.
 
         Args:
           token: A unique token returned as part of a /v1/three_ds_authentication/simulate call
