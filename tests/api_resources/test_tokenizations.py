@@ -364,7 +364,7 @@ class TestTokenizations:
     def test_method_update_digital_card_art_with_all_params(self, client: Lithic) -> None:
         tokenization = client.tokenizations.update_digital_card_art(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            digital_card_art_token="00000000-0000-0000-1000-000000000000",
+            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
 
@@ -745,7 +745,7 @@ class TestAsyncTokenizations:
     async def test_method_update_digital_card_art_with_all_params(self, async_client: AsyncLithic) -> None:
         tokenization = await async_client.tokenizations.update_digital_card_art(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            digital_card_art_token="00000000-0000-0000-1000-000000000000",
+            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
 
