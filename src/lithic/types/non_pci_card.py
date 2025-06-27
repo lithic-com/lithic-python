@@ -5,6 +5,7 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .spend_limit_duration import SpendLimitDuration
 
 __all__ = ["NonPCICard", "Funding"]
 
@@ -79,8 +80,20 @@ class NonPCICard(BaseModel):
     be declined.
     """
 
-    spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION", "DAILY"]
-    """Spend limit duration"""
+    spend_limit_duration: SpendLimitDuration
+    """Spend limit duration values:
+
+    - `ANNUALLY` - Card will authorize transactions up to spend limit for the
+      trailing year.
+    - `FOREVER` - Card will authorize only up to spend limit for the entire lifetime
+      of the card.
+    - `MONTHLY` - Card will authorize transactions up to spend limit for the
+      trailing month. To support recurring monthly payments, which can occur on
+      different day every month, the time window we consider for monthly velocity
+      starts 6 days after the current calendar date one month prior.
+    - `TRANSACTION` - Card will authorize multiple transactions if each individual
+      transaction is under the spend limit.
+    """
 
     state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"]
     """Card state values: \\** `CLOSED` - Card will no longer approve authorizations.
