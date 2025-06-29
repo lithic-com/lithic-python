@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.95.0 (2025-06-29)
+
+Full Changelog: [v0.94.0...v0.95.0](https://github.com/lithic-com/lithic-python/compare/v0.94.0...v0.95.0)
+
+### Features
+
+* **api:** introduce dedicated model for SpendLimitDuration ([1e1fb23](https://github.com/lithic-com/lithic-python/commit/1e1fb237a754aeb2a3d9cc5b751ef5d4c51d11e9))
+* **client:** adds support for on-demand Auth Rule Performance Reports ([81c2860](https://github.com/lithic-com/lithic-python/commit/81c2860a37078364b3f4c1876f407b60bdb88bec))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([9422f2e](https://github.com/lithic-com/lithic-python/commit/9422f2ec8393447429219af34bda88c581984fa3))
+* **ci:** release-doctor — report correct token name ([59781eb](https://github.com/lithic-com/lithic-python/commit/59781ebf072b0b0839d0ad4ab27a79bfa045db59))
+
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([954c7f0](https://github.com/lithic-com/lithic-python/commit/954c7f0f1bea593b30d71d15a8c626ffadf30c6b))
+* **internal:** manual updates ([0c5bbdb](https://github.com/lithic-com/lithic-python/commit/0c5bbdb7e2bff6f7588b06b5ef3ed40db06b412b))
+
 ## 0.94.0 (2025-06-23)
 
 Full Changelog: [v0.93.0...v0.94.0](https://github.com/lithic-com/lithic-python/compare/v0.93.0...v0.94.0)
