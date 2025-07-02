@@ -701,6 +701,8 @@ class Event(BaseModel):
     ]
     """Type of transaction event"""
 
+    account_type: Optional[Literal["CHECKING", "SAVINGS"]] = None
+
     network_specific_data: Optional[EventNetworkSpecificData] = None
 
 
