@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.96.0 (2025-07-02)
+
+Full Changelog: [v0.95.0...v0.96.0](https://github.com/lithic-com/lithic-python/compare/v0.95.0...v0.96.0)
+
+### Features
+
+* **api:** add models for merchant_lock_parameters and conditional_3ds_action_parameters ([6dcfc0d](https://github.com/lithic-com/lithic-python/commit/6dcfc0dc2ea8e25b316317c3c99d34c9beb92465))
+* **api:** api update ([9387b8d](https://github.com/lithic-com/lithic-python/commit/9387b8dcd62abdea2f001dad29fc5f85f1d31f29))
+
+
+### Chores
+
+* **ci:** change upload type ([58fae0a](https://github.com/lithic-com/lithic-python/commit/58fae0a7c82b38bed1b3adc9a6077ab2d232ccba))
+
 ## 0.95.0 (2025-06-29)
 
 Full Changelog: [v0.94.0...v0.95.0](https://github.com/lithic-com/lithic-python/compare/v0.94.0...v0.95.0)
