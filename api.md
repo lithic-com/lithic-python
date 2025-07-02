@@ -81,8 +81,10 @@ Types:
 from lithic.types.auth_rules import (
     AuthRule,
     AuthRuleCondition,
+    Conditional3DSActionParameters,
     ConditionalAttribute,
     ConditionalBlockParameters,
+    MerchantLockParameters,
     RuleStats,
     VelocityLimitParams,
     VelocityLimitParamsPeriodWindow,
