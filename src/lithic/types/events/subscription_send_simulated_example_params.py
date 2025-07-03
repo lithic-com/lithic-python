@@ -39,6 +39,8 @@ class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
         "loan_tape.updated",
         "management_operation.created",
         "management_operation.updated",
+        "network_total.created",
+        "network_total.updated",
         "payment_transaction.created",
         "payment_transaction.updated",
         "internal_transaction.created",
