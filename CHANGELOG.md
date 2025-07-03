@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.97.0 (2025-07-03)
+
+Full Changelog: [v0.96.0...v0.97.0](https://github.com/lithic-com/lithic-python/compare/v0.96.0...v0.97.0)
+
+### Features
+
+* **api:** api update ([c72de33](https://github.com/lithic-com/lithic-python/commit/c72de3375251f5260efb89453c64a0b1b9364af8))
+* **api:** api update ([77eaece](https://github.com/lithic-com/lithic-python/commit/77eaece83f6c20603c0bff867ab7d35712918046))
+
 ## 0.96.0 (2025-07-02)
 
 Full Changelog: [v0.95.0...v0.96.0](https://github.com/lithic-com/lithic-python/compare/v0.95.0...v0.96.0)
