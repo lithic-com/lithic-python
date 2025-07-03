@@ -45,10 +45,16 @@ class NetworkTotalListResponse(BaseModel):
     For Visa: lowest level SRE (Settlement Reporting Entity).
     """
 
-    network: Literal["VISA", "MASTERCARD", "MAESTRO", "INTERLINK"]
+    is_complete: bool
+    """
+    Indicates that all settlement records related to this Network Total are
+    available in the details endpoint.
+    """
+
+    network: Literal["AMEX", "VISA", "MASTERCARD", "MAESTRO", "INTERLINK"]
     """Card network where the transaction took place.
 
-    VISA, MASTERCARD, MAESTRO, or INTERLINK.
+    AMEX, VISA, MASTERCARD, MAESTRO, or INTERLINK.
     """
 
     report_date: date
