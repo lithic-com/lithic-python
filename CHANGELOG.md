@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.97.1 (2025-07-09)
+
+Full Changelog: [v0.97.0...v0.97.1](https://github.com/lithic-com/lithic-python/compare/v0.97.0...v0.97.1)
+
+### Bug Fixes
+
+* **parsing:** correctly handle nested discriminated unions ([a64aca3](https://github.com/lithic-com/lithic-python/commit/a64aca3063355ce5cd73844d1bc51f70c41c2d9e))
+
+
+### Chores
+
+* **internal:** bump pinned h11 dep ([e858da4](https://github.com/lithic-com/lithic-python/commit/e858da478df9e173121ec85b25c325592b829a7d))
+* **internal:** codegen related update ([dcfbd58](https://github.com/lithic-com/lithic-python/commit/dcfbd58a82291c18a0d8eb39b032892578372f82))
+* **package:** mark python 3.13 as supported ([5899b78](https://github.com/lithic-com/lithic-python/commit/5899b78cbb1a18810f41a7eb1b8ea4dfe0932117))
+
 ## 0.97.0 (2025-07-03)
 
 Full Changelog: [v0.96.0...v0.97.0](https://github.com/lithic-com/lithic-python/compare/v0.96.0...v0.97.0)
