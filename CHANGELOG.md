@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.97.2 (2025-07-11)
+
+Full Changelog: [v0.97.1...v0.97.2](https://github.com/lithic-com/lithic-python/compare/v0.97.1...v0.97.2)
+
+### Bug Fixes
+
+* **client:** don't send Content-Type header on GET requests ([765eca7](https://github.com/lithic-com/lithic-python/commit/765eca745c1c78c4cafbac44df1b57dbbc47e0aa))
+
+
+### Chores
+
+* **readme:** fix version rendering on pypi ([94e7cc0](https://github.com/lithic-com/lithic-python/commit/94e7cc0b82073f9af11323fc3a02557c3f1815fd))
+
 ## 0.97.1 (2025-07-09)
 
 Full Changelog: [v0.97.0...v0.97.1](https://github.com/lithic-com/lithic-python/compare/v0.97.0...v0.97.1)
