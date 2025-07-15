@@ -227,7 +227,7 @@ class FinancialAccounts(SyncAPIResource):
         *,
         account_token: str | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
-        type: Literal["ISSUING", "OPERATING", "RESERVE"] | NotGiven = NOT_GIVEN,
+        type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -525,7 +525,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         *,
         account_token: str | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
-        type: Literal["ISSUING", "OPERATING", "RESERVE"] | NotGiven = NOT_GIVEN,
+        type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

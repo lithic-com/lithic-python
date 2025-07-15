@@ -83,6 +83,7 @@ class ManagementOperations(SyncAPIResource):
         financial_account_token: str,
         token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
         subtype: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -96,6 +97,8 @@ class ManagementOperations(SyncAPIResource):
         Create management operation
 
         Args:
+          on_closed_account: What to do if the financial account is closed when posting an operation
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -116,6 +119,7 @@ class ManagementOperations(SyncAPIResource):
                     "financial_account_token": financial_account_token,
                     "token": token,
                     "memo": memo,
+                    "on_closed_account": on_closed_account,
                     "subtype": subtype,
                     "user_defined_id": user_defined_id,
                 },
@@ -350,6 +354,7 @@ class AsyncManagementOperations(AsyncAPIResource):
         financial_account_token: str,
         token: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
         subtype: str | NotGiven = NOT_GIVEN,
         user_defined_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -363,6 +368,8 @@ class AsyncManagementOperations(AsyncAPIResource):
         Create management operation
 
         Args:
+          on_closed_account: What to do if the financial account is closed when posting an operation
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -383,6 +390,7 @@ class AsyncManagementOperations(AsyncAPIResource):
                     "financial_account_token": financial_account_token,
                     "token": token,
                     "memo": memo,
+                    "on_closed_account": on_closed_account,
                     "subtype": subtype,
                     "user_defined_id": user_defined_id,
                 },

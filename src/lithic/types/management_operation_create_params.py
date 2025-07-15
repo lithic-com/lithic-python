@@ -58,6 +58,9 @@ class ManagementOperationCreateParams(TypedDict, total=False):
 
     memo: str
 
+    on_closed_account: Literal["FAIL", "USE_SUSPENSE"]
+    """What to do if the financial account is closed when posting an operation"""
+
     subtype: str
 
     user_defined_id: str

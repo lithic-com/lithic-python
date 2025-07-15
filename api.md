@@ -701,7 +701,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types import ManagementOperationTransaction
+from lithic.types import ExternalResource, ExternalResourceType, ManagementOperationTransaction
 ```
 
 Methods:
@@ -743,3 +743,16 @@ Methods:
 
 - <code title="get /v1/fraud/transactions/{transaction_token}">client.fraud.transactions.<a href="./src/lithic/resources/fraud/transactions.py">retrieve</a>(transaction_token) -> <a href="./src/lithic/types/fraud/transaction_retrieve_response.py">TransactionRetrieveResponse</a></code>
 - <code title="post /v1/fraud/transactions/{transaction_token}">client.fraud.transactions.<a href="./src/lithic/resources/fraud/transactions.py">report</a>(transaction_token, \*\*<a href="src/lithic/types/fraud/transaction_report_params.py">params</a>) -> <a href="./src/lithic/types/fraud/transaction_report_response.py">TransactionReportResponse</a></code>
+
+# NetworkPrograms
+
+Types:
+
+```python
+from lithic.types import NetworkProgram
+```
+
+Methods:
+
+- <code title="get /v1/network_programs/{network_program_token}">client.network_programs.<a href="./src/lithic/resources/network_programs.py">retrieve</a>(network_program_token) -> <a href="./src/lithic/types/network_program.py">NetworkProgram</a></code>
+- <code title="get /v1/network_programs">client.network_programs.<a href="./src/lithic/resources/network_programs.py">list</a>(\*\*<a href="src/lithic/types/network_program_list_params.py">params</a>) -> <a href="./src/lithic/types/network_program.py">SyncSinglePage[NetworkProgram]</a></code>

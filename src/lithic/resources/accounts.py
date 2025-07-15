@@ -80,10 +80,22 @@ class Accounts(SyncAPIResource):
         self,
         account_token: str,
         *,
+        comment: str | NotGiven = NOT_GIVEN,
         daily_spend_limit: int | NotGiven = NOT_GIVEN,
         lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
         monthly_spend_limit: int | NotGiven = NOT_GIVEN,
         state: Literal["ACTIVE", "PAUSED", "CLOSED"] | NotGiven = NOT_GIVEN,
+        substatus: Literal[
+            "FRAUD_IDENTIFIED",
+            "SUSPICIOUS_ACTIVITY",
+            "RISK_VIOLATION",
+            "END_USER_REQUEST",
+            "ISSUER_REQUEST",
+            "NOT_ACTIVE",
+            "INTERNAL_REVIEW",
+            "OTHER",
+        ]
+        | NotGiven = NOT_GIVEN,
         verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -99,6 +111,8 @@ class Accounts(SyncAPIResource):
         in the `PAUSED` state will not be able to transact or create new cards.
 
         Args:
+          comment: Additional context or information related to the account.
+
           daily_spend_limit: Amount (in cents) for the account's daily spend limit (e.g. 100000 would be a
               $1,000 limit). By default the daily spend limit is set to $1,250.
 
@@ -114,6 +128,35 @@ class Accounts(SyncAPIResource):
               $1,000 limit). By default the monthly spend limit is set to $5,000.
 
           state: Account states.
+
+          substatus:
+              Account state substatus values:
+
+              - `FRAUD_IDENTIFIED` - The account has been recognized as being created or used
+                with stolen or fabricated identity information, encompassing both true
+                identity theft and synthetic identities.
+              - `SUSPICIOUS_ACTIVITY` - The account has exhibited suspicious behavior, such as
+                unauthorized access or fraudulent transactions, necessitating further
+                investigation.
+              - `RISK_VIOLATION` - The account has been involved in deliberate misuse by the
+                legitimate account holder. Examples include disputing valid transactions
+                without cause, falsely claiming non-receipt of goods, or engaging in
+                intentional bust-out schemes to exploit account services.
+              - `END_USER_REQUEST` - The account holder has voluntarily requested the closure
+                of the account for personal reasons. This encompasses situations such as
+                bankruptcy, other financial considerations, or the account holder's death.
+              - `ISSUER_REQUEST` - The issuer has initiated the closure of the account due to
+                business strategy, risk management, inactivity, product changes, regulatory
+                concerns, or violations of terms and conditions.
+              - `NOT_ACTIVE` - The account has not had any transactions or payment activity
+                within a specified period. This status applies to accounts that are paused or
+                closed due to inactivity.
+              - `INTERNAL_REVIEW` - The account is temporarily paused pending further internal
+                review. In future implementations, this status may prevent clients from
+                activating the account via APIs until the review is completed.
+              - `OTHER` - The reason for the account's current status does not fall into any
+                of the above categories. A comment should be provided to specify the
+                particular reason.
 
           verification_address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules. This field is deprecated as AVS checks
@@ -134,10 +177,12 @@ class Accounts(SyncAPIResource):
             f"/v1/accounts/{account_token}",
             body=maybe_transform(
                 {
+                    "comment": comment,
                     "daily_spend_limit": daily_spend_limit,
                     "lifetime_spend_limit": lifetime_spend_limit,
                     "monthly_spend_limit": monthly_spend_limit,
                     "state": state,
+                    "substatus": substatus,
                     "verification_address": verification_address,
                 },
                 account_update_params.AccountUpdateParams,
@@ -307,10 +352,22 @@ class AsyncAccounts(AsyncAPIResource):
         self,
         account_token: str,
         *,
+        comment: str | NotGiven = NOT_GIVEN,
         daily_spend_limit: int | NotGiven = NOT_GIVEN,
         lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
         monthly_spend_limit: int | NotGiven = NOT_GIVEN,
         state: Literal["ACTIVE", "PAUSED", "CLOSED"] | NotGiven = NOT_GIVEN,
+        substatus: Literal[
+            "FRAUD_IDENTIFIED",
+            "SUSPICIOUS_ACTIVITY",
+            "RISK_VIOLATION",
+            "END_USER_REQUEST",
+            "ISSUER_REQUEST",
+            "NOT_ACTIVE",
+            "INTERNAL_REVIEW",
+            "OTHER",
+        ]
+        | NotGiven = NOT_GIVEN,
         verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -326,6 +383,8 @@ class AsyncAccounts(AsyncAPIResource):
         in the `PAUSED` state will not be able to transact or create new cards.
 
         Args:
+          comment: Additional context or information related to the account.
+
           daily_spend_limit: Amount (in cents) for the account's daily spend limit (e.g. 100000 would be a
               $1,000 limit). By default the daily spend limit is set to $1,250.
 
@@ -341,6 +400,35 @@ class AsyncAccounts(AsyncAPIResource):
               $1,000 limit). By default the monthly spend limit is set to $5,000.
 
           state: Account states.
+
+          substatus:
+              Account state substatus values:
+
+              - `FRAUD_IDENTIFIED` - The account has been recognized as being created or used
+                with stolen or fabricated identity information, encompassing both true
+                identity theft and synthetic identities.
+              - `SUSPICIOUS_ACTIVITY` - The account has exhibited suspicious behavior, such as
+                unauthorized access or fraudulent transactions, necessitating further
+                investigation.
+              - `RISK_VIOLATION` - The account has been involved in deliberate misuse by the
+                legitimate account holder. Examples include disputing valid transactions
+                without cause, falsely claiming non-receipt of goods, or engaging in
+                intentional bust-out schemes to exploit account services.
+              - `END_USER_REQUEST` - The account holder has voluntarily requested the closure
+                of the account for personal reasons. This encompasses situations such as
+                bankruptcy, other financial considerations, or the account holder's death.
+              - `ISSUER_REQUEST` - The issuer has initiated the closure of the account due to
+                business strategy, risk management, inactivity, product changes, regulatory
+                concerns, or violations of terms and conditions.
+              - `NOT_ACTIVE` - The account has not had any transactions or payment activity
+                within a specified period. This status applies to accounts that are paused or
+                closed due to inactivity.
+              - `INTERNAL_REVIEW` - The account is temporarily paused pending further internal
+                review. In future implementations, this status may prevent clients from
+                activating the account via APIs until the review is completed.
+              - `OTHER` - The reason for the account's current status does not fall into any
+                of the above categories. A comment should be provided to specify the
+                particular reason.
 
           verification_address: Address used during Address Verification Service (AVS) checks during
               transactions if enabled via Auth Rules. This field is deprecated as AVS checks
@@ -361,10 +449,12 @@ class AsyncAccounts(AsyncAPIResource):
             f"/v1/accounts/{account_token}",
             body=await async_maybe_transform(
                 {
+                    "comment": comment,
                     "daily_spend_limit": daily_spend_limit,
                     "lifetime_spend_limit": lifetime_spend_limit,
                     "monthly_spend_limit": monthly_spend_limit,
                     "state": state,
+                    "substatus": substatus,
                     "verification_address": verification_address,
                 },
                 account_update_params.AccountUpdateParams,

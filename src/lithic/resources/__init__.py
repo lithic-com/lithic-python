@@ -144,6 +144,14 @@ from .digital_card_art import (
     DigitalCardArtResourceWithStreamingResponse,
     AsyncDigitalCardArtResourceWithStreamingResponse,
 )
+from .network_programs import (
+    NetworkPrograms,
+    AsyncNetworkPrograms,
+    NetworkProgramsWithRawResponse,
+    AsyncNetworkProgramsWithRawResponse,
+    NetworkProgramsWithStreamingResponse,
+    AsyncNetworkProgramsWithStreamingResponse,
+)
 from .external_payments import (
     ExternalPayments,
     AsyncExternalPayments,
@@ -366,4 +374,10 @@ __all__ = [
     "AsyncFraudWithRawResponse",
     "FraudWithStreamingResponse",
     "AsyncFraudWithStreamingResponse",
+    "NetworkPrograms",
+    "AsyncNetworkPrograms",
+    "NetworkProgramsWithRawResponse",
+    "AsyncNetworkProgramsWithRawResponse",
+    "NetworkProgramsWithStreamingResponse",
+    "AsyncNetworkProgramsWithStreamingResponse",
 ]
