@@ -15,6 +15,7 @@ class PaymentSimulateActionParams(TypedDict, total=False):
             "ACH_ORIGINATION_PROCESSED",
             "ACH_ORIGINATION_SETTLED",
             "ACH_RECEIPT_SETTLED",
+            "ACH_RECEIPT_RELEASED",
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",

@@ -70,10 +70,12 @@ class TestAccounts:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         account = client.accounts.update(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            comment="comment",
             daily_spend_limit=1000,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
             state="ACTIVE",
+            substatus="FRAUD_IDENTIFIED",
             verification_address={
                 "address1": "address1",
                 "address2": "address2",
@@ -250,10 +252,12 @@ class TestAsyncAccounts:
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         account = await async_client.accounts.update(
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            comment="comment",
             daily_spend_limit=1000,
             lifetime_spend_limit=0,
             monthly_spend_limit=0,
             state="ACTIVE",
+            substatus="FRAUD_IDENTIFIED",
             verification_address={
                 "address1": "address1",
                 "address2": "address2",

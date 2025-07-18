@@ -5,6 +5,7 @@ from datetime import date, datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .external_resource import ExternalResource
 
 __all__ = ["ManagementOperationTransaction", "Event", "TransactionSeries"]
 
@@ -85,5 +86,8 @@ class ManagementOperationTransaction(BaseModel):
     transaction_series: Optional[TransactionSeries] = None
 
     updated: datetime
+
+    external_resource: Optional[ExternalResource] = None
+    """External resource associated with the management operation"""
 
     user_defined_id: Optional[str] = None

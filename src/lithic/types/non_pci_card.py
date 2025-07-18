@@ -139,6 +139,9 @@ class NonPCICard(BaseModel):
     cardholder_currency: Optional[str] = None
     """3-character alphabetic ISO 4217 code for the currency of the cardholder."""
 
+    comment: Optional[str] = None
+    """Additional context or information related to the card."""
+
     digital_card_art_token: Optional[str] = None
     """
     Specifies the digital card art to be displayed in the user's digital wallet
@@ -158,6 +161,13 @@ class NonPCICard(BaseModel):
     memo: Optional[str] = None
     """Friendly name to identify the card."""
 
+    network_program_token: Optional[str] = None
+    """Globally unique identifier for the card's network program.
+
+    Null if the card is not associated with a network program. Currently applicable
+    to Visa cards participating in Account Level Management only
+    """
+
     pending_commands: Optional[List[str]] = None
     """
     Indicates if there are offline PIN changes pending card interaction with an
@@ -176,4 +186,42 @@ class NonPCICard(BaseModel):
     """
     If the card is a replacement for another card, the globally unique identifier
     for the card that was replaced.
+    """
+
+    substatus: Optional[
+        Literal[
+            "LOST",
+            "COMPROMISED",
+            "DAMAGED",
+            "END_USER_REQUEST",
+            "ISSUER_REQUEST",
+            "NOT_ACTIVE",
+            "SUSPICIOUS_ACTIVITY",
+            "INTERNAL_REVIEW",
+            "EXPIRED",
+            "UNDELIVERABLE",
+            "OTHER",
+        ]
+    ] = None
+    """
+    Card state substatus values: _ `LOST` - The physical card is no longer in the
+    cardholder's possession due to being lost or never received by the cardholder. _
+    `COMPROMISED` - Card information has been exposed, potentially leading to
+    unauthorized access. This may involve physical card theft, cloning, or online
+    data breaches. _ `DAMAGED` - The physical card is not functioning properly, such
+    as having chip failures or a demagnetized magnetic stripe. _
+    `END_USER_REQUEST` - The cardholder requested the closure of the card for
+    reasons unrelated to fraud or damage, such as switching to a different product
+    or closing the account. _ `ISSUER_REQUEST` - The issuer closed the card for
+    reasons unrelated to fraud or damage, such as account inactivity, product or
+    policy changes, or technology upgrades. _ `NOT_ACTIVE` - The card hasn’t had any
+    transaction activity for a specified period, applicable to statuses like
+    `PAUSED` or `CLOSED`. _ `SUSPICIOUS_ACTIVITY` - The card has one or more
+    suspicious transactions or activities that require review. This can involve
+    prompting the cardholder to confirm legitimate use or report confirmed fraud. _
+    `INTERNAL_REVIEW` - The card is temporarily paused pending further internal
+    review. _ `EXPIRED` - The card has expired and has been closed without being
+    reissued. _ `UNDELIVERABLE` - The card cannot be delivered to the cardholder and
+    has been returned. \\** `OTHER` - The reason for the status does not fall into any
+    of the above categories. A comment can be provided to specify the reason.
     """

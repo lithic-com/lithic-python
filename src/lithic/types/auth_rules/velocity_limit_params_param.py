@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from .velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
+from .velocity_limit_params_period_window_param import VelocityLimitParamsPeriodWindowParam
 
 __all__ = ["VelocityLimitParamsParam", "Filters"]
 
@@ -42,7 +42,7 @@ class Filters(TypedDict, total=False):
 class VelocityLimitParamsParam(TypedDict, total=False):
     filters: Required[Filters]
 
-    period: Required[Union[int, VelocityLimitParamsPeriodWindow]]
+    period: Required[VelocityLimitParamsPeriodWindowParam]
     """The size of the trailing window to calculate Spend Velocity over in seconds.
 
     The minimum value is 10 seconds, and the maximum value is 2678400 seconds (31

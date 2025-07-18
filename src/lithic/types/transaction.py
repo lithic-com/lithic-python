@@ -114,27 +114,28 @@ class CardholderAuthentication(BaseModel):
         "STRONG_CUSTOMER_AUTHENTICATION_DELEGATION",
         "TRANSACTION_RISK_ANALYSIS",
     ]
-    """Whether an acquirer exemption applied to the transaction."""
+    """Whether an acquirer exemption applied to the transaction.
+
+    Not currently populated and will be removed in the future.
+    """
 
     authentication_result: Literal["ATTEMPTS", "DECLINE", "NONE", "SUCCESS"]
-    """Indicates what the outcome of the 3DS authentication process is."""
+    """Indicates the outcome of the 3DS authentication process."""
 
     decision_made_by: Literal[
         "CUSTOMER_RULES", "CUSTOMER_ENDPOINT", "LITHIC_DEFAULT", "LITHIC_RULES", "NETWORK", "UNKNOWN"
     ]
     """Indicates which party made the 3DS authentication decision."""
 
-    liability_shift: Literal["3DS_AUTHENTICATED", "ACQUIRER_EXEMPTION", "NONE", "TOKEN_AUTHENTICATED"]
+    liability_shift: Literal["3DS_AUTHENTICATED", "TOKEN_AUTHENTICATED", "NONE"]
     """Indicates whether chargeback liability shift applies to the transaction.
 
     Possible enum values:
 
-        * `3DS_AUTHENTICATED`: The transaction was fully authenticated through a 3-D Secure flow, chargeback liability shift applies.
-
-        * `ACQUIRER_EXEMPTION`: The acquirer utilised an exemption to bypass Strong Customer Authentication (`transStatus = N`, or `transStatus = I`). Liability remains with the acquirer and in this case the `acquirer_exemption` field is expected to be not `NONE`.
-
-        * `NONE`: Chargeback liability shift has not shifted to the issuer, i.e. the merchant is liable.
-
+    - `3DS_AUTHENTICATED`: The transaction was fully authenticated through a 3-D
+      Secure flow, chargeback liability shift applies.
+    - `NONE`: Chargeback liability shift has not shifted to the issuer, i.e. the
+      merchant is liable.
     - `TOKEN_AUTHENTICATED`: The transaction was a tokenized payment with validated
       cryptography, possibly recurring. Chargeback liability shift to the issuer
       applies.

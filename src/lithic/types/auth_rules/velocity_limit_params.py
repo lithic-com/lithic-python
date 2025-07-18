@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -41,7 +41,7 @@ class Filters(BaseModel):
 class VelocityLimitParams(BaseModel):
     filters: Filters
 
-    period: Union[int, VelocityLimitParamsPeriodWindow]
+    period: VelocityLimitParamsPeriodWindow
     """The size of the trailing window to calculate Spend Velocity over in seconds.
 
     The minimum value is 10 seconds, and the maximum value is 2678400 seconds (31

@@ -32,3 +32,6 @@ from .velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
 from .conditional_3ds_action_parameters_param import (
     Conditional3DSActionParametersParam as Conditional3DSActionParametersParam,
 )
+from .velocity_limit_params_period_window_param import (
+    VelocityLimitParamsPeriodWindowParam as VelocityLimitParamsPeriodWindowParam,
+)
