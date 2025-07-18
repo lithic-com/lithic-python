@@ -27,6 +27,7 @@ from .non_pci_card import NonPCICard as NonPCICard
 from .tokenization import Tokenization as Tokenization
 from .account_holder import AccountHolder as AccountHolder
 from .message_attempt import MessageAttempt as MessageAttempt
+from .network_program import NetworkProgram as NetworkProgram
 from .card_list_params import CardListParams as CardListParams
 from .digital_card_art import DigitalCardArt as DigitalCardArt
 from .dispute_evidence import DisputeEvidence as DisputeEvidence
@@ -37,6 +38,7 @@ from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .card_renew_params import CardRenewParams as CardRenewParams
 from .card_spend_limits import CardSpendLimits as CardSpendLimits
 from .event_list_params import EventListParams as EventListParams
+from .external_resource import ExternalResource as ExternalResource
 from .financial_account import FinancialAccount as FinancialAccount
 from .required_document import RequiredDocument as RequiredDocument
 from .settlement_detail import SettlementDetail as SettlementDetail
@@ -65,6 +67,7 @@ from .dispute_update_params import DisputeUpdateParams as DisputeUpdateParams
 from .financial_transaction import FinancialTransaction as FinancialTransaction
 from .payment_create_params import PaymentCreateParams as PaymentCreateParams
 from .book_transfer_response import BookTransferResponse as BookTransferResponse
+from .external_resource_type import ExternalResourceType as ExternalResourceType
 from .payment_retry_response import PaymentRetryResponse as PaymentRetryResponse
 from .card_provision_response import CardProvisionResponse as CardProvisionResponse
 from .payment_create_response import PaymentCreateResponse as PaymentCreateResponse
@@ -84,6 +87,7 @@ from .settlement_summary_details import SettlementSummaryDetails as SettlementSu
 from .book_transfer_create_params import BookTransferCreateParams as BookTransferCreateParams
 from .card_web_provision_response import CardWebProvisionResponse as CardWebProvisionResponse
 from .funding_event_list_response import FundingEventListResponse as FundingEventListResponse
+from .network_program_list_params import NetworkProgramListParams as NetworkProgramListParams
 from .account_holder_create_params import AccountHolderCreateParams as AccountHolderCreateParams
 from .account_holder_update_params import AccountHolderUpdateParams as AccountHolderUpdateParams
 from .book_transfer_reverse_params import BookTransferReverseParams as BookTransferReverseParams

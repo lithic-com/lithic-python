@@ -57,6 +57,7 @@ if TYPE_CHECKING:
         account_holders,
         credit_products,
         digital_card_art,
+        network_programs,
         external_payments,
         aggregate_balances,
         financial_accounts,
@@ -80,6 +81,7 @@ if TYPE_CHECKING:
     from .resources.account_holders import AccountHolders, AsyncAccountHolders
     from .resources.reports.reports import Reports, AsyncReports
     from .resources.digital_card_art import DigitalCardArtResource, AsyncDigitalCardArtResource
+    from .resources.network_programs import NetworkPrograms, AsyncNetworkPrograms
     from .resources.external_payments import ExternalPayments, AsyncExternalPayments
     from .resources.three_ds.three_ds import ThreeDS, AsyncThreeDS
     from .resources.aggregate_balances import AggregateBalances, AsyncAggregateBalances
@@ -359,6 +361,12 @@ class Lithic(SyncAPIClient):
         from .resources.fraud import Fraud
 
         return Fraud(self)
+
+    @cached_property
+    def network_programs(self) -> NetworkPrograms:
+        from .resources.network_programs import NetworkPrograms
+
+        return NetworkPrograms(self)
 
     @cached_property
     def with_raw_response(self) -> LithicWithRawResponse:
@@ -741,6 +749,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncFraud(self)
 
     @cached_property
+    def network_programs(self) -> AsyncNetworkPrograms:
+        from .resources.network_programs import AsyncNetworkPrograms
+
+        return AsyncNetworkPrograms(self)
+
+    @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooks:
         from .resources.webhooks import AsyncWebhooks
 
@@ -1049,6 +1063,12 @@ class LithicWithRawResponse:
 
         return FraudWithRawResponse(self._client.fraud)
 
+    @cached_property
+    def network_programs(self) -> network_programs.NetworkProgramsWithRawResponse:
+        from .resources.network_programs import NetworkProgramsWithRawResponse
+
+        return NetworkProgramsWithRawResponse(self._client.network_programs)
+
 
 class AsyncLithicWithRawResponse:
     _client: AsyncLithic
@@ -1215,6 +1235,12 @@ class AsyncLithicWithRawResponse:
         from .resources.fraud import AsyncFraudWithRawResponse
 
         return AsyncFraudWithRawResponse(self._client.fraud)
+
+    @cached_property
+    def network_programs(self) -> network_programs.AsyncNetworkProgramsWithRawResponse:
+        from .resources.network_programs import AsyncNetworkProgramsWithRawResponse
+
+        return AsyncNetworkProgramsWithRawResponse(self._client.network_programs)
 
 
 class LithicWithStreamedResponse:
@@ -1383,6 +1409,12 @@ class LithicWithStreamedResponse:
 
         return FraudWithStreamingResponse(self._client.fraud)
 
+    @cached_property
+    def network_programs(self) -> network_programs.NetworkProgramsWithStreamingResponse:
+        from .resources.network_programs import NetworkProgramsWithStreamingResponse
+
+        return NetworkProgramsWithStreamingResponse(self._client.network_programs)
+
 
 class AsyncLithicWithStreamedResponse:
     _client: AsyncLithic
@@ -1549,6 +1581,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.fraud import AsyncFraudWithStreamingResponse
 
         return AsyncFraudWithStreamingResponse(self._client.fraud)
+
+    @cached_property
+    def network_programs(self) -> network_programs.AsyncNetworkProgramsWithStreamingResponse:
+        from .resources.network_programs import AsyncNetworkProgramsWithStreamingResponse
+
+        return AsyncNetworkProgramsWithStreamingResponse(self._client.network_programs)
 
 
 Client = Lithic

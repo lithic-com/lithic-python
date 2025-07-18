@@ -45,7 +45,7 @@ class BalanceListResponse(BaseModel):
     cents for USD).
     """
 
-    type: Literal["ISSUING", "OPERATING", "RESERVE"]
+    type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"]
     """Type of financial account."""
 
     updated: datetime

@@ -46,7 +46,9 @@ class TestCards:
             pin="pin",
             product_id="1",
             replacement_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            replacement_comment="replacement_comment",
             replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            replacement_substatus="LOST",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -140,13 +142,16 @@ class TestCards:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         card = client.cards.update(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            comment="comment",
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="Updated Name",
+            network_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pin="pin",
             pin_status="OK",
             spend_limit=100,
             spend_limit_duration="FOREVER",
             state="OPEN",
+            substatus="LOST",
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -716,7 +721,9 @@ class TestAsyncCards:
             pin="pin",
             product_id="1",
             replacement_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            replacement_comment="replacement_comment",
             replacement_for="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            replacement_substatus="LOST",
             shipping_address={
                 "address1": "5 Broad Street",
                 "city": "NEW YORK",
@@ -810,13 +817,16 @@ class TestAsyncCards:
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.update(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            comment="comment",
             digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             memo="Updated Name",
+            network_program_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pin="pin",
             pin_status="OK",
             spend_limit=100,
             spend_limit_duration="FOREVER",
             state="OPEN",
+            substatus="LOST",
         )
         assert_matches_type(Card, card, path=["response"])
 

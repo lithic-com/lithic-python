@@ -24,5 +24,5 @@ class BalanceListParams(TypedDict, total=False):
     business_account_token: str
     """List balances for all financial accounts of a given business_account_token."""
 
-    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE"]
+    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"]
     """List balances for a given Financial Account type."""

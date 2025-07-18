@@ -10,6 +10,9 @@ __all__ = ["CardUpdateParams"]
 
 
 class CardUpdateParams(TypedDict, total=False):
+    comment: str
+    """Additional context or information related to the card."""
+
     digital_card_art_token: str
     """
     Specifies the digital card art to be displayed in the user’s digital wallet
@@ -20,6 +23,13 @@ class CardUpdateParams(TypedDict, total=False):
 
     memo: str
     """Friendly name to identify the card."""
+
+    network_program_token: str
+    """Globally unique identifier for the card's network program.
+
+    Currently applicable to Visa cards participating in Account Level Management
+    only.
+    """
 
     pin: str
     """Encrypted PIN block (in base64).
@@ -68,4 +78,46 @@ class CardUpdateParams(TypedDict, total=False):
       parameters).
     - `PAUSED` - Card will decline authorizations, but can be resumed at a later
       time.
+    """
+
+    substatus: Literal[
+        "LOST",
+        "COMPROMISED",
+        "DAMAGED",
+        "END_USER_REQUEST",
+        "ISSUER_REQUEST",
+        "NOT_ACTIVE",
+        "SUSPICIOUS_ACTIVITY",
+        "INTERNAL_REVIEW",
+        "EXPIRED",
+        "UNDELIVERABLE",
+        "OTHER",
+    ]
+    """Card state substatus values:
+
+    - `LOST` - The physical card is no longer in the cardholder's possession due to
+      being lost or never received by the cardholder.
+    - `COMPROMISED` - Card information has been exposed, potentially leading to
+      unauthorized access. This may involve physical card theft, cloning, or online
+      data breaches.
+    - `DAMAGED` - The physical card is not functioning properly, such as having chip
+      failures or a demagnetized magnetic stripe.
+    - `END_USER_REQUEST` - The cardholder requested the closure of the card for
+      reasons unrelated to fraud or damage, such as switching to a different product
+      or closing the account.
+    - `ISSUER_REQUEST` - The issuer closed the card for reasons unrelated to fraud
+      or damage, such as account inactivity, product or policy changes, or
+      technology upgrades.
+    - `NOT_ACTIVE` - The card hasn’t had any transaction activity for a specified
+      period, applicable to statuses like `PAUSED` or `CLOSED`.
+    - `SUSPICIOUS_ACTIVITY` - The card has one or more suspicious transactions or
+      activities that require review. This can involve prompting the cardholder to
+      confirm legitimate use or report confirmed fraud.
+    - `INTERNAL_REVIEW` - The card is temporarily paused pending further internal
+      review.
+    - `EXPIRED` - The card has expired and has been closed without being reissued.
+    - `UNDELIVERABLE` - The card cannot be delivered to the cardholder and has been
+      returned.
+    - `OTHER` - The reason for the status does not fall into any of the above
+      categories. A comment should be provided to specify the reason.
     """

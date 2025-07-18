@@ -101,11 +101,59 @@ class CardCreateParams(TypedDict, total=False):
     card being replaced.
     """
 
+    replacement_comment: str
+    """
+    Additional context or information related to the card that this card will
+    replace.
+    """
+
     replacement_for: str
     """Globally unique identifier for the card that this card will replace.
 
     If the card type is `PHYSICAL` it will be replaced by a `PHYSICAL` card. If the
     card type is `VIRTUAL` it will be replaced by a `VIRTUAL` card.
+    """
+
+    replacement_substatus: Literal[
+        "LOST",
+        "COMPROMISED",
+        "DAMAGED",
+        "END_USER_REQUEST",
+        "ISSUER_REQUEST",
+        "NOT_ACTIVE",
+        "SUSPICIOUS_ACTIVITY",
+        "INTERNAL_REVIEW",
+        "EXPIRED",
+        "UNDELIVERABLE",
+        "OTHER",
+    ]
+    """Card state substatus values for the card that this card will replace:
+
+    - `LOST` - The physical card is no longer in the cardholder's possession due to
+      being lost or never received by the cardholder.
+    - `COMPROMISED` - Card information has been exposed, potentially leading to
+      unauthorized access. This may involve physical card theft, cloning, or online
+      data breaches.
+    - `DAMAGED` - The physical card is not functioning properly, such as having chip
+      failures or a demagnetized magnetic stripe.
+    - `END_USER_REQUEST` - The cardholder requested the closure of the card for
+      reasons unrelated to fraud or damage, such as switching to a different product
+      or closing the account.
+    - `ISSUER_REQUEST` - The issuer closed the card for reasons unrelated to fraud
+      or damage, such as account inactivity, product or policy changes, or
+      technology upgrades.
+    - `NOT_ACTIVE` - The card hasn’t had any transaction activity for a specified
+      period, applicable to statuses like `PAUSED` or `CLOSED`.
+    - `SUSPICIOUS_ACTIVITY` - The card has one or more suspicious transactions or
+      activities that require review. This can involve prompting the cardholder to
+      confirm legitimate use or report confirmed fraud.
+    - `INTERNAL_REVIEW` - The card is temporarily paused pending further internal
+      review.
+    - `EXPIRED` - The card has expired and has been closed without being reissued.
+    - `UNDELIVERABLE` - The card cannot be delivered to the cardholder and has been
+      returned.
+    - `OTHER` - The reason for the status does not fall into any of the above
+      categories. A comment should be provided to specify the reason.
     """
 
     shipping_address: ShippingAddress

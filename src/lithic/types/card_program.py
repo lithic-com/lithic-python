@@ -24,6 +24,12 @@ class CardProgram(BaseModel):
     pan_range_start: str
     """The first digits of the card number that this card program starts with."""
 
+    account_level_management_enabled: Optional[bool] = None
+    """Whether the card program is participating in Account Level Management.
+
+    Currently applicable to Visa card programs only.
+    """
+
     cardholder_currency: Optional[str] = None
     """3-character alphabetic ISO 4217 code for the currency of the cardholder."""
 

@@ -21,7 +21,7 @@ class Balance(BaseModel):
     financial_account_token: str
     """Globally unique identifier for the financial account that holds this balance."""
 
-    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE"]
+    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"]
     """Type of financial account."""
 
     last_transaction_event_token: str
