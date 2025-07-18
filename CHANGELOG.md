@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.98.0 (2025-07-18)
+
+Full Changelog: [v0.97.2...v0.98.0](https://github.com/lithic-com/lithic-python/compare/v0.97.2...v0.98.0)
+
+### Features
+
+* **api:** adds Network Programs and Account/Card Sub-statuses ([4065995](https://github.com/lithic-com/lithic-python/commit/4065995b2bb7cb922d182c3d952be29306e0470d))
+* clean up environment call outs ([15419b7](https://github.com/lithic-com/lithic-python/commit/15419b76176c39ffacc152120bd390ea80542177))
+
 ## 0.97.2 (2025-07-11)
 
 Full Changelog: [v0.97.1...v0.97.2](https://github.com/lithic-com/lithic-python/compare/v0.97.1...v0.97.2)
