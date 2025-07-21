@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.98.1 (2025-07-21)
+
+Full Changelog: [v0.98.0...v0.98.1](https://github.com/lithic-com/lithic-python/compare/v0.98.0...v0.98.1)
+
+### Bug Fixes
+
+* **parsing:** ignore empty metadata ([75dc52a](https://github.com/lithic-com/lithic-python/commit/75dc52abfadac1b39b099e6783b986e3df030a83))
+
+
+### Chores
+
+* **docs:** update Account Holder deprecation formatting ([edebef5](https://github.com/lithic-com/lithic-python/commit/edebef58e9b8a88b5f978d54c36bddb959671b65))
+
 ## 0.98.0 (2025-07-18)
 
 Full Changelog: [v0.97.2...v0.98.0](https://github.com/lithic-com/lithic-python/compare/v0.97.2...v0.98.0)
