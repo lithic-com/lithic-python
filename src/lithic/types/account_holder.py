@@ -243,11 +243,11 @@ class AccountHolder(BaseModel):
     """
 
     email: Optional[str] = None
-    """
-    < Deprecated. Use control_person.email when user_type == "BUSINESS". Use
-    individual.phone_number when user_type == "INDIVIDUAL".
+    """(Deprecated.
 
-    > Primary email of Account Holder.
+    Use control_person.email when user_type == "BUSINESS". Use
+    individual.phone_number when user_type == "INDIVIDUAL".) Primary email of
+    Account Holder.
     """
 
     exemption_type: Optional[Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"]] = None
@@ -273,11 +273,11 @@ class AccountHolder(BaseModel):
     """
 
     phone_number: Optional[str] = None
-    """
-    < Deprecated. Use control_person.phone_number when user_type == "BUSINESS". Use
-    individual.phone_number when user_type == "INDIVIDUAL".
+    """(Deprecated.
 
-    > Primary phone of Account Holder, entered in E.164 format.
+    Use control_person.phone_number when user_type == "BUSINESS". Use
+    individual.phone_number when user_type == "INDIVIDUAL".) Primary phone of
+    Account Holder, entered in E.164 format.
     """
 
     required_documents: Optional[List[RequiredDocument]] = None
@@ -287,7 +287,7 @@ class AccountHolder(BaseModel):
     """
 
     status: Optional[Literal["ACCEPTED", "PENDING_REVIEW", "PENDING_DOCUMENT", "PENDING_RESUBMIT", "REJECTED"]] = None
-    """<Deprecated. Use verification_application.status instead>
+    """(Deprecated. Use verification_application.status instead)
 
     KYC and KYB evaluation states.
 
@@ -313,9 +313,9 @@ class AccountHolder(BaseModel):
             ]
         ]
     ] = None
-    """<Deprecated.
+    """(Deprecated. Use verification_application.status_reasons)
 
-    Use verification_application.status_reasons> Reason for the evaluation status.
+    Reason for the evaluation status.
     """
 
     user_type: Optional[Literal["BUSINESS", "INDIVIDUAL"]] = None
