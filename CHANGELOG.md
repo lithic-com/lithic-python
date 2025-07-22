@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.98.2 (2025-07-22)
+
+Full Changelog: [v0.98.1...v0.98.2](https://github.com/lithic-com/lithic-python/compare/v0.98.1...v0.98.2)
+
+### Bug Fixes
+
+* **parsing:** parse extra field types ([a33b762](https://github.com/lithic-com/lithic-python/commit/a33b7627652d13f204a4fdfaa817156902c73066))
+
 ## 0.98.1 (2025-07-21)
 
 Full Changelog: [v0.98.0...v0.98.1](https://github.com/lithic-com/lithic-python/compare/v0.98.0...v0.98.1)
