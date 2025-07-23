@@ -26,7 +26,7 @@ class V2ListParams(TypedDict, total=False):
     page_size: int
     """Page size (for pagination)."""
 
-    scope: Literal["PROGRAM", "ACCOUNT", "CARD"]
+    scope: Literal["PROGRAM", "ACCOUNT", "CARD", "ANY"]
     """Only return Auth Rules that are bound to the provided scope."""
 
     starting_after: str
