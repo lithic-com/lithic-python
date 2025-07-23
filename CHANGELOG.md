@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.99.0 (2025-07-23)
+
+Full Changelog: [v0.98.2...v0.99.0](https://github.com/lithic-com/lithic-python/compare/v0.98.2...v0.99.0)
+
+### Features
+
+* **api:** adds new Auth Rules Scope and Settlement Details type ([b791cfd](https://github.com/lithic-com/lithic-python/commit/b791cfd30d03d104b7b4c5a0cafd15763c7f6cd0))
+
 ## 0.98.2 (2025-07-22)
 
 Full Changelog: [v0.98.1...v0.98.2](https://github.com/lithic-com/lithic-python/compare/v0.98.1...v0.98.2)
