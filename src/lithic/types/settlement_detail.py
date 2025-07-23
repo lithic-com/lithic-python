@@ -96,6 +96,7 @@ class SettlementDetail(BaseModel):
         "ARBITRATION",
         "CHARGEBACK",
         "CLEARING",
+        "COLLABORATION",
         "FEE",
         "FINANCIAL",
         "NON-FINANCIAL",
