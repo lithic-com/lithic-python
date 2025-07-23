@@ -455,7 +455,7 @@ class V2(SyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        scope: Literal["PROGRAM", "ACCOUNT", "CARD"] | NotGiven = NOT_GIVEN,
+        scope: Literal["PROGRAM", "ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1317,7 +1317,7 @@ class AsyncV2(AsyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        scope: Literal["PROGRAM", "ACCOUNT", "CARD"] | NotGiven = NOT_GIVEN,
+        scope: Literal["PROGRAM", "ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
