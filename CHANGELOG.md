@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.99.1 (2025-07-24)
+
+Full Changelog: [v0.99.0...v0.99.1](https://github.com/lithic-com/lithic-python/compare/v0.99.0...v0.99.1)
+
+### Chores
+
+* **project:** add settings file for vscode ([5dc0933](https://github.com/lithic-com/lithic-python/commit/5dc09332b73ffe63937ca60a419e9e0c5ca533d9))
+
 ## 0.99.0 (2025-07-23)
 
 Full Changelog: [v0.98.2...v0.99.0](https://github.com/lithic-com/lithic-python/compare/v0.98.2...v0.99.0)
