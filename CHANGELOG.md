@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.100.0 (2025-07-28)
+
+Full Changelog: [v0.99.0...v0.100.0](https://github.com/lithic-com/lithic-python/compare/v0.99.0...v0.100.0)
+
+### Features
+
+* **api:** updates Transaction retrieve response to match API ([f659cd3](https://github.com/lithic-com/lithic-python/commit/f659cd3179c6ee214ab01d5dbc176931b1b503be))
+
+
+### Chores
+
+* **project:** add settings file for vscode ([5dc0933](https://github.com/lithic-com/lithic-python/commit/5dc09332b73ffe63937ca60a419e9e0c5ca533d9))
+
 ## 0.99.0 (2025-07-23)
 
 Full Changelog: [v0.98.2...v0.99.0](https://github.com/lithic-com/lithic-python/compare/v0.98.2...v0.99.0)
