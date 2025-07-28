@@ -24,7 +24,7 @@ class TestManagementOperations:
     @parametrize
     def test_method_create(self, client: Lithic) -> None:
         management_operation = client.management_operations.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
@@ -36,7 +36,7 @@ class TestManagementOperations:
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         management_operation = client.management_operations.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
@@ -53,7 +53,7 @@ class TestManagementOperations:
     @parametrize
     def test_raw_response_create(self, client: Lithic) -> None:
         response = client.management_operations.with_raw_response.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
@@ -69,7 +69,7 @@ class TestManagementOperations:
     @parametrize
     def test_streaming_response_create(self, client: Lithic) -> None:
         with client.management_operations.with_streaming_response.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
@@ -226,7 +226,7 @@ class TestAsyncManagementOperations:
     @parametrize
     async def test_method_create(self, async_client: AsyncLithic) -> None:
         management_operation = await async_client.management_operations.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
@@ -238,7 +238,7 @@ class TestAsyncManagementOperations:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
         management_operation = await async_client.management_operations.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
@@ -255,7 +255,7 @@ class TestAsyncManagementOperations:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
         response = await async_client.management_operations.with_raw_response.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),
@@ -271,7 +271,7 @@ class TestAsyncManagementOperations:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
         async with async_client.management_operations.with_streaming_response.create(
-            amount=0,
+            amount=1,
             category="MANAGEMENT_FEE",
             direction="CREDIT",
             effective_date=parse_date("2019-12-27"),

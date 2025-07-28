@@ -23,7 +23,6 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.tokenization import Tokenization
-from ..types.tokenization_retrieve_response import TokenizationRetrieveResponse
 from ..types.tokenization_simulate_response import TokenizationSimulateResponse
 from ..types.tokenization_update_digital_card_art_response import TokenizationUpdateDigitalCardArtResponse
 
@@ -60,7 +59,7 @@ class Tokenizations(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TokenizationRetrieveResponse:
+    ) -> Tokenization:
         """
         Get tokenization
 
@@ -80,7 +79,7 @@ class Tokenizations(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenizationRetrieveResponse,
+            cast_to=Tokenization,
         )
 
     def list(
@@ -526,7 +525,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TokenizationRetrieveResponse:
+    ) -> Tokenization:
         """
         Get tokenization
 
@@ -546,7 +545,7 @@ class AsyncTokenizations(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenizationRetrieveResponse,
+            cast_to=Tokenization,
         )
 
     def list(

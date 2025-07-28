@@ -11,7 +11,6 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import (
     Tokenization,
-    TokenizationRetrieveResponse,
     TokenizationSimulateResponse,
     TokenizationUpdateDigitalCardArtResponse,
 )
@@ -29,7 +28,7 @@ class TestTokenizations:
         tokenization = client.tokenizations.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(TokenizationRetrieveResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
@@ -40,7 +39,7 @@ class TestTokenizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
-        assert_matches_type(TokenizationRetrieveResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
@@ -51,7 +50,7 @@ class TestTokenizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tokenization = response.parse()
-            assert_matches_type(TokenizationRetrieveResponse, tokenization, path=["response"])
+            assert_matches_type(Tokenization, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -410,7 +409,7 @@ class TestAsyncTokenizations:
         tokenization = await async_client.tokenizations.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(TokenizationRetrieveResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -421,7 +420,7 @@ class TestAsyncTokenizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
-        assert_matches_type(TokenizationRetrieveResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -432,7 +431,7 @@ class TestAsyncTokenizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tokenization = await response.parse()
-            assert_matches_type(TokenizationRetrieveResponse, tokenization, path=["response"])
+            assert_matches_type(Tokenization, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
