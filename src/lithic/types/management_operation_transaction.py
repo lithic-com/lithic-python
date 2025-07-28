@@ -60,34 +60,46 @@ class TransactionSeries(BaseModel):
 
 class ManagementOperationTransaction(BaseModel):
     token: str
-
-    category: Literal[
-        "MANAGEMENT_FEE", "MANAGEMENT_DISPUTE", "MANAGEMENT_REWARD", "MANAGEMENT_ADJUSTMENT", "MANAGEMENT_DISBURSEMENT"
-    ]
+    """Unique identifier for the transaction"""
 
     created: datetime
+    """ISO 8601 timestamp of when the transaction was created"""
 
-    currency: str
-
-    direction: Literal["CREDIT", "DEBIT"]
-
-    events: List[Event]
-
-    financial_account_token: str
-
-    pending_amount: int
-
-    result: Literal["APPROVED", "DECLINED"]
-
-    settled_amount: int
+    family: Literal["CARD", "PAYMENT", "TRANSFER", "INTERNAL", "EXTERNAL_PAYMENT", "MANAGEMENT_OPERATION"]
 
     status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
-
-    transaction_series: Optional[TransactionSeries] = None
+    """The status of the transaction"""
 
     updated: datetime
+    """ISO 8601 timestamp of when the transaction was last updated"""
+
+    category: Optional[
+        Literal[
+            "MANAGEMENT_FEE",
+            "MANAGEMENT_DISPUTE",
+            "MANAGEMENT_REWARD",
+            "MANAGEMENT_ADJUSTMENT",
+            "MANAGEMENT_DISBURSEMENT",
+        ]
+    ] = None
+
+    currency: Optional[str] = None
+
+    direction: Optional[Literal["CREDIT", "DEBIT"]] = None
+
+    events: Optional[List[Event]] = None
 
     external_resource: Optional[ExternalResource] = None
     """External resource associated with the management operation"""
+
+    financial_account_token: Optional[str] = None
+
+    pending_amount: Optional[int] = None
+
+    result: Optional[Literal["APPROVED", "DECLINED"]] = None
+
+    settled_amount: Optional[int] = None
+
+    transaction_series: Optional[TransactionSeries] = None
 
     user_defined_id: Optional[str] = None
