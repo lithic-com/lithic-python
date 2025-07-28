@@ -50,27 +50,33 @@ class Event(BaseModel):
 
 class ExternalPayment(BaseModel):
     token: str
-
-    category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]
+    """Unique identifier for the transaction"""
 
     created: datetime
+    """ISO 8601 timestamp of when the transaction was created"""
 
-    currency: str
-
-    events: List[Event]
-
-    financial_account_token: str
-
-    payment_type: Literal["DEPOSIT", "WITHDRAWAL"]
-
-    pending_amount: int
-
-    result: Literal["APPROVED", "DECLINED"]
-
-    settled_amount: int
+    family: Literal["CARD", "PAYMENT", "TRANSFER", "INTERNAL", "EXTERNAL_PAYMENT", "MANAGEMENT_OPERATION"]
 
     status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+    """The status of the transaction"""
 
     updated: datetime
+    """ISO 8601 timestamp of when the transaction was last updated"""
+
+    category: Optional[Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]] = None
+
+    currency: Optional[str] = None
+
+    events: Optional[List[Event]] = None
+
+    financial_account_token: Optional[str] = None
+
+    payment_type: Optional[Literal["DEPOSIT", "WITHDRAWAL"]] = None
+
+    pending_amount: Optional[int] = None
+
+    result: Optional[Literal["APPROVED", "DECLINED"]] = None
+
+    settled_amount: Optional[int] = None
 
     user_defined_id: Optional[str] = None
