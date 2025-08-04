@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.101.0 (2025-08-04)
+
+Full Changelog: [v0.100.0...v0.101.0](https://github.com/lithic-com/lithic-python/compare/v0.100.0...v0.101.0)
+
+### Features
+
+* **api:** adds new Account Activity API ([62a2b97](https://github.com/lithic-com/lithic-python/commit/62a2b970195c5a3969187e20921d9b5c859d91e8))
+* **client:** support file upload requests ([97fa938](https://github.com/lithic-com/lithic-python/commit/97fa9388daaf5147aeeaeb1911ca1847c149ff3a))
+
 ## 0.100.0 (2025-07-28)
 
 Full Changelog: [v0.99.0...v0.100.0](https://github.com/lithic-com/lithic-python/compare/v0.99.0...v0.100.0)
