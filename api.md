@@ -766,3 +766,16 @@ Methods:
 
 - <code title="get /v1/network_programs/{network_program_token}">client.network_programs.<a href="./src/lithic/resources/network_programs.py">retrieve</a>(network_program_token) -> <a href="./src/lithic/types/network_program.py">NetworkProgram</a></code>
 - <code title="get /v1/network_programs">client.network_programs.<a href="./src/lithic/resources/network_programs.py">list</a>(\*\*<a href="src/lithic/types/network_program_list_params.py">params</a>) -> <a href="./src/lithic/types/network_program.py">SyncSinglePage[NetworkProgram]</a></code>
+
+# AccountActivity
+
+Types:
+
+```python
+from lithic.types import AccountActivityListResponse, AccountActivityRetrieveTransactionResponse
+```
+
+Methods:
+
+- <code title="get /v1/account_activity">client.account_activity.<a href="./src/lithic/resources/account_activity.py">list</a>(\*\*<a href="src/lithic/types/account_activity_list_params.py">params</a>) -> <a href="./src/lithic/types/account_activity_list_response.py">SyncCursorPage[AccountActivityListResponse]</a></code>
+- <code title="get /v1/account_activity/{transaction_token}">client.account_activity.<a href="./src/lithic/resources/account_activity.py">retrieve_transaction</a>(transaction_token) -> <a href="./src/lithic/types/account_activity_retrieve_transaction_response.py">AccountActivityRetrieveTransactionResponse</a></code>

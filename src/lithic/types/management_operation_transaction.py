@@ -17,7 +17,7 @@ class Event(BaseModel):
 
     created: datetime
 
-    detailed_results: List[Literal["APPROVED"]]
+    detailed_results: List[Literal["APPROVED", "INSUFFICIENT_FUNDS"]]
 
     effective_date: date
 

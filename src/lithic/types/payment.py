@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Payment", "Event", "MethodAttributes"]
+__all__ = ["Payment", "Event", "MethodAttributes", "RelatedAccountTokens"]
 
 
 class Event(BaseModel):
@@ -94,6 +94,14 @@ class MethodAttributes(BaseModel):
     addenda: Optional[str] = None
 
 
+class RelatedAccountTokens(BaseModel):
+    account_token: Optional[str] = None
+    """Globally unique identifier for the account"""
+
+    business_account_token: Optional[str] = None
+    """Globally unique identifier for the business account"""
+
+
 class Payment(BaseModel):
     token: str
     """Globally unique identifier."""
@@ -131,6 +139,9 @@ class Payment(BaseModel):
     Pending amount of the payment in the currency's smallest unit (e.g., cents). The
     value of this field will go to zero over time once the payment is settled.
     """
+
+    related_account_tokens: RelatedAccountTokens
+    """Account tokens related to a payment transaction"""
 
     result: Literal["APPROVED", "DECLINED"]
     """

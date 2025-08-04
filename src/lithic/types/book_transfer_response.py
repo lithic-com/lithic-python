@@ -1,12 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .external_resource import ExternalResource
 
-__all__ = ["BookTransferResponse", "Event"]
+__all__ = ["BookTransferResponse", "Event", "TransactionSeries"]
 
 
 class Event(BaseModel):
@@ -41,6 +42,14 @@ class Event(BaseModel):
     """Type of the book transfer"""
 
 
+class TransactionSeries(BaseModel):
+    related_transaction_event_token: Optional[str] = None
+
+    related_transaction_token: Optional[str] = None
+
+    type: str
+
+
 class BookTransferResponse(BaseModel):
     token: str
     """Customer-provided token that will serve as an idempotency token.
@@ -62,6 +71,9 @@ class BookTransferResponse(BaseModel):
 
     events: List[Event]
     """A list of all financial events that have modified this transfer."""
+
+    external_resource: Optional[ExternalResource] = None
+    """External resource associated with the management operation"""
 
     from_financial_account_token: str
     """
@@ -100,6 +112,9 @@ class BookTransferResponse(BaseModel):
     Globally unique identifier for the financial account or card that will receive
     the funds. Accepted type dependent on the program's use case.
     """
+
+    transaction_series: Optional[TransactionSeries] = None
+    """A series of transactions that are grouped together."""
 
     updated: datetime
     """Date and time when the financial transaction was last updated. UTC time zone."""
