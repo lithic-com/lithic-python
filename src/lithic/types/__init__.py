@@ -85,6 +85,7 @@ from .book_transfer_create_params import BookTransferCreateParams as BookTransfe
 from .card_web_provision_response import CardWebProvisionResponse as CardWebProvisionResponse
 from .funding_event_list_response import FundingEventListResponse as FundingEventListResponse
 from .network_program_list_params import NetworkProgramListParams as NetworkProgramListParams
+from .account_activity_list_params import AccountActivityListParams as AccountActivityListParams
 from .account_holder_create_params import AccountHolderCreateParams as AccountHolderCreateParams
 from .account_holder_update_params import AccountHolderUpdateParams as AccountHolderUpdateParams
 from .book_transfer_reverse_params import BookTransferReverseParams as BookTransferReverseParams
@@ -96,6 +97,7 @@ from .aggregate_balance_list_params import AggregateBalanceListParams as Aggrega
 from .dispute_list_evidences_params import DisputeListEvidencesParams as DisputeListEvidencesParams
 from .external_bank_account_address import ExternalBankAccountAddress as ExternalBankAccountAddress
 from .financial_account_list_params import FinancialAccountListParams as FinancialAccountListParams
+from .account_activity_list_response import AccountActivityListResponse as AccountActivityListResponse
 from .account_holder_create_response import AccountHolderCreateResponse as AccountHolderCreateResponse
 from .account_holder_update_response import AccountHolderUpdateResponse as AccountHolderUpdateResponse
 from .external_payment_cancel_params import ExternalPaymentCancelParams as ExternalPaymentCancelParams
@@ -188,6 +190,9 @@ from .tokenization_update_digital_card_art_response import (
 )
 from .transaction_simulate_return_reversal_response import (
     TransactionSimulateReturnReversalResponse as TransactionSimulateReturnReversalResponse,
+)
+from .account_activity_retrieve_transaction_response import (
+    AccountActivityRetrieveTransactionResponse as AccountActivityRetrieveTransactionResponse,
 )
 from .tokenization_decisioning_rotate_secret_response import (
     TokenizationDecisioningRotateSecretResponse as TokenizationDecisioningRotateSecretResponse,
