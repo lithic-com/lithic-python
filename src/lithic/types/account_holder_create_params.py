@@ -76,7 +76,7 @@ class KYB(TypedDict, total=False):
 
     kyb_passed_timestamp: str
     """
-    An RFC 3339 timestamp indicating when precomputed KYC was completed on the
+    An RFC 3339 timestamp indicating when precomputed KYB was completed on the
     business with a pass result.
 
     This field is required only if workflow type is `KYB_BYO`.
