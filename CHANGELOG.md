@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.102.0 (2025-08-13)
+
+Full Changelog: [v0.101.0...v0.102.0](https://github.com/lithic-com/lithic-python/compare/v0.101.0...v0.102.0)
+
+### Features
+
+* **api:** adds detailed 3DS challenge statuses ([c08b37a](https://github.com/lithic-com/lithic-python/commit/c08b37ad7fdbf81f76df2bf5b7714c9cc8c4eb60))
+
+
+### Chores
+
+* **internal:** fix ruff target version ([5c7644d](https://github.com/lithic-com/lithic-python/commit/5c7644d6d1a3bb820c12a0f5d85c2479c659879c))
+* **internal:** update comment in script ([88dcc8c](https://github.com/lithic-com/lithic-python/commit/88dcc8c88838f024ed2d8538a0832aa3fe038864))
+* update @stainless-api/prism-cli to v5.15.0 ([9d53118](https://github.com/lithic-com/lithic-python/commit/9d53118b6ef04ab98b1bda7b76f312f69d2d83a7))
+
 ## 0.101.0 (2025-08-04)
 
 Full Changelog: [v0.100.0...v0.101.0](https://github.com/lithic-com/lithic-python/compare/v0.100.0...v0.101.0)
