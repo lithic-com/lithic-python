@@ -295,6 +295,35 @@ class ChallengeMetadata(BaseModel):
     method_type: Literal["SMS_OTP", "OUT_OF_BAND"]
     """The type of challenge method used for authentication."""
 
+    status: Literal[
+        "SUCCESS",
+        "PENDING",
+        "SMS_DELIVERY_FAILED",
+        "CARDHOLDER_TIMEOUT",
+        "CANCELED_VIA_CHALLENGE_UI",
+        "CANCELED_OOB",
+        "ATTEMPTS_EXCEEDED",
+        "ABORTED",
+        "ERROR",
+    ]
+    """Indicates the status of the challenge
+
+    - SUCCESS - Cardholder completed the challenge successfully
+    - PENDING - Challenge was issued to the cardholder and was not completed yet
+    - SMS_DELIVERY_FAILED - Lithic confirmed undeliverability of the SMS to the
+      provided phone number. Relevant only for SMS_OTP method
+    - CARDHOLDER_TIMEOUT - Cardholder failed to complete the challenge within the
+      given challenge TTL
+    - CANCELED_VIA_CHALLENGE_UI - Cardholder canceled the challenge by selecting
+      "cancel" on the challenge UI
+    - CANCELED_OOB - Cardholder canceled the challenge out of band
+    - ATTEMPTS_EXCEEDED - Cardholder failed the challenge by either entering an
+      incorrect OTP more than the allowed number of times or requesting a new OTP
+      more than the allowed number of times
+    - ABORTED - Merchant aborted authentication after a challenge was requested
+    - ERROR - The challenge failed for a reason different than those documented
+    """
+
     phone_number: Optional[str] = None
     """The phone number used for delivering the OTP. Relevant only for SMS_OTP method."""
 

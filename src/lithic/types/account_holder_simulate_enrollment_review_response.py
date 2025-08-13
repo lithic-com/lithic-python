@@ -241,6 +241,12 @@ class VerificationApplication(BaseModel):
     updated: datetime
     """Timestamp of when the application was last updated."""
 
+    ky_passed_at: Optional[datetime] = None
+    """Timestamp of when the application passed the verification process.
+
+    Only present if `status` is `ACCEPTED`
+    """
+
 
 class AccountHolderSimulateEnrollmentReviewResponse(BaseModel):
     token: Optional[str] = None
