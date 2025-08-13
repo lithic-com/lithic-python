@@ -123,7 +123,7 @@ class AccountHolders(SyncAPIResource):
           external_id: A user provided id that can be used to link an account holder with an external
               system
 
-          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
+          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYB was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
@@ -1112,7 +1112,7 @@ class AsyncAccountHolders(AsyncAPIResource):
           external_id: A user provided id that can be used to link an account holder with an external
               system
 
-          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYC was completed on the
+          kyb_passed_timestamp: An RFC 3339 timestamp indicating when precomputed KYB was completed on the
               business with a pass result.
 
               This field is required only if workflow type is `KYB_BYO`.
