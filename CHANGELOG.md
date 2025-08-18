@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.103.0 (2025-08-18)
+
+Full Changelog: [v0.102.0...v0.103.0](https://github.com/lithic-com/lithic-python/compare/v0.102.0...v0.103.0)
+
+### Features
+
+* **api:** adds Event types for additional API resources ([41e5b11](https://github.com/lithic-com/lithic-python/commit/41e5b1123172252c4afccd3524dd4a6f129a17d6))
+
 ## 0.102.0 (2025-08-13)
 
 Full Changelog: [v0.101.0...v0.102.0](https://github.com/lithic-com/lithic-python/compare/v0.101.0...v0.102.0)
