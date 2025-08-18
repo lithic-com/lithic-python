@@ -43,7 +43,9 @@ class TestBookTransfers:
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             type="ATM_WITHDRAWAL",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_id="external_id",
             memo="memo",
+            on_closed_account="FAIL",
         )
         assert_matches_type(BookTransferResponse, book_transfer, path=["response"])
 
@@ -235,7 +237,9 @@ class TestAsyncBookTransfers:
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             type="ATM_WITHDRAWAL",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            external_id="external_id",
             memo="memo",
+            on_closed_account="FAIL",
         )
         assert_matches_type(BookTransferResponse, book_transfer, path=["response"])
 

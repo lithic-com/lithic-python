@@ -12,6 +12,9 @@ __all__ = ["AccountActivityListParams"]
 
 
 class AccountActivityListParams(TypedDict, total=False):
+    account_token: str
+    """Filter by account token"""
+
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 

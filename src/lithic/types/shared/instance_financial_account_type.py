@@ -14,4 +14,5 @@ InstanceFinancialAccountType: TypeAlias = Literal[
     "SECURITY",
     "PROGRAM_RECEIVABLES",
     "COLLECTION",
+    "BANK_ACCOUNTS_PAYABLE",
 ]
