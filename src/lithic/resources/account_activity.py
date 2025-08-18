@@ -46,6 +46,7 @@ class AccountActivity(SyncAPIResource):
     def list(
         self,
         *,
+        account_token: str | NotGiven = NOT_GIVEN,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
         category: Literal[
@@ -83,6 +84,8 @@ class AccountActivity(SyncAPIResource):
         Retrieve a list of transactions across all public accounts.
 
         Args:
+          account_token: Filter by account token
+
           begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
@@ -125,6 +128,7 @@ class AccountActivity(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "account_token": account_token,
                         "begin": begin,
                         "business_account_token": business_account_token,
                         "category": category,
@@ -206,6 +210,7 @@ class AsyncAccountActivity(AsyncAPIResource):
     def list(
         self,
         *,
+        account_token: str | NotGiven = NOT_GIVEN,
         begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
         business_account_token: str | NotGiven = NOT_GIVEN,
         category: Literal[
@@ -243,6 +248,8 @@ class AsyncAccountActivity(AsyncAPIResource):
         Retrieve a list of transactions across all public accounts.
 
         Args:
+          account_token: Filter by account token
+
           begin: Date string in RFC 3339 format. Only entries created after the specified time
               will be included. UTC time zone.
 
@@ -285,6 +292,7 @@ class AsyncAccountActivity(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "account_token": account_token,
                         "begin": begin,
                         "business_account_token": business_account_token,
                         "category": category,

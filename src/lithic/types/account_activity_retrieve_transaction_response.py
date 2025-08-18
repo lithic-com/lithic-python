@@ -13,15 +13,111 @@ from .management_operation_transaction import ManagementOperationTransaction
 __all__ = [
     "AccountActivityRetrieveTransactionResponse",
     "FinancialTransaction",
+    "FinancialTransactionEvent",
     "BookTransferTransaction",
+    "BookTransferTransactionEvent",
     "BookTransferTransactionTransactionSeries",
     "CardTransaction",
     "PaymentTransaction",
+    "PaymentTransactionEvent",
     "PaymentTransactionMethodAttributes",
     "PaymentTransactionMethodAttributesACHMethodAttributes",
     "PaymentTransactionMethodAttributesWireMethodAttributes",
     "PaymentTransactionRelatedAccountTokens",
 ]
+
+
+class FinancialTransactionEvent(BaseModel):
+    token: Optional[str] = None
+    """Globally unique identifier."""
+
+    amount: Optional[int] = None
+    """
+    Amount of the financial event that has been settled in the currency's smallest
+    unit (e.g., cents).
+    """
+
+    created: Optional[datetime] = None
+    """Date and time when the financial event occurred. UTC time zone."""
+
+    result: Optional[Literal["APPROVED", "DECLINED"]] = None
+    """
+    APPROVED financial events were successful while DECLINED financial events were
+    declined by user, Lithic, or the network.
+    """
+
+    type: Optional[
+        Literal[
+            "ACH_ORIGINATION_CANCELLED",
+            "ACH_ORIGINATION_INITIATED",
+            "ACH_ORIGINATION_PROCESSED",
+            "ACH_ORIGINATION_RELEASED",
+            "ACH_ORIGINATION_REVIEWED",
+            "ACH_ORIGINATION_SETTLED",
+            "ACH_RECEIPT_PROCESSED",
+            "ACH_RECEIPT_SETTLED",
+            "ACH_RETURN_INITIATED",
+            "ACH_RETURN_PROCESSED",
+            "ACH_RETURN_SETTLED",
+            "AUTHORIZATION",
+            "AUTHORIZATION_ADVICE",
+            "AUTHORIZATION_EXPIRY",
+            "AUTHORIZATION_REVERSAL",
+            "BALANCE_INQUIRY",
+            "BILLING_ERROR",
+            "BILLING_ERROR_REVERSAL",
+            "CARD_TO_CARD",
+            "CASH_BACK",
+            "CASH_BACK_REVERSAL",
+            "CLEARING",
+            "COLLECTION",
+            "CORRECTION_CREDIT",
+            "CORRECTION_DEBIT",
+            "CREDIT_AUTHORIZATION",
+            "CREDIT_AUTHORIZATION_ADVICE",
+            "CURRENCY_CONVERSION",
+            "CURRENCY_CONVERSION_REVERSAL",
+            "DISPUTE_WON",
+            "EXTERNAL_ACH_CANCELED",
+            "EXTERNAL_ACH_INITIATED",
+            "EXTERNAL_ACH_RELEASED",
+            "EXTERNAL_ACH_REVERSED",
+            "EXTERNAL_ACH_SETTLED",
+            "EXTERNAL_CHECK_CANCELED",
+            "EXTERNAL_CHECK_INITIATED",
+            "EXTERNAL_CHECK_RELEASED",
+            "EXTERNAL_CHECK_REVERSED",
+            "EXTERNAL_CHECK_SETTLED",
+            "EXTERNAL_TRANSFER_CANCELED",
+            "EXTERNAL_TRANSFER_INITIATED",
+            "EXTERNAL_TRANSFER_RELEASED",
+            "EXTERNAL_TRANSFER_REVERSED",
+            "EXTERNAL_TRANSFER_SETTLED",
+            "EXTERNAL_WIRE_CANCELED",
+            "EXTERNAL_WIRE_INITIATED",
+            "EXTERNAL_WIRE_RELEASED",
+            "EXTERNAL_WIRE_REVERSED",
+            "EXTERNAL_WIRE_SETTLED",
+            "FINANCIAL_AUTHORIZATION",
+            "FINANCIAL_CREDIT_AUTHORIZATION",
+            "INTEREST",
+            "INTEREST_REVERSAL",
+            "INTERNAL_ADJUSTMENT",
+            "LATE_PAYMENT",
+            "LATE_PAYMENT_REVERSAL",
+            "LOSS_WRITE_OFF",
+            "PROVISIONAL_CREDIT",
+            "PROVISIONAL_CREDIT_REVERSAL",
+            "SERVICE",
+            "RETURN",
+            "RETURN_REVERSAL",
+            "TRANSFER",
+            "TRANSFER_INSUFFICIENT_FUNDS",
+            "RETURNED_PAYMENT",
+            "RETURNED_PAYMENT_REVERSAL",
+            "LITHIC_NETWORK_PAYMENT",
+        ]
+    ] = None
 
 
 class FinancialTransaction(BaseModel):
@@ -54,7 +150,7 @@ class FinancialTransaction(BaseModel):
     descriptor: str
     """Transaction descriptor"""
 
-    events: List[object]
+    events: List[FinancialTransactionEvent]
     """List of transaction events"""
 
     family: Literal["CARD", "PAYMENT", "TRANSFER", "INTERNAL", "EXTERNAL_PAYMENT", "MANAGEMENT_OPERATION"]
@@ -76,6 +172,71 @@ class FinancialTransaction(BaseModel):
 
     updated: datetime
     """ISO 8601 timestamp of when the transaction was last updated"""
+
+
+class BookTransferTransactionEvent(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
+    amount: int
+    """
+    Amount of the financial event that has been settled in the currency's smallest
+    unit (e.g., cents).
+    """
+
+    created: datetime
+    """Date and time when the financial event occurred. UTC time zone."""
+
+    detailed_results: Literal["APPROVED", "FUNDS_INSUFFICIENT"]
+
+    memo: str
+    """Memo for the transfer."""
+
+    result: Literal["APPROVED", "DECLINED"]
+    """
+    APPROVED financial events were successful while DECLINED financial events were
+    declined by user, Lithic, or the network.
+    """
+
+    subtype: str
+    """The program specific subtype code for the specified category/type."""
+
+    type: Literal[
+        "ATM_WITHDRAWAL",
+        "ATM_DECLINE",
+        "INTERNATIONAL_ATM_WITHDRAWAL",
+        "INACTIVITY",
+        "STATEMENT",
+        "MONTHLY",
+        "QUARTERLY",
+        "ANNUAL",
+        "CUSTOMER_SERVICE",
+        "ACCOUNT_MAINTENANCE",
+        "ACCOUNT_ACTIVATION",
+        "ACCOUNT_CLOSURE",
+        "CARD_REPLACEMENT",
+        "CARD_DELIVERY",
+        "CARD_CREATE",
+        "CURRENCY_CONVERSION",
+        "INTEREST",
+        "LATE_PAYMENT",
+        "BILL_PAYMENT",
+        "CASH_BACK",
+        "ACCOUNT_TO_ACCOUNT",
+        "CARD_TO_CARD",
+        "DISBURSE",
+        "BILLING_ERROR",
+        "LOSS_WRITE_OFF",
+        "EXPIRED_CARD",
+        "EARLY_DERECOGNITION",
+        "ESCHEATMENT",
+        "INACTIVITY_FEE_DOWN",
+        "PROVISIONAL_CREDIT",
+        "DISPUTE_WON",
+        "SERVICE",
+        "TRANSFER",
+    ]
+    """Type of the book transfer"""
 
 
 class BookTransferTransactionTransactionSeries(BaseModel):
@@ -112,7 +273,7 @@ class BookTransferTransaction(BaseModel):
     currency: str
     """Currency of the transaction in ISO 4217 format"""
 
-    events: List[object]
+    events: List[BookTransferTransactionEvent]
     """List of events associated with this book transfer"""
 
     family: Literal["CARD", "PAYMENT", "TRANSFER", "INTERNAL", "EXTERNAL_PAYMENT", "MANAGEMENT_OPERATION"]
@@ -162,6 +323,75 @@ class CardTransaction(Transaction):
     """ISO 8601 timestamp of when the transaction was last updated"""
 
 
+class PaymentTransactionEvent(BaseModel):
+    token: str
+    """Globally unique identifier."""
+
+    amount: int
+    """
+    Amount of the financial event that has been settled in the currency's smallest
+    unit (e.g., cents).
+    """
+
+    created: datetime
+    """Date and time when the financial event occurred. UTC time zone."""
+
+    result: Literal["APPROVED", "DECLINED"]
+    """
+    APPROVED financial events were successful while DECLINED financial events were
+    declined by user, Lithic, or the network.
+    """
+
+    type: Literal[
+        "ACH_ORIGINATION_CANCELLED",
+        "ACH_ORIGINATION_INITIATED",
+        "ACH_ORIGINATION_PROCESSED",
+        "ACH_ORIGINATION_SETTLED",
+        "ACH_ORIGINATION_RELEASED",
+        "ACH_ORIGINATION_REVIEWED",
+        "ACH_RECEIPT_PROCESSED",
+        "ACH_RECEIPT_SETTLED",
+        "ACH_RETURN_INITIATED",
+        "ACH_RETURN_PROCESSED",
+        "ACH_RETURN_SETTLED",
+    ]
+    """Event types:
+
+    - `ACH_ORIGINATION_INITIATED` - ACH origination received and pending
+      approval/release from an ACH hold.
+    - `ACH_ORIGINATION_REVIEWED` - ACH origination has completed the review process.
+    - `ACH_ORIGINATION_CANCELLED` - ACH origination has been cancelled.
+    - `ACH_ORIGINATION_PROCESSED` - ACH origination has been processed and sent to
+      the Federal Reserve.
+    - `ACH_ORIGINATION_SETTLED` - ACH origination has settled.
+    - `ACH_ORIGINATION_RELEASED` - ACH origination released from pending to
+      available balance.
+    - `ACH_RETURN_PROCESSED` - ACH origination returned by the Receiving Depository
+      Financial Institution.
+    - `ACH_RECEIPT_PROCESSED` - ACH receipt pending release from an ACH holder.
+    - `ACH_RETURN_INITIATED` - ACH initiated return for a ACH receipt.
+    - `ACH_RECEIPT_SETTLED` - ACH receipt funds have settled.
+    - `ACH_RECEIPT_RELEASED` - ACH receipt released from pending to available
+      balance.
+    - `ACH_RETURN_SETTLED` - ACH receipt return settled by the Receiving Depository
+      Financial Institution.
+    """
+
+    detailed_results: Optional[
+        List[
+            Literal[
+                "APPROVED",
+                "FUNDS_INSUFFICIENT",
+                "ACCOUNT_INVALID",
+                "PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
+                "PROGRAM_DAILY_LIMIT_EXCEEDED",
+                "PROGRAM_MONTHLY_LIMIT_EXCEEDED",
+            ]
+        ]
+    ] = None
+    """More detailed reasons for the event"""
+
+
 class PaymentTransactionMethodAttributesACHMethodAttributes(BaseModel):
     sec_code: Literal["CCD", "PPD", "WEB", "TEL", "CIE", "CTX"]
     """SEC code for ACH transaction"""
@@ -198,6 +428,9 @@ class PaymentTransactionMethodAttributesWireMethodAttributes(BaseModel):
     external_individual_name: Optional[str] = None
     """External individual name"""
 
+    imad: Optional[str] = None
+    """IMAD"""
+
     lithic_bank_name: Optional[str] = None
     """Lithic bank name"""
 
@@ -207,8 +440,14 @@ class PaymentTransactionMethodAttributesWireMethodAttributes(BaseModel):
     lithic_individual_name: Optional[str] = None
     """Lithic individual name"""
 
+    omad: Optional[str] = None
+    """OMAD"""
+
     previous_transfer: Optional[str] = None
     """UUID of previous transfer if this is a retry"""
+
+    wire_token: Optional[str] = None
+    """Wire token"""
 
 
 PaymentTransactionMethodAttributes: TypeAlias = Union[
@@ -254,7 +493,7 @@ class PaymentTransaction(BaseModel):
     direction: Literal["CREDIT", "DEBIT"]
     """Transfer direction"""
 
-    events: List[object]
+    events: List[PaymentTransactionEvent]
     """List of transaction events"""
 
     family: Literal["CARD", "PAYMENT", "TRANSFER", "INTERNAL", "EXTERNAL_PAYMENT", "MANAGEMENT_OPERATION"]

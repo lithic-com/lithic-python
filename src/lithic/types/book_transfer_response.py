@@ -23,8 +23,7 @@ class Event(BaseModel):
     created: datetime
     """Date and time when the financial event occurred. UTC time zone."""
 
-    detailed_results: List[Literal["APPROVED", "FUNDS_INSUFFICIENT"]]
-    """Detailed Results"""
+    detailed_results: Literal["APPROVED", "FUNDS_INSUFFICIENT"]
 
     memo: str
     """Memo for the transfer."""
@@ -38,7 +37,41 @@ class Event(BaseModel):
     subtype: str
     """The program specific subtype code for the specified category/type."""
 
-    type: str
+    type: Literal[
+        "ATM_WITHDRAWAL",
+        "ATM_DECLINE",
+        "INTERNATIONAL_ATM_WITHDRAWAL",
+        "INACTIVITY",
+        "STATEMENT",
+        "MONTHLY",
+        "QUARTERLY",
+        "ANNUAL",
+        "CUSTOMER_SERVICE",
+        "ACCOUNT_MAINTENANCE",
+        "ACCOUNT_ACTIVATION",
+        "ACCOUNT_CLOSURE",
+        "CARD_REPLACEMENT",
+        "CARD_DELIVERY",
+        "CARD_CREATE",
+        "CURRENCY_CONVERSION",
+        "INTEREST",
+        "LATE_PAYMENT",
+        "BILL_PAYMENT",
+        "CASH_BACK",
+        "ACCOUNT_TO_ACCOUNT",
+        "CARD_TO_CARD",
+        "DISBURSE",
+        "BILLING_ERROR",
+        "LOSS_WRITE_OFF",
+        "EXPIRED_CARD",
+        "EARLY_DERECOGNITION",
+        "ESCHEATMENT",
+        "INACTIVITY_FEE_DOWN",
+        "PROVISIONAL_CREDIT",
+        "DISPUTE_WON",
+        "SERVICE",
+        "TRANSFER",
+    ]
     """Type of the book transfer"""
 
 
@@ -72,6 +105,9 @@ class BookTransferResponse(BaseModel):
     events: List[Event]
     """A list of all financial events that have modified this transfer."""
 
+    external_id: Optional[str] = None
+    """External ID defined by the customer"""
+
     external_resource: Optional[ExternalResource] = None
     """External resource associated with the management operation"""
 
@@ -84,15 +120,13 @@ class BookTransferResponse(BaseModel):
     pending_amount: int
     """
     Pending amount of the transaction in the currency's smallest unit (e.g., cents),
-    including any acquirer fees. The value of this field will go to zero over time
-    once the financial transaction is settled.
+    including any acquirer fees.
+
+    The value of this field will go to zero over time once the financial transaction
+    is settled.
     """
 
     result: Literal["APPROVED", "DECLINED"]
-    """
-    APPROVED transactions were successful while DECLINED transactions were declined
-    by user, Lithic, or the network.
-    """
 
     settled_amount: int
     """
@@ -101,13 +135,14 @@ class BookTransferResponse(BaseModel):
     """
 
     status: Literal["DECLINED", "REVERSED", "SETTLED"]
-    """Status types: \\** `DECLINED` - The transfer was declined.
+    """Status types:
 
-    - `REVERSED` - The transfer was reversed \\** `SETTLED` - The transfer is
-      completed.
+    - `DECLINED` - The transfer was declined.
+    - `REVERSED` - The transfer was reversed
+    - `SETTLED` - The transfer is completed.
     """
 
-    to_financial_account_token: object
+    to_financial_account_token: str
     """
     Globally unique identifier for the financial account or card that will receive
     the funds. Accepted type dependent on the program's use case.
