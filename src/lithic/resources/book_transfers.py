@@ -86,7 +86,9 @@ class BookTransfers(SyncAPIResource):
             "TRANSFER",
         ],
         token: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -99,7 +101,7 @@ class BookTransfers(SyncAPIResource):
         account and card
 
         Args:
-          amount: Amount to be transferred in the currency’s smallest unit (e.g., cents for USD).
+          amount: Amount to be transferred in the currency's smallest unit (e.g., cents for USD).
               This should always be a positive value.
 
           category: Category of the book transfer
@@ -112,12 +114,16 @@ class BookTransfers(SyncAPIResource):
           to_financial_account_token: Globally unique identifier for the financial account or card that will receive
               the funds. Accepted type dependent on the program's use case.
 
-          type: Type of book_transfer
+          type: Type of the book transfer
 
           token: Customer-provided token that will serve as an idempotency token. This token will
               become the transaction token.
 
+          external_id: External ID defined by the customer
+
           memo: Optional descriptor for the transfer.
+
+          on_closed_account: What to do if the financial account is closed when posting an operation
 
           extra_headers: Send extra headers
 
@@ -138,7 +144,9 @@ class BookTransfers(SyncAPIResource):
                     "to_financial_account_token": to_financial_account_token,
                     "type": type,
                     "token": token,
+                    "external_id": external_id,
                     "memo": memo,
+                    "on_closed_account": on_closed_account,
                 },
                 book_transfer_create_params.BookTransferCreateParams,
             ),
@@ -373,7 +381,9 @@ class AsyncBookTransfers(AsyncAPIResource):
             "TRANSFER",
         ],
         token: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
         memo: str | NotGiven = NOT_GIVEN,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -386,7 +396,7 @@ class AsyncBookTransfers(AsyncAPIResource):
         account and card
 
         Args:
-          amount: Amount to be transferred in the currency’s smallest unit (e.g., cents for USD).
+          amount: Amount to be transferred in the currency's smallest unit (e.g., cents for USD).
               This should always be a positive value.
 
           category: Category of the book transfer
@@ -399,12 +409,16 @@ class AsyncBookTransfers(AsyncAPIResource):
           to_financial_account_token: Globally unique identifier for the financial account or card that will receive
               the funds. Accepted type dependent on the program's use case.
 
-          type: Type of book_transfer
+          type: Type of the book transfer
 
           token: Customer-provided token that will serve as an idempotency token. This token will
               become the transaction token.
 
+          external_id: External ID defined by the customer
+
           memo: Optional descriptor for the transfer.
+
+          on_closed_account: What to do if the financial account is closed when posting an operation
 
           extra_headers: Send extra headers
 
@@ -425,7 +439,9 @@ class AsyncBookTransfers(AsyncAPIResource):
                     "to_financial_account_token": to_financial_account_token,
                     "type": type,
                     "token": token,
+                    "external_id": external_id,
                     "memo": memo,
+                    "on_closed_account": on_closed_account,
                 },
                 book_transfer_create_params.BookTransferCreateParams,
             ),

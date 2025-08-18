@@ -9,7 +9,7 @@ __all__ = ["BookTransferCreateParams"]
 
 class BookTransferCreateParams(TypedDict, total=False):
     amount: Required[int]
-    """Amount to be transferred in the currency’s smallest unit (e.g., cents for USD).
+    """Amount to be transferred in the currency's smallest unit (e.g., cents for USD).
 
     This should always be a positive value.
     """
@@ -71,7 +71,7 @@ class BookTransferCreateParams(TypedDict, total=False):
             "TRANSFER",
         ]
     ]
-    """Type of book_transfer"""
+    """Type of the book transfer"""
 
     token: str
     """Customer-provided token that will serve as an idempotency token.
@@ -79,5 +79,11 @@ class BookTransferCreateParams(TypedDict, total=False):
     This token will become the transaction token.
     """
 
+    external_id: str
+    """External ID defined by the customer"""
+
     memo: str
     """Optional descriptor for the transfer."""
+
+    on_closed_account: Literal["FAIL", "USE_SUSPENSE"]
+    """What to do if the financial account is closed when posting an operation"""

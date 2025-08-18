@@ -174,3 +174,19 @@ class Payment(BaseModel):
 
     expected_release_date: Optional[date] = None
     """Date when the financial transaction expected to be released after settlement"""
+
+    type: Optional[
+        Literal[
+            "ORIGINATION_CREDIT",
+            "ORIGINATION_DEBIT",
+            "RECEIPT_CREDIT",
+            "RECEIPT_DEBIT",
+            "CUSTOMER_TRANSFER",
+            "DRAWDOWN_PAYMENT",
+            "REVERSAL_PAYMENT",
+            "DRAWDOWN_REQUEST",
+            "REVERSAL_REQUEST",
+            "DRAWDOWN_REFUSAL",
+        ]
+    ] = None
+    """Payment type indicating the specific ACH message or Fedwire transfer type"""
