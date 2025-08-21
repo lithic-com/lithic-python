@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.103.1 (2025-08-21)
+
+Full Changelog: [v0.103.0...v0.103.1](https://github.com/lithic-com/lithic-python/compare/v0.103.0...v0.103.1)
+
+### Chores
+
+* update github action ([b51fa14](https://github.com/lithic-com/lithic-python/commit/b51fa14601334c7e5023cc89f8c6af262f68debf))
+
 ## 0.103.0 (2025-08-18)
 
 Full Changelog: [v0.102.0...v0.103.0](https://github.com/lithic-com/lithic-python/compare/v0.102.0...v0.103.0)
