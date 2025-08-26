@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.103.1 (2025-08-26)
+
+Full Changelog: [v0.103.0...v0.103.1](https://github.com/lithic-com/lithic-python/compare/v0.103.0...v0.103.1)
+
+### Bug Fixes
+
+* avoid newer type syntax ([c369fbc](https://github.com/lithic-com/lithic-python/commit/c369fbcbe1e84b199e68bb9081e84f00172e6590))
+
+
+### Chores
+
+* **internal:** change ci workflow machines ([083042a](https://github.com/lithic-com/lithic-python/commit/083042ad2752b9bbd27f0084456074c24223968f))
+* update github action ([b51fa14](https://github.com/lithic-com/lithic-python/commit/b51fa14601334c7e5023cc89f8c6af262f68debf))
+
 ## 0.103.0 (2025-08-18)
 
 Full Changelog: [v0.102.0...v0.103.0](https://github.com/lithic-com/lithic-python/compare/v0.102.0...v0.103.0)
