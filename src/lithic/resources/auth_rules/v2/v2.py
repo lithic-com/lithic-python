@@ -1791,7 +1791,7 @@ class V2WithRawResponse:
         )
         self.apply = (  # pyright: ignore[reportDeprecated]
             _legacy_response.to_raw_response_wrapper(
-                v2.apply  # pyright: ignore[reportDeprecated],
+                v2.apply,  # pyright: ignore[reportDeprecated],
             )
         )
         self.draft = _legacy_response.to_raw_response_wrapper(
@@ -1802,7 +1802,7 @@ class V2WithRawResponse:
         )
         self.report = (  # pyright: ignore[reportDeprecated]
             _legacy_response.to_raw_response_wrapper(
-                v2.report  # pyright: ignore[reportDeprecated],
+                v2.report,  # pyright: ignore[reportDeprecated],
             )
         )
         self.retrieve_report = _legacy_response.to_raw_response_wrapper(
@@ -1835,7 +1835,7 @@ class AsyncV2WithRawResponse:
         )
         self.apply = (  # pyright: ignore[reportDeprecated]
             _legacy_response.async_to_raw_response_wrapper(
-                v2.apply  # pyright: ignore[reportDeprecated],
+                v2.apply,  # pyright: ignore[reportDeprecated],
             )
         )
         self.draft = _legacy_response.async_to_raw_response_wrapper(
@@ -1846,7 +1846,7 @@ class AsyncV2WithRawResponse:
         )
         self.report = (  # pyright: ignore[reportDeprecated]
             _legacy_response.async_to_raw_response_wrapper(
-                v2.report  # pyright: ignore[reportDeprecated],
+                v2.report,  # pyright: ignore[reportDeprecated],
             )
         )
         self.retrieve_report = _legacy_response.async_to_raw_response_wrapper(
@@ -1879,7 +1879,7 @@ class V2WithStreamingResponse:
         )
         self.apply = (  # pyright: ignore[reportDeprecated]
             to_streamed_response_wrapper(
-                v2.apply  # pyright: ignore[reportDeprecated],
+                v2.apply,  # pyright: ignore[reportDeprecated],
             )
         )
         self.draft = to_streamed_response_wrapper(
@@ -1890,7 +1890,7 @@ class V2WithStreamingResponse:
         )
         self.report = (  # pyright: ignore[reportDeprecated]
             to_streamed_response_wrapper(
-                v2.report  # pyright: ignore[reportDeprecated],
+                v2.report,  # pyright: ignore[reportDeprecated],
             )
         )
         self.retrieve_report = to_streamed_response_wrapper(
@@ -1923,7 +1923,7 @@ class AsyncV2WithStreamingResponse:
         )
         self.apply = (  # pyright: ignore[reportDeprecated]
             async_to_streamed_response_wrapper(
-                v2.apply  # pyright: ignore[reportDeprecated],
+                v2.apply,  # pyright: ignore[reportDeprecated],
             )
         )
         self.draft = async_to_streamed_response_wrapper(
@@ -1934,7 +1934,7 @@ class AsyncV2WithStreamingResponse:
         )
         self.report = (  # pyright: ignore[reportDeprecated]
             async_to_streamed_response_wrapper(
-                v2.report  # pyright: ignore[reportDeprecated],
+                v2.report,  # pyright: ignore[reportDeprecated],
             )
         )
         self.retrieve_report = async_to_streamed_response_wrapper(
