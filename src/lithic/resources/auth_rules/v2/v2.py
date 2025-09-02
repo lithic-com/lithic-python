@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import typing_extensions
-from typing import List, Union, Optional
+from typing import Union, Optional
 from datetime import date
 from typing_extensions import Literal, overload
 
 import httpx
 
 from .... import _legacy_response
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
 from ...._utils import required_args, maybe_transform, async_maybe_transform
 from .backtests import (
     Backtests,
@@ -74,7 +74,7 @@ class V2(SyncAPIResource):
     def create(
         self,
         *,
-        account_tokens: List[str],
+        account_tokens: SequenceNotStr[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
@@ -118,7 +118,7 @@ class V2(SyncAPIResource):
     def create(
         self,
         *,
-        card_tokens: List[str],
+        card_tokens: SequenceNotStr[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
@@ -163,7 +163,7 @@ class V2(SyncAPIResource):
         self,
         *,
         program_level: bool,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
@@ -209,14 +209,14 @@ class V2(SyncAPIResource):
     def create(
         self,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
         | NotGiven = NOT_GIVEN,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -282,7 +282,7 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -325,7 +325,7 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -368,7 +368,7 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
@@ -413,11 +413,11 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -555,7 +555,7 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str],
+        account_tokens: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -588,7 +588,7 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: List[str],
+        card_tokens: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -622,7 +622,7 @@ class V2(SyncAPIResource):
         auth_rule_token: str,
         *,
         program_level: bool,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -657,10 +657,10 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -936,7 +936,7 @@ class AsyncV2(AsyncAPIResource):
     async def create(
         self,
         *,
-        account_tokens: List[str],
+        account_tokens: SequenceNotStr[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
@@ -980,7 +980,7 @@ class AsyncV2(AsyncAPIResource):
     async def create(
         self,
         *,
-        card_tokens: List[str],
+        card_tokens: SequenceNotStr[str],
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
@@ -1025,7 +1025,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         program_level: bool,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
@@ -1071,14 +1071,14 @@ class AsyncV2(AsyncAPIResource):
     async def create(
         self,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
         | NotGiven = NOT_GIVEN,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1144,7 +1144,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1187,7 +1187,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1230,7 +1230,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
@@ -1275,11 +1275,11 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1417,7 +1417,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str],
+        account_tokens: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1450,7 +1450,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: List[str],
+        card_tokens: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1484,7 +1484,7 @@ class AsyncV2(AsyncAPIResource):
         auth_rule_token: str,
         *,
         program_level: bool,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1519,10 +1519,10 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: List[str] | NotGiven = NOT_GIVEN,
-        card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: List[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

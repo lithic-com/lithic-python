@@ -2,36 +2,37 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
+from ..._types import SequenceNotStr
 from .velocity_limit_params_period_window_param import VelocityLimitParamsPeriodWindowParam
 
 __all__ = ["VelocityLimitParamsParam", "Filters"]
 
 
 class Filters(TypedDict, total=False):
-    exclude_countries: Optional[List[str]]
+    exclude_countries: Optional[SequenceNotStr[str]]
     """ISO-3166-1 alpha-3 Country Codes to exclude from the velocity calculation.
 
     Transactions matching any of the provided will be excluded from the calculated
     velocity.
     """
 
-    exclude_mccs: Optional[List[str]]
+    exclude_mccs: Optional[SequenceNotStr[str]]
     """Merchant Category Codes to exclude from the velocity calculation.
 
     Transactions matching this MCC will be excluded from the calculated velocity.
     """
 
-    include_countries: Optional[List[str]]
+    include_countries: Optional[SequenceNotStr[str]]
     """ISO-3166-1 alpha-3 Country Codes to include in the velocity calculation.
 
     Transactions not matching any of the provided will not be included in the
     calculated velocity.
     """
 
-    include_mccs: Optional[List[str]]
+    include_mccs: Optional[SequenceNotStr[str]]
     """Merchant Category Codes to include in the velocity calculation.
 
     Transactions not matching this MCC will not be included in the calculated

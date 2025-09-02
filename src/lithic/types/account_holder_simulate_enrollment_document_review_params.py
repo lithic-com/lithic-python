@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Literal, Required, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["AccountHolderSimulateEnrollmentDocumentReviewParams"]
 
@@ -15,7 +16,7 @@ class AccountHolderSimulateEnrollmentDocumentReviewParams(TypedDict, total=False
     status: Required[Literal["UPLOADED", "ACCEPTED", "REJECTED", "PARTIAL_APPROVAL"]]
     """An account holder document's upload status for use within the simulation."""
 
-    accepted_entity_status_reasons: List[str]
+    accepted_entity_status_reasons: SequenceNotStr[str]
     """A list of status reasons associated with a KYB account holder in PENDING_REVIEW"""
 
     status_reason: Literal[

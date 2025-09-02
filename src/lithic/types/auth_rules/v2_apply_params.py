@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from typing_extensions import Required, TypeAlias, TypedDict
+
+from ..._types import SequenceNotStr
 
 __all__ = [
     "V2ApplyParams",
@@ -14,12 +16,12 @@ __all__ = [
 
 
 class ApplyAuthRuleRequestAccountTokens(TypedDict, total=False):
-    account_tokens: Required[List[str]]
+    account_tokens: Required[SequenceNotStr[str]]
     """Account tokens to which the Auth Rule applies."""
 
 
 class ApplyAuthRuleRequestCardTokens(TypedDict, total=False):
-    card_tokens: Required[List[str]]
+    card_tokens: Required[SequenceNotStr[str]]
     """Card tokens to which the Auth Rule applies."""
 
 
@@ -27,7 +29,7 @@ class ApplyAuthRuleRequestProgramLevel(TypedDict, total=False):
     program_level: Required[bool]
     """Whether the Auth Rule applies to all authorizations on the card program."""
 
-    excluded_card_tokens: List[str]
+    excluded_card_tokens: SequenceNotStr[str]
     """Card tokens to which the Auth Rule does not apply."""
 
 
