@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, TypedDict
 
+from .._types import SequenceNotStr
 from .owner_type import OwnerType
 
 __all__ = ["ExternalBankAccountListParams"]
@@ -15,7 +16,7 @@ class ExternalBankAccountListParams(TypedDict, total=False):
 
     account_types: List[Literal["CHECKING", "SAVINGS"]]
 
-    countries: List[str]
+    countries: SequenceNotStr[str]
 
     ending_before: str
     """A cursor representing an item's token before which a page of results should end.

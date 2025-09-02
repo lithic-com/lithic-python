@@ -17,7 +17,7 @@ from ..types import (
     account_holder_simulate_enrollment_review_params,
     account_holder_simulate_enrollment_document_review_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from .._utils import is_given, required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -809,7 +809,7 @@ class AccountHolders(SyncAPIResource):
         *,
         document_upload_token: str,
         status: Literal["UPLOADED", "ACCEPTED", "REJECTED", "PARTIAL_APPROVAL"],
-        accepted_entity_status_reasons: List[str] | NotGiven = NOT_GIVEN,
+        accepted_entity_status_reasons: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         status_reason: Literal[
             "DOCUMENT_MISSING_REQUIRED_DATA",
             "DOCUMENT_UPLOAD_TOO_BLURRY",
@@ -1798,7 +1798,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         *,
         document_upload_token: str,
         status: Literal["UPLOADED", "ACCEPTED", "REJECTED", "PARTIAL_APPROVAL"],
-        accepted_entity_status_reasons: List[str] | NotGiven = NOT_GIVEN,
+        accepted_entity_status_reasons: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         status_reason: Literal[
             "DOCUMENT_MISSING_REQUIRED_DATA",
             "DOCUMENT_UPLOAD_TOO_BLURRY",

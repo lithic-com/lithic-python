@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -16,7 +16,7 @@ from ..types import (
     dispute_list_evidences_params,
     dispute_initiate_evidence_upload_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -242,7 +242,7 @@ class Disputes(SyncAPIResource):
             "SUBMITTED",
         ]
         | NotGiven = NOT_GIVEN,
-        transaction_tokens: List[str] | NotGiven = NOT_GIVEN,
+        transaction_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -736,7 +736,7 @@ class AsyncDisputes(AsyncAPIResource):
             "SUBMITTED",
         ]
         | NotGiven = NOT_GIVEN,
-        transaction_tokens: List[str] | NotGiven = NOT_GIVEN,
+        transaction_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
