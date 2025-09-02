@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
+from .._types import SequenceNotStr
 from .shared_params.address import Address
 
 __all__ = ["KYBParam", "BeneficialOwnerIndividual", "BusinessEntity", "ControlPerson", "BeneficialOwnerEntity"]
@@ -61,7 +62,7 @@ class BusinessEntity(TypedDict, total=False):
     legal_business_name: Required[str]
     """Legal (formal) business name."""
 
-    phone_numbers: Required[List[str]]
+    phone_numbers: Required[SequenceNotStr[str]]
     """
     One or more of the business's phone number(s), entered as a list in E.164
     format.
@@ -128,7 +129,7 @@ class BeneficialOwnerEntity(TypedDict, total=False):
     legal_business_name: Required[str]
     """Legal (formal) business name."""
 
-    phone_numbers: Required[List[str]]
+    phone_numbers: Required[SequenceNotStr[str]]
     """
     One or more of the business's phone number(s), entered as a list in E.164
     format.

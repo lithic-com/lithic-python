@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
+from ..._types import SequenceNotStr
 from .velocity_limit_params_param import VelocityLimitParamsParam
 from .merchant_lock_parameters_param import MerchantLockParametersParam
 from .conditional_block_parameters_param import ConditionalBlockParametersParam
@@ -22,7 +23,7 @@ __all__ = [
 
 
 class CreateAuthRuleRequestAccountTokens(TypedDict, total=False):
-    account_tokens: Required[List[str]]
+    account_tokens: Required[SequenceNotStr[str]]
     """Account tokens to which the Auth Rule applies."""
 
     name: Optional[str]
@@ -52,7 +53,7 @@ CreateAuthRuleRequestAccountTokensParameters: TypeAlias = Union[
 
 
 class CreateAuthRuleRequestCardTokens(TypedDict, total=False):
-    card_tokens: Required[List[str]]
+    card_tokens: Required[SequenceNotStr[str]]
     """Card tokens to which the Auth Rule applies."""
 
     name: Optional[str]
@@ -85,7 +86,7 @@ class CreateAuthRuleRequestProgramLevel(TypedDict, total=False):
     program_level: Required[bool]
     """Whether the Auth Rule applies to all authorizations on the card program."""
 
-    excluded_card_tokens: List[str]
+    excluded_card_tokens: SequenceNotStr[str]
     """Card tokens to which the Auth Rule does not apply."""
 
     name: Optional[str]

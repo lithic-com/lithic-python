@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["DisputeListParams"]
@@ -52,5 +53,5 @@ class DisputeListParams(TypedDict, total=False):
     ]
     """List disputes of a specific status."""
 
-    transaction_tokens: List[str]
+    transaction_tokens: SequenceNotStr[str]
     """Transaction tokens to filter by."""

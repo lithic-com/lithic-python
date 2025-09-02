@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import Union, Iterable
 from typing_extensions import Required, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .address_update_param import AddressUpdateParam
 
 __all__ = [
@@ -97,7 +98,7 @@ class KYBPatchRequestBeneficialOwnerEntity(TypedDict, total=False):
     parent_company: str
     """Parent company name (if applicable)."""
 
-    phone_numbers: List[str]
+    phone_numbers: SequenceNotStr[str]
     """
     One or more of the business's phone number(s), entered as a list in E.164
     format.
@@ -171,7 +172,7 @@ class KYBPatchRequestBusinessEntity(TypedDict, total=False):
     parent_company: str
     """Parent company name (if applicable)."""
 
-    phone_numbers: List[str]
+    phone_numbers: SequenceNotStr[str]
     """
     One or more of the business's phone number(s), entered as a list in E.164
     format.

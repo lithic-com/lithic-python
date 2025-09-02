@@ -18,7 +18,7 @@ from ...types import (
     external_bank_account_retry_prenote_params,
     external_bank_account_retry_micro_deposits_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ..._utils import required_args, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -547,7 +547,7 @@ class ExternalBankAccounts(SyncAPIResource):
         *,
         account_token: str | NotGiven = NOT_GIVEN,
         account_types: List[Literal["CHECKING", "SAVINGS"]] | NotGiven = NOT_GIVEN,
-        countries: List[str] | NotGiven = NOT_GIVEN,
+        countries: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
@@ -1190,7 +1190,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         *,
         account_token: str | NotGiven = NOT_GIVEN,
         account_types: List[Literal["CHECKING", "SAVINGS"]] | NotGiven = NOT_GIVEN,
-        countries: List[str] | NotGiven = NOT_GIVEN,
+        countries: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,

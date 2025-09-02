@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import Union, Optional
 from typing_extensions import Literal, TypeAlias, TypedDict
+
+from ..._types import SequenceNotStr
 
 __all__ = ["V2UpdateParams", "AccountLevelRule", "CardLevelRule", "ProgramLevelRule"]
 
 
 class AccountLevelRule(TypedDict, total=False):
-    account_tokens: List[str]
+    account_tokens: SequenceNotStr[str]
     """Account tokens to which the Auth Rule applies."""
 
     name: Optional[str]
@@ -25,7 +27,7 @@ class AccountLevelRule(TypedDict, total=False):
 
 
 class CardLevelRule(TypedDict, total=False):
-    card_tokens: List[str]
+    card_tokens: SequenceNotStr[str]
     """Card tokens to which the Auth Rule applies."""
 
     name: Optional[str]
@@ -41,7 +43,7 @@ class CardLevelRule(TypedDict, total=False):
 
 
 class ProgramLevelRule(TypedDict, total=False):
-    excluded_card_tokens: List[str]
+    excluded_card_tokens: SequenceNotStr[str]
     """Card tokens to which the Auth Rule does not apply."""
 
     name: Optional[str]

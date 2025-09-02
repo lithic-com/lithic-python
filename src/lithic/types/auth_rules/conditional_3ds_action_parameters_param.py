@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import Union, Iterable
 from typing_extensions import Literal, Required, TypedDict
+
+from ..._types import SequenceNotStr
 
 __all__ = ["Conditional3DSActionParametersParam", "Condition"]
 
@@ -45,7 +47,7 @@ class Condition(TypedDict, total=False):
     operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]
     """The operation to apply to the attribute"""
 
-    value: Union[str, int, List[str]]
+    value: Union[str, int, SequenceNotStr[str]]
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 
