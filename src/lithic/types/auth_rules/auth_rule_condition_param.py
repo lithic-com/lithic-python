@@ -62,7 +62,18 @@ class AuthRuleConditionParam(TypedDict, total=False):
       `SAMSUNG_PAY`, `MASTERPASS`, `MERCHANT`, `OTHER`, `NONE`.
     """
 
-    operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]
+    operation: Literal[
+        "IS_ONE_OF",
+        "IS_NOT_ONE_OF",
+        "MATCHES",
+        "DOES_NOT_MATCH",
+        "IS_EQUAL_TO",
+        "IS_NOT_EQUAL_TO",
+        "IS_GREATER_THAN",
+        "IS_GREATER_THAN_OR_EQUAL_TO",
+        "IS_LESS_THAN",
+        "IS_LESS_THAN_OR_EQUAL_TO",
+    ]
     """The operation to apply to the attribute"""
 
     value: Union[str, int, SequenceNotStr[str]]

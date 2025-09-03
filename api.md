@@ -772,7 +772,11 @@ Methods:
 Types:
 
 ```python
-from lithic.types import AccountActivityListResponse, AccountActivityRetrieveTransactionResponse
+from lithic.types import (
+    WirePartyDetails,
+    AccountActivityListResponse,
+    AccountActivityRetrieveTransactionResponse,
+)
 ```
 
 Methods:

@@ -69,6 +69,7 @@ class BookTransferCreateParams(TypedDict, total=False):
             "DISPUTE_WON",
             "SERVICE",
             "TRANSFER",
+            "COLLECTION",
         ]
     ]
     """Type of the book transfer"""
