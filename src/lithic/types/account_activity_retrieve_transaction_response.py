@@ -8,6 +8,7 @@ from .._models import BaseModel
 from .transaction import Transaction
 from .external_payment import ExternalPayment
 from .external_resource import ExternalResource
+from .wire_party_details import WirePartyDetails
 from .management_operation_transaction import ManagementOperationTransaction
 
 __all__ = [
@@ -235,6 +236,7 @@ class BookTransferTransactionEvent(BaseModel):
         "DISPUTE_WON",
         "SERVICE",
         "TRANSFER",
+        "COLLECTION",
     ]
     """Type of the book transfer"""
 
@@ -416,38 +418,24 @@ class PaymentTransactionMethodAttributesACHMethodAttributes(BaseModel):
 
 
 class PaymentTransactionMethodAttributesWireMethodAttributes(BaseModel):
-    wire_transfer_type: Literal["FEDWIRE", "SWIFT"]
+    wire_network: Literal["FEDWIRE", "SWIFT"]
     """Type of wire transfer"""
 
-    external_bank_name: Optional[str] = None
-    """External bank name"""
+    creditor: Optional[WirePartyDetails] = None
 
-    external_bank_routing_number: Optional[str] = None
-    """External bank routing number"""
+    debtor: Optional[WirePartyDetails] = None
 
-    external_individual_name: Optional[str] = None
-    """External individual name"""
+    message_id: Optional[str] = None
+    """
+    Point to point reference identifier, as assigned by the instructing party, used
+    for tracking the message through the Fedwire system
+    """
 
-    imad: Optional[str] = None
-    """IMAD"""
+    remittance_information: Optional[str] = None
+    """Payment details or invoice reference"""
 
-    lithic_bank_name: Optional[str] = None
-    """Lithic bank name"""
-
-    lithic_bank_routing_number: Optional[str] = None
-    """Lithic bank routing number"""
-
-    lithic_individual_name: Optional[str] = None
-    """Lithic individual name"""
-
-    omad: Optional[str] = None
-    """OMAD"""
-
-    previous_transfer: Optional[str] = None
-    """UUID of previous transfer if this is a retry"""
-
-    wire_token: Optional[str] = None
-    """Wire token"""
+    wire_message_type: Optional[str] = None
+    """Type of wire message"""
 
 
 PaymentTransactionMethodAttributes: TypeAlias = Union[
@@ -536,6 +524,19 @@ class PaymentTransaction(BaseModel):
 
     external_bank_account_token: Optional[str] = None
     """External bank account token"""
+
+    type: Optional[
+        Literal[
+            "ORIGINATION_CREDIT",
+            "ORIGINATION_DEBIT",
+            "RECEIPT_CREDIT",
+            "RECEIPT_DEBIT",
+            "WIRE_INBOUND_PAYMENT",
+            "WIRE_INBOUND_ADMIN",
+            "WIRE_OUTBOUND_PAYMENT",
+            "WIRE_OUTBOUND_ADMIN",
+        ]
+    ] = None
 
     user_defined_id: Optional[str] = None
     """User-defined identifier"""

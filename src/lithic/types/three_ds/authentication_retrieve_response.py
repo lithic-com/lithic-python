@@ -232,17 +232,41 @@ class AdditionalData(BaseModel):
 
 
 class App(BaseModel):
+    device: Optional[str] = None
+    """Device model: e.g. "Apple iPhone 16"."""
+
     device_info: Optional[str] = None
-    """
-    Device information gathered from the cardholder's device - JSON name/value pairs
-    that is Base64url encoded. Maps to EMV 3DS field `deviceInfo`.
+    """Raw device information - base64-encoded JSON object.
+
+    Maps to EMV 3DS field `deviceInfo`.
     """
 
     ip: Optional[str] = None
-    """External IP address used by the app generating the 3DS authentication request.
+    """IP address of the device."""
 
-    Maps to EMV 3DS field `appIp`.
-    """
+    latitude: Optional[float] = None
+    """Latitude coordinate of current device location."""
+
+    locale: Optional[str] = None
+    """Device locale: e.g. "en-US"."""
+
+    longitude: Optional[float] = None
+    """Longitude coordinate of current device location."""
+
+    os: Optional[str] = None
+    """Operating System: e.g. "Android 12", "iOS 17.1"."""
+
+    platform: Optional[str] = None
+    """Device platform: Android, iOS, Windows, etc."""
+
+    screen_height: Optional[int] = None
+    """Screen height in pixels."""
+
+    screen_width: Optional[int] = None
+    """Screen width in pixels."""
+
+    time_zone: Optional[str] = None
+    """Time zone offset in minutes between UTC and device local time."""
 
 
 class Browser(BaseModel):
@@ -278,10 +302,9 @@ class Browser(BaseModel):
     """
 
     time_zone: Optional[str] = None
-    """
-    Time zone of the cardholder's browser offset in minutes between UTC and the
-    cardholder browser's local time. The offset is positive if the local time is
-    behind UTC and negative if it is ahead. Maps to EMV 3DS field `browserTz`.
+    """Time zone offset in minutes between UTC and browser local time.
+
+    Maps to EMV 3DS field `browserTz`.
     """
 
     user_agent: Optional[str] = None
