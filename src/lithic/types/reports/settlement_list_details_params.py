@@ -15,7 +15,7 @@ class SettlementListDetailsParams(TypedDict, total=False):
     """
 
     page_size: int
-    """Page size (for pagination)."""
+    """Number of records per page."""
 
     starting_after: str
     """A cursor representing an item's token after which a page of results should

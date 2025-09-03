@@ -71,6 +71,7 @@ class Event(BaseModel):
         "DISPUTE_WON",
         "SERVICE",
         "TRANSFER",
+        "COLLECTION",
     ]
     """Type of the book transfer"""
 

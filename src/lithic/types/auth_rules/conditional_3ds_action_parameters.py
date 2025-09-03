@@ -45,7 +45,18 @@ class Condition(BaseModel):
     """
 
     operation: Optional[
-        Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]
+        Literal[
+            "IS_ONE_OF",
+            "IS_NOT_ONE_OF",
+            "MATCHES",
+            "DOES_NOT_MATCH",
+            "IS_EQUAL_TO",
+            "IS_NOT_EQUAL_TO",
+            "IS_GREATER_THAN",
+            "IS_GREATER_THAN_OR_EQUAL_TO",
+            "IS_LESS_THAN",
+            "IS_LESS_THAN_OR_EQUAL_TO",
+        ]
     ] = None
     """The operation to apply to the attribute"""
 

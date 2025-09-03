@@ -270,6 +270,124 @@ class TestAccountHolders:
     @parametrize
     def test_method_create_overload_2(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "legal_business_name": "Acme, Inc.",
+            },
+        )
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
+        account_holder = client.account_holders.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                    "address2": "address2",
+                },
+                "legal_business_name": "Acme, Inc.",
+                "dba_business_name": "dba_business_name",
+                "government_id": "114-123-1513",
+                "parent_company": "parent_company",
+                "phone_numbers": ["+15555555555"],
+            },
+            beneficial_owner_individuals=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                        "address2": "address2",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+15555555555",
+                }
+            ],
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                    "address2": "address2",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+15555555555",
+            },
+            external_id="external_id",
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2022-03-08 08:00:00",
+            website_url="www.mybusiness.com",
+            workflow="KYB_DELEGATED",
+        )
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_raw_response_create_overload_2(self, client: Lithic) -> None:
+        response = client.account_holders.with_raw_response.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "legal_business_name": "Acme, Inc.",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
+        with client.account_holders.with_streaming_response.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "legal_business_name": "Acme, Inc.",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = response.parse()
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_create_overload_3(self, client: Lithic) -> None:
+        account_holder = client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -291,7 +409,7 @@ class TestAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
+    def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
             individual={
                 "address": {
@@ -317,7 +435,7 @@ class TestAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_raw_response_create_overload_2(self, client: Lithic) -> None:
+    def test_raw_response_create_overload_3(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.create(
             individual={
                 "address": {
@@ -344,7 +462,7 @@ class TestAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
+    def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.create(
             individual={
                 "address": {
@@ -373,7 +491,7 @@ class TestAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_create_overload_3(self, client: Lithic) -> None:
+    def test_method_create_overload_4(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
             address={
                 "address1": "123 Old Forest Way",
@@ -392,7 +510,7 @@ class TestAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
+    def test_method_create_with_all_params_overload_4(self, client: Lithic) -> None:
         account_holder = client.account_holders.create(
             address={
                 "address1": "123 Old Forest Way",
@@ -414,7 +532,7 @@ class TestAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_raw_response_create_overload_3(self, client: Lithic) -> None:
+    def test_raw_response_create_overload_4(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.create(
             address={
                 "address1": "123 Old Forest Way",
@@ -437,7 +555,7 @@ class TestAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
+    def test_streaming_response_create_overload_4(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.create(
             address={
                 "address1": "123 Old Forest Way",
@@ -1241,6 +1359,124 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_create_overload_2(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "legal_business_name": "Acme, Inc.",
+            },
+        )
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                    "address2": "address2",
+                },
+                "legal_business_name": "Acme, Inc.",
+                "dba_business_name": "dba_business_name",
+                "government_id": "114-123-1513",
+                "parent_company": "parent_company",
+                "phone_numbers": ["+15555555555"],
+            },
+            beneficial_owner_individuals=[
+                {
+                    "address": {
+                        "address1": "123 Old Forest Way",
+                        "city": "Omaha",
+                        "country": "USA",
+                        "postal_code": "68022",
+                        "state": "NE",
+                        "address2": "address2",
+                    },
+                    "dob": "1991-03-08 08:00:00",
+                    "email": "tom@middle-earth.com",
+                    "first_name": "Tom",
+                    "government_id": "111-23-1412",
+                    "last_name": "Bombadil",
+                    "phone_number": "+15555555555",
+                }
+            ],
+            control_person={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                    "address2": "address2",
+                },
+                "dob": "1991-03-08 08:00:00",
+                "email": "tom@middle-earth.com",
+                "first_name": "Tom",
+                "government_id": "111-23-1412",
+                "last_name": "Bombadil",
+                "phone_number": "+15555555555",
+            },
+            external_id="external_id",
+            nature_of_business="Software company selling solutions to the restaurant industry",
+            tos_timestamp="2022-03-08 08:00:00",
+            website_url="www.mybusiness.com",
+            workflow="KYB_DELEGATED",
+        )
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+        response = await async_client.account_holders.with_raw_response.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "legal_business_name": "Acme, Inc.",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account_holder = response.parse()
+        assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+        async with async_client.account_holders.with_streaming_response.create(
+            business_entity={
+                "address": {
+                    "address1": "123 Old Forest Way",
+                    "city": "Omaha",
+                    "country": "USA",
+                    "postal_code": "68022",
+                    "state": "NE",
+                },
+                "legal_business_name": "Acme, Inc.",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account_holder = await response.parse()
+            assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
+        account_holder = await async_client.account_holders.create(
             individual={
                 "address": {
                     "address1": "123 Old Forest Way",
@@ -1262,7 +1498,7 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
+    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
             individual={
                 "address": {
@@ -1288,7 +1524,7 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+    async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.create(
             individual={
                 "address": {
@@ -1315,7 +1551,7 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+    async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.create(
             individual={
                 "address": {
@@ -1344,7 +1580,7 @@ class TestAsyncAccountHolders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_method_create_overload_4(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
             address={
                 "address1": "123 Old Forest Way",
@@ -1363,7 +1599,7 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_method_create_with_all_params_overload_4(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.create(
             address={
                 "address1": "123 Old Forest Way",
@@ -1385,7 +1621,7 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_raw_response_create_overload_4(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.create(
             address={
                 "address1": "123 Old Forest Way",
@@ -1408,7 +1644,7 @@ class TestAsyncAccountHolders:
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_streaming_response_create_overload_4(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.create(
             address={
                 "address1": "123 Old Forest Way",

@@ -75,7 +75,7 @@ class Settlement(SyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          page_size: Page size (for pagination).
+          page_size: Number of records per page.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -190,7 +190,7 @@ class AsyncSettlement(AsyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          page_size: Page size (for pagination).
+          page_size: Number of records per page.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.

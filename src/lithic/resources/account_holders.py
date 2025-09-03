@@ -144,6 +144,79 @@ class AccountHolders(SyncAPIResource):
     def create(
         self,
         *,
+        business_entity: account_holder_create_params.KYBDelegatedBusinessEntity,
+        beneficial_owner_individuals: Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
+        | NotGiven = NOT_GIVEN,
+        control_person: account_holder_create_params.KYBDelegatedControlPerson | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        nature_of_business: str | NotGiven = NOT_GIVEN,
+        tos_timestamp: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
+        workflow: Literal["KYB_DELEGATED"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderCreateResponse:
+        """
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
+
+        Args:
+          business_entity: Information for business for which the account is being opened.
+
+          beneficial_owner_individuals: You can submit a list of all direct and indirect individuals with 25% or more
+              ownership in the company. A maximum of 4 beneficial owners can be submitted. If
+              no individual owns 25% of the company you do not need to send beneficial owner
+              information. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+              (Section I) for more background on individuals that should be included.
+
+          control_person: An individual with significant responsibility for managing the legal entity
+              (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
+              Officer, Managing Member, General Partner, President, Vice President, or
+              Treasurer). This can be an executive, or someone who will have program-wide
+              access to the cards that Lithic will provide. In some cases, this individual
+              could also be a beneficial owner listed above. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+              (Section II) for more background.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
+          nature_of_business: Short description of the company's line of business (i.e., what does the company
+              do?).
+
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
+              legal agreements (e.g., cardholder terms) as agreed upon during API customer's
+              implementation with Lithic.
+
+          website_url: Company website URL.
+
+          workflow: Specifies the type of KYB workflow to run.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def create(
+        self,
+        *,
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
         workflow: Literal["KYC_BASIC", "KYC_BYO"],
@@ -266,6 +339,7 @@ class AccountHolders(SyncAPIResource):
             "tos_timestamp",
             "workflow",
         ],
+        ["business_entity"],
         ["individual", "tos_timestamp", "workflow"],
         ["address", "email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
     )
@@ -278,7 +352,11 @@ class AccountHolders(SyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
-        workflow: Literal["KYB_BASIC", "KYB_BYO"] | Literal["KYC_BASIC", "KYC_BYO"] | Literal["KYC_EXEMPT"],
+        workflow: Literal["KYB_BASIC", "KYB_BYO"]
+        | Literal["KYB_DELEGATED"]
+        | Literal["KYC_BASIC", "KYC_BYO"]
+        | Literal["KYC_EXEMPT"]
+        | NotGiven = NOT_GIVEN,
         beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
         | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,
@@ -1133,6 +1211,79 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def create(
         self,
         *,
+        business_entity: account_holder_create_params.KYBDelegatedBusinessEntity,
+        beneficial_owner_individuals: Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
+        | NotGiven = NOT_GIVEN,
+        control_person: account_holder_create_params.KYBDelegatedControlPerson | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
+        nature_of_business: str | NotGiven = NOT_GIVEN,
+        tos_timestamp: str | NotGiven = NOT_GIVEN,
+        website_url: str | NotGiven = NOT_GIVEN,
+        workflow: Literal["KYB_DELEGATED"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountHolderCreateResponse:
+        """
+        Create an account holder and initiate the appropriate onboarding workflow.
+        Account holders and accounts have a 1:1 relationship. When an account holder is
+        successfully created an associated account is also created. All calls to this
+        endpoint will return a synchronous response. The response time will depend on
+        the workflow. In some cases, the response may indicate the workflow is under
+        review or further action will be needed to complete the account creation
+        process. This endpoint can only be used on accounts that are part of the program
+        that the calling API key manages.
+
+        Args:
+          business_entity: Information for business for which the account is being opened.
+
+          beneficial_owner_individuals: You can submit a list of all direct and indirect individuals with 25% or more
+              ownership in the company. A maximum of 4 beneficial owners can be submitted. If
+              no individual owns 25% of the company you do not need to send beneficial owner
+              information. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+              (Section I) for more background on individuals that should be included.
+
+          control_person: An individual with significant responsibility for managing the legal entity
+              (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating
+              Officer, Managing Member, General Partner, President, Vice President, or
+              Treasurer). This can be an executive, or someone who will have program-wide
+              access to the cards that Lithic will provide. In some cases, this individual
+              could also be a beneficial owner listed above. See
+              [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf)
+              (Section II) for more background.
+
+          external_id: A user provided id that can be used to link an account holder with an external
+              system
+
+          nature_of_business: Short description of the company's line of business (i.e., what does the company
+              do?).
+
+          tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
+              legal agreements (e.g., cardholder terms) as agreed upon during API customer's
+              implementation with Lithic.
+
+          website_url: Company website URL.
+
+          workflow: Specifies the type of KYB workflow to run.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def create(
+        self,
+        *,
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
         workflow: Literal["KYC_BASIC", "KYC_BYO"],
@@ -1255,6 +1406,7 @@ class AsyncAccountHolders(AsyncAPIResource):
             "tos_timestamp",
             "workflow",
         ],
+        ["business_entity"],
         ["individual", "tos_timestamp", "workflow"],
         ["address", "email", "first_name", "kyc_exemption_type", "last_name", "phone_number", "workflow"],
     )
@@ -1267,7 +1419,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
-        workflow: Literal["KYB_BASIC", "KYB_BYO"] | Literal["KYC_BASIC", "KYC_BYO"] | Literal["KYC_EXEMPT"],
+        workflow: Literal["KYB_BASIC", "KYB_BYO"]
+        | Literal["KYB_DELEGATED"]
+        | Literal["KYC_BASIC", "KYC_BYO"]
+        | Literal["KYC_EXEMPT"]
+        | NotGiven = NOT_GIVEN,
         beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
         | NotGiven = NOT_GIVEN,
         external_id: str | NotGiven = NOT_GIVEN,

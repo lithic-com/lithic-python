@@ -44,7 +44,18 @@ class Condition(TypedDict, total=False):
     - `MESSAGE_CATEGORY`: The category of the authentication being processed.
     """
 
-    operation: Literal["IS_ONE_OF", "IS_NOT_ONE_OF", "MATCHES", "DOES_NOT_MATCH", "IS_GREATER_THAN", "IS_LESS_THAN"]
+    operation: Literal[
+        "IS_ONE_OF",
+        "IS_NOT_ONE_OF",
+        "MATCHES",
+        "DOES_NOT_MATCH",
+        "IS_EQUAL_TO",
+        "IS_NOT_EQUAL_TO",
+        "IS_GREATER_THAN",
+        "IS_GREATER_THAN_OR_EQUAL_TO",
+        "IS_LESS_THAN",
+        "IS_LESS_THAN_OR_EQUAL_TO",
+    ]
     """The operation to apply to the attribute"""
 
     value: Union[str, int, SequenceNotStr[str]]
