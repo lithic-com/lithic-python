@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.104.0 (2025-09-04)
+
+Full Changelog: [v0.103.1...v0.104.0](https://github.com/lithic-com/lithic-python/compare/v0.103.1...v0.104.0)
+
+### Features
+
+* **api:** adds support for delegated KYB onboarding and more device details in 3DS Authentications ([0a5a2ba](https://github.com/lithic-com/lithic-python/commit/0a5a2badb3cba976896e2d34cab0c7b70a73139c))
+* improve future compat with pydantic v3 ([d589749](https://github.com/lithic-com/lithic-python/commit/d5897496aa90a50d98ac3306ca88b301a891e063))
+* **types:** replace List[str] with SequenceNotStr in params ([fa51159](https://github.com/lithic-com/lithic-python/commit/fa51159008addf6e0981eba26f71724a1e2aa8ae))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([b448cd0](https://github.com/lithic-com/lithic-python/commit/b448cd0d12bd7223622949cd5cf39ff01e9505fd))
+* **internal:** fix mypy ([#1575](https://github.com/lithic-com/lithic-python/issues/1575)) ([be186c8](https://github.com/lithic-com/lithic-python/commit/be186c8c990290873eeb1f7272278082ce391e05))
+* **internal:** minor formatting change ([0fd12bf](https://github.com/lithic-com/lithic-python/commit/0fd12bf85297db62f7d292d617226ef654583513))
+* **internal:** update pyright exclude list ([cdbdc72](https://github.com/lithic-com/lithic-python/commit/cdbdc724ffe1bf7bed3ad78f1c11241308c54a69))
+
 ## 0.103.1 (2025-08-26)
 
 Full Changelog: [v0.103.0...v0.103.1](https://github.com/lithic-com/lithic-python/compare/v0.103.0...v0.103.1)
