@@ -211,7 +211,10 @@ class V2(SyncAPIResource):
         *,
         account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
+        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters
+        | v2_create_params.CreateAuthRuleRequestCardTokensParameters
+        | v2_create_params.CreateAuthRuleRequestProgramLevelParameters
+        | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
         | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
@@ -1073,7 +1076,10 @@ class AsyncV2(AsyncAPIResource):
         *,
         account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
+        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters
+        | v2_create_params.CreateAuthRuleRequestCardTokensParameters
+        | v2_create_params.CreateAuthRuleRequestProgramLevelParameters
+        | NotGiven = NOT_GIVEN,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
         | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
