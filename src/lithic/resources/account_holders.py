@@ -347,9 +347,14 @@ class AccountHolders(SyncAPIResource):
         self,
         *,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
+        | Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
-        business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
-        control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_create_params.KYBBusinessEntity
+        | account_holder_create_params.KYBDelegatedBusinessEntity
+        | NotGiven = NOT_GIVEN,
+        control_person: account_holder_create_params.KYBControlPerson
+        | account_holder_create_params.KYBDelegatedControlPerson
+        | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
@@ -1414,9 +1419,14 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         *,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
+        | Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
         | NotGiven = NOT_GIVEN,
-        business_entity: account_holder_create_params.KYBBusinessEntity | NotGiven = NOT_GIVEN,
-        control_person: account_holder_create_params.KYBControlPerson | NotGiven = NOT_GIVEN,
+        business_entity: account_holder_create_params.KYBBusinessEntity
+        | account_holder_create_params.KYBDelegatedBusinessEntity
+        | NotGiven = NOT_GIVEN,
+        control_person: account_holder_create_params.KYBControlPerson
+        | account_holder_create_params.KYBDelegatedControlPerson
+        | NotGiven = NOT_GIVEN,
         nature_of_business: str | NotGiven = NOT_GIVEN,
         tos_timestamp: str | NotGiven = NOT_GIVEN,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
