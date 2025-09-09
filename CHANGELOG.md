@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.105.0 (2025-09-09)
+
+Full Changelog: [v0.104.0...v0.105.0](https://github.com/lithic-com/lithic-python/compare/v0.104.0...v0.105.0)
+
+### Features
+
+* **api:** adds support for unpauseing external bank accounts ([6abb97a](https://github.com/lithic-com/lithic-python/commit/6abb97ac297e522db029326aa42f526ee4ab6b56))
+
+
+### Bug Fixes
+
+* **types:** add missing types to method arguments ([2a2cf4f](https://github.com/lithic-com/lithic-python/commit/2a2cf4f23bbed5067f494d7865194f2237397a67))
+
+
+### Chores
+
+* **internal:** move mypy configurations to `pyproject.toml` file ([7334406](https://github.com/lithic-com/lithic-python/commit/73344067058de624d05271c91360f9554935c26e))
+* **tests:** simplify `get_platform` test ([fb87755](https://github.com/lithic-com/lithic-python/commit/fb87755ec9d3575d5720da0e30d07df120955fd5))
+
 ## 0.104.0 (2025-09-04)
 
 Full Changelog: [v0.103.1...v0.104.0](https://github.com/lithic-com/lithic-python/compare/v0.103.1...v0.104.0)
