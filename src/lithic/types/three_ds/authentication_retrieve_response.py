@@ -187,32 +187,39 @@ class MerchantRiskIndicator(BaseModel):
 
 
 class Merchant(BaseModel):
-    id: str
-    """Merchant identifier as assigned by the acquirer.
-
-    Maps to EMV 3DS field `acquirerMerchantId`.
-    """
-
-    country: str
-    """Country code of the merchant requesting 3DS authentication.
-
-    Maps to EMV 3DS field `merchantCountryCode`. Permitted values: ISO 3166-1
-    alpha-3 country code (e.g., USA).
-    """
-
-    mcc: str
-    """
-    Merchant category code assigned to the merchant that describes its business
-    activity type. Maps to EMV 3DS field `mcc`.
-    """
-
-    name: str
-    """Name of the merchant. Maps to EMV 3DS field `merchantName`."""
-
     risk_indicator: MerchantRiskIndicator
     """
     Object containing additional data indicating additional risk factors related to
     the e-commerce transaction.
+    """
+
+    id: Optional[str] = None
+    """Merchant identifier as assigned by the acquirer.
+
+    Maps to EMV 3DS field `acquirerMerchantId`. May not be present for non-payment
+    authentications.
+    """
+
+    country: Optional[str] = None
+    """Country code of the merchant requesting 3DS authentication.
+
+    Maps to EMV 3DS field `merchantCountryCode`. Permitted values: ISO 3166-1
+    alpha-3 country code (e.g., USA). May not be present for non-payment
+    authentications.
+    """
+
+    mcc: Optional[str] = None
+    """
+    Merchant category code assigned to the merchant that describes its business
+    activity type. Maps to EMV 3DS field `mcc`. May not be present for non-payment
+    authentications.
+    """
+
+    name: Optional[str] = None
+    """Name of the merchant.
+
+    Maps to EMV 3DS field `merchantName`. May not be present for non-payment
+    authentications.
     """
 
 

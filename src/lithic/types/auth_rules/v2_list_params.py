@@ -11,6 +11,9 @@ class V2ListParams(TypedDict, total=False):
     account_token: str
     """Only return Auth Rules that are bound to the provided account token."""
 
+    business_account_token: str
+    """Only return Auth Rules that are bound to the provided business account token."""
+
     card_token: str
     """Only return Auth Rules that are bound to the provided card token."""
 
@@ -26,7 +29,7 @@ class V2ListParams(TypedDict, total=False):
     page_size: int
     """Page size (for pagination)."""
 
-    scope: Literal["PROGRAM", "ACCOUNT", "CARD", "ANY"]
+    scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"]
     """Only return Auth Rules that are bound to the provided scope."""
 
     starting_after: str

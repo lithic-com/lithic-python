@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Union, cast
+from typing import Any, Union, cast
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -69,9 +69,9 @@ class AccountActivity(SyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         financial_account_token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        result: List[Literal["APPROVED", "DECLINED"]] | NotGiven = NOT_GIVEN,
+        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        status: List[Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED", "RETURNED", "REVERSED"]]
+        status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "REVERSED", "SETTLED", "VOIDED"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -233,9 +233,9 @@ class AsyncAccountActivity(AsyncAPIResource):
         ending_before: str | NotGiven = NOT_GIVEN,
         financial_account_token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        result: List[Literal["APPROVED", "DECLINED"]] | NotGiven = NOT_GIVEN,
+        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
-        status: List[Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED", "RETURNED", "REVERSED"]]
+        status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "REVERSED", "SETTLED", "VOIDED"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
