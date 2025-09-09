@@ -11,7 +11,7 @@ import httpx
 
 from .... import _legacy_response
 from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
-from ...._utils import required_args, maybe_transform, async_maybe_transform
+from ...._utils import maybe_transform, async_maybe_transform
 from .backtests import (
     Backtests,
     AsyncBacktests,
@@ -74,10 +74,12 @@ class V2(SyncAPIResource):
     def create(
         self,
         *,
-        account_tokens: SequenceNotStr[str],
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -92,17 +94,23 @@ class V2(SyncAPIResource):
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
 
+          business_account_tokens: Business Account tokens to which the Auth Rule applies.
+
+          event_stream: The event stream during which the rule will be evaluated.
+
           name: Auth Rule Name
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule. Effectively determines the event stream during which it
-              will be evaluated.
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
 
               - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -119,9 +127,10 @@ class V2(SyncAPIResource):
         self,
         *,
         card_tokens: SequenceNotStr[str],
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -136,17 +145,21 @@ class V2(SyncAPIResource):
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
 
+          event_stream: The event stream during which the rule will be evaluated.
+
           name: Auth Rule Name
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule. Effectively determines the event stream during which it
-              will be evaluated.
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
 
               - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -163,10 +176,11 @@ class V2(SyncAPIResource):
         self,
         *,
         program_level: bool,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -181,19 +195,23 @@ class V2(SyncAPIResource):
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
 
+          event_stream: The event stream during which the rule will be evaluated.
+
           excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           name: Auth Rule Name
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule. Effectively determines the event stream during which it
-              will be evaluated.
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
 
               - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -205,17 +223,18 @@ class V2(SyncAPIResource):
         """
         ...
 
-    @required_args(["account_tokens"], ["card_tokens"], ["program_level"])
     def create(
         self,
         *,
         account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters
         | v2_create_params.CreateAuthRuleRequestCardTokensParameters
         | v2_create_params.CreateAuthRuleRequestProgramLevelParameters
         | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
@@ -232,6 +251,8 @@ class V2(SyncAPIResource):
             body=maybe_transform(
                 {
                     "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
+                    "event_stream": event_stream,
                     "name": name,
                     "parameters": parameters,
                     "type": type,
@@ -285,7 +306,6 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -303,8 +323,46 @@ class V2(SyncAPIResource):
         entities.
 
         Args:
-          account_tokens: Account tokens to which the Auth Rule applies.
+          name: Auth Rule Name
 
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        auth_rule_token: str,
+        *,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
+        """
+        Updates a V2 Auth rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
+
+        Args:
           name: Auth Rule Name
 
           state: The desired state of the Auth Rule.
@@ -416,7 +474,6 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
@@ -435,7 +492,6 @@ class V2(SyncAPIResource):
             f"/v2/auth_rules/{auth_rule_token}",
             body=maybe_transform(
                 {
-                    "account_tokens": account_tokens,
                     "name": name,
                     "state": state,
                     "card_tokens": card_tokens,
@@ -454,11 +510,12 @@ class V2(SyncAPIResource):
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        scope: Literal["PROGRAM", "ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
+        scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -472,6 +529,8 @@ class V2(SyncAPIResource):
 
         Args:
           account_token: Only return Auth Rules that are bound to the provided account token.
+
+          business_account_token: Only return Auth Rules that are bound to the provided business account token.
 
           card_token: Only return Auth Rules that are bound to the provided card token.
 
@@ -506,6 +565,7 @@ class V2(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "account_token": account_token,
+                        "business_account_token": business_account_token,
                         "card_token": card_token,
                         "ending_before": ending_before,
                         "event_stream": event_stream,
@@ -558,7 +618,8 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str],
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -574,6 +635,8 @@ class V2(SyncAPIResource):
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
+
+          business_account_tokens: Business Account tokens to which the Auth Rule applies.
 
           extra_headers: Send extra headers
 
@@ -655,12 +718,12 @@ class V2(SyncAPIResource):
         ...
 
     @typing_extensions.deprecated("deprecated")
-    @required_args(["account_tokens"], ["card_tokens"], ["program_level"])
     def apply(
         self,
         auth_rule_token: str,
         *,
         account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
@@ -678,6 +741,7 @@ class V2(SyncAPIResource):
             body=maybe_transform(
                 {
                     "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
                     "excluded_card_tokens": excluded_card_tokens,
@@ -939,10 +1003,12 @@ class AsyncV2(AsyncAPIResource):
     async def create(
         self,
         *,
-        account_tokens: SequenceNotStr[str],
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -957,17 +1023,23 @@ class AsyncV2(AsyncAPIResource):
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
 
+          business_account_tokens: Business Account tokens to which the Auth Rule applies.
+
+          event_stream: The event stream during which the rule will be evaluated.
+
           name: Auth Rule Name
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule. Effectively determines the event stream during which it
-              will be evaluated.
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
 
               - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -984,9 +1056,10 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         card_tokens: SequenceNotStr[str],
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1001,17 +1074,21 @@ class AsyncV2(AsyncAPIResource):
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
 
+          event_stream: The event stream during which the rule will be evaluated.
+
           name: Auth Rule Name
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule. Effectively determines the event stream during which it
-              will be evaluated.
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
 
               - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -1028,10 +1105,11 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         program_level: bool,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1046,19 +1124,23 @@ class AsyncV2(AsyncAPIResource):
         Args:
           program_level: Whether the Auth Rule applies to all authorizations on the card program.
 
+          event_stream: The event stream during which the rule will be evaluated.
+
           excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           name: Auth Rule Name
 
           parameters: Parameters for the Auth Rule
 
-          type: The type of Auth Rule. Effectively determines the event stream during which it
-              will be evaluated.
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
 
               - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-              - `CONDITIONAL_3DS_ACTION`: THREE_DS_AUTHENTICATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
 
           extra_headers: Send extra headers
 
@@ -1070,17 +1152,18 @@ class AsyncV2(AsyncAPIResource):
         """
         ...
 
-    @required_args(["account_tokens"], ["card_tokens"], ["program_level"])
     async def create(
         self,
         *,
         account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters
         | v2_create_params.CreateAuthRuleRequestCardTokensParameters
         | v2_create_params.CreateAuthRuleRequestProgramLevelParameters
         | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_3DS_ACTION"]
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
         | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
@@ -1097,6 +1180,8 @@ class AsyncV2(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
+                    "event_stream": event_stream,
                     "name": name,
                     "parameters": parameters,
                     "type": type,
@@ -1150,7 +1235,6 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1168,8 +1252,46 @@ class AsyncV2(AsyncAPIResource):
         entities.
 
         Args:
-          account_tokens: Account tokens to which the Auth Rule applies.
+          name: Auth Rule Name
 
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        auth_rule_token: str,
+        *,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2UpdateResponse:
+        """
+        Updates a V2 Auth rule's properties
+
+        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
+        is provided, this will replace existing associations with the provided list of
+        entities.
+
+        Args:
           name: Auth Rule Name
 
           state: The desired state of the Auth Rule.
@@ -1281,7 +1403,6 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
@@ -1300,7 +1421,6 @@ class AsyncV2(AsyncAPIResource):
             f"/v2/auth_rules/{auth_rule_token}",
             body=await async_maybe_transform(
                 {
-                    "account_tokens": account_tokens,
                     "name": name,
                     "state": state,
                     "card_tokens": card_tokens,
@@ -1319,11 +1439,12 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         account_token: str | NotGiven = NOT_GIVEN,
+        business_account_token: str | NotGiven = NOT_GIVEN,
         card_token: str | NotGiven = NOT_GIVEN,
         ending_before: str | NotGiven = NOT_GIVEN,
         event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        scope: Literal["PROGRAM", "ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
+        scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
         starting_after: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1337,6 +1458,8 @@ class AsyncV2(AsyncAPIResource):
 
         Args:
           account_token: Only return Auth Rules that are bound to the provided account token.
+
+          business_account_token: Only return Auth Rules that are bound to the provided business account token.
 
           card_token: Only return Auth Rules that are bound to the provided card token.
 
@@ -1371,6 +1494,7 @@ class AsyncV2(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "account_token": account_token,
+                        "business_account_token": business_account_token,
                         "card_token": card_token,
                         "ending_before": ending_before,
                         "event_stream": event_stream,
@@ -1423,7 +1547,8 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str],
+        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1439,6 +1564,8 @@ class AsyncV2(AsyncAPIResource):
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
+
+          business_account_tokens: Business Account tokens to which the Auth Rule applies.
 
           extra_headers: Send extra headers
 
@@ -1520,12 +1647,12 @@ class AsyncV2(AsyncAPIResource):
         ...
 
     @typing_extensions.deprecated("deprecated")
-    @required_args(["account_tokens"], ["card_tokens"], ["program_level"])
     async def apply(
         self,
         auth_rule_token: str,
         *,
         account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         program_level: bool | NotGiven = NOT_GIVEN,
         excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
@@ -1543,6 +1670,7 @@ class AsyncV2(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
                     "excluded_card_tokens": excluded_card_tokens,

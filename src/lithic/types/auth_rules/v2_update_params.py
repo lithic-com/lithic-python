@@ -7,13 +7,23 @@ from typing_extensions import Literal, TypeAlias, TypedDict
 
 from ..._types import SequenceNotStr
 
-__all__ = ["V2UpdateParams", "AccountLevelRule", "CardLevelRule", "ProgramLevelRule"]
+__all__ = ["V2UpdateParams", "Variant0", "Variant1", "CardLevelRule", "ProgramLevelRule"]
 
 
-class AccountLevelRule(TypedDict, total=False):
-    account_tokens: SequenceNotStr[str]
-    """Account tokens to which the Auth Rule applies."""
+class Variant0(TypedDict, total=False):
+    name: Optional[str]
+    """Auth Rule Name"""
 
+    state: Literal["INACTIVE"]
+    """The desired state of the Auth Rule.
+
+    Note that only deactivating an Auth Rule through this endpoint is supported at
+    this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+    should be used to promote a draft to the currently active version.
+    """
+
+
+class Variant1(TypedDict, total=False):
     name: Optional[str]
     """Auth Rule Name"""
 
@@ -61,4 +71,4 @@ class ProgramLevelRule(TypedDict, total=False):
     """
 
 
-V2UpdateParams: TypeAlias = Union[AccountLevelRule, CardLevelRule, ProgramLevelRule]
+V2UpdateParams: TypeAlias = Union[Variant0, Variant1, CardLevelRule, ProgramLevelRule]

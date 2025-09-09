@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
@@ -59,7 +59,7 @@ class AccountActivityListParams(TypedDict, total=False):
     page_size: int
     """Page size (for pagination)."""
 
-    result: List[Literal["APPROVED", "DECLINED"]]
+    result: Literal["APPROVED", "DECLINED"]
     """Filter by transaction result"""
 
     starting_after: str
@@ -69,5 +69,5 @@ class AccountActivityListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    status: List[Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED", "RETURNED", "REVERSED"]]
+    status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "REVERSED", "SETTLED", "VOIDED"]
     """Filter by transaction status"""

@@ -42,6 +42,8 @@ class EventSubscription(BaseModel):
                 "digital_wallet.tokenization_updated",
                 "dispute.updated",
                 "dispute_evidence.upload_failed",
+                "dispute_transaction.created",
+                "dispute_transaction.updated",
                 "external_bank_account.created",
                 "external_bank_account.updated",
                 "external_payment.created",

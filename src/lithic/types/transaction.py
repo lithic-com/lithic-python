@@ -480,6 +480,7 @@ class EventRuleResult(BaseModel):
         "ACCOUNT_INACTIVE",
         "ACCOUNT_LIFETIME_SPEND_LIMIT_EXCEEDED",
         "ACCOUNT_MONTHLY_SPEND_LIMIT_EXCEEDED",
+        "ACCOUNT_PAUSED",
         "ACCOUNT_UNDER_REVIEW",
         "ADDRESS_INCORRECT",
         "APPROVED",
@@ -590,6 +591,7 @@ class Event(BaseModel):
             "ACCOUNT_INACTIVE",
             "ACCOUNT_LIFETIME_SPEND_LIMIT_EXCEEDED",
             "ACCOUNT_MONTHLY_SPEND_LIMIT_EXCEEDED",
+            "ACCOUNT_PAUSED",
             "ACCOUNT_UNDER_REVIEW",
             "ADDRESS_INCORRECT",
             "APPROVED",
@@ -657,6 +659,7 @@ class Event(BaseModel):
     """
 
     result: Literal[
+        "ACCOUNT_PAUSED",
         "ACCOUNT_STATE_TRANSACTION_FAIL",
         "APPROVED",
         "BANK_CONNECTION_ERROR",
@@ -789,6 +792,7 @@ class Transaction(BaseModel):
     pos: Pos
 
     result: Literal[
+        "ACCOUNT_PAUSED",
         "ACCOUNT_STATE_TRANSACTION_FAIL",
         "APPROVED",
         "BANK_CONNECTION_ERROR",
