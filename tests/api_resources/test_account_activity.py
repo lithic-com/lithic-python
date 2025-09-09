@@ -38,9 +38,9 @@ class TestAccountActivity:
             ending_before="ending_before",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page_size=1,
-            result=["APPROVED"],
+            result="APPROVED",
             starting_after="starting_after",
-            status=["DECLINED"],
+            status="DECLINED",
         )
         assert_matches_type(SyncCursorPage[AccountActivityListResponse], account_activity, path=["response"])
 
@@ -124,9 +124,9 @@ class TestAsyncAccountActivity:
             ending_before="ending_before",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page_size=1,
-            result=["APPROVED"],
+            result="APPROVED",
             starting_after="starting_after",
-            status=["DECLINED"],
+            status="DECLINED",
         )
         assert_matches_type(AsyncCursorPage[AccountActivityListResponse], account_activity, path=["response"])
 

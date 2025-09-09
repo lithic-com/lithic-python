@@ -16,8 +16,11 @@ __all__ = [
 
 
 class ApplyAuthRuleRequestAccountTokens(TypedDict, total=False):
-    account_tokens: Required[SequenceNotStr[str]]
+    account_tokens: SequenceNotStr[str]
     """Account tokens to which the Auth Rule applies."""
+
+    business_account_tokens: SequenceNotStr[str]
+    """Business Account tokens to which the Auth Rule applies."""
 
 
 class ApplyAuthRuleRequestCardTokens(TypedDict, total=False):
