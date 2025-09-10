@@ -228,6 +228,12 @@ from .transaction_simulate_credit_authorization_response import (
 from .external_bank_account_retry_micro_deposits_response import (
     ExternalBankAccountRetryMicroDepositsResponse as ExternalBankAccountRetryMicroDepositsResponse,
 )
+from .transaction_simulate_credit_authorization_advice_params import (
+    TransactionSimulateCreditAuthorizationAdviceParams as TransactionSimulateCreditAuthorizationAdviceParams,
+)
 from .account_holder_simulate_enrollment_document_review_params import (
     AccountHolderSimulateEnrollmentDocumentReviewParams as AccountHolderSimulateEnrollmentDocumentReviewParams,
+)
+from .transaction_simulate_credit_authorization_advice_response import (
+    TransactionSimulateCreditAuthorizationAdviceResponse as TransactionSimulateCreditAuthorizationAdviceResponse,
 )
