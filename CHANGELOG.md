@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.106.0 (2025-09-10)
+
+Full Changelog: [v0.105.0...v0.106.0](https://github.com/lithic-com/lithic-python/compare/v0.105.0...v0.106.0)
+
+### Features
+
+* **api:** rename endpoint ([ee65354](https://github.com/lithic-com/lithic-python/commit/ee6535445d9d8d0cc0b54fc6e18e1a7d24157e4d))
+
 ## 0.105.0 (2025-09-09)
 
 Full Changelog: [v0.104.0...v0.105.0](https://github.com/lithic-com/lithic-python/compare/v0.104.0...v0.105.0)
