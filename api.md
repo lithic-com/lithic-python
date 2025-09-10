@@ -422,6 +422,7 @@ from lithic.types import (
     TransactionSimulateAuthorizationAdviceResponse,
     TransactionSimulateClearingResponse,
     TransactionSimulateCreditAuthorizationResponse,
+    TransactionSimulateCreditAuthorizationAdviceResponse,
     TransactionSimulateReturnResponse,
     TransactionSimulateReturnReversalResponse,
     TransactionSimulateVoidResponse,
@@ -437,6 +438,7 @@ Methods:
 - <code title="post /v1/simulate/authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_authorization_advice</a>(\*\*<a href="src/lithic/types/transaction_simulate_authorization_advice_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_authorization_advice_response.py">TransactionSimulateAuthorizationAdviceResponse</a></code>
 - <code title="post /v1/simulate/clearing">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_clearing</a>(\*\*<a href="src/lithic/types/transaction_simulate_clearing_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_clearing_response.py">TransactionSimulateClearingResponse</a></code>
 - <code title="post /v1/simulate/credit_authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_credit_authorization</a>(\*\*<a href="src/lithic/types/transaction_simulate_credit_authorization_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_credit_authorization_response.py">TransactionSimulateCreditAuthorizationResponse</a></code>
+- <code title="post /v1/simulate/credit_authorization_advice">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_credit_authorization_advice</a>(\*\*<a href="src/lithic/types/transaction_simulate_credit_authorization_advice_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_credit_authorization_advice_response.py">TransactionSimulateCreditAuthorizationAdviceResponse</a></code>
 - <code title="post /v1/simulate/return">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_return</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_response.py">TransactionSimulateReturnResponse</a></code>
 - <code title="post /v1/simulate/return_reversal">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_return_reversal</a>(\*\*<a href="src/lithic/types/transaction_simulate_return_reversal_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_return_reversal_response.py">TransactionSimulateReturnReversalResponse</a></code>
 - <code title="post /v1/simulate/void">client.transactions.<a href="./src/lithic/resources/transactions/transactions.py">simulate_void</a>(\*\*<a href="src/lithic/types/transaction_simulate_void_params.py">params</a>) -> <a href="./src/lithic/types/transaction_simulate_void_response.py">TransactionSimulateVoidResponse</a></code>

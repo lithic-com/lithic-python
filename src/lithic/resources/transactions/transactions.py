@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Union
 from datetime import datetime
 from typing_extensions import Literal
@@ -18,6 +19,7 @@ from ...types import (
     transaction_simulate_return_reversal_params,
     transaction_simulate_authorization_advice_params,
     transaction_simulate_credit_authorization_params,
+    transaction_simulate_credit_authorization_advice_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import maybe_transform, async_maybe_transform
@@ -50,6 +52,9 @@ from ...types.transaction_simulate_authorization_response import TransactionSimu
 from ...types.transaction_simulate_return_reversal_response import TransactionSimulateReturnReversalResponse
 from ...types.transaction_simulate_authorization_advice_response import TransactionSimulateAuthorizationAdviceResponse
 from ...types.transaction_simulate_credit_authorization_response import TransactionSimulateCreditAuthorizationResponse
+from ...types.transaction_simulate_credit_authorization_advice_response import (
+    TransactionSimulateCreditAuthorizationAdviceResponse,
+)
 
 __all__ = ["Transactions", "AsyncTransactions"]
 
@@ -449,6 +454,7 @@ class Transactions(SyncAPIResource):
             cast_to=TransactionSimulateClearingResponse,
         )
 
+    @typing_extensions.deprecated("use `simulate_credit_authorization_advice` instead")
     def simulate_credit_authorization(
         self,
         *,
@@ -508,6 +514,67 @@ class Transactions(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
+        )
+
+    def simulate_credit_authorization_advice(
+        self,
+        *,
+        amount: int,
+        descriptor: str,
+        pan: str,
+        mcc: str | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> TransactionSimulateCreditAuthorizationAdviceResponse:
+        """Simulates a credit authorization advice from the card network.
+
+        This message
+        indicates that the network approved a credit authorization on your behalf.
+
+        Args:
+          amount: Amount (in cents). Any value entered will be converted into a negative amount in
+              the simulated transaction. For example, entering 100 in this field will appear
+              as a -100 amount in the transaction.
+
+          descriptor: Merchant descriptor.
+
+          pan: Sixteen digit card number.
+
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/simulate/credit_authorization_advice",
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                    "mcc": mcc,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                },
+                transaction_simulate_credit_authorization_advice_params.TransactionSimulateCreditAuthorizationAdviceParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TransactionSimulateCreditAuthorizationAdviceResponse,
         )
 
     def simulate_return(
@@ -1051,6 +1118,7 @@ class AsyncTransactions(AsyncAPIResource):
             cast_to=TransactionSimulateClearingResponse,
         )
 
+    @typing_extensions.deprecated("use `simulate_credit_authorization_advice` instead")
     async def simulate_credit_authorization(
         self,
         *,
@@ -1110,6 +1178,67 @@ class AsyncTransactions(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TransactionSimulateCreditAuthorizationResponse,
+        )
+
+    async def simulate_credit_authorization_advice(
+        self,
+        *,
+        amount: int,
+        descriptor: str,
+        pan: str,
+        mcc: str | NotGiven = NOT_GIVEN,
+        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> TransactionSimulateCreditAuthorizationAdviceResponse:
+        """Simulates a credit authorization advice from the card network.
+
+        This message
+        indicates that the network approved a credit authorization on your behalf.
+
+        Args:
+          amount: Amount (in cents). Any value entered will be converted into a negative amount in
+              the simulated transaction. For example, entering 100 in this field will appear
+              as a -100 amount in the transaction.
+
+          descriptor: Merchant descriptor.
+
+          pan: Sixteen digit card number.
+
+          mcc: Merchant category code for the transaction to be simulated. A four-digit number
+              listed in ISO 18245. Supported merchant category codes can be found
+              [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
+
+          merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/simulate/credit_authorization_advice",
+            body=await async_maybe_transform(
+                {
+                    "amount": amount,
+                    "descriptor": descriptor,
+                    "pan": pan,
+                    "mcc": mcc,
+                    "merchant_acceptor_id": merchant_acceptor_id,
+                },
+                transaction_simulate_credit_authorization_advice_params.TransactionSimulateCreditAuthorizationAdviceParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TransactionSimulateCreditAuthorizationAdviceResponse,
         )
 
     async def simulate_return(
@@ -1280,8 +1409,13 @@ class TransactionsWithRawResponse:
         self.simulate_clearing = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_clearing,
         )
-        self.simulate_credit_authorization = _legacy_response.to_raw_response_wrapper(
-            transactions.simulate_credit_authorization,
+        self.simulate_credit_authorization = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.to_raw_response_wrapper(
+                transactions.simulate_credit_authorization,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.simulate_credit_authorization_advice = _legacy_response.to_raw_response_wrapper(
+            transactions.simulate_credit_authorization_advice,
         )
         self.simulate_return = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_return,
@@ -1324,8 +1458,13 @@ class AsyncTransactionsWithRawResponse:
         self.simulate_clearing = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_clearing,
         )
-        self.simulate_credit_authorization = _legacy_response.async_to_raw_response_wrapper(
-            transactions.simulate_credit_authorization,
+        self.simulate_credit_authorization = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.async_to_raw_response_wrapper(
+                transactions.simulate_credit_authorization,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.simulate_credit_authorization_advice = _legacy_response.async_to_raw_response_wrapper(
+            transactions.simulate_credit_authorization_advice,
         )
         self.simulate_return = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_return,
@@ -1368,8 +1507,13 @@ class TransactionsWithStreamingResponse:
         self.simulate_clearing = to_streamed_response_wrapper(
             transactions.simulate_clearing,
         )
-        self.simulate_credit_authorization = to_streamed_response_wrapper(
-            transactions.simulate_credit_authorization,
+        self.simulate_credit_authorization = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                transactions.simulate_credit_authorization,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.simulate_credit_authorization_advice = to_streamed_response_wrapper(
+            transactions.simulate_credit_authorization_advice,
         )
         self.simulate_return = to_streamed_response_wrapper(
             transactions.simulate_return,
@@ -1412,8 +1556,13 @@ class AsyncTransactionsWithStreamingResponse:
         self.simulate_clearing = async_to_streamed_response_wrapper(
             transactions.simulate_clearing,
         )
-        self.simulate_credit_authorization = async_to_streamed_response_wrapper(
-            transactions.simulate_credit_authorization,
+        self.simulate_credit_authorization = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                transactions.simulate_credit_authorization,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.simulate_credit_authorization_advice = async_to_streamed_response_wrapper(
+            transactions.simulate_credit_authorization_advice,
         )
         self.simulate_return = async_to_streamed_response_wrapper(
             transactions.simulate_return,
