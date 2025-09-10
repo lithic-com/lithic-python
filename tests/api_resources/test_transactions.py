@@ -18,9 +18,12 @@ from lithic.types import (
     TransactionSimulateReturnReversalResponse,
     TransactionSimulateAuthorizationAdviceResponse,
     TransactionSimulateCreditAuthorizationResponse,
+    TransactionSimulateCreditAuthorizationAdviceResponse,
 )
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
+
+# pyright: reportDeprecated=false
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -272,31 +275,36 @@ class TestTransactions:
 
     @parametrize
     def test_method_simulate_credit_authorization(self, client: Lithic) -> None:
-        transaction = client.transactions.simulate_credit_authorization(
-            amount=3831,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-        )
+        with pytest.warns(DeprecationWarning):
+            transaction = client.transactions.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+            )
+
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     def test_method_simulate_credit_authorization_with_all_params(self, client: Lithic) -> None:
-        transaction = client.transactions.simulate_credit_authorization(
-            amount=3831,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-            mcc="5812",
-            merchant_acceptor_id="XRKGDPOWEWQRRWU",
-        )
+        with pytest.warns(DeprecationWarning):
+            transaction = client.transactions.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+                mcc="5812",
+                merchant_acceptor_id="XRKGDPOWEWQRRWU",
+            )
+
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     def test_raw_response_simulate_credit_authorization(self, client: Lithic) -> None:
-        response = client.transactions.with_raw_response.simulate_credit_authorization(
-            amount=3831,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.transactions.with_raw_response.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -305,7 +313,56 @@ class TestTransactions:
 
     @parametrize
     def test_streaming_response_simulate_credit_authorization(self, client: Lithic) -> None:
-        with client.transactions.with_streaming_response.simulate_credit_authorization(
+        with pytest.warns(DeprecationWarning):
+            with client.transactions.with_streaming_response.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+                transaction = response.parse()
+                assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_simulate_credit_authorization_advice(self, client: Lithic) -> None:
+        transaction = client.transactions.simulate_credit_authorization_advice(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_method_simulate_credit_authorization_advice_with_all_params(self, client: Lithic) -> None:
+        transaction = client.transactions.simulate_credit_authorization_advice(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+            mcc="5812",
+            merchant_acceptor_id="XRKGDPOWEWQRRWU",
+        )
+        assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_raw_response_simulate_credit_authorization_advice(self, client: Lithic) -> None:
+        response = client.transactions.with_raw_response.simulate_credit_authorization_advice(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_streaming_response_simulate_credit_authorization_advice(self, client: Lithic) -> None:
+        with client.transactions.with_streaming_response.simulate_credit_authorization_advice(
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
@@ -314,7 +371,7 @@ class TestTransactions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             transaction = response.parse()
-            assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+            assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -676,31 +733,36 @@ class TestAsyncTransactions:
 
     @parametrize
     async def test_method_simulate_credit_authorization(self, async_client: AsyncLithic) -> None:
-        transaction = await async_client.transactions.simulate_credit_authorization(
-            amount=3831,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-        )
+        with pytest.warns(DeprecationWarning):
+            transaction = await async_client.transactions.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+            )
+
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     async def test_method_simulate_credit_authorization_with_all_params(self, async_client: AsyncLithic) -> None:
-        transaction = await async_client.transactions.simulate_credit_authorization(
-            amount=3831,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-            mcc="5812",
-            merchant_acceptor_id="XRKGDPOWEWQRRWU",
-        )
+        with pytest.warns(DeprecationWarning):
+            transaction = await async_client.transactions.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+                mcc="5812",
+                merchant_acceptor_id="XRKGDPOWEWQRRWU",
+            )
+
         assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
 
     @parametrize
     async def test_raw_response_simulate_credit_authorization(self, async_client: AsyncLithic) -> None:
-        response = await async_client.transactions.with_raw_response.simulate_credit_authorization(
-            amount=3831,
-            descriptor="COFFEE SHOP",
-            pan="4111111289144142",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.transactions.with_raw_response.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -709,7 +771,56 @@ class TestAsyncTransactions:
 
     @parametrize
     async def test_streaming_response_simulate_credit_authorization(self, async_client: AsyncLithic) -> None:
-        async with async_client.transactions.with_streaming_response.simulate_credit_authorization(
+        with pytest.warns(DeprecationWarning):
+            async with async_client.transactions.with_streaming_response.simulate_credit_authorization(
+                amount=3831,
+                descriptor="COFFEE SHOP",
+                pan="4111111289144142",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+                transaction = await response.parse()
+                assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_simulate_credit_authorization_advice(self, async_client: AsyncLithic) -> None:
+        transaction = await async_client.transactions.simulate_credit_authorization_advice(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+        assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_credit_authorization_advice_with_all_params(self, async_client: AsyncLithic) -> None:
+        transaction = await async_client.transactions.simulate_credit_authorization_advice(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+            mcc="5812",
+            merchant_acceptor_id="XRKGDPOWEWQRRWU",
+        )
+        assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_raw_response_simulate_credit_authorization_advice(self, async_client: AsyncLithic) -> None:
+        response = await async_client.transactions.with_raw_response.simulate_credit_authorization_advice(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        transaction = response.parse()
+        assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_simulate_credit_authorization_advice(self, async_client: AsyncLithic) -> None:
+        async with async_client.transactions.with_streaming_response.simulate_credit_authorization_advice(
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
@@ -718,7 +829,7 @@ class TestAsyncTransactions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             transaction = await response.parse()
-            assert_matches_type(TransactionSimulateCreditAuthorizationResponse, transaction, path=["response"])
+            assert_matches_type(TransactionSimulateCreditAuthorizationAdviceResponse, transaction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
