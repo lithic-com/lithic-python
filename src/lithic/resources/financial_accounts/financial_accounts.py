@@ -15,7 +15,7 @@ from ...types import (
     financial_account_update_status_params,
     financial_account_register_account_number_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .balances import (
     Balances,
@@ -112,14 +112,14 @@ class FinancialAccounts(SyncAPIResource):
         *,
         nickname: str,
         type: Literal["OPERATING"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        is_for_benefit_of: bool | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        is_for_benefit_of: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Create a new financial account
@@ -159,7 +159,7 @@ class FinancialAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Get a financial account
@@ -189,13 +189,13 @@ class FinancialAccounts(SyncAPIResource):
         self,
         financial_account_token: str,
         *,
-        nickname: str | NotGiven = NOT_GIVEN,
+        nickname: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Update a financial account
@@ -225,15 +225,15 @@ class FinancialAccounts(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        business_account_token: str | Omit = omit,
+        type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSinglePage[FinancialAccount]:
         """
         Retrieve information on your financial accounts including routing and account
@@ -284,7 +284,7 @@ class FinancialAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Register account number
@@ -325,7 +325,7 @@ class FinancialAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Update financial account status
@@ -408,14 +408,14 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         *,
         nickname: str,
         type: Literal["OPERATING"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        is_for_benefit_of: bool | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        is_for_benefit_of: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Create a new financial account
@@ -455,7 +455,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Get a financial account
@@ -485,13 +485,13 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         self,
         financial_account_token: str,
         *,
-        nickname: str | NotGiven = NOT_GIVEN,
+        nickname: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Update a financial account
@@ -523,15 +523,15 @@ class AsyncFinancialAccounts(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        business_account_token: str | Omit = omit,
+        type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[FinancialAccount, AsyncSinglePage[FinancialAccount]]:
         """
         Retrieve information on your financial accounts including routing and account
@@ -582,7 +582,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Register account number
@@ -623,7 +623,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccount:
         """
         Update financial account status

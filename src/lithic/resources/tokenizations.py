@@ -15,7 +15,7 @@ from ..types import (
     tokenization_resend_activation_code_params,
     tokenization_update_digital_card_art_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -58,7 +58,7 @@ class Tokenizations(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tokenization:
         """
         Get tokenization
@@ -85,20 +85,20 @@ class Tokenizations(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, date] | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        end: Union[str, date] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "ALL"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, date] | Omit = omit,
+        card_token: str | Omit = omit,
+        end: Union[str, date] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "ALL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[Tokenization]:
         """
         List card tokenizations
@@ -165,7 +165,7 @@ class Tokenizations(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to activate a tokenization.
 
@@ -206,7 +206,7 @@ class Tokenizations(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to deactivate a tokenization.
 
@@ -248,7 +248,7 @@ class Tokenizations(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to pause a tokenization.
 
@@ -284,14 +284,13 @@ class Tokenizations(SyncAPIResource):
         self,
         tokenization_token: str,
         *,
-        activation_method_type: Literal["EMAIL_TO_CARDHOLDER_ADDRESS", "TEXT_TO_CARDHOLDER_NUMBER"]
-        | NotGiven = NOT_GIVEN,
+        activation_method_type: Literal["EMAIL_TO_CARDHOLDER_ADDRESS", "TEXT_TO_CARDHOLDER_NUMBER"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         This endpoint is used to ask the card network to send another activation code to
@@ -339,17 +338,16 @@ class Tokenizations(SyncAPIResource):
         expiration_date: str,
         pan: str,
         tokenization_source: Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY", "MERCHANT"],
-        account_score: int | NotGiven = NOT_GIVEN,
-        device_score: int | NotGiven = NOT_GIVEN,
-        entity: str | NotGiven = NOT_GIVEN,
-        wallet_recommended_decision: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"]
-        | NotGiven = NOT_GIVEN,
+        account_score: int | Omit = omit,
+        device_score: int | Omit = omit,
+        entity: str | Omit = omit,
+        wallet_recommended_decision: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TokenizationSimulateResponse:
         """
         This endpoint is used to simulate a card's tokenization in the Digital Wallet
@@ -413,7 +411,7 @@ class Tokenizations(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to unpause a tokenization.
 
@@ -448,13 +446,13 @@ class Tokenizations(SyncAPIResource):
         self,
         tokenization_token: str,
         *,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TokenizationUpdateDigitalCardArtResponse:
         """
         This endpoint is used update the digital card art for a digital wallet
@@ -524,7 +522,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tokenization:
         """
         Get tokenization
@@ -551,20 +549,20 @@ class AsyncTokenizations(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, date] | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        end: Union[str, date] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "ALL"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, date] | Omit = omit,
+        card_token: str | Omit = omit,
+        end: Union[str, date] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "ALL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Tokenization, AsyncCursorPage[Tokenization]]:
         """
         List card tokenizations
@@ -631,7 +629,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to activate a tokenization.
 
@@ -672,7 +670,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to deactivate a tokenization.
 
@@ -714,7 +712,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to pause a tokenization.
 
@@ -750,14 +748,13 @@ class AsyncTokenizations(AsyncAPIResource):
         self,
         tokenization_token: str,
         *,
-        activation_method_type: Literal["EMAIL_TO_CARDHOLDER_ADDRESS", "TEXT_TO_CARDHOLDER_NUMBER"]
-        | NotGiven = NOT_GIVEN,
+        activation_method_type: Literal["EMAIL_TO_CARDHOLDER_ADDRESS", "TEXT_TO_CARDHOLDER_NUMBER"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         This endpoint is used to ask the card network to send another activation code to
@@ -805,17 +802,16 @@ class AsyncTokenizations(AsyncAPIResource):
         expiration_date: str,
         pan: str,
         tokenization_source: Literal["APPLE_PAY", "GOOGLE", "SAMSUNG_PAY", "MERCHANT"],
-        account_score: int | NotGiven = NOT_GIVEN,
-        device_score: int | NotGiven = NOT_GIVEN,
-        entity: str | NotGiven = NOT_GIVEN,
-        wallet_recommended_decision: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"]
-        | NotGiven = NOT_GIVEN,
+        account_score: int | Omit = omit,
+        device_score: int | Omit = omit,
+        entity: str | Omit = omit,
+        wallet_recommended_decision: Literal["APPROVED", "DECLINED", "REQUIRE_ADDITIONAL_AUTHENTICATION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TokenizationSimulateResponse:
         """
         This endpoint is used to simulate a card's tokenization in the Digital Wallet
@@ -879,7 +875,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """This endpoint is used to ask the card network to unpause a tokenization.
 
@@ -914,13 +910,13 @@ class AsyncTokenizations(AsyncAPIResource):
         self,
         tokenization_token: str,
         *,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
+        digital_card_art_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TokenizationUpdateDigitalCardArtResponse:
         """
         This endpoint is used update the digital card art for a digital wallet

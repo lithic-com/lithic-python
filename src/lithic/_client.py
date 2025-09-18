@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Dict, Union, Mapping, cast
+from typing import TYPE_CHECKING, Any, Dict, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -11,7 +11,6 @@ import httpx
 from . import _exceptions, _legacy_response
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Body,
     Omit,
     Query,
@@ -21,6 +20,7 @@ from ._types import (
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
 from ._utils import is_given, get_async_library
 from ._compat import cached_property
@@ -126,9 +126,9 @@ class Lithic(SyncAPIClient):
         *,
         api_key: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        environment: Literal["production", "sandbox"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -405,9 +405,9 @@ class Lithic(SyncAPIClient):
         webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -461,7 +461,7 @@ class Lithic(SyncAPIClient):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIStatus:
         """Status of api"""
         return self.get(
@@ -518,9 +518,9 @@ class AsyncLithic(AsyncAPIClient):
         *,
         api_key: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        environment: Literal["production", "sandbox"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -797,9 +797,9 @@ class AsyncLithic(AsyncAPIClient):
         webhook_secret: str | None = None,
         environment: Literal["production", "sandbox"] | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -853,7 +853,7 @@ class AsyncLithic(AsyncAPIClient):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIStatus:
         """Status of api"""
         return await self.get(

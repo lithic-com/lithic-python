@@ -7,7 +7,7 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -49,7 +49,7 @@ class Authentication(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthenticationRetrieveResponse:
         """
         Get 3DS Authentication by token
@@ -81,13 +81,13 @@ class Authentication(SyncAPIResource):
         merchant: authentication_simulate_params.Merchant,
         pan: str,
         transaction: authentication_simulate_params.Transaction,
-        card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"] | NotGiven = NOT_GIVEN,
+        card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthenticationSimulateResponse:
         """
         Simulates a 3DS authentication request from the payment network as if it came
@@ -142,7 +142,7 @@ class Authentication(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Endpoint for simulating entering OTP into 3DS Challenge UI.
 
@@ -210,7 +210,7 @@ class AsyncAuthentication(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthenticationRetrieveResponse:
         """
         Get 3DS Authentication by token
@@ -242,13 +242,13 @@ class AsyncAuthentication(AsyncAPIResource):
         merchant: authentication_simulate_params.Merchant,
         pan: str,
         transaction: authentication_simulate_params.Transaction,
-        card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"] | NotGiven = NOT_GIVEN,
+        card_expiry_check: Literal["MATCH", "MISMATCH", "NOT_PRESENT"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthenticationSimulateResponse:
         """
         Simulates a 3DS authentication request from the payment network as if it came
@@ -303,7 +303,7 @@ class AsyncAuthentication(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Endpoint for simulating entering OTP into 3DS Challenge UI.
 

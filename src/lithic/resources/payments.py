@@ -17,7 +17,7 @@ from ..types import (
     payment_simulate_receipt_params,
     payment_simulate_release_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -64,15 +64,15 @@ class Payments(SyncAPIResource):
         method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY"],
         method_attributes: payment_create_params.MethodAttributes,
         type: Literal["COLLECTION", "PAYMENT"],
-        token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        memo: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentCreateResponse:
         """
         Initiates a payment between a financial account and an external bank account.
@@ -120,7 +120,7 @@ class Payments(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Payment:
         """
         Get the payment by token.
@@ -147,23 +147,23 @@ class Payments(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        category: Literal["ACH"] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
+        category: Literal["ACH"] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[Payment]:
         """
         List all the payments for the provided search criteria.
@@ -228,7 +228,7 @@ class Payments(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentRetryResponse:
         """
         Retry an origination which has been returned.
@@ -270,14 +270,14 @@ class Payments(SyncAPIResource):
         decline_reason: Literal[
             "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
         ]
-        | NotGiven = NOT_GIVEN,
-        return_reason_code: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        return_reason_code: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateActionResponse:
         """
         Simulate payment lifecycle event
@@ -322,13 +322,13 @@ class Payments(SyncAPIResource):
         amount: int,
         financial_account_token: str,
         receipt_type: Literal["RECEIPT_CREDIT", "RECEIPT_DEBIT"],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateReceiptResponse:
         """
         Simulates a receipt of a Payment.
@@ -379,7 +379,7 @@ class Payments(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateReleaseResponse:
         """
         Simulates a release of a Payment.
@@ -410,13 +410,13 @@ class Payments(SyncAPIResource):
         self,
         *,
         payment_token: str,
-        return_reason_code: str | NotGiven = NOT_GIVEN,
+        return_reason_code: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateReturnResponse:
         """
         Simulates a return of a Payment.
@@ -479,15 +479,15 @@ class AsyncPayments(AsyncAPIResource):
         method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY"],
         method_attributes: payment_create_params.MethodAttributes,
         type: Literal["COLLECTION", "PAYMENT"],
-        token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        memo: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentCreateResponse:
         """
         Initiates a payment between a financial account and an external bank account.
@@ -535,7 +535,7 @@ class AsyncPayments(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Payment:
         """
         Get the payment by token.
@@ -562,23 +562,23 @@ class AsyncPayments(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        category: Literal["ACH"] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
+        category: Literal["ACH"] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Payment, AsyncCursorPage[Payment]]:
         """
         List all the payments for the provided search criteria.
@@ -643,7 +643,7 @@ class AsyncPayments(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentRetryResponse:
         """
         Retry an origination which has been returned.
@@ -685,14 +685,14 @@ class AsyncPayments(AsyncAPIResource):
         decline_reason: Literal[
             "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
         ]
-        | NotGiven = NOT_GIVEN,
-        return_reason_code: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        return_reason_code: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateActionResponse:
         """
         Simulate payment lifecycle event
@@ -737,13 +737,13 @@ class AsyncPayments(AsyncAPIResource):
         amount: int,
         financial_account_token: str,
         receipt_type: Literal["RECEIPT_CREDIT", "RECEIPT_DEBIT"],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateReceiptResponse:
         """
         Simulates a receipt of a Payment.
@@ -794,7 +794,7 @@ class AsyncPayments(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateReleaseResponse:
         """
         Simulates a release of a Payment.
@@ -825,13 +825,13 @@ class AsyncPayments(AsyncAPIResource):
         self,
         *,
         payment_token: str,
-        return_reason_code: str | NotGiven = NOT_GIVEN,
+        return_reason_code: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentSimulateReturnResponse:
         """
         Simulates a return of a Payment.

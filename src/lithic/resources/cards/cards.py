@@ -22,7 +22,7 @@ from ...types import (
     card_web_provision_params,
     card_convert_physical_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, Base64FileInput
+from ..._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .balances import (
     Balances,
@@ -101,18 +101,18 @@ class Cards(SyncAPIResource):
         self,
         *,
         type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        card_program_token: str | NotGiven = NOT_GIVEN,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
-        exp_month: str | NotGiven = NOT_GIVEN,
-        exp_year: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
-        replacement_account_token: str | NotGiven = NOT_GIVEN,
-        replacement_comment: str | NotGiven = NOT_GIVEN,
-        replacement_for: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        card_program_token: str | Omit = omit,
+        carrier: Carrier | Omit = omit,
+        digital_card_art_token: str | Omit = omit,
+        exp_month: str | Omit = omit,
+        exp_year: str | Omit = omit,
+        memo: str | Omit = omit,
+        pin: str | Omit = omit,
+        product_id: str | Omit = omit,
+        replacement_account_token: str | Omit = omit,
+        replacement_comment: str | Omit = omit,
+        replacement_for: str | Omit = omit,
         replacement_substatus: Literal[
             "LOST",
             "COMPROMISED",
@@ -126,19 +126,19 @@ class Cards(SyncAPIResource):
             "UNDELIVERABLE",
             "OTHER",
         ]
-        | NotGiven = NOT_GIVEN,
-        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
-        spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        spend_limit: int | Omit = omit,
+        spend_limit_duration: SpendLimitDuration | Omit = omit,
+        state: Literal["OPEN", "PAUSED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -331,7 +331,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """
         Get card configuration such as spend limit and state.
@@ -359,15 +359,15 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        comment: str | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        network_program_token: str | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
-        pin_status: Literal["OK"] | NotGiven = NOT_GIVEN,
-        spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
+        comment: str | Omit = omit,
+        digital_card_art_token: str | Omit = omit,
+        memo: str | Omit = omit,
+        network_program_token: str | Omit = omit,
+        pin: str | Omit = omit,
+        pin_status: Literal["OK"] | Omit = omit,
+        spend_limit: int | Omit = omit,
+        spend_limit_duration: SpendLimitDuration | Omit = omit,
+        state: Literal["CLOSED", "OPEN", "PAUSED"] | Omit = omit,
         substatus: Literal[
             "LOST",
             "COMPROMISED",
@@ -381,13 +381,13 @@ class Cards(SyncAPIResource):
             "UNDELIVERABLE",
             "OTHER",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -512,20 +512,20 @@ class Cards(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        memo: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[NonPCICard]:
         """
         List cards.
@@ -589,16 +589,16 @@ class Cards(SyncAPIResource):
         card_token: str,
         *,
         shipping_address: ShippingAddress,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
+        carrier: Carrier | Omit = omit,
+        product_id: str | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Convert a virtual card into a physical card and manufacture it.
 
@@ -674,7 +674,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Handling full card PANs and CVV codes requires that you comply with the Payment
@@ -741,18 +741,18 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        certificate: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
-        client_device_id: str | NotGiven = NOT_GIVEN,
-        client_wallet_account_id: str | NotGiven = NOT_GIVEN,
-        digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
-        nonce: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
-        nonce_signature: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
+        certificate: Union[str, Base64FileInput] | Omit = omit,
+        client_device_id: str | Omit = omit,
+        client_wallet_account_id: str | Omit = omit,
+        digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | Omit = omit,
+        nonce: Union[str, Base64FileInput] | Omit = omit,
+        nonce_signature: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -819,17 +819,17 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
-        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
+        carrier: Carrier | Omit = omit,
+        product_id: str | Omit = omit,
+        shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Initiate print and shipment of a duplicate physical card (e.g.
 
@@ -895,18 +895,18 @@ class Cards(SyncAPIResource):
         card_token: str,
         *,
         shipping_address: ShippingAddress,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        exp_month: str | NotGiven = NOT_GIVEN,
-        exp_year: str | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
+        carrier: Carrier | Omit = omit,
+        exp_month: str | Omit = omit,
+        exp_year: str | Omit = omit,
+        product_id: str | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Applies to card types `PHYSICAL` and `VIRTUAL`.
 
@@ -988,7 +988,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardSpendLimits:
         """
         Get a Card's available spend limit, which is based on the spend limit configured
@@ -1024,7 +1024,7 @@ class Cards(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Get card configuration such as spend limit and state.
 
@@ -1058,13 +1058,13 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        digital_wallet: Literal["APPLE_PAY"] | NotGiven = NOT_GIVEN,
+        digital_wallet: Literal["APPLE_PAY"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardWebProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -1133,18 +1133,18 @@ class AsyncCards(AsyncAPIResource):
         self,
         *,
         type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        card_program_token: str | NotGiven = NOT_GIVEN,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
-        exp_month: str | NotGiven = NOT_GIVEN,
-        exp_year: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
-        replacement_account_token: str | NotGiven = NOT_GIVEN,
-        replacement_comment: str | NotGiven = NOT_GIVEN,
-        replacement_for: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        card_program_token: str | Omit = omit,
+        carrier: Carrier | Omit = omit,
+        digital_card_art_token: str | Omit = omit,
+        exp_month: str | Omit = omit,
+        exp_year: str | Omit = omit,
+        memo: str | Omit = omit,
+        pin: str | Omit = omit,
+        product_id: str | Omit = omit,
+        replacement_account_token: str | Omit = omit,
+        replacement_comment: str | Omit = omit,
+        replacement_for: str | Omit = omit,
         replacement_substatus: Literal[
             "LOST",
             "COMPROMISED",
@@ -1158,19 +1158,19 @@ class AsyncCards(AsyncAPIResource):
             "UNDELIVERABLE",
             "OTHER",
         ]
-        | NotGiven = NOT_GIVEN,
-        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
-        spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        state: Literal["OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        spend_limit: int | Omit = omit,
+        spend_limit_duration: SpendLimitDuration | Omit = omit,
+        state: Literal["OPEN", "PAUSED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Create a new virtual or physical card.
 
@@ -1363,7 +1363,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """
         Get card configuration such as spend limit and state.
@@ -1391,15 +1391,15 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        comment: str | NotGiven = NOT_GIVEN,
-        digital_card_art_token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        network_program_token: str | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
-        pin_status: Literal["OK"] | NotGiven = NOT_GIVEN,
-        spend_limit: int | NotGiven = NOT_GIVEN,
-        spend_limit_duration: SpendLimitDuration | NotGiven = NOT_GIVEN,
-        state: Literal["CLOSED", "OPEN", "PAUSED"] | NotGiven = NOT_GIVEN,
+        comment: str | Omit = omit,
+        digital_card_art_token: str | Omit = omit,
+        memo: str | Omit = omit,
+        network_program_token: str | Omit = omit,
+        pin: str | Omit = omit,
+        pin_status: Literal["OK"] | Omit = omit,
+        spend_limit: int | Omit = omit,
+        spend_limit_duration: SpendLimitDuration | Omit = omit,
+        state: Literal["CLOSED", "OPEN", "PAUSED"] | Omit = omit,
         substatus: Literal[
             "LOST",
             "COMPROMISED",
@@ -1413,13 +1413,13 @@ class AsyncCards(AsyncAPIResource):
             "UNDELIVERABLE",
             "OTHER",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Update the specified properties of the card.
 
@@ -1544,20 +1544,20 @@ class AsyncCards(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        memo: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[NonPCICard, AsyncCursorPage[NonPCICard]]:
         """
         List cards.
@@ -1621,16 +1621,16 @@ class AsyncCards(AsyncAPIResource):
         card_token: str,
         *,
         shipping_address: ShippingAddress,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
+        carrier: Carrier | Omit = omit,
+        product_id: str | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Convert a virtual card into a physical card and manufacture it.
 
@@ -1706,7 +1706,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Handling full card PANs and CVV codes requires that you comply with the Payment
@@ -1773,18 +1773,18 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        certificate: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
-        client_device_id: str | NotGiven = NOT_GIVEN,
-        client_wallet_account_id: str | NotGiven = NOT_GIVEN,
-        digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | NotGiven = NOT_GIVEN,
-        nonce: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
-        nonce_signature: Union[str, Base64FileInput] | NotGiven = NOT_GIVEN,
+        certificate: Union[str, Base64FileInput] | Omit = omit,
+        client_device_id: str | Omit = omit,
+        client_wallet_account_id: str | Omit = omit,
+        digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY", "SAMSUNG_PAY"] | Omit = omit,
+        nonce: Union[str, Base64FileInput] | Omit = omit,
+        nonce_signature: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
@@ -1851,17 +1851,17 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
-        shipping_address: ShippingAddress | NotGiven = NOT_GIVEN,
+        carrier: Carrier | Omit = omit,
+        product_id: str | Omit = omit,
+        shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Initiate print and shipment of a duplicate physical card (e.g.
 
@@ -1927,18 +1927,18 @@ class AsyncCards(AsyncAPIResource):
         card_token: str,
         *,
         shipping_address: ShippingAddress,
-        carrier: Carrier | NotGiven = NOT_GIVEN,
-        exp_month: str | NotGiven = NOT_GIVEN,
-        exp_year: str | NotGiven = NOT_GIVEN,
-        product_id: str | NotGiven = NOT_GIVEN,
+        carrier: Carrier | Omit = omit,
+        exp_month: str | Omit = omit,
+        exp_year: str | Omit = omit,
+        product_id: str | Omit = omit,
         shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Applies to card types `PHYSICAL` and `VIRTUAL`.
 
@@ -2020,7 +2020,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardSpendLimits:
         """
         Get a Card's available spend limit, which is based on the spend limit configured
@@ -2056,7 +2056,7 @@ class AsyncCards(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Card:
         """Get card configuration such as spend limit and state.
 
@@ -2090,13 +2090,13 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        digital_wallet: Literal["APPLE_PAY"] | NotGiven = NOT_GIVEN,
+        digital_wallet: Literal["APPLE_PAY"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardWebProvisionResponse:
         """
         Allow your cardholders to directly add payment cards to the device's digital
