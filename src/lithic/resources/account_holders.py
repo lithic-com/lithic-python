@@ -17,7 +17,7 @@ from ..types import (
     account_holder_simulate_enrollment_review_params,
     account_holder_simulate_enrollment_document_review_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import is_given, required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -67,17 +67,16 @@ class AccountHolders(SyncAPIResource):
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
+        external_id: str | Omit = omit,
+        kyb_passed_timestamp: str | Omit = omit,
+        website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -146,19 +145,19 @@ class AccountHolders(SyncAPIResource):
         *,
         business_entity: account_holder_create_params.KYBDelegatedBusinessEntity,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
-        control_person: account_holder_create_params.KYBDelegatedControlPerson | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        tos_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
-        workflow: Literal["KYB_DELEGATED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        control_person: account_holder_create_params.KYBDelegatedControlPerson | Omit = omit,
+        external_id: str | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        tos_timestamp: str | Omit = omit,
+        website_url: str | Omit = omit,
+        workflow: Literal["KYB_DELEGATED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -220,14 +219,14 @@ class AccountHolders(SyncAPIResource):
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
         workflow: Literal["KYC_BASIC", "KYC_BYO"],
-        external_id: str | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        external_id: str | Omit = omit,
+        kyc_passed_timestamp: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -278,14 +277,14 @@ class AccountHolders(SyncAPIResource):
         last_name: str,
         phone_number: str,
         workflow: Literal["KYC_EXEMPT"],
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
+        business_account_token: str | Omit = omit,
+        external_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -348,40 +347,39 @@ class AccountHolders(SyncAPIResource):
         *,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         business_entity: account_holder_create_params.KYBBusinessEntity
         | account_holder_create_params.KYBDelegatedBusinessEntity
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         control_person: account_holder_create_params.KYBControlPerson
         | account_holder_create_params.KYBDelegatedControlPerson
-        | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        tos_timestamp: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        tos_timestamp: str | Omit = omit,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYB_DELEGATED"]
         | Literal["KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"]
-        | NotGiven = NOT_GIVEN,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        address: Address | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
+        external_id: str | Omit = omit,
+        kyb_passed_timestamp: str | Omit = omit,
+        website_url: str | Omit = omit,
+        individual: account_holder_create_params.KYCIndividual | Omit = omit,
+        kyc_passed_timestamp: str | Omit = omit,
+        address: Address | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | Omit = omit,
+        last_name: str | Omit = omit,
+        phone_number: str | Omit = omit,
+        business_account_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
             timeout = 300
@@ -426,7 +424,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolder:
         """
         Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
@@ -459,20 +457,20 @@ class AccountHolders(SyncAPIResource):
         account_holder_token: str,
         *,
         beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
-        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
-        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
+        external_id: str | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder (including
@@ -531,14 +529,14 @@ class AccountHolders(SyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        external_id: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
+        external_id: str | Omit = omit,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder (including
@@ -574,19 +572,19 @@ class AccountHolders(SyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        legal_business_name: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
+        address: AddressUpdateParam | Omit = omit,
+        business_account_token: str | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        legal_business_name: str | Omit = omit,
+        phone_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder (including
@@ -635,28 +633,28 @@ class AccountHolders(SyncAPIResource):
         account_holder_token: str,
         *,
         beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
-        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
-        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
-        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        legal_business_name: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
+        external_id: str | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        website_url: str | Omit = omit,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | Omit = omit,
+        address: AddressUpdateParam | Omit = omit,
+        business_account_token: str | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        legal_business_name: str | Omit = omit,
+        phone_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         if not account_holder_token:
             raise ValueError(
@@ -698,23 +696,23 @@ class AccountHolders(SyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        legal_business_name: str | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        email: str | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        external_id: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        legal_business_name: str | Omit = omit,
+        limit: int | Omit = omit,
+        phone_number: str | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSinglePage[AccountHolder]:
         """
         Get a list of individual or business account holders and their KYC or KYB
@@ -796,7 +794,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -846,7 +844,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Document:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -892,7 +890,7 @@ class AccountHolders(SyncAPIResource):
         *,
         document_upload_token: str,
         status: Literal["UPLOADED", "ACCEPTED", "REJECTED", "PARTIAL_APPROVAL"],
-        accepted_entity_status_reasons: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        accepted_entity_status_reasons: SequenceNotStr[str] | Omit = omit,
         status_reason: Literal[
             "DOCUMENT_MISSING_REQUIRED_DATA",
             "DOCUMENT_UPLOAD_TOO_BLURRY",
@@ -906,13 +904,13 @@ class AccountHolders(SyncAPIResource):
             "UNKNOWN_FAILURE_REASON",
             "UNKNOWN_ERROR",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Document:
         """
         Simulates a review for an account holder document upload.
@@ -955,8 +953,8 @@ class AccountHolders(SyncAPIResource):
     def simulate_enrollment_review(
         self,
         *,
-        account_holder_token: str | NotGiven = NOT_GIVEN,
-        status: Literal["ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
+        account_holder_token: str | Omit = omit,
+        status: Literal["ACCEPTED", "REJECTED"] | Omit = omit,
         status_reasons: List[
             Literal[
                 "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
@@ -978,13 +976,13 @@ class AccountHolders(SyncAPIResource):
                 "BENEFICIAL_OWNER_INDIVIDUAL_NAME_VERIFICATION_FAILURE",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderSimulateEnrollmentReviewResponse:
         """Simulates an enrollment review for an account holder.
 
@@ -1054,7 +1052,7 @@ class AccountHolders(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Document:
         """
         Use this endpoint to identify which type of supported government-issued
@@ -1139,17 +1137,16 @@ class AsyncAccountHolders(AsyncAPIResource):
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
+        external_id: str | Omit = omit,
+        kyb_passed_timestamp: str | Omit = omit,
+        website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -1218,19 +1215,19 @@ class AsyncAccountHolders(AsyncAPIResource):
         *,
         business_entity: account_holder_create_params.KYBDelegatedBusinessEntity,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
-        control_person: account_holder_create_params.KYBDelegatedControlPerson | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        tos_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
-        workflow: Literal["KYB_DELEGATED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        control_person: account_holder_create_params.KYBDelegatedControlPerson | Omit = omit,
+        external_id: str | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        tos_timestamp: str | Omit = omit,
+        website_url: str | Omit = omit,
+        workflow: Literal["KYB_DELEGATED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -1292,14 +1289,14 @@ class AsyncAccountHolders(AsyncAPIResource):
         individual: account_holder_create_params.KYCIndividual,
         tos_timestamp: str,
         workflow: Literal["KYC_BASIC", "KYC_BYO"],
-        external_id: str | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
+        external_id: str | Omit = omit,
+        kyc_passed_timestamp: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -1350,14 +1347,14 @@ class AsyncAccountHolders(AsyncAPIResource):
         last_name: str,
         phone_number: str,
         workflow: Literal["KYC_EXEMPT"],
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
+        business_account_token: str | Omit = omit,
+        external_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         """
         Create an account holder and initiate the appropriate onboarding workflow.
@@ -1420,40 +1417,39 @@ class AsyncAccountHolders(AsyncAPIResource):
         *,
         beneficial_owner_individuals: Iterable[account_holder_create_params.KYBBeneficialOwnerIndividual]
         | Iterable[account_holder_create_params.KYBDelegatedBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         business_entity: account_holder_create_params.KYBBusinessEntity
         | account_holder_create_params.KYBDelegatedBusinessEntity
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         control_person: account_holder_create_params.KYBControlPerson
         | account_holder_create_params.KYBDelegatedControlPerson
-        | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        tos_timestamp: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        tos_timestamp: str | Omit = omit,
         workflow: Literal["KYB_BASIC", "KYB_BYO"]
         | Literal["KYB_DELEGATED"]
         | Literal["KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"]
-        | NotGiven = NOT_GIVEN,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        kyb_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_create_params.KYCIndividual | NotGiven = NOT_GIVEN,
-        kyc_passed_timestamp: str | NotGiven = NOT_GIVEN,
-        address: Address | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
+        external_id: str | Omit = omit,
+        kyb_passed_timestamp: str | Omit = omit,
+        website_url: str | Omit = omit,
+        individual: account_holder_create_params.KYCIndividual | Omit = omit,
+        kyc_passed_timestamp: str | Omit = omit,
+        address: Address | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        kyc_exemption_type: Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"] | Omit = omit,
+        last_name: str | Omit = omit,
+        phone_number: str | Omit = omit,
+        business_account_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderCreateResponse:
         if not is_given(timeout) and self._client.timeout == DEFAULT_TIMEOUT:
             timeout = 300
@@ -1498,7 +1494,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolder:
         """
         Get an Individual or Business Account Holder and/or their KYC or KYB evaluation
@@ -1531,20 +1527,20 @@ class AsyncAccountHolders(AsyncAPIResource):
         account_holder_token: str,
         *,
         beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
-        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
-        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
+        external_id: str | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder (including
@@ -1603,14 +1599,14 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        external_id: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
+        external_id: str | Omit = omit,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder (including
@@ -1646,19 +1642,19 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        legal_business_name: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
+        address: AddressUpdateParam | Omit = omit,
+        business_account_token: str | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        legal_business_name: str | Omit = omit,
+        phone_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         """
         Update the information associated with a particular account holder (including
@@ -1707,28 +1703,28 @@ class AsyncAccountHolders(AsyncAPIResource):
         account_holder_token: str,
         *,
         beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
-        | NotGiven = NOT_GIVEN,
-        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | NotGiven = NOT_GIVEN,
-        control_person: account_holder_update_params.KYBPatchRequestControlPerson | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        nature_of_business: str | NotGiven = NOT_GIVEN,
-        website_url: str | NotGiven = NOT_GIVEN,
-        individual: account_holder_update_params.KYCPatchRequestIndividual | NotGiven = NOT_GIVEN,
-        address: AddressUpdateParam | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        legal_business_name: str | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
+        control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
+        external_id: str | Omit = omit,
+        nature_of_business: str | Omit = omit,
+        website_url: str | Omit = omit,
+        individual: account_holder_update_params.KYCPatchRequestIndividual | Omit = omit,
+        address: AddressUpdateParam | Omit = omit,
+        business_account_token: str | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        legal_business_name: str | Omit = omit,
+        phone_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderUpdateResponse:
         if not account_holder_token:
             raise ValueError(
@@ -1770,23 +1766,23 @@ class AsyncAccountHolders(AsyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        legal_business_name: str | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        phone_number: str | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        email: str | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        external_id: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        legal_business_name: str | Omit = omit,
+        limit: int | Omit = omit,
+        phone_number: str | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[AccountHolder, AsyncSinglePage[AccountHolder]]:
         """
         Get a list of individual or business account holders and their KYC or KYB
@@ -1868,7 +1864,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderListDocumentsResponse:
         """
         Retrieve the status of account holder document uploads, or retrieve the upload
@@ -1918,7 +1914,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Document:
         """
         Check the status of an account holder document upload, or retrieve the upload
@@ -1964,7 +1960,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         *,
         document_upload_token: str,
         status: Literal["UPLOADED", "ACCEPTED", "REJECTED", "PARTIAL_APPROVAL"],
-        accepted_entity_status_reasons: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        accepted_entity_status_reasons: SequenceNotStr[str] | Omit = omit,
         status_reason: Literal[
             "DOCUMENT_MISSING_REQUIRED_DATA",
             "DOCUMENT_UPLOAD_TOO_BLURRY",
@@ -1978,13 +1974,13 @@ class AsyncAccountHolders(AsyncAPIResource):
             "UNKNOWN_FAILURE_REASON",
             "UNKNOWN_ERROR",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Document:
         """
         Simulates a review for an account holder document upload.
@@ -2027,8 +2023,8 @@ class AsyncAccountHolders(AsyncAPIResource):
     async def simulate_enrollment_review(
         self,
         *,
-        account_holder_token: str | NotGiven = NOT_GIVEN,
-        status: Literal["ACCEPTED", "REJECTED"] | NotGiven = NOT_GIVEN,
+        account_holder_token: str | Omit = omit,
+        status: Literal["ACCEPTED", "REJECTED"] | Omit = omit,
         status_reasons: List[
             Literal[
                 "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
@@ -2050,13 +2046,13 @@ class AsyncAccountHolders(AsyncAPIResource):
                 "BENEFICIAL_OWNER_INDIVIDUAL_NAME_VERIFICATION_FAILURE",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderSimulateEnrollmentReviewResponse:
         """Simulates an enrollment review for an account holder.
 
@@ -2126,7 +2122,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Document:
         """
         Use this endpoint to identify which type of supported government-issued

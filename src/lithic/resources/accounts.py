@@ -10,7 +10,7 @@ import httpx
 
 from .. import _legacy_response
 from ..types import account_list_params, account_update_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -52,7 +52,7 @@ class Accounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Get account configuration such as spend limits.
@@ -80,11 +80,11 @@ class Accounts(SyncAPIResource):
         self,
         account_token: str,
         *,
-        comment: str | NotGiven = NOT_GIVEN,
-        daily_spend_limit: int | NotGiven = NOT_GIVEN,
-        lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
-        monthly_spend_limit: int | NotGiven = NOT_GIVEN,
-        state: Literal["ACTIVE", "PAUSED", "CLOSED"] | NotGiven = NOT_GIVEN,
+        comment: str | Omit = omit,
+        daily_spend_limit: int | Omit = omit,
+        lifetime_spend_limit: int | Omit = omit,
+        monthly_spend_limit: int | Omit = omit,
+        state: Literal["ACTIVE", "PAUSED", "CLOSED"] | Omit = omit,
         substatus: Literal[
             "FRAUD_IDENTIFIED",
             "SUSPICIOUS_ACTIVITY",
@@ -95,14 +95,14 @@ class Accounts(SyncAPIResource):
             "INTERNAL_REVIEW",
             "OTHER",
         ]
-        | NotGiven = NOT_GIVEN,
-        verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        verification_address: account_update_params.VerificationAddress | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """Update account configuration such as state or spend limits.
 
@@ -196,17 +196,17 @@ class Accounts(SyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[Account]:
         """List account configurations.
 
@@ -266,7 +266,7 @@ class Accounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountSpendLimits:
         """
         Get an Account's available spend limits, which is based on the spend limit
@@ -324,7 +324,7 @@ class AsyncAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Get account configuration such as spend limits.
@@ -352,11 +352,11 @@ class AsyncAccounts(AsyncAPIResource):
         self,
         account_token: str,
         *,
-        comment: str | NotGiven = NOT_GIVEN,
-        daily_spend_limit: int | NotGiven = NOT_GIVEN,
-        lifetime_spend_limit: int | NotGiven = NOT_GIVEN,
-        monthly_spend_limit: int | NotGiven = NOT_GIVEN,
-        state: Literal["ACTIVE", "PAUSED", "CLOSED"] | NotGiven = NOT_GIVEN,
+        comment: str | Omit = omit,
+        daily_spend_limit: int | Omit = omit,
+        lifetime_spend_limit: int | Omit = omit,
+        monthly_spend_limit: int | Omit = omit,
+        state: Literal["ACTIVE", "PAUSED", "CLOSED"] | Omit = omit,
         substatus: Literal[
             "FRAUD_IDENTIFIED",
             "SUSPICIOUS_ACTIVITY",
@@ -367,14 +367,14 @@ class AsyncAccounts(AsyncAPIResource):
             "INTERNAL_REVIEW",
             "OTHER",
         ]
-        | NotGiven = NOT_GIVEN,
-        verification_address: account_update_params.VerificationAddress | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        verification_address: account_update_params.VerificationAddress | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """Update account configuration such as state or spend limits.
 
@@ -468,17 +468,17 @@ class AsyncAccounts(AsyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Account, AsyncCursorPage[Account]]:
         """List account configurations.
 
@@ -538,7 +538,7 @@ class AsyncAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountSpendLimits:
         """
         Get an Account's available spend limits, which is based on the spend limit

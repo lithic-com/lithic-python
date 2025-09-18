@@ -16,7 +16,7 @@ from ..types import (
     dispute_list_evidences_params,
     dispute_initiate_evidence_upload_params,
 )
-from .._types import NOT_GIVEN, Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr
+from .._types import Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr, Body, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -70,14 +70,14 @@ class Disputes(SyncAPIResource):
             "REFUND_NOT_PROCESSED",
         ],
         transaction_token: str,
-        customer_filed_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        customer_note: str | NotGiven = NOT_GIVEN,
+        customer_filed_date: Union[str, datetime] | Omit = omit,
+        customer_note: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
         Initiate a dispute.
@@ -128,7 +128,7 @@ class Disputes(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
         Get dispute.
@@ -156,9 +156,9 @@ class Disputes(SyncAPIResource):
         self,
         dispute_token: str,
         *,
-        amount: int | NotGiven = NOT_GIVEN,
-        customer_filed_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        customer_note: str | NotGiven = NOT_GIVEN,
+        amount: int | Omit = omit,
+        customer_filed_date: Union[str, datetime] | Omit = omit,
+        customer_note: str | Omit = omit,
         reason: Literal[
             "ATM_CASH_MISDISPENSE",
             "CANCELLED",
@@ -175,13 +175,13 @@ class Disputes(SyncAPIResource):
             "RECURRING_TRANSACTION_NOT_CANCELLED",
             "REFUND_NOT_PROCESSED",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """Update dispute.
 
@@ -226,11 +226,11 @@ class Disputes(SyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         status: Literal[
             "ARBITRATION",
             "CASE_CLOSED",
@@ -241,14 +241,14 @@ class Disputes(SyncAPIResource):
             "REPRESENTMENT",
             "SUBMITTED",
         ]
-        | NotGiven = NOT_GIVEN,
-        transaction_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        transaction_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[Dispute]:
         """List disputes.
 
@@ -314,7 +314,7 @@ class Disputes(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
         Withdraw dispute.
@@ -348,7 +348,7 @@ class Disputes(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """Soft delete evidence for a dispute.
 
@@ -380,13 +380,13 @@ class Disputes(SyncAPIResource):
         self,
         dispute_token: str,
         *,
-        filename: str | NotGiven = NOT_GIVEN,
+        filename: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """Use this endpoint to upload evidences for the dispute.
 
@@ -424,17 +424,17 @@ class Disputes(SyncAPIResource):
         self,
         dispute_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[DisputeEvidence]:
         """
         List evidence metadata for a dispute.
@@ -496,7 +496,7 @@ class Disputes(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """
         Get a dispute's evidence metadata.
@@ -586,14 +586,14 @@ class AsyncDisputes(AsyncAPIResource):
             "REFUND_NOT_PROCESSED",
         ],
         transaction_token: str,
-        customer_filed_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        customer_note: str | NotGiven = NOT_GIVEN,
+        customer_filed_date: Union[str, datetime] | Omit = omit,
+        customer_note: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
         Initiate a dispute.
@@ -644,7 +644,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
         Get dispute.
@@ -672,9 +672,9 @@ class AsyncDisputes(AsyncAPIResource):
         self,
         dispute_token: str,
         *,
-        amount: int | NotGiven = NOT_GIVEN,
-        customer_filed_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        customer_note: str | NotGiven = NOT_GIVEN,
+        amount: int | Omit = omit,
+        customer_filed_date: Union[str, datetime] | Omit = omit,
+        customer_note: str | Omit = omit,
         reason: Literal[
             "ATM_CASH_MISDISPENSE",
             "CANCELLED",
@@ -691,13 +691,13 @@ class AsyncDisputes(AsyncAPIResource):
             "RECURRING_TRANSACTION_NOT_CANCELLED",
             "REFUND_NOT_PROCESSED",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """Update dispute.
 
@@ -742,11 +742,11 @@ class AsyncDisputes(AsyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         status: Literal[
             "ARBITRATION",
             "CASE_CLOSED",
@@ -757,14 +757,14 @@ class AsyncDisputes(AsyncAPIResource):
             "REPRESENTMENT",
             "SUBMITTED",
         ]
-        | NotGiven = NOT_GIVEN,
-        transaction_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        transaction_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Dispute, AsyncCursorPage[Dispute]]:
         """List disputes.
 
@@ -830,7 +830,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
         Withdraw dispute.
@@ -864,7 +864,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """Soft delete evidence for a dispute.
 
@@ -896,13 +896,13 @@ class AsyncDisputes(AsyncAPIResource):
         self,
         dispute_token: str,
         *,
-        filename: str | NotGiven = NOT_GIVEN,
+        filename: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """Use this endpoint to upload evidences for the dispute.
 
@@ -940,17 +940,17 @@ class AsyncDisputes(AsyncAPIResource):
         self,
         dispute_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[DisputeEvidence, AsyncCursorPage[DisputeEvidence]]:
         """
         List evidence metadata for a dispute.
@@ -1012,7 +1012,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """
         Get a dispute's evidence metadata.

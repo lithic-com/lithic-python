@@ -21,7 +21,7 @@ from ...types import (
     transaction_simulate_credit_authorization_params,
     transaction_simulate_credit_authorization_advice_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -96,7 +96,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transaction:
         """Get a specific card transaction.
 
@@ -125,21 +125,21 @@ class Transactions(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "VOIDED", "SETTLED", "DECLINED", "EXPIRED"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        card_token: str | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["PENDING", "VOIDED", "SETTLED", "DECLINED", "EXPIRED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[Transaction]:
         """List card transactions.
 
@@ -213,7 +213,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Expire authorization
@@ -243,12 +243,12 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        mcc: str | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
-        merchant_amount: int | NotGiven = NOT_GIVEN,
-        merchant_currency: str | NotGiven = NOT_GIVEN,
-        partial_approval_capable: bool | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
+        mcc: str | Omit = omit,
+        merchant_acceptor_id: str | Omit = omit,
+        merchant_amount: int | Omit = omit,
+        merchant_currency: str | Omit = omit,
+        partial_approval_capable: bool | Omit = omit,
+        pin: str | Omit = omit,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -256,13 +256,13 @@ class Transactions(SyncAPIResource):
             "FINANCIAL_AUTHORIZATION",
             "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the card network as if it came from a
@@ -361,7 +361,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateAuthorizationAdviceResponse:
         """
         Simulates an authorization advice from the card network as if it came from a
@@ -401,13 +401,13 @@ class Transactions(SyncAPIResource):
         self,
         *,
         token: str,
-        amount: int | NotGiven = NOT_GIVEN,
+        amount: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization, either debit or credit.
 
@@ -461,14 +461,14 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        mcc: str | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        mcc: str | Omit = omit,
+        merchant_acceptor_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateCreditAuthorizationResponse:
         """Simulates a credit authorization advice from the card network.
 
@@ -522,14 +522,14 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        mcc: str | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        mcc: str | Omit = omit,
+        merchant_acceptor_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateCreditAuthorizationAdviceResponse:
         """Simulates a credit authorization advice from the card network.
 
@@ -588,7 +588,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateReturnResponse:
         """Returns, or refunds, an amount back to a card.
 
@@ -636,7 +636,7 @@ class Transactions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateReturnReversalResponse:
         """Reverses a return, i.e.
 
@@ -670,14 +670,14 @@ class Transactions(SyncAPIResource):
         self,
         *,
         token: str,
-        amount: int | NotGiven = NOT_GIVEN,
-        type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | NotGiven = NOT_GIVEN,
+        amount: int | Omit = omit,
+        type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateVoidResponse:
         """Voids a pending authorization.
 
@@ -760,7 +760,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transaction:
         """Get a specific card transaction.
 
@@ -789,21 +789,21 @@ class AsyncTransactions(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "VOIDED", "SETTLED", "DECLINED", "EXPIRED"] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        card_token: str | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["PENDING", "VOIDED", "SETTLED", "DECLINED", "EXPIRED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Transaction, AsyncCursorPage[Transaction]]:
         """List card transactions.
 
@@ -877,7 +877,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Expire authorization
@@ -907,12 +907,12 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        mcc: str | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
-        merchant_amount: int | NotGiven = NOT_GIVEN,
-        merchant_currency: str | NotGiven = NOT_GIVEN,
-        partial_approval_capable: bool | NotGiven = NOT_GIVEN,
-        pin: str | NotGiven = NOT_GIVEN,
+        mcc: str | Omit = omit,
+        merchant_acceptor_id: str | Omit = omit,
+        merchant_amount: int | Omit = omit,
+        merchant_currency: str | Omit = omit,
+        partial_approval_capable: bool | Omit = omit,
+        pin: str | Omit = omit,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -920,13 +920,13 @@ class AsyncTransactions(AsyncAPIResource):
             "FINANCIAL_AUTHORIZATION",
             "FINANCIAL_CREDIT_AUTHORIZATION",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateAuthorizationResponse:
         """
         Simulates an authorization request from the card network as if it came from a
@@ -1025,7 +1025,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateAuthorizationAdviceResponse:
         """
         Simulates an authorization advice from the card network as if it came from a
@@ -1065,13 +1065,13 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         *,
         token: str,
-        amount: int | NotGiven = NOT_GIVEN,
+        amount: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateClearingResponse:
         """Clears an existing authorization, either debit or credit.
 
@@ -1125,14 +1125,14 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        mcc: str | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        mcc: str | Omit = omit,
+        merchant_acceptor_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateCreditAuthorizationResponse:
         """Simulates a credit authorization advice from the card network.
 
@@ -1186,14 +1186,14 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
-        mcc: str | NotGiven = NOT_GIVEN,
-        merchant_acceptor_id: str | NotGiven = NOT_GIVEN,
+        mcc: str | Omit = omit,
+        merchant_acceptor_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateCreditAuthorizationAdviceResponse:
         """Simulates a credit authorization advice from the card network.
 
@@ -1252,7 +1252,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateReturnResponse:
         """Returns, or refunds, an amount back to a card.
 
@@ -1300,7 +1300,7 @@ class AsyncTransactions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateReturnReversalResponse:
         """Reverses a return, i.e.
 
@@ -1334,14 +1334,14 @@ class AsyncTransactions(AsyncAPIResource):
         self,
         *,
         token: str,
-        amount: int | NotGiven = NOT_GIVEN,
-        type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | NotGiven = NOT_GIVEN,
+        amount: int | Omit = omit,
+        type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TransactionSimulateVoidResponse:
         """Voids a pending authorization.
 

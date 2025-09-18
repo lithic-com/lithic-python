@@ -17,7 +17,7 @@ from ..types import (
     external_payment_release_params,
     external_payment_reverse_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -57,16 +57,16 @@ class ExternalPayments(SyncAPIResource):
         effective_date: Union[str, date],
         financial_account_token: str,
         payment_type: Literal["DEPOSIT", "WITHDRAWAL"],
-        token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        progress_to: Literal["SETTLED", "RELEASED"] | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        memo: str | Omit = omit,
+        progress_to: Literal["SETTLED", "RELEASED"] | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Create external payment
@@ -111,7 +111,7 @@ class ExternalPayments(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Get external payment
@@ -140,23 +140,22 @@ class ExternalPayments(SyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]
-        | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
+        category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[ExternalPayment]:
         """List external payments
 
@@ -226,13 +225,13 @@ class ExternalPayments(SyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Cancel external payment
@@ -270,13 +269,13 @@ class ExternalPayments(SyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Release external payment
@@ -314,13 +313,13 @@ class ExternalPayments(SyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Reverse external payment
@@ -358,14 +357,14 @@ class ExternalPayments(SyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
-        progress_to: Literal["SETTLED", "RELEASED"] | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
+        progress_to: Literal["SETTLED", "RELEASED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Settle external payment
@@ -428,16 +427,16 @@ class AsyncExternalPayments(AsyncAPIResource):
         effective_date: Union[str, date],
         financial_account_token: str,
         payment_type: Literal["DEPOSIT", "WITHDRAWAL"],
-        token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        progress_to: Literal["SETTLED", "RELEASED"] | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        memo: str | Omit = omit,
+        progress_to: Literal["SETTLED", "RELEASED"] | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Create external payment
@@ -482,7 +481,7 @@ class AsyncExternalPayments(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Get external payment
@@ -511,23 +510,22 @@ class AsyncExternalPayments(AsyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]
-        | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
+        category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[ExternalPayment, AsyncCursorPage[ExternalPayment]]:
         """List external payments
 
@@ -597,13 +595,13 @@ class AsyncExternalPayments(AsyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Cancel external payment
@@ -641,13 +639,13 @@ class AsyncExternalPayments(AsyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Release external payment
@@ -685,13 +683,13 @@ class AsyncExternalPayments(AsyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Reverse external payment
@@ -729,14 +727,14 @@ class AsyncExternalPayments(AsyncAPIResource):
         external_payment_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
-        progress_to: Literal["SETTLED", "RELEASED"] | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
+        progress_to: Literal["SETTLED", "RELEASED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalPayment:
         """
         Settle external payment

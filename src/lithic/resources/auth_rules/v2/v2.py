@@ -10,7 +10,7 @@ from typing_extensions import Literal, overload
 import httpx
 
 from .... import _legacy_response
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from .backtests import (
     Backtests,
@@ -74,19 +74,18 @@ class V2(SyncAPIResource):
     def create(
         self,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         """
         Creates a new V2 Auth rule in draft mode
@@ -127,17 +126,16 @@ class V2(SyncAPIResource):
         self,
         *,
         card_tokens: SequenceNotStr[str],
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         """
         Creates a new V2 Auth rule in draft mode
@@ -176,18 +174,17 @@ class V2(SyncAPIResource):
         self,
         *,
         program_level: bool,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         """
         Creates a new V2 Auth rule in draft mode
@@ -226,25 +223,24 @@ class V2(SyncAPIResource):
     def create(
         self,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters
         | v2_create_params.CreateAuthRuleRequestCardTokensParameters
         | v2_create_params.CreateAuthRuleRequestProgramLevelParameters
-        | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        program_level: bool | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         return self._post(
             "/v2/auth_rules",
@@ -277,7 +273,7 @@ class V2(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2RetrieveResponse:
         """
         Fetches a V2 Auth rule by its token
@@ -306,14 +302,14 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -346,14 +342,14 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -386,15 +382,15 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -429,16 +425,16 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        program_level: bool | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -474,17 +470,17 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
+        program_level: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -509,20 +505,20 @@ class V2(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        business_account_token: str | Omit = omit,
+        card_token: str | Omit = omit,
+        ending_before: str | Omit = omit,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        page_size: int | Omit = omit,
+        scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[V2ListResponse]:
         """
         Lists V2 Auth rules
@@ -588,7 +584,7 @@ class V2(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Deletes a V2 Auth rule
@@ -618,14 +614,14 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         """
         Associates a V2 Auth rule with a card program, the provided account(s) or
@@ -660,7 +656,7 @@ class V2(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         """
         Associates a V2 Auth rule with a card program, the provided account(s) or
@@ -688,13 +684,13 @@ class V2(SyncAPIResource):
         auth_rule_token: str,
         *,
         program_level: bool,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         """
         Associates a V2 Auth rule with a card program, the provided account(s) or
@@ -722,17 +718,17 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        program_level: bool | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -758,13 +754,13 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        parameters: Optional[v2_draft_params.Parameters] | NotGiven = NOT_GIVEN,
+        parameters: Optional[v2_draft_params.Parameters] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2DraftResponse:
         """
         Creates a new draft version of a rule that will be ran in shadow mode.
@@ -803,7 +799,7 @@ class V2(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2PromoteResponse:
         """
         Promotes the draft version of an Auth rule to the currently active version such
@@ -838,7 +834,7 @@ class V2(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ReportResponse:
         """This endpoint is deprecated and will be removed in the future.
 
@@ -924,7 +920,7 @@ class V2(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2RetrieveReportResponse:
         """
         Retrieves a performance report for an Auth rule containing daily statistics and
@@ -1003,19 +999,18 @@ class AsyncV2(AsyncAPIResource):
     async def create(
         self,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         """
         Creates a new V2 Auth rule in draft mode
@@ -1056,17 +1051,16 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         card_tokens: SequenceNotStr[str],
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        parameters: v2_create_params.CreateAuthRuleRequestCardTokensParameters | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         """
         Creates a new V2 Auth rule in draft mode
@@ -1105,18 +1099,17 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         program_level: bool,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        parameters: v2_create_params.CreateAuthRuleRequestProgramLevelParameters | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         """
         Creates a new V2 Auth rule in draft mode
@@ -1155,25 +1148,24 @@ class AsyncV2(AsyncAPIResource):
     async def create(
         self,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         parameters: v2_create_params.CreateAuthRuleRequestAccountTokensParameters
         | v2_create_params.CreateAuthRuleRequestCardTokensParameters
         | v2_create_params.CreateAuthRuleRequestProgramLevelParameters
-        | NotGiven = NOT_GIVEN,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
-        | NotGiven = NOT_GIVEN,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"] | Omit = omit,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        program_level: bool | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2CreateResponse:
         return await self._post(
             "/v2/auth_rules",
@@ -1206,7 +1198,7 @@ class AsyncV2(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2RetrieveResponse:
         """
         Fetches a V2 Auth rule by its token
@@ -1235,14 +1227,14 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -1275,14 +1267,14 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -1315,15 +1307,15 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -1358,16 +1350,16 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        program_level: bool | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         """
         Updates a V2 Auth rule's properties
@@ -1403,17 +1395,17 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Literal["INACTIVE"] | NotGiven = NOT_GIVEN,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
+        program_level: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2UpdateResponse:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -1438,20 +1430,20 @@ class AsyncV2(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
-        card_token: str | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        business_account_token: str | Omit = omit,
+        card_token: str | Omit = omit,
+        ending_before: str | Omit = omit,
+        event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"] | Omit = omit,
+        page_size: int | Omit = omit,
+        scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[V2ListResponse, AsyncCursorPage[V2ListResponse]]:
         """
         Lists V2 Auth rules
@@ -1517,7 +1509,7 @@ class AsyncV2(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Deletes a V2 Auth rule
@@ -1547,14 +1539,14 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         """
         Associates a V2 Auth rule with a card program, the provided account(s) or
@@ -1589,7 +1581,7 @@ class AsyncV2(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         """
         Associates a V2 Auth rule with a card program, the provided account(s) or
@@ -1617,13 +1609,13 @@ class AsyncV2(AsyncAPIResource):
         auth_rule_token: str,
         *,
         program_level: bool,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         """
         Associates a V2 Auth rule with a card program, the provided account(s) or
@@ -1651,17 +1643,17 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        business_account_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        program_level: bool | NotGiven = NOT_GIVEN,
-        excluded_card_tokens: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        card_tokens: SequenceNotStr[str] | Omit = omit,
+        program_level: bool | Omit = omit,
+        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ApplyResponse:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
@@ -1687,13 +1679,13 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        parameters: Optional[v2_draft_params.Parameters] | NotGiven = NOT_GIVEN,
+        parameters: Optional[v2_draft_params.Parameters] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2DraftResponse:
         """
         Creates a new draft version of a rule that will be ran in shadow mode.
@@ -1732,7 +1724,7 @@ class AsyncV2(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2PromoteResponse:
         """
         Promotes the draft version of an Auth rule to the currently active version such
@@ -1767,7 +1759,7 @@ class AsyncV2(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2ReportResponse:
         """This endpoint is deprecated and will be removed in the future.
 
@@ -1853,7 +1845,7 @@ class AsyncV2(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> V2RetrieveReportResponse:
         """
         Retrieves a performance report for an Auth rule containing daily statistics and

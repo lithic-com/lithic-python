@@ -10,7 +10,7 @@ import httpx
 
 from .. import _legacy_response
 from ..types import book_transfer_list_params, book_transfer_create_params, book_transfer_reverse_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -86,16 +86,16 @@ class BookTransfers(SyncAPIResource):
             "TRANSFER",
             "COLLECTION",
         ],
-        token: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        external_id: str | Omit = omit,
+        memo: str | Omit = omit,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BookTransferResponse:
         """
         Book transfer funds between two financial accounts or between a financial
@@ -166,7 +166,7 @@ class BookTransfers(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BookTransferResponse:
         """
         Get book transfer by token
@@ -195,24 +195,24 @@ class BookTransfers(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
         category: Literal["BALANCE_OR_FUNDING", "FEE", "REWARD", "ADJUSTMENT", "DERECOGNITION", "DISPUTE", "INTERNAL"]
-        | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["DECLINED", "SETTLED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["DECLINED", "SETTLED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[BookTransferResponse]:
         """List book transfers
 
@@ -282,13 +282,13 @@ class BookTransfers(SyncAPIResource):
         self,
         book_transfer_token: str,
         *,
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BookTransferResponse:
         """
         Reverse a book transfer
@@ -382,16 +382,16 @@ class AsyncBookTransfers(AsyncAPIResource):
             "TRANSFER",
             "COLLECTION",
         ],
-        token: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        external_id: str | Omit = omit,
+        memo: str | Omit = omit,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BookTransferResponse:
         """
         Book transfer funds between two financial accounts or between a financial
@@ -462,7 +462,7 @@ class AsyncBookTransfers(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BookTransferResponse:
         """
         Get book transfer by token
@@ -491,24 +491,24 @@ class AsyncBookTransfers(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
         category: Literal["BALANCE_OR_FUNDING", "FEE", "REWARD", "ADJUSTMENT", "DERECOGNITION", "DISPUTE", "INTERNAL"]
-        | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        result: Literal["APPROVED", "DECLINED"] | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["DECLINED", "SETTLED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        result: Literal["APPROVED", "DECLINED"] | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["DECLINED", "SETTLED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[BookTransferResponse, AsyncCursorPage[BookTransferResponse]]:
         """List book transfers
 
@@ -578,13 +578,13 @@ class AsyncBookTransfers(AsyncAPIResource):
         self,
         book_transfer_token: str,
         *,
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BookTransferResponse:
         """
         Reverse a book transfer

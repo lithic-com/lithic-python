@@ -18,7 +18,7 @@ from ...types import (
     external_bank_account_retry_prenote_params,
     external_bank_account_retry_micro_deposits_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import required_args, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -83,20 +83,20 @@ class ExternalBankAccounts(SyncAPIResource):
         routing_number: str,
         type: Literal["CHECKING", "SAVINGS"],
         verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
-        verification_enforcement: bool | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
+        verification_enforcement: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -156,17 +156,17 @@ class ExternalBankAccounts(SyncAPIResource):
         owner_type: OwnerType,
         processor_token: str,
         verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -213,19 +213,19 @@ class ExternalBankAccounts(SyncAPIResource):
         routing_number: str,
         type: Literal["CHECKING", "SAVINGS"],
         verification_method: Literal["EXTERNALLY_VERIFIED"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -287,19 +287,19 @@ class ExternalBankAccounts(SyncAPIResource):
         routing_number: str,
         type: Literal["CHECKING", "SAVINGS"],
         verification_method: Literal["UNVERIFIED"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -376,30 +376,30 @@ class ExternalBankAccounts(SyncAPIResource):
     def create(
         self,
         *,
-        account_number: str | NotGiven = NOT_GIVEN,
-        country: str | NotGiven = NOT_GIVEN,
-        currency: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
+        account_number: str | Omit = omit,
+        country: str | Omit = omit,
+        currency: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
         owner: str,
         owner_type: OwnerType,
-        routing_number: str | NotGiven = NOT_GIVEN,
-        type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
+        routing_number: str | Omit = omit,
+        type: Literal["CHECKING", "SAVINGS"] | Omit = omit,
         verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"] | Literal["UNVERIFIED"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | Union[str, date] | Union[str, date] | Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
-        verification_enforcement: bool | NotGiven = NOT_GIVEN,
-        processor_token: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Union[str, date] | Union[str, date] | Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
+        verification_enforcement: bool | Omit = omit,
+        processor_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         return self._post(
             "/v1/external_bank_accounts",
@@ -441,7 +441,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountRetrieveResponse:
         """
         Get the external bank account by token.
@@ -471,21 +471,21 @@ class ExternalBankAccounts(SyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        owner: str | NotGiven = NOT_GIVEN,
-        owner_type: OwnerType | NotGiven = NOT_GIVEN,
-        type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        owner: str | Omit = omit,
+        owner_type: OwnerType | Omit = omit,
+        type: Literal["CHECKING", "SAVINGS"] | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountUpdateResponse:
         """
         Update the external bank account by token.
@@ -545,22 +545,22 @@ class ExternalBankAccounts(SyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        account_types: List[Literal["CHECKING", "SAVINGS"]] | NotGiven = NOT_GIVEN,
-        countries: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        account_types: List[Literal["CHECKING", "SAVINGS"]] | Omit = omit,
+        countries: SequenceNotStr[str] | Omit = omit,
+        ending_before: str | Omit = omit,
+        owner_types: List[OwnerType] | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | Omit = omit,
         verification_states: List[Literal["PENDING", "ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"]]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[ExternalBankAccountListResponse]:
         """
         List all the external bank accounts for the provided search criteria.
@@ -612,13 +612,13 @@ class ExternalBankAccounts(SyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountRetryMicroDepositsResponse:
         """
         Retry external bank account micro deposit verification.
@@ -652,13 +652,13 @@ class ExternalBankAccounts(SyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountRetryPrenoteResponse:
         """
         Retry external bank account prenote verification.
@@ -726,20 +726,20 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         routing_number: str,
         type: Literal["CHECKING", "SAVINGS"],
         verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
-        verification_enforcement: bool | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
+        verification_enforcement: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -799,17 +799,17 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         owner_type: OwnerType,
         processor_token: str,
         verification_method: VerificationMethod,
-        account_token: str | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -856,19 +856,19 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         routing_number: str,
         type: Literal["CHECKING", "SAVINGS"],
         verification_method: Literal["EXTERNALLY_VERIFIED"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -930,19 +930,19 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         routing_number: str,
         type: Literal["CHECKING", "SAVINGS"],
         verification_method: Literal["UNVERIFIED"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         """
         Creates an external bank account within a program or Lithic account.
@@ -1019,30 +1019,30 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
     async def create(
         self,
         *,
-        account_number: str | NotGiven = NOT_GIVEN,
-        country: str | NotGiven = NOT_GIVEN,
-        currency: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
+        account_number: str | Omit = omit,
+        country: str | Omit = omit,
+        currency: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
         owner: str,
         owner_type: OwnerType,
-        routing_number: str | NotGiven = NOT_GIVEN,
-        type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
+        routing_number: str | Omit = omit,
+        type: Literal["CHECKING", "SAVINGS"] | Omit = omit,
         verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"] | Literal["UNVERIFIED"],
-        account_token: str | NotGiven = NOT_GIVEN,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | Union[str, date] | Union[str, date] | Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
-        verification_enforcement: bool | NotGiven = NOT_GIVEN,
-        processor_token: str | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Union[str, date] | Union[str, date] | Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
+        verification_enforcement: bool | Omit = omit,
+        processor_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountCreateResponse:
         return await self._post(
             "/v1/external_bank_accounts",
@@ -1084,7 +1084,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountRetrieveResponse:
         """
         Get the external bank account by token.
@@ -1114,21 +1114,21 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
-        address: ExternalBankAccountAddressParam | NotGiven = NOT_GIVEN,
-        company_id: str | NotGiven = NOT_GIVEN,
-        dob: Union[str, date] | NotGiven = NOT_GIVEN,
-        doing_business_as: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        owner: str | NotGiven = NOT_GIVEN,
-        owner_type: OwnerType | NotGiven = NOT_GIVEN,
-        type: Literal["CHECKING", "SAVINGS"] | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        address: ExternalBankAccountAddressParam | Omit = omit,
+        company_id: str | Omit = omit,
+        dob: Union[str, date] | Omit = omit,
+        doing_business_as: str | Omit = omit,
+        name: str | Omit = omit,
+        owner: str | Omit = omit,
+        owner_type: OwnerType | Omit = omit,
+        type: Literal["CHECKING", "SAVINGS"] | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountUpdateResponse:
         """
         Update the external bank account by token.
@@ -1188,22 +1188,22 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
     def list(
         self,
         *,
-        account_token: str | NotGiven = NOT_GIVEN,
-        account_types: List[Literal["CHECKING", "SAVINGS"]] | NotGiven = NOT_GIVEN,
-        countries: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        owner_types: List[OwnerType] | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | NotGiven = NOT_GIVEN,
+        account_token: str | Omit = omit,
+        account_types: List[Literal["CHECKING", "SAVINGS"]] | Omit = omit,
+        countries: SequenceNotStr[str] | Omit = omit,
+        ending_before: str | Omit = omit,
+        owner_types: List[OwnerType] | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        states: List[Literal["ENABLED", "CLOSED", "PAUSED"]] | Omit = omit,
         verification_states: List[Literal["PENDING", "ENABLED", "FAILED_VERIFICATION", "INSUFFICIENT_FUNDS"]]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[ExternalBankAccountListResponse, AsyncCursorPage[ExternalBankAccountListResponse]]:
         """
         List all the external bank accounts for the provided search criteria.
@@ -1255,13 +1255,13 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountRetryMicroDepositsResponse:
         """
         Retry external bank account micro deposit verification.
@@ -1295,13 +1295,13 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         self,
         external_bank_account_token: str,
         *,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
+        financial_account_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExternalBankAccountRetryPrenoteResponse:
         """
         Retry external bank account prenote verification.
