@@ -8,7 +8,7 @@ from datetime import date
 import httpx
 
 from ... import _legacy_response
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -51,7 +51,7 @@ class LoanTapes(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LoanTape:
         """
         Get a specific loan tape for a given financial account.
@@ -87,17 +87,17 @@ class LoanTapes(SyncAPIResource):
         self,
         financial_account_token: str,
         *,
-        begin: Union[str, date] | NotGiven = NOT_GIVEN,
-        end: Union[str, date] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, date] | Omit = omit,
+        end: Union[str, date] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[LoanTape]:
         """
         List the loan tapes for a given financial account.
@@ -184,7 +184,7 @@ class AsyncLoanTapes(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LoanTape:
         """
         Get a specific loan tape for a given financial account.
@@ -220,17 +220,17 @@ class AsyncLoanTapes(AsyncAPIResource):
         self,
         financial_account_token: str,
         *,
-        begin: Union[str, date] | NotGiven = NOT_GIVEN,
-        end: Union[str, date] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, date] | Omit = omit,
+        end: Union[str, date] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[LoanTape, AsyncCursorPage[LoanTape]]:
         """
         List the loan tapes for a given financial account.

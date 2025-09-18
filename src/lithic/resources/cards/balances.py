@@ -8,7 +8,7 @@ from datetime import datetime
 import httpx
 
 from ... import _legacy_response
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -45,14 +45,14 @@ class Balances(SyncAPIResource):
         self,
         card_token: str,
         *,
-        balance_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        last_transaction_event_token: str | NotGiven = NOT_GIVEN,
+        balance_date: Union[str, datetime] | Omit = omit,
+        last_transaction_event_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSinglePage[BalanceListResponse]:
         """
         Get the balances for a given card.
@@ -118,14 +118,14 @@ class AsyncBalances(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        balance_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        last_transaction_event_token: str | NotGiven = NOT_GIVEN,
+        balance_date: Union[str, datetime] | Omit = omit,
+        last_transaction_event_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[BalanceListResponse, AsyncSinglePage[BalanceListResponse]]:
         """
         Get the balances for a given card.

@@ -9,7 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from ... import _legacy_response
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -56,8 +56,8 @@ class Subscriptions(SyncAPIResource):
         self,
         *,
         url: str,
-        description: str | NotGiven = NOT_GIVEN,
-        disabled: bool | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        disabled: bool | Omit = omit,
         event_types: List[
             Literal[
                 "account_holder.created",
@@ -109,13 +109,13 @@ class Subscriptions(SyncAPIResource):
                 "tokenization.updated",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventSubscription:
         """
         Create a new event subscription.
@@ -164,7 +164,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventSubscription:
         """
         Get an event subscription.
@@ -195,8 +195,8 @@ class Subscriptions(SyncAPIResource):
         event_subscription_token: str,
         *,
         url: str,
-        description: str | NotGiven = NOT_GIVEN,
-        disabled: bool | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        disabled: bool | Omit = omit,
         event_types: List[
             Literal[
                 "account_holder.created",
@@ -248,13 +248,13 @@ class Subscriptions(SyncAPIResource):
                 "tokenization.updated",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventSubscription:
         """
         Update an event subscription.
@@ -301,15 +301,15 @@ class Subscriptions(SyncAPIResource):
     def list(
         self,
         *,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[EventSubscription]:
         """
         List all the event subscriptions.
@@ -360,7 +360,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete an event subscription.
@@ -390,18 +390,18 @@ class Subscriptions(SyncAPIResource):
         self,
         event_subscription_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["FAILED", "PENDING", "SENDING", "SUCCESS"] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["FAILED", "PENDING", "SENDING", "SUCCESS"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[MessageAttempt]:
         """
         List all the message attempts for a given event subscription.
@@ -460,14 +460,14 @@ class Subscriptions(SyncAPIResource):
         self,
         event_subscription_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Resend all failed messages since a given time.
@@ -513,14 +513,14 @@ class Subscriptions(SyncAPIResource):
         self,
         event_subscription_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Replays messages to the endpoint.
 
@@ -576,7 +576,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionRetrieveSecretResponse:
         """
         Get the secret for an event subscription.
@@ -611,7 +611,7 @@ class Subscriptions(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Rotate the secret for an event subscription.
 
@@ -692,13 +692,13 @@ class Subscriptions(SyncAPIResource):
             "tokenization.two_factor_authentication_code_sent",
             "tokenization.updated",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Send an example message for event.
@@ -755,8 +755,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         self,
         *,
         url: str,
-        description: str | NotGiven = NOT_GIVEN,
-        disabled: bool | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        disabled: bool | Omit = omit,
         event_types: List[
             Literal[
                 "account_holder.created",
@@ -808,13 +808,13 @@ class AsyncSubscriptions(AsyncAPIResource):
                 "tokenization.updated",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventSubscription:
         """
         Create a new event subscription.
@@ -863,7 +863,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventSubscription:
         """
         Get an event subscription.
@@ -894,8 +894,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         event_subscription_token: str,
         *,
         url: str,
-        description: str | NotGiven = NOT_GIVEN,
-        disabled: bool | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        disabled: bool | Omit = omit,
         event_types: List[
             Literal[
                 "account_holder.created",
@@ -947,13 +947,13 @@ class AsyncSubscriptions(AsyncAPIResource):
                 "tokenization.updated",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventSubscription:
         """
         Update an event subscription.
@@ -1000,15 +1000,15 @@ class AsyncSubscriptions(AsyncAPIResource):
     def list(
         self,
         *,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[EventSubscription, AsyncCursorPage[EventSubscription]]:
         """
         List all the event subscriptions.
@@ -1059,7 +1059,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete an event subscription.
@@ -1089,18 +1089,18 @@ class AsyncSubscriptions(AsyncAPIResource):
         self,
         event_subscription_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["FAILED", "PENDING", "SENDING", "SUCCESS"] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["FAILED", "PENDING", "SENDING", "SUCCESS"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[MessageAttempt, AsyncCursorPage[MessageAttempt]]:
         """
         List all the message attempts for a given event subscription.
@@ -1159,14 +1159,14 @@ class AsyncSubscriptions(AsyncAPIResource):
         self,
         event_subscription_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Resend all failed messages since a given time.
@@ -1212,14 +1212,14 @@ class AsyncSubscriptions(AsyncAPIResource):
         self,
         event_subscription_token: str,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Replays messages to the endpoint.
 
@@ -1275,7 +1275,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionRetrieveSecretResponse:
         """
         Get the secret for an event subscription.
@@ -1310,7 +1310,7 @@ class AsyncSubscriptions(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Rotate the secret for an event subscription.
 
@@ -1391,13 +1391,13 @@ class AsyncSubscriptions(AsyncAPIResource):
             "tokenization.two_factor_authentication_code_sent",
             "tokenization.updated",
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Send an example message for event.

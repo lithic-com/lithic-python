@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ... import _legacy_response
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -46,7 +46,7 @@ class CreditConfiguration(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccountCreditConfig:
         """
         Get an Account's credit configuration
@@ -76,16 +76,16 @@ class CreditConfiguration(SyncAPIResource):
         self,
         financial_account_token: str,
         *,
-        credit_limit: int | NotGiven = NOT_GIVEN,
-        credit_product_token: str | NotGiven = NOT_GIVEN,
-        external_bank_account_token: str | NotGiven = NOT_GIVEN,
-        tier: str | NotGiven = NOT_GIVEN,
+        credit_limit: int | Omit = omit,
+        credit_product_token: str | Omit = omit,
+        external_bank_account_token: str | Omit = omit,
+        tier: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccountCreditConfig:
         """
         Update an account's credit configuration
@@ -154,7 +154,7 @@ class AsyncCreditConfiguration(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccountCreditConfig:
         """
         Get an Account's credit configuration
@@ -184,16 +184,16 @@ class AsyncCreditConfiguration(AsyncAPIResource):
         self,
         financial_account_token: str,
         *,
-        credit_limit: int | NotGiven = NOT_GIVEN,
-        credit_product_token: str | NotGiven = NOT_GIVEN,
-        external_bank_account_token: str | NotGiven = NOT_GIVEN,
-        tier: str | NotGiven = NOT_GIVEN,
+        credit_limit: int | Omit = omit,
+        credit_product_token: str | Omit = omit,
+        external_bank_account_token: str | Omit = omit,
+        tier: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccountCreditConfig:
         """
         Update an account's credit configuration

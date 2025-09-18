@@ -14,7 +14,7 @@ from ..types import (
     management_operation_create_params,
     management_operation_reverse_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -81,17 +81,17 @@ class ManagementOperations(SyncAPIResource):
             "DISBURSE_REVERSAL",
         ],
         financial_account_token: str,
-        token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
-        subtype: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        memo: str | Omit = omit,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | Omit = omit,
+        subtype: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ManagementOperationTransaction:
         """
         Create management operation
@@ -140,7 +140,7 @@ class ManagementOperations(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ManagementOperationTransaction:
         """
         Get management operation
@@ -169,8 +169,8 @@ class ManagementOperations(SyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
         category: Literal[
             "MANAGEMENT_FEE",
             "MANAGEMENT_DISPUTE",
@@ -178,19 +178,19 @@ class ManagementOperations(SyncAPIResource):
             "MANAGEMENT_ADJUSTMENT",
             "MANAGEMENT_DISBURSEMENT",
         ]
-        | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[ManagementOperationTransaction]:
         """List management operations
 
@@ -257,13 +257,13 @@ class ManagementOperations(SyncAPIResource):
         management_operation_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ManagementOperationTransaction:
         """
         Reverse a management operation
@@ -352,17 +352,17 @@ class AsyncManagementOperations(AsyncAPIResource):
             "DISBURSE_REVERSAL",
         ],
         financial_account_token: str,
-        token: str | NotGiven = NOT_GIVEN,
-        memo: str | NotGiven = NOT_GIVEN,
-        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | NotGiven = NOT_GIVEN,
-        subtype: str | NotGiven = NOT_GIVEN,
-        user_defined_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        memo: str | Omit = omit,
+        on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | Omit = omit,
+        subtype: str | Omit = omit,
+        user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ManagementOperationTransaction:
         """
         Create management operation
@@ -411,7 +411,7 @@ class AsyncManagementOperations(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ManagementOperationTransaction:
         """
         Get management operation
@@ -440,8 +440,8 @@ class AsyncManagementOperations(AsyncAPIResource):
     def list(
         self,
         *,
-        begin: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        business_account_token: str | NotGiven = NOT_GIVEN,
+        begin: Union[str, datetime] | Omit = omit,
+        business_account_token: str | Omit = omit,
         category: Literal[
             "MANAGEMENT_FEE",
             "MANAGEMENT_DISPUTE",
@@ -449,19 +449,19 @@ class AsyncManagementOperations(AsyncAPIResource):
             "MANAGEMENT_ADJUSTMENT",
             "MANAGEMENT_DISBURSEMENT",
         ]
-        | NotGiven = NOT_GIVEN,
-        end: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        ending_before: str | NotGiven = NOT_GIVEN,
-        financial_account_token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        starting_after: str | NotGiven = NOT_GIVEN,
-        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
+        ending_before: str | Omit = omit,
+        financial_account_token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[ManagementOperationTransaction, AsyncCursorPage[ManagementOperationTransaction]]:
         """List management operations
 
@@ -528,13 +528,13 @@ class AsyncManagementOperations(AsyncAPIResource):
         management_operation_token: str,
         *,
         effective_date: Union[str, date],
-        memo: str | NotGiven = NOT_GIVEN,
+        memo: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ManagementOperationTransaction:
         """
         Reverse a management operation
