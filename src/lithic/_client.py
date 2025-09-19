@@ -351,7 +351,7 @@ class Lithic(SyncAPIClient):
         from .resources.funding_events import FundingEvents
 
         return FundingEvents(self)
-    
+
     @cached_property
     def webhooks(self) -> webhooks.Webhooks:
         from .resources.webhooks import Webhooks
@@ -767,7 +767,7 @@ class AsyncLithic(AsyncAPIClient):
         from .resources.account_activity import AsyncAccountActivity
 
         return AsyncAccountActivity(self)
-      
+
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooks:
         from .resources.webhooks import AsyncWebhooks
