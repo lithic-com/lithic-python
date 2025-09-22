@@ -112,14 +112,14 @@ class TestTransactions:
     @parametrize
     def test_method_expire_authorization(self, client: Lithic) -> None:
         transaction = client.transactions.expire_authorization(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
         assert transaction is None
 
     @parametrize
     def test_raw_response_expire_authorization(self, client: Lithic) -> None:
         response = client.transactions.with_raw_response.expire_authorization(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
 
         assert response.is_closed is True
@@ -130,7 +130,7 @@ class TestTransactions:
     @parametrize
     def test_streaming_response_expire_authorization(self, client: Lithic) -> None:
         with client.transactions.with_streaming_response.expire_authorization(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -570,14 +570,14 @@ class TestAsyncTransactions:
     @parametrize
     async def test_method_expire_authorization(self, async_client: AsyncLithic) -> None:
         transaction = await async_client.transactions.expire_authorization(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
         assert transaction is None
 
     @parametrize
     async def test_raw_response_expire_authorization(self, async_client: AsyncLithic) -> None:
         response = await async_client.transactions.with_raw_response.expire_authorization(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
 
         assert response.is_closed is True
@@ -588,7 +588,7 @@ class TestAsyncTransactions:
     @parametrize
     async def test_streaming_response_expire_authorization(self, async_client: AsyncLithic) -> None:
         async with async_client.transactions.with_streaming_response.expire_authorization(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
