@@ -70,14 +70,14 @@ class TestSettlement:
     @parametrize
     def test_method_summary(self, client: Lithic) -> None:
         settlement = client.reports.settlement.summary(
-            parse_date("2019-12-27"),
+            parse_date("2023-09-01"),
         )
         assert_matches_type(SettlementReport, settlement, path=["response"])
 
     @parametrize
     def test_raw_response_summary(self, client: Lithic) -> None:
         response = client.reports.settlement.with_raw_response.summary(
-            parse_date("2019-12-27"),
+            parse_date("2023-09-01"),
         )
 
         assert response.is_closed is True
@@ -88,7 +88,7 @@ class TestSettlement:
     @parametrize
     def test_streaming_response_summary(self, client: Lithic) -> None:
         with client.reports.settlement.with_streaming_response.summary(
-            parse_date("2019-12-27"),
+            parse_date("2023-09-01"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -162,14 +162,14 @@ class TestAsyncSettlement:
     @parametrize
     async def test_method_summary(self, async_client: AsyncLithic) -> None:
         settlement = await async_client.reports.settlement.summary(
-            parse_date("2019-12-27"),
+            parse_date("2023-09-01"),
         )
         assert_matches_type(SettlementReport, settlement, path=["response"])
 
     @parametrize
     async def test_raw_response_summary(self, async_client: AsyncLithic) -> None:
         response = await async_client.reports.settlement.with_raw_response.summary(
-            parse_date("2019-12-27"),
+            parse_date("2023-09-01"),
         )
 
         assert response.is_closed is True
@@ -180,7 +180,7 @@ class TestAsyncSettlement:
     @parametrize
     async def test_streaming_response_summary(self, async_client: AsyncLithic) -> None:
         async with async_client.reports.settlement.with_streaming_response.summary(
-            parse_date("2019-12-27"),
+            parse_date("2023-09-01"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

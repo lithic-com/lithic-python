@@ -20,14 +20,14 @@ class TestEnhancedCommercialData:
     @parametrize
     def test_method_retrieve(self, client: Lithic) -> None:
         enhanced_commercial_data = client.transactions.events.enhanced_commercial_data.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
         assert_matches_type(EnhancedData, enhanced_commercial_data, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
         response = client.transactions.events.enhanced_commercial_data.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
 
         assert response.is_closed is True
@@ -38,7 +38,7 @@ class TestEnhancedCommercialData:
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
         with client.transactions.events.enhanced_commercial_data.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -64,14 +64,14 @@ class TestAsyncEnhancedCommercialData:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncLithic) -> None:
         enhanced_commercial_data = await async_client.transactions.events.enhanced_commercial_data.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
         assert_matches_type(EnhancedData, enhanced_commercial_data, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
         response = await async_client.transactions.events.enhanced_commercial_data.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         )
 
         assert response.is_closed is True
@@ -82,7 +82,7 @@ class TestAsyncEnhancedCommercialData:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
         async with async_client.transactions.events.enhanced_commercial_data.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "00000000-0000-0000-0000-000000000000",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
