@@ -15,7 +15,8 @@ class TransactionSimulateVoidParams(TypedDict, total=False):
     """Amount (in cents) to void.
 
     Typically this will match the amount in the original authorization, but can be
-    less.
+    less. Applies to authorization reversals only. An authorization expiry will
+    always apply to the full pending amount.
     """
 
     type: Literal["AUTHORIZATION_EXPIRY", "AUTHORIZATION_REVERSAL"]

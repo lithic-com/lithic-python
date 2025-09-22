@@ -690,7 +690,8 @@ class Transactions(SyncAPIResource):
           token: The transaction token returned from the /v1/simulate/authorize response.
 
           amount: Amount (in cents) to void. Typically this will match the amount in the original
-              authorization, but can be less.
+              authorization, but can be less. Applies to authorization reversals only. An
+              authorization expiry will always apply to the full pending amount.
 
           type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
 
@@ -1354,7 +1355,8 @@ class AsyncTransactions(AsyncAPIResource):
           token: The transaction token returned from the /v1/simulate/authorize response.
 
           amount: Amount (in cents) to void. Typically this will match the amount in the original
-              authorization, but can be less.
+              authorization, but can be less. Applies to authorization reversals only. An
+              authorization expiry will always apply to the full pending amount.
 
           type: Type of event to simulate. Defaults to `AUTHORIZATION_REVERSAL`.
 
