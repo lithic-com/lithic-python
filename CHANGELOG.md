@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.107.0 (2025-09-30)
+
+Full Changelog: [v0.106.0...v0.107.0](https://github.com/lithic-com/lithic-python/compare/v0.106.0...v0.107.0)
+
+### Features
+
+* **api:** adds support for Auth Rule features ([7e0277a](https://github.com/lithic-com/lithic-python/commit/7e0277acc1907cdc6936beea74dabefa1eb196c0))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([91d6a3d](https://github.com/lithic-com/lithic-python/commit/91d6a3dc2cd34db41af8489e54fb7947dac54821))
+* **docs:** small updates to doc strings on a few endpoints ([29d124d](https://github.com/lithic-com/lithic-python/commit/29d124db71e0d20a196a8d909549a5eaa99e7fcc))
+* improve example values ([296dbed](https://github.com/lithic-com/lithic-python/commit/296dbed7ed5259a5fa277f6e7eefbcb633e1fb7c))
+* **internal:** fix formatting ([b2d5995](https://github.com/lithic-com/lithic-python/commit/b2d5995f96e25e9cfa46d2df75ccbce9862941a9))
+* **internal:** update pydantic dependency ([a9450be](https://github.com/lithic-com/lithic-python/commit/a9450be775514765b362ea0870b0a4f79ac79571))
+* **types:** change optional parameter type from NotGiven to Omit ([8a9d613](https://github.com/lithic-com/lithic-python/commit/8a9d613f03e41acec74c4dfbf393649ee320536f))
+* update more places to use Omit ([16eb50e](https://github.com/lithic-com/lithic-python/commit/16eb50e2bbb397ff778f10b74d739ad1e4125da1))
+
 ## 0.106.0 (2025-09-10)
 
 Full Changelog: [v0.105.0...v0.106.0](https://github.com/lithic-com/lithic-python/compare/v0.105.0...v0.106.0)
