@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ..._types import SequenceNotStr
@@ -39,18 +39,46 @@ class Filters(TypedDict, total=False):
     velocity.
     """
 
+    include_pan_entry_modes: Optional[
+        List[
+            Literal[
+                "AUTO_ENTRY",
+                "BAR_CODE",
+                "CONTACTLESS",
+                "CREDENTIAL_ON_FILE",
+                "ECOMMERCE",
+                "ERROR_KEYED",
+                "ERROR_MAGNETIC_STRIPE",
+                "ICC",
+                "KEY_ENTERED",
+                "MAGNETIC_STRIPE",
+                "MANUAL",
+                "OCR",
+                "SECURE_CARDLESS",
+                "UNSPECIFIED",
+                "UNKNOWN",
+            ]
+        ]
+    ]
+    """PAN entry modes to include in the velocity calculation.
+
+    Transactions not matching any of the provided will not be included in the
+    calculated velocity.
+    """
+
 
 class VelocityLimitParamsParam(TypedDict, total=False):
     filters: Required[Filters]
 
     period: Required[VelocityLimitParamsPeriodWindowParam]
-    """The size of the trailing window to calculate Spend Velocity over in seconds.
+    """DEPRECATED: This has been deprecated in favor of the Trailing Window Objects
 
-    The minimum value is 10 seconds, and the maximum value is 2678400 seconds (31
-    days).
+    The size of the trailing window to calculate Spend Velocity over in seconds. The
+    minimum value is 10 seconds, and the maximum value is 2678400 seconds (31 days).
     """
 
     scope: Required[Literal["CARD", "ACCOUNT"]]
+    """The scope the velocity is calculated for"""
 
     limit_amount: Optional[int]
     """
