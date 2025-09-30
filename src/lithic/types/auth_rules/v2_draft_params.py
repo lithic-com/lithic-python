@@ -34,6 +34,7 @@ class ParametersConditionalAuthorizationActionParametersCondition(TypedDict, tot
         "LIABILITY_SHIFT",
         "PAN_ENTRY_MODE",
         "TRANSACTION_AMOUNT",
+        "CASH_AMOUNT",
         "RISK_SCORE",
         "CARD_TRANSACTION_COUNT_15M",
         "CARD_TRANSACTION_COUNT_1H",
@@ -70,6 +71,8 @@ class ParametersConditionalAuthorizationActionParametersCondition(TypedDict, tot
       fee field in the settlement/cardholder billing currency. This is the amount
       the issuer should authorize against unless the issuer is paying the acquirer
       fee on behalf of the cardholder.
+    - `CASH_AMOUNT`: The cash amount of the transaction in minor units (cents). This
+      represents the amount of cash being withdrawn or advanced.
     - `RISK_SCORE`: Network-provided score assessing risk level associated with a
       given authorization. Scores are on a range of 0-999, with 0 representing the
       lowest risk and 999 representing the highest risk. For Visa transactions,
