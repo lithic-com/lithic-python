@@ -32,6 +32,7 @@ from ....types.auth_rules import (
     v2_create_params,
     v2_update_params,
     v2_retrieve_report_params,
+    v2_retrieve_features_params,
 )
 from ....types.auth_rules.v2_list_response import V2ListResponse
 from ....types.auth_rules.v2_apply_response import V2ApplyResponse
@@ -42,6 +43,7 @@ from ....types.auth_rules.v2_update_response import V2UpdateResponse
 from ....types.auth_rules.v2_promote_response import V2PromoteResponse
 from ....types.auth_rules.v2_retrieve_response import V2RetrieveResponse
 from ....types.auth_rules.v2_retrieve_report_response import V2RetrieveReportResponse
+from ....types.auth_rules.v2_retrieve_features_response import V2RetrieveFeaturesResponse
 
 __all__ = ["V2", "AsyncV2"]
 
@@ -907,6 +909,59 @@ class V2(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=V2ReportResponse,
+        )
+
+    def retrieve_features(
+        self,
+        auth_rule_token: str,
+        *,
+        account_token: str | Omit = omit,
+        card_token: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> V2RetrieveFeaturesResponse:
+        """
+        Fetches the current calculated Feature values for the given Auth Rule
+
+        This only calculates the features for the active version.
+
+        - VelocityLimit Rules calculates the current Velocity Feature data. This
+          requires a `card_token` or `account_token` matching what the rule is Scoped
+          to.
+        - ConditionalBlock Rules calculates the CARD*TRANSACTION_COUNT*\\** attributes on
+          the rule. This requires a `card_token`
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return self._get(
+            f"/v2/auth_rules/{auth_rule_token}/features",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "card_token": card_token,
+                    },
+                    v2_retrieve_features_params.V2RetrieveFeaturesParams,
+                ),
+            ),
+            cast_to=V2RetrieveFeaturesResponse,
         )
 
     def retrieve_report(
@@ -1834,6 +1889,59 @@ class AsyncV2(AsyncAPIResource):
             cast_to=V2ReportResponse,
         )
 
+    async def retrieve_features(
+        self,
+        auth_rule_token: str,
+        *,
+        account_token: str | Omit = omit,
+        card_token: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> V2RetrieveFeaturesResponse:
+        """
+        Fetches the current calculated Feature values for the given Auth Rule
+
+        This only calculates the features for the active version.
+
+        - VelocityLimit Rules calculates the current Velocity Feature data. This
+          requires a `card_token` or `account_token` matching what the rule is Scoped
+          to.
+        - ConditionalBlock Rules calculates the CARD*TRANSACTION_COUNT*\\** attributes on
+          the rule. This requires a `card_token`
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return await self._get(
+            f"/v2/auth_rules/{auth_rule_token}/features",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "account_token": account_token,
+                        "card_token": card_token,
+                    },
+                    v2_retrieve_features_params.V2RetrieveFeaturesParams,
+                ),
+            ),
+            cast_to=V2RetrieveFeaturesResponse,
+        )
+
     async def retrieve_report(
         self,
         auth_rule_token: str,
@@ -1931,6 +2039,9 @@ class V2WithRawResponse:
                 v2.report,  # pyright: ignore[reportDeprecated],
             )
         )
+        self.retrieve_features = _legacy_response.to_raw_response_wrapper(
+            v2.retrieve_features,
+        )
         self.retrieve_report = _legacy_response.to_raw_response_wrapper(
             v2.retrieve_report,
         )
@@ -1974,6 +2085,9 @@ class AsyncV2WithRawResponse:
             _legacy_response.async_to_raw_response_wrapper(
                 v2.report,  # pyright: ignore[reportDeprecated],
             )
+        )
+        self.retrieve_features = _legacy_response.async_to_raw_response_wrapper(
+            v2.retrieve_features,
         )
         self.retrieve_report = _legacy_response.async_to_raw_response_wrapper(
             v2.retrieve_report,
@@ -2019,6 +2133,9 @@ class V2WithStreamingResponse:
                 v2.report,  # pyright: ignore[reportDeprecated],
             )
         )
+        self.retrieve_features = to_streamed_response_wrapper(
+            v2.retrieve_features,
+        )
         self.retrieve_report = to_streamed_response_wrapper(
             v2.retrieve_report,
         )
@@ -2062,6 +2179,9 @@ class AsyncV2WithStreamingResponse:
             async_to_streamed_response_wrapper(
                 v2.report,  # pyright: ignore[reportDeprecated],
             )
+        )
+        self.retrieve_features = async_to_streamed_response_wrapper(
+            v2.retrieve_features,
         )
         self.retrieve_report = async_to_streamed_response_wrapper(
             v2.retrieve_report,

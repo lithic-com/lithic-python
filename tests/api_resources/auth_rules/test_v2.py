@@ -21,6 +21,7 @@ from lithic.types.auth_rules import (
     V2PromoteResponse,
     V2RetrieveResponse,
     V2RetrieveReportResponse,
+    V2RetrieveFeaturesResponse,
 )
 
 # pyright: reportDeprecated=false
@@ -776,6 +777,53 @@ class TestV2:
                 client.auth_rules.v2.with_raw_response.report(
                     "",
                 )
+
+    @parametrize
+    def test_method_retrieve_features(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+    @parametrize
+    def test_method_retrieve_features_with_all_params(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_features(self, client: Lithic) -> None:
+        response = client.auth_rules.v2.with_raw_response.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_features(self, client: Lithic) -> None:
+        with client.auth_rules.v2.with_streaming_response.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = response.parse()
+            assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve_features(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+            client.auth_rules.v2.with_raw_response.retrieve_features(
+                auth_rule_token="",
+            )
 
     @parametrize
     def test_method_retrieve_report(self, client: Lithic) -> None:
@@ -1574,6 +1622,53 @@ class TestAsyncV2:
                 await async_client.auth_rules.v2.with_raw_response.report(
                     "",
                 )
+
+    @parametrize
+    async def test_method_retrieve_features(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_features_with_all_params(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_features(self, async_client: AsyncLithic) -> None:
+        response = await async_client.auth_rules.v2.with_raw_response.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_features(self, async_client: AsyncLithic) -> None:
+        async with async_client.auth_rules.v2.with_streaming_response.retrieve_features(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = await response.parse()
+            assert_matches_type(V2RetrieveFeaturesResponse, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_features(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+            await async_client.auth_rules.v2.with_raw_response.retrieve_features(
+                auth_rule_token="",
+            )
 
     @parametrize
     async def test_method_retrieve_report(self, async_client: AsyncLithic) -> None:

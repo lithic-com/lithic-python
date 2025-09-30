@@ -1,15 +1,16 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
 from .velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
 
-__all__ = ["VelocityLimitParams", "Filters"]
+__all__ = ["V2RetrieveFeaturesResponse", "Feature", "FeatureFilters", "FeatureValue"]
 
 
-class Filters(BaseModel):
+class FeatureFilters(BaseModel):
     exclude_countries: Optional[List[str]] = None
     """ISO-3166-1 alpha-3 Country Codes to exclude from the velocity calculation.
 
@@ -65,8 +66,23 @@ class Filters(BaseModel):
     """
 
 
-class VelocityLimitParams(BaseModel):
-    filters: Filters
+class FeatureValue(BaseModel):
+    amount: int
+    """
+    Amount (in cents) for the given Auth Rule that is used as input for calculating
+    the rule. For Velocity Limit rules this would be the calculated Velocity. For
+    Conditional Rules using CARD*TRANSACTION_COUNT*\\** this will be 0
+    """
+
+    count: int
+    """
+    Number of velocity impacting transactions matching the given scope, period and
+    filters
+    """
+
+
+class Feature(BaseModel):
+    filters: FeatureFilters
 
     period: VelocityLimitParamsPeriodWindow
     """DEPRECATED: This has been deprecated in favor of the Trailing Window Objects
@@ -78,18 +94,12 @@ class VelocityLimitParams(BaseModel):
     scope: Literal["CARD", "ACCOUNT"]
     """The scope the velocity is calculated for"""
 
-    limit_amount: Optional[int] = None
-    """
-    The maximum amount of spend velocity allowed in the period in minor units (the
-    smallest unit of a currency, e.g. cents for USD). Transactions exceeding this
-    limit will be declined.
-    """
+    value: FeatureValue
 
-    limit_count: Optional[int] = None
-    """
-    The number of spend velocity impacting transactions may not exceed this limit in
-    the period. Transactions exceeding this limit will be declined. A spend velocity
-    impacting transaction is a transaction that has been authorized, and optionally
-    settled, or a force post (a transaction that settled without prior
-    authorization).
-    """
+
+class V2RetrieveFeaturesResponse(BaseModel):
+    evaluated: datetime
+    """Timestamp at which the Features were evaluated"""
+
+    features: List[Feature]
+    """Calculated Features used for evaluation of the provided Auth Rule"""
