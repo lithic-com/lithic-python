@@ -46,11 +46,22 @@ class BookTransfers(SyncAPIResource):
         self,
         *,
         amount: int,
-        category: Literal["ADJUSTMENT", "BALANCE_OR_FUNDING", "DERECOGNITION", "DISPUTE", "FEE", "REWARD", "TRANSFER"],
+        category: Literal[
+            "ADJUSTMENT",
+            "BALANCE_OR_FUNDING",
+            "DERECOGNITION",
+            "DISPUTE",
+            "FEE",
+            "INTERNAL",
+            "REWARD",
+            "PROGRAM_FUNDING",
+            "TRANSFER",
+        ],
         from_financial_account_token: str,
         subtype: str,
         to_financial_account_token: str,
         type: Literal[
+            "ATM_BALANCE_INQUIRY",
             "ATM_WITHDRAWAL",
             "ATM_DECLINE",
             "INTERNATIONAL_ATM_WITHDRAWAL",
@@ -104,8 +115,6 @@ class BookTransfers(SyncAPIResource):
         Args:
           amount: Amount to be transferred in the currency's smallest unit (e.g., cents for USD).
               This should always be a positive value.
-
-          category: Category of the book transfer
 
           from_financial_account_token: Globally unique identifier for the financial account or card that will send the
               funds. Accepted type dependent on the program's use case.
@@ -198,7 +207,17 @@ class BookTransfers(SyncAPIResource):
         account_token: str | Omit = omit,
         begin: Union[str, datetime] | Omit = omit,
         business_account_token: str | Omit = omit,
-        category: Literal["BALANCE_OR_FUNDING", "FEE", "REWARD", "ADJUSTMENT", "DERECOGNITION", "DISPUTE", "INTERNAL"]
+        category: Literal[
+            "ADJUSTMENT",
+            "BALANCE_OR_FUNDING",
+            "DERECOGNITION",
+            "DISPUTE",
+            "FEE",
+            "INTERNAL",
+            "REWARD",
+            "PROGRAM_FUNDING",
+            "TRANSFER",
+        ]
         | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
@@ -342,11 +361,22 @@ class AsyncBookTransfers(AsyncAPIResource):
         self,
         *,
         amount: int,
-        category: Literal["ADJUSTMENT", "BALANCE_OR_FUNDING", "DERECOGNITION", "DISPUTE", "FEE", "REWARD", "TRANSFER"],
+        category: Literal[
+            "ADJUSTMENT",
+            "BALANCE_OR_FUNDING",
+            "DERECOGNITION",
+            "DISPUTE",
+            "FEE",
+            "INTERNAL",
+            "REWARD",
+            "PROGRAM_FUNDING",
+            "TRANSFER",
+        ],
         from_financial_account_token: str,
         subtype: str,
         to_financial_account_token: str,
         type: Literal[
+            "ATM_BALANCE_INQUIRY",
             "ATM_WITHDRAWAL",
             "ATM_DECLINE",
             "INTERNATIONAL_ATM_WITHDRAWAL",
@@ -400,8 +430,6 @@ class AsyncBookTransfers(AsyncAPIResource):
         Args:
           amount: Amount to be transferred in the currency's smallest unit (e.g., cents for USD).
               This should always be a positive value.
-
-          category: Category of the book transfer
 
           from_financial_account_token: Globally unique identifier for the financial account or card that will send the
               funds. Accepted type dependent on the program's use case.
@@ -494,7 +522,17 @@ class AsyncBookTransfers(AsyncAPIResource):
         account_token: str | Omit = omit,
         begin: Union[str, datetime] | Omit = omit,
         business_account_token: str | Omit = omit,
-        category: Literal["BALANCE_OR_FUNDING", "FEE", "REWARD", "ADJUSTMENT", "DERECOGNITION", "DISPUTE", "INTERNAL"]
+        category: Literal[
+            "ADJUSTMENT",
+            "BALANCE_OR_FUNDING",
+            "DERECOGNITION",
+            "DISPUTE",
+            "FEE",
+            "INTERNAL",
+            "REWARD",
+            "PROGRAM_FUNDING",
+            "TRANSFER",
+        ]
         | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,

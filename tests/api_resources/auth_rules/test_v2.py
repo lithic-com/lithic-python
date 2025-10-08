@@ -227,6 +227,8 @@ class TestV2:
     def test_method_update_with_all_params_overload_1(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             state="INACTIVE",
         )
@@ -274,6 +276,7 @@ class TestV2:
     def test_method_update_with_all_params_overload_2(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             state="INACTIVE",
         )
@@ -321,8 +324,9 @@ class TestV2:
     def test_method_update_with_all_params_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
+            program_level=True,
             state="INACTIVE",
         )
         assert_matches_type(V2UpdateResponse, v2, path=["response"])
@@ -353,55 +357,6 @@ class TestV2:
 
     @parametrize
     def test_path_params_update_overload_3(self, client: Lithic) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
-            client.auth_rules.v2.with_raw_response.update(
-                auth_rule_token="",
-            )
-
-    @parametrize
-    def test_method_update_overload_4(self, client: Lithic) -> None:
-        v2 = client.auth_rules.v2.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_4(self, client: Lithic) -> None:
-        v2 = client.auth_rules.v2.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            name="name",
-            program_level=True,
-            state="INACTIVE",
-        )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_overload_4(self, client: Lithic) -> None:
-        response = client.auth_rules.v2.with_raw_response.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_overload_4(self, client: Lithic) -> None:
-        with client.auth_rules.v2.with_streaming_response.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            v2 = response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_update_overload_4(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
             client.auth_rules.v2.with_raw_response.update(
                 auth_rule_token="",
@@ -1072,6 +1027,8 @@ class TestAsyncV2:
     async def test_method_update_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             state="INACTIVE",
         )
@@ -1119,6 +1076,7 @@ class TestAsyncV2:
     async def test_method_update_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             state="INACTIVE",
         )
@@ -1166,8 +1124,9 @@ class TestAsyncV2:
     async def test_method_update_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
+            program_level=True,
             state="INACTIVE",
         )
         assert_matches_type(V2UpdateResponse, v2, path=["response"])
@@ -1198,55 +1157,6 @@ class TestAsyncV2:
 
     @parametrize
     async def test_path_params_update_overload_3(self, async_client: AsyncLithic) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
-            await async_client.auth_rules.v2.with_raw_response.update(
-                auth_rule_token="",
-            )
-
-    @parametrize
-    async def test_method_update_overload_4(self, async_client: AsyncLithic) -> None:
-        v2 = await async_client.auth_rules.v2.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_4(self, async_client: AsyncLithic) -> None:
-        v2 = await async_client.auth_rules.v2.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            name="name",
-            program_level=True,
-            state="INACTIVE",
-        )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_overload_4(self, async_client: AsyncLithic) -> None:
-        response = await async_client.auth_rules.v2.with_raw_response.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_overload_4(self, async_client: AsyncLithic) -> None:
-        async with async_client.auth_rules.v2.with_streaming_response.update(
-            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            v2 = await response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_update_overload_4(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
             await async_client.auth_rules.v2.with_raw_response.update(
                 auth_rule_token="",

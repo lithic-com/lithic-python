@@ -304,6 +304,8 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -321,46 +323,10 @@ class V2(SyncAPIResource):
         entities.
 
         Args:
-          name: Auth Rule Name
+          account_tokens: Account tokens to which the Auth Rule applies.
 
-          state: The desired state of the Auth Rule.
+          business_account_tokens: Business Account tokens to which the Auth Rule applies.
 
-              Note that only deactivating an Auth Rule through this endpoint is supported at
-              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
-              should be used to promote a draft to the currently active version.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        auth_rule_token: str,
-        *,
-        name: Optional[str] | Omit = omit,
-        state: Literal["INACTIVE"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
-        """
-        Updates a V2 Auth rule's properties
-
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
-
-        Args:
           name: Auth Rule Name
 
           state: The desired state of the Auth Rule.
@@ -472,6 +438,8 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
@@ -490,6 +458,8 @@ class V2(SyncAPIResource):
             f"/v2/auth_rules/{auth_rule_token}",
             body=maybe_transform(
                 {
+                    "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "name": name,
                     "state": state,
                     "card_tokens": card_tokens,
@@ -1282,6 +1252,8 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1299,46 +1271,10 @@ class AsyncV2(AsyncAPIResource):
         entities.
 
         Args:
-          name: Auth Rule Name
+          account_tokens: Account tokens to which the Auth Rule applies.
 
-          state: The desired state of the Auth Rule.
+          business_account_tokens: Business Account tokens to which the Auth Rule applies.
 
-              Note that only deactivating an Auth Rule through this endpoint is supported at
-              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
-              should be used to promote a draft to the currently active version.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        auth_rule_token: str,
-        *,
-        name: Optional[str] | Omit = omit,
-        state: Literal["INACTIVE"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
-        """
-        Updates a V2 Auth rule's properties
-
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
-
-        Args:
           name: Auth Rule Name
 
           state: The desired state of the Auth Rule.
@@ -1450,6 +1386,8 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
@@ -1468,6 +1406,8 @@ class AsyncV2(AsyncAPIResource):
             f"/v2/auth_rules/{auth_rule_token}",
             body=await async_maybe_transform(
                 {
+                    "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "name": name,
                     "state": state,
                     "card_tokens": card_tokens,

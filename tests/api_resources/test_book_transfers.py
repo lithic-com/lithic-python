@@ -29,7 +29,7 @@ class TestBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
         )
         assert_matches_type(BookTransferResponse, book_transfer, path=["response"])
 
@@ -41,7 +41,7 @@ class TestBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             external_id="external_id",
             memo="memo",
@@ -57,7 +57,7 @@ class TestBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
         )
 
         assert response.is_closed is True
@@ -73,7 +73,7 @@ class TestBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -132,7 +132,7 @@ class TestBookTransfers:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            category="BALANCE_OR_FUNDING",
+            category="ADJUSTMENT",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="ending_before",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -223,7 +223,7 @@ class TestAsyncBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
         )
         assert_matches_type(BookTransferResponse, book_transfer, path=["response"])
 
@@ -235,7 +235,7 @@ class TestAsyncBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             external_id="external_id",
             memo="memo",
@@ -251,7 +251,7 @@ class TestAsyncBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
         )
 
         assert response.is_closed is True
@@ -267,7 +267,7 @@ class TestAsyncBookTransfers:
             from_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             subtype="subtype",
             to_financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            type="ATM_WITHDRAWAL",
+            type="ATM_BALANCE_INQUIRY",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -326,7 +326,7 @@ class TestAsyncBookTransfers:
             account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             begin=parse_datetime("2019-12-27T18:11:19.117Z"),
             business_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            category="BALANCE_OR_FUNDING",
+            category="ADJUSTMENT",
             end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="ending_before",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",

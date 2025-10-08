@@ -6,7 +6,12 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["FinancialAccount", "CreditConfiguration"]
+__all__ = ["FinancialAccount", "CreditConfiguration", "CreditConfigurationAutoCollectionConfiguration"]
+
+
+class CreditConfigurationAutoCollectionConfiguration(BaseModel):
+    auto_collection_enabled: bool
+    """If auto collection is enabled for this account"""
 
 
 class CreditConfiguration(BaseModel):
@@ -27,6 +32,8 @@ class CreditConfiguration(BaseModel):
 
     tier: Optional[str] = None
     """Tier assigned to the financial account"""
+
+    auto_collection_configuration: Optional[CreditConfigurationAutoCollectionConfiguration] = None
 
 
 class FinancialAccount(BaseModel):

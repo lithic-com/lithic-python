@@ -58,6 +58,7 @@ class Tokenization(BaseModel):
     created_at: datetime
     """Date and time when the tokenization first occurred. UTC time zone."""
 
+
     status: Literal["ACTIVE", "DEACTIVATED", "INACTIVE", "PAUSED", "PENDING_2FA", "PENDING_ACTIVATION", "UNKNOWN"]
     """The status of the tokenization request"""
 
