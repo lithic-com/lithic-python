@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.108.0 (2025-10-08)
+
+Full Changelog: [v0.107.0...v0.108.0](https://github.com/lithic-com/lithic-python/compare/v0.107.0...v0.108.0)
+
+### Features
+
+* **api:** adds support for Auto-Collections ([28a777b](https://github.com/lithic-com/lithic-python/commit/28a777be2f54096fee954a1bb7fe7c717d5f7de1))
+
 ## 0.107.0 (2025-09-30)
 
 Full Changelog: [v0.106.0...v0.107.0](https://github.com/lithic-com/lithic-python/compare/v0.106.0...v0.107.0)
