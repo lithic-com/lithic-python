@@ -76,6 +76,7 @@ class CreditConfiguration(SyncAPIResource):
         self,
         financial_account_token: str,
         *,
+        auto_collection_configuration: credit_configuration_update_params.AutoCollectionConfiguration | Omit = omit,
         credit_limit: int | Omit = omit,
         credit_product_token: str | Omit = omit,
         external_bank_account_token: str | Omit = omit,
@@ -111,6 +112,7 @@ class CreditConfiguration(SyncAPIResource):
             f"/v1/financial_accounts/{financial_account_token}/credit_configuration",
             body=maybe_transform(
                 {
+                    "auto_collection_configuration": auto_collection_configuration,
                     "credit_limit": credit_limit,
                     "credit_product_token": credit_product_token,
                     "external_bank_account_token": external_bank_account_token,
@@ -184,6 +186,7 @@ class AsyncCreditConfiguration(AsyncAPIResource):
         self,
         financial_account_token: str,
         *,
+        auto_collection_configuration: credit_configuration_update_params.AutoCollectionConfiguration | Omit = omit,
         credit_limit: int | Omit = omit,
         credit_product_token: str | Omit = omit,
         external_bank_account_token: str | Omit = omit,
@@ -219,6 +222,7 @@ class AsyncCreditConfiguration(AsyncAPIResource):
             f"/v1/financial_accounts/{financial_account_token}/credit_configuration",
             body=await async_maybe_transform(
                 {
+                    "auto_collection_configuration": auto_collection_configuration,
                     "credit_limit": credit_limit,
                     "credit_product_token": credit_product_token,
                     "external_bank_account_token": external_bank_account_token,

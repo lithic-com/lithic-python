@@ -522,6 +522,7 @@ class EventRuleResult(BaseModel):
         "REVERSAL_UNMATCHED",
         "SECURITY_VIOLATION",
         "SINGLE_USE_CARD_REATTEMPTED",
+        "SUSPECTED_FRAUD",
         "TRANSACTION_INVALID",
         "TRANSACTION_NOT_PERMITTED_TO_ACQUIRER_OR_TERMINAL",
         "TRANSACTION_NOT_PERMITTED_TO_ISSUER_OR_CARDHOLDER",
@@ -633,6 +634,7 @@ class Event(BaseModel):
             "REVERSAL_UNMATCHED",
             "SECURITY_VIOLATION",
             "SINGLE_USE_CARD_REATTEMPTED",
+            "SUSPECTED_FRAUD",
             "TRANSACTION_INVALID",
             "TRANSACTION_NOT_PERMITTED_TO_ACQUIRER_OR_TERMINAL",
             "TRANSACTION_NOT_PERMITTED_TO_ISSUER_OR_CARDHOLDER",
@@ -669,6 +671,7 @@ class Event(BaseModel):
         "DECLINED",
         "FRAUD_ADVICE",
         "IGNORED_TTL_EXPIRY",
+        "SUSPECTED_FRAUD",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
         "INVALID_CARD_DETAILS",
@@ -762,6 +765,8 @@ class Transaction(BaseModel):
     created: datetime
     """Date and time when the transaction first occurred. UTC time zone."""
 
+    financial_account_token: Optional[str] = None
+
     merchant: Merchant
 
     merchant_amount: Optional[int] = None
@@ -802,6 +807,7 @@ class Transaction(BaseModel):
         "DECLINED",
         "FRAUD_ADVICE",
         "IGNORED_TTL_EXPIRY",
+        "SUSPECTED_FRAUD",
         "INACTIVE_ACCOUNT",
         "INCORRECT_PIN",
         "INVALID_CARD_DETAILS",

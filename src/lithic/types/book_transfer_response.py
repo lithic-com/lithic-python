@@ -38,6 +38,7 @@ class Event(BaseModel):
     """The program specific subtype code for the specified category/type."""
 
     type: Literal[
+        "ATM_BALANCE_INQUIRY",
         "ATM_WITHDRAWAL",
         "ATM_DECLINE",
         "INTERNATIONAL_ATM_WITHDRAWAL",
@@ -91,8 +92,17 @@ class BookTransferResponse(BaseModel):
     This token will become the transaction token.
     """
 
-    category: Literal["ADJUSTMENT", "BALANCE_OR_FUNDING", "DERECOGNITION", "DISPUTE", "FEE", "REWARD", "TRANSFER"]
-    """Category of the book transfer"""
+    category: Literal[
+        "ADJUSTMENT",
+        "BALANCE_OR_FUNDING",
+        "DERECOGNITION",
+        "DISPUTE",
+        "FEE",
+        "INTERNAL",
+        "REWARD",
+        "PROGRAM_FUNDING",
+        "TRANSFER",
+    ]
 
     created: datetime
     """Date and time when the transfer occurred. UTC time zone."""

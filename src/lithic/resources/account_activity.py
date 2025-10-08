@@ -52,6 +52,11 @@ class AccountActivity(SyncAPIResource):
         category: Literal[
             "ACH",
             "BALANCE_OR_FUNDING",
+            "FEE",
+            "REWARD",
+            "ADJUSTMENT",
+            "DERECOGNITION",
+            "DISPUTE",
             "CARD",
             "EXTERNAL_ACH",
             "EXTERNAL_CHECK",
@@ -215,6 +220,11 @@ class AsyncAccountActivity(AsyncAPIResource):
         category: Literal[
             "ACH",
             "BALANCE_OR_FUNDING",
+            "FEE",
+            "REWARD",
+            "ADJUSTMENT",
+            "DERECOGNITION",
+            "DISPUTE",
             "CARD",
             "EXTERNAL_ACH",
             "EXTERNAL_CHECK",

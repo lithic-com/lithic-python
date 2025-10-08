@@ -58,6 +58,9 @@ class Tokenization(BaseModel):
     created_at: datetime
     """Date and time when the tokenization first occurred. UTC time zone."""
 
+    device_id: Optional[str] = None
+    """The device identifier associated with the tokenization."""
+
     dpan: Optional[str] = None
     """The dynamic pan assigned to the token by the network."""
 

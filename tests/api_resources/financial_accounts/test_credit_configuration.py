@@ -68,6 +68,7 @@ class TestCreditConfiguration:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         credit_configuration = client.financial_accounts.credit_configuration.update(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auto_collection_configuration={"auto_collection_enabled": True},
             credit_limit=0,
             credit_product_token="credit_product_token",
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -165,6 +166,7 @@ class TestAsyncCreditConfiguration:
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         credit_configuration = await async_client.financial_accounts.credit_configuration.update(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auto_collection_configuration={"auto_collection_enabled": True},
             credit_limit=0,
             credit_product_token="credit_product_token",
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
