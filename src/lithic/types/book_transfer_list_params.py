@@ -22,7 +22,17 @@ class BookTransferListParams(TypedDict, total=False):
 
     business_account_token: str
 
-    category: Literal["BALANCE_OR_FUNDING", "FEE", "REWARD", "ADJUSTMENT", "DERECOGNITION", "DISPUTE", "INTERNAL"]
+    category: Literal[
+        "ADJUSTMENT",
+        "BALANCE_OR_FUNDING",
+        "DERECOGNITION",
+        "DISPUTE",
+        "FEE",
+        "INTERNAL",
+        "REWARD",
+        "PROGRAM_FUNDING",
+        "TRANSFER",
+    ]
     """Book Transfer category to be returned."""
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]

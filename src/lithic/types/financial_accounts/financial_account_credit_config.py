@@ -5,12 +5,19 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["FinancialAccountCreditConfig"]
+__all__ = ["FinancialAccountCreditConfig", "AutoCollectionConfiguration"]
+
+
+class AutoCollectionConfiguration(BaseModel):
+    auto_collection_enabled: bool
+    """If auto collection is enabled for this account"""
 
 
 class FinancialAccountCreditConfig(BaseModel):
     account_token: str
     """Globally unique identifier for the account"""
+
+    auto_collection_configuration: AutoCollectionConfiguration
 
     charged_off_reason: Optional[Literal["DELINQUENT", "FRAUD"]] = None
     """Reason for the financial account being marked as Charged Off"""

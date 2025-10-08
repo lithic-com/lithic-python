@@ -27,6 +27,11 @@ class AccountActivityListParams(TypedDict, total=False):
     category: Literal[
         "ACH",
         "BALANCE_OR_FUNDING",
+        "FEE",
+        "REWARD",
+        "ADJUSTMENT",
+        "DERECOGNITION",
+        "DISPUTE",
         "CARD",
         "EXTERNAL_ACH",
         "EXTERNAL_CHECK",

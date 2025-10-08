@@ -21,19 +21,19 @@ class SettlementDetail(BaseModel):
 
     account_token: str
     """
-    The most granular ID the network settles with (e.g., ICA for Mastercard, FTSRE
-    for Visa).
+    Globally unique identifier denoting the account that the associated transaction
+    occurred on.
     """
 
     card_program_token: str
     """
     Globally unique identifier denoting the card program that the associated
-    Transaction occurred on.
+    transaction occurred on.
     """
 
     card_token: str
     """
-    Globally unique identifier denoting the card that the associated Transaction
+    Globally unique identifier denoting the card that the associated transaction
     occurred on.
     """
 

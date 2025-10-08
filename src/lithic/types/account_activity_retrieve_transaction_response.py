@@ -53,12 +53,14 @@ class FinancialTransactionEvent(BaseModel):
             "ACH_ORIGINATION_INITIATED",
             "ACH_ORIGINATION_PROCESSED",
             "ACH_ORIGINATION_RELEASED",
+            "ACH_ORIGINATION_REJECTED",
             "ACH_ORIGINATION_REVIEWED",
             "ACH_ORIGINATION_SETTLED",
             "ACH_RECEIPT_PROCESSED",
             "ACH_RECEIPT_SETTLED",
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
+            "ACH_RETURN_REJECTED",
             "ACH_RETURN_SETTLED",
             "AUTHORIZATION",
             "AUTHORIZATION_ADVICE",
@@ -128,6 +130,11 @@ class FinancialTransaction(BaseModel):
     category: Literal[
         "ACH",
         "BALANCE_OR_FUNDING",
+        "FEE",
+        "REWARD",
+        "ADJUSTMENT",
+        "DERECOGNITION",
+        "DISPUTE",
         "CARD",
         "EXTERNAL_ACH",
         "EXTERNAL_CHECK",
@@ -203,6 +210,7 @@ class BookTransferTransactionEvent(BaseModel):
     """The program specific subtype code for the specified category/type."""
 
     type: Literal[
+        "ATM_BALANCE_INQUIRY",
         "ATM_WITHDRAWAL",
         "ATM_DECLINE",
         "INTERNATIONAL_ATM_WITHDRAWAL",
@@ -254,19 +262,15 @@ class BookTransferTransaction(BaseModel):
     """Unique identifier for the transaction"""
 
     category: Literal[
-        "ACH",
+        "ADJUSTMENT",
         "BALANCE_OR_FUNDING",
-        "CARD",
-        "EXTERNAL_ACH",
-        "EXTERNAL_CHECK",
-        "EXTERNAL_TRANSFER",
-        "EXTERNAL_WIRE",
-        "MANAGEMENT_ADJUSTMENT",
-        "MANAGEMENT_DISPUTE",
-        "MANAGEMENT_FEE",
-        "MANAGEMENT_REWARD",
-        "MANAGEMENT_DISBURSEMENT",
+        "DERECOGNITION",
+        "DISPUTE",
+        "FEE",
+        "INTERNAL",
+        "REWARD",
         "PROGRAM_FUNDING",
+        "TRANSFER",
     ]
 
     created: datetime
@@ -458,6 +462,11 @@ class PaymentTransaction(BaseModel):
     category: Literal[
         "ACH",
         "BALANCE_OR_FUNDING",
+        "FEE",
+        "REWARD",
+        "ADJUSTMENT",
+        "DERECOGNITION",
+        "DISPUTE",
         "CARD",
         "EXTERNAL_ACH",
         "EXTERNAL_CHECK",

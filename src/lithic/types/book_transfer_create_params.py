@@ -15,9 +15,18 @@ class BookTransferCreateParams(TypedDict, total=False):
     """
 
     category: Required[
-        Literal["ADJUSTMENT", "BALANCE_OR_FUNDING", "DERECOGNITION", "DISPUTE", "FEE", "REWARD", "TRANSFER"]
+        Literal[
+            "ADJUSTMENT",
+            "BALANCE_OR_FUNDING",
+            "DERECOGNITION",
+            "DISPUTE",
+            "FEE",
+            "INTERNAL",
+            "REWARD",
+            "PROGRAM_FUNDING",
+            "TRANSFER",
+        ]
     ]
-    """Category of the book transfer"""
 
     from_financial_account_token: Required[str]
     """
@@ -36,6 +45,7 @@ class BookTransferCreateParams(TypedDict, total=False):
 
     type: Required[
         Literal[
+            "ATM_BALANCE_INQUIRY",
             "ATM_WITHDRAWAL",
             "ATM_DECLINE",
             "INTERNATIONAL_ATM_WITHDRAWAL",
