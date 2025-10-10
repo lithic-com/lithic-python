@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.108.1 (2025-10-10)
+
+Full Changelog: [v0.108.0...v0.108.1](https://github.com/lithic-com/lithic-python/compare/v0.108.0...v0.108.1)
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([a179321](https://github.com/lithic-com/lithic-python/commit/a1793216b4f1e68c98b6c6d22314ebbc34cba322))
+
 ## 0.108.0 (2025-10-08)
 
 Full Changelog: [v0.107.0...v0.108.0](https://github.com/lithic-com/lithic-python/compare/v0.107.0...v0.108.0)
