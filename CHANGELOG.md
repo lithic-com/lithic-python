@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.109.0 (2025-10-23)
+
+Full Changelog: [v0.108.0...v0.109.0](https://github.com/lithic-com/lithic-python/compare/v0.108.0...v0.109.0)
+
+### Features
+
+* **api:** updates to Auth Rules and Card provisioning ([5a634bb](https://github.com/lithic-com/lithic-python/commit/5a634bbbaccf90921d5339d4173c6798e11f5898))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([1f43f1d](https://github.com/lithic-com/lithic-python/commit/1f43f1da5db00568795b4f04462f075ea7130d16))
+* **internal:** detect missing future annotations with ruff ([a179321](https://github.com/lithic-com/lithic-python/commit/a1793216b4f1e68c98b6c6d22314ebbc34cba322))
+
 ## 0.108.0 (2025-10-08)
 
 Full Changelog: [v0.107.0...v0.108.0](https://github.com/lithic-com/lithic-python/compare/v0.107.0...v0.108.0)
