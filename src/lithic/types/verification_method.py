@@ -4,6 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["VerificationMethod"]
 
-VerificationMethod: TypeAlias = Literal[
-    "MANUAL", "MICRO_DEPOSIT", "PLAID", "PRENOTE", "EXTERNALLY_VERIFIED", "UNVERIFIED"
-]
+VerificationMethod: TypeAlias = Literal["MANUAL", "MICRO_DEPOSIT", "PRENOTE", "EXTERNALLY_VERIFIED", "UNVERIFIED"]

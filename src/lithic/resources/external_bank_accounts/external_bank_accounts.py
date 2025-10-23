@@ -152,59 +152,6 @@ class ExternalBankAccounts(SyncAPIResource):
     def create(
         self,
         *,
-        owner: str,
-        owner_type: OwnerType,
-        processor_token: str,
-        verification_method: VerificationMethod,
-        account_token: str | Omit = omit,
-        company_id: str | Omit = omit,
-        dob: Union[str, date] | Omit = omit,
-        doing_business_as: str | Omit = omit,
-        user_defined_id: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExternalBankAccountCreateResponse:
-        """
-        Creates an external bank account within a program or Lithic account.
-
-        Args:
-          owner: Legal Name of the business or individual who owns the external account. This
-              will appear in statements
-
-          owner_type: Owner Type
-
-          verification_method: Verification Method
-
-          account_token: Indicates which Lithic account the external account is associated with. For
-              external accounts that are associated with the program, account_token field
-              returned will be null
-
-          company_id: Optional field that helps identify bank accounts in receipts
-
-          dob: Date of Birth of the Individual that owns the external bank account
-
-          doing_business_as: Doing Business As
-
-          user_defined_id: User Defined ID
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def create(
-        self,
-        *,
         account_number: str,
         country: str,
         currency: str,
@@ -361,7 +308,6 @@ class ExternalBankAccounts(SyncAPIResource):
             "type",
             "verification_method",
         ],
-        ["owner", "owner_type", "processor_token", "verification_method"],
         [
             "account_number",
             "country",
@@ -376,24 +322,23 @@ class ExternalBankAccounts(SyncAPIResource):
     def create(
         self,
         *,
-        account_number: str | Omit = omit,
-        country: str | Omit = omit,
-        currency: str | Omit = omit,
+        account_number: str,
+        country: str,
+        currency: str,
         financial_account_token: str | Omit = omit,
         owner: str,
         owner_type: OwnerType,
-        routing_number: str | Omit = omit,
-        type: Literal["CHECKING", "SAVINGS"] | Omit = omit,
+        routing_number: str,
+        type: Literal["CHECKING", "SAVINGS"],
         verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"] | Literal["UNVERIFIED"],
         account_token: str | Omit = omit,
         address: ExternalBankAccountAddressParam | Omit = omit,
         company_id: str | Omit = omit,
-        dob: Union[str, date] | Union[str, date] | Union[str, date] | Union[str, date] | Omit = omit,
+        dob: Union[str, date] | Union[str, date] | Union[str, date] | Omit = omit,
         doing_business_as: str | Omit = omit,
         name: str | Omit = omit,
         user_defined_id: str | Omit = omit,
         verification_enforcement: bool | Omit = omit,
-        processor_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -422,7 +367,6 @@ class ExternalBankAccounts(SyncAPIResource):
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
-                    "processor_token": processor_token,
                 },
                 external_bank_account_create_params.ExternalBankAccountCreateParams,
             ),
@@ -795,59 +739,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
     async def create(
         self,
         *,
-        owner: str,
-        owner_type: OwnerType,
-        processor_token: str,
-        verification_method: VerificationMethod,
-        account_token: str | Omit = omit,
-        company_id: str | Omit = omit,
-        dob: Union[str, date] | Omit = omit,
-        doing_business_as: str | Omit = omit,
-        user_defined_id: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExternalBankAccountCreateResponse:
-        """
-        Creates an external bank account within a program or Lithic account.
-
-        Args:
-          owner: Legal Name of the business or individual who owns the external account. This
-              will appear in statements
-
-          owner_type: Owner Type
-
-          verification_method: Verification Method
-
-          account_token: Indicates which Lithic account the external account is associated with. For
-              external accounts that are associated with the program, account_token field
-              returned will be null
-
-          company_id: Optional field that helps identify bank accounts in receipts
-
-          dob: Date of Birth of the Individual that owns the external bank account
-
-          doing_business_as: Doing Business As
-
-          user_defined_id: User Defined ID
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def create(
-        self,
-        *,
         account_number: str,
         country: str,
         currency: str,
@@ -1004,7 +895,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             "type",
             "verification_method",
         ],
-        ["owner", "owner_type", "processor_token", "verification_method"],
         [
             "account_number",
             "country",
@@ -1019,24 +909,23 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
     async def create(
         self,
         *,
-        account_number: str | Omit = omit,
-        country: str | Omit = omit,
-        currency: str | Omit = omit,
+        account_number: str,
+        country: str,
+        currency: str,
         financial_account_token: str | Omit = omit,
         owner: str,
         owner_type: OwnerType,
-        routing_number: str | Omit = omit,
-        type: Literal["CHECKING", "SAVINGS"] | Omit = omit,
+        routing_number: str,
+        type: Literal["CHECKING", "SAVINGS"],
         verification_method: VerificationMethod | Literal["EXTERNALLY_VERIFIED"] | Literal["UNVERIFIED"],
         account_token: str | Omit = omit,
         address: ExternalBankAccountAddressParam | Omit = omit,
         company_id: str | Omit = omit,
-        dob: Union[str, date] | Union[str, date] | Union[str, date] | Union[str, date] | Omit = omit,
+        dob: Union[str, date] | Union[str, date] | Union[str, date] | Omit = omit,
         doing_business_as: str | Omit = omit,
         name: str | Omit = omit,
         user_defined_id: str | Omit = omit,
         verification_enforcement: bool | Omit = omit,
-        processor_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1065,7 +954,6 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
                     "name": name,
                     "user_defined_id": user_defined_id,
                     "verification_enforcement": verification_enforcement,
-                    "processor_token": processor_token,
                 },
                 external_bank_account_create_params.ExternalBankAccountCreateParams,
             ),

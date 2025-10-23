@@ -23,7 +23,6 @@ class SubscriptionCreateParams(TypedDict, total=False):
             "account_holder.created",
             "account_holder.updated",
             "account_holder.verification",
-            "auth_rules.performance_report.created",
             "balance.updated",
             "book_transfer_transaction.created",
             "card.created",
