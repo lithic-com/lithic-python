@@ -1,12 +1,20 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import date, datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
+from .wire_party_details import WirePartyDetails
 
-__all__ = ["Payment", "Event", "MethodAttributes", "RelatedAccountTokens"]
+__all__ = [
+    "Payment",
+    "Event",
+    "MethodAttributes",
+    "MethodAttributesACHMethodAttributes",
+    "MethodAttributesWireMethodAttributes",
+    "RelatedAccountTokens",
+]
 
 
 class Event(BaseModel):
@@ -78,20 +86,51 @@ class Event(BaseModel):
     """More detailed reasons for the event"""
 
 
-class MethodAttributes(BaseModel):
-    company_id: Optional[str] = None
-
-    receipt_routing_number: Optional[str] = None
-
-    retries: Optional[int] = None
-
-    return_reason_code: Optional[str] = None
-
-    sec_code: Literal["CCD", "PPD", "WEB"]
-
-    trace_numbers: List[Optional[str]]
+class MethodAttributesACHMethodAttributes(BaseModel):
+    sec_code: Literal["CCD", "PPD", "WEB", "TEL", "CIE", "CTX"]
+    """SEC code for ACH transaction"""
 
     addenda: Optional[str] = None
+    """Addenda information"""
+
+    company_id: Optional[str] = None
+    """Company ID for the ACH transaction"""
+
+    receipt_routing_number: Optional[str] = None
+    """Receipt routing number"""
+
+    retries: Optional[int] = None
+    """Number of retries attempted"""
+
+    return_reason_code: Optional[str] = None
+    """Return reason code if the transaction was returned"""
+
+    trace_numbers: Optional[List[str]] = None
+    """Trace numbers for the ACH transaction"""
+
+
+class MethodAttributesWireMethodAttributes(BaseModel):
+    wire_network: Literal["FEDWIRE", "SWIFT"]
+    """Type of wire transfer"""
+
+    creditor: Optional[WirePartyDetails] = None
+
+    debtor: Optional[WirePartyDetails] = None
+
+    message_id: Optional[str] = None
+    """
+    Point to point reference identifier, as assigned by the instructing party, used
+    for tracking the message through the Fedwire system
+    """
+
+    remittance_information: Optional[str] = None
+    """Payment details or invoice reference"""
+
+    wire_message_type: Optional[str] = None
+    """Type of wire message"""
+
+
+MethodAttributes: TypeAlias = Union[MethodAttributesACHMethodAttributes, MethodAttributesWireMethodAttributes]
 
 
 class RelatedAccountTokens(BaseModel):
@@ -104,76 +143,83 @@ class RelatedAccountTokens(BaseModel):
 
 class Payment(BaseModel):
     token: str
-    """Globally unique identifier."""
+    """Unique identifier for the transaction"""
 
-    category: Literal["ACH"]
-    """Payment category"""
+    category: Literal[
+        "ACH",
+        "BALANCE_OR_FUNDING",
+        "FEE",
+        "REWARD",
+        "ADJUSTMENT",
+        "DERECOGNITION",
+        "DISPUTE",
+        "CARD",
+        "EXTERNAL_ACH",
+        "EXTERNAL_CHECK",
+        "EXTERNAL_TRANSFER",
+        "EXTERNAL_WIRE",
+        "MANAGEMENT_ADJUSTMENT",
+        "MANAGEMENT_DISPUTE",
+        "MANAGEMENT_FEE",
+        "MANAGEMENT_REWARD",
+        "MANAGEMENT_DISBURSEMENT",
+        "PROGRAM_FUNDING",
+    ]
+    """Transaction category"""
 
     created: datetime
-    """Date and time when the payment first occurred. UTC time zone."""
-
-    currency: str
-    """3-character alphabetic ISO 4217 code for the settling currency of the payment."""
+    """ISO 8601 timestamp of when the transaction was created"""
 
     descriptor: str
-    """
-    A string that provides a description of the payment; may be useful to display to
-    users.
-    """
+    """Transaction descriptor"""
 
     direction: Literal["CREDIT", "DEBIT"]
+    """Transfer direction"""
 
     events: List[Event]
-    """A list of all payment events that have modified this payment."""
+    """List of transaction events"""
 
-    external_bank_account_token: Optional[str] = None
+    family: Literal["PAYMENT"]
+    """PAYMENT - Payment Transaction"""
 
     financial_account_token: str
+    """Financial account token"""
 
-    method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY"]
+    method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY", "WIRE"]
+    """Transfer method"""
 
     method_attributes: MethodAttributes
+    """Method-specific attributes"""
 
     pending_amount: int
-    """
-    Pending amount of the payment in the currency's smallest unit (e.g., cents). The
-    value of this field will go to zero over time once the payment is settled.
-    """
+    """Pending amount in cents"""
 
     related_account_tokens: RelatedAccountTokens
-    """Account tokens related to a payment transaction"""
+    """Related account tokens for the transaction"""
 
     result: Literal["APPROVED", "DECLINED"]
-    """
-    APPROVED payments were successful while DECLINED payments were declined by
-    Lithic or returned.
-    """
+    """Transaction result"""
 
     settled_amount: int
-    """
-    Amount of the payment that has been settled in the currency's smallest unit
-    (e.g., cents).
-    """
+    """Settled amount in cents"""
 
-    source: Literal["CUSTOMER", "LITHIC"]
+    source: Literal["LITHIC", "EXTERNAL", "CUSTOMER"]
+    """Transaction source"""
 
-    status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"]
-    """Status types:
-
-    - `DECLINED` - The payment was declined.
-    - `PENDING` - The payment is being processed and has yet to settle or release
-      (origination debit).
-    - `RETURNED` - The payment has been returned.
-    - `SETTLED` - The payment is completed.
-    """
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+    """The status of the transaction"""
 
     updated: datetime
-    """Date and time when the financial transaction was last updated. UTC time zone."""
+    """ISO 8601 timestamp of when the transaction was last updated"""
 
-    user_defined_id: Optional[str] = None
+    currency: Optional[str] = None
+    """Currency of the transaction in ISO 4217 format"""
 
     expected_release_date: Optional[date] = None
-    """Date when the financial transaction expected to be released after settlement"""
+    """Expected release date for the transaction"""
+
+    external_bank_account_token: Optional[str] = None
+    """External bank account token"""
 
     type: Optional[
         Literal[
@@ -187,4 +233,6 @@ class Payment(BaseModel):
             "WIRE_OUTBOUND_ADMIN",
         ]
     ] = None
-    """Payment type indicating the specific ACH message or Fedwire transfer type"""
+
+    user_defined_id: Optional[str] = None
+    """User-defined identifier"""

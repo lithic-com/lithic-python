@@ -65,8 +65,6 @@ class ManagementOperationTransaction(BaseModel):
     created: datetime
     """ISO 8601 timestamp of when the transaction was created"""
 
-    family: Literal["CARD", "PAYMENT", "TRANSFER", "INTERNAL", "EXTERNAL_PAYMENT", "MANAGEMENT_OPERATION"]
-
     status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
     """The status of the transaction"""
 
@@ -91,6 +89,9 @@ class ManagementOperationTransaction(BaseModel):
 
     external_resource: Optional[ExternalResource] = None
     """External resource associated with the management operation"""
+
+    family: Optional[Literal["MANAGEMENT_OPERATION"]] = None
+    """MANAGEMENT_OPERATION - Management Operation Transaction"""
 
     financial_account_token: Optional[str] = None
 

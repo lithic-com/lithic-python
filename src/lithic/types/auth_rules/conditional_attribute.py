@@ -21,4 +21,5 @@ ConditionalAttribute: TypeAlias = Literal[
     "PIN_ENTERED",
     "PIN_STATUS",
     "WALLET_TYPE",
+    "ADDRESS_MATCH",
 ]

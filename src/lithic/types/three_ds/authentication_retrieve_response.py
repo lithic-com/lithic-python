@@ -76,6 +76,16 @@ class Cardholder(BaseModel):
     Maps to EMV 3DS field `addrMatch`.
     """
 
+    address_on_file_match: Optional[
+        Literal["MATCH", "MATCH_ADDRESS_ONLY", "MATCH_ZIP_ONLY", "MISMATCH", "NOT_PRESENT"]
+    ] = None
+    """
+    Lithic's evaluation result comparing the transaction's address data with the
+    cardholder KYC data if it exists. In the event Lithic does not have any
+    Cardholder KYC data, or the transaction does not contain any address data,
+    NOT_PRESENT will be returned
+    """
+
     billing_address: Optional[CardholderBillingAddress] = None
     """Object containing data on the billing address provided during the transaction."""
 

@@ -14,7 +14,6 @@ from .external_bank_account_address_param import ExternalBankAccountAddressParam
 __all__ = [
     "ExternalBankAccountCreateParams",
     "BankVerifiedCreateBankAccountAPIRequest",
-    "PlaidCreateBankAccountAPIRequest",
     "ExternallyVerifiedCreateBankAccountAPIRequest",
     "UnverifiedCreateBankAccountAPIRequest",
 ]
@@ -80,45 +79,6 @@ class BankVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
     """User Defined ID"""
 
     verification_enforcement: bool
-
-
-class PlaidCreateBankAccountAPIRequest(TypedDict, total=False):
-    owner: Required[str]
-    """Legal Name of the business or individual who owns the external account.
-
-    This will appear in statements
-    """
-
-    owner_type: Required[OwnerType]
-    """Owner Type"""
-
-    processor_token: Required[str]
-
-    verification_method: Required[VerificationMethod]
-    """Verification Method"""
-
-    account_token: str
-    """Indicates which Lithic account the external account is associated with.
-
-    For external accounts that are associated with the program, account_token field
-    returned will be null
-    """
-
-    company_id: str
-    """Optional field that helps identify bank accounts in receipts"""
-
-    dob: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
-    """Date of Birth of the Individual that owns the external bank account"""
-
-    doing_business_as: str
-    """Doing Business As"""
-
-    user_defined_id: str
-    """User Defined ID"""
-
-
-ExternalBankAccountAddress = ExternalBankAccountAddressParam
-"""This type is deprecated, please use ExternalBankAccountAddressParam instead"""
 
 
 class ExternallyVerifiedCreateBankAccountAPIRequest(TypedDict, total=False):
@@ -237,7 +197,6 @@ class UnverifiedCreateBankAccountAPIRequest(TypedDict, total=False):
 
 ExternalBankAccountCreateParams: TypeAlias = Union[
     BankVerifiedCreateBankAccountAPIRequest,
-    PlaidCreateBankAccountAPIRequest,
     ExternallyVerifiedCreateBankAccountAPIRequest,
     UnverifiedCreateBankAccountAPIRequest,
 ]

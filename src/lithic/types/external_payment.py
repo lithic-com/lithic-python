@@ -55,8 +55,6 @@ class ExternalPayment(BaseModel):
     created: datetime
     """ISO 8601 timestamp of when the transaction was created"""
 
-    family: Literal["CARD", "PAYMENT", "TRANSFER", "INTERNAL", "EXTERNAL_PAYMENT", "MANAGEMENT_OPERATION"]
-
     status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
     """The status of the transaction"""
 
@@ -68,6 +66,9 @@ class ExternalPayment(BaseModel):
     currency: Optional[str] = None
 
     events: Optional[List[Event]] = None
+
+    family: Optional[Literal["EXTERNAL_PAYMENT"]] = None
+    """EXTERNAL_PAYMENT - External Payment Response"""
 
     financial_account_token: Optional[str] = None
 

@@ -47,6 +47,7 @@ from .auth_stream_secret import AuthStreamSecret as AuthStreamSecret
 from .card_create_params import CardCreateParams as CardCreateParams
 from .card_update_params import CardUpdateParams as CardUpdateParams
 from .event_subscription import EventSubscription as EventSubscription
+from .provision_response import ProvisionResponse as ProvisionResponse
 from .wire_party_details import WirePartyDetails as WirePartyDetails
 from .account_list_params import AccountListParams as AccountListParams
 from .balance_list_params import BalanceListParams as BalanceListParams
