@@ -43,6 +43,7 @@ class CurrentVersionParametersConditionalAuthorizationActionParametersCondition(
             "PIN_STATUS",
             "WALLET_TYPE",
             "TRANSACTION_INITIATOR",
+            "ADDRESS_MATCH",
         ]
     ] = None
     """The attribute to target.
@@ -96,6 +97,9 @@ class CurrentVersionParametersConditionalAuthorizationActionParametersCondition(
       `SAMSUNG_PAY`, `MASTERPASS`, `MERCHANT`, `OTHER`, `NONE`.
     - `TRANSACTION_INITIATOR`: The entity that initiated the transaction indicates
       the source of the token. Valid values are `CARDHOLDER`, `MERCHANT`, `UNKNOWN`.
+    - `ADDRESS_MATCH`: Lithic's evaluation result comparing transaction's address
+      data with the cardholder KYC data if it exists. Valid values are `MATCH`,
+      `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
     """
 
     operation: Optional[
@@ -166,6 +170,7 @@ class DraftVersionParametersConditionalAuthorizationActionParametersCondition(Ba
             "PIN_STATUS",
             "WALLET_TYPE",
             "TRANSACTION_INITIATOR",
+            "ADDRESS_MATCH",
         ]
     ] = None
     """The attribute to target.
@@ -219,6 +224,9 @@ class DraftVersionParametersConditionalAuthorizationActionParametersCondition(Ba
       `SAMSUNG_PAY`, `MASTERPASS`, `MERCHANT`, `OTHER`, `NONE`.
     - `TRANSACTION_INITIATOR`: The entity that initiated the transaction indicates
       the source of the token. Valid values are `CARDHOLDER`, `MERCHANT`, `UNKNOWN`.
+    - `ADDRESS_MATCH`: Lithic's evaluation result comparing transaction's address
+      data with the cardholder KYC data if it exists. Valid values are `MATCH`,
+      `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
     """
 
     operation: Optional[

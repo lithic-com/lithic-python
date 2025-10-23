@@ -529,6 +529,8 @@ class EventRuleResult(BaseModel):
         "TRANSACTION_PREVIOUSLY_COMPLETED",
         "UNAUTHORIZED_MERCHANT",
         "VEHICLE_NUMBER_INVALID",
+        "CARDHOLDER_CHALLENGED",
+        "CARDHOLDER_CHALLENGE_FAILED",
     ]
     """The detailed_result associated with this rule's decline."""
 
@@ -641,6 +643,8 @@ class Event(BaseModel):
             "TRANSACTION_PREVIOUSLY_COMPLETED",
             "UNAUTHORIZED_MERCHANT",
             "VEHICLE_NUMBER_INVALID",
+            "CARDHOLDER_CHALLENGED",
+            "CARDHOLDER_CHALLENGE_FAILED",
         ]
     ]
 

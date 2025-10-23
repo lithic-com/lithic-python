@@ -20,6 +20,7 @@ class Condition(TypedDict, total=False):
         "TRANSACTION_AMOUNT",
         "RISK_SCORE",
         "MESSAGE_CATEGORY",
+        "ADDRESS_MATCH",
     ]
     """The attribute to target.
 
@@ -42,6 +43,9 @@ class Condition(TypedDict, total=False):
     - `RISK_SCORE`: Mastercard only: Assessment by the network of the authentication
       risk level, with a higher value indicating a higher amount of risk.
     - `MESSAGE_CATEGORY`: The category of the authentication being processed.
+    - `ADDRESS_MATCH`: Lithic's evaluation result comparing transaction's address
+      data with the cardholder KYC data if it exists. Valid values are `MATCH`,
+      `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
     """
 
     operation: Literal[

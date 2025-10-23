@@ -87,10 +87,7 @@ class TransactionSeries(BaseModel):
 
 class BookTransferResponse(BaseModel):
     token: str
-    """Customer-provided token that will serve as an idempotency token.
-
-    This token will become the transaction token.
-    """
+    """Unique identifier for the transaction"""
 
     category: Literal[
         "ADJUSTMENT",
@@ -105,27 +102,24 @@ class BookTransferResponse(BaseModel):
     ]
 
     created: datetime
-    """Date and time when the transfer occurred. UTC time zone."""
+    """ISO 8601 timestamp of when the transaction was created"""
 
     currency: str
     """
     3-character alphabetic ISO 4217 code for the settling currency of the
-    transaction.
+    transaction
     """
 
     events: List[Event]
-    """A list of all financial events that have modified this transfer."""
+    """A list of all financial events that have modified this transfer"""
 
-    external_id: Optional[str] = None
-    """External ID defined by the customer"""
-
-    external_resource: Optional[ExternalResource] = None
-    """External resource associated with the management operation"""
+    family: Literal["TRANSFER"]
+    """TRANSFER - Book Transfer Transaction"""
 
     from_financial_account_token: str
     """
     Globally unique identifier for the financial account or card that will send the
-    funds. Accepted type dependent on the program's use case.
+    funds. Accepted type dependent on the program's use case
     """
 
     pending_amount: int
@@ -142,25 +136,26 @@ class BookTransferResponse(BaseModel):
     settled_amount: int
     """
     Amount of the transaction that has been settled in the currency's smallest unit
-    (e.g., cents).
+    (e.g., cents)
     """
 
-    status: Literal["DECLINED", "REVERSED", "SETTLED"]
-    """Status types:
-
-    - `DECLINED` - The transfer was declined.
-    - `REVERSED` - The transfer was reversed
-    - `SETTLED` - The transfer is completed.
-    """
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+    """The status of the transaction"""
 
     to_financial_account_token: str
     """
     Globally unique identifier for the financial account or card that will receive
-    the funds. Accepted type dependent on the program's use case.
+    the funds. Accepted type dependent on the program's use case
     """
 
-    transaction_series: Optional[TransactionSeries] = None
-    """A series of transactions that are grouped together."""
-
     updated: datetime
-    """Date and time when the financial transaction was last updated. UTC time zone."""
+    """ISO 8601 timestamp of when the transaction was last updated"""
+
+    external_id: Optional[str] = None
+    """External ID defined by the customer"""
+
+    external_resource: Optional[ExternalResource] = None
+    """External resource associated with the management operation"""
+
+    transaction_series: Optional[TransactionSeries] = None
+    """A series of transactions that are grouped together"""

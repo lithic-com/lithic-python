@@ -15,8 +15,7 @@ class CreditConfigurationAutoCollectionConfiguration(BaseModel):
 
 
 class CreditConfiguration(BaseModel):
-    charged_off_reason: Optional[Literal["DELINQUENT", "FRAUD"]] = None
-    """Reason for the financial account being marked as Charged Off"""
+    auto_collection_configuration: CreditConfigurationAutoCollectionConfiguration
 
     credit_limit: Optional[int] = None
 
@@ -25,15 +24,16 @@ class CreditConfiguration(BaseModel):
 
     external_bank_account_token: Optional[str] = None
 
-    financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT", "CHARGED_OFF"]] = None
-    """State of the financial account"""
-
-    is_spend_blocked: bool
-
     tier: Optional[str] = None
     """Tier assigned to the financial account"""
 
-    auto_collection_configuration: Optional[CreditConfigurationAutoCollectionConfiguration] = None
+    charged_off_reason: Optional[Literal["DELINQUENT", "FRAUD"]] = None
+    """Reason for the financial account being marked as Charged Off"""
+
+    financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT", "CHARGED_OFF"]] = None
+    """State of the financial account"""
+
+    is_spend_blocked: Optional[bool] = None
 
 
 class FinancialAccount(BaseModel):
