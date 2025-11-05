@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing_extensions
 from typing import Union, Optional
 from datetime import date
 from typing_extensions import Literal, overload
@@ -27,7 +26,6 @@ from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.auth_rules import (
     v2_list_params,
-    v2_apply_params,
     v2_draft_params,
     v2_create_params,
     v2_update_params,
@@ -35,7 +33,6 @@ from ....types.auth_rules import (
     v2_retrieve_features_params,
 )
 from ....types.auth_rules.v2_list_response import V2ListResponse
-from ....types.auth_rules.v2_apply_response import V2ApplyResponse
 from ....types.auth_rules.v2_draft_response import V2DraftResponse
 from ....types.auth_rules.v2_create_response import V2CreateResponse
 from ....types.auth_rules.v2_update_response import V2UpdateResponse
@@ -577,148 +574,6 @@ class V2(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
-        )
-
-    @typing_extensions.deprecated("deprecated")
-    @overload
-    def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        """
-        Associates a V2 Auth rule with a card program, the provided account(s) or
-        card(s).
-
-        Prefer using the `PATCH` method for this operation.
-
-        Args:
-          account_tokens: Account tokens to which the Auth Rule applies.
-
-          business_account_tokens: Business Account tokens to which the Auth Rule applies.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @typing_extensions.deprecated("deprecated")
-    @overload
-    def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        card_tokens: SequenceNotStr[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        """
-        Associates a V2 Auth rule with a card program, the provided account(s) or
-        card(s).
-
-        Prefer using the `PATCH` method for this operation.
-
-        Args:
-          card_tokens: Card tokens to which the Auth Rule applies.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @typing_extensions.deprecated("deprecated")
-    @overload
-    def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        program_level: bool,
-        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        """
-        Associates a V2 Auth rule with a card program, the provided account(s) or
-        card(s).
-
-        Prefer using the `PATCH` method for this operation.
-
-        Args:
-          program_level: Whether the Auth Rule applies to all authorizations on the card program.
-
-          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @typing_extensions.deprecated("deprecated")
-    def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        card_tokens: SequenceNotStr[str] | Omit = omit,
-        program_level: bool | Omit = omit,
-        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        if not auth_rule_token:
-            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
-        return self._post(
-            f"/v2/auth_rules/{auth_rule_token}/apply",
-            body=maybe_transform(
-                {
-                    "account_tokens": account_tokens,
-                    "business_account_tokens": business_account_tokens,
-                    "card_tokens": card_tokens,
-                    "program_level": program_level,
-                    "excluded_card_tokens": excluded_card_tokens,
-                },
-                v2_apply_params.V2ApplyParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=V2ApplyResponse,
         )
 
     def draft(
@@ -1442,148 +1297,6 @@ class AsyncV2(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    @typing_extensions.deprecated("deprecated")
-    @overload
-    async def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        """
-        Associates a V2 Auth rule with a card program, the provided account(s) or
-        card(s).
-
-        Prefer using the `PATCH` method for this operation.
-
-        Args:
-          account_tokens: Account tokens to which the Auth Rule applies.
-
-          business_account_tokens: Business Account tokens to which the Auth Rule applies.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @typing_extensions.deprecated("deprecated")
-    @overload
-    async def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        card_tokens: SequenceNotStr[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        """
-        Associates a V2 Auth rule with a card program, the provided account(s) or
-        card(s).
-
-        Prefer using the `PATCH` method for this operation.
-
-        Args:
-          card_tokens: Card tokens to which the Auth Rule applies.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @typing_extensions.deprecated("deprecated")
-    @overload
-    async def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        program_level: bool,
-        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        """
-        Associates a V2 Auth rule with a card program, the provided account(s) or
-        card(s).
-
-        Prefer using the `PATCH` method for this operation.
-
-        Args:
-          program_level: Whether the Auth Rule applies to all authorizations on the card program.
-
-          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @typing_extensions.deprecated("deprecated")
-    async def apply(
-        self,
-        auth_rule_token: str,
-        *,
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        card_tokens: SequenceNotStr[str] | Omit = omit,
-        program_level: bool | Omit = omit,
-        excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ApplyResponse:
-        if not auth_rule_token:
-            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
-        return await self._post(
-            f"/v2/auth_rules/{auth_rule_token}/apply",
-            body=await async_maybe_transform(
-                {
-                    "account_tokens": account_tokens,
-                    "business_account_tokens": business_account_tokens,
-                    "card_tokens": card_tokens,
-                    "program_level": program_level,
-                    "excluded_card_tokens": excluded_card_tokens,
-                },
-                v2_apply_params.V2ApplyParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=V2ApplyResponse,
-        )
-
     async def draft(
         self,
         auth_rule_token: str,
@@ -1792,11 +1505,6 @@ class V2WithRawResponse:
         self.delete = _legacy_response.to_raw_response_wrapper(
             v2.delete,
         )
-        self.apply = (  # pyright: ignore[reportDeprecated]
-            _legacy_response.to_raw_response_wrapper(
-                v2.apply,  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.draft = _legacy_response.to_raw_response_wrapper(
             v2.draft,
         )
@@ -1833,11 +1541,6 @@ class AsyncV2WithRawResponse:
         )
         self.delete = _legacy_response.async_to_raw_response_wrapper(
             v2.delete,
-        )
-        self.apply = (  # pyright: ignore[reportDeprecated]
-            _legacy_response.async_to_raw_response_wrapper(
-                v2.apply,  # pyright: ignore[reportDeprecated],
-            )
         )
         self.draft = _legacy_response.async_to_raw_response_wrapper(
             v2.draft,
@@ -1876,11 +1579,6 @@ class V2WithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             v2.delete,
         )
-        self.apply = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                v2.apply,  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.draft = to_streamed_response_wrapper(
             v2.draft,
         )
@@ -1917,11 +1615,6 @@ class AsyncV2WithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             v2.delete,
-        )
-        self.apply = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                v2.apply,  # pyright: ignore[reportDeprecated],
-            )
         )
         self.draft = async_to_streamed_response_wrapper(
             v2.draft,

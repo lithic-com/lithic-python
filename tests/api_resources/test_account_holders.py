@@ -988,7 +988,7 @@ class TestAccountHolders:
     @parametrize
     def test_method_simulate_enrollment_document_review(self, client: Lithic) -> None:
         account_holder = client.account_holders.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
         )
         assert_matches_type(Document, account_holder, path=["response"])
@@ -996,7 +996,7 @@ class TestAccountHolders:
     @parametrize
     def test_method_simulate_enrollment_document_review_with_all_params(self, client: Lithic) -> None:
         account_holder = client.account_holders.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
             accepted_entity_status_reasons=["string"],
             status_reason="DOCUMENT_MISSING_REQUIRED_DATA",
@@ -1006,7 +1006,7 @@ class TestAccountHolders:
     @parametrize
     def test_raw_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
         response = client.account_holders.with_raw_response.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
         )
 
@@ -1018,7 +1018,7 @@ class TestAccountHolders:
     @parametrize
     def test_streaming_response_simulate_enrollment_document_review(self, client: Lithic) -> None:
         with client.account_holders.with_streaming_response.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
         ) as response:
             assert not response.is_closed
@@ -2077,7 +2077,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
         )
         assert_matches_type(Document, account_holder, path=["response"])
@@ -2085,7 +2085,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_method_simulate_enrollment_document_review_with_all_params(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
             accepted_entity_status_reasons=["string"],
             status_reason="DOCUMENT_MISSING_REQUIRED_DATA",
@@ -2095,7 +2095,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_raw_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
         response = await async_client.account_holders.with_raw_response.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
         )
 
@@ -2107,7 +2107,7 @@ class TestAsyncAccountHolders:
     @parametrize
     async def test_streaming_response_simulate_enrollment_document_review(self, async_client: AsyncLithic) -> None:
         async with async_client.account_holders.with_streaming_response.simulate_enrollment_document_review(
-            document_upload_token="document_upload_token",
+            document_upload_token="b11cd67b-0a52-4180-8365-314f3def5426",
             status="UPLOADED",
         ) as response:
             assert not response.is_closed

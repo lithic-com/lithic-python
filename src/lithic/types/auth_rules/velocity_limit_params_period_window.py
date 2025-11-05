@@ -16,21 +16,23 @@ __all__ = [
 
 
 class TrailingWindowObject(BaseModel):
-    duration: Optional[int] = None
+    duration: int
     """The size of the trailing window to calculate Spend Velocity over in seconds.
 
     The minimum value is 10 seconds, and the maximum value is 2678400 seconds (31
     days).
     """
 
-    type: Optional[Literal["CUSTOM"]] = None
+    type: Literal["CUSTOM"]
 
 
 class FixedWindowDay(BaseModel):
-    type: Optional[Literal["DAY"]] = None
+    type: Literal["DAY"]
 
 
 class FixedWindowWeek(BaseModel):
+    type: Literal["WEEK"]
+
     day_of_week: Optional[int] = None
     """The day of the week to start the week from.
 
@@ -38,10 +40,10 @@ class FixedWindowWeek(BaseModel):
     specified.
     """
 
-    type: Optional[Literal["WEEK"]] = None
-
 
 class FixedWindowMonth(BaseModel):
+    type: Literal["MONTH"]
+
     day_of_month: Optional[int] = None
     """The day of the month to start from.
 
@@ -50,10 +52,10 @@ class FixedWindowMonth(BaseModel):
     specified.
     """
 
-    type: Optional[Literal["MONTH"]] = None
-
 
 class FixedWindowYear(BaseModel):
+    type: Literal["YEAR"]
+
     day_of_month: Optional[int] = None
     """The day of the month to start from.
 
@@ -66,15 +68,7 @@ class FixedWindowYear(BaseModel):
     1 is January and 12 is December. Defaults to January if not specified.
     """
 
-    type: Optional[Literal["YEAR"]] = None
-
 
 VelocityLimitParamsPeriodWindow: TypeAlias = Union[
-    int,
-    Literal["DAY", "WEEK", "MONTH", "YEAR"],
-    TrailingWindowObject,
-    FixedWindowDay,
-    FixedWindowWeek,
-    FixedWindowMonth,
-    FixedWindowYear,
+    TrailingWindowObject, FixedWindowDay, FixedWindowWeek, FixedWindowMonth, FixedWindowYear
 ]
