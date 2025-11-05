@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union
-from datetime import datetime
+from datetime import date, datetime
 from typing_extensions import Literal
 
 import httpx
@@ -267,10 +267,12 @@ class Payments(SyncAPIResource):
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",
         ],
+        date_of_death: Union[str, date] | Omit = omit,
         decline_reason: Literal[
             "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
         ]
         | Omit = omit,
+        return_addenda: str | Omit = omit,
         return_reason_code: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -285,7 +287,11 @@ class Payments(SyncAPIResource):
         Args:
           event_type: Event Type
 
+          date_of_death: Date of Death for ACH Return
+
           decline_reason: Decline reason
+
+          return_addenda: Return Addenda
 
           return_reason_code: Return Reason Code
 
@@ -304,7 +310,9 @@ class Payments(SyncAPIResource):
             body=maybe_transform(
                 {
                     "event_type": event_type,
+                    "date_of_death": date_of_death,
                     "decline_reason": decline_reason,
+                    "return_addenda": return_addenda,
                     "return_reason_code": return_reason_code,
                 },
                 payment_simulate_action_params.PaymentSimulateActionParams,
@@ -682,10 +690,12 @@ class AsyncPayments(AsyncAPIResource):
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",
         ],
+        date_of_death: Union[str, date] | Omit = omit,
         decline_reason: Literal[
             "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
         ]
         | Omit = omit,
+        return_addenda: str | Omit = omit,
         return_reason_code: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -700,7 +710,11 @@ class AsyncPayments(AsyncAPIResource):
         Args:
           event_type: Event Type
 
+          date_of_death: Date of Death for ACH Return
+
           decline_reason: Decline reason
+
+          return_addenda: Return Addenda
 
           return_reason_code: Return Reason Code
 
@@ -719,7 +733,9 @@ class AsyncPayments(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "event_type": event_type,
+                    "date_of_death": date_of_death,
                     "decline_reason": decline_reason,
+                    "return_addenda": return_addenda,
                     "return_reason_code": return_reason_code,
                 },
                 payment_simulate_action_params.PaymentSimulateActionParams,

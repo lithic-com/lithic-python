@@ -69,11 +69,7 @@ class VelocityLimitParams(BaseModel):
     filters: Filters
 
     period: VelocityLimitParamsPeriodWindow
-    """DEPRECATED: This has been deprecated in favor of the Trailing Window Objects
-
-    The size of the trailing window to calculate Spend Velocity over in seconds. The
-    minimum value is 10 seconds, and the maximum value is 2678400 seconds (31 days).
-    """
+    """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
 
     scope: Literal["CARD", "ACCOUNT"]
     """The scope the velocity is calculated for"""

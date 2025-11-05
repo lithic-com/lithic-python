@@ -23,7 +23,7 @@ class Event(BaseModel):
     created: datetime
     """Date and time when the financial event occurred. UTC time zone."""
 
-    detailed_results: Literal["APPROVED", "FUNDS_INSUFFICIENT"]
+    detailed_results: List[Literal["APPROVED", "FUNDS_INSUFFICIENT"]]
 
     memo: str
     """Memo for the transfer."""

@@ -35,7 +35,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created"],
+            event_types=["account_holder_document.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -118,7 +118,7 @@ class TestSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created"],
+            event_types=["account_holder_document.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -492,7 +492,7 @@ class TestSubscriptions:
     def test_method_send_simulated_example_with_all_params(self, client: Lithic) -> None:
         subscription = client.events.subscriptions.send_simulated_example(
             event_subscription_token="event_subscription_token",
-            event_type="account_holder.created",
+            event_type="account_holder_document.updated",
         )
         assert subscription is None
 
@@ -548,7 +548,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created"],
+            event_types=["account_holder_document.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -631,7 +631,7 @@ class TestAsyncSubscriptions:
             url="https://example.com",
             description="description",
             disabled=True,
-            event_types=["account_holder.created"],
+            event_types=["account_holder_document.updated"],
         )
         assert_matches_type(EventSubscription, subscription, path=["response"])
 
@@ -1005,7 +1005,7 @@ class TestAsyncSubscriptions:
     async def test_method_send_simulated_example_with_all_params(self, async_client: AsyncLithic) -> None:
         subscription = await async_client.events.subscriptions.send_simulated_example(
             event_subscription_token="event_subscription_token",
-            event_type="account_holder.created",
+            event_type="account_holder_document.updated",
         )
         assert subscription is None
 

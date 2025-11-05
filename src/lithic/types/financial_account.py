@@ -27,14 +27,6 @@ class CreditConfiguration(BaseModel):
     tier: Optional[str] = None
     """Tier assigned to the financial account"""
 
-    charged_off_reason: Optional[Literal["DELINQUENT", "FRAUD"]] = None
-    """Reason for the financial account being marked as Charged Off"""
-
-    financial_account_state: Optional[Literal["PENDING", "CURRENT", "DELINQUENT", "CHARGED_OFF"]] = None
-    """State of the financial account"""
-
-    is_spend_blocked: Optional[bool] = None
-
 
 class FinancialAccount(BaseModel):
     token: str
