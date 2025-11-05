@@ -23,8 +23,12 @@ from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.dispute import Dispute
 from ..types.dispute_evidence import DisputeEvidence
+from ..types.dispute_list_response import DisputeListResponse
+from ..types.dispute_create_response import DisputeCreateResponse
+from ..types.dispute_delete_response import DisputeDeleteResponse
+from ..types.dispute_update_response import DisputeUpdateResponse
+from ..types.dispute_retrieve_response import DisputeRetrieveResponse
 
 __all__ = ["Disputes", "AsyncDisputes"]
 
@@ -78,7 +82,7 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeCreateResponse:
         """
         Initiate a dispute.
 
@@ -116,7 +120,7 @@ class Disputes(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeCreateResponse,
         )
 
     def retrieve(
@@ -129,7 +133,7 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeRetrieveResponse:
         """
         Get dispute.
 
@@ -149,7 +153,7 @@ class Disputes(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeRetrieveResponse,
         )
 
     def update(
@@ -182,7 +186,7 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeUpdateResponse:
         """Update dispute.
 
         Can only be modified if status is `NEW`.
@@ -220,7 +224,7 @@ class Disputes(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeUpdateResponse,
         )
 
     def list(
@@ -249,7 +253,7 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCursorPage[Dispute]:
+    ) -> SyncCursorPage[DisputeListResponse]:
         """List disputes.
 
         Args:
@@ -283,7 +287,7 @@ class Disputes(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/disputes",
-            page=SyncCursorPage[Dispute],
+            page=SyncCursorPage[DisputeListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -302,7 +306,7 @@ class Disputes(SyncAPIResource):
                     dispute_list_params.DisputeListParams,
                 ),
             ),
-            model=Dispute,
+            model=DisputeListResponse,
         )
 
     def delete(
@@ -315,7 +319,7 @@ class Disputes(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeDeleteResponse:
         """
         Withdraw dispute.
 
@@ -335,7 +339,7 @@ class Disputes(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeDeleteResponse,
         )
 
     def delete_evidence(
@@ -572,7 +576,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeCreateResponse:
         """
         Initiate a dispute.
 
@@ -610,7 +614,7 @@ class AsyncDisputes(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeCreateResponse,
         )
 
     async def retrieve(
@@ -623,7 +627,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeRetrieveResponse:
         """
         Get dispute.
 
@@ -643,7 +647,7 @@ class AsyncDisputes(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeRetrieveResponse,
         )
 
     async def update(
@@ -676,7 +680,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeUpdateResponse:
         """Update dispute.
 
         Can only be modified if status is `NEW`.
@@ -714,7 +718,7 @@ class AsyncDisputes(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeUpdateResponse,
         )
 
     def list(
@@ -743,7 +747,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Dispute, AsyncCursorPage[Dispute]]:
+    ) -> AsyncPaginator[DisputeListResponse, AsyncCursorPage[DisputeListResponse]]:
         """List disputes.
 
         Args:
@@ -777,7 +781,7 @@ class AsyncDisputes(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/disputes",
-            page=AsyncCursorPage[Dispute],
+            page=AsyncCursorPage[DisputeListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -796,7 +800,7 @@ class AsyncDisputes(AsyncAPIResource):
                     dispute_list_params.DisputeListParams,
                 ),
             ),
-            model=Dispute,
+            model=DisputeListResponse,
         )
 
     async def delete(
@@ -809,7 +813,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Dispute:
+    ) -> DisputeDeleteResponse:
         """
         Withdraw dispute.
 
@@ -829,7 +833,7 @@ class AsyncDisputes(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Dispute,
+            cast_to=DisputeDeleteResponse,
         )
 
     async def delete_evidence(

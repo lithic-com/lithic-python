@@ -117,6 +117,9 @@ class MethodAttributesACHMethodAttributes(BaseModel):
 
 
 class MethodAttributesWireMethodAttributes(BaseModel):
+    wire_message_type: Optional[str] = None
+    """Type of wire message"""
+
     wire_network: Literal["FEDWIRE", "SWIFT"]
     """Type of wire transfer"""
 
@@ -132,9 +135,6 @@ class MethodAttributesWireMethodAttributes(BaseModel):
 
     remittance_information: Optional[str] = None
     """Payment details or invoice reference"""
-
-    wire_message_type: Optional[str] = None
-    """Type of wire message"""
 
 
 MethodAttributes: TypeAlias = Union[MethodAttributesACHMethodAttributes, MethodAttributesWireMethodAttributes]

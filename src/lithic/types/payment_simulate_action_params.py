@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing import Union
+from datetime import date
+from typing_extensions import Literal, Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["PaymentSimulateActionParams"]
 
@@ -23,10 +27,16 @@ class PaymentSimulateActionParams(TypedDict, total=False):
     ]
     """Event Type"""
 
+    date_of_death: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
+    """Date of Death for ACH Return"""
+
     decline_reason: Literal[
         "PROGRAM_TRANSACTION_LIMIT_EXCEEDED", "PROGRAM_DAILY_LIMIT_EXCEEDED", "PROGRAM_MONTHLY_LIMIT_EXCEEDED"
     ]
     """Decline reason"""
+
+    return_addenda: str
+    """Return Addenda"""
 
     return_reason_code: str
     """Return Reason Code"""

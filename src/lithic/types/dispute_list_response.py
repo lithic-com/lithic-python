@@ -6,10 +6,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Dispute"]
+__all__ = ["DisputeListResponse"]
 
 
-class Dispute(BaseModel):
+class DisputeListResponse(BaseModel):
     token: str
     """Globally unique identifier."""
 

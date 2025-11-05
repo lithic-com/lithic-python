@@ -92,7 +92,6 @@ from lithic.types.auth_rules import (
     V2RetrieveResponse,
     V2UpdateResponse,
     V2ListResponse,
-    V2ApplyResponse,
     V2DraftResponse,
     V2PromoteResponse,
     V2RetrieveFeaturesResponse,
@@ -107,7 +106,6 @@ Methods:
 - <code title="patch /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_update_response.py">V2UpdateResponse</a></code>
 - <code title="get /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">list</a>(\*\*<a href="src/lithic/types/auth_rules/v2_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_list_response.py">SyncCursorPage[V2ListResponse]</a></code>
 - <code title="delete /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">delete</a>(auth_rule_token) -> None</code>
-- <code title="post /v2/auth_rules/{auth_rule_token}/apply">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">apply</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_apply_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_apply_response.py">V2ApplyResponse</a></code>
 - <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_draft_response.py">V2DraftResponse</a></code>
 - <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_promote_response.py">V2PromoteResponse</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/features">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_features</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_features_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_features_response.py">V2RetrieveFeaturesResponse</a></code>
@@ -268,16 +266,24 @@ Methods:
 Types:
 
 ```python
-from lithic.types import Dispute, DisputeEvidence
+from lithic.types import (
+    Dispute,
+    DisputeEvidence,
+    DisputeCreateResponse,
+    DisputeRetrieveResponse,
+    DisputeUpdateResponse,
+    DisputeListResponse,
+    DisputeDeleteResponse,
+)
 ```
 
 Methods:
 
-- <code title="post /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">create</a>(\*\*<a href="src/lithic/types/dispute_create_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
-- <code title="get /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
-- <code title="patch /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">update</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_update_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
-- <code title="get /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">list</a>(\*\*<a href="src/lithic/types/dispute_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">SyncCursorPage[Dispute]</a></code>
-- <code title="delete /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="post /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">create</a>(\*\*<a href="src/lithic/types/dispute_create_params.py">params</a>) -> <a href="./src/lithic/types/dispute_create_response.py">DisputeCreateResponse</a></code>
+- <code title="get /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve</a>(dispute_token) -> <a href="./src/lithic/types/dispute_retrieve_response.py">DisputeRetrieveResponse</a></code>
+- <code title="patch /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">update</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_update_params.py">params</a>) -> <a href="./src/lithic/types/dispute_update_response.py">DisputeUpdateResponse</a></code>
+- <code title="get /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">list</a>(\*\*<a href="src/lithic/types/dispute_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute_list_response.py">SyncCursorPage[DisputeListResponse]</a></code>
+- <code title="delete /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete</a>(dispute_token) -> <a href="./src/lithic/types/dispute_delete_response.py">DisputeDeleteResponse</a></code>
 - <code title="delete /v1/disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete_evidence</a>(evidence_token, \*, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="post /v1/disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">initiate_evidence_upload</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_initiate_evidence_upload_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="get /v1/disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">list_evidences</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_list_evidences_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">SyncCursorPage[DisputeEvidence]</a></code>

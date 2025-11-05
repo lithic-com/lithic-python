@@ -15,7 +15,6 @@ from .shared import (
 )
 from .account import Account as Account
 from .balance import Balance as Balance
-from .dispute import Dispute as Dispute
 from .payment import Payment as Payment
 from .kyb_param import KYBParam as KYBParam
 from .kyc_param import KYCParam as KYCParam
@@ -64,6 +63,7 @@ from .spend_limit_duration import SpendLimitDuration as SpendLimitDuration
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams
 from .dispute_create_params import DisputeCreateParams as DisputeCreateParams
+from .dispute_list_response import DisputeListResponse as DisputeListResponse
 from .dispute_update_params import DisputeUpdateParams as DisputeUpdateParams
 from .financial_transaction import FinancialTransaction as FinancialTransaction
 from .payment_create_params import PaymentCreateParams as PaymentCreateParams
@@ -71,6 +71,9 @@ from .book_transfer_response import BookTransferResponse as BookTransferResponse
 from .external_resource_type import ExternalResourceType as ExternalResourceType
 from .payment_retry_response import PaymentRetryResponse as PaymentRetryResponse
 from .card_provision_response import CardProvisionResponse as CardProvisionResponse
+from .dispute_create_response import DisputeCreateResponse as DisputeCreateResponse
+from .dispute_delete_response import DisputeDeleteResponse as DisputeDeleteResponse
+from .dispute_update_response import DisputeUpdateResponse as DisputeUpdateResponse
 from .payment_create_response import PaymentCreateResponse as PaymentCreateResponse
 from .transaction_list_params import TransactionListParams as TransactionListParams
 from .card_program_list_params import CardProgramListParams as CardProgramListParams
@@ -78,6 +81,7 @@ from .tokenization_list_params import TokenizationListParams as TokenizationList
 from .book_transfer_list_params import BookTransferListParams as BookTransferListParams
 from .card_search_by_pan_params import CardSearchByPanParams as CardSearchByPanParams
 from .card_web_provision_params import CardWebProvisionParams as CardWebProvisionParams
+from .dispute_retrieve_response import DisputeRetrieveResponse as DisputeRetrieveResponse
 from .funding_event_list_params import FundingEventListParams as FundingEventListParams
 from .responder_endpoint_status import ResponderEndpointStatus as ResponderEndpointStatus
 from .account_holder_list_params import AccountHolderListParams as AccountHolderListParams

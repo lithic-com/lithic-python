@@ -18,7 +18,7 @@ from lithic.types import (
     PaymentSimulateReceiptResponse,
     PaymentSimulateReleaseResponse,
 )
-from lithic._utils import parse_datetime
+from lithic._utils import parse_date, parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -222,7 +222,9 @@ class TestPayments:
         payment = client.payments.simulate_action(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
+            date_of_death=parse_date("2019-12-27"),
             decline_reason="PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
+            return_addenda="return_addenda",
             return_reason_code="return_reason_code",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])
@@ -583,7 +585,9 @@ class TestAsyncPayments:
         payment = await async_client.payments.simulate_action(
             payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_type="ACH_ORIGINATION_REVIEWED",
+            date_of_death=parse_date("2019-12-27"),
             decline_reason="PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
+            return_addenda="return_addenda",
             return_reason_code="return_reason_code",
         )
         assert_matches_type(PaymentSimulateActionResponse, payment, path=["response"])

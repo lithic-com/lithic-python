@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Literal, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = [
     "VelocityLimitParamsPeriodWindowParam",
@@ -16,21 +16,23 @@ __all__ = [
 
 
 class TrailingWindowObject(TypedDict, total=False):
-    duration: int
+    duration: Required[int]
     """The size of the trailing window to calculate Spend Velocity over in seconds.
 
     The minimum value is 10 seconds, and the maximum value is 2678400 seconds (31
     days).
     """
 
-    type: Literal["CUSTOM"]
+    type: Required[Literal["CUSTOM"]]
 
 
 class FixedWindowDay(TypedDict, total=False):
-    type: Literal["DAY"]
+    type: Required[Literal["DAY"]]
 
 
 class FixedWindowWeek(TypedDict, total=False):
+    type: Required[Literal["WEEK"]]
+
     day_of_week: int
     """The day of the week to start the week from.
 
@@ -38,10 +40,10 @@ class FixedWindowWeek(TypedDict, total=False):
     specified.
     """
 
-    type: Literal["WEEK"]
-
 
 class FixedWindowMonth(TypedDict, total=False):
+    type: Required[Literal["MONTH"]]
+
     day_of_month: int
     """The day of the month to start from.
 
@@ -50,10 +52,10 @@ class FixedWindowMonth(TypedDict, total=False):
     specified.
     """
 
-    type: Literal["MONTH"]
-
 
 class FixedWindowYear(TypedDict, total=False):
+    type: Required[Literal["YEAR"]]
+
     day_of_month: int
     """The day of the month to start from.
 
@@ -66,15 +68,7 @@ class FixedWindowYear(TypedDict, total=False):
     1 is January and 12 is December. Defaults to January if not specified.
     """
 
-    type: Literal["YEAR"]
-
 
 VelocityLimitParamsPeriodWindowParam: TypeAlias = Union[
-    int,
-    Literal["DAY", "WEEK", "MONTH", "YEAR"],
-    TrailingWindowObject,
-    FixedWindowDay,
-    FixedWindowWeek,
-    FixedWindowMonth,
-    FixedWindowYear,
+    TrailingWindowObject, FixedWindowDay, FixedWindowWeek, FixedWindowMonth, FixedWindowYear
 ]
