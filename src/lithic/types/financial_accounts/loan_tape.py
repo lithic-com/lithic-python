@@ -151,6 +151,9 @@ class DayTotals(BaseModel):
     debit_details: Optional[object] = None
     """Breakdown of debits"""
 
+    payment_details: Optional[object] = None
+    """Breakdown of payments"""
+
 
 class InterestDetailsDailyBalanceAmounts(BaseModel):
     balance_transfers: str
@@ -240,6 +243,9 @@ class PeriodTotals(BaseModel):
     debit_details: Optional[object] = None
     """Breakdown of debits"""
 
+    payment_details: Optional[object] = None
+    """Breakdown of payments"""
+
 
 class PreviousStatementBalance(BaseModel):
     amount: int
@@ -280,6 +286,9 @@ class YtdTotals(BaseModel):
 
     debit_details: Optional[object] = None
     """Breakdown of debits"""
+
+    payment_details: Optional[object] = None
+    """Breakdown of payments"""
 
 
 class LoanTape(BaseModel):
