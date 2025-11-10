@@ -1,11 +1,12 @@
 #!/usr/bin/env -S rye run python
 
+from __future__ import annotations
+
 # To run this example locally
 #   1. Install Rye and setup a Python virtual environment: ./scripts/bootstrap
 #   2. Run the example: LITHIC_API_KEY=<your_api_key> rye run python examples/upload_evidence.py
-
-
 from lithic import Lithic, file_from_path
+from lithic.types import DisputeListResponse, DisputeCreateResponse
 
 client = Lithic(environment="sandbox")
 
@@ -16,7 +17,7 @@ transaction = transactions_page.data[0]
 assert transaction.token, "Transaction must have a token"
 
 disputes_page = client.disputes.list()
-dispute = disputes_page.data[0]
+dispute: DisputeCreateResponse | DisputeListResponse | None = disputes_page.data[0] if disputes_page.data else None
 if not dispute:
     dispute = client.disputes.create(
         amount=42,
