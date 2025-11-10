@@ -81,6 +81,9 @@ class PeriodTotals(BaseModel):
     cents
     """
 
+    debits: int
+    """Volume of debit management operation transactions less any interest in cents"""
+
     fees: int
     """Volume of debit management operation transactions less any interest in cents"""
 
@@ -92,6 +95,12 @@ class PeriodTotals(BaseModel):
 
     purchases: int
     """Net card transaction volume less any cash advances in cents"""
+
+    credit_details: Optional[object] = None
+    """Breakdown of credits"""
+
+    debit_details: Optional[object] = None
+    """Breakdown of debits"""
 
 
 class YtdTotals(BaseModel):
@@ -107,6 +116,9 @@ class YtdTotals(BaseModel):
     cents
     """
 
+    debits: int
+    """Volume of debit management operation transactions less any interest in cents"""
+
     fees: int
     """Volume of debit management operation transactions less any interest in cents"""
 
@@ -118,6 +130,12 @@ class YtdTotals(BaseModel):
 
     purchases: int
     """Net card transaction volume less any cash advances in cents"""
+
+    credit_details: Optional[object] = None
+    """Breakdown of credits"""
+
+    debit_details: Optional[object] = None
+    """Breakdown of debits"""
 
 
 class InterestDetailsDailyBalanceAmounts(BaseModel):
