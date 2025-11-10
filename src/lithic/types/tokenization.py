@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -63,22 +63,27 @@ class Tokenization(BaseModel):
     status: Literal["ACTIVE", "DEACTIVATED", "INACTIVE", "PAUSED", "PENDING_2FA", "PENDING_ACTIVATION", "UNKNOWN"]
     """The status of the tokenization request"""
 
-    token_requestor_name: Literal[
-        "AMAZON_ONE",
-        "ANDROID_PAY",
-        "APPLE_PAY",
-        "FACEBOOK",
-        "FITBIT_PAY",
-        "GARMIN_PAY",
-        "MICROSOFT_PAY",
-        "NETFLIX",
-        "SAMSUNG_PAY",
-        "UNKNOWN",
-        "VISA_CHECKOUT",
+    token_requestor_name: Union[
+        Literal[
+            "AMAZON_ONE",
+            "ANDROID_PAY",
+            "APPLE_PAY",
+            "FACEBOOK",
+            "FITBIT_PAY",
+            "GARMIN_PAY",
+            "GOOGLE_PAY",
+            "MICROSOFT_PAY",
+            "NETFLIX",
+            "SAMSUNG_PAY",
+            "UNKNOWN",
+            "VISA_CHECKOUT",
+        ],
+        str,
     ]
     """The entity that requested the tokenization.
 
-    Represents a Digital Wallet or merchant.
+    For digital wallets, this will be one of the defined wallet types. For merchant
+    tokenizations, this will be a free-form merchant name string.
     """
 
     token_unique_reference: str
@@ -90,9 +95,12 @@ class Tokenization(BaseModel):
     updated_at: datetime
     """Latest date and time when the tokenization was updated. UTC time zone."""
 
+    device_id: Optional[str] = None
+    """The device identifier associated with the tokenization."""
+
     digital_card_art_token: Optional[str] = None
     """
-    Specifies the digital card art displayed in the user’s digital wallet after
+    Specifies the digital card art displayed in the user's digital wallet after
     tokenization. This will be null if the tokenization was created without an
     associated digital card art. See
     [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
