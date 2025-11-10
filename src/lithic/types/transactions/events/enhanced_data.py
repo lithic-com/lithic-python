@@ -10,7 +10,7 @@ __all__ = ["EnhancedData", "Common", "CommonLineItem", "CommonTax", "Fleet", "Fl
 
 
 class CommonLineItem(BaseModel):
-    amount: Optional[float] = None
+    amount: Optional[str] = None
     """The price of the item purchased in merchant currency."""
 
     description: Optional[str] = None
@@ -19,7 +19,7 @@ class CommonLineItem(BaseModel):
     product_code: Optional[str] = None
     """An identifier for the item purchased."""
 
-    quantity: Optional[float] = None
+    quantity: Optional[str] = None
     """The quantity of the item purchased."""
 
 
@@ -61,7 +61,7 @@ class FleetAmountTotals(BaseModel):
 
 
 class FleetFuel(BaseModel):
-    quantity: Optional[float] = None
+    quantity: Optional[str] = None
     """The quantity of fuel purchased."""
 
     type: Optional[
