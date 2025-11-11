@@ -4,8 +4,6 @@ from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from pydantic import Field as FieldInfo
-
 from .._models import BaseModel
 from .shared.currency import Currency
 
@@ -101,23 +99,8 @@ class Avs(BaseModel):
 
 
 class CardholderAuthentication(BaseModel):
-    three_ds_version: Optional[str] = FieldInfo(alias="3ds_version", default=None)
-    """The 3DS version used for the authentication"""
-
-    acquirer_exemption: Literal[
-        "AUTHENTICATION_OUTAGE_EXCEPTION",
-        "LOW_VALUE",
-        "MERCHANT_INITIATED_TRANSACTION",
-        "NONE",
-        "RECURRING_PAYMENT",
-        "SECURE_CORPORATE_PAYMENT",
-        "STRONG_CUSTOMER_AUTHENTICATION_DELEGATION",
-        "TRANSACTION_RISK_ANALYSIS",
-    ]
-    """Whether an acquirer exemption applied to the transaction.
-
-    Not currently populated and will be removed in the future.
-    """
+    authentication_method: Literal["FRICTIONLESS", "CHALLENGE", "NONE"]
+    """Indicates the method used to authenticate the cardholder."""
 
     authentication_result: Literal["ATTEMPTS", "DECLINE", "NONE", "SUCCESS"]
     """Indicates the outcome of the 3DS authentication process."""
@@ -148,21 +131,6 @@ class CardholderAuthentication(BaseModel):
     that in cases where liability shift does not occur, this token is matched to the
     transaction on a best-effort basis.
     """
-
-    verification_attempted: Literal["NONE", "OTHER"]
-    """
-    Indicates whether a 3DS challenge flow was used, and if so, what the
-    verification method was. (deprecated, use `authentication_result`)
-    """
-
-    verification_result: Literal["CANCELLED", "FAILED", "FRICTIONLESS", "NOT_ATTEMPTED", "REJECTED", "SUCCESS"]
-    """Indicates whether a transaction is considered 3DS authenticated.
-
-    (deprecated, use `authentication_result`)
-    """
-
-    authentication_method: Optional[Literal["FRICTIONLESS", "CHALLENGE", "NONE"]] = None
-    """Indicates the method used to authenticate the cardholder."""
 
 
 class Merchant(BaseModel):

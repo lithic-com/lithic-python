@@ -6,7 +6,27 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Tokenization", "Event"]
+__all__ = ["Tokenization", "Event", "EventRuleResult"]
+
+
+class EventRuleResult(BaseModel):
+    auth_rule_token: Optional[str] = None
+    """The Auth Rule Token associated with the rule.
+
+    If this is set to null, then the result was not associated with a
+    customer-configured rule. This may happen in cases where a tokenization is
+    declined or requires TFA due to a Lithic-configured security or compliance rule,
+    for example.
+    """
+
+    explanation: Optional[str] = None
+    """A human-readable explanation outlining the motivation for the rule's result"""
+
+    name: Optional[str] = None
+    """The name for the rule, if any was configured"""
+
+    result: Literal["APPROVED", "DECLINED", "REQUIRE_TFA", "ERROR"]
+    """The result associated with this rule"""
 
 
 class Event(BaseModel):
@@ -33,6 +53,53 @@ class Event(BaseModel):
         ]
     ] = None
     """Enum representing the result of the tokenization event"""
+
+    rule_results: Optional[List[EventRuleResult]] = None
+    """Results from rules that were evaluated for this tokenization"""
+
+    tokenization_decline_reasons: Optional[
+        List[
+            Literal[
+                "ACCOUNT_SCORE_1",
+                "DEVICE_SCORE_1",
+                "ALL_WALLET_DECLINE_REASONS_PRESENT",
+                "WALLET_RECOMMENDED_DECISION_RED",
+                "CVC_MISMATCH",
+                "CARD_EXPIRY_MONTH_MISMATCH",
+                "CARD_EXPIRY_YEAR_MISMATCH",
+                "CARD_INVALID_STATE",
+                "CUSTOMER_RED_PATH",
+                "INVALID_CUSTOMER_RESPONSE",
+                "NETWORK_FAILURE",
+                "GENERIC_DECLINE",
+                "DIGITAL_CARD_ART_REQUIRED",
+            ]
+        ]
+    ] = None
+    """List of reasons why the tokenization was declined"""
+
+    tokenization_tfa_reasons: Optional[
+        List[
+            Literal[
+                "WALLET_RECOMMENDED_TFA",
+                "SUSPICIOUS_ACTIVITY",
+                "DEVICE_RECENTLY_LOST",
+                "TOO_MANY_RECENT_ATTEMPTS",
+                "TOO_MANY_RECENT_TOKENS",
+                "TOO_MANY_DIFFERENT_CARDHOLDERS",
+                "OUTSIDE_HOME_TERRITORY",
+                "HAS_SUSPENDED_TOKENS",
+                "HIGH_RISK",
+                "ACCOUNT_SCORE_LOW",
+                "DEVICE_SCORE_LOW",
+                "CARD_STATE_TFA",
+                "HARDCODED_TFA",
+                "CUSTOMER_RULE_TFA",
+                "DEVICE_HOST_CARD_EMULATION",
+            ]
+        ]
+    ] = None
+    """List of reasons why two-factor authentication was required"""
 
     type: Optional[
         Literal[
