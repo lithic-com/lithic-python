@@ -6,7 +6,7 @@ from typing import Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = [
-    "VelocityLimitParamsPeriodWindowParam",
+    "VelocityLimitPeriodParam",
     "TrailingWindowObject",
     "FixedWindowDay",
     "FixedWindowWeek",
@@ -69,6 +69,6 @@ class FixedWindowYear(TypedDict, total=False):
     """
 
 
-VelocityLimitParamsPeriodWindowParam: TypeAlias = Union[
+VelocityLimitPeriodParam: TypeAlias = Union[
     TrailingWindowObject, FixedWindowDay, FixedWindowWeek, FixedWindowMonth, FixedWindowYear
 ]

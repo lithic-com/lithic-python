@@ -6,7 +6,7 @@ from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ..._types import SequenceNotStr
-from .velocity_limit_params_period_window_param import VelocityLimitParamsPeriodWindowParam
+from .velocity_limit_period_param import VelocityLimitPeriodParam
 
 __all__ = ["VelocityLimitParamsParam", "Filters"]
 
@@ -70,7 +70,7 @@ class Filters(TypedDict, total=False):
 class VelocityLimitParamsParam(TypedDict, total=False):
     filters: Required[Filters]
 
-    period: Required[VelocityLimitParamsPeriodWindowParam]
+    period: Required[VelocityLimitPeriodParam]
     """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
 
     scope: Required[Literal["CARD", "ACCOUNT"]]

@@ -5,7 +5,7 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from .velocity_limit_params_period_window import VelocityLimitParamsPeriodWindow
+from .velocity_limit_period import VelocityLimitPeriod
 
 __all__ = ["V2RetrieveFeaturesResponse", "Feature", "FeatureFilters", "FeatureValue"]
 
@@ -84,7 +84,7 @@ class FeatureValue(BaseModel):
 class Feature(BaseModel):
     filters: FeatureFilters
 
-    period: VelocityLimitParamsPeriodWindow
+    period: VelocityLimitPeriod
     """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
 
     scope: Literal["CARD", "ACCOUNT"]
