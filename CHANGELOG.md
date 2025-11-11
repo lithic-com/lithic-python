@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.110.0 (2025-11-11)
+
+Full Changelog: [v0.109.1...v0.110.0](https://github.com/lithic-com/lithic-python/compare/v0.109.1...v0.110.0)
+
+### Features
+
+* **api:** add payment_details ([59653f5](https://github.com/lithic-com/lithic-python/commit/59653f5db08fe87d8c8f97b34c1edac575996e19))
+* **api:** deprecate auth rule apply endpoint and fix several schemas ([2ccbc8e](https://github.com/lithic-com/lithic-python/commit/2ccbc8e1defce005fcf32d22aa68b8d98af68222))
+* **api:** new fields in Statements APIs ([79aa803](https://github.com/lithic-com/lithic-python/commit/79aa803f7e6a30a3d6383f5bca21d7c4c955b6e9))
+* **api:** re-add rules metadata to tokenization events ([7e4b9a7](https://github.com/lithic-com/lithic-python/commit/7e4b9a750be5431be81a74a4b44c7a1f872ebf5d))
+* **api:** remove deprecated fields from Cardholder Authentication object ([7e4b9a7](https://github.com/lithic-com/lithic-python/commit/7e4b9a750be5431be81a74a4b44c7a1f872ebf5d))
+
+
+### Bug Fixes
+
+* **api:** adjust Auth Rules spec for better SDK structure ([7e4b9a7](https://github.com/lithic-com/lithic-python/commit/7e4b9a750be5431be81a74a4b44c7a1f872ebf5d))
+* **api:** fix oneOf -&gt; anyOf in account holder update ([59653f5](https://github.com/lithic-com/lithic-python/commit/59653f5db08fe87d8c8f97b34c1edac575996e19))
+* **api:** fixing spec for Tokenizations and Enhanced data ([79aa803](https://github.com/lithic-com/lithic-python/commit/79aa803f7e6a30a3d6383f5bca21d7c4c955b6e9))
+* compat with Python 3.14 ([b56a588](https://github.com/lithic-com/lithic-python/commit/b56a588a807420f848c39e445ea6e39034c2f88f))
+
+
+### Chores
+
+* **api:** adds support for new ACH_RECEIPT_RELEASED event ([30908f3](https://github.com/lithic-com/lithic-python/commit/30908f3f1d72c38d57239415d2a093dbdaee4f96))
+* **examples:** fix type checking ([6a138be](https://github.com/lithic-com/lithic-python/commit/6a138beaf9ec36f3db3cb89e8b653ef2e34f4de4))
+* **internal/tests:** avoid race condition with implicit client cleanup ([e90a25d](https://github.com/lithic-com/lithic-python/commit/e90a25da2bb81f93978555a8f671866fbe696235))
+* **internal:** grammar fix (it's -&gt; its) ([091851d](https://github.com/lithic-com/lithic-python/commit/091851d9a940925c83d30cb98470ff22b7bb9de2))
+* **package:** drop Python 3.8 support ([80a0e1f](https://github.com/lithic-com/lithic-python/commit/80a0e1f29373041cc63d7acffa37d91a5c1a66b0))
+
 ## 0.109.1 (2025-10-29)
 
 Full Changelog: [v0.109.0...v0.109.1](https://github.com/lithic-com/lithic-python/compare/v0.109.0...v0.109.1)
