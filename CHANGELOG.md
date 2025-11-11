@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.110.1 (2025-11-11)
+
+Full Changelog: [v0.110.0...v0.110.1](https://github.com/lithic-com/lithic-python/compare/v0.110.0...v0.110.1)
+
+### Bug Fixes
+
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([c5041f8](https://github.com/lithic-com/lithic-python/commit/c5041f89824e1f124135d7c0242424f1770f94dd))
+
 ## 0.110.0 (2025-11-11)
 
 Full Changelog: [v0.109.1...v0.110.0](https://github.com/lithic-com/lithic-python/compare/v0.109.1...v0.110.0)
