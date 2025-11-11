@@ -6,7 +6,7 @@ from typing_extensions import Literal, TypeAlias
 from ..._models import BaseModel
 
 __all__ = [
-    "VelocityLimitParamsPeriodWindow",
+    "VelocityLimitPeriod",
     "TrailingWindowObject",
     "FixedWindowDay",
     "FixedWindowWeek",
@@ -69,6 +69,6 @@ class FixedWindowYear(BaseModel):
     """
 
 
-VelocityLimitParamsPeriodWindow: TypeAlias = Union[
+VelocityLimitPeriod: TypeAlias = Union[
     TrailingWindowObject, FixedWindowDay, FixedWindowWeek, FixedWindowMonth, FixedWindowYear
 ]
