@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Literal, TypedDict
+from typing_extensions import Required, TypedDict
 
-from ..._types import SequenceNotStr
 from .conditional_attribute import ConditionalAttribute
+from .conditional_operation import ConditionalOperation
+from .conditional_value_param import ConditionalValueParam
 
 __all__ = ["AuthRuleConditionParam"]
 
 
 class AuthRuleConditionParam(TypedDict, total=False):
-    attribute: ConditionalAttribute
+    attribute: Required[ConditionalAttribute]
     """The attribute to target.
 
     The following attributes may be targeted:
@@ -65,19 +65,8 @@ class AuthRuleConditionParam(TypedDict, total=False):
       `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
     """
 
-    operation: Literal[
-        "IS_ONE_OF",
-        "IS_NOT_ONE_OF",
-        "MATCHES",
-        "DOES_NOT_MATCH",
-        "IS_EQUAL_TO",
-        "IS_NOT_EQUAL_TO",
-        "IS_GREATER_THAN",
-        "IS_GREATER_THAN_OR_EQUAL_TO",
-        "IS_LESS_THAN",
-        "IS_LESS_THAN_OR_EQUAL_TO",
-    ]
+    operation: Required[ConditionalOperation]
     """The operation to apply to the attribute"""
 
-    value: Union[str, int, SequenceNotStr[str]]
+    value: Required[ConditionalValueParam]
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""

@@ -55,7 +55,7 @@ class ExternalPayment(BaseModel):
     created: datetime
     """ISO 8601 timestamp of when the transaction was created"""
 
-    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED", "RETURNED"]
     """The status of the transaction"""
 
     updated: datetime

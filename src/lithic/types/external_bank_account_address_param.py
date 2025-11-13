@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["ExternalBankAccountAddressParam"]
@@ -18,4 +19,4 @@ class ExternalBankAccountAddressParam(TypedDict, total=False):
 
     state: Required[str]
 
-    address2: str
+    address2: Optional[str]

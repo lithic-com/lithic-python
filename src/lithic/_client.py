@@ -48,6 +48,7 @@ if TYPE_CHECKING:
         payments,
         three_ds,
         auth_rules,
+        disputes_v2,
         transactions,
         card_programs,
         tokenizations,
@@ -72,6 +73,7 @@ if TYPE_CHECKING:
     from .resources.disputes import Disputes, AsyncDisputes
     from .resources.payments import Payments, AsyncPayments
     from .resources.cards.cards import Cards, AsyncCards
+    from .resources.disputes_v2 import DisputesV2, AsyncDisputesV2
     from .resources.fraud.fraud import Fraud, AsyncFraud
     from .resources.card_programs import CardPrograms, AsyncCardPrograms
     from .resources.events.events import Events, AsyncEvents
@@ -260,6 +262,12 @@ class Lithic(SyncAPIClient):
         from .resources.disputes import Disputes
 
         return Disputes(self)
+
+    @cached_property
+    def disputes_v2(self) -> DisputesV2:
+        from .resources.disputes_v2 import DisputesV2
+
+        return DisputesV2(self)
 
     @cached_property
     def events(self) -> Events:
@@ -654,6 +662,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncDisputes(self)
 
     @cached_property
+    def disputes_v2(self) -> AsyncDisputesV2:
+        from .resources.disputes_v2 import AsyncDisputesV2
+
+        return AsyncDisputesV2(self)
+
+    @cached_property
     def events(self) -> AsyncEvents:
         from .resources.events import AsyncEvents
 
@@ -969,6 +983,12 @@ class LithicWithRawResponse:
         return DisputesWithRawResponse(self._client.disputes)
 
     @cached_property
+    def disputes_v2(self) -> disputes_v2.DisputesV2WithRawResponse:
+        from .resources.disputes_v2 import DisputesV2WithRawResponse
+
+        return DisputesV2WithRawResponse(self._client.disputes_v2)
+
+    @cached_property
     def events(self) -> events.EventsWithRawResponse:
         from .resources.events import EventsWithRawResponse
 
@@ -1146,6 +1166,12 @@ class AsyncLithicWithRawResponse:
         from .resources.disputes import AsyncDisputesWithRawResponse
 
         return AsyncDisputesWithRawResponse(self._client.disputes)
+
+    @cached_property
+    def disputes_v2(self) -> disputes_v2.AsyncDisputesV2WithRawResponse:
+        from .resources.disputes_v2 import AsyncDisputesV2WithRawResponse
+
+        return AsyncDisputesV2WithRawResponse(self._client.disputes_v2)
 
     @cached_property
     def events(self) -> events.AsyncEventsWithRawResponse:
@@ -1327,6 +1353,12 @@ class LithicWithStreamedResponse:
         return DisputesWithStreamingResponse(self._client.disputes)
 
     @cached_property
+    def disputes_v2(self) -> disputes_v2.DisputesV2WithStreamingResponse:
+        from .resources.disputes_v2 import DisputesV2WithStreamingResponse
+
+        return DisputesV2WithStreamingResponse(self._client.disputes_v2)
+
+    @cached_property
     def events(self) -> events.EventsWithStreamingResponse:
         from .resources.events import EventsWithStreamingResponse
 
@@ -1504,6 +1536,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.disputes import AsyncDisputesWithStreamingResponse
 
         return AsyncDisputesWithStreamingResponse(self._client.disputes)
+
+    @cached_property
+    def disputes_v2(self) -> disputes_v2.AsyncDisputesV2WithStreamingResponse:
+        from .resources.disputes_v2 import AsyncDisputesV2WithStreamingResponse
+
+        return AsyncDisputesV2WithStreamingResponse(self._client.disputes_v2)
 
     @cached_property
     def events(self) -> events.AsyncEventsWithStreamingResponse:

@@ -80,6 +80,14 @@ from .auth_rules import (
     AuthRulesWithStreamingResponse,
     AsyncAuthRulesWithStreamingResponse,
 )
+from .disputes_v2 import (
+    DisputesV2,
+    AsyncDisputesV2,
+    DisputesV2WithRawResponse,
+    AsyncDisputesV2WithRawResponse,
+    DisputesV2WithStreamingResponse,
+    AsyncDisputesV2WithStreamingResponse,
+)
 from .transactions import (
     Transactions,
     AsyncTransactions,
@@ -286,6 +294,12 @@ __all__ = [
     "AsyncDisputesWithRawResponse",
     "DisputesWithStreamingResponse",
     "AsyncDisputesWithStreamingResponse",
+    "DisputesV2",
+    "AsyncDisputesV2",
+    "DisputesV2WithRawResponse",
+    "AsyncDisputesV2WithRawResponse",
+    "DisputesV2WithStreamingResponse",
+    "AsyncDisputesV2WithStreamingResponse",
     "Events",
     "AsyncEvents",
     "EventsWithRawResponse",
