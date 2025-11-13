@@ -139,7 +139,7 @@ class BookTransferResponse(BaseModel):
     (e.g., cents)
     """
 
-    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED", "RETURNED"]
     """The status of the transaction"""
 
     to_financial_account_token: str

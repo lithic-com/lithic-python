@@ -99,19 +99,19 @@ class Cardholder(BaseModel):
     """Name of the cardholder. Maps to EMV 3DS field `cardholderName`."""
 
     phone_number_home: Optional[str] = None
-    """Home phone number provided by the cardholder.
+    """Home phone number in E.164 format provided by the cardholder.
 
     Maps to EMV 3DS fields `homePhone.cc` and `homePhone.subscriber`.
     """
 
     phone_number_mobile: Optional[str] = None
-    """Mobile/cell phone number provided by the cardholder.
+    """Mobile/cell phone number in E.164 format provided by the cardholder.
 
     Maps to EMV 3DS fields `mobilePhone.cc` and `mobilePhone.subscriber`.
     """
 
     phone_number_work: Optional[str] = None
-    """Work phone number provided by the cardholder.
+    """Work phone number in E.164 format provided by the cardholder.
 
     Maps to EMV 3DS fields `workPhone.cc` and `workPhone.subscriber`.
     """

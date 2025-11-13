@@ -5,6 +5,7 @@ from __future__ import annotations
 from .loan_tape import LoanTape as LoanTape
 from .statement import Statement as Statement
 from .statements import Statements as Statements
+from .category_balances import CategoryBalances as CategoryBalances
 from .balance_list_params import BalanceListParams as BalanceListParams
 from .balance_list_response import BalanceListResponse as BalanceListResponse
 from .loan_tape_list_params import LoanTapeListParams as LoanTapeListParams

@@ -15,7 +15,7 @@ class CreditConfigurationAutoCollectionConfiguration(BaseModel):
 
 
 class CreditConfiguration(BaseModel):
-    auto_collection_configuration: CreditConfigurationAutoCollectionConfiguration
+    auto_collection_configuration: Optional[CreditConfigurationAutoCollectionConfiguration] = None
 
     credit_limit: Optional[int] = None
 

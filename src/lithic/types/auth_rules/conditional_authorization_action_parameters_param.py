@@ -2,35 +2,38 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-from ..._types import SequenceNotStr
+from .conditional_operation import ConditionalOperation
+from .conditional_value_param import ConditionalValueParam
 
 __all__ = ["ConditionalAuthorizationActionParametersParam", "Condition"]
 
 
 class Condition(TypedDict, total=False):
-    attribute: Literal[
-        "MCC",
-        "COUNTRY",
-        "CURRENCY",
-        "MERCHANT_ID",
-        "DESCRIPTOR",
-        "LIABILITY_SHIFT",
-        "PAN_ENTRY_MODE",
-        "TRANSACTION_AMOUNT",
-        "CASH_AMOUNT",
-        "RISK_SCORE",
-        "CARD_TRANSACTION_COUNT_15M",
-        "CARD_TRANSACTION_COUNT_1H",
-        "CARD_TRANSACTION_COUNT_24H",
-        "CARD_STATE",
-        "PIN_ENTERED",
-        "PIN_STATUS",
-        "WALLET_TYPE",
-        "TRANSACTION_INITIATOR",
-        "ADDRESS_MATCH",
+    attribute: Required[
+        Literal[
+            "MCC",
+            "COUNTRY",
+            "CURRENCY",
+            "MERCHANT_ID",
+            "DESCRIPTOR",
+            "LIABILITY_SHIFT",
+            "PAN_ENTRY_MODE",
+            "TRANSACTION_AMOUNT",
+            "CASH_AMOUNT",
+            "RISK_SCORE",
+            "CARD_TRANSACTION_COUNT_15M",
+            "CARD_TRANSACTION_COUNT_1H",
+            "CARD_TRANSACTION_COUNT_24H",
+            "CARD_STATE",
+            "PIN_ENTERED",
+            "PIN_STATUS",
+            "WALLET_TYPE",
+            "TRANSACTION_INITIATOR",
+            "ADDRESS_MATCH",
+        ]
     ]
     """The attribute to target.
 
@@ -88,21 +91,10 @@ class Condition(TypedDict, total=False):
       `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
     """
 
-    operation: Literal[
-        "IS_ONE_OF",
-        "IS_NOT_ONE_OF",
-        "MATCHES",
-        "DOES_NOT_MATCH",
-        "IS_EQUAL_TO",
-        "IS_NOT_EQUAL_TO",
-        "IS_GREATER_THAN",
-        "IS_GREATER_THAN_OR_EQUAL_TO",
-        "IS_LESS_THAN",
-        "IS_LESS_THAN_OR_EQUAL_TO",
-    ]
+    operation: Required[ConditionalOperation]
     """The operation to apply to the attribute"""
 
-    value: Union[str, int, SequenceNotStr[str]]
+    value: Required[ConditionalValueParam]
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 

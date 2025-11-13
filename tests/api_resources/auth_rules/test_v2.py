@@ -31,7 +31,15 @@ class TestV2:
     @parametrize
     def test_method_create_overload_1(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
         assert_matches_type(V2CreateResponse, v2, path=["response"])
@@ -59,7 +67,15 @@ class TestV2:
     @parametrize
     def test_raw_response_create_overload_1(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
 
@@ -71,7 +87,15 @@ class TestV2:
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         ) as response:
             assert not response.is_closed
@@ -86,7 +110,15 @@ class TestV2:
     def test_method_create_overload_2(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
         assert_matches_type(V2CreateResponse, v2, path=["response"])
@@ -114,7 +146,15 @@ class TestV2:
     def test_raw_response_create_overload_2(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
 
@@ -127,7 +167,15 @@ class TestV2:
     def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         ) as response:
             assert not response.is_closed
@@ -141,7 +189,15 @@ class TestV2:
     @parametrize
     def test_method_create_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             program_level=True,
             type="CONDITIONAL_BLOCK",
         )
@@ -170,7 +226,15 @@ class TestV2:
     @parametrize
     def test_raw_response_create_overload_3(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             program_level=True,
             type="CONDITIONAL_BLOCK",
         )
@@ -183,7 +247,15 @@ class TestV2:
     @parametrize
     def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             program_level=True,
             type="CONDITIONAL_BLOCK",
         ) as response:
@@ -650,7 +722,15 @@ class TestAsyncV2:
     @parametrize
     async def test_method_create_overload_1(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
         assert_matches_type(V2CreateResponse, v2, path=["response"])
@@ -678,7 +758,15 @@ class TestAsyncV2:
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
 
@@ -690,7 +778,15 @@ class TestAsyncV2:
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         ) as response:
             assert not response.is_closed
@@ -705,7 +801,15 @@ class TestAsyncV2:
     async def test_method_create_overload_2(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
         assert_matches_type(V2CreateResponse, v2, path=["response"])
@@ -733,7 +837,15 @@ class TestAsyncV2:
     async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         )
 
@@ -746,7 +858,15 @@ class TestAsyncV2:
     async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             type="CONDITIONAL_BLOCK",
         ) as response:
             assert not response.is_closed
@@ -760,7 +880,15 @@ class TestAsyncV2:
     @parametrize
     async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             program_level=True,
             type="CONDITIONAL_BLOCK",
         )
@@ -789,7 +917,15 @@ class TestAsyncV2:
     @parametrize
     async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             program_level=True,
             type="CONDITIONAL_BLOCK",
         )
@@ -802,7 +938,15 @@ class TestAsyncV2:
     @parametrize
     async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
-            parameters={"conditions": [{}]},
+            parameters={
+                "conditions": [
+                    {
+                        "attribute": "MCC",
+                        "operation": "IS_ONE_OF",
+                        "value": "string",
+                    }
+                ]
+            },
             program_level=True,
             type="CONDITIONAL_BLOCK",
         ) as response:

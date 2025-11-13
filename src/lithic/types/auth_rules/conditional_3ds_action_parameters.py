@@ -1,27 +1,27 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+from .conditional_value import ConditionalValue
+from .conditional_operation import ConditionalOperation
 
 __all__ = ["Conditional3DSActionParameters", "Condition"]
 
 
 class Condition(BaseModel):
-    attribute: Optional[
-        Literal[
-            "MCC",
-            "COUNTRY",
-            "CURRENCY",
-            "MERCHANT_ID",
-            "DESCRIPTOR",
-            "TRANSACTION_AMOUNT",
-            "RISK_SCORE",
-            "MESSAGE_CATEGORY",
-            "ADDRESS_MATCH",
-        ]
-    ] = None
+    attribute: Literal[
+        "MCC",
+        "COUNTRY",
+        "CURRENCY",
+        "MERCHANT_ID",
+        "DESCRIPTOR",
+        "TRANSACTION_AMOUNT",
+        "RISK_SCORE",
+        "MESSAGE_CATEGORY",
+        "ADDRESS_MATCH",
+    ]
     """The attribute to target.
 
     The following attributes may be targeted:
@@ -48,23 +48,10 @@ class Condition(BaseModel):
       `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
     """
 
-    operation: Optional[
-        Literal[
-            "IS_ONE_OF",
-            "IS_NOT_ONE_OF",
-            "MATCHES",
-            "DOES_NOT_MATCH",
-            "IS_EQUAL_TO",
-            "IS_NOT_EQUAL_TO",
-            "IS_GREATER_THAN",
-            "IS_GREATER_THAN_OR_EQUAL_TO",
-            "IS_LESS_THAN",
-            "IS_LESS_THAN_OR_EQUAL_TO",
-        ]
-    ] = None
+    operation: ConditionalOperation
     """The operation to apply to the attribute"""
 
-    value: Union[str, int, List[str], None] = None
+    value: ConditionalValue
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
 

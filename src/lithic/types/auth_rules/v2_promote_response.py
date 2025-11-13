@@ -8,6 +8,8 @@ from .velocity_limit_params import VelocityLimitParams
 from .merchant_lock_parameters import MerchantLockParameters
 from .conditional_block_parameters import ConditionalBlockParameters
 from .conditional_3ds_action_parameters import Conditional3DSActionParameters
+from .conditional_ach_action_parameters import ConditionalACHActionParameters
+from .conditional_tokenization_action_parameters import ConditionalTokenizationActionParameters
 from .conditional_authorization_action_parameters import ConditionalAuthorizationActionParameters
 
 __all__ = ["V2PromoteResponse", "CurrentVersion", "CurrentVersionParameters", "DraftVersion", "DraftVersionParameters"]
@@ -18,6 +20,8 @@ CurrentVersionParameters: TypeAlias = Union[
     MerchantLockParameters,
     Conditional3DSActionParameters,
     ConditionalAuthorizationActionParameters,
+    ConditionalACHActionParameters,
+    ConditionalTokenizationActionParameters,
 ]
 
 
@@ -38,6 +42,8 @@ DraftVersionParameters: TypeAlias = Union[
     MerchantLockParameters,
     Conditional3DSActionParameters,
     ConditionalAuthorizationActionParameters,
+    ConditionalACHActionParameters,
+    ConditionalTokenizationActionParameters,
 ]
 
 
@@ -69,7 +75,9 @@ class V2PromoteResponse(BaseModel):
 
     draft_version: Optional[DraftVersion] = None
 
-    event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"]
+    event_stream: Literal[
+        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
+    ]
     """The event stream during which the rule will be evaluated."""
 
     lithic_managed: bool
@@ -97,7 +105,8 @@ class V2PromoteResponse(BaseModel):
     - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-    - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
+    - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
     excluded_card_tokens: Optional[List[str]] = None

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import date, datetime
 from typing_extensions import Literal
 
@@ -12,6 +12,7 @@ from .. import _legacy_response
 from ..types import (
     payment_list_params,
     payment_create_params,
+    payment_return_params,
     payment_simulate_action_params,
     payment_simulate_return_params,
     payment_simulate_receipt_params,
@@ -27,6 +28,7 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.payment import Payment
 from ..types.payment_retry_response import PaymentRetryResponse
 from ..types.payment_create_response import PaymentCreateResponse
+from ..types.payment_return_response import PaymentReturnResponse
 from ..types.payment_simulate_action_response import PaymentSimulateActionResponse
 from ..types.payment_simulate_return_response import PaymentSimulateReturnResponse
 from ..types.payment_simulate_receipt_response import PaymentSimulateReceiptResponse
@@ -250,6 +252,83 @@ class Payments(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PaymentRetryResponse,
+        )
+
+    def return_(
+        self,
+        payment_token: str,
+        *,
+        financial_account_token: str,
+        return_reason_code: str,
+        addenda: Optional[str] | Omit = omit,
+        date_of_death: Union[str, date, None] | Omit = omit,
+        memo: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PaymentReturnResponse:
+        """Return an ACH payment with a specified return reason code.
+
+        Returns must be
+        initiated within the time window specified by NACHA rules for each return code
+        (typically 2 banking days for most codes, 60 calendar days for unauthorized
+        debits). For a complete list of return codes and their meanings, see the
+        [ACH Return Reasons documentation](https://docs.lithic.com/docs/ach-overview#ach-return-reasons).
+
+        Note:
+
+        - This endpoint does not modify the state of the financial account associated
+          with the payment. If you would like to change the account state, use the
+          [Update financial account status](https://docs.lithic.com/reference/updatefinancialaccountstatus)
+          endpoint.
+        - By default this endpoint is not enabled for your account. Please contact your
+          implementations manager to enable this feature.
+
+        Args:
+          financial_account_token: Globally unique identifier for the financial account
+
+          return_reason_code: ACH return reason code indicating the reason for returning the payment.
+              Supported codes include R01-R53 and R80-R85. For a complete list of return codes
+              and their meanings, see
+              [ACH Return Reasons](https://docs.lithic.com/docs/ach-overview#ach-return-reasons)
+
+          addenda: Optional additional information about the return. Limited to 44 characters
+
+          date_of_death: Date of death in YYYY-MM-DD format. Required when using return codes **R14**
+              (representative payee deceased) or **R15** (beneficiary or account holder
+              deceased)
+
+          memo: Optional memo for the return. Limited to 10 characters
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
+        return self._post(
+            f"/v1/payments/{payment_token}/return",
+            body=maybe_transform(
+                {
+                    "financial_account_token": financial_account_token,
+                    "return_reason_code": return_reason_code,
+                    "addenda": addenda,
+                    "date_of_death": date_of_death,
+                    "memo": memo,
+                },
+                payment_return_params.PaymentReturnParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentReturnResponse,
         )
 
     def simulate_action(
@@ -675,6 +754,83 @@ class AsyncPayments(AsyncAPIResource):
             cast_to=PaymentRetryResponse,
         )
 
+    async def return_(
+        self,
+        payment_token: str,
+        *,
+        financial_account_token: str,
+        return_reason_code: str,
+        addenda: Optional[str] | Omit = omit,
+        date_of_death: Union[str, date, None] | Omit = omit,
+        memo: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PaymentReturnResponse:
+        """Return an ACH payment with a specified return reason code.
+
+        Returns must be
+        initiated within the time window specified by NACHA rules for each return code
+        (typically 2 banking days for most codes, 60 calendar days for unauthorized
+        debits). For a complete list of return codes and their meanings, see the
+        [ACH Return Reasons documentation](https://docs.lithic.com/docs/ach-overview#ach-return-reasons).
+
+        Note:
+
+        - This endpoint does not modify the state of the financial account associated
+          with the payment. If you would like to change the account state, use the
+          [Update financial account status](https://docs.lithic.com/reference/updatefinancialaccountstatus)
+          endpoint.
+        - By default this endpoint is not enabled for your account. Please contact your
+          implementations manager to enable this feature.
+
+        Args:
+          financial_account_token: Globally unique identifier for the financial account
+
+          return_reason_code: ACH return reason code indicating the reason for returning the payment.
+              Supported codes include R01-R53 and R80-R85. For a complete list of return codes
+              and their meanings, see
+              [ACH Return Reasons](https://docs.lithic.com/docs/ach-overview#ach-return-reasons)
+
+          addenda: Optional additional information about the return. Limited to 44 characters
+
+          date_of_death: Date of death in YYYY-MM-DD format. Required when using return codes **R14**
+              (representative payee deceased) or **R15** (beneficiary or account holder
+              deceased)
+
+          memo: Optional memo for the return. Limited to 10 characters
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not payment_token:
+            raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
+        return await self._post(
+            f"/v1/payments/{payment_token}/return",
+            body=await async_maybe_transform(
+                {
+                    "financial_account_token": financial_account_token,
+                    "return_reason_code": return_reason_code,
+                    "addenda": addenda,
+                    "date_of_death": date_of_death,
+                    "memo": memo,
+                },
+                payment_return_params.PaymentReturnParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentReturnResponse,
+        )
+
     async def simulate_action(
         self,
         payment_token: str,
@@ -897,6 +1053,9 @@ class PaymentsWithRawResponse:
         self.retry = _legacy_response.to_raw_response_wrapper(
             payments.retry,
         )
+        self.return_ = _legacy_response.to_raw_response_wrapper(
+            payments.return_,
+        )
         self.simulate_action = _legacy_response.to_raw_response_wrapper(
             payments.simulate_action,
         )
@@ -926,6 +1085,9 @@ class AsyncPaymentsWithRawResponse:
         )
         self.retry = _legacy_response.async_to_raw_response_wrapper(
             payments.retry,
+        )
+        self.return_ = _legacy_response.async_to_raw_response_wrapper(
+            payments.return_,
         )
         self.simulate_action = _legacy_response.async_to_raw_response_wrapper(
             payments.simulate_action,
@@ -957,6 +1119,9 @@ class PaymentsWithStreamingResponse:
         self.retry = to_streamed_response_wrapper(
             payments.retry,
         )
+        self.return_ = to_streamed_response_wrapper(
+            payments.return_,
+        )
         self.simulate_action = to_streamed_response_wrapper(
             payments.simulate_action,
         )
@@ -986,6 +1151,9 @@ class AsyncPaymentsWithStreamingResponse:
         )
         self.retry = async_to_streamed_response_wrapper(
             payments.retry,
+        )
+        self.return_ = async_to_streamed_response_wrapper(
+            payments.return_,
         )
         self.simulate_action = async_to_streamed_response_wrapper(
             payments.simulate_action,
