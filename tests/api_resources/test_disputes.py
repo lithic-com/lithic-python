@@ -10,12 +10,8 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import (
+    Dispute,
     DisputeEvidence,
-    DisputeListResponse,
-    DisputeCreateResponse,
-    DisputeDeleteResponse,
-    DisputeUpdateResponse,
-    DisputeRetrieveResponse,
 )
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -33,7 +29,7 @@ class TestDisputes:
             reason="FRAUD_CARD_PRESENT",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
-        assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Lithic) -> None:
@@ -44,7 +40,7 @@ class TestDisputes:
             customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
             customer_note="customer_note",
         )
-        assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Lithic) -> None:
@@ -57,7 +53,7 @@ class TestDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Lithic) -> None:
@@ -70,7 +66,7 @@ class TestDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = response.parse()
-            assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -79,7 +75,7 @@ class TestDisputes:
         dispute = client.disputes.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeRetrieveResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
@@ -90,7 +86,7 @@ class TestDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeRetrieveResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
@@ -101,7 +97,7 @@ class TestDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = response.parse()
-            assert_matches_type(DisputeRetrieveResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -117,7 +113,7 @@ class TestDisputes:
         dispute = client.disputes.update(
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Lithic) -> None:
@@ -128,7 +124,7 @@ class TestDisputes:
             customer_note="customer_note",
             reason="ATM_CASH_MISDISPENSE",
         )
-        assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: Lithic) -> None:
@@ -139,7 +135,7 @@ class TestDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_streaming_response_update(self, client: Lithic) -> None:
@@ -150,7 +146,7 @@ class TestDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = response.parse()
-            assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -164,7 +160,7 @@ class TestDisputes:
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         dispute = client.disputes.list()
-        assert_matches_type(SyncCursorPage[DisputeListResponse], dispute, path=["response"])
+        assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
@@ -177,7 +173,7 @@ class TestDisputes:
             status="ARBITRATION",
             transaction_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
-        assert_matches_type(SyncCursorPage[DisputeListResponse], dispute, path=["response"])
+        assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
@@ -186,7 +182,7 @@ class TestDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(SyncCursorPage[DisputeListResponse], dispute, path=["response"])
+        assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Lithic) -> None:
@@ -195,7 +191,7 @@ class TestDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = response.parse()
-            assert_matches_type(SyncCursorPage[DisputeListResponse], dispute, path=["response"])
+            assert_matches_type(SyncCursorPage[Dispute], dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -204,7 +200,7 @@ class TestDisputes:
         dispute = client.disputes.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeDeleteResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Lithic) -> None:
@@ -215,7 +211,7 @@ class TestDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeDeleteResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     def test_streaming_response_delete(self, client: Lithic) -> None:
@@ -226,7 +222,7 @@ class TestDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = response.parse()
-            assert_matches_type(DisputeDeleteResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -442,7 +438,7 @@ class TestAsyncDisputes:
             reason="FRAUD_CARD_PRESENT",
             transaction_token="12345624-aa69-4cbc-a946-30d90181b621",
         )
-        assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -453,7 +449,7 @@ class TestAsyncDisputes:
             customer_filed_date=parse_datetime("2021-06-28T22:53:15Z"),
             customer_note="customer_note",
         )
-        assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncLithic) -> None:
@@ -466,7 +462,7 @@ class TestAsyncDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncLithic) -> None:
@@ -479,7 +475,7 @@ class TestAsyncDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = await response.parse()
-            assert_matches_type(DisputeCreateResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -488,7 +484,7 @@ class TestAsyncDisputes:
         dispute = await async_client.disputes.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeRetrieveResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -499,7 +495,7 @@ class TestAsyncDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeRetrieveResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -510,7 +506,7 @@ class TestAsyncDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = await response.parse()
-            assert_matches_type(DisputeRetrieveResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -526,7 +522,7 @@ class TestAsyncDisputes:
         dispute = await async_client.disputes.update(
             dispute_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -537,7 +533,7 @@ class TestAsyncDisputes:
             customer_note="customer_note",
             reason="ATM_CASH_MISDISPENSE",
         )
-        assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLithic) -> None:
@@ -548,7 +544,7 @@ class TestAsyncDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLithic) -> None:
@@ -559,7 +555,7 @@ class TestAsyncDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = await response.parse()
-            assert_matches_type(DisputeUpdateResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -573,7 +569,7 @@ class TestAsyncDisputes:
     @parametrize
     async def test_method_list(self, async_client: AsyncLithic) -> None:
         dispute = await async_client.disputes.list()
-        assert_matches_type(AsyncCursorPage[DisputeListResponse], dispute, path=["response"])
+        assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -586,7 +582,7 @@ class TestAsyncDisputes:
             status="ARBITRATION",
             transaction_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
-        assert_matches_type(AsyncCursorPage[DisputeListResponse], dispute, path=["response"])
+        assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
@@ -595,7 +591,7 @@ class TestAsyncDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(AsyncCursorPage[DisputeListResponse], dispute, path=["response"])
+        assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
@@ -604,7 +600,7 @@ class TestAsyncDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = await response.parse()
-            assert_matches_type(AsyncCursorPage[DisputeListResponse], dispute, path=["response"])
+            assert_matches_type(AsyncCursorPage[Dispute], dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -613,7 +609,7 @@ class TestAsyncDisputes:
         dispute = await async_client.disputes.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(DisputeDeleteResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncLithic) -> None:
@@ -624,7 +620,7 @@ class TestAsyncDisputes:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dispute = response.parse()
-        assert_matches_type(DisputeDeleteResponse, dispute, path=["response"])
+        assert_matches_type(Dispute, dispute, path=["response"])
 
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncLithic) -> None:
@@ -635,7 +631,7 @@ class TestAsyncDisputes:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dispute = await response.parse()
-            assert_matches_type(DisputeDeleteResponse, dispute, path=["response"])
+            assert_matches_type(Dispute, dispute, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

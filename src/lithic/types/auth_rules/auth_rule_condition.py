@@ -1,16 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
-from typing_extensions import Literal
-
 from ..._models import BaseModel
+from .conditional_value import ConditionalValue
 from .conditional_attribute import ConditionalAttribute
+from .conditional_operation import ConditionalOperation
 
 __all__ = ["AuthRuleCondition"]
 
 
 class AuthRuleCondition(BaseModel):
-    attribute: Optional[ConditionalAttribute] = None
+    attribute: ConditionalAttribute
     """The attribute to target.
 
     The following attributes may be targeted:
@@ -63,21 +62,8 @@ class AuthRuleCondition(BaseModel):
       `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
     """
 
-    operation: Optional[
-        Literal[
-            "IS_ONE_OF",
-            "IS_NOT_ONE_OF",
-            "MATCHES",
-            "DOES_NOT_MATCH",
-            "IS_EQUAL_TO",
-            "IS_NOT_EQUAL_TO",
-            "IS_GREATER_THAN",
-            "IS_GREATER_THAN_OR_EQUAL_TO",
-            "IS_LESS_THAN",
-            "IS_LESS_THAN_OR_EQUAL_TO",
-        ]
-    ] = None
+    operation: ConditionalOperation
     """The operation to apply to the attribute"""
 
-    value: Union[str, int, List[str], None] = None
+    value: ConditionalValue
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""

@@ -7,7 +7,9 @@ from lithic.types import (
     Carrier,
     Currency,
     Document,
+    FinancialEvent,
     InstanceFinancialAccountType,
+    Merchant,
     ShippingAddress,
 )
 ```
@@ -82,9 +84,13 @@ from lithic.types.auth_rules import (
     AuthRule,
     AuthRuleCondition,
     Conditional3DSActionParameters,
+    ConditionalACHActionParameters,
     ConditionalAttribute,
     ConditionalAuthorizationActionParameters,
     ConditionalBlockParameters,
+    ConditionalOperation,
+    ConditionalTokenizationActionParameters,
+    ConditionalValue,
     MerchantLockParameters,
     RuleStats,
     VelocityLimitParams,
@@ -269,29 +275,34 @@ Methods:
 Types:
 
 ```python
-from lithic.types import (
-    Dispute,
-    DisputeEvidence,
-    DisputeCreateResponse,
-    DisputeRetrieveResponse,
-    DisputeUpdateResponse,
-    DisputeListResponse,
-    DisputeDeleteResponse,
-)
+from lithic.types import Dispute, DisputeEvidence
 ```
 
 Methods:
 
-- <code title="post /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">create</a>(\*\*<a href="src/lithic/types/dispute_create_params.py">params</a>) -> <a href="./src/lithic/types/dispute_create_response.py">DisputeCreateResponse</a></code>
-- <code title="get /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve</a>(dispute_token) -> <a href="./src/lithic/types/dispute_retrieve_response.py">DisputeRetrieveResponse</a></code>
-- <code title="patch /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">update</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_update_params.py">params</a>) -> <a href="./src/lithic/types/dispute_update_response.py">DisputeUpdateResponse</a></code>
-- <code title="get /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">list</a>(\*\*<a href="src/lithic/types/dispute_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute_list_response.py">SyncCursorPage[DisputeListResponse]</a></code>
-- <code title="delete /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete</a>(dispute_token) -> <a href="./src/lithic/types/dispute_delete_response.py">DisputeDeleteResponse</a></code>
+- <code title="post /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">create</a>(\*\*<a href="src/lithic/types/dispute_create_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="get /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="patch /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">update</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_update_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
+- <code title="get /v1/disputes">client.disputes.<a href="./src/lithic/resources/disputes.py">list</a>(\*\*<a href="src/lithic/types/dispute_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute.py">SyncCursorPage[Dispute]</a></code>
+- <code title="delete /v1/disputes/{dispute_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete</a>(dispute_token) -> <a href="./src/lithic/types/dispute.py">Dispute</a></code>
 - <code title="delete /v1/disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">delete_evidence</a>(evidence_token, \*, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="post /v1/disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">initiate_evidence_upload</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_initiate_evidence_upload_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code title="get /v1/disputes/{dispute_token}/evidences">client.disputes.<a href="./src/lithic/resources/disputes.py">list_evidences</a>(dispute_token, \*\*<a href="src/lithic/types/dispute_list_evidences_params.py">params</a>) -> <a href="./src/lithic/types/dispute_evidence.py">SyncCursorPage[DisputeEvidence]</a></code>
 - <code title="get /v1/disputes/{dispute_token}/evidences/{evidence_token}">client.disputes.<a href="./src/lithic/resources/disputes.py">retrieve_evidence</a>(evidence_token, \*, dispute_token) -> <a href="./src/lithic/types/dispute_evidence.py">DisputeEvidence</a></code>
 - <code>client.disputes.<a href="./src/lithic/resources/disputes.py">upload_evidence</a>(\*args) -> None</code>
+
+# DisputesV2
+
+Types:
+
+```python
+from lithic.types import DisputeV2
+```
+
+Methods:
+
+- <code title="get /v2/disputes/{dispute_token}">client.disputes_v2.<a href="./src/lithic/resources/disputes_v2.py">retrieve</a>(dispute_token) -> <a href="./src/lithic/types/dispute_v2.py">DisputeV2</a></code>
+- <code title="get /v2/disputes">client.disputes_v2.<a href="./src/lithic/resources/disputes_v2.py">list</a>(\*\*<a href="src/lithic/types/disputes_v2_list_params.py">params</a>) -> <a href="./src/lithic/types/dispute_v2.py">SyncCursorPage[DisputeV2]</a></code>
 
 # Events
 
@@ -341,7 +352,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types import FinancialAccount, FinancialTransaction
+from lithic.types import CategoryDetails, FinancialAccount, FinancialTransaction, StatementTotals
 ```
 
 Methods:
@@ -415,7 +426,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types.financial_accounts import LoanTape
+from lithic.types.financial_accounts import CategoryBalances, LoanTape
 ```
 
 Methods:
@@ -517,6 +528,7 @@ from lithic.types import (
     ExternalBankAccountListResponse,
     ExternalBankAccountRetryMicroDepositsResponse,
     ExternalBankAccountRetryPrenoteResponse,
+    ExternalBankAccountUnpauseResponse,
 )
 ```
 
@@ -528,6 +540,7 @@ Methods:
 - <code title="get /v1/external_bank_accounts">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">list</a>(\*\*<a href="src/lithic/types/external_bank_account_list_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_list_response.py">SyncCursorPage[ExternalBankAccountListResponse]</a></code>
 - <code title="post /v1/external_bank_accounts/{external_bank_account_token}/retry_micro_deposits">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retry_micro_deposits</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_retry_micro_deposits_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_retry_micro_deposits_response.py">ExternalBankAccountRetryMicroDepositsResponse</a></code>
 - <code title="post /v1/external_bank_accounts/{external_bank_account_token}/retry_prenote">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">retry_prenote</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_account_retry_prenote_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_account_retry_prenote_response.py">ExternalBankAccountRetryPrenoteResponse</a></code>
+- <code title="post /v1/external_bank_accounts/{external_bank_account_token}/unpause">client.external_bank_accounts.<a href="./src/lithic/resources/external_bank_accounts/external_bank_accounts.py">unpause</a>(external_bank_account_token) -> <a href="./src/lithic/types/external_bank_account_unpause_response.py">ExternalBankAccountUnpauseResponse</a></code>
 
 ## MicroDeposits
 
@@ -550,6 +563,7 @@ from lithic.types import (
     Payment,
     PaymentCreateResponse,
     PaymentRetryResponse,
+    PaymentReturnResponse,
     PaymentSimulateActionResponse,
     PaymentSimulateReceiptResponse,
     PaymentSimulateReleaseResponse,
@@ -563,6 +577,7 @@ Methods:
 - <code title="get /v1/payments/{payment_token}">client.payments.<a href="./src/lithic/resources/payments.py">retrieve</a>(payment_token) -> <a href="./src/lithic/types/payment.py">Payment</a></code>
 - <code title="get /v1/payments">client.payments.<a href="./src/lithic/resources/payments.py">list</a>(\*\*<a href="src/lithic/types/payment_list_params.py">params</a>) -> <a href="./src/lithic/types/payment.py">SyncCursorPage[Payment]</a></code>
 - <code title="post /v1/payments/{payment_token}/retry">client.payments.<a href="./src/lithic/resources/payments.py">retry</a>(payment_token) -> <a href="./src/lithic/types/payment_retry_response.py">PaymentRetryResponse</a></code>
+- <code title="post /v1/payments/{payment_token}/return">client.payments.<a href="./src/lithic/resources/payments.py">return\_</a>(payment_token, \*\*<a href="src/lithic/types/payment_return_params.py">params</a>) -> <a href="./src/lithic/types/payment_return_response.py">PaymentReturnResponse</a></code>
 - <code title="post /v1/simulate/payments/{payment_token}/action">client.payments.<a href="./src/lithic/resources/payments.py">simulate_action</a>(payment_token, \*\*<a href="src/lithic/types/payment_simulate_action_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_action_response.py">PaymentSimulateActionResponse</a></code>
 - <code title="post /v1/simulate/payments/receipt">client.payments.<a href="./src/lithic/resources/payments.py">simulate_receipt</a>(\*\*<a href="src/lithic/types/payment_simulate_receipt_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_receipt_response.py">PaymentSimulateReceiptResponse</a></code>
 - <code title="post /v1/simulate/payments/release">client.payments.<a href="./src/lithic/resources/payments.py">simulate_release</a>(\*\*<a href="src/lithic/types/payment_simulate_release_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_release_response.py">PaymentSimulateReleaseResponse</a></code>

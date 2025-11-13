@@ -23,7 +23,9 @@ class V2ListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
-    event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"]
+    event_stream: Literal[
+        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
+    ]
     """Only return Auth rules that are executed during the provided event stream."""
 
     page_size: int

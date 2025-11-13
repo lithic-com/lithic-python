@@ -5,19 +5,10 @@ from datetime import date, datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+from ..category_details import CategoryDetails
+from ..statement_totals import StatementTotals
 
-__all__ = [
-    "Statement",
-    "AccountStanding",
-    "AccountStandingFinancialAccountState",
-    "AmountDue",
-    "PeriodTotals",
-    "YtdTotals",
-    "InterestDetails",
-    "InterestDetailsDailyBalanceAmounts",
-    "InterestDetailsEffectiveApr",
-    "InterestDetailsInterestForPeriod",
-]
+__all__ = ["Statement", "AccountStanding", "AccountStandingFinancialAccountState", "AmountDue", "InterestDetails"]
 
 
 class AccountStandingFinancialAccountState(BaseModel):
@@ -68,116 +59,16 @@ class AmountDue(BaseModel):
     """Amount past due for statement in cents"""
 
 
-class PeriodTotals(BaseModel):
-    balance_transfers: int
-    """Opening balance transferred from previous account in cents"""
-
-    cash_advances: int
-    """ATM and cashback transactions in cents"""
-
-    credits: int
-    """
-    Volume of credit management operation transactions less any balance transfers in
-    cents
-    """
-
-    debits: int
-    """Volume of debit management operation transactions less any interest in cents"""
-
-    fees: int
-    """Volume of debit management operation transactions less any interest in cents"""
-
-    interest: int
-    """Interest accrued in cents"""
-
-    payments: int
-    """Any funds transfers which affective the balance in cents"""
-
-    purchases: int
-    """Net card transaction volume less any cash advances in cents"""
-
-    credit_details: Optional[object] = None
-    """Breakdown of credits"""
-
-    debit_details: Optional[object] = None
-    """Breakdown of debits"""
-
-    payment_details: Optional[object] = None
-    """Breakdown of payments"""
-
-
-class YtdTotals(BaseModel):
-    balance_transfers: int
-    """Opening balance transferred from previous account in cents"""
-
-    cash_advances: int
-    """ATM and cashback transactions in cents"""
-
-    credits: int
-    """
-    Volume of credit management operation transactions less any balance transfers in
-    cents
-    """
-
-    debits: int
-    """Volume of debit management operation transactions less any interest in cents"""
-
-    fees: int
-    """Volume of debit management operation transactions less any interest in cents"""
-
-    interest: int
-    """Interest accrued in cents"""
-
-    payments: int
-    """Any funds transfers which affective the balance in cents"""
-
-    purchases: int
-    """Net card transaction volume less any cash advances in cents"""
-
-    credit_details: Optional[object] = None
-    """Breakdown of credits"""
-
-    debit_details: Optional[object] = None
-    """Breakdown of debits"""
-
-    payment_details: Optional[object] = None
-    """Breakdown of payments"""
-
-
-class InterestDetailsDailyBalanceAmounts(BaseModel):
-    balance_transfers: str
-
-    cash_advances: str
-
-    purchases: str
-
-
-class InterestDetailsEffectiveApr(BaseModel):
-    balance_transfers: str
-
-    cash_advances: str
-
-    purchases: str
-
-
-class InterestDetailsInterestForPeriod(BaseModel):
-    balance_transfers: str
-
-    cash_advances: str
-
-    purchases: str
-
-
 class InterestDetails(BaseModel):
     actual_interest_charged: Optional[int] = None
 
-    daily_balance_amounts: InterestDetailsDailyBalanceAmounts
+    daily_balance_amounts: CategoryDetails
 
-    effective_apr: InterestDetailsEffectiveApr
+    effective_apr: CategoryDetails
 
     interest_calculation_method: Literal["DAILY", "AVERAGE_DAILY"]
 
-    interest_for_period: InterestDetailsInterestForPeriod
+    interest_for_period: CategoryDetails
 
     prime_rate: Optional[str] = None
 
@@ -219,7 +110,7 @@ class Statement(BaseModel):
     payment_due_date: Optional[date] = None
     """Date when the payment is due"""
 
-    period_totals: PeriodTotals
+    period_totals: StatementTotals
 
     starting_balance: int
     """Balance at the start of the billing period"""
@@ -235,7 +126,7 @@ class Statement(BaseModel):
     updated: datetime
     """Timestamp of when the statement was updated"""
 
-    ytd_totals: YtdTotals
+    ytd_totals: StatementTotals
 
     interest_details: Optional[InterestDetails] = None
 

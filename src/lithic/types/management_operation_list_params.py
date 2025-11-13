@@ -53,5 +53,5 @@ class ManagementOperationListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED", "RETURNED"]
     """Management operation status to be returned."""

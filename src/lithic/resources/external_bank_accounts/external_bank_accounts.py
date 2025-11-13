@@ -39,6 +39,7 @@ from ...types.external_bank_account_address_param import ExternalBankAccountAddr
 from ...types.external_bank_account_list_response import ExternalBankAccountListResponse
 from ...types.external_bank_account_create_response import ExternalBankAccountCreateResponse
 from ...types.external_bank_account_update_response import ExternalBankAccountUpdateResponse
+from ...types.external_bank_account_unpause_response import ExternalBankAccountUnpauseResponse
 from ...types.external_bank_account_retrieve_response import ExternalBankAccountRetrieveResponse
 from ...types.external_bank_account_retry_prenote_response import ExternalBankAccountRetryPrenoteResponse
 from ...types.external_bank_account_retry_micro_deposits_response import ExternalBankAccountRetryMicroDepositsResponse
@@ -632,6 +633,41 @@ class ExternalBankAccounts(SyncAPIResource):
             cast_to=ExternalBankAccountRetryPrenoteResponse,
         )
 
+    def unpause(
+        self,
+        external_bank_account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExternalBankAccountUnpauseResponse:
+        """
+        Unpause an external bank account
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
+        return self._post(
+            f"/v1/external_bank_accounts/{external_bank_account_token}/unpause",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExternalBankAccountUnpauseResponse,
+        )
+
 
 class AsyncExternalBankAccounts(AsyncAPIResource):
     @cached_property
@@ -1219,6 +1255,41 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             cast_to=ExternalBankAccountRetryPrenoteResponse,
         )
 
+    async def unpause(
+        self,
+        external_bank_account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExternalBankAccountUnpauseResponse:
+        """
+        Unpause an external bank account
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
+        return await self._post(
+            f"/v1/external_bank_accounts/{external_bank_account_token}/unpause",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExternalBankAccountUnpauseResponse,
+        )
+
 
 class ExternalBankAccountsWithRawResponse:
     def __init__(self, external_bank_accounts: ExternalBankAccounts) -> None:
@@ -1241,6 +1312,9 @@ class ExternalBankAccountsWithRawResponse:
         )
         self.retry_prenote = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.retry_prenote,
+        )
+        self.unpause = _legacy_response.to_raw_response_wrapper(
+            external_bank_accounts.unpause,
         )
 
     @cached_property
@@ -1270,6 +1344,9 @@ class AsyncExternalBankAccountsWithRawResponse:
         self.retry_prenote = _legacy_response.async_to_raw_response_wrapper(
             external_bank_accounts.retry_prenote,
         )
+        self.unpause = _legacy_response.async_to_raw_response_wrapper(
+            external_bank_accounts.unpause,
+        )
 
     @cached_property
     def micro_deposits(self) -> AsyncMicroDepositsWithRawResponse:
@@ -1298,6 +1375,9 @@ class ExternalBankAccountsWithStreamingResponse:
         self.retry_prenote = to_streamed_response_wrapper(
             external_bank_accounts.retry_prenote,
         )
+        self.unpause = to_streamed_response_wrapper(
+            external_bank_accounts.unpause,
+        )
 
     @cached_property
     def micro_deposits(self) -> MicroDepositsWithStreamingResponse:
@@ -1325,6 +1405,9 @@ class AsyncExternalBankAccountsWithStreamingResponse:
         )
         self.retry_prenote = async_to_streamed_response_wrapper(
             external_bank_accounts.retry_prenote,
+        )
+        self.unpause = async_to_streamed_response_wrapper(
+            external_bank_accounts.unpause,
         )
 
     @cached_property

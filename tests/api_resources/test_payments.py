@@ -13,6 +13,7 @@ from lithic.types import (
     Payment,
     PaymentRetryResponse,
     PaymentCreateResponse,
+    PaymentReturnResponse,
     PaymentSimulateActionResponse,
     PaymentSimulateReturnResponse,
     PaymentSimulateReceiptResponse,
@@ -207,6 +208,64 @@ class TestPayments:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
             client.payments.with_raw_response.retry(
                 "",
+            )
+
+    @parametrize
+    def test_method_return(self, client: Lithic) -> None:
+        payment = client.payments.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+        )
+        assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+    @parametrize
+    def test_method_return_with_all_params(self, client: Lithic) -> None:
+        payment = client.payments.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+            addenda="addenda",
+            date_of_death=parse_date("2025-01-15"),
+            memo="memo",
+        )
+        assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+    @parametrize
+    def test_raw_response_return(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_return(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_return(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
+            client.payments.with_raw_response.return_(
+                payment_token="",
+                financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                return_reason_code="R01",
             )
 
     @parametrize
@@ -570,6 +629,64 @@ class TestAsyncPayments:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
             await async_client.payments.with_raw_response.retry(
                 "",
+            )
+
+    @parametrize
+    async def test_method_return(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+        )
+        assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_method_return_with_all_params(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+            addenda="addenda",
+            date_of_death=parse_date("2025-01-15"),
+            memo="memo",
+        )
+        assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_raw_response_return(self, async_client: AsyncLithic) -> None:
+        response = await async_client.payments.with_raw_response.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_return(self, async_client: AsyncLithic) -> None:
+        async with async_client.payments.with_streaming_response.return_(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            return_reason_code="R01",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentReturnResponse, payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_return(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
+            await async_client.payments.with_raw_response.return_(
+                payment_token="",
+                financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                return_reason_code="R01",
             )
 
     @parametrize

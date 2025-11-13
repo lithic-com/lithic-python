@@ -82,6 +82,7 @@ class Event(BaseModel):
         List[
             Literal[
                 "APPROVED",
+                "DECLINED",
                 "FUNDS_INSUFFICIENT",
                 "ACCOUNT_INVALID",
                 "PROGRAM_TRANSACTION_LIMIT_EXCEEDED",
@@ -201,8 +202,8 @@ class Payment(BaseModel):
     pending_amount: int
     """Pending amount in cents"""
 
-    related_account_tokens: RelatedAccountTokens
-    """Related account tokens for the transaction"""
+    related_account_tokens: Optional[RelatedAccountTokens] = None
+    """Account tokens related to a payment transaction"""
 
     result: Literal["APPROVED", "DECLINED"]
     """Transaction result"""
@@ -213,7 +214,7 @@ class Payment(BaseModel):
     source: Literal["LITHIC", "EXTERNAL", "CUSTOMER"]
     """Transaction source"""
 
-    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED"]
+    status: Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED", "RETURNED"]
     """The status of the transaction"""
 
     updated: datetime

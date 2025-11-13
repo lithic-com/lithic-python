@@ -10,6 +10,8 @@ from .velocity_limit_params_param import VelocityLimitParamsParam
 from .merchant_lock_parameters_param import MerchantLockParametersParam
 from .conditional_block_parameters_param import ConditionalBlockParametersParam
 from .conditional_3ds_action_parameters_param import Conditional3DSActionParametersParam
+from .conditional_ach_action_parameters_param import ConditionalACHActionParametersParam
+from .conditional_tokenization_action_parameters_param import ConditionalTokenizationActionParametersParam
 from .conditional_authorization_action_parameters_param import ConditionalAuthorizationActionParametersParam
 
 __all__ = [
@@ -37,7 +39,8 @@ class AccountLevelRule(TypedDict, total=False):
     - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-    - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
+    - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
     account_tokens: SequenceNotStr[str]
@@ -46,7 +49,9 @@ class AccountLevelRule(TypedDict, total=False):
     business_account_tokens: SequenceNotStr[str]
     """Business Account tokens to which the Auth Rule applies."""
 
-    event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"]
+    event_stream: Literal[
+        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
+    ]
     """The event stream during which the rule will be evaluated."""
 
     name: Optional[str]
@@ -59,6 +64,8 @@ AccountLevelRuleParameters: TypeAlias = Union[
     MerchantLockParametersParam,
     Conditional3DSActionParametersParam,
     ConditionalAuthorizationActionParametersParam,
+    ConditionalACHActionParametersParam,
+    ConditionalTokenizationActionParametersParam,
 ]
 
 
@@ -79,10 +86,13 @@ class CardLevelRule(TypedDict, total=False):
     - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-    - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
+    - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
-    event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"]
+    event_stream: Literal[
+        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
+    ]
     """The event stream during which the rule will be evaluated."""
 
     name: Optional[str]
@@ -95,6 +105,8 @@ CardLevelRuleParameters: TypeAlias = Union[
     MerchantLockParametersParam,
     Conditional3DSActionParametersParam,
     ConditionalAuthorizationActionParametersParam,
+    ConditionalACHActionParametersParam,
+    ConditionalTokenizationActionParametersParam,
 ]
 
 
@@ -115,10 +127,13 @@ class ProgramLevelRule(TypedDict, total=False):
     - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
-    - `CONDITIONAL_ACTION`: AUTHORIZATION or THREE_DS_AUTHENTICATION event stream.
+    - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
-    event_stream: Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION"]
+    event_stream: Literal[
+        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
+    ]
     """The event stream during which the rule will be evaluated."""
 
     excluded_card_tokens: SequenceNotStr[str]
@@ -134,6 +149,8 @@ ProgramLevelRuleParameters: TypeAlias = Union[
     MerchantLockParametersParam,
     Conditional3DSActionParametersParam,
     ConditionalAuthorizationActionParametersParam,
+    ConditionalACHActionParametersParam,
+    ConditionalTokenizationActionParametersParam,
 ]
 
 V2CreateParams: TypeAlias = Union[AccountLevelRule, CardLevelRule, ProgramLevelRule]
