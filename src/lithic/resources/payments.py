@@ -28,7 +28,6 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.payment import Payment
 from ..types.payment_retry_response import PaymentRetryResponse
 from ..types.payment_create_response import PaymentCreateResponse
-from ..types.payment_return_response import PaymentReturnResponse
 from ..types.payment_simulate_action_response import PaymentSimulateActionResponse
 from ..types.payment_simulate_return_response import PaymentSimulateReturnResponse
 from ..types.payment_simulate_receipt_response import PaymentSimulateReceiptResponse
@@ -269,7 +268,7 @@ class Payments(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PaymentReturnResponse:
+    ) -> Payment:
         """Return an ACH payment with a specified return reason code.
 
         Returns must be
@@ -328,7 +327,7 @@ class Payments(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PaymentReturnResponse,
+            cast_to=Payment,
         )
 
     def simulate_action(
@@ -769,7 +768,7 @@ class AsyncPayments(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PaymentReturnResponse:
+    ) -> Payment:
         """Return an ACH payment with a specified return reason code.
 
         Returns must be
@@ -828,7 +827,7 @@ class AsyncPayments(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PaymentReturnResponse,
+            cast_to=Payment,
         )
 
     async def simulate_action(

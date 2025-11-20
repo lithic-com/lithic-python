@@ -563,7 +563,6 @@ from lithic.types import (
     Payment,
     PaymentCreateResponse,
     PaymentRetryResponse,
-    PaymentReturnResponse,
     PaymentSimulateActionResponse,
     PaymentSimulateReceiptResponse,
     PaymentSimulateReleaseResponse,
@@ -577,7 +576,7 @@ Methods:
 - <code title="get /v1/payments/{payment_token}">client.payments.<a href="./src/lithic/resources/payments.py">retrieve</a>(payment_token) -> <a href="./src/lithic/types/payment.py">Payment</a></code>
 - <code title="get /v1/payments">client.payments.<a href="./src/lithic/resources/payments.py">list</a>(\*\*<a href="src/lithic/types/payment_list_params.py">params</a>) -> <a href="./src/lithic/types/payment.py">SyncCursorPage[Payment]</a></code>
 - <code title="post /v1/payments/{payment_token}/retry">client.payments.<a href="./src/lithic/resources/payments.py">retry</a>(payment_token) -> <a href="./src/lithic/types/payment_retry_response.py">PaymentRetryResponse</a></code>
-- <code title="post /v1/payments/{payment_token}/return">client.payments.<a href="./src/lithic/resources/payments.py">return\_</a>(payment_token, \*\*<a href="src/lithic/types/payment_return_params.py">params</a>) -> <a href="./src/lithic/types/payment_return_response.py">PaymentReturnResponse</a></code>
+- <code title="post /v1/payments/{payment_token}/return">client.payments.<a href="./src/lithic/resources/payments.py">return\_</a>(payment_token, \*\*<a href="src/lithic/types/payment_return_params.py">params</a>) -> <a href="./src/lithic/types/payment.py">Payment</a></code>
 - <code title="post /v1/simulate/payments/{payment_token}/action">client.payments.<a href="./src/lithic/resources/payments.py">simulate_action</a>(payment_token, \*\*<a href="src/lithic/types/payment_simulate_action_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_action_response.py">PaymentSimulateActionResponse</a></code>
 - <code title="post /v1/simulate/payments/receipt">client.payments.<a href="./src/lithic/resources/payments.py">simulate_receipt</a>(\*\*<a href="src/lithic/types/payment_simulate_receipt_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_receipt_response.py">PaymentSimulateReceiptResponse</a></code>
 - <code title="post /v1/simulate/payments/release">client.payments.<a href="./src/lithic/resources/payments.py">simulate_release</a>(\*\*<a href="src/lithic/types/payment_simulate_release_params.py">params</a>) -> <a href="./src/lithic/types/payment_simulate_release_response.py">PaymentSimulateReleaseResponse</a></code>

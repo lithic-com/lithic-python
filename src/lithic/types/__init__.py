@@ -80,7 +80,6 @@ from .payment_retry_response import PaymentRetryResponse as PaymentRetryResponse
 from .card_provision_response import CardProvisionResponse as CardProvisionResponse
 from .disputes_v2_list_params import DisputesV2ListParams as DisputesV2ListParams
 from .payment_create_response import PaymentCreateResponse as PaymentCreateResponse
-from .payment_return_response import PaymentReturnResponse as PaymentReturnResponse
 from .transaction_list_params import TransactionListParams as TransactionListParams
 from .card_program_list_params import CardProgramListParams as CardProgramListParams
 from .tokenization_list_params import TokenizationListParams as TokenizationListParams
