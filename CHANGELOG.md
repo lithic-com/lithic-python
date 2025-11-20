@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.111.0 (2025-11-20)
+
+Full Changelog: [v0.110.1...v0.111.0](https://github.com/lithic-com/lithic-python/compare/v0.110.1...v0.111.0)
+
+### Features
+
+* **api:** add disputes V2 endpoints ([a346176](https://github.com/lithic-com/lithic-python/commit/a3461767eaf97aa5b10dd356513a401644599722))
+* **api:** Add Payoff Details ([8408ced](https://github.com/lithic-com/lithic-python/commit/8408ced534e41f25de0b62aa8f6ca0735001994a))
+* **api:** add return payment method ([a346176](https://github.com/lithic-com/lithic-python/commit/a3461767eaf97aa5b10dd356513a401644599722))
+* **api:** add Tokenization and ACH Rules ([a346176](https://github.com/lithic-com/lithic-python/commit/a3461767eaf97aa5b10dd356513a401644599722))
+* **api:** add unpause external_bank_accounts API method ([a346176](https://github.com/lithic-com/lithic-python/commit/a3461767eaf97aa5b10dd356513a401644599722))
+* **api:** extract some common schemas into models ([a346176](https://github.com/lithic-com/lithic-python/commit/a3461767eaf97aa5b10dd356513a401644599722))
+
+
+### Bug Fixes
+
+* **api:** change allowed phone number length from 18 to 16 ([a346176](https://github.com/lithic-com/lithic-python/commit/a3461767eaf97aa5b10dd356513a401644599722))
+* **api:** mark certain optional fields as nullable ([a346176](https://github.com/lithic-com/lithic-python/commit/a3461767eaf97aa5b10dd356513a401644599722))
+* **api:** Modify return type of returns API to payment-transaction ([8408ced](https://github.com/lithic-com/lithic-python/commit/8408ced534e41f25de0b62aa8f6ca0735001994a))
+
 ## 0.110.1 (2025-11-11)
 
 Full Changelog: [v0.110.0...v0.110.1](https://github.com/lithic-com/lithic-python/compare/v0.110.0...v0.110.1)
