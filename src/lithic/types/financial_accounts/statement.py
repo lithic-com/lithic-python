@@ -8,7 +8,14 @@ from ..._models import BaseModel
 from ..category_details import CategoryDetails
 from ..statement_totals import StatementTotals
 
-__all__ = ["Statement", "AccountStanding", "AccountStandingFinancialAccountState", "AmountDue", "InterestDetails"]
+__all__ = [
+    "Statement",
+    "AccountStanding",
+    "AccountStandingFinancialAccountState",
+    "AmountDue",
+    "InterestDetails",
+    "PayoffDetails",
+]
 
 
 class AccountStandingFinancialAccountState(BaseModel):
@@ -75,6 +82,35 @@ class InterestDetails(BaseModel):
     minimum_interest_charged: Optional[int] = None
 
 
+class PayoffDetails(BaseModel):
+    minimum_payment_months: str
+    """
+    The number of months it would take to pay off the balance in full by only paying
+    the minimum payment. "NA" will signal negative or zero amortization
+    """
+
+    minimum_payment_total: str
+    """
+    The sum of all interest and principal paid, in cents, when only paying minimum
+    monthly payment. "NA" will signal negative or zero amortization
+    """
+
+    payoff_period_length_months: int
+    """Number of months to full pay off"""
+
+    payoff_period_monthly_payment_amount: int
+    """
+    The amount needed to be paid, in cents, each month in order to pay off current
+    balance in the payoff period
+    """
+
+    payoff_period_payment_total: int
+    """
+    The sum of all interest and principal paid, in cents, when paying off in the
+    payoff period
+    """
+
+
 class Statement(BaseModel):
     token: str
     """Globally unique identifier for a statement"""
@@ -135,3 +171,6 @@ class Statement(BaseModel):
 
     next_statement_end_date: Optional[date] = None
     """Date when the next billing period will end"""
+
+    payoff_details: Optional[PayoffDetails] = None
+    """Details on number and size of payments to pay off balance"""
