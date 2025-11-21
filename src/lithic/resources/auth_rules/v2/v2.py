@@ -32,12 +32,7 @@ from ....types.auth_rules import (
     v2_retrieve_report_params,
     v2_retrieve_features_params,
 )
-from ....types.auth_rules.v2_list_response import V2ListResponse
-from ....types.auth_rules.v2_draft_response import V2DraftResponse
-from ....types.auth_rules.v2_create_response import V2CreateResponse
-from ....types.auth_rules.v2_update_response import V2UpdateResponse
-from ....types.auth_rules.v2_promote_response import V2PromoteResponse
-from ....types.auth_rules.v2_retrieve_response import V2RetrieveResponse
+from ....types.auth_rules.auth_rule import AuthRule
 from ....types.auth_rules.v2_retrieve_report_response import V2RetrieveReportResponse
 from ....types.auth_rules.v2_retrieve_features_response import V2RetrieveFeaturesResponse
 
@@ -87,7 +82,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         """
         Creates a new V2 Auth rule in draft mode
 
@@ -141,7 +136,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         """
         Creates a new V2 Auth rule in draft mode
 
@@ -194,7 +189,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         """
         Creates a new V2 Auth rule in draft mode
 
@@ -256,7 +251,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         return self._post(
             "/v2/auth_rules",
             body=maybe_transform(
@@ -276,7 +271,7 @@ class V2(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2CreateResponse,
+            cast_to=AuthRule,
         )
 
     def retrieve(
@@ -289,7 +284,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2RetrieveResponse:
+    ) -> AuthRule:
         """
         Fetches a V2 Auth rule by its token
 
@@ -309,7 +304,7 @@ class V2(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2RetrieveResponse,
+            cast_to=AuthRule,
         )
 
     @overload
@@ -327,7 +322,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         """
         Updates a V2 Auth rule's properties
 
@@ -372,7 +367,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         """
         Updates a V2 Auth rule's properties
 
@@ -416,7 +411,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         """
         Updates a V2 Auth rule's properties
 
@@ -464,7 +459,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._patch(
@@ -484,7 +479,7 @@ class V2(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2UpdateResponse,
+            cast_to=AuthRule,
         )
 
     def list(
@@ -507,7 +502,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCursorPage[V2ListResponse]:
+    ) -> SyncCursorPage[AuthRule]:
         """
         Lists V2 Auth rules
 
@@ -540,7 +535,7 @@ class V2(SyncAPIResource):
         """
         return self._get_api_list(
             "/v2/auth_rules",
-            page=SyncCursorPage[V2ListResponse],
+            page=SyncCursorPage[AuthRule],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -560,7 +555,7 @@ class V2(SyncAPIResource):
                     v2_list_params.V2ListParams,
                 ),
             ),
-            model=V2ListResponse,
+            model=AuthRule,
         )
 
     def delete(
@@ -607,7 +602,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2DraftResponse:
+    ) -> AuthRule:
         """
         Creates a new draft version of a rule that will be ran in shadow mode.
 
@@ -633,7 +628,7 @@ class V2(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2DraftResponse,
+            cast_to=AuthRule,
         )
 
     def promote(
@@ -646,7 +641,7 @@ class V2(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2PromoteResponse:
+    ) -> AuthRule:
         """
         Promotes the draft version of an Auth rule to the currently active version such
         that it is enforced in the respective stream.
@@ -667,7 +662,7 @@ class V2(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2PromoteResponse,
+            cast_to=AuthRule,
         )
 
     def retrieve_features(
@@ -828,7 +823,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         """
         Creates a new V2 Auth rule in draft mode
 
@@ -882,7 +877,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         """
         Creates a new V2 Auth rule in draft mode
 
@@ -935,7 +930,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         """
         Creates a new V2 Auth rule in draft mode
 
@@ -997,7 +992,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2CreateResponse:
+    ) -> AuthRule:
         return await self._post(
             "/v2/auth_rules",
             body=await async_maybe_transform(
@@ -1017,7 +1012,7 @@ class AsyncV2(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2CreateResponse,
+            cast_to=AuthRule,
         )
 
     async def retrieve(
@@ -1030,7 +1025,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2RetrieveResponse:
+    ) -> AuthRule:
         """
         Fetches a V2 Auth rule by its token
 
@@ -1050,7 +1045,7 @@ class AsyncV2(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2RetrieveResponse,
+            cast_to=AuthRule,
         )
 
     @overload
@@ -1068,7 +1063,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         """
         Updates a V2 Auth rule's properties
 
@@ -1113,7 +1108,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         """
         Updates a V2 Auth rule's properties
 
@@ -1157,7 +1152,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         """
         Updates a V2 Auth rule's properties
 
@@ -1205,7 +1200,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2UpdateResponse:
+    ) -> AuthRule:
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._patch(
@@ -1225,7 +1220,7 @@ class AsyncV2(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2UpdateResponse,
+            cast_to=AuthRule,
         )
 
     def list(
@@ -1248,7 +1243,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[V2ListResponse, AsyncCursorPage[V2ListResponse]]:
+    ) -> AsyncPaginator[AuthRule, AsyncCursorPage[AuthRule]]:
         """
         Lists V2 Auth rules
 
@@ -1281,7 +1276,7 @@ class AsyncV2(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v2/auth_rules",
-            page=AsyncCursorPage[V2ListResponse],
+            page=AsyncCursorPage[AuthRule],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1301,7 +1296,7 @@ class AsyncV2(AsyncAPIResource):
                     v2_list_params.V2ListParams,
                 ),
             ),
-            model=V2ListResponse,
+            model=AuthRule,
         )
 
     async def delete(
@@ -1348,7 +1343,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2DraftResponse:
+    ) -> AuthRule:
         """
         Creates a new draft version of a rule that will be ran in shadow mode.
 
@@ -1374,7 +1369,7 @@ class AsyncV2(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2DraftResponse,
+            cast_to=AuthRule,
         )
 
     async def promote(
@@ -1387,7 +1382,7 @@ class AsyncV2(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2PromoteResponse:
+    ) -> AuthRule:
         """
         Promotes the draft version of an Auth rule to the currently active version such
         that it is enforced in the respective stream.
@@ -1408,7 +1403,7 @@ class AsyncV2(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=V2PromoteResponse,
+            cast_to=AuthRule,
         )
 
     async def retrieve_features(
