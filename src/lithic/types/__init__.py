@@ -117,7 +117,6 @@ from .external_payment_create_params import ExternalPaymentCreateParams as Exter
 from .external_payment_settle_params import ExternalPaymentSettleParams as ExternalPaymentSettleParams
 from .payment_simulate_action_params import PaymentSimulateActionParams as PaymentSimulateActionParams
 from .payment_simulate_return_params import PaymentSimulateReturnParams as PaymentSimulateReturnParams
-from .tokenization_simulate_response import TokenizationSimulateResponse as TokenizationSimulateResponse
 from .external_payment_release_params import ExternalPaymentReleaseParams as ExternalPaymentReleaseParams
 from .external_payment_reverse_params import ExternalPaymentReverseParams as ExternalPaymentReverseParams
 from .financial_account_create_params import FinancialAccountCreateParams as FinancialAccountCreateParams
@@ -199,9 +198,6 @@ from .transaction_simulate_return_reversal_params import (
 )
 from .external_bank_account_retry_prenote_response import (
     ExternalBankAccountRetryPrenoteResponse as ExternalBankAccountRetryPrenoteResponse,
-)
-from .tokenization_update_digital_card_art_response import (
-    TokenizationUpdateDigitalCardArtResponse as TokenizationUpdateDigitalCardArtResponse,
 )
 from .transaction_simulate_return_reversal_response import (
     TransactionSimulateReturnReversalResponse as TransactionSimulateReturnReversalResponse,

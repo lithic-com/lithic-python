@@ -176,6 +176,29 @@ for card in first_page.data:
 # Remove `await` for non-async usage.
 ```
 
+## Nested params
+
+Nested parameters are dictionaries. The SDK uses TypedDict for type validation, but you can pass regular dictionaries as shown below:
+
+```python
+from lithic import Lithic
+
+client = Lithic()
+
+card = client.cards.create(
+    type="PHYSICAL",
+    shipping_address={
+        "address1": "123",
+        "city": "NEW YORK",
+        "country": "USA",
+        "first_name": "Johnny",
+        "last_name": "Appleseed",
+        "postal_code": "10001",
+        "state": "NY",
+    },
+)
+```
+
 ## Webhook Verification
 
 We provide helper methods for verifying that a webhook request came from Lithic, and not a malicious third party.

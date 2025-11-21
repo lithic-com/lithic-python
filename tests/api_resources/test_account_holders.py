@@ -1068,7 +1068,7 @@ class TestAccountHolders:
         account_holder = client.account_holders.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
-            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
         )
         assert_matches_type(Document, account_holder, path=["response"])
 
@@ -1077,7 +1077,7 @@ class TestAccountHolders:
         response = client.account_holders.with_raw_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
-            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
         )
 
         assert response.is_closed is True
@@ -1090,7 +1090,7 @@ class TestAccountHolders:
         with client.account_holders.with_streaming_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
-            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1106,7 +1106,7 @@ class TestAccountHolders:
             client.account_holders.with_raw_response.upload_document(
                 account_holder_token="",
                 document_type="EIN_LETTER",
-                entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
             )
 
 
@@ -2157,7 +2157,7 @@ class TestAsyncAccountHolders:
         account_holder = await async_client.account_holders.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
-            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
         )
         assert_matches_type(Document, account_holder, path=["response"])
 
@@ -2166,7 +2166,7 @@ class TestAsyncAccountHolders:
         response = await async_client.account_holders.with_raw_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
-            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
         )
 
         assert response.is_closed is True
@@ -2179,7 +2179,7 @@ class TestAsyncAccountHolders:
         async with async_client.account_holders.with_streaming_response.upload_document(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="EIN_LETTER",
-            entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -2195,5 +2195,5 @@ class TestAsyncAccountHolders:
             await async_client.account_holders.with_raw_response.upload_document(
                 account_holder_token="",
                 document_type="EIN_LETTER",
-                entity_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                entity_token="83cf25ae-c14f-4d10-9fa2-0119f36c7286",
             )

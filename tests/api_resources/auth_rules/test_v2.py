@@ -12,12 +12,7 @@ from tests.utils import assert_matches_type
 from lithic._utils import parse_date
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 from lithic.types.auth_rules import (
-    V2ListResponse,
-    V2DraftResponse,
-    V2CreateResponse,
-    V2UpdateResponse,
-    V2PromoteResponse,
-    V2RetrieveResponse,
+    AuthRule,
     V2RetrieveReportResponse,
     V2RetrieveFeaturesResponse,
 )
@@ -42,7 +37,7 @@ class TestV2:
             },
             type="CONDITIONAL_BLOCK",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
@@ -62,7 +57,7 @@ class TestV2:
             event_stream="AUTHORIZATION",
             name="name",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_create_overload_1(self, client: Lithic) -> None:
@@ -82,7 +77,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
@@ -102,7 +97,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2CreateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -121,7 +116,7 @@ class TestV2:
             },
             type="CONDITIONAL_BLOCK",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
@@ -140,7 +135,7 @@ class TestV2:
             event_stream="AUTHORIZATION",
             name="name",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_create_overload_2(self, client: Lithic) -> None:
@@ -161,7 +156,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
@@ -182,7 +177,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2CreateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -201,7 +196,7 @@ class TestV2:
             program_level=True,
             type="CONDITIONAL_BLOCK",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
@@ -221,7 +216,7 @@ class TestV2:
             excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_create_overload_3(self, client: Lithic) -> None:
@@ -242,7 +237,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
@@ -263,7 +258,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2CreateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -272,7 +267,7 @@ class TestV2:
         v2 = client.auth_rules.v2.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2RetrieveResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
@@ -283,7 +278,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2RetrieveResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
@@ -294,7 +289,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2RetrieveResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -310,7 +305,7 @@ class TestV2:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params_overload_1(self, client: Lithic) -> None:
@@ -321,7 +316,7 @@ class TestV2:
             name="name",
             state="INACTIVE",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_update_overload_1(self, client: Lithic) -> None:
@@ -332,7 +327,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_update_overload_1(self, client: Lithic) -> None:
@@ -343,7 +338,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -359,7 +354,7 @@ class TestV2:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params_overload_2(self, client: Lithic) -> None:
@@ -369,7 +364,7 @@ class TestV2:
             name="name",
             state="INACTIVE",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_update_overload_2(self, client: Lithic) -> None:
@@ -380,7 +375,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_update_overload_2(self, client: Lithic) -> None:
@@ -391,7 +386,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -407,7 +402,7 @@ class TestV2:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params_overload_3(self, client: Lithic) -> None:
@@ -418,7 +413,7 @@ class TestV2:
             program_level=True,
             state="INACTIVE",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_update_overload_3(self, client: Lithic) -> None:
@@ -429,7 +424,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_update_overload_3(self, client: Lithic) -> None:
@@ -440,7 +435,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -454,7 +449,7 @@ class TestV2:
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.list()
-        assert_matches_type(SyncCursorPage[V2ListResponse], v2, path=["response"])
+        assert_matches_type(SyncCursorPage[AuthRule], v2, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
@@ -468,7 +463,7 @@ class TestV2:
             scope="PROGRAM",
             starting_after="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(SyncCursorPage[V2ListResponse], v2, path=["response"])
+        assert_matches_type(SyncCursorPage[AuthRule], v2, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
@@ -477,7 +472,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(SyncCursorPage[V2ListResponse], v2, path=["response"])
+        assert_matches_type(SyncCursorPage[AuthRule], v2, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Lithic) -> None:
@@ -486,7 +481,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(SyncCursorPage[V2ListResponse], v2, path=["response"])
+            assert_matches_type(SyncCursorPage[AuthRule], v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -533,7 +528,7 @@ class TestV2:
         v2 = client.auth_rules.v2.draft(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2DraftResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_method_draft_with_all_params(self, client: Lithic) -> None:
@@ -549,7 +544,7 @@ class TestV2:
                 ]
             },
         )
-        assert_matches_type(V2DraftResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_draft(self, client: Lithic) -> None:
@@ -560,7 +555,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2DraftResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_draft(self, client: Lithic) -> None:
@@ -571,7 +566,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2DraftResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -587,7 +582,7 @@ class TestV2:
         v2 = client.auth_rules.v2.promote(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2PromoteResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_raw_response_promote(self, client: Lithic) -> None:
@@ -598,7 +593,7 @@ class TestV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2PromoteResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     def test_streaming_response_promote(self, client: Lithic) -> None:
@@ -609,7 +604,7 @@ class TestV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = response.parse()
-            assert_matches_type(V2PromoteResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -733,7 +728,7 @@ class TestAsyncV2:
             },
             type="CONDITIONAL_BLOCK",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
@@ -753,7 +748,7 @@ class TestAsyncV2:
             event_stream="AUTHORIZATION",
             name="name",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
@@ -773,7 +768,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
@@ -793,7 +788,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2CreateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -812,7 +807,7 @@ class TestAsyncV2:
             },
             type="CONDITIONAL_BLOCK",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
@@ -831,7 +826,7 @@ class TestAsyncV2:
             event_stream="AUTHORIZATION",
             name="name",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
@@ -852,7 +847,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
@@ -873,7 +868,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2CreateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -892,7 +887,7 @@ class TestAsyncV2:
             program_level=True,
             type="CONDITIONAL_BLOCK",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
@@ -912,7 +907,7 @@ class TestAsyncV2:
             excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
         )
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
@@ -933,7 +928,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2CreateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
@@ -954,7 +949,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2CreateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -963,7 +958,7 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2RetrieveResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -974,7 +969,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2RetrieveResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -985,7 +980,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2RetrieveResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1001,7 +996,7 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
@@ -1012,7 +1007,7 @@ class TestAsyncV2:
             name="name",
             state="INACTIVE",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_update_overload_1(self, async_client: AsyncLithic) -> None:
@@ -1023,7 +1018,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_update_overload_1(self, async_client: AsyncLithic) -> None:
@@ -1034,7 +1029,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1050,7 +1045,7 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
@@ -1060,7 +1055,7 @@ class TestAsyncV2:
             name="name",
             state="INACTIVE",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_update_overload_2(self, async_client: AsyncLithic) -> None:
@@ -1071,7 +1066,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_update_overload_2(self, async_client: AsyncLithic) -> None:
@@ -1082,7 +1077,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1098,7 +1093,7 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
@@ -1109,7 +1104,7 @@ class TestAsyncV2:
             program_level=True,
             state="INACTIVE",
         )
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_update_overload_3(self, async_client: AsyncLithic) -> None:
@@ -1120,7 +1115,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2UpdateResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_update_overload_3(self, async_client: AsyncLithic) -> None:
@@ -1131,7 +1126,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2UpdateResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1145,7 +1140,7 @@ class TestAsyncV2:
     @parametrize
     async def test_method_list(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.list()
-        assert_matches_type(AsyncCursorPage[V2ListResponse], v2, path=["response"])
+        assert_matches_type(AsyncCursorPage[AuthRule], v2, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -1159,7 +1154,7 @@ class TestAsyncV2:
             scope="PROGRAM",
             starting_after="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AsyncCursorPage[V2ListResponse], v2, path=["response"])
+        assert_matches_type(AsyncCursorPage[AuthRule], v2, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
@@ -1168,7 +1163,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(AsyncCursorPage[V2ListResponse], v2, path=["response"])
+        assert_matches_type(AsyncCursorPage[AuthRule], v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
@@ -1177,7 +1172,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(AsyncCursorPage[V2ListResponse], v2, path=["response"])
+            assert_matches_type(AsyncCursorPage[AuthRule], v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1224,7 +1219,7 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.draft(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2DraftResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_method_draft_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -1240,7 +1235,7 @@ class TestAsyncV2:
                 ]
             },
         )
-        assert_matches_type(V2DraftResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_draft(self, async_client: AsyncLithic) -> None:
@@ -1251,7 +1246,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2DraftResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_draft(self, async_client: AsyncLithic) -> None:
@@ -1262,7 +1257,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2DraftResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1278,7 +1273,7 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.promote(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(V2PromoteResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_raw_response_promote(self, async_client: AsyncLithic) -> None:
@@ -1289,7 +1284,7 @@ class TestAsyncV2:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         v2 = response.parse()
-        assert_matches_type(V2PromoteResponse, v2, path=["response"])
+        assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
     async def test_streaming_response_promote(self, async_client: AsyncLithic) -> None:
@@ -1300,7 +1295,7 @@ class TestAsyncV2:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             v2 = await response.parse()
-            assert_matches_type(V2PromoteResponse, v2, path=["response"])
+            assert_matches_type(AuthRule, v2, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
