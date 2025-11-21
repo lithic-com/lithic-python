@@ -95,12 +95,6 @@ from lithic.types.auth_rules import (
     RuleStats,
     VelocityLimitParams,
     VelocityLimitPeriod,
-    V2CreateResponse,
-    V2RetrieveResponse,
-    V2UpdateResponse,
-    V2ListResponse,
-    V2DraftResponse,
-    V2PromoteResponse,
     V2RetrieveFeaturesResponse,
     V2RetrieveReportResponse,
 )
@@ -108,13 +102,13 @@ from lithic.types.auth_rules import (
 
 Methods:
 
-- <code title="post /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">create</a>(\*\*<a href="src/lithic/types/auth_rules/v2_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_create_response.py">V2CreateResponse</a></code>
-- <code title="get /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_response.py">V2RetrieveResponse</a></code>
-- <code title="patch /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_update_response.py">V2UpdateResponse</a></code>
-- <code title="get /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">list</a>(\*\*<a href="src/lithic/types/auth_rules/v2_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_list_response.py">SyncCursorPage[V2ListResponse]</a></code>
+- <code title="post /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">create</a>(\*\*<a href="src/lithic/types/auth_rules/v2_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
+- <code title="get /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
+- <code title="patch /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">update</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_update_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
+- <code title="get /v2/auth_rules">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">list</a>(\*\*<a href="src/lithic/types/auth_rules/v2_list_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">SyncCursorPage[AuthRule]</a></code>
 - <code title="delete /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">delete</a>(auth_rule_token) -> None</code>
-- <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_draft_response.py">V2DraftResponse</a></code>
-- <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_promote_response.py">V2PromoteResponse</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
+- <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/features">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_features</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_features_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_features_response.py">V2RetrieveFeaturesResponse</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_report</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_report_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_report_response.py">V2RetrieveReportResponse</a></code>
 
@@ -162,11 +156,7 @@ Methods:
 Types:
 
 ```python
-from lithic.types import (
-    Tokenization,
-    TokenizationSimulateResponse,
-    TokenizationUpdateDigitalCardArtResponse,
-)
+from lithic.types import Tokenization
 ```
 
 Methods:
@@ -177,9 +167,9 @@ Methods:
 - <code title="post /v1/tokenizations/{tokenization_token}/deactivate">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">deactivate</a>(tokenization_token) -> None</code>
 - <code title="post /v1/tokenizations/{tokenization_token}/pause">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">pause</a>(tokenization_token) -> None</code>
 - <code title="post /v1/tokenizations/{tokenization_token}/resend_activation_code">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">resend_activation_code</a>(tokenization_token, \*\*<a href="src/lithic/types/tokenization_resend_activation_code_params.py">params</a>) -> None</code>
-- <code title="post /v1/simulate/tokenizations">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">simulate</a>(\*\*<a href="src/lithic/types/tokenization_simulate_params.py">params</a>) -> <a href="./src/lithic/types/tokenization_simulate_response.py">TokenizationSimulateResponse</a></code>
+- <code title="post /v1/simulate/tokenizations">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">simulate</a>(\*\*<a href="src/lithic/types/tokenization_simulate_params.py">params</a>) -> <a href="./src/lithic/types/tokenization.py">Tokenization</a></code>
 - <code title="post /v1/tokenizations/{tokenization_token}/unpause">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">unpause</a>(tokenization_token) -> None</code>
-- <code title="post /v1/tokenizations/{tokenization_token}/update_digital_card_art">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">update_digital_card_art</a>(tokenization_token, \*\*<a href="src/lithic/types/tokenization_update_digital_card_art_params.py">params</a>) -> <a href="./src/lithic/types/tokenization_update_digital_card_art_response.py">TokenizationUpdateDigitalCardArtResponse</a></code>
+- <code title="post /v1/tokenizations/{tokenization_token}/update_digital_card_art">client.tokenizations.<a href="./src/lithic/resources/tokenizations.py">update_digital_card_art</a>(tokenization_token, \*\*<a href="src/lithic/types/tokenization_update_digital_card_art_params.py">params</a>) -> <a href="./src/lithic/types/tokenization.py">Tokenization</a></code>
 
 # Cards
 

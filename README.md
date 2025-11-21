@@ -176,6 +176,29 @@ for card in first_page.data:
 # Remove `await` for non-async usage.
 ```
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from lithic import Lithic
+
+client = Lithic()
+
+card = client.cards.create(
+    type="PHYSICAL",
+    shipping_address={
+        "address1": "123",
+        "city": "NEW YORK",
+        "country": "USA",
+        "first_name": "Johnny",
+        "last_name": "Appleseed",
+        "postal_code": "10001",
+        "state": "NY",
+    },
+)
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `lithic.APIConnectionError` is raised.

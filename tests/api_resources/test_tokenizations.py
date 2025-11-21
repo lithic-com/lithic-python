@@ -11,8 +11,6 @@ from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import (
     Tokenization,
-    TokenizationSimulateResponse,
-    TokenizationUpdateDigitalCardArtResponse,
 )
 from lithic._utils import parse_date
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -268,7 +266,7 @@ class TestTokenizations:
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
         )
-        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_method_simulate_with_all_params(self, client: Lithic) -> None:
@@ -282,7 +280,7 @@ class TestTokenizations:
             entity="entity",
             wallet_recommended_decision="APPROVED",
         )
-        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_raw_response_simulate(self, client: Lithic) -> None:
@@ -296,7 +294,7 @@ class TestTokenizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
-        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_streaming_response_simulate(self, client: Lithic) -> None:
@@ -310,7 +308,7 @@ class TestTokenizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tokenization = response.parse()
-            assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+            assert_matches_type(Tokenization, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -357,15 +355,15 @@ class TestTokenizations:
         tokenization = client.tokenizations.update_digital_card_art(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_method_update_digital_card_art_with_all_params(self, client: Lithic) -> None:
         tokenization = client.tokenizations.update_digital_card_art(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="5e9483eb-8103-4e16-9794-2106111b2eca",
         )
-        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_raw_response_update_digital_card_art(self, client: Lithic) -> None:
@@ -376,7 +374,7 @@ class TestTokenizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
-        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     def test_streaming_response_update_digital_card_art(self, client: Lithic) -> None:
@@ -387,7 +385,7 @@ class TestTokenizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tokenization = response.parse()
-            assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+            assert_matches_type(Tokenization, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -649,7 +647,7 @@ class TestAsyncTokenizations:
             pan="4111111289144142",
             tokenization_source="APPLE_PAY",
         )
-        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_method_simulate_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -663,7 +661,7 @@ class TestAsyncTokenizations:
             entity="entity",
             wallet_recommended_decision="APPROVED",
         )
-        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_raw_response_simulate(self, async_client: AsyncLithic) -> None:
@@ -677,7 +675,7 @@ class TestAsyncTokenizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
-        assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_streaming_response_simulate(self, async_client: AsyncLithic) -> None:
@@ -691,7 +689,7 @@ class TestAsyncTokenizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tokenization = await response.parse()
-            assert_matches_type(TokenizationSimulateResponse, tokenization, path=["response"])
+            assert_matches_type(Tokenization, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -738,15 +736,15 @@ class TestAsyncTokenizations:
         tokenization = await async_client.tokenizations.update_digital_card_art(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_method_update_digital_card_art_with_all_params(self, async_client: AsyncLithic) -> None:
         tokenization = await async_client.tokenizations.update_digital_card_art(
             tokenization_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            digital_card_art_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            digital_card_art_token="5e9483eb-8103-4e16-9794-2106111b2eca",
         )
-        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_raw_response_update_digital_card_art(self, async_client: AsyncLithic) -> None:
@@ -757,7 +755,7 @@ class TestAsyncTokenizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tokenization = response.parse()
-        assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+        assert_matches_type(Tokenization, tokenization, path=["response"])
 
     @parametrize
     async def test_streaming_response_update_digital_card_art(self, async_client: AsyncLithic) -> None:
@@ -768,7 +766,7 @@ class TestAsyncTokenizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tokenization = await response.parse()
-            assert_matches_type(TokenizationUpdateDigitalCardArtResponse, tokenization, path=["response"])
+            assert_matches_type(Tokenization, tokenization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

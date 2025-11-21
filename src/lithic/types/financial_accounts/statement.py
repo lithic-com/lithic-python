@@ -95,16 +95,16 @@ class PayoffDetails(BaseModel):
     monthly payment. "NA" will signal negative or zero amortization
     """
 
-    payoff_period_length_months: int
+    payoff_period_length_months: Optional[int] = None
     """Number of months to full pay off"""
 
-    payoff_period_monthly_payment_amount: int
+    payoff_period_monthly_payment_amount: Optional[int] = None
     """
     The amount needed to be paid, in cents, each month in order to pay off current
     balance in the payoff period
     """
 
-    payoff_period_payment_total: int
+    payoff_period_payment_total: Optional[int] = None
     """
     The sum of all interest and principal paid, in cents, when paying off in the
     payoff period

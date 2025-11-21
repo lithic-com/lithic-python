@@ -12,7 +12,7 @@ from .conditional_ach_action_parameters import ConditionalACHActionParameters
 from .conditional_tokenization_action_parameters import ConditionalTokenizationActionParameters
 from .conditional_authorization_action_parameters import ConditionalAuthorizationActionParameters
 
-__all__ = ["V2CreateResponse", "CurrentVersion", "CurrentVersionParameters", "DraftVersion", "DraftVersionParameters"]
+__all__ = ["AuthRule", "CurrentVersion", "CurrentVersionParameters", "DraftVersion", "DraftVersionParameters"]
 
 CurrentVersionParameters: TypeAlias = Union[
     ConditionalBlockParameters,
@@ -58,7 +58,7 @@ class DraftVersion(BaseModel):
     """
 
 
-class V2CreateResponse(BaseModel):
+class AuthRule(BaseModel):
     token: str
     """Auth Rule Token"""
 
