@@ -23,8 +23,6 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.tokenization import Tokenization
-from ..types.tokenization_simulate_response import TokenizationSimulateResponse
-from ..types.tokenization_update_digital_card_art_response import TokenizationUpdateDigitalCardArtResponse
 
 __all__ = ["Tokenizations", "AsyncTokenizations"]
 
@@ -348,7 +346,7 @@ class Tokenizations(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenizationSimulateResponse:
+    ) -> Tokenization:
         """
         This endpoint is used to simulate a card's tokenization in the Digital Wallet
         and merchant tokenization ecosystem.
@@ -399,7 +397,7 @@ class Tokenizations(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenizationSimulateResponse,
+            cast_to=Tokenization,
         )
 
     def unpause(
@@ -453,7 +451,7 @@ class Tokenizations(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenizationUpdateDigitalCardArtResponse:
+    ) -> Tokenization:
         """
         This endpoint is used update the digital card art for a digital wallet
         tokenization. A successful response indicates that the card network has updated
@@ -489,7 +487,7 @@ class Tokenizations(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenizationUpdateDigitalCardArtResponse,
+            cast_to=Tokenization,
         )
 
 
@@ -812,7 +810,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenizationSimulateResponse:
+    ) -> Tokenization:
         """
         This endpoint is used to simulate a card's tokenization in the Digital Wallet
         and merchant tokenization ecosystem.
@@ -863,7 +861,7 @@ class AsyncTokenizations(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenizationSimulateResponse,
+            cast_to=Tokenization,
         )
 
     async def unpause(
@@ -917,7 +915,7 @@ class AsyncTokenizations(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenizationUpdateDigitalCardArtResponse:
+    ) -> Tokenization:
         """
         This endpoint is used update the digital card art for a digital wallet
         tokenization. A successful response indicates that the card network has updated
@@ -953,7 +951,7 @@ class AsyncTokenizations(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenizationUpdateDigitalCardArtResponse,
+            cast_to=Tokenization,
         )
 
 
