@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.112.0 (2025-11-21)
+
+Full Changelog: [v0.111.0...v0.112.0](https://github.com/lithic-com/lithic-python/compare/v0.111.0...v0.112.0)
+
+### Features
+
+* **api:** add WALLET_RECOMMENDATION_REASONS attribute for tokenization rules ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+* **api:** provide a unified model for AuthRule ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+
+
+### Bug Fixes
+
+* **api:** fix examples in spec that were not fully valid ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+* **api:** make certain payoff fields nullable ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([95a6172](https://github.com/lithic-com/lithic-python/commit/95a6172000f72b77904fcd0fb21c6ca83319b5ed))
+
 ## 0.111.0 (2025-11-20)
 
 Full Changelog: [v0.110.1...v0.111.0](https://github.com/lithic-com/lithic-python/compare/v0.110.1...v0.111.0)
