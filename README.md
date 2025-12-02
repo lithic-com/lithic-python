@@ -85,6 +85,7 @@ pip install lithic[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from lithic import DefaultAioHttpClient
 from lithic import AsyncLithic
@@ -92,7 +93,7 @@ from lithic import AsyncLithic
 
 async def main() -> None:
     async with AsyncLithic(
-        api_key="My Lithic API Key",
+        api_key=os.environ.get("LITHIC_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         card = await client.cards.create(
