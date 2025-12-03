@@ -9,11 +9,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import (
-    FundingEventListResponse,
-    FundingEventRetrieveResponse,
-    FundingEventRetrieveDetailsResponse,
-)
+from lithic.types import FundingEvent, FundingEventRetrieveDetailsResponse
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -27,7 +23,7 @@ class TestFundingEvents:
         funding_event = client.funding_events.retrieve(
             "funding_event_token",
         )
-        assert_matches_type(FundingEventRetrieveResponse, funding_event, path=["response"])
+        assert_matches_type(FundingEvent, funding_event, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
@@ -38,7 +34,7 @@ class TestFundingEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         funding_event = response.parse()
-        assert_matches_type(FundingEventRetrieveResponse, funding_event, path=["response"])
+        assert_matches_type(FundingEvent, funding_event, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
@@ -49,7 +45,7 @@ class TestFundingEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             funding_event = response.parse()
-            assert_matches_type(FundingEventRetrieveResponse, funding_event, path=["response"])
+            assert_matches_type(FundingEvent, funding_event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -63,7 +59,7 @@ class TestFundingEvents:
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         funding_event = client.funding_events.list()
-        assert_matches_type(SyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+        assert_matches_type(SyncCursorPage[FundingEvent], funding_event, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
@@ -72,7 +68,7 @@ class TestFundingEvents:
             page_size=1,
             starting_after="starting_after",
         )
-        assert_matches_type(SyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+        assert_matches_type(SyncCursorPage[FundingEvent], funding_event, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
@@ -81,7 +77,7 @@ class TestFundingEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         funding_event = response.parse()
-        assert_matches_type(SyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+        assert_matches_type(SyncCursorPage[FundingEvent], funding_event, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Lithic) -> None:
@@ -90,7 +86,7 @@ class TestFundingEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             funding_event = response.parse()
-            assert_matches_type(SyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+            assert_matches_type(SyncCursorPage[FundingEvent], funding_event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -143,7 +139,7 @@ class TestAsyncFundingEvents:
         funding_event = await async_client.funding_events.retrieve(
             "funding_event_token",
         )
-        assert_matches_type(FundingEventRetrieveResponse, funding_event, path=["response"])
+        assert_matches_type(FundingEvent, funding_event, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -154,7 +150,7 @@ class TestAsyncFundingEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         funding_event = response.parse()
-        assert_matches_type(FundingEventRetrieveResponse, funding_event, path=["response"])
+        assert_matches_type(FundingEvent, funding_event, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -165,7 +161,7 @@ class TestAsyncFundingEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             funding_event = await response.parse()
-            assert_matches_type(FundingEventRetrieveResponse, funding_event, path=["response"])
+            assert_matches_type(FundingEvent, funding_event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -179,7 +175,7 @@ class TestAsyncFundingEvents:
     @parametrize
     async def test_method_list(self, async_client: AsyncLithic) -> None:
         funding_event = await async_client.funding_events.list()
-        assert_matches_type(AsyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+        assert_matches_type(AsyncCursorPage[FundingEvent], funding_event, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -188,7 +184,7 @@ class TestAsyncFundingEvents:
             page_size=1,
             starting_after="starting_after",
         )
-        assert_matches_type(AsyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+        assert_matches_type(AsyncCursorPage[FundingEvent], funding_event, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
@@ -197,7 +193,7 @@ class TestAsyncFundingEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         funding_event = response.parse()
-        assert_matches_type(AsyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+        assert_matches_type(AsyncCursorPage[FundingEvent], funding_event, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
@@ -206,7 +202,7 @@ class TestAsyncFundingEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             funding_event = await response.parse()
-            assert_matches_type(AsyncCursorPage[FundingEventListResponse], funding_event, path=["response"])
+            assert_matches_type(AsyncCursorPage[FundingEvent], funding_event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

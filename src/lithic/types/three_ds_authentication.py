@@ -4,10 +4,10 @@ from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
 __all__ = [
-    "AuthenticationRetrieveResponse",
+    "ThreeDSAuthentication",
     "Cardholder",
     "CardholderBillingAddress",
     "CardholderShippingAddress",
@@ -416,7 +416,7 @@ class Transaction(BaseModel):
     """
 
 
-class AuthenticationRetrieveResponse(BaseModel):
+class ThreeDSAuthentication(BaseModel):
     token: str
     """Globally unique identifier for the 3DS authentication.
 

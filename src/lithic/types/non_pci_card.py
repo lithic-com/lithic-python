@@ -136,6 +136,12 @@ class NonPCICard(BaseModel):
     `/auth_rules` endpoints to fetch Auth Rule information instead.
     """
 
+    bulk_order_token: Optional[str] = None
+    """Globally unique identifier for the bulk order associated with this card.
+
+    Only applicable to physical cards that are part of a bulk shipment
+    """
+
     cardholder_currency: Optional[str] = None
     """3-character alphabetic ISO 4217 code for the currency of the cardholder."""
 

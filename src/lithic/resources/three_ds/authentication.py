@@ -14,7 +14,7 @@ from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..._base_client import make_request_options
 from ...types.three_ds import authentication_simulate_params, authentication_simulate_otp_entry_params
-from ...types.three_ds.authentication_retrieve_response import AuthenticationRetrieveResponse
+from ...types.three_ds_authentication import ThreeDSAuthentication
 from ...types.three_ds.authentication_simulate_response import AuthenticationSimulateResponse
 
 __all__ = ["Authentication", "AsyncAuthentication"]
@@ -50,7 +50,7 @@ class Authentication(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AuthenticationRetrieveResponse:
+    ) -> ThreeDSAuthentication:
         """
         Get 3DS Authentication by token
 
@@ -72,7 +72,7 @@ class Authentication(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthenticationRetrieveResponse,
+            cast_to=ThreeDSAuthentication,
         )
 
     def simulate(
@@ -211,7 +211,7 @@ class AsyncAuthentication(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AuthenticationRetrieveResponse:
+    ) -> ThreeDSAuthentication:
         """
         Get 3DS Authentication by token
 
@@ -233,7 +233,7 @@ class AsyncAuthentication(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthenticationRetrieveResponse,
+            cast_to=ThreeDSAuthentication,
         )
 
     async def simulate(

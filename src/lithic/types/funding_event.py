@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["FundingEventListResponse", "NetworkSettlementSummary"]
+__all__ = ["FundingEvent", "NetworkSettlementSummary"]
 
 
 class NetworkSettlementSummary(BaseModel):
@@ -15,7 +15,7 @@ class NetworkSettlementSummary(BaseModel):
     settled_gross_amount: int
 
 
-class FundingEventListResponse(BaseModel):
+class FundingEvent(BaseModel):
     token: str
     """Unique token ID"""
 

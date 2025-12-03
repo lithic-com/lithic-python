@@ -153,6 +153,14 @@ from .account_activity import (
     AccountActivityWithStreamingResponse,
     AsyncAccountActivityWithStreamingResponse,
 )
+from .card_bulk_orders import (
+    CardBulkOrders,
+    AsyncCardBulkOrders,
+    CardBulkOrdersWithRawResponse,
+    AsyncCardBulkOrdersWithRawResponse,
+    CardBulkOrdersWithStreamingResponse,
+    AsyncCardBulkOrdersWithStreamingResponse,
+)
 from .digital_card_art import (
     DigitalCardArtResource,
     AsyncDigitalCardArtResource,
@@ -277,6 +285,12 @@ __all__ = [
     "AsyncCardsWithRawResponse",
     "CardsWithStreamingResponse",
     "AsyncCardsWithStreamingResponse",
+    "CardBulkOrders",
+    "AsyncCardBulkOrders",
+    "CardBulkOrdersWithRawResponse",
+    "AsyncCardBulkOrdersWithRawResponse",
+    "CardBulkOrdersWithStreamingResponse",
+    "AsyncCardBulkOrdersWithStreamingResponse",
     "Balances",
     "AsyncBalances",
     "BalancesWithRawResponse",

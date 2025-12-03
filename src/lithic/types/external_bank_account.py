@@ -9,10 +9,10 @@ from .owner_type import OwnerType
 from .verification_method import VerificationMethod
 from .external_bank_account_address import ExternalBankAccountAddress
 
-__all__ = ["ExternalBankAccountRetryPrenoteResponse"]
+__all__ = ["ExternalBankAccount"]
 
 
-class ExternalBankAccountRetryPrenoteResponse(BaseModel):
+class ExternalBankAccount(BaseModel):
     token: str
     """
     A globally unique identifier for this record of an external bank account

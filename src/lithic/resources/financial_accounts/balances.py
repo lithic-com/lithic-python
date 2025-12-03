@@ -16,7 +16,7 @@ from ..._response import to_streamed_response_wrapper, async_to_streamed_respons
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.financial_accounts import balance_list_params
-from ...types.financial_accounts.balance_list_response import BalanceListResponse
+from ...types.financial_account_balance import FinancialAccountBalance
 
 __all__ = ["Balances", "AsyncBalances"]
 
@@ -53,7 +53,7 @@ class Balances(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSinglePage[BalanceListResponse]:
+    ) -> SyncSinglePage[FinancialAccountBalance]:
         """
         Get the balances for a given financial account.
 
@@ -78,7 +78,7 @@ class Balances(SyncAPIResource):
             )
         return self._get_api_list(
             f"/v1/financial_accounts/{financial_account_token}/balances",
-            page=SyncSinglePage[BalanceListResponse],
+            page=SyncSinglePage[FinancialAccountBalance],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -92,7 +92,7 @@ class Balances(SyncAPIResource):
                     balance_list_params.BalanceListParams,
                 ),
             ),
-            model=BalanceListResponse,
+            model=FinancialAccountBalance,
         )
 
 
@@ -128,7 +128,7 @@ class AsyncBalances(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[BalanceListResponse, AsyncSinglePage[BalanceListResponse]]:
+    ) -> AsyncPaginator[FinancialAccountBalance, AsyncSinglePage[FinancialAccountBalance]]:
         """
         Get the balances for a given financial account.
 
@@ -153,7 +153,7 @@ class AsyncBalances(AsyncAPIResource):
             )
         return self._get_api_list(
             f"/v1/financial_accounts/{financial_account_token}/balances",
-            page=AsyncSinglePage[BalanceListResponse],
+            page=AsyncSinglePage[FinancialAccountBalance],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -167,7 +167,7 @@ class AsyncBalances(AsyncAPIResource):
                     balance_list_params.BalanceListParams,
                 ),
             ),
-            model=BalanceListResponse,
+            model=FinancialAccountBalance,
         )
 
 

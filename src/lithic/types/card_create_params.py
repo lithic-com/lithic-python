@@ -40,6 +40,13 @@ class CardCreateParams(TypedDict, total=False):
     See [Managing Your Program](doc:managing-your-program) for more information.
     """
 
+    bulk_order_token: str
+    """
+    Globally unique identifier for an existing bulk order to associate this card
+    with. When specified, the card will be added to the bulk order for batch
+    shipment. Only applicable to cards of type PHYSICAL
+    """
+
     card_program_token: str
     """For card programs with more than one BIN range.
 
@@ -158,7 +165,9 @@ class CardCreateParams(TypedDict, total=False):
 
     shipping_address: ShippingAddress
 
-    shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+    shipping_method: Literal[
+        "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+    ]
     """Shipping method for the card.
 
     Only applies to cards of type PHYSICAL. Use of options besides `STANDARD`
@@ -175,6 +184,7 @@ class CardCreateParams(TypedDict, total=False):
       tracking
     - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
       or similar international option, with tracking
+    - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
     """
 
     spend_limit: int
