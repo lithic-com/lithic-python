@@ -35,13 +35,12 @@ from .micro_deposits import (
 )
 from ...types.owner_type import OwnerType
 from ...types.verification_method import VerificationMethod
+from ...types.external_bank_account import ExternalBankAccount
 from ...types.external_bank_account_address_param import ExternalBankAccountAddressParam
 from ...types.external_bank_account_list_response import ExternalBankAccountListResponse
 from ...types.external_bank_account_create_response import ExternalBankAccountCreateResponse
 from ...types.external_bank_account_update_response import ExternalBankAccountUpdateResponse
-from ...types.external_bank_account_unpause_response import ExternalBankAccountUnpauseResponse
 from ...types.external_bank_account_retrieve_response import ExternalBankAccountRetrieveResponse
-from ...types.external_bank_account_retry_prenote_response import ExternalBankAccountRetryPrenoteResponse
 from ...types.external_bank_account_retry_micro_deposits_response import ExternalBankAccountRetryMicroDepositsResponse
 
 __all__ = ["ExternalBankAccounts", "AsyncExternalBankAccounts"]
@@ -604,7 +603,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExternalBankAccountRetryPrenoteResponse:
+    ) -> ExternalBankAccount:
         """
         Retry external bank account prenote verification.
 
@@ -630,7 +629,7 @@ class ExternalBankAccounts(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExternalBankAccountRetryPrenoteResponse,
+            cast_to=ExternalBankAccount,
         )
 
     def unpause(
@@ -643,7 +642,7 @@ class ExternalBankAccounts(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExternalBankAccountUnpauseResponse:
+    ) -> ExternalBankAccount:
         """
         Unpause an external bank account
 
@@ -665,7 +664,7 @@ class ExternalBankAccounts(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExternalBankAccountUnpauseResponse,
+            cast_to=ExternalBankAccount,
         )
 
 
@@ -1226,7 +1225,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExternalBankAccountRetryPrenoteResponse:
+    ) -> ExternalBankAccount:
         """
         Retry external bank account prenote verification.
 
@@ -1252,7 +1251,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExternalBankAccountRetryPrenoteResponse,
+            cast_to=ExternalBankAccount,
         )
 
     async def unpause(
@@ -1265,7 +1264,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExternalBankAccountUnpauseResponse:
+    ) -> ExternalBankAccount:
         """
         Unpause an external bank account
 
@@ -1287,7 +1286,7 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExternalBankAccountUnpauseResponse,
+            cast_to=ExternalBankAccount,
         )
 
 

@@ -13,8 +13,7 @@ from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.funding_event_list_response import FundingEventListResponse
-from ..types.funding_event_retrieve_response import FundingEventRetrieveResponse
+from ..types.funding_event import FundingEvent
 from ..types.funding_event_retrieve_details_response import FundingEventRetrieveDetailsResponse
 
 __all__ = ["FundingEvents", "AsyncFundingEvents"]
@@ -50,7 +49,7 @@ class FundingEvents(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FundingEventRetrieveResponse:
+    ) -> FundingEvent:
         """
         Get funding event for program by id
 
@@ -72,7 +71,7 @@ class FundingEvents(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FundingEventRetrieveResponse,
+            cast_to=FundingEvent,
         )
 
     def list(
@@ -87,7 +86,7 @@ class FundingEvents(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCursorPage[FundingEventListResponse]:
+    ) -> SyncCursorPage[FundingEvent]:
         """
         Get all funding events for program
 
@@ -110,7 +109,7 @@ class FundingEvents(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/funding_events",
-            page=SyncCursorPage[FundingEventListResponse],
+            page=SyncCursorPage[FundingEvent],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -125,7 +124,7 @@ class FundingEvents(SyncAPIResource):
                     funding_event_list_params.FundingEventListParams,
                 ),
             ),
-            model=FundingEventListResponse,
+            model=FundingEvent,
         )
 
     def retrieve_details(
@@ -194,7 +193,7 @@ class AsyncFundingEvents(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FundingEventRetrieveResponse:
+    ) -> FundingEvent:
         """
         Get funding event for program by id
 
@@ -216,7 +215,7 @@ class AsyncFundingEvents(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FundingEventRetrieveResponse,
+            cast_to=FundingEvent,
         )
 
     def list(
@@ -231,7 +230,7 @@ class AsyncFundingEvents(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[FundingEventListResponse, AsyncCursorPage[FundingEventListResponse]]:
+    ) -> AsyncPaginator[FundingEvent, AsyncCursorPage[FundingEvent]]:
         """
         Get all funding events for program
 
@@ -254,7 +253,7 @@ class AsyncFundingEvents(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/funding_events",
-            page=AsyncCursorPage[FundingEventListResponse],
+            page=AsyncCursorPage[FundingEvent],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -269,7 +268,7 @@ class AsyncFundingEvents(AsyncAPIResource):
                     funding_event_list_params.FundingEventListParams,
                 ),
             ),
-            model=FundingEventListResponse,
+            model=FundingEvent,
         )
 
     async def retrieve_details(

@@ -24,7 +24,9 @@ class CardConvertPhysicalParams(TypedDict, total=False):
     to cards of type `PHYSICAL`. This must be configured with Lithic before use.
     """
 
-    shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+    shipping_method: Literal[
+        "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+    ]
     """Shipping method for the card.
 
     Only applies to cards of type PHYSICAL. Use of options besides `STANDARD`
@@ -41,4 +43,5 @@ class CardConvertPhysicalParams(TypedDict, total=False):
       tracking
     - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
       or similar international option, with tracking
+    - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
     """

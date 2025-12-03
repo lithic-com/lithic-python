@@ -3,12 +3,12 @@
 from datetime import datetime
 from typing_extensions import Literal
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["BalanceListResponse"]
+__all__ = ["FinancialAccountBalance"]
 
 
-class BalanceListResponse(BaseModel):
+class FinancialAccountBalance(BaseModel):
     token: str
     """Globally unique identifier for the financial account that holds this balance."""
 

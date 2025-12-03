@@ -4,9 +4,9 @@ from typing import Optional
 from datetime import date, datetime
 from typing_extensions import Literal
 
-from ...._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["NetworkTotalRetrieveResponse", "Amounts"]
+__all__ = ["NetworkTotal", "Amounts"]
 
 
 class Amounts(BaseModel):
@@ -26,7 +26,7 @@ class Amounts(BaseModel):
     """Charges specific to Visa/Interlink, in currency's smallest unit."""
 
 
-class NetworkTotalRetrieveResponse(BaseModel):
+class NetworkTotal(BaseModel):
     token: str
     """Globally unique identifier."""
 
