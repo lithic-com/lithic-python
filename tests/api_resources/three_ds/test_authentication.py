@@ -9,8 +9,8 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
+from lithic.types import ThreeDSAuthentication
 from lithic.types.three_ds import (
-    AuthenticationRetrieveResponse,
     AuthenticationSimulateResponse,
 )
 
@@ -25,7 +25,7 @@ class TestAuthentication:
         authentication = client.three_ds.authentication.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+        assert_matches_type(ThreeDSAuthentication, authentication, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
@@ -36,7 +36,7 @@ class TestAuthentication:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authentication = response.parse()
-        assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+        assert_matches_type(ThreeDSAuthentication, authentication, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
@@ -47,7 +47,7 @@ class TestAuthentication:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             authentication = response.parse()
-            assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+            assert_matches_type(ThreeDSAuthentication, authentication, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -184,7 +184,7 @@ class TestAsyncAuthentication:
         authentication = await async_client.three_ds.authentication.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+        assert_matches_type(ThreeDSAuthentication, authentication, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -195,7 +195,7 @@ class TestAsyncAuthentication:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authentication = response.parse()
-        assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+        assert_matches_type(ThreeDSAuthentication, authentication, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -206,7 +206,7 @@ class TestAsyncAuthentication:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             authentication = await response.parse()
-            assert_matches_type(AuthenticationRetrieveResponse, authentication, path=["response"])
+            assert_matches_type(ThreeDSAuthentication, authentication, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

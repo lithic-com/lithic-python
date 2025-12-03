@@ -57,6 +57,7 @@ if TYPE_CHECKING:
         account_holders,
         credit_products,
         account_activity,
+        card_bulk_orders,
         digital_card_art,
         network_programs,
         external_payments,
@@ -83,6 +84,7 @@ if TYPE_CHECKING:
     from .resources.account_holders import AccountHolders, AsyncAccountHolders
     from .resources.reports.reports import Reports, AsyncReports
     from .resources.account_activity import AccountActivity, AsyncAccountActivity
+    from .resources.card_bulk_orders import CardBulkOrders, AsyncCardBulkOrders
     from .resources.digital_card_art import DigitalCardArtResource, AsyncDigitalCardArtResource
     from .resources.network_programs import NetworkPrograms, AsyncNetworkPrograms
     from .resources.external_payments import ExternalPayments, AsyncExternalPayments
@@ -244,6 +246,12 @@ class Lithic(SyncAPIClient):
         from .resources.cards import Cards
 
         return Cards(self)
+
+    @cached_property
+    def card_bulk_orders(self) -> CardBulkOrders:
+        from .resources.card_bulk_orders import CardBulkOrders
+
+        return CardBulkOrders(self)
 
     @cached_property
     def balances(self) -> Balances:
@@ -644,6 +652,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncCards(self)
 
     @cached_property
+    def card_bulk_orders(self) -> AsyncCardBulkOrders:
+        from .resources.card_bulk_orders import AsyncCardBulkOrders
+
+        return AsyncCardBulkOrders(self)
+
+    @cached_property
     def balances(self) -> AsyncBalances:
         from .resources.balances import AsyncBalances
 
@@ -965,6 +979,12 @@ class LithicWithRawResponse:
         return CardsWithRawResponse(self._client.cards)
 
     @cached_property
+    def card_bulk_orders(self) -> card_bulk_orders.CardBulkOrdersWithRawResponse:
+        from .resources.card_bulk_orders import CardBulkOrdersWithRawResponse
+
+        return CardBulkOrdersWithRawResponse(self._client.card_bulk_orders)
+
+    @cached_property
     def balances(self) -> balances.BalancesWithRawResponse:
         from .resources.balances import BalancesWithRawResponse
 
@@ -1148,6 +1168,12 @@ class AsyncLithicWithRawResponse:
         from .resources.cards import AsyncCardsWithRawResponse
 
         return AsyncCardsWithRawResponse(self._client.cards)
+
+    @cached_property
+    def card_bulk_orders(self) -> card_bulk_orders.AsyncCardBulkOrdersWithRawResponse:
+        from .resources.card_bulk_orders import AsyncCardBulkOrdersWithRawResponse
+
+        return AsyncCardBulkOrdersWithRawResponse(self._client.card_bulk_orders)
 
     @cached_property
     def balances(self) -> balances.AsyncBalancesWithRawResponse:
@@ -1335,6 +1361,12 @@ class LithicWithStreamedResponse:
         return CardsWithStreamingResponse(self._client.cards)
 
     @cached_property
+    def card_bulk_orders(self) -> card_bulk_orders.CardBulkOrdersWithStreamingResponse:
+        from .resources.card_bulk_orders import CardBulkOrdersWithStreamingResponse
+
+        return CardBulkOrdersWithStreamingResponse(self._client.card_bulk_orders)
+
+    @cached_property
     def balances(self) -> balances.BalancesWithStreamingResponse:
         from .resources.balances import BalancesWithStreamingResponse
 
@@ -1518,6 +1550,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.cards import AsyncCardsWithStreamingResponse
 
         return AsyncCardsWithStreamingResponse(self._client.cards)
+
+    @cached_property
+    def card_bulk_orders(self) -> card_bulk_orders.AsyncCardBulkOrdersWithStreamingResponse:
+        from .resources.card_bulk_orders import AsyncCardBulkOrdersWithStreamingResponse
+
+        return AsyncCardBulkOrdersWithStreamingResponse(self._client.card_bulk_orders)
 
     @cached_property
     def balances(self) -> balances.AsyncBalancesWithStreamingResponse:

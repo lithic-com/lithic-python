@@ -102,6 +102,7 @@ class Cards(SyncAPIResource):
         *,
         type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"],
         account_token: str | Omit = omit,
+        bulk_order_token: str | Omit = omit,
         card_program_token: str | Omit = omit,
         carrier: Carrier | Omit = omit,
         digital_card_art_token: str | Omit = omit,
@@ -128,7 +129,9 @@ class Cards(SyncAPIResource):
         ]
         | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         spend_limit: int | Omit = omit,
         spend_limit_duration: SpendLimitDuration | Omit = omit,
@@ -168,6 +171,10 @@ class Cards(SyncAPIResource):
               with. Required for programs enrolling users using the
               [/account_holders endpoint](https://docs.lithic.com/docs/account-holders-kyc).
               See [Managing Your Program](doc:managing-your-program) for more information.
+
+          bulk_order_token: Globally unique identifier for an existing bulk order to associate this card
+              with. When specified, the card will be added to the bulk order for batch
+              shipment. Only applicable to cards of type PHYSICAL
 
           card_program_token: For card programs with more than one BIN range. This must be configured with
               Lithic before use. Identifies the card program/BIN range under which to create
@@ -253,6 +260,7 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
               $1,000 limit). Transaction requests above the spend limit will be declined. Note
@@ -296,6 +304,7 @@ class Cards(SyncAPIResource):
                 {
                     "type": type,
                     "account_token": account_token,
+                    "bulk_order_token": bulk_order_token,
                     "card_program_token": card_program_token,
                     "carrier": carrier,
                     "digital_card_art_token": digital_card_art_token,
@@ -591,7 +600,9 @@ class Cards(SyncAPIResource):
         shipping_address: ShippingAddress,
         carrier: Carrier | Omit = omit,
         product_id: str | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -636,6 +647,7 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           extra_headers: Send extra headers
 
@@ -822,7 +834,9 @@ class Cards(SyncAPIResource):
         carrier: Carrier | Omit = omit,
         product_id: str | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -862,6 +876,7 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           extra_headers: Send extra headers
 
@@ -899,7 +914,9 @@ class Cards(SyncAPIResource):
         exp_month: str | Omit = omit,
         exp_year: str | Omit = omit,
         product_id: str | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -949,6 +966,7 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           extra_headers: Send extra headers
 
@@ -1134,6 +1152,7 @@ class AsyncCards(AsyncAPIResource):
         *,
         type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"],
         account_token: str | Omit = omit,
+        bulk_order_token: str | Omit = omit,
         card_program_token: str | Omit = omit,
         carrier: Carrier | Omit = omit,
         digital_card_art_token: str | Omit = omit,
@@ -1160,7 +1179,9 @@ class AsyncCards(AsyncAPIResource):
         ]
         | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         spend_limit: int | Omit = omit,
         spend_limit_duration: SpendLimitDuration | Omit = omit,
@@ -1200,6 +1221,10 @@ class AsyncCards(AsyncAPIResource):
               with. Required for programs enrolling users using the
               [/account_holders endpoint](https://docs.lithic.com/docs/account-holders-kyc).
               See [Managing Your Program](doc:managing-your-program) for more information.
+
+          bulk_order_token: Globally unique identifier for an existing bulk order to associate this card
+              with. When specified, the card will be added to the bulk order for batch
+              shipment. Only applicable to cards of type PHYSICAL
 
           card_program_token: For card programs with more than one BIN range. This must be configured with
               Lithic before use. Identifies the card program/BIN range under which to create
@@ -1285,6 +1310,7 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
               $1,000 limit). Transaction requests above the spend limit will be declined. Note
@@ -1328,6 +1354,7 @@ class AsyncCards(AsyncAPIResource):
                 {
                     "type": type,
                     "account_token": account_token,
+                    "bulk_order_token": bulk_order_token,
                     "card_program_token": card_program_token,
                     "carrier": carrier,
                     "digital_card_art_token": digital_card_art_token,
@@ -1623,7 +1650,9 @@ class AsyncCards(AsyncAPIResource):
         shipping_address: ShippingAddress,
         carrier: Carrier | Omit = omit,
         product_id: str | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1668,6 +1697,7 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           extra_headers: Send extra headers
 
@@ -1854,7 +1884,9 @@ class AsyncCards(AsyncAPIResource):
         carrier: Carrier | Omit = omit,
         product_id: str | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1894,6 +1926,7 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           extra_headers: Send extra headers
 
@@ -1931,7 +1964,9 @@ class AsyncCards(AsyncAPIResource):
         exp_month: str | Omit = omit,
         exp_year: str | Omit = omit,
         product_id: str | Omit = omit,
-        shipping_method: Literal["2_DAY", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
+        shipping_method: Literal[
+            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1981,6 +2016,7 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
+              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
 
           extra_headers: Send extra headers
 

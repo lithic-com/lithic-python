@@ -16,9 +16,8 @@ from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import AsyncPaginator, make_request_options
+from ....types.network_total import NetworkTotal
 from ....types.reports.settlement import network_total_list_params
-from ....types.reports.settlement.network_total_list_response import NetworkTotalListResponse
-from ....types.reports.settlement.network_total_retrieve_response import NetworkTotalRetrieveResponse
 
 __all__ = ["NetworkTotals", "AsyncNetworkTotals"]
 
@@ -53,7 +52,7 @@ class NetworkTotals(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NetworkTotalRetrieveResponse:
+    ) -> NetworkTotal:
         """Retrieve a specific network total record by token.
 
         Not available in sandbox.
@@ -74,7 +73,7 @@ class NetworkTotals(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NetworkTotalRetrieveResponse,
+            cast_to=NetworkTotal,
         )
 
     def list(
@@ -97,7 +96,7 @@ class NetworkTotals(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCursorPage[NetworkTotalListResponse]:
+    ) -> SyncCursorPage[NetworkTotal]:
         """List network total records with optional filters.
 
         Not available in sandbox.
@@ -140,7 +139,7 @@ class NetworkTotals(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/reports/settlement/network_totals",
-            page=SyncCursorPage[NetworkTotalListResponse],
+            page=SyncCursorPage[NetworkTotal],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -163,7 +162,7 @@ class NetworkTotals(SyncAPIResource):
                     network_total_list_params.NetworkTotalListParams,
                 ),
             ),
-            model=NetworkTotalListResponse,
+            model=NetworkTotal,
         )
 
 
@@ -197,7 +196,7 @@ class AsyncNetworkTotals(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NetworkTotalRetrieveResponse:
+    ) -> NetworkTotal:
         """Retrieve a specific network total record by token.
 
         Not available in sandbox.
@@ -218,7 +217,7 @@ class AsyncNetworkTotals(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NetworkTotalRetrieveResponse,
+            cast_to=NetworkTotal,
         )
 
     def list(
@@ -241,7 +240,7 @@ class AsyncNetworkTotals(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[NetworkTotalListResponse, AsyncCursorPage[NetworkTotalListResponse]]:
+    ) -> AsyncPaginator[NetworkTotal, AsyncCursorPage[NetworkTotal]]:
         """List network total records with optional filters.
 
         Not available in sandbox.
@@ -284,7 +283,7 @@ class AsyncNetworkTotals(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/reports/settlement/network_totals",
-            page=AsyncCursorPage[NetworkTotalListResponse],
+            page=AsyncCursorPage[NetworkTotal],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -307,7 +306,7 @@ class AsyncNetworkTotals(AsyncAPIResource):
                     network_total_list_params.NetworkTotalListParams,
                 ),
             ),
-            model=NetworkTotalListResponse,
+            model=NetworkTotal,
         )
 
 

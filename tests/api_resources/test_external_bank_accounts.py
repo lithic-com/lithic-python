@@ -10,12 +10,11 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import (
+    ExternalBankAccount,
     ExternalBankAccountListResponse,
     ExternalBankAccountCreateResponse,
     ExternalBankAccountUpdateResponse,
-    ExternalBankAccountUnpauseResponse,
     ExternalBankAccountRetrieveResponse,
-    ExternalBankAccountRetryPrenoteResponse,
     ExternalBankAccountRetryMicroDepositsResponse,
 )
 from lithic._utils import parse_date
@@ -470,7 +469,7 @@ class TestExternalBankAccounts:
         external_bank_account = client.external_bank_accounts.retry_prenote(
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     def test_method_retry_prenote_with_all_params(self, client: Lithic) -> None:
@@ -478,7 +477,7 @@ class TestExternalBankAccounts:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     def test_raw_response_retry_prenote(self, client: Lithic) -> None:
@@ -489,7 +488,7 @@ class TestExternalBankAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
-        assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     def test_streaming_response_retry_prenote(self, client: Lithic) -> None:
@@ -500,7 +499,7 @@ class TestExternalBankAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             external_bank_account = response.parse()
-            assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+            assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -518,7 +517,7 @@ class TestExternalBankAccounts:
         external_bank_account = client.external_bank_accounts.unpause(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ExternalBankAccountUnpauseResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     def test_raw_response_unpause(self, client: Lithic) -> None:
@@ -529,7 +528,7 @@ class TestExternalBankAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
-        assert_matches_type(ExternalBankAccountUnpauseResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     def test_streaming_response_unpause(self, client: Lithic) -> None:
@@ -540,7 +539,7 @@ class TestExternalBankAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             external_bank_account = response.parse()
-            assert_matches_type(ExternalBankAccountUnpauseResponse, external_bank_account, path=["response"])
+            assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1002,7 +1001,7 @@ class TestAsyncExternalBankAccounts:
         external_bank_account = await async_client.external_bank_accounts.retry_prenote(
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     async def test_method_retry_prenote_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -1010,7 +1009,7 @@ class TestAsyncExternalBankAccounts:
             external_bank_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     async def test_raw_response_retry_prenote(self, async_client: AsyncLithic) -> None:
@@ -1021,7 +1020,7 @@ class TestAsyncExternalBankAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
-        assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     async def test_streaming_response_retry_prenote(self, async_client: AsyncLithic) -> None:
@@ -1032,7 +1031,7 @@ class TestAsyncExternalBankAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             external_bank_account = await response.parse()
-            assert_matches_type(ExternalBankAccountRetryPrenoteResponse, external_bank_account, path=["response"])
+            assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1050,7 +1049,7 @@ class TestAsyncExternalBankAccounts:
         external_bank_account = await async_client.external_bank_accounts.unpause(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ExternalBankAccountUnpauseResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     async def test_raw_response_unpause(self, async_client: AsyncLithic) -> None:
@@ -1061,7 +1060,7 @@ class TestAsyncExternalBankAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         external_bank_account = response.parse()
-        assert_matches_type(ExternalBankAccountUnpauseResponse, external_bank_account, path=["response"])
+        assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
     @parametrize
     async def test_streaming_response_unpause(self, async_client: AsyncLithic) -> None:
@@ -1072,7 +1071,7 @@ class TestAsyncExternalBankAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             external_bank_account = await response.parse()
-            assert_matches_type(ExternalBankAccountUnpauseResponse, external_bank_account, path=["response"])
+            assert_matches_type(ExternalBankAccount, external_bank_account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

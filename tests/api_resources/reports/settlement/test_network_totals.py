@@ -9,12 +9,9 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
+from lithic.types import NetworkTotal
 from lithic._utils import parse_date, parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
-from lithic.types.reports.settlement import (
-    NetworkTotalListResponse,
-    NetworkTotalRetrieveResponse,
-)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -27,7 +24,7 @@ class TestNetworkTotals:
         network_total = client.reports.settlement.network_totals.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(NetworkTotalRetrieveResponse, network_total, path=["response"])
+        assert_matches_type(NetworkTotal, network_total, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Lithic) -> None:
@@ -38,7 +35,7 @@ class TestNetworkTotals:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         network_total = response.parse()
-        assert_matches_type(NetworkTotalRetrieveResponse, network_total, path=["response"])
+        assert_matches_type(NetworkTotal, network_total, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Lithic) -> None:
@@ -49,7 +46,7 @@ class TestNetworkTotals:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             network_total = response.parse()
-            assert_matches_type(NetworkTotalRetrieveResponse, network_total, path=["response"])
+            assert_matches_type(NetworkTotal, network_total, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -63,7 +60,7 @@ class TestNetworkTotals:
     @parametrize
     def test_method_list(self, client: Lithic) -> None:
         network_total = client.reports.settlement.network_totals.list()
-        assert_matches_type(SyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+        assert_matches_type(SyncCursorPage[NetworkTotal], network_total, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
@@ -80,7 +77,7 @@ class TestNetworkTotals:
             settlement_institution_id="settlement_institution_id",
             starting_after="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(SyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+        assert_matches_type(SyncCursorPage[NetworkTotal], network_total, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Lithic) -> None:
@@ -89,7 +86,7 @@ class TestNetworkTotals:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         network_total = response.parse()
-        assert_matches_type(SyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+        assert_matches_type(SyncCursorPage[NetworkTotal], network_total, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Lithic) -> None:
@@ -98,7 +95,7 @@ class TestNetworkTotals:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             network_total = response.parse()
-            assert_matches_type(SyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+            assert_matches_type(SyncCursorPage[NetworkTotal], network_total, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -113,7 +110,7 @@ class TestAsyncNetworkTotals:
         network_total = await async_client.reports.settlement.network_totals.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(NetworkTotalRetrieveResponse, network_total, path=["response"])
+        assert_matches_type(NetworkTotal, network_total, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -124,7 +121,7 @@ class TestAsyncNetworkTotals:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         network_total = response.parse()
-        assert_matches_type(NetworkTotalRetrieveResponse, network_total, path=["response"])
+        assert_matches_type(NetworkTotal, network_total, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLithic) -> None:
@@ -135,7 +132,7 @@ class TestAsyncNetworkTotals:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             network_total = await response.parse()
-            assert_matches_type(NetworkTotalRetrieveResponse, network_total, path=["response"])
+            assert_matches_type(NetworkTotal, network_total, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -149,7 +146,7 @@ class TestAsyncNetworkTotals:
     @parametrize
     async def test_method_list(self, async_client: AsyncLithic) -> None:
         network_total = await async_client.reports.settlement.network_totals.list()
-        assert_matches_type(AsyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+        assert_matches_type(AsyncCursorPage[NetworkTotal], network_total, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
@@ -166,7 +163,7 @@ class TestAsyncNetworkTotals:
             settlement_institution_id="settlement_institution_id",
             starting_after="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AsyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+        assert_matches_type(AsyncCursorPage[NetworkTotal], network_total, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncLithic) -> None:
@@ -175,7 +172,7 @@ class TestAsyncNetworkTotals:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         network_total = response.parse()
-        assert_matches_type(AsyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+        assert_matches_type(AsyncCursorPage[NetworkTotal], network_total, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncLithic) -> None:
@@ -184,6 +181,6 @@ class TestAsyncNetworkTotals:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             network_total = await response.parse()
-            assert_matches_type(AsyncCursorPage[NetworkTotalListResponse], network_total, path=["response"])
+            assert_matches_type(AsyncCursorPage[NetworkTotal], network_total, path=["response"])
 
         assert cast(Any, response.is_closed) is True
