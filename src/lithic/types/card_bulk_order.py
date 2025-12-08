@@ -10,6 +10,8 @@ __all__ = ["CardBulkOrder"]
 
 
 class CardBulkOrder(BaseModel):
+    """Represents a bulk order for physical card shipments"""
+
     token: str
     """Globally unique identifier for the bulk order"""
 

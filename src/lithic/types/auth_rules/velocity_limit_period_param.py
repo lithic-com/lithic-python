@@ -27,10 +27,16 @@ class TrailingWindowObject(TypedDict, total=False):
 
 
 class FixedWindowDay(TypedDict, total=False):
+    """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
+
     type: Required[Literal["DAY"]]
 
 
 class FixedWindowWeek(TypedDict, total=False):
+    """
+    Velocity over the current week since 00:00 / 12 AM in Eastern Time on specified `day_of_week`
+    """
+
     type: Required[Literal["WEEK"]]
 
     day_of_week: int
@@ -42,6 +48,10 @@ class FixedWindowWeek(TypedDict, total=False):
 
 
 class FixedWindowMonth(TypedDict, total=False):
+    """
+    Velocity over the current month since 00:00 / 12 AM in Eastern Time on specified `day_of_month`.
+    """
+
     type: Required[Literal["MONTH"]]
 
     day_of_month: int
@@ -54,6 +64,10 @@ class FixedWindowMonth(TypedDict, total=False):
 
 
 class FixedWindowYear(TypedDict, total=False):
+    """
+    Velocity over the current year since 00:00 / 12 AM in Eastern Time on specified `month` and `day_of_month`. This validates the month and day of the year to start from is a real date. In the event that February 29th is selected, in non-leap years, the window will start from February 28th.
+    """
+
     type: Required[Literal["YEAR"]]
 
     day_of_month: int

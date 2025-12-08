@@ -8,11 +8,17 @@ __all__ = ["CardWebProvisionResponse", "Jws", "JwsHeader"]
 
 
 class JwsHeader(BaseModel):
+    """
+    JWS unprotected headers containing header parameters that aren't integrity-protected by the JWS signature.
+    """
+
     kid: Optional[str] = None
     """The ID for the JWS Public Key of the key pair used to generate the signature."""
 
 
 class Jws(BaseModel):
+    """JWS object required for handoff to Apple's script."""
+
     header: Optional[JwsHeader] = None
     """
     JWS unprotected headers containing header parameters that aren't

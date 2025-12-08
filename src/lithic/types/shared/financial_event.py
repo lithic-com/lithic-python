@@ -10,6 +10,8 @@ __all__ = ["FinancialEvent"]
 
 
 class FinancialEvent(BaseModel):
+    """Financial Event"""
+
     token: Optional[str] = None
     """Globally unique identifier."""
 

@@ -10,6 +10,8 @@ __all__ = ["EnhancedData", "Common", "CommonLineItem", "CommonTax", "Fleet", "Fl
 
 
 class CommonLineItem(BaseModel):
+    """An L2/L3 enhanced commercial data line item."""
+
     amount: Optional[str] = None
     """The price of the item purchased in merchant currency."""
 

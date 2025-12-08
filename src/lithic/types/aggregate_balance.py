@@ -9,6 +9,8 @@ __all__ = ["AggregateBalance"]
 
 
 class AggregateBalance(BaseModel):
+    """Aggregate Balance across all end-user accounts"""
+
     available_amount: int
     """Funds available for spend in the currency's smallest unit (e.g., cents for USD)"""
 

@@ -25,6 +25,8 @@ class AuthenticationSimulateParams(TypedDict, total=False):
 
 
 class Merchant(TypedDict, total=False):
+    """Merchant information for the simulated transaction"""
+
     id: Required[str]
     """Unique identifier to identify the payment card acceptor.
 
@@ -53,6 +55,8 @@ class Merchant(TypedDict, total=False):
 
 
 class Transaction(TypedDict, total=False):
+    """Transaction details for the simulation"""
+
     amount: Required[int]
     """Amount (in cents) to authenticate."""
 

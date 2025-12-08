@@ -12,6 +12,8 @@ __all__ = ["SettlementDetail", "OtherFeesDetails"]
 
 
 class OtherFeesDetails(BaseModel):
+    """The total gross amount of other fees by type."""
+
     isa: Optional[int] = FieldInfo(alias="ISA", default=None)
 
 

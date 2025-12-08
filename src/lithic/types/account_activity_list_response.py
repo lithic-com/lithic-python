@@ -17,6 +17,8 @@ __all__ = ["AccountActivityListResponse", "FinancialTransaction", "CardTransacti
 
 
 class FinancialTransaction(BaseModel):
+    """Financial transaction with inheritance from unified base transaction"""
+
     token: str
     """Unique identifier for the transaction"""
 
@@ -79,6 +81,8 @@ class FinancialTransaction(BaseModel):
 
 
 class CardTransaction(Transaction):
+    """Card transaction with ledger base properties"""
+
     token: str  # type: ignore
     """Unique identifier for the transaction"""
 

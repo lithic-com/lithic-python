@@ -106,6 +106,8 @@ class KYBPatchRequestBeneficialOwnerEntity(TypedDict, total=False):
 
 
 class KYBPatchRequestBeneficialOwnerIndividual(TypedDict, total=False):
+    """Individuals associated with a KYB application. Phone number is optional."""
+
     entity_token: Required[str]
     """Globally unique identifier for an entity."""
 
@@ -144,6 +146,10 @@ class KYBPatchRequestBeneficialOwnerIndividual(TypedDict, total=False):
 
 
 class KYBPatchRequestBusinessEntity(TypedDict, total=False):
+    """
+    Information for business for which the account is being opened and KYB is being run.
+    """
+
     entity_token: Required[str]
     """Globally unique identifier for an entity."""
 
@@ -180,6 +186,10 @@ class KYBPatchRequestBusinessEntity(TypedDict, total=False):
 
 
 class KYBPatchRequestControlPerson(TypedDict, total=False):
+    """
+    An individual with significant responsibility for managing the legal entity (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating Officer, Managing Member, General Partner, President, Vice President, or Treasurer). This can be an executive, or someone who will have program-wide access to the cards that Lithic will provide. In some cases, this individual could also be a beneficial owner listed above. See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section II) for more background.
+    """
+
     entity_token: Required[str]
     """Globally unique identifier for an entity."""
 
@@ -232,6 +242,10 @@ class KYCPatchRequest(TypedDict, total=False):
 
 
 class KYCPatchRequestIndividual(TypedDict, total=False):
+    """
+    Information on the individual for whom the account is being opened and KYC is being run.
+    """
+
     entity_token: Required[str]
     """Globally unique identifier for an entity."""
 

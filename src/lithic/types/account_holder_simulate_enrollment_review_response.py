@@ -21,6 +21,10 @@ __all__ = [
 
 
 class BeneficialOwnerIndividualAddress(BaseModel):
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 
@@ -80,6 +84,10 @@ class BeneficialOwnerIndividual(BaseModel):
 
 
 class ControlPersonAddress(BaseModel):
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 
@@ -112,6 +120,15 @@ class ControlPersonAddress(BaseModel):
 
 
 class ControlPerson(BaseModel):
+    """Only present when user_type == "BUSINESS".
+
+    An individual with significant responsibility for managing the legal entity (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating Officer,
+
+    Managing Member, General Partner, President, Vice President, or Treasurer). This can be an executive, or someone who will have program-wide access
+
+    to the cards that Lithic will provide. In some cases, this individual could also be a beneficial owner listed above.
+    """
+
     address: Optional[ControlPersonAddress] = None
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -139,6 +156,10 @@ class ControlPerson(BaseModel):
 
 
 class IndividualAddress(BaseModel):
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 
@@ -171,6 +192,11 @@ class IndividualAddress(BaseModel):
 
 
 class Individual(BaseModel):
+    """Only present when user_type == "INDIVIDUAL".
+
+    Information about the individual for which the account is being opened and KYC is being run.
+    """
+
     address: Optional[IndividualAddress] = None
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -198,6 +224,8 @@ class Individual(BaseModel):
 
 
 class VerificationApplication(BaseModel):
+    """Information about the most recent identity verification attempt"""
+
     created: datetime
     """Timestamp of when the application was created."""
 

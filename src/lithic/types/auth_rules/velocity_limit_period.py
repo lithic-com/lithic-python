@@ -27,10 +27,16 @@ class TrailingWindowObject(BaseModel):
 
 
 class FixedWindowDay(BaseModel):
+    """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
+
     type: Literal["DAY"]
 
 
 class FixedWindowWeek(BaseModel):
+    """
+    Velocity over the current week since 00:00 / 12 AM in Eastern Time on specified `day_of_week`
+    """
+
     type: Literal["WEEK"]
 
     day_of_week: Optional[int] = None
@@ -42,6 +48,10 @@ class FixedWindowWeek(BaseModel):
 
 
 class FixedWindowMonth(BaseModel):
+    """
+    Velocity over the current month since 00:00 / 12 AM in Eastern Time on specified `day_of_month`.
+    """
+
     type: Literal["MONTH"]
 
     day_of_month: Optional[int] = None
@@ -54,6 +64,10 @@ class FixedWindowMonth(BaseModel):
 
 
 class FixedWindowYear(BaseModel):
+    """
+    Velocity over the current year since 00:00 / 12 AM in Eastern Time on specified `month` and `day_of_month`. This validates the month and day of the year to start from is a real date. In the event that February 29th is selected, in non-leap years, the window will start from February 28th.
+    """
+
     type: Literal["YEAR"]
 
     day_of_month: Optional[int] = None

@@ -19,6 +19,8 @@ __all__ = [
 
 
 class AccountStandingFinancialAccountState(BaseModel):
+    """Information about the financial account state"""
+
     status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"]
     """Status of the financial account"""
 
@@ -83,6 +85,8 @@ class InterestDetails(BaseModel):
 
 
 class PayoffDetails(BaseModel):
+    """Details on number and size of payments to pay off balance"""
+
     minimum_payment_months: str
     """
     The number of months it would take to pay off the balance in full by only paying

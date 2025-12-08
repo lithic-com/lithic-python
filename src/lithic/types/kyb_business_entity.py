@@ -8,6 +8,10 @@ __all__ = ["KYBBusinessEntity", "Address"]
 
 
 class Address(BaseModel):
+    """
+    Business''s physical address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable.
+    """
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 
