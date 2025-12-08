@@ -24,6 +24,10 @@ __all__ = [
 
 
 class KybkycPatchResponseBeneficialOwnerIndividualAddress(BaseModel):
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 
@@ -83,6 +87,10 @@ class KybkycPatchResponseBeneficialOwnerIndividual(BaseModel):
 
 
 class KYBKYCPatchResponseControlPersonAddress(BaseModel):
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 
@@ -115,6 +123,15 @@ class KYBKYCPatchResponseControlPersonAddress(BaseModel):
 
 
 class KYBKYCPatchResponseControlPerson(BaseModel):
+    """Only present when user_type == "BUSINESS".
+
+    An individual with significant responsibility for managing the legal entity (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating Officer,
+
+    Managing Member, General Partner, President, Vice President, or Treasurer). This can be an executive, or someone who will have program-wide access
+
+    to the cards that Lithic will provide. In some cases, this individual could also be a beneficial owner listed above.
+    """
+
     address: Optional[KYBKYCPatchResponseControlPersonAddress] = None
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -142,6 +159,10 @@ class KYBKYCPatchResponseControlPerson(BaseModel):
 
 
 class KYBKYCPatchResponseIndividualAddress(BaseModel):
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 
@@ -174,6 +195,11 @@ class KYBKYCPatchResponseIndividualAddress(BaseModel):
 
 
 class KYBKYCPatchResponseIndividual(BaseModel):
+    """Only present when user_type == "INDIVIDUAL".
+
+    Information about the individual for which the account is being opened and KYC is being run.
+    """
+
     address: Optional[KYBKYCPatchResponseIndividualAddress] = None
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -201,6 +227,8 @@ class KYBKYCPatchResponseIndividual(BaseModel):
 
 
 class KYBKYCPatchResponseVerificationApplication(BaseModel):
+    """Information about the most recent identity verification attempt"""
+
     created: datetime
     """Timestamp of when the application was created."""
 
@@ -412,6 +440,8 @@ class KYBKYCPatchResponse(BaseModel):
 
 
 class PatchResponseAddress(BaseModel):
+    """The address for the account holder"""
+
     address1: str
     """Valid deliverable address (no PO boxes)."""
 

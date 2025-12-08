@@ -8,6 +8,11 @@ __all__ = ["MerchantLockParameters", "Merchant"]
 
 
 class Merchant(BaseModel):
+    """Represents a specific merchant lock based on their ID or descriptor.
+
+    Each merchant object allows transaction rules to work at a granular level and requires at least one of merchant_id or descriptor.
+    """
+
     comment: Optional[str] = None
     """
     A comment or explanation about the merchant, used internally for rule management

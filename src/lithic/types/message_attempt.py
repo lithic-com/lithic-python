@@ -9,6 +9,8 @@ __all__ = ["MessageAttempt"]
 
 
 class MessageAttempt(BaseModel):
+    """A subscription to specific event types."""
+
     token: str
     """Globally unique identifier."""
 

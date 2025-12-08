@@ -92,6 +92,8 @@ class KYB(TypedDict, total=False):
 
 
 class KYBBeneficialOwnerIndividual(TypedDict, total=False):
+    """Individuals associated with a KYB application. Phone number is optional."""
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -126,6 +128,10 @@ class KYBBeneficialOwnerIndividual(TypedDict, total=False):
 
 
 class KYBBusinessEntity(TypedDict, total=False):
+    """
+    Information for business for which the account is being opened and KYB is being run.
+    """
+
     address: Required[Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
@@ -159,6 +165,13 @@ class KYBBusinessEntity(TypedDict, total=False):
 
 
 class KYBControlPerson(TypedDict, total=False):
+    """
+    An individual with significant responsibility for managing the legal entity (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating Officer,
+    Managing Member, General Partner, President, Vice President, or Treasurer). This can be an executive, or someone who will have program-wide access
+    to the cards that Lithic will provide. In some cases, this individual could also be a beneficial owner listed above.
+    See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section II) for more background.
+    """
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -278,6 +291,8 @@ class KYBDelegated(TypedDict, total=False):
 
 
 class KYBDelegatedBusinessEntity(TypedDict, total=False):
+    """Information for business for which the account is being opened."""
+
     address: Required[Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
@@ -311,6 +326,8 @@ class KYBDelegatedBusinessEntity(TypedDict, total=False):
 
 
 class KYBDelegatedBeneficialOwnerIndividual(TypedDict, total=False):
+    """Individuals associated with a KYB application. Phone number is optional."""
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -345,6 +362,13 @@ class KYBDelegatedBeneficialOwnerIndividual(TypedDict, total=False):
 
 
 class KYBDelegatedControlPerson(TypedDict, total=False):
+    """
+    An individual with significant responsibility for managing the legal entity (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating Officer,
+    Managing Member, General Partner, President, Vice President, or Treasurer). This can be an executive, or someone who will have program-wide access
+    to the cards that Lithic will provide. In some cases, this individual could also be a beneficial owner listed above.
+    See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section II) for more background.
+    """
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -411,6 +435,10 @@ class KYC(TypedDict, total=False):
 
 
 class KYCIndividual(TypedDict, total=False):
+    """
+    Information on individual for whom the account is being opened and KYC is being run.
+    """
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not

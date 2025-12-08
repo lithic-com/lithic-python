@@ -11,6 +11,8 @@ __all__ = ["BookTransferResponse", "Event", "TransactionSeries"]
 
 
 class Event(BaseModel):
+    """Book transfer Event"""
+
     token: str
     """Globally unique identifier."""
 
@@ -78,6 +80,8 @@ class Event(BaseModel):
 
 
 class TransactionSeries(BaseModel):
+    """A series of transactions that are grouped together"""
+
     related_transaction_event_token: Optional[str] = None
 
     related_transaction_token: Optional[str] = None
@@ -86,6 +90,8 @@ class TransactionSeries(BaseModel):
 
 
 class BookTransferResponse(BaseModel):
+    """Book transfer transaction"""
+
     token: str
     """Unique identifier for the transaction"""
 

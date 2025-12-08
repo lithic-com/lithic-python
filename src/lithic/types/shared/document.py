@@ -10,6 +10,8 @@ __all__ = ["Document", "RequiredDocumentUpload"]
 
 
 class RequiredDocumentUpload(BaseModel):
+    """Represents a single image of the document to upload."""
+
     token: str
     """Globally unique identifier for the document upload."""
 
@@ -64,6 +66,11 @@ class RequiredDocumentUpload(BaseModel):
 
 
 class Document(BaseModel):
+    """
+    Describes the document and the required document image uploads
+    required to re-run KYC
+    """
+
     token: str
     """Globally unique identifier for the document."""
 
