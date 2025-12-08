@@ -11,6 +11,8 @@ __all__ = ["NonPCICard", "Funding"]
 
 
 class Funding(BaseModel):
+    """Deprecated: Funding account for the card."""
+
     token: str
     """A globally unique identifier for this FundingAccount."""
 
@@ -49,6 +51,8 @@ class Funding(BaseModel):
 
 
 class NonPCICard(BaseModel):
+    """Card details without PCI information"""
+
     token: str
     """Globally unique identifier."""
 

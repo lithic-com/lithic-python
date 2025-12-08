@@ -8,6 +8,10 @@ __all__ = ["Card"]
 
 
 class Card(NonPCICard):
+    """
+    Card details with potentially PCI sensitive information for Enterprise customers
+    """
+
     cvv: Optional[str] = None
     """Three digit cvv printed on the back of the card."""
 

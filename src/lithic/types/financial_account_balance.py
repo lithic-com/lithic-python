@@ -9,6 +9,8 @@ __all__ = ["FinancialAccountBalance"]
 
 
 class FinancialAccountBalance(BaseModel):
+    """Balance of a Financial Account"""
+
     token: str
     """Globally unique identifier for the financial account that holds this balance."""
 

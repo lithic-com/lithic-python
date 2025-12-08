@@ -9,5 +9,7 @@ __all__ = ["PaymentCreateResponse"]
 
 
 class PaymentCreateResponse(Payment):
+    """Payment transaction"""
+
     balance: Optional[Balance] = None
     """Balance"""

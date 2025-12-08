@@ -9,6 +9,8 @@ __all__ = ["ExternalResource"]
 
 
 class ExternalResource(BaseModel):
+    """External resource associated with the management operation"""
+
     external_resource_token: str
     """Token identifying the external resource"""
 

@@ -8,6 +8,8 @@ __all__ = ["AggregateBalanceListResponse"]
 
 
 class AggregateBalanceListResponse(BaseModel):
+    """Card Aggregate Balance across all end-user accounts"""
+
     available_amount: int
     """Funds available for spend in the currency's smallest unit (e.g., cents for USD)"""
 

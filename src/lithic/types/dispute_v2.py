@@ -21,6 +21,8 @@ __all__ = [
 
 
 class EventDataWorkflow(BaseModel):
+    """Details specific to workflow events"""
+
     action: Literal["OPENED", "CLOSED", "REOPENED"]
     """Action taken in this stage"""
 
@@ -41,6 +43,8 @@ class EventDataWorkflow(BaseModel):
 
 
 class EventDataFinancial(BaseModel):
+    """Details specific to financial events"""
+
     amount: int
     """Amount in minor units"""
 
@@ -55,6 +59,8 @@ class EventDataFinancial(BaseModel):
 
 
 class EventDataCardholderLiability(BaseModel):
+    """Details specific to cardholder liability events"""
+
     action: Literal["PROVISIONAL_CREDIT_GRANTED", "PROVISIONAL_CREDIT_REVERSED", "WRITTEN_OFF"]
     """Action taken regarding cardholder liability"""
 
@@ -74,6 +80,8 @@ EventData: TypeAlias = Annotated[
 
 
 class Event(BaseModel):
+    """Event that occurred in the dispute lifecycle"""
+
     token: str
     """Unique identifier for the event, in UUID format"""
 
@@ -88,6 +96,8 @@ class Event(BaseModel):
 
 
 class LiabilityAllocation(BaseModel):
+    """Current breakdown of how liability is allocated for the disputed amount"""
+
     denied_amount: int
     """The amount that has been denied to the cardholder"""
 
@@ -110,6 +120,10 @@ class LiabilityAllocation(BaseModel):
 
 
 class TransactionSeries(BaseModel):
+    """
+    Contains identifiers for the transaction and specific event within being disputed; null if no transaction can be identified
+    """
+
     related_transaction_event_token: Optional[str] = None
     """
     Token of the specific event in the original transaction being disputed, in UUID
@@ -127,6 +141,10 @@ class TransactionSeries(BaseModel):
 
 
 class DisputeV2(BaseModel):
+    """
+    The Dispute object tracks the progression of a dispute throughout its lifecycle.
+    """
+
     token: str
     """Token assigned by Lithic for the dispute, in UUID format."""
 

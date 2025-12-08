@@ -10,6 +10,8 @@ __all__ = ["Dispute"]
 
 
 class Dispute(BaseModel):
+    """Dispute."""
+
     token: str
     """Globally unique identifier."""
 

@@ -9,6 +9,11 @@ __all__ = ["MerchantLockParametersParam", "Merchant"]
 
 
 class Merchant(TypedDict, total=False):
+    """Represents a specific merchant lock based on their ID or descriptor.
+
+    Each merchant object allows transaction rules to work at a granular level and requires at least one of merchant_id or descriptor.
+    """
+
     comment: str
     """
     A comment or explanation about the merchant, used internally for rule management

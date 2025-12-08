@@ -22,6 +22,8 @@ __all__ = [
 
 
 class CardholderBillingAddress(BaseModel):
+    """Object containing data on the billing address provided during the transaction."""
+
     address1: Optional[str] = None
     """First line of the street address provided by the cardholder."""
 
@@ -45,6 +47,8 @@ class CardholderBillingAddress(BaseModel):
 
 
 class CardholderShippingAddress(BaseModel):
+    """Object containing data on the shipping address provided during the transaction."""
+
     address1: Optional[str] = None
     """First line of the street address provided by the cardholder."""
 
@@ -68,6 +72,8 @@ class CardholderShippingAddress(BaseModel):
 
 
 class Cardholder(BaseModel):
+    """Object containing data about the cardholder provided during the transaction."""
+
     address_match: Optional[bool] = None
     """
     Indicates whether the shipping address and billing address provided by the
@@ -121,6 +127,10 @@ class Cardholder(BaseModel):
 
 
 class MerchantRiskIndicator(BaseModel):
+    """
+    Object containing additional data indicating additional risk factors related to the e-commerce transaction.
+    """
+
     delivery_email_address: Optional[str] = None
     """
     In transactions with electronic delivery, email address to which merchandise is
@@ -197,6 +207,10 @@ class MerchantRiskIndicator(BaseModel):
 
 
 class Merchant(BaseModel):
+    """
+    Object containing data about the merchant involved in the e-commerce transaction.
+    """
+
     risk_indicator: MerchantRiskIndicator
     """
     Object containing additional data indicating additional risk factors related to
@@ -234,6 +248,10 @@ class Merchant(BaseModel):
 
 
 class AdditionalData(BaseModel):
+    """
+    Object containing additional data about the 3DS request that is beyond the EMV 3DS standard spec (e.g., specific fields that only certain card networks send but are not required across all 3DS requests).
+    """
+
     network_decision: Optional[Literal["LOW_RISK", "NOT_LOW_RISK"]] = None
     """
     Mastercard only: Indicates whether the network would have considered the
@@ -249,6 +267,11 @@ class AdditionalData(BaseModel):
 
 
 class App(BaseModel):
+    """Object containing data about the app used in the e-commerce transaction.
+
+    Present if the channel is 'APP_BASED'.
+    """
+
     device: Optional[str] = None
     """Device model: e.g. "Apple iPhone 16"."""
 
@@ -287,6 +310,11 @@ class App(BaseModel):
 
 
 class Browser(BaseModel):
+    """Object containing data about the browser used in the e-commerce transaction.
+
+    Present if the channel is 'BROWSER'.
+    """
+
     accept_header: Optional[str] = None
     """
     Content of the HTTP accept headers as sent from the cardholder's browser to the
@@ -332,6 +360,11 @@ class Browser(BaseModel):
 
 
 class ChallengeMetadata(BaseModel):
+    """Metadata about the challenge method and delivery.
+
+    Only present when a challenge is triggered.
+    """
+
     method_type: Literal["SMS_OTP", "OUT_OF_BAND"]
     """The type of challenge method used for authentication."""
 
@@ -369,6 +402,10 @@ class ChallengeMetadata(BaseModel):
 
 
 class Transaction(BaseModel):
+    """
+    Object containing data about the e-commerce transaction for which the merchant is requesting authentication.
+    """
+
     amount: float
     """Amount of the purchase in minor units of currency with all punctuation removed.
 
@@ -417,6 +454,8 @@ class Transaction(BaseModel):
 
 
 class ThreeDSAuthentication(BaseModel):
+    """Represents a 3DS authentication"""
+
     token: str
     """Globally unique identifier for the 3DS authentication.
 

@@ -21,6 +21,8 @@ __all__ = [
 
 
 class AccountStandingFinancialAccountState(BaseModel):
+    """Information about the financial account state"""
+
     status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"]
     """Status of the financial account"""
 

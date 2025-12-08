@@ -12,6 +12,8 @@ __all__ = ["KYBParam", "BeneficialOwnerIndividual", "BusinessEntity", "ControlPe
 
 
 class BeneficialOwnerIndividual(TypedDict, total=False):
+    """Individuals associated with a KYB application. Phone number is optional."""
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
@@ -46,6 +48,10 @@ class BeneficialOwnerIndividual(TypedDict, total=False):
 
 
 class BusinessEntity(TypedDict, total=False):
+    """
+    Information for business for which the account is being opened and KYB is being run.
+    """
+
     address: Required[Address]
     """
     Business's physical address - PO boxes, UPS drops, and FedEx drops are not
@@ -79,6 +85,13 @@ class BusinessEntity(TypedDict, total=False):
 
 
 class ControlPerson(TypedDict, total=False):
+    """
+    An individual with significant responsibility for managing the legal entity (e.g., a Chief Executive Officer, Chief Financial Officer, Chief Operating Officer,
+    Managing Member, General Partner, President, Vice President, or Treasurer). This can be an executive, or someone who will have program-wide access
+    to the cards that Lithic will provide. In some cases, this individual could also be a beneficial owner listed above.
+    See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section II) for more background.
+    """
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not

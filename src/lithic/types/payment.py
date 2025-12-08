@@ -18,6 +18,8 @@ __all__ = [
 
 
 class Event(BaseModel):
+    """Payment Event"""
+
     token: str
     """Globally unique identifier."""
 
@@ -145,6 +147,8 @@ MethodAttributes: TypeAlias = Union[MethodAttributesACHMethodAttributes, MethodA
 
 
 class RelatedAccountTokens(BaseModel):
+    """Account tokens related to a payment transaction"""
+
     account_token: Optional[str] = None
     """Globally unique identifier for the account"""
 
@@ -153,6 +157,8 @@ class RelatedAccountTokens(BaseModel):
 
 
 class Payment(BaseModel):
+    """Payment transaction"""
+
     token: str
     """Unique identifier for the transaction"""
 

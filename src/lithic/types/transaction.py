@@ -338,6 +338,11 @@ class EventNetworkInfoVisa(BaseModel):
 
 
 class EventNetworkInfo(BaseModel):
+    """Information provided by the card network in each event.
+
+    This includes common identifiers shared between you, Lithic, the card network and in some cases the acquirer. These identifiers often link together events within the same transaction lifecycle and can be used to locate a particular transaction, such as during processing of disputes. Not all fields are available in all events, and the presence of these fields is dependent on the card network and the event type. If the field is populated by the network, we will pass it through as is unless otherwise specified. Please consult the official network documentation for more details about these fields and how to use them.
+    """
+
     acquirer: Optional[EventNetworkInfoAcquirer] = None
 
     amex: Optional[EventNetworkInfoAmex] = None

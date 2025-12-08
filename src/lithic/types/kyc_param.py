@@ -10,6 +10,10 @@ __all__ = ["KYCParam", "Individual"]
 
 
 class Individual(TypedDict, total=False):
+    """
+    Information on individual for whom the account is being opened and KYC is being run.
+    """
+
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not

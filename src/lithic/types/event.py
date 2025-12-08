@@ -10,6 +10,8 @@ __all__ = ["Event"]
 
 
 class Event(BaseModel):
+    """A single event that affects the transaction state and lifecycle."""
+
     token: str
     """Globally unique identifier."""
 
