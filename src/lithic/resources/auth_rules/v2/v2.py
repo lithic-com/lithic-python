@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing import List, Union, Optional
 from datetime import date
 from typing_extensions import Literal, overload
 
@@ -493,6 +493,12 @@ class V2(SyncAPIResource):
             "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
         ]
         | Omit = omit,
+        event_streams: List[
+            Literal[
+                "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
+            ]
+        ]
+        | Omit = omit,
         page_size: int | Omit = omit,
         scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | Omit = omit,
         starting_after: str | Omit = omit,
@@ -516,7 +522,12 @@ class V2(SyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          event_stream: Only return Auth rules that are executed during the provided event stream.
+          event_stream: Deprecated: Use event_streams instead. Only return Auth rules that are executed
+              during the provided event stream.
+
+          event_streams: Only return Auth rules that are executed during any of the provided event
+              streams. If event_streams and event_stream are specified, the values will be
+              combined.
 
           page_size: Page size (for pagination).
 
@@ -548,6 +559,7 @@ class V2(SyncAPIResource):
                         "card_token": card_token,
                         "ending_before": ending_before,
                         "event_stream": event_stream,
+                        "event_streams": event_streams,
                         "page_size": page_size,
                         "scope": scope,
                         "starting_after": starting_after,
@@ -1234,6 +1246,12 @@ class AsyncV2(AsyncAPIResource):
             "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
         ]
         | Omit = omit,
+        event_streams: List[
+            Literal[
+                "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
+            ]
+        ]
+        | Omit = omit,
         page_size: int | Omit = omit,
         scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | Omit = omit,
         starting_after: str | Omit = omit,
@@ -1257,7 +1275,12 @@ class AsyncV2(AsyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          event_stream: Only return Auth rules that are executed during the provided event stream.
+          event_stream: Deprecated: Use event_streams instead. Only return Auth rules that are executed
+              during the provided event stream.
+
+          event_streams: Only return Auth rules that are executed during any of the provided event
+              streams. If event_streams and event_stream are specified, the values will be
+              combined.
 
           page_size: Page size (for pagination).
 
@@ -1289,6 +1312,7 @@ class AsyncV2(AsyncAPIResource):
                         "card_token": card_token,
                         "ending_before": ending_before,
                         "event_stream": event_stream,
+                        "event_streams": event_streams,
                         "page_size": page_size,
                         "scope": scope,
                         "starting_after": starting_after,

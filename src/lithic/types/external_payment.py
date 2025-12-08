@@ -45,6 +45,16 @@ class Event(BaseModel):
         "EXTERNAL_CHECK_SETTLED",
         "EXTERNAL_CHECK_REVERSED",
         "EXTERNAL_CHECK_RELEASED",
+        "EXTERNAL_FEDNOW_INITIATED",
+        "EXTERNAL_FEDNOW_CANCELED",
+        "EXTERNAL_FEDNOW_SETTLED",
+        "EXTERNAL_FEDNOW_REVERSED",
+        "EXTERNAL_FEDNOW_RELEASED",
+        "EXTERNAL_RTP_INITIATED",
+        "EXTERNAL_RTP_CANCELED",
+        "EXTERNAL_RTP_SETTLED",
+        "EXTERNAL_RTP_REVERSED",
+        "EXTERNAL_RTP_RELEASED",
     ]
 
 
@@ -61,7 +71,11 @@ class ExternalPayment(BaseModel):
     updated: datetime
     """ISO 8601 timestamp of when the transaction was last updated"""
 
-    category: Optional[Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]] = None
+    category: Optional[
+        Literal[
+            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+        ]
+    ] = None
 
     currency: Optional[str] = None
 

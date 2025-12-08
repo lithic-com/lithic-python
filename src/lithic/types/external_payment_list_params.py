@@ -20,7 +20,9 @@ class ExternalPaymentListParams(TypedDict, total=False):
 
     business_account_token: str
 
-    category: Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]
+    category: Literal[
+        "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+    ]
     """External Payment category to be returned."""
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]

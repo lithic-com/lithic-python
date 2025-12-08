@@ -14,7 +14,11 @@ __all__ = ["ExternalPaymentCreateParams"]
 class ExternalPaymentCreateParams(TypedDict, total=False):
     amount: Required[int]
 
-    category: Required[Literal["EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_TRANSFER"]]
+    category: Required[
+        Literal[
+            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+        ]
+    ]
 
     effective_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
 
