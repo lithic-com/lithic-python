@@ -98,6 +98,9 @@ class MethodAttributesACHMethodAttributes(BaseModel):
     sec_code: Literal["CCD", "PPD", "WEB", "TEL", "CIE", "CTX"]
     """SEC code for ACH transaction"""
 
+    ach_hold_period: Optional[int] = None
+    """Number of days the ACH transaction is on hold"""
+
     addenda: Optional[str] = None
     """Addenda information"""
 
@@ -164,6 +167,8 @@ class Payment(BaseModel):
         "CARD",
         "EXTERNAL_ACH",
         "EXTERNAL_CHECK",
+        "EXTERNAL_FEDNOW",
+        "EXTERNAL_RTP",
         "EXTERNAL_TRANSFER",
         "EXTERNAL_WIRE",
         "MANAGEMENT_ADJUSTMENT",

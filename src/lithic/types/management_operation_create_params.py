@@ -49,6 +49,12 @@ class ManagementOperationCreateParams(TypedDict, total=False):
             "DISPUTE_WON_REVERSAL",
             "DISBURSE",
             "DISBURSE_REVERSAL",
+            "ANNUAL",
+            "ANNUAL_REVERSAL",
+            "QUARTERLY",
+            "QUARTERLY_REVERSAL",
+            "MONTHLY",
+            "MONTHLY_REVERSAL",
         ]
     ]
 

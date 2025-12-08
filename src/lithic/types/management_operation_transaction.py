@@ -45,6 +45,12 @@ class Event(BaseModel):
         "DISPUTE_WON_REVERSAL",
         "DISBURSE",
         "DISBURSE_REVERSAL",
+        "ANNUAL",
+        "ANNUAL_REVERSAL",
+        "QUARTERLY",
+        "QUARTERLY_REVERSAL",
+        "MONTHLY",
+        "MONTHLY_REVERSAL",
     ]
 
     subtype: Optional[str] = None

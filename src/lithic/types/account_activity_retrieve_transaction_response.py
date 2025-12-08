@@ -31,6 +31,8 @@ class FinancialTransaction(BaseModel):
         "CARD",
         "EXTERNAL_ACH",
         "EXTERNAL_CHECK",
+        "EXTERNAL_FEDNOW",
+        "EXTERNAL_RTP",
         "EXTERNAL_TRANSFER",
         "EXTERNAL_WIRE",
         "MANAGEMENT_ADJUSTMENT",
