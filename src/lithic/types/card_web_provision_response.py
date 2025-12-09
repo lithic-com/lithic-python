@@ -1,13 +1,20 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Union, Optional
+from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["CardWebProvisionResponse", "Jws", "JwsHeader"]
+__all__ = [
+    "CardWebProvisionResponse",
+    "AppleWebPushProvisioningResponse",
+    "AppleWebPushProvisioningResponseJws",
+    "AppleWebPushProvisioningResponseJwsHeader",
+    "GoogleWebPushProvisioningResponse",
+]
 
 
-class JwsHeader(BaseModel):
+class AppleWebPushProvisioningResponseJwsHeader(BaseModel):
     """
     JWS unprotected headers containing header parameters that aren't integrity-protected by the JWS signature.
     """
@@ -16,10 +23,10 @@ class JwsHeader(BaseModel):
     """The ID for the JWS Public Key of the key pair used to generate the signature."""
 
 
-class Jws(BaseModel):
+class AppleWebPushProvisioningResponseJws(BaseModel):
     """JWS object required for handoff to Apple's script."""
 
-    header: Optional[JwsHeader] = None
+    header: Optional[AppleWebPushProvisioningResponseJwsHeader] = None
     """
     JWS unprotected headers containing header parameters that aren't
     integrity-protected by the JWS signature.
@@ -38,9 +45,26 @@ class Jws(BaseModel):
     """Base64url encoded signature of the JWS object."""
 
 
-class CardWebProvisionResponse(BaseModel):
-    jws: Optional[Jws] = None
+class AppleWebPushProvisioningResponse(BaseModel):
+    jws: Optional[AppleWebPushProvisioningResponseJws] = None
     """JWS object required for handoff to Apple's script."""
 
     state: Optional[str] = None
     """A unique identifier for the JWS object."""
+
+
+class GoogleWebPushProvisioningResponse(BaseModel):
+    google_opc: Optional[str] = None
+    """
+    A base64 encoded and encrypted payload representing card data for the Google Pay
+    UWPP FPAN flow.
+    """
+
+    tsp_opc: Optional[str] = None
+    """
+    A base64 encoded and encrypted payload representing card data for the Google Pay
+    UWPP tokenization flow.
+    """
+
+
+CardWebProvisionResponse: TypeAlias = Union[AppleWebPushProvisioningResponse, GoogleWebPushProvisioningResponse]
