@@ -25,6 +25,7 @@ from ...._response import to_streamed_response_wrapper, async_to_streamed_respon
 from ....pagination import SyncCursorPage, AsyncCursorPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.auth_rules import (
+    EventStream,
     v2_list_params,
     v2_draft_params,
     v2_create_params,
@@ -33,6 +34,7 @@ from ....types.auth_rules import (
     v2_retrieve_features_params,
 )
 from ....types.auth_rules.auth_rule import AuthRule
+from ....types.auth_rules.event_stream import EventStream
 from ....types.auth_rules.v2_retrieve_report_response import V2RetrieveReportResponse
 from ....types.auth_rules.v2_retrieve_features_response import V2RetrieveFeaturesResponse
 
@@ -71,10 +73,7 @@ class V2(SyncAPIResource):
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -125,10 +124,7 @@ class V2(SyncAPIResource):
         card_tokens: SequenceNotStr[str],
         parameters: v2_create_params.CardLevelRuleParameters,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -177,10 +173,7 @@ class V2(SyncAPIResource):
         parameters: v2_create_params.ProgramLevelRuleParameters,
         program_level: bool,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -237,10 +230,7 @@ class V2(SyncAPIResource):
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
@@ -489,16 +479,8 @@ class V2(SyncAPIResource):
         business_account_token: str | Omit = omit,
         card_token: str | Omit = omit,
         ending_before: str | Omit = omit,
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
-        event_streams: List[
-            Literal[
-                "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-            ]
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
+        event_streams: List[EventStream] | Omit = omit,
         page_size: int | Omit = omit,
         scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | Omit = omit,
         starting_after: str | Omit = omit,
@@ -824,10 +806,7 @@ class AsyncV2(AsyncAPIResource):
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -878,10 +857,7 @@ class AsyncV2(AsyncAPIResource):
         card_tokens: SequenceNotStr[str],
         parameters: v2_create_params.CardLevelRuleParameters,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -930,10 +906,7 @@ class AsyncV2(AsyncAPIResource):
         parameters: v2_create_params.ProgramLevelRuleParameters,
         program_level: bool,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -990,10 +963,7 @@ class AsyncV2(AsyncAPIResource):
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
@@ -1242,16 +1212,8 @@ class AsyncV2(AsyncAPIResource):
         business_account_token: str | Omit = omit,
         card_token: str | Omit = omit,
         ending_before: str | Omit = omit,
-        event_stream: Literal[
-            "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-        ]
-        | Omit = omit,
-        event_streams: List[
-            Literal[
-                "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-            ]
-        ]
-        | Omit = omit,
+        event_stream: EventStream | Omit = omit,
+        event_streams: List[EventStream] | Omit = omit,
         page_size: int | Omit = omit,
         scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"] | Omit = omit,
         starting_after: str | Omit = omit,
