@@ -4,6 +4,7 @@ from typing import List, Union, Optional
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
+from .event_stream import EventStream
 from .velocity_limit_params import VelocityLimitParams
 from .merchant_lock_parameters import MerchantLockParameters
 from .conditional_block_parameters import ConditionalBlockParameters
@@ -75,9 +76,7 @@ class AuthRule(BaseModel):
 
     draft_version: Optional[DraftVersion] = None
 
-    event_stream: Literal[
-        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-    ]
+    event_stream: EventStream
     """The event stream during which the rule will be evaluated."""
 
     lithic_managed: bool
