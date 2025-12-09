@@ -15,6 +15,8 @@ ConditionalOperation: TypeAlias = Literal[
     "IS_GREATER_THAN_OR_EQUAL_TO",
     "IS_LESS_THAN",
     "IS_LESS_THAN_OR_EQUAL_TO",
+    "IS_AFTER",
+    "IS_BEFORE",
     "CONTAINS_ANY",
     "CONTAINS_ALL",
     "CONTAINS_NONE",

@@ -660,7 +660,10 @@ class TestCards:
     def test_method_web_provision_with_all_params(self, client: Lithic) -> None:
         card = client.cards.web_provision(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_device_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_wallet_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             digital_wallet="APPLE_PAY",
+            server_session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardWebProvisionResponse, card, path=["response"])
 
@@ -1336,7 +1339,10 @@ class TestAsyncCards:
     async def test_method_web_provision_with_all_params(self, async_client: AsyncLithic) -> None:
         card = await async_client.cards.web_provision(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_device_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_wallet_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             digital_wallet="APPLE_PAY",
+            server_session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CardWebProvisionResponse, card, path=["response"])
 
