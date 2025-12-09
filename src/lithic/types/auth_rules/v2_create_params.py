@@ -6,6 +6,7 @@ from typing import Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from ..._types import SequenceNotStr
+from .event_stream import EventStream
 from .velocity_limit_params_param import VelocityLimitParamsParam
 from .merchant_lock_parameters_param import MerchantLockParametersParam
 from .conditional_block_parameters_param import ConditionalBlockParametersParam
@@ -49,9 +50,7 @@ class AccountLevelRule(TypedDict, total=False):
     business_account_tokens: SequenceNotStr[str]
     """Business Account tokens to which the Auth Rule applies."""
 
-    event_stream: Literal[
-        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-    ]
+    event_stream: EventStream
     """The event stream during which the rule will be evaluated."""
 
     name: Optional[str]
@@ -90,9 +89,7 @@ class CardLevelRule(TypedDict, total=False):
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
-    event_stream: Literal[
-        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-    ]
+    event_stream: EventStream
     """The event stream during which the rule will be evaluated."""
 
     name: Optional[str]
@@ -131,9 +128,7 @@ class ProgramLevelRule(TypedDict, total=False):
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
-    event_stream: Literal[
-        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-    ]
+    event_stream: EventStream
     """The event stream during which the rule will be evaluated."""
 
     excluded_card_tokens: SequenceNotStr[str]

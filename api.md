@@ -91,6 +91,7 @@ from lithic.types.auth_rules import (
     ConditionalOperation,
     ConditionalTokenizationActionParameters,
     ConditionalValue,
+    EventStream,
     MerchantLockParameters,
     RuleStats,
     VelocityLimitParams,

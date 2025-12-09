@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, TypedDict
 
+from .event_stream import EventStream
+
 __all__ = ["V2ListParams"]
 
 
@@ -24,17 +26,13 @@ class V2ListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
-    event_stream: Literal[
-        "AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"
-    ]
+    event_stream: EventStream
     """Deprecated: Use event_streams instead.
 
     Only return Auth rules that are executed during the provided event stream.
     """
 
-    event_streams: List[
-        Literal["AUTHORIZATION", "THREE_DS_AUTHENTICATION", "TOKENIZATION", "ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"]
-    ]
+    event_streams: List[EventStream]
     """
     Only return Auth rules that are executed during any of the provided event
     streams. If event_streams and event_stream are specified, the values will be
