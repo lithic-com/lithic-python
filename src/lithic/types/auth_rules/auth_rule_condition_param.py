@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
+from ..._utils import PropertyInfo
 from .conditional_attribute import ConditionalAttribute
 from .conditional_operation import ConditionalOperation
 from .conditional_value_param import ConditionalValueParam
@@ -68,5 +69,5 @@ class AuthRuleConditionParam(TypedDict, total=False):
     operation: Required[ConditionalOperation]
     """The operation to apply to the attribute"""
 
-    value: Required[ConditionalValueParam]
+    value: Required[Annotated[ConditionalValueParam, PropertyInfo(format="iso8601")]]
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""

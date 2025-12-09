@@ -6,7 +6,7 @@ import hmac
 import json
 import base64
 import hashlib
-from typing import Union
+from typing import Any, Union, cast
 from datetime import datetime, timezone, timedelta
 from typing_extensions import Literal
 
@@ -1193,7 +1193,10 @@ class Cards(SyncAPIResource):
         self,
         card_token: str,
         *,
-        digital_wallet: Literal["APPLE_PAY"] | Omit = omit,
+        client_device_id: str | Omit = omit,
+        client_wallet_account_id: str | Omit = omit,
+        digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY"] | Omit = omit,
+        server_session_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1210,7 +1213,16 @@ class Cards(SyncAPIResource):
         for more information.
 
         Args:
+          client_device_id: Only applicable if `digital_wallet` is GOOGLE_PAY. Google Pay Web Push
+              Provisioning device identifier required for the tokenization flow
+
+          client_wallet_account_id: Only applicable if `digital_wallet` is GOOGLE_PAY. Google Pay Web Push
+              Provisioning wallet account identifier required for the tokenization flow
+
           digital_wallet: Name of digital wallet provider.
+
+          server_session_id: Only applicable if `digital_wallet` is GOOGLE_PAY. Google Pay Web Push
+              Provisioning session identifier required for the FPAN flow.
 
           extra_headers: Send extra headers
 
@@ -1222,13 +1234,26 @@ class Cards(SyncAPIResource):
         """
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
-        return self._post(
-            f"/v1/cards/{card_token}/web_provision",
-            body=maybe_transform({"digital_wallet": digital_wallet}, card_web_provision_params.CardWebProvisionParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            CardWebProvisionResponse,
+            self._post(
+                f"/v1/cards/{card_token}/web_provision",
+                body=maybe_transform(
+                    {
+                        "client_device_id": client_device_id,
+                        "client_wallet_account_id": client_wallet_account_id,
+                        "digital_wallet": digital_wallet,
+                        "server_session_id": server_session_id,
+                    },
+                    card_web_provision_params.CardWebProvisionParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, CardWebProvisionResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=CardWebProvisionResponse,
         )
 
 
@@ -2354,7 +2379,10 @@ class AsyncCards(AsyncAPIResource):
         self,
         card_token: str,
         *,
-        digital_wallet: Literal["APPLE_PAY"] | Omit = omit,
+        client_device_id: str | Omit = omit,
+        client_wallet_account_id: str | Omit = omit,
+        digital_wallet: Literal["APPLE_PAY", "GOOGLE_PAY"] | Omit = omit,
+        server_session_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2371,7 +2399,16 @@ class AsyncCards(AsyncAPIResource):
         for more information.
 
         Args:
+          client_device_id: Only applicable if `digital_wallet` is GOOGLE_PAY. Google Pay Web Push
+              Provisioning device identifier required for the tokenization flow
+
+          client_wallet_account_id: Only applicable if `digital_wallet` is GOOGLE_PAY. Google Pay Web Push
+              Provisioning wallet account identifier required for the tokenization flow
+
           digital_wallet: Name of digital wallet provider.
+
+          server_session_id: Only applicable if `digital_wallet` is GOOGLE_PAY. Google Pay Web Push
+              Provisioning session identifier required for the FPAN flow.
 
           extra_headers: Send extra headers
 
@@ -2383,15 +2420,26 @@ class AsyncCards(AsyncAPIResource):
         """
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
-        return await self._post(
-            f"/v1/cards/{card_token}/web_provision",
-            body=await async_maybe_transform(
-                {"digital_wallet": digital_wallet}, card_web_provision_params.CardWebProvisionParams
+        return cast(
+            CardWebProvisionResponse,
+            await self._post(
+                f"/v1/cards/{card_token}/web_provision",
+                body=await async_maybe_transform(
+                    {
+                        "client_device_id": client_device_id,
+                        "client_wallet_account_id": client_wallet_account_id,
+                        "digital_wallet": digital_wallet,
+                        "server_session_id": server_session_id,
+                    },
+                    card_web_provision_params.CardWebProvisionParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, CardWebProvisionResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=CardWebProvisionResponse,
         )
 
 
