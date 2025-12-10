@@ -809,3 +809,67 @@ Methods:
 
 - <code title="get /v1/account_activity">client.account_activity.<a href="./src/lithic/resources/account_activity.py">list</a>(\*\*<a href="src/lithic/types/account_activity_list_params.py">params</a>) -> <a href="./src/lithic/types/account_activity_list_response.py">SyncCursorPage[AccountActivityListResponse]</a></code>
 - <code title="get /v1/account_activity/{transaction_token}">client.account_activity.<a href="./src/lithic/resources/account_activity.py">retrieve_transaction</a>(transaction_token) -> <a href="./src/lithic/types/account_activity_retrieve_transaction_response.py">AccountActivityRetrieveTransactionResponse</a></code>
+
+# Webhooks
+
+Types:
+
+```python
+from lithic.types import (
+    AccountHolderCreatedWebhookEvent,
+    AccountHolderUpdatedWebhookEvent,
+    AccountHolderVerificationWebhookEvent,
+    AccountHolderDocumentUpdatedWebhookEvent,
+    AsaRequestWebhookEvent,
+    TokenizationDecisioningRequestWebhookEvent,
+    AuthRulesBacktestReportCreatedWebhookEvent,
+    BalanceUpdatedWebhookEvent,
+    BookTransferTransactionCreatedWebhookEvent,
+    BookTransferTransactionUpdatedWebhookEvent,
+    CardCreatedWebhookEvent,
+    CardConvertedWebhookEvent,
+    CardRenewedWebhookEvent,
+    CardReissuedWebhookEvent,
+    CardShippedWebhookEvent,
+    CardTransactionUpdatedWebhookEvent,
+    CardTransactionEnhancedDataCreatedWebhookEvent,
+    CardTransactionEnhancedDataUpdatedWebhookEvent,
+    DigitalWalletTokenizationApprovalRequestWebhookEvent,
+    DigitalWalletTokenizationResultWebhookEvent,
+    DigitalWalletTokenizationTwoFactorAuthenticationCodeWebhookEvent,
+    DigitalWalletTokenizationTwoFactorAuthenticationCodeSentWebhookEvent,
+    DigitalWalletTokenizationUpdatedWebhookEvent,
+    DisputeUpdatedWebhookEvent,
+    DisputeEvidenceUploadFailedWebhookEvent,
+    ExternalBankAccountCreatedWebhookEvent,
+    ExternalBankAccountUpdatedWebhookEvent,
+    ExternalPaymentCreatedWebhookEvent,
+    ExternalPaymentUpdatedWebhookEvent,
+    FinancialAccountCreatedWebhookEvent,
+    FinancialAccountUpdatedWebhookEvent,
+    FundingEventCreatedWebhookEvent,
+    LoanTapeCreatedWebhookEvent,
+    LoanTapeUpdatedWebhookEvent,
+    ManagementOperationCreatedWebhookEvent,
+    ManagementOperationUpdatedWebhookEvent,
+    InternalTransactionCreatedWebhookEvent,
+    InternalTransactionUpdatedWebhookEvent,
+    NetworkTotalCreatedWebhookEvent,
+    NetworkTotalUpdatedWebhookEvent,
+    PaymentTransactionCreatedWebhookEvent,
+    PaymentTransactionUpdatedWebhookEvent,
+    SettlementReportUpdatedWebhookEvent,
+    StatementsCreatedWebhookEvent,
+    ThreeDSAuthenticationCreatedWebhookEvent,
+    ThreeDSAuthenticationUpdatedWebhookEvent,
+    ThreeDSAuthenticationChallengeWebhookEvent,
+    TokenizationApprovalRequestWebhookEvent,
+    TokenizationResultWebhookEvent,
+    TokenizationTwoFactorAuthenticationCodeWebhookEvent,
+    TokenizationTwoFactorAuthenticationCodeSentWebhookEvent,
+    TokenizationUpdatedWebhookEvent,
+    DisputeTransactionCreatedWebhookEvent,
+    DisputeTransactionUpdatedWebhookEvent,
+    ParsedWebhookEvent,
+)
+```

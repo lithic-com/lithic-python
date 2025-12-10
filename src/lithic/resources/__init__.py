@@ -72,6 +72,7 @@ from .three_ds import (
     ThreeDSWithStreamingResponse,
     AsyncThreeDSWithStreamingResponse,
 )
+from .webhooks import Webhooks, AsyncWebhooks
 from .auth_rules import (
     AuthRules,
     AsyncAuthRules,
@@ -422,4 +423,6 @@ __all__ = [
     "AsyncAccountActivityWithRawResponse",
     "AccountActivityWithStreamingResponse",
     "AsyncAccountActivityWithStreamingResponse",
+    "Webhooks",
+    "AsyncWebhooks",
 ]

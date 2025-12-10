@@ -73,6 +73,7 @@ if TYPE_CHECKING:
     from .resources.balances import Balances, AsyncBalances
     from .resources.disputes import Disputes, AsyncDisputes
     from .resources.payments import Payments, AsyncPayments
+    from .resources.webhooks import Webhooks, AsyncWebhooks
     from .resources.cards.cards import Cards, AsyncCards
     from .resources.disputes_v2 import DisputesV2, AsyncDisputesV2
     from .resources.fraud.fraud import Fraud, AsyncFraud
@@ -384,6 +385,12 @@ class Lithic(SyncAPIClient):
         from .resources.account_activity import AccountActivity
 
         return AccountActivity(self)
+
+    @cached_property
+    def webhooks(self) -> Webhooks:
+        from .resources.webhooks import Webhooks
+
+        return Webhooks(self)
 
     @cached_property
     def with_raw_response(self) -> LithicWithRawResponse:
@@ -788,6 +795,12 @@ class AsyncLithic(AsyncAPIClient):
         from .resources.account_activity import AsyncAccountActivity
 
         return AsyncAccountActivity(self)
+
+    @cached_property
+    def webhooks(self) -> AsyncWebhooks:
+        from .resources.webhooks import AsyncWebhooks
+
+        return AsyncWebhooks(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncLithicWithRawResponse:
