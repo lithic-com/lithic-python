@@ -72,7 +72,7 @@ from .digital_wallet_tokenization_two_factor_authentication_code_sent_webhook_ev
 )
 
 __all__ = [
-    "UnwrapTypedWebhookEvent",
+    "ParsedWebhookEvent",
     "KYBPayload",
     "KYBPayloadUpdateRequest",
     "KYBPayloadUpdateRequestBeneficialOwnerIndividual",
@@ -419,7 +419,7 @@ class LegacyPayload(BaseModel):
     """
 
 
-UnwrapTypedWebhookEvent: TypeAlias = Union[
+ParsedWebhookEvent: TypeAlias = Union[
     AccountHolderCreatedWebhookEvent,
     KYBPayload,
     KYCPayload,

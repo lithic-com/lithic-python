@@ -200,27 +200,47 @@ card = client.cards.create(
 )
 ```
 
-## Webhook Verification
+## Webhooks
 
-We provide helper methods for verifying that a webhook request came from Lithic, and not a malicious third party.
+Lithic uses webhooks to notify your application when events happen. The library provides signature verification via the optional `standardwebhooks` package.
 
-You can use `lithic.webhooks.verify_signature(body: string, headers, secret?) -> None` or `lithic.webhooks.unwrap(body: string, headers, secret?) -> Payload`,
-both of which will raise an error if the signature is invalid.
-
-Note that the "body" parameter must be the raw JSON string sent from the server (do not parse it first).
-The `.unwrap()` method can parse this JSON for you into a `Payload` object.
-
-For example, in [FastAPI](https://fastapi.tiangolo.com/):
+### Parsing and verifying webhooks
 
 ```py
-@app.post('/my-webhook-handler')
-async def handler(request: Request):
-    body = await request.body()
-    secret = os.environ['LITHIC_WEBHOOK_SECRET']  # env var used by default; explicit here.
-    payload = client.webhooks.unwrap(body, request.headers, secret)
-    print(payload)
+from lithic.types import CardCreatedWebhookEvent
 
-    return {'ok': True}
+# Verifies signature and returns typed event
+event = client.webhooks.parse(
+    request.body,  # raw request body as string
+    headers=request.headers,
+    secret=os.environ["LITHIC_WEBHOOK_SECRET"]  # optional, reads from env by default
+)
+
+# Use isinstance to narrow the type
+if isinstance(event, CardCreatedWebhookEvent):
+    print(f"Card created: {event.card_token}")
+```
+
+### Parsing without verification
+
+```py
+# Parse only - skips signature verification (not recommended for production)
+event = client.webhooks.parse_unsafe(request.body)
+```
+
+### Verifying signatures only
+
+```py
+# Verify signature without parsing (raises exception if invalid)
+client.webhooks.verify_signature(request.body, headers=request.headers, secret=secret)
+```
+
+### Installing standardwebhooks (optional)
+
+To use signature verification, install the webhooks extra:
+
+```sh
+pip install lithic[webhooks]
 ```
 
 ## Handling errors
