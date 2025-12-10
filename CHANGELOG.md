@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.112.0 (2025-12-10)
+
+Full Changelog: [v0.111.0...v0.112.0](https://github.com/lithic-com/lithic-python/compare/v0.111.0...v0.112.0)
+
+### Features
+
+* **api:** add bulk card creation APIs ([8bb0722](https://github.com/lithic-com/lithic-python/commit/8bb072220516545e9adbd32ad3aef1f51c029a8b))
+* **api:** Add event_streams to auth rules APIs ([ad154eb](https://github.com/lithic-com/lithic-python/commit/ad154eb4737943666314f8a53d63e3bf4d48514e))
+* **api:** add Google WPP to SDKs ([75159c4](https://github.com/lithic-com/lithic-python/commit/75159c4e762e68281b00fec859e69052d3a45d3b))
+* **api:** add IS_AFTER / IS_BEFORE operators to Auth Rule APIs ([75159c4](https://github.com/lithic-com/lithic-python/commit/75159c4e762e68281b00fec859e69052d3a45d3b))
+* **api:** Add new fee types ([ad154eb](https://github.com/lithic-com/lithic-python/commit/ad154eb4737943666314f8a53d63e3bf4d48514e))
+* **api:** Add optional ach_hold_period ([ad154eb](https://github.com/lithic-com/lithic-python/commit/ad154eb4737943666314f8a53d63e3bf4d48514e))
+* **api:** add WALLET_RECOMMENDATION_REASONS attribute for tokenization rules ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+* **api:** add webhook schemas to SDKs - add parse and parse_unsafe ([d977e3f](https://github.com/lithic-com/lithic-python/commit/d977e3fc8beb01522aadb98d12df79e823cf128b))
+* **api:** provide a unified model for AuthRule ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+* **api:** support event_streams in auth_rules list endpoint ([befa333](https://github.com/lithic-com/lithic-python/commit/befa3335fabdc8099e8cf7dee8b32ae269c9c890))
+
+
+### Bug Fixes
+
+* **api:** extract several common types to reduce duplication ([8bb0722](https://github.com/lithic-com/lithic-python/commit/8bb072220516545e9adbd32ad3aef1f51c029a8b))
+* **api:** fix examples in spec that were not fully valid ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+* **api:** fix webhook parsing logic ([fc50832](https://github.com/lithic-com/lithic-python/commit/fc508320a25f3716b2f55880169df2c9c8faa056))
+* **api:** make certain payoff fields nullable ([78148ad](https://github.com/lithic-com/lithic-python/commit/78148adea18a42644b9778613c3f459f4003aeec))
+* ensure streams are always closed ([7a9e41f](https://github.com/lithic-com/lithic-python/commit/7a9e41ff7a639075315b721842d95c13b624e421))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([d290cbb](https://github.com/lithic-com/lithic-python/commit/d290cbb1df6ed2ad2280dc150c106e6b2b3ca441))
+
+
+### Chores
+
+* add missing docstrings ([d297283](https://github.com/lithic-com/lithic-python/commit/d2972836067fdb76678128af20212c0b9bb4e8a0))
+* add Python 3.14 classifier and testing ([95a6172](https://github.com/lithic-com/lithic-python/commit/95a6172000f72b77904fcd0fb21c6ca83319b5ed))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([6b9f3ab](https://github.com/lithic-com/lithic-python/commit/6b9f3abd0737a2db85284a76a9281a340c89b630))
+* **docs:** use environment variables for authentication in code snippets ([29ae3a9](https://github.com/lithic-com/lithic-python/commit/29ae3a9b42a67775cb5225887c6bb6a37a327cf4))
+* replace custom webhook signature verification with standardwebhooks ([d977e3f](https://github.com/lithic-com/lithic-python/commit/d977e3fc8beb01522aadb98d12df79e823cf128b))
+* update lockfile ([a7a6330](https://github.com/lithic-com/lithic-python/commit/a7a63309b13085625edd790131f3ad588a3f472f))
+
+
+### Documentation
+
+* **api:** clarify error 422 for 3DS challenge response ([75159c4](https://github.com/lithic-com/lithic-python/commit/75159c4e762e68281b00fec859e69052d3a45d3b))
+
 ## 0.111.0 (2025-11-20)
 
 Full Changelog: [v0.110.1...v0.111.0](https://github.com/lithic-com/lithic-python/compare/v0.110.1...v0.111.0)
