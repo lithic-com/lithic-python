@@ -339,8 +339,6 @@ __all__ = [
     "AsyncResponderEndpointsWithRawResponse",
     "ResponderEndpointsWithStreamingResponse",
     "AsyncResponderEndpointsWithStreamingResponse",
-    "Webhooks",
-    "AsyncWebhooks",
     "ExternalBankAccounts",
     "AsyncExternalBankAccounts",
     "ExternalBankAccountsWithRawResponse",
