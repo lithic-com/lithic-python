@@ -185,14 +185,6 @@ from .external_payments import (
     ExternalPaymentsWithStreamingResponse,
     AsyncExternalPaymentsWithStreamingResponse,
 )
-from .aggregate_balances import (
-    AggregateBalances,
-    AsyncAggregateBalances,
-    AggregateBalancesWithRawResponse,
-    AsyncAggregateBalancesWithRawResponse,
-    AggregateBalancesWithStreamingResponse,
-    AsyncAggregateBalancesWithStreamingResponse,
-)
 from .financial_accounts import (
     FinancialAccounts,
     AsyncFinancialAccounts,
@@ -297,12 +289,6 @@ __all__ = [
     "AsyncBalancesWithRawResponse",
     "BalancesWithStreamingResponse",
     "AsyncBalancesWithStreamingResponse",
-    "AggregateBalances",
-    "AsyncAggregateBalances",
-    "AggregateBalancesWithRawResponse",
-    "AsyncAggregateBalancesWithRawResponse",
-    "AggregateBalancesWithStreamingResponse",
-    "AsyncAggregateBalancesWithStreamingResponse",
     "Disputes",
     "AsyncDisputes",
     "DisputesWithRawResponse",

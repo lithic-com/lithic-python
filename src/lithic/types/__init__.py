@@ -43,7 +43,6 @@ from .dispute_evidence import DisputeEvidence as DisputeEvidence
 from .external_payment import ExternalPayment as ExternalPayment
 from .kyc_exempt_param import KYCExemptParam as KYCExemptParam
 from .statement_totals import StatementTotals as StatementTotals
-from .aggregate_balance import AggregateBalance as AggregateBalance
 from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .card_renew_params import CardRenewParams as CardRenewParams
 from .card_spend_limits import CardSpendLimits as CardSpendLimits
@@ -123,7 +122,6 @@ from .card_converted_webhook_event import CardConvertedWebhookEvent as CardConve
 from .digital_card_art_list_params import DigitalCardArtListParams as DigitalCardArtListParams
 from .external_payment_list_params import ExternalPaymentListParams as ExternalPaymentListParams
 from .tokenization_simulate_params import TokenizationSimulateParams as TokenizationSimulateParams
-from .aggregate_balance_list_params import AggregateBalanceListParams as AggregateBalanceListParams
 from .balance_updated_webhook_event import BalanceUpdatedWebhookEvent as BalanceUpdatedWebhookEvent
 from .card_bulk_order_create_params import CardBulkOrderCreateParams as CardBulkOrderCreateParams
 from .card_bulk_order_update_params import CardBulkOrderUpdateParams as CardBulkOrderUpdateParams
