@@ -61,7 +61,6 @@ if TYPE_CHECKING:
         digital_card_art,
         network_programs,
         external_payments,
-        aggregate_balances,
         financial_accounts,
         responder_endpoints,
         management_operations,
@@ -93,7 +92,6 @@ if TYPE_CHECKING:
     from .resources.network_programs import NetworkPrograms, AsyncNetworkPrograms
     from .resources.external_payments import ExternalPayments, AsyncExternalPayments
     from .resources.three_ds.three_ds import ThreeDS, AsyncThreeDS
-    from .resources.aggregate_balances import AggregateBalances, AsyncAggregateBalances
     from .resources.responder_endpoints import (
         ResponderEndpoints,
         AsyncResponderEndpoints,
@@ -283,12 +281,6 @@ class Lithic(SyncAPIClient):
         from .resources.balances import Balances
 
         return Balances(self)
-
-    @cached_property
-    def aggregate_balances(self) -> AggregateBalances:
-        from .resources.aggregate_balances import AggregateBalances
-
-        return AggregateBalances(self)
 
     @cached_property
     def disputes(self) -> Disputes:
@@ -698,12 +690,6 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncBalances(self)
 
     @cached_property
-    def aggregate_balances(self) -> AsyncAggregateBalances:
-        from .resources.aggregate_balances import AsyncAggregateBalances
-
-        return AsyncAggregateBalances(self)
-
-    @cached_property
     def disputes(self) -> AsyncDisputes:
         from .resources.disputes import AsyncDisputes
 
@@ -1042,12 +1028,6 @@ class LithicWithRawResponse:
         return BalancesWithRawResponse(self._client.balances)
 
     @cached_property
-    def aggregate_balances(self) -> aggregate_balances.AggregateBalancesWithRawResponse:
-        from .resources.aggregate_balances import AggregateBalancesWithRawResponse
-
-        return AggregateBalancesWithRawResponse(self._client.aggregate_balances)
-
-    @cached_property
     def disputes(self) -> disputes.DisputesWithRawResponse:
         from .resources.disputes import DisputesWithRawResponse
 
@@ -1249,14 +1229,6 @@ class AsyncLithicWithRawResponse:
         from .resources.balances import AsyncBalancesWithRawResponse
 
         return AsyncBalancesWithRawResponse(self._client.balances)
-
-    @cached_property
-    def aggregate_balances(
-        self,
-    ) -> aggregate_balances.AsyncAggregateBalancesWithRawResponse:
-        from .resources.aggregate_balances import AsyncAggregateBalancesWithRawResponse
-
-        return AsyncAggregateBalancesWithRawResponse(self._client.aggregate_balances)
 
     @cached_property
     def disputes(self) -> disputes.AsyncDisputesWithRawResponse:
@@ -1470,14 +1442,6 @@ class LithicWithStreamedResponse:
         from .resources.balances import BalancesWithStreamingResponse
 
         return BalancesWithStreamingResponse(self._client.balances)
-
-    @cached_property
-    def aggregate_balances(
-        self,
-    ) -> aggregate_balances.AggregateBalancesWithStreamingResponse:
-        from .resources.aggregate_balances import AggregateBalancesWithStreamingResponse
-
-        return AggregateBalancesWithStreamingResponse(self._client.aggregate_balances)
 
     @cached_property
     def disputes(self) -> disputes.DisputesWithStreamingResponse:
@@ -1695,16 +1659,6 @@ class AsyncLithicWithStreamedResponse:
         from .resources.balances import AsyncBalancesWithStreamingResponse
 
         return AsyncBalancesWithStreamingResponse(self._client.balances)
-
-    @cached_property
-    def aggregate_balances(
-        self,
-    ) -> aggregate_balances.AsyncAggregateBalancesWithStreamingResponse:
-        from .resources.aggregate_balances import (
-            AsyncAggregateBalancesWithStreamingResponse,
-        )
-
-        return AsyncAggregateBalancesWithStreamingResponse(self._client.aggregate_balances)
 
     @cached_property
     def disputes(self) -> disputes.AsyncDisputesWithStreamingResponse:
