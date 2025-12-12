@@ -214,18 +214,6 @@ Methods:
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_html</a>(\*args) -> str</code>
 - <code>client.cards.<a href="./src/lithic/resources/cards/cards.py">get_embed_url</a>(\*args) -> URL</code>
 
-## AggregateBalances
-
-Types:
-
-```python
-from lithic.types.cards import AggregateBalanceListResponse
-```
-
-Methods:
-
-- <code title="get /v1/cards/aggregate_balances">client.cards.aggregate_balances.<a href="./src/lithic/resources/cards/aggregate_balances.py">list</a>(\*\*<a href="src/lithic/types/cards/aggregate_balance_list_params.py">params</a>) -> <a href="./src/lithic/types/cards/aggregate_balance_list_response.py">SyncSinglePage[AggregateBalanceListResponse]</a></code>
-
 ## Balances
 
 Methods:
@@ -265,18 +253,6 @@ from lithic.types import Balance
 Methods:
 
 - <code title="get /v1/balances">client.balances.<a href="./src/lithic/resources/balances.py">list</a>(\*\*<a href="src/lithic/types/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/balance.py">SyncSinglePage[Balance]</a></code>
-
-# AggregateBalances
-
-Types:
-
-```python
-from lithic.types import AggregateBalance
-```
-
-Methods:
-
-- <code title="get /v1/aggregate_balances">client.aggregate_balances.<a href="./src/lithic/resources/aggregate_balances.py">list</a>(\*\*<a href="src/lithic/types/aggregate_balance_list_params.py">params</a>) -> <a href="./src/lithic/types/aggregate_balance.py">SyncSinglePage[AggregateBalance]</a></code>
 
 # Disputes
 

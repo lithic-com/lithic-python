@@ -44,14 +44,6 @@ from ..._response import to_streamed_response_wrapper, async_to_streamed_respons
 from ...pagination import SyncCursorPage, AsyncCursorPage
 from ...types.card import Card
 from ..._base_client import AsyncPaginator, _merge_mappings, make_request_options
-from .aggregate_balances import (
-    AggregateBalances,
-    AsyncAggregateBalances,
-    AggregateBalancesWithRawResponse,
-    AsyncAggregateBalancesWithRawResponse,
-    AggregateBalancesWithStreamingResponse,
-    AsyncAggregateBalancesWithStreamingResponse,
-)
 from ...types.non_pci_card import NonPCICard
 from .financial_transactions import (
     FinancialTransactions,
@@ -72,10 +64,6 @@ __all__ = ["Cards", "AsyncCards"]
 
 
 class Cards(SyncAPIResource):
-    @cached_property
-    def aggregate_balances(self) -> AggregateBalances:
-        return AggregateBalances(self._client)
-
     @cached_property
     def balances(self) -> Balances:
         return Balances(self._client)
@@ -1258,10 +1246,6 @@ class Cards(SyncAPIResource):
 
 
 class AsyncCards(AsyncAPIResource):
-    @cached_property
-    def aggregate_balances(self) -> AsyncAggregateBalances:
-        return AsyncAggregateBalances(self._client)
-
     @cached_property
     def balances(self) -> AsyncBalances:
         return AsyncBalances(self._client)
@@ -2485,10 +2469,6 @@ class CardsWithRawResponse:
         )
 
     @cached_property
-    def aggregate_balances(self) -> AggregateBalancesWithRawResponse:
-        return AggregateBalancesWithRawResponse(self._cards.aggregate_balances)
-
-    @cached_property
     def balances(self) -> BalancesWithRawResponse:
         return BalancesWithRawResponse(self._cards.balances)
 
@@ -2537,10 +2517,6 @@ class AsyncCardsWithRawResponse:
         self.web_provision = _legacy_response.async_to_raw_response_wrapper(
             cards.web_provision,
         )
-
-    @cached_property
-    def aggregate_balances(self) -> AsyncAggregateBalancesWithRawResponse:
-        return AsyncAggregateBalancesWithRawResponse(self._cards.aggregate_balances)
 
     @cached_property
     def balances(self) -> AsyncBalancesWithRawResponse:
@@ -2593,10 +2569,6 @@ class CardsWithStreamingResponse:
         )
 
     @cached_property
-    def aggregate_balances(self) -> AggregateBalancesWithStreamingResponse:
-        return AggregateBalancesWithStreamingResponse(self._cards.aggregate_balances)
-
-    @cached_property
     def balances(self) -> BalancesWithStreamingResponse:
         return BalancesWithStreamingResponse(self._cards.balances)
 
@@ -2645,10 +2617,6 @@ class AsyncCardsWithStreamingResponse:
         self.web_provision = async_to_streamed_response_wrapper(
             cards.web_provision,
         )
-
-    @cached_property
-    def aggregate_balances(self) -> AsyncAggregateBalancesWithStreamingResponse:
-        return AsyncAggregateBalancesWithStreamingResponse(self._cards.aggregate_balances)
 
     @cached_property
     def balances(self) -> AsyncBalancesWithStreamingResponse:

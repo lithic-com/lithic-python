@@ -16,14 +16,6 @@ from .balances import (
     BalancesWithStreamingResponse,
     AsyncBalancesWithStreamingResponse,
 )
-from .aggregate_balances import (
-    AggregateBalances,
-    AsyncAggregateBalances,
-    AggregateBalancesWithRawResponse,
-    AsyncAggregateBalancesWithRawResponse,
-    AggregateBalancesWithStreamingResponse,
-    AsyncAggregateBalancesWithStreamingResponse,
-)
 from .financial_transactions import (
     FinancialTransactions,
     AsyncFinancialTransactions,
@@ -34,12 +26,6 @@ from .financial_transactions import (
 )
 
 __all__ = [
-    "AggregateBalances",
-    "AsyncAggregateBalances",
-    "AggregateBalancesWithRawResponse",
-    "AsyncAggregateBalancesWithRawResponse",
-    "AggregateBalancesWithStreamingResponse",
-    "AsyncAggregateBalancesWithStreamingResponse",
     "Balances",
     "AsyncBalances",
     "BalancesWithRawResponse",
