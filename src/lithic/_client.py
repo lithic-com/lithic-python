@@ -85,43 +85,19 @@ if TYPE_CHECKING:
     from .resources.reports.reports import Reports, AsyncReports
     from .resources.account_activity import AccountActivity, AsyncAccountActivity
     from .resources.card_bulk_orders import CardBulkOrders, AsyncCardBulkOrders
-    from .resources.digital_card_art import (
-        DigitalCardArtResource,
-        AsyncDigitalCardArtResource,
-    )
+    from .resources.digital_card_art import DigitalCardArtResource, AsyncDigitalCardArtResource
     from .resources.network_programs import NetworkPrograms, AsyncNetworkPrograms
     from .resources.external_payments import ExternalPayments, AsyncExternalPayments
     from .resources.three_ds.three_ds import ThreeDS, AsyncThreeDS
-    from .resources.responder_endpoints import (
-        ResponderEndpoints,
-        AsyncResponderEndpoints,
-    )
+    from .resources.responder_endpoints import ResponderEndpoints, AsyncResponderEndpoints
     from .resources.auth_rules.auth_rules import AuthRules, AsyncAuthRules
-    from .resources.management_operations import (
-        ManagementOperations,
-        AsyncManagementOperations,
-    )
-    from .resources.auth_stream_enrollment import (
-        AuthStreamEnrollment,
-        AsyncAuthStreamEnrollment,
-    )
-    from .resources.tokenization_decisioning import (
-        TokenizationDecisioning,
-        AsyncTokenizationDecisioning,
-    )
+    from .resources.management_operations import ManagementOperations, AsyncManagementOperations
+    from .resources.auth_stream_enrollment import AuthStreamEnrollment, AsyncAuthStreamEnrollment
+    from .resources.tokenization_decisioning import TokenizationDecisioning, AsyncTokenizationDecisioning
     from .resources.transactions.transactions import Transactions, AsyncTransactions
-    from .resources.credit_products.credit_products import (
-        CreditProducts,
-        AsyncCreditProducts,
-    )
-    from .resources.financial_accounts.financial_accounts import (
-        FinancialAccounts,
-        AsyncFinancialAccounts,
-    )
-    from .resources.external_bank_accounts.external_bank_accounts import (
-        ExternalBankAccounts,
-        AsyncExternalBankAccounts,
-    )
+    from .resources.credit_products.credit_products import CreditProducts, AsyncCreditProducts
+    from .resources.financial_accounts.financial_accounts import FinancialAccounts, AsyncFinancialAccounts
+    from .resources.external_bank_accounts.external_bank_accounts import ExternalBankAccounts, AsyncExternalBankAccounts
 
 __all__ = [
     "ENVIRONMENTS",
@@ -506,10 +482,7 @@ class Lithic(SyncAPIClient):
         return self.get(
             "/v1/status",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=APIStatus,
         )
@@ -913,10 +886,7 @@ class AsyncLithic(AsyncAPIClient):
         return await self.get(
             "/v1/status",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=APIStatus,
         )
@@ -984,22 +954,14 @@ class LithicWithRawResponse:
         return AuthRulesWithRawResponse(self._client.auth_rules)
 
     @cached_property
-    def auth_stream_enrollment(
-        self,
-    ) -> auth_stream_enrollment.AuthStreamEnrollmentWithRawResponse:
-        from .resources.auth_stream_enrollment import (
-            AuthStreamEnrollmentWithRawResponse,
-        )
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AuthStreamEnrollmentWithRawResponse:
+        from .resources.auth_stream_enrollment import AuthStreamEnrollmentWithRawResponse
 
         return AuthStreamEnrollmentWithRawResponse(self._client.auth_stream_enrollment)
 
     @cached_property
-    def tokenization_decisioning(
-        self,
-    ) -> tokenization_decisioning.TokenizationDecisioningWithRawResponse:
-        from .resources.tokenization_decisioning import (
-            TokenizationDecisioningWithRawResponse,
-        )
+    def tokenization_decisioning(self) -> tokenization_decisioning.TokenizationDecisioningWithRawResponse:
+        from .resources.tokenization_decisioning import TokenizationDecisioningWithRawResponse
 
         return TokenizationDecisioningWithRawResponse(self._client.tokenization_decisioning)
 
@@ -1058,20 +1020,14 @@ class LithicWithRawResponse:
         return TransactionsWithRawResponse(self._client.transactions)
 
     @cached_property
-    def responder_endpoints(
-        self,
-    ) -> responder_endpoints.ResponderEndpointsWithRawResponse:
+    def responder_endpoints(self) -> responder_endpoints.ResponderEndpointsWithRawResponse:
         from .resources.responder_endpoints import ResponderEndpointsWithRawResponse
 
         return ResponderEndpointsWithRawResponse(self._client.responder_endpoints)
 
     @cached_property
-    def external_bank_accounts(
-        self,
-    ) -> external_bank_accounts.ExternalBankAccountsWithRawResponse:
-        from .resources.external_bank_accounts import (
-            ExternalBankAccountsWithRawResponse,
-        )
+    def external_bank_accounts(self) -> external_bank_accounts.ExternalBankAccountsWithRawResponse:
+        from .resources.external_bank_accounts import ExternalBankAccountsWithRawResponse
 
         return ExternalBankAccountsWithRawResponse(self._client.external_bank_accounts)
 
@@ -1100,9 +1056,7 @@ class LithicWithRawResponse:
         return CardProgramsWithRawResponse(self._client.card_programs)
 
     @cached_property
-    def digital_card_art(
-        self,
-    ) -> digital_card_art.DigitalCardArtResourceWithRawResponse:
+    def digital_card_art(self) -> digital_card_art.DigitalCardArtResourceWithRawResponse:
         from .resources.digital_card_art import DigitalCardArtResourceWithRawResponse
 
         return DigitalCardArtResourceWithRawResponse(self._client.digital_card_art)
@@ -1126,9 +1080,7 @@ class LithicWithRawResponse:
         return ExternalPaymentsWithRawResponse(self._client.external_payments)
 
     @cached_property
-    def management_operations(
-        self,
-    ) -> management_operations.ManagementOperationsWithRawResponse:
+    def management_operations(self) -> management_operations.ManagementOperationsWithRawResponse:
         from .resources.management_operations import ManagementOperationsWithRawResponse
 
         return ManagementOperationsWithRawResponse(self._client.management_operations)
@@ -1187,22 +1139,14 @@ class AsyncLithicWithRawResponse:
         return AsyncAuthRulesWithRawResponse(self._client.auth_rules)
 
     @cached_property
-    def auth_stream_enrollment(
-        self,
-    ) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithRawResponse:
-        from .resources.auth_stream_enrollment import (
-            AsyncAuthStreamEnrollmentWithRawResponse,
-        )
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithRawResponse:
+        from .resources.auth_stream_enrollment import AsyncAuthStreamEnrollmentWithRawResponse
 
         return AsyncAuthStreamEnrollmentWithRawResponse(self._client.auth_stream_enrollment)
 
     @cached_property
-    def tokenization_decisioning(
-        self,
-    ) -> tokenization_decisioning.AsyncTokenizationDecisioningWithRawResponse:
-        from .resources.tokenization_decisioning import (
-            AsyncTokenizationDecisioningWithRawResponse,
-        )
+    def tokenization_decisioning(self) -> tokenization_decisioning.AsyncTokenizationDecisioningWithRawResponse:
+        from .resources.tokenization_decisioning import AsyncTokenizationDecisioningWithRawResponse
 
         return AsyncTokenizationDecisioningWithRawResponse(self._client.tokenization_decisioning)
 
@@ -1249,9 +1193,7 @@ class AsyncLithicWithRawResponse:
         return AsyncEventsWithRawResponse(self._client.events)
 
     @cached_property
-    def financial_accounts(
-        self,
-    ) -> financial_accounts.AsyncFinancialAccountsWithRawResponse:
+    def financial_accounts(self) -> financial_accounts.AsyncFinancialAccountsWithRawResponse:
         from .resources.financial_accounts import AsyncFinancialAccountsWithRawResponse
 
         return AsyncFinancialAccountsWithRawResponse(self._client.financial_accounts)
@@ -1263,22 +1205,14 @@ class AsyncLithicWithRawResponse:
         return AsyncTransactionsWithRawResponse(self._client.transactions)
 
     @cached_property
-    def responder_endpoints(
-        self,
-    ) -> responder_endpoints.AsyncResponderEndpointsWithRawResponse:
-        from .resources.responder_endpoints import (
-            AsyncResponderEndpointsWithRawResponse,
-        )
+    def responder_endpoints(self) -> responder_endpoints.AsyncResponderEndpointsWithRawResponse:
+        from .resources.responder_endpoints import AsyncResponderEndpointsWithRawResponse
 
         return AsyncResponderEndpointsWithRawResponse(self._client.responder_endpoints)
 
     @cached_property
-    def external_bank_accounts(
-        self,
-    ) -> external_bank_accounts.AsyncExternalBankAccountsWithRawResponse:
-        from .resources.external_bank_accounts import (
-            AsyncExternalBankAccountsWithRawResponse,
-        )
+    def external_bank_accounts(self) -> external_bank_accounts.AsyncExternalBankAccountsWithRawResponse:
+        from .resources.external_bank_accounts import AsyncExternalBankAccountsWithRawResponse
 
         return AsyncExternalBankAccountsWithRawResponse(self._client.external_bank_accounts)
 
@@ -1307,12 +1241,8 @@ class AsyncLithicWithRawResponse:
         return AsyncCardProgramsWithRawResponse(self._client.card_programs)
 
     @cached_property
-    def digital_card_art(
-        self,
-    ) -> digital_card_art.AsyncDigitalCardArtResourceWithRawResponse:
-        from .resources.digital_card_art import (
-            AsyncDigitalCardArtResourceWithRawResponse,
-        )
+    def digital_card_art(self) -> digital_card_art.AsyncDigitalCardArtResourceWithRawResponse:
+        from .resources.digital_card_art import AsyncDigitalCardArtResourceWithRawResponse
 
         return AsyncDigitalCardArtResourceWithRawResponse(self._client.digital_card_art)
 
@@ -1329,20 +1259,14 @@ class AsyncLithicWithRawResponse:
         return AsyncCreditProductsWithRawResponse(self._client.credit_products)
 
     @cached_property
-    def external_payments(
-        self,
-    ) -> external_payments.AsyncExternalPaymentsWithRawResponse:
+    def external_payments(self) -> external_payments.AsyncExternalPaymentsWithRawResponse:
         from .resources.external_payments import AsyncExternalPaymentsWithRawResponse
 
         return AsyncExternalPaymentsWithRawResponse(self._client.external_payments)
 
     @cached_property
-    def management_operations(
-        self,
-    ) -> management_operations.AsyncManagementOperationsWithRawResponse:
-        from .resources.management_operations import (
-            AsyncManagementOperationsWithRawResponse,
-        )
+    def management_operations(self) -> management_operations.AsyncManagementOperationsWithRawResponse:
+        from .resources.management_operations import AsyncManagementOperationsWithRawResponse
 
         return AsyncManagementOperationsWithRawResponse(self._client.management_operations)
 
@@ -1400,22 +1324,14 @@ class LithicWithStreamedResponse:
         return AuthRulesWithStreamingResponse(self._client.auth_rules)
 
     @cached_property
-    def auth_stream_enrollment(
-        self,
-    ) -> auth_stream_enrollment.AuthStreamEnrollmentWithStreamingResponse:
-        from .resources.auth_stream_enrollment import (
-            AuthStreamEnrollmentWithStreamingResponse,
-        )
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AuthStreamEnrollmentWithStreamingResponse:
+        from .resources.auth_stream_enrollment import AuthStreamEnrollmentWithStreamingResponse
 
         return AuthStreamEnrollmentWithStreamingResponse(self._client.auth_stream_enrollment)
 
     @cached_property
-    def tokenization_decisioning(
-        self,
-    ) -> tokenization_decisioning.TokenizationDecisioningWithStreamingResponse:
-        from .resources.tokenization_decisioning import (
-            TokenizationDecisioningWithStreamingResponse,
-        )
+    def tokenization_decisioning(self) -> tokenization_decisioning.TokenizationDecisioningWithStreamingResponse:
+        from .resources.tokenization_decisioning import TokenizationDecisioningWithStreamingResponse
 
         return TokenizationDecisioningWithStreamingResponse(self._client.tokenization_decisioning)
 
@@ -1462,9 +1378,7 @@ class LithicWithStreamedResponse:
         return EventsWithStreamingResponse(self._client.events)
 
     @cached_property
-    def financial_accounts(
-        self,
-    ) -> financial_accounts.FinancialAccountsWithStreamingResponse:
+    def financial_accounts(self) -> financial_accounts.FinancialAccountsWithStreamingResponse:
         from .resources.financial_accounts import FinancialAccountsWithStreamingResponse
 
         return FinancialAccountsWithStreamingResponse(self._client.financial_accounts)
@@ -1476,22 +1390,14 @@ class LithicWithStreamedResponse:
         return TransactionsWithStreamingResponse(self._client.transactions)
 
     @cached_property
-    def responder_endpoints(
-        self,
-    ) -> responder_endpoints.ResponderEndpointsWithStreamingResponse:
-        from .resources.responder_endpoints import (
-            ResponderEndpointsWithStreamingResponse,
-        )
+    def responder_endpoints(self) -> responder_endpoints.ResponderEndpointsWithStreamingResponse:
+        from .resources.responder_endpoints import ResponderEndpointsWithStreamingResponse
 
         return ResponderEndpointsWithStreamingResponse(self._client.responder_endpoints)
 
     @cached_property
-    def external_bank_accounts(
-        self,
-    ) -> external_bank_accounts.ExternalBankAccountsWithStreamingResponse:
-        from .resources.external_bank_accounts import (
-            ExternalBankAccountsWithStreamingResponse,
-        )
+    def external_bank_accounts(self) -> external_bank_accounts.ExternalBankAccountsWithStreamingResponse:
+        from .resources.external_bank_accounts import ExternalBankAccountsWithStreamingResponse
 
         return ExternalBankAccountsWithStreamingResponse(self._client.external_bank_accounts)
 
@@ -1520,12 +1426,8 @@ class LithicWithStreamedResponse:
         return CardProgramsWithStreamingResponse(self._client.card_programs)
 
     @cached_property
-    def digital_card_art(
-        self,
-    ) -> digital_card_art.DigitalCardArtResourceWithStreamingResponse:
-        from .resources.digital_card_art import (
-            DigitalCardArtResourceWithStreamingResponse,
-        )
+    def digital_card_art(self) -> digital_card_art.DigitalCardArtResourceWithStreamingResponse:
+        from .resources.digital_card_art import DigitalCardArtResourceWithStreamingResponse
 
         return DigitalCardArtResourceWithStreamingResponse(self._client.digital_card_art)
 
@@ -1542,20 +1444,14 @@ class LithicWithStreamedResponse:
         return CreditProductsWithStreamingResponse(self._client.credit_products)
 
     @cached_property
-    def external_payments(
-        self,
-    ) -> external_payments.ExternalPaymentsWithStreamingResponse:
+    def external_payments(self) -> external_payments.ExternalPaymentsWithStreamingResponse:
         from .resources.external_payments import ExternalPaymentsWithStreamingResponse
 
         return ExternalPaymentsWithStreamingResponse(self._client.external_payments)
 
     @cached_property
-    def management_operations(
-        self,
-    ) -> management_operations.ManagementOperationsWithStreamingResponse:
-        from .resources.management_operations import (
-            ManagementOperationsWithStreamingResponse,
-        )
+    def management_operations(self) -> management_operations.ManagementOperationsWithStreamingResponse:
+        from .resources.management_operations import ManagementOperationsWithStreamingResponse
 
         return ManagementOperationsWithStreamingResponse(self._client.management_operations)
 
@@ -1601,9 +1497,7 @@ class AsyncLithicWithStreamedResponse:
         return AsyncAccountsWithStreamingResponse(self._client.accounts)
 
     @cached_property
-    def account_holders(
-        self,
-    ) -> account_holders.AsyncAccountHoldersWithStreamingResponse:
+    def account_holders(self) -> account_holders.AsyncAccountHoldersWithStreamingResponse:
         from .resources.account_holders import AsyncAccountHoldersWithStreamingResponse
 
         return AsyncAccountHoldersWithStreamingResponse(self._client.account_holders)
@@ -1615,22 +1509,14 @@ class AsyncLithicWithStreamedResponse:
         return AsyncAuthRulesWithStreamingResponse(self._client.auth_rules)
 
     @cached_property
-    def auth_stream_enrollment(
-        self,
-    ) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithStreamingResponse:
-        from .resources.auth_stream_enrollment import (
-            AsyncAuthStreamEnrollmentWithStreamingResponse,
-        )
+    def auth_stream_enrollment(self) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithStreamingResponse:
+        from .resources.auth_stream_enrollment import AsyncAuthStreamEnrollmentWithStreamingResponse
 
         return AsyncAuthStreamEnrollmentWithStreamingResponse(self._client.auth_stream_enrollment)
 
     @cached_property
-    def tokenization_decisioning(
-        self,
-    ) -> tokenization_decisioning.AsyncTokenizationDecisioningWithStreamingResponse:
-        from .resources.tokenization_decisioning import (
-            AsyncTokenizationDecisioningWithStreamingResponse,
-        )
+    def tokenization_decisioning(self) -> tokenization_decisioning.AsyncTokenizationDecisioningWithStreamingResponse:
+        from .resources.tokenization_decisioning import AsyncTokenizationDecisioningWithStreamingResponse
 
         return AsyncTokenizationDecisioningWithStreamingResponse(self._client.tokenization_decisioning)
 
@@ -1647,9 +1533,7 @@ class AsyncLithicWithStreamedResponse:
         return AsyncCardsWithStreamingResponse(self._client.cards)
 
     @cached_property
-    def card_bulk_orders(
-        self,
-    ) -> card_bulk_orders.AsyncCardBulkOrdersWithStreamingResponse:
+    def card_bulk_orders(self) -> card_bulk_orders.AsyncCardBulkOrdersWithStreamingResponse:
         from .resources.card_bulk_orders import AsyncCardBulkOrdersWithStreamingResponse
 
         return AsyncCardBulkOrdersWithStreamingResponse(self._client.card_bulk_orders)
@@ -1679,12 +1563,8 @@ class AsyncLithicWithStreamedResponse:
         return AsyncEventsWithStreamingResponse(self._client.events)
 
     @cached_property
-    def financial_accounts(
-        self,
-    ) -> financial_accounts.AsyncFinancialAccountsWithStreamingResponse:
-        from .resources.financial_accounts import (
-            AsyncFinancialAccountsWithStreamingResponse,
-        )
+    def financial_accounts(self) -> financial_accounts.AsyncFinancialAccountsWithStreamingResponse:
+        from .resources.financial_accounts import AsyncFinancialAccountsWithStreamingResponse
 
         return AsyncFinancialAccountsWithStreamingResponse(self._client.financial_accounts)
 
@@ -1695,22 +1575,14 @@ class AsyncLithicWithStreamedResponse:
         return AsyncTransactionsWithStreamingResponse(self._client.transactions)
 
     @cached_property
-    def responder_endpoints(
-        self,
-    ) -> responder_endpoints.AsyncResponderEndpointsWithStreamingResponse:
-        from .resources.responder_endpoints import (
-            AsyncResponderEndpointsWithStreamingResponse,
-        )
+    def responder_endpoints(self) -> responder_endpoints.AsyncResponderEndpointsWithStreamingResponse:
+        from .resources.responder_endpoints import AsyncResponderEndpointsWithStreamingResponse
 
         return AsyncResponderEndpointsWithStreamingResponse(self._client.responder_endpoints)
 
     @cached_property
-    def external_bank_accounts(
-        self,
-    ) -> external_bank_accounts.AsyncExternalBankAccountsWithStreamingResponse:
-        from .resources.external_bank_accounts import (
-            AsyncExternalBankAccountsWithStreamingResponse,
-        )
+    def external_bank_accounts(self) -> external_bank_accounts.AsyncExternalBankAccountsWithStreamingResponse:
+        from .resources.external_bank_accounts import AsyncExternalBankAccountsWithStreamingResponse
 
         return AsyncExternalBankAccountsWithStreamingResponse(self._client.external_bank_accounts)
 
@@ -1739,12 +1611,8 @@ class AsyncLithicWithStreamedResponse:
         return AsyncCardProgramsWithStreamingResponse(self._client.card_programs)
 
     @cached_property
-    def digital_card_art(
-        self,
-    ) -> digital_card_art.AsyncDigitalCardArtResourceWithStreamingResponse:
-        from .resources.digital_card_art import (
-            AsyncDigitalCardArtResourceWithStreamingResponse,
-        )
+    def digital_card_art(self) -> digital_card_art.AsyncDigitalCardArtResourceWithStreamingResponse:
+        from .resources.digital_card_art import AsyncDigitalCardArtResourceWithStreamingResponse
 
         return AsyncDigitalCardArtResourceWithStreamingResponse(self._client.digital_card_art)
 
@@ -1755,30 +1623,20 @@ class AsyncLithicWithStreamedResponse:
         return AsyncBookTransfersWithStreamingResponse(self._client.book_transfers)
 
     @cached_property
-    def credit_products(
-        self,
-    ) -> credit_products.AsyncCreditProductsWithStreamingResponse:
+    def credit_products(self) -> credit_products.AsyncCreditProductsWithStreamingResponse:
         from .resources.credit_products import AsyncCreditProductsWithStreamingResponse
 
         return AsyncCreditProductsWithStreamingResponse(self._client.credit_products)
 
     @cached_property
-    def external_payments(
-        self,
-    ) -> external_payments.AsyncExternalPaymentsWithStreamingResponse:
-        from .resources.external_payments import (
-            AsyncExternalPaymentsWithStreamingResponse,
-        )
+    def external_payments(self) -> external_payments.AsyncExternalPaymentsWithStreamingResponse:
+        from .resources.external_payments import AsyncExternalPaymentsWithStreamingResponse
 
         return AsyncExternalPaymentsWithStreamingResponse(self._client.external_payments)
 
     @cached_property
-    def management_operations(
-        self,
-    ) -> management_operations.AsyncManagementOperationsWithStreamingResponse:
-        from .resources.management_operations import (
-            AsyncManagementOperationsWithStreamingResponse,
-        )
+    def management_operations(self) -> management_operations.AsyncManagementOperationsWithStreamingResponse:
+        from .resources.management_operations import AsyncManagementOperationsWithStreamingResponse
 
         return AsyncManagementOperationsWithStreamingResponse(self._client.management_operations)
 
@@ -1795,22 +1653,14 @@ class AsyncLithicWithStreamedResponse:
         return AsyncFraudWithStreamingResponse(self._client.fraud)
 
     @cached_property
-    def network_programs(
-        self,
-    ) -> network_programs.AsyncNetworkProgramsWithStreamingResponse:
-        from .resources.network_programs import (
-            AsyncNetworkProgramsWithStreamingResponse,
-        )
+    def network_programs(self) -> network_programs.AsyncNetworkProgramsWithStreamingResponse:
+        from .resources.network_programs import AsyncNetworkProgramsWithStreamingResponse
 
         return AsyncNetworkProgramsWithStreamingResponse(self._client.network_programs)
 
     @cached_property
-    def account_activity(
-        self,
-    ) -> account_activity.AsyncAccountActivityWithStreamingResponse:
-        from .resources.account_activity import (
-            AsyncAccountActivityWithStreamingResponse,
-        )
+    def account_activity(self) -> account_activity.AsyncAccountActivityWithStreamingResponse:
+        from .resources.account_activity import AsyncAccountActivityWithStreamingResponse
 
         return AsyncAccountActivityWithStreamingResponse(self._client.account_activity)
 
