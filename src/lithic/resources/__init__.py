@@ -145,6 +145,14 @@ from .credit_products import (
     CreditProductsWithStreamingResponse,
     AsyncCreditProductsWithStreamingResponse,
 )
+from .transfer_limits import (
+    TransferLimits,
+    AsyncTransferLimits,
+    TransferLimitsWithRawResponse,
+    AsyncTransferLimitsWithRawResponse,
+    TransferLimitsWithStreamingResponse,
+    AsyncTransferLimitsWithStreamingResponse,
+)
 from .account_activity import (
     AccountActivity,
     AsyncAccountActivity,
@@ -409,6 +417,12 @@ __all__ = [
     "AsyncAccountActivityWithRawResponse",
     "AccountActivityWithStreamingResponse",
     "AsyncAccountActivityWithStreamingResponse",
+    "TransferLimits",
+    "AsyncTransferLimits",
+    "TransferLimitsWithRawResponse",
+    "AsyncTransferLimitsWithRawResponse",
+    "TransferLimitsWithStreamingResponse",
+    "AsyncTransferLimitsWithStreamingResponse",
     "Webhooks",
     "AsyncWebhooks",
 ]

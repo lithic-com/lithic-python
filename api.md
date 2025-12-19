@@ -657,6 +657,7 @@ Methods:
 - <code title="post /v1/book_transfers">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">create</a>(\*\*<a href="src/lithic/types/book_transfer_create_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
 - <code title="get /v1/book_transfers/{book_transfer_token}">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">retrieve</a>(book_transfer_token) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
 - <code title="get /v1/book_transfers">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">list</a>(\*\*<a href="src/lithic/types/book_transfer_list_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">SyncCursorPage[BookTransferResponse]</a></code>
+- <code title="post /v1/book_transfers/{book_transfer_token}/retry">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">retry</a>(book_transfer_token, \*\*<a href="src/lithic/types/book_transfer_retry_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
 - <code title="post /v1/book_transfers/{book_transfer_token}/reverse">client.book_transfers.<a href="./src/lithic/resources/book_transfers.py">reverse</a>(book_transfer_token, \*\*<a href="src/lithic/types/book_transfer_reverse_params.py">params</a>) -> <a href="./src/lithic/types/book_transfer_response.py">BookTransferResponse</a></code>
 
 # CreditProducts
@@ -785,6 +786,18 @@ Methods:
 
 - <code title="get /v1/account_activity">client.account_activity.<a href="./src/lithic/resources/account_activity.py">list</a>(\*\*<a href="src/lithic/types/account_activity_list_params.py">params</a>) -> <a href="./src/lithic/types/account_activity_list_response.py">SyncCursorPage[AccountActivityListResponse]</a></code>
 - <code title="get /v1/account_activity/{transaction_token}">client.account_activity.<a href="./src/lithic/resources/account_activity.py">retrieve_transaction</a>(transaction_token) -> <a href="./src/lithic/types/account_activity_retrieve_transaction_response.py">AccountActivityRetrieveTransactionResponse</a></code>
+
+# TransferLimits
+
+Types:
+
+```python
+from lithic.types import TransferLimitsResponse
+```
+
+Methods:
+
+- <code title="get /v1/transfer_limits">client.transfer_limits.<a href="./src/lithic/resources/transfer_limits.py">list</a>(\*\*<a href="src/lithic/types/transfer_limit_list_params.py">params</a>) -> SyncSinglePage[Data]</code>
 
 # Webhooks
 

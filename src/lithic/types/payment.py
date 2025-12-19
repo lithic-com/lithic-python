@@ -95,6 +95,9 @@ class Event(BaseModel):
     ] = None
     """More detailed reasons for the event"""
 
+    external_id: Optional[str] = None
+    """Payment event external ID, for example, ACH trace number."""
+
 
 class MethodAttributesACHMethodAttributes(BaseModel):
     sec_code: Literal["CCD", "PPD", "WEB", "TEL", "CIE", "CTX"]
