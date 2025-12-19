@@ -56,6 +56,7 @@ if TYPE_CHECKING:
         funding_events,
         account_holders,
         credit_products,
+        transfer_limits,
         account_activity,
         card_bulk_orders,
         digital_card_art,
@@ -83,6 +84,7 @@ if TYPE_CHECKING:
     from .resources.funding_events import FundingEvents, AsyncFundingEvents
     from .resources.account_holders import AccountHolders, AsyncAccountHolders
     from .resources.reports.reports import Reports, AsyncReports
+    from .resources.transfer_limits import TransferLimits, AsyncTransferLimits
     from .resources.account_activity import AccountActivity, AsyncAccountActivity
     from .resources.card_bulk_orders import CardBulkOrders, AsyncCardBulkOrders
     from .resources.digital_card_art import DigitalCardArtResource, AsyncDigitalCardArtResource
@@ -377,6 +379,12 @@ class Lithic(SyncAPIClient):
         from .resources.account_activity import AccountActivity
 
         return AccountActivity(self)
+
+    @cached_property
+    def transfer_limits(self) -> TransferLimits:
+        from .resources.transfer_limits import TransferLimits
+
+        return TransferLimits(self)
 
     @cached_property
     def webhooks(self) -> Webhooks:
@@ -783,6 +791,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncAccountActivity(self)
 
     @cached_property
+    def transfer_limits(self) -> AsyncTransferLimits:
+        from .resources.transfer_limits import AsyncTransferLimits
+
+        return AsyncTransferLimits(self)
+
+    @cached_property
     def webhooks(self) -> AsyncWebhooks:
         from .resources.webhooks import AsyncWebhooks
 
@@ -1109,6 +1123,12 @@ class LithicWithRawResponse:
 
         return AccountActivityWithRawResponse(self._client.account_activity)
 
+    @cached_property
+    def transfer_limits(self) -> transfer_limits.TransferLimitsWithRawResponse:
+        from .resources.transfer_limits import TransferLimitsWithRawResponse
+
+        return TransferLimitsWithRawResponse(self._client.transfer_limits)
+
 
 class AsyncLithicWithRawResponse:
     _client: AsyncLithic
@@ -1293,6 +1313,12 @@ class AsyncLithicWithRawResponse:
         from .resources.account_activity import AsyncAccountActivityWithRawResponse
 
         return AsyncAccountActivityWithRawResponse(self._client.account_activity)
+
+    @cached_property
+    def transfer_limits(self) -> transfer_limits.AsyncTransferLimitsWithRawResponse:
+        from .resources.transfer_limits import AsyncTransferLimitsWithRawResponse
+
+        return AsyncTransferLimitsWithRawResponse(self._client.transfer_limits)
 
 
 class LithicWithStreamedResponse:
@@ -1479,6 +1505,12 @@ class LithicWithStreamedResponse:
 
         return AccountActivityWithStreamingResponse(self._client.account_activity)
 
+    @cached_property
+    def transfer_limits(self) -> transfer_limits.TransferLimitsWithStreamingResponse:
+        from .resources.transfer_limits import TransferLimitsWithStreamingResponse
+
+        return TransferLimitsWithStreamingResponse(self._client.transfer_limits)
+
 
 class AsyncLithicWithStreamedResponse:
     _client: AsyncLithic
@@ -1663,6 +1695,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.account_activity import AsyncAccountActivityWithStreamingResponse
 
         return AsyncAccountActivityWithStreamingResponse(self._client.account_activity)
+
+    @cached_property
+    def transfer_limits(self) -> transfer_limits.AsyncTransferLimitsWithStreamingResponse:
+        from .resources.transfer_limits import AsyncTransferLimitsWithStreamingResponse
+
+        return AsyncTransferLimitsWithStreamingResponse(self._client.transfer_limits)
 
 
 Client = Lithic
