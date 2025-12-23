@@ -9,4 +9,7 @@ __all__ = ["BookTransferRetryParams"]
 
 class BookTransferRetryParams(TypedDict, total=False):
     retry_token: Required[str]
-    """Globally unique identifier for the retry."""
+    """Customer-provided token that will serve as an idempotency token.
+
+    This token will become the transaction token.
+    """

@@ -27,6 +27,10 @@ class ExternalPaymentCreateParams(TypedDict, total=False):
     payment_type: Required[Literal["DEPOSIT", "WITHDRAWAL"]]
 
     token: str
+    """Customer-provided token that will serve as an idempotency token.
+
+    This token will become the transaction token.
+    """
 
     memo: str
 

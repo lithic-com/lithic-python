@@ -103,6 +103,9 @@ class ManagementOperations(SyncAPIResource):
         Create management operation
 
         Args:
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
+
           on_closed_account: What to do if the financial account is closed when posting an operation
 
           extra_headers: Send extra headers
@@ -380,6 +383,9 @@ class AsyncManagementOperations(AsyncAPIResource):
         Create management operation
 
         Args:
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
+
           on_closed_account: What to do if the financial account is closed when posting an operation
 
           extra_headers: Send extra headers

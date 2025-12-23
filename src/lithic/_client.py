@@ -417,7 +417,6 @@ class Lithic(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
-            "X-Lithic-Pagination": "cursor",
             **self._custom_headers,
         }
 
@@ -827,7 +826,6 @@ class AsyncLithic(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
-            "X-Lithic-Pagination": "cursor",
             **self._custom_headers,
         }
 
