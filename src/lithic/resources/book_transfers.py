@@ -318,7 +318,8 @@ class BookTransfers(SyncAPIResource):
         Retry a book transfer that has been declined
 
         Args:
-          retry_token: Globally unique identifier for the retry.
+          retry_token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
 
           extra_headers: Send extra headers
 
@@ -672,7 +673,8 @@ class AsyncBookTransfers(AsyncAPIResource):
         Retry a book transfer that has been declined
 
         Args:
-          retry_token: Globally unique identifier for the retry.
+          retry_token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
 
           extra_headers: Send extra headers
 

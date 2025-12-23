@@ -61,6 +61,10 @@ class ManagementOperationCreateParams(TypedDict, total=False):
     financial_account_token: Required[str]
 
     token: str
+    """Customer-provided token that will serve as an idempotency token.
+
+    This token will become the transaction token.
+    """
 
     memo: str
 
