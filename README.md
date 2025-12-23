@@ -295,20 +295,6 @@ On timeout, an `APITimeoutError` is thrown.
 
 Note that requests that time out are [retried twice by default](#retries).
 
-## Default Headers
-
-We automatically send the `X-Lithic-Pagination` header set to `cursor`.
-
-If you need to, you can override it by setting default headers per-request or on the client object.
-
-```python
-from lithic import Lithic
-
-client = Lithic(
-    default_headers={"X-Lithic-Pagination": "My-Custom-Value"},
-)
-```
-
 ## Advanced
 
 ### Logging

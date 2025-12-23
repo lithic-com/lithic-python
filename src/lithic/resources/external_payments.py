@@ -74,6 +74,9 @@ class ExternalPayments(SyncAPIResource):
         Create external payment
 
         Args:
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -449,6 +452,9 @@ class AsyncExternalPayments(AsyncAPIResource):
         Create external payment
 
         Args:
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request

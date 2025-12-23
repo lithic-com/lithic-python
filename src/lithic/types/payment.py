@@ -253,6 +253,7 @@ class Payment(BaseModel):
             "WIRE_INBOUND_ADMIN",
             "WIRE_OUTBOUND_PAYMENT",
             "WIRE_OUTBOUND_ADMIN",
+            "WIRE_DRAWDOWN_REQUEST",
         ]
     ] = None
 
