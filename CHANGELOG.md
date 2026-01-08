@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.113.1 (2026-01-08)
+
+Full Changelog: [v0.113.0...v0.113.1](https://github.com/lithic-com/lithic-python/compare/v0.113.0...v0.113.1)
+
+### Chores
+
+* configure new SDK language ([427958f](https://github.com/lithic-com/lithic-python/commit/427958fe0fca3e9162da20580087cc4dcca80b1c))
+
 ## 0.113.0 (2026-01-08)
 
 Full Changelog: [v0.112.0...v0.113.0](https://github.com/lithic-com/lithic-python/compare/v0.112.0...v0.113.0)
