@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.113.0 (2026-01-08)
+
+Full Changelog: [v0.112.0...v0.113.0](https://github.com/lithic-com/lithic-python/compare/v0.112.0...v0.113.0)
+
+### Features
+
+* **api:** Add card state attribute to tokenization rules ([baad6b3](https://github.com/lithic-com/lithic-python/commit/baad6b392013bd69f1b96e1e56c5a7557fb2262f))
+* **api:** Add event_type to ASA request and 3DS decisioning request ([baad6b3](https://github.com/lithic-com/lithic-python/commit/baad6b392013bd69f1b96e1e56c5a7557fb2262f))
+* **api:** add external_id to payment_event ([b87046c](https://github.com/lithic-com/lithic-python/commit/b87046c51cb5d332ea53959ac3892ce2ba29cec3))
+* **api:** add get /v1/transfer_limits endpoint ([b87046c](https://github.com/lithic-com/lithic-python/commit/b87046c51cb5d332ea53959ac3892ce2ba29cec3))
+* **api:** add post /v1/book_transfers/{book_transfer_token}/retry endpoint ([b87046c](https://github.com/lithic-com/lithic-python/commit/b87046c51cb5d332ea53959ac3892ce2ba29cec3))
+* **api:** Add user defined status to ledger accounts ([baad6b3](https://github.com/lithic-com/lithic-python/commit/baad6b392013bd69f1b96e1e56c5a7557fb2262f))
+* **api:** add WIRE_DRAWDOWN_REQUEST transfer type ([97f0128](https://github.com/lithic-com/lithic-python/commit/97f012830440e7bd5071bf58d88b47b87b8b2025))
+* **api:** Expose Payment Allocation Details ([baad6b3](https://github.com/lithic-com/lithic-python/commit/baad6b392013bd69f1b96e1e56c5a7557fb2262f))
+* **api:** remove unnecessary X-Lithic-Pagination header ([97f0128](https://github.com/lithic-com/lithic-python/commit/97f012830440e7bd5071bf58d88b47b87b8b2025))
+* **api:** remove v1/aggregate_balances and related models ([f3e089e](https://github.com/lithic-com/lithic-python/commit/f3e089e78535d88553bd60681bce6e75f0c29ece))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([783d8ff](https://github.com/lithic-com/lithic-python/commit/783d8ff3f2119f1ff7c89e65864107fa13afe9b4))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([8e0a11c](https://github.com/lithic-com/lithic-python/commit/8e0a11ca6969fe5956ad244a7222525ff16c11b9))
+* **internal:** add missing files argument to base client ([52f441e](https://github.com/lithic-com/lithic-python/commit/52f441ece2827bf2b57bc2840d226121becbbff4))
+* **internal:** codegen related update ([14b9d48](https://github.com/lithic-com/lithic-python/commit/14b9d48c8280147c26e92118bf070fd3a35e5013))
+* update code formatting ([baad6b3](https://github.com/lithic-com/lithic-python/commit/baad6b392013bd69f1b96e1e56c5a7557fb2262f))
+
+
+### Documentation
+
+* **api:** clarify description of token /  retry_token when it serves as idempotency key ([97f0128](https://github.com/lithic-com/lithic-python/commit/97f012830440e7bd5071bf58d88b47b87b8b2025))
+* Update language for Google Web Push Provisioning docs ([baad6b3](https://github.com/lithic-com/lithic-python/commit/baad6b392013bd69f1b96e1e56c5a7557fb2262f))
+
 ## 0.112.0 (2025-12-10)
 
 Full Changelog: [v0.111.0...v0.112.0](https://github.com/lithic-com/lithic-python/compare/v0.111.0...v0.112.0)
