@@ -320,6 +320,7 @@ class FinancialAccounts(SyncAPIResource):
         *,
         status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
         substatus: Optional[Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]],
+        user_defined_status: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -334,6 +335,8 @@ class FinancialAccounts(SyncAPIResource):
           status: Status of the financial account
 
           substatus: Substatus for the financial account
+
+          user_defined_status: User-defined status for the financial account
 
           extra_headers: Send extra headers
 
@@ -353,6 +356,7 @@ class FinancialAccounts(SyncAPIResource):
                 {
                     "status": status,
                     "substatus": substatus,
+                    "user_defined_status": user_defined_status,
                 },
                 financial_account_update_status_params.FinancialAccountUpdateStatusParams,
             ),
@@ -618,6 +622,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         *,
         status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
         substatus: Optional[Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]],
+        user_defined_status: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -632,6 +637,8 @@ class AsyncFinancialAccounts(AsyncAPIResource):
           status: Status of the financial account
 
           substatus: Substatus for the financial account
+
+          user_defined_status: User-defined status for the financial account
 
           extra_headers: Send extra headers
 
@@ -651,6 +658,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 {
                     "status": status,
                     "substatus": substatus,
+                    "user_defined_status": user_defined_status,
                 },
                 financial_account_update_status_params.FinancialAccountUpdateStatusParams,
             ),

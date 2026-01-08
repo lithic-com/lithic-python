@@ -94,7 +94,6 @@ from .card_program_list_params import CardProgramListParams as CardProgramListPa
 from .tokenization_list_params import TokenizationListParams as TokenizationListParams
 from .tokenization_rule_result import TokenizationRuleResult as TokenizationRuleResult
 from .transfer_limits_response import TransferLimitsResponse as TransferLimitsResponse
-from .asa_request_webhook_event import AsaRequestWebhookEvent as AsaRequestWebhookEvent
 from .book_transfer_list_params import BookTransferListParams as BookTransferListParams
 from .card_search_by_pan_params import CardSearchByPanParams as CardSearchByPanParams
 from .card_web_provision_params import CardWebProvisionParams as CardWebProvisionParams
@@ -331,6 +330,9 @@ from .transaction_simulate_authorization_advice_params import (
 from .transaction_simulate_credit_authorization_params import (
     TransactionSimulateCreditAuthorizationParams as TransactionSimulateCreditAuthorizationParams,
 )
+from .card_authorization_approval_request_webhook_event import (
+    CardAuthorizationApprovalRequestWebhookEvent as CardAuthorizationApprovalRequestWebhookEvent,
+)
 from .digital_wallet_tokenization_updated_webhook_event import (
     DigitalWalletTokenizationUpdatedWebhookEvent as DigitalWalletTokenizationUpdatedWebhookEvent,
 )
@@ -354,6 +356,9 @@ from .card_transaction_enhanced_data_created_webhook_event import (
 )
 from .card_transaction_enhanced_data_updated_webhook_event import (
     CardTransactionEnhancedDataUpdatedWebhookEvent as CardTransactionEnhancedDataUpdatedWebhookEvent,
+)
+from .three_ds_authentication_approval_request_webhook_event import (
+    ThreeDSAuthenticationApprovalRequestWebhookEvent as ThreeDSAuthenticationApprovalRequestWebhookEvent,
 )
 from .transaction_simulate_credit_authorization_advice_params import (
     TransactionSimulateCreditAuthorizationAdviceParams as TransactionSimulateCreditAuthorizationAdviceParams,
