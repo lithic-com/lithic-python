@@ -10,7 +10,7 @@ from .shared.merchant import Merchant
 from .cardholder_authentication import CardholderAuthentication
 
 __all__ = [
-    "AsaRequestWebhookEvent",
+    "CardAuthorizationApprovalRequestWebhookEvent",
     "Avs",
     "Card",
     "FleetInfo",
@@ -293,9 +293,7 @@ class Pos(BaseModel):
     terminal: Optional[PosTerminal] = None
 
 
-class AsaRequestWebhookEvent(BaseModel):
-    """The Auth Stream Access request payload that was sent to the ASA responder."""
-
+class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
     token: str
     """The provisional transaction group uuid associated with the authorization"""
 
@@ -339,6 +337,8 @@ class AsaRequestWebhookEvent(BaseModel):
 
     created: datetime
     """Date and time when the transaction first occurred in UTC."""
+
+    event_type: Literal["card_authorization.approval_request"]
 
     merchant: Merchant
 

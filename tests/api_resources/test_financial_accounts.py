@@ -240,6 +240,16 @@ class TestFinancialAccounts:
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 
     @parametrize
+    def test_method_update_status_with_all_params(self, client: Lithic) -> None:
+        financial_account = client.financial_accounts.update_status(
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            status="OPEN",
+            substatus="CHARGED_OFF_FRAUD",
+            user_defined_status="26",
+        )
+        assert_matches_type(FinancialAccount, financial_account, path=["response"])
+
+    @parametrize
     def test_raw_response_update_status(self, client: Lithic) -> None:
         response = client.financial_accounts.with_raw_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -500,6 +510,16 @@ class TestAsyncFinancialAccounts:
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status="OPEN",
             substatus="CHARGED_OFF_FRAUD",
+        )
+        assert_matches_type(FinancialAccount, financial_account, path=["response"])
+
+    @parametrize
+    async def test_method_update_status_with_all_params(self, async_client: AsyncLithic) -> None:
+        financial_account = await async_client.financial_accounts.update_status(
+            financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            status="OPEN",
+            substatus="CHARGED_OFF_FRAUD",
+            user_defined_status="26",
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 

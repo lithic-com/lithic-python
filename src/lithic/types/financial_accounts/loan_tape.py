@@ -16,6 +16,7 @@ __all__ = [
     "Balances",
     "InterestDetails",
     "MinimumPaymentBalance",
+    "PaymentAllocation",
     "PreviousStatementBalance",
 ]
 
@@ -101,6 +102,23 @@ class MinimumPaymentBalance(BaseModel):
     remaining: int
 
 
+class PaymentAllocation(BaseModel):
+    fee_details: Optional[CategoryDetails] = None
+
+    fees: int
+    """Amount allocated to fees in cents"""
+
+    interest: int
+    """Amount allocated to interest in cents"""
+
+    interest_details: Optional[CategoryDetails] = None
+
+    principal: int
+    """Amount allocated to principal in cents"""
+
+    principal_details: Optional[CategoryDetails] = None
+
+
 class PreviousStatementBalance(BaseModel):
     amount: int
 
@@ -154,7 +172,7 @@ class LoanTape(BaseModel):
 
     minimum_payment_balance: MinimumPaymentBalance
 
-    payment_allocation: CategoryBalances
+    payment_allocation: PaymentAllocation
 
     period_totals: StatementTotals
 
