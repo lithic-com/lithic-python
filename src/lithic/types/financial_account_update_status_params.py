@@ -16,3 +16,6 @@ class FinancialAccountUpdateStatusParams(TypedDict, total=False):
         Optional[Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]]
     ]
     """Substatus for the financial account"""
+
+    user_defined_status: str
+    """User-defined status for the financial account"""

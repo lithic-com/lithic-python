@@ -81,6 +81,7 @@ class Condition(BaseModel):
         "WALLET_RECOMMENDATION_REASONS",
         "TOKEN_REQUESTOR_ID",
         "WALLET_TOKEN_STATUS",
+        "CARD_STATE",
     ]
     """The attribute to target.
 
@@ -114,6 +115,8 @@ class Condition(BaseModel):
       `TOO_MANY_RECENT_TOKENS`, `UNABLE_TO_ASSESS`.
     - `TOKEN_REQUESTOR_ID`: Unique identifier for the entity requesting the token.
     - `WALLET_TOKEN_STATUS`: The current status of the wallet token.
+    - `CARD_STATE`: The state of the card being tokenized. Valid values are
+      `CLOSED`, `OPEN`, `PAUSED`, `PENDING_ACTIVATION`, `PENDING_FULFILLMENT`.
     """
 
     operation: ConditionalOperation

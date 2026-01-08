@@ -6,8 +6,6 @@ from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 from .kyb_business_entity import KYBBusinessEntity
-from .three_ds_authentication import ThreeDSAuthentication
-from .asa_request_webhook_event import AsaRequestWebhookEvent
 from .card_created_webhook_event import CardCreatedWebhookEvent
 from .card_renewed_webhook_event import CardRenewedWebhookEvent
 from .card_shipped_webhook_event import CardShippedWebhookEvent
@@ -52,9 +50,11 @@ from .book_transfer_transaction_updated_webhook_event import BookTransferTransac
 from .three_ds_authentication_challenge_webhook_event import ThreeDSAuthenticationChallengeWebhookEvent
 from .auth_rules_backtest_report_created_webhook_event import AuthRulesBacktestReportCreatedWebhookEvent
 from .digital_wallet_tokenization_result_webhook_event import DigitalWalletTokenizationResultWebhookEvent
+from .card_authorization_approval_request_webhook_event import CardAuthorizationApprovalRequestWebhookEvent
 from .digital_wallet_tokenization_updated_webhook_event import DigitalWalletTokenizationUpdatedWebhookEvent
 from .card_transaction_enhanced_data_created_webhook_event import CardTransactionEnhancedDataCreatedWebhookEvent
 from .card_transaction_enhanced_data_updated_webhook_event import CardTransactionEnhancedDataUpdatedWebhookEvent
+from .three_ds_authentication_approval_request_webhook_event import ThreeDSAuthenticationApprovalRequestWebhookEvent
 from .tokenization_two_factor_authentication_code_webhook_event import (
     TokenizationTwoFactorAuthenticationCodeWebhookEvent,
 )
@@ -426,7 +426,7 @@ ParsedWebhookEvent: TypeAlias = Union[
     LegacyPayload,
     AccountHolderVerificationWebhookEvent,
     AccountHolderDocumentUpdatedWebhookEvent,
-    AsaRequestWebhookEvent,
+    CardAuthorizationApprovalRequestWebhookEvent,
     TokenizationDecisioningRequestWebhookEvent,
     AuthRulesBacktestReportCreatedWebhookEvent,
     BalanceUpdatedWebhookEvent,
@@ -474,7 +474,7 @@ ParsedWebhookEvent: TypeAlias = Union[
     TokenizationTwoFactorAuthenticationCodeWebhookEvent,
     TokenizationTwoFactorAuthenticationCodeSentWebhookEvent,
     TokenizationUpdatedWebhookEvent,
-    ThreeDSAuthentication,
+    ThreeDSAuthenticationApprovalRequestWebhookEvent,
     DisputeTransactionCreatedWebhookEvent,
     DisputeTransactionUpdatedWebhookEvent,
 ]

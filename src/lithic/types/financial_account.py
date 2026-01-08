@@ -46,6 +46,11 @@ class FinancialAccount(BaseModel):
     status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"]
     """Status of the financial account"""
 
+    substatus: Optional[
+        Literal["CHARGED_OFF_DELINQUENT", "CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "DELINQUENT"]
+    ] = None
+    """Substatus for the financial account"""
+
     type: Literal[
         "ISSUING",
         "RESERVE",
@@ -61,11 +66,9 @@ class FinancialAccount(BaseModel):
 
     updated: datetime
 
+    user_defined_status: Optional[str] = None
+    """User-defined status for the financial account"""
+
     account_number: Optional[str] = None
 
     routing_number: Optional[str] = None
-
-    substatus: Optional[
-        Literal["CHARGED_OFF_DELINQUENT", "CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "DELINQUENT"]
-    ] = None
-    """Substatus for the financial account"""
