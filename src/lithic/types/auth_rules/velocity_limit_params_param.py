@@ -68,13 +68,13 @@ class Filters(TypedDict, total=False):
 
 
 class VelocityLimitParamsParam(TypedDict, total=False):
-    filters: Required[Filters]
-
     period: Required[VelocityLimitPeriodParam]
     """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
 
     scope: Required[Literal["CARD", "ACCOUNT"]]
     """The scope the velocity is calculated for"""
+
+    filters: Filters
 
     limit_amount: Optional[int]
     """
