@@ -66,13 +66,13 @@ class Filters(BaseModel):
 
 
 class VelocityLimitParams(BaseModel):
-    filters: Filters
-
     period: VelocityLimitPeriod
     """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
 
     scope: Literal["CARD", "ACCOUNT"]
     """The scope the velocity is calculated for"""
+
+    filters: Optional[Filters] = None
 
     limit_amount: Optional[int] = None
     """
