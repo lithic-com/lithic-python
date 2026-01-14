@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["PaymentCreateParams", "MethodAttributes"]
 
@@ -35,7 +37,7 @@ class PaymentCreateParams(TypedDict, total=False):
 class MethodAttributes(TypedDict, total=False):
     sec_code: Required[Literal["CCD", "PPD", "WEB"]]
 
-    ach_hold_period: int
+    ach_hold_period: Annotated[int, PropertyInfo(alias="ach_hold__period")]
     """Number of days to hold the ACH payment"""
 
     addenda: Optional[str]
