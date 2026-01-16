@@ -46,10 +46,10 @@ class AppleWebPushProvisioningResponseJws(BaseModel):
 
 
 class AppleWebPushProvisioningResponse(BaseModel):
-    jws: Optional[AppleWebPushProvisioningResponseJws] = None
+    jws: AppleWebPushProvisioningResponseJws
     """JWS object required for handoff to Apple's script."""
 
-    state: Optional[str] = None
+    state: str
     """A unique identifier for the JWS object."""
 
 
