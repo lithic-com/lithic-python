@@ -45,8 +45,10 @@ class FinancialTransaction(BaseModel):
     pending_amount: int
     """
     Pending amount of the transaction in the currency's smallest unit (e.g., cents),
-    including any acquirer fees. The value of this field will go to zero over time
-    once the financial transaction is settled.
+    including any acquirer fees.
+
+    The value of this field will go to zero over time once the financial transaction
+    is settled.
     """
 
     result: Literal["APPROVED", "DECLINED"]
