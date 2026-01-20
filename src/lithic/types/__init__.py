@@ -109,6 +109,7 @@ from .card_created_webhook_event import CardCreatedWebhookEvent as CardCreatedWe
 from .card_get_embed_html_params import CardGetEmbedHTMLParams as CardGetEmbedHTMLParams
 from .card_renewed_webhook_event import CardRenewedWebhookEvent as CardRenewedWebhookEvent
 from .card_shipped_webhook_event import CardShippedWebhookEvent as CardShippedWebhookEvent
+from .card_updated_webhook_event import CardUpdatedWebhookEvent as CardUpdatedWebhookEvent
 from .event_list_attempts_params import EventListAttemptsParams as EventListAttemptsParams
 from .settlement_summary_details import SettlementSummaryDetails as SettlementSummaryDetails
 from .transfer_limit_list_params import TransferLimitListParams as TransferLimitListParams
