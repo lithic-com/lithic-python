@@ -820,6 +820,7 @@ from lithic.types import (
     CardRenewedWebhookEvent,
     CardReissuedWebhookEvent,
     CardShippedWebhookEvent,
+    CardUpdatedWebhookEvent,
     CardTransactionUpdatedWebhookEvent,
     CardTransactionEnhancedDataCreatedWebhookEvent,
     CardTransactionEnhancedDataUpdatedWebhookEvent,

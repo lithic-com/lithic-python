@@ -41,6 +41,7 @@ class EventSubscription(BaseModel):
                 "card.reissued",
                 "card.renewed",
                 "card.shipped",
+                "card.updated",
                 "digital_wallet.tokenization_approval_request",
                 "digital_wallet.tokenization_result",
                 "digital_wallet.tokenization_two_factor_authentication_code",

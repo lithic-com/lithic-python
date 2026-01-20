@@ -9,6 +9,7 @@ from .kyb_business_entity import KYBBusinessEntity
 from .card_created_webhook_event import CardCreatedWebhookEvent
 from .card_renewed_webhook_event import CardRenewedWebhookEvent
 from .card_shipped_webhook_event import CardShippedWebhookEvent
+from .card_updated_webhook_event import CardUpdatedWebhookEvent
 from .card_reissued_webhook_event import CardReissuedWebhookEvent
 from .card_converted_webhook_event import CardConvertedWebhookEvent
 from .balance_updated_webhook_event import BalanceUpdatedWebhookEvent
@@ -437,6 +438,7 @@ ParsedWebhookEvent: TypeAlias = Union[
     CardRenewedWebhookEvent,
     CardReissuedWebhookEvent,
     CardShippedWebhookEvent,
+    CardUpdatedWebhookEvent,
     CardTransactionUpdatedWebhookEvent,
     CardTransactionEnhancedDataCreatedWebhookEvent,
     CardTransactionEnhancedDataUpdatedWebhookEvent,
