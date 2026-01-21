@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -728,6 +728,13 @@ class Transaction(BaseModel):
 
     status: Literal["DECLINED", "EXPIRED", "PENDING", "SETTLED", "VOIDED"]
     """Status of the transaction."""
+
+    tags: Dict[str, str]
+    """Key-value pairs for tagging resources.
+
+    Tags allow you to associate arbitrary metadata with a resource for your own
+    purposes.
+    """
 
     token_info: Optional[TokenInfo] = None
 
