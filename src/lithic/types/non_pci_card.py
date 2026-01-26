@@ -125,11 +125,10 @@ class NonPCICard(BaseModel):
     wallet-enabled). _ `PHYSICAL` - Manufactured and sent to the cardholder. We
     offer white label branding, credit, ATM, PIN debit, chip/EMV, NFC and magstripe
     functionality. _ `SINGLE_USE` - Card is closed upon first successful
-    authorization. _ `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first
-    merchant that successfully authorizes the card. _ `UNLOCKED` - _[Deprecated]_
-    Similar behavior to VIRTUAL cards, please use VIRTUAL instead. _
-    `DIGITAL_WALLET` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please use
-    VIRTUAL instead.
+    authorization. _ `MERCHANT_LOCKED` - Card is locked to the first merchant that
+    successfully authorizes the card. _ `UNLOCKED` - _[Deprecated]_ Similar behavior
+    to VIRTUAL cards, please use VIRTUAL instead. _ `DIGITAL_WALLET` -
+    _[Deprecated]_ Similar behavior to VIRTUAL cards, please use VIRTUAL instead.
     """
 
     auth_rule_tokens: Optional[List[str]] = None
