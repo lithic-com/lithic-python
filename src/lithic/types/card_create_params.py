@@ -23,8 +23,8 @@ class CardCreateParams(TypedDict, total=False):
       Reach out at [lithic.com/contact](https://lithic.com/contact) for more
       information.
     - `SINGLE_USE` - Card is closed upon first successful authorization.
-    - `MERCHANT_LOCKED` - _[Deprecated]_ Card is locked to the first merchant that
-      successfully authorizes the card.
+    - `MERCHANT_LOCKED` - Card is locked to the first merchant that successfully
+      authorizes the card.
     - `UNLOCKED` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please use
       VIRTUAL instead.
     - `DIGITAL_WALLET` - _[Deprecated]_ Similar behavior to VIRTUAL cards, please
