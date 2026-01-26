@@ -8,7 +8,7 @@ __all__ = ["CardUpdatedWebhookEvent"]
 
 
 class CardUpdatedWebhookEvent(BaseModel):
-    token: str
+    card_token: str
     """The token of the card that was updated."""
 
     event_type: Literal["card.updated"]
