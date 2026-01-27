@@ -30,5 +30,14 @@ class TransactionSimulateCreditAuthorizationParams(TypedDict, total=False):
     [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
     """
 
+    merchant_acceptor_city: str
+    """Merchant acceptor city"""
+
+    merchant_acceptor_country: str
+    """Merchant acceptor country code (ISO 3166-1 alpha-3)"""
+
     merchant_acceptor_id: str
     """Unique identifier to identify the payment card acceptor."""
+
+    merchant_acceptor_state: str
+    """Merchant acceptor state/province (ISO 3166-2 subdivision code)"""
