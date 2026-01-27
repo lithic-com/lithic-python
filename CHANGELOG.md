@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.114.0 (2026-01-27)
+
+Full Changelog: [v0.113.0...v0.114.0](https://github.com/lithic-com/lithic-python/compare/v0.113.0...v0.114.0)
+
+### Features
+
+* **api:** Add card.updated event ([e6fb3b8](https://github.com/lithic-com/lithic-python/commit/e6fb3b8e4a9aa3f989f4916f2787a87f7a762d58))
+* **api:** Add merchant location fields to simulator endpoints ([a42dc62](https://github.com/lithic-com/lithic-python/commit/a42dc6295dd6e213ace91209cc17b05471624457))
+* **api:** Add tags field to card transactions ([e13c1d1](https://github.com/lithic-com/lithic-python/commit/e13c1d12f598be79535089e8269ffd572fdcce45))
+* **api:** make filter optional for Spend Velocity Auth Rules ([260d4a6](https://github.com/lithic-com/lithic-python/commit/260d4a653a2c325bbce7bf24474043a3e0974c28))
+* **client:** add support for binary request streaming ([941a2e3](https://github.com/lithic-com/lithic-python/commit/941a2e3857a34b9555d9b5ce83149ec2ab36d0c3))
+
+
+### Bug Fixes
+
+* **api:** Correct field name from ach_hold__period to ach_hold_period ([2b4f00b](https://github.com/lithic-com/lithic-python/commit/2b4f00b6e98ac08aa2e545940ade5abc8f2681b9))
+* **api:** mark AppleWebPushProvisioningResponse fields required ([fa13843](https://github.com/lithic-com/lithic-python/commit/fa13843b6069e986f22812b711ea23bf405104fd))
+* **api:** rename WIRE_DRAWDOWN_REQUEST to WIRE_INBOUND_DRAWDOWN_REQUEST ([260d4a6](https://github.com/lithic-com/lithic-python/commit/260d4a653a2c325bbce7bf24474043a3e0974c28))
+
+
+### Chores
+
+* Add spec linter for YAML and folded style multiline strings ([36b4035](https://github.com/lithic-com/lithic-python/commit/36b40359b59c3feac3ce84b3437a0d8fd9bfa803))
+* **ci:** upgrade `actions/github-script` ([4f0854d](https://github.com/lithic-com/lithic-python/commit/4f0854d649ef5aaea5c3e6e4ed09aac6a749018b))
+* configure new SDK language ([427958f](https://github.com/lithic-com/lithic-python/commit/427958fe0fca3e9162da20580087cc4dcca80b1c))
+* **internal:** update `actions/checkout` version ([afc35a5](https://github.com/lithic-com/lithic-python/commit/afc35a53e20b1c71e1dd96288fcd416c7674107c))
+* Rework event type generation to support spec splitting ([f9939dd](https://github.com/lithic-com/lithic-python/commit/f9939ddb3e941195435eaee0a962f985e3367546))
+
+
+### Documentation
+
+* Remove deprecated tag from MERCHANT_LOCKED card type ([20b0566](https://github.com/lithic-com/lithic-python/commit/20b0566393cc139e815718813720acd041eb393c))
+
 ## 0.113.0 (2026-01-08)
 
 Full Changelog: [v0.112.0...v0.113.0](https://github.com/lithic-com/lithic-python/compare/v0.112.0...v0.113.0)
