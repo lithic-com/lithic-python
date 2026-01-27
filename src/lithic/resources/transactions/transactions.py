@@ -244,7 +244,10 @@ class Transactions(SyncAPIResource):
         descriptor: str,
         pan: str,
         mcc: str | Omit = omit,
+        merchant_acceptor_city: str | Omit = omit,
+        merchant_acceptor_country: str | Omit = omit,
         merchant_acceptor_id: str | Omit = omit,
+        merchant_acceptor_state: str | Omit = omit,
         merchant_amount: int | Omit = omit,
         merchant_currency: str | Omit = omit,
         partial_approval_capable: bool | Omit = omit,
@@ -289,7 +292,13 @@ class Transactions(SyncAPIResource):
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
 
+          merchant_acceptor_city: Merchant acceptor city
+
+          merchant_acceptor_country: Merchant acceptor country code (ISO 3166-1 alpha-3)
+
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_acceptor_state: Merchant acceptor state/province (ISO 3166-2 subdivision code)
 
           merchant_amount: Amount of the transaction to be simulated in currency specified in
               merchant_currency, including any acquirer fees.
@@ -336,7 +345,10 @@ class Transactions(SyncAPIResource):
                     "descriptor": descriptor,
                     "pan": pan,
                     "mcc": mcc,
+                    "merchant_acceptor_city": merchant_acceptor_city,
+                    "merchant_acceptor_country": merchant_acceptor_country,
                     "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_acceptor_state": merchant_acceptor_state,
                     "merchant_amount": merchant_amount,
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
@@ -462,7 +474,10 @@ class Transactions(SyncAPIResource):
         descriptor: str,
         pan: str,
         mcc: str | Omit = omit,
+        merchant_acceptor_city: str | Omit = omit,
+        merchant_acceptor_country: str | Omit = omit,
         merchant_acceptor_id: str | Omit = omit,
+        merchant_acceptor_state: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -488,7 +503,13 @@ class Transactions(SyncAPIResource):
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
 
+          merchant_acceptor_city: Merchant acceptor city
+
+          merchant_acceptor_country: Merchant acceptor country code (ISO 3166-1 alpha-3)
+
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_acceptor_state: Merchant acceptor state/province (ISO 3166-2 subdivision code)
 
           extra_headers: Send extra headers
 
@@ -506,7 +527,10 @@ class Transactions(SyncAPIResource):
                     "descriptor": descriptor,
                     "pan": pan,
                     "mcc": mcc,
+                    "merchant_acceptor_city": merchant_acceptor_city,
+                    "merchant_acceptor_country": merchant_acceptor_country,
                     "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_acceptor_state": merchant_acceptor_state,
                 },
                 transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
             ),
@@ -523,7 +547,10 @@ class Transactions(SyncAPIResource):
         descriptor: str,
         pan: str,
         mcc: str | Omit = omit,
+        merchant_acceptor_city: str | Omit = omit,
+        merchant_acceptor_country: str | Omit = omit,
         merchant_acceptor_id: str | Omit = omit,
+        merchant_acceptor_state: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -549,7 +576,13 @@ class Transactions(SyncAPIResource):
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
 
+          merchant_acceptor_city: Merchant acceptor city
+
+          merchant_acceptor_country: Merchant acceptor country code (ISO 3166-1 alpha-3)
+
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_acceptor_state: Merchant acceptor state/province (ISO 3166-2 subdivision code)
 
           extra_headers: Send extra headers
 
@@ -567,7 +600,10 @@ class Transactions(SyncAPIResource):
                     "descriptor": descriptor,
                     "pan": pan,
                     "mcc": mcc,
+                    "merchant_acceptor_city": merchant_acceptor_city,
+                    "merchant_acceptor_country": merchant_acceptor_country,
                     "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_acceptor_state": merchant_acceptor_state,
                 },
                 transaction_simulate_credit_authorization_advice_params.TransactionSimulateCreditAuthorizationAdviceParams,
             ),
@@ -909,7 +945,10 @@ class AsyncTransactions(AsyncAPIResource):
         descriptor: str,
         pan: str,
         mcc: str | Omit = omit,
+        merchant_acceptor_city: str | Omit = omit,
+        merchant_acceptor_country: str | Omit = omit,
         merchant_acceptor_id: str | Omit = omit,
+        merchant_acceptor_state: str | Omit = omit,
         merchant_amount: int | Omit = omit,
         merchant_currency: str | Omit = omit,
         partial_approval_capable: bool | Omit = omit,
@@ -954,7 +993,13 @@ class AsyncTransactions(AsyncAPIResource):
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
 
+          merchant_acceptor_city: Merchant acceptor city
+
+          merchant_acceptor_country: Merchant acceptor country code (ISO 3166-1 alpha-3)
+
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_acceptor_state: Merchant acceptor state/province (ISO 3166-2 subdivision code)
 
           merchant_amount: Amount of the transaction to be simulated in currency specified in
               merchant_currency, including any acquirer fees.
@@ -1001,7 +1046,10 @@ class AsyncTransactions(AsyncAPIResource):
                     "descriptor": descriptor,
                     "pan": pan,
                     "mcc": mcc,
+                    "merchant_acceptor_city": merchant_acceptor_city,
+                    "merchant_acceptor_country": merchant_acceptor_country,
                     "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_acceptor_state": merchant_acceptor_state,
                     "merchant_amount": merchant_amount,
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
@@ -1127,7 +1175,10 @@ class AsyncTransactions(AsyncAPIResource):
         descriptor: str,
         pan: str,
         mcc: str | Omit = omit,
+        merchant_acceptor_city: str | Omit = omit,
+        merchant_acceptor_country: str | Omit = omit,
         merchant_acceptor_id: str | Omit = omit,
+        merchant_acceptor_state: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1153,7 +1204,13 @@ class AsyncTransactions(AsyncAPIResource):
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
 
+          merchant_acceptor_city: Merchant acceptor city
+
+          merchant_acceptor_country: Merchant acceptor country code (ISO 3166-1 alpha-3)
+
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_acceptor_state: Merchant acceptor state/province (ISO 3166-2 subdivision code)
 
           extra_headers: Send extra headers
 
@@ -1171,7 +1228,10 @@ class AsyncTransactions(AsyncAPIResource):
                     "descriptor": descriptor,
                     "pan": pan,
                     "mcc": mcc,
+                    "merchant_acceptor_city": merchant_acceptor_city,
+                    "merchant_acceptor_country": merchant_acceptor_country,
                     "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_acceptor_state": merchant_acceptor_state,
                 },
                 transaction_simulate_credit_authorization_params.TransactionSimulateCreditAuthorizationParams,
             ),
@@ -1188,7 +1248,10 @@ class AsyncTransactions(AsyncAPIResource):
         descriptor: str,
         pan: str,
         mcc: str | Omit = omit,
+        merchant_acceptor_city: str | Omit = omit,
+        merchant_acceptor_country: str | Omit = omit,
         merchant_acceptor_id: str | Omit = omit,
+        merchant_acceptor_state: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1214,7 +1277,13 @@ class AsyncTransactions(AsyncAPIResource):
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
 
+          merchant_acceptor_city: Merchant acceptor city
+
+          merchant_acceptor_country: Merchant acceptor country code (ISO 3166-1 alpha-3)
+
           merchant_acceptor_id: Unique identifier to identify the payment card acceptor.
+
+          merchant_acceptor_state: Merchant acceptor state/province (ISO 3166-2 subdivision code)
 
           extra_headers: Send extra headers
 
@@ -1232,7 +1301,10 @@ class AsyncTransactions(AsyncAPIResource):
                     "descriptor": descriptor,
                     "pan": pan,
                     "mcc": mcc,
+                    "merchant_acceptor_city": merchant_acceptor_city,
+                    "merchant_acceptor_country": merchant_acceptor_country,
                     "merchant_acceptor_id": merchant_acceptor_id,
+                    "merchant_acceptor_state": merchant_acceptor_state,
                 },
                 transaction_simulate_credit_authorization_advice_params.TransactionSimulateCreditAuthorizationAdviceParams,
             ),
