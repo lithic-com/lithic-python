@@ -206,6 +206,12 @@ class KYBPayload(BaseModel):
     system
     """
 
+    naics_code: Optional[str] = None
+    """
+    6-digit North American Industry Classification System (NAICS) code for the
+    business. Only present if naics_code was included in the update request.
+    """
+
     nature_of_business: Optional[str] = None
     """
     Short description of the company's line of business (i.e., what does the company

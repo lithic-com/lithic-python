@@ -220,5 +220,11 @@ class KYBParam(TypedDict, total=False):
     This field is required only if workflow type is `KYB_BYO`.
     """
 
+    naics_code: str
+    """
+    6-digit North American Industry Classification System (NAICS) code for the
+    business.
+    """
+
     website_url: str
     """Company website URL."""
