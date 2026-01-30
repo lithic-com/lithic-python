@@ -87,6 +87,12 @@ class KYB(TypedDict, total=False):
     This field is required only if workflow type is `KYB_BYO`.
     """
 
+    naics_code: str
+    """
+    6-digit North American Industry Classification System (NAICS) code for the
+    business.
+    """
+
     website_url: str
     """Company website URL."""
 
@@ -268,6 +274,12 @@ class KYBDelegated(TypedDict, total=False):
     """
     A user provided id that can be used to link an account holder with an external
     system
+    """
+
+    naics_code: str
+    """
+    6-digit North American Industry Classification System (NAICS) code for the
+    business.
     """
 
     nature_of_business: str

@@ -70,6 +70,7 @@ class AccountHolders(SyncAPIResource):
         beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
+        naics_code: str | Omit = omit,
         website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -127,6 +128,9 @@ class AccountHolders(SyncAPIResource):
 
               This field is required only if workflow type is `KYB_BYO`.
 
+          naics_code: 6-digit North American Industry Classification System (NAICS) code for the
+              business.
+
           website_url: Company website URL.
 
           extra_headers: Send extra headers
@@ -148,6 +152,7 @@ class AccountHolders(SyncAPIResource):
         | Omit = omit,
         control_person: account_holder_create_params.KYBDelegatedControlPerson | Omit = omit,
         external_id: str | Omit = omit,
+        naics_code: str | Omit = omit,
         nature_of_business: str | Omit = omit,
         tos_timestamp: str | Omit = omit,
         website_url: str | Omit = omit,
@@ -190,6 +195,9 @@ class AccountHolders(SyncAPIResource):
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
+
+          naics_code: 6-digit North American Industry Classification System (NAICS) code for the
+              business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
@@ -364,6 +372,7 @@ class AccountHolders(SyncAPIResource):
         beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
+        naics_code: str | Omit = omit,
         website_url: str | Omit = omit,
         individual: account_holder_create_params.KYCIndividual | Omit = omit,
         kyc_passed_timestamp: str | Omit = omit,
@@ -396,6 +405,7 @@ class AccountHolders(SyncAPIResource):
                     "beneficial_owner_entities": beneficial_owner_entities,
                     "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
+                    "naics_code": naics_code,
                     "website_url": website_url,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
@@ -463,6 +473,7 @@ class AccountHolders(SyncAPIResource):
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
         control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
         external_id: str | Omit = omit,
+        naics_code: str | Omit = omit,
         nature_of_business: str | Omit = omit,
         website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -508,6 +519,9 @@ class AccountHolders(SyncAPIResource):
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
+
+          naics_code: 6-digit North American Industry Classification System (NAICS) code for the
+              business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
@@ -639,6 +653,7 @@ class AccountHolders(SyncAPIResource):
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
         control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
         external_id: str | Omit = omit,
+        naics_code: str | Omit = omit,
         nature_of_business: str | Omit = omit,
         website_url: str | Omit = omit,
         individual: account_holder_update_params.KYCPatchRequestIndividual | Omit = omit,
@@ -671,6 +686,7 @@ class AccountHolders(SyncAPIResource):
                         "business_entity": business_entity,
                         "control_person": control_person,
                         "external_id": external_id,
+                        "naics_code": naics_code,
                         "nature_of_business": nature_of_business,
                         "website_url": website_url,
                         "individual": individual,
@@ -1140,6 +1156,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
+        naics_code: str | Omit = omit,
         website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1197,6 +1214,9 @@ class AsyncAccountHolders(AsyncAPIResource):
 
               This field is required only if workflow type is `KYB_BYO`.
 
+          naics_code: 6-digit North American Industry Classification System (NAICS) code for the
+              business.
+
           website_url: Company website URL.
 
           extra_headers: Send extra headers
@@ -1218,6 +1238,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         | Omit = omit,
         control_person: account_holder_create_params.KYBDelegatedControlPerson | Omit = omit,
         external_id: str | Omit = omit,
+        naics_code: str | Omit = omit,
         nature_of_business: str | Omit = omit,
         tos_timestamp: str | Omit = omit,
         website_url: str | Omit = omit,
@@ -1260,6 +1281,9 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
+
+          naics_code: 6-digit North American Industry Classification System (NAICS) code for the
+              business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
@@ -1434,6 +1458,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
+        naics_code: str | Omit = omit,
         website_url: str | Omit = omit,
         individual: account_holder_create_params.KYCIndividual | Omit = omit,
         kyc_passed_timestamp: str | Omit = omit,
@@ -1466,6 +1491,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                     "beneficial_owner_entities": beneficial_owner_entities,
                     "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
+                    "naics_code": naics_code,
                     "website_url": website_url,
                     "individual": individual,
                     "kyc_passed_timestamp": kyc_passed_timestamp,
@@ -1533,6 +1559,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
         control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
         external_id: str | Omit = omit,
+        naics_code: str | Omit = omit,
         nature_of_business: str | Omit = omit,
         website_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1578,6 +1605,9 @@ class AsyncAccountHolders(AsyncAPIResource):
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
+
+          naics_code: 6-digit North American Industry Classification System (NAICS) code for the
+              business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
               do?).
@@ -1709,6 +1739,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
         control_person: account_holder_update_params.KYBPatchRequestControlPerson | Omit = omit,
         external_id: str | Omit = omit,
+        naics_code: str | Omit = omit,
         nature_of_business: str | Omit = omit,
         website_url: str | Omit = omit,
         individual: account_holder_update_params.KYCPatchRequestIndividual | Omit = omit,
@@ -1741,6 +1772,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                         "business_entity": business_entity,
                         "control_person": control_person,
                         "external_id": external_id,
+                        "naics_code": naics_code,
                         "nature_of_business": nature_of_business,
                         "website_url": website_url,
                         "individual": individual,

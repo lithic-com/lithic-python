@@ -358,6 +358,13 @@ class KYBKYCPatchResponse(BaseModel):
     is being run.
     """
 
+    naics_code: Optional[str] = None
+    """Only present when user_type == "BUSINESS".
+
+    6-digit North American Industry Classification System (NAICS) code for the
+    business.
+    """
+
     nature_of_business: Optional[str] = None
     """Only present when user_type == "BUSINESS".
 
@@ -428,8 +435,8 @@ class KYBKYCPatchResponse(BaseModel):
     If the type is "INDIVIDUAL", the "individual" attribute will be present.
 
     If the type is "BUSINESS" then the "business_entity", "control_person",
-    "beneficial_owner_individuals", "nature_of_business", and "website_url"
-    attributes will be present.
+    "beneficial_owner_individuals", "naics_code", "nature_of_business", and
+    "website_url" attributes will be present.
     """
 
     verification_application: Optional[KYBKYCPatchResponseVerificationApplication] = None
