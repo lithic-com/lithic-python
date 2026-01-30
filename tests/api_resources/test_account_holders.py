@@ -151,6 +151,7 @@ class TestAccountHolders:
             ],
             external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
+            naics_code="541512",
             website_url="www.mybusiness.com",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
@@ -336,6 +337,7 @@ class TestAccountHolders:
                 "phone_number": "+15555555555",
             },
             external_id="external_id",
+            naics_code="541512",
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2022-03-08 08:00:00",
             website_url="www.mybusiness.com",
@@ -699,6 +701,7 @@ class TestAccountHolders:
                 "phone_number": "+15555555555",
             },
             external_id="external_id",
+            naics_code="541512",
             nature_of_business="Software company selling solutions to the restaurant industry",
             website_url="www.mybusiness.com",
         )
@@ -1240,6 +1243,7 @@ class TestAsyncAccountHolders:
             ],
             external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
+            naics_code="541512",
             website_url="www.mybusiness.com",
         )
         assert_matches_type(AccountHolderCreateResponse, account_holder, path=["response"])
@@ -1425,6 +1429,7 @@ class TestAsyncAccountHolders:
                 "phone_number": "+15555555555",
             },
             external_id="external_id",
+            naics_code="541512",
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2022-03-08 08:00:00",
             website_url="www.mybusiness.com",
@@ -1788,6 +1793,7 @@ class TestAsyncAccountHolders:
                 "phone_number": "+15555555555",
             },
             external_id="external_id",
+            naics_code="541512",
             nature_of_business="Software company selling solutions to the restaurant industry",
             website_url="www.mybusiness.com",
         )

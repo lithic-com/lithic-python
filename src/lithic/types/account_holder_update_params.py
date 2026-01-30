@@ -59,6 +59,12 @@ class KYBPatchRequest(TypedDict, total=False):
     system
     """
 
+    naics_code: str
+    """
+    6-digit North American Industry Classification System (NAICS) code for the
+    business.
+    """
+
     nature_of_business: str
     """
     Short description of the company's line of business (i.e., what does the company
