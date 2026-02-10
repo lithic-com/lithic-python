@@ -11,7 +11,7 @@ __all__ = [
     "V2ListResultsResponse",
     "Action",
     "ActionAuthorizationAction",
-    "ActionThreeDSAction",
+    "ActionAuthentication3DSAction",
     "ActionDeclineAction",
     "ActionRequireTfaAction",
     "ActionApproveAction",
@@ -24,7 +24,7 @@ class ActionAuthorizationAction(BaseModel):
     """Optional explanation for why this action was taken"""
 
 
-class ActionThreeDSAction(BaseModel):
+class ActionAuthentication3DSAction(BaseModel):
     explanation: Optional[str] = None
     """Optional explanation for why this action was taken"""
 
@@ -169,7 +169,7 @@ class ActionReturnAction(BaseModel):
 
 Action: TypeAlias = Union[
     ActionAuthorizationAction,
-    ActionThreeDSAction,
+    ActionAuthentication3DSAction,
     ActionDeclineAction,
     ActionRequireTfaAction,
     ActionApproveAction,
