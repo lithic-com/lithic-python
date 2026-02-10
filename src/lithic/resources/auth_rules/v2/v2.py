@@ -632,7 +632,7 @@ class V2(SyncAPIResource):
         *,
         auth_rule_token: str | Omit = omit,
         ending_before: str | Omit = omit,
-        event_uuid: str | Omit = omit,
+        event_token: str | Omit = omit,
         has_actions: bool | Omit = omit,
         page_size: int | Omit = omit,
         starting_after: str | Omit = omit,
@@ -649,8 +649,8 @@ class V2(SyncAPIResource):
         **Limitations:**
 
         - Results are available for the past 3 months only
-        - At least one filter (`event_uuid` or `auth_rule_token`) must be provided
-        - When filtering by `event_uuid`, pagination is not supported
+        - At least one filter (`event_token` or `auth_rule_token`) must be provided
+        - When filtering by `event_token`, pagination is not supported
 
         Args:
           auth_rule_token: Filter by Auth Rule token
@@ -658,7 +658,7 @@ class V2(SyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          event_uuid: Filter by event UUID
+          event_token: Filter by event token
 
           has_actions: Filter by whether the rule evaluation produced any actions. When not provided,
               all results are returned.
@@ -688,7 +688,7 @@ class V2(SyncAPIResource):
                     {
                         "auth_rule_token": auth_rule_token,
                         "ending_before": ending_before,
-                        "event_uuid": event_uuid,
+                        "event_token": event_token,
                         "has_actions": has_actions,
                         "page_size": page_size,
                         "starting_after": starting_after,
@@ -1437,7 +1437,7 @@ class AsyncV2(AsyncAPIResource):
         *,
         auth_rule_token: str | Omit = omit,
         ending_before: str | Omit = omit,
-        event_uuid: str | Omit = omit,
+        event_token: str | Omit = omit,
         has_actions: bool | Omit = omit,
         page_size: int | Omit = omit,
         starting_after: str | Omit = omit,
@@ -1454,8 +1454,8 @@ class AsyncV2(AsyncAPIResource):
         **Limitations:**
 
         - Results are available for the past 3 months only
-        - At least one filter (`event_uuid` or `auth_rule_token`) must be provided
-        - When filtering by `event_uuid`, pagination is not supported
+        - At least one filter (`event_token` or `auth_rule_token`) must be provided
+        - When filtering by `event_token`, pagination is not supported
 
         Args:
           auth_rule_token: Filter by Auth Rule token
@@ -1463,7 +1463,7 @@ class AsyncV2(AsyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          event_uuid: Filter by event UUID
+          event_token: Filter by event token
 
           has_actions: Filter by whether the rule evaluation produced any actions. When not provided,
               all results are returned.
@@ -1493,7 +1493,7 @@ class AsyncV2(AsyncAPIResource):
                     {
                         "auth_rule_token": auth_rule_token,
                         "ending_before": ending_before,
-                        "event_uuid": event_uuid,
+                        "event_token": event_token,
                         "has_actions": has_actions,
                         "page_size": page_size,
                         "starting_after": starting_after,
