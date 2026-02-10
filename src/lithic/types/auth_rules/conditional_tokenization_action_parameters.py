@@ -130,6 +130,6 @@ class Condition(BaseModel):
 
 class ConditionalTokenizationActionParameters(BaseModel):
     action: Action
-    """The action to take if the conditions are met"""
+    """The action to take if the conditions are met."""
 
     conditions: List[Condition]

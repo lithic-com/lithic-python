@@ -129,6 +129,6 @@ class Condition(BaseModel):
 
 class ConditionalACHActionParameters(BaseModel):
     action: Action
-    """The action to take if the conditions are met"""
+    """The action to take if the conditions are met."""
 
     conditions: List[Condition]

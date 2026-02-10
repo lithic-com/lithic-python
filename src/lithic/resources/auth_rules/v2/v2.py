@@ -30,11 +30,13 @@ from ....types.auth_rules import (
     v2_draft_params,
     v2_create_params,
     v2_update_params,
+    v2_list_results_params,
     v2_retrieve_report_params,
     v2_retrieve_features_params,
 )
 from ....types.auth_rules.auth_rule import AuthRule
 from ....types.auth_rules.event_stream import EventStream
+from ....types.auth_rules.v2_list_results_response import V2ListResultsResponse
 from ....types.auth_rules.v2_retrieve_report_response import V2RetrieveReportResponse
 from ....types.auth_rules.v2_retrieve_features_response import V2RetrieveFeaturesResponse
 
@@ -623,6 +625,78 @@ class V2(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthRule,
+        )
+
+    def list_results(
+        self,
+        *,
+        auth_rule_token: str | Omit = omit,
+        ending_before: str | Omit = omit,
+        event_uuid: str | Omit = omit,
+        has_actions: bool | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncCursorPage[V2ListResultsResponse]:
+        """
+        Lists Auth Rule evaluation results.
+
+        **Limitations:**
+
+        - Results are available for the past 3 months only
+        - At least one filter (`event_uuid` or `auth_rule_token`) must be provided
+        - When filtering by `event_uuid`, pagination is not supported
+
+        Args:
+          auth_rule_token: Filter by Auth Rule token
+
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
+
+          event_uuid: Filter by event UUID
+
+          has_actions: Filter by whether the rule evaluation produced any actions. When not provided,
+              all results are returned.
+
+          page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/v2/auth_rules/results",
+            page=SyncCursorPage[V2ListResultsResponse],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "auth_rule_token": auth_rule_token,
+                        "ending_before": ending_before,
+                        "event_uuid": event_uuid,
+                        "has_actions": has_actions,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                    },
+                    v2_list_results_params.V2ListResultsParams,
+                ),
+            ),
+            model=V2ListResultsResponse,
         )
 
     def promote(
@@ -1358,6 +1432,78 @@ class AsyncV2(AsyncAPIResource):
             cast_to=AuthRule,
         )
 
+    def list_results(
+        self,
+        *,
+        auth_rule_token: str | Omit = omit,
+        ending_before: str | Omit = omit,
+        event_uuid: str | Omit = omit,
+        has_actions: bool | Omit = omit,
+        page_size: int | Omit = omit,
+        starting_after: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[V2ListResultsResponse, AsyncCursorPage[V2ListResultsResponse]]:
+        """
+        Lists Auth Rule evaluation results.
+
+        **Limitations:**
+
+        - Results are available for the past 3 months only
+        - At least one filter (`event_uuid` or `auth_rule_token`) must be provided
+        - When filtering by `event_uuid`, pagination is not supported
+
+        Args:
+          auth_rule_token: Filter by Auth Rule token
+
+          ending_before: A cursor representing an item's token before which a page of results should end.
+              Used to retrieve the previous page of results before this item.
+
+          event_uuid: Filter by event UUID
+
+          has_actions: Filter by whether the rule evaluation produced any actions. When not provided,
+              all results are returned.
+
+          page_size: Page size (for pagination).
+
+          starting_after: A cursor representing an item's token after which a page of results should
+              begin. Used to retrieve the next page of results after this item.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/v2/auth_rules/results",
+            page=AsyncCursorPage[V2ListResultsResponse],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "auth_rule_token": auth_rule_token,
+                        "ending_before": ending_before,
+                        "event_uuid": event_uuid,
+                        "has_actions": has_actions,
+                        "page_size": page_size,
+                        "starting_after": starting_after,
+                    },
+                    v2_list_results_params.V2ListResultsParams,
+                ),
+            ),
+            model=V2ListResultsResponse,
+        )
+
     async def promote(
         self,
         auth_rule_token: str,
@@ -1529,6 +1675,9 @@ class V2WithRawResponse:
         self.draft = _legacy_response.to_raw_response_wrapper(
             v2.draft,
         )
+        self.list_results = _legacy_response.to_raw_response_wrapper(
+            v2.list_results,
+        )
         self.promote = _legacy_response.to_raw_response_wrapper(
             v2.promote,
         )
@@ -1565,6 +1714,9 @@ class AsyncV2WithRawResponse:
         )
         self.draft = _legacy_response.async_to_raw_response_wrapper(
             v2.draft,
+        )
+        self.list_results = _legacy_response.async_to_raw_response_wrapper(
+            v2.list_results,
         )
         self.promote = _legacy_response.async_to_raw_response_wrapper(
             v2.promote,
@@ -1603,6 +1755,9 @@ class V2WithStreamingResponse:
         self.draft = to_streamed_response_wrapper(
             v2.draft,
         )
+        self.list_results = to_streamed_response_wrapper(
+            v2.list_results,
+        )
         self.promote = to_streamed_response_wrapper(
             v2.promote,
         )
@@ -1639,6 +1794,9 @@ class AsyncV2WithStreamingResponse:
         )
         self.draft = async_to_streamed_response_wrapper(
             v2.draft,
+        )
+        self.list_results = async_to_streamed_response_wrapper(
+            v2.list_results,
         )
         self.promote = async_to_streamed_response_wrapper(
             v2.promote,

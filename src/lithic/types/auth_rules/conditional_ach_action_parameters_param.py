@@ -133,6 +133,6 @@ class Condition(TypedDict, total=False):
 
 class ConditionalACHActionParametersParam(TypedDict, total=False):
     action: Required[Action]
-    """The action to take if the conditions are met"""
+    """The action to take if the conditions are met."""
 
     conditions: Required[Iterable[Condition]]
