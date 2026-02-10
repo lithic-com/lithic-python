@@ -589,7 +589,7 @@ class TestV2:
         v2 = client.auth_rules.v2.list_results(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             ending_before="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            event_uuid="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             has_actions=True,
             page_size=1,
             starting_after="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1318,7 +1318,7 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.list_results(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             ending_before="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            event_uuid="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            event_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             has_actions=True,
             page_size=1,
             starting_after="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",

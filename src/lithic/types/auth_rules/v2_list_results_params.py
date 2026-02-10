@@ -17,8 +17,8 @@ class V2ListResultsParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
-    event_uuid: str
-    """Filter by event UUID"""
+    event_token: str
+    """Filter by event token"""
 
     has_actions: bool
     """Filter by whether the rule evaluation produced any actions.
