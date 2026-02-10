@@ -15,8 +15,10 @@ from .conditional_attribute import ConditionalAttribute as ConditionalAttribute
 from .conditional_operation import ConditionalOperation as ConditionalOperation
 from .velocity_limit_params import VelocityLimitParams as VelocityLimitParams
 from .velocity_limit_period import VelocityLimitPeriod as VelocityLimitPeriod
+from .v2_list_results_params import V2ListResultsParams as V2ListResultsParams
 from .conditional_value_param import ConditionalValueParam as ConditionalValueParam
 from .merchant_lock_parameters import MerchantLockParameters as MerchantLockParameters
+from .v2_list_results_response import V2ListResultsResponse as V2ListResultsResponse
 from .auth_rule_condition_param import AuthRuleConditionParam as AuthRuleConditionParam
 from .v2_retrieve_report_params import V2RetrieveReportParams as V2RetrieveReportParams
 from .v2_retrieve_features_params import V2RetrieveFeaturesParams as V2RetrieveFeaturesParams
