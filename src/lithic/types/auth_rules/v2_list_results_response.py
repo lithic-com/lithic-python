@@ -5,33 +5,96 @@ from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
-from .event_stream import EventStream
 
 __all__ = [
     "V2ListResultsResponse",
-    "Action",
-    "ActionAuthorizationAction",
-    "ActionAuthentication3DSAction",
-    "ActionDeclineAction",
-    "ActionRequireTfaAction",
-    "ActionApproveAction",
-    "ActionReturnAction",
+    "AuthorizationResult",
+    "AuthorizationResultAction",
+    "Authentication3DSResult",
+    "Authentication3DsResultAction",
+    "TokenizationResult",
+    "TokenizationResultAction",
+    "TokenizationResultActionDeclineAction",
+    "TokenizationResultActionRequireTfaAction",
+    "ACHResult",
+    "ACHResultAction",
+    "ACHResultActionApproveAction",
+    "ACHResultActionReturnAction",
 ]
 
 
-class ActionAuthorizationAction(BaseModel):
+class AuthorizationResultAction(BaseModel):
+    type: Literal["DECLINE", "CHALLENGE"]
+
     explanation: Optional[str] = None
     """Optional explanation for why this action was taken"""
 
 
-class ActionAuthentication3DSAction(BaseModel):
+class AuthorizationResult(BaseModel):
+    token: str
+    """Globally unique identifier for the evaluation"""
+
+    actions: List[AuthorizationResultAction]
+    """Actions returned by the rule evaluation"""
+
+    auth_rule_token: str
+    """The Auth Rule token"""
+
+    evaluation_time: datetime
+    """Timestamp of the rule evaluation"""
+
+    event_stream: Literal["AUTHORIZATION"]
+    """The event stream during which the rule was evaluated"""
+
+    event_token: str
+    """Token of the event that triggered the evaluation"""
+
+    mode: Literal["ACTIVE", "INACTIVE"]
+    """The state of the Auth Rule"""
+
+    rule_version: int
+    """Version of the rule that was evaluated"""
+
+
+class Authentication3DsResultAction(BaseModel):
+    type: Literal["DECLINE", "CHALLENGE"]
+
     explanation: Optional[str] = None
     """Optional explanation for why this action was taken"""
 
 
-class ActionDeclineAction(BaseModel):
+class Authentication3DSResult(BaseModel):
+    token: str
+    """Globally unique identifier for the evaluation"""
+
+    actions: List[Authentication3DsResultAction]
+    """Actions returned by the rule evaluation"""
+
+    auth_rule_token: str
+    """The Auth Rule token"""
+
+    evaluation_time: datetime
+    """Timestamp of the rule evaluation"""
+
+    event_stream: Literal["THREE_DS_AUTHENTICATION"]
+    """The event stream during which the rule was evaluated"""
+
+    event_token: str
+    """Token of the event that triggered the evaluation"""
+
+    mode: Literal["ACTIVE", "INACTIVE"]
+    """The state of the Auth Rule"""
+
+    rule_version: int
+    """Version of the rule that was evaluated"""
+
+
+class TokenizationResultActionDeclineAction(BaseModel):
     type: Literal["DECLINE"]
     """Decline the tokenization request"""
+
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
 
     reason: Optional[
         Literal[
@@ -53,9 +116,12 @@ class ActionDeclineAction(BaseModel):
     """Reason code for declining the tokenization request"""
 
 
-class ActionRequireTfaAction(BaseModel):
+class TokenizationResultActionRequireTfaAction(BaseModel):
     type: Literal["REQUIRE_TFA"]
     """Require two-factor authentication for the tokenization request"""
+
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
 
     reason: Optional[
         Literal[
@@ -79,12 +145,46 @@ class ActionRequireTfaAction(BaseModel):
     """Reason code for requiring two-factor authentication"""
 
 
-class ActionApproveAction(BaseModel):
+TokenizationResultAction: TypeAlias = Union[
+    TokenizationResultActionDeclineAction, TokenizationResultActionRequireTfaAction
+]
+
+
+class TokenizationResult(BaseModel):
+    token: str
+    """Globally unique identifier for the evaluation"""
+
+    actions: List[TokenizationResultAction]
+    """Actions returned by the rule evaluation"""
+
+    auth_rule_token: str
+    """The Auth Rule token"""
+
+    evaluation_time: datetime
+    """Timestamp of the rule evaluation"""
+
+    event_stream: Literal["TOKENIZATION"]
+    """The event stream during which the rule was evaluated"""
+
+    event_token: str
+    """Token of the event that triggered the evaluation"""
+
+    mode: Literal["ACTIVE", "INACTIVE"]
+    """The state of the Auth Rule"""
+
+    rule_version: int
+    """Version of the rule that was evaluated"""
+
+
+class ACHResultActionApproveAction(BaseModel):
     type: Literal["APPROVE"]
     """Approve the ACH transaction"""
 
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
 
-class ActionReturnAction(BaseModel):
+
+class ACHResultActionReturnAction(BaseModel):
     code: Literal[
         "R01",
         "R02",
@@ -166,24 +266,18 @@ class ActionReturnAction(BaseModel):
     type: Literal["RETURN"]
     """Return the ACH transaction"""
 
-
-Action: TypeAlias = Union[
-    ActionAuthorizationAction,
-    ActionAuthentication3DSAction,
-    ActionDeclineAction,
-    ActionRequireTfaAction,
-    ActionApproveAction,
-    ActionReturnAction,
-]
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
 
 
-class V2ListResultsResponse(BaseModel):
-    """Result of an Auth Rule evaluation"""
+ACHResultAction: TypeAlias = Union[ACHResultActionApproveAction, ACHResultActionReturnAction]
 
+
+class ACHResult(BaseModel):
     token: str
     """Globally unique identifier for the evaluation"""
 
-    actions: List[Action]
+    actions: List[ACHResultAction]
     """Actions returned by the rule evaluation"""
 
     auth_rule_token: str
@@ -192,7 +286,7 @@ class V2ListResultsResponse(BaseModel):
     evaluation_time: datetime
     """Timestamp of the rule evaluation"""
 
-    event_stream: EventStream
+    event_stream: Literal["ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"]
     """The event stream during which the rule was evaluated"""
 
     event_token: str
@@ -203,3 +297,6 @@ class V2ListResultsResponse(BaseModel):
 
     rule_version: int
     """Version of the rule that was evaluated"""
+
+
+V2ListResultsResponse: TypeAlias = Union[AuthorizationResult, Authentication3DSResult, TokenizationResult, ACHResult]
