@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import Any, List, Union, Optional, cast
 from datetime import date
 from typing_extensions import Literal, overload
 
@@ -696,7 +696,7 @@ class V2(SyncAPIResource):
                     v2_list_results_params.V2ListResultsParams,
                 ),
             ),
-            model=V2ListResultsResponse,
+            model=cast(Any, V2ListResultsResponse),  # Union types cannot be passed in as arguments in the type system
         )
 
     def promote(
@@ -1501,7 +1501,7 @@ class AsyncV2(AsyncAPIResource):
                     v2_list_results_params.V2ListResultsParams,
                 ),
             ),
-            model=V2ListResultsResponse,
+            model=cast(Any, V2ListResultsResponse),  # Union types cannot be passed in as arguments in the type system
         )
 
     async def promote(
