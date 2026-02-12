@@ -12,7 +12,7 @@ class AccountHolderSimulateEnrollmentReviewParams(TypedDict, total=False):
     account_holder_token: str
     """The account holder which to perform the simulation upon."""
 
-    status: Literal["ACCEPTED", "REJECTED"]
+    status: Literal["ACCEPTED", "REJECTED", "PENDING_REVIEW"]
     """An account holder's status for use within the simulation."""
 
     status_reasons: List[

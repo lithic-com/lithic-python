@@ -970,7 +970,7 @@ class AccountHolders(SyncAPIResource):
         self,
         *,
         account_holder_token: str | Omit = omit,
-        status: Literal["ACCEPTED", "REJECTED"] | Omit = omit,
+        status: Literal["ACCEPTED", "REJECTED", "PENDING_REVIEW"] | Omit = omit,
         status_reasons: List[
             Literal[
                 "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
@@ -2056,7 +2056,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         *,
         account_holder_token: str | Omit = omit,
-        status: Literal["ACCEPTED", "REJECTED"] | Omit = omit,
+        status: Literal["ACCEPTED", "REJECTED", "PENDING_REVIEW"] | Omit = omit,
         status_reasons: List[
             Literal[
                 "PRIMARY_BUSINESS_ENTITY_ID_VERIFICATION_FAILURE",
