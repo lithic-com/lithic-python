@@ -104,6 +104,7 @@ class BookTransfers(SyncAPIResource):
         ],
         token: str | Omit = omit,
         external_id: str | Omit = omit,
+        hold_token: str | Omit = omit,
         memo: str | Omit = omit,
         on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -136,6 +137,8 @@ class BookTransfers(SyncAPIResource):
 
           external_id: External ID defined by the customer
 
+          hold_token: Token of an existing hold to settle when this transfer is initiated
+
           memo: Optional descriptor for the transfer.
 
           on_closed_account: What to do if the financial account is closed when posting an operation
@@ -160,6 +163,7 @@ class BookTransfers(SyncAPIResource):
                     "type": type,
                     "token": token,
                     "external_id": external_id,
+                    "hold_token": hold_token,
                     "memo": memo,
                     "on_closed_account": on_closed_account,
                 },
@@ -459,6 +463,7 @@ class AsyncBookTransfers(AsyncAPIResource):
         ],
         token: str | Omit = omit,
         external_id: str | Omit = omit,
+        hold_token: str | Omit = omit,
         memo: str | Omit = omit,
         on_closed_account: Literal["FAIL", "USE_SUSPENSE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -491,6 +496,8 @@ class AsyncBookTransfers(AsyncAPIResource):
 
           external_id: External ID defined by the customer
 
+          hold_token: Token of an existing hold to settle when this transfer is initiated
+
           memo: Optional descriptor for the transfer.
 
           on_closed_account: What to do if the financial account is closed when posting an operation
@@ -515,6 +522,7 @@ class AsyncBookTransfers(AsyncAPIResource):
                     "type": type,
                     "token": token,
                     "external_id": external_id,
+                    "hold_token": hold_token,
                     "memo": memo,
                     "on_closed_account": on_closed_account,
                 },

@@ -93,6 +93,9 @@ class BookTransferCreateParams(TypedDict, total=False):
     external_id: str
     """External ID defined by the customer"""
 
+    hold_token: str
+    """Token of an existing hold to settle when this transfer is initiated"""
+
     memo: str
     """Optional descriptor for the transfer."""
 
