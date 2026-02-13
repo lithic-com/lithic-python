@@ -6,11 +6,17 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 from .token_info import TokenInfo
+from .shared.currency import Currency
 from .shared.merchant import Merchant
 from .cardholder_authentication import CardholderAuthentication
 
 __all__ = [
     "CardAuthorizationApprovalRequestWebhookEvent",
+    "Amounts",
+    "AmountsCardholder",
+    "AmountsHold",
+    "AmountsMerchant",
+    "AmountsSettlement",
     "Avs",
     "Card",
     "FleetInfo",
@@ -23,6 +29,56 @@ __all__ = [
     "PosEntryMode",
     "PosTerminal",
 ]
+
+
+class AmountsCardholder(BaseModel):
+    amount: int
+    """Amount in the smallest unit of the applicable currency (e.g., cents)"""
+
+    conversion_rate: str
+    """Exchange rate used for currency conversion"""
+
+    currency: Currency
+    """3-character alphabetic ISO 4217 currency"""
+
+
+class AmountsHold(BaseModel):
+    amount: int
+    """Amount in the smallest unit of the applicable currency (e.g., cents)"""
+
+    currency: Currency
+    """3-character alphabetic ISO 4217 currency"""
+
+
+class AmountsMerchant(BaseModel):
+    amount: int
+    """Amount in the smallest unit of the applicable currency (e.g., cents)"""
+
+    currency: Currency
+    """3-character alphabetic ISO 4217 currency"""
+
+
+class AmountsSettlement(BaseModel):
+    amount: int
+    """Amount in the smallest unit of the applicable currency (e.g., cents)"""
+
+    currency: Currency
+    """3-character alphabetic ISO 4217 currency"""
+
+
+class Amounts(BaseModel):
+    """Structured amounts for this authorization.
+
+    The `cardholder` and `merchant` amounts reflect the original network authorization values. For programs with hold adjustments enabled (e.g., automated fuel dispensers or tipping MCCs), the `hold` amount may exceed the `cardholder` and `merchant` amounts to account for anticipated final transaction amounts such as tips or fuel fill-ups
+    """
+
+    cardholder: AmountsCardholder
+
+    hold: Optional[AmountsHold] = None
+
+    merchant: AmountsMerchant
+
+    settlement: Optional[AmountsSettlement] = None
 
 
 class Avs(BaseModel):
@@ -305,16 +361,28 @@ class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
     """
 
     amount: int
-    """Authorization amount of the transaction (in cents), including any acquirer fees.
+    """Deprecated, use `amounts`.
 
+    Authorization amount of the transaction (in cents), including any acquirer fees.
     The contents of this field are identical to `authorization_amount`.
     """
 
-    authorization_amount: int
-    """The base transaction amount (in cents) plus the acquirer fee field.
+    amounts: Amounts
+    """Structured amounts for this authorization.
 
-    This is the amount the issuer should authorize against unless the issuer is
-    paying the acquirer fee on behalf of the cardholder.
+    The `cardholder` and `merchant` amounts reflect the original network
+    authorization values. For programs with hold adjustments enabled (e.g.,
+    automated fuel dispensers or tipping MCCs), the `hold` amount may exceed the
+    `cardholder` and `merchant` amounts to account for anticipated final transaction
+    amounts such as tips or fuel fill-ups
+    """
+
+    authorization_amount: int
+    """Deprecated, use `amounts`.
+
+    The base transaction amount (in cents) plus the acquirer fee field. This is the
+    amount the issuer should authorize against unless the issuer is paying the
+    acquirer fee on behalf of the cardholder.
     """
 
     avs: Avs
@@ -323,7 +391,10 @@ class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
     """Card object in ASA"""
 
     cardholder_currency: str
-    """3-character alphabetic ISO 4217 code for cardholder's billing currency."""
+    """Deprecated, use `amounts`.
+
+    3-character alphabetic ISO 4217 code for cardholder's billing currency.
+    """
 
     cash_amount: int
     """
@@ -343,7 +414,8 @@ class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
     merchant: Merchant
 
     merchant_amount: int
-    """
+    """Deprecated, use `amounts`.
+
     The amount that the merchant will receive, denominated in `merchant_currency`
     and in the smallest currency unit. Note the amount includes `acquirer_fee`,
     similar to `authorization_amount`. It will be different from
@@ -355,9 +427,10 @@ class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
     """3-character alphabetic ISO 4217 code for the local currency of the transaction."""
 
     settled_amount: int
-    """
+    """Deprecated, use `amounts`.
+
     Amount (in cents) of the transaction that has been settled, including any
-    acquirer fees
+    acquirer fees.
     """
 
     status: Literal[
@@ -384,7 +457,8 @@ class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
     """Deprecated, use `cash_amount`."""
 
     conversion_rate: Optional[float] = None
-    """
+    """Deprecated, use `amounts`.
+
     If the transaction was requested in a currency other than the settlement
     currency, this field will be populated to indicate the rate used to translate
     the merchant_amount to the amount (i.e., `merchant_amount` x `conversion_rate` =
