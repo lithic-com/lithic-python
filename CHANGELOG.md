@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.115.0 (2026-02-13)
+
+Full Changelog: [v0.114.0...v0.115.0](https://github.com/lithic-com/lithic-python/compare/v0.114.0...v0.115.0)
+
+### Features
+
+* **api:** Add /v2/auth_rules/results endpoint for listing rule evaluation data ([aea1658](https://github.com/lithic-com/lithic-python/commit/aea1658f300aeb41d859c9bb7271d883f3b4a2c3))
+* **api:** Add amounts object to ASA request ([d65ed36](https://github.com/lithic-com/lithic-python/commit/d65ed36a3ec9b52ffde11768ac705be37678f1e2))
+* **api:** Add hold token field to book transfers ([51d053e](https://github.com/lithic-com/lithic-python/commit/51d053eb788f43396d71c14acfd6dd80e8fefe77))
+* **api:** Add naics_code to account holder requests/responses ([a7135fb](https://github.com/lithic-com/lithic-python/commit/a7135fb5f63687973cc1856731eb6c7f524994e3))
+* **api:** Add network specific wallet recommendation reasons ([a3a74ea](https://github.com/lithic-com/lithic-python/commit/a3a74ea5a051037b1585369cfcdfaccdc54a1d29))
+* **api:** Add PENDING_REVIEW status to KYB enrollment simulation ([ede8a8a](https://github.com/lithic-com/lithic-python/commit/ede8a8ac24af85f8dd21178007af35f7b35aa133))
+* **api:** Add result schemas for Authorization and Authentication (3DS) actions ([ced5f0d](https://github.com/lithic-com/lithic-python/commit/ced5f0db1ae27e02bde4402cfff8ef4a9e33ce1a))
+* **client:** add custom JSON encoder for extended type support ([5658dcc](https://github.com/lithic-com/lithic-python/commit/5658dccf4d989063d2d4ffdb243cfec17861a000))
+
+
+### Bug Fixes
+
+* **api:** Update /v2/auth_rules/results endpoint parameter naming and action types ([e50dd4d](https://github.com/lithic-com/lithic-python/commit/e50dd4d8a866a47d77c0e92c6e0703053c54f403))
+
+
+### Chores
+
+* configure new SDK language ([292317d](https://github.com/lithic-com/lithic-python/commit/292317d003f007992d8848fbe4a870164bac9d29))
+* Enable stainless MCP in config ([a799eec](https://github.com/lithic-com/lithic-python/commit/a799eeca71933e98243cf351caf374b9a59d9ce9))
+* format all `api.md` files ([f428d56](https://github.com/lithic-com/lithic-python/commit/f428d56ec1200a79ea23658daf01771dc8b198c7))
+* **internal:** bump dependencies ([67243a9](https://github.com/lithic-com/lithic-python/commit/67243a9d839bb33d4b53a7a7b8cc02678d068f66))
+* **internal:** fix lint error on Python 3.14 ([73de2f2](https://github.com/lithic-com/lithic-python/commit/73de2f20082fecd5e07af008ff79b161c2b4378d))
+
+
+### Documentation
+
+* Fix documentation of tokenization channel and tokenization source for tokenization rules ([7d111f8](https://github.com/lithic-com/lithic-python/commit/7d111f8f8ee283412f9846f239ff626a410a2a24))
+
 ## 0.114.0 (2026-01-27)
 
 Full Changelog: [v0.113.0...v0.114.0](https://github.com/lithic-com/lithic-python/compare/v0.113.0...v0.114.0)
