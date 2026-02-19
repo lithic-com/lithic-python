@@ -319,7 +319,15 @@ class FinancialAccounts(SyncAPIResource):
         financial_account_token: str,
         *,
         status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
-        substatus: Optional[Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]],
+        substatus: Optional[
+            Literal[
+                "CHARGED_OFF_FRAUD",
+                "END_USER_REQUEST",
+                "BANK_REQUEST",
+                "CHARGED_OFF_DELINQUENT",
+                "INTEREST_AND_FEES_PAUSED",
+            ]
+        ],
         user_defined_status: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -621,7 +629,15 @@ class AsyncFinancialAccounts(AsyncAPIResource):
         financial_account_token: str,
         *,
         status: Literal["OPEN", "CLOSED", "SUSPENDED", "PENDING"],
-        substatus: Optional[Literal["CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "CHARGED_OFF_DELINQUENT"]],
+        substatus: Optional[
+            Literal[
+                "CHARGED_OFF_FRAUD",
+                "END_USER_REQUEST",
+                "BANK_REQUEST",
+                "CHARGED_OFF_DELINQUENT",
+                "INTEREST_AND_FEES_PAUSED",
+            ]
+        ],
         user_defined_status: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
