@@ -47,7 +47,14 @@ class FinancialAccount(BaseModel):
     """Status of the financial account"""
 
     substatus: Optional[
-        Literal["CHARGED_OFF_DELINQUENT", "CHARGED_OFF_FRAUD", "END_USER_REQUEST", "BANK_REQUEST", "DELINQUENT"]
+        Literal[
+            "CHARGED_OFF_DELINQUENT",
+            "CHARGED_OFF_FRAUD",
+            "END_USER_REQUEST",
+            "BANK_REQUEST",
+            "DELINQUENT",
+            "INTEREST_AND_FEES_PAUSED",
+        ]
     ] = None
     """Substatus for the financial account"""
 
