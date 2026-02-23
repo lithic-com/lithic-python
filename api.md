@@ -420,6 +420,34 @@ Methods:
 - <code title="get /v1/financial_accounts/{financial_account_token}/loan_tapes/{loan_tape_token}">client.financial_accounts.loan_tapes.<a href="./src/lithic/resources/financial_accounts/loan_tapes.py">retrieve</a>(loan_tape_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/loan_tape.py">LoanTape</a></code>
 - <code title="get /v1/financial_accounts/{financial_account_token}/loan_tapes">client.financial_accounts.loan_tapes.<a href="./src/lithic/resources/financial_accounts/loan_tapes.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/loan_tape_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/loan_tape.py">SyncCursorPage[LoanTape]</a></code>
 
+## LoanTapeConfiguration
+
+Types:
+
+```python
+from lithic.types.financial_accounts import LoanTapeConfiguration, LoanTapeRebuildConfiguration
+```
+
+Methods:
+
+- <code title="get /v1/financial_accounts/{financial_account_token}/loan_tape_configuration">client.financial_accounts.loan_tape_configuration.<a href="./src/lithic/resources/financial_accounts/loan_tape_configuration.py">retrieve</a>(financial_account_token) -> <a href="./src/lithic/types/financial_accounts/loan_tape_configuration.py">LoanTapeConfiguration</a></code>
+
+## InterestTierSchedule
+
+Types:
+
+```python
+from lithic.types.financial_accounts import CategoryTier, InterestTierSchedule
+```
+
+Methods:
+
+- <code title="post /v1/financial_accounts/{financial_account_token}/interest_tier_schedule">client.financial_accounts.interest_tier_schedule.<a href="./src/lithic/resources/financial_accounts/interest_tier_schedule.py">create</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/interest_tier_schedule_create_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/interest_tier_schedule.py">InterestTierSchedule</a></code>
+- <code title="get /v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}">client.financial_accounts.interest_tier_schedule.<a href="./src/lithic/resources/financial_accounts/interest_tier_schedule.py">retrieve</a>(effective_date, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/interest_tier_schedule.py">InterestTierSchedule</a></code>
+- <code title="put /v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}">client.financial_accounts.interest_tier_schedule.<a href="./src/lithic/resources/financial_accounts/interest_tier_schedule.py">update</a>(effective_date, \*, financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/interest_tier_schedule_update_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/interest_tier_schedule.py">InterestTierSchedule</a></code>
+- <code title="get /v1/financial_accounts/{financial_account_token}/interest_tier_schedule">client.financial_accounts.interest_tier_schedule.<a href="./src/lithic/resources/financial_accounts/interest_tier_schedule.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/interest_tier_schedule_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/interest_tier_schedule.py">SyncSinglePage[InterestTierSchedule]</a></code>
+- <code title="delete /v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}">client.financial_accounts.interest_tier_schedule.<a href="./src/lithic/resources/financial_accounts/interest_tier_schedule.py">delete</a>(effective_date, \*, financial_account_token) -> None</code>
+
 # Transactions
 
 Types:
