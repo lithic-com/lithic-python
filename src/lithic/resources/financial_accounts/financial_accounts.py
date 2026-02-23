@@ -62,6 +62,22 @@ from .financial_transactions import (
     FinancialTransactionsWithStreamingResponse,
     AsyncFinancialTransactionsWithStreamingResponse,
 )
+from .interest_tier_schedule import (
+    InterestTierScheduleResource,
+    AsyncInterestTierScheduleResource,
+    InterestTierScheduleResourceWithRawResponse,
+    AsyncInterestTierScheduleResourceWithRawResponse,
+    InterestTierScheduleResourceWithStreamingResponse,
+    AsyncInterestTierScheduleResourceWithStreamingResponse,
+)
+from .loan_tape_configuration import (
+    LoanTapeConfigurationResource,
+    AsyncLoanTapeConfigurationResource,
+    LoanTapeConfigurationResourceWithRawResponse,
+    AsyncLoanTapeConfigurationResourceWithRawResponse,
+    LoanTapeConfigurationResourceWithStreamingResponse,
+    AsyncLoanTapeConfigurationResourceWithStreamingResponse,
+)
 from ...types.financial_account import FinancialAccount
 
 __all__ = ["FinancialAccounts", "AsyncFinancialAccounts"]
@@ -87,6 +103,14 @@ class FinancialAccounts(SyncAPIResource):
     @cached_property
     def loan_tapes(self) -> LoanTapes:
         return LoanTapes(self._client)
+
+    @cached_property
+    def loan_tape_configuration(self) -> LoanTapeConfigurationResource:
+        return LoanTapeConfigurationResource(self._client)
+
+    @cached_property
+    def interest_tier_schedule(self) -> InterestTierScheduleResource:
+        return InterestTierScheduleResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> FinancialAccountsWithRawResponse:
@@ -395,6 +419,14 @@ class AsyncFinancialAccounts(AsyncAPIResource):
     @cached_property
     def loan_tapes(self) -> AsyncLoanTapes:
         return AsyncLoanTapes(self._client)
+
+    @cached_property
+    def loan_tape_configuration(self) -> AsyncLoanTapeConfigurationResource:
+        return AsyncLoanTapeConfigurationResource(self._client)
+
+    @cached_property
+    def interest_tier_schedule(self) -> AsyncInterestTierScheduleResource:
+        return AsyncInterestTierScheduleResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncFinancialAccountsWithRawResponse:
@@ -728,6 +760,14 @@ class FinancialAccountsWithRawResponse:
     def loan_tapes(self) -> LoanTapesWithRawResponse:
         return LoanTapesWithRawResponse(self._financial_accounts.loan_tapes)
 
+    @cached_property
+    def loan_tape_configuration(self) -> LoanTapeConfigurationResourceWithRawResponse:
+        return LoanTapeConfigurationResourceWithRawResponse(self._financial_accounts.loan_tape_configuration)
+
+    @cached_property
+    def interest_tier_schedule(self) -> InterestTierScheduleResourceWithRawResponse:
+        return InterestTierScheduleResourceWithRawResponse(self._financial_accounts.interest_tier_schedule)
+
 
 class AsyncFinancialAccountsWithRawResponse:
     def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
@@ -771,6 +811,14 @@ class AsyncFinancialAccountsWithRawResponse:
     @cached_property
     def loan_tapes(self) -> AsyncLoanTapesWithRawResponse:
         return AsyncLoanTapesWithRawResponse(self._financial_accounts.loan_tapes)
+
+    @cached_property
+    def loan_tape_configuration(self) -> AsyncLoanTapeConfigurationResourceWithRawResponse:
+        return AsyncLoanTapeConfigurationResourceWithRawResponse(self._financial_accounts.loan_tape_configuration)
+
+    @cached_property
+    def interest_tier_schedule(self) -> AsyncInterestTierScheduleResourceWithRawResponse:
+        return AsyncInterestTierScheduleResourceWithRawResponse(self._financial_accounts.interest_tier_schedule)
 
 
 class FinancialAccountsWithStreamingResponse:
@@ -816,6 +864,14 @@ class FinancialAccountsWithStreamingResponse:
     def loan_tapes(self) -> LoanTapesWithStreamingResponse:
         return LoanTapesWithStreamingResponse(self._financial_accounts.loan_tapes)
 
+    @cached_property
+    def loan_tape_configuration(self) -> LoanTapeConfigurationResourceWithStreamingResponse:
+        return LoanTapeConfigurationResourceWithStreamingResponse(self._financial_accounts.loan_tape_configuration)
+
+    @cached_property
+    def interest_tier_schedule(self) -> InterestTierScheduleResourceWithStreamingResponse:
+        return InterestTierScheduleResourceWithStreamingResponse(self._financial_accounts.interest_tier_schedule)
+
 
 class AsyncFinancialAccountsWithStreamingResponse:
     def __init__(self, financial_accounts: AsyncFinancialAccounts) -> None:
@@ -859,3 +915,11 @@ class AsyncFinancialAccountsWithStreamingResponse:
     @cached_property
     def loan_tapes(self) -> AsyncLoanTapesWithStreamingResponse:
         return AsyncLoanTapesWithStreamingResponse(self._financial_accounts.loan_tapes)
+
+    @cached_property
+    def loan_tape_configuration(self) -> AsyncLoanTapeConfigurationResourceWithStreamingResponse:
+        return AsyncLoanTapeConfigurationResourceWithStreamingResponse(self._financial_accounts.loan_tape_configuration)
+
+    @cached_property
+    def interest_tier_schedule(self) -> AsyncInterestTierScheduleResourceWithStreamingResponse:
+        return AsyncInterestTierScheduleResourceWithStreamingResponse(self._financial_accounts.interest_tier_schedule)

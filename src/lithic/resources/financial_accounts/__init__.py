@@ -48,6 +48,22 @@ from .financial_transactions import (
     FinancialTransactionsWithStreamingResponse,
     AsyncFinancialTransactionsWithStreamingResponse,
 )
+from .interest_tier_schedule import (
+    InterestTierScheduleResource,
+    AsyncInterestTierScheduleResource,
+    InterestTierScheduleResourceWithRawResponse,
+    AsyncInterestTierScheduleResourceWithRawResponse,
+    InterestTierScheduleResourceWithStreamingResponse,
+    AsyncInterestTierScheduleResourceWithStreamingResponse,
+)
+from .loan_tape_configuration import (
+    LoanTapeConfigurationResource,
+    AsyncLoanTapeConfigurationResource,
+    LoanTapeConfigurationResourceWithRawResponse,
+    AsyncLoanTapeConfigurationResourceWithRawResponse,
+    LoanTapeConfigurationResourceWithStreamingResponse,
+    AsyncLoanTapeConfigurationResourceWithStreamingResponse,
+)
 
 __all__ = [
     "Balances",
@@ -80,6 +96,18 @@ __all__ = [
     "AsyncLoanTapesWithRawResponse",
     "LoanTapesWithStreamingResponse",
     "AsyncLoanTapesWithStreamingResponse",
+    "LoanTapeConfigurationResource",
+    "AsyncLoanTapeConfigurationResource",
+    "LoanTapeConfigurationResourceWithRawResponse",
+    "AsyncLoanTapeConfigurationResourceWithRawResponse",
+    "LoanTapeConfigurationResourceWithStreamingResponse",
+    "AsyncLoanTapeConfigurationResourceWithStreamingResponse",
+    "InterestTierScheduleResource",
+    "AsyncInterestTierScheduleResource",
+    "InterestTierScheduleResourceWithRawResponse",
+    "AsyncInterestTierScheduleResourceWithRawResponse",
+    "InterestTierScheduleResourceWithStreamingResponse",
+    "AsyncInterestTierScheduleResourceWithStreamingResponse",
     "FinancialAccounts",
     "AsyncFinancialAccounts",
     "FinancialAccountsWithRawResponse",
