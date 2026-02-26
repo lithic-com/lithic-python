@@ -8,8 +8,8 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from .. import _legacy_response
-from ..types import (
+from ... import _legacy_response
+from ...types import (
     account_holder_list_params,
     account_holder_create_params,
     account_holder_update_params,
@@ -17,27 +17,39 @@ from ..types import (
     account_holder_simulate_enrollment_review_params,
     account_holder_simulate_enrollment_document_review_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import is_given, required_args, maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from .._constants import DEFAULT_TIMEOUT
-from ..pagination import SyncSinglePage, AsyncSinglePage
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.account_holder import AccountHolder
-from ..types.shared.document import Document
-from ..types.address_update_param import AddressUpdateParam
-from ..types.shared_params.address import Address
-from ..types.account_holder_create_response import AccountHolderCreateResponse
-from ..types.account_holder_update_response import AccountHolderUpdateResponse
-from ..types.account_holder_list_documents_response import AccountHolderListDocumentsResponse
-from ..types.account_holder_simulate_enrollment_review_response import AccountHolderSimulateEnrollmentReviewResponse
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._utils import is_given, required_args, maybe_transform, async_maybe_transform
+from .entities import (
+    Entities,
+    AsyncEntities,
+    EntitiesWithRawResponse,
+    AsyncEntitiesWithRawResponse,
+    EntitiesWithStreamingResponse,
+    AsyncEntitiesWithStreamingResponse,
+)
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ..._constants import DEFAULT_TIMEOUT
+from ...pagination import SyncSinglePage, AsyncSinglePage
+from ..._base_client import AsyncPaginator, make_request_options
+from ...types.account_holder import AccountHolder
+from ...types.shared.document import Document
+from ...types.address_update_param import AddressUpdateParam
+from ...types.shared_params.address import Address
+from ...types.account_holder_create_response import AccountHolderCreateResponse
+from ...types.account_holder_update_response import AccountHolderUpdateResponse
+from ...types.account_holder_list_documents_response import AccountHolderListDocumentsResponse
+from ...types.account_holder_simulate_enrollment_review_response import AccountHolderSimulateEnrollmentReviewResponse
 
 __all__ = ["AccountHolders", "AsyncAccountHolders"]
 
 
 class AccountHolders(SyncAPIResource):
+    @cached_property
+    def entities(self) -> Entities:
+        return Entities(self._client)
+
     @cached_property
     def with_raw_response(self) -> AccountHoldersWithRawResponse:
         """
@@ -1124,6 +1136,10 @@ class AccountHolders(SyncAPIResource):
 
 
 class AsyncAccountHolders(AsyncAPIResource):
+    @cached_property
+    def entities(self) -> AsyncEntities:
+        return AsyncEntities(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncAccountHoldersWithRawResponse:
         """
@@ -2241,6 +2257,10 @@ class AccountHoldersWithRawResponse:
             account_holders.upload_document,
         )
 
+    @cached_property
+    def entities(self) -> EntitiesWithRawResponse:
+        return EntitiesWithRawResponse(self._account_holders.entities)
+
 
 class AsyncAccountHoldersWithRawResponse:
     def __init__(self, account_holders: AsyncAccountHolders) -> None:
@@ -2273,6 +2293,10 @@ class AsyncAccountHoldersWithRawResponse:
         self.upload_document = _legacy_response.async_to_raw_response_wrapper(
             account_holders.upload_document,
         )
+
+    @cached_property
+    def entities(self) -> AsyncEntitiesWithRawResponse:
+        return AsyncEntitiesWithRawResponse(self._account_holders.entities)
 
 
 class AccountHoldersWithStreamingResponse:
@@ -2307,6 +2331,10 @@ class AccountHoldersWithStreamingResponse:
             account_holders.upload_document,
         )
 
+    @cached_property
+    def entities(self) -> EntitiesWithStreamingResponse:
+        return EntitiesWithStreamingResponse(self._account_holders.entities)
+
 
 class AsyncAccountHoldersWithStreamingResponse:
     def __init__(self, account_holders: AsyncAccountHolders) -> None:
@@ -2339,3 +2367,7 @@ class AsyncAccountHoldersWithStreamingResponse:
         self.upload_document = async_to_streamed_response_wrapper(
             account_holders.upload_document,
         )
+
+    @cached_property
+    def entities(self) -> AsyncEntitiesWithStreamingResponse:
+        return AsyncEntitiesWithStreamingResponse(self._account_holders.entities)

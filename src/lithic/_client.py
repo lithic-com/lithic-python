@@ -82,7 +82,6 @@ if TYPE_CHECKING:
     from .resources.tokenizations import Tokenizations, AsyncTokenizations
     from .resources.book_transfers import BookTransfers, AsyncBookTransfers
     from .resources.funding_events import FundingEvents, AsyncFundingEvents
-    from .resources.account_holders import AccountHolders, AsyncAccountHolders
     from .resources.reports.reports import Reports, AsyncReports
     from .resources.transfer_limits import TransferLimits, AsyncTransferLimits
     from .resources.account_activity import AccountActivity, AsyncAccountActivity
@@ -97,6 +96,7 @@ if TYPE_CHECKING:
     from .resources.auth_stream_enrollment import AuthStreamEnrollment, AsyncAuthStreamEnrollment
     from .resources.tokenization_decisioning import TokenizationDecisioning, AsyncTokenizationDecisioning
     from .resources.transactions.transactions import Transactions, AsyncTransactions
+    from .resources.account_holders.account_holders import AccountHolders, AsyncAccountHolders
     from .resources.credit_products.credit_products import CreditProducts, AsyncCreditProducts
     from .resources.financial_accounts.financial_accounts import FinancialAccounts, AsyncFinancialAccounts
     from .resources.external_bank_accounts.external_bank_accounts import ExternalBankAccounts, AsyncExternalBankAccounts
