@@ -37,7 +37,8 @@ class AccountLevelRule(TypedDict, total=False):
     evaluated. For rules that can be applied to one of several event streams, the
     effective one is defined by the separate `event_stream` field.
 
-    - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+    - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
+      AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -82,7 +83,8 @@ class CardLevelRule(TypedDict, total=False):
     evaluated. For rules that can be applied to one of several event streams, the
     effective one is defined by the separate `event_stream` field.
 
-    - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+    - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
+      AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -121,7 +123,8 @@ class ProgramLevelRule(TypedDict, total=False):
     evaluated. For rules that can be applied to one of several event streams, the
     effective one is defined by the separate `event_stream` field.
 
-    - `CONDITIONAL_BLOCK`: AUTHORIZATION event stream.
+    - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
+      AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
