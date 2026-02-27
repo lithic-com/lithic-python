@@ -6,8 +6,8 @@ from typing_extensions import Literal
 
 from .device import Device
 from .._models import BaseModel
+from .token_metadata import TokenMetadata
 from .wallet_decisioning_info import WalletDecisioningInfo
-from .digital_wallet_token_metadata import DigitalWalletTokenMetadata
 
 __all__ = ["TokenizationDecisioningRequestWebhookEvent"]
 
@@ -25,6 +25,9 @@ class TokenizationDecisioningRequestWebhookEvent(BaseModel):
 
     created: datetime
     """Indicate when the request was received from Mastercard or Visa"""
+
+    digital_wallet_token_metadata: TokenMetadata
+    """Contains the metadata for the digital wallet being tokenized."""
 
     event_type: Literal["digital_wallet.tokenization_approval_request"]
     """The name of this event"""
@@ -44,9 +47,6 @@ class TokenizationDecisioningRequestWebhookEvent(BaseModel):
     wallet_decisioning_info: WalletDecisioningInfo
 
     device: Optional[Device] = None
-
-    digital_wallet_token_metadata: Optional[DigitalWalletTokenMetadata] = None
-    """Contains the metadata for the digital wallet being tokenized."""
 
     tokenization_source: Optional[
         Literal["ACCOUNT_ON_FILE", "CONTACTLESS_TAP", "MANUAL_PROVISION", "PUSH_PROVISION", "TOKEN", "UNKNOWN"]

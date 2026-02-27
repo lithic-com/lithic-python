@@ -5,7 +5,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DigitalWalletTokenMetadata", "PaymentAccountInfo", "PaymentAccountInfoAccountHolderData"]
+__all__ = ["TokenMetadata", "PaymentAccountInfo", "PaymentAccountInfoAccountHolderData"]
 
 
 class PaymentAccountInfoAccountHolderData(BaseModel):
@@ -42,7 +42,7 @@ class PaymentAccountInfo(BaseModel):
     """
 
 
-class DigitalWalletTokenMetadata(BaseModel):
+class TokenMetadata(BaseModel):
     """Contains the metadata for the digital wallet being tokenized."""
 
     payment_account_info: PaymentAccountInfo
@@ -68,6 +68,7 @@ class DigitalWalletTokenMetadata(BaseModel):
             "FACEBOOK",
             "FITBIT_PAY",
             "GARMIN_PAY",
+            "GOOGLE_PAY",
             "MICROSOFT_PAY",
             "NETFLIX",
             "SAMSUNG_PAY",
