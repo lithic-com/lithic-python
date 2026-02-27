@@ -11,4 +11,6 @@ __all__ = ["ConditionalBlockParametersParam"]
 
 
 class ConditionalBlockParametersParam(TypedDict, total=False):
+    """Deprecated: Use CONDITIONAL_ACTION instead."""
+
     conditions: Required[Iterable[AuthRuleConditionParam]]
