@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.116.0 (2026-02-27)
+
+Full Changelog: [v0.115.0...v0.116.0](https://github.com/lithic-com/lithic-python/compare/v0.115.0...v0.116.0)
+
+### Features
+
+* **api:** Add account holder entity endpoints ([710c501](https://github.com/lithic-com/lithic-python/commit/710c501c3695a51743437488769f1132578c23dd))
+* **api:** Add INTEREST_AND_FEES_PAUSED substatus to financial account ([c4a37de](https://github.com/lithic-com/lithic-python/commit/c4a37de9f0f7821e54d05702c4d1d809124fc7bc))
+* **api:** Expose MIL interest schedules and loan tape configuration endpoints ([5c6bcd7](https://github.com/lithic-com/lithic-python/commit/5c6bcd740933255291c0fd0b482021c4a50d0e78))
+
+
+### Bug Fixes
+
+* **api:** Correct token_metadata field name in tokenization.approval_request schema ([36532d8](https://github.com/lithic-com/lithic-python/commit/36532d836f7cd3ef23b6c70194cd50f9495644ec))
+
+
+### Chores
+
+* **dependencies:** require standardwebhooks 1.0.1 ([7dae789](https://github.com/lithic-com/lithic-python/commit/7dae7892de61a765ab4bca8c7af3046d90fe2ff4))
+* **internal:** add request options to SSE classes ([1b49e55](https://github.com/lithic-com/lithic-python/commit/1b49e550b0e6fe3c5203740a9634ee6264046489))
+* **internal:** make `test_proxy_environment_variables` more resilient ([e12df38](https://github.com/lithic-com/lithic-python/commit/e12df381dda14514d7bc8ce5f7fe7ea882d0fb0f))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([9d0e878](https://github.com/lithic-com/lithic-python/commit/9d0e87814e2369c791ee5b9f8a4431c9de38e505))
+* update mock server docs ([ec268b7](https://github.com/lithic-com/lithic-python/commit/ec268b7426be15578b2eaf92ca81107cbf9084e6))
+
+
+### Documentation
+
+* Remove CONDITIONAL_BLOCK from docs ([f202486](https://github.com/lithic-com/lithic-python/commit/f202486f3cb2c60338be8d38f09eb23e82acf1ae))
+
 ## 0.115.0 (2026-02-13)
 
 Full Changelog: [v0.114.0...v0.115.0](https://github.com/lithic-com/lithic-python/compare/v0.114.0...v0.115.0)
