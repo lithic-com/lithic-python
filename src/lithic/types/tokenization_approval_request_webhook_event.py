@@ -6,11 +6,11 @@ from typing_extensions import Literal
 
 from .device import Device
 from .._models import BaseModel
+from .token_metadata import TokenMetadata
 from .tokenization_tfa_reason import TokenizationTfaReason
 from .wallet_decisioning_info import WalletDecisioningInfo
 from .tokenization_rule_result import TokenizationRuleResult
 from .tokenization_decline_reason import TokenizationDeclineReason
-from .digital_wallet_token_metadata import DigitalWalletTokenMetadata
 
 __all__ = ["TokenizationApprovalRequestWebhookEvent", "CustomerTokenizationDecision"]
 
@@ -55,6 +55,9 @@ class TokenizationApprovalRequestWebhookEvent(BaseModel):
     APPROVED/VERIFICATION_REQUIRED/DENIED.
     """
 
+    token_metadata: TokenMetadata
+    """Contains the metadata for the digital wallet being tokenized."""
+
     tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT"]
     """The channel through which the tokenization was made."""
 
@@ -64,9 +67,6 @@ class TokenizationApprovalRequestWebhookEvent(BaseModel):
     wallet_decisioning_info: WalletDecisioningInfo
 
     device: Optional[Device] = None
-
-    digital_wallet_token_metadata: Optional[DigitalWalletTokenMetadata] = None
-    """Contains the metadata for the digital wallet being tokenized."""
 
     rule_results: Optional[List[TokenizationRuleResult]] = None
     """Results from rules that were evaluated for this tokenization"""

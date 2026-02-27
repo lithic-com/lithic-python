@@ -33,6 +33,7 @@ from .tokenization import Tokenization as Tokenization
 from .funding_event import FundingEvent as FundingEvent
 from .network_total import NetworkTotal as NetworkTotal
 from .account_holder import AccountHolder as AccountHolder
+from .token_metadata import TokenMetadata as TokenMetadata
 from .card_bulk_order import CardBulkOrder as CardBulkOrder
 from .message_attempt import MessageAttempt as MessageAttempt
 from .network_program import NetworkProgram as NetworkProgram
@@ -128,7 +129,6 @@ from .tokenization_simulate_params import TokenizationSimulateParams as Tokeniza
 from .balance_updated_webhook_event import BalanceUpdatedWebhookEvent as BalanceUpdatedWebhookEvent
 from .card_bulk_order_create_params import CardBulkOrderCreateParams as CardBulkOrderCreateParams
 from .card_bulk_order_update_params import CardBulkOrderUpdateParams as CardBulkOrderUpdateParams
-from .digital_wallet_token_metadata import DigitalWalletTokenMetadata as DigitalWalletTokenMetadata
 from .dispute_list_evidences_params import DisputeListEvidencesParams as DisputeListEvidencesParams
 from .dispute_updated_webhook_event import DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent
 from .external_bank_account_address import ExternalBankAccountAddress as ExternalBankAccountAddress

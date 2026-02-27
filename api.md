@@ -174,7 +174,7 @@ Types:
 ```python
 from lithic.types import (
     Device,
-    DigitalWalletTokenMetadata,
+    TokenMetadata,
     Tokenization,
     TokenizationDeclineReason,
     TokenizationRuleResult,
