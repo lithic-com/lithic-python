@@ -9,4 +9,6 @@ __all__ = ["ConditionalBlockParameters"]
 
 
 class ConditionalBlockParameters(BaseModel):
+    """Deprecated: Use CONDITIONAL_ACTION instead."""
+
     conditions: List[AuthRuleCondition]
