@@ -7,10 +7,10 @@ from ..._models import BaseModel
 from .conditional_value import ConditionalValue
 from .conditional_operation import ConditionalOperation
 
-__all__ = ["ConditionalACHActionParameters", "Action", "ActionApproveAction", "ActionReturnAction", "Condition"]
+__all__ = ["ConditionalACHActionParameters", "Action", "ActionApproveActionACH", "ActionReturnAction", "Condition"]
 
 
-class ActionApproveAction(BaseModel):
+class ActionApproveActionACH(BaseModel):
     type: Literal["APPROVE"]
     """Approve the ACH transaction"""
 
@@ -98,7 +98,7 @@ class ActionReturnAction(BaseModel):
     """Return the ACH transaction"""
 
 
-Action: TypeAlias = Union[ActionApproveAction, ActionReturnAction]
+Action: TypeAlias = Union[ActionApproveActionACH, ActionReturnAction]
 
 
 class Condition(BaseModel):
