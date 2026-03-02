@@ -79,7 +79,6 @@ class AccountHolders(SyncAPIResource):
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
         naics_code: str | Omit = omit,
@@ -129,8 +128,6 @@ class AccountHolders(SyncAPIResource):
               implementation with Lithic.
 
           workflow: Specifies the type of KYB workflow to run.
-
-          beneficial_owner_entities: Deprecated.
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
@@ -381,7 +378,6 @@ class AccountHolders(SyncAPIResource):
         | Literal["KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"]
         | Omit = omit,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
         naics_code: str | Omit = omit,
@@ -414,7 +410,6 @@ class AccountHolders(SyncAPIResource):
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "workflow": workflow,
-                    "beneficial_owner_entities": beneficial_owner_entities,
                     "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
                     "naics_code": naics_code,
@@ -478,8 +473,6 @@ class AccountHolders(SyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
         | Omit = omit,
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
@@ -508,8 +501,6 @@ class AccountHolders(SyncAPIResource):
         the program that the calling API key manages.
 
         Args:
-          beneficial_owner_entities: Deprecated.
-
           beneficial_owner_individuals: You must submit a list of all direct and indirect individuals with 25% or more
               ownership in the company. A maximum of 4 beneficial owners can be submitted. If
               no individual owns 25% of the company you do not need to send beneficial owner
@@ -658,8 +649,6 @@ class AccountHolders(SyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
         | Omit = omit,
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
@@ -693,7 +682,6 @@ class AccountHolders(SyncAPIResource):
                 f"/v1/account_holders/{account_holder_token}",
                 body=maybe_transform(
                     {
-                        "beneficial_owner_entities": beneficial_owner_entities,
                         "beneficial_owner_individuals": beneficial_owner_individuals,
                         "business_entity": business_entity,
                         "control_person": control_person,
@@ -1169,7 +1157,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         nature_of_business: str,
         tos_timestamp: str,
         workflow: Literal["KYB_BASIC", "KYB_BYO"],
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
         naics_code: str | Omit = omit,
@@ -1219,8 +1206,6 @@ class AsyncAccountHolders(AsyncAPIResource):
               implementation with Lithic.
 
           workflow: Specifies the type of KYB workflow to run.
-
-          beneficial_owner_entities: Deprecated.
 
           external_id: A user provided id that can be used to link an account holder with an external
               system
@@ -1471,7 +1456,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         | Literal["KYC_BASIC", "KYC_BYO"]
         | Literal["KYC_EXEMPT"]
         | Omit = omit,
-        beneficial_owner_entities: Iterable[account_holder_create_params.KYBBeneficialOwnerEntity] | Omit = omit,
         external_id: str | Omit = omit,
         kyb_passed_timestamp: str | Omit = omit,
         naics_code: str | Omit = omit,
@@ -1504,7 +1488,6 @@ class AsyncAccountHolders(AsyncAPIResource):
                     "nature_of_business": nature_of_business,
                     "tos_timestamp": tos_timestamp,
                     "workflow": workflow,
-                    "beneficial_owner_entities": beneficial_owner_entities,
                     "external_id": external_id,
                     "kyb_passed_timestamp": kyb_passed_timestamp,
                     "naics_code": naics_code,
@@ -1568,8 +1551,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
         | Omit = omit,
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
@@ -1598,8 +1579,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         the program that the calling API key manages.
 
         Args:
-          beneficial_owner_entities: Deprecated.
-
           beneficial_owner_individuals: You must submit a list of all direct and indirect individuals with 25% or more
               ownership in the company. A maximum of 4 beneficial owners can be submitted. If
               no individual owns 25% of the company you do not need to send beneficial owner
@@ -1748,8 +1727,6 @@ class AsyncAccountHolders(AsyncAPIResource):
         self,
         account_holder_token: str,
         *,
-        beneficial_owner_entities: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerEntity]
-        | Omit = omit,
         beneficial_owner_individuals: Iterable[account_holder_update_params.KYBPatchRequestBeneficialOwnerIndividual]
         | Omit = omit,
         business_entity: account_holder_update_params.KYBPatchRequestBusinessEntity | Omit = omit,
@@ -1783,7 +1760,6 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"/v1/account_holders/{account_holder_token}",
                 body=await async_maybe_transform(
                     {
-                        "beneficial_owner_entities": beneficial_owner_entities,
                         "beneficial_owner_individuals": beneficial_owner_individuals,
                         "business_entity": business_entity,
                         "control_person": control_person,

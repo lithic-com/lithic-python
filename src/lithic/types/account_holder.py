@@ -10,49 +10,12 @@ from .required_document import RequiredDocument
 
 __all__ = [
     "AccountHolder",
-    "BeneficialOwnerEntity",
     "BeneficialOwnerIndividual",
     "BusinessEntity",
     "ControlPerson",
     "Individual",
     "VerificationApplication",
 ]
-
-
-class BeneficialOwnerEntity(BaseModel):
-    address: Address
-    """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    dba_business_name: str
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    entity_token: str
-    """Globally unique identifier for the entity."""
-
-    government_id: str
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: str
-    """Legal (formal) business name."""
-
-    phone_numbers: List[str]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    parent_company: Optional[str] = None
-    """Parent company name (if applicable)."""
 
 
 class BeneficialOwnerIndividual(BaseModel):
@@ -228,9 +191,6 @@ class AccountHolder(BaseModel):
 
     account_token: Optional[str] = None
     """Globally unique identifier for the account."""
-
-    beneficial_owner_entities: Optional[List[BeneficialOwnerEntity]] = None
-    """Deprecated."""
 
     beneficial_owner_individuals: Optional[List[BeneficialOwnerIndividual]] = None
     """

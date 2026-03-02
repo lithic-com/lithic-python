@@ -11,7 +11,6 @@ from .address_update_param import AddressUpdateParam
 __all__ = [
     "AccountHolderUpdateParams",
     "KYBPatchRequest",
-    "KYBPatchRequestBeneficialOwnerEntity",
     "KYBPatchRequestBeneficialOwnerIndividual",
     "KYBPatchRequestBusinessEntity",
     "KYBPatchRequestControlPerson",
@@ -22,9 +21,6 @@ __all__ = [
 
 
 class KYBPatchRequest(TypedDict, total=False):
-    beneficial_owner_entities: Iterable[KYBPatchRequestBeneficialOwnerEntity]
-    """Deprecated."""
-
     beneficial_owner_individuals: Iterable[KYBPatchRequestBeneficialOwnerIndividual]
     """
     You must submit a list of all direct and indirect individuals with 25% or more
@@ -73,42 +69,6 @@ class KYBPatchRequest(TypedDict, total=False):
 
     website_url: str
     """Company website URL."""
-
-
-class KYBPatchRequestBeneficialOwnerEntity(TypedDict, total=False):
-    entity_token: Required[str]
-    """Globally unique identifier for an entity."""
-
-    address: AddressUpdateParam
-    """
-    Business''s physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    dba_business_name: str
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    government_id: str
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: str
-    """Legal (formal) business name."""
-
-    parent_company: str
-    """Parent company name (if applicable)."""
-
-    phone_numbers: SequenceNotStr[str]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
 
 
 class KYBPatchRequestBeneficialOwnerIndividual(TypedDict, total=False):

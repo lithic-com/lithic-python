@@ -60,8 +60,8 @@ class Entities(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EntityCreateResponse:
         """
-        Create a new beneficial owner or replace the control person entity on an
-        existing KYB account holder. This endpoint is only applicable for account
+        Create a new beneficial owner individual or replace the control person entity on
+        an existing KYB account holder. This endpoint is only applicable for account
         holders enrolled through a KYB workflow with the Persona KYB provider. A new
         control person can only replace the existing one. A maximum of 4 beneficial
         owners can be associated with an account holder.
@@ -133,10 +133,10 @@ class Entities(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderEntity:
-        """Deactivate a beneficial owner entity on an existing KYB account holder.
+        """Deactivate a beneficial owner individual on an existing KYB account holder.
 
         Only
-        beneficial owner entities can be deactivated.
+        beneficial owner individuals can be deactivated.
 
         Args:
           extra_headers: Send extra headers
@@ -202,8 +202,8 @@ class AsyncEntities(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EntityCreateResponse:
         """
-        Create a new beneficial owner or replace the control person entity on an
-        existing KYB account holder. This endpoint is only applicable for account
+        Create a new beneficial owner individual or replace the control person entity on
+        an existing KYB account holder. This endpoint is only applicable for account
         holders enrolled through a KYB workflow with the Persona KYB provider. A new
         control person can only replace the existing one. A maximum of 4 beneficial
         owners can be associated with an account holder.
@@ -275,10 +275,10 @@ class AsyncEntities(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountHolderEntity:
-        """Deactivate a beneficial owner entity on an existing KYB account holder.
+        """Deactivate a beneficial owner individual on an existing KYB account holder.
 
         Only
-        beneficial owner entities can be deactivated.
+        beneficial owner individuals can be deactivated.
 
         Args:
           extra_headers: Send extra headers

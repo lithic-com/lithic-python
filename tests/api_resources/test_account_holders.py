@@ -132,23 +132,6 @@ class TestAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                }
-            ],
             external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             naics_code="541512",
@@ -630,24 +613,6 @@ class TestAccountHolders:
     def test_method_update_with_all_params_overload_1(self, client: Lithic) -> None:
         account_holder = client.account_holders.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            beneficial_owner_entities=[
-                {
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "address2": "address2",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dba_business_name": "dba_business_name",
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "parent_company": "parent_company",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1224,23 +1189,6 @@ class TestAsyncAccountHolders:
             nature_of_business="Software company selling solutions to the restaurant industry",
             tos_timestamp="2018-05-29T21:16:05Z",
             workflow="KYB_BASIC",
-            beneficial_owner_entities=[
-                {
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                        "address2": "address2",
-                    },
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "phone_numbers": ["+15555555555"],
-                    "dba_business_name": "dba_business_name",
-                    "parent_company": "parent_company",
-                }
-            ],
             external_id="external_id",
             kyb_passed_timestamp="2018-05-29T21:16:05Z",
             naics_code="541512",
@@ -1722,24 +1670,6 @@ class TestAsyncAccountHolders:
     async def test_method_update_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
         account_holder = await async_client.account_holders.update(
             account_holder_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            beneficial_owner_entities=[
-                {
-                    "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "address": {
-                        "address1": "123 Old Forest Way",
-                        "address2": "address2",
-                        "city": "Omaha",
-                        "country": "USA",
-                        "postal_code": "68022",
-                        "state": "NE",
-                    },
-                    "dba_business_name": "dba_business_name",
-                    "government_id": "114-123-1513",
-                    "legal_business_name": "Acme, Inc.",
-                    "parent_company": "parent_company",
-                    "phone_numbers": ["+15555555555"],
-                }
-            ],
             beneficial_owner_individuals=[
                 {
                     "entity_token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
