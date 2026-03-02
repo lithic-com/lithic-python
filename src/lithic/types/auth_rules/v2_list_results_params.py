@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Union
+from datetime import datetime
+from typing_extensions import Annotated, TypedDict
+
+from ..._utils import PropertyInfo
 
 __all__ = ["V2ListResultsParams"]
 
@@ -10,6 +14,18 @@ __all__ = ["V2ListResultsParams"]
 class V2ListResultsParams(TypedDict, total=False):
     auth_rule_token: str
     """Filter by Auth Rule token"""
+
+    begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """Date string in RFC 3339 format.
+
+    Only events evaluated after the specified time will be included. UTC time zone.
+    """
+
+    end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """Date string in RFC 3339 format.
+
+    Only events evaluated before the specified time will be included. UTC time zone.
+    """
 
     ending_before: str
     """A cursor representing an item's token before which a page of results should end.

@@ -12,13 +12,13 @@ from .conditional_value_param import ConditionalValueParam
 __all__ = [
     "ConditionalTokenizationActionParametersParam",
     "Action",
-    "ActionDeclineAction",
+    "ActionDeclineActionTokenization",
     "ActionRequireTfaAction",
     "Condition",
 ]
 
 
-class ActionDeclineAction(TypedDict, total=False):
+class ActionDeclineActionTokenization(TypedDict, total=False):
     type: Required[Literal["DECLINE"]]
     """Decline the tokenization request"""
 
@@ -64,7 +64,7 @@ class ActionRequireTfaAction(TypedDict, total=False):
     """Reason code for requiring two-factor authentication"""
 
 
-Action: TypeAlias = Union[ActionDeclineAction, ActionRequireTfaAction]
+Action: TypeAlias = Union[ActionDeclineActionTokenization, ActionRequireTfaAction]
 
 
 class Condition(TypedDict, total=False):

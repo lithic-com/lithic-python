@@ -4,15 +4,15 @@ from typing import Optional
 from datetime import datetime
 
 from ...._models import BaseModel
-from ..rule_stats import RuleStats
+from ..backtest_stats import BacktestStats
 
 __all__ = ["BacktestResults", "Results", "SimulationParameters"]
 
 
 class Results(BaseModel):
-    current_version: Optional[RuleStats] = None
+    current_version: Optional[BacktestStats] = None
 
-    draft_version: Optional[RuleStats] = None
+    draft_version: Optional[BacktestStats] = None
 
 
 class SimulationParameters(BaseModel):

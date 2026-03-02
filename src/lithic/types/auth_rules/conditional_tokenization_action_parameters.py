@@ -10,13 +10,13 @@ from .conditional_operation import ConditionalOperation
 __all__ = [
     "ConditionalTokenizationActionParameters",
     "Action",
-    "ActionDeclineAction",
+    "ActionDeclineActionTokenization",
     "ActionRequireTfaAction",
     "Condition",
 ]
 
 
-class ActionDeclineAction(BaseModel):
+class ActionDeclineActionTokenization(BaseModel):
     type: Literal["DECLINE"]
     """Decline the tokenization request"""
 
@@ -66,7 +66,7 @@ class ActionRequireTfaAction(BaseModel):
     """Reason code for requiring two-factor authentication"""
 
 
-Action: TypeAlias = Union[ActionDeclineAction, ActionRequireTfaAction]
+Action: TypeAlias = Union[ActionDeclineActionTokenization, ActionRequireTfaAction]
 
 
 class Condition(BaseModel):

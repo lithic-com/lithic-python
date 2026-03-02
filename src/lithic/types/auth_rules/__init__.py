@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from .auth_rule import AuthRule as AuthRule
-from .rule_stats import RuleStats as RuleStats
 from .event_stream import EventStream as EventStream
+from .report_stats import ReportStats as ReportStats
+from .backtest_stats import BacktestStats as BacktestStats
 from .v2_list_params import V2ListParams as V2ListParams
 from .v2_draft_params import V2DraftParams as V2DraftParams
 from .v2_create_params import V2CreateParams as V2CreateParams

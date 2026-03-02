@@ -96,6 +96,7 @@ Types:
 from lithic.types.auth_rules import (
     AuthRule,
     AuthRuleCondition,
+    BacktestStats,
     Conditional3DSActionParameters,
     ConditionalACHActionParameters,
     ConditionalAttribute,
@@ -106,7 +107,7 @@ from lithic.types.auth_rules import (
     ConditionalValue,
     EventStream,
     MerchantLockParameters,
-    RuleStats,
+    ReportStats,
     VelocityLimitParams,
     VelocityLimitPeriod,
     V2ListResultsResponse,
