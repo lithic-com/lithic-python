@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["PaymentCreateParams", "MethodAttributes"]
+__all__ = ["PaymentCreateParams", "MethodAttributes", "Hold"]
 
 
 class PaymentCreateParams(TypedDict, total=False):
@@ -27,6 +27,9 @@ class PaymentCreateParams(TypedDict, total=False):
     This token will become the transaction token.
     """
 
+    hold: Hold
+    """Optional hold to settle when this payment is initiated."""
+
     memo: str
 
     user_defined_id: str
@@ -39,3 +42,10 @@ class MethodAttributes(TypedDict, total=False):
     """Number of days to hold the ACH payment"""
 
     addenda: Optional[str]
+
+
+class Hold(TypedDict, total=False):
+    """Optional hold to settle when this payment is initiated."""
+
+    token: Required[str]
+    """Token of the hold to settle when this payment is initiated."""
