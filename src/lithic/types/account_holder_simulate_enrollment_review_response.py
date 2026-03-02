@@ -283,9 +283,6 @@ class AccountHolderSimulateEnrollmentReviewResponse(BaseModel):
     account_token: Optional[str] = None
     """Globally unique identifier for the account."""
 
-    beneficial_owner_entities: Optional[List[KYBBusinessEntity]] = None
-    """Deprecated."""
-
     beneficial_owner_individuals: Optional[List[BeneficialOwnerIndividual]] = None
     """Only present when user_type == "BUSINESS".
 

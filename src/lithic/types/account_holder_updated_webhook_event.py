@@ -156,9 +156,6 @@ class KYBPayloadUpdateRequestControlPerson(BaseModel):
 class KYBPayloadUpdateRequest(BaseModel):
     """Original request to update the account holder."""
 
-    beneficial_owner_entities: Optional[List[KYBBusinessEntity]] = None
-    """Deprecated."""
-
     beneficial_owner_individuals: Optional[List[KYBPayloadUpdateRequestBeneficialOwnerIndividual]] = None
     """
     You must submit a list of all direct and indirect individuals with 25% or more
