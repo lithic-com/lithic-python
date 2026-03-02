@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Any, List, Union, Optional, cast
-from datetime import date
+from datetime import date, datetime
 from typing_extensions import Literal, overload
 
 import httpx
@@ -634,6 +634,8 @@ class V2(SyncAPIResource):
         self,
         *,
         auth_rule_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
         event_token: str | Omit = omit,
         has_actions: bool | Omit = omit,
@@ -657,6 +659,12 @@ class V2(SyncAPIResource):
 
         Args:
           auth_rule_token: Filter by Auth Rule token
+
+          begin: Date string in RFC 3339 format. Only events evaluated after the specified time
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only events evaluated before the specified time
+              will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
@@ -690,6 +698,8 @@ class V2(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "auth_rule_token": auth_rule_token,
+                        "begin": begin,
+                        "end": end,
                         "ending_before": ending_before,
                         "event_token": event_token,
                         "has_actions": has_actions,
@@ -1442,6 +1452,8 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         auth_rule_token: str | Omit = omit,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
         event_token: str | Omit = omit,
         has_actions: bool | Omit = omit,
@@ -1465,6 +1477,12 @@ class AsyncV2(AsyncAPIResource):
 
         Args:
           auth_rule_token: Filter by Auth Rule token
+
+          begin: Date string in RFC 3339 format. Only events evaluated after the specified time
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only events evaluated before the specified time
+              will be included. UTC time zone.
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
@@ -1498,6 +1516,8 @@ class AsyncV2(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "auth_rule_token": auth_rule_token,
+                        "begin": begin,
+                        "end": end,
                         "ending_before": ending_before,
                         "event_token": event_token,
                         "has_actions": has_actions,

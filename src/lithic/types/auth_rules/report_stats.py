@@ -1,31 +1,26 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Dict, List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
 __all__ = [
-    "V2ListResultsResponse",
-    "AuthorizationResult",
-    "AuthorizationResultAction",
-    "AuthorizationResultActionDeclineActionAuthorization",
-    "AuthorizationResultActionChallengeActionAuthorization",
-    "Authentication3DSResult",
-    "Authentication3DsResultAction",
-    "TokenizationResult",
-    "TokenizationResultAction",
-    "TokenizationResultActionDeclineActionTokenization",
-    "TokenizationResultActionRequireTfaAction",
-    "ACHResult",
-    "ACHResultAction",
-    "ACHResultActionApproveActionACH",
-    "ACHResultActionReturnAction",
+    "ReportStats",
+    "Example",
+    "ExampleAction",
+    "ExampleActionDeclineActionAuthorization",
+    "ExampleActionChallengeActionAuthorization",
+    "ExampleActionResultAuthentication3DSAction",
+    "ExampleActionDeclineActionTokenization",
+    "ExampleActionRequireTfaAction",
+    "ExampleActionApproveActionACH",
+    "ExampleActionReturnAction",
 ]
 
 
-class AuthorizationResultActionDeclineActionAuthorization(BaseModel):
+class ExampleActionDeclineActionAuthorization(BaseModel):
     code: Literal[
         "ACCOUNT_DAILY_SPEND_LIMIT_EXCEEDED",
         "ACCOUNT_DELINQUENT",
@@ -89,87 +84,18 @@ class AuthorizationResultActionDeclineActionAuthorization(BaseModel):
 
     type: Literal["DECLINE"]
 
-    explanation: Optional[str] = None
-    """Optional explanation for why this action was taken"""
 
-
-class AuthorizationResultActionChallengeActionAuthorization(BaseModel):
+class ExampleActionChallengeActionAuthorization(BaseModel):
     type: Literal["CHALLENGE"]
 
-    explanation: Optional[str] = None
-    """Optional explanation for why this action was taken"""
 
-
-AuthorizationResultAction: TypeAlias = Union[
-    AuthorizationResultActionDeclineActionAuthorization, AuthorizationResultActionChallengeActionAuthorization
-]
-
-
-class AuthorizationResult(BaseModel):
-    token: str
-    """Globally unique identifier for the evaluation"""
-
-    actions: List[AuthorizationResultAction]
-    """Actions returned by the rule evaluation"""
-
-    auth_rule_token: str
-    """The Auth Rule token"""
-
-    evaluation_time: datetime
-    """Timestamp of the rule evaluation"""
-
-    event_stream: Literal["AUTHORIZATION"]
-    """The event stream during which the rule was evaluated"""
-
-    event_token: str
-    """Token of the event that triggered the evaluation"""
-
-    mode: Literal["ACTIVE", "INACTIVE"]
-    """The state of the Auth Rule"""
-
-    rule_version: int
-    """Version of the rule that was evaluated"""
-
-
-class Authentication3DsResultAction(BaseModel):
+class ExampleActionResultAuthentication3DSAction(BaseModel):
     type: Literal["DECLINE", "CHALLENGE"]
 
-    explanation: Optional[str] = None
-    """Optional explanation for why this action was taken"""
 
-
-class Authentication3DSResult(BaseModel):
-    token: str
-    """Globally unique identifier for the evaluation"""
-
-    actions: List[Authentication3DsResultAction]
-    """Actions returned by the rule evaluation"""
-
-    auth_rule_token: str
-    """The Auth Rule token"""
-
-    evaluation_time: datetime
-    """Timestamp of the rule evaluation"""
-
-    event_stream: Literal["THREE_DS_AUTHENTICATION"]
-    """The event stream during which the rule was evaluated"""
-
-    event_token: str
-    """Token of the event that triggered the evaluation"""
-
-    mode: Literal["ACTIVE", "INACTIVE"]
-    """The state of the Auth Rule"""
-
-    rule_version: int
-    """Version of the rule that was evaluated"""
-
-
-class TokenizationResultActionDeclineActionTokenization(BaseModel):
+class ExampleActionDeclineActionTokenization(BaseModel):
     type: Literal["DECLINE"]
     """Decline the tokenization request"""
-
-    explanation: Optional[str] = None
-    """Optional explanation for why this action was taken"""
 
     reason: Optional[
         Literal[
@@ -191,12 +117,9 @@ class TokenizationResultActionDeclineActionTokenization(BaseModel):
     """Reason code for declining the tokenization request"""
 
 
-class TokenizationResultActionRequireTfaAction(BaseModel):
+class ExampleActionRequireTfaAction(BaseModel):
     type: Literal["REQUIRE_TFA"]
     """Require two-factor authentication for the tokenization request"""
-
-    explanation: Optional[str] = None
-    """Optional explanation for why this action was taken"""
 
     reason: Optional[
         Literal[
@@ -220,46 +143,12 @@ class TokenizationResultActionRequireTfaAction(BaseModel):
     """Reason code for requiring two-factor authentication"""
 
 
-TokenizationResultAction: TypeAlias = Union[
-    TokenizationResultActionDeclineActionTokenization, TokenizationResultActionRequireTfaAction
-]
-
-
-class TokenizationResult(BaseModel):
-    token: str
-    """Globally unique identifier for the evaluation"""
-
-    actions: List[TokenizationResultAction]
-    """Actions returned by the rule evaluation"""
-
-    auth_rule_token: str
-    """The Auth Rule token"""
-
-    evaluation_time: datetime
-    """Timestamp of the rule evaluation"""
-
-    event_stream: Literal["TOKENIZATION"]
-    """The event stream during which the rule was evaluated"""
-
-    event_token: str
-    """Token of the event that triggered the evaluation"""
-
-    mode: Literal["ACTIVE", "INACTIVE"]
-    """The state of the Auth Rule"""
-
-    rule_version: int
-    """Version of the rule that was evaluated"""
-
-
-class ACHResultActionApproveActionACH(BaseModel):
+class ExampleActionApproveActionACH(BaseModel):
     type: Literal["APPROVE"]
     """Approve the ACH transaction"""
 
-    explanation: Optional[str] = None
-    """Optional explanation for why this action was taken"""
 
-
-class ACHResultActionReturnAction(BaseModel):
+class ExampleActionReturnAction(BaseModel):
     code: Literal[
         "R01",
         "R02",
@@ -341,37 +230,65 @@ class ACHResultActionReturnAction(BaseModel):
     type: Literal["RETURN"]
     """Return the ACH transaction"""
 
-    explanation: Optional[str] = None
-    """Optional explanation for why this action was taken"""
+
+ExampleAction: TypeAlias = Union[
+    ExampleActionDeclineActionAuthorization,
+    ExampleActionChallengeActionAuthorization,
+    ExampleActionResultAuthentication3DSAction,
+    ExampleActionDeclineActionTokenization,
+    ExampleActionRequireTfaAction,
+    ExampleActionApproveActionACH,
+    ExampleActionReturnAction,
+]
 
 
-ACHResultAction: TypeAlias = Union[ACHResultActionApproveActionACH, ACHResultActionReturnAction]
+class Example(BaseModel):
+    actions: Optional[List[ExampleAction]] = None
+    """The actions taken by the rule for this event."""
+
+    approved: Optional[bool] = None
+    """Whether the rule would have approved the request."""
+
+    decision: Optional[Literal["APPROVED", "DECLINED", "CHALLENGED"]] = None
+    """The decision made by the rule for this event."""
+
+    event_token: Optional[str] = None
+    """The event token."""
+
+    timestamp: Optional[datetime] = None
+    """The timestamp of the event."""
 
 
-class ACHResult(BaseModel):
-    token: str
-    """Globally unique identifier for the evaluation"""
+class ReportStats(BaseModel):
+    action_counts: Optional[Dict[str, int]] = None
+    """
+    A mapping of action types to the number of times that action was returned by
+    this rule during the relevant period. Actions are the possible outcomes of a
+    rule evaluation, such as DECLINE, CHALLENGE, REQUIRE_TFA, etc. In case rule
+    didn't trigger any action, it's counted under NO_ACTION key.
+    """
 
-    actions: List[ACHResultAction]
-    """Actions returned by the rule evaluation"""
+    approved: Optional[int] = None
+    """
+    The total number of historical transactions approved by this rule during the
+    relevant period, or the number of transactions that would have been approved if
+    the rule was evaluated in shadow mode.
+    """
 
-    auth_rule_token: str
-    """The Auth Rule token"""
+    challenged: Optional[int] = None
+    """
+    The total number of historical transactions challenged by this rule during the
+    relevant period, or the number of transactions that would have been challenged
+    if the rule was evaluated in shadow mode. Currently applicable only for 3DS Auth
+    Rules.
+    """
 
-    evaluation_time: datetime
-    """Timestamp of the rule evaluation"""
+    declined: Optional[int] = None
+    """
+    The total number of historical transactions declined by this rule during the
+    relevant period, or the number of transactions that would have been declined if
+    the rule was evaluated in shadow mode.
+    """
 
-    event_stream: Literal["ACH_CREDIT_RECEIPT", "ACH_DEBIT_RECEIPT"]
-    """The event stream during which the rule was evaluated"""
-
-    event_token: str
-    """Token of the event that triggered the evaluation"""
-
-    mode: Literal["ACTIVE", "INACTIVE"]
-    """The state of the Auth Rule"""
-
-    rule_version: int
-    """Version of the rule that was evaluated"""
-
-
-V2ListResultsResponse: TypeAlias = Union[AuthorizationResult, Authentication3DSResult, TokenizationResult, ACHResult]
+    examples: Optional[List[Example]] = None
+    """Example events and their outcomes."""

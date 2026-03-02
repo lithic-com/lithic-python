@@ -9,10 +9,10 @@ from ..._utils import PropertyInfo
 from .conditional_operation import ConditionalOperation
 from .conditional_value_param import ConditionalValueParam
 
-__all__ = ["ConditionalACHActionParametersParam", "Action", "ActionApproveAction", "ActionReturnAction", "Condition"]
+__all__ = ["ConditionalACHActionParametersParam", "Action", "ActionApproveActionACH", "ActionReturnAction", "Condition"]
 
 
-class ActionApproveAction(TypedDict, total=False):
+class ActionApproveActionACH(TypedDict, total=False):
     type: Required[Literal["APPROVE"]]
     """Approve the ACH transaction"""
 
@@ -102,7 +102,7 @@ class ActionReturnAction(TypedDict, total=False):
     """Return the ACH transaction"""
 
 
-Action: TypeAlias = Union[ActionApproveAction, ActionReturnAction]
+Action: TypeAlias = Union[ActionApproveActionACH, ActionReturnAction]
 
 
 class Condition(TypedDict, total=False):

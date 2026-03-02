@@ -6,13 +6,10 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["RuleStats", "Example"]
+__all__ = ["BacktestStats", "Example"]
 
 
 class Example(BaseModel):
-    approved: Optional[bool] = None
-    """Whether the rule would have approved the request."""
-
     decision: Optional[Literal["APPROVED", "DECLINED", "CHALLENGED"]] = None
     """The decision made by the rule for this event."""
 
@@ -23,18 +20,18 @@ class Example(BaseModel):
     """The timestamp of the event."""
 
 
-class RuleStats(BaseModel):
+class BacktestStats(BaseModel):
     approved: Optional[int] = None
     """
     The total number of historical transactions approved by this rule during the
-    relevant period, or the number of transactions that would have been approved if
+    backtest period, or the number of transactions that would have been approved if
     the rule was evaluated in shadow mode.
     """
 
     challenged: Optional[int] = None
     """
     The total number of historical transactions challenged by this rule during the
-    relevant period, or the number of transactions that would have been challenged
+    backtest period, or the number of transactions that would have been challenged
     if the rule was evaluated in shadow mode. Currently applicable only for 3DS Auth
     Rules.
     """
@@ -42,7 +39,7 @@ class RuleStats(BaseModel):
     declined: Optional[int] = None
     """
     The total number of historical transactions declined by this rule during the
-    relevant period, or the number of transactions that would have been declined if
+    backtest period, or the number of transactions that would have been declined if
     the rule was evaluated in shadow mode.
     """
 

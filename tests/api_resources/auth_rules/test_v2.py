@@ -9,7 +9,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic._utils import parse_date
+from lithic._utils import parse_date, parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 from lithic.types.auth_rules import (
     AuthRule,
@@ -588,6 +588,8 @@ class TestV2:
     def test_method_list_results_with_all_params(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.list_results(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             has_actions=True,
@@ -1317,6 +1319,8 @@ class TestAsyncV2:
     async def test_method_list_results_with_all_params(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.list_results(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             event_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             has_actions=True,
