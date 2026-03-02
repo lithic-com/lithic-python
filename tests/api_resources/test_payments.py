@@ -53,6 +53,7 @@ class TestPayments:
             },
             type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            hold={"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             memo="memo",
             user_defined_id="user_defined_id",
         )
@@ -475,6 +476,7 @@ class TestAsyncPayments:
             },
             type="COLLECTION",
             token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            hold={"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             memo="memo",
             user_defined_id="user_defined_id",
         )

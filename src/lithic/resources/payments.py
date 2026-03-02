@@ -66,6 +66,7 @@ class Payments(SyncAPIResource):
         method_attributes: payment_create_params.MethodAttributes,
         type: Literal["COLLECTION", "PAYMENT"],
         token: str | Omit = omit,
+        hold: payment_create_params.Hold | Omit = omit,
         memo: str | Omit = omit,
         user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -81,6 +82,8 @@ class Payments(SyncAPIResource):
         Args:
           token: Customer-provided token that will serve as an idempotency token. This token will
               become the transaction token.
+
+          hold: Optional hold to settle when this payment is initiated.
 
           extra_headers: Send extra headers
 
@@ -101,6 +104,7 @@ class Payments(SyncAPIResource):
                     "method_attributes": method_attributes,
                     "type": type,
                     "token": token,
+                    "hold": hold,
                     "memo": memo,
                     "user_defined_id": user_defined_id,
                 },
@@ -566,6 +570,7 @@ class AsyncPayments(AsyncAPIResource):
         method_attributes: payment_create_params.MethodAttributes,
         type: Literal["COLLECTION", "PAYMENT"],
         token: str | Omit = omit,
+        hold: payment_create_params.Hold | Omit = omit,
         memo: str | Omit = omit,
         user_defined_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -581,6 +586,8 @@ class AsyncPayments(AsyncAPIResource):
         Args:
           token: Customer-provided token that will serve as an idempotency token. This token will
               become the transaction token.
+
+          hold: Optional hold to settle when this payment is initiated.
 
           extra_headers: Send extra headers
 
@@ -601,6 +608,7 @@ class AsyncPayments(AsyncAPIResource):
                     "method_attributes": method_attributes,
                     "type": type,
                     "token": token,
+                    "hold": hold,
                     "memo": memo,
                     "user_defined_id": user_defined_id,
                 },
