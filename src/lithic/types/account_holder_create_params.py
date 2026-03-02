@@ -14,7 +14,6 @@ __all__ = [
     "KYBBeneficialOwnerIndividual",
     "KYBBusinessEntity",
     "KYBControlPerson",
-    "KYBBeneficialOwnerEntity",
     "KYBDelegated",
     "KYBDelegatedBusinessEntity",
     "KYBDelegatedBeneficialOwnerIndividual",
@@ -69,9 +68,6 @@ class KYB(TypedDict, total=False):
 
     workflow: Required[Literal["KYB_BASIC", "KYB_BYO"]]
     """Specifies the type of KYB workflow to run."""
-
-    beneficial_owner_entities: Iterable[KYBBeneficialOwnerEntity]
-    """Deprecated."""
 
     external_id: str
     """
@@ -209,39 +205,6 @@ class KYBControlPerson(TypedDict, total=False):
 
     phone_number: str
     """Individual's phone number, entered in E.164 format."""
-
-
-class KYBBeneficialOwnerEntity(TypedDict, total=False):
-    address: Required[Address]
-    """
-    Business's physical address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable.
-    """
-
-    government_id: Required[str]
-    """Government-issued identification number.
-
-    US Federal Employer Identification Numbers (EIN) are currently supported,
-    entered as full nine-digits, with or without hyphens.
-    """
-
-    legal_business_name: Required[str]
-    """Legal (formal) business name."""
-
-    phone_numbers: Required[SequenceNotStr[str]]
-    """
-    One or more of the business's phone number(s), entered as a list in E.164
-    format.
-    """
-
-    dba_business_name: str
-    """
-    Any name that the business operates under that is not its legal business name
-    (if applicable).
-    """
-
-    parent_company: str
-    """Parent company name (if applicable)."""
 
 
 class KYBDelegated(TypedDict, total=False):
