@@ -16,9 +16,20 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestWebhooks:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    def test_method_parsed(self, client: Lithic) -> None:
-        key = b"secret"
-        hook = standardwebhooks.Webhook(key)
+    @pytest.mark.parametrize(
+        "client_opt,method_opt",
+        [
+            ("whsec_c2VjcmV0Cg==", None),
+            ("wrong", b"secret\n"),
+            ("wrong", "whsec_c2VjcmV0Cg=="),
+            (None, b"secret\n"),
+            (None, "whsec_c2VjcmV0Cg=="),
+        ],
+    )
+    def test_method_parsed(self, client: Lithic, client_opt: str | None, method_opt: str | bytes | None) -> None:
+        hook = standardwebhooks.Webhook(b"secret\n")
+
+        client = client.with_options(webhook_secret=client_opt)
 
         data = """{"event_type":"account_holder.created","token":"00000000-0000-0000-0000-000000000001","account_token":"00000000-0000-0000-0000-000000000001","created":"2019-12-27T18:11:19.117Z","required_documents":[{"entity_token":"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e","status_reasons":["string"],"valid_documents":["string"]}],"status":"ACCEPTED","status_reason":["string"]}"""
         msg_id = "1"
@@ -31,7 +42,7 @@ class TestWebhooks:
         }
 
         try:
-            _ = client.webhooks.parsed(data, headers=headers, key=key)
+            _ = client.webhooks.parsed(data, headers=headers, key=method_opt)
         except standardwebhooks.WebhookVerificationError as e:
             raise AssertionError("Failed to unwrap valid webhook") from e
 
@@ -42,7 +53,7 @@ class TestWebhooks:
         ]
         for bad_header in bad_headers:
             with pytest.raises(standardwebhooks.WebhookVerificationError):
-                _ = client.webhooks.parsed(data, headers=bad_header, key=key)
+                _ = client.webhooks.parsed(data, headers=bad_header, key=method_opt)
 
 
 class TestAsyncWebhooks:
@@ -50,9 +61,20 @@ class TestAsyncWebhooks:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    def test_method_parsed(self, client: Lithic) -> None:
-        key = b"secret"
-        hook = standardwebhooks.Webhook(key)
+    @pytest.mark.parametrize(
+        "client_opt,method_opt",
+        [
+            ("whsec_c2VjcmV0Cg==", None),
+            ("wrong", b"secret\n"),
+            ("wrong", "whsec_c2VjcmV0Cg=="),
+            (None, b"secret\n"),
+            (None, "whsec_c2VjcmV0Cg=="),
+        ],
+    )
+    def test_method_parsed(self, async_client: Lithic, client_opt: str | None, method_opt: str | bytes | None) -> None:
+        hook = standardwebhooks.Webhook(b"secret\n")
+
+        async_client = async_client.with_options(webhook_secret=client_opt)
 
         data = """{"event_type":"account_holder.created","token":"00000000-0000-0000-0000-000000000001","account_token":"00000000-0000-0000-0000-000000000001","created":"2019-12-27T18:11:19.117Z","required_documents":[{"entity_token":"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e","status_reasons":["string"],"valid_documents":["string"]}],"status":"ACCEPTED","status_reason":["string"]}"""
         msg_id = "1"
@@ -65,7 +87,7 @@ class TestAsyncWebhooks:
         }
 
         try:
-            _ = client.webhooks.parsed(data, headers=headers, key=key)
+            _ = async_client.webhooks.parsed(data, headers=headers, key=method_opt)
         except standardwebhooks.WebhookVerificationError as e:
             raise AssertionError("Failed to unwrap valid webhook") from e
 
@@ -76,4 +98,4 @@ class TestAsyncWebhooks:
         ]
         for bad_header in bad_headers:
             with pytest.raises(standardwebhooks.WebhookVerificationError):
-                _ = client.webhooks.parsed(data, headers=bad_header, key=key)
+                _ = async_client.webhooks.parsed(data, headers=bad_header, key=method_opt)
