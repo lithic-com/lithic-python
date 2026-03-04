@@ -30,6 +30,7 @@ class TestWebhooks:
         "webhook-signature": f"v1,{signature}",
     }
     secret = "whsec_zlFsbBZ8Xcodlpcu6NDTdSzZRLSdhkst"
+
     @time_machine.travel(fake_now)
     def test_unwrap(self, client: Lithic) -> None:
         payload = self.payload
@@ -37,6 +38,7 @@ class TestWebhooks:
         secret = self.secret
 
         client.webhooks.unwrap(payload, headers, secret=secret)
+
     @time_machine.travel(fake_now)
     def test_verify_signature(self, client: Lithic) -> None:
         payload = self.payload
@@ -117,6 +119,7 @@ class TestWebhooks:
                 headers=headers,
                 secret=secret,
             )
+
     @time_machine.travel(fake_now)
     def test_parse(self, client: Lithic) -> None:
         valid_payload = """{"event_type":"account_holder.created","token":"00000000-0000-0000-0000-000000000001","account_token":"00000000-0000-0000-0000-000000000001","created":"2019-12-27T18:11:19.117Z","status":"ACCEPTED"}"""
@@ -151,6 +154,7 @@ class TestWebhooks:
         wrong_secret = f"whsec_{base64.b64encode(b'wrong').decode('utf-8')}"
         with pytest.raises(standardwebhooks.WebhookVerificationError):
             client.webhooks.parse(valid_payload, headers=headers, secret=wrong_secret)
+
     def test_parse_unsafe(self, client: Lithic) -> None:
         valid_payload = """{"event_type":"account_holder.created","token":"00000000-0000-0000-0000-000000000001","account_token":"00000000-0000-0000-0000-000000000001","created":"2019-12-27T18:11:19.117Z","status":"ACCEPTED"}"""
 
@@ -161,20 +165,6 @@ class TestWebhooks:
         assert isinstance(result, AccountHolderCreatedWebhookEvent)
         assert result.event_type == "account_holder.created"
         assert result.token == "00000000-0000-0000-0000-000000000001"
-    @pytest.mark.parametrize(
-        "client_opt,method_opt",
-        [
-            ("whsec_c2VjcmV0Cg==", None),
-            ("wrong", b"secret\n"),
-            ("wrong", "whsec_c2VjcmV0Cg=="),
-            (None, b"secret\n"),
-            (None, "whsec_c2VjcmV0Cg=="),
-        ],
-    )
-    def test_method_parsed(self, client: Lithic, client_opt: str | None, method_opt: str | bytes | None) -> None:
-        hook = standardwebhooks.Webhook(b"secret\n")
-
-        client = client.with_options(webhook_secret=client_opt)
 
 
 class TestAsyncWebhooks:
@@ -190,6 +180,7 @@ class TestAsyncWebhooks:
         "webhook-signature": f"v1,{signature}",
     }
     secret = "whsec_zlFsbBZ8Xcodlpcu6NDTdSzZRLSdhkst"
+
     @time_machine.travel(fake_now)
     def test_unwrap(self, async_client: AsyncLithic) -> None:
         payload = self.payload
@@ -197,6 +188,7 @@ class TestAsyncWebhooks:
         secret = self.secret
 
         async_client.webhooks.unwrap(payload, headers, secret=secret)
+
     @time_machine.travel(fake_now)
     def test_verify_signature(self, async_client: AsyncLithic) -> None:
         payload = self.payload
@@ -277,6 +269,7 @@ class TestAsyncWebhooks:
                 headers=headers,
                 secret=secret,
             )
+
     @time_machine.travel(fake_now)
     def test_parse(self, async_client: AsyncLithic) -> None:
         valid_payload = """{"event_type":"account_holder.created","token":"00000000-0000-0000-0000-000000000001","account_token":"00000000-0000-0000-0000-000000000001","created":"2019-12-27T18:11:19.117Z","status":"ACCEPTED"}"""
@@ -311,6 +304,7 @@ class TestAsyncWebhooks:
         wrong_secret = f"whsec_{base64.b64encode(b'wrong').decode('utf-8')}"
         with pytest.raises(standardwebhooks.WebhookVerificationError):
             async_client.webhooks.parse(valid_payload, headers=headers, secret=wrong_secret)
+
     def test_parse_unsafe(self, async_client: AsyncLithic) -> None:
         valid_payload = """{"event_type":"account_holder.created","token":"00000000-0000-0000-0000-000000000001","account_token":"00000000-0000-0000-0000-000000000001","created":"2019-12-27T18:11:19.117Z","status":"ACCEPTED"}"""
 
@@ -321,17 +315,3 @@ class TestAsyncWebhooks:
         assert isinstance(result, AccountHolderCreatedWebhookEvent)
         assert result.event_type == "account_holder.created"
         assert result.token == "00000000-0000-0000-0000-000000000001"
-    @pytest.mark.parametrize(
-        "client_opt,method_opt",
-        [
-            ("whsec_c2VjcmV0Cg==", None),
-            ("wrong", b"secret\n"),
-            ("wrong", "whsec_c2VjcmV0Cg=="),
-            (None, b"secret\n"),
-            (None, "whsec_c2VjcmV0Cg=="),
-        ],
-    )
-    def test_method_parsed(self, async_client: Lithic, client_opt: str | None, method_opt: str | bytes | None) -> None:
-        hook = standardwebhooks.Webhook(b"secret\n")
-
-        async_client = async_client.with_options(webhook_secret=client_opt)
