@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.117.0 (2026-03-05)
+
+Full Changelog: [v0.116.0...v0.117.0](https://github.com/lithic-com/lithic-python/compare/v0.116.0...v0.117.0)
+
+### Features
+
+* **api:** add action_counts to rule performance reports and code to authorization actions ([8301127](https://github.com/lithic-com/lithic-python/commit/8301127ce01926ad8290614abe4f2b636a120cbf))
+* **api:** Add Hold API for financial account fund reservations ([a476549](https://github.com/lithic-com/lithic-python/commit/a4765491913a1ca262ee53a1a988a79e05a77542))
+* **api:** Remove deprecated beneficial owner entities field ([4160169](https://github.com/lithic-com/lithic-python/commit/4160169460138e469b75e642346a573a2f43c55e))
+
+
+### Chores
+
+* fix webhook parsing tests ([0f10f64](https://github.com/lithic-com/lithic-python/commit/0f10f64e04f189436e48423da8639768bb6d88a3))
+* **internal:** codegen related update ([83f9164](https://github.com/lithic-com/lithic-python/commit/83f9164040f73e7f585d0f05e37bb24f97f57115))
+* **internal:** codegen related update ([089f0d7](https://github.com/lithic-com/lithic-python/commit/089f0d7d6935e896cc9304ebc9535521f8353456))
+
 ## 0.116.0 (2026-02-27)
 
 Full Changelog: [v0.115.0...v0.116.0](https://github.com/lithic-com/lithic-python/compare/v0.115.0...v0.116.0)
