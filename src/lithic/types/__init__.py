@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .card import Card as Card
+from .hold import Hold as Hold
 from .event import Event as Event
 from .device import Device as Device
 from .shared import (
@@ -24,6 +25,7 @@ from .kyb_param import KYBParam as KYBParam
 from .kyc_param import KYCParam as KYCParam
 from .api_status import APIStatus as APIStatus
 from .dispute_v2 import DisputeV2 as DisputeV2
+from .hold_event import HoldEvent as HoldEvent
 from .owner_type import OwnerType as OwnerType
 from .token_info import TokenInfo as TokenInfo
 from .transaction import Transaction as Transaction
@@ -42,6 +44,8 @@ from .category_details import CategoryDetails as CategoryDetails
 from .digital_card_art import DigitalCardArt as DigitalCardArt
 from .dispute_evidence import DisputeEvidence as DisputeEvidence
 from .external_payment import ExternalPayment as ExternalPayment
+from .hold_list_params import HoldListParams as HoldListParams
+from .hold_void_params import HoldVoidParams as HoldVoidParams
 from .kyc_exempt_param import KYCExemptParam as KYCExemptParam
 from .statement_totals import StatementTotals as StatementTotals
 from .card_embed_params import CardEmbedParams as CardEmbedParams
@@ -57,6 +61,7 @@ from .auth_stream_secret import AuthStreamSecret as AuthStreamSecret
 from .card_create_params import CardCreateParams as CardCreateParams
 from .card_update_params import CardUpdateParams as CardUpdateParams
 from .event_subscription import EventSubscription as EventSubscription
+from .hold_create_params import HoldCreateParams as HoldCreateParams
 from .provision_response import ProvisionResponse as ProvisionResponse
 from .wire_party_details import WirePartyDetails as WirePartyDetails
 from .account_list_params import AccountListParams as AccountListParams
