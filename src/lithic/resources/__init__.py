@@ -16,6 +16,14 @@ from .fraud import (
     FraudWithStreamingResponse,
     AsyncFraudWithStreamingResponse,
 )
+from .holds import (
+    Holds,
+    AsyncHolds,
+    HoldsWithRawResponse,
+    AsyncHoldsWithRawResponse,
+    HoldsWithStreamingResponse,
+    AsyncHoldsWithStreamingResponse,
+)
 from .events import (
     Events,
     AsyncEvents,
@@ -411,6 +419,12 @@ __all__ = [
     "AsyncNetworkProgramsWithRawResponse",
     "NetworkProgramsWithStreamingResponse",
     "AsyncNetworkProgramsWithStreamingResponse",
+    "Holds",
+    "AsyncHolds",
+    "HoldsWithRawResponse",
+    "AsyncHoldsWithRawResponse",
+    "HoldsWithStreamingResponse",
+    "AsyncHoldsWithStreamingResponse",
     "AccountActivity",
     "AsyncAccountActivity",
     "AccountActivityWithRawResponse",

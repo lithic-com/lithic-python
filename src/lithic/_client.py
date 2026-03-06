@@ -40,6 +40,7 @@ if TYPE_CHECKING:
     from .resources import (
         cards,
         fraud,
+        holds,
         events,
         reports,
         accounts,
@@ -69,6 +70,7 @@ if TYPE_CHECKING:
         external_bank_accounts,
         tokenization_decisioning,
     )
+    from .resources.holds import Holds, AsyncHolds
     from .resources.accounts import Accounts, AsyncAccounts
     from .resources.balances import Balances, AsyncBalances
     from .resources.disputes import Disputes, AsyncDisputes
@@ -373,6 +375,12 @@ class Lithic(SyncAPIClient):
         from .resources.network_programs import NetworkPrograms
 
         return NetworkPrograms(self)
+
+    @cached_property
+    def holds(self) -> Holds:
+        from .resources.holds import Holds
+
+        return Holds(self)
 
     @cached_property
     def account_activity(self) -> AccountActivity:
@@ -784,6 +792,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncNetworkPrograms(self)
 
     @cached_property
+    def holds(self) -> AsyncHolds:
+        from .resources.holds import AsyncHolds
+
+        return AsyncHolds(self)
+
+    @cached_property
     def account_activity(self) -> AsyncAccountActivity:
         from .resources.account_activity import AsyncAccountActivity
 
@@ -1116,6 +1130,12 @@ class LithicWithRawResponse:
         return NetworkProgramsWithRawResponse(self._client.network_programs)
 
     @cached_property
+    def holds(self) -> holds.HoldsWithRawResponse:
+        from .resources.holds import HoldsWithRawResponse
+
+        return HoldsWithRawResponse(self._client.holds)
+
+    @cached_property
     def account_activity(self) -> account_activity.AccountActivityWithRawResponse:
         from .resources.account_activity import AccountActivityWithRawResponse
 
@@ -1305,6 +1325,12 @@ class AsyncLithicWithRawResponse:
         from .resources.network_programs import AsyncNetworkProgramsWithRawResponse
 
         return AsyncNetworkProgramsWithRawResponse(self._client.network_programs)
+
+    @cached_property
+    def holds(self) -> holds.AsyncHoldsWithRawResponse:
+        from .resources.holds import AsyncHoldsWithRawResponse
+
+        return AsyncHoldsWithRawResponse(self._client.holds)
 
     @cached_property
     def account_activity(self) -> account_activity.AsyncAccountActivityWithRawResponse:
@@ -1498,6 +1524,12 @@ class LithicWithStreamedResponse:
         return NetworkProgramsWithStreamingResponse(self._client.network_programs)
 
     @cached_property
+    def holds(self) -> holds.HoldsWithStreamingResponse:
+        from .resources.holds import HoldsWithStreamingResponse
+
+        return HoldsWithStreamingResponse(self._client.holds)
+
+    @cached_property
     def account_activity(self) -> account_activity.AccountActivityWithStreamingResponse:
         from .resources.account_activity import AccountActivityWithStreamingResponse
 
@@ -1687,6 +1719,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.network_programs import AsyncNetworkProgramsWithStreamingResponse
 
         return AsyncNetworkProgramsWithStreamingResponse(self._client.network_programs)
+
+    @cached_property
+    def holds(self) -> holds.AsyncHoldsWithStreamingResponse:
+        from .resources.holds import AsyncHoldsWithStreamingResponse
+
+        return AsyncHoldsWithStreamingResponse(self._client.holds)
 
     @cached_property
     def account_activity(self) -> account_activity.AsyncAccountActivityWithStreamingResponse:

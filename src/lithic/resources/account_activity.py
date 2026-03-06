@@ -69,6 +69,7 @@ class AccountActivity(SyncAPIResource):
             "MANAGEMENT_FEE",
             "MANAGEMENT_REWARD",
             "MANAGEMENT_DISBURSEMENT",
+            "HOLD",
             "PROGRAM_FUNDING",
         ]
         | Omit = omit,
@@ -239,6 +240,7 @@ class AsyncAccountActivity(AsyncAPIResource):
             "MANAGEMENT_FEE",
             "MANAGEMENT_REWARD",
             "MANAGEMENT_DISBURSEMENT",
+            "HOLD",
             "PROGRAM_FUNDING",
         ]
         | Omit = omit,

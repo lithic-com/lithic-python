@@ -814,6 +814,21 @@ Methods:
 - <code title="get /v1/network_programs/{network_program_token}">client.network_programs.<a href="./src/lithic/resources/network_programs.py">retrieve</a>(network_program_token) -> <a href="./src/lithic/types/network_program.py">NetworkProgram</a></code>
 - <code title="get /v1/network_programs">client.network_programs.<a href="./src/lithic/resources/network_programs.py">list</a>(\*\*<a href="src/lithic/types/network_program_list_params.py">params</a>) -> <a href="./src/lithic/types/network_program.py">SyncSinglePage[NetworkProgram]</a></code>
 
+# Holds
+
+Types:
+
+```python
+from lithic.types import Hold, HoldEvent
+```
+
+Methods:
+
+- <code title="post /v1/financial_accounts/{financial_account_token}/holds">client.holds.<a href="./src/lithic/resources/holds.py">create</a>(financial_account_token, \*\*<a href="src/lithic/types/hold_create_params.py">params</a>) -> <a href="./src/lithic/types/hold.py">Hold</a></code>
+- <code title="get /v1/holds/{hold_token}">client.holds.<a href="./src/lithic/resources/holds.py">retrieve</a>(hold_token) -> <a href="./src/lithic/types/hold.py">Hold</a></code>
+- <code title="get /v1/financial_accounts/{financial_account_token}/holds">client.holds.<a href="./src/lithic/resources/holds.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/hold_list_params.py">params</a>) -> <a href="./src/lithic/types/hold.py">SyncCursorPage[Hold]</a></code>
+- <code title="post /v1/holds/{hold_token}/void">client.holds.<a href="./src/lithic/resources/holds.py">void</a>(hold_token, \*\*<a href="src/lithic/types/hold_void_params.py">params</a>) -> <a href="./src/lithic/types/hold.py">Hold</a></code>
+
 # AccountActivity
 
 Types:
