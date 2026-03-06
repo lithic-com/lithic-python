@@ -4,6 +4,7 @@ from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypeAlias
 
+from .hold import Hold
 from .._utils import PropertyInfo
 from .payment import Payment
 from .._models import BaseModel
@@ -42,6 +43,7 @@ class FinancialTransaction(BaseModel):
         "MANAGEMENT_FEE",
         "MANAGEMENT_REWARD",
         "MANAGEMENT_DISBURSEMENT",
+        "HOLD",
         "PROGRAM_FUNDING",
     ]
     """Transaction category"""
@@ -107,6 +109,7 @@ AccountActivityRetrieveTransactionResponse: TypeAlias = Annotated[
         Payment,
         ExternalPayment,
         ManagementOperationTransaction,
+        Hold,
     ],
     PropertyInfo(discriminator="family"),
 ]

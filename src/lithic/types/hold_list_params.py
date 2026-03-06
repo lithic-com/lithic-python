@@ -8,46 +8,15 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["AccountActivityListParams"]
+__all__ = ["HoldListParams"]
 
 
-class AccountActivityListParams(TypedDict, total=False):
-    account_token: str
-    """Filter by account token"""
-
+class HoldListParams(TypedDict, total=False):
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
     Only entries created after the specified time will be included. UTC time zone.
     """
-
-    business_account_token: str
-    """Filter by business account token"""
-
-    category: Literal[
-        "ACH",
-        "BALANCE_OR_FUNDING",
-        "FEE",
-        "REWARD",
-        "ADJUSTMENT",
-        "DERECOGNITION",
-        "DISPUTE",
-        "CARD",
-        "EXTERNAL_ACH",
-        "EXTERNAL_CHECK",
-        "EXTERNAL_FEDNOW",
-        "EXTERNAL_RTP",
-        "EXTERNAL_TRANSFER",
-        "EXTERNAL_WIRE",
-        "MANAGEMENT_ADJUSTMENT",
-        "MANAGEMENT_DISPUTE",
-        "MANAGEMENT_FEE",
-        "MANAGEMENT_REWARD",
-        "MANAGEMENT_DISBURSEMENT",
-        "HOLD",
-        "PROGRAM_FUNDING",
-    ]
-    """Filter by transaction category"""
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
@@ -61,14 +30,8 @@ class AccountActivityListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
-    financial_account_token: str
-    """Filter by financial account token"""
-
     page_size: int
     """Page size (for pagination)."""
-
-    result: Literal["APPROVED", "DECLINED"]
-    """Filter by transaction result"""
 
     starting_after: str
     """A cursor representing an item's token after which a page of results should
@@ -77,5 +40,5 @@ class AccountActivityListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "REVERSED", "SETTLED", "VOIDED"]
-    """Filter by transaction status"""
+    status: Literal["PENDING", "SETTLED", "EXPIRED", "VOIDED"]
+    """Hold status to filter by."""
