@@ -72,7 +72,7 @@ class V2(SyncAPIResource):
         self,
         *,
         parameters: v2_create_params.AccountLevelRuleParameters,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
@@ -101,6 +101,8 @@ class V2(SyncAPIResource):
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
                 ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
 
           account_tokens: Account tokens to which the Auth Rule applies.
 
@@ -126,7 +128,7 @@ class V2(SyncAPIResource):
         *,
         card_tokens: SequenceNotStr[str],
         parameters: v2_create_params.CardLevelRuleParameters,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -155,6 +157,8 @@ class V2(SyncAPIResource):
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
                 ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -176,7 +180,7 @@ class V2(SyncAPIResource):
         *,
         parameters: v2_create_params.ProgramLevelRuleParameters,
         program_level: bool,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         event_stream: EventStream | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
@@ -206,6 +210,8 @@ class V2(SyncAPIResource):
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
                 ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -232,7 +238,7 @@ class V2(SyncAPIResource):
         parameters: v2_create_params.AccountLevelRuleParameters
         | v2_create_params.CardLevelRuleParameters
         | v2_create_params.ProgramLevelRuleParameters,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
@@ -890,7 +896,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         parameters: v2_create_params.AccountLevelRuleParameters,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
@@ -919,6 +925,8 @@ class AsyncV2(AsyncAPIResource):
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
                 ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
 
           account_tokens: Account tokens to which the Auth Rule applies.
 
@@ -944,7 +952,7 @@ class AsyncV2(AsyncAPIResource):
         *,
         card_tokens: SequenceNotStr[str],
         parameters: v2_create_params.CardLevelRuleParameters,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -973,6 +981,8 @@ class AsyncV2(AsyncAPIResource):
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
                 ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -994,7 +1004,7 @@ class AsyncV2(AsyncAPIResource):
         *,
         parameters: v2_create_params.ProgramLevelRuleParameters,
         program_level: bool,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         event_stream: EventStream | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
@@ -1024,6 +1034,8 @@ class AsyncV2(AsyncAPIResource):
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
                 ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -1050,7 +1062,7 @@ class AsyncV2(AsyncAPIResource):
         parameters: v2_create_params.AccountLevelRuleParameters
         | v2_create_params.CardLevelRuleParameters
         | v2_create_params.ProgramLevelRuleParameters,
-        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"],
+        type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,

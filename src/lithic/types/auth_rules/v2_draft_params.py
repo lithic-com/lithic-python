@@ -7,6 +7,7 @@ from typing_extensions import TypeAlias, TypedDict
 
 from .velocity_limit_params_param import VelocityLimitParamsParam
 from .merchant_lock_parameters_param import MerchantLockParametersParam
+from .typescript_code_parameters_param import TypescriptCodeParametersParam
 from .conditional_block_parameters_param import ConditionalBlockParametersParam
 from .conditional_3ds_action_parameters_param import Conditional3DSActionParametersParam
 from .conditional_ach_action_parameters_param import ConditionalACHActionParametersParam
@@ -29,4 +30,5 @@ Parameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    TypescriptCodeParametersParam,
 ]

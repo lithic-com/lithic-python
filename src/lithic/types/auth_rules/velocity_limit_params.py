@@ -1,68 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
 from .velocity_limit_period import VelocityLimitPeriod
+from .velocity_limit_filters import VelocityLimitFilters
 
-__all__ = ["VelocityLimitParams", "Filters"]
-
-
-class Filters(BaseModel):
-    exclude_countries: Optional[List[str]] = None
-    """ISO-3166-1 alpha-3 Country Codes to exclude from the velocity calculation.
-
-    Transactions matching any of the provided will be excluded from the calculated
-    velocity.
-    """
-
-    exclude_mccs: Optional[List[str]] = None
-    """Merchant Category Codes to exclude from the velocity calculation.
-
-    Transactions matching this MCC will be excluded from the calculated velocity.
-    """
-
-    include_countries: Optional[List[str]] = None
-    """ISO-3166-1 alpha-3 Country Codes to include in the velocity calculation.
-
-    Transactions not matching any of the provided will not be included in the
-    calculated velocity.
-    """
-
-    include_mccs: Optional[List[str]] = None
-    """Merchant Category Codes to include in the velocity calculation.
-
-    Transactions not matching this MCC will not be included in the calculated
-    velocity.
-    """
-
-    include_pan_entry_modes: Optional[
-        List[
-            Literal[
-                "AUTO_ENTRY",
-                "BAR_CODE",
-                "CONTACTLESS",
-                "CREDENTIAL_ON_FILE",
-                "ECOMMERCE",
-                "ERROR_KEYED",
-                "ERROR_MAGNETIC_STRIPE",
-                "ICC",
-                "KEY_ENTERED",
-                "MAGNETIC_STRIPE",
-                "MANUAL",
-                "OCR",
-                "SECURE_CARDLESS",
-                "UNSPECIFIED",
-                "UNKNOWN",
-            ]
-        ]
-    ] = None
-    """PAN entry modes to include in the velocity calculation.
-
-    Transactions not matching any of the provided will not be included in the
-    calculated velocity.
-    """
+__all__ = ["VelocityLimitParams"]
 
 
 class VelocityLimitParams(BaseModel):
@@ -72,7 +17,7 @@ class VelocityLimitParams(BaseModel):
     scope: Literal["CARD", "ACCOUNT"]
     """The scope the velocity is calculated for"""
 
-    filters: Optional[Filters] = None
+    filters: Optional[VelocityLimitFilters] = None
 
     limit_amount: Optional[int] = None
     """

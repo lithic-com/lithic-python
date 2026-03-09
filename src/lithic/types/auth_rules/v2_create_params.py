@@ -9,6 +9,7 @@ from ..._types import SequenceNotStr
 from .event_stream import EventStream
 from .velocity_limit_params_param import VelocityLimitParamsParam
 from .merchant_lock_parameters_param import MerchantLockParametersParam
+from .typescript_code_parameters_param import TypescriptCodeParametersParam
 from .conditional_block_parameters_param import ConditionalBlockParametersParam
 from .conditional_3ds_action_parameters_param import Conditional3DSActionParametersParam
 from .conditional_ach_action_parameters_param import ConditionalACHActionParametersParam
@@ -30,7 +31,9 @@ class AccountLevelRule(TypedDict, total=False):
     parameters: Required[AccountLevelRuleParameters]
     """Parameters for the Auth Rule"""
 
-    type: Required[Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]]
+    type: Required[
+        Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
+    ]
     """The type of Auth Rule.
 
     For certain rule types, this determines the event stream during which it will be
@@ -42,6 +45,8 @@ class AccountLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+    - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
@@ -66,6 +71,7 @@ AccountLevelRuleParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    TypescriptCodeParametersParam,
 ]
 
 
@@ -76,7 +82,9 @@ class CardLevelRule(TypedDict, total=False):
     parameters: Required[CardLevelRuleParameters]
     """Parameters for the Auth Rule"""
 
-    type: Required[Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]]
+    type: Required[
+        Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
+    ]
     """The type of Auth Rule.
 
     For certain rule types, this determines the event stream during which it will be
@@ -88,6 +96,8 @@ class CardLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+    - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
@@ -106,6 +116,7 @@ CardLevelRuleParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    TypescriptCodeParametersParam,
 ]
 
 
@@ -116,7 +127,9 @@ class ProgramLevelRule(TypedDict, total=False):
     program_level: Required[bool]
     """Whether the Auth Rule applies to all authorizations on the card program."""
 
-    type: Required[Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]]
+    type: Required[
+        Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
+    ]
     """The type of Auth Rule.
 
     For certain rule types, this determines the event stream during which it will be
@@ -128,6 +141,8 @@ class ProgramLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+    - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
@@ -149,6 +164,7 @@ ProgramLevelRuleParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    TypescriptCodeParametersParam,
 ]
 
 V2CreateParams: TypeAlias = Union[AccountLevelRule, CardLevelRule, ProgramLevelRule]

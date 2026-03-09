@@ -7,6 +7,7 @@ from ..._models import BaseModel
 from .event_stream import EventStream
 from .velocity_limit_params import VelocityLimitParams
 from .merchant_lock_parameters import MerchantLockParameters
+from .typescript_code_parameters import TypescriptCodeParameters
 from .conditional_block_parameters import ConditionalBlockParameters
 from .conditional_3ds_action_parameters import Conditional3DSActionParameters
 from .conditional_ach_action_parameters import ConditionalACHActionParameters
@@ -23,6 +24,7 @@ CurrentVersionParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParameters,
     ConditionalACHActionParameters,
     ConditionalTokenizationActionParameters,
+    TypescriptCodeParameters,
 ]
 
 
@@ -45,12 +47,33 @@ DraftVersionParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParameters,
     ConditionalACHActionParameters,
     ConditionalTokenizationActionParameters,
+    TypescriptCodeParameters,
 ]
 
 
 class DraftVersion(BaseModel):
+    error: Optional[str] = None
+    """An error message if the draft version failed compilation.
+
+    Populated when `state` is `ERROR`, `null` otherwise.
+    """
+
     parameters: DraftVersionParameters
     """Parameters for the Auth Rule"""
+
+    state: Literal["PENDING", "SHADOWING", "ERROR"]
+    """The state of the draft version.
+
+    Most rules are created synchronously and the state is immediately `SHADOWING`.
+    Rules backed by TypeScript code are compiled asynchronously — the state starts
+    as `PENDING` and transitions to `SHADOWING` on success or `ERROR` on failure.
+
+    - `PENDING`: Compilation of the rule is in progress (TypeScript rules only).
+    - `SHADOWING`: The draft version is ready and evaluating in shadow mode
+      alongside the current active version. It can be promoted to the active
+      version.
+    - `ERROR`: Compilation of the rule failed. Check the `error` field for details.
+    """
 
     version: int
     """
@@ -94,7 +117,7 @@ class AuthRule(BaseModel):
     state: Literal["ACTIVE", "INACTIVE"]
     """The state of the Auth Rule"""
 
-    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION"]
+    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
     """The type of Auth Rule.
 
     For certain rule types, this determines the event stream during which it will be
@@ -106,6 +129,8 @@ class AuthRule(BaseModel):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+    - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
