@@ -156,6 +156,9 @@ class Data(BaseModel):
 
     descriptor: Optional[str] = None
 
+    event_subtype: Optional[str] = None
+    """Subtype of the event that generated the line items"""
+
 
 class StatementLineItems(BaseModel):
     data: List[Data]
