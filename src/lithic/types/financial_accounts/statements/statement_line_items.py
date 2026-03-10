@@ -159,6 +159,9 @@ class Data(BaseModel):
     event_subtype: Optional[str] = None
     """Subtype of the event that generated the line items"""
 
+    loan_tape_date: Optional[date] = None
+    """Date of the loan tape that generated this line item"""
+
 
 class StatementLineItems(BaseModel):
     data: List[Data]
