@@ -48,6 +48,7 @@ class Event(BaseModel):
         "ACH_ORIGINATION_SETTLED",
         "ACH_RECEIPT_PROCESSED",
         "ACH_RECEIPT_RELEASED",
+        "ACH_RECEIPT_RELEASED_EARLY",
         "ACH_RECEIPT_SETTLED",
         "ACH_RETURN_INITIATED",
         "ACH_RETURN_PROCESSED",
@@ -71,6 +72,8 @@ class Event(BaseModel):
     - `ACH_RECEIPT_SETTLED` - ACH receipt funds have settled.
     - `ACH_RECEIPT_RELEASED` - ACH receipt released from pending to available
       balance.
+    - `ACH_RECEIPT_RELEASED_EARLY` - ACH receipt released early from pending to
+      available balance.
     - `ACH_RETURN_INITIATED` - ACH initiated return for an ACH receipt.
     - `ACH_RETURN_PROCESSED` - ACH receipt returned by the Receiving Depository
       Financial Institution.
