@@ -182,6 +182,8 @@ class V2(SyncAPIResource):
         program_level: bool,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         event_stream: EventStream | Omit = omit,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -215,6 +217,10 @@ class V2(SyncAPIResource):
 
           event_stream: The event stream during which the rule will be evaluated.
 
+          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+
+          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+
           excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           name: Auth Rule Name
@@ -245,6 +251,8 @@ class V2(SyncAPIResource):
         name: Optional[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -265,6 +273,8 @@ class V2(SyncAPIResource):
                     "name": name,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
+                    "excluded_account_tokens": excluded_account_tokens,
+                    "excluded_business_account_tokens": excluded_business_account_tokens,
                     "excluded_card_tokens": excluded_card_tokens,
                 },
                 v2_create_params.V2CreateParams,
@@ -327,9 +337,9 @@ class V2(SyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
+        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
+        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
+        this will replace existing associations with the provided list of entities.
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
@@ -372,9 +382,9 @@ class V2(SyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
+        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
+        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
+        this will replace existing associations with the provided list of entities.
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
@@ -402,6 +412,8 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         program_level: bool | Omit = omit,
@@ -416,11 +428,15 @@ class V2(SyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
+        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
+        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
+        this will replace existing associations with the provided list of entities.
 
         Args:
+          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+
+          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+
           excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           name: Auth Rule Name
@@ -452,6 +468,8 @@ class V2(SyncAPIResource):
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -472,6 +490,8 @@ class V2(SyncAPIResource):
                     "name": name,
                     "state": state,
                     "card_tokens": card_tokens,
+                    "excluded_account_tokens": excluded_account_tokens,
+                    "excluded_business_account_tokens": excluded_business_account_tokens,
                     "excluded_card_tokens": excluded_card_tokens,
                     "program_level": program_level,
                 },
@@ -1006,6 +1026,8 @@ class AsyncV2(AsyncAPIResource):
         program_level: bool,
         type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"],
         event_stream: EventStream | Omit = omit,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1039,6 +1061,10 @@ class AsyncV2(AsyncAPIResource):
 
           event_stream: The event stream during which the rule will be evaluated.
 
+          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+
+          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+
           excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           name: Auth Rule Name
@@ -1069,6 +1095,8 @@ class AsyncV2(AsyncAPIResource):
         name: Optional[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1089,6 +1117,8 @@ class AsyncV2(AsyncAPIResource):
                     "name": name,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
+                    "excluded_account_tokens": excluded_account_tokens,
+                    "excluded_business_account_tokens": excluded_business_account_tokens,
                     "excluded_card_tokens": excluded_card_tokens,
                 },
                 v2_create_params.V2CreateParams,
@@ -1151,9 +1181,9 @@ class AsyncV2(AsyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
+        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
+        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
+        this will replace existing associations with the provided list of entities.
 
         Args:
           account_tokens: Account tokens to which the Auth Rule applies.
@@ -1196,9 +1226,9 @@ class AsyncV2(AsyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
+        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
+        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
+        this will replace existing associations with the provided list of entities.
 
         Args:
           card_tokens: Card tokens to which the Auth Rule applies.
@@ -1226,6 +1256,8 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         program_level: bool | Omit = omit,
@@ -1240,11 +1272,15 @@ class AsyncV2(AsyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, or `excluded_card_tokens`
-        is provided, this will replace existing associations with the provided list of
-        entities.
+        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
+        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
+        this will replace existing associations with the provided list of entities.
 
         Args:
+          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+
+          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+
           excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
 
           name: Auth Rule Name
@@ -1276,6 +1312,8 @@ class AsyncV2(AsyncAPIResource):
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
+        excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1296,6 +1334,8 @@ class AsyncV2(AsyncAPIResource):
                     "name": name,
                     "state": state,
                     "card_tokens": card_tokens,
+                    "excluded_account_tokens": excluded_account_tokens,
+                    "excluded_business_account_tokens": excluded_business_account_tokens,
                     "excluded_card_tokens": excluded_card_tokens,
                     "program_level": program_level,
                 },
