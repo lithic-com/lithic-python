@@ -214,6 +214,8 @@ class TestV2:
             program_level=True,
             type="CONDITIONAL_BLOCK",
             event_stream="AUTHORIZATION",
+            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
         )
@@ -409,6 +411,8 @@ class TestV2:
     def test_method_update_with_all_params_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             program_level=True,
@@ -945,6 +949,8 @@ class TestAsyncV2:
             program_level=True,
             type="CONDITIONAL_BLOCK",
             event_stream="AUTHORIZATION",
+            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
         )
@@ -1140,6 +1146,8 @@ class TestAsyncV2:
     async def test_method_update_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             program_level=True,

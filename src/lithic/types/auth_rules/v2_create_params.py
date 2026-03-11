@@ -149,6 +149,12 @@ class ProgramLevelRule(TypedDict, total=False):
     event_stream: EventStream
     """The event stream during which the rule will be evaluated."""
 
+    excluded_account_tokens: SequenceNotStr[str]
+    """Account tokens to which the Auth Rule does not apply."""
+
+    excluded_business_account_tokens: SequenceNotStr[str]
+    """Business account tokens to which the Auth Rule does not apply."""
+
     excluded_card_tokens: SequenceNotStr[str]
     """Card tokens to which the Auth Rule does not apply."""
 

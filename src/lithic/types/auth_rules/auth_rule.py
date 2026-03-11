@@ -134,5 +134,11 @@ class AuthRule(BaseModel):
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
 
+    excluded_account_tokens: Optional[List[str]] = None
+    """Account tokens to which the Auth Rule does not apply."""
+
+    excluded_business_account_tokens: Optional[List[str]] = None
+    """Business account tokens to which the Auth Rule does not apply."""
+
     excluded_card_tokens: Optional[List[str]] = None
     """Card tokens to which the Auth Rule does not apply."""
