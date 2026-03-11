@@ -46,6 +46,12 @@ class CardLevelRule(TypedDict, total=False):
 
 
 class ProgramLevelRule(TypedDict, total=False):
+    excluded_account_tokens: SequenceNotStr[str]
+    """Account tokens to which the Auth Rule does not apply."""
+
+    excluded_business_account_tokens: SequenceNotStr[str]
+    """Business account tokens to which the Auth Rule does not apply."""
+
     excluded_card_tokens: SequenceNotStr[str]
     """Card tokens to which the Auth Rule does not apply."""
 
