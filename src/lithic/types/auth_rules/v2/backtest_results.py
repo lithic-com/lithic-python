@@ -16,14 +16,11 @@ class Results(BaseModel):
 
 
 class SimulationParameters(BaseModel):
-    auth_rule_token: Optional[str] = None
-    """Auth Rule Token"""
+    end: datetime
+    """The end time of the simulation"""
 
-    end: Optional[datetime] = None
-    """The end time of the simulation."""
-
-    start: Optional[datetime] = None
-    """The start time of the simulation."""
+    start: datetime
+    """The start time of the simulation"""
 
 
 class BacktestResults(BaseModel):
