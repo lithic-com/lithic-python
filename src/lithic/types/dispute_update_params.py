@@ -13,13 +13,13 @@ __all__ = ["DisputeUpdateParams"]
 
 class DisputeUpdateParams(TypedDict, total=False):
     amount: int
-    """Amount to dispute"""
+    """Amount for chargeback"""
 
     customer_filed_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """Date the customer filed the dispute"""
+    """Date the customer filed the chargeback request"""
 
     customer_note: str
-    """Customer description of dispute"""
+    """Customer description"""
 
     reason: Literal[
         "ATM_CASH_MISDISPENSE",
@@ -37,4 +37,4 @@ class DisputeUpdateParams(TypedDict, total=False):
         "RECURRING_TRANSACTION_NOT_CANCELLED",
         "REFUND_NOT_PROCESSED",
     ]
-    """Reason for dispute"""
+    """Reason for chargeback"""
