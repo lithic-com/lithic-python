@@ -26,7 +26,6 @@ class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
         "card.renewed",
         "card.shipped",
         "card.updated",
-        "digital_wallet.tokenization_approval_request",
         "digital_wallet.tokenization_result",
         "digital_wallet.tokenization_two_factor_authentication_code",
         "digital_wallet.tokenization_two_factor_authentication_code_sent",

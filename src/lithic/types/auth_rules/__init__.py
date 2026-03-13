@@ -11,7 +11,6 @@ from .v2_list_params import V2ListParams as V2ListParams
 from .v2_draft_params import V2DraftParams as V2DraftParams
 from .v2_create_params import V2CreateParams as V2CreateParams
 from .v2_update_params import V2UpdateParams as V2UpdateParams
-from .auth_rule_version import AuthRuleVersion as AuthRuleVersion
 from .conditional_value import ConditionalValue as ConditionalValue
 from .rule_feature_param import RuleFeatureParam as RuleFeatureParam
 from .auth_rule_condition import AuthRuleCondition as AuthRuleCondition
@@ -25,7 +24,6 @@ from .conditional_value_param import ConditionalValueParam as ConditionalValuePa
 from .merchant_lock_parameters import MerchantLockParameters as MerchantLockParameters
 from .v2_list_results_response import V2ListResultsResponse as V2ListResultsResponse
 from .auth_rule_condition_param import AuthRuleConditionParam as AuthRuleConditionParam
-from .v2_list_versions_response import V2ListVersionsResponse as V2ListVersionsResponse
 from .v2_retrieve_report_params import V2RetrieveReportParams as V2RetrieveReportParams
 from .typescript_code_parameters import TypescriptCodeParameters as TypescriptCodeParameters
 from .v2_retrieve_features_params import V2RetrieveFeaturesParams as V2RetrieveFeaturesParams

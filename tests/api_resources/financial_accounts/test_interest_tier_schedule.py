@@ -36,7 +36,6 @@ class TestInterestTierSchedule:
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             credit_product_token="credit_product_token",
             effective_date=parse_date("2019-12-27"),
-            penalty_rates={},
             tier_name="tier_name",
             tier_rates={},
         )
@@ -144,7 +143,6 @@ class TestInterestTierSchedule:
         interest_tier_schedule = client.financial_accounts.interest_tier_schedule.update(
             effective_date=parse_date("2019-12-27"),
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            penalty_rates={},
             tier_name="tier_name",
             tier_rates={},
         )
@@ -313,7 +311,6 @@ class TestAsyncInterestTierSchedule:
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             credit_product_token="credit_product_token",
             effective_date=parse_date("2019-12-27"),
-            penalty_rates={},
             tier_name="tier_name",
             tier_rates={},
         )
@@ -421,7 +418,6 @@ class TestAsyncInterestTierSchedule:
         interest_tier_schedule = await async_client.financial_accounts.interest_tier_schedule.update(
             effective_date=parse_date("2019-12-27"),
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            penalty_rates={},
             tier_name="tier_name",
             tier_rates={},
         )

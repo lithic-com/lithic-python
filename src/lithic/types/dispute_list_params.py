@@ -51,7 +51,7 @@ class DisputeListParams(TypedDict, total=False):
         "REPRESENTMENT",
         "SUBMITTED",
     ]
-    """Filter by status."""
+    """List disputes of a specific status."""
 
     transaction_tokens: SequenceNotStr[str]
     """Transaction tokens to filter by."""
