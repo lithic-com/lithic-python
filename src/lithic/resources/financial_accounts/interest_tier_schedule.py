@@ -51,7 +51,6 @@ class InterestTierScheduleResource(SyncAPIResource):
         *,
         credit_product_token: str,
         effective_date: Union[str, date],
-        penalty_rates: object | Omit = omit,
         tier_name: str | Omit = omit,
         tier_rates: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -68,8 +67,6 @@ class InterestTierScheduleResource(SyncAPIResource):
           credit_product_token: Globally unique identifier for a credit product
 
           effective_date: Date the tier should be effective in YYYY-MM-DD format
-
-          penalty_rates: Custom rates per category for penalties
 
           tier_name: Name of a tier contained in the credit product. Mutually exclusive with
               tier_rates
@@ -94,7 +91,6 @@ class InterestTierScheduleResource(SyncAPIResource):
                 {
                     "credit_product_token": credit_product_token,
                     "effective_date": effective_date,
-                    "penalty_rates": penalty_rates,
                     "tier_name": tier_name,
                     "tier_rates": tier_rates,
                 },
@@ -149,7 +145,6 @@ class InterestTierScheduleResource(SyncAPIResource):
         effective_date: Union[str, date],
         *,
         financial_account_token: str,
-        penalty_rates: object | Omit = omit,
         tier_name: str | Omit = omit,
         tier_rates: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -163,8 +158,6 @@ class InterestTierScheduleResource(SyncAPIResource):
         Update an existing interest tier schedule
 
         Args:
-          penalty_rates: Custom rates per category for penalties
-
           tier_name: Name of a tier contained in the credit product. Mutually exclusive with
               tier_rates
 
@@ -188,7 +181,6 @@ class InterestTierScheduleResource(SyncAPIResource):
             f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
             body=maybe_transform(
                 {
-                    "penalty_rates": penalty_rates,
                     "tier_name": tier_name,
                     "tier_rates": tier_rates,
                 },
@@ -345,7 +337,6 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
         *,
         credit_product_token: str,
         effective_date: Union[str, date],
-        penalty_rates: object | Omit = omit,
         tier_name: str | Omit = omit,
         tier_rates: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -362,8 +353,6 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
           credit_product_token: Globally unique identifier for a credit product
 
           effective_date: Date the tier should be effective in YYYY-MM-DD format
-
-          penalty_rates: Custom rates per category for penalties
 
           tier_name: Name of a tier contained in the credit product. Mutually exclusive with
               tier_rates
@@ -388,7 +377,6 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
                 {
                     "credit_product_token": credit_product_token,
                     "effective_date": effective_date,
-                    "penalty_rates": penalty_rates,
                     "tier_name": tier_name,
                     "tier_rates": tier_rates,
                 },
@@ -443,7 +431,6 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
         effective_date: Union[str, date],
         *,
         financial_account_token: str,
-        penalty_rates: object | Omit = omit,
         tier_name: str | Omit = omit,
         tier_rates: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -457,8 +444,6 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
         Update an existing interest tier schedule
 
         Args:
-          penalty_rates: Custom rates per category for penalties
-
           tier_name: Name of a tier contained in the credit product. Mutually exclusive with
               tier_rates
 
@@ -482,7 +467,6 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
             f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
             body=await async_maybe_transform(
                 {
-                    "penalty_rates": penalty_rates,
                     "tier_name": tier_name,
                     "tier_rates": tier_rates,
                 },

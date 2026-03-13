@@ -13,7 +13,7 @@ __all__ = ["DisputeCreateParams"]
 
 class DisputeCreateParams(TypedDict, total=False):
     amount: Required[int]
-    """Amount for chargeback"""
+    """Amount to dispute"""
 
     reason: Required[
         Literal[
@@ -33,13 +33,13 @@ class DisputeCreateParams(TypedDict, total=False):
             "REFUND_NOT_PROCESSED",
         ]
     ]
-    """Reason for chargeback"""
+    """Reason for dispute"""
 
     transaction_token: Required[str]
-    """Transaction for chargeback"""
+    """Transaction to dispute"""
 
     customer_filed_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """Date the customer filed the chargeback request"""
+    """Date the customer filed the dispute"""
 
     customer_note: str
-    """Customer description"""
+    """Customer description of dispute"""

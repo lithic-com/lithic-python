@@ -34,6 +34,11 @@ class CustomerTokenizationDecision(BaseModel):
 
 
 class DigitalWalletTokenizationApprovalRequestWebhookEvent(BaseModel):
+    """Payload for digital wallet tokenization approval requests.
+
+    Used for both the decisioning responder request (sent to the customer's endpoint for a real-time decision) and the subsequent webhook event (sent after the decision is made). Fields like customer_tokenization_decision, tokenization_decline_reasons, tokenization_tfa_reasons, and rule_results are only populated in the webhook event, not in the initial decisioning request.
+    """
+
     account_token: str
     """Unique identifier for the user tokenizing a card"""
 
@@ -42,9 +47,6 @@ class DigitalWalletTokenizationApprovalRequestWebhookEvent(BaseModel):
 
     created: datetime
     """Indicate when the request was received from Mastercard or Visa"""
-
-    customer_tokenization_decision: Optional[CustomerTokenizationDecision] = None
-    """Contains the metadata for the customer tokenization decision."""
 
     digital_wallet_token_metadata: TokenMetadata
     """Contains the metadata for the digital wallet being tokenized."""
@@ -66,13 +68,22 @@ class DigitalWalletTokenizationApprovalRequestWebhookEvent(BaseModel):
 
     wallet_decisioning_info: WalletDecisioningInfo
 
+    customer_tokenization_decision: Optional[CustomerTokenizationDecision] = None
+    """Contains the metadata for the customer tokenization decision."""
+
     device: Optional[Device] = None
 
     rule_results: Optional[List[TokenizationRuleResult]] = None
-    """Results from rules that were evaluated for this tokenization"""
+    """Results from rules that were evaluated for this tokenization.
+
+    Only populated in webhook events, not in the initial decisioning request
+    """
 
     tokenization_decline_reasons: Optional[List[TokenizationDeclineReason]] = None
-    """List of reasons why the tokenization was declined"""
+    """List of reasons why the tokenization was declined.
+
+    Only populated in webhook events, not in the initial decisioning request
+    """
 
     tokenization_source: Optional[
         Literal["ACCOUNT_ON_FILE", "CONTACTLESS_TAP", "MANUAL_PROVISION", "PUSH_PROVISION", "TOKEN", "UNKNOWN"]
@@ -80,4 +91,7 @@ class DigitalWalletTokenizationApprovalRequestWebhookEvent(BaseModel):
     """The source of the tokenization."""
 
     tokenization_tfa_reasons: Optional[List[TokenizationTfaReason]] = None
-    """List of reasons why two-factor authentication was required"""
+    """List of reasons why two-factor authentication was required.
+
+    Only populated in webhook events, not in the initial decisioning request
+    """

@@ -18,9 +18,6 @@ class InterestTierScheduleCreateParams(TypedDict, total=False):
     effective_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """Date the tier should be effective in YYYY-MM-DD format"""
 
-    penalty_rates: object
-    """Custom rates per category for penalties"""
-
     tier_name: str
     """Name of a tier contained in the credit product.
 

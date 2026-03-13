@@ -96,7 +96,6 @@ Types:
 from lithic.types.auth_rules import (
     AuthRule,
     AuthRuleCondition,
-    AuthRuleVersion,
     BacktestStats,
     Conditional3DSActionParameters,
     ConditionalACHActionParameters,
@@ -115,7 +114,6 @@ from lithic.types.auth_rules import (
     VelocityLimitParams,
     VelocityLimitPeriod,
     V2ListResultsResponse,
-    V2ListVersionsResponse,
     V2RetrieveFeaturesResponse,
     V2RetrieveReportResponse,
 )
@@ -130,7 +128,6 @@ Methods:
 - <code title="delete /v2/auth_rules/{auth_rule_token}">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">delete</a>(auth_rule_token) -> None</code>
 - <code title="post /v2/auth_rules/{auth_rule_token}/draft">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">draft</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_draft_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
 - <code title="get /v2/auth_rules/results">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">list_results</a>(\*\*<a href="src/lithic/types/auth_rules/v2_list_results_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_list_results_response.py">SyncCursorPage[V2ListResultsResponse]</a></code>
-- <code title="get /v2/auth_rules/{auth_rule_token}/versions">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">list_versions</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2_list_versions_response.py">V2ListVersionsResponse</a></code>
 - <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/features">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_features</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_features_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_features_response.py">V2RetrieveFeaturesResponse</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_report</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_report_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_report_response.py">V2RetrieveReportResponse</a></code>
@@ -875,7 +872,6 @@ from lithic.types import (
     AccountHolderVerificationWebhookEvent,
     AccountHolderDocumentUpdatedWebhookEvent,
     CardAuthorizationApprovalRequestWebhookEvent,
-    TokenizationDecisioningRequestWebhookEvent,
     AuthRulesBacktestReportCreatedWebhookEvent,
     BalanceUpdatedWebhookEvent,
     BookTransferTransactionCreatedWebhookEvent,

@@ -51,7 +51,6 @@ class AccountActivity(SyncAPIResource):
         business_account_token: str | Omit = omit,
         category: Literal[
             "ACH",
-            "WIRE",
             "BALANCE_OR_FUNDING",
             "FEE",
             "REWARD",
@@ -223,7 +222,6 @@ class AsyncAccountActivity(AsyncAPIResource):
         business_account_token: str | Omit = omit,
         category: Literal[
             "ACH",
-            "WIRE",
             "BALANCE_OR_FUNDING",
             "FEE",
             "REWARD",

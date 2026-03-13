@@ -45,7 +45,6 @@ from .dispute_evidence_upload_failed_webhook_event import DisputeEvidenceUploadF
 from .account_holder_document_updated_webhook_event import AccountHolderDocumentUpdatedWebhookEvent
 from .three_ds_authentication_created_webhook_event import ThreeDSAuthenticationCreatedWebhookEvent
 from .three_ds_authentication_updated_webhook_event import ThreeDSAuthenticationUpdatedWebhookEvent
-from .tokenization_decisioning_request_webhook_event import TokenizationDecisioningRequestWebhookEvent
 from .book_transfer_transaction_created_webhook_event import BookTransferTransactionCreatedWebhookEvent
 from .book_transfer_transaction_updated_webhook_event import BookTransferTransactionUpdatedWebhookEvent
 from .three_ds_authentication_challenge_webhook_event import ThreeDSAuthenticationChallengeWebhookEvent
@@ -431,7 +430,6 @@ ParsedWebhookEvent: TypeAlias = Union[
     AccountHolderVerificationWebhookEvent,
     AccountHolderDocumentUpdatedWebhookEvent,
     CardAuthorizationApprovalRequestWebhookEvent,
-    TokenizationDecisioningRequestWebhookEvent,
     AuthRulesBacktestReportCreatedWebhookEvent,
     BalanceUpdatedWebhookEvent,
     BookTransferTransactionCreatedWebhookEvent,
