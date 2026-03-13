@@ -17,9 +17,6 @@ class InterestTierSchedule(BaseModel):
     effective_date: date
     """Date the tier should be effective in YYYY-MM-DD format"""
 
-    penalty_rates: Optional[object] = None
-    """Custom rates per category for penalties"""
-
     tier_name: Optional[str] = None
     """Name of a tier contained in the credit product.
 

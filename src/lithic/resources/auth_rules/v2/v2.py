@@ -37,7 +37,6 @@ from ....types.auth_rules import (
 from ....types.auth_rules.auth_rule import AuthRule
 from ....types.auth_rules.event_stream import EventStream
 from ....types.auth_rules.v2_list_results_response import V2ListResultsResponse
-from ....types.auth_rules.v2_list_versions_response import V2ListVersionsResponse
 from ....types.auth_rules.v2_retrieve_report_response import V2RetrieveReportResponse
 from ....types.auth_rules.v2_retrieve_features_response import V2RetrieveFeaturesResponse
 
@@ -737,40 +736,6 @@ class V2(SyncAPIResource):
                 ),
             ),
             model=cast(Any, V2ListResultsResponse),  # Union types cannot be passed in as arguments in the type system
-        )
-
-    def list_versions(
-        self,
-        auth_rule_token: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ListVersionsResponse:
-        """
-        Returns all versions of an auth rule, sorted by version number descending
-        (newest first).
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not auth_rule_token:
-            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
-        return self._get(
-            f"/v2/auth_rules/{auth_rule_token}/versions",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=V2ListVersionsResponse,
         )
 
     def promote(
@@ -1617,40 +1582,6 @@ class AsyncV2(AsyncAPIResource):
             model=cast(Any, V2ListResultsResponse),  # Union types cannot be passed in as arguments in the type system
         )
 
-    async def list_versions(
-        self,
-        auth_rule_token: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> V2ListVersionsResponse:
-        """
-        Returns all versions of an auth rule, sorted by version number descending
-        (newest first).
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not auth_rule_token:
-            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
-        return await self._get(
-            f"/v2/auth_rules/{auth_rule_token}/versions",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=V2ListVersionsResponse,
-        )
-
     async def promote(
         self,
         auth_rule_token: str,
@@ -1825,9 +1756,6 @@ class V2WithRawResponse:
         self.list_results = _legacy_response.to_raw_response_wrapper(
             v2.list_results,
         )
-        self.list_versions = _legacy_response.to_raw_response_wrapper(
-            v2.list_versions,
-        )
         self.promote = _legacy_response.to_raw_response_wrapper(
             v2.promote,
         )
@@ -1867,9 +1795,6 @@ class AsyncV2WithRawResponse:
         )
         self.list_results = _legacy_response.async_to_raw_response_wrapper(
             v2.list_results,
-        )
-        self.list_versions = _legacy_response.async_to_raw_response_wrapper(
-            v2.list_versions,
         )
         self.promote = _legacy_response.async_to_raw_response_wrapper(
             v2.promote,
@@ -1911,9 +1836,6 @@ class V2WithStreamingResponse:
         self.list_results = to_streamed_response_wrapper(
             v2.list_results,
         )
-        self.list_versions = to_streamed_response_wrapper(
-            v2.list_versions,
-        )
         self.promote = to_streamed_response_wrapper(
             v2.promote,
         )
@@ -1953,9 +1875,6 @@ class AsyncV2WithStreamingResponse:
         )
         self.list_results = async_to_streamed_response_wrapper(
             v2.list_results,
-        )
-        self.list_versions = async_to_streamed_response_wrapper(
-            v2.list_versions,
         )
         self.promote = async_to_streamed_response_wrapper(
             v2.promote,

@@ -306,9 +306,6 @@ from .transaction_simulate_return_reversal_response import (
 from .account_activity_retrieve_transaction_response import (
     AccountActivityRetrieveTransactionResponse as AccountActivityRetrieveTransactionResponse,
 )
-from .tokenization_decisioning_request_webhook_event import (
-    TokenizationDecisioningRequestWebhookEvent as TokenizationDecisioningRequestWebhookEvent,
-)
 from .book_transfer_transaction_created_webhook_event import (
     BookTransferTransactionCreatedWebhookEvent as BookTransferTransactionCreatedWebhookEvent,
 )

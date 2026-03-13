@@ -10,9 +10,6 @@ __all__ = ["InterestTierScheduleUpdateParams"]
 class InterestTierScheduleUpdateParams(TypedDict, total=False):
     financial_account_token: Required[str]
 
-    penalty_rates: object
-    """Custom rates per category for penalties"""
-
     tier_name: str
     """Name of a tier contained in the credit product.
 

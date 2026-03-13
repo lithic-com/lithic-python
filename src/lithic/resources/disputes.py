@@ -80,18 +80,18 @@ class Disputes(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
-        Request a chargeback.
+        Initiate a dispute.
 
         Args:
-          amount: Amount for chargeback
+          amount: Amount to dispute
 
-          reason: Reason for chargeback
+          reason: Reason for dispute
 
-          transaction_token: Transaction for chargeback
+          transaction_token: Transaction to dispute
 
-          customer_filed_date: Date the customer filed the chargeback request
+          customer_filed_date: Date the customer filed the dispute
 
-          customer_note: Customer description
+          customer_note: Customer description of dispute
 
           extra_headers: Send extra headers
 
@@ -131,7 +131,7 @@ class Disputes(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
-        Get chargeback request.
+        Get dispute.
 
         Args:
           extra_headers: Send extra headers
@@ -183,18 +183,18 @@ class Disputes(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
-        """Update chargeback request.
+        """Update dispute.
 
         Can only be modified if status is `NEW`.
 
         Args:
-          amount: Amount for chargeback
+          amount: Amount to dispute
 
-          customer_filed_date: Date the customer filed the chargeback request
+          customer_filed_date: Date the customer filed the dispute
 
-          customer_note: Customer description
+          customer_note: Customer description of dispute
 
-          reason: Reason for chargeback
+          reason: Reason for dispute
 
           extra_headers: Send extra headers
 
@@ -250,7 +250,7 @@ class Disputes(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[Dispute]:
-        """List chargeback requests.
+        """List disputes.
 
         Args:
           begin: Date string in RFC 3339 format.
@@ -269,7 +269,7 @@ class Disputes(SyncAPIResource):
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
 
-          status: Filter by status.
+          status: List disputes of a specific status.
 
           transaction_tokens: Transaction tokens to filter by.
 
@@ -317,7 +317,7 @@ class Disputes(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
-        Withdraw chargeback request.
+        Withdraw dispute.
 
         Args:
           extra_headers: Send extra headers
@@ -350,10 +350,10 @@ class Disputes(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
-        """Soft delete evidence for a chargeback request.
+        """Soft delete evidence for a dispute.
 
-        Evidence will not be reviewed or
-        submitted by Lithic after it is withdrawn.
+        Evidence will not be reviewed or submitted
+        by Lithic after it is withdrawn.
 
         Args:
           extra_headers: Send extra headers
@@ -388,10 +388,10 @@ class Disputes(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
-        """Use this endpoint to upload evidence for a chargeback request.
+        """Use this endpoint to upload evidences for the dispute.
 
-        It will return a
-        URL to upload your documents to. The URL will expire in 30 minutes.
+        It will return a URL to
+        upload your documents to. The URL will expire in 30 minutes.
 
         Uploaded documents must either be a `jpg`, `png` or `pdf` file, and each must be
         less than 5 GiB.
@@ -437,7 +437,7 @@ class Disputes(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[DisputeEvidence]:
         """
-        List evidence for a chargeback request.
+        List evidence metadata for a dispute.
 
         Args:
           begin: Date string in RFC 3339 format. Only entries created after the specified time
@@ -499,7 +499,7 @@ class Disputes(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """
-        Get evidence for a chargeback request.
+        Get a dispute's evidence metadata.
 
         Args:
           extra_headers: Send extra headers
@@ -596,18 +596,18 @@ class AsyncDisputes(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
-        Request a chargeback.
+        Initiate a dispute.
 
         Args:
-          amount: Amount for chargeback
+          amount: Amount to dispute
 
-          reason: Reason for chargeback
+          reason: Reason for dispute
 
-          transaction_token: Transaction for chargeback
+          transaction_token: Transaction to dispute
 
-          customer_filed_date: Date the customer filed the chargeback request
+          customer_filed_date: Date the customer filed the dispute
 
-          customer_note: Customer description
+          customer_note: Customer description of dispute
 
           extra_headers: Send extra headers
 
@@ -647,7 +647,7 @@ class AsyncDisputes(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
-        Get chargeback request.
+        Get dispute.
 
         Args:
           extra_headers: Send extra headers
@@ -699,18 +699,18 @@ class AsyncDisputes(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
-        """Update chargeback request.
+        """Update dispute.
 
         Can only be modified if status is `NEW`.
 
         Args:
-          amount: Amount for chargeback
+          amount: Amount to dispute
 
-          customer_filed_date: Date the customer filed the chargeback request
+          customer_filed_date: Date the customer filed the dispute
 
-          customer_note: Customer description
+          customer_note: Customer description of dispute
 
-          reason: Reason for chargeback
+          reason: Reason for dispute
 
           extra_headers: Send extra headers
 
@@ -766,7 +766,7 @@ class AsyncDisputes(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Dispute, AsyncCursorPage[Dispute]]:
-        """List chargeback requests.
+        """List disputes.
 
         Args:
           begin: Date string in RFC 3339 format.
@@ -785,7 +785,7 @@ class AsyncDisputes(AsyncAPIResource):
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
 
-          status: Filter by status.
+          status: List disputes of a specific status.
 
           transaction_tokens: Transaction tokens to filter by.
 
@@ -833,7 +833,7 @@ class AsyncDisputes(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Dispute:
         """
-        Withdraw chargeback request.
+        Withdraw dispute.
 
         Args:
           extra_headers: Send extra headers
@@ -866,10 +866,10 @@ class AsyncDisputes(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
-        """Soft delete evidence for a chargeback request.
+        """Soft delete evidence for a dispute.
 
-        Evidence will not be reviewed or
-        submitted by Lithic after it is withdrawn.
+        Evidence will not be reviewed or submitted
+        by Lithic after it is withdrawn.
 
         Args:
           extra_headers: Send extra headers
@@ -904,10 +904,10 @@ class AsyncDisputes(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
-        """Use this endpoint to upload evidence for a chargeback request.
+        """Use this endpoint to upload evidences for the dispute.
 
-        It will return a
-        URL to upload your documents to. The URL will expire in 30 minutes.
+        It will return a URL to
+        upload your documents to. The URL will expire in 30 minutes.
 
         Uploaded documents must either be a `jpg`, `png` or `pdf` file, and each must be
         less than 5 GiB.
@@ -953,7 +953,7 @@ class AsyncDisputes(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[DisputeEvidence, AsyncCursorPage[DisputeEvidence]]:
         """
-        List evidence for a chargeback request.
+        List evidence metadata for a dispute.
 
         Args:
           begin: Date string in RFC 3339 format. Only entries created after the specified time
@@ -1015,7 +1015,7 @@ class AsyncDisputes(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DisputeEvidence:
         """
-        Get evidence for a chargeback request.
+        Get a dispute's evidence metadata.
 
         Args:
           extra_headers: Send extra headers
