@@ -18,6 +18,7 @@ class Data(BaseModel):
 
     category: Literal[
         "ACH",
+        "WIRE",
         "BALANCE_OR_FUNDING",
         "FEE",
         "REWARD",
@@ -39,6 +40,11 @@ class Data(BaseModel):
         "HOLD",
         "PROGRAM_FUNDING",
     ]
+    """
+    Note: Inbound wire transfers are coming soon (availability varies by partner
+    bank). The WIRE category is a preview. To learn more, contact your customer
+    success manager.
+    """
 
     created: datetime
     """Timestamp of when the line item was generated"""
