@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.118.0 (2026-03-16)
+
+Full Changelog: [v0.117.0...v0.118.0](https://github.com/lithic-com/lithic-python/compare/v0.117.0...v0.118.0)
+
+### Features
+
+* **api:** add ACH_RECEIPT_RELEASED_EARLY event type to payments ([5c64610](https://github.com/lithic-com/lithic-python/commit/5c64610e0a6306c4aa6138b0e5574368a1b539d1))
+* **api:** add EARLY_DIRECT_DEPOSIT_FLOAT type to financial accounts ([6b3cfd6](https://github.com/lithic-com/lithic-python/commit/6b3cfd6ac06980b80d110b19b20697068bbeeee9))
+* **api:** add event_subtype field to statement line items ([5545804](https://github.com/lithic-com/lithic-python/commit/5545804313ec283e1749d6bebf058b62c3b9ea28))
+* **api:** add excluded_account_tokens parameter to auth_rules v2 create/update ([9a13e1d](https://github.com/lithic-com/lithic-python/commit/9a13e1df3d7e6ec585304e9aac9735d5a821251c))
+* **api:** add loan_tape_date field to statement line items ([e4ff030](https://github.com/lithic-com/lithic-python/commit/e4ff03048937dc447d5ceba8ecfa3f804d880fd1))
+* **api:** add penalty_rates to interest tier schedule create ([224cb0c](https://github.com/lithic-com/lithic-python/commit/224cb0c851605095646d0ee649645e9227919948))
+* **api:** add typescript_code rule type, state/error fields to auth_rules ([f6dc800](https://github.com/lithic-com/lithic-python/commit/f6dc800f95e413c8a9436c5a966a2bb12d27b6b6))
+* **api:** add versions field to auth_rules DailyStatistic model ([5cce645](https://github.com/lithic-com/lithic-python/commit/5cce6456e5f26d05b456cb27ae2dc424a6172475))
+* **api:** add WIRE category, wire events, remove remittance_information from payment ([aa66507](https://github.com/lithic-com/lithic-python/commit/aa66507238f574018428f8e5e327eb4f22af67a4))
+
+
+### Bug Fixes
+
+* **api:** [breaking] unify webhook schemas for digital_wallet.tokenization_approval_request webhooks ([c6f0508](https://github.com/lithic-com/lithic-python/commit/c6f05085946c26c8d2a52bae6d25c25243674ec4))
+* **api:** Disable MCP server to fix TypeScript SDK package publishing ([f23d302](https://github.com/lithic-com/lithic-python/commit/f23d3022b0b0a860db16cefc008153f09c0bae48))
+* **types:** make start/end required, remove auth_rule_token in SimulationParameters ([96a4a8c](https://github.com/lithic-com/lithic-python/commit/96a4a8cb6107548b1404d5904ca72a0523f32a23))
+
+
+### Chores
+
+* **internal:** codegen related update ([845458d](https://github.com/lithic-com/lithic-python/commit/845458d17d741e51d1ef212fac9de9a9cbd8b0e5))
+* **internal:** regenerate SDK with no functional changes ([fc13bed](https://github.com/lithic-com/lithic-python/commit/fc13bedbd24a3c0b99ceb95b2f371906558325db))
+
+
+### Documentation
+
+* **api:** update disputes docstrings to use chargeback terminology ([0f35c28](https://github.com/lithic-com/lithic-python/commit/0f35c286c78528c332f4d82fa10ed88e014819b8))
+* **client:** add MCP Server setup documentation ([9f8d54b](https://github.com/lithic-com/lithic-python/commit/9f8d54b2b2c29e590f601635459d3ef20b092759))
+
 ## 0.117.0 (2026-03-05)
 
 Full Changelog: [v0.116.0...v0.117.0](https://github.com/lithic-com/lithic-python/compare/v0.116.0...v0.117.0)
