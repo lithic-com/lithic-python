@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.119.0 (2026-03-17)
+
+Full Changelog: [v0.118.0...v0.119.0](https://github.com/lithic-com/lithic-python/compare/v0.118.0...v0.119.0)
+
+### Features
+
+* **api:** add remittance_information field to payment wire attributes ([669e335](https://github.com/lithic-com/lithic-python/commit/669e335cc6b256343053ec177256d9a60819a287))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([26fb17c](https://github.com/lithic-com/lithic-python/commit/26fb17c88ea9eaf9158c44f8b75263fe0de3d08d))
+* **pydantic:** do not pass `by_alias` unless set ([cf205ce](https://github.com/lithic-com/lithic-python/commit/cf205ce9ac4e93542db0a9efcc5456f4e5f1774b))
+* **types:** make address/dob/email/government_id optional in KYB delegated types ([d2345a0](https://github.com/lithic-com/lithic-python/commit/d2345a077dc90995f973163c25ee898d5ac92195))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([d18bbc8](https://github.com/lithic-com/lithic-python/commit/d18bbc894b759ff8c066403d21d195aa67468441))
+
+
+### Documentation
+
+* **api:** add pdf to supported file types for account holders document upload ([afcb77c](https://github.com/lithic-com/lithic-python/commit/afcb77c4ebd2bab497a04a2ecd112247f2c1215e))
+
 ## 0.118.0 (2026-03-16)
 
 Full Changelog: [v0.117.0...v0.118.0](https://github.com/lithic-com/lithic-python/compare/v0.117.0...v0.118.0)
