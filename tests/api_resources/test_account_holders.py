@@ -287,6 +287,8 @@ class TestAccountHolders:
             },
             beneficial_owner_individuals=[
                 {
+                    "first_name": "Tom",
+                    "last_name": "Bombadil",
                     "address": {
                         "address1": "123 Old Forest Way",
                         "city": "Omaha",
@@ -297,13 +299,13 @@ class TestAccountHolders:
                     },
                     "dob": "1991-03-08 08:00:00",
                     "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
                     "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
                     "phone_number": "+15555555555",
                 }
             ],
             control_person={
+                "first_name": "Tom",
+                "last_name": "Bombadil",
                 "address": {
                     "address1": "123 Old Forest Way",
                     "city": "Omaha",
@@ -314,9 +316,7 @@ class TestAccountHolders:
                 },
                 "dob": "1991-03-08 08:00:00",
                 "email": "tom@middle-earth.com",
-                "first_name": "Tom",
                 "government_id": "111-23-1412",
-                "last_name": "Bombadil",
                 "phone_number": "+15555555555",
             },
             external_id="external_id",
@@ -1344,6 +1344,8 @@ class TestAsyncAccountHolders:
             },
             beneficial_owner_individuals=[
                 {
+                    "first_name": "Tom",
+                    "last_name": "Bombadil",
                     "address": {
                         "address1": "123 Old Forest Way",
                         "city": "Omaha",
@@ -1354,13 +1356,13 @@ class TestAsyncAccountHolders:
                     },
                     "dob": "1991-03-08 08:00:00",
                     "email": "tom@middle-earth.com",
-                    "first_name": "Tom",
                     "government_id": "111-23-1412",
-                    "last_name": "Bombadil",
                     "phone_number": "+15555555555",
                 }
             ],
             control_person={
+                "first_name": "Tom",
+                "last_name": "Bombadil",
                 "address": {
                     "address1": "123 Old Forest Way",
                     "city": "Omaha",
@@ -1371,9 +1373,7 @@ class TestAsyncAccountHolders:
                 },
                 "dob": "1991-03-08 08:00:00",
                 "email": "tom@middle-earth.com",
-                "first_name": "Tom",
                 "government_id": "111-23-1412",
-                "last_name": "Bombadil",
                 "phone_number": "+15555555555",
             },
             external_id="external_id",
