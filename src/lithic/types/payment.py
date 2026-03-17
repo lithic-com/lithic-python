@@ -187,6 +187,9 @@ class MethodAttributesWireMethodAttributes(BaseModel):
     for tracking the message through the Fedwire system
     """
 
+    remittance_information: Optional[str] = None
+    """Payment details or invoice reference"""
+
 
 MethodAttributes: TypeAlias = Union[MethodAttributesACHMethodAttributes, MethodAttributesWireMethodAttributes]
 
