@@ -301,36 +301,39 @@ class KYBDelegatedBusinessEntity(TypedDict, total=False):
 
 
 class KYBDelegatedBeneficialOwnerIndividual(TypedDict, total=False):
-    """Individuals associated with a KYB application. Phone number is optional."""
+    """Individuals associated with a KYB_DELEGATED application.
 
-    address: Required[Address]
-    """
-    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
-    """
-
-    dob: Required[str]
-    """Individual's date of birth, as an RFC 3339 date."""
-
-    email: Required[str]
-    """
-    Individual's email address. If utilizing Lithic for chargeback processing, this
-    customer email address may be used to communicate dispute status and resolution.
+    Only first and last name are required.
     """
 
     first_name: Required[str]
     """Individual's first name, as it appears on government-issued identity documents."""
 
-    government_id: Required[str]
+    last_name: Required[str]
+    """Individual's last name, as it appears on government-issued identity documents."""
+
+    address: Address
+    """
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not
+    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    """
+
+    dob: str
+    """Individual's date of birth, as an RFC 3339 date."""
+
+    email: str
+    """
+    Individual's email address. If utilizing Lithic for chargeback processing, this
+    customer email address may be used to communicate dispute status and resolution.
+    """
+
+    government_id: str
     """
     Government-issued identification number (required for identity verification and
     compliance with banking regulations). Social Security Numbers (SSN) and
     Individual Taxpayer Identification Numbers (ITIN) are currently supported,
     entered as full nine-digits, with or without hyphens
     """
-
-    last_name: Required[str]
-    """Individual's last name, as it appears on government-issued identity documents."""
 
     phone_number: str
     """Individual's phone number, entered in E.164 format."""
@@ -344,34 +347,34 @@ class KYBDelegatedControlPerson(TypedDict, total=False):
     See [FinCEN requirements](https://www.fincen.gov/sites/default/files/shared/CDD_Rev6.7_Sept_2017_Certificate.pdf) (Section II) for more background.
     """
 
-    address: Required[Address]
+    first_name: Required[str]
+    """Individual's first name, as it appears on government-issued identity documents."""
+
+    last_name: Required[str]
+    """Individual's last name, as it appears on government-issued identity documents."""
+
+    address: Address
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
     acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
     """
 
-    dob: Required[str]
+    dob: str
     """Individual's date of birth, as an RFC 3339 date."""
 
-    email: Required[str]
+    email: str
     """
     Individual's email address. If utilizing Lithic for chargeback processing, this
     customer email address may be used to communicate dispute status and resolution.
     """
 
-    first_name: Required[str]
-    """Individual's first name, as it appears on government-issued identity documents."""
-
-    government_id: Required[str]
+    government_id: str
     """
     Government-issued identification number (required for identity verification and
     compliance with banking regulations). Social Security Numbers (SSN) and
     Individual Taxpayer Identification Numbers (ITIN) are currently supported,
     entered as full nine-digits, with or without hyphens
     """
-
-    last_name: Required[str]
-    """Individual's last name, as it appears on government-issued identity documents."""
 
     phone_number: str
     """Individual's phone number, entered in E.164 format."""
