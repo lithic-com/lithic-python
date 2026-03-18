@@ -4,10 +4,10 @@ from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from .shared import merchant
 from .._models import BaseModel
 from .token_info import TokenInfo
 from .shared.currency import Currency
-from .shared.merchant import Merchant
 from .cardholder_authentication import CardholderAuthentication
 
 __all__ = [
@@ -18,9 +18,11 @@ __all__ = [
     "AmountsMerchant",
     "AmountsSettlement",
     "Avs",
+    "Merchant",
     "Pos",
     "PosEntryMode",
     "PosTerminal",
+    "ServiceLocation",
     "Event",
     "EventAmounts",
     "EventAmountsCardholder",
@@ -96,6 +98,19 @@ class Avs(BaseModel):
 
     zipcode: str
     """Cardholder ZIP code"""
+
+
+class Merchant(merchant.Merchant):
+    """Merchant information including full location details."""
+
+    phone_number: Optional[str] = None
+    """Phone number of card acceptor."""
+
+    postal_code: Optional[str] = None
+    """Postal code of card acceptor."""
+
+    street_address: Optional[str] = None
+    """Street address of card acceptor."""
 
 
 class PosEntryMode(BaseModel):
@@ -204,6 +219,27 @@ class Pos(BaseModel):
     entry_mode: PosEntryMode
 
     terminal: PosTerminal
+
+
+class ServiceLocation(BaseModel):
+    """
+    Where the cardholder received the service, when different from the card acceptor location. This is populated from network data elements such as Mastercard DE-122 SE1 SF9-14 and Visa F34 DS02.
+    """
+
+    city: Optional[str] = None
+    """City of service location."""
+
+    country: Optional[str] = None
+    """Country code of service location, ISO 3166-1 alpha-3."""
+
+    postal_code: Optional[str] = None
+    """Postal code of service location."""
+
+    state: Optional[str] = None
+    """State/province code of service location, ISO 3166-2."""
+
+    street_address: Optional[str] = None
+    """Street address of service location."""
 
 
 class EventAmountsCardholder(BaseModel):
@@ -667,6 +703,7 @@ class Transaction(BaseModel):
     financial_account_token: Optional[str] = None
 
     merchant: Merchant
+    """Merchant information including full location details."""
 
     merchant_amount: Optional[int] = None
     """Analogous to the 'amount', but in the merchant currency."""
@@ -722,6 +759,13 @@ class Transaction(BaseModel):
         "UNKNOWN_HOST_TIMEOUT",
         "USER_TRANSACTION_LIMIT",
     ]
+
+    service_location: Optional[ServiceLocation] = None
+    """
+    Where the cardholder received the service, when different from the card acceptor
+    location. This is populated from network data elements such as Mastercard DE-122
+    SE1 SF9-14 and Visa F34 DS02.
+    """
 
     settled_amount: int
     """The settled amount of the transaction in the settlement currency."""

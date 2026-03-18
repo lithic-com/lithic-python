@@ -4,10 +4,10 @@ from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from .shared import merchant
 from .._models import BaseModel
 from .token_info import TokenInfo
 from .shared.currency import Currency
-from .shared.merchant import Merchant
 from .cardholder_authentication import CardholderAuthentication
 
 __all__ = [
@@ -19,6 +19,8 @@ __all__ = [
     "AmountsSettlement",
     "Avs",
     "Card",
+    "Merchant",
+    "ServiceLocation",
     "FleetInfo",
     "LatestChallenge",
     "NetworkSpecificData",
@@ -139,6 +141,40 @@ class Card(BaseModel):
     state: Optional[Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"]] = None
 
     type: Optional[Literal["SINGLE_USE", "MERCHANT_LOCKED", "UNLOCKED", "PHYSICAL", "DIGITAL_WALLET", "VIRTUAL"]] = None
+
+
+class Merchant(merchant.Merchant):
+    """Merchant information including full location details."""
+
+    phone_number: Optional[str] = None
+    """Phone number of card acceptor."""
+
+    postal_code: Optional[str] = None
+    """Postal code of card acceptor."""
+
+    street_address: Optional[str] = None
+    """Street address of card acceptor."""
+
+
+class ServiceLocation(BaseModel):
+    """
+    Where the cardholder received the service, when different from the card acceptor location. This is populated from network data elements such as Mastercard DE-122 SE1 SF9-14 and Visa F34 DS02.
+    """
+
+    city: Optional[str] = None
+    """City of service location."""
+
+    country: Optional[str] = None
+    """Country code of service location, ISO 3166-1 alpha-3."""
+
+    postal_code: Optional[str] = None
+    """Postal code of service location."""
+
+    state: Optional[str] = None
+    """State/province code of service location, ISO 3166-2."""
+
+    street_address: Optional[str] = None
+    """Street address of service location."""
 
 
 class FleetInfo(BaseModel):
@@ -412,6 +448,7 @@ class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
     event_type: Literal["card_authorization.approval_request"]
 
     merchant: Merchant
+    """Merchant information including full location details."""
 
     merchant_amount: int
     """Deprecated, use `amounts`.
@@ -425,6 +462,13 @@ class CardAuthorizationApprovalRequestWebhookEvent(BaseModel):
 
     merchant_currency: str
     """3-character alphabetic ISO 4217 code for the local currency of the transaction."""
+
+    service_location: Optional[ServiceLocation] = None
+    """
+    Where the cardholder received the service, when different from the card acceptor
+    location. This is populated from network data elements such as Mastercard DE-122
+    SE1 SF9-14 and Visa F34 DS02.
+    """
 
     settled_amount: int
     """Deprecated, use `amounts`.
