@@ -31,6 +31,8 @@ class Condition(BaseModel):
         "WALLET_TYPE",
         "TRANSACTION_INITIATOR",
         "ADDRESS_MATCH",
+        "CARD_AGE",
+        "ACCOUNT_AGE",
     ]
     """The attribute to target.
 
@@ -86,6 +88,9 @@ class Condition(BaseModel):
     - `ADDRESS_MATCH`: Lithic's evaluation result comparing transaction's address
       data with the cardholder KYC data if it exists. Valid values are `MATCH`,
       `MATCH_ADDRESS_ONLY`, `MATCH_ZIP_ONLY`,`MISMATCH`,`NOT_PRESENT`.
+    - `CARD_AGE`: The age of the card in seconds at the time of the authorization.
+    - `ACCOUNT_AGE`: The age of the account holder's account in seconds at the time
+      of the authorization.
     """
 
     operation: ConditionalOperation
