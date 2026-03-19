@@ -18,7 +18,7 @@ from ..types import (
     external_payment_reverse_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -135,7 +135,9 @@ class ExternalPayments(SyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return self._get(
-            f"/v1/external_payments/{external_payment_token}",
+            path_template(
+                "/v1/external_payments/{external_payment_token}", external_payment_token=external_payment_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -258,7 +260,9 @@ class ExternalPayments(SyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return self._post(
-            f"/v1/external_payments/{external_payment_token}/cancel",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/cancel", external_payment_token=external_payment_token
+            ),
             body=maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -302,7 +306,9 @@ class ExternalPayments(SyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return self._post(
-            f"/v1/external_payments/{external_payment_token}/release",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/release", external_payment_token=external_payment_token
+            ),
             body=maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -346,7 +352,9 @@ class ExternalPayments(SyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return self._post(
-            f"/v1/external_payments/{external_payment_token}/reverse",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/reverse", external_payment_token=external_payment_token
+            ),
             body=maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -391,7 +399,9 @@ class ExternalPayments(SyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return self._post(
-            f"/v1/external_payments/{external_payment_token}/settle",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/settle", external_payment_token=external_payment_token
+            ),
             body=maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -513,7 +523,9 @@ class AsyncExternalPayments(AsyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return await self._get(
-            f"/v1/external_payments/{external_payment_token}",
+            path_template(
+                "/v1/external_payments/{external_payment_token}", external_payment_token=external_payment_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -636,7 +648,9 @@ class AsyncExternalPayments(AsyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return await self._post(
-            f"/v1/external_payments/{external_payment_token}/cancel",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/cancel", external_payment_token=external_payment_token
+            ),
             body=await async_maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -680,7 +694,9 @@ class AsyncExternalPayments(AsyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return await self._post(
-            f"/v1/external_payments/{external_payment_token}/release",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/release", external_payment_token=external_payment_token
+            ),
             body=await async_maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -724,7 +740,9 @@ class AsyncExternalPayments(AsyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return await self._post(
-            f"/v1/external_payments/{external_payment_token}/reverse",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/reverse", external_payment_token=external_payment_token
+            ),
             body=await async_maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -769,7 +787,9 @@ class AsyncExternalPayments(AsyncAPIResource):
                 f"Expected a non-empty value for `external_payment_token` but received {external_payment_token!r}"
             )
         return await self._post(
-            f"/v1/external_payments/{external_payment_token}/settle",
+            path_template(
+                "/v1/external_payments/{external_payment_token}/settle", external_payment_token=external_payment_token
+            ),
             body=await async_maybe_transform(
                 {
                     "effective_date": effective_date,

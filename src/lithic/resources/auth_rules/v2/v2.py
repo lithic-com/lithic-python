@@ -10,7 +10,7 @@ import httpx
 
 from .... import _legacy_response
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from ...._utils import required_args, maybe_transform, async_maybe_transform
+from ...._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from .backtests import (
     Backtests,
     AsyncBacktests,
@@ -312,7 +312,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._get(
-            f"/v2/auth_rules/{auth_rule_token}",
+            path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -483,7 +483,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._patch(
-            f"/v2/auth_rules/{auth_rule_token}",
+            path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             body=maybe_transform(
                 {
                     "account_tokens": account_tokens,
@@ -610,7 +610,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._delete(
-            f"/v2/auth_rules/{auth_rule_token}",
+            path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -649,7 +649,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._post(
-            f"/v2/auth_rules/{auth_rule_token}/draft",
+            path_template("/v2/auth_rules/{auth_rule_token}/draft", auth_rule_token=auth_rule_token),
             body=maybe_transform({"parameters": parameters}, v2_draft_params.V2DraftParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -766,7 +766,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._get(
-            f"/v2/auth_rules/{auth_rule_token}/versions",
+            path_template("/v2/auth_rules/{auth_rule_token}/versions", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -800,7 +800,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._post(
-            f"/v2/auth_rules/{auth_rule_token}/promote",
+            path_template("/v2/auth_rules/{auth_rule_token}/promote", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -843,7 +843,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._get(
-            f"/v2/auth_rules/{auth_rule_token}/features",
+            path_template("/v2/auth_rules/{auth_rule_token}/features", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -904,7 +904,7 @@ class V2(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._get(
-            f"/v2/auth_rules/{auth_rule_token}/report",
+            path_template("/v2/auth_rules/{auth_rule_token}/report", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1190,7 +1190,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._get(
-            f"/v2/auth_rules/{auth_rule_token}",
+            path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1361,7 +1361,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._patch(
-            f"/v2/auth_rules/{auth_rule_token}",
+            path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             body=await async_maybe_transform(
                 {
                     "account_tokens": account_tokens,
@@ -1488,7 +1488,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._delete(
-            f"/v2/auth_rules/{auth_rule_token}",
+            path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1527,7 +1527,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._post(
-            f"/v2/auth_rules/{auth_rule_token}/draft",
+            path_template("/v2/auth_rules/{auth_rule_token}/draft", auth_rule_token=auth_rule_token),
             body=await async_maybe_transform({"parameters": parameters}, v2_draft_params.V2DraftParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1644,7 +1644,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._get(
-            f"/v2/auth_rules/{auth_rule_token}/versions",
+            path_template("/v2/auth_rules/{auth_rule_token}/versions", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1678,7 +1678,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._post(
-            f"/v2/auth_rules/{auth_rule_token}/promote",
+            path_template("/v2/auth_rules/{auth_rule_token}/promote", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1721,7 +1721,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._get(
-            f"/v2/auth_rules/{auth_rule_token}/features",
+            path_template("/v2/auth_rules/{auth_rule_token}/features", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1782,7 +1782,7 @@ class AsyncV2(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._get(
-            f"/v2/auth_rules/{auth_rule_token}/report",
+            path_template("/v2/auth_rules/{auth_rule_token}/report", auth_rule_token=auth_rule_token),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

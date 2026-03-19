@@ -29,7 +29,7 @@ from ...types import (
     card_convert_physical_params,
 )
 from ..._types import NOT_GIVEN, Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
-from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from .balances import (
     Balances,
     AsyncBalances,
@@ -351,7 +351,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get(
-            f"/v1/cards/{card_token}",
+            path_template("/v1/cards/{card_token}", card_token=card_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -490,7 +490,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._patch(
-            f"/v1/cards/{card_token}",
+            path_template("/v1/cards/{card_token}", card_token=card_token),
             body=maybe_transform(
                 {
                     "comment": comment,
@@ -654,7 +654,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
-            f"/v1/cards/{card_token}/convert_physical",
+            path_template("/v1/cards/{card_token}/convert_physical", card_token=card_token),
             body=maybe_transform(
                 {
                     "shipping_address": shipping_address,
@@ -914,7 +914,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
-            f"/v1/cards/{card_token}/provision",
+            path_template("/v1/cards/{card_token}/provision", card_token=card_token),
             body=maybe_transform(
                 {
                     "certificate": certificate,
@@ -994,7 +994,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
-            f"/v1/cards/{card_token}/reissue",
+            path_template("/v1/cards/{card_token}/reissue", card_token=card_token),
             body=maybe_transform(
                 {
                     "carrier": carrier,
@@ -1084,7 +1084,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._post(
-            f"/v1/cards/{card_token}/renew",
+            path_template("/v1/cards/{card_token}/renew", card_token=card_token),
             body=maybe_transform(
                 {
                     "shipping_address": shipping_address,
@@ -1131,7 +1131,7 @@ class Cards(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get(
-            f"/v1/cards/{card_token}/spend_limits",
+            path_template("/v1/cards/{card_token}/spend_limits", card_token=card_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1225,7 +1225,7 @@ class Cards(SyncAPIResource):
         return cast(
             CardWebProvisionResponse,
             self._post(
-                f"/v1/cards/{card_token}/web_provision",
+                path_template("/v1/cards/{card_token}/web_provision", card_token=card_token),
                 body=maybe_transform(
                     {
                         "client_device_id": client_device_id,
@@ -1533,7 +1533,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._get(
-            f"/v1/cards/{card_token}",
+            path_template("/v1/cards/{card_token}", card_token=card_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1672,7 +1672,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._patch(
-            f"/v1/cards/{card_token}",
+            path_template("/v1/cards/{card_token}", card_token=card_token),
             body=await async_maybe_transform(
                 {
                     "comment": comment,
@@ -1836,7 +1836,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
-            f"/v1/cards/{card_token}/convert_physical",
+            path_template("/v1/cards/{card_token}/convert_physical", card_token=card_token),
             body=await async_maybe_transform(
                 {
                     "shipping_address": shipping_address,
@@ -2096,7 +2096,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
-            f"/v1/cards/{card_token}/provision",
+            path_template("/v1/cards/{card_token}/provision", card_token=card_token),
             body=await async_maybe_transform(
                 {
                     "certificate": certificate,
@@ -2176,7 +2176,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
-            f"/v1/cards/{card_token}/reissue",
+            path_template("/v1/cards/{card_token}/reissue", card_token=card_token),
             body=await async_maybe_transform(
                 {
                     "carrier": carrier,
@@ -2266,7 +2266,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._post(
-            f"/v1/cards/{card_token}/renew",
+            path_template("/v1/cards/{card_token}/renew", card_token=card_token),
             body=await async_maybe_transform(
                 {
                     "shipping_address": shipping_address,
@@ -2313,7 +2313,7 @@ class AsyncCards(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return await self._get(
-            f"/v1/cards/{card_token}/spend_limits",
+            path_template("/v1/cards/{card_token}/spend_limits", card_token=card_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2407,7 +2407,7 @@ class AsyncCards(AsyncAPIResource):
         return cast(
             CardWebProvisionResponse,
             await self._post(
-                f"/v1/cards/{card_token}/web_provision",
+                path_template("/v1/cards/{card_token}/web_provision", card_token=card_token),
                 body=await async_maybe_transform(
                     {
                         "client_device_id": client_device_id,

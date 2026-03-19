@@ -9,7 +9,7 @@ import httpx
 
 from .... import _legacy_response
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ...._utils import maybe_transform
+from ...._utils import path_template, maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -91,7 +91,7 @@ class Settlement(SyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get_api_list(
-            f"/v1/reports/settlement/details/{report_date}",
+            path_template("/v1/reports/settlement/details/{report_date}", report_date=report_date),
             page=SyncCursorPage[SettlementDetail],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -137,7 +137,7 @@ class Settlement(SyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get(
-            f"/v1/reports/settlement/summary/{report_date}",
+            path_template("/v1/reports/settlement/summary/{report_date}", report_date=report_date),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -206,7 +206,7 @@ class AsyncSettlement(AsyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return self._get_api_list(
-            f"/v1/reports/settlement/details/{report_date}",
+            path_template("/v1/reports/settlement/details/{report_date}", report_date=report_date),
             page=AsyncCursorPage[SettlementDetail],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -252,7 +252,7 @@ class AsyncSettlement(AsyncAPIResource):
         if not report_date:
             raise ValueError(f"Expected a non-empty value for `report_date` but received {report_date!r}")
         return await self._get(
-            f"/v1/reports/settlement/summary/{report_date}",
+            path_template("/v1/reports/settlement/summary/{report_date}", report_date=report_date),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

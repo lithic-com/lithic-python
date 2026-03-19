@@ -9,7 +9,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -89,7 +89,10 @@ class InterestTierScheduleResource(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._post(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+                financial_account_token=financial_account_token,
+            ),
             body=maybe_transform(
                 {
                     "credit_product_token": credit_product_token,
@@ -137,7 +140,11 @@ class InterestTierScheduleResource(SyncAPIResource):
         if not effective_date:
             raise ValueError(f"Expected a non-empty value for `effective_date` but received {effective_date!r}")
         return self._get(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+                financial_account_token=financial_account_token,
+                effective_date=effective_date,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -185,7 +192,11 @@ class InterestTierScheduleResource(SyncAPIResource):
         if not effective_date:
             raise ValueError(f"Expected a non-empty value for `effective_date` but received {effective_date!r}")
         return self._put(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+                financial_account_token=financial_account_token,
+                effective_date=effective_date,
+            ),
             body=maybe_transform(
                 {
                     "penalty_rates": penalty_rates,
@@ -246,7 +257,10 @@ class InterestTierScheduleResource(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+                financial_account_token=financial_account_token,
+            ),
             page=SyncSinglePage[InterestTierSchedule],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -311,7 +325,11 @@ class InterestTierScheduleResource(SyncAPIResource):
         if not effective_date:
             raise ValueError(f"Expected a non-empty value for `effective_date` but received {effective_date!r}")
         return self._delete(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+                financial_account_token=financial_account_token,
+                effective_date=effective_date,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -383,7 +401,10 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._post(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+                financial_account_token=financial_account_token,
+            ),
             body=await async_maybe_transform(
                 {
                     "credit_product_token": credit_product_token,
@@ -431,7 +452,11 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
         if not effective_date:
             raise ValueError(f"Expected a non-empty value for `effective_date` but received {effective_date!r}")
         return await self._get(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+                financial_account_token=financial_account_token,
+                effective_date=effective_date,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -479,7 +504,11 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
         if not effective_date:
             raise ValueError(f"Expected a non-empty value for `effective_date` but received {effective_date!r}")
         return await self._put(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+                financial_account_token=financial_account_token,
+                effective_date=effective_date,
+            ),
             body=await async_maybe_transform(
                 {
                     "penalty_rates": penalty_rates,
@@ -540,7 +569,10 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule",
+                financial_account_token=financial_account_token,
+            ),
             page=AsyncSinglePage[InterestTierSchedule],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -605,7 +637,11 @@ class AsyncInterestTierScheduleResource(AsyncAPIResource):
         if not effective_date:
             raise ValueError(f"Expected a non-empty value for `effective_date` but received {effective_date!r}")
         return await self._delete(
-            f"/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/interest_tier_schedule/{effective_date}",
+                financial_account_token=financial_account_token,
+                effective_date=effective_date,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

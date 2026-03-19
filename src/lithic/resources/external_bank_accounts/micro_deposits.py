@@ -8,7 +8,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Query, Headers, NotGiven, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -68,7 +68,10 @@ class MicroDeposits(SyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return self._post(
-            f"/v1/external_bank_accounts/{external_bank_account_token}/micro_deposits",
+            path_template(
+                "/v1/external_bank_accounts/{external_bank_account_token}/micro_deposits",
+                external_bank_account_token=external_bank_account_token,
+            ),
             body=maybe_transform(
                 {"micro_deposits": micro_deposits}, micro_deposit_create_params.MicroDepositCreateParams
             ),
@@ -128,7 +131,10 @@ class AsyncMicroDeposits(AsyncAPIResource):
                 f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
             )
         return await self._post(
-            f"/v1/external_bank_accounts/{external_bank_account_token}/micro_deposits",
+            path_template(
+                "/v1/external_bank_accounts/{external_bank_account_token}/micro_deposits",
+                external_bank_account_token=external_bank_account_token,
+            ),
             body=await async_maybe_transform(
                 {"micro_deposits": micro_deposits}, micro_deposit_create_params.MicroDepositCreateParams
             ),

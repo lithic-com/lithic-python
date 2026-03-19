@@ -6,6 +6,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Query, Headers, NotGiven, not_given
+from ..._utils import path_template
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -63,7 +64,9 @@ class ExtendedCreditResource(SyncAPIResource):
                 f"Expected a non-empty value for `credit_product_token` but received {credit_product_token!r}"
             )
         return self._get(
-            f"/v1/credit_products/{credit_product_token}/extended_credit",
+            path_template(
+                "/v1/credit_products/{credit_product_token}/extended_credit", credit_product_token=credit_product_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -119,7 +122,9 @@ class AsyncExtendedCreditResource(AsyncAPIResource):
                 f"Expected a non-empty value for `credit_product_token` but received {credit_product_token!r}"
             )
         return await self._get(
-            f"/v1/credit_products/{credit_product_token}/extended_credit",
+            path_template(
+                "/v1/credit_products/{credit_product_token}/extended_credit", credit_product_token=credit_product_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

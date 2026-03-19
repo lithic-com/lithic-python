@@ -10,7 +10,7 @@ import httpx
 from .. import _legacy_response
 from ..types import disputes_v2_list_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform
+from .._utils import path_template, maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -67,7 +67,7 @@ class DisputesV2(SyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._get(
-            f"/v2/disputes/{dispute_token}",
+            path_template("/v2/disputes/{dispute_token}", dispute_token=dispute_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -195,7 +195,7 @@ class AsyncDisputesV2(AsyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._get(
-            f"/v2/disputes/{dispute_token}",
+            path_template("/v2/disputes/{dispute_token}", dispute_token=dispute_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

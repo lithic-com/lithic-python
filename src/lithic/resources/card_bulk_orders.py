@@ -11,7 +11,7 @@ import httpx
 from .. import _legacy_response
 from ..types import card_bulk_order_list_params, card_bulk_order_create_params, card_bulk_order_update_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -122,7 +122,7 @@ class CardBulkOrders(SyncAPIResource):
         if not bulk_order_token:
             raise ValueError(f"Expected a non-empty value for `bulk_order_token` but received {bulk_order_token!r}")
         return self._get(
-            f"/v1/card_bulk_orders/{bulk_order_token}",
+            path_template("/v1/card_bulk_orders/{bulk_order_token}", bulk_order_token=bulk_order_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -160,7 +160,7 @@ class CardBulkOrders(SyncAPIResource):
         if not bulk_order_token:
             raise ValueError(f"Expected a non-empty value for `bulk_order_token` but received {bulk_order_token!r}")
         return self._patch(
-            f"/v1/card_bulk_orders/{bulk_order_token}",
+            path_template("/v1/card_bulk_orders/{bulk_order_token}", bulk_order_token=bulk_order_token),
             body=maybe_transform({"status": status}, card_bulk_order_update_params.CardBulkOrderUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -332,7 +332,7 @@ class AsyncCardBulkOrders(AsyncAPIResource):
         if not bulk_order_token:
             raise ValueError(f"Expected a non-empty value for `bulk_order_token` but received {bulk_order_token!r}")
         return await self._get(
-            f"/v1/card_bulk_orders/{bulk_order_token}",
+            path_template("/v1/card_bulk_orders/{bulk_order_token}", bulk_order_token=bulk_order_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -370,7 +370,7 @@ class AsyncCardBulkOrders(AsyncAPIResource):
         if not bulk_order_token:
             raise ValueError(f"Expected a non-empty value for `bulk_order_token` but received {bulk_order_token!r}")
         return await self._patch(
-            f"/v1/card_bulk_orders/{bulk_order_token}",
+            path_template("/v1/card_bulk_orders/{bulk_order_token}", bulk_order_token=bulk_order_token),
             body=await async_maybe_transform(
                 {"status": status}, card_bulk_order_update_params.CardBulkOrderUpdateParams
             ),
