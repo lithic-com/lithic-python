@@ -157,6 +157,12 @@ class MethodAttributesACHMethodAttributes(BaseModel):
     company_id: Optional[str] = None
     """Company ID for the ACH transaction"""
 
+    override_company_name: Optional[str] = None
+    """Value to override the configured company name with.
+
+    Can only be used if allowed to override
+    """
+
     receipt_routing_number: Optional[str] = None
     """Receipt routing number"""
 
