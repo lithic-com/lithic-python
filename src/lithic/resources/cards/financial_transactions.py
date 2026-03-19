@@ -10,7 +10,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform
+from ..._utils import path_template, maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -73,7 +73,11 @@ class FinancialTransactions(SyncAPIResource):
                 f"Expected a non-empty value for `financial_transaction_token` but received {financial_transaction_token!r}"
             )
         return self._get(
-            f"/v1/cards/{card_token}/financial_transactions/{financial_transaction_token}",
+            path_template(
+                "/v1/cards/{card_token}/financial_transactions/{financial_transaction_token}",
+                card_token=card_token,
+                financial_transaction_token=financial_transaction_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -131,7 +135,7 @@ class FinancialTransactions(SyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
-            f"/v1/cards/{card_token}/financial_transactions",
+            path_template("/v1/cards/{card_token}/financial_transactions", card_token=card_token),
             page=SyncSinglePage[FinancialTransaction],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -206,7 +210,11 @@ class AsyncFinancialTransactions(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_transaction_token` but received {financial_transaction_token!r}"
             )
         return await self._get(
-            f"/v1/cards/{card_token}/financial_transactions/{financial_transaction_token}",
+            path_template(
+                "/v1/cards/{card_token}/financial_transactions/{financial_transaction_token}",
+                card_token=card_token,
+                financial_transaction_token=financial_transaction_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -264,7 +272,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
         if not card_token:
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
-            f"/v1/cards/{card_token}/financial_transactions",
+            path_template("/v1/cards/{card_token}/financial_transactions", card_token=card_token),
             page=AsyncSinglePage[FinancialTransaction],
             options=make_request_options(
                 extra_headers=extra_headers,

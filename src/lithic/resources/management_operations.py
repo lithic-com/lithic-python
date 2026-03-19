@@ -15,7 +15,7 @@ from ..types import (
     management_operation_reverse_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -168,7 +168,10 @@ class ManagementOperations(SyncAPIResource):
                 f"Expected a non-empty value for `management_operation_token` but received {management_operation_token!r}"
             )
         return self._get(
-            f"/v1/management_operations/{management_operation_token}",
+            path_template(
+                "/v1/management_operations/{management_operation_token}",
+                management_operation_token=management_operation_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -291,7 +294,10 @@ class ManagementOperations(SyncAPIResource):
                 f"Expected a non-empty value for `management_operation_token` but received {management_operation_token!r}"
             )
         return self._post(
-            f"/v1/management_operations/{management_operation_token}/reverse",
+            path_template(
+                "/v1/management_operations/{management_operation_token}/reverse",
+                management_operation_token=management_operation_token,
+            ),
             body=maybe_transform(
                 {
                     "effective_date": effective_date,
@@ -448,7 +454,10 @@ class AsyncManagementOperations(AsyncAPIResource):
                 f"Expected a non-empty value for `management_operation_token` but received {management_operation_token!r}"
             )
         return await self._get(
-            f"/v1/management_operations/{management_operation_token}",
+            path_template(
+                "/v1/management_operations/{management_operation_token}",
+                management_operation_token=management_operation_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -571,7 +580,10 @@ class AsyncManagementOperations(AsyncAPIResource):
                 f"Expected a non-empty value for `management_operation_token` but received {management_operation_token!r}"
             )
         return await self._post(
-            f"/v1/management_operations/{management_operation_token}/reverse",
+            path_template(
+                "/v1/management_operations/{management_operation_token}/reverse",
+                management_operation_token=management_operation_token,
+            ),
             body=await async_maybe_transform(
                 {
                     "effective_date": effective_date,

@@ -11,7 +11,7 @@ import httpx
 from ... import _legacy_response
 from ...types import event_list_params, event_list_attempts_params
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform
+from ..._utils import path_template, maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -93,7 +93,7 @@ class Events(SyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get(
-            f"/v1/events/{event_token}",
+            path_template("/v1/events/{event_token}", event_token=event_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -274,7 +274,7 @@ class Events(SyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get_api_list(
-            f"/v1/events/{event_token}/attempts",
+            path_template("/v1/events/{event_token}/attempts", event_token=event_token),
             page=SyncCursorPage[MessageAttempt],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -367,7 +367,7 @@ class AsyncEvents(AsyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return await self._get(
-            f"/v1/events/{event_token}",
+            path_template("/v1/events/{event_token}", event_token=event_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -548,7 +548,7 @@ class AsyncEvents(AsyncAPIResource):
         if not event_token:
             raise ValueError(f"Expected a non-empty value for `event_token` but received {event_token!r}")
         return self._get_api_list(
-            f"/v1/events/{event_token}/attempts",
+            path_template("/v1/events/{event_token}/attempts", event_token=event_token),
             page=AsyncCursorPage[MessageAttempt],
             options=make_request_options(
                 extra_headers=extra_headers,

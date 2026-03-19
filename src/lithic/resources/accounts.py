@@ -11,7 +11,7 @@ import httpx
 from .. import _legacy_response
 from ..types import account_list_params, account_update_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -69,7 +69,7 @@ class Accounts(SyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._get(
-            f"/v1/accounts/{account_token}",
+            path_template("/v1/accounts/{account_token}", account_token=account_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -174,7 +174,7 @@ class Accounts(SyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._patch(
-            f"/v1/accounts/{account_token}",
+            path_template("/v1/accounts/{account_token}", account_token=account_token),
             body=maybe_transform(
                 {
                     "comment": comment,
@@ -287,7 +287,7 @@ class Accounts(SyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return self._get(
-            f"/v1/accounts/{account_token}/spend_limits",
+            path_template("/v1/accounts/{account_token}/spend_limits", account_token=account_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -341,7 +341,7 @@ class AsyncAccounts(AsyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._get(
-            f"/v1/accounts/{account_token}",
+            path_template("/v1/accounts/{account_token}", account_token=account_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -446,7 +446,7 @@ class AsyncAccounts(AsyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._patch(
-            f"/v1/accounts/{account_token}",
+            path_template("/v1/accounts/{account_token}", account_token=account_token),
             body=await async_maybe_transform(
                 {
                     "comment": comment,
@@ -559,7 +559,7 @@ class AsyncAccounts(AsyncAPIResource):
         if not account_token:
             raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
         return await self._get(
-            f"/v1/accounts/{account_token}/spend_limits",
+            path_template("/v1/accounts/{account_token}/spend_limits", account_token=account_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

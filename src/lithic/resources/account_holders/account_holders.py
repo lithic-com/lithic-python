@@ -18,7 +18,7 @@ from ...types import (
     account_holder_simulate_enrollment_document_review_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ..._utils import is_given, required_args, maybe_transform, async_maybe_transform
+from ..._utils import is_given, path_template, required_args, maybe_transform, async_maybe_transform
 from .entities import (
     Entities,
     AsyncEntities,
@@ -461,7 +461,7 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._get(
-            f"/v1/account_holders/{account_holder_token}",
+            path_template("/v1/account_holders/{account_holder_token}", account_holder_token=account_holder_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -679,7 +679,7 @@ class AccountHolders(SyncAPIResource):
         return cast(
             AccountHolderUpdateResponse,
             self._patch(
-                f"/v1/account_holders/{account_holder_token}",
+                path_template("/v1/account_holders/{account_holder_token}", account_holder_token=account_holder_token),
                 body=maybe_transform(
                     {
                         "beneficial_owner_individuals": beneficial_owner_individuals,
@@ -843,7 +843,9 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._get(
-            f"/v1/account_holders/{account_holder_token}/documents",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/documents", account_holder_token=account_holder_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -894,7 +896,11 @@ class AccountHolders(SyncAPIResource):
         if not document_token:
             raise ValueError(f"Expected a non-empty value for `document_token` but received {document_token!r}")
         return self._get(
-            f"/v1/account_holders/{account_holder_token}/documents/{document_token}",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/documents/{document_token}",
+                account_holder_token=account_holder_token,
+                document_token=document_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1108,7 +1114,9 @@ class AccountHolders(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._post(
-            f"/v1/account_holders/{account_holder_token}/documents",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/documents", account_holder_token=account_holder_token
+            ),
             body=maybe_transform(
                 {
                     "document_type": document_type,
@@ -1539,7 +1547,7 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._get(
-            f"/v1/account_holders/{account_holder_token}",
+            path_template("/v1/account_holders/{account_holder_token}", account_holder_token=account_holder_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1757,7 +1765,7 @@ class AsyncAccountHolders(AsyncAPIResource):
         return cast(
             AccountHolderUpdateResponse,
             await self._patch(
-                f"/v1/account_holders/{account_holder_token}",
+                path_template("/v1/account_holders/{account_holder_token}", account_holder_token=account_holder_token),
                 body=await async_maybe_transform(
                     {
                         "beneficial_owner_individuals": beneficial_owner_individuals,
@@ -1921,7 +1929,9 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._get(
-            f"/v1/account_holders/{account_holder_token}/documents",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/documents", account_holder_token=account_holder_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1972,7 +1982,11 @@ class AsyncAccountHolders(AsyncAPIResource):
         if not document_token:
             raise ValueError(f"Expected a non-empty value for `document_token` but received {document_token!r}")
         return await self._get(
-            f"/v1/account_holders/{account_holder_token}/documents/{document_token}",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/documents/{document_token}",
+                account_holder_token=account_holder_token,
+                document_token=document_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -2186,7 +2200,9 @@ class AsyncAccountHolders(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._post(
-            f"/v1/account_holders/{account_holder_token}/documents",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/documents", account_holder_token=account_holder_token
+            ),
             body=await async_maybe_transform(
                 {
                     "document_type": document_type,

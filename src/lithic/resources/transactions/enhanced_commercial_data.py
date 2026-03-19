@@ -6,6 +6,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Query, Headers, NotGiven, not_given
+from ..._utils import path_template
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -63,7 +64,9 @@ class EnhancedCommercialData(SyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._get(
-            f"/v1/transactions/{transaction_token}/enhanced_commercial_data",
+            path_template(
+                "/v1/transactions/{transaction_token}/enhanced_commercial_data", transaction_token=transaction_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -119,7 +122,9 @@ class AsyncEnhancedCommercialData(AsyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._get(
-            f"/v1/transactions/{transaction_token}/enhanced_commercial_data",
+            path_template(
+                "/v1/transactions/{transaction_token}/enhanced_commercial_data", transaction_token=transaction_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

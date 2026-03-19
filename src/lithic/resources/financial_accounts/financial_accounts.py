@@ -16,7 +16,7 @@ from ...types import (
     financial_account_register_account_number_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from .balances import (
     Balances,
     AsyncBalances,
@@ -202,7 +202,9 @@ class FinancialAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get(
-            f"/v1/financial_accounts/{financial_account_token}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}", financial_account_token=financial_account_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -238,7 +240,9 @@ class FinancialAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._patch(
-            f"/v1/financial_accounts/{financial_account_token}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}", financial_account_token=financial_account_token
+            ),
             body=maybe_transform({"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -327,7 +331,10 @@ class FinancialAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._post(
-            f"/v1/financial_accounts/{financial_account_token}/register_account_number",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/register_account_number",
+                financial_account_token=financial_account_token,
+            ),
             body=maybe_transform(
                 {"account_number": account_number},
                 financial_account_register_account_number_params.FinancialAccountRegisterAccountNumberParams,
@@ -383,7 +390,10 @@ class FinancialAccounts(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._post(
-            f"/v1/financial_accounts/{financial_account_token}/update_status",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/update_status",
+                financial_account_token=financial_account_token,
+            ),
             body=maybe_transform(
                 {
                     "status": status,
@@ -518,7 +528,9 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._get(
-            f"/v1/financial_accounts/{financial_account_token}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}", financial_account_token=financial_account_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -554,7 +566,9 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._patch(
-            f"/v1/financial_accounts/{financial_account_token}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}", financial_account_token=financial_account_token
+            ),
             body=await async_maybe_transform(
                 {"nickname": nickname}, financial_account_update_params.FinancialAccountUpdateParams
             ),
@@ -645,7 +659,10 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._post(
-            f"/v1/financial_accounts/{financial_account_token}/register_account_number",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/register_account_number",
+                financial_account_token=financial_account_token,
+            ),
             body=await async_maybe_transform(
                 {"account_number": account_number},
                 financial_account_register_account_number_params.FinancialAccountRegisterAccountNumberParams,
@@ -701,7 +718,10 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return await self._post(
-            f"/v1/financial_accounts/{financial_account_token}/update_status",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/update_status",
+                financial_account_token=financial_account_token,
+            ),
             body=await async_maybe_transform(
                 {
                     "status": status,

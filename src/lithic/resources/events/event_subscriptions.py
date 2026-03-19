@@ -6,6 +6,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
+from ..._utils import path_template
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -65,7 +66,11 @@ class EventSubscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._post(
-            f"/v1/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
+            path_template(
+                "/v1/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
+                event_token=event_token,
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -124,7 +129,11 @@ class AsyncEventSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._post(
-            f"/v1/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
+            path_template(
+                "/v1/events/{event_token}/event_subscriptions/{event_subscription_token}/resend",
+                event_token=event_token,
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
