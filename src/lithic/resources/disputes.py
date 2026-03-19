@@ -17,7 +17,7 @@ from ..types import (
     dispute_initiate_evidence_upload_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -145,7 +145,7 @@ class Disputes(SyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._get(
-            f"/v1/disputes/{dispute_token}",
+            path_template("/v1/disputes/{dispute_token}", dispute_token=dispute_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -207,7 +207,7 @@ class Disputes(SyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._patch(
-            f"/v1/disputes/{dispute_token}",
+            path_template("/v1/disputes/{dispute_token}", dispute_token=dispute_token),
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -331,7 +331,7 @@ class Disputes(SyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._delete(
-            f"/v1/disputes/{dispute_token}",
+            path_template("/v1/disputes/{dispute_token}", dispute_token=dispute_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -369,7 +369,11 @@ class Disputes(SyncAPIResource):
         if not evidence_token:
             raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return self._delete(
-            f"/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+            path_template(
+                "/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+                dispute_token=dispute_token,
+                evidence_token=evidence_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -410,7 +414,7 @@ class Disputes(SyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._post(
-            f"/v1/disputes/{dispute_token}/evidences",
+            path_template("/v1/disputes/{dispute_token}/evidences", dispute_token=dispute_token),
             body=maybe_transform(
                 {"filename": filename}, dispute_initiate_evidence_upload_params.DisputeInitiateEvidenceUploadParams
             ),
@@ -465,7 +469,7 @@ class Disputes(SyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._get_api_list(
-            f"/v1/disputes/{dispute_token}/evidences",
+            path_template("/v1/disputes/{dispute_token}/evidences", dispute_token=dispute_token),
             page=SyncCursorPage[DisputeEvidence],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -515,7 +519,11 @@ class Disputes(SyncAPIResource):
         if not evidence_token:
             raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return self._get(
-            f"/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+            path_template(
+                "/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+                dispute_token=dispute_token,
+                evidence_token=evidence_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -639,7 +647,7 @@ class AsyncDisputes(AsyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._get(
-            f"/v1/disputes/{dispute_token}",
+            path_template("/v1/disputes/{dispute_token}", dispute_token=dispute_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -701,7 +709,7 @@ class AsyncDisputes(AsyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._patch(
-            f"/v1/disputes/{dispute_token}",
+            path_template("/v1/disputes/{dispute_token}", dispute_token=dispute_token),
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -825,7 +833,7 @@ class AsyncDisputes(AsyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._delete(
-            f"/v1/disputes/{dispute_token}",
+            path_template("/v1/disputes/{dispute_token}", dispute_token=dispute_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -863,7 +871,11 @@ class AsyncDisputes(AsyncAPIResource):
         if not evidence_token:
             raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return await self._delete(
-            f"/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+            path_template(
+                "/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+                dispute_token=dispute_token,
+                evidence_token=evidence_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -904,7 +916,7 @@ class AsyncDisputes(AsyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return await self._post(
-            f"/v1/disputes/{dispute_token}/evidences",
+            path_template("/v1/disputes/{dispute_token}/evidences", dispute_token=dispute_token),
             body=await async_maybe_transform(
                 {"filename": filename}, dispute_initiate_evidence_upload_params.DisputeInitiateEvidenceUploadParams
             ),
@@ -959,7 +971,7 @@ class AsyncDisputes(AsyncAPIResource):
         if not dispute_token:
             raise ValueError(f"Expected a non-empty value for `dispute_token` but received {dispute_token!r}")
         return self._get_api_list(
-            f"/v1/disputes/{dispute_token}/evidences",
+            path_template("/v1/disputes/{dispute_token}/evidences", dispute_token=dispute_token),
             page=AsyncCursorPage[DisputeEvidence],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -1009,7 +1021,11 @@ class AsyncDisputes(AsyncAPIResource):
         if not evidence_token:
             raise ValueError(f"Expected a non-empty value for `evidence_token` but received {evidence_token!r}")
         return await self._get(
-            f"/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+            path_template(
+                "/v1/disputes/{dispute_token}/evidences/{evidence_token}",
+                dispute_token=dispute_token,
+                evidence_token=evidence_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

@@ -8,7 +8,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Query, Headers, NotGiven, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -101,7 +101,9 @@ class Entities(SyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return self._post(
-            f"/v1/account_holders/{account_holder_token}/entities",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/entities", account_holder_token=account_holder_token
+            ),
             body=maybe_transform(
                 {
                     "address": address,
@@ -154,7 +156,11 @@ class Entities(SyncAPIResource):
         if not entity_token:
             raise ValueError(f"Expected a non-empty value for `entity_token` but received {entity_token!r}")
         return self._delete(
-            f"/v1/account_holders/{account_holder_token}/entities/{entity_token}",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/entities/{entity_token}",
+                account_holder_token=account_holder_token,
+                entity_token=entity_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -243,7 +249,9 @@ class AsyncEntities(AsyncAPIResource):
                 f"Expected a non-empty value for `account_holder_token` but received {account_holder_token!r}"
             )
         return await self._post(
-            f"/v1/account_holders/{account_holder_token}/entities",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/entities", account_holder_token=account_holder_token
+            ),
             body=await async_maybe_transform(
                 {
                     "address": address,
@@ -296,7 +304,11 @@ class AsyncEntities(AsyncAPIResource):
         if not entity_token:
             raise ValueError(f"Expected a non-empty value for `entity_token` but received {entity_token!r}")
         return await self._delete(
-            f"/v1/account_holders/{account_holder_token}/entities/{entity_token}",
+            path_template(
+                "/v1/account_holders/{account_holder_token}/entities/{entity_token}",
+                account_holder_token=account_holder_token,
+                entity_token=entity_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

@@ -9,7 +9,7 @@ import httpx
 
 from .... import _legacy_response
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ...._utils import maybe_transform
+from ...._utils import path_template, maybe_transform
 from ...._compat import cached_property
 from .line_items import (
     LineItems,
@@ -88,7 +88,11 @@ class Statements(SyncAPIResource):
         if not statement_token:
             raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return self._get(
-            f"/v1/financial_accounts/{financial_account_token}/statements/{statement_token}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/statements/{statement_token}",
+                financial_account_token=financial_account_token,
+                statement_token=statement_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -147,7 +151,10 @@ class Statements(SyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/v1/financial_accounts/{financial_account_token}/statements",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/statements",
+                financial_account_token=financial_account_token,
+            ),
             page=SyncCursorPage[Statement],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -229,7 +236,11 @@ class AsyncStatements(AsyncAPIResource):
         if not statement_token:
             raise ValueError(f"Expected a non-empty value for `statement_token` but received {statement_token!r}")
         return await self._get(
-            f"/v1/financial_accounts/{financial_account_token}/statements/{statement_token}",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/statements/{statement_token}",
+                financial_account_token=financial_account_token,
+                statement_token=statement_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -288,7 +299,10 @@ class AsyncStatements(AsyncAPIResource):
                 f"Expected a non-empty value for `financial_account_token` but received {financial_account_token!r}"
             )
         return self._get_api_list(
-            f"/v1/financial_accounts/{financial_account_token}/statements",
+            path_template(
+                "/v1/financial_accounts/{financial_account_token}/statements",
+                financial_account_token=financial_account_token,
+            ),
             page=AsyncCursorPage[Statement],
             options=make_request_options(
                 extra_headers=extra_headers,

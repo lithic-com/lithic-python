@@ -8,7 +8,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -67,7 +67,7 @@ class Transactions(SyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._get(
-            f"/v1/fraud/transactions/{transaction_token}",
+            path_template("/v1/fraud/transactions/{transaction_token}", transaction_token=transaction_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -144,7 +144,7 @@ class Transactions(SyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._post(
-            f"/v1/fraud/transactions/{transaction_token}",
+            path_template("/v1/fraud/transactions/{transaction_token}", transaction_token=transaction_token),
             body=maybe_transform(
                 {
                     "fraud_status": fraud_status,
@@ -207,7 +207,7 @@ class AsyncTransactions(AsyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._get(
-            f"/v1/fraud/transactions/{transaction_token}",
+            path_template("/v1/fraud/transactions/{transaction_token}", transaction_token=transaction_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -284,7 +284,7 @@ class AsyncTransactions(AsyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._post(
-            f"/v1/fraud/transactions/{transaction_token}",
+            path_template("/v1/fraud/transactions/{transaction_token}", transaction_token=transaction_token),
             body=await async_maybe_transform(
                 {
                     "fraud_status": fraud_status,

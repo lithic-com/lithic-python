@@ -22,7 +22,7 @@ from ...types import (
     transaction_simulate_credit_authorization_advice_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -115,7 +115,7 @@ class Transactions(SyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._get(
-            f"/v1/transactions/{transaction_token}",
+            path_template("/v1/transactions/{transaction_token}", transaction_token=transaction_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -230,7 +230,9 @@ class Transactions(SyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return self._post(
-            f"/v1/transactions/{transaction_token}/expire_authorization",
+            path_template(
+                "/v1/transactions/{transaction_token}/expire_authorization", transaction_token=transaction_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -816,7 +818,7 @@ class AsyncTransactions(AsyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._get(
-            f"/v1/transactions/{transaction_token}",
+            path_template("/v1/transactions/{transaction_token}", transaction_token=transaction_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -931,7 +933,9 @@ class AsyncTransactions(AsyncAPIResource):
         if not transaction_token:
             raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
         return await self._post(
-            f"/v1/transactions/{transaction_token}/expire_authorization",
+            path_template(
+                "/v1/transactions/{transaction_token}/expire_authorization", transaction_token=transaction_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

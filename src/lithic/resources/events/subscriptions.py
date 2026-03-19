@@ -10,7 +10,7 @@ import httpx
 
 from ... import _legacy_response
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -188,7 +188,9 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._get(
-            f"/v1/event_subscriptions/{event_subscription_token}",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}", event_subscription_token=event_subscription_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -292,7 +294,9 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._patch(
-            f"/v1/event_subscriptions/{event_subscription_token}",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}", event_subscription_token=event_subscription_token
+            ),
             body=maybe_transform(
                 {
                     "url": url,
@@ -389,7 +393,9 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._delete(
-            f"/v1/event_subscriptions/{event_subscription_token}",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}", event_subscription_token=event_subscription_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -444,7 +450,10 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._get_api_list(
-            f"/v1/event_subscriptions/{event_subscription_token}/attempts",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/attempts",
+                event_subscription_token=event_subscription_token,
+            ),
             page=SyncCursorPage[MessageAttempt],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -502,7 +511,10 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._post(
-            f"/v1/event_subscriptions/{event_subscription_token}/recover",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/recover",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -560,7 +572,10 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._post(
-            f"/v1/event_subscriptions/{event_subscription_token}/replay_missing",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/replay_missing",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -605,7 +620,10 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._get(
-            f"/v1/event_subscriptions/{event_subscription_token}/secret",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/secret",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -642,7 +660,10 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._post(
-            f"/v1/event_subscriptions/{event_subscription_token}/secret/rotate",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/secret/rotate",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -734,7 +755,10 @@ class Subscriptions(SyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._post(
-            f"/v1/simulate/event_subscriptions/{event_subscription_token}/send_example",
+            path_template(
+                "/v1/simulate/event_subscriptions/{event_subscription_token}/send_example",
+                event_subscription_token=event_subscription_token,
+            ),
             body=maybe_transform(
                 {"event_type": event_type},
                 subscription_send_simulated_example_params.SubscriptionSendSimulatedExampleParams,
@@ -902,7 +926,9 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._get(
-            f"/v1/event_subscriptions/{event_subscription_token}",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}", event_subscription_token=event_subscription_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1006,7 +1032,9 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._patch(
-            f"/v1/event_subscriptions/{event_subscription_token}",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}", event_subscription_token=event_subscription_token
+            ),
             body=await async_maybe_transform(
                 {
                     "url": url,
@@ -1103,7 +1131,9 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._delete(
-            f"/v1/event_subscriptions/{event_subscription_token}",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}", event_subscription_token=event_subscription_token
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1158,7 +1188,10 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return self._get_api_list(
-            f"/v1/event_subscriptions/{event_subscription_token}/attempts",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/attempts",
+                event_subscription_token=event_subscription_token,
+            ),
             page=AsyncCursorPage[MessageAttempt],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -1216,7 +1249,10 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._post(
-            f"/v1/event_subscriptions/{event_subscription_token}/recover",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/recover",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1274,7 +1310,10 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._post(
-            f"/v1/event_subscriptions/{event_subscription_token}/replay_missing",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/replay_missing",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1319,7 +1358,10 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._get(
-            f"/v1/event_subscriptions/{event_subscription_token}/secret",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/secret",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1356,7 +1398,10 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._post(
-            f"/v1/event_subscriptions/{event_subscription_token}/secret/rotate",
+            path_template(
+                "/v1/event_subscriptions/{event_subscription_token}/secret/rotate",
+                event_subscription_token=event_subscription_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1448,7 +1493,10 @@ class AsyncSubscriptions(AsyncAPIResource):
                 f"Expected a non-empty value for `event_subscription_token` but received {event_subscription_token!r}"
             )
         return await self._post(
-            f"/v1/simulate/event_subscriptions/{event_subscription_token}/send_example",
+            path_template(
+                "/v1/simulate/event_subscriptions/{event_subscription_token}/send_example",
+                event_subscription_token=event_subscription_token,
+            ),
             body=await async_maybe_transform(
                 {"event_type": event_type},
                 subscription_send_simulated_example_params.SubscriptionSendSimulatedExampleParams,

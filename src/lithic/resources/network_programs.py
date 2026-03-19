@@ -10,7 +10,7 @@ import httpx
 from .. import _legacy_response
 from ..types import network_program_list_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform
+from .._utils import path_template, maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -69,7 +69,7 @@ class NetworkPrograms(SyncAPIResource):
                 f"Expected a non-empty value for `network_program_token` but received {network_program_token!r}"
             )
         return self._get(
-            f"/v1/network_programs/{network_program_token}",
+            path_template("/v1/network_programs/{network_program_token}", network_program_token=network_program_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -179,7 +179,7 @@ class AsyncNetworkPrograms(AsyncAPIResource):
                 f"Expected a non-empty value for `network_program_token` but received {network_program_token!r}"
             )
         return await self._get(
-            f"/v1/network_programs/{network_program_token}",
+            path_template("/v1/network_programs/{network_program_token}", network_program_token=network_program_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

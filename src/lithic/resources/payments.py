@@ -19,7 +19,7 @@ from ..types import (
     payment_simulate_release_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -142,7 +142,7 @@ class Payments(SyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._get(
-            f"/v1/payments/{payment_token}",
+            path_template("/v1/payments/{payment_token}", payment_token=payment_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -250,7 +250,7 @@ class Payments(SyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
-            f"/v1/payments/{payment_token}/retry",
+            path_template("/v1/payments/{payment_token}/retry", payment_token=payment_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -317,7 +317,7 @@ class Payments(SyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
-            f"/v1/payments/{payment_token}/return",
+            path_template("/v1/payments/{payment_token}/return", payment_token=payment_token),
             body=maybe_transform(
                 {
                     "financial_account_token": financial_account_token,
@@ -389,7 +389,7 @@ class Payments(SyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
-            f"/v1/simulate/payments/{payment_token}/action",
+            path_template("/v1/simulate/payments/{payment_token}/action", payment_token=payment_token),
             body=maybe_transform(
                 {
                     "event_type": event_type,
@@ -647,7 +647,7 @@ class AsyncPayments(AsyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._get(
-            f"/v1/payments/{payment_token}",
+            path_template("/v1/payments/{payment_token}", payment_token=payment_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -755,7 +755,7 @@ class AsyncPayments(AsyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
-            f"/v1/payments/{payment_token}/retry",
+            path_template("/v1/payments/{payment_token}/retry", payment_token=payment_token),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -822,7 +822,7 @@ class AsyncPayments(AsyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
-            f"/v1/payments/{payment_token}/return",
+            path_template("/v1/payments/{payment_token}/return", payment_token=payment_token),
             body=await async_maybe_transform(
                 {
                     "financial_account_token": financial_account_token,
@@ -894,7 +894,7 @@ class AsyncPayments(AsyncAPIResource):
         if not payment_token:
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
-            f"/v1/simulate/payments/{payment_token}/action",
+            path_template("/v1/simulate/payments/{payment_token}/action", payment_token=payment_token),
             body=await async_maybe_transform(
                 {
                     "event_type": event_type,

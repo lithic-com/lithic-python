@@ -9,7 +9,7 @@ import httpx
 
 from .... import _legacy_response
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -97,7 +97,7 @@ class Backtests(SyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return self._post(
-            f"/v2/auth_rules/{auth_rule_token}/backtests",
+            path_template("/v2/auth_rules/{auth_rule_token}/backtests", auth_rule_token=auth_rule_token),
             body=maybe_transform(
                 {
                     "end": end,
@@ -159,7 +159,11 @@ class Backtests(SyncAPIResource):
                 f"Expected a non-empty value for `auth_rule_backtest_token` but received {auth_rule_backtest_token!r}"
             )
         return self._get(
-            f"/v2/auth_rules/{auth_rule_token}/backtests/{auth_rule_backtest_token}",
+            path_template(
+                "/v2/auth_rules/{auth_rule_token}/backtests/{auth_rule_backtest_token}",
+                auth_rule_token=auth_rule_token,
+                auth_rule_backtest_token=auth_rule_backtest_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -243,7 +247,7 @@ class AsyncBacktests(AsyncAPIResource):
         if not auth_rule_token:
             raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
         return await self._post(
-            f"/v2/auth_rules/{auth_rule_token}/backtests",
+            path_template("/v2/auth_rules/{auth_rule_token}/backtests", auth_rule_token=auth_rule_token),
             body=await async_maybe_transform(
                 {
                     "end": end,
@@ -305,7 +309,11 @@ class AsyncBacktests(AsyncAPIResource):
                 f"Expected a non-empty value for `auth_rule_backtest_token` but received {auth_rule_backtest_token!r}"
             )
         return await self._get(
-            f"/v2/auth_rules/{auth_rule_token}/backtests/{auth_rule_backtest_token}",
+            path_template(
+                "/v2/auth_rules/{auth_rule_token}/backtests/{auth_rule_backtest_token}",
+                auth_rule_token=auth_rule_token,
+                auth_rule_backtest_token=auth_rule_backtest_token,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
