@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.120.0 (2026-03-23)
+
+Full Changelog: [v0.119.0...v0.120.0](https://github.com/lithic-com/lithic-python/compare/v0.119.0...v0.120.0)
+
+### Features
+
+* **api:** add CARD_AGE and ACCOUNT_AGE attributes to auth_rules conditions ([1838bd0](https://github.com/lithic-com/lithic-python/commit/1838bd0fbb14543bc05140167eb787b26f3adad1))
+* **api:** add override_company_name parameter to external_payments create ([ebb9e7e](https://github.com/lithic-com/lithic-python/commit/ebb9e7e42397c158c13a8c79a20ae62a5bc5dff9))
+* **api:** add service location attributes to auth_rules, fields to merchant ([40b6ef4](https://github.com/lithic-com/lithic-python/commit/40b6ef452d154afd5262977b20ddbea8f2581d9c))
+
+
+### Bug Fixes
+
+* sanitize endpoint path params ([3bdb99d](https://github.com/lithic-com/lithic-python/commit/3bdb99d62ca73acbd65d4f2ca3dda9e9405c05e3))
+
+
+### Chores
+
+* **internal:** migrate mock server from steady to prism ([8468963](https://github.com/lithic-com/lithic-python/commit/8468963d5df57bd9f01f545a2a02d1df3dcef41e))
+* **internal:** update gitignore ([8ccbe00](https://github.com/lithic-com/lithic-python/commit/8ccbe00eb37dadfa57a111e70d4a12ebabaa7e40))
+* **tests:** bump steady to v0.19.4 ([6e585b7](https://github.com/lithic-com/lithic-python/commit/6e585b742334baf5045bbc1d8be487674a4ec9af))
+* **tests:** bump steady to v0.19.5 ([327135e](https://github.com/lithic-com/lithic-python/commit/327135ec2c31132edcf1d3a3cbb4f4f7f6dbdb1a))
+* **tests:** bump steady to v0.19.6 ([bd694b9](https://github.com/lithic-com/lithic-python/commit/bd694b94f5d3cbf3e11a8064168082202b645e92))
+
+
+### Documentation
+
+* **api:** add character limit to nature_of_business, allowlisting note to qr_code_url ([77a8f10](https://github.com/lithic-com/lithic-python/commit/77a8f1028956b151b2b1d85a12a5719fff04d871))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([23a9671](https://github.com/lithic-com/lithic-python/commit/23a967122869204b8e063e86d2807417d1542b5b))
+
 ## 0.119.0 (2026-03-17)
 
 Full Changelog: [v0.118.0...v0.119.0](https://github.com/lithic-com/lithic-python/compare/v0.118.0...v0.119.0)
