@@ -121,7 +121,8 @@ class AccountHolders(SyncAPIResource):
               (Section II) for more background.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
+              do?). Values longer than 255 characters will be truncated before KYB
+              verification
 
           tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
@@ -209,7 +210,8 @@ class AccountHolders(SyncAPIResource):
               business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
+              do?). Values longer than 255 characters will be truncated before KYB
+              verification
 
           tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
@@ -527,7 +529,8 @@ class AccountHolders(SyncAPIResource):
               business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
+              do?). Values longer than 255 characters will be truncated before KYB
+              verification
 
           website_url: Company website URL.
 
@@ -1207,7 +1210,8 @@ class AsyncAccountHolders(AsyncAPIResource):
               (Section II) for more background.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
+              do?). Values longer than 255 characters will be truncated before KYB
+              verification
 
           tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
@@ -1295,7 +1299,8 @@ class AsyncAccountHolders(AsyncAPIResource):
               business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
+              do?). Values longer than 255 characters will be truncated before KYB
+              verification
 
           tos_timestamp: An RFC 3339 timestamp indicating when the account holder accepted the applicable
               legal agreements (e.g., cardholder terms) as agreed upon during API customer's
@@ -1613,7 +1618,8 @@ class AsyncAccountHolders(AsyncAPIResource):
               business.
 
           nature_of_business: Short description of the company's line of business (i.e., what does the company
-              do?).
+              do?). Values longer than 255 characters will be truncated before KYB
+              verification
 
           website_url: Company website URL.
 

@@ -64,7 +64,8 @@ class KYBPatchRequest(TypedDict, total=False):
     nature_of_business: str
     """
     Short description of the company's line of business (i.e., what does the company
-    do?).
+    do?). Values longer than 255 characters will be truncated before KYB
+    verification
     """
 
     website_url: str
