@@ -43,6 +43,12 @@ class MethodAttributes(TypedDict, total=False):
 
     addenda: Optional[str]
 
+    override_company_name: Optional[str]
+    """Value to override the configured company name with.
+
+    Can only be used if allowed to override
+    """
+
 
 class Hold(TypedDict, total=False):
     """Optional hold to settle when this payment is initiated."""
