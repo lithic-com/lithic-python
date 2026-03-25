@@ -30,8 +30,12 @@ class CardBulkOrder(BaseModel):
     shipping_address: object
     """Shipping address for all cards in this bulk order"""
 
-    shipping_method: Literal["BULK_EXPEDITED"]
-    """Shipping method for all cards in this bulk order"""
+    shipping_method: Literal["BULK_EXPEDITED", "BULK_PRIORITY", "BULK_2_DAY", "BULK_EXPRESS"]
+    """Shipping method for all cards in this bulk order.
+
+    BULK_PRIORITY, BULK_2_DAY, and BULK_EXPRESS are only available with Perfect
+    Plastic Printing
+    """
 
     status: Literal["OPEN", "LOCKED"]
     """Status of the bulk order.

@@ -165,9 +165,7 @@ class CardCreateParams(TypedDict, total=False):
 
     shipping_address: ShippingAddress
 
-    shipping_method: Literal[
-        "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
-    ]
+    shipping_method: Literal["2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"]
     """Shipping method for the card.
 
     Only applies to cards of type PHYSICAL. Use of options besides `STANDARD`
@@ -184,7 +182,8 @@ class CardCreateParams(TypedDict, total=False):
       tracking
     - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
       or similar international option, with tracking
-    - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+    - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+      shipping method and timeline are inherited from the parent bulk order.
     """
 
     spend_limit: int

@@ -118,7 +118,7 @@ class Cards(SyncAPIResource):
         | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         spend_limit: int | Omit = omit,
@@ -248,7 +248,8 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
               $1,000 limit). Transaction requests above the spend limit will be declined. Note
@@ -589,7 +590,7 @@ class Cards(SyncAPIResource):
         carrier: Carrier | Omit = omit,
         product_id: str | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -635,7 +636,8 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           extra_headers: Send extra headers
 
@@ -823,7 +825,7 @@ class Cards(SyncAPIResource):
         product_id: str | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -864,7 +866,8 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           extra_headers: Send extra headers
 
@@ -903,7 +906,7 @@ class Cards(SyncAPIResource):
         exp_year: str | Omit = omit,
         product_id: str | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -954,7 +957,8 @@ class Cards(SyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           extra_headers: Send extra headers
 
@@ -1189,7 +1193,7 @@ class AsyncCards(AsyncAPIResource):
         | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         spend_limit: int | Omit = omit,
@@ -1319,7 +1323,8 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           spend_limit: Amount (in cents) to limit approved authorizations (e.g. 100000 would be a
               $1,000 limit). Transaction requests above the spend limit will be declined. Note
@@ -1660,7 +1665,7 @@ class AsyncCards(AsyncAPIResource):
         carrier: Carrier | Omit = omit,
         product_id: str | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1706,7 +1711,8 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           extra_headers: Send extra headers
 
@@ -1894,7 +1900,7 @@ class AsyncCards(AsyncAPIResource):
         product_id: str | Omit = omit,
         shipping_address: ShippingAddress | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1935,7 +1941,8 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           extra_headers: Send extra headers
 
@@ -1974,7 +1981,7 @@ class AsyncCards(AsyncAPIResource):
         exp_year: str | Omit = omit,
         product_id: str | Omit = omit,
         shipping_method: Literal[
-            "2_DAY", "BULK_EXPEDITED", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
+            "2_DAY", "BULK", "EXPEDITED", "EXPRESS", "PRIORITY", "STANDARD", "STANDARD_WITH_TRACKING"
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2025,7 +2032,8 @@ class AsyncCards(AsyncAPIResource):
                 tracking
               - `EXPEDITED` - FedEx or UPS depending on card manufacturer, Standard Overnight
                 or similar international option, with tracking
-              - `BULK_EXPEDITED` - Bulk shipment with Expedited shipping
+              - `BULK` - Card will be shipped as part of a bulk fulfillment order. The
+                shipping method and timeline are inherited from the parent bulk order.
 
           extra_headers: Send extra headers
 
