@@ -47,7 +47,7 @@ class CardBulkOrders(SyncAPIResource):
         *,
         customer_product_id: str,
         shipping_address: object,
-        shipping_method: Literal["BULK_EXPEDITED"],
+        shipping_method: Literal["BULK_EXPEDITED", "BULK_PRIORITY", "BULK_2_DAY", "BULK_EXPRESS"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -55,14 +55,13 @@ class CardBulkOrders(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardBulkOrder:
-        """Create a new bulk order for physical card shipments **[BETA]**.
+        """Create a new bulk order for physical card shipments.
 
-        Cards can be
-        added to the order via the POST /v1/cards endpoint by specifying the
-        bulk_order_token. Lock the order via PATCH
-        /v1/card_bulk_orders/{bulk_order_token} to prepare for shipment. Please work
-        with your Customer Success Manager and card personalization bureau to ensure
-        bulk shipping is supported for your program.
+        Cards can be added to the
+        order via the POST /v1/cards endpoint by specifying the bulk_order_token. Lock
+        the order via PATCH /v1/card_bulk_orders/{bulk_order_token} to prepare for
+        shipment. Please work with your Customer Success Manager and card
+        personalization bureau to ensure bulk shipping is supported for your program.
 
         Args:
           customer_product_id: Customer-specified product configuration for physical card manufacturing. This
@@ -70,7 +69,8 @@ class CardBulkOrders(SyncAPIResource):
 
           shipping_address: Shipping address for all cards in this bulk order
 
-          shipping_method: Shipping method for all cards in this bulk order
+          shipping_method: Shipping method for all cards in this bulk order. BULK_PRIORITY, BULK_2_DAY, and
+              BULK_EXPRESS are only available with Perfect Plastic Printing
 
           extra_headers: Send extra headers
 
@@ -108,7 +108,7 @@ class CardBulkOrders(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardBulkOrder:
         """
-        Retrieve a specific bulk order by token **[BETA]**
+        Retrieve a specific bulk order by token
 
         Args:
           extra_headers: Send extra headers
@@ -141,10 +141,10 @@ class CardBulkOrders(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardBulkOrder:
-        """Update a bulk order **[BETA]**.
+        """Update a bulk order.
 
-        Primarily used to lock the order, preventing
-        additional cards from being added
+        Primarily used to lock the order, preventing additional
+        cards from being added
 
         Args:
           status: Status to update the bulk order to. Use LOCKED to finalize the order
@@ -184,7 +184,7 @@ class CardBulkOrders(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[CardBulkOrder]:
         """
-        List bulk orders for physical card shipments **[BETA]**
+        List bulk orders for physical card shipments
 
         Args:
           begin: Date string in RFC 3339 format. Only entries created after the specified time
@@ -257,7 +257,7 @@ class AsyncCardBulkOrders(AsyncAPIResource):
         *,
         customer_product_id: str,
         shipping_address: object,
-        shipping_method: Literal["BULK_EXPEDITED"],
+        shipping_method: Literal["BULK_EXPEDITED", "BULK_PRIORITY", "BULK_2_DAY", "BULK_EXPRESS"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -265,14 +265,13 @@ class AsyncCardBulkOrders(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardBulkOrder:
-        """Create a new bulk order for physical card shipments **[BETA]**.
+        """Create a new bulk order for physical card shipments.
 
-        Cards can be
-        added to the order via the POST /v1/cards endpoint by specifying the
-        bulk_order_token. Lock the order via PATCH
-        /v1/card_bulk_orders/{bulk_order_token} to prepare for shipment. Please work
-        with your Customer Success Manager and card personalization bureau to ensure
-        bulk shipping is supported for your program.
+        Cards can be added to the
+        order via the POST /v1/cards endpoint by specifying the bulk_order_token. Lock
+        the order via PATCH /v1/card_bulk_orders/{bulk_order_token} to prepare for
+        shipment. Please work with your Customer Success Manager and card
+        personalization bureau to ensure bulk shipping is supported for your program.
 
         Args:
           customer_product_id: Customer-specified product configuration for physical card manufacturing. This
@@ -280,7 +279,8 @@ class AsyncCardBulkOrders(AsyncAPIResource):
 
           shipping_address: Shipping address for all cards in this bulk order
 
-          shipping_method: Shipping method for all cards in this bulk order
+          shipping_method: Shipping method for all cards in this bulk order. BULK_PRIORITY, BULK_2_DAY, and
+              BULK_EXPRESS are only available with Perfect Plastic Printing
 
           extra_headers: Send extra headers
 
@@ -318,7 +318,7 @@ class AsyncCardBulkOrders(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardBulkOrder:
         """
-        Retrieve a specific bulk order by token **[BETA]**
+        Retrieve a specific bulk order by token
 
         Args:
           extra_headers: Send extra headers
@@ -351,10 +351,10 @@ class AsyncCardBulkOrders(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CardBulkOrder:
-        """Update a bulk order **[BETA]**.
+        """Update a bulk order.
 
-        Primarily used to lock the order, preventing
-        additional cards from being added
+        Primarily used to lock the order, preventing additional
+        cards from being added
 
         Args:
           status: Status to update the bulk order to. Use LOCKED to finalize the order
@@ -396,7 +396,7 @@ class AsyncCardBulkOrders(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[CardBulkOrder, AsyncCursorPage[CardBulkOrder]]:
         """
-        List bulk orders for physical card shipments **[BETA]**
+        List bulk orders for physical card shipments
 
         Args:
           begin: Date string in RFC 3339 format. Only entries created after the specified time

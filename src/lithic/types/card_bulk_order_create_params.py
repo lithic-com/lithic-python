@@ -17,5 +17,9 @@ class CardBulkOrderCreateParams(TypedDict, total=False):
     shipping_address: Required[object]
     """Shipping address for all cards in this bulk order"""
 
-    shipping_method: Required[Literal["BULK_EXPEDITED"]]
-    """Shipping method for all cards in this bulk order"""
+    shipping_method: Required[Literal["BULK_EXPEDITED", "BULK_PRIORITY", "BULK_2_DAY", "BULK_EXPRESS"]]
+    """Shipping method for all cards in this bulk order.
+
+    BULK_PRIORITY, BULK_2_DAY, and BULK_EXPRESS are only available with Perfect
+    Plastic Printing
+    """
