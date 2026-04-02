@@ -185,3 +185,5 @@ class Statement(BaseModel):
 
     payoff_details: Optional[PayoffDetails] = None
     """Details on number and size of payments to pay off balance"""
+
+    statement_totals: Optional[StatementTotals] = None
