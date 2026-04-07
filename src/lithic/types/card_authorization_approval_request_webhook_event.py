@@ -102,23 +102,16 @@ class Avs(BaseModel):
 class Card(BaseModel):
     """Card object in ASA"""
 
-    token: Optional[str] = None
+    token: str
     """Globally unique identifier for the card."""
 
-    hostname: Optional[str] = None
-    """Hostname of card’s locked merchant (will be empty if not applicable)"""
-
-    last_four: Optional[str] = None
+    last_four: str
     """Last four digits of the card number"""
 
-    memo: Optional[str] = None
-    """Customizable name to identify the card.
+    memo: str
+    """Customizable name to identify the card"""
 
-    We recommend against using this field to store JSON data as it can cause
-    unexpected behavior.
-    """
-
-    spend_limit: Optional[int] = None
+    spend_limit: int
     """Amount (in cents) to limit approved authorizations.
 
     Purchase requests above the spend limit will be declined (refunds and credits
@@ -131,16 +124,16 @@ class Card(BaseModel):
     authorization).
     """
 
-    spend_limit_duration: Optional[Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"]] = None
+    spend_limit_duration: Literal["ANNUALLY", "FOREVER", "MONTHLY", "TRANSACTION"]
     """
     Note that to support recurring monthly payments, which can occur on different
     day every month, the time window we consider for MONTHLY velocity starts 6 days
     after the current calendar date one month prior.
     """
 
-    state: Optional[Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"]] = None
+    state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"]
 
-    type: Optional[Literal["SINGLE_USE", "MERCHANT_LOCKED", "UNLOCKED", "PHYSICAL", "DIGITAL_WALLET", "VIRTUAL"]] = None
+    type: Literal["SINGLE_USE", "MERCHANT_LOCKED", "UNLOCKED", "PHYSICAL", "DIGITAL_WALLET", "VIRTUAL"]
 
 
 class Merchant(merchant.Merchant):
