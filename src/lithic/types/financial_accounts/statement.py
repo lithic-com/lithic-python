@@ -139,7 +139,7 @@ class Statement(BaseModel):
     credit_limit: int
     """This is the maximum credit balance extended by the lender in cents"""
 
-    credit_product_token: str
+    credit_product_token: Optional[str] = None
     """Globally unique identifier for a credit product"""
 
     days_in_billing_cycle: int
