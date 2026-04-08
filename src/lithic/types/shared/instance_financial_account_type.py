@@ -16,4 +16,7 @@ InstanceFinancialAccountType: TypeAlias = Literal[
     "COLLECTION",
     "PROGRAM_BANK_ACCOUNTS_PAYABLE",
     "EARLY_DIRECT_DEPOSIT_FLOAT",
+    "INTERCHANGE",
+    "CHARGEBACK",
+    "PROVISIONAL_CREDIT_ACCOUNT",
 ]
