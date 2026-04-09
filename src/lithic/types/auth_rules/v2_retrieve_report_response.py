@@ -255,6 +255,9 @@ class DailyStatisticVersionExample(BaseModel):
     timestamp: datetime.datetime
     """The timestamp of the event."""
 
+    transaction_token: Optional[str] = None
+    """The token of the transaction associated with the event"""
+
 
 class DailyStatisticVersion(BaseModel):
     action_counts: Dict[str, int]
