@@ -258,6 +258,9 @@ class Example(BaseModel):
     timestamp: Optional[datetime] = None
     """The timestamp of the event."""
 
+    transaction_token: Optional[str] = None
+    """The token of the transaction associated with the event"""
+
 
 class ReportStats(BaseModel):
     action_counts: Optional[Dict[str, int]] = None
