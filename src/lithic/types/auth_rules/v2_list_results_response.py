@@ -130,6 +130,9 @@ class AuthorizationResult(BaseModel):
     rule_version: int
     """Version of the rule that was evaluated"""
 
+    transaction_token: Optional[str] = None
+    """The token of the transaction that triggered the rule evaluation"""
+
 
 class Authentication3DsResultAction(BaseModel):
     type: Literal["DECLINE", "CHALLENGE"]
@@ -162,6 +165,9 @@ class Authentication3DSResult(BaseModel):
 
     rule_version: int
     """Version of the rule that was evaluated"""
+
+    transaction_token: Optional[str] = None
+    """The token of the transaction that triggered the rule evaluation"""
 
 
 class TokenizationResultActionDeclineActionTokenization(BaseModel):
@@ -249,6 +255,9 @@ class TokenizationResult(BaseModel):
 
     rule_version: int
     """Version of the rule that was evaluated"""
+
+    transaction_token: Optional[str] = None
+    """The token of the transaction that triggered the rule evaluation"""
 
 
 class ACHResultActionApproveActionACH(BaseModel):
@@ -372,6 +381,9 @@ class ACHResult(BaseModel):
 
     rule_version: int
     """Version of the rule that was evaluated"""
+
+    transaction_token: Optional[str] = None
+    """The token of the transaction that triggered the rule evaluation"""
 
 
 V2ListResultsResponse: TypeAlias = Union[AuthorizationResult, Authentication3DSResult, TokenizationResult, ACHResult]
