@@ -243,19 +243,13 @@ ExampleAction: TypeAlias = Union[
 
 
 class Example(BaseModel):
-    actions: Optional[List[ExampleAction]] = None
-    """The actions taken by the rule for this event."""
+    actions: List[ExampleAction]
+    """The actions taken by this version for this event."""
 
-    approved: Optional[bool] = None
-    """Whether the rule would have approved the request."""
-
-    decision: Optional[Literal["APPROVED", "DECLINED", "CHALLENGED"]] = None
-    """The decision made by the rule for this event."""
-
-    event_token: Optional[str] = None
+    event_token: str
     """The event token."""
 
-    timestamp: Optional[datetime] = None
+    timestamp: datetime
     """The timestamp of the event."""
 
     transaction_token: Optional[str] = None
@@ -263,35 +257,19 @@ class Example(BaseModel):
 
 
 class ReportStats(BaseModel):
-    action_counts: Optional[Dict[str, int]] = None
+    action_counts: Dict[str, int]
     """
     A mapping of action types to the number of times that action was returned by
-    this rule during the relevant period. Actions are the possible outcomes of a
+    this version during the relevant period. Actions are the possible outcomes of a
     rule evaluation, such as DECLINE, CHALLENGE, REQUIRE_TFA, etc. In case rule
     didn't trigger any action, it's counted under NO_ACTION key.
     """
 
-    approved: Optional[int] = None
-    """
-    The total number of historical transactions approved by this rule during the
-    relevant period, or the number of transactions that would have been approved if
-    the rule was evaluated in shadow mode.
-    """
+    examples: List[Example]
+    """Example events and their outcomes for this version."""
 
-    challenged: Optional[int] = None
-    """
-    The total number of historical transactions challenged by this rule during the
-    relevant period, or the number of transactions that would have been challenged
-    if the rule was evaluated in shadow mode. Currently applicable only for 3DS Auth
-    Rules.
-    """
+    state: Literal["ACTIVE", "SHADOW", "INACTIVE"]
+    """The evaluation mode of this version during the reported period."""
 
-    declined: Optional[int] = None
-    """
-    The total number of historical transactions declined by this rule during the
-    relevant period, or the number of transactions that would have been declined if
-    the rule was evaluated in shadow mode.
-    """
-
-    examples: Optional[List[Example]] = None
-    """Example events and their outcomes."""
+    version: int
+    """The rule version number."""
