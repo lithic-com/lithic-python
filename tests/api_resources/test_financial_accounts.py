@@ -234,8 +234,8 @@ class TestFinancialAccounts:
     def test_method_update_status(self, client: Lithic) -> None:
         financial_account = client.financial_accounts.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 
@@ -243,8 +243,8 @@ class TestFinancialAccounts:
     def test_method_update_status_with_all_params(self, client: Lithic) -> None:
         financial_account = client.financial_accounts.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
             user_defined_status="26",
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
@@ -253,8 +253,8 @@ class TestFinancialAccounts:
     def test_raw_response_update_status(self, client: Lithic) -> None:
         response = client.financial_accounts.with_raw_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
         )
 
         assert response.is_closed is True
@@ -266,8 +266,8 @@ class TestFinancialAccounts:
     def test_streaming_response_update_status(self, client: Lithic) -> None:
         with client.financial_accounts.with_streaming_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -284,8 +284,8 @@ class TestFinancialAccounts:
         ):
             client.financial_accounts.with_raw_response.update_status(
                 financial_account_token="",
-                status="OPEN",
-                substatus="CHARGED_OFF_FRAUD",
+                status="CLOSED",
+                substatus="END_USER_REQUEST",
             )
 
 
@@ -508,8 +508,8 @@ class TestAsyncFinancialAccounts:
     async def test_method_update_status(self, async_client: AsyncLithic) -> None:
         financial_account = await async_client.financial_accounts.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
 
@@ -517,8 +517,8 @@ class TestAsyncFinancialAccounts:
     async def test_method_update_status_with_all_params(self, async_client: AsyncLithic) -> None:
         financial_account = await async_client.financial_accounts.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
             user_defined_status="26",
         )
         assert_matches_type(FinancialAccount, financial_account, path=["response"])
@@ -527,8 +527,8 @@ class TestAsyncFinancialAccounts:
     async def test_raw_response_update_status(self, async_client: AsyncLithic) -> None:
         response = await async_client.financial_accounts.with_raw_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
         )
 
         assert response.is_closed is True
@@ -540,8 +540,8 @@ class TestAsyncFinancialAccounts:
     async def test_streaming_response_update_status(self, async_client: AsyncLithic) -> None:
         async with async_client.financial_accounts.with_streaming_response.update_status(
             financial_account_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            status="OPEN",
-            substatus="CHARGED_OFF_FRAUD",
+            status="CLOSED",
+            substatus="END_USER_REQUEST",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -558,6 +558,6 @@ class TestAsyncFinancialAccounts:
         ):
             await async_client.financial_accounts.with_raw_response.update_status(
                 financial_account_token="",
-                status="OPEN",
-                substatus="CHARGED_OFF_FRAUD",
+                status="CLOSED",
+                substatus="END_USER_REQUEST",
             )
