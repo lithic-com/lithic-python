@@ -357,6 +357,7 @@ class FinancialAccounts(SyncAPIResource):
                 "BANK_REQUEST",
                 "CHARGED_OFF_DELINQUENT",
                 "INTEREST_AND_FEES_PAUSED",
+                "DELINQUENT",
             ]
         ],
         user_defined_status: str | Omit = omit,
@@ -685,6 +686,7 @@ class AsyncFinancialAccounts(AsyncAPIResource):
                 "BANK_REQUEST",
                 "CHARGED_OFF_DELINQUENT",
                 "INTEREST_AND_FEES_PAUSED",
+                "DELINQUENT",
             ]
         ],
         user_defined_status: str | Omit = omit,
