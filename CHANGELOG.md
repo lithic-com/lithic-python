@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.121.0 (2026-04-13)
+
+Full Changelog: [v0.120.0...v0.121.0](https://github.com/lithic-com/lithic-python/compare/v0.120.0...v0.121.0)
+
+### Features
+
+* **api:** add decline count attributes to auth_rules conditions ([c511d14](https://github.com/lithic-com/lithic-python/commit/c511d14d11ca9c7d37fb549cb36ca3cba4661224))
+* **api:** add DELINQUENT status to financial_accounts update_status ([320f1fe](https://github.com/lithic-com/lithic-python/commit/320f1fe8f17ceda3d068935278f65bab8b356287))
+* **api:** add INTERCHANGE/CHARGEBACK/PROVISIONAL_CREDIT_ACCOUNT account types ([aa96cd4](https://github.com/lithic-com/lithic-python/commit/aa96cd46ed483528438520ffa337b9dbdfa85e45))
+* **api:** add override_company_name parameter to payment create method ([babec29](https://github.com/lithic-com/lithic-python/commit/babec2956fc1cea2f2a7568f7229be0973f763f6))
+* **api:** add statement_totals field to Statement model ([3b035bc](https://github.com/lithic-com/lithic-python/commit/3b035bce611c86716f0f837e11a590384c94442e))
+* **api:** add transaction_token field to auth_rules example models ([ce41be2](https://github.com/lithic-com/lithic-python/commit/ce41be23c7b6a638e387598ced8ebb31d9696cb9))
+* **api:** add transaction_token field to auth_rules result types ([25fcd02](https://github.com/lithic-com/lithic-python/commit/25fcd02a8982d74d39761c25eaeee897d19e7601))
+* **internal:** implement indices array format for query and form serialization ([bef46fb](https://github.com/lithic-com/lithic-python/commit/bef46fbe5eacffefedb37a7677753e877da3c922))
+
+
+### Bug Fixes
+
+* **api:** [breaking] remove approved/decision/challenged/declined fields from auth_rules report_stats ([b81fa5c](https://github.com/lithic-com/lithic-python/commit/b81fa5c76b79066d1a00fdf4c896213542277607))
+* **client:** preserve hardcoded query params when merging with user params ([89aced4](https://github.com/lithic-com/lithic-python/commit/89aced4c87b0777be00f82621e50077905bff9d8))
+* ensure file data are only sent as 1 parameter ([6f796aa](https://github.com/lithic-com/lithic-python/commit/6f796aae3a23a29bf4a17e2462a94dc502d5303e))
+* **types:** make credit_product_token optional in Statement ([6caf4c4](https://github.com/lithic-com/lithic-python/commit/6caf4c4065ffb59f6e285f72c1d0f4b5c8713249))
+* **types:** make fields required, remove hostname in card authorization approval webhook ([80c1bcc](https://github.com/lithic-com/lithic-python/commit/80c1bccf3efd889135833d481db58ca7743464c3))
+* **types:** remove INTERCHANGE and CHARGEBACK from financial account types ([5567809](https://github.com/lithic-com/lithic-python/commit/55678093ad91356470a2e7dc30bcb9ec1069263d))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([7d73b7b](https://github.com/lithic-com/lithic-python/commit/7d73b7b0775f2e4f9fe6cd78f5bbf528b93804ab))
+
+
+### Documentation
+
+* **api:** update nature_of_business and qr_code_url parameter descriptions ([7514c59](https://github.com/lithic-com/lithic-python/commit/7514c5966cd9b4a84d221aadffe3ef02c7fa8814))
+* improve examples ([b7a637b](https://github.com/lithic-com/lithic-python/commit/b7a637b10e527febc5d9fccb9e597a107b3a3c30))
+* update examples ([108bff1](https://github.com/lithic-com/lithic-python/commit/108bff14a733a28268fec8430184e27dbaeaf198))
+
 ## 0.120.0 (2026-03-23)
 
 Full Changelog: [v0.119.0...v0.120.0](https://github.com/lithic-com/lithic-python/compare/v0.119.0...v0.120.0)
