@@ -354,6 +354,9 @@ from .transaction_simulate_authorization_advice_response import (
 from .transaction_simulate_credit_authorization_response import (
     TransactionSimulateCreditAuthorizationResponse as TransactionSimulateCreditAuthorizationResponse,
 )
+from .card_authorization_challenge_response_webhook_event import (
+    CardAuthorizationChallengeResponseWebhookEvent as CardAuthorizationChallengeResponseWebhookEvent,
+)
 from .external_bank_account_retry_micro_deposits_response import (
     ExternalBankAccountRetryMicroDepositsResponse as ExternalBankAccountRetryMicroDepositsResponse,
 )
