@@ -875,6 +875,7 @@ from lithic.types import (
     AccountHolderVerificationWebhookEvent,
     AccountHolderDocumentUpdatedWebhookEvent,
     CardAuthorizationApprovalRequestWebhookEvent,
+    CardAuthorizationChallengeResponseWebhookEvent,
     AuthRulesBacktestReportCreatedWebhookEvent,
     BalanceUpdatedWebhookEvent,
     BookTransferTransactionCreatedWebhookEvent,

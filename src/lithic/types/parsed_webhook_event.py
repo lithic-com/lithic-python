@@ -52,6 +52,7 @@ from .auth_rules_backtest_report_created_webhook_event import AuthRulesBacktestR
 from .digital_wallet_tokenization_result_webhook_event import DigitalWalletTokenizationResultWebhookEvent
 from .card_authorization_approval_request_webhook_event import CardAuthorizationApprovalRequestWebhookEvent
 from .digital_wallet_tokenization_updated_webhook_event import DigitalWalletTokenizationUpdatedWebhookEvent
+from .card_authorization_challenge_response_webhook_event import CardAuthorizationChallengeResponseWebhookEvent
 from .card_transaction_enhanced_data_created_webhook_event import CardTransactionEnhancedDataCreatedWebhookEvent
 from .card_transaction_enhanced_data_updated_webhook_event import CardTransactionEnhancedDataUpdatedWebhookEvent
 from .three_ds_authentication_approval_request_webhook_event import ThreeDSAuthenticationApprovalRequestWebhookEvent
@@ -431,6 +432,7 @@ ParsedWebhookEvent: TypeAlias = Union[
     AccountHolderVerificationWebhookEvent,
     AccountHolderDocumentUpdatedWebhookEvent,
     CardAuthorizationApprovalRequestWebhookEvent,
+    CardAuthorizationChallengeResponseWebhookEvent,
     AuthRulesBacktestReportCreatedWebhookEvent,
     BalanceUpdatedWebhookEvent,
     BookTransferTransactionCreatedWebhookEvent,

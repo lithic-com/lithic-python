@@ -17,6 +17,7 @@ class SubscriptionSendSimulatedExampleParams(TypedDict, total=False):
         "balance.updated",
         "book_transfer_transaction.created",
         "book_transfer_transaction.updated",
+        "card_authorization.challenge_response",
         "card_transaction.enhanced_data.created",
         "card_transaction.enhanced_data.updated",
         "card_transaction.updated",
