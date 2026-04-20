@@ -366,6 +366,9 @@ from .card_transaction_enhanced_data_created_webhook_event import (
 from .card_transaction_enhanced_data_updated_webhook_event import (
     CardTransactionEnhancedDataUpdatedWebhookEvent as CardTransactionEnhancedDataUpdatedWebhookEvent,
 )
+from .external_bank_account_set_verification_method_params import (
+    ExternalBankAccountSetVerificationMethodParams as ExternalBankAccountSetVerificationMethodParams,
+)
 from .three_ds_authentication_approval_request_webhook_event import (
     ThreeDSAuthenticationApprovalRequestWebhookEvent as ThreeDSAuthenticationApprovalRequestWebhookEvent,
 )
