@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.122.0 (2026-04-20)
+
+Full Changelog: [v0.121.0...v0.122.0](https://github.com/lithic-com/lithic-python/compare/v0.121.0...v0.122.0)
+
+### Features
+
+* **api:** add card_authorization.challenge_response webhook event ([78f2c4c](https://github.com/lithic-com/lithic-python/commit/78f2c4c93def51d76abab01e41c5d80f6fe146e5))
+* **api:** Add card/account/business account signals endpoints and behavioral rule attributes ([aa44c45](https://github.com/lithic-com/lithic-python/commit/aa44c45ae060d6350d56dd72e1ca7bf55d16a7e3))
+* **api:** add set_verification_method to external_bank_accounts ([2645172](https://github.com/lithic-com/lithic-python/commit/26451722203cc8c6f88ec720d6529847ac09b2fd))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([5504230](https://github.com/lithic-com/lithic-python/commit/55042302360bdca2a67d23f2d835bdb3d072d071))
+
 ## 0.121.0 (2026-04-13)
 
 Full Changelog: [v0.120.0...v0.121.0](https://github.com/lithic-com/lithic-python/compare/v0.120.0...v0.121.0)
