@@ -18,6 +18,7 @@ __all__ = [
     "AccountHolderFeature",
     "IPMetadataFeature",
     "SpendVelocityFeature",
+    "TransactionHistorySignalsFeature",
 ]
 
 
@@ -85,6 +86,16 @@ class SpendVelocityFeature(TypedDict, total=False):
     """The variable name for this feature in the rule function signature"""
 
 
+class TransactionHistorySignalsFeature(TypedDict, total=False):
+    scope: Required[Literal["CARD", "ACCOUNT", "BUSINESS_ACCOUNT"]]
+    """The entity scope to load transaction history signals for."""
+
+    type: Required[Literal["TRANSACTION_HISTORY_SIGNALS"]]
+
+    name: str
+    """The variable name for this feature in the rule function signature"""
+
+
 RuleFeatureParam: TypeAlias = Union[
     AuthorizationFeature,
     AuthenticationFeature,
@@ -94,4 +105,5 @@ RuleFeatureParam: TypeAlias = Union[
     AccountHolderFeature,
     IPMetadataFeature,
     SpendVelocityFeature,
+    TransactionHistorySignalsFeature,
 ]
