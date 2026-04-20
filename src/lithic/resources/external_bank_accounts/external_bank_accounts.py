@@ -17,6 +17,7 @@ from ...types import (
     external_bank_account_update_params,
     external_bank_account_retry_prenote_params,
     external_bank_account_retry_micro_deposits_params,
+    external_bank_account_set_verification_method_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, required_args, maybe_transform, async_maybe_transform
@@ -637,6 +638,60 @@ class ExternalBankAccounts(SyncAPIResource):
             body=maybe_transform(
                 {"financial_account_token": financial_account_token},
                 external_bank_account_retry_prenote_params.ExternalBankAccountRetryPrenoteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExternalBankAccount,
+        )
+
+    def set_verification_method(
+        self,
+        external_bank_account_token: str,
+        *,
+        verification_method: Literal["MICRO_DEPOSIT", "PRENOTE", "EXTERNALLY_VERIFIED"],
+        financial_account_token: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExternalBankAccount:
+        """Update the verification method for an external bank account.
+
+        Verification method
+        can only be updated if the `verification_state` is `PENDING`.
+
+        Args:
+          verification_method: The verification method to set for the external bank account
+
+          financial_account_token: The financial account token of the operating account to fund the micro deposits.
+              Required when verification_method is MICRO_DEPOSIT or PRENOTE.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
+        return self._post(
+            path_template(
+                "/v1/external_bank_accounts/{external_bank_account_token}/set_verification_method",
+                external_bank_account_token=external_bank_account_token,
+            ),
+            body=maybe_transform(
+                {
+                    "verification_method": verification_method,
+                    "financial_account_token": financial_account_token,
+                },
+                external_bank_account_set_verification_method_params.ExternalBankAccountSetVerificationMethodParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -1281,6 +1336,60 @@ class AsyncExternalBankAccounts(AsyncAPIResource):
             cast_to=ExternalBankAccount,
         )
 
+    async def set_verification_method(
+        self,
+        external_bank_account_token: str,
+        *,
+        verification_method: Literal["MICRO_DEPOSIT", "PRENOTE", "EXTERNALLY_VERIFIED"],
+        financial_account_token: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExternalBankAccount:
+        """Update the verification method for an external bank account.
+
+        Verification method
+        can only be updated if the `verification_state` is `PENDING`.
+
+        Args:
+          verification_method: The verification method to set for the external bank account
+
+          financial_account_token: The financial account token of the operating account to fund the micro deposits.
+              Required when verification_method is MICRO_DEPOSIT or PRENOTE.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not external_bank_account_token:
+            raise ValueError(
+                f"Expected a non-empty value for `external_bank_account_token` but received {external_bank_account_token!r}"
+            )
+        return await self._post(
+            path_template(
+                "/v1/external_bank_accounts/{external_bank_account_token}/set_verification_method",
+                external_bank_account_token=external_bank_account_token,
+            ),
+            body=await async_maybe_transform(
+                {
+                    "verification_method": verification_method,
+                    "financial_account_token": financial_account_token,
+                },
+                external_bank_account_set_verification_method_params.ExternalBankAccountSetVerificationMethodParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExternalBankAccount,
+        )
+
     async def unpause(
         self,
         external_bank_account_token: str,
@@ -1342,6 +1451,9 @@ class ExternalBankAccountsWithRawResponse:
         self.retry_prenote = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.retry_prenote,
         )
+        self.set_verification_method = _legacy_response.to_raw_response_wrapper(
+            external_bank_accounts.set_verification_method,
+        )
         self.unpause = _legacy_response.to_raw_response_wrapper(
             external_bank_accounts.unpause,
         )
@@ -1372,6 +1484,9 @@ class AsyncExternalBankAccountsWithRawResponse:
         )
         self.retry_prenote = _legacy_response.async_to_raw_response_wrapper(
             external_bank_accounts.retry_prenote,
+        )
+        self.set_verification_method = _legacy_response.async_to_raw_response_wrapper(
+            external_bank_accounts.set_verification_method,
         )
         self.unpause = _legacy_response.async_to_raw_response_wrapper(
             external_bank_accounts.unpause,
@@ -1404,6 +1519,9 @@ class ExternalBankAccountsWithStreamingResponse:
         self.retry_prenote = to_streamed_response_wrapper(
             external_bank_accounts.retry_prenote,
         )
+        self.set_verification_method = to_streamed_response_wrapper(
+            external_bank_accounts.set_verification_method,
+        )
         self.unpause = to_streamed_response_wrapper(
             external_bank_accounts.unpause,
         )
@@ -1434,6 +1552,9 @@ class AsyncExternalBankAccountsWithStreamingResponse:
         )
         self.retry_prenote = async_to_streamed_response_wrapper(
             external_bank_accounts.retry_prenote,
+        )
+        self.set_verification_method = async_to_streamed_response_wrapper(
+            external_bank_accounts.set_verification_method,
         )
         self.unpause = async_to_streamed_response_wrapper(
             external_bank_accounts.unpause,
