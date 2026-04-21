@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -85,15 +85,17 @@ class Accounts(SyncAPIResource):
         lifetime_spend_limit: int | Omit = omit,
         monthly_spend_limit: int | Omit = omit,
         state: Literal["ACTIVE", "PAUSED", "CLOSED"] | Omit = omit,
-        substatus: Literal[
-            "FRAUD_IDENTIFIED",
-            "SUSPICIOUS_ACTIVITY",
-            "RISK_VIOLATION",
-            "END_USER_REQUEST",
-            "ISSUER_REQUEST",
-            "NOT_ACTIVE",
-            "INTERNAL_REVIEW",
-            "OTHER",
+        substatus: Optional[
+            Literal[
+                "FRAUD_IDENTIFIED",
+                "SUSPICIOUS_ACTIVITY",
+                "RISK_VIOLATION",
+                "END_USER_REQUEST",
+                "ISSUER_REQUEST",
+                "NOT_ACTIVE",
+                "INTERNAL_REVIEW",
+                "OTHER",
+            ]
         ]
         | Omit = omit,
         verification_address: account_update_params.VerificationAddress | Omit = omit,
@@ -357,15 +359,17 @@ class AsyncAccounts(AsyncAPIResource):
         lifetime_spend_limit: int | Omit = omit,
         monthly_spend_limit: int | Omit = omit,
         state: Literal["ACTIVE", "PAUSED", "CLOSED"] | Omit = omit,
-        substatus: Literal[
-            "FRAUD_IDENTIFIED",
-            "SUSPICIOUS_ACTIVITY",
-            "RISK_VIOLATION",
-            "END_USER_REQUEST",
-            "ISSUER_REQUEST",
-            "NOT_ACTIVE",
-            "INTERNAL_REVIEW",
-            "OTHER",
+        substatus: Optional[
+            Literal[
+                "FRAUD_IDENTIFIED",
+                "SUSPICIOUS_ACTIVITY",
+                "RISK_VIOLATION",
+                "END_USER_REQUEST",
+                "ISSUER_REQUEST",
+                "NOT_ACTIVE",
+                "INTERNAL_REVIEW",
+                "OTHER",
+            ]
         ]
         | Omit = omit,
         verification_address: account_update_params.VerificationAddress | Omit = omit,

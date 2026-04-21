@@ -11,7 +11,7 @@ __all__ = ["NonPCICard", "Funding"]
 
 
 class Funding(BaseModel):
-    """Deprecated: Funding account for the card."""
+    """Funding account for a card"""
 
     token: str
     """A globally unique identifier for this FundingAccount."""
@@ -65,8 +65,8 @@ class NonPCICard(BaseModel):
     created: datetime
     """An RFC 3339 timestamp for when the card was created. UTC time zone."""
 
-    funding: Funding
-    """Deprecated: Funding account for the card."""
+    funding: Optional[Funding] = None
+    """Funding account for a card"""
 
     last_four: str
     """Last four digits of the card number."""
