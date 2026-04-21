@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, TypedDict
 
 __all__ = ["AccountUpdateParams", "VerificationAddress"]
@@ -39,15 +40,17 @@ class AccountUpdateParams(TypedDict, total=False):
     state: Literal["ACTIVE", "PAUSED", "CLOSED"]
     """Account states."""
 
-    substatus: Literal[
-        "FRAUD_IDENTIFIED",
-        "SUSPICIOUS_ACTIVITY",
-        "RISK_VIOLATION",
-        "END_USER_REQUEST",
-        "ISSUER_REQUEST",
-        "NOT_ACTIVE",
-        "INTERNAL_REVIEW",
-        "OTHER",
+    substatus: Optional[
+        Literal[
+            "FRAUD_IDENTIFIED",
+            "SUSPICIOUS_ACTIVITY",
+            "RISK_VIOLATION",
+            "END_USER_REQUEST",
+            "ISSUER_REQUEST",
+            "NOT_ACTIVE",
+            "INTERNAL_REVIEW",
+            "OTHER",
+        ]
     ]
     """Account state substatus values:
 
