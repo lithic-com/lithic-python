@@ -183,10 +183,12 @@ class Cards(SyncAPIResource):
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
-              an expiration date will be generated.
+              an expiration date five years in the future will be generated. Five years is the
+              maximum expiration date.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
-              provided, an expiration date will be generated.
+              provided, an expiration date five years in the future will be generated. Five
+              years is the maximum expiration date.
 
           memo: Friendly name to identify the card.
 
@@ -1051,10 +1053,12 @@ class Cards(SyncAPIResource):
           carrier: If omitted, the previous carrier will be used.
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
-              an expiration date six years in the future will be generated.
+              an expiration date five years in the future will be generated. Five years is the
+              maximum expiration date.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
-              provided, an expiration date six years in the future will be generated.
+              provided, an expiration date five years in the future will be generated. Five
+              years is the maximum expiration date.
 
           product_id: Specifies the configuration (e.g. physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be
@@ -1369,10 +1373,12 @@ class AsyncCards(AsyncAPIResource):
               [Flexible Card Art Guide](https://docs.lithic.com/docs/about-digital-wallets#flexible-card-art).
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
-              an expiration date will be generated.
+              an expiration date five years in the future will be generated. Five years is the
+              maximum expiration date.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
-              provided, an expiration date will be generated.
+              provided, an expiration date five years in the future will be generated. Five
+              years is the maximum expiration date.
 
           memo: Friendly name to identify the card.
 
@@ -2237,10 +2243,12 @@ class AsyncCards(AsyncAPIResource):
           carrier: If omitted, the previous carrier will be used.
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
-              an expiration date six years in the future will be generated.
+              an expiration date five years in the future will be generated. Five years is the
+              maximum expiration date.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
-              provided, an expiration date six years in the future will be generated.
+              provided, an expiration date five years in the future will be generated. Five
+              years is the maximum expiration date.
 
           product_id: Specifies the configuration (e.g. physical card art) that the card should be
               manufactured with, and only applies to cards of type `PHYSICAL`. This must be

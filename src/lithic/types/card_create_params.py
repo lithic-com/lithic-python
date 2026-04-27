@@ -70,15 +70,15 @@ class CardCreateParams(TypedDict, total=False):
     exp_month: str
     """Two digit (MM) expiry month.
 
-    If neither `exp_month` nor `exp_year` is provided, an expiration date will be
-    generated.
+    If neither `exp_month` nor `exp_year` is provided, an expiration date five years
+    in the future will be generated. Five years is the maximum expiration date.
     """
 
     exp_year: str
     """Four digit (yyyy) expiry year.
 
-    If neither `exp_month` nor `exp_year` is provided, an expiration date will be
-    generated.
+    If neither `exp_month` nor `exp_year` is provided, an expiration date five years
+    in the future will be generated. Five years is the maximum expiration date.
     """
 
     memo: str
