@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.123.0 (2026-05-01)
+
+Full Changelog: [v0.122.0...v0.123.0](https://github.com/lithic-com/lithic-python/compare/v0.122.0...v0.123.0)
+
+### Features
+
+* **api:** add AMEX to network enum in settlement reports ([a429a2e](https://github.com/lithic-com/lithic-python/commit/a429a2e6c8915f857d692f567951b03b392791ba))
+* support setting headers via env ([759b6e2](https://github.com/lithic-com/lithic-python/commit/759b6e2ea428bfea52d518cd9dadadac4d4bc393))
+
+
+### Bug Fixes
+
+* **types:** make substatus/funding optional, add exemption_type enum value ([e424839](https://github.com/lithic-com/lithic-python/commit/e424839de5a127d48086c9dd1ed5ec7146cdfd6a))
+* use correct field name format for multipart file arrays ([66cbc65](https://github.com/lithic-com/lithic-python/commit/66cbc65975b11d4914b4f3c57b4b7b581cef04d7))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([0df0d6c](https://github.com/lithic-com/lithic-python/commit/0df0d6cf2e2691b4979e5727dd88781229b7e831))
+* **internal:** reformat pyproject.toml ([7d42546](https://github.com/lithic-com/lithic-python/commit/7d4254692e5456f270de6173ba45180b3adfcb66))
+
+
+### Documentation
+
+* **api:** clarify exp_month/exp_year generation in cards create/renew methods ([8e94d66](https://github.com/lithic-com/lithic-python/commit/8e94d661759140b25e202afb48fd00ac63bf68d4))
+* **types:** improve settlement_detail field descriptions ([77ee726](https://github.com/lithic-com/lithic-python/commit/77ee72643eebfa74b7a97d8e4104e3fd5be21041))
+
 ## 0.122.0 (2026-04-20)
 
 Full Changelog: [v0.121.0...v0.122.0](https://github.com/lithic-com/lithic-python/compare/v0.121.0...v0.122.0)
