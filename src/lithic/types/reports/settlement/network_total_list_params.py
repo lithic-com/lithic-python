@@ -33,7 +33,7 @@ class NetworkTotalListParams(TypedDict, total=False):
     institution_id: str
     """Institution ID to filter on."""
 
-    network: Literal["VISA", "MASTERCARD", "MAESTRO", "INTERLINK"]
+    network: Literal["AMEX", "VISA", "MASTERCARD", "MAESTRO", "INTERLINK"]
     """Network to filter on."""
 
     page_size: int

@@ -339,7 +339,7 @@ class KYBKYCPatchResponse(BaseModel):
     exemption_type: Optional[Literal["AUTHORIZED_USER", "PREPAID_CARD_USER"]] = None
     """The type of KYC exemption for a KYC-Exempt Account Holder.
 
-    "None" if the account holder is not KYC-Exempt.
+    `null` if the account holder is not KYC-Exempt.
     """
 
     external_id: Optional[str] = None

@@ -50,7 +50,8 @@ class SettlementDetail(BaseModel):
 
     event_tokens: List[str]
     """
-    Globally unique identifiers denoting the Events associated with this settlement.
+    Array of globally unique identifiers for the financial events that comprise this
+    settlement. Use these tokens to access detailed event-level information.
     """
 
     institution: str
@@ -65,7 +66,7 @@ class SettlementDetail(BaseModel):
     interchange_gross_amount: int
     """The total amount of interchange."""
 
-    network: Literal["INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]
+    network: Literal["AMEX", "INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]
     """Card network where the transaction took place."""
 
     other_fees_details: OtherFeesDetails
@@ -85,7 +86,14 @@ class SettlementDetail(BaseModel):
     """
 
     transaction_token: str
-    """Globally unique identifier denoting the associated Transaction object."""
+    """Globally unique identifier denoting the associated transaction.
+
+    For settlement records with type `CLEARING`, `FINANCIAL`, or `NON-FINANCIAL`,
+    this references a card transaction token. For settlement records with type
+    `CHARGEBACK`, `REPRESENTMENT`, `PREARBITRATION`, `ARBITRATION`, or
+    `COLLABORATION`, this references the dispute transaction token. May be null for
+    certain settlement types.
+    """
 
     transactions_gross_amount: int
     """
