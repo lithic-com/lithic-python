@@ -15,6 +15,9 @@ from .conditional_3ds_action_parameters_param import Conditional3DSActionParamet
 from .conditional_ach_action_parameters_param import ConditionalACHActionParametersParam
 from .conditional_tokenization_action_parameters_param import ConditionalTokenizationActionParametersParam
 from .conditional_authorization_action_parameters_param import ConditionalAuthorizationActionParametersParam
+from .conditional_card_transaction_update_action_parameters_param import (
+    ConditionalCardTransactionUpdateActionParametersParam,
+)
 
 __all__ = [
     "V2CreateParams",
@@ -45,7 +48,8 @@ class AccountLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+      stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
@@ -71,6 +75,7 @@ AccountLevelRuleParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    ConditionalCardTransactionUpdateActionParametersParam,
     TypescriptCodeParametersParam,
 ]
 
@@ -96,7 +101,8 @@ class CardLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+      stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
@@ -116,6 +122,7 @@ CardLevelRuleParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    ConditionalCardTransactionUpdateActionParametersParam,
     TypescriptCodeParametersParam,
 ]
 
@@ -141,7 +148,8 @@ class ProgramLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+      stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
     """
@@ -170,6 +178,7 @@ ProgramLevelRuleParameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    ConditionalCardTransactionUpdateActionParametersParam,
     TypescriptCodeParametersParam,
 ]
 
