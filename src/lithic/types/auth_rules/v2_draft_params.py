@@ -13,6 +13,9 @@ from .conditional_3ds_action_parameters_param import Conditional3DSActionParamet
 from .conditional_ach_action_parameters_param import ConditionalACHActionParametersParam
 from .conditional_tokenization_action_parameters_param import ConditionalTokenizationActionParametersParam
 from .conditional_authorization_action_parameters_param import ConditionalAuthorizationActionParametersParam
+from .conditional_card_transaction_update_action_parameters_param import (
+    ConditionalCardTransactionUpdateActionParametersParam,
+)
 
 __all__ = ["V2DraftParams", "Parameters"]
 
@@ -30,5 +33,6 @@ Parameters: TypeAlias = Union[
     ConditionalAuthorizationActionParametersParam,
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
+    ConditionalCardTransactionUpdateActionParametersParam,
     TypescriptCodeParametersParam,
 ]
