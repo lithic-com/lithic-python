@@ -47,6 +47,7 @@ from .external_payment import ExternalPayment as ExternalPayment
 from .hold_list_params import HoldListParams as HoldListParams
 from .hold_void_params import HoldVoidParams as HoldVoidParams
 from .kyc_exempt_param import KYCExemptParam as KYCExemptParam
+from .signals_response import SignalsResponse as SignalsResponse
 from .statement_totals import StatementTotals as StatementTotals
 from .card_embed_params import CardEmbedParams as CardEmbedParams
 from .card_renew_params import CardRenewParams as CardRenewParams
