@@ -53,6 +53,7 @@ from .financial_transactions import (
     FinancialTransactionsWithStreamingResponse,
     AsyncFinancialTransactionsWithStreamingResponse,
 )
+from ...types.signals_response import SignalsResponse
 from ...types.card_spend_limits import CardSpendLimits
 from ...types.spend_limit_duration import SpendLimitDuration
 from ...types.shared_params.carrier import Carrier
@@ -1108,6 +1109,44 @@ class Cards(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Card,
+        )
+
+    def retrieve_signals(
+        self,
+        card_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SignalsResponse:
+        """
+        Returns behavioral feature state derived from a card's transaction history.
+
+        These signals expose the same data used by behavioral rule attributes (e.g.
+        `AMOUNT_Z_SCORE` with `scope: CARD`, `IS_NEW_COUNTRY` with `scope: CARD`) and
+        custom code `TRANSACTION_HISTORY_SIGNALS` features, allowing clients to inspect
+        feature values before writing rules and debug rule behavior.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return self._get(
+            path_template("/v1/cards/{card_token}/signals", card_token=card_token),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SignalsResponse,
         )
 
     def retrieve_spend_limits(
@@ -2300,6 +2339,44 @@ class AsyncCards(AsyncAPIResource):
             cast_to=Card,
         )
 
+    async def retrieve_signals(
+        self,
+        card_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SignalsResponse:
+        """
+        Returns behavioral feature state derived from a card's transaction history.
+
+        These signals expose the same data used by behavioral rule attributes (e.g.
+        `AMOUNT_Z_SCORE` with `scope: CARD`, `IS_NEW_COUNTRY` with `scope: CARD`) and
+        custom code `TRANSACTION_HISTORY_SIGNALS` features, allowing clients to inspect
+        feature values before writing rules and debug rule behavior.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return await self._get(
+            path_template("/v1/cards/{card_token}/signals", card_token=card_token),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SignalsResponse,
+        )
+
     async def retrieve_spend_limits(
         self,
         card_token: str,
@@ -2474,6 +2551,9 @@ class CardsWithRawResponse:
         self.renew = _legacy_response.to_raw_response_wrapper(
             cards.renew,
         )
+        self.retrieve_signals = _legacy_response.to_raw_response_wrapper(
+            cards.retrieve_signals,
+        )
         self.retrieve_spend_limits = _legacy_response.to_raw_response_wrapper(
             cards.retrieve_spend_limits,
         )
@@ -2523,6 +2603,9 @@ class AsyncCardsWithRawResponse:
         )
         self.renew = _legacy_response.async_to_raw_response_wrapper(
             cards.renew,
+        )
+        self.retrieve_signals = _legacy_response.async_to_raw_response_wrapper(
+            cards.retrieve_signals,
         )
         self.retrieve_spend_limits = _legacy_response.async_to_raw_response_wrapper(
             cards.retrieve_spend_limits,
@@ -2574,6 +2657,9 @@ class CardsWithStreamingResponse:
         self.renew = to_streamed_response_wrapper(
             cards.renew,
         )
+        self.retrieve_signals = to_streamed_response_wrapper(
+            cards.retrieve_signals,
+        )
         self.retrieve_spend_limits = to_streamed_response_wrapper(
             cards.retrieve_spend_limits,
         )
@@ -2623,6 +2709,9 @@ class AsyncCardsWithStreamingResponse:
         )
         self.renew = async_to_streamed_response_wrapper(
             cards.renew,
+        )
+        self.retrieve_signals = async_to_streamed_response_wrapper(
+            cards.retrieve_signals,
         )
         self.retrieve_spend_limits = async_to_streamed_response_wrapper(
             cards.retrieve_spend_limits,

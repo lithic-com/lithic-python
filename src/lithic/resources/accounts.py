@@ -18,6 +18,7 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.account import Account
+from ..types.signals_response import SignalsResponse
 from ..types.account_spend_limits import AccountSpendLimits
 
 __all__ = ["Accounts", "AsyncAccounts"]
@@ -257,6 +258,46 @@ class Accounts(SyncAPIResource):
                 ),
             ),
             model=Account,
+        )
+
+    def retrieve_signals(
+        self,
+        account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SignalsResponse:
+        """
+        Returns behavioral feature state derived from an account's transaction history.
+
+        These signals expose the same data used by behavioral rule attributes (e.g.
+        `AMOUNT_Z_SCORE` with `scope: ACCOUNT`, `IS_NEW_COUNTRY` with `scope: ACCOUNT`)
+        and custom code `TRANSACTION_HISTORY_SIGNALS` features, allowing clients to
+        inspect feature values before writing rules and debug rule behavior.
+
+        Note: 3DS fields are not available at the account scope and will be null.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
+        return self._get(
+            path_template("/v1/accounts/{account_token}/signals", account_token=account_token),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SignalsResponse,
         )
 
     def retrieve_spend_limits(
@@ -533,6 +574,46 @@ class AsyncAccounts(AsyncAPIResource):
             model=Account,
         )
 
+    async def retrieve_signals(
+        self,
+        account_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SignalsResponse:
+        """
+        Returns behavioral feature state derived from an account's transaction history.
+
+        These signals expose the same data used by behavioral rule attributes (e.g.
+        `AMOUNT_Z_SCORE` with `scope: ACCOUNT`, `IS_NEW_COUNTRY` with `scope: ACCOUNT`)
+        and custom code `TRANSACTION_HISTORY_SIGNALS` features, allowing clients to
+        inspect feature values before writing rules and debug rule behavior.
+
+        Note: 3DS fields are not available at the account scope and will be null.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_token:
+            raise ValueError(f"Expected a non-empty value for `account_token` but received {account_token!r}")
+        return await self._get(
+            path_template("/v1/accounts/{account_token}/signals", account_token=account_token),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SignalsResponse,
+        )
+
     async def retrieve_spend_limits(
         self,
         account_token: str,
@@ -584,6 +665,9 @@ class AccountsWithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             accounts.list,
         )
+        self.retrieve_signals = _legacy_response.to_raw_response_wrapper(
+            accounts.retrieve_signals,
+        )
         self.retrieve_spend_limits = _legacy_response.to_raw_response_wrapper(
             accounts.retrieve_spend_limits,
         )
@@ -601,6 +685,9 @@ class AsyncAccountsWithRawResponse:
         )
         self.list = _legacy_response.async_to_raw_response_wrapper(
             accounts.list,
+        )
+        self.retrieve_signals = _legacy_response.async_to_raw_response_wrapper(
+            accounts.retrieve_signals,
         )
         self.retrieve_spend_limits = _legacy_response.async_to_raw_response_wrapper(
             accounts.retrieve_spend_limits,
@@ -620,6 +707,9 @@ class AccountsWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             accounts.list,
         )
+        self.retrieve_signals = to_streamed_response_wrapper(
+            accounts.retrieve_signals,
+        )
         self.retrieve_spend_limits = to_streamed_response_wrapper(
             accounts.retrieve_spend_limits,
         )
@@ -637,6 +727,9 @@ class AsyncAccountsWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             accounts.list,
+        )
+        self.retrieve_signals = async_to_streamed_response_wrapper(
+            accounts.retrieve_signals,
         )
         self.retrieve_spend_limits = async_to_streamed_response_wrapper(
             accounts.retrieve_spend_limits,

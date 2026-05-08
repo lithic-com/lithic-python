@@ -9,7 +9,7 @@ import pytest
 
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
-from lithic.types import Account, AccountSpendLimits
+from lithic.types import Account, SignalsResponse, AccountSpendLimits
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
@@ -156,6 +156,44 @@ class TestAccounts:
             assert_matches_type(SyncCursorPage[Account], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_retrieve_signals(self, client: Lithic) -> None:
+        account = client.accounts.retrieve_signals(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(SignalsResponse, account, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_signals(self, client: Lithic) -> None:
+        response = client.accounts.with_raw_response.retrieve_signals(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(SignalsResponse, account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_signals(self, client: Lithic) -> None:
+        with client.accounts.with_streaming_response.retrieve_signals(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = response.parse()
+            assert_matches_type(SignalsResponse, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve_signals(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            client.accounts.with_raw_response.retrieve_signals(
+                "",
+            )
 
     @parametrize
     def test_method_retrieve_spend_limits(self, client: Lithic) -> None:
@@ -338,6 +376,44 @@ class TestAsyncAccounts:
             assert_matches_type(AsyncCursorPage[Account], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_retrieve_signals(self, async_client: AsyncLithic) -> None:
+        account = await async_client.accounts.retrieve_signals(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(SignalsResponse, account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_signals(self, async_client: AsyncLithic) -> None:
+        response = await async_client.accounts.with_raw_response.retrieve_signals(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(SignalsResponse, account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_signals(self, async_client: AsyncLithic) -> None:
+        async with async_client.accounts.with_streaming_response.retrieve_signals(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = await response.parse()
+            assert_matches_type(SignalsResponse, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_signals(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_token` but received ''"):
+            await async_client.accounts.with_raw_response.retrieve_signals(
+                "",
+            )
 
     @parametrize
     async def test_method_retrieve_spend_limits(self, async_client: AsyncLithic) -> None:
