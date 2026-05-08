@@ -39,6 +39,7 @@ Methods:
 - <code title="get /v1/accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">retrieve</a>(account_token) -> <a href="./src/lithic/types/account.py">Account</a></code>
 - <code title="patch /v1/accounts/{account_token}">client.accounts.<a href="./src/lithic/resources/accounts.py">update</a>(account_token, \*\*<a href="src/lithic/types/account_update_params.py">params</a>) -> <a href="./src/lithic/types/account.py">Account</a></code>
 - <code title="get /v1/accounts">client.accounts.<a href="./src/lithic/resources/accounts.py">list</a>(\*\*<a href="src/lithic/types/account_list_params.py">params</a>) -> <a href="./src/lithic/types/account.py">SyncCursorPage[Account]</a></code>
+- <code title="get /v1/accounts/{account_token}/signals">client.accounts.<a href="./src/lithic/resources/accounts.py">retrieve_signals</a>(account_token) -> <a href="./src/lithic/types/signals_response.py">SignalsResponse</a></code>
 - <code title="get /v1/accounts/{account_token}/spend_limits">client.accounts.<a href="./src/lithic/resources/accounts.py">retrieve_spend_limits</a>(account_token) -> <a href="./src/lithic/types/account_spend_limits.py">AccountSpendLimits</a></code>
 
 # AccountHolders
@@ -87,6 +88,12 @@ Methods:
 - <code title="delete /v1/account_holders/{account_holder_token}/entities/{entity_token}">client.account_holders.entities.<a href="./src/lithic/resources/account_holders/entities.py">delete</a>(entity_token, \*, account_holder_token) -> <a href="./src/lithic/types/account_holders/account_holder_entity.py">AccountHolderEntity</a></code>
 
 # AuthRules
+
+Types:
+
+```python
+from lithic.types import SignalsResponse
+```
 
 ## V2
 
@@ -233,6 +240,7 @@ Methods:
 - <code title="post /v1/cards/{card_token}/provision">client.cards.<a href="./src/lithic/resources/cards/cards.py">provision</a>(card_token, \*\*<a href="src/lithic/types/card_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_provision_response.py">CardProvisionResponse</a></code>
 - <code title="post /v1/cards/{card_token}/reissue">client.cards.<a href="./src/lithic/resources/cards/cards.py">reissue</a>(card_token, \*\*<a href="src/lithic/types/card_reissue_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="post /v1/cards/{card_token}/renew">client.cards.<a href="./src/lithic/resources/cards/cards.py">renew</a>(card_token, \*\*<a href="src/lithic/types/card_renew_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
+- <code title="get /v1/cards/{card_token}/signals">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_signals</a>(card_token) -> <a href="./src/lithic/types/signals_response.py">SignalsResponse</a></code>
 - <code title="get /v1/cards/{card_token}/spend_limits">client.cards.<a href="./src/lithic/resources/cards/cards.py">retrieve_spend_limits</a>(card_token) -> <a href="./src/lithic/types/card_spend_limits.py">CardSpendLimits</a></code>
 - <code title="post /v1/cards/search_by_pan">client.cards.<a href="./src/lithic/resources/cards/cards.py">search_by_pan</a>(\*\*<a href="src/lithic/types/card_search_by_pan_params.py">params</a>) -> <a href="./src/lithic/types/card.py">Card</a></code>
 - <code title="post /v1/cards/{card_token}/web_provision">client.cards.<a href="./src/lithic/resources/cards/cards.py">web_provision</a>(card_token, \*\*<a href="src/lithic/types/card_web_provision_params.py">params</a>) -> <a href="./src/lithic/types/card_web_provision_response.py">CardWebProvisionResponse</a></code>
