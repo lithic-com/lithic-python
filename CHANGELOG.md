@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.124.0 (2026-05-11)
+
+Full Changelog: [v0.123.0...v0.124.0](https://github.com/lithic-com/lithic-python/compare/v0.123.0...v0.124.0)
+
+### Features
+
+* **api:** add retrieve_signals method to accounts and cards ([6e1649a](https://github.com/lithic-com/lithic-python/commit/6e1649ad7ee7ca58316891747b24c3f4773553d9))
+* **api:** add unit parameter and travel/distance attributes to auth_rules ([02bd0f0](https://github.com/lithic-com/lithic-python/commit/02bd0f021353f6ddb9e930f3e5515c0636adfb29))
+* **internal/types:** support eagerly validating pydantic iterators ([e956125](https://github.com/lithic-com/lithic-python/commit/e956125636a2734501d5fb3a46de532102a00e87))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([826938a](https://github.com/lithic-com/lithic-python/commit/826938aec1590a333b0e377dc6f99c9e14e96cdf))
+
 ## 0.123.0 (2026-05-06)
 
 Full Changelog: [v0.122.0...v0.123.0](https://github.com/lithic-com/lithic-python/compare/v0.122.0...v0.123.0)
