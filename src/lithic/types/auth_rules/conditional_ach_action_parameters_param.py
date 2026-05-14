@@ -116,7 +116,7 @@ class Condition(TypedDict, total=False):
       ID) of the entity initiating the ACH transaction.
     - `TIMESTAMP`: The timestamp of the ACH transaction in ISO 8601 format.
     - `TRANSACTION_AMOUNT`: The amount of the ACH transaction in minor units
-      (cents).
+      (cents). Use an integer value.
     - `SEC_CODE`: Standard Entry Class code indicating the type of ACH transaction.
       Valid values include PPD (Prearranged Payment and Deposit Entry), CCD
       (Corporate Credit or Debit Entry), WEB (Internet-Initiated/Mobile Entry), TEL

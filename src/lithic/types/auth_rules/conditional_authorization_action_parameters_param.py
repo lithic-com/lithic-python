@@ -113,26 +113,27 @@ class Condition(TypedDict, total=False):
     - `TRANSACTION_AMOUNT`: The base transaction amount (in cents) plus the acquirer
       fee field in the settlement/cardholder billing currency. This is the amount
       the issuer should authorize against unless the issuer is paying the acquirer
-      fee on behalf of the cardholder.
+      fee on behalf of the cardholder. Use an integer value.
     - `CASH_AMOUNT`: The cash amount of the transaction in minor units (cents). This
-      represents the amount of cash being withdrawn or advanced.
+      represents the amount of cash being withdrawn or advanced. Use an integer
+      value.
     - `RISK_SCORE`: Network-provided score assessing risk level associated with a
       given authorization. Scores are on a range of 0-999, with 0 representing the
       lowest risk and 999 representing the highest risk. For Visa transactions,
       where the raw score has a range of 0-99, Lithic will normalize the score by
-      multiplying the raw score by 10x.
+      multiplying the raw score by 10x. Use an integer value.
     - `CARD_TRANSACTION_COUNT_15M`: The number of transactions on the card in the
-      trailing 15 minutes before the authorization.
+      trailing 15 minutes before the authorization. Use an integer value.
     - `CARD_TRANSACTION_COUNT_1H`: The number of transactions on the card in the
-      trailing hour up and until the authorization.
+      trailing hour up and until the authorization. Use an integer value.
     - `CARD_TRANSACTION_COUNT_24H`: The number of transactions on the card in the
-      trailing 24 hours up and until the authorization.
+      trailing 24 hours up and until the authorization. Use an integer value.
     - `CARD_DECLINE_COUNT_15M`: The number of declined transactions on the card in
-      the trailing 15 minutes before the authorization.
+      the trailing 15 minutes before the authorization. Use an integer value.
     - `CARD_DECLINE_COUNT_1H`: The number of declined transactions on the card in
-      the trailing hour up and until the authorization.
+      the trailing hour up and until the authorization. Use an integer value.
     - `CARD_DECLINE_COUNT_24H`: The number of declined transactions on the card in
-      the trailing 24 hours up and until the authorization.
+      the trailing 24 hours up and until the authorization. Use an integer value.
     - `CARD_STATE`: The current state of the card associated with the transaction.
       Valid values are `CLOSED`, `OPEN`, `PAUSED`, `PENDING_ACTIVATION`,
       `PENDING_FULFILLMENT`.
@@ -157,18 +158,20 @@ class Condition(TypedDict, total=False):
       data, the service location postal code is used. Otherwise, falls back to the
       card acceptor postal code.
     - `CARD_AGE`: The age of the card in seconds at the time of the authorization.
+      Use an integer value.
     - `ACCOUNT_AGE`: The age of the account holder's account in seconds at the time
-      of the authorization.
+      of the authorization. Use an integer value.
     - `AMOUNT_Z_SCORE`: The z-score of the transaction amount relative to the
       entity's transaction history. Null if fewer than 30 approved transactions in
       the specified window. Requires `parameters.scope` and `parameters.interval`.
+      Use a decimal value.
     - `AVG_TRANSACTION_AMOUNT`: The average approved transaction amount for the
       entity over the specified window, in cents. Requires `parameters.scope` and
-      `parameters.interval`.
+      `parameters.interval`. Use a decimal value.
     - `STDEV_TRANSACTION_AMOUNT`: The standard deviation of approved transaction
       amounts for the entity over the specified window, in cents. Null if fewer than
       30 approved transactions in the specified window. Requires `parameters.scope`
-      and `parameters.interval`.
+      and `parameters.interval`. Use a decimal value.
     - `IS_NEW_COUNTRY`: Whether the transaction's merchant country has not been seen
       in the entity's transaction history. Valid values are `TRUE`, `FALSE`.
       Requires `parameters.scope`.
@@ -179,26 +182,31 @@ class Condition(TypedDict, total=False):
       Valid values are `TRUE`, `FALSE`. Requires `parameters.scope`.
     - `CONSECUTIVE_DECLINES`: The number of consecutive declined transactions for
       the entity over the last 30 days (rolling). Requires `parameters.scope`. Not
-      supported for `BUSINESS_ACCOUNT` scope.
+      supported for `BUSINESS_ACCOUNT` scope. Use an integer value.
     - `TIME_SINCE_LAST_TRANSACTION`: The number of days since the last approved
-      transaction for the entity. Requires `parameters.scope`.
+      transaction for the entity, rounded to the nearest whole day. Requires
+      `parameters.scope`. Use an integer value.
     - `DISTINCT_COUNTRY_COUNT`: The number of distinct merchant countries seen in
-      the entity's transaction history. Requires `parameters.scope`.
+      the entity's transaction history. Requires `parameters.scope`. Use an integer
+      value.
     - `IS_NEW_MERCHANT`: Whether the card acceptor ID has not been seen in the
       card's approved transaction history (capped at the 1000 most recently seen
       merchants). Valid values are `TRUE`, `FALSE`. Card-scoped only; no
       `parameters` required.
     - `THREE_DS_SUCCESS_RATE`: The 3DS authentication success rate for the card, as
       a percentage from 0.0 to 100.0. Card-scoped only; no `parameters` required.
+      Use a decimal value.
     - `TRAVEL_SPEED`: The estimated speed of travel derived from the distance
       between the postal code centers of the last card-present transaction and the
       current transaction, divided by the elapsed time. Null if there is no prior
       card-present transaction, if either postal code cannot be geocoded, or if
-      elapsed time is zero. Requires `parameters.unit` set to `MPH` or `KPH`.
+      elapsed time is zero. Requires `parameters.unit` set to `MPH` or `KPH`. Use a
+      decimal value.
     - `DISTANCE_FROM_LAST_TRANSACTION`: The estimated distance between the postal
       code centers of the last card-present transaction and the current transaction.
       Null if there is no prior card-present transaction or if either postal code
       cannot be geocoded. Requires `parameters.unit` set to `MILES` or `KILOMETERS`.
+      Use a decimal value.
     """
 
     operation: Required[ConditionalOperation]
