@@ -6,4 +6,4 @@ from typing_extensions import TypeAlias
 
 __all__ = ["ConditionalValue"]
 
-ConditionalValue: TypeAlias = Union[str, int, List[str], datetime]
+ConditionalValue: TypeAlias = Union[str, int, float, List[str], datetime]
