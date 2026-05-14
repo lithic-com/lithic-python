@@ -65,12 +65,12 @@ class Condition(BaseModel):
     - `TRANSACTION_AMOUNT`: The base transaction amount (in cents) plus the acquirer
       fee field in the settlement/cardholder billing currency. This is the amount
       the issuer should authorize against unless the issuer is paying the acquirer
-      fee on behalf of the cardholder.
+      fee on behalf of the cardholder. Use an integer value.
     - `RISK_SCORE`: Network-provided score assessing risk level associated with a
       given authorization. Scores are on a range of 0-999, with 0 representing the
       lowest risk and 999 representing the highest risk. For Visa transactions,
       where the raw score has a range of 0-99, Lithic will normalize the score by
-      multiplying the raw score by 10x.
+      multiplying the raw score by 10x. Use an integer value.
     - `TRANSACTION_STATUS`: The status of the transaction. Valid values are
       `PENDING`, `VOIDED`, `SETTLING`, `SETTLED`, `BOUNCED`, `RETURNED`, `DECLINED`,
       `EXPIRED`.
@@ -91,15 +91,16 @@ class Condition(BaseModel):
     - `WALLET_TYPE`: For transactions using a digital wallet token, indicates the
       source of the token. Valid values are `APPLE_PAY`, `GOOGLE_PAY`,
       `SAMSUNG_PAY`, `MASTERPASS`, `MERCHANT`, `OTHER`, `NONE`.
-    - `CARD_AGE`: The age of the card in seconds at the time of the transaction.
+    - `CARD_AGE`: The age of the card in seconds at the time of the transaction. Use
+      an integer value.
     - `ACCOUNT_AGE`: The age of the account in seconds at the time of the
-      transaction.
+      transaction. Use an integer value.
     - `SPEND_VELOCITY_COUNT`: The number of transactions matching the specified
       filters within the given period. Requires `parameters` with `scope`, `period`,
-      and optional `filters`.
+      and optional `filters`. Use an integer value.
     - `SPEND_VELOCITY_AMOUNT`: The total spend amount (in cents) of transactions
       matching the specified filters within the given period. Requires `parameters`
-      with `scope`, `period`, and optional `filters`.
+      with `scope`, `period`, and optional `filters`. Use an integer value.
     """
 
     operation: ConditionalOperation

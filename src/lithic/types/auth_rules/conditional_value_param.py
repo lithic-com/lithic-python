@@ -10,4 +10,4 @@ from ..._types import SequenceNotStr
 
 __all__ = ["ConditionalValueParam"]
 
-ConditionalValueParam: TypeAlias = Union[str, int, SequenceNotStr[str], Union[str, datetime]]
+ConditionalValueParam: TypeAlias = Union[str, int, float, SequenceNotStr[str], Union[str, datetime]]

@@ -100,10 +100,10 @@ class Condition(BaseModel):
       `SAMSUNG_PAY`, `UNKNOWN`, `VISA_CHECKOUT`.
     - `WALLET_ACCOUNT_SCORE`: Risk score for the account in the digital wallet.
       Numeric value where lower numbers indicate higher risk (e.g., 1 = high risk, 2
-      = medium risk).
+      = medium risk). Use an integer value.
     - `WALLET_DEVICE_SCORE`: Risk score for the device in the digital wallet.
       Numeric value where lower numbers indicate higher risk (e.g., 1 = high risk, 2
-      = medium risk).
+      = medium risk). Use an integer value.
     - `WALLET_RECOMMENDED_DECISION`: The decision recommended by the digital wallet
       provider. Valid values include APPROVE, DECLINE,
       REQUIRE_ADDITIONAL_AUTHENTICATION.
