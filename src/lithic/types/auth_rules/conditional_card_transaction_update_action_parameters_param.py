@@ -98,7 +98,8 @@ class Condition(TypedDict, total=False):
     - `CARD_AGE`: The age of the card in seconds at the time of the transaction. Use
       an integer value.
     - `ACCOUNT_AGE`: The age of the account in seconds at the time of the
-      transaction. Use an integer value.
+      transaction. Use an integer value. For programs where Lithic does not manage
+      or retain account holder data, this attribute does not evaluate.
     - `SPEND_VELOCITY_COUNT`: The number of transactions matching the specified
       filters within the given period. Requires `parameters` with `scope`, `period`,
       and optional `filters`. Use an integer value.
