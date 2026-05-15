@@ -34,6 +34,7 @@ from .dispute_transaction_created_webhook_event import DisputeTransactionCreated
 from .dispute_transaction_updated_webhook_event import DisputeTransactionUpdatedWebhookEvent
 from .payment_transaction_created_webhook_event import PaymentTransactionCreatedWebhookEvent
 from .payment_transaction_updated_webhook_event import PaymentTransactionUpdatedWebhookEvent
+from .card_authorization_challenge_webhook_event import CardAuthorizationChallengeWebhookEvent
 from .internal_transaction_created_webhook_event import InternalTransactionCreatedWebhookEvent
 from .internal_transaction_updated_webhook_event import InternalTransactionUpdatedWebhookEvent
 from .management_operation_created_webhook_event import ManagementOperationCreatedWebhookEvent
@@ -432,6 +433,7 @@ ParsedWebhookEvent: TypeAlias = Union[
     AccountHolderVerificationWebhookEvent,
     AccountHolderDocumentUpdatedWebhookEvent,
     CardAuthorizationApprovalRequestWebhookEvent,
+    CardAuthorizationChallengeWebhookEvent,
     CardAuthorizationChallengeResponseWebhookEvent,
     AuthRulesBacktestReportCreatedWebhookEvent,
     BalanceUpdatedWebhookEvent,
