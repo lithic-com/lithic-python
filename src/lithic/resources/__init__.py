@@ -209,6 +209,14 @@ from .financial_accounts import (
     FinancialAccountsWithStreamingResponse,
     AsyncFinancialAccountsWithStreamingResponse,
 )
+from .card_authorizations import (
+    CardAuthorizations,
+    AsyncCardAuthorizations,
+    CardAuthorizationsWithRawResponse,
+    AsyncCardAuthorizationsWithRawResponse,
+    CardAuthorizationsWithStreamingResponse,
+    AsyncCardAuthorizationsWithStreamingResponse,
+)
 from .responder_endpoints import (
     ResponderEndpoints,
     AsyncResponderEndpoints,
@@ -293,6 +301,12 @@ __all__ = [
     "AsyncCardsWithRawResponse",
     "CardsWithStreamingResponse",
     "AsyncCardsWithStreamingResponse",
+    "CardAuthorizations",
+    "AsyncCardAuthorizations",
+    "CardAuthorizationsWithRawResponse",
+    "AsyncCardAuthorizationsWithRawResponse",
+    "CardAuthorizationsWithStreamingResponse",
+    "AsyncCardAuthorizationsWithStreamingResponse",
     "CardBulkOrders",
     "AsyncCardBulkOrders",
     "CardBulkOrdersWithRawResponse",
