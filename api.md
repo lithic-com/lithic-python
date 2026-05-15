@@ -258,6 +258,18 @@ Methods:
 - <code title="get /v1/cards/{card_token}/financial_transactions/{financial_transaction_token}">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">retrieve</a>(financial_transaction_token, \*, card_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
 - <code title="get /v1/cards/{card_token}/financial_transactions">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
 
+# CardAuthorizations
+
+Types:
+
+```python
+from lithic.types import CardAuthorization
+```
+
+Methods:
+
+- <code title="post /v1/card_authorizations/{event_token}/challenge_response">client.card_authorizations.<a href="./src/lithic/resources/card_authorizations.py">challenge_response</a>(event_token, \*\*<a href="src/lithic/types/card_authorization_challenge_response_params.py">params</a>) -> None</code>
+
 # CardBulkOrders
 
 Types:
@@ -887,6 +899,7 @@ from lithic.types import (
     AccountHolderVerificationWebhookEvent,
     AccountHolderDocumentUpdatedWebhookEvent,
     CardAuthorizationApprovalRequestWebhookEvent,
+    CardAuthorizationChallengeWebhookEvent,
     CardAuthorizationChallengeResponseWebhookEvent,
     AuthRulesBacktestReportCreatedWebhookEvent,
     BalanceUpdatedWebhookEvent,

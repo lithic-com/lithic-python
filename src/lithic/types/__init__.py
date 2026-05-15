@@ -59,6 +59,7 @@ from .required_document import RequiredDocument as RequiredDocument
 from .settlement_detail import SettlementDetail as SettlementDetail
 from .settlement_report import SettlementReport as SettlementReport
 from .auth_stream_secret import AuthStreamSecret as AuthStreamSecret
+from .card_authorization import CardAuthorization as CardAuthorization
 from .card_create_params import CardCreateParams as CardCreateParams
 from .card_update_params import CardUpdateParams as CardUpdateParams
 from .event_subscription import EventSubscription as EventSubscription
@@ -250,6 +251,9 @@ from .payment_transaction_updated_webhook_event import (
 from .transaction_simulate_authorization_params import (
     TransactionSimulateAuthorizationParams as TransactionSimulateAuthorizationParams,
 )
+from .card_authorization_challenge_webhook_event import (
+    CardAuthorizationChallengeWebhookEvent as CardAuthorizationChallengeWebhookEvent,
+)
 from .external_bank_account_retry_prenote_params import (
     ExternalBankAccountRetryPrenoteParams as ExternalBankAccountRetryPrenoteParams,
 )
@@ -285,6 +289,9 @@ from .transaction_simulate_authorization_response import (
 )
 from .transaction_simulate_return_reversal_params import (
     TransactionSimulateReturnReversalParams as TransactionSimulateReturnReversalParams,
+)
+from .card_authorization_challenge_response_params import (
+    CardAuthorizationChallengeResponseParams as CardAuthorizationChallengeResponseParams,
 )
 from .dispute_evidence_upload_failed_webhook_event import (
     DisputeEvidenceUploadFailedWebhookEvent as DisputeEvidenceUploadFailedWebhookEvent,

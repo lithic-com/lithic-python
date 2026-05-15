@@ -68,6 +68,7 @@ if TYPE_CHECKING:
         network_programs,
         external_payments,
         financial_accounts,
+        card_authorizations,
         responder_endpoints,
         management_operations,
         auth_stream_enrollment,
@@ -96,6 +97,7 @@ if TYPE_CHECKING:
     from .resources.network_programs import NetworkPrograms, AsyncNetworkPrograms
     from .resources.external_payments import ExternalPayments, AsyncExternalPayments
     from .resources.three_ds.three_ds import ThreeDS, AsyncThreeDS
+    from .resources.card_authorizations import CardAuthorizations, AsyncCardAuthorizations
     from .resources.responder_endpoints import ResponderEndpoints, AsyncResponderEndpoints
     from .resources.auth_rules.auth_rules import AuthRules, AsyncAuthRules
     from .resources.management_operations import ManagementOperations, AsyncManagementOperations
@@ -262,6 +264,12 @@ class Lithic(SyncAPIClient):
         from .resources.cards import Cards
 
         return Cards(self)
+
+    @cached_property
+    def card_authorizations(self) -> CardAuthorizations:
+        from .resources.card_authorizations import CardAuthorizations
+
+        return CardAuthorizations(self)
 
     @cached_property
     def card_bulk_orders(self) -> CardBulkOrders:
@@ -688,6 +696,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncCards(self)
 
     @cached_property
+    def card_authorizations(self) -> AsyncCardAuthorizations:
+        from .resources.card_authorizations import AsyncCardAuthorizations
+
+        return AsyncCardAuthorizations(self)
+
+    @cached_property
     def card_bulk_orders(self) -> AsyncCardBulkOrders:
         from .resources.card_bulk_orders import AsyncCardBulkOrders
 
@@ -1026,6 +1040,12 @@ class LithicWithRawResponse:
         return CardsWithRawResponse(self._client.cards)
 
     @cached_property
+    def card_authorizations(self) -> card_authorizations.CardAuthorizationsWithRawResponse:
+        from .resources.card_authorizations import CardAuthorizationsWithRawResponse
+
+        return CardAuthorizationsWithRawResponse(self._client.card_authorizations)
+
+    @cached_property
     def card_bulk_orders(self) -> card_bulk_orders.CardBulkOrdersWithRawResponse:
         from .resources.card_bulk_orders import CardBulkOrdersWithRawResponse
 
@@ -1221,6 +1241,12 @@ class AsyncLithicWithRawResponse:
         from .resources.cards import AsyncCardsWithRawResponse
 
         return AsyncCardsWithRawResponse(self._client.cards)
+
+    @cached_property
+    def card_authorizations(self) -> card_authorizations.AsyncCardAuthorizationsWithRawResponse:
+        from .resources.card_authorizations import AsyncCardAuthorizationsWithRawResponse
+
+        return AsyncCardAuthorizationsWithRawResponse(self._client.card_authorizations)
 
     @cached_property
     def card_bulk_orders(self) -> card_bulk_orders.AsyncCardBulkOrdersWithRawResponse:
@@ -1420,6 +1446,12 @@ class LithicWithStreamedResponse:
         return CardsWithStreamingResponse(self._client.cards)
 
     @cached_property
+    def card_authorizations(self) -> card_authorizations.CardAuthorizationsWithStreamingResponse:
+        from .resources.card_authorizations import CardAuthorizationsWithStreamingResponse
+
+        return CardAuthorizationsWithStreamingResponse(self._client.card_authorizations)
+
+    @cached_property
     def card_bulk_orders(self) -> card_bulk_orders.CardBulkOrdersWithStreamingResponse:
         from .resources.card_bulk_orders import CardBulkOrdersWithStreamingResponse
 
@@ -1615,6 +1647,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.cards import AsyncCardsWithStreamingResponse
 
         return AsyncCardsWithStreamingResponse(self._client.cards)
+
+    @cached_property
+    def card_authorizations(self) -> card_authorizations.AsyncCardAuthorizationsWithStreamingResponse:
+        from .resources.card_authorizations import AsyncCardAuthorizationsWithStreamingResponse
+
+        return AsyncCardAuthorizationsWithStreamingResponse(self._client.card_authorizations)
 
     @cached_property
     def card_bulk_orders(self) -> card_bulk_orders.AsyncCardBulkOrdersWithStreamingResponse:
