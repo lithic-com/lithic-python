@@ -13,7 +13,7 @@ class CardAuthorizationChallengeResponseWebhookEvent(BaseModel):
     card_token: Optional[str] = None
     """The token of the card associated with the challenge"""
 
-    challenge_method: Literal["SMS"]
+    challenge_method: Literal["SMS", "OUT_OF_BAND"]
     """The method used to deliver the challenge to the cardholder"""
 
     completed: Optional[datetime] = None
