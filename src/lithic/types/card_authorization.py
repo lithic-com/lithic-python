@@ -201,13 +201,24 @@ class LatestChallenge(BaseModel):
     The latest Authorization Challenge that was issued to the cardholder for this merchant.
     """
 
-    phone_number: str
-    """The phone number used for sending Authorization Challenge SMS."""
+    method: Literal["SMS", "OUT_OF_BAND"]
+    """The method used to deliver the challenge to the cardholder
 
-    status: Literal["COMPLETED", "PENDING", "EXPIRED", "ERROR"]
+    - `SMS` - Challenge was delivered via SMS
+    - `OUT_OF_BAND` - Challenge was delivered via an out-of-band method
+    """
+
+    phone_number: Optional[str] = None
+    """The phone number used for sending the Authorization Challenge.
+
+    Present only when the challenge method is `SMS`.
+    """
+
+    status: Literal["COMPLETED", "DECLINED", "PENDING", "EXPIRED", "ERROR"]
     """The status of the Authorization Challenge
 
     - `COMPLETED` - Challenge was successfully completed by the cardholder
+    - `DECLINED` - Challenge was declined by the cardholder
     - `PENDING` - Challenge is still open
     - `EXPIRED` - Challenge has expired without being completed
     - `ERROR` - There was an error processing the challenge
