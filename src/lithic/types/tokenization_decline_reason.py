@@ -18,4 +18,5 @@ TokenizationDeclineReason: TypeAlias = Literal[
     "NETWORK_FAILURE",
     "GENERIC_DECLINE",
     "DIGITAL_CARD_ART_REQUIRED",
+    "INVALID_PAN",
 ]
