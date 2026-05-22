@@ -21,19 +21,19 @@ class SettlementDetail(BaseModel):
     token: str
     """Globally unique identifier denoting the Settlement Detail."""
 
-    account_token: str
+    account_token: Optional[str] = None
     """
     Globally unique identifier denoting the account that the associated transaction
     occurred on.
     """
 
-    card_program_token: str
+    card_program_token: Optional[str] = None
     """
     Globally unique identifier denoting the card program that the associated
     transaction occurred on.
     """
 
-    card_token: str
+    card_token: Optional[str] = None
     """
     Globally unique identifier denoting the card that the associated transaction
     occurred on.
@@ -85,10 +85,10 @@ class SettlementDetail(BaseModel):
     settlement advisement date, which is distinct from the date of money movement.
     """
 
-    transaction_token: str
+    transaction_token: Optional[str] = None
     """Globally unique identifier denoting the associated transaction.
 
-    For settlement records with type `CLEARING`, `FINANCIAL`, or `NON-FINANCIAL`,
+    For settlement records with type `CLEARING`, `FINANCIAL`, or `NON_FINANCIAL`,
     this references a card transaction token. For settlement records with type
     `CHARGEBACK`, `REPRESENTMENT`, `PREARBITRATION`, `ARBITRATION`, or
     `COLLABORATION`, this references the dispute transaction token. May be null for
@@ -109,7 +109,7 @@ class SettlementDetail(BaseModel):
         "COLLABORATION",
         "FEE",
         "FINANCIAL",
-        "NON-FINANCIAL",
+        "NON_FINANCIAL",
         "PREARBITRATION",
         "REPRESENTMENT",
     ]
