@@ -146,6 +146,7 @@ class Data(BaseModel):
         "QUARTERLY_REVERSAL",
         "MONTHLY",
         "MONTHLY_REVERSAL",
+        "ACCOUNT_TO_ACCOUNT",
     ]
 
     financial_account_token: str

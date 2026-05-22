@@ -119,5 +119,6 @@ class FinancialEvent(BaseModel):
             "QUARTERLY_REVERSAL",
             "MONTHLY",
             "MONTHLY_REVERSAL",
+            "ACCOUNT_TO_ACCOUNT",
         ]
     ] = None

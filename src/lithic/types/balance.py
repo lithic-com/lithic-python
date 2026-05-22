@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -23,16 +24,16 @@ class Balance(BaseModel):
     financial_account_token: str
     """Globally unique identifier for the financial account that holds this balance."""
 
-    financial_account_type: Literal["ISSUING", "OPERATING", "RESERVE", "SECURITY"]
+    financial_account_type: Literal["CARD", "ISSUING", "OPERATING", "PROGRAM_RECEIVABLES", "RESERVE", "SECURITY"]
     """Type of financial account."""
 
-    last_transaction_event_token: str
+    last_transaction_event_token: Optional[str] = None
     """
     Globally unique identifier for the last financial transaction event that
     impacted this balance.
     """
 
-    last_transaction_token: str
+    last_transaction_token: Optional[str] = None
     """
     Globally unique identifier for the last financial transaction that impacted this
     balance.
