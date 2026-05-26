@@ -15,6 +15,7 @@ from .conditional_3ds_action_parameters_param import Conditional3DSActionParamet
 from .conditional_ach_action_parameters_param import ConditionalACHActionParametersParam
 from .conditional_tokenization_action_parameters_param import ConditionalTokenizationActionParametersParam
 from .conditional_authorization_action_parameters_param import ConditionalAuthorizationActionParametersParam
+from .conditional_authorization_adjustment_parameters_param import ConditionalAuthorizationAdjustmentParametersParam
 from .conditional_card_transaction_update_action_parameters_param import (
     ConditionalCardTransactionUpdateActionParametersParam,
 )
@@ -77,6 +78,7 @@ AccountLevelRuleParameters: TypeAlias = Union[
     ConditionalTokenizationActionParametersParam,
     ConditionalCardTransactionUpdateActionParametersParam,
     TypescriptCodeParametersParam,
+    ConditionalAuthorizationAdjustmentParametersParam,
 ]
 
 
@@ -124,6 +126,7 @@ CardLevelRuleParameters: TypeAlias = Union[
     ConditionalTokenizationActionParametersParam,
     ConditionalCardTransactionUpdateActionParametersParam,
     TypescriptCodeParametersParam,
+    ConditionalAuthorizationAdjustmentParametersParam,
 ]
 
 
@@ -180,6 +183,7 @@ ProgramLevelRuleParameters: TypeAlias = Union[
     ConditionalTokenizationActionParametersParam,
     ConditionalCardTransactionUpdateActionParametersParam,
     TypescriptCodeParametersParam,
+    ConditionalAuthorizationAdjustmentParametersParam,
 ]
 
 V2CreateParams: TypeAlias = Union[AccountLevelRule, CardLevelRule, ProgramLevelRule]

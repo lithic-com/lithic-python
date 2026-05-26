@@ -13,6 +13,7 @@ from .conditional_3ds_action_parameters import Conditional3DSActionParameters
 from .conditional_ach_action_parameters import ConditionalACHActionParameters
 from .conditional_tokenization_action_parameters import ConditionalTokenizationActionParameters
 from .conditional_authorization_action_parameters import ConditionalAuthorizationActionParameters
+from .conditional_authorization_adjustment_parameters import ConditionalAuthorizationAdjustmentParameters
 from .conditional_card_transaction_update_action_parameters import ConditionalCardTransactionUpdateActionParameters
 
 __all__ = ["AuthRuleVersion", "Parameters"]
@@ -27,6 +28,7 @@ Parameters: TypeAlias = Union[
     ConditionalTokenizationActionParameters,
     ConditionalCardTransactionUpdateActionParameters,
     TypescriptCodeParameters,
+    ConditionalAuthorizationAdjustmentParameters,
 ]
 
 
