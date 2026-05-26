@@ -110,6 +110,7 @@ from lithic.types.auth_rules import (
     ConditionalACHActionParameters,
     ConditionalAttribute,
     ConditionalAuthorizationActionParameters,
+    ConditionalAuthorizationAdjustmentParameters,
     ConditionalBlockParameters,
     ConditionalCardTransactionUpdateActionParameters,
     ConditionalOperation,
