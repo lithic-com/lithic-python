@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.125.0 (2026-05-26)
+
+Full Changelog: [v0.124.0...v0.125.0](https://github.com/lithic-com/lithic-python/compare/v0.124.0...v0.125.0)
+
+### Features
+
+* **api:** add card_authorization.challenge webhook event ([b765f10](https://github.com/lithic-com/lithic-python/commit/b765f10fde1ef33f2678fbd822aed1bb038682e7))
+* **api:** add INVALID_PAN to tokenization_decline_reason enum ([00844d9](https://github.com/lithic-com/lithic-python/commit/00844d942e7324d211726c78fed50de1cd032ec4))
+* **api:** add out-of-band challenge method, declined status to card authorization types ([d8076eb](https://github.com/lithic-com/lithic-python/commit/d8076ebdf083ac1107e72d959bc463d20c5352a0))
+* **api:** add pause method to external_bank_accounts ([1f022b2](https://github.com/lithic-com/lithic-python/commit/1f022b274d9b7f2f3cb148553a583873512c31d3))
+* **api:** Add schemas for authorization adjustment rules ([97f044c](https://github.com/lithic-com/lithic-python/commit/97f044ce048e6a9497445114e72c0ac996199aaf))
+
+
+### Bug Fixes
+
+* **types:** change ConditionalValue from int to float in auth_rules ([40d3bf0](https://github.com/lithic-com/lithic-python/commit/40d3bf0fee4584c9da3329c38db4be5891cb83e6))
+* **types:** make fields optional, add enum values in balance/settlement_detail/financial_event ([13c231e](https://github.com/lithic-com/lithic-python/commit/13c231e2fdae1ec83048c0014a14bd57589009d0))
+
+
+### Documentation
+
+* **api:** clarify ACCOUNT_AGE attribute behavior in auth_rules conditions ([9fa7ab5](https://github.com/lithic-com/lithic-python/commit/9fa7ab57a8d841dbfba48bf4c7dc322ef30db202))
+
 ## 0.124.0 (2026-05-11)
 
 Full Changelog: [v0.123.0...v0.124.0](https://github.com/lithic-com/lithic-python/compare/v0.123.0...v0.124.0)
