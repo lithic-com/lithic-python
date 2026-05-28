@@ -201,6 +201,15 @@ class LatestChallenge(BaseModel):
     The latest Authorization Challenge that was issued to the cardholder for this merchant.
     """
 
+    completed_at: Optional[datetime] = None
+    """The date and time when the Authorization Challenge was completed in UTC.
+
+    Filled only if the challenge has been completed.
+    """
+
+    created: datetime
+    """The date and time when the Authorization Challenge was created in UTC"""
+
     method: Literal["SMS", "OUT_OF_BAND"]
     """The method used to deliver the challenge to the cardholder
 
@@ -222,12 +231,6 @@ class LatestChallenge(BaseModel):
     - `PENDING` - Challenge is still open
     - `EXPIRED` - Challenge has expired without being completed
     - `ERROR` - There was an error processing the challenge
-    """
-
-    completed_at: Optional[datetime] = None
-    """The date and time when the Authorization Challenge was completed in UTC.
-
-    Present only if the status is `COMPLETED`.
     """
 
 
