@@ -19,5 +19,5 @@ class Card(NonPCICard):
     """Primary Account Number (PAN) (i.e.
 
     the card number). Customers must be PCI compliant to have PAN returned as a
-    field in production. Please contact support@lithic.com for questions.
+    field in production. Please contact https://support.lithic.com/ for questions.
     """
