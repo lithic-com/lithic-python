@@ -1083,8 +1083,8 @@ class Cards(SyncAPIResource):
 
         Customers must be PCI
         compliant to use this endpoint. Please contact
-        [support@lithic.com](mailto:support@lithic.com) for questions. _Note: this is a
-        `POST` endpoint because it is more secure to send sensitive data in a request
+        [support.lithic.com](https://support.lithic.com/) for questions. _Note: this is
+        a `POST` endpoint because it is more secure to send sensitive data in a request
         body than in a URL._
 
         Args:
@@ -2200,8 +2200,8 @@ class AsyncCards(AsyncAPIResource):
 
         Customers must be PCI
         compliant to use this endpoint. Please contact
-        [support@lithic.com](mailto:support@lithic.com) for questions. _Note: this is a
-        `POST` endpoint because it is more secure to send sensitive data in a request
+        [support.lithic.com](https://support.lithic.com/) for questions. _Note: this is
+        a `POST` endpoint because it is more secure to send sensitive data in a request
         body than in a URL._
 
         Args:
