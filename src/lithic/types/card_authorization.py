@@ -20,6 +20,9 @@ __all__ = [
     "Avs",
     "Card",
     "Merchant",
+    "NameValidation",
+    "NameValidationName",
+    "NameValidationNameOnFileMatch",
     "ServiceLocation",
     "FleetInfo",
     "LatestChallenge",
@@ -147,6 +150,43 @@ class Merchant(merchant.Merchant):
 
     street_address: Optional[str] = None
     """Street address of card acceptor."""
+
+
+class NameValidationName(BaseModel):
+    """Cardholder name as provided by the card network."""
+
+    first: str
+    """First name"""
+
+    last: str
+    """Last name"""
+
+    middle: Optional[str] = None
+    """Middle name"""
+
+
+class NameValidationNameOnFileMatch(BaseModel):
+    """
+    Lithic's computed match result comparing the network-provided name to the name on file.
+    """
+
+    full_name: Literal["MATCH", "PARTIAL_MATCH", "NO_MATCH", "UNVERIFIED"]
+    """Overall name match result."""
+
+
+class NameValidation(BaseModel):
+    """
+    Network name validation data, present when the card network requested name validation for this transaction. Contains the cardholder name provided by the network and Lithic's computed match result against KYC data on file.
+    """
+
+    name: NameValidationName
+    """Cardholder name as provided by the card network."""
+
+    name_on_file_match: NameValidationNameOnFileMatch
+    """
+    Lithic's computed match result comparing the network-provided name to the name
+    on file.
+    """
 
 
 class ServiceLocation(BaseModel):
@@ -469,6 +509,13 @@ class CardAuthorization(BaseModel):
 
     merchant_currency: str
     """3-character alphabetic ISO 4217 code for the local currency of the transaction."""
+
+    name_validation: Optional[NameValidation] = None
+    """
+    Network name validation data, present when the card network requested name
+    validation for this transaction. Contains the cardholder name provided by the
+    network and Lithic's computed match result against KYC data on file.
+    """
 
     service_location: Optional[ServiceLocation] = None
     """
