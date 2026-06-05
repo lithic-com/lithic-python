@@ -9,11 +9,11 @@ from ..._utils import PropertyInfo
 from .conditional_operation import ConditionalOperation
 from .conditional_value_param import ConditionalValueParam
 
-__all__ = ["ConditionalAuthorizationAdjustmentParametersParam", "Adjustment", "Condition", "ConditionParameters"]
+__all__ = ["ConditionalAuthorizationAdjustmentParametersParam", "Action", "Condition", "ConditionParameters"]
 
 
-class Adjustment(TypedDict, total=False):
-    """The hold adjustment to apply if the conditions are met"""
+class Action(TypedDict, total=False):
+    """The hold adjustment to apply if the conditions are met."""
 
     mode: Required[Literal["REPLACE_WITH_AMOUNT", "ADD_PERCENTAGE", "ADD_AMOUNT"]]
     """The mode of the hold adjustment, determining how the value is interpreted:
@@ -248,7 +248,7 @@ class Condition(TypedDict, total=False):
 
 
 class ConditionalAuthorizationAdjustmentParametersParam(TypedDict, total=False):
-    adjustment: Required[Adjustment]
-    """The hold adjustment to apply if the conditions are met"""
+    action: Required[Action]
+    """The hold adjustment to apply if the conditions are met."""
 
     conditions: Required[Iterable[Condition]]
