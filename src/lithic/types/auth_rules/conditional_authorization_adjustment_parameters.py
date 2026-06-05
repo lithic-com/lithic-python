@@ -7,11 +7,11 @@ from ..._models import BaseModel
 from .conditional_value import ConditionalValue
 from .conditional_operation import ConditionalOperation
 
-__all__ = ["ConditionalAuthorizationAdjustmentParameters", "Adjustment", "Condition", "ConditionParameters"]
+__all__ = ["ConditionalAuthorizationAdjustmentParameters", "Action", "Condition", "ConditionParameters"]
 
 
-class Adjustment(BaseModel):
-    """The hold adjustment to apply if the conditions are met"""
+class Action(BaseModel):
+    """The hold adjustment to apply if the conditions are met."""
 
     mode: Literal["REPLACE_WITH_AMOUNT", "ADD_PERCENTAGE", "ADD_AMOUNT"]
     """The mode of the hold adjustment, determining how the value is interpreted:
@@ -244,7 +244,7 @@ class Condition(BaseModel):
 
 
 class ConditionalAuthorizationAdjustmentParameters(BaseModel):
-    adjustment: Adjustment
-    """The hold adjustment to apply if the conditions are met"""
+    action: Action
+    """The hold adjustment to apply if the conditions are met."""
 
     conditions: List[Condition]
