@@ -196,5 +196,8 @@ class LoanTape(BaseModel):
 
     ytd_totals: StatementTotals
 
+    day_of_period: Optional[int] = None
+    """Day of the billing period that this loan tape covers, starting at 1"""
+
     tier: Optional[str] = None
     """Interest tier to which this account belongs to"""
