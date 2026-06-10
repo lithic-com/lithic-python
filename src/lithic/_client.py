@@ -73,6 +73,7 @@ if TYPE_CHECKING:
         management_operations,
         auth_stream_enrollment,
         external_bank_accounts,
+        transaction_monitoring,
         tokenization_decisioning,
     )
     from .resources.holds import Holds, AsyncHolds
@@ -108,6 +109,10 @@ if TYPE_CHECKING:
     from .resources.credit_products.credit_products import CreditProducts, AsyncCreditProducts
     from .resources.financial_accounts.financial_accounts import FinancialAccounts, AsyncFinancialAccounts
     from .resources.external_bank_accounts.external_bank_accounts import ExternalBankAccounts, AsyncExternalBankAccounts
+    from .resources.transaction_monitoring.transaction_monitoring import (
+        TransactionMonitoring,
+        AsyncTransactionMonitoring,
+    )
 
 __all__ = [
     "ENVIRONMENTS",
@@ -240,6 +245,12 @@ class Lithic(SyncAPIClient):
         from .resources.auth_rules import AuthRules
 
         return AuthRules(self)
+
+    @cached_property
+    def transaction_monitoring(self) -> TransactionMonitoring:
+        from .resources.transaction_monitoring import TransactionMonitoring
+
+        return TransactionMonitoring(self)
 
     @cached_property
     def auth_stream_enrollment(self) -> AuthStreamEnrollment:
@@ -672,6 +683,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncAuthRules(self)
 
     @cached_property
+    def transaction_monitoring(self) -> AsyncTransactionMonitoring:
+        from .resources.transaction_monitoring import AsyncTransactionMonitoring
+
+        return AsyncTransactionMonitoring(self)
+
+    @cached_property
     def auth_stream_enrollment(self) -> AsyncAuthStreamEnrollment:
         from .resources.auth_stream_enrollment import AsyncAuthStreamEnrollment
 
@@ -1016,6 +1033,12 @@ class LithicWithRawResponse:
         return AuthRulesWithRawResponse(self._client.auth_rules)
 
     @cached_property
+    def transaction_monitoring(self) -> transaction_monitoring.TransactionMonitoringWithRawResponse:
+        from .resources.transaction_monitoring import TransactionMonitoringWithRawResponse
+
+        return TransactionMonitoringWithRawResponse(self._client.transaction_monitoring)
+
+    @cached_property
     def auth_stream_enrollment(self) -> auth_stream_enrollment.AuthStreamEnrollmentWithRawResponse:
         from .resources.auth_stream_enrollment import AuthStreamEnrollmentWithRawResponse
 
@@ -1217,6 +1240,12 @@ class AsyncLithicWithRawResponse:
         from .resources.auth_rules import AsyncAuthRulesWithRawResponse
 
         return AsyncAuthRulesWithRawResponse(self._client.auth_rules)
+
+    @cached_property
+    def transaction_monitoring(self) -> transaction_monitoring.AsyncTransactionMonitoringWithRawResponse:
+        from .resources.transaction_monitoring import AsyncTransactionMonitoringWithRawResponse
+
+        return AsyncTransactionMonitoringWithRawResponse(self._client.transaction_monitoring)
 
     @cached_property
     def auth_stream_enrollment(self) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithRawResponse:
@@ -1422,6 +1451,12 @@ class LithicWithStreamedResponse:
         return AuthRulesWithStreamingResponse(self._client.auth_rules)
 
     @cached_property
+    def transaction_monitoring(self) -> transaction_monitoring.TransactionMonitoringWithStreamingResponse:
+        from .resources.transaction_monitoring import TransactionMonitoringWithStreamingResponse
+
+        return TransactionMonitoringWithStreamingResponse(self._client.transaction_monitoring)
+
+    @cached_property
     def auth_stream_enrollment(self) -> auth_stream_enrollment.AuthStreamEnrollmentWithStreamingResponse:
         from .resources.auth_stream_enrollment import AuthStreamEnrollmentWithStreamingResponse
 
@@ -1623,6 +1658,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.auth_rules import AsyncAuthRulesWithStreamingResponse
 
         return AsyncAuthRulesWithStreamingResponse(self._client.auth_rules)
+
+    @cached_property
+    def transaction_monitoring(self) -> transaction_monitoring.AsyncTransactionMonitoringWithStreamingResponse:
+        from .resources.transaction_monitoring import AsyncTransactionMonitoringWithStreamingResponse
+
+        return AsyncTransactionMonitoringWithStreamingResponse(self._client.transaction_monitoring)
 
     @cached_property
     def auth_stream_enrollment(self) -> auth_stream_enrollment.AsyncAuthStreamEnrollmentWithStreamingResponse:

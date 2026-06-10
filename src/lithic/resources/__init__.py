@@ -249,6 +249,14 @@ from .external_bank_accounts import (
     ExternalBankAccountsWithStreamingResponse,
     AsyncExternalBankAccountsWithStreamingResponse,
 )
+from .transaction_monitoring import (
+    TransactionMonitoring,
+    AsyncTransactionMonitoring,
+    TransactionMonitoringWithRawResponse,
+    AsyncTransactionMonitoringWithRawResponse,
+    TransactionMonitoringWithStreamingResponse,
+    AsyncTransactionMonitoringWithStreamingResponse,
+)
 from .tokenization_decisioning import (
     TokenizationDecisioning,
     AsyncTokenizationDecisioning,
@@ -277,6 +285,12 @@ __all__ = [
     "AsyncAuthRulesWithRawResponse",
     "AuthRulesWithStreamingResponse",
     "AsyncAuthRulesWithStreamingResponse",
+    "TransactionMonitoring",
+    "AsyncTransactionMonitoring",
+    "TransactionMonitoringWithRawResponse",
+    "AsyncTransactionMonitoringWithRawResponse",
+    "TransactionMonitoringWithStreamingResponse",
+    "AsyncTransactionMonitoringWithStreamingResponse",
     "AuthStreamEnrollment",
     "AsyncAuthStreamEnrollment",
     "AuthStreamEnrollmentWithRawResponse",
