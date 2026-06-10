@@ -159,6 +159,77 @@ Methods:
 - <code title="post /v2/auth_rules/{auth_rule_token}/backtests">client.auth_rules.v2.backtests.<a href="./src/lithic/resources/auth_rules/v2/backtests.py">create</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2/backtest_create_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2/backtest_create_response.py">BacktestCreateResponse</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/backtests/{auth_rule_backtest_token}">client.auth_rules.v2.backtests.<a href="./src/lithic/resources/auth_rules/v2/backtests.py">retrieve</a>(auth_rule_backtest_token, \*, auth_rule_token) -> <a href="./src/lithic/types/auth_rules/v2/backtest_results.py">BacktestResults</a></code>
 
+# TransactionMonitoring
+
+## Cases
+
+Types:
+
+```python
+from lithic.types.transaction_monitoring import (
+    CaseActivityEntry,
+    CaseActivityType,
+    CaseCard,
+    CaseEntity,
+    CasePriority,
+    CaseSortOrder,
+    CaseStatus,
+    CaseTransaction,
+    EntityType,
+    MonitoringCase,
+    ResolutionOutcome,
+    CaseRetrieveCardsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/transaction_monitoring/cases/{case_token}">client.transaction_monitoring.cases.<a href="./src/lithic/resources/transaction_monitoring/cases/cases.py">retrieve</a>(case_token) -> <a href="./src/lithic/types/transaction_monitoring/monitoring_case.py">MonitoringCase</a></code>
+- <code title="patch /v1/transaction_monitoring/cases/{case_token}">client.transaction_monitoring.cases.<a href="./src/lithic/resources/transaction_monitoring/cases/cases.py">update</a>(case_token, \*\*<a href="src/lithic/types/transaction_monitoring/case_update_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/monitoring_case.py">MonitoringCase</a></code>
+- <code title="get /v1/transaction_monitoring/cases">client.transaction_monitoring.cases.<a href="./src/lithic/resources/transaction_monitoring/cases/cases.py">list</a>(\*\*<a href="src/lithic/types/transaction_monitoring/case_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/monitoring_case.py">SyncCursorPage[MonitoringCase]</a></code>
+- <code title="get /v1/transaction_monitoring/cases/{case_token}/activity">client.transaction_monitoring.cases.<a href="./src/lithic/resources/transaction_monitoring/cases/cases.py">list_activity</a>(case_token, \*\*<a href="src/lithic/types/transaction_monitoring/case_list_activity_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/case_activity_entry.py">SyncCursorPage[CaseActivityEntry]</a></code>
+- <code title="get /v1/transaction_monitoring/cases/{case_token}/transactions">client.transaction_monitoring.cases.<a href="./src/lithic/resources/transaction_monitoring/cases/cases.py">list_transactions</a>(case_token, \*\*<a href="src/lithic/types/transaction_monitoring/case_list_transactions_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/case_transaction.py">SyncCursorPage[CaseTransaction]</a></code>
+- <code title="get /v1/transaction_monitoring/cases/{case_token}/cards">client.transaction_monitoring.cases.<a href="./src/lithic/resources/transaction_monitoring/cases/cases.py">retrieve_cards</a>(case_token) -> <a href="./src/lithic/types/transaction_monitoring/case_retrieve_cards_response.py">CaseRetrieveCardsResponse</a></code>
+
+### Comments
+
+Methods:
+
+- <code title="post /v1/transaction_monitoring/cases/{case_token}/comments">client.transaction_monitoring.cases.comments.<a href="./src/lithic/resources/transaction_monitoring/cases/comments.py">create</a>(case_token, \*\*<a href="src/lithic/types/transaction_monitoring/cases/comment_create_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/case_activity_entry.py">CaseActivityEntry</a></code>
+- <code title="patch /v1/transaction_monitoring/cases/{case_token}/comments/{comment_token}">client.transaction_monitoring.cases.comments.<a href="./src/lithic/resources/transaction_monitoring/cases/comments.py">update</a>(comment_token, \*, case_token, \*\*<a href="src/lithic/types/transaction_monitoring/cases/comment_update_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/case_activity_entry.py">CaseActivityEntry</a></code>
+- <code title="delete /v1/transaction_monitoring/cases/{case_token}/comments/{comment_token}">client.transaction_monitoring.cases.comments.<a href="./src/lithic/resources/transaction_monitoring/cases/comments.py">delete</a>(comment_token, \*, case_token) -> None</code>
+
+### Files
+
+Types:
+
+```python
+from lithic.types.transaction_monitoring.cases import CaseFile, FileStatus, UploadConstraints
+```
+
+Methods:
+
+- <code title="post /v1/transaction_monitoring/cases/{case_token}/files">client.transaction_monitoring.cases.files.<a href="./src/lithic/resources/transaction_monitoring/cases/files.py">create</a>(case_token, \*\*<a href="src/lithic/types/transaction_monitoring/cases/file_create_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/cases/case_file.py">CaseFile</a></code>
+- <code title="get /v1/transaction_monitoring/cases/{case_token}/files/{file_token}">client.transaction_monitoring.cases.files.<a href="./src/lithic/resources/transaction_monitoring/cases/files.py">retrieve</a>(file_token, \*, case_token) -> <a href="./src/lithic/types/transaction_monitoring/cases/case_file.py">CaseFile</a></code>
+- <code title="get /v1/transaction_monitoring/cases/{case_token}/files">client.transaction_monitoring.cases.files.<a href="./src/lithic/resources/transaction_monitoring/cases/files.py">list</a>(case_token, \*\*<a href="src/lithic/types/transaction_monitoring/cases/file_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/cases/case_file.py">SyncCursorPage[CaseFile]</a></code>
+- <code title="delete /v1/transaction_monitoring/cases/{case_token}/files/{file_token}">client.transaction_monitoring.cases.files.<a href="./src/lithic/resources/transaction_monitoring/cases/files.py">delete</a>(file_token, \*, case_token) -> None</code>
+
+## Queues
+
+Types:
+
+```python
+from lithic.types.transaction_monitoring import Queue
+```
+
+Methods:
+
+- <code title="post /v1/transaction_monitoring/queues">client.transaction_monitoring.queues.<a href="./src/lithic/resources/transaction_monitoring/queues.py">create</a>(\*\*<a href="src/lithic/types/transaction_monitoring/queue_create_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/queue.py">Queue</a></code>
+- <code title="get /v1/transaction_monitoring/queues/{queue_token}">client.transaction_monitoring.queues.<a href="./src/lithic/resources/transaction_monitoring/queues.py">retrieve</a>(queue_token) -> <a href="./src/lithic/types/transaction_monitoring/queue.py">Queue</a></code>
+- <code title="patch /v1/transaction_monitoring/queues/{queue_token}">client.transaction_monitoring.queues.<a href="./src/lithic/resources/transaction_monitoring/queues.py">update</a>(queue_token, \*\*<a href="src/lithic/types/transaction_monitoring/queue_update_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/queue.py">Queue</a></code>
+- <code title="get /v1/transaction_monitoring/queues">client.transaction_monitoring.queues.<a href="./src/lithic/resources/transaction_monitoring/queues.py">list</a>(\*\*<a href="src/lithic/types/transaction_monitoring/queue_list_params.py">params</a>) -> <a href="./src/lithic/types/transaction_monitoring/queue.py">SyncCursorPage[Queue]</a></code>
+- <code title="delete /v1/transaction_monitoring/queues/{queue_token}">client.transaction_monitoring.queues.<a href="./src/lithic/resources/transaction_monitoring/queues.py">delete</a>(queue_token) -> None</code>
+
 # AuthStreamEnrollment
 
 Types:

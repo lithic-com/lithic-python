@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
+
+from ..transaction_monitoring.entity_type import EntityType
 
 __all__ = ["EntityCreateParams", "Address"]
 
@@ -41,7 +43,7 @@ class EntityCreateParams(TypedDict, total=False):
     phone_number: Required[str]
     """Individual's phone number, entered in E.164 format."""
 
-    type: Required[Literal["BENEFICIAL_OWNER_INDIVIDUAL", "CONTROL_PERSON"]]
+    type: Required[EntityType]
     """The type of entity to create on the account holder"""
 
 

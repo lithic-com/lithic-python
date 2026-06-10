@@ -4,6 +4,7 @@ from typing import Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+from ..transaction_monitoring.entity_type import EntityType
 
 __all__ = ["AccountHolderEntity", "Address"]
 
@@ -72,5 +73,5 @@ class AccountHolderEntity(BaseModel):
     status: Literal["ACCEPTED", "INACTIVE", "PENDING_REVIEW", "REJECTED"]
     """The status of the entity"""
 
-    type: Literal["BENEFICIAL_OWNER_INDIVIDUAL", "CONTROL_PERSON"]
+    type: EntityType
     """The type of entity"""
