@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Dict, List, Union, Optional
 from datetime import date, datetime
 from typing_extensions import Literal, TypeAlias
 
@@ -295,6 +295,13 @@ class Payment(BaseModel):
 
     external_bank_account_token: Optional[str] = None
     """External bank account token"""
+
+    tags: Optional[Dict[str, str]] = None
+    """Key-value pairs for tagging resources.
+
+    Tags allow you to associate arbitrary metadata with a resource for your own
+    purposes.
+    """
 
     type: Optional[
         Literal[
