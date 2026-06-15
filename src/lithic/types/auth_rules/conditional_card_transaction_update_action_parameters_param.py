@@ -16,19 +16,45 @@ __all__ = ["ConditionalCardTransactionUpdateActionParametersParam", "Condition",
 
 
 class ConditionParameters(TypedDict, total=False):
-    """Additional parameters for spend velocity attributes.
+    """Additional parameters for certain attributes.
 
     Required when `attribute` is
-    `SPEND_VELOCITY_COUNT` or `SPEND_VELOCITY_AMOUNT`. Not used for other attributes.
+    `SPEND_VELOCITY_COUNT` or `SPEND_VELOCITY_AMOUNT` (require `scope`, `period`, and
+    optional `filters`); `AMOUNT_Z_SCORE`, `AVG_TRANSACTION_AMOUNT`,
+    `STDEV_TRANSACTION_AMOUNT`, `IS_NEW_COUNTRY`, `IS_NEW_MCC`, `IS_FIRST_TRANSACTION`,
+    `CONSECUTIVE_DECLINES`, `TIME_SINCE_LAST_TRANSACTION`, or `DISTINCT_COUNTRY_COUNT`
+    (require `scope`, and additionally `interval` for the statistical attributes); or
+    `TRAVEL_SPEED` or `DISTANCE_FROM_LAST_TRANSACTION` (require `unit`). Not used for
+    other attributes.
     """
 
     filters: SpendVelocityFiltersParam
+
+    interval: Literal["LIFETIME", "7D", "30D", "90D"]
+    """
+    The time window for statistical attributes (`AMOUNT_Z_SCORE`,
+    `AVG_TRANSACTION_AMOUNT`, `STDEV_TRANSACTION_AMOUNT`). Use `LIFETIME` for
+    all-time history or a specific window (`7D`, `30D`, `90D`).
+    """
 
     period: VelocityLimitPeriodParam
     """The time period over which to calculate the spend velocity."""
 
     scope: Literal["CARD", "ACCOUNT", "GLOBAL"]
-    """The entity scope to evaluate the attribute against."""
+    """The entity scope to evaluate the attribute against.
+
+    `GLOBAL` is only valid for spend velocity attributes.
+    """
+
+    unit: Literal["MPH", "KPH", "MILES", "KILOMETERS"]
+    """The unit for impossible travel attributes.
+
+    Required when `attribute` is `TRAVEL_SPEED` or `DISTANCE_FROM_LAST_TRANSACTION`.
+
+    For `TRAVEL_SPEED`: `MPH` (miles per hour) or `KPH` (kilometers per hour).
+
+    For `DISTANCE_FROM_LAST_TRANSACTION`: `MILES` or `KILOMETERS`.
+    """
 
 
 class Condition(TypedDict, total=False):
@@ -50,6 +76,19 @@ class Condition(TypedDict, total=False):
             "ACCOUNT_AGE",
             "SPEND_VELOCITY_COUNT",
             "SPEND_VELOCITY_AMOUNT",
+            "AMOUNT_Z_SCORE",
+            "AVG_TRANSACTION_AMOUNT",
+            "STDEV_TRANSACTION_AMOUNT",
+            "IS_NEW_COUNTRY",
+            "IS_NEW_MCC",
+            "IS_FIRST_TRANSACTION",
+            "CONSECUTIVE_DECLINES",
+            "TIME_SINCE_LAST_TRANSACTION",
+            "DISTINCT_COUNTRY_COUNT",
+            "IS_NEW_MERCHANT",
+            "THREE_DS_SUCCESS_RATE",
+            "TRAVEL_SPEED",
+            "DISTANCE_FROM_LAST_TRANSACTION",
         ]
     ]
     """The attribute to target.
@@ -106,6 +145,52 @@ class Condition(TypedDict, total=False):
     - `SPEND_VELOCITY_AMOUNT`: The total spend amount (in cents) of transactions
       matching the specified filters within the given period. Requires `parameters`
       with `scope`, `period`, and optional `filters`. Use an integer value.
+    - `AMOUNT_Z_SCORE`: The z-score of the transaction amount relative to the
+      entity's transaction history. Null if fewer than 30 approved transactions in
+      the specified window. Requires `parameters.scope` and `parameters.interval`.
+      Use a decimal value.
+    - `AVG_TRANSACTION_AMOUNT`: The average approved transaction amount for the
+      entity over the specified window, in cents. Requires `parameters.scope` and
+      `parameters.interval`. Use a decimal value.
+    - `STDEV_TRANSACTION_AMOUNT`: The standard deviation of approved transaction
+      amounts for the entity over the specified window, in cents. Null if fewer than
+      30 approved transactions in the specified window. Requires `parameters.scope`
+      and `parameters.interval`. Use a decimal value.
+    - `IS_NEW_COUNTRY`: Whether the transaction's merchant country has not been seen
+      in the entity's transaction history. Valid values are `TRUE`, `FALSE`.
+      Requires `parameters.scope`.
+    - `IS_NEW_MCC`: Whether the transaction's MCC has not been seen in the entity's
+      transaction history. Valid values are `TRUE`, `FALSE`. Requires
+      `parameters.scope`.
+    - `IS_FIRST_TRANSACTION`: Whether this is the first transaction for the entity.
+      Valid values are `TRUE`, `FALSE`. Requires `parameters.scope`.
+    - `CONSECUTIVE_DECLINES`: The number of consecutive declined transactions for
+      the entity over the last 30 days (rolling). Requires `parameters.scope`. Use
+      an integer value.
+    - `TIME_SINCE_LAST_TRANSACTION`: The number of days since the last approved
+      transaction for the entity, rounded to the nearest whole day. Requires
+      `parameters.scope`. Use an integer value.
+    - `DISTINCT_COUNTRY_COUNT`: The number of distinct merchant countries seen in
+      the entity's transaction history. Requires `parameters.scope`. Use an integer
+      value.
+    - `IS_NEW_MERCHANT`: Whether the card acceptor ID has not been seen in the
+      card's approved transaction history (capped at the 1000 most recently seen
+      merchants). Valid values are `TRUE`, `FALSE`. Card-scoped only; no
+      `parameters` required.
+    - `THREE_DS_SUCCESS_RATE`: The 3DS authentication success rate for the card, as
+      a percentage from 0.0 to 100.0. Card-scoped only; no `parameters` required.
+      Use a decimal value.
+    - `TRAVEL_SPEED`: The estimated speed of travel derived from the distance
+      between the postal code centers of the last card-present transaction and the
+      current transaction, divided by the elapsed time. Null if there is no prior
+      card-present transaction, if either postal code cannot be geocoded, or if
+      elapsed time is zero. Requires `parameters.unit` set to `MPH` or `KPH`. Use a
+      decimal value.
+    - `DISTANCE_FROM_LAST_TRANSACTION`: The estimated distance between the postal
+      code centers of the last card-present transaction and the current transaction.
+      Null if there is no prior card-present transaction or if either postal code
+      cannot be geocoded. Requires `parameters.unit` set to `MILES` or `KILOMETERS`.
+      Use a decimal value.
     """
 
     operation: Required[ConditionalOperation]
@@ -115,10 +200,16 @@ class Condition(TypedDict, total=False):
     """A regex string, to be used with `MATCHES` or `DOES_NOT_MATCH`"""
 
     parameters: ConditionParameters
-    """Additional parameters for spend velocity attributes.
+    """Additional parameters for certain attributes.
 
-    Required when `attribute` is `SPEND_VELOCITY_COUNT` or `SPEND_VELOCITY_AMOUNT`.
-    Not used for other attributes.
+    Required when `attribute` is `SPEND_VELOCITY_COUNT` or `SPEND_VELOCITY_AMOUNT`
+    (require `scope`, `period`, and optional `filters`); `AMOUNT_Z_SCORE`,
+    `AVG_TRANSACTION_AMOUNT`, `STDEV_TRANSACTION_AMOUNT`, `IS_NEW_COUNTRY`,
+    `IS_NEW_MCC`, `IS_FIRST_TRANSACTION`, `CONSECUTIVE_DECLINES`,
+    `TIME_SINCE_LAST_TRANSACTION`, or `DISTINCT_COUNTRY_COUNT` (require `scope`, and
+    additionally `interval` for the statistical attributes); or `TRAVEL_SPEED` or
+    `DISTANCE_FROM_LAST_TRANSACTION` (require `unit`). Not used for other
+    attributes.
     """
 
 
