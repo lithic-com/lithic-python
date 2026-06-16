@@ -102,6 +102,7 @@ from .wallet_decisioning_info import WalletDecisioningInfo as WalletDecisioningI
 from .card_program_list_params import CardProgramListParams as CardProgramListParams
 from .tokenization_list_params import TokenizationListParams as TokenizationListParams
 from .tokenization_rule_result import TokenizationRuleResult as TokenizationRuleResult
+from .transaction_route_params import TransactionRouteParams as TransactionRouteParams
 from .transfer_limits_response import TransferLimitsResponse as TransferLimitsResponse
 from .book_transfer_list_params import BookTransferListParams as BookTransferListParams
 from .card_get_embed_url_params import CardGetEmbedURLParams as CardGetEmbedURLParams
