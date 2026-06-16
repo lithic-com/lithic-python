@@ -52,7 +52,8 @@ class AccountLevelRule(TypedDict, total=False):
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
       stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+      stream.
     """
 
     account_tokens: SequenceNotStr[str]
@@ -106,7 +107,8 @@ class CardLevelRule(TypedDict, total=False):
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
       stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+      stream.
     """
 
     event_stream: EventStream
@@ -154,7 +156,8 @@ class ProgramLevelRule(TypedDict, total=False):
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
       stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+      stream.
     """
 
     event_stream: EventStream

@@ -14,6 +14,7 @@ __all__ = [
     "AuthenticationFeature",
     "TokenizationFeature",
     "ACHReceiptFeature",
+    "CardTransactionFeature",
     "CardFeature",
     "AccountHolderFeature",
     "IPMetadataFeature",
@@ -45,6 +46,13 @@ class TokenizationFeature(TypedDict, total=False):
 
 class ACHReceiptFeature(TypedDict, total=False):
     type: Required[Literal["ACH_RECEIPT"]]
+
+    name: str
+    """The variable name for this feature in the rule function signature"""
+
+
+class CardTransactionFeature(TypedDict, total=False):
+    type: Required[Literal["CARD_TRANSACTION"]]
 
     name: str
     """The variable name for this feature in the rule function signature"""
@@ -101,6 +109,7 @@ RuleFeatureParam: TypeAlias = Union[
     AuthenticationFeature,
     TokenizationFeature,
     ACHReceiptFeature,
+    CardTransactionFeature,
     CardFeature,
     AccountHolderFeature,
     IPMetadataFeature,
