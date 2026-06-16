@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.126.0 (2026-06-16)
+
+Full Changelog: [v0.125.0...v0.126.0](https://github.com/lithic-com/lithic-python/compare/v0.125.0...v0.126.0)
+
+### Features
+
+* **api:** add 13 attributes, interval/unit params to auth rules conditional actions ([3e52757](https://github.com/lithic-com/lithic-python/commit/3e52757207c6c3f43d25d34f9e0ff3a982cd0dd5))
+* **api:** add CardTransactionFeature type to auth_rules ([c57609d](https://github.com/lithic-com/lithic-python/commit/c57609da9576515964cfe147a8c3fcd6f3337872))
+* **api:** Add created field and make completed_at nullable in latest_challenge ([126641d](https://github.com/lithic-com/lithic-python/commit/126641d827512c68dfef741d7a6a053cbfe94f12))
+* **api:** add day_of_period field to financial_accounts loan_tape ([612ce5f](https://github.com/lithic-com/lithic-python/commit/612ce5f2b44d73a6bad3ca57613061c5d8ed705c))
+* **api:** add hold_adjustment action type to auth rules ([dc58d95](https://github.com/lithic-com/lithic-python/commit/dc58d95543aa7723246f81b6d836512f19bc02a0))
+* **api:** add name_validation field to card_authorization ([5bde4bc](https://github.com/lithic-com/lithic-python/commit/5bde4bcae161d20561ed1be62e636462018365e7))
+* **api:** add route method to transactions ([a48dac5](https://github.com/lithic-com/lithic-python/commit/a48dac554ead26e6010a1e4cf12e502e3f39e107))
+* **api:** add tags field to payment model ([8b813b4](https://github.com/lithic-com/lithic-python/commit/8b813b4717546669a6cc7afd6814f015cc41a770))
+* **api:** add transaction_monitoring cases/comments/files/queues endpoints ([67701a6](https://github.com/lithic-com/lithic-python/commit/67701a6bbcf684c7abf436f3d9760b7b3814013c))
+
+
+### Documentation
+
+* **api:** update support contact URL in cards/account/card documentation ([71b5283](https://github.com/lithic-com/lithic-python/commit/71b5283efe22257a9a706ebc41ba51c523775d5c))
+
 ## 0.125.0 (2026-05-26)
 
 Full Changelog: [v0.124.0...v0.125.0](https://github.com/lithic-com/lithic-python/compare/v0.124.0...v0.125.0)
