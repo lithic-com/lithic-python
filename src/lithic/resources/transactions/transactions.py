@@ -12,6 +12,7 @@ import httpx
 from ... import _legacy_response
 from ...types import (
     transaction_list_params,
+    transaction_route_params,
     transaction_simulate_void_params,
     transaction_simulate_return_params,
     transaction_simulate_clearing_params,
@@ -232,6 +233,47 @@ class Transactions(SyncAPIResource):
         return self._post(
             path_template(
                 "/v1/transactions/{transaction_token}/expire_authorization", transaction_token=transaction_token
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def route(
+        self,
+        transaction_token: str,
+        *,
+        financial_account_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Route a card transaction to a financial account.
+
+        Only available for select use
+        cases and programs.
+
+        Args:
+          financial_account_token: The token of the financial account to route the transaction to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not transaction_token:
+            raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
+        return self._post(
+            path_template("/v1/transactions/{transaction_token}/route", transaction_token=transaction_token),
+            body=maybe_transform(
+                {"financial_account_token": financial_account_token}, transaction_route_params.TransactionRouteParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -942,6 +984,47 @@ class AsyncTransactions(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def route(
+        self,
+        transaction_token: str,
+        *,
+        financial_account_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Route a card transaction to a financial account.
+
+        Only available for select use
+        cases and programs.
+
+        Args:
+          financial_account_token: The token of the financial account to route the transaction to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not transaction_token:
+            raise ValueError(f"Expected a non-empty value for `transaction_token` but received {transaction_token!r}")
+        return await self._post(
+            path_template("/v1/transactions/{transaction_token}/route", transaction_token=transaction_token),
+            body=await async_maybe_transform(
+                {"financial_account_token": financial_account_token}, transaction_route_params.TransactionRouteParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def simulate_authorization(
         self,
         *,
@@ -1478,6 +1561,9 @@ class TransactionsWithRawResponse:
         self.expire_authorization = _legacy_response.to_raw_response_wrapper(
             transactions.expire_authorization,
         )
+        self.route = _legacy_response.to_raw_response_wrapper(
+            transactions.route,
+        )
         self.simulate_authorization = _legacy_response.to_raw_response_wrapper(
             transactions.simulate_authorization,
         )
@@ -1526,6 +1612,9 @@ class AsyncTransactionsWithRawResponse:
         )
         self.expire_authorization = _legacy_response.async_to_raw_response_wrapper(
             transactions.expire_authorization,
+        )
+        self.route = _legacy_response.async_to_raw_response_wrapper(
+            transactions.route,
         )
         self.simulate_authorization = _legacy_response.async_to_raw_response_wrapper(
             transactions.simulate_authorization,
@@ -1576,6 +1665,9 @@ class TransactionsWithStreamingResponse:
         self.expire_authorization = to_streamed_response_wrapper(
             transactions.expire_authorization,
         )
+        self.route = to_streamed_response_wrapper(
+            transactions.route,
+        )
         self.simulate_authorization = to_streamed_response_wrapper(
             transactions.simulate_authorization,
         )
@@ -1624,6 +1716,9 @@ class AsyncTransactionsWithStreamingResponse:
         )
         self.expire_authorization = async_to_streamed_response_wrapper(
             transactions.expire_authorization,
+        )
+        self.route = async_to_streamed_response_wrapper(
+            transactions.route,
         )
         self.simulate_authorization = async_to_streamed_response_wrapper(
             transactions.simulate_authorization,
