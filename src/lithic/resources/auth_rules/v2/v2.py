@@ -104,7 +104,8 @@ class V2(SyncAPIResource):
                 ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
                 stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+                stream.
 
           account_tokens: Account tokens to which the Auth Rule applies.
 
@@ -161,7 +162,8 @@ class V2(SyncAPIResource):
                 ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
                 stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+                stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -217,7 +219,8 @@ class V2(SyncAPIResource):
                 ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
                 stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+                stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -985,7 +988,8 @@ class AsyncV2(AsyncAPIResource):
                 ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
                 stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+                stream.
 
           account_tokens: Account tokens to which the Auth Rule applies.
 
@@ -1042,7 +1046,8 @@ class AsyncV2(AsyncAPIResource):
                 ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
                 stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+                stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -1098,7 +1103,8 @@ class AsyncV2(AsyncAPIResource):
                 ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
                 stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+                stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 

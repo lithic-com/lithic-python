@@ -138,7 +138,8 @@ class AuthRule(BaseModel):
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
       stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, or ACH_DEBIT_RECEIPT event stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
+      stream.
     """
 
     excluded_account_tokens: Optional[List[str]] = None
