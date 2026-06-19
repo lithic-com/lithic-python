@@ -11,4 +11,5 @@ EventStream: TypeAlias = Literal[
     "ACH_CREDIT_RECEIPT",
     "ACH_DEBIT_RECEIPT",
     "CARD_TRANSACTION_UPDATE",
+    "ACH_PAYMENT_UPDATE",
 ]
