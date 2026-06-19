@@ -16,6 +16,7 @@ from .conditional_ach_action_parameters_param import ConditionalACHActionParamet
 from .conditional_tokenization_action_parameters_param import ConditionalTokenizationActionParametersParam
 from .conditional_authorization_action_parameters_param import ConditionalAuthorizationActionParametersParam
 from .conditional_authorization_adjustment_parameters_param import ConditionalAuthorizationAdjustmentParametersParam
+from .conditional_ach_payment_update_action_parameters_param import ConditionalACHPaymentUpdateActionParametersParam
 from .conditional_card_transaction_update_action_parameters_param import (
     ConditionalCardTransactionUpdateActionParametersParam,
 )
@@ -49,11 +50,11 @@ class AccountLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     """
 
     account_tokens: SequenceNotStr[str]
@@ -78,6 +79,7 @@ AccountLevelRuleParameters: TypeAlias = Union[
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
     ConditionalCardTransactionUpdateActionParametersParam,
+    ConditionalACHPaymentUpdateActionParametersParam,
     TypescriptCodeParametersParam,
     ConditionalAuthorizationAdjustmentParametersParam,
 ]
@@ -104,11 +106,11 @@ class CardLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     """
 
     event_stream: EventStream
@@ -127,6 +129,7 @@ CardLevelRuleParameters: TypeAlias = Union[
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
     ConditionalCardTransactionUpdateActionParametersParam,
+    ConditionalACHPaymentUpdateActionParametersParam,
     TypescriptCodeParametersParam,
     ConditionalAuthorizationAdjustmentParametersParam,
 ]
@@ -153,11 +156,11 @@ class ProgramLevelRule(TypedDict, total=False):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     """
 
     event_stream: EventStream
@@ -185,6 +188,7 @@ ProgramLevelRuleParameters: TypeAlias = Union[
     ConditionalACHActionParametersParam,
     ConditionalTokenizationActionParametersParam,
     ConditionalCardTransactionUpdateActionParametersParam,
+    ConditionalACHPaymentUpdateActionParametersParam,
     TypescriptCodeParametersParam,
     ConditionalAuthorizationAdjustmentParametersParam,
 ]

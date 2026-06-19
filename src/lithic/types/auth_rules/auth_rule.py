@@ -14,6 +14,7 @@ from .conditional_ach_action_parameters import ConditionalACHActionParameters
 from .conditional_tokenization_action_parameters import ConditionalTokenizationActionParameters
 from .conditional_authorization_action_parameters import ConditionalAuthorizationActionParameters
 from .conditional_authorization_adjustment_parameters import ConditionalAuthorizationAdjustmentParameters
+from .conditional_ach_payment_update_action_parameters import ConditionalACHPaymentUpdateActionParameters
 from .conditional_card_transaction_update_action_parameters import ConditionalCardTransactionUpdateActionParameters
 
 __all__ = ["AuthRule", "CurrentVersion", "CurrentVersionParameters", "DraftVersion", "DraftVersionParameters"]
@@ -27,6 +28,7 @@ CurrentVersionParameters: TypeAlias = Union[
     ConditionalACHActionParameters,
     ConditionalTokenizationActionParameters,
     ConditionalCardTransactionUpdateActionParameters,
+    ConditionalACHPaymentUpdateActionParameters,
     TypescriptCodeParameters,
     ConditionalAuthorizationAdjustmentParameters,
 ]
@@ -52,6 +54,7 @@ DraftVersionParameters: TypeAlias = Union[
     ConditionalACHActionParameters,
     ConditionalTokenizationActionParameters,
     ConditionalCardTransactionUpdateActionParameters,
+    ConditionalACHPaymentUpdateActionParameters,
     TypescriptCodeParameters,
     ConditionalAuthorizationAdjustmentParameters,
 ]
@@ -135,11 +138,11 @@ class AuthRule(BaseModel):
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-      stream.
+      ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+      ACH_PAYMENT_UPDATE event stream.
     """
 
     excluded_account_tokens: Optional[List[str]] = None
