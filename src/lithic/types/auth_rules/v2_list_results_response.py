@@ -22,6 +22,14 @@ __all__ = [
     "ACHResultAction",
     "ACHResultActionApproveActionACH",
     "ACHResultActionReturnAction",
+    "CardTransactionUpdateResult",
+    "CardTransactionUpdateResultAction",
+    "CardTransactionUpdateResultActionTagAction",
+    "CardTransactionUpdateResultActionCreateCaseAction",
+    "ACHPaymentUpdateResult",
+    "ACHPaymentUpdateResultAction",
+    "ACHPaymentUpdateResultActionTagAction",
+    "ACHPaymentUpdateResultActionCreateCaseAction",
 ]
 
 
@@ -386,4 +394,135 @@ class ACHResult(BaseModel):
     """The token of the transaction that triggered the rule evaluation"""
 
 
-V2ListResultsResponse: TypeAlias = Union[AuthorizationResult, Authentication3DSResult, TokenizationResult, ACHResult]
+class CardTransactionUpdateResultActionTagAction(BaseModel):
+    key: str
+    """The key of the tag to apply to the transaction"""
+
+    type: Literal["TAG"]
+    """Tag the transaction with key-value metadata"""
+
+    value: str
+    """The value of the tag to apply to the transaction"""
+
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
+
+
+class CardTransactionUpdateResultActionCreateCaseAction(BaseModel):
+    queue_token: str
+    """The token of the queue to create the case in"""
+
+    scope: Literal["CARD", "ACCOUNT"]
+    """The scope of the case to create"""
+
+    type: Literal["CREATE_CASE"]
+    """Create a case for the transaction"""
+
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
+
+
+CardTransactionUpdateResultAction: TypeAlias = Union[
+    CardTransactionUpdateResultActionTagAction, CardTransactionUpdateResultActionCreateCaseAction
+]
+
+
+class CardTransactionUpdateResult(BaseModel):
+    token: str
+    """Globally unique identifier for the evaluation"""
+
+    actions: List[CardTransactionUpdateResultAction]
+    """Actions returned by the rule evaluation"""
+
+    auth_rule_token: str
+    """The Auth Rule token"""
+
+    evaluation_time: datetime
+    """Timestamp of the rule evaluation"""
+
+    event_stream: Literal["CARD_TRANSACTION_UPDATE"]
+    """The event stream during which the rule was evaluated"""
+
+    event_token: str
+    """Token of the event that triggered the evaluation"""
+
+    mode: Literal["ACTIVE", "INACTIVE"]
+    """The state of the Auth Rule"""
+
+    rule_version: int
+    """Version of the rule that was evaluated"""
+
+    transaction_token: Optional[str] = None
+    """The token of the transaction that triggered the rule evaluation"""
+
+
+class ACHPaymentUpdateResultActionTagAction(BaseModel):
+    key: str
+    """The key of the tag to apply to the payment"""
+
+    type: Literal["TAG"]
+    """Tag the payment with key-value metadata"""
+
+    value: str
+    """The value of the tag to apply to the payment"""
+
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
+
+
+class ACHPaymentUpdateResultActionCreateCaseAction(BaseModel):
+    queue_token: str
+    """The token of the queue to create the case in"""
+
+    scope: Literal["FINANCIAL_ACCOUNT"]
+    """The scope of the case to create"""
+
+    type: Literal["CREATE_CASE"]
+    """Create a case for the payment"""
+
+    explanation: Optional[str] = None
+    """Optional explanation for why this action was taken"""
+
+
+ACHPaymentUpdateResultAction: TypeAlias = Union[
+    ACHPaymentUpdateResultActionTagAction, ACHPaymentUpdateResultActionCreateCaseAction
+]
+
+
+class ACHPaymentUpdateResult(BaseModel):
+    token: str
+    """Globally unique identifier for the evaluation"""
+
+    actions: List[ACHPaymentUpdateResultAction]
+    """Actions returned by the rule evaluation"""
+
+    auth_rule_token: str
+    """The Auth Rule token"""
+
+    evaluation_time: datetime
+    """Timestamp of the rule evaluation"""
+
+    event_stream: Literal["ACH_PAYMENT_UPDATE"]
+    """The event stream during which the rule was evaluated"""
+
+    event_token: str
+    """Token of the event that triggered the evaluation"""
+
+    mode: Literal["ACTIVE", "INACTIVE"]
+    """The state of the Auth Rule"""
+
+    rule_version: int
+    """Version of the rule that was evaluated"""
+
+    transaction_token: Optional[str] = None
+    """The token of the transaction that triggered the rule evaluation"""
+
+
+V2ListResultsResponse: TypeAlias = Union[
+    AuthorizationResult,
+    Authentication3DSResult,
+    TokenizationResult,
+    ACHResult,
+    CardTransactionUpdateResult,
+    ACHPaymentUpdateResult,
+]

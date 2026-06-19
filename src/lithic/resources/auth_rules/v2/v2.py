@@ -101,11 +101,11 @@ class V2(SyncAPIResource):
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
 
           account_tokens: Account tokens to which the Auth Rule applies.
 
@@ -159,11 +159,11 @@ class V2(SyncAPIResource):
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -216,11 +216,11 @@ class V2(SyncAPIResource):
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -985,11 +985,11 @@ class AsyncV2(AsyncAPIResource):
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
 
           account_tokens: Account tokens to which the Auth Rule applies.
 
@@ -1043,11 +1043,11 @@ class AsyncV2(AsyncAPIResource):
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -1100,11 +1100,11 @@ class AsyncV2(AsyncAPIResource):
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
               - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
-                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, or CARD_TRANSACTION_UPDATE event
-                stream.
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
 
           event_stream: The event stream during which the rule will be evaluated.
 

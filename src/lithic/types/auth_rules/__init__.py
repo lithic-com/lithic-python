@@ -25,6 +25,7 @@ from .velocity_limit_filters import VelocityLimitFilters as VelocityLimitFilters
 from .conditional_value_param import ConditionalValueParam as ConditionalValueParam
 from .merchant_lock_parameters import MerchantLockParameters as MerchantLockParameters
 from .v2_list_results_response import V2ListResultsResponse as V2ListResultsResponse
+from .ach_payment_update_action import ACHPaymentUpdateAction as ACHPaymentUpdateAction
 from .auth_rule_condition_param import AuthRuleConditionParam as AuthRuleConditionParam
 from .v2_list_versions_response import V2ListVersionsResponse as V2ListVersionsResponse
 from .v2_retrieve_report_params import V2RetrieveReportParams as V2RetrieveReportParams
@@ -39,6 +40,7 @@ from .velocity_limit_filters_param import VelocityLimitFiltersParam as VelocityL
 from .v2_retrieve_features_response import V2RetrieveFeaturesResponse as V2RetrieveFeaturesResponse
 from .card_transaction_update_action import CardTransactionUpdateAction as CardTransactionUpdateAction
 from .merchant_lock_parameters_param import MerchantLockParametersParam as MerchantLockParametersParam
+from .ach_payment_update_action_param import ACHPaymentUpdateActionParam as ACHPaymentUpdateActionParam
 from .typescript_code_parameters_param import TypescriptCodeParametersParam as TypescriptCodeParametersParam
 from .conditional_3ds_action_parameters import Conditional3DSActionParameters as Conditional3DSActionParameters
 from .conditional_ach_action_parameters import ConditionalACHActionParameters as ConditionalACHActionParameters
@@ -59,6 +61,9 @@ from .conditional_authorization_action_parameters import (
 from .conditional_authorization_adjustment_parameters import (
     ConditionalAuthorizationAdjustmentParameters as ConditionalAuthorizationAdjustmentParameters,
 )
+from .conditional_ach_payment_update_action_parameters import (
+    ConditionalACHPaymentUpdateActionParameters as ConditionalACHPaymentUpdateActionParameters,
+)
 from .conditional_tokenization_action_parameters_param import (
     ConditionalTokenizationActionParametersParam as ConditionalTokenizationActionParametersParam,
 )
@@ -70,6 +75,9 @@ from .conditional_authorization_adjustment_parameters_param import (
 )
 from .conditional_card_transaction_update_action_parameters import (
     ConditionalCardTransactionUpdateActionParameters as ConditionalCardTransactionUpdateActionParameters,
+)
+from .conditional_ach_payment_update_action_parameters_param import (
+    ConditionalACHPaymentUpdateActionParametersParam as ConditionalACHPaymentUpdateActionParametersParam,
 )
 from .conditional_card_transaction_update_action_parameters_param import (
     ConditionalCardTransactionUpdateActionParametersParam as ConditionalCardTransactionUpdateActionParametersParam,

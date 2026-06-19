@@ -14,6 +14,7 @@ __all__ = [
     "TokenizationFeature",
     "ACHReceiptFeature",
     "CardTransactionFeature",
+    "ACHPaymentFeature",
     "CardFeature",
     "AccountHolderFeature",
     "IPMetadataFeature",
@@ -52,6 +53,13 @@ class ACHReceiptFeature(BaseModel):
 
 class CardTransactionFeature(BaseModel):
     type: Literal["CARD_TRANSACTION"]
+
+    name: Optional[str] = None
+    """The variable name for this feature in the rule function signature"""
+
+
+class ACHPaymentFeature(BaseModel):
+    type: Literal["ACH_PAYMENT"]
 
     name: Optional[str] = None
     """The variable name for this feature in the rule function signature"""
@@ -109,6 +117,7 @@ RuleFeature: TypeAlias = Union[
     TokenizationFeature,
     ACHReceiptFeature,
     CardTransactionFeature,
+    ACHPaymentFeature,
     CardFeature,
     AccountHolderFeature,
     IPMetadataFeature,

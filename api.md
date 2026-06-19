@@ -101,6 +101,7 @@ Types:
 
 ```python
 from lithic.types.auth_rules import (
+    ACHPaymentUpdateAction,
     AuthRule,
     AuthRuleCondition,
     AuthRuleVersion,
@@ -108,6 +109,7 @@ from lithic.types.auth_rules import (
     CardTransactionUpdateAction,
     Conditional3DSActionParameters,
     ConditionalACHActionParameters,
+    ConditionalACHPaymentUpdateActionParameters,
     ConditionalAttribute,
     ConditionalAuthorizationActionParameters,
     ConditionalAuthorizationAdjustmentParameters,
