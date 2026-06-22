@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.127.0 (2026-06-22)
+
+Full Changelog: [v0.126.0...v0.127.0](https://github.com/lithic-com/lithic-python/compare/v0.126.0...v0.127.0)
+
+### Features
+
+* **api:** add ACH_EVENT_TYPE attribute to auth_rules conditional ACH payment parameters ([2597047](https://github.com/lithic-com/lithic-python/commit/2597047204b6d5c40859edea544d5e07360cdade))
+* **api:** add ACH_PAYMENT_UPDATE event stream, actions, and result types to auth_rules ([27f6d31](https://github.com/lithic-com/lithic-python/commit/27f6d315469a1388b17a644456e8df6515daa95f))
+
 ## 0.126.0 (2026-06-16)
 
 Full Changelog: [v0.125.0...v0.126.0](https://github.com/lithic-com/lithic-python/compare/v0.125.0...v0.126.0)
