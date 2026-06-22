@@ -21,6 +21,7 @@ class Condition(BaseModel):
         "EXTERNAL_BANK_ACCOUNT_VERIFICATION_METHOD",
         "EXTERNAL_BANK_ACCOUNT_VERIFICATION_STATE",
         "EXTERNAL_BANK_ACCOUNT_OWNER_TYPE",
+        "ACH_EVENT_TYPE",
     ]
     """The attribute to target.
 
@@ -48,6 +49,13 @@ class Condition(BaseModel):
       `FAILED_VERIFICATION`, or `INSUFFICIENT_FUNDS`.
     - `EXTERNAL_BANK_ACCOUNT_OWNER_TYPE`: The owner type of the external bank
       account. Valid values are `INDIVIDUAL` or `BUSINESS`.
+    - `ACH_EVENT_TYPE`: The type of ACH payment event being evaluated. Valid values
+      include `ACH_ORIGINATION_INITIATED`, `ACH_ORIGINATION_REVIEWED`,
+      `ACH_ORIGINATION_CANCELLED`, `ACH_ORIGINATION_PROCESSED`,
+      `ACH_ORIGINATION_SETTLED`, `ACH_ORIGINATION_RELEASED`,
+      `ACH_ORIGINATION_REJECTED`, `ACH_RECEIPT_PROCESSED`, `ACH_RECEIPT_SETTLED`,
+      `ACH_RECEIPT_RELEASED`, `ACH_RECEIPT_RELEASED_EARLY`, `ACH_RETURN_INITIATED`,
+      `ACH_RETURN_PROCESSED`, `ACH_RETURN_SETTLED`, and `ACH_RETURN_REJECTED`.
     """
 
     operation: ConditionalOperation
