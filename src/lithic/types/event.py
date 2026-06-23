@@ -41,6 +41,11 @@ class Event(BaseModel):
         "card.renewed",
         "card.shipped",
         "card.updated",
+        "claim_document.accepted",
+        "claim_document.rejected",
+        "claim_document.uploaded",
+        "claim.created",
+        "claim.updated",
         "digital_wallet.tokenization_result",
         "digital_wallet.tokenization_two_factor_authentication_code",
         "digital_wallet.tokenization_two_factor_authentication_code_sent",
@@ -109,6 +114,15 @@ class Event(BaseModel):
     - card.renewed: Occurs when a card is renewed.
     - card.shipped: Occurs when a card is shipped.
     - card.updated: Occurs when a card is updated.
+    - claim_document.accepted: Occurs when a claim document passes validation and is
+      accepted.
+    - claim_document.rejected: Occurs when a claim document fails validation and is
+      rejected.
+    - claim_document.uploaded: Occurs when a claim document is uploaded and begins
+      validation.
+    - claim.created: Occurs when a dispute intake claim is created.
+    - claim.updated: Occurs when a dispute intake claim is updated, such as a status
+      change or a change to its outstanding requirements.
     - digital_wallet.tokenization_result: Occurs when a tokenization request
       succeeded or failed.
 

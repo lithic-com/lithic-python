@@ -11,6 +11,8 @@ from .card_renewed_webhook_event import CardRenewedWebhookEvent
 from .card_shipped_webhook_event import CardShippedWebhookEvent
 from .card_updated_webhook_event import CardUpdatedWebhookEvent
 from .card_reissued_webhook_event import CardReissuedWebhookEvent
+from .claim_created_webhook_event import ClaimCreatedWebhookEvent
+from .claim_updated_webhook_event import ClaimUpdatedWebhookEvent
 from .card_converted_webhook_event import CardConvertedWebhookEvent
 from .balance_updated_webhook_event import BalanceUpdatedWebhookEvent
 from .dispute_updated_webhook_event import DisputeUpdatedWebhookEvent
@@ -23,6 +25,9 @@ from .funding_event_created_webhook_event import FundingEventCreatedWebhookEvent
 from .network_total_created_webhook_event import NetworkTotalCreatedWebhookEvent
 from .network_total_updated_webhook_event import NetworkTotalUpdatedWebhookEvent
 from .account_holder_created_webhook_event import AccountHolderCreatedWebhookEvent
+from .claim_document_accepted_webhook_event import ClaimDocumentAcceptedWebhookEvent
+from .claim_document_rejected_webhook_event import ClaimDocumentRejectedWebhookEvent
+from .claim_document_uploaded_webhook_event import ClaimDocumentUploadedWebhookEvent
 from .card_transaction_updated_webhook_event import CardTransactionUpdatedWebhookEvent
 from .external_payment_created_webhook_event import ExternalPaymentCreatedWebhookEvent
 from .external_payment_updated_webhook_event import ExternalPaymentUpdatedWebhookEvent
@@ -448,6 +453,11 @@ ParsedWebhookEvent: TypeAlias = Union[
     CardTransactionUpdatedWebhookEvent,
     CardTransactionEnhancedDataCreatedWebhookEvent,
     CardTransactionEnhancedDataUpdatedWebhookEvent,
+    ClaimCreatedWebhookEvent,
+    ClaimUpdatedWebhookEvent,
+    ClaimDocumentUploadedWebhookEvent,
+    ClaimDocumentAcceptedWebhookEvent,
+    ClaimDocumentRejectedWebhookEvent,
     DigitalWalletTokenizationApprovalRequestWebhookEvent,
     DigitalWalletTokenizationResultWebhookEvent,
     DigitalWalletTokenizationTwoFactorAuthenticationCodeWebhookEvent,
