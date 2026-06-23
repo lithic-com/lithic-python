@@ -126,6 +126,8 @@ from .book_transfer_create_params import BookTransferCreateParams as BookTransfe
 from .card_bulk_order_list_params import CardBulkOrderListParams as CardBulkOrderListParams
 from .card_reissued_webhook_event import CardReissuedWebhookEvent as CardReissuedWebhookEvent
 from .card_web_provision_response import CardWebProvisionResponse as CardWebProvisionResponse
+from .claim_created_webhook_event import ClaimCreatedWebhookEvent as ClaimCreatedWebhookEvent
+from .claim_updated_webhook_event import ClaimUpdatedWebhookEvent as ClaimUpdatedWebhookEvent
 from .network_program_list_params import NetworkProgramListParams as NetworkProgramListParams
 from .tokenization_decline_reason import TokenizationDeclineReason as TokenizationDeclineReason
 from .account_activity_list_params import AccountActivityListParams as AccountActivityListParams
@@ -191,6 +193,15 @@ from .transaction_simulate_clearing_params import TransactionSimulateClearingPar
 from .transaction_simulate_return_response import TransactionSimulateReturnResponse as TransactionSimulateReturnResponse
 from .account_holder_upload_document_params import (
     AccountHolderUploadDocumentParams as AccountHolderUploadDocumentParams,
+)
+from .claim_document_accepted_webhook_event import (
+    ClaimDocumentAcceptedWebhookEvent as ClaimDocumentAcceptedWebhookEvent,
+)
+from .claim_document_rejected_webhook_event import (
+    ClaimDocumentRejectedWebhookEvent as ClaimDocumentRejectedWebhookEvent,
+)
+from .claim_document_uploaded_webhook_event import (
+    ClaimDocumentUploadedWebhookEvent as ClaimDocumentUploadedWebhookEvent,
 )
 from .external_bank_account_create_response import (
     ExternalBankAccountCreateResponse as ExternalBankAccountCreateResponse,
