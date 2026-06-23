@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Dict, List, Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .velocity_limit_period_param import VelocityLimitPeriodParam
@@ -16,11 +16,16 @@ __all__ = [
     "ACHReceiptFeature",
     "CardTransactionFeature",
     "ACHPaymentFeature",
+    "ExternalBankAccountFeature",
     "CardFeature",
     "AccountHolderFeature",
     "IPMetadataFeature",
     "SpendVelocityFeature",
+    "PaymentVelocityFeature",
+    "PaymentVelocityFeatureFilters",
     "TransactionHistorySignalsFeature",
+    "ConsecutiveDeclinesFeature",
+    "ACHPaymentHistoryFeature",
 ]
 
 
@@ -66,6 +71,13 @@ class ACHPaymentFeature(TypedDict, total=False):
     """The variable name for this feature in the rule function signature"""
 
 
+class ExternalBankAccountFeature(TypedDict, total=False):
+    type: Required[Literal["EXTERNAL_BANK_ACCOUNT"]]
+
+    name: str
+    """The variable name for this feature in the rule function signature"""
+
+
 class CardFeature(TypedDict, total=False):
     type: Required[Literal["CARD"]]
 
@@ -102,11 +114,76 @@ class SpendVelocityFeature(TypedDict, total=False):
     """The variable name for this feature in the rule function signature"""
 
 
+class PaymentVelocityFeatureFilters(TypedDict, total=False):
+    """Optional filters applied when aggregating ACH payment velocity.
+
+    Payments not matching the provided filters are excluded from the calculated velocity.
+    """
+
+    exclude_tags: Optional[Dict[str, str]]
+    """Exclude payments matching any of the provided tag key-value pairs."""
+
+    include_payment_types: Optional[List[Literal["ORIGINATION", "RECEIPT"]]]
+    """Payment types to include in the velocity calculation."""
+
+    include_polarities: Optional[List[Literal["CREDIT", "DEBIT"]]]
+    """Payment polarities to include in the velocity calculation."""
+
+    include_statuses: Optional[List[Literal["PENDING", "SETTLED", "DECLINED", "REVERSED", "CANCELED", "RETURNED"]]]
+    """Payment statuses to include in the velocity calculation."""
+
+    include_tags: Optional[Dict[str, str]]
+    """Only include payments matching all of the provided tag key-value pairs."""
+
+    result: Literal["APPROVED", "DECLINED"]
+    """Only include payments with the given result."""
+
+
+class PaymentVelocityFeature(TypedDict, total=False):
+    period: Required[VelocityLimitPeriodParam]
+    """Velocity over the current day since 00:00 / 12 AM in Eastern Time"""
+
+    scope: Required[Literal["FINANCIAL_ACCOUNT", "GLOBAL"]]
+    """The scope over which the ACH payment velocity is aggregated."""
+
+    type: Required[Literal["PAYMENT_VELOCITY"]]
+
+    filters: PaymentVelocityFeatureFilters
+    """Optional filters applied when aggregating ACH payment velocity.
+
+    Payments not matching the provided filters are excluded from the calculated
+    velocity.
+    """
+
+    name: str
+    """The variable name for this feature in the rule function signature"""
+
+
 class TransactionHistorySignalsFeature(TypedDict, total=False):
     scope: Required[Literal["CARD", "ACCOUNT", "BUSINESS_ACCOUNT"]]
     """The entity scope to load transaction history signals for."""
 
     type: Required[Literal["TRANSACTION_HISTORY_SIGNALS"]]
+
+    name: str
+    """The variable name for this feature in the rule function signature"""
+
+
+class ConsecutiveDeclinesFeature(TypedDict, total=False):
+    scope: Required[Literal["CARD", "ACCOUNT"]]
+    """The entity scope to count consecutive declines for."""
+
+    type: Required[Literal["CONSECUTIVE_DECLINES"]]
+
+    name: str
+    """The variable name for this feature in the rule function signature"""
+
+
+class ACHPaymentHistoryFeature(TypedDict, total=False):
+    scope: Required[Literal["FINANCIAL_ACCOUNT"]]
+    """The entity scope to load ACH payment history for."""
+
+    type: Required[Literal["ACH_PAYMENT_HISTORY"]]
 
     name: str
     """The variable name for this feature in the rule function signature"""
@@ -119,9 +196,13 @@ RuleFeatureParam: TypeAlias = Union[
     ACHReceiptFeature,
     CardTransactionFeature,
     ACHPaymentFeature,
+    ExternalBankAccountFeature,
     CardFeature,
     AccountHolderFeature,
     IPMetadataFeature,
     SpendVelocityFeature,
+    PaymentVelocityFeature,
     TransactionHistorySignalsFeature,
+    ConsecutiveDeclinesFeature,
+    ACHPaymentHistoryFeature,
 ]
