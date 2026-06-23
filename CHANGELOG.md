@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.128.0 (2026-06-23)
+
+Full Changelog: [v0.127.0...v0.128.0](https://github.com/lithic-com/lithic-python/compare/v0.127.0...v0.128.0)
+
+### Features
+
+* **api:** add claim and claim_document webhook events ([512d4fa](https://github.com/lithic-com/lithic-python/commit/512d4fad7f07a4e9756cd5c5b16693bcd2105262))
+* **api:** add external bank/payment velocity/declines/history features to auth_rules ([11d71e3](https://github.com/lithic-com/lithic-python/commit/11d71e30f57728e98b9d8c90077d355b08cbc89c))
+
 ## 0.127.0 (2026-06-22)
 
 Full Changelog: [v0.126.0...v0.127.0](https://github.com/lithic-com/lithic-python/compare/v0.126.0...v0.127.0)
