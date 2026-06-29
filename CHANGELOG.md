@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.129.0 (2026-06-29)
+
+Full Changelog: [v0.128.0...v0.129.0](https://github.com/lithic-com/lithic-python/compare/v0.128.0...v0.129.0)
+
+### Features
+
+* **api:** add payment transaction support to case transactions ([56bc7d5](https://github.com/lithic-com/lithic-python/commit/56bc7d58831ca1ca9e15386407742765dd53a29e))
+
+
+### Documentation
+
+* **types:** update cash_amount field description in CardAuthorization ([1157e38](https://github.com/lithic-com/lithic-python/commit/1157e38b8bfe8ec1a819eacda361957f640e8430))
+
 ## 0.128.0 (2026-06-23)
 
 Full Changelog: [v0.127.0...v0.128.0](https://github.com/lithic-com/lithic-python/compare/v0.127.0...v0.128.0)
