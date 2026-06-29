@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
+from typing import Any, Dict, Union, Optional, cast
 from datetime import datetime
 
 import httpx
@@ -417,7 +417,7 @@ class Cases(SyncAPIResource):
                     case_list_transactions_params.CaseListTransactionsParams,
                 ),
             ),
-            model=CaseTransaction,
+            model=cast(Any, CaseTransaction),  # Union types cannot be passed in as arguments in the type system
         )
 
     def retrieve_cards(
@@ -818,7 +818,7 @@ class AsyncCases(AsyncAPIResource):
                     case_list_transactions_params.CaseListTransactionsParams,
                 ),
             ),
-            model=CaseTransaction,
+            model=cast(Any, CaseTransaction),  # Union types cannot be passed in as arguments in the type system
         )
 
     async def retrieve_cards(
