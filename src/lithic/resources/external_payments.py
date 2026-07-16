@@ -175,7 +175,7 @@ class ExternalPayments(SyncAPIResource):
         Only entries created after the specified time
               will be included. UTC time zone.
 
-          category: External Payment category to be returned.
+          category: The external rail the funds moved on
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -563,7 +563,7 @@ class AsyncExternalPayments(AsyncAPIResource):
         Only entries created after the specified time
               will be included. UTC time zone.
 
-          category: External Payment category to be returned.
+          category: The external rail the funds moved on
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
