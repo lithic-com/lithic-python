@@ -6,6 +6,7 @@ import hmac
 import json
 import base64
 import hashlib
+import typing_extensions
 from typing import Any, Union, cast
 from datetime import datetime, timezone, timedelta
 from typing_extensions import Literal
@@ -675,6 +676,7 @@ class Cards(SyncAPIResource):
             cast_to=Card,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def embed(
         self,
         *,
@@ -688,6 +690,9 @@ class Cards(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
+        **Deprecated.** Use the modern embedded card flow instead: create a session with
+        `POST /v1/cards/{card_token}/embed` and render it via `GET /v1/embed`.
+
         Handling full card PANs and CVV codes requires that you comply with the Payment
         Card Industry Data Security Standards (PCI DSS). Some clients choose to reduce
         their compliance obligations by leveraging our embedded card UI solution
@@ -1903,6 +1908,7 @@ class AsyncCards(AsyncAPIResource):
             cast_to=Card,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def embed(
         self,
         *,
@@ -1916,6 +1922,9 @@ class AsyncCards(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
+        **Deprecated.** Use the modern embedded card flow instead: create a session with
+        `POST /v1/cards/{card_token}/embed` and render it via `GET /v1/embed`.
+
         Handling full card PANs and CVV codes requires that you comply with the Payment
         Card Industry Data Security Standards (PCI DSS). Some clients choose to reduce
         their compliance obligations by leveraging our embedded card UI solution
@@ -2539,8 +2548,10 @@ class CardsWithRawResponse:
         self.convert_physical = _legacy_response.to_raw_response_wrapper(
             cards.convert_physical,
         )
-        self.embed = _legacy_response.to_raw_response_wrapper(
-            cards.embed,
+        self.embed = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.to_raw_response_wrapper(
+                cards.embed,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.provision = _legacy_response.to_raw_response_wrapper(
             cards.provision,
@@ -2592,8 +2603,10 @@ class AsyncCardsWithRawResponse:
         self.convert_physical = _legacy_response.async_to_raw_response_wrapper(
             cards.convert_physical,
         )
-        self.embed = _legacy_response.async_to_raw_response_wrapper(
-            cards.embed,
+        self.embed = (  # pyright: ignore[reportDeprecated]
+            _legacy_response.async_to_raw_response_wrapper(
+                cards.embed,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.provision = _legacy_response.async_to_raw_response_wrapper(
             cards.provision,
@@ -2645,8 +2658,10 @@ class CardsWithStreamingResponse:
         self.convert_physical = to_streamed_response_wrapper(
             cards.convert_physical,
         )
-        self.embed = to_streamed_response_wrapper(
-            cards.embed,
+        self.embed = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                cards.embed,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.provision = to_streamed_response_wrapper(
             cards.provision,
@@ -2698,8 +2713,10 @@ class AsyncCardsWithStreamingResponse:
         self.convert_physical = async_to_streamed_response_wrapper(
             cards.convert_physical,
         )
-        self.embed = async_to_streamed_response_wrapper(
-            cards.embed,
+        self.embed = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                cards.embed,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.provision = async_to_streamed_response_wrapper(
             cards.provision,
