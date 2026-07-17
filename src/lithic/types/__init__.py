@@ -119,6 +119,7 @@ from .card_get_embed_html_params import CardGetEmbedHTMLParams as CardGetEmbedHT
 from .card_renewed_webhook_event import CardRenewedWebhookEvent as CardRenewedWebhookEvent
 from .card_shipped_webhook_event import CardShippedWebhookEvent as CardShippedWebhookEvent
 from .card_updated_webhook_event import CardUpdatedWebhookEvent as CardUpdatedWebhookEvent
+from .embed_viewed_webhook_event import EmbedViewedWebhookEvent as EmbedViewedWebhookEvent
 from .event_list_attempts_params import EventListAttemptsParams as EventListAttemptsParams
 from .settlement_summary_details import SettlementSummaryDetails as SettlementSummaryDetails
 from .transfer_limit_list_params import TransferLimitListParams as TransferLimitListParams
@@ -202,6 +203,9 @@ from .claim_document_rejected_webhook_event import (
 )
 from .claim_document_uploaded_webhook_event import (
     ClaimDocumentUploadedWebhookEvent as ClaimDocumentUploadedWebhookEvent,
+)
+from .embed_session_generated_webhook_event import (
+    EmbedSessionGeneratedWebhookEvent as EmbedSessionGeneratedWebhookEvent,
 )
 from .external_bank_account_create_response import (
     ExternalBankAccountCreateResponse as ExternalBankAccountCreateResponse,

@@ -20,6 +20,8 @@ from lithic.types import (
 from lithic._utils import parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -326,18 +328,21 @@ class TestCards:
 
     @parametrize
     def test_method_embed(self, client: Lithic) -> None:
-        card = client.cards.embed(
-            embed_request="embed_request",
-            hmac="hmac",
-        )
+        with pytest.warns(DeprecationWarning):
+            card = client.cards.embed(
+                embed_request="embed_request",
+                hmac="hmac",
+            )
+
         assert_matches_type(str, card, path=["response"])
 
     @parametrize
     def test_raw_response_embed(self, client: Lithic) -> None:
-        response = client.cards.with_raw_response.embed(
-            embed_request="embed_request",
-            hmac="hmac",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.cards.with_raw_response.embed(
+                embed_request="embed_request",
+                hmac="hmac",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -346,15 +351,16 @@ class TestCards:
 
     @parametrize
     def test_streaming_response_embed(self, client: Lithic) -> None:
-        with client.cards.with_streaming_response.embed(
-            embed_request="embed_request",
-            hmac="hmac",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.cards.with_streaming_response.embed(
+                embed_request="embed_request",
+                hmac="hmac",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            card = response.parse()
-            assert_matches_type(str, card, path=["response"])
+                card = response.parse()
+                assert_matches_type(str, card, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1043,18 +1049,21 @@ class TestAsyncCards:
 
     @parametrize
     async def test_method_embed(self, async_client: AsyncLithic) -> None:
-        card = await async_client.cards.embed(
-            embed_request="embed_request",
-            hmac="hmac",
-        )
+        with pytest.warns(DeprecationWarning):
+            card = await async_client.cards.embed(
+                embed_request="embed_request",
+                hmac="hmac",
+            )
+
         assert_matches_type(str, card, path=["response"])
 
     @parametrize
     async def test_raw_response_embed(self, async_client: AsyncLithic) -> None:
-        response = await async_client.cards.with_raw_response.embed(
-            embed_request="embed_request",
-            hmac="hmac",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.cards.with_raw_response.embed(
+                embed_request="embed_request",
+                hmac="hmac",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1063,15 +1072,16 @@ class TestAsyncCards:
 
     @parametrize
     async def test_streaming_response_embed(self, async_client: AsyncLithic) -> None:
-        async with async_client.cards.with_streaming_response.embed(
-            embed_request="embed_request",
-            hmac="hmac",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.cards.with_streaming_response.embed(
+                embed_request="embed_request",
+                hmac="hmac",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            card = await response.parse()
-            assert_matches_type(str, card, path=["response"])
+                card = await response.parse()
+                assert_matches_type(str, card, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
