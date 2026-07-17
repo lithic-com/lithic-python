@@ -1002,6 +1002,8 @@ from lithic.types import (
     DigitalWalletTokenizationUpdatedWebhookEvent,
     DisputeUpdatedWebhookEvent,
     DisputeEvidenceUploadFailedWebhookEvent,
+    EmbedSessionGeneratedWebhookEvent,
+    EmbedViewedWebhookEvent,
     ExternalBankAccountCreatedWebhookEvent,
     ExternalBankAccountUpdatedWebhookEvent,
     ExternalPaymentCreatedWebhookEvent,

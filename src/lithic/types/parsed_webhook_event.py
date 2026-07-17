@@ -10,6 +10,7 @@ from .card_created_webhook_event import CardCreatedWebhookEvent
 from .card_renewed_webhook_event import CardRenewedWebhookEvent
 from .card_shipped_webhook_event import CardShippedWebhookEvent
 from .card_updated_webhook_event import CardUpdatedWebhookEvent
+from .embed_viewed_webhook_event import EmbedViewedWebhookEvent
 from .card_reissued_webhook_event import CardReissuedWebhookEvent
 from .claim_created_webhook_event import ClaimCreatedWebhookEvent
 from .claim_updated_webhook_event import ClaimUpdatedWebhookEvent
@@ -28,6 +29,7 @@ from .account_holder_created_webhook_event import AccountHolderCreatedWebhookEve
 from .claim_document_accepted_webhook_event import ClaimDocumentAcceptedWebhookEvent
 from .claim_document_rejected_webhook_event import ClaimDocumentRejectedWebhookEvent
 from .claim_document_uploaded_webhook_event import ClaimDocumentUploadedWebhookEvent
+from .embed_session_generated_webhook_event import EmbedSessionGeneratedWebhookEvent
 from .card_transaction_updated_webhook_event import CardTransactionUpdatedWebhookEvent
 from .external_payment_created_webhook_event import ExternalPaymentCreatedWebhookEvent
 from .external_payment_updated_webhook_event import ExternalPaymentUpdatedWebhookEvent
@@ -465,6 +467,8 @@ ParsedWebhookEvent: TypeAlias = Union[
     DigitalWalletTokenizationUpdatedWebhookEvent,
     DisputeUpdatedWebhookEvent,
     DisputeEvidenceUploadFailedWebhookEvent,
+    EmbedSessionGeneratedWebhookEvent,
+    EmbedViewedWebhookEvent,
     ExternalBankAccountCreatedWebhookEvent,
     ExternalBankAccountUpdatedWebhookEvent,
     ExternalPaymentCreatedWebhookEvent,

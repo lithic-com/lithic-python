@@ -64,6 +64,8 @@ class EventListParams(TypedDict, total=False):
             "dispute_transaction.created",
             "dispute_transaction.updated",
             "dispute.updated",
+            "embed.session_generated",
+            "embed.viewed",
             "external_bank_account.created",
             "external_bank_account.updated",
             "external_payment.created",
