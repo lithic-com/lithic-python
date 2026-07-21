@@ -19,7 +19,7 @@ class TrailingWindowObject(TypedDict, total=False):
     duration: Required[int]
     """The size of the trailing window to calculate Spend Velocity over in seconds.
 
-    The minimum value is 10 seconds, and the maximum value is 2678400 seconds (31
+    The minimum value is 10 seconds, and the maximum value is 7776000 seconds (90
     days).
     """
 
