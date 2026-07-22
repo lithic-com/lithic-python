@@ -72,6 +72,7 @@ class AccountActivity(SyncAPIResource):
             "MANAGEMENT_DISBURSEMENT",
             "HOLD",
             "PROGRAM_FUNDING",
+            "PROGRAM_TRANSFER",
         ]
         | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
@@ -244,6 +245,7 @@ class AsyncAccountActivity(AsyncAPIResource):
             "MANAGEMENT_DISBURSEMENT",
             "HOLD",
             "PROGRAM_FUNDING",
+            "PROGRAM_TRANSFER",
         ]
         | Omit = omit,
         end: Union[str, datetime] | Omit = omit,

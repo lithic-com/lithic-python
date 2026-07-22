@@ -31,6 +31,7 @@ class BookTransferListParams(TypedDict, total=False):
         "INTERNAL",
         "REWARD",
         "PROGRAM_FUNDING",
+        "PROGRAM_TRANSFER",
         "TRANSFER",
     ]
     """Book Transfer category to be returned."""
