@@ -113,6 +113,8 @@ class FinancialEvent(BaseModel):
             "RETURNED_PAYMENT",
             "RETURNED_PAYMENT_REVERSAL",
             "LITHIC_NETWORK_PAYMENT",
+            "LITHIC_PROGRAM_TRANSFER",
+            "BANK_PROGRAM_TRANSFER",
             "ANNUAL",
             "ANNUAL_REVERSAL",
             "QUARTERLY",
