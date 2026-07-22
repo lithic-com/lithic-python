@@ -166,6 +166,9 @@ class MethodAttributesACHMethodAttributes(BaseModel):
     receipt_routing_number: Optional[str] = None
     """Receipt routing number"""
 
+    recipient_name: Optional[str] = None
+    """Name of the recipient on ACH receipts. Reflects the originating bank's record"""
+
     retries: Optional[int] = None
     """Number of retries attempted"""
 
