@@ -162,7 +162,7 @@ class Payments(SyncAPIResource):
         page_size: int | Omit = omit,
         result: Literal["APPROVED", "DECLINED"] | Omit = omit,
         starting_after: str | Omit = omit,
-        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | Omit = omit,
+        status: Literal["DECLINED", "PENDING", "RETURNED", "REVERSED", "SETTLED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -667,7 +667,7 @@ class AsyncPayments(AsyncAPIResource):
         page_size: int | Omit = omit,
         result: Literal["APPROVED", "DECLINED"] | Omit = omit,
         starting_after: str | Omit = omit,
-        status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"] | Omit = omit,
+        status: Literal["DECLINED", "PENDING", "RETURNED", "REVERSED", "SETTLED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
