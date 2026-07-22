@@ -242,6 +242,7 @@ class Payment(BaseModel):
         "MANAGEMENT_DISBURSEMENT",
         "HOLD",
         "PROGRAM_FUNDING",
+        "PROGRAM_TRANSFER",
     ]
     """Transaction category"""
 

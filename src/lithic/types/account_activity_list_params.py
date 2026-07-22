@@ -47,6 +47,7 @@ class AccountActivityListParams(TypedDict, total=False):
         "MANAGEMENT_DISBURSEMENT",
         "HOLD",
         "PROGRAM_FUNDING",
+        "PROGRAM_TRANSFER",
     ]
     """Filter by transaction category"""
 

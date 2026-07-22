@@ -39,6 +39,7 @@ class Data(BaseModel):
         "MANAGEMENT_DISBURSEMENT",
         "HOLD",
         "PROGRAM_FUNDING",
+        "PROGRAM_TRANSFER",
     ]
     """
     Note: Inbound wire transfers are coming soon (availability varies by partner
@@ -140,6 +141,8 @@ class Data(BaseModel):
         "RETURNED_PAYMENT",
         "RETURNED_PAYMENT_REVERSAL",
         "LITHIC_NETWORK_PAYMENT",
+        "LITHIC_PROGRAM_TRANSFER",
+        "BANK_PROGRAM_TRANSFER",
         "ANNUAL",
         "ANNUAL_REVERSAL",
         "QUARTERLY",

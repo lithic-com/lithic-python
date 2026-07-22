@@ -76,6 +76,8 @@ class Event(BaseModel):
         "SERVICE",
         "TRANSFER",
         "COLLECTION",
+        "LITHIC_PROGRAM_TRANSFER",
+        "BANK_PROGRAM_TRANSFER",
     ]
     """Type of the book transfer"""
 
@@ -105,6 +107,7 @@ class BookTransferResponse(BaseModel):
         "INTERNAL",
         "REWARD",
         "PROGRAM_FUNDING",
+        "PROGRAM_TRANSFER",
         "TRANSFER",
     ]
 
