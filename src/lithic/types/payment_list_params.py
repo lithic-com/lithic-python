@@ -50,4 +50,4 @@ class PaymentListParams(TypedDict, total=False):
     Used to retrieve the next page of results after this item.
     """
 
-    status: Literal["DECLINED", "PENDING", "RETURNED", "SETTLED"]
+    status: Literal["DECLINED", "PENDING", "RETURNED", "REVERSED", "SETTLED"]
