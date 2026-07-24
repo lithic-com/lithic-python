@@ -60,9 +60,10 @@ class Balances(SyncAPIResource):
         Args:
           balance_date: UTC date of the balance to retrieve. Defaults to latest available balance
 
-          last_transaction_event_token: Balance after a given financial event occured. For example, passing the
-              event_token of a $5 CARD_CLEARING financial event will return a balance
-              decreased by $5
+          last_transaction_event_token: Balance after a given financial event occured. Note: if an account receives
+              multiple events around the same time whose financial impacts cancel out, a
+              balance lookup by one of those event tokens may return 404, since their combined
+              impact on the account is zero.
 
           extra_headers: Send extra headers
 
@@ -138,9 +139,10 @@ class AsyncBalances(AsyncAPIResource):
         Args:
           balance_date: UTC date of the balance to retrieve. Defaults to latest available balance
 
-          last_transaction_event_token: Balance after a given financial event occured. For example, passing the
-              event_token of a $5 CARD_CLEARING financial event will return a balance
-              decreased by $5
+          last_transaction_event_token: Balance after a given financial event occured. Note: if an account receives
+              multiple events around the same time whose financial impacts cancel out, a
+              balance lookup by one of those event tokens may return 404, since their combined
+              impact on the account is zero.
 
           extra_headers: Send extra headers
 
