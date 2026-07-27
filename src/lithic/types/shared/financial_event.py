@@ -122,5 +122,8 @@ class FinancialEvent(BaseModel):
             "MONTHLY",
             "MONTHLY_REVERSAL",
             "ACCOUNT_TO_ACCOUNT",
+            "STABLECOIN_RECEIVED",
+            "STABLECOIN_REVIEWED",
+            "STABLECOIN_SETTLED",
         ]
     ] = None

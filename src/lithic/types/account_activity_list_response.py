@@ -26,6 +26,7 @@ class FinancialTransaction(BaseModel):
     category: Literal[
         "ACH",
         "WIRE",
+        "STABLECOIN",
         "BALANCE_OR_FUNDING",
         "FEE",
         "REWARD",
