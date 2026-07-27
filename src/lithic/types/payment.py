@@ -65,6 +65,9 @@ class Event(BaseModel):
         "WIRE_RETURN_OUTBOUND_SENT",
         "WIRE_RETURN_OUTBOUND_SETTLED",
         "WIRE_RETURN_OUTBOUND_REJECTED",
+        "STABLECOIN_RECEIVED",
+        "STABLECOIN_REVIEWED",
+        "STABLECOIN_SETTLED",
     ]
     """
     Note: Inbound wire transfers are coming soon (availability varies by partner
@@ -119,6 +122,13 @@ class Event(BaseModel):
       Reserve and funds returned to sender.
     - `WIRE_RETURN_OUTBOUND_REJECTED` - Outbound wire return rejected by the Federal
       Reserve.
+
+    Stablecoin events:
+
+    - `STABLECOIN_RECEIVED` - Stablecoin pay-in received on-chain and pending
+      release to available balance.
+    - `STABLECOIN_REVIEWED` - Stablecoin pay-in has completed the review process.
+    - `STABLECOIN_SETTLED` - Stablecoin pay-in funds released to available balance.
     """
 
     detailed_results: Optional[
@@ -222,6 +232,7 @@ class Payment(BaseModel):
     category: Literal[
         "ACH",
         "WIRE",
+        "STABLECOIN",
         "BALANCE_OR_FUNDING",
         "FEE",
         "REWARD",

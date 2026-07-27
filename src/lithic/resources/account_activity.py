@@ -52,6 +52,7 @@ class AccountActivity(SyncAPIResource):
         category: Literal[
             "ACH",
             "WIRE",
+            "STABLECOIN",
             "BALANCE_OR_FUNDING",
             "FEE",
             "REWARD",
@@ -225,6 +226,7 @@ class AsyncAccountActivity(AsyncAPIResource):
         category: Literal[
             "ACH",
             "WIRE",
+            "STABLECOIN",
             "BALANCE_OR_FUNDING",
             "FEE",
             "REWARD",

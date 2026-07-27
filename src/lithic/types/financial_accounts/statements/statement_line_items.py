@@ -19,6 +19,7 @@ class Data(BaseModel):
     category: Literal[
         "ACH",
         "WIRE",
+        "STABLECOIN",
         "BALANCE_OR_FUNDING",
         "FEE",
         "REWARD",
@@ -150,6 +151,9 @@ class Data(BaseModel):
         "MONTHLY",
         "MONTHLY_REVERSAL",
         "ACCOUNT_TO_ACCOUNT",
+        "STABLECOIN_RECEIVED",
+        "STABLECOIN_REVIEWED",
+        "STABLECOIN_SETTLED",
     ]
 
     financial_account_token: str
