@@ -9,7 +9,6 @@ from typing_extensions import Annotated, TypedDict
 from ..._utils import PropertyInfo
 from .case_status import CaseStatus
 from .case_priority import CasePriority
-from .resolution_outcome import ResolutionOutcome
 
 __all__ = ["CaseUpdateParams"]
 
@@ -28,15 +27,11 @@ class CaseUpdateParams(TypedDict, total=False):
     priority: CasePriority
     """Priority level of a case, controlling queue ordering and SLA urgency"""
 
-    resolution: ResolutionOutcome
-    """Outcome recorded when a case is resolved:
+    resolution: str
+    """Resolution to record on the case.
 
-    - `CONFIRMED_FRAUD` - The reviewed activity was confirmed to be fraudulent
-    - `SUSPICIOUS_ACTIVITY` - The activity is suspicious but not confirmed fraud
-    - `FALSE_POSITIVE` - The activity was legitimate and the alert was a false
-      positive
-    - `NO_ACTION_REQUIRED` - No further action is required
-    - `ESCALATED_EXTERNAL` - The case was escalated to an external party
+    Must be one of the `allowed_resolutions` configured on the case's queue,
+    otherwise the request is rejected with a `400`
     """
 
     resolution_notes: str

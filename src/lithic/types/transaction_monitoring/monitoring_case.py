@@ -7,7 +7,6 @@ from ..._models import BaseModel
 from .case_entity import CaseEntity
 from .case_status import CaseStatus
 from .case_priority import CasePriority
-from .resolution_outcome import ResolutionOutcome
 
 __all__ = ["MonitoringCase"]
 
@@ -39,15 +38,10 @@ class MonitoringCase(BaseModel):
     queue_token: str
     """Token of the queue the case belongs to"""
 
-    resolution: Optional[ResolutionOutcome] = None
-    """Outcome recorded when a case is resolved:
-
-    - `CONFIRMED_FRAUD` - The reviewed activity was confirmed to be fraudulent
-    - `SUSPICIOUS_ACTIVITY` - The activity is suspicious but not confirmed fraud
-    - `FALSE_POSITIVE` - The activity was legitimate and the alert was a false
-      positive
-    - `NO_ACTION_REQUIRED` - No further action is required
-    - `ESCALATED_EXTERNAL` - The case was escalated to an external party
+    resolution: Optional[str] = None
+    """
+    Outcome recorded when the case was resolved, from the `allowed_resolutions`
+    configured on the case's queue
     """
 
     resolution_notes: Optional[str] = None
