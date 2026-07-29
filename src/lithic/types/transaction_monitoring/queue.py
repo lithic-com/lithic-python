@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 from pydantic import Field as FieldInfo
@@ -41,6 +41,13 @@ class Queue(BaseModel):
 
     token: str
     """Globally unique identifier for the queue"""
+
+    allowed_resolutions: List[str]
+    """Resolutions that can be recorded on cases in this queue.
+
+    Always the effective list: the queue's own values when it defines them,
+    otherwise the default list
+    """
 
     case_counts: CaseCounts
     """Number of cases in the queue, broken down by status.
