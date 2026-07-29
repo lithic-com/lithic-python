@@ -35,7 +35,6 @@ from ....types.transaction_monitoring import (
     CaseStatus,
     CasePriority,
     CaseSortOrder,
-    ResolutionOutcome,
     case_list_params,
     case_update_params,
     case_list_activity_params,
@@ -46,7 +45,6 @@ from ....types.transaction_monitoring.case_priority import CasePriority
 from ....types.transaction_monitoring.case_sort_order import CaseSortOrder
 from ....types.transaction_monitoring.monitoring_case import MonitoringCase
 from ....types.transaction_monitoring.case_transaction import CaseTransaction
-from ....types.transaction_monitoring.resolution_outcome import ResolutionOutcome
 from ....types.transaction_monitoring.case_activity_entry import CaseActivityEntry
 from ....types.transaction_monitoring.case_retrieve_cards_response import CaseRetrieveCardsResponse
 
@@ -121,7 +119,7 @@ class Cases(SyncAPIResource):
         actor_token: str | Omit = omit,
         assignee: Optional[str] | Omit = omit,
         priority: CasePriority | Omit = omit,
-        resolution: ResolutionOutcome | Omit = omit,
+        resolution: str | Omit = omit,
         resolution_notes: str | Omit = omit,
         sla_deadline: Union[str, datetime, None] | Omit = omit,
         status: CaseStatus | Omit = omit,
@@ -146,15 +144,8 @@ class Cases(SyncAPIResource):
 
           priority: Priority level of a case, controlling queue ordering and SLA urgency
 
-          resolution:
-              Outcome recorded when a case is resolved:
-
-              - `CONFIRMED_FRAUD` - The reviewed activity was confirmed to be fraudulent
-              - `SUSPICIOUS_ACTIVITY` - The activity is suspicious but not confirmed fraud
-              - `FALSE_POSITIVE` - The activity was legitimate and the alert was a false
-                positive
-              - `NO_ACTION_REQUIRED` - No further action is required
-              - `ESCALATED_EXTERNAL` - The case was escalated to an external party
+          resolution: Resolution to record on the case. Must be one of the `allowed_resolutions`
+              configured on the case's queue, otherwise the request is rejected with a `400`
 
           resolution_notes: Notes describing the resolution
 
@@ -522,7 +513,7 @@ class AsyncCases(AsyncAPIResource):
         actor_token: str | Omit = omit,
         assignee: Optional[str] | Omit = omit,
         priority: CasePriority | Omit = omit,
-        resolution: ResolutionOutcome | Omit = omit,
+        resolution: str | Omit = omit,
         resolution_notes: str | Omit = omit,
         sla_deadline: Union[str, datetime, None] | Omit = omit,
         status: CaseStatus | Omit = omit,
@@ -547,15 +538,8 @@ class AsyncCases(AsyncAPIResource):
 
           priority: Priority level of a case, controlling queue ordering and SLA urgency
 
-          resolution:
-              Outcome recorded when a case is resolved:
-
-              - `CONFIRMED_FRAUD` - The reviewed activity was confirmed to be fraudulent
-              - `SUSPICIOUS_ACTIVITY` - The activity is suspicious but not confirmed fraud
-              - `FALSE_POSITIVE` - The activity was legitimate and the alert was a false
-                positive
-              - `NO_ACTION_REQUIRED` - No further action is required
-              - `ESCALATED_EXTERNAL` - The case was escalated to an external party
+          resolution: Resolution to record on the case. Must be one of the `allowed_resolutions`
+              configured on the case's queue, otherwise the request is rejected with a `400`
 
           resolution_notes: Notes describing the resolution
 

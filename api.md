@@ -179,7 +179,6 @@ from lithic.types.transaction_monitoring import (
     CaseTransaction,
     EntityType,
     MonitoringCase,
-    ResolutionOutcome,
     CaseRetrieveCardsResponse,
 )
 ```

@@ -7,7 +7,7 @@ from typing import Optional
 import httpx
 
 from ... import _legacy_response
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -44,6 +44,7 @@ class Queues(SyncAPIResource):
         self,
         *,
         name: str,
+        allowed_resolutions: Optional[SequenceNotStr[str]] | Omit = omit,
         description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -57,6 +58,10 @@ class Queues(SyncAPIResource):
 
         Args:
           name: Human-readable name of the queue
+
+          allowed_resolutions: Resolutions that can be recorded on cases in this queue. Omit or send `null` to
+              use the default list. Values are free-form labels and must be non-empty and
+              unique
 
           description: Optional description of the queue
 
@@ -73,6 +78,7 @@ class Queues(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
+                    "allowed_resolutions": allowed_resolutions,
                     "description": description,
                 },
                 queue_create_params.QueueCreateParams,
@@ -120,6 +126,7 @@ class Queues(SyncAPIResource):
         self,
         queue_token: str,
         *,
+        allowed_resolutions: Optional[SequenceNotStr[str]] | Omit = omit,
         description: Optional[str] | Omit = omit,
         name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -133,6 +140,11 @@ class Queues(SyncAPIResource):
         Updates a transaction monitoring queue.
 
         Args:
+          allowed_resolutions: New list of resolutions that can be recorded on cases in this queue, or `null`
+              to revert to the default list. Values are free-form labels and must be non-empty
+              and unique. Changing the list only affects what is selectable going forward; the
+              `resolution` already stored on a case is preserved as-is
+
           description: New description for the queue, or `null` to clear it
 
           name: New name for the queue
@@ -151,6 +163,7 @@ class Queues(SyncAPIResource):
             path_template("/v1/transaction_monitoring/queues/{queue_token}", queue_token=queue_token),
             body=maybe_transform(
                 {
+                    "allowed_resolutions": allowed_resolutions,
                     "description": description,
                     "name": name,
                 },
@@ -273,6 +286,7 @@ class AsyncQueues(AsyncAPIResource):
         self,
         *,
         name: str,
+        allowed_resolutions: Optional[SequenceNotStr[str]] | Omit = omit,
         description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -286,6 +300,10 @@ class AsyncQueues(AsyncAPIResource):
 
         Args:
           name: Human-readable name of the queue
+
+          allowed_resolutions: Resolutions that can be recorded on cases in this queue. Omit or send `null` to
+              use the default list. Values are free-form labels and must be non-empty and
+              unique
 
           description: Optional description of the queue
 
@@ -302,6 +320,7 @@ class AsyncQueues(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
+                    "allowed_resolutions": allowed_resolutions,
                     "description": description,
                 },
                 queue_create_params.QueueCreateParams,
@@ -349,6 +368,7 @@ class AsyncQueues(AsyncAPIResource):
         self,
         queue_token: str,
         *,
+        allowed_resolutions: Optional[SequenceNotStr[str]] | Omit = omit,
         description: Optional[str] | Omit = omit,
         name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -362,6 +382,11 @@ class AsyncQueues(AsyncAPIResource):
         Updates a transaction monitoring queue.
 
         Args:
+          allowed_resolutions: New list of resolutions that can be recorded on cases in this queue, or `null`
+              to revert to the default list. Values are free-form labels and must be non-empty
+              and unique. Changing the list only affects what is selectable going forward; the
+              `resolution` already stored on a case is preserved as-is
+
           description: New description for the queue, or `null` to clear it
 
           name: New name for the queue
@@ -380,6 +405,7 @@ class AsyncQueues(AsyncAPIResource):
             path_template("/v1/transaction_monitoring/queues/{queue_token}", queue_token=queue_token),
             body=await async_maybe_transform(
                 {
+                    "allowed_resolutions": allowed_resolutions,
                     "description": description,
                     "name": name,
                 },

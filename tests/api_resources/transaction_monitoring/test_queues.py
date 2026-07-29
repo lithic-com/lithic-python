@@ -29,6 +29,7 @@ class TestQueues:
     def test_method_create_with_all_params(self, client: Lithic) -> None:
         queue = client.transaction_monitoring.queues.create(
             name="name",
+            allowed_resolutions=["x"],
             description="description",
         )
         assert_matches_type(Queue, queue, path=["response"])
@@ -106,6 +107,7 @@ class TestQueues:
     def test_method_update_with_all_params(self, client: Lithic) -> None:
         queue = client.transaction_monitoring.queues.update(
             queue_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            allowed_resolutions=["x"],
             description="description",
             name="name",
         )
@@ -231,6 +233,7 @@ class TestAsyncQueues:
     async def test_method_create_with_all_params(self, async_client: AsyncLithic) -> None:
         queue = await async_client.transaction_monitoring.queues.create(
             name="name",
+            allowed_resolutions=["x"],
             description="description",
         )
         assert_matches_type(Queue, queue, path=["response"])
@@ -308,6 +311,7 @@ class TestAsyncQueues:
     async def test_method_update_with_all_params(self, async_client: AsyncLithic) -> None:
         queue = await async_client.transaction_monitoring.queues.update(
             queue_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            allowed_resolutions=["x"],
             description="description",
             name="name",
         )

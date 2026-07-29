@@ -15,7 +15,6 @@ from .case_transaction import CaseTransaction as CaseTransaction
 from .queue_list_params import QueueListParams as QueueListParams
 from .case_activity_type import CaseActivityType as CaseActivityType
 from .case_update_params import CaseUpdateParams as CaseUpdateParams
-from .resolution_outcome import ResolutionOutcome as ResolutionOutcome
 from .case_activity_entry import CaseActivityEntry as CaseActivityEntry
 from .queue_create_params import QueueCreateParams as QueueCreateParams
 from .queue_update_params import QueueUpdateParams as QueueUpdateParams
