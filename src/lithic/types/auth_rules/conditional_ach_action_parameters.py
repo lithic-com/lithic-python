@@ -102,7 +102,9 @@ Action: TypeAlias = Union[ActionApproveActionACH, ActionReturnAction]
 
 
 class Condition(BaseModel):
-    attribute: Literal["COMPANY_NAME", "COMPANY_ID", "TIMESTAMP", "TRANSACTION_AMOUNT", "SEC_CODE", "MEMO"]
+    attribute: Literal[
+        "COMPANY_NAME", "COMPANY_ID", "TIMESTAMP", "TRANSACTION_AMOUNT", "SEC_CODE", "MEMO", "RECIPIENT_NAME"
+    ]
     """The attribute to target.
 
     The following attributes may be targeted:
@@ -118,6 +120,7 @@ class Condition(BaseModel):
       (Corporate Credit or Debit Entry), WEB (Internet-Initiated/Mobile Entry), TEL
       (Telephone-Initiated Entry), and others.
     - `MEMO`: Optional memo or description field included with the ACH transaction.
+    - `RECIPIENT_NAME`: The name of the recipient of the ACH transaction.
     """
 
     operation: ConditionalOperation
