@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.130.0 (2026-07-30)
+
+Full Changelog: [v0.129.0...v0.130.0](https://github.com/lithic-com/lithic-python/compare/v0.129.0...v0.130.0)
+
+### Features
+
+* **api:** add disposition_reasons to queues, change resolution to string in cases ([bcbde18](https://github.com/lithic-com/lithic-python/commit/bcbde1856fa3f14b45f15fcac11261a9c0e0fe5e))
+* **api:** add embed.session_generated and embed.viewed webhook events ([84ae573](https://github.com/lithic-com/lithic-python/commit/84ae5737ab2f64c05b512dc8cc0ac6de0579de70))
+* **api:** add PAYMENT enum value to book_transfers ([64b5358](https://github.com/lithic-com/lithic-python/commit/64b535810856b0344875a50a10bfed3212a1bb8a))
+* **api:** add PROGRAM_TRANSFER category and LITHIC/BANK_PROGRAM_TRANSFER type enums ([c10d6da](https://github.com/lithic-com/lithic-python/commit/c10d6da217709c34f2c2a3d7c39306a0372a1735))
+* **api:** add RECIPIENT_NAME attribute option to auth_rules ACH conditions ([809d5a9](https://github.com/lithic-com/lithic-python/commit/809d5a9f563fdff71609a22fafeede36723e9951))
+* **api:** add recipient_name field to payment ACH method attributes ([99e1525](https://github.com/lithic-com/lithic-python/commit/99e1525f200cf84137eee26ffaa5dde53406ad42))
+* **api:** add REVERSED status value to payments list method ([0f01552](https://github.com/lithic-com/lithic-python/commit/0f0155270dd93252f2717ad754f816b72b6abb61))
+* **api:** add STABLECOIN category and events to account_activity and payments ([1f083ba](https://github.com/lithic-com/lithic-python/commit/1f083bacd4a39c1245fa2c0962cd2d72a387de43))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([d2bf66d](https://github.com/lithic-com/lithic-python/commit/d2bf66d3cb39aaeb20363b620223a1c010aaf846))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([11f2bc1](https://github.com/lithic-com/lithic-python/commit/11f2bc121e233392a77b71cee01b873ef12ce780))
+
+
+### Documentation
+
+* **api:** clarify dispute event descriptions in Event model ([92638f2](https://github.com/lithic-com/lithic-python/commit/92638f2617ed8c2114082008a5d30171bbdd17ae))
+* **api:** clarify last_transaction_event_token behavior in balances ([e1934d5](https://github.com/lithic-com/lithic-python/commit/e1934d529914332c32953ea89ec9323adb31d2d4))
+* **api:** clarify simulate_clearing behavior in transactions ([85d2d96](https://github.com/lithic-com/lithic-python/commit/85d2d9657022d3e7848477b329ba7f347efa7007))
+* **api:** update category parameter description in external_payments ([7c331aa](https://github.com/lithic-com/lithic-python/commit/7c331aae7db42d9e5663d71d26ec2f8a7ee91153))
+* **types:** increase max duration to 90 days in velocity_limit_period ([3423f7a](https://github.com/lithic-com/lithic-python/commit/3423f7aa9cc494895464c2c18056feafb5e6f95b))
+
 ## 0.129.0 (2026-06-29)
 
 Full Changelog: [v0.128.0...v0.129.0](https://github.com/lithic-com/lithic-python/compare/v0.128.0...v0.129.0)
