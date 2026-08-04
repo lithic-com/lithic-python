@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -79,5 +79,11 @@ class FinancialAccount(BaseModel):
     """User-defined status for the financial account"""
 
     account_number: Optional[str] = None
+
+    blockchain_addresses: Optional[Dict[str, str]] = None
+    """
+    Provisioned blockchain deposit addresses for this financial account, keyed by
+    the blockchain network that each address belongs to
+    """
 
     routing_number: Optional[str] = None
