@@ -354,7 +354,7 @@ class Tokenizations(SyncAPIResource):
         and merchant tokenization ecosystem.
 
         Args:
-          cvv: The three digit cvv for the card.
+          cvv: The three or four digit CVV for the card. AMEX cards use four digit CVVs.
 
           expiration_date: The expiration date of the card in 'MM/YY' format.
 
@@ -822,7 +822,7 @@ class AsyncTokenizations(AsyncAPIResource):
         and merchant tokenization ecosystem.
 
         Args:
-          cvv: The three digit cvv for the card.
+          cvv: The three or four digit CVV for the card. AMEX cards use four digit CVVs.
 
           expiration_date: The expiration date of the card in 'MM/YY' format.
 
