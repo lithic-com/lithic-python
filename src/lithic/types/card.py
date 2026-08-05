@@ -13,7 +13,7 @@ class Card(NonPCICard):
     """
 
     cvv: Optional[str] = None
-    """Three digit cvv printed on the back of the card."""
+    """Three or four digit CVV printed on the card. Amex cards use four digit CVVs"""
 
     pan: Optional[str] = None
     """Primary Account Number (PAN) (i.e.
