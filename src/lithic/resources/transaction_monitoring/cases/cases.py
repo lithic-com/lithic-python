@@ -243,7 +243,9 @@ class Cases(SyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          entity_token: Only return cases associated with the provided entity.
+          entity_token: Only return cases associated with the provided entity. Accepts a card, account,
+              or financial account token. Cases with a `PROGRAM` entity have no entity token
+              and are never returned by this filter.
 
           page_size: Page size (for pagination).
 
@@ -637,7 +639,9 @@ class AsyncCases(AsyncAPIResource):
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
 
-          entity_token: Only return cases associated with the provided entity.
+          entity_token: Only return cases associated with the provided entity. Accepts a card, account,
+              or financial account token. Cases with a `PROGRAM` entity have no entity token
+              and are never returned by this filter.
 
           page_size: Page size (for pagination).
 
