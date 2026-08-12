@@ -13,6 +13,7 @@ __all__ = [
     "MethodAttributes",
     "MethodAttributesACHMethodAttributes",
     "MethodAttributesWireMethodAttributes",
+    "MethodAttributesStablecoinMethodAttributes",
     "RelatedAccountTokens",
 ]
 
@@ -223,7 +224,22 @@ class MethodAttributesWireMethodAttributes(BaseModel):
     """Payment details or invoice reference"""
 
 
-MethodAttributes: TypeAlias = Union[MethodAttributesACHMethodAttributes, MethodAttributesWireMethodAttributes]
+class MethodAttributesStablecoinMethodAttributes(BaseModel):
+    chain: str
+    """Blockchain the stablecoin transfer settled on"""
+
+    transaction_hash: Optional[str] = None
+    """On-chain transaction hash of the transfer.
+
+    Null until the transfer has settled on chain
+    """
+
+
+MethodAttributes: TypeAlias = Union[
+    MethodAttributesACHMethodAttributes,
+    MethodAttributesWireMethodAttributes,
+    MethodAttributesStablecoinMethodAttributes,
+]
 
 
 class RelatedAccountTokens(BaseModel):
@@ -288,7 +304,7 @@ class Payment(BaseModel):
     financial_account_token: str
     """Financial account token"""
 
-    method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY", "WIRE"]
+    method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY", "WIRE", "STABLECOIN"]
     """Transfer method"""
 
     method_attributes: MethodAttributes
