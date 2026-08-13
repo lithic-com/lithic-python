@@ -677,6 +677,18 @@ Methods:
 
 - <code title="post /v1/external_bank_accounts/{external_bank_account_token}/micro_deposits">client.external_bank_accounts.micro_deposits.<a href="./src/lithic/resources/external_bank_accounts/micro_deposits.py">create</a>(external_bank_account_token, \*\*<a href="src/lithic/types/external_bank_accounts/micro_deposit_create_params.py">params</a>) -> <a href="./src/lithic/types/external_bank_accounts/micro_deposit_create_response.py">MicroDepositCreateResponse</a></code>
 
+# BlockchainRecipients
+
+Types:
+
+```python
+from lithic.types import BlockchainRecipient
+```
+
+Methods:
+
+- <code title="post /v1/blockchain_recipients">client.blockchain_recipients.<a href="./src/lithic/resources/blockchain_recipients.py">create</a>(\*\*<a href="src/lithic/types/blockchain_recipient_create_params.py">params</a>) -> <a href="./src/lithic/types/blockchain_recipient.py">BlockchainRecipient</a></code>
+
 # Payments
 
 Types:
