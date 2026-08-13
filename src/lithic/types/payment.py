@@ -331,6 +331,9 @@ class Payment(BaseModel):
     updated: datetime
     """ISO 8601 timestamp of when the transaction was last updated"""
 
+    blockchain_recipient_token: Optional[str] = None
+    """Token of the blockchain recipient the payout is sent to"""
+
     currency: Optional[str] = None
     """Currency of the transaction in ISO 4217 format"""
 
