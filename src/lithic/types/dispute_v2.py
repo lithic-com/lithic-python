@@ -61,7 +61,7 @@ class EventDataFinancial(BaseModel):
 class EventDataCardholderLiability(BaseModel):
     """Details specific to cardholder liability events"""
 
-    action: Literal["PROVISIONAL_CREDIT_GRANTED", "PROVISIONAL_CREDIT_REVERSED", "WRITTEN_OFF"]
+    action: Literal["PROVISIONAL_CREDIT_GRANTED", "PROVISIONAL_CREDIT_REVERSED", "WRITTEN_OFF", "WRITE_OFF_REVERSED"]
     """Action taken regarding cardholder liability"""
 
     amount: int
@@ -156,6 +156,12 @@ class DisputeV2(BaseModel):
 
     case_id: Optional[str] = None
     """Identifier assigned by the network for this dispute."""
+
+    claim_token: Optional[str] = None
+    """Token for the claim this dispute was filed under, in UUID format.
+
+    Null for disputes not initiated through the Dispute Intake API.
+    """
 
     created: datetime
     """When the dispute was created."""
