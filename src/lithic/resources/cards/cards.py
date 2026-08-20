@@ -778,13 +778,15 @@ class Cards(SyncAPIResource):
               encoded in PEM format with headers `(-----BEGIN CERTIFICATE-----)` and trailers
               omitted. Provided by the device's wallet.
 
-          client_device_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
-              card is on the Visa network. Stable device identification set by the wallet
-              provider.
+          client_device_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY`. Stable
+              device identification set by the wallet provider. Required for both wallets
+              regardless of network, though the value is only used for cards on the Visa
+              network and is ignored on Amex and Mastercard.
 
-          client_wallet_account_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
-              card is on the Visa network. Consumer ID that identifies the wallet account
-              holder entity.
+          client_wallet_account_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY`. Consumer
+              ID that identifies the wallet account holder entity. Required for both wallets
+              regardless of network, though the value is only used for cards on the Visa
+              network and is ignored on Amex and Mastercard.
 
           digital_wallet: Name of digital wallet provider.
 
@@ -1899,13 +1901,15 @@ class AsyncCards(AsyncAPIResource):
               encoded in PEM format with headers `(-----BEGIN CERTIFICATE-----)` and trailers
               omitted. Provided by the device's wallet.
 
-          client_device_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
-              card is on the Visa network. Stable device identification set by the wallet
-              provider.
+          client_device_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY`. Stable
+              device identification set by the wallet provider. Required for both wallets
+              regardless of network, though the value is only used for cards on the Visa
+              network and is ignored on Amex and Mastercard.
 
-          client_wallet_account_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY` and the
-              card is on the Visa network. Consumer ID that identifies the wallet account
-              holder entity.
+          client_wallet_account_id: Only applicable if `digital_wallet` is `GOOGLE_PAY` or `SAMSUNG_PAY`. Consumer
+              ID that identifies the wallet account holder entity. Required for both wallets
+              regardless of network, though the value is only used for cards on the Visa
+              network and is ignored on Amex and Mastercard.
 
           digital_wallet: Name of digital wallet provider.
 
