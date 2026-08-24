@@ -361,7 +361,6 @@ class Payment(BaseModel):
             "WIRE_OUTBOUND_PAYMENT",
             "WIRE_OUTBOUND_ADMIN",
             "WIRE_INBOUND_DRAWDOWN_REQUEST",
-            "STABLECOIN",
             "STABLECOIN_INBOUND",
             "STABLECOIN_OUTBOUND",
         ]
