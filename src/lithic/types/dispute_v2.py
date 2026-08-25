@@ -11,16 +11,18 @@ from .shared.merchant import Merchant
 __all__ = [
     "DisputeV2",
     "Event",
-    "EventData",
-    "EventDataWorkflow",
-    "EventDataFinancial",
-    "EventDataCardholderLiability",
+    "EventWorkflowEvent",
+    "EventWorkflowEventData",
+    "EventFinancialEvent",
+    "EventFinancialEventData",
+    "EventCardholderLiabilityEvent",
+    "EventCardholderLiabilityEventData",
     "LiabilityAllocation",
     "TransactionSeries",
 ]
 
 
-class EventDataWorkflow(BaseModel):
+class EventWorkflowEventData(BaseModel):
     """Details specific to workflow events"""
 
     action: Literal["OPENED", "CLOSED", "REOPENED"]
@@ -38,11 +40,24 @@ class EventDataWorkflow(BaseModel):
     stage: Literal["CLAIM"]
     """Current stage of the dispute workflow"""
 
+
+class EventWorkflowEvent(BaseModel):
+    """Event tracking the dispute's case management workflow"""
+
+    token: str
+    """Unique identifier for the event, in UUID format"""
+
+    created: datetime
+    """When the event occurred"""
+
+    data: EventWorkflowEventData
+    """Details specific to workflow events"""
+
     type: Literal["WORKFLOW"]
-    """Event type discriminator"""
+    """Type of event. Always `WORKFLOW`"""
 
 
-class EventDataFinancial(BaseModel):
+class EventFinancialEventData(BaseModel):
     """Details specific to financial events"""
 
     amount: int
@@ -54,11 +69,24 @@ class EventDataFinancial(BaseModel):
     stage: Literal["CHARGEBACK", "REPRESENTMENT", "PREARBITRATION", "ARBITRATION", "COLLABORATION"]
     """Stage at which the financial event occurred"""
 
+
+class EventFinancialEvent(BaseModel):
+    """Event tracking a funds movement between issuer and acquirer"""
+
+    token: str
+    """Unique identifier for the event, in UUID format"""
+
+    created: datetime
+    """When the event occurred"""
+
+    data: EventFinancialEventData
+    """Details specific to financial events"""
+
     type: Literal["FINANCIAL"]
-    """Event type discriminator"""
+    """Type of event. Always `FINANCIAL`"""
 
 
-class EventDataCardholderLiability(BaseModel):
+class EventCardholderLiabilityEventData(BaseModel):
     """Details specific to cardholder liability events"""
 
     action: Literal["PROVISIONAL_CREDIT_GRANTED", "PROVISIONAL_CREDIT_REVERSED", "WRITTEN_OFF", "WRITE_OFF_REVERSED"]
@@ -67,20 +95,12 @@ class EventDataCardholderLiability(BaseModel):
     amount: int
     """Amount in minor units"""
 
-    reason: str
+    reason: Optional[str] = None
     """Reason for the action"""
 
-    type: Literal["CARDHOLDER_LIABILITY"]
-    """Event type discriminator"""
 
-
-EventData: TypeAlias = Annotated[
-    Union[EventDataWorkflow, EventDataFinancial, EventDataCardholderLiability], PropertyInfo(discriminator="type")
-]
-
-
-class Event(BaseModel):
-    """Event that occurred in the dispute lifecycle"""
+class EventCardholderLiabilityEvent(BaseModel):
+    """Event tracking a change in cardholder liability"""
 
     token: str
     """Unique identifier for the event, in UUID format"""
@@ -88,11 +108,16 @@ class Event(BaseModel):
     created: datetime
     """When the event occurred"""
 
-    data: EventData
-    """Details specific to the event type"""
+    data: EventCardholderLiabilityEventData
+    """Details specific to cardholder liability events"""
 
-    type: Literal["WORKFLOW", "FINANCIAL", "CARDHOLDER_LIABILITY"]
-    """Type of event"""
+    type: Literal["CARDHOLDER_LIABILITY"]
+    """Type of event. Always `CARDHOLDER_LIABILITY`"""
+
+
+Event: TypeAlias = Annotated[
+    Union[EventWorkflowEvent, EventFinancialEvent, EventCardholderLiabilityEvent], PropertyInfo(discriminator="type")
+]
 
 
 class LiabilityAllocation(BaseModel):
