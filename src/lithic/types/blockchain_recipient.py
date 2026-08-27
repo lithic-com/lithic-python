@@ -14,8 +14,11 @@ class BlockchainRecipient(BaseModel):
     token: str
     """A globally unique identifier for this blockchain recipient"""
 
-    account_token: str
-    """The financial account the blockchain recipient belongs to"""
+    account_token: Optional[str] = None
+    """
+    The financial account the blockchain recipient belongs to, or null when the
+    recipient is registered against the program rather than a financial account
+    """
 
     address_tag: Optional[str] = None
     """
