@@ -416,6 +416,48 @@ class TestCards:
             )
 
     @parametrize
+    def test_method_reassign_account(self, client: Lithic) -> None:
+        card = client.cards.reassign_account(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_raw_response_reassign_account(self, client: Lithic) -> None:
+        response = client.cards.with_raw_response.reassign_account(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    def test_streaming_response_reassign_account(self, client: Lithic) -> None:
+        with client.cards.with_streaming_response.reassign_account(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = response.parse()
+            assert_matches_type(Card, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_reassign_account(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
+            client.cards.with_raw_response.reassign_account(
+                card_token="",
+                new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
+            )
+
+    @parametrize
     def test_method_reissue(self, client: Lithic) -> None:
         card = client.cards.reissue(
             card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1122,6 +1164,48 @@ class TestAsyncCards:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
             await async_client.cards.with_raw_response.provision(
                 card_token="",
+            )
+
+    @parametrize
+    async def test_method_reassign_account(self, async_client: AsyncLithic) -> None:
+        card = await async_client.cards.reassign_account(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
+        )
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_raw_response_reassign_account(self, async_client: AsyncLithic) -> None:
+        response = await async_client.cards.with_raw_response.reassign_account(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        card = response.parse()
+        assert_matches_type(Card, card, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_reassign_account(self, async_client: AsyncLithic) -> None:
+        async with async_client.cards.with_streaming_response.reassign_account(
+            card_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            card = await response.parse()
+            assert_matches_type(Card, card, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_reassign_account(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_token` but received ''"):
+            await async_client.cards.with_raw_response.reassign_account(
+                card_token="",
+                new_account_token="82d7c408-2bbb-4f63-889a-8a2a2b1601af",
             )
 
     @parametrize

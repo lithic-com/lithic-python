@@ -22,6 +22,7 @@ from ...types import (
     card_search_by_pan_params,
     card_web_provision_params,
     card_convert_physical_params,
+    card_reassign_account_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
@@ -825,6 +826,49 @@ class Cards(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=CardProvisionResponse,
+        )
+
+    def reassign_account(
+        self,
+        card_token: str,
+        *,
+        new_account_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Card:
+        """Reassigns a card to another account.
+
+        The card must be in an `OPEN` or `PAUSED`
+        state, and the destination account must be in an `ACTIVE` state.
+
+        Clients must contact their Lithic account manager for access to this endpoint.
+
+        Args:
+          new_account_token: Globally unique identifier for the account to associate with the card
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return self._post(
+            path_template("/v1/cards/{card_token}/reassign_account", card_token=card_token),
+            body=maybe_transform(
+                {"new_account_token": new_account_token}, card_reassign_account_params.CardReassignAccountParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Card,
         )
 
     def reissue(
@@ -1950,6 +1994,49 @@ class AsyncCards(AsyncAPIResource):
             cast_to=CardProvisionResponse,
         )
 
+    async def reassign_account(
+        self,
+        card_token: str,
+        *,
+        new_account_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Card:
+        """Reassigns a card to another account.
+
+        The card must be in an `OPEN` or `PAUSED`
+        state, and the destination account must be in an `ACTIVE` state.
+
+        Clients must contact their Lithic account manager for access to this endpoint.
+
+        Args:
+          new_account_token: Globally unique identifier for the account to associate with the card
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return await self._post(
+            path_template("/v1/cards/{card_token}/reassign_account", card_token=card_token),
+            body=await async_maybe_transform(
+                {"new_account_token": new_account_token}, card_reassign_account_params.CardReassignAccountParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Card,
+        )
+
     async def reissue(
         self,
         card_token: str,
@@ -2332,6 +2419,9 @@ class CardsWithRawResponse:
         self.provision = _legacy_response.to_raw_response_wrapper(
             cards.provision,
         )
+        self.reassign_account = _legacy_response.to_raw_response_wrapper(
+            cards.reassign_account,
+        )
         self.reissue = _legacy_response.to_raw_response_wrapper(
             cards.reissue,
         )
@@ -2386,6 +2476,9 @@ class AsyncCardsWithRawResponse:
         )
         self.provision = _legacy_response.async_to_raw_response_wrapper(
             cards.provision,
+        )
+        self.reassign_account = _legacy_response.async_to_raw_response_wrapper(
+            cards.reassign_account,
         )
         self.reissue = _legacy_response.async_to_raw_response_wrapper(
             cards.reissue,
@@ -2442,6 +2535,9 @@ class CardsWithStreamingResponse:
         self.provision = to_streamed_response_wrapper(
             cards.provision,
         )
+        self.reassign_account = to_streamed_response_wrapper(
+            cards.reassign_account,
+        )
         self.reissue = to_streamed_response_wrapper(
             cards.reissue,
         )
@@ -2496,6 +2592,9 @@ class AsyncCardsWithStreamingResponse:
         )
         self.provision = async_to_streamed_response_wrapper(
             cards.provision,
+        )
+        self.reassign_account = async_to_streamed_response_wrapper(
+            cards.reassign_account,
         )
         self.reissue = async_to_streamed_response_wrapper(
             cards.reissue,
