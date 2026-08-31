@@ -23,7 +23,7 @@ class CreateCaseAction(TypedDict, total=False):
     queue_token: Required[str]
     """The token of the queue to create the case in"""
 
-    scope: Required[Literal["CARD", "ACCOUNT"]]
+    scope: Required[Literal["CARD", "ACCOUNT", "PROGRAM"]]
     """The scope of the case to create"""
 
     type: Required[Literal["CREATE_CASE"]]

@@ -21,6 +21,12 @@ class DisputesV2ListParams(TypedDict, total=False):
     card_token: str
     """Filter by card token."""
 
+    claim_token: str
+    """Filter by the token of the claim the dispute was filed under.
+
+    Returns the disputes created from that claim's disputed transaction events.
+    """
+
     disputed_transaction_token: str
     """Filter by the token of the transaction being disputed.
 

@@ -70,6 +70,7 @@ if TYPE_CHECKING:
         financial_accounts,
         card_authorizations,
         responder_endpoints,
+        blockchain_recipients,
         management_operations,
         auth_stream_enrollment,
         external_bank_accounts,
@@ -101,6 +102,7 @@ if TYPE_CHECKING:
     from .resources.card_authorizations import CardAuthorizations, AsyncCardAuthorizations
     from .resources.responder_endpoints import ResponderEndpoints, AsyncResponderEndpoints
     from .resources.auth_rules.auth_rules import AuthRules, AsyncAuthRules
+    from .resources.blockchain_recipients import BlockchainRecipients, AsyncBlockchainRecipients
     from .resources.management_operations import ManagementOperations, AsyncManagementOperations
     from .resources.auth_stream_enrollment import AuthStreamEnrollment, AsyncAuthStreamEnrollment
     from .resources.tokenization_decisioning import TokenizationDecisioning, AsyncTokenizationDecisioning
@@ -335,6 +337,12 @@ class Lithic(SyncAPIClient):
         from .resources.external_bank_accounts import ExternalBankAccounts
 
         return ExternalBankAccounts(self)
+
+    @cached_property
+    def blockchain_recipients(self) -> BlockchainRecipients:
+        from .resources.blockchain_recipients import BlockchainRecipients
+
+        return BlockchainRecipients(self)
 
     @cached_property
     def payments(self) -> Payments:
@@ -773,6 +781,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncExternalBankAccounts(self)
 
     @cached_property
+    def blockchain_recipients(self) -> AsyncBlockchainRecipients:
+        from .resources.blockchain_recipients import AsyncBlockchainRecipients
+
+        return AsyncBlockchainRecipients(self)
+
+    @cached_property
     def payments(self) -> AsyncPayments:
         from .resources.payments import AsyncPayments
 
@@ -1123,6 +1137,12 @@ class LithicWithRawResponse:
         return ExternalBankAccountsWithRawResponse(self._client.external_bank_accounts)
 
     @cached_property
+    def blockchain_recipients(self) -> blockchain_recipients.BlockchainRecipientsWithRawResponse:
+        from .resources.blockchain_recipients import BlockchainRecipientsWithRawResponse
+
+        return BlockchainRecipientsWithRawResponse(self._client.blockchain_recipients)
+
+    @cached_property
     def payments(self) -> payments.PaymentsWithRawResponse:
         from .resources.payments import PaymentsWithRawResponse
 
@@ -1330,6 +1350,12 @@ class AsyncLithicWithRawResponse:
         from .resources.external_bank_accounts import AsyncExternalBankAccountsWithRawResponse
 
         return AsyncExternalBankAccountsWithRawResponse(self._client.external_bank_accounts)
+
+    @cached_property
+    def blockchain_recipients(self) -> blockchain_recipients.AsyncBlockchainRecipientsWithRawResponse:
+        from .resources.blockchain_recipients import AsyncBlockchainRecipientsWithRawResponse
+
+        return AsyncBlockchainRecipientsWithRawResponse(self._client.blockchain_recipients)
 
     @cached_property
     def payments(self) -> payments.AsyncPaymentsWithRawResponse:
@@ -1541,6 +1567,12 @@ class LithicWithStreamedResponse:
         return ExternalBankAccountsWithStreamingResponse(self._client.external_bank_accounts)
 
     @cached_property
+    def blockchain_recipients(self) -> blockchain_recipients.BlockchainRecipientsWithStreamingResponse:
+        from .resources.blockchain_recipients import BlockchainRecipientsWithStreamingResponse
+
+        return BlockchainRecipientsWithStreamingResponse(self._client.blockchain_recipients)
+
+    @cached_property
     def payments(self) -> payments.PaymentsWithStreamingResponse:
         from .resources.payments import PaymentsWithStreamingResponse
 
@@ -1748,6 +1780,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.external_bank_accounts import AsyncExternalBankAccountsWithStreamingResponse
 
         return AsyncExternalBankAccountsWithStreamingResponse(self._client.external_bank_accounts)
+
+    @cached_property
+    def blockchain_recipients(self) -> blockchain_recipients.AsyncBlockchainRecipientsWithStreamingResponse:
+        from .resources.blockchain_recipients import AsyncBlockchainRecipientsWithStreamingResponse
+
+        return AsyncBlockchainRecipientsWithStreamingResponse(self._client.blockchain_recipients)
 
     @cached_property
     def payments(self) -> payments.AsyncPaymentsWithStreamingResponse:

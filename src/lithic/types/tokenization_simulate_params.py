@@ -9,7 +9,7 @@ __all__ = ["TokenizationSimulateParams"]
 
 class TokenizationSimulateParams(TypedDict, total=False):
     cvv: Required[str]
-    """The three digit cvv for the card."""
+    """The three or four digit CVV for the card. AMEX cards use four digit CVVs."""
 
     expiration_date: Required[str]
     """The expiration date of the card in 'MM/YY' format."""

@@ -225,6 +225,14 @@ from .responder_endpoints import (
     ResponderEndpointsWithStreamingResponse,
     AsyncResponderEndpointsWithStreamingResponse,
 )
+from .blockchain_recipients import (
+    BlockchainRecipients,
+    AsyncBlockchainRecipients,
+    BlockchainRecipientsWithRawResponse,
+    AsyncBlockchainRecipientsWithRawResponse,
+    BlockchainRecipientsWithStreamingResponse,
+    AsyncBlockchainRecipientsWithStreamingResponse,
+)
 from .management_operations import (
     ManagementOperations,
     AsyncManagementOperations,
@@ -375,6 +383,12 @@ __all__ = [
     "AsyncExternalBankAccountsWithRawResponse",
     "ExternalBankAccountsWithStreamingResponse",
     "AsyncExternalBankAccountsWithStreamingResponse",
+    "BlockchainRecipients",
+    "AsyncBlockchainRecipients",
+    "BlockchainRecipientsWithRawResponse",
+    "AsyncBlockchainRecipientsWithRawResponse",
+    "BlockchainRecipientsWithStreamingResponse",
+    "AsyncBlockchainRecipientsWithStreamingResponse",
     "Payments",
     "AsyncPayments",
     "PaymentsWithRawResponse",

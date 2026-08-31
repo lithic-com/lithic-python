@@ -23,7 +23,7 @@ class CreateCaseAction(BaseModel):
     queue_token: str
     """The token of the queue to create the case in"""
 
-    scope: Literal["FINANCIAL_ACCOUNT"]
+    scope: Literal["FINANCIAL_ACCOUNT", "PROGRAM"]
     """The scope of the case to create"""
 
     type: Literal["CREATE_CASE"]

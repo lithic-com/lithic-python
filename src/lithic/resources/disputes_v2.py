@@ -80,6 +80,7 @@ class DisputesV2(SyncAPIResource):
         account_token: str | Omit = omit,
         begin: Union[str, datetime] | Omit = omit,
         card_token: str | Omit = omit,
+        claim_token: str | Omit = omit,
         disputed_transaction_token: str | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
@@ -101,6 +102,9 @@ class DisputesV2(SyncAPIResource):
           begin: RFC 3339 timestamp for filtering by created date, inclusive.
 
           card_token: Filter by card token.
+
+          claim_token: Filter by the token of the claim the dispute was filed under. Returns the
+              disputes created from that claim's disputed transaction events.
 
           disputed_transaction_token: Filter by the token of the transaction being disputed. Corresponds with
               transaction_series.related_transaction_token in the Dispute.
@@ -136,6 +140,7 @@ class DisputesV2(SyncAPIResource):
                         "account_token": account_token,
                         "begin": begin,
                         "card_token": card_token,
+                        "claim_token": claim_token,
                         "disputed_transaction_token": disputed_transaction_token,
                         "end": end,
                         "ending_before": ending_before,
@@ -208,6 +213,7 @@ class AsyncDisputesV2(AsyncAPIResource):
         account_token: str | Omit = omit,
         begin: Union[str, datetime] | Omit = omit,
         card_token: str | Omit = omit,
+        claim_token: str | Omit = omit,
         disputed_transaction_token: str | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
@@ -229,6 +235,9 @@ class AsyncDisputesV2(AsyncAPIResource):
           begin: RFC 3339 timestamp for filtering by created date, inclusive.
 
           card_token: Filter by card token.
+
+          claim_token: Filter by the token of the claim the dispute was filed under. Returns the
+              disputes created from that claim's disputed transaction events.
 
           disputed_transaction_token: Filter by the token of the transaction being disputed. Corresponds with
               transaction_series.related_transaction_token in the Dispute.
@@ -264,6 +273,7 @@ class AsyncDisputesV2(AsyncAPIResource):
                         "account_token": account_token,
                         "begin": begin,
                         "card_token": card_token,
+                        "claim_token": claim_token,
                         "disputed_transaction_token": disputed_transaction_token,
                         "end": end,
                         "ending_before": ending_before,

@@ -83,7 +83,8 @@ class FinancialAccount(BaseModel):
     blockchain_addresses: Optional[Dict[str, str]] = None
     """
     Provisioned blockchain deposit addresses for this financial account, keyed by
-    the blockchain network that each address belongs to
+    the full name of the blockchain network that each address belongs to (e.g.
+    `ETHEREUM`)
     """
 
     routing_number: Optional[str] = None

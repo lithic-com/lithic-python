@@ -152,8 +152,11 @@ class Data(BaseModel):
         "MONTHLY_REVERSAL",
         "ACCOUNT_TO_ACCOUNT",
         "STABLECOIN_RECEIVED",
+        "STABLECOIN_INITIATED",
         "STABLECOIN_REVIEWED",
+        "STABLECOIN_SENT",
         "STABLECOIN_SETTLED",
+        "STABLECOIN_REJECTED",
     ]
 
     financial_account_token: str
