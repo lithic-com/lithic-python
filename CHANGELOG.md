@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.131.0 (2026-08-31)
+
+Full Changelog: [v0.130.0...v0.131.0](https://github.com/lithic-com/lithic-python/compare/v0.130.0...v0.131.0)
+
+### Features
+
+* **api:** add blockchain_addresses field to financial account ([168e194](https://github.com/lithic-com/lithic-python/commit/168e194dce255e6b907a65b3387dffec89ca0426))
+* **api:** add claim_token parameter/field, WRITE_OFF_REVERSED enum to disputes_v2 ([1ce906c](https://github.com/lithic-com/lithic-python/commit/1ce906c05421ae00dfc09d6513552c1f9a130d68))
+* **api:** Add limit_cash_amount and limit_cash_count to VelocityLimit template ([64068f8](https://github.com/lithic-com/lithic-python/commit/64068f89bd9400b4e684b8eb1fdf5bdede893a36))
+* **api:** add PROGRAM scope to auth_rules and case entity types ([7d67d35](https://github.com/lithic-com/lithic-python/commit/7d67d35bafb84f3cb24fade78214478bcc3204f2))
+* **api:** add reassign_account method to cards ([993f3f3](https://github.com/lithic-com/lithic-python/commit/993f3f3dac1d9043f8518da438812dc0c5612e58))
+* **api:** add stablecoin event types to payment/statement/financial_event ([9c1cfe4](https://github.com/lithic-com/lithic-python/commit/9c1cfe46e6538c2429653dd65bf72938544f1fe4))
+* **api:** add stablecoin method and attributes to payment ([ed5c9b0](https://github.com/lithic-com/lithic-python/commit/ed5c9b0496b984876497c39a6110020979f93bfb))
+* **api:** add STABLECOIN method, make method_attributes optional in payment ([ebb1b60](https://github.com/lithic-com/lithic-python/commit/ebb1b60c55251a27d0da338875be625a67cea4c2))
+* **api:** Add STABLECOIN to approvals request and transfer type enums ([8c277b5](https://github.com/lithic-com/lithic-python/commit/8c277b59aefd35e571026c97177a50223fd0622d))
+* **api:** add STABLECOIN_INBOUND and STABLECOIN_OUTBOUND to Payment ([ae77597](https://github.com/lithic-com/lithic-python/commit/ae7759730d8cbcadb159c7584ce41bd1259e6c8b))
+* Make blockchain recipient account_token nullable ([bedead8](https://github.com/lithic-com/lithic-python/commit/bedead85bca43055d618fb90df2a2bfeaee7f85e))
+* Remove stablecoin transfer type ([a69c537](https://github.com/lithic-com/lithic-python/commit/a69c5377a1e1f383aef0ee50a2380d326d174e0e))
+
+
+### Bug Fixes
+
+* **types:** remove discriminator from event data types in dispute_v2 ([02bc887](https://github.com/lithic-com/lithic-python/commit/02bc88780f9660c80e30bd7b8a486203487843fe))
+
+
+### Chores
+
+* **internal:** allow the mock server port to be set with STAINLESS_MOCK_PORT ([f7318ae](https://github.com/lithic-com/lithic-python/commit/f7318aea8fdc1d002a5188952d418832f2629d84))
+
+
+### Documentation
+
+* **api:** clarify CVV format in tokenizations and card ([8980c52](https://github.com/lithic-com/lithic-python/commit/8980c5219db6e83e4cc8e9d2445fbd223c24a728))
+* **api:** update client_device_id and client_wallet_account_id docs in cards provision ([2ff9d3a](https://github.com/lithic-com/lithic-python/commit/2ff9d3a68766e807ed7507e8965e44d9f95bbb92))
+
 ## 0.130.0 (2026-07-30)
 
 Full Changelog: [v0.129.0...v0.130.0](https://github.com/lithic-com/lithic-python/compare/v0.129.0...v0.130.0)
