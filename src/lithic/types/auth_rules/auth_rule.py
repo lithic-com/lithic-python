@@ -126,7 +126,9 @@ class AuthRule(BaseModel):
     state: Literal["ACTIVE", "INACTIVE"]
     """The state of the Auth Rule"""
 
-    type: Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
+    type: Literal[
+        "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
+    ]
     """The type of Auth Rule.
 
     For certain rule types, this determines the event stream during which it will be
@@ -143,6 +145,8 @@ class AuthRule(BaseModel):
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
       ACH_PAYMENT_UPDATE event stream.
+    - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
+      are read-only; `OTHER` cannot be used when creating a rule.
     """
 
     excluded_account_tokens: Optional[List[str]] = None
