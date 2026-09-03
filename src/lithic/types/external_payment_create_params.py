@@ -16,7 +16,13 @@ class ExternalPaymentCreateParams(TypedDict, total=False):
 
     category: Required[
         Literal[
-            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+            "EXTERNAL_WIRE",
+            "EXTERNAL_ACH",
+            "EXTERNAL_CHECK",
+            "EXTERNAL_FEDNOW",
+            "EXTERNAL_RTP",
+            "EXTERNAL_STABLECOIN",
+            "EXTERNAL_TRANSFER",
         ]
     ]
 
