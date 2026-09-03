@@ -54,7 +54,13 @@ class ExternalPayments(SyncAPIResource):
         *,
         amount: int,
         category: Literal[
-            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+            "EXTERNAL_WIRE",
+            "EXTERNAL_ACH",
+            "EXTERNAL_CHECK",
+            "EXTERNAL_FEDNOW",
+            "EXTERNAL_RTP",
+            "EXTERNAL_STABLECOIN",
+            "EXTERNAL_TRANSFER",
         ],
         effective_date: Union[str, date],
         financial_account_token: str,
@@ -150,7 +156,13 @@ class ExternalPayments(SyncAPIResource):
         begin: Union[str, datetime] | Omit = omit,
         business_account_token: str | Omit = omit,
         category: Literal[
-            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+            "EXTERNAL_WIRE",
+            "EXTERNAL_ACH",
+            "EXTERNAL_CHECK",
+            "EXTERNAL_FEDNOW",
+            "EXTERNAL_RTP",
+            "EXTERNAL_STABLECOIN",
+            "EXTERNAL_TRANSFER",
         ]
         | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
@@ -442,7 +454,13 @@ class AsyncExternalPayments(AsyncAPIResource):
         *,
         amount: int,
         category: Literal[
-            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+            "EXTERNAL_WIRE",
+            "EXTERNAL_ACH",
+            "EXTERNAL_CHECK",
+            "EXTERNAL_FEDNOW",
+            "EXTERNAL_RTP",
+            "EXTERNAL_STABLECOIN",
+            "EXTERNAL_TRANSFER",
         ],
         effective_date: Union[str, date],
         financial_account_token: str,
@@ -538,7 +556,13 @@ class AsyncExternalPayments(AsyncAPIResource):
         begin: Union[str, datetime] | Omit = omit,
         business_account_token: str | Omit = omit,
         category: Literal[
-            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+            "EXTERNAL_WIRE",
+            "EXTERNAL_ACH",
+            "EXTERNAL_CHECK",
+            "EXTERNAL_FEDNOW",
+            "EXTERNAL_RTP",
+            "EXTERNAL_STABLECOIN",
+            "EXTERNAL_TRANSFER",
         ]
         | Omit = omit,
         end: Union[str, datetime] | Omit = omit,

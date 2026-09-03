@@ -38,6 +38,7 @@ class FinancialTransaction(BaseModel):
         "EXTERNAL_CHECK",
         "EXTERNAL_FEDNOW",
         "EXTERNAL_RTP",
+        "EXTERNAL_STABLECOIN",
         "EXTERNAL_TRANSFER",
         "EXTERNAL_WIRE",
         "MANAGEMENT_ADJUSTMENT",
