@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.132.0 (2026-09-03)
+
+Full Changelog: [v0.131.0...v0.132.0](https://github.com/lithic-com/lithic-python/compare/v0.131.0...v0.132.0)
+
+### Features
+
+* **api:** add EXTERNAL_STABLECOIN category and events to external_payments/account_activity ([945f5ae](https://github.com/lithic-com/lithic-python/commit/945f5aed2a5ddf72dac4319d65cc0c87c86ca172))
+* **api:** add OTHER enum value to auth_rules v2 type field ([3f0a148](https://github.com/lithic-com/lithic-python/commit/3f0a148adc95e092aa25c9e569bbda518bbe3f54))
+
 ## 0.131.0 (2026-08-31)
 
 Full Changelog: [v0.130.0...v0.131.0](https://github.com/lithic-com/lithic-python/compare/v0.130.0...v0.131.0)
