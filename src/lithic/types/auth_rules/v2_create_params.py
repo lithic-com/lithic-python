@@ -37,7 +37,9 @@ class AccountLevelRule(TypedDict, total=False):
     """Parameters for the Auth Rule"""
 
     type: Required[
-        Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
+        Literal[
+            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
+        ]
     ]
     """The type of Auth Rule.
 
@@ -55,6 +57,8 @@ class AccountLevelRule(TypedDict, total=False):
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
       ACH_PAYMENT_UPDATE event stream.
+    - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
+      are read-only; `OTHER` cannot be used when creating a rule.
     """
 
     account_tokens: SequenceNotStr[str]
@@ -93,7 +97,9 @@ class CardLevelRule(TypedDict, total=False):
     """Parameters for the Auth Rule"""
 
     type: Required[
-        Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
+        Literal[
+            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
+        ]
     ]
     """The type of Auth Rule.
 
@@ -111,6 +117,8 @@ class CardLevelRule(TypedDict, total=False):
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
       ACH_PAYMENT_UPDATE event stream.
+    - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
+      are read-only; `OTHER` cannot be used when creating a rule.
     """
 
     event_stream: EventStream
@@ -143,7 +151,9 @@ class ProgramLevelRule(TypedDict, total=False):
     """Whether the Auth Rule applies to all authorizations on the card program."""
 
     type: Required[
-        Literal["CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE"]
+        Literal[
+            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
+        ]
     ]
     """The type of Auth Rule.
 
@@ -161,6 +171,8 @@ class ProgramLevelRule(TypedDict, total=False):
     - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
       ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
       ACH_PAYMENT_UPDATE event stream.
+    - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
+      are read-only; `OTHER` cannot be used when creating a rule.
     """
 
     event_stream: EventStream
