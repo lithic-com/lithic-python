@@ -17,6 +17,7 @@ from lithic.types import (
     PaymentSimulateReturnResponse,
     PaymentSimulateReceiptResponse,
     PaymentSimulateReleaseResponse,
+    PaymentCreateStablecoinResponse,
 )
 from lithic._utils import parse_date, parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
@@ -171,6 +172,59 @@ class TestPayments:
 
             payment = response.parse()
             assert_matches_type(SyncCursorPage[Payment], payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_create_stablecoin(self, client: Lithic) -> None:
+        payment = client.payments.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+        )
+        assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
+
+    @parametrize
+    def test_method_create_stablecoin_with_all_params(self, client: Lithic) -> None:
+        payment = client.payments.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            hold={"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            memo="Vendor payout",
+        )
+        assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
+
+    @parametrize
+    def test_raw_response_create_stablecoin(self, client: Lithic) -> None:
+        response = client.payments.with_raw_response.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_stablecoin(self, client: Lithic) -> None:
+        with client.payments.with_streaming_response.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = response.parse()
+            assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -595,6 +649,59 @@ class TestAsyncPayments:
 
             payment = await response.parse()
             assert_matches_type(AsyncCursorPage[Payment], payment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_create_stablecoin(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+        )
+        assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_method_create_stablecoin_with_all_params(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+            token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            hold={"token": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            memo="Vendor payout",
+        )
+        assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_raw_response_create_stablecoin(self, async_client: AsyncLithic) -> None:
+        response = await async_client.payments.with_raw_response.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        payment = response.parse()
+        assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_stablecoin(self, async_client: AsyncLithic) -> None:
+        async with async_client.payments.with_streaming_response.create_stablecoin(
+            amount=1588,
+            blockchain_recipient_token="1e3fdb71-4b52-4a30-a7a9-52c85e26a1d9",
+            financial_account_token="35b0c466-a3e3-519a-9549-ead6a6a2277d",
+            type="PAYMENT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            payment = await response.parse()
+            assert_matches_type(PaymentCreateStablecoinResponse, payment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

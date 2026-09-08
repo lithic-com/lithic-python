@@ -22,7 +22,7 @@ class PaymentListParams(TypedDict, total=False):
 
     business_account_token: str
 
-    category: Literal["ACH"]
+    category: Literal["ACH", "STABLECOIN"]
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
