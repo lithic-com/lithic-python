@@ -689,6 +689,7 @@ from lithic.types import BlockchainRecipient
 Methods:
 
 - <code title="post /v1/blockchain_recipients">client.blockchain_recipients.<a href="./src/lithic/resources/blockchain_recipients.py">create</a>(\*\*<a href="src/lithic/types/blockchain_recipient_create_params.py">params</a>) -> <a href="./src/lithic/types/blockchain_recipient.py">BlockchainRecipient</a></code>
+- <code title="get /v1/blockchain_recipients/{blockchain_recipient_token}">client.blockchain_recipients.<a href="./src/lithic/resources/blockchain_recipients.py">retrieve</a>(blockchain_recipient_token) -> <a href="./src/lithic/types/blockchain_recipient.py">BlockchainRecipient</a></code>
 
 # Payments
 
