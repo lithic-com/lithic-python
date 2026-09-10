@@ -7,7 +7,7 @@ import httpx
 from .. import _legacy_response
 from ..types import OwnerType, blockchain_recipient_create_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
@@ -108,6 +108,48 @@ class BlockchainRecipients(SyncAPIResource):
             cast_to=BlockchainRecipient,
         )
 
+    def retrieve(
+        self,
+        blockchain_recipient_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BlockchainRecipient:
+        """
+        Get a blockchain recipient by token
+
+        Use this to poll the `verification_state` after registering an address: a
+        recipient cannot receive a payout until screening completes and moves it out of
+        `PENDING`
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not blockchain_recipient_token:
+            raise ValueError(
+                f"Expected a non-empty value for `blockchain_recipient_token` but received {blockchain_recipient_token!r}"
+            )
+        return self._get(
+            path_template(
+                "/v1/blockchain_recipients/{blockchain_recipient_token}",
+                blockchain_recipient_token=blockchain_recipient_token,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BlockchainRecipient,
+        )
+
 
 class AsyncBlockchainRecipients(AsyncAPIResource):
     @cached_property
@@ -199,6 +241,48 @@ class AsyncBlockchainRecipients(AsyncAPIResource):
             cast_to=BlockchainRecipient,
         )
 
+    async def retrieve(
+        self,
+        blockchain_recipient_token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BlockchainRecipient:
+        """
+        Get a blockchain recipient by token
+
+        Use this to poll the `verification_state` after registering an address: a
+        recipient cannot receive a payout until screening completes and moves it out of
+        `PENDING`
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not blockchain_recipient_token:
+            raise ValueError(
+                f"Expected a non-empty value for `blockchain_recipient_token` but received {blockchain_recipient_token!r}"
+            )
+        return await self._get(
+            path_template(
+                "/v1/blockchain_recipients/{blockchain_recipient_token}",
+                blockchain_recipient_token=blockchain_recipient_token,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BlockchainRecipient,
+        )
+
 
 class BlockchainRecipientsWithRawResponse:
     def __init__(self, blockchain_recipients: BlockchainRecipients) -> None:
@@ -206,6 +290,9 @@ class BlockchainRecipientsWithRawResponse:
 
         self.create = _legacy_response.to_raw_response_wrapper(
             blockchain_recipients.create,
+        )
+        self.retrieve = _legacy_response.to_raw_response_wrapper(
+            blockchain_recipients.retrieve,
         )
 
 
@@ -216,6 +303,9 @@ class AsyncBlockchainRecipientsWithRawResponse:
         self.create = _legacy_response.async_to_raw_response_wrapper(
             blockchain_recipients.create,
         )
+        self.retrieve = _legacy_response.async_to_raw_response_wrapper(
+            blockchain_recipients.retrieve,
+        )
 
 
 class BlockchainRecipientsWithStreamingResponse:
@@ -225,6 +315,9 @@ class BlockchainRecipientsWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             blockchain_recipients.create,
         )
+        self.retrieve = to_streamed_response_wrapper(
+            blockchain_recipients.retrieve,
+        )
 
 
 class AsyncBlockchainRecipientsWithStreamingResponse:
@@ -233,4 +326,7 @@ class AsyncBlockchainRecipientsWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             blockchain_recipients.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            blockchain_recipients.retrieve,
         )
