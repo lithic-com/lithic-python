@@ -102,6 +102,8 @@ class FinancialEvent(BaseModel):
             "EXTERNAL_WIRE_SETTLED",
             "FINANCIAL_AUTHORIZATION",
             "FINANCIAL_CREDIT_AUTHORIZATION",
+            "INSTALLMENT_FEE",
+            "INSTALLMENT_FEE_REVERSAL",
             "INTEREST",
             "INTEREST_REVERSAL",
             "INTERNAL_ADJUSTMENT",
