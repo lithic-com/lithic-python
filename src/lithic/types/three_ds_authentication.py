@@ -17,6 +17,7 @@ __all__ = [
     "App",
     "Browser",
     "ChallengeMetadata",
+    "Psd2Context",
     "Transaction",
 ]
 
@@ -401,6 +402,61 @@ class ChallengeMetadata(BaseModel):
     """The phone number used for delivering the OTP. Relevant only for SMS_OTP method."""
 
 
+class Psd2Context(BaseModel):
+    """PSD2/SCA context for EEA and UK transactions.
+
+    Present when Lithic determines the transaction is in scope for PSD2 Strong Customer Authentication. Absent for out-of-scope transactions.
+    """
+
+    acquirer_exemption: Optional[
+        Literal[
+            "NONE",
+            "TRANSACTION_RISK_ANALYSIS",
+            "LOW_VALUE",
+            "RECURRING_PAYMENT",
+            "MERCHANT_INITIATED_TRANSACTION",
+            "TRUSTED_BENEFICIARY",
+            "STRONG_CUSTOMER_AUTHENTICATION_DELEGATION",
+            "SECURE_CORPORATE_PAYMENT",
+            "AUTHENTICATION_OUTAGE_EXCEPTION",
+            "BUNDLED",
+        ]
+    ] = None
+    """SCA exemption declared by the acquirer in the 3DS authentication request.
+
+    - `NONE` - No exemption claimed
+    - `TRANSACTION_RISK_ANALYSIS` - Transaction Risk Analysis (TRA) exemption;
+      acquirer asserts low fraud risk
+    - `LOW_VALUE` - Low-value payment exemption; transaction is below the EUR 30
+      threshold
+    - `RECURRING_PAYMENT` - Recurring payment with a fixed amount to the same payee
+    - `MERCHANT_INITIATED_TRANSACTION` - Merchant-initiated transaction (MIT);
+      cardholder not present
+    - `TRUSTED_BENEFICIARY` - Trusted beneficiary; merchant is on cardholder's
+      whitelist
+    - `STRONG_CUSTOMER_AUTHENTICATION_DELEGATION` - SCA already performed by a
+      delegated third-party authenticator
+    - `SECURE_CORPORATE_PAYMENT` - Secure corporate payment using a dedicated
+      corporate card or process
+    - `AUTHENTICATION_OUTAGE_EXCEPTION` - Authentication outage exception;
+      scheme-level fallback during ACS downtime
+    - `BUNDLED` - Mastercard only; bundled exemption code where the exact exemption
+      type cannot be distinguished
+    """
+
+    lithic_exemption_validation: Optional[Literal["ACCEPTED", "REJECTED", "NOT_VALIDATED"]] = None
+    """Lithic's validation of the acquirer-declared exemption.
+
+    Absent when no acquirer exemption was declared.
+
+    - `ACCEPTED` - Lithic signals support the acquirer's claim
+    - `REJECTED` - Lithic signals contradict the claim, or a required signal is
+      missing
+    - `NOT_VALIDATED` - Exemption was declared but Lithic has no basis to evaluate
+      it; treated as `REJECTED` for challenge purposes
+    """
+
+
 class Transaction(BaseModel):
     """
     Object containing data about the e-commerce transaction for which the merchant is requesting authentication.
@@ -591,6 +647,13 @@ class ThreeDSAuthentication(BaseModel):
 
     This won't be set for authentications for which a decision has not yet been made
     (e.g. in-flight customer decisioning request).
+    """
+
+    psd2_context: Optional[Psd2Context] = None
+    """PSD2/SCA context for EEA and UK transactions.
+
+    Present when Lithic determines the transaction is in scope for PSD2 Strong
+    Customer Authentication. Absent for out-of-scope transactions.
     """
 
     three_ri_request_type: Optional[
