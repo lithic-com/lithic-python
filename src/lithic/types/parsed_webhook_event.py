@@ -17,6 +17,7 @@ from .claim_updated_webhook_event import ClaimUpdatedWebhookEvent
 from .card_converted_webhook_event import CardConvertedWebhookEvent
 from .balance_updated_webhook_event import BalanceUpdatedWebhookEvent
 from .dispute_updated_webhook_event import DisputeUpdatedWebhookEvent
+from .card_pin_updated_webhook_event import CardPinUpdatedWebhookEvent
 from .loan_tape_created_webhook_event import LoanTapeCreatedWebhookEvent
 from .loan_tape_updated_webhook_event import LoanTapeUpdatedWebhookEvent
 from .statements_created_webhook_event import StatementsCreatedWebhookEvent
@@ -448,6 +449,7 @@ ParsedWebhookEvent: TypeAlias = Union[
     BookTransferTransactionUpdatedWebhookEvent,
     CardCreatedWebhookEvent,
     CardConvertedWebhookEvent,
+    CardPinUpdatedWebhookEvent,
     CardRenewedWebhookEvent,
     CardReissuedWebhookEvent,
     CardShippedWebhookEvent,

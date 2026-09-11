@@ -1011,6 +1011,7 @@ from lithic.types import (
     BookTransferTransactionUpdatedWebhookEvent,
     CardCreatedWebhookEvent,
     CardConvertedWebhookEvent,
+    CardPinUpdatedWebhookEvent,
     CardRenewedWebhookEvent,
     CardReissuedWebhookEvent,
     CardShippedWebhookEvent,

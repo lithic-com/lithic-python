@@ -47,6 +47,7 @@ class EventListParams(TypedDict, total=False):
             "card_transaction.updated",
             "card.converted",
             "card.created",
+            "card.pin_updated",
             "card.reissued",
             "card.renewed",
             "card.shipped",
