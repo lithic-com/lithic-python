@@ -55,6 +55,11 @@ class Event(BaseModel):
         "EXTERNAL_RTP_SETTLED",
         "EXTERNAL_RTP_REVERSED",
         "EXTERNAL_RTP_RELEASED",
+        "EXTERNAL_STABLECOIN_INITIATED",
+        "EXTERNAL_STABLECOIN_CANCELED",
+        "EXTERNAL_STABLECOIN_SETTLED",
+        "EXTERNAL_STABLECOIN_REVERSED",
+        "EXTERNAL_STABLECOIN_RELEASED",
     ]
 
 
@@ -73,7 +78,13 @@ class ExternalPayment(BaseModel):
 
     category: Optional[
         Literal[
-            "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+            "EXTERNAL_WIRE",
+            "EXTERNAL_ACH",
+            "EXTERNAL_CHECK",
+            "EXTERNAL_FEDNOW",
+            "EXTERNAL_RTP",
+            "EXTERNAL_STABLECOIN",
+            "EXTERNAL_TRANSFER",
         ]
     ] = None
 

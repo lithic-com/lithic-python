@@ -21,7 +21,13 @@ class ExternalPaymentListParams(TypedDict, total=False):
     business_account_token: str
 
     category: Literal[
-        "EXTERNAL_WIRE", "EXTERNAL_ACH", "EXTERNAL_CHECK", "EXTERNAL_FEDNOW", "EXTERNAL_RTP", "EXTERNAL_TRANSFER"
+        "EXTERNAL_WIRE",
+        "EXTERNAL_ACH",
+        "EXTERNAL_CHECK",
+        "EXTERNAL_FEDNOW",
+        "EXTERNAL_RTP",
+        "EXTERNAL_STABLECOIN",
+        "EXTERNAL_TRANSFER",
     ]
     """The external rail the funds moved on"""
 

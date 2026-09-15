@@ -17,6 +17,7 @@ from ..types import (
     payment_simulate_return_params,
     payment_simulate_receipt_params,
     payment_simulate_release_params,
+    payment_create_stablecoin_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
@@ -32,6 +33,7 @@ from ..types.payment_simulate_action_response import PaymentSimulateActionRespon
 from ..types.payment_simulate_return_response import PaymentSimulateReturnResponse
 from ..types.payment_simulate_receipt_response import PaymentSimulateReceiptResponse
 from ..types.payment_simulate_release_response import PaymentSimulateReleaseResponse
+from ..types.payment_create_stablecoin_response import PaymentCreateStablecoinResponse
 
 __all__ = ["Payments", "AsyncPayments"]
 
@@ -77,7 +79,14 @@ class Payments(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentCreateResponse:
         """
-        Initiates a payment between a financial account and an external bank account.
+        Initiates an ACH payment between a financial account and an external bank
+        account.
+
+        This endpoint originates on the ACH rail only. To send a stablecoin payout, use
+        the
+        [Create stablecoin payment](https://docs.lithic.com/reference/createstablecoinpayment)
+        endpoint. Payments on every rail are read back through
+        [List payments](https://docs.lithic.com/reference/searchpayments).
 
         Args:
           token: Customer-provided token that will serve as an idempotency token. This token will
@@ -155,7 +164,7 @@ class Payments(SyncAPIResource):
         account_token: str | Omit = omit,
         begin: Union[str, datetime] | Omit = omit,
         business_account_token: str | Omit = omit,
-        category: Literal["ACH"] | Omit = omit,
+        category: Literal["ACH", "STABLECOIN"] | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
         financial_account_token: str | Omit = omit,
@@ -222,6 +231,88 @@ class Payments(SyncAPIResource):
                 ),
             ),
             model=Payment,
+        )
+
+    def create_stablecoin(
+        self,
+        *,
+        amount: int,
+        blockchain_recipient_token: str,
+        financial_account_token: str,
+        type: Literal["PAYMENT"],
+        token: str | Omit = omit,
+        hold: payment_create_stablecoin_params.Hold | Omit = omit,
+        memo: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PaymentCreateStablecoinResponse:
+        """
+        Initiates a stablecoin payout from a financial account to a registered
+        blockchain recipient.
+
+        The recipient must have been registered with
+        [Create blockchain recipient](https://docs.lithic.com/reference/createblockchainrecipient)
+        and have completed address screening — only a recipient in the `ENABLED`
+        verification state can receive a payout. The destination address and chain come
+        from the recipient, so they are not supplied here.
+
+        Only payouts are initiated through this endpoint. Stablecoin pay-ins are
+        credited from on-chain deposits to a financial account's deposit address and are
+        not created through the API. Funds are placed on hold when the payout is
+        initiated, and a payout that fails on chain reverses that hold. A payout cannot
+        be cancelled once it has been submitted on chain.
+
+        This endpoint is only available to stablecoin-enabled programs. Contact your
+        customer success manager to learn more.
+
+        Args:
+          amount: Payout amount in cents
+
+          blockchain_recipient_token: Token of the blockchain recipient to send the payout to. The recipient must be
+              in the `ENABLED` verification state
+
+          financial_account_token: Token of the financial account the payout is funded from
+
+          type: Direction of the payment. Stablecoin supports payouts only
+
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token
+
+          hold: Optional hold to settle when this payout is initiated
+
+          memo: Memo recorded on the payout. Defaults to `Stablecoin payout on <chain>` when
+              omitted
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/payments/stablecoin",
+            body=maybe_transform(
+                {
+                    "amount": amount,
+                    "blockchain_recipient_token": blockchain_recipient_token,
+                    "financial_account_token": financial_account_token,
+                    "type": type,
+                    "token": token,
+                    "hold": hold,
+                    "memo": memo,
+                },
+                payment_create_stablecoin_params.PaymentCreateStablecoinParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentCreateStablecoinResponse,
         )
 
     def retry(
@@ -349,6 +440,7 @@ class Payments(SyncAPIResource):
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",
+            "STABLECOIN_REVIEWED",
         ],
         date_of_death: Union[str, date] | Omit = omit,
         decline_reason: Literal[
@@ -582,7 +674,14 @@ class AsyncPayments(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PaymentCreateResponse:
         """
-        Initiates a payment between a financial account and an external bank account.
+        Initiates an ACH payment between a financial account and an external bank
+        account.
+
+        This endpoint originates on the ACH rail only. To send a stablecoin payout, use
+        the
+        [Create stablecoin payment](https://docs.lithic.com/reference/createstablecoinpayment)
+        endpoint. Payments on every rail are read back through
+        [List payments](https://docs.lithic.com/reference/searchpayments).
 
         Args:
           token: Customer-provided token that will serve as an idempotency token. This token will
@@ -660,7 +759,7 @@ class AsyncPayments(AsyncAPIResource):
         account_token: str | Omit = omit,
         begin: Union[str, datetime] | Omit = omit,
         business_account_token: str | Omit = omit,
-        category: Literal["ACH"] | Omit = omit,
+        category: Literal["ACH", "STABLECOIN"] | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
         financial_account_token: str | Omit = omit,
@@ -727,6 +826,88 @@ class AsyncPayments(AsyncAPIResource):
                 ),
             ),
             model=Payment,
+        )
+
+    async def create_stablecoin(
+        self,
+        *,
+        amount: int,
+        blockchain_recipient_token: str,
+        financial_account_token: str,
+        type: Literal["PAYMENT"],
+        token: str | Omit = omit,
+        hold: payment_create_stablecoin_params.Hold | Omit = omit,
+        memo: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PaymentCreateStablecoinResponse:
+        """
+        Initiates a stablecoin payout from a financial account to a registered
+        blockchain recipient.
+
+        The recipient must have been registered with
+        [Create blockchain recipient](https://docs.lithic.com/reference/createblockchainrecipient)
+        and have completed address screening — only a recipient in the `ENABLED`
+        verification state can receive a payout. The destination address and chain come
+        from the recipient, so they are not supplied here.
+
+        Only payouts are initiated through this endpoint. Stablecoin pay-ins are
+        credited from on-chain deposits to a financial account's deposit address and are
+        not created through the API. Funds are placed on hold when the payout is
+        initiated, and a payout that fails on chain reverses that hold. A payout cannot
+        be cancelled once it has been submitted on chain.
+
+        This endpoint is only available to stablecoin-enabled programs. Contact your
+        customer success manager to learn more.
+
+        Args:
+          amount: Payout amount in cents
+
+          blockchain_recipient_token: Token of the blockchain recipient to send the payout to. The recipient must be
+              in the `ENABLED` verification state
+
+          financial_account_token: Token of the financial account the payout is funded from
+
+          type: Direction of the payment. Stablecoin supports payouts only
+
+          token: Customer-provided token that will serve as an idempotency token. This token will
+              become the transaction token
+
+          hold: Optional hold to settle when this payout is initiated
+
+          memo: Memo recorded on the payout. Defaults to `Stablecoin payout on <chain>` when
+              omitted
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/payments/stablecoin",
+            body=await async_maybe_transform(
+                {
+                    "amount": amount,
+                    "blockchain_recipient_token": blockchain_recipient_token,
+                    "financial_account_token": financial_account_token,
+                    "type": type,
+                    "token": token,
+                    "hold": hold,
+                    "memo": memo,
+                },
+                payment_create_stablecoin_params.PaymentCreateStablecoinParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PaymentCreateStablecoinResponse,
         )
 
     async def retry(
@@ -854,6 +1035,7 @@ class AsyncPayments(AsyncAPIResource):
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",
+            "STABLECOIN_REVIEWED",
         ],
         date_of_death: Union[str, date] | Omit = omit,
         decline_reason: Literal[
@@ -1059,6 +1241,9 @@ class PaymentsWithRawResponse:
         self.list = _legacy_response.to_raw_response_wrapper(
             payments.list,
         )
+        self.create_stablecoin = _legacy_response.to_raw_response_wrapper(
+            payments.create_stablecoin,
+        )
         self.retry = _legacy_response.to_raw_response_wrapper(
             payments.retry,
         )
@@ -1091,6 +1276,9 @@ class AsyncPaymentsWithRawResponse:
         )
         self.list = _legacy_response.async_to_raw_response_wrapper(
             payments.list,
+        )
+        self.create_stablecoin = _legacy_response.async_to_raw_response_wrapper(
+            payments.create_stablecoin,
         )
         self.retry = _legacy_response.async_to_raw_response_wrapper(
             payments.retry,
@@ -1125,6 +1313,9 @@ class PaymentsWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             payments.list,
         )
+        self.create_stablecoin = to_streamed_response_wrapper(
+            payments.create_stablecoin,
+        )
         self.retry = to_streamed_response_wrapper(
             payments.retry,
         )
@@ -1157,6 +1348,9 @@ class AsyncPaymentsWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             payments.list,
+        )
+        self.create_stablecoin = async_to_streamed_response_wrapper(
+            payments.create_stablecoin,
         )
         self.retry = async_to_streamed_response_wrapper(
             payments.retry,
