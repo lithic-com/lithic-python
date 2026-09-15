@@ -68,6 +68,7 @@ class ExampleActionDeclineActionAuthorization(BaseModel):
         "PROGRAM_SUSPENDED",
         "PROGRAM_USAGE_RESTRICTION",
         "REVERSAL_UNMATCHED",
+        "SCA_REQUIRED",
         "SECURITY_VIOLATION",
         "SINGLE_USE_CARD_REATTEMPTED",
         "SUSPECTED_FRAUD",
