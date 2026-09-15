@@ -440,6 +440,7 @@ class Payments(SyncAPIResource):
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",
+            "STABLECOIN_REVIEWED",
         ],
         date_of_death: Union[str, date] | Omit = omit,
         decline_reason: Literal[
@@ -1034,6 +1035,7 @@ class AsyncPayments(AsyncAPIResource):
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",
+            "STABLECOIN_REVIEWED",
         ],
         date_of_death: Union[str, date] | Omit = omit,
         decline_reason: Literal[

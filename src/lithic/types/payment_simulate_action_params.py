@@ -24,6 +24,7 @@ class PaymentSimulateActionParams(TypedDict, total=False):
             "ACH_RETURN_INITIATED",
             "ACH_RETURN_PROCESSED",
             "ACH_RETURN_SETTLED",
+            "STABLECOIN_REVIEWED",
         ]
     ]
     """Event Type"""
