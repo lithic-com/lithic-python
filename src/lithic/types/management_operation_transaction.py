@@ -53,6 +53,8 @@ class Event(BaseModel):
         "QUARTERLY_REVERSAL",
         "MONTHLY",
         "MONTHLY_REVERSAL",
+        "FEE",
+        "FEE_REVERSAL",
     ]
 
     subtype: Optional[str] = None
