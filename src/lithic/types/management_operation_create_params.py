@@ -57,6 +57,8 @@ class ManagementOperationCreateParams(TypedDict, total=False):
             "QUARTERLY_REVERSAL",
             "MONTHLY",
             "MONTHLY_REVERSAL",
+            "FEE",
+            "FEE_REVERSAL",
         ]
     ]
 
