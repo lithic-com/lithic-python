@@ -231,14 +231,22 @@ class TestPayments:
     @parametrize
     def test_method_retry(self, client: Lithic) -> None:
         payment = client.payments.retry(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+    @parametrize
+    def test_method_retry_with_all_params(self, client: Lithic) -> None:
+        payment = client.payments.retry(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            method="ACH_SAME_DAY",
         )
         assert_matches_type(PaymentRetryResponse, payment, path=["response"])
 
     @parametrize
     def test_raw_response_retry(self, client: Lithic) -> None:
         response = client.payments.with_raw_response.retry(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -249,7 +257,7 @@ class TestPayments:
     @parametrize
     def test_streaming_response_retry(self, client: Lithic) -> None:
         with client.payments.with_streaming_response.retry(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -263,7 +271,7 @@ class TestPayments:
     def test_path_params_retry(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
             client.payments.with_raw_response.retry(
-                "",
+                payment_token="",
             )
 
     @parametrize
@@ -708,14 +716,22 @@ class TestAsyncPayments:
     @parametrize
     async def test_method_retry(self, async_client: AsyncLithic) -> None:
         payment = await async_client.payments.retry(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(PaymentRetryResponse, payment, path=["response"])
+
+    @parametrize
+    async def test_method_retry_with_all_params(self, async_client: AsyncLithic) -> None:
+        payment = await async_client.payments.retry(
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            method="ACH_SAME_DAY",
         )
         assert_matches_type(PaymentRetryResponse, payment, path=["response"])
 
     @parametrize
     async def test_raw_response_retry(self, async_client: AsyncLithic) -> None:
         response = await async_client.payments.with_raw_response.retry(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -726,7 +742,7 @@ class TestAsyncPayments:
     @parametrize
     async def test_streaming_response_retry(self, async_client: AsyncLithic) -> None:
         async with async_client.payments.with_streaming_response.retry(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -740,7 +756,7 @@ class TestAsyncPayments:
     async def test_path_params_retry(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_token` but received ''"):
             await async_client.payments.with_raw_response.retry(
-                "",
+                payment_token="",
             )
 
     @parametrize
