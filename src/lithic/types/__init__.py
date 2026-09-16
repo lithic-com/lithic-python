@@ -80,6 +80,7 @@ from .address_update_param import AddressUpdateParam as AddressUpdateParam
 from .blockchain_recipient import BlockchainRecipient as BlockchainRecipient
 from .internal_transaction import InternalTransaction as InternalTransaction
 from .parsed_webhook_event import ParsedWebhookEvent as ParsedWebhookEvent
+from .payment_retry_params import PaymentRetryParams as PaymentRetryParams
 from .spend_limit_duration import SpendLimitDuration as SpendLimitDuration
 from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .card_provision_params import CardProvisionParams as CardProvisionParams

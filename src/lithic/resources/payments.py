@@ -11,6 +11,7 @@ import httpx
 from .. import _legacy_response
 from ..types import (
     payment_list_params,
+    payment_retry_params,
     payment_create_params,
     payment_return_params,
     payment_simulate_action_params,
@@ -319,6 +320,7 @@ class Payments(SyncAPIResource):
         self,
         payment_token: str,
         *,
+        method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -330,6 +332,10 @@ class Payments(SyncAPIResource):
         Retry an origination which has been returned.
 
         Args:
+          method: Settlement speed to retry the payment at. Defaults to the original payment's
+              method. An `ACH_SAME_DAY` retry is rejected if the payment is for $1,000,000.00
+              or more, or if it is submitted after the same day ACH cutoff
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -342,6 +348,7 @@ class Payments(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return self._post(
             path_template("/v1/payments/{payment_token}/retry", payment_token=payment_token),
+            body=maybe_transform({"method": method}, payment_retry_params.PaymentRetryParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -914,6 +921,7 @@ class AsyncPayments(AsyncAPIResource):
         self,
         payment_token: str,
         *,
+        method: Literal["ACH_NEXT_DAY", "ACH_SAME_DAY"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -925,6 +933,10 @@ class AsyncPayments(AsyncAPIResource):
         Retry an origination which has been returned.
 
         Args:
+          method: Settlement speed to retry the payment at. Defaults to the original payment's
+              method. An `ACH_SAME_DAY` retry is rejected if the payment is for $1,000,000.00
+              or more, or if it is submitted after the same day ACH cutoff
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -937,6 +949,7 @@ class AsyncPayments(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `payment_token` but received {payment_token!r}")
         return await self._post(
             path_template("/v1/payments/{payment_token}/retry", payment_token=payment_token),
+            body=await async_maybe_transform({"method": method}, payment_retry_params.PaymentRetryParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
