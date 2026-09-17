@@ -479,6 +479,18 @@ Methods:
 
 - <code title="get /v1/financial_accounts/{financial_account_token}/balances">client.financial_accounts.balances.<a href="./src/lithic/resources/financial_accounts/balances.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/balance_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_account_balance.py">SyncSinglePage[FinancialAccountBalance]</a></code>
 
+## OpenToBuy
+
+Types:
+
+```python
+from lithic.types.financial_accounts import OpenToBuy, OpenToBuySummary
+```
+
+Methods:
+
+- <code title="get /v1/financial_accounts/{financial_account_token}/open_to_buy">client.financial_accounts.open_to_buy.<a href="./src/lithic/resources/financial_accounts/open_to_buy.py">retrieve</a>(financial_account_token) -> <a href="./src/lithic/types/financial_accounts/open_to_buy.py">OpenToBuy</a></code>
+
 ## FinancialTransactions
 
 Methods:
