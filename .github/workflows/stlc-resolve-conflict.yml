@@ -28,6 +28,13 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  # claude-code-action mints an OIDC token and exchanges it for a GitHub token, so it needs
+  # id-token: write. Without it every attempt fails with "Unable to get
+  # ACTIONS_ID_TOKEN_REQUEST_URL env variable" before it ever looks at the conflict -- and
+  # because the step is continue-on-error, the job still goes green and the PR comment
+  # reads as "couldn't auto-resolve" rather than "never ran". Same set as lithic-schemas'
+  # own claude.yaml.
+  id-token: write
 
 jobs:
   resolve:
