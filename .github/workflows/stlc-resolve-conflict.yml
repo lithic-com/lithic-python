@@ -1,0 +1,167 @@
+name: Resolve pending main conflict
+
+# lithic-schemas's push-triggered stlc build can't drive claude-code-action inline (that
+# action only recognizes issues/issue_comment/pull_request/pull_request_review/
+# pull_request_review_comment/workflow_dispatch/repository_dispatch/schedule/workflow_run --
+# push isn't in that list, no config bypasses it). So on a push-time custom-code conflict,
+# lithic-schemas's "Cut conflict PR" step pushes just the freshly generated commit (clean, no
+# markers) to the reused `stlc/pending-main-conflict` branch and opens a PR against this
+# repo's own main. Since main already has the custom code, that PR is a real, unresolved
+# merge conflict -- but computed natively by GitHub/git, not fabricated. This workflow
+# reproduces that same merge locally (`git merge origin/main`), resolves it with Claude the
+# same way lithic-schemas resolves a pull_request-time conflict, and pushes the result back
+# onto this same branch.
+#
+# Deliberately does not auto-merge: a human reviews and merges, same as the seal PR pattern
+# in stlc-sync.yml. Merging triggers that file's `seal-dispatch` job, which notifies
+# lithic-schemas to re-sync -- no separate callback needed here.
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  resolve:
+    # Scope to the one branch this is for -- this workflow has no reason to run on any other
+    # PR into this repo (there shouldn't normally be others; this repo's main is stlc-managed).
+    if: github.event.pull_request.head.ref == 'stlc/pending-main-conflict'
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    concurrency:
+      # One resolution attempt at a time per PR -- a rapid-fire re-push (e.g. lithic-schemas
+      # force-pushing a fresher generated commit before this run finishes) shouldn't race
+      # with itself.
+      group: resolve-pending-conflict-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Attempt to merge main
+        # Reproduces the real conflict: this branch is just the freshly generated commit,
+        # main already has the custom code, so merging main in here is the same operation
+        # (same two sides) as the "Apply custom-code patches" step that failed upstream --
+        # just computed by git natively instead of stlc's internal merge.
+        id: merge
+        run: |
+          set -uo pipefail  # not -e: a conflicting `git merge` exits non-zero on purpose
+          git fetch origin main
+          git -c user.name="lithic-workflow[bot]" -c user.email="lithic-workflow[bot]@users.noreply.github.com" \
+            merge --no-ff --no-commit origin/main
+          status=$?
+          if [ "$status" -eq 0 ]; then
+            echo "conflicted=false" >> "$GITHUB_OUTPUT"
+          elif [ -n "$(git diff --name-only --diff-filter=U)" ]; then
+            echo "conflicted=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error title=Merge failed::git merge exited $status for a reason other than a content conflict."
+            exit "$status"
+          fi
+
+      - name: Resolve conflict with Claude
+        id: resolve
+        if: steps.merge.outputs.conflicted == 'true'
+        # continue-on-error: a miss must still fall through to the "still conflicted" path
+        # below, not be swallowed as a silent success.
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # This PR was opened by the lithic-workflow-dispatcher GitHub App (lithic-schemas's
+          # "Cut conflict PR" step, using the same LITHIC_WORKFLOW_APP_ID/PRIVATE_KEY as
+          # bundle.yaml), so github.actor on this pull_request event is that bot, not a human
+          # -- claude-code-action's human-actor guard rejects it unless allow-listed here.
+          # Same reasoning, same bot, as the inline resolve step in stlc-build-template.yml.
+          allowed_bots: "lithic-workflow-dispatcher"
+          # git diff/add only -- no commit, no push. This step's job is to resolve file
+          # content and stage it; finishing the merge happens explicitly below where it's
+          # auditable from the workflow log, not folded into whatever the model runs.
+          claude_args: |
+            --allowedTools "Read,Edit,Bash(git diff:*),Bash(git add:*),Bash(git status:*)"
+          prompt: |
+            This repo is mid-merge: HEAD (this branch) is newly generated SDK code from an
+            OpenAPI spec change, MERGE_HEAD (origin/main) is hand-written custom code, and the
+            merge base is the previous generated code.
+
+            1. Run `git diff --name-only --diff-filter=U` to list the conflicted files.
+            2. For each one, read the conflict markers and resolve them. Note which side is
+               which here: HEAD (above the ======= line) is the newly generated code,
+               MERGE_HEAD (below it) is the hand-written custom code -- the reverse of the
+               usual "ours is custom code" convention, so don't assume from position alone.
+               Preserve the intent of the hand-written custom code while incorporating
+               whatever the new generation legitimately added or changed. When in doubt about
+               intent, prefer keeping the custom code behavior and layering the new generated
+               pieces (new types, new fields, new methods) around it, rather than discarding
+               either side.
+            3. After resolving a file's markers, stage it with `git add <file>`.
+            4. Do NOT run `git commit`, `git push`, or `git merge --abort` -- a later step
+               finishes the integration. Do NOT run a formatter.
+            5. If any conflict can't be resolved with confidence (ambiguous intent, a semantic
+               conflict beyond a textual merge), leave it unresolved/unstaged and say so plainly
+               in your final summary rather than guessing.
+
+      - name: Finish merge and push
+        id: finish
+        if: always() && steps.merge.outcome == 'success'
+        run: |
+          set -euo pipefail
+          if [ ! -f .git/MERGE_HEAD ]; then
+            # Our own previous successful push already merged main into this branch -- that
+            # push re-triggered `synchronize`, which re-ran this whole workflow, and this
+            # time `git merge origin/main` had nothing to do (no MERGE_HEAD was created).
+            # Nothing to finish; this is the expected shape of the second run, not a failure.
+            echo "Already up to date with main -- nothing to finish."
+            echo "resolved=true" >> "$GITHUB_OUTPUT"
+            echo "nothing_new=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
+            echo "Unresolved conflicts remain -- aborting the merge, leaving the branch"
+            echo "untouched for manual resolution."
+            git merge --abort
+            echo "resolved=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git -c user.name="lithic-workflow[bot]" -c user.email="lithic-workflow[bot]@users.noreply.github.com" \
+            commit --no-edit
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+          echo "resolved=true" >> "$GITHUB_OUTPUT"
+
+      - name: Comment status on the PR
+        if: always() && steps.merge.outcome == 'success' && steps.finish.outputs.nothing_new != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          RESOLVED: ${{ steps.finish.outputs.resolved }}
+          WAS_CONFLICTED: ${{ steps.merge.outputs.conflicted }}
+        run: |
+          merge_warning="Use \"Create a merge commit\" when merging -- do NOT squash or rebase (breaks stlc's lineage tracking, see stainless/README.md in lithic-schemas)."
+          if [ "$RESOLVED" = "true" ] && [ "$WAS_CONFLICTED" = "true" ]; then
+            body="Conflict resolved and pushed. Please review the diff and merge when ready. ${merge_warning}"
+          elif [ "$RESOLVED" = "true" ]; then
+            body="No actual conflict -- main merged in cleanly and was pushed here. Review and merge when ready. ${merge_warning}"
+          else
+            body="Could not fully auto-resolve this conflict (Claude left some markers unstaged, flagged low confidence, or the resolution step failed outright). This needs manual resolution: check out this branch, run \`git merge origin/main\`, resolve the conflict by hand, commit, and push."
+          fi
+          gh pr comment "$PR_NUMBER" --body "$body"
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          msg="Conflict-resolution workflow failed in ${{ github.repository }} for the pending main conflict PR (#${{ github.event.pull_request.number }}). It needs manual resolution now. Run: ${RUN_URL}"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi
