@@ -6,6 +6,7 @@ from .loan_tape import LoanTape as LoanTape
 from .statement import Statement as Statement
 from .statements import Statements as Statements
 from .open_to_buy import OpenToBuy as OpenToBuy
+from .installment_plan import InstallmentPlan as InstallmentPlan
 from .category_balances import CategoryBalances as CategoryBalances
 from .balance_list_params import BalanceListParams as BalanceListParams
 from .open_to_buy_summary import OpenToBuySummary as OpenToBuySummary
@@ -13,6 +14,8 @@ from .loan_tape_list_params import LoanTapeListParams as LoanTapeListParams
 from .statement_list_params import StatementListParams as StatementListParams
 from .interest_tier_schedule import InterestTierSchedule as InterestTierSchedule
 from .loan_tape_configuration import LoanTapeConfiguration as LoanTapeConfiguration
+from .installment_plan_list_params import InstallmentPlanListParams as InstallmentPlanListParams
+from .transaction_category_balances import TransactionCategoryBalances as TransactionCategoryBalances
 from .financial_account_credit_config import FinancialAccountCreditConfig as FinancialAccountCreditConfig
 from .loan_tape_rebuild_configuration import LoanTapeRebuildConfiguration as LoanTapeRebuildConfiguration
 from .financial_transaction_list_params import FinancialTransactionListParams as FinancialTransactionListParams

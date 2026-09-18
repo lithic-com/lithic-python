@@ -46,6 +46,14 @@ from .open_to_buy import (
 )
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ..._base_client import AsyncPaginator, make_request_options
+from .installment_plans import (
+    InstallmentPlans,
+    AsyncInstallmentPlans,
+    InstallmentPlansWithRawResponse,
+    AsyncInstallmentPlansWithRawResponse,
+    InstallmentPlansWithStreamingResponse,
+    AsyncInstallmentPlansWithStreamingResponse,
+)
 from .credit_configuration import (
     CreditConfiguration,
     AsyncCreditConfiguration,
@@ -115,6 +123,10 @@ class FinancialAccounts(SyncAPIResource):
     @cached_property
     def loan_tapes(self) -> LoanTapes:
         return LoanTapes(self._client)
+
+    @cached_property
+    def installment_plans(self) -> InstallmentPlans:
+        return InstallmentPlans(self._client)
 
     @cached_property
     def loan_tape_configuration(self) -> LoanTapeConfigurationResource:
@@ -446,6 +458,10 @@ class AsyncFinancialAccounts(AsyncAPIResource):
     @cached_property
     def loan_tapes(self) -> AsyncLoanTapes:
         return AsyncLoanTapes(self._client)
+
+    @cached_property
+    def installment_plans(self) -> AsyncInstallmentPlans:
+        return AsyncInstallmentPlans(self._client)
 
     @cached_property
     def loan_tape_configuration(self) -> AsyncLoanTapeConfigurationResource:
@@ -803,6 +819,10 @@ class FinancialAccountsWithRawResponse:
         return LoanTapesWithRawResponse(self._financial_accounts.loan_tapes)
 
     @cached_property
+    def installment_plans(self) -> InstallmentPlansWithRawResponse:
+        return InstallmentPlansWithRawResponse(self._financial_accounts.installment_plans)
+
+    @cached_property
     def loan_tape_configuration(self) -> LoanTapeConfigurationResourceWithRawResponse:
         return LoanTapeConfigurationResourceWithRawResponse(self._financial_accounts.loan_tape_configuration)
 
@@ -857,6 +877,10 @@ class AsyncFinancialAccountsWithRawResponse:
     @cached_property
     def loan_tapes(self) -> AsyncLoanTapesWithRawResponse:
         return AsyncLoanTapesWithRawResponse(self._financial_accounts.loan_tapes)
+
+    @cached_property
+    def installment_plans(self) -> AsyncInstallmentPlansWithRawResponse:
+        return AsyncInstallmentPlansWithRawResponse(self._financial_accounts.installment_plans)
 
     @cached_property
     def loan_tape_configuration(self) -> AsyncLoanTapeConfigurationResourceWithRawResponse:
@@ -915,6 +939,10 @@ class FinancialAccountsWithStreamingResponse:
         return LoanTapesWithStreamingResponse(self._financial_accounts.loan_tapes)
 
     @cached_property
+    def installment_plans(self) -> InstallmentPlansWithStreamingResponse:
+        return InstallmentPlansWithStreamingResponse(self._financial_accounts.installment_plans)
+
+    @cached_property
     def loan_tape_configuration(self) -> LoanTapeConfigurationResourceWithStreamingResponse:
         return LoanTapeConfigurationResourceWithStreamingResponse(self._financial_accounts.loan_tape_configuration)
 
@@ -969,6 +997,10 @@ class AsyncFinancialAccountsWithStreamingResponse:
     @cached_property
     def loan_tapes(self) -> AsyncLoanTapesWithStreamingResponse:
         return AsyncLoanTapesWithStreamingResponse(self._financial_accounts.loan_tapes)
+
+    @cached_property
+    def installment_plans(self) -> AsyncInstallmentPlansWithStreamingResponse:
+        return AsyncInstallmentPlansWithStreamingResponse(self._financial_accounts.installment_plans)
 
     @cached_property
     def loan_tape_configuration(self) -> AsyncLoanTapeConfigurationResourceWithStreamingResponse:

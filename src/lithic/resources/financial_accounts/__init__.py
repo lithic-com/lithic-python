@@ -32,6 +32,14 @@ from .open_to_buy import (
     OpenToBuyResourceWithStreamingResponse,
     AsyncOpenToBuyResourceWithStreamingResponse,
 )
+from .installment_plans import (
+    InstallmentPlans,
+    AsyncInstallmentPlans,
+    InstallmentPlansWithRawResponse,
+    AsyncInstallmentPlansWithRawResponse,
+    InstallmentPlansWithStreamingResponse,
+    AsyncInstallmentPlansWithStreamingResponse,
+)
 from .financial_accounts import (
     FinancialAccounts,
     AsyncFinancialAccounts,
@@ -110,6 +118,12 @@ __all__ = [
     "AsyncLoanTapesWithRawResponse",
     "LoanTapesWithStreamingResponse",
     "AsyncLoanTapesWithStreamingResponse",
+    "InstallmentPlans",
+    "AsyncInstallmentPlans",
+    "InstallmentPlansWithRawResponse",
+    "AsyncInstallmentPlansWithRawResponse",
+    "InstallmentPlansWithStreamingResponse",
+    "AsyncInstallmentPlansWithStreamingResponse",
     "LoanTapeConfigurationResource",
     "AsyncLoanTapeConfigurationResource",
     "LoanTapeConfigurationResourceWithRawResponse",

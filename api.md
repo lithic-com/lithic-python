@@ -549,6 +549,19 @@ Methods:
 - <code title="get /v1/financial_accounts/{financial_account_token}/loan_tapes/{loan_tape_token}">client.financial_accounts.loan_tapes.<a href="./src/lithic/resources/financial_accounts/loan_tapes.py">retrieve</a>(loan_tape_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/loan_tape.py">LoanTape</a></code>
 - <code title="get /v1/financial_accounts/{financial_account_token}/loan_tapes">client.financial_accounts.loan_tapes.<a href="./src/lithic/resources/financial_accounts/loan_tapes.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/loan_tape_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/loan_tape.py">SyncCursorPage[LoanTape]</a></code>
 
+## InstallmentPlans
+
+Types:
+
+```python
+from lithic.types.financial_accounts import InstallmentPlan, TransactionCategoryBalances
+```
+
+Methods:
+
+- <code title="get /v1/financial_accounts/{financial_account_token}/installment_plans/{installment_plan_token}">client.financial_accounts.installment_plans.<a href="./src/lithic/resources/financial_accounts/installment_plans.py">retrieve</a>(installment_plan_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_accounts/installment_plan.py">InstallmentPlan</a></code>
+- <code title="get /v1/financial_accounts/{financial_account_token}/installment_plans">client.financial_accounts.installment_plans.<a href="./src/lithic/resources/financial_accounts/installment_plans.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/installment_plan_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_accounts/installment_plan.py">SyncCursorPage[InstallmentPlan]</a></code>
+
 ## LoanTapeConfiguration
 
 Types:
