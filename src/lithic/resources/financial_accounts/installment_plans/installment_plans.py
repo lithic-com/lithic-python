@@ -7,21 +7,33 @@ from typing_extensions import Literal
 
 import httpx
 
-from ... import _legacy_response
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ...pagination import SyncCursorPage, AsyncCursorPage
-from ..._base_client import AsyncPaginator, make_request_options
-from ...types.financial_accounts import installment_plan_list_params
-from ...types.financial_accounts.installment_plan import InstallmentPlan
+from .... import _legacy_response
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ...._utils import path_template, maybe_transform
+from ...._compat import cached_property
+from .statements import (
+    Statements,
+    AsyncStatements,
+    StatementsWithRawResponse,
+    AsyncStatementsWithRawResponse,
+    StatementsWithStreamingResponse,
+    AsyncStatementsWithStreamingResponse,
+)
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
+from ....pagination import SyncCursorPage, AsyncCursorPage
+from ...._base_client import AsyncPaginator, make_request_options
+from ....types.financial_accounts import installment_plan_list_params
+from ....types.financial_accounts.installment_plan import InstallmentPlan
 
 __all__ = ["InstallmentPlans", "AsyncInstallmentPlans"]
 
 
 class InstallmentPlans(SyncAPIResource):
+    @cached_property
+    def statements(self) -> Statements:
+        return Statements(self._client)
+
     @cached_property
     def with_raw_response(self) -> InstallmentPlansWithRawResponse:
         """
@@ -158,6 +170,10 @@ class InstallmentPlans(SyncAPIResource):
 
 
 class AsyncInstallmentPlans(AsyncAPIResource):
+    @cached_property
+    def statements(self) -> AsyncStatements:
+        return AsyncStatements(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncInstallmentPlansWithRawResponse:
         """
@@ -304,6 +320,10 @@ class InstallmentPlansWithRawResponse:
             installment_plans.list,
         )
 
+    @cached_property
+    def statements(self) -> StatementsWithRawResponse:
+        return StatementsWithRawResponse(self._installment_plans.statements)
+
 
 class AsyncInstallmentPlansWithRawResponse:
     def __init__(self, installment_plans: AsyncInstallmentPlans) -> None:
@@ -315,6 +335,10 @@ class AsyncInstallmentPlansWithRawResponse:
         self.list = _legacy_response.async_to_raw_response_wrapper(
             installment_plans.list,
         )
+
+    @cached_property
+    def statements(self) -> AsyncStatementsWithRawResponse:
+        return AsyncStatementsWithRawResponse(self._installment_plans.statements)
 
 
 class InstallmentPlansWithStreamingResponse:
@@ -328,6 +352,10 @@ class InstallmentPlansWithStreamingResponse:
             installment_plans.list,
         )
 
+    @cached_property
+    def statements(self) -> StatementsWithStreamingResponse:
+        return StatementsWithStreamingResponse(self._installment_plans.statements)
+
 
 class AsyncInstallmentPlansWithStreamingResponse:
     def __init__(self, installment_plans: AsyncInstallmentPlans) -> None:
@@ -339,3 +367,7 @@ class AsyncInstallmentPlansWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             installment_plans.list,
         )
+
+    @cached_property
+    def statements(self) -> AsyncStatementsWithStreamingResponse:
+        return AsyncStatementsWithStreamingResponse(self._installment_plans.statements)

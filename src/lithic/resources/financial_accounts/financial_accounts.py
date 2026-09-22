@@ -46,14 +46,6 @@ from .open_to_buy import (
 )
 from ...pagination import SyncSinglePage, AsyncSinglePage
 from ..._base_client import AsyncPaginator, make_request_options
-from .installment_plans import (
-    InstallmentPlans,
-    AsyncInstallmentPlans,
-    InstallmentPlansWithRawResponse,
-    AsyncInstallmentPlansWithRawResponse,
-    InstallmentPlansWithStreamingResponse,
-    AsyncInstallmentPlansWithStreamingResponse,
-)
 from .credit_configuration import (
     CreditConfiguration,
     AsyncCreditConfiguration,
@@ -95,6 +87,14 @@ from .loan_tape_configuration import (
     AsyncLoanTapeConfigurationResourceWithStreamingResponse,
 )
 from ...types.financial_account import FinancialAccount
+from .installment_plans.installment_plans import (
+    InstallmentPlans,
+    AsyncInstallmentPlans,
+    InstallmentPlansWithRawResponse,
+    AsyncInstallmentPlansWithRawResponse,
+    InstallmentPlansWithStreamingResponse,
+    AsyncInstallmentPlansWithStreamingResponse,
+)
 
 __all__ = ["FinancialAccounts", "AsyncFinancialAccounts"]
 
