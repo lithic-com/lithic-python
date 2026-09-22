@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 from ..transaction_monitoring.entity_type import EntityType
@@ -13,7 +14,8 @@ class EntityCreateParams(TypedDict, total=False):
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Required[str]
@@ -49,7 +51,7 @@ class EntityCreateParams(TypedDict, total=False):
 
 class Address(TypedDict, total=False):
     """
-    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB and KYC workflows.
     """
 
     address1: Required[str]
@@ -59,25 +61,39 @@ class Address(TypedDict, total=False):
     """Name of city."""
 
     country: Required[str]
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
     """
-
-    postal_code: Required[str]
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: Required[str]
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
+    Valid country code, entered in uppercase ISO 3166-1 alpha-3 three-character
+    format. Supported countries depend on the onboarding workflow used for the
+    account holder.
     """
 
     address2: str
     """Unit or apartment number (if applicable)."""
+
+    postal_code: Optional[str]
+    """Valid postal code.
+
+    For USA addresses, enter either a five-digit postal code or a nine-digit postal
+    code (ZIP+4) using the format 12345-1234. Required for all countries except the
+    following, which do not use postal codes: ABW, AGO, ARE, ATG, BDI, BEN, BFA,
+    BHS, BLZ, BOL, BWA, CIV, CMR, COD, COG, COK, COM, DJI, DMA, ERI, FJI, GAB, GMB,
+    GNQ, GRD, GUY, HKG, KIR, MAC, MLI, MRT, NIU, NRU, QAT, RWA, SLB, SLE, SSD, SUR,
+    SXM, SYC, TGO, TKL, TLS, TON, TUV, UGA, VUT, YEM, ZWE
+    """
+
+    state: Optional[str]
+    """
+    Valid state, province, or subdivision code, entered as the uppercase ISO 3166-2
+    code for the country without the country prefix. For example, `CA` for
+    California. Optional unless the address is in one of the following countries,
+    where it is required:
+
+    - `USA`
+    - `CAN`
+    - `AUS`
+    - `CHN`
+    - `KOR`
+    - `MEX`
+    - `MYS`
+    - `NZL`
+    """

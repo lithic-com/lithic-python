@@ -100,7 +100,8 @@ class KYBBeneficialOwnerIndividual(TypedDict, total=False):
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Required[str]
@@ -178,7 +179,8 @@ class KYBControlPerson(TypedDict, total=False):
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Required[str]
@@ -317,7 +319,8 @@ class KYBDelegatedBeneficialOwnerIndividual(TypedDict, total=False):
     address: Address
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: str
@@ -358,7 +361,8 @@ class KYBDelegatedControlPerson(TypedDict, total=False):
     address: Address
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: str
@@ -422,7 +426,8 @@ class KYCIndividual(TypedDict, total=False):
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Required[str]

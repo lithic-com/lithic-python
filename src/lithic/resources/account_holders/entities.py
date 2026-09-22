@@ -68,7 +68,8 @@ class Entities(SyncAPIResource):
 
         Args:
           address: Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+              acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+              and KYC workflows.
 
           dob: Individual's date of birth, as an RFC 3339 date.
 
@@ -216,7 +217,8 @@ class AsyncEntities(AsyncAPIResource):
 
         Args:
           address: Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-              acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+              acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+              and KYC workflows.
 
           dob: Individual's date of birth, as an RFC 3339 date.
 

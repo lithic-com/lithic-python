@@ -25,7 +25,7 @@ __all__ = [
 
 class KybkycPatchResponseBeneficialOwnerIndividualAddress(BaseModel):
     """
-    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB and KYC workflows.
     """
 
     address1: str
@@ -35,35 +35,50 @@ class KybkycPatchResponseBeneficialOwnerIndividualAddress(BaseModel):
     """Name of city."""
 
     country: str
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
     """
-
-    postal_code: str
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: str
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
+    Valid country code, entered in uppercase ISO 3166-1 alpha-3 three-character
+    format. Supported countries depend on the onboarding workflow used for the
+    account holder.
     """
 
     address2: Optional[str] = None
     """Unit or apartment number (if applicable)."""
+
+    postal_code: Optional[str] = None
+    """Valid postal code.
+
+    For USA addresses, enter either a five-digit postal code or a nine-digit postal
+    code (ZIP+4) using the format 12345-1234. Required for all countries except the
+    following, which do not use postal codes: ABW, AGO, ARE, ATG, BDI, BEN, BFA,
+    BHS, BLZ, BOL, BWA, CIV, CMR, COD, COG, COK, COM, DJI, DMA, ERI, FJI, GAB, GMB,
+    GNQ, GRD, GUY, HKG, KIR, MAC, MLI, MRT, NIU, NRU, QAT, RWA, SLB, SLE, SSD, SUR,
+    SXM, SYC, TGO, TKL, TLS, TON, TUV, UGA, VUT, YEM, ZWE
+    """
+
+    state: Optional[str] = None
+    """
+    Valid state, province, or subdivision code, entered as the uppercase ISO 3166-2
+    code for the country without the country prefix. For example, `CA` for
+    California. Optional unless the address is in one of the following countries,
+    where it is required:
+
+    - `USA`
+    - `CAN`
+    - `AUS`
+    - `CHN`
+    - `KOR`
+    - `MEX`
+    - `MYS`
+    - `NZL`
+    """
 
 
 class KybkycPatchResponseBeneficialOwnerIndividual(BaseModel):
     address: Optional[KybkycPatchResponseBeneficialOwnerIndividualAddress] = None
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Optional[str] = None
@@ -88,7 +103,7 @@ class KybkycPatchResponseBeneficialOwnerIndividual(BaseModel):
 
 class KYBKYCPatchResponseControlPersonAddress(BaseModel):
     """
-    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB and KYC workflows.
     """
 
     address1: str
@@ -98,28 +113,42 @@ class KYBKYCPatchResponseControlPersonAddress(BaseModel):
     """Name of city."""
 
     country: str
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
     """
-
-    postal_code: str
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: str
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
+    Valid country code, entered in uppercase ISO 3166-1 alpha-3 three-character
+    format. Supported countries depend on the onboarding workflow used for the
+    account holder.
     """
 
     address2: Optional[str] = None
     """Unit or apartment number (if applicable)."""
+
+    postal_code: Optional[str] = None
+    """Valid postal code.
+
+    For USA addresses, enter either a five-digit postal code or a nine-digit postal
+    code (ZIP+4) using the format 12345-1234. Required for all countries except the
+    following, which do not use postal codes: ABW, AGO, ARE, ATG, BDI, BEN, BFA,
+    BHS, BLZ, BOL, BWA, CIV, CMR, COD, COG, COK, COM, DJI, DMA, ERI, FJI, GAB, GMB,
+    GNQ, GRD, GUY, HKG, KIR, MAC, MLI, MRT, NIU, NRU, QAT, RWA, SLB, SLE, SSD, SUR,
+    SXM, SYC, TGO, TKL, TLS, TON, TUV, UGA, VUT, YEM, ZWE
+    """
+
+    state: Optional[str] = None
+    """
+    Valid state, province, or subdivision code, entered as the uppercase ISO 3166-2
+    code for the country without the country prefix. For example, `CA` for
+    California. Optional unless the address is in one of the following countries,
+    where it is required:
+
+    - `USA`
+    - `CAN`
+    - `AUS`
+    - `CHN`
+    - `KOR`
+    - `MEX`
+    - `MYS`
+    - `NZL`
+    """
 
 
 class KYBKYCPatchResponseControlPerson(BaseModel):
@@ -135,7 +164,8 @@ class KYBKYCPatchResponseControlPerson(BaseModel):
     address: Optional[KYBKYCPatchResponseControlPersonAddress] = None
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Optional[str] = None
@@ -160,7 +190,7 @@ class KYBKYCPatchResponseControlPerson(BaseModel):
 
 class KYBKYCPatchResponseIndividualAddress(BaseModel):
     """
-    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    Individual's current address - PO boxes, UPS drops, and FedEx drops are not acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB and KYC workflows.
     """
 
     address1: str
@@ -170,28 +200,42 @@ class KYBKYCPatchResponseIndividualAddress(BaseModel):
     """Name of city."""
 
     country: str
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
     """
-
-    postal_code: str
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: str
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
+    Valid country code, entered in uppercase ISO 3166-1 alpha-3 three-character
+    format. Supported countries depend on the onboarding workflow used for the
+    account holder.
     """
 
     address2: Optional[str] = None
     """Unit or apartment number (if applicable)."""
+
+    postal_code: Optional[str] = None
+    """Valid postal code.
+
+    For USA addresses, enter either a five-digit postal code or a nine-digit postal
+    code (ZIP+4) using the format 12345-1234. Required for all countries except the
+    following, which do not use postal codes: ABW, AGO, ARE, ATG, BDI, BEN, BFA,
+    BHS, BLZ, BOL, BWA, CIV, CMR, COD, COG, COK, COM, DJI, DMA, ERI, FJI, GAB, GMB,
+    GNQ, GRD, GUY, HKG, KIR, MAC, MLI, MRT, NIU, NRU, QAT, RWA, SLB, SLE, SSD, SUR,
+    SXM, SYC, TGO, TKL, TLS, TON, TUV, UGA, VUT, YEM, ZWE
+    """
+
+    state: Optional[str] = None
+    """
+    Valid state, province, or subdivision code, entered as the uppercase ISO 3166-2
+    code for the country without the country prefix. For example, `CA` for
+    California. Optional unless the address is in one of the following countries,
+    where it is required:
+
+    - `USA`
+    - `CAN`
+    - `AUS`
+    - `CHN`
+    - `KOR`
+    - `MEX`
+    - `MYS`
+    - `NZL`
+    """
 
 
 class KYBKYCPatchResponseIndividual(BaseModel):
@@ -203,7 +247,8 @@ class KYBKYCPatchResponseIndividual(BaseModel):
     address: Optional[KYBKYCPatchResponseIndividualAddress] = None
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Optional[str] = None
@@ -453,28 +498,42 @@ class PatchResponseAddress(BaseModel):
     """Name of city."""
 
     country: str
-    """Valid country code.
-
-    Only USA is currently supported, entered in uppercase ISO 3166-1 alpha-3
-    three-character format.
     """
-
-    postal_code: str
-    """Valid postal code.
-
-    Only USA ZIP codes are currently supported, entered as a five-digit ZIP or
-    nine-digit ZIP+4.
-    """
-
-    state: str
-    """Valid state code.
-
-    Only USA state codes are currently supported, entered in uppercase ISO 3166-2
-    two-character format.
+    Valid country code, entered in uppercase ISO 3166-1 alpha-3 three-character
+    format. Supported countries depend on the onboarding workflow used for the
+    account holder.
     """
 
     address2: Optional[str] = None
     """Unit or apartment number (if applicable)."""
+
+    postal_code: Optional[str] = None
+    """Valid postal code.
+
+    For USA addresses, enter either a five-digit postal code or a nine-digit postal
+    code (ZIP+4) using the format 12345-1234. Required for all countries except the
+    following, which do not use postal codes: ABW, AGO, ARE, ATG, BDI, BEN, BFA,
+    BHS, BLZ, BOL, BWA, CIV, CMR, COD, COG, COK, COM, DJI, DMA, ERI, FJI, GAB, GMB,
+    GNQ, GRD, GUY, HKG, KIR, MAC, MLI, MRT, NIU, NRU, QAT, RWA, SLB, SLE, SSD, SUR,
+    SXM, SYC, TGO, TKL, TLS, TON, TUV, UGA, VUT, YEM, ZWE
+    """
+
+    state: Optional[str] = None
+    """
+    Valid state, province, or subdivision code, entered as the uppercase ISO 3166-2
+    code for the country without the country prefix. For example, `CA` for
+    California. Optional unless the address is in one of the following countries,
+    where it is required:
+
+    - `USA`
+    - `CAN`
+    - `AUS`
+    - `CHN`
+    - `KOR`
+    - `MEX`
+    - `MYS`
+    - `NZL`
+    """
 
 
 class PatchResponse(BaseModel):

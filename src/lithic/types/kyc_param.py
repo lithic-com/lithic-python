@@ -17,7 +17,8 @@ class Individual(TypedDict, total=False):
     address: Required[Address]
     """
     Individual's current address - PO boxes, UPS drops, and FedEx drops are not
-    acceptable; APO/FPO are acceptable. Only USA addresses are currently supported.
+    acceptable; APO/FPO are acceptable. Only USA addresses are supported for the KYB
+    and KYC workflows.
     """
 
     dob: Required[str]
