@@ -23,6 +23,13 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
     pan: Required[str]
     """Sixteen digit card number."""
 
+    billing_currency: str
+    """3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+
+    Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+    a 422. Defaults to USD
+    """
+
     mcc: str
     """Merchant category code for the transaction to be simulated.
 
@@ -50,10 +57,11 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
     """
 
     merchant_currency: str
-    """3-character alphabetic ISO 4217 currency code.
+    """3-character alphabetic ISO 4217 currency code for the merchant amount.
 
-    Note: Simulator only accepts USD, GBP, EUR and defaults to GBP if another ISO
-    4217 code is provided
+    Only used when merchant_amount is set, and defaults to GBP in that case. Without
+    merchant_amount, the merchant amount uses the billing currency. Permitted values
+    are USD, GBP, EUR and CAD, and any other ISO 4217 code returns a 422
     """
 
     partial_approval_capable: bool
@@ -65,6 +73,15 @@ class TransactionSimulateAuthorizationParams(TypedDict, total=False):
 
     pin: str
     """Simulate entering a PIN. If omitted, PIN check will not be performed."""
+
+    settlement_currency: str
+    """3-character alphabetic ISO 4217 currency code for the settlement amount.
+
+    Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+    a 422. Defaults to the value of billing_currency. Only single message
+    (financial) authorizations carry a settlement amount, and the value is ignored
+    for dual message authorizations
+    """
 
     status: Literal[
         "AUTHORIZATION",

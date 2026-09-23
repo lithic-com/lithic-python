@@ -287,6 +287,7 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
         mcc: str | Omit = omit,
         merchant_acceptor_city: str | Omit = omit,
         merchant_acceptor_country: str | Omit = omit,
@@ -296,6 +297,7 @@ class Transactions(SyncAPIResource):
         merchant_currency: str | Omit = omit,
         partial_approval_capable: bool | Omit = omit,
         pin: str | Omit = omit,
+        settlement_currency: str | Omit = omit,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -332,6 +334,10 @@ class Transactions(SyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
@@ -347,14 +353,22 @@ class Transactions(SyncAPIResource):
           merchant_amount: Amount of the transaction to be simulated in currency specified in
               merchant_currency, including any acquirer fees.
 
-          merchant_currency: 3-character alphabetic ISO 4217 currency code. Note: Simulator only accepts USD,
-              GBP, EUR and defaults to GBP if another ISO 4217 code is provided
+          merchant_currency: 3-character alphabetic ISO 4217 currency code for the merchant amount. Only used
+              when merchant_amount is set, and defaults to GBP in that case. Without
+              merchant_amount, the merchant amount uses the billing currency. Permitted values
+              are USD, GBP, EUR and CAD, and any other ISO 4217 code returns a 422
 
           partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
 
           pin: Simulate entering a PIN. If omitted, PIN check will not be performed.
+
+          settlement_currency: 3-character alphabetic ISO 4217 currency code for the settlement amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to the value of billing_currency. Only single message
+              (financial) authorizations carry a settlement amount, and the value is ignored
+              for dual message authorizations
 
           status: Type of event to simulate.
 
@@ -388,6 +402,7 @@ class Transactions(SyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
                     "mcc": mcc,
                     "merchant_acceptor_city": merchant_acceptor_city,
                     "merchant_acceptor_country": merchant_acceptor_country,
@@ -397,6 +412,7 @@ class Transactions(SyncAPIResource):
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
                     "pin": pin,
+                    "settlement_currency": settlement_currency,
                     "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
@@ -519,6 +535,7 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
         mcc: str | Omit = omit,
         merchant_acceptor_city: str | Omit = omit,
         merchant_acceptor_country: str | Omit = omit,
@@ -545,6 +562,10 @@ class Transactions(SyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
@@ -572,6 +593,7 @@ class Transactions(SyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
                     "mcc": mcc,
                     "merchant_acceptor_city": merchant_acceptor_city,
                     "merchant_acceptor_country": merchant_acceptor_country,
@@ -592,6 +614,7 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
         mcc: str | Omit = omit,
         merchant_acceptor_city: str | Omit = omit,
         merchant_acceptor_country: str | Omit = omit,
@@ -618,6 +641,10 @@ class Transactions(SyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
@@ -645,6 +672,7 @@ class Transactions(SyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
                     "mcc": mcc,
                     "merchant_acceptor_city": merchant_acceptor_city,
                     "merchant_acceptor_country": merchant_acceptor_country,
@@ -665,6 +693,8 @@ class Transactions(SyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
+        settlement_currency: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -685,6 +715,14 @@ class Transactions(SyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
+          settlement_currency: 3-character alphabetic ISO 4217 currency code for the settlement amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to the value of billing_currency
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -700,6 +738,8 @@ class Transactions(SyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
+                    "settlement_currency": settlement_currency,
                 },
                 transaction_simulate_return_params.TransactionSimulateReturnParams,
             ),
@@ -1033,6 +1073,7 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
         mcc: str | Omit = omit,
         merchant_acceptor_city: str | Omit = omit,
         merchant_acceptor_country: str | Omit = omit,
@@ -1042,6 +1083,7 @@ class AsyncTransactions(AsyncAPIResource):
         merchant_currency: str | Omit = omit,
         partial_approval_capable: bool | Omit = omit,
         pin: str | Omit = omit,
+        settlement_currency: str | Omit = omit,
         status: Literal[
             "AUTHORIZATION",
             "BALANCE_INQUIRY",
@@ -1078,6 +1120,10 @@ class AsyncTransactions(AsyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
@@ -1093,14 +1139,22 @@ class AsyncTransactions(AsyncAPIResource):
           merchant_amount: Amount of the transaction to be simulated in currency specified in
               merchant_currency, including any acquirer fees.
 
-          merchant_currency: 3-character alphabetic ISO 4217 currency code. Note: Simulator only accepts USD,
-              GBP, EUR and defaults to GBP if another ISO 4217 code is provided
+          merchant_currency: 3-character alphabetic ISO 4217 currency code for the merchant amount. Only used
+              when merchant_amount is set, and defaults to GBP in that case. Without
+              merchant_amount, the merchant amount uses the billing currency. Permitted values
+              are USD, GBP, EUR and CAD, and any other ISO 4217 code returns a 422
 
           partial_approval_capable: Set to true if the terminal is capable of partial approval otherwise false.
               Partial approval is when part of a transaction is approved and another payment
               must be used for the remainder.
 
           pin: Simulate entering a PIN. If omitted, PIN check will not be performed.
+
+          settlement_currency: 3-character alphabetic ISO 4217 currency code for the settlement amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to the value of billing_currency. Only single message
+              (financial) authorizations carry a settlement amount, and the value is ignored
+              for dual message authorizations
 
           status: Type of event to simulate.
 
@@ -1134,6 +1188,7 @@ class AsyncTransactions(AsyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
                     "mcc": mcc,
                     "merchant_acceptor_city": merchant_acceptor_city,
                     "merchant_acceptor_country": merchant_acceptor_country,
@@ -1143,6 +1198,7 @@ class AsyncTransactions(AsyncAPIResource):
                     "merchant_currency": merchant_currency,
                     "partial_approval_capable": partial_approval_capable,
                     "pin": pin,
+                    "settlement_currency": settlement_currency,
                     "status": status,
                 },
                 transaction_simulate_authorization_params.TransactionSimulateAuthorizationParams,
@@ -1265,6 +1321,7 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
         mcc: str | Omit = omit,
         merchant_acceptor_city: str | Omit = omit,
         merchant_acceptor_country: str | Omit = omit,
@@ -1291,6 +1348,10 @@ class AsyncTransactions(AsyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
@@ -1318,6 +1379,7 @@ class AsyncTransactions(AsyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
                     "mcc": mcc,
                     "merchant_acceptor_city": merchant_acceptor_city,
                     "merchant_acceptor_country": merchant_acceptor_country,
@@ -1338,6 +1400,7 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
         mcc: str | Omit = omit,
         merchant_acceptor_city: str | Omit = omit,
         merchant_acceptor_country: str | Omit = omit,
@@ -1364,6 +1427,10 @@ class AsyncTransactions(AsyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
           mcc: Merchant category code for the transaction to be simulated. A four-digit number
               listed in ISO 18245. Supported merchant category codes can be found
               [here](https://docs.lithic.com/docs/transactions#merchant-category-codes-mccs).
@@ -1391,6 +1458,7 @@ class AsyncTransactions(AsyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
                     "mcc": mcc,
                     "merchant_acceptor_city": merchant_acceptor_city,
                     "merchant_acceptor_country": merchant_acceptor_country,
@@ -1411,6 +1479,8 @@ class AsyncTransactions(AsyncAPIResource):
         amount: int,
         descriptor: str,
         pan: str,
+        billing_currency: str | Omit = omit,
+        settlement_currency: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1431,6 +1501,14 @@ class AsyncTransactions(AsyncAPIResource):
 
           pan: Sixteen digit card number.
 
+          billing_currency: 3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to USD
+
+          settlement_currency: 3-character alphabetic ISO 4217 currency code for the settlement amount.
+              Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+              a 422. Defaults to the value of billing_currency
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1446,6 +1524,8 @@ class AsyncTransactions(AsyncAPIResource):
                     "amount": amount,
                     "descriptor": descriptor,
                     "pan": pan,
+                    "billing_currency": billing_currency,
+                    "settlement_currency": settlement_currency,
                 },
                 transaction_simulate_return_params.TransactionSimulateReturnParams,
             ),

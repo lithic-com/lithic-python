@@ -22,6 +22,13 @@ class TransactionSimulateCreditAuthorizationAdviceParams(TypedDict, total=False)
     pan: Required[str]
     """Sixteen digit card number."""
 
+    billing_currency: str
+    """3-character alphabetic ISO 4217 currency code for the cardholder billing amount.
+
+    Permitted values are USD, GBP, EUR and CAD, and any other ISO 4217 code returns
+    a 422. Defaults to USD
+    """
+
     mcc: str
     """Merchant category code for the transaction to be simulated.
 

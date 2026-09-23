@@ -204,6 +204,7 @@ class TestTransactions:
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+            billing_currency="CAD",
             mcc="5812",
             merchant_acceptor_city="LOS ANGELES",
             merchant_acceptor_country="USA",
@@ -213,6 +214,7 @@ class TestTransactions:
             merchant_currency="GBP",
             partial_approval_capable=True,
             pin="1234",
+            settlement_currency="CAD",
             status="AUTHORIZATION",
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
@@ -336,6 +338,7 @@ class TestTransactions:
                 amount=3831,
                 descriptor="COFFEE SHOP",
                 pan="4111111289144142",
+                billing_currency="CAD",
                 mcc="5812",
                 merchant_acceptor_city="SEATTLE",
                 merchant_acceptor_country="USA",
@@ -390,6 +393,7 @@ class TestTransactions:
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+            billing_currency="CAD",
             mcc="5812",
             merchant_acceptor_city="SEATTLE",
             merchant_acceptor_country="USA",
@@ -432,6 +436,17 @@ class TestTransactions:
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+        )
+        assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+    @parametrize
+    def test_method_simulate_return_with_all_params(self, client: Lithic) -> None:
+        transaction = client.transactions.simulate_return(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+            billing_currency="CAD",
+            settlement_currency="CAD",
         )
         assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
 
@@ -713,6 +728,7 @@ class TestAsyncTransactions:
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+            billing_currency="CAD",
             mcc="5812",
             merchant_acceptor_city="LOS ANGELES",
             merchant_acceptor_country="USA",
@@ -722,6 +738,7 @@ class TestAsyncTransactions:
             merchant_currency="GBP",
             partial_approval_capable=True,
             pin="1234",
+            settlement_currency="CAD",
             status="AUTHORIZATION",
         )
         assert_matches_type(TransactionSimulateAuthorizationResponse, transaction, path=["response"])
@@ -845,6 +862,7 @@ class TestAsyncTransactions:
                 amount=3831,
                 descriptor="COFFEE SHOP",
                 pan="4111111289144142",
+                billing_currency="CAD",
                 mcc="5812",
                 merchant_acceptor_city="SEATTLE",
                 merchant_acceptor_country="USA",
@@ -899,6 +917,7 @@ class TestAsyncTransactions:
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+            billing_currency="CAD",
             mcc="5812",
             merchant_acceptor_city="SEATTLE",
             merchant_acceptor_country="USA",
@@ -941,6 +960,17 @@ class TestAsyncTransactions:
             amount=3831,
             descriptor="COFFEE SHOP",
             pan="4111111289144142",
+        )
+        assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
+
+    @parametrize
+    async def test_method_simulate_return_with_all_params(self, async_client: AsyncLithic) -> None:
+        transaction = await async_client.transactions.simulate_return(
+            amount=3831,
+            descriptor="COFFEE SHOP",
+            pan="4111111289144142",
+            billing_currency="CAD",
+            settlement_currency="CAD",
         )
         assert_matches_type(TransactionSimulateReturnResponse, transaction, path=["response"])
 
