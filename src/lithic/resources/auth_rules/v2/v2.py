@@ -73,9 +73,7 @@ class V2(SyncAPIResource):
         self,
         *,
         parameters: v2_create_params.AccountLevelRuleParameters,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
@@ -98,8 +96,6 @@ class V2(SyncAPIResource):
               several event streams, the effective one is defined by the separate
               `event_stream` field.
 
-              - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
-                AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -135,9 +131,7 @@ class V2(SyncAPIResource):
         *,
         card_tokens: SequenceNotStr[str],
         parameters: v2_create_params.CardLevelRuleParameters,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -160,8 +154,6 @@ class V2(SyncAPIResource):
               several event streams, the effective one is defined by the separate
               `event_stream` field.
 
-              - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
-                AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -193,9 +185,7 @@ class V2(SyncAPIResource):
         *,
         parameters: v2_create_params.ProgramLevelRuleParameters,
         program_level: bool,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         event_stream: EventStream | Omit = omit,
         excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
@@ -221,8 +211,6 @@ class V2(SyncAPIResource):
               several event streams, the effective one is defined by the separate
               `event_stream` field.
 
-              - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
-                AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -263,9 +251,7 @@ class V2(SyncAPIResource):
         parameters: v2_create_params.AccountLevelRuleParameters
         | v2_create_params.CardLevelRuleParameters
         | v2_create_params.ProgramLevelRuleParameters,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
@@ -848,7 +834,7 @@ class V2(SyncAPIResource):
         - VelocityLimit Rules calculates the current Velocity Feature data. This
           requires a `card_token` or `account_token` matching what the rule is Scoped
           to.
-        - ConditionalBlock Rules calculates the CARD*TRANSACTION_COUNT*\\** attributes on
+        - ConditionalAction Rules calculates the CARD*TRANSACTION_COUNT*\\** attributes on
           the rule. This requires a `card_token`
 
         Args:
@@ -971,9 +957,7 @@ class AsyncV2(AsyncAPIResource):
         self,
         *,
         parameters: v2_create_params.AccountLevelRuleParameters,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
@@ -996,8 +980,6 @@ class AsyncV2(AsyncAPIResource):
               several event streams, the effective one is defined by the separate
               `event_stream` field.
 
-              - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
-                AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -1033,9 +1015,7 @@ class AsyncV2(AsyncAPIResource):
         *,
         card_tokens: SequenceNotStr[str],
         parameters: v2_create_params.CardLevelRuleParameters,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1058,8 +1038,6 @@ class AsyncV2(AsyncAPIResource):
               several event streams, the effective one is defined by the separate
               `event_stream` field.
 
-              - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
-                AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -1091,9 +1069,7 @@ class AsyncV2(AsyncAPIResource):
         *,
         parameters: v2_create_params.ProgramLevelRuleParameters,
         program_level: bool,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         event_stream: EventStream | Omit = omit,
         excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
@@ -1119,8 +1095,6 @@ class AsyncV2(AsyncAPIResource):
               several event streams, the effective one is defined by the separate
               `event_stream` field.
 
-              - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
-                AUTHORIZATION event stream.
               - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
               - `MERCHANT_LOCK`: AUTHORIZATION event stream.
               - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
@@ -1161,9 +1135,7 @@ class AsyncV2(AsyncAPIResource):
         parameters: v2_create_params.AccountLevelRuleParameters
         | v2_create_params.CardLevelRuleParameters
         | v2_create_params.ProgramLevelRuleParameters,
-        type: Literal[
-            "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-        ],
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
@@ -1746,7 +1718,7 @@ class AsyncV2(AsyncAPIResource):
         - VelocityLimit Rules calculates the current Velocity Feature data. This
           requires a `card_token` or `account_token` matching what the rule is Scoped
           to.
-        - ConditionalBlock Rules calculates the CARD*TRANSACTION_COUNT*\\** attributes on
+        - ConditionalAction Rules calculates the CARD*TRANSACTION_COUNT*\\** attributes on
           the rule. This requires a `card_token`
 
         Args:

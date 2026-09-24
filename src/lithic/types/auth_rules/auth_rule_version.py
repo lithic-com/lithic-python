@@ -8,7 +8,6 @@ from ..._models import BaseModel
 from .velocity_limit_params import VelocityLimitParams
 from .merchant_lock_parameters import MerchantLockParameters
 from .typescript_code_parameters import TypescriptCodeParameters
-from .conditional_block_parameters import ConditionalBlockParameters
 from .conditional_3ds_action_parameters import Conditional3DSActionParameters
 from .conditional_ach_action_parameters import ConditionalACHActionParameters
 from .conditional_tokenization_action_parameters import ConditionalTokenizationActionParameters
@@ -20,7 +19,6 @@ from .conditional_card_transaction_update_action_parameters import ConditionalCa
 __all__ = ["AuthRuleVersion", "Parameters"]
 
 Parameters: TypeAlias = Union[
-    ConditionalBlockParameters,
     VelocityLimitParams,
     MerchantLockParameters,
     Conditional3DSActionParameters,

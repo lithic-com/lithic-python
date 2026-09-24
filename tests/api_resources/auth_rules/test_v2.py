@@ -29,15 +29,13 @@ class TestV2:
     def test_method_create_overload_1(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
 
@@ -45,15 +43,24 @@ class TestV2:
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
             account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             event_stream="AUTHORIZATION",
@@ -65,15 +72,13 @@ class TestV2:
     def test_raw_response_create_overload_1(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
 
         assert response.is_closed is True
@@ -85,15 +90,13 @@ class TestV2:
     def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -108,15 +111,13 @@ class TestV2:
         v2 = client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
 
@@ -125,15 +126,24 @@ class TestV2:
         v2 = client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
             event_stream="AUTHORIZATION",
             name="name",
         )
@@ -144,15 +154,13 @@ class TestV2:
         response = client.auth_rules.v2.with_raw_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
 
         assert response.is_closed is True
@@ -165,15 +173,13 @@ class TestV2:
         with client.auth_rules.v2.with_streaming_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -187,16 +193,14 @@ class TestV2:
     def test_method_create_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
 
@@ -204,16 +208,25 @@ class TestV2:
     def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
             event_stream="AUTHORIZATION",
             excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -226,16 +239,14 @@ class TestV2:
     def test_raw_response_create_overload_3(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
 
         assert response.is_closed is True
@@ -247,16 +258,14 @@ class TestV2:
     def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -542,13 +551,22 @@ class TestV2:
         v2 = client.auth_rules.v2.draft(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
         )
         assert_matches_type(AuthRule, v2, path=["response"])
@@ -802,15 +820,13 @@ class TestAsyncV2:
     async def test_method_create_overload_1(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
 
@@ -818,15 +834,24 @@ class TestAsyncV2:
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
             account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             event_stream="AUTHORIZATION",
@@ -838,15 +863,13 @@ class TestAsyncV2:
     async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
 
         assert response.is_closed is True
@@ -858,15 +881,13 @@ class TestAsyncV2:
     async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -881,15 +902,13 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
 
@@ -898,15 +917,24 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
             event_stream="AUTHORIZATION",
             name="name",
         )
@@ -917,15 +945,13 @@ class TestAsyncV2:
         response = await async_client.auth_rules.v2.with_raw_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
 
         assert response.is_closed is True
@@ -938,15 +964,13 @@ class TestAsyncV2:
         async with async_client.auth_rules.v2.with_streaming_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -960,16 +984,14 @@ class TestAsyncV2:
     async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
 
@@ -977,16 +999,25 @@ class TestAsyncV2:
     async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
             event_stream="AUTHORIZATION",
             excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -999,16 +1030,14 @@ class TestAsyncV2:
     async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         )
 
         assert response.is_closed is True
@@ -1020,16 +1049,14 @@ class TestAsyncV2:
     async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
             },
             program_level=True,
-            type="CONDITIONAL_BLOCK",
+            type="VELOCITY_LIMIT",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1315,13 +1342,22 @@ class TestAsyncV2:
         v2 = await async_client.auth_rules.v2.draft(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             parameters={
-                "conditions": [
-                    {
-                        "attribute": "MCC",
-                        "operation": "IS_ONE_OF",
-                        "value": "string",
-                    }
-                ]
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
             },
         )
         assert_matches_type(AuthRule, v2, path=["response"])

@@ -8,7 +8,6 @@ from .event_stream import EventStream
 from .velocity_limit_params import VelocityLimitParams
 from .merchant_lock_parameters import MerchantLockParameters
 from .typescript_code_parameters import TypescriptCodeParameters
-from .conditional_block_parameters import ConditionalBlockParameters
 from .conditional_3ds_action_parameters import Conditional3DSActionParameters
 from .conditional_ach_action_parameters import ConditionalACHActionParameters
 from .conditional_tokenization_action_parameters import ConditionalTokenizationActionParameters
@@ -20,7 +19,6 @@ from .conditional_card_transaction_update_action_parameters import ConditionalCa
 __all__ = ["AuthRule", "CurrentVersion", "CurrentVersionParameters", "DraftVersion", "DraftVersionParameters"]
 
 CurrentVersionParameters: TypeAlias = Union[
-    ConditionalBlockParameters,
     VelocityLimitParams,
     MerchantLockParameters,
     Conditional3DSActionParameters,
@@ -46,7 +44,6 @@ class CurrentVersion(BaseModel):
 
 
 DraftVersionParameters: TypeAlias = Union[
-    ConditionalBlockParameters,
     VelocityLimitParams,
     MerchantLockParameters,
     Conditional3DSActionParameters,
@@ -126,17 +123,13 @@ class AuthRule(BaseModel):
     state: Literal["ACTIVE", "INACTIVE"]
     """The state of the Auth Rule"""
 
-    type: Literal[
-        "CONDITIONAL_BLOCK", "VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"
-    ]
+    type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"]
     """The type of Auth Rule.
 
     For certain rule types, this determines the event stream during which it will be
     evaluated. For rules that can be applied to one of several event streams, the
     effective one is defined by the separate `event_stream` field.
 
-    - `CONDITIONAL_BLOCK`: Deprecated. Use `CONDITIONAL_ACTION` instead.
-      AUTHORIZATION event stream.
     - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
     - `MERCHANT_LOCK`: AUTHORIZATION event stream.
     - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
