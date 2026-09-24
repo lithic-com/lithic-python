@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 
 from ..._models import BaseModel
 
@@ -40,3 +41,6 @@ class MerchantLockParameters(BaseModel):
     A list of merchant locks defining specific merchants or groups of merchants
     (based on descriptors or IDs) that the lock applies to.
     """
+
+    locked_at: Optional[datetime] = None
+    """Timestamp of when the merchant lock was created"""
