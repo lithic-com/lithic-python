@@ -1,5 +1,61 @@
 # Changelog
 
+## 0.132.0 (2026-09-18)
+
+Full Changelog: [v0.131.0...v0.132.0](https://github.com/lithic-com/lithic-python/compare/v0.131.0...v0.132.0)
+
+### Features
+
+* [CARDS-5174] Add reiusse/renew 409 error ([60c6b8e](https://github.com/lithic-com/lithic-python/commit/60c6b8eefa05208966212c0cc205ef0019f115ac))
+* [TRE-14464] Update /retry payments endpoint to accept method ([9ac7441](https://github.com/lithic-com/lithic-python/commit/9ac74418812660394107e068a012a373a9f81460))
+* [TRE-14524] Add Open to buy API spec ([001bd06](https://github.com/lithic-com/lithic-python/commit/001bd06bbd7c7274e6a1c59f4adcb9e86959b74e))
+* Add missing blockchain/stablecoin endpoints to the spec ([8f1b51c](https://github.com/lithic-com/lithic-python/commit/8f1b51c992cf317ee4353a3244e347f02a666b0f))
+* **api:** add card.pin_updated webhook event ([14889db](https://github.com/lithic-com/lithic-python/commit/14889dbf638b7d1b85e4b3145d8b3914cc87619a))
+* **api:** add EXTERNAL_STABLECOIN category and events to external_payments/account_activity ([945f5ae](https://github.com/lithic-com/lithic-python/commit/945f5aed2a5ddf72dac4319d65cc0c87c86ca172))
+* **api:** add FEE/FEE_REVERSAL enum values to management_operations and financial events ([615daa4](https://github.com/lithic-com/lithic-python/commit/615daa4be69ee4aab3fb1bc992635b335077ad92))
+* **api:** add installment_plans endpoints to financial_accounts ([065f732](https://github.com/lithic-com/lithic-python/commit/065f7323f26a10269c58eced8866f9f5fb4267e3))
+* **api:** add OTHER enum value to auth_rules v2 type field ([3f0a148](https://github.com/lithic-com/lithic-python/commit/3f0a148adc95e092aa25c9e569bbda518bbe3f54))
+* **api:** add psd2_context field and types to three_ds_authentication ([7da6f44](https://github.com/lithic-com/lithic-python/commit/7da6f4449fc8a5e018e8cc6483400a3383f3df4e))
+* **api:** add STABLECOIN_REVIEWED event type to payments simulate_action ([dc065e4](https://github.com/lithic-com/lithic-python/commit/dc065e43f9c025156c5ca142a9a222b5e0305354))
+* AUTH-3759: Add DECLINE_SCA_REQUIRED and SCA_REQUIRED enum entries ([445299d](https://github.com/lithic-com/lithic-python/commit/445299db5e0bbce6d2a5611a4cb752ac141dd77e))
+* TRE-14349: add installment plan management operation event types ([3cdcf9f](https://github.com/lithic-com/lithic-python/commit/3cdcf9fec6517da95ac06beaf373bc9070a8704f))
+* TRE-14429: Document the stablecoin payments endpoint ([c7b557e](https://github.com/lithic-com/lithic-python/commit/c7b557e0873ef183937d5c432f2a026e8fdd37c3))
+
+## 0.131.0 (2026-08-31)
+
+Full Changelog: [v0.130.0...v0.131.0](https://github.com/lithic-com/lithic-python/compare/v0.130.0...v0.131.0)
+
+### Features
+
+* **api:** add blockchain_addresses field to financial account ([168e194](https://github.com/lithic-com/lithic-python/commit/168e194dce255e6b907a65b3387dffec89ca0426))
+* **api:** add claim_token parameter/field, WRITE_OFF_REVERSED enum to disputes_v2 ([1ce906c](https://github.com/lithic-com/lithic-python/commit/1ce906c05421ae00dfc09d6513552c1f9a130d68))
+* **api:** Add limit_cash_amount and limit_cash_count to VelocityLimit template ([64068f8](https://github.com/lithic-com/lithic-python/commit/64068f89bd9400b4e684b8eb1fdf5bdede893a36))
+* **api:** add PROGRAM scope to auth_rules and case entity types ([7d67d35](https://github.com/lithic-com/lithic-python/commit/7d67d35bafb84f3cb24fade78214478bcc3204f2))
+* **api:** add reassign_account method to cards ([993f3f3](https://github.com/lithic-com/lithic-python/commit/993f3f3dac1d9043f8518da438812dc0c5612e58))
+* **api:** add stablecoin event types to payment/statement/financial_event ([9c1cfe4](https://github.com/lithic-com/lithic-python/commit/9c1cfe46e6538c2429653dd65bf72938544f1fe4))
+* **api:** add stablecoin method and attributes to payment ([ed5c9b0](https://github.com/lithic-com/lithic-python/commit/ed5c9b0496b984876497c39a6110020979f93bfb))
+* **api:** add STABLECOIN method, make method_attributes optional in payment ([ebb1b60](https://github.com/lithic-com/lithic-python/commit/ebb1b60c55251a27d0da338875be625a67cea4c2))
+* **api:** Add STABLECOIN to approvals request and transfer type enums ([8c277b5](https://github.com/lithic-com/lithic-python/commit/8c277b59aefd35e571026c97177a50223fd0622d))
+* **api:** add STABLECOIN_INBOUND and STABLECOIN_OUTBOUND to Payment ([ae77597](https://github.com/lithic-com/lithic-python/commit/ae7759730d8cbcadb159c7584ce41bd1259e6c8b))
+* Make blockchain recipient account_token nullable ([bedead8](https://github.com/lithic-com/lithic-python/commit/bedead85bca43055d618fb90df2a2bfeaee7f85e))
+* Remove stablecoin transfer type ([a69c537](https://github.com/lithic-com/lithic-python/commit/a69c5377a1e1f383aef0ee50a2380d326d174e0e))
+
+
+### Bug Fixes
+
+* **types:** remove discriminator from event data types in dispute_v2 ([02bc887](https://github.com/lithic-com/lithic-python/commit/02bc88780f9660c80e30bd7b8a486203487843fe))
+
+
+### Chores
+
+* **internal:** allow the mock server port to be set with STAINLESS_MOCK_PORT ([f7318ae](https://github.com/lithic-com/lithic-python/commit/f7318aea8fdc1d002a5188952d418832f2629d84))
+
+
+### Documentation
+
+* **api:** clarify CVV format in tokenizations and card ([8980c52](https://github.com/lithic-com/lithic-python/commit/8980c5219db6e83e4cc8e9d2445fbd223c24a728))
+* **api:** update client_device_id and client_wallet_account_id docs in cards provision ([2ff9d3a](https://github.com/lithic-com/lithic-python/commit/2ff9d3a68766e807ed7507e8965e44d9f95bbb92))
+
 ## 0.130.0 (2026-07-30)
 
 Full Changelog: [v0.129.0...v0.130.0](https://github.com/lithic-com/lithic-python/compare/v0.129.0...v0.130.0)
