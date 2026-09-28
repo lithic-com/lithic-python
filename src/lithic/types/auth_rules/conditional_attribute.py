@@ -30,6 +30,7 @@ ConditionalAttribute: TypeAlias = Literal[
     "SERVICE_LOCATION_STATE",
     "SERVICE_LOCATION_POSTAL_CODE",
     "CARD_AGE",
+    "IS_DOMESTIC",
     "ACCOUNT_AGE",
     "AMOUNT_Z_SCORE",
     "AVG_TRANSACTION_AMOUNT",

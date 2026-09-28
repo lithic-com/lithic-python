@@ -117,6 +117,9 @@ class AuthRuleConditionParam(TypedDict, total=False):
       card acceptor postal code.
     - `CARD_AGE`: The age of the card in seconds at the time of the authorization.
       Use an integer value.
+    - `IS_DOMESTIC`: Whether the merchant's country matches the card program's
+      issuing country. Valid values are `TRUE`, `FALSE`. For programs with no
+      issuing country configured, this attribute does not evaluate.
     - `ACCOUNT_AGE`: The age of the account holder's account in seconds at the time
       of the authorization. Use an integer value. For programs where Lithic does not
       manage or retain account holder data, this attribute does not evaluate.
