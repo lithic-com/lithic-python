@@ -55,14 +55,16 @@ jobs:
             "https://x-access-token:${GH_TOKEN}@github.com/${PRODUCTION_REPO}.git"
           git fetch production main
 
-      - name: Check whether production already has staging's content
+      - name: Check whether production already has staging's tip
         id: diff
         run: |
-          # After a release, production has release-please commits staging lacks, so compare trees.
-          MERGED=$(git merge-tree --write-tree production/main origin/main) || MERGED=conflict
-          PRODUCTION_TREE=$(git rev-parse 'production/main^{tree}')
-          if [ "$MERGED" = "$PRODUCTION_TREE" ]; then
-            echo "Production already contains staging's content. Nothing to promote."
+          # Ancestry, not content. Production may be *ahead* of staging right after a release
+          # (release-please's version commit, not yet back-synced): then it already contains
+          # staging's tip and there is nothing to promote. A tree comparison was used here
+          # before and wrongly skipped commits that change no files (e.g. empty Conventional
+          # Commits seeded for release-please), leaving production without them.
+          if git merge-base --is-ancestor origin/main production/main; then
+            echo "Production already contains staging's tip $(git rev-parse --short origin/main). Nothing to promote."
             echo "synced=true" >> "$GITHUB_OUTPUT"
           else
             echo "synced=false" >> "$GITHUB_OUTPUT"
@@ -78,7 +80,7 @@ jobs:
             exit 1
           fi
           git push production origin/main:refs/heads/main
-          echo "Fast-forwarded production/main to staging/main."
+          echo "Fast-forwarded production/main $(git rev-parse --short production/main) -> $(git rev-parse --short origin/main)."
 
       - name: Alert on failure
         if: failure()
