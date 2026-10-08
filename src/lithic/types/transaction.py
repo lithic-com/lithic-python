@@ -779,7 +779,8 @@ class Transaction(BaseModel):
     """Key-value pairs for tagging resources.
 
     Tags allow you to associate arbitrary metadata with a resource for your own
-    purposes.
+    purposes. A resource can have at most 50 tags, with keys up to 40 characters and
+    values up to 500 characters
     """
 
     token_info: Optional[TokenInfo] = None

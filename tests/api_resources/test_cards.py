@@ -70,6 +70,7 @@ class TestCards:
             spend_limit=1000,
             spend_limit_duration="TRANSACTION",
             state="OPEN",
+            tags={"risk-level": "high"},
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -156,6 +157,7 @@ class TestCards:
             spend_limit_duration="FOREVER",
             state="OPEN",
             substatus="LOST",
+            tags={"risk-level": "high"},
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -833,6 +835,7 @@ class TestAsyncCards:
             spend_limit=1000,
             spend_limit_duration="TRANSACTION",
             state="OPEN",
+            tags={"risk-level": "high"},
         )
         assert_matches_type(Card, card, path=["response"])
 
@@ -919,6 +922,7 @@ class TestAsyncCards:
             spend_limit_duration="FOREVER",
             state="OPEN",
             substatus="LOST",
+            tags={"risk-level": "high"},
         )
         assert_matches_type(Card, card, path=["response"])
 

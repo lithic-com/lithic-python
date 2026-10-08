@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict, Optional
 from typing_extensions import Literal, TypedDict
 
 from .spend_limit_duration import SpendLimitDuration
@@ -120,4 +121,12 @@ class CardUpdateParams(TypedDict, total=False):
       returned.
     - `OTHER` - The reason for the status does not fall into any of the above
       categories. A comment should be provided to specify the reason.
+    """
+
+    tags: Dict[str, Optional[str]]
+    """Key-value pairs to merge into the card's tags.
+
+    Supplied keys are added or overwritten, a key with a `null` value is removed,
+    and omitted keys remain unchanged. A card can have at most 50 tags, with keys up
+    to 40 characters and values up to 500 characters
     """

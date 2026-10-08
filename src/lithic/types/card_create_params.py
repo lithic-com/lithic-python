@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Literal, Required, TypedDict
 
 from .spend_limit_duration import SpendLimitDuration
@@ -217,4 +218,12 @@ class CardCreateParams(TypedDict, total=False):
       parameters).
     - `PAUSED` - Card will decline authorizations, but can be resumed at a later
       time.
+    """
+
+    tags: Dict[str, str]
+    """Key-value pairs to tag the card with.
+
+    A replacement card does not inherit tags from the card it replaces. A card can
+    have at most 50 tags, with keys up to 40 characters and values up to 500
+    characters
     """
