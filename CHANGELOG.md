@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.133.0](https://github.com/lithic-com/lithic-python/compare/v0.132.0...v0.133.0) (2026-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** the CONDITIONAL_BLOCK rule type and the ConditionalBlockParameters model are removed. All rules are now CONDITIONAL_ACTION.
+
+### Features
+
+* **api:** accept billing_currency and settlement_currency on transaction simulation endpoints ([6fc38ce](https://github.com/lithic-com/lithic-python/commit/6fc38ce6502edc99e7e9dfe212f862529e16f449))
+* **api:** add installment plan statement endpoints to financial accounts ([8994f64](https://github.com/lithic-com/lithic-python/commit/8994f641971d774bb06926dd4baeeca47b0417af))
+* **api:** add payment-only allocation breakdown to the loan tape ([820d8aa](https://github.com/lithic-com/lithic-python/commit/820d8aaeccc8c8fc2415f18f531c6696c8e1684e))
+* **api:** expose the full conditional attribute set for authorization rules ([178de6b](https://github.com/lithic-com/lithic-python/commit/178de6b27bf612c76d7c84f5b05e46afefd990f9))
+* **api:** remove CONDITIONAL_BLOCK from authorization rules ([0d7e5ab](https://github.com/lithic-com/lithic-python/commit/0d7e5ab0f933b92a7b85bf24c1d470f1587ffda0))
+* **api:** support international addresses and address2 for KYB_DELEGATED and KYC_EXEMPT workflows ([65c8658](https://github.com/lithic-com/lithic-python/commit/65c8658e6e195d335e0b0a7d6665da31bb5dac1b))
+
 ## 0.132.0 (2026-09-18)
 
 Full Changelog: [v0.131.0...v0.132.0](https://github.com/lithic-com/lithic-python/compare/v0.131.0...v0.132.0)
