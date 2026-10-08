@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -116,6 +116,14 @@ class NonPCICard(BaseModel):
     card's state to `OPEN` only after the cardholder confirms receipt of the card.
     In sandbox, the same daily batch fulfillment occurs, but no cards are actually
     manufactured.
+    """
+
+    tags: Dict[str, str]
+    """Key-value pairs for tagging resources.
+
+    Tags allow you to associate arbitrary metadata with a resource for your own
+    purposes. A resource can have at most 50 tags, with keys up to 40 characters and
+    values up to 500 characters
     """
 
     type: Literal["MERCHANT_LOCKED", "PHYSICAL", "SINGLE_USE", "VIRTUAL", "UNLOCKED", "DIGITAL_WALLET"]

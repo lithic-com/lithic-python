@@ -7,7 +7,7 @@ import json
 import base64
 import hashlib
 import typing_extensions
-from typing import Any, Union, cast
+from typing import Any, Dict, Union, Optional, cast
 from datetime import datetime, timezone, timedelta
 from typing_extensions import Literal
 
@@ -133,6 +133,7 @@ class Cards(SyncAPIResource):
         spend_limit: int | Omit = omit,
         spend_limit_duration: SpendLimitDuration | Omit = omit,
         state: Literal["OPEN", "PAUSED"] | Omit = omit,
+        tags: Dict[str, str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -290,6 +291,10 @@ class Cards(SyncAPIResource):
               - `PAUSED` - Card will decline authorizations, but can be resumed at a later
                 time.
 
+          tags: Key-value pairs to tag the card with. A replacement card does not inherit tags
+              from the card it replaces. A card can have at most 50 tags, with keys up to 40
+              characters and values up to 500 characters
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -322,6 +327,7 @@ class Cards(SyncAPIResource):
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
                     "state": state,
+                    "tags": tags,
                 },
                 card_create_params.CardCreateParams,
             ),
@@ -391,6 +397,7 @@ class Cards(SyncAPIResource):
             "OTHER",
         ]
         | Omit = omit,
+        tags: Dict[str, Optional[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -485,6 +492,11 @@ class Cards(SyncAPIResource):
               - `OTHER` - The reason for the status does not fall into any of the above
                 categories. A comment should be provided to specify the reason.
 
+          tags: Key-value pairs to merge into the card's tags. Supplied keys are added or
+              overwritten, a key with a `null` value is removed, and omitted keys remain
+              unchanged. A card can have at most 50 tags, with keys up to 40 characters and
+              values up to 500 characters
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -509,6 +521,7 @@ class Cards(SyncAPIResource):
                     "spend_limit_duration": spend_limit_duration,
                     "state": state,
                     "substatus": substatus,
+                    "tags": tags,
                 },
                 card_update_params.CardUpdateParams,
             ),
@@ -1412,6 +1425,7 @@ class AsyncCards(AsyncAPIResource):
         spend_limit: int | Omit = omit,
         spend_limit_duration: SpendLimitDuration | Omit = omit,
         state: Literal["OPEN", "PAUSED"] | Omit = omit,
+        tags: Dict[str, str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1569,6 +1583,10 @@ class AsyncCards(AsyncAPIResource):
               - `PAUSED` - Card will decline authorizations, but can be resumed at a later
                 time.
 
+          tags: Key-value pairs to tag the card with. A replacement card does not inherit tags
+              from the card it replaces. A card can have at most 50 tags, with keys up to 40
+              characters and values up to 500 characters
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1601,6 +1619,7 @@ class AsyncCards(AsyncAPIResource):
                     "spend_limit": spend_limit,
                     "spend_limit_duration": spend_limit_duration,
                     "state": state,
+                    "tags": tags,
                 },
                 card_create_params.CardCreateParams,
             ),
@@ -1670,6 +1689,7 @@ class AsyncCards(AsyncAPIResource):
             "OTHER",
         ]
         | Omit = omit,
+        tags: Dict[str, Optional[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1764,6 +1784,11 @@ class AsyncCards(AsyncAPIResource):
               - `OTHER` - The reason for the status does not fall into any of the above
                 categories. A comment should be provided to specify the reason.
 
+          tags: Key-value pairs to merge into the card's tags. Supplied keys are added or
+              overwritten, a key with a `null` value is removed, and omitted keys remain
+              unchanged. A card can have at most 50 tags, with keys up to 40 characters and
+              values up to 500 characters
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1788,6 +1813,7 @@ class AsyncCards(AsyncAPIResource):
                     "spend_limit_duration": spend_limit_duration,
                     "state": state,
                     "substatus": substatus,
+                    "tags": tags,
                 },
                 card_update_params.CardUpdateParams,
             ),
