@@ -7,13 +7,8 @@ import json
 import base64
 import hashlib
 import typing_extensions
-<<<<<<< HEAD
 from typing import Any, Dict, Union, Optional, cast
-from datetime import datetime
-=======
-from typing import Any, Union, cast
 from datetime import datetime, timezone, timedelta
->>>>>>> 542e645f (Apply custom code)
 from typing_extensions import Literal
 
 import httpx
