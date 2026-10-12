@@ -8,11 +8,7 @@ import base64
 import hashlib
 import typing_extensions
 from typing import Any, Dict, Union, Optional, cast
-<<<<<<< HEAD
-from datetime import datetime
-=======
 from datetime import datetime, timezone, timedelta
->>>>>>> ac31691b (Apply custom code)
 from typing_extensions import Literal
 
 import httpx
