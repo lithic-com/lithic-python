@@ -43,7 +43,11 @@ class V2ListParams(TypedDict, total=False):
     """Page size (for pagination)."""
 
     scope: Literal["PROGRAM", "ACCOUNT", "BUSINESS_ACCOUNT", "CARD", "ANY"]
-    """Only return Auth Rules that are bound to the provided scope."""
+    """Only return Auth Rules that are bound to the provided scope.
+
+    When no token is provided, `CARD` also returns Auth Rules that include a
+    `CARD_TAG` entity.
+    """
 
     starting_after: str
     """A cursor representing an item's token after which a page of results should

@@ -104,6 +104,9 @@ from lithic.types.auth_rules import (
     ACHPaymentUpdateAction,
     AuthRule,
     AuthRuleCondition,
+    AuthRuleEntities,
+    AuthRuleEntitiesResponse,
+    AuthRuleEntity,
     AuthRuleVersion,
     BacktestStats,
     CardTransactionUpdateAction,
@@ -146,6 +149,7 @@ Methods:
 - <code title="post /v2/auth_rules/{auth_rule_token}/promote">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">promote</a>(auth_rule_token) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/features">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_features</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_features_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_features_response.py">V2RetrieveFeaturesResponse</a></code>
 - <code title="get /v2/auth_rules/{auth_rule_token}/report">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">retrieve_report</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_retrieve_report_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/v2_retrieve_report_response.py">V2RetrieveReportResponse</a></code>
+- <code title="patch /v2/auth_rules/{auth_rule_token}/entities">client.auth_rules.v2.<a href="./src/lithic/resources/auth_rules/v2/v2.py">update_entities</a>(auth_rule_token, \*\*<a href="src/lithic/types/auth_rules/v2_update_entities_params.py">params</a>) -> <a href="./src/lithic/types/auth_rules/auth_rule.py">AuthRule</a></code>
 
 ### Backtests
 

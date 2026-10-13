@@ -32,10 +32,12 @@ from ....types.auth_rules import (
     v2_update_params,
     v2_list_results_params,
     v2_retrieve_report_params,
+    v2_update_entities_params,
     v2_retrieve_features_params,
 )
 from ....types.auth_rules.auth_rule import AuthRule
 from ....types.auth_rules.event_stream import EventStream
+from ....types.auth_rules.auth_rule_entities_param import AuthRuleEntitiesParam
 from ....types.auth_rules.v2_list_results_response import V2ListResultsResponse
 from ....types.auth_rules.v2_list_versions_response import V2ListVersionsResponse
 from ....types.auth_rules.v2_retrieve_report_response import V2RetrieveReportResponse
@@ -67,6 +69,74 @@ class V2(SyncAPIResource):
         For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
         """
         return V2WithStreamingResponse(self)
+
+    @overload
+    def create(
+        self,
+        *,
+        entities: AuthRuleEntitiesParam,
+        parameters: v2_create_params.RuleParameters,
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
+        event_stream: EventStream | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthRule:
+        """
+        Creates a new V2 Auth rule in draft mode
+
+        Args:
+          entities: The entities an Auth Rule applies to (`include`) and does not apply to
+              (`exclude`). An exclusion overrides an inclusion, so a card excluded here is
+              skipped even when the program, its account or one of its tags is included.
+
+              The rule's resulting entities must satisfy these constraints after any write:
+
+              - `include` must contain at least one entity.
+              - If `PROGRAM` is included, it must be the only included entity.
+              - `PROGRAM` cannot be excluded.
+              - An entity cannot appear in both `include` and `exclude`, or twice in the same
+                list.
+              - A rule can have at most 1,000 entities across `include` and `exclude`, not
+                counting `PROGRAM`.
+              - Entity types must be valid for the rule's event stream.
+              - `CARD`, `ACCOUNT` and `BUSINESS_ACCOUNT` tokens must belong to your program.
+
+          parameters: Parameters for the Auth Rule
+
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
+
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
+              - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
+                are read-only; `OTHER` cannot be used when creating a rule.
+
+          event_stream: The event stream during which the rule will be evaluated.
+
+          name: Auth Rule Name
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
 
     @overload
     def create(
@@ -107,9 +177,13 @@ class V2(SyncAPIResource):
               - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
                 are read-only; `OTHER` cannot be used when creating a rule.
 
-          account_tokens: Account tokens to which the Auth Rule applies.
+          account_tokens: Deprecated: Use `entities.include` with `ACCOUNT` entities instead.
 
-          business_account_tokens: Business Account tokens to which the Auth Rule applies.
+              Account tokens to which the Auth Rule applies.
+
+          business_account_tokens: Deprecated: Use `entities.include` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business Account tokens to which the Auth Rule applies.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -145,7 +219,10 @@ class V2(SyncAPIResource):
         Creates a new V2 Auth rule in draft mode
 
         Args:
-          card_tokens: Card tokens to which the Auth Rule applies.
+          card_tokens: Deprecated: Use `entities.include` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule applies. Cards the rule applies to through a
+              `CARD_TAG` entity are not listed.
 
           parameters: Parameters for the Auth Rule
 
@@ -204,7 +281,9 @@ class V2(SyncAPIResource):
         Args:
           parameters: Parameters for the Auth Rule
 
-          program_level: Whether the Auth Rule applies to all authorizations on the card program.
+          program_level: Deprecated: Use `entities.include` with a `PROGRAM` entity instead.
+
+              Whether the Auth Rule applies to all authorizations on the card program.
 
           type: The type of Auth Rule. For certain rule types, this determines the event stream
               during which it will be evaluated. For rules that can be applied to one of
@@ -224,11 +303,18 @@ class V2(SyncAPIResource):
 
           event_stream: The event stream during which the rule will be evaluated.
 
-          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+          excluded_account_tokens: Deprecated: Use `entities.exclude` with `ACCOUNT` entities instead.
 
-          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+              Account tokens to which the Auth Rule does not apply.
 
-          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+          excluded_business_account_tokens: Deprecated: Use `entities.exclude` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business account tokens to which the Auth Rule does not apply.
+
+          excluded_card_tokens: Deprecated: Use `entities.exclude` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule does not apply. Cards excluded through a
+              `CARD_TAG` entity are not listed.
 
           name: Auth Rule Name
 
@@ -243,19 +329,24 @@ class V2(SyncAPIResource):
         ...
 
     @required_args(
-        ["parameters", "type"], ["card_tokens", "parameters", "type"], ["parameters", "program_level", "type"]
+        ["entities", "parameters", "type"],
+        ["parameters", "type"],
+        ["card_tokens", "parameters", "type"],
+        ["parameters", "program_level", "type"],
     )
     def create(
         self,
         *,
-        parameters: v2_create_params.AccountLevelRuleParameters
+        entities: AuthRuleEntitiesParam | Omit = omit,
+        parameters: v2_create_params.RuleParameters
+        | v2_create_params.AccountLevelRuleParameters
         | v2_create_params.CardLevelRuleParameters
         | v2_create_params.ProgramLevelRuleParameters,
         type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
         excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
@@ -272,12 +363,13 @@ class V2(SyncAPIResource):
             "/v2/auth_rules",
             body=maybe_transform(
                 {
+                    "entities": entities,
                     "parameters": parameters,
                     "type": type,
-                    "account_tokens": account_tokens,
-                    "business_account_tokens": business_account_tokens,
                     "event_stream": event_stream,
                     "name": name,
+                    "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
                     "excluded_account_tokens": excluded_account_tokens,
@@ -330,6 +422,63 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        entities: AuthRuleEntitiesParam | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthRule:
+        """
+        Updates a V2 Auth rule's properties
+
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
+
+        Args:
+          entities: The entities an Auth Rule applies to (`include`) and does not apply to
+              (`exclude`). An exclusion overrides an inclusion, so a card excluded here is
+              skipped even when the program, its account or one of its tags is included.
+
+              The rule's resulting entities must satisfy these constraints after any write:
+
+              - `include` must contain at least one entity.
+              - If `PROGRAM` is included, it must be the only included entity.
+              - `PROGRAM` cannot be excluded.
+              - An entity cannot appear in both `include` and `exclude`, or twice in the same
+                list.
+              - A rule can have at most 1,000 entities across `include` and `exclude`, not
+                counting `PROGRAM`.
+              - Entity types must be valid for the rule's event stream.
+              - `CARD`, `ACCOUNT` and `BUSINESS_ACCOUNT` tokens must belong to your program.
+
+          name: Auth Rule Name
+
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        auth_rule_token: str,
+        *,
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
@@ -344,14 +493,18 @@ class V2(SyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
-        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
-        this will replace existing associations with the provided list of entities.
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
 
         Args:
-          account_tokens: Account tokens to which the Auth Rule applies.
+          account_tokens: Deprecated: Use `entities.include` with `ACCOUNT` entities instead.
 
-          business_account_tokens: Business Account tokens to which the Auth Rule applies.
+              Account tokens to which the Auth Rule applies.
+
+          business_account_tokens: Deprecated: Use `entities.include` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business Account tokens to which the Auth Rule applies.
 
           name: Auth Rule Name
 
@@ -389,12 +542,15 @@ class V2(SyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
-        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
-        this will replace existing associations with the provided list of entities.
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
 
         Args:
-          card_tokens: Card tokens to which the Auth Rule applies.
+          card_tokens: Deprecated: Use `entities.include` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule applies. Cards the rule applies to through a
+              `CARD_TAG` entity are not listed.
 
           name: Auth Rule Name
 
@@ -435,20 +591,29 @@ class V2(SyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
-        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
-        this will replace existing associations with the provided list of entities.
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
 
         Args:
-          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+          excluded_account_tokens: Deprecated: Use `entities.exclude` with `ACCOUNT` entities instead.
 
-          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+              Account tokens to which the Auth Rule does not apply.
 
-          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+          excluded_business_account_tokens: Deprecated: Use `entities.exclude` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business account tokens to which the Auth Rule does not apply.
+
+          excluded_card_tokens: Deprecated: Use `entities.exclude` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule does not apply. Cards excluded through a
+              `CARD_TAG` entity are not listed.
 
           name: Auth Rule Name
 
-          program_level: Whether the Auth Rule applies to all authorizations on the card program.
+          program_level: Deprecated: Use `entities.include` with a `PROGRAM` entity instead.
+
+              Whether the Auth Rule applies to all authorizations on the card program.
 
           state: The desired state of the Auth Rule.
 
@@ -470,10 +635,11 @@ class V2(SyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        entities: AuthRuleEntitiesParam | Omit = omit,
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
@@ -492,10 +658,11 @@ class V2(SyncAPIResource):
             path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             body=maybe_transform(
                 {
-                    "account_tokens": account_tokens,
-                    "business_account_tokens": business_account_tokens,
+                    "entities": entities,
                     "name": name,
                     "state": state,
+                    "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "card_tokens": card_tokens,
                     "excluded_account_tokens": excluded_account_tokens,
                     "excluded_business_account_tokens": excluded_business_account_tokens,
@@ -551,7 +718,8 @@ class V2(SyncAPIResource):
 
           page_size: Page size (for pagination).
 
-          scope: Only return Auth Rules that are bound to the provided scope.
+          scope: Only return Auth Rules that are bound to the provided scope. When no token is
+              provided, `CARD` also returns Auth Rules that include a `CARD_TAG` entity.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -927,6 +1095,56 @@ class V2(SyncAPIResource):
             cast_to=V2RetrieveReportResponse,
         )
 
+    def update_entities(
+        self,
+        auth_rule_token: str,
+        *,
+        add: AuthRuleEntitiesParam | Omit = omit,
+        remove: AuthRuleEntitiesParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthRule:
+        """
+        Adds entities to and removes entities from a V2 Auth rule's `include` and
+        `exclude` lists
+
+        To replace all of the rule's entities at once, provide `entities` to
+        `PATCH /v2/auth_rules/{auth_rule_token}` instead.
+
+        Args:
+          add: Entities to add to the rule's `include` and `exclude` lists
+
+          remove: Entities to remove from the rule's `include` and `exclude` lists
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return self._patch(
+            path_template("/v2/auth_rules/{auth_rule_token}/entities", auth_rule_token=auth_rule_token),
+            body=maybe_transform(
+                {
+                    "add": add,
+                    "remove": remove,
+                },
+                v2_update_entities_params.V2UpdateEntitiesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthRule,
+        )
+
 
 class AsyncV2(AsyncAPIResource):
     @cached_property
@@ -951,6 +1169,74 @@ class AsyncV2(AsyncAPIResource):
         For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
         """
         return AsyncV2WithStreamingResponse(self)
+
+    @overload
+    async def create(
+        self,
+        *,
+        entities: AuthRuleEntitiesParam,
+        parameters: v2_create_params.RuleParameters,
+        type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
+        event_stream: EventStream | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthRule:
+        """
+        Creates a new V2 Auth rule in draft mode
+
+        Args:
+          entities: The entities an Auth Rule applies to (`include`) and does not apply to
+              (`exclude`). An exclusion overrides an inclusion, so a card excluded here is
+              skipped even when the program, its account or one of its tags is included.
+
+              The rule's resulting entities must satisfy these constraints after any write:
+
+              - `include` must contain at least one entity.
+              - If `PROGRAM` is included, it must be the only included entity.
+              - `PROGRAM` cannot be excluded.
+              - An entity cannot appear in both `include` and `exclude`, or twice in the same
+                list.
+              - A rule can have at most 1,000 entities across `include` and `exclude`, not
+                counting `PROGRAM`.
+              - Entity types must be valid for the rule's event stream.
+              - `CARD`, `ACCOUNT` and `BUSINESS_ACCOUNT` tokens must belong to your program.
+
+          parameters: Parameters for the Auth Rule
+
+          type: The type of Auth Rule. For certain rule types, this determines the event stream
+              during which it will be evaluated. For rules that can be applied to one of
+              several event streams, the effective one is defined by the separate
+              `event_stream` field.
+
+              - `VELOCITY_LIMIT`: AUTHORIZATION event stream.
+              - `MERCHANT_LOCK`: AUTHORIZATION event stream.
+              - `CONDITIONAL_ACTION`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
+              - `TYPESCRIPT_CODE`: AUTHORIZATION, THREE_DS_AUTHENTICATION, TOKENIZATION,
+                ACH_CREDIT_RECEIPT, ACH_DEBIT_RECEIPT, CARD_TRANSACTION_UPDATE, or
+                ACH_PAYMENT_UPDATE event stream.
+              - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
+                are read-only; `OTHER` cannot be used when creating a rule.
+
+          event_stream: The event stream during which the rule will be evaluated.
+
+          name: Auth Rule Name
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
 
     @overload
     async def create(
@@ -991,9 +1277,13 @@ class AsyncV2(AsyncAPIResource):
               - `OTHER`: A rule whose type is not exposed through this API. Rules of this type
                 are read-only; `OTHER` cannot be used when creating a rule.
 
-          account_tokens: Account tokens to which the Auth Rule applies.
+          account_tokens: Deprecated: Use `entities.include` with `ACCOUNT` entities instead.
 
-          business_account_tokens: Business Account tokens to which the Auth Rule applies.
+              Account tokens to which the Auth Rule applies.
+
+          business_account_tokens: Deprecated: Use `entities.include` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business Account tokens to which the Auth Rule applies.
 
           event_stream: The event stream during which the rule will be evaluated.
 
@@ -1029,7 +1319,10 @@ class AsyncV2(AsyncAPIResource):
         Creates a new V2 Auth rule in draft mode
 
         Args:
-          card_tokens: Card tokens to which the Auth Rule applies.
+          card_tokens: Deprecated: Use `entities.include` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule applies. Cards the rule applies to through a
+              `CARD_TAG` entity are not listed.
 
           parameters: Parameters for the Auth Rule
 
@@ -1088,7 +1381,9 @@ class AsyncV2(AsyncAPIResource):
         Args:
           parameters: Parameters for the Auth Rule
 
-          program_level: Whether the Auth Rule applies to all authorizations on the card program.
+          program_level: Deprecated: Use `entities.include` with a `PROGRAM` entity instead.
+
+              Whether the Auth Rule applies to all authorizations on the card program.
 
           type: The type of Auth Rule. For certain rule types, this determines the event stream
               during which it will be evaluated. For rules that can be applied to one of
@@ -1108,11 +1403,18 @@ class AsyncV2(AsyncAPIResource):
 
           event_stream: The event stream during which the rule will be evaluated.
 
-          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+          excluded_account_tokens: Deprecated: Use `entities.exclude` with `ACCOUNT` entities instead.
 
-          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+              Account tokens to which the Auth Rule does not apply.
 
-          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+          excluded_business_account_tokens: Deprecated: Use `entities.exclude` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business account tokens to which the Auth Rule does not apply.
+
+          excluded_card_tokens: Deprecated: Use `entities.exclude` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule does not apply. Cards excluded through a
+              `CARD_TAG` entity are not listed.
 
           name: Auth Rule Name
 
@@ -1127,19 +1429,24 @@ class AsyncV2(AsyncAPIResource):
         ...
 
     @required_args(
-        ["parameters", "type"], ["card_tokens", "parameters", "type"], ["parameters", "program_level", "type"]
+        ["entities", "parameters", "type"],
+        ["parameters", "type"],
+        ["card_tokens", "parameters", "type"],
+        ["parameters", "program_level", "type"],
     )
     async def create(
         self,
         *,
-        parameters: v2_create_params.AccountLevelRuleParameters
+        entities: AuthRuleEntitiesParam | Omit = omit,
+        parameters: v2_create_params.RuleParameters
+        | v2_create_params.AccountLevelRuleParameters
         | v2_create_params.CardLevelRuleParameters
         | v2_create_params.ProgramLevelRuleParameters,
         type: Literal["VELOCITY_LIMIT", "MERCHANT_LOCK", "CONDITIONAL_ACTION", "TYPESCRIPT_CODE", "OTHER"],
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         event_stream: EventStream | Omit = omit,
         name: Optional[str] | Omit = omit,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         program_level: bool | Omit = omit,
         excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
@@ -1156,12 +1463,13 @@ class AsyncV2(AsyncAPIResource):
             "/v2/auth_rules",
             body=await async_maybe_transform(
                 {
+                    "entities": entities,
                     "parameters": parameters,
                     "type": type,
-                    "account_tokens": account_tokens,
-                    "business_account_tokens": business_account_tokens,
                     "event_stream": event_stream,
                     "name": name,
+                    "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "card_tokens": card_tokens,
                     "program_level": program_level,
                     "excluded_account_tokens": excluded_account_tokens,
@@ -1214,6 +1522,63 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
+        entities: AuthRuleEntitiesParam | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        state: Literal["INACTIVE"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthRule:
+        """
+        Updates a V2 Auth rule's properties
+
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
+
+        Args:
+          entities: The entities an Auth Rule applies to (`include`) and does not apply to
+              (`exclude`). An exclusion overrides an inclusion, so a card excluded here is
+              skipped even when the program, its account or one of its tags is included.
+
+              The rule's resulting entities must satisfy these constraints after any write:
+
+              - `include` must contain at least one entity.
+              - If `PROGRAM` is included, it must be the only included entity.
+              - `PROGRAM` cannot be excluded.
+              - An entity cannot appear in both `include` and `exclude`, or twice in the same
+                list.
+              - A rule can have at most 1,000 entities across `include` and `exclude`, not
+                counting `PROGRAM`.
+              - Entity types must be valid for the rule's event stream.
+              - `CARD`, `ACCOUNT` and `BUSINESS_ACCOUNT` tokens must belong to your program.
+
+          name: Auth Rule Name
+
+          state: The desired state of the Auth Rule.
+
+              Note that only deactivating an Auth Rule through this endpoint is supported at
+              this time. If you need to (re-)activate an Auth Rule the /promote endpoint
+              should be used to promote a draft to the currently active version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        auth_rule_token: str,
+        *,
         account_tokens: SequenceNotStr[str] | Omit = omit,
         business_account_tokens: SequenceNotStr[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
@@ -1228,14 +1593,18 @@ class AsyncV2(AsyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
-        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
-        this will replace existing associations with the provided list of entities.
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
 
         Args:
-          account_tokens: Account tokens to which the Auth Rule applies.
+          account_tokens: Deprecated: Use `entities.include` with `ACCOUNT` entities instead.
 
-          business_account_tokens: Business Account tokens to which the Auth Rule applies.
+              Account tokens to which the Auth Rule applies.
+
+          business_account_tokens: Deprecated: Use `entities.include` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business Account tokens to which the Auth Rule applies.
 
           name: Auth Rule Name
 
@@ -1273,12 +1642,15 @@ class AsyncV2(AsyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
-        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
-        this will replace existing associations with the provided list of entities.
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
 
         Args:
-          card_tokens: Card tokens to which the Auth Rule applies.
+          card_tokens: Deprecated: Use `entities.include` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule applies. Cards the rule applies to through a
+              `CARD_TAG` entity are not listed.
 
           name: Auth Rule Name
 
@@ -1319,20 +1691,29 @@ class AsyncV2(AsyncAPIResource):
         """
         Updates a V2 Auth rule's properties
 
-        If `account_tokens`, `card_tokens`, `program_level`, `excluded_card_tokens`,
-        `excluded_account_tokens`, or `excluded_business_account_tokens` is provided,
-        this will replace existing associations with the provided list of entities.
+        If `entities` is provided, this will replace the rule's existing entities with
+        the provided `include` and `exclude` lists. To change entities incrementally,
+        use `PATCH /v2/auth_rules/{auth_rule_token}/entities` instead.
 
         Args:
-          excluded_account_tokens: Account tokens to which the Auth Rule does not apply.
+          excluded_account_tokens: Deprecated: Use `entities.exclude` with `ACCOUNT` entities instead.
 
-          excluded_business_account_tokens: Business account tokens to which the Auth Rule does not apply.
+              Account tokens to which the Auth Rule does not apply.
 
-          excluded_card_tokens: Card tokens to which the Auth Rule does not apply.
+          excluded_business_account_tokens: Deprecated: Use `entities.exclude` with `BUSINESS_ACCOUNT` entities instead.
+
+              Business account tokens to which the Auth Rule does not apply.
+
+          excluded_card_tokens: Deprecated: Use `entities.exclude` with `CARD` entities instead.
+
+              Card tokens to which the Auth Rule does not apply. Cards excluded through a
+              `CARD_TAG` entity are not listed.
 
           name: Auth Rule Name
 
-          program_level: Whether the Auth Rule applies to all authorizations on the card program.
+          program_level: Deprecated: Use `entities.include` with a `PROGRAM` entity instead.
+
+              Whether the Auth Rule applies to all authorizations on the card program.
 
           state: The desired state of the Auth Rule.
 
@@ -1354,10 +1735,11 @@ class AsyncV2(AsyncAPIResource):
         self,
         auth_rule_token: str,
         *,
-        account_tokens: SequenceNotStr[str] | Omit = omit,
-        business_account_tokens: SequenceNotStr[str] | Omit = omit,
+        entities: AuthRuleEntitiesParam | Omit = omit,
         name: Optional[str] | Omit = omit,
         state: Literal["INACTIVE"] | Omit = omit,
+        account_tokens: SequenceNotStr[str] | Omit = omit,
+        business_account_tokens: SequenceNotStr[str] | Omit = omit,
         card_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_account_tokens: SequenceNotStr[str] | Omit = omit,
         excluded_business_account_tokens: SequenceNotStr[str] | Omit = omit,
@@ -1376,10 +1758,11 @@ class AsyncV2(AsyncAPIResource):
             path_template("/v2/auth_rules/{auth_rule_token}", auth_rule_token=auth_rule_token),
             body=await async_maybe_transform(
                 {
-                    "account_tokens": account_tokens,
-                    "business_account_tokens": business_account_tokens,
+                    "entities": entities,
                     "name": name,
                     "state": state,
+                    "account_tokens": account_tokens,
+                    "business_account_tokens": business_account_tokens,
                     "card_tokens": card_tokens,
                     "excluded_account_tokens": excluded_account_tokens,
                     "excluded_business_account_tokens": excluded_business_account_tokens,
@@ -1435,7 +1818,8 @@ class AsyncV2(AsyncAPIResource):
 
           page_size: Page size (for pagination).
 
-          scope: Only return Auth Rules that are bound to the provided scope.
+          scope: Only return Auth Rules that are bound to the provided scope. When no token is
+              provided, `CARD` also returns Auth Rules that include a `CARD_TAG` entity.
 
           starting_after: A cursor representing an item's token after which a page of results should
               begin. Used to retrieve the next page of results after this item.
@@ -1811,6 +2195,56 @@ class AsyncV2(AsyncAPIResource):
             cast_to=V2RetrieveReportResponse,
         )
 
+    async def update_entities(
+        self,
+        auth_rule_token: str,
+        *,
+        add: AuthRuleEntitiesParam | Omit = omit,
+        remove: AuthRuleEntitiesParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthRule:
+        """
+        Adds entities to and removes entities from a V2 Auth rule's `include` and
+        `exclude` lists
+
+        To replace all of the rule's entities at once, provide `entities` to
+        `PATCH /v2/auth_rules/{auth_rule_token}` instead.
+
+        Args:
+          add: Entities to add to the rule's `include` and `exclude` lists
+
+          remove: Entities to remove from the rule's `include` and `exclude` lists
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not auth_rule_token:
+            raise ValueError(f"Expected a non-empty value for `auth_rule_token` but received {auth_rule_token!r}")
+        return await self._patch(
+            path_template("/v2/auth_rules/{auth_rule_token}/entities", auth_rule_token=auth_rule_token),
+            body=await async_maybe_transform(
+                {
+                    "add": add,
+                    "remove": remove,
+                },
+                v2_update_entities_params.V2UpdateEntitiesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthRule,
+        )
+
 
 class V2WithRawResponse:
     def __init__(self, v2: V2) -> None:
@@ -1848,6 +2282,9 @@ class V2WithRawResponse:
         )
         self.retrieve_report = _legacy_response.to_raw_response_wrapper(
             v2.retrieve_report,
+        )
+        self.update_entities = _legacy_response.to_raw_response_wrapper(
+            v2.update_entities,
         )
 
     @cached_property
@@ -1892,6 +2329,9 @@ class AsyncV2WithRawResponse:
         self.retrieve_report = _legacy_response.async_to_raw_response_wrapper(
             v2.retrieve_report,
         )
+        self.update_entities = _legacy_response.async_to_raw_response_wrapper(
+            v2.update_entities,
+        )
 
     @cached_property
     def backtests(self) -> AsyncBacktestsWithRawResponse:
@@ -1935,6 +2375,9 @@ class V2WithStreamingResponse:
         self.retrieve_report = to_streamed_response_wrapper(
             v2.retrieve_report,
         )
+        self.update_entities = to_streamed_response_wrapper(
+            v2.update_entities,
+        )
 
     @cached_property
     def backtests(self) -> BacktestsWithStreamingResponse:
@@ -1977,6 +2420,9 @@ class AsyncV2WithStreamingResponse:
         )
         self.retrieve_report = async_to_streamed_response_wrapper(
             v2.retrieve_report,
+        )
+        self.update_entities = async_to_streamed_response_wrapper(
+            v2.update_entities,
         )
 
     @cached_property
