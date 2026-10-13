@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -135,6 +135,14 @@ class Card(BaseModel):
     """
 
     state: Literal["CLOSED", "OPEN", "PAUSED", "PENDING_ACTIVATION", "PENDING_FULFILLMENT"]
+
+    tags: Dict[str, str]
+    """Key-value pairs for tagging resources.
+
+    Tags allow you to associate arbitrary metadata with a resource for your own
+    purposes. A resource can have at most 50 tags, with keys up to 40 characters and
+    values up to 500 characters
+    """
 
     type: Literal["SINGLE_USE", "MERCHANT_LOCKED", "UNLOCKED", "PHYSICAL", "DIGITAL_WALLET", "VIRTUAL"]
 
