@@ -8,6 +8,7 @@ from .event_stream import EventStream
 from .velocity_limit_params import VelocityLimitParams
 from .merchant_lock_parameters import MerchantLockParameters
 from .typescript_code_parameters import TypescriptCodeParameters
+from .auth_rule_entities_response import AuthRuleEntitiesResponse
 from .conditional_3ds_action_parameters import Conditional3DSActionParameters
 from .conditional_ach_action_parameters import ConditionalACHActionParameters
 from .conditional_tokenization_action_parameters import ConditionalTokenizationActionParameters
@@ -93,17 +94,33 @@ class AuthRule(BaseModel):
     """Auth Rule Token"""
 
     account_tokens: List[str]
-    """Account tokens to which the Auth Rule applies."""
+    """Deprecated: Use `entities.include` with `ACCOUNT` entities instead.
+
+    Account tokens to which the Auth Rule applies.
+    """
 
     business_account_tokens: List[str]
-    """Business Account tokens to which the Auth Rule applies."""
+    """Deprecated: Use `entities.include` with `BUSINESS_ACCOUNT` entities instead.
+
+    Business Account tokens to which the Auth Rule applies.
+    """
 
     card_tokens: List[str]
-    """Card tokens to which the Auth Rule applies."""
+    """Deprecated: Use `entities.include` with `CARD` entities instead.
+
+    Card tokens to which the Auth Rule applies. Cards the rule applies to through a
+    `CARD_TAG` entity are not listed.
+    """
 
     current_version: Optional[CurrentVersion] = None
 
     draft_version: Optional[DraftVersion] = None
+
+    entities: AuthRuleEntitiesResponse
+    """
+    The entities the Auth Rule applies to (`include`) and does not apply to
+    (`exclude`). An exclusion overrides an inclusion.
+    """
 
     event_stream: EventStream
     """The event stream during which the rule will be evaluated."""
@@ -118,7 +135,10 @@ class AuthRule(BaseModel):
     """Auth Rule Name"""
 
     program_level: bool
-    """Whether the Auth Rule applies to all authorizations on the card program."""
+    """Deprecated: Use `entities.include` with a `PROGRAM` entity instead.
+
+    Whether the Auth Rule applies to all authorizations on the card program.
+    """
 
     state: Literal["ACTIVE", "INACTIVE"]
     """The state of the Auth Rule"""
@@ -143,10 +163,20 @@ class AuthRule(BaseModel):
     """
 
     excluded_account_tokens: Optional[List[str]] = None
-    """Account tokens to which the Auth Rule does not apply."""
+    """Deprecated: Use `entities.exclude` with `ACCOUNT` entities instead.
+
+    Account tokens to which the Auth Rule does not apply.
+    """
 
     excluded_business_account_tokens: Optional[List[str]] = None
-    """Business account tokens to which the Auth Rule does not apply."""
+    """Deprecated: Use `entities.exclude` with `BUSINESS_ACCOUNT` entities instead.
+
+    Business account tokens to which the Auth Rule does not apply.
+    """
 
     excluded_card_tokens: Optional[List[str]] = None
-    """Card tokens to which the Auth Rule does not apply."""
+    """Deprecated: Use `entities.exclude` with `CARD` entities instead.
+
+    Card tokens to which the Auth Rule does not apply. Cards excluded through a
+    `CARD_TAG` entity are not listed.
+    """

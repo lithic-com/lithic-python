@@ -28,6 +28,7 @@ class TestV2:
     @parametrize
     def test_method_create_overload_1(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
+            entities={},
             parameters={
                 "period": {
                     "duration": 10,
@@ -41,6 +42,91 @@ class TestV2:
 
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.create(
+            entities={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
+            },
+            type="VELOCITY_LIMIT",
+            event_stream="AUTHORIZATION",
+            name="name",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_raw_response_create_overload_1(self, client: Lithic) -> None:
+        response = client.auth_rules.v2.with_raw_response.create(
+            entities={},
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+            },
+            type="VELOCITY_LIMIT",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
+        with client.auth_rules.v2.with_streaming_response.create(
+            entities={},
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+            },
+            type="VELOCITY_LIMIT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = response.parse()
+            assert_matches_type(AuthRule, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_create_overload_2(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.create(
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+            },
+            type="VELOCITY_LIMIT",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             parameters={
                 "period": {
@@ -69,7 +155,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_raw_response_create_overload_1(self, client: Lithic) -> None:
+    def test_raw_response_create_overload_2(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
             parameters={
                 "period": {
@@ -87,7 +173,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_streaming_response_create_overload_1(self, client: Lithic) -> None:
+    def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
             parameters={
                 "period": {
@@ -107,7 +193,7 @@ class TestV2:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_create_overload_2(self, client: Lithic) -> None:
+    def test_method_create_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -122,7 +208,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params_overload_2(self, client: Lithic) -> None:
+    def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -150,7 +236,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_raw_response_create_overload_2(self, client: Lithic) -> None:
+    def test_raw_response_create_overload_3(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -169,7 +255,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_streaming_response_create_overload_2(self, client: Lithic) -> None:
+    def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -190,7 +276,7 @@ class TestV2:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_create_overload_3(self, client: Lithic) -> None:
+    def test_method_create_overload_4(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             parameters={
                 "period": {
@@ -205,7 +291,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params_overload_3(self, client: Lithic) -> None:
+    def test_method_create_with_all_params_overload_4(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.create(
             parameters={
                 "period": {
@@ -236,7 +322,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_raw_response_create_overload_3(self, client: Lithic) -> None:
+    def test_raw_response_create_overload_4(self, client: Lithic) -> None:
         response = client.auth_rules.v2.with_raw_response.create(
             parameters={
                 "period": {
@@ -255,7 +341,7 @@ class TestV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    def test_streaming_response_create_overload_3(self, client: Lithic) -> None:
+    def test_streaming_response_create_overload_4(self, client: Lithic) -> None:
         with client.auth_rules.v2.with_streaming_response.create(
             parameters={
                 "period": {
@@ -324,8 +410,10 @@ class TestV2:
     def test_method_update_with_all_params_overload_1(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            entities={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
             name="name",
             state="INACTIVE",
         )
@@ -373,7 +461,8 @@ class TestV2:
     def test_method_update_with_all_params_overload_2(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             state="INACTIVE",
         )
@@ -421,11 +510,8 @@ class TestV2:
     def test_method_update_with_all_params_overload_3(self, client: Lithic) -> None:
         v2 = client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
-            program_level=True,
             state="INACTIVE",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
@@ -456,6 +542,57 @@ class TestV2:
 
     @parametrize
     def test_path_params_update_overload_3(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+            client.auth_rules.v2.with_raw_response.update(
+                auth_rule_token="",
+            )
+
+    @parametrize
+    def test_method_update_overload_4(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_4(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
+            program_level=True,
+            state="INACTIVE",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_4(self, client: Lithic) -> None:
+        response = client.auth_rules.v2.with_raw_response.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_4(self, client: Lithic) -> None:
+        with client.auth_rules.v2.with_streaming_response.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = response.parse()
+            assert_matches_type(AuthRule, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_update_overload_4(self, client: Lithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
             client.auth_rules.v2.with_raw_response.update(
                 auth_rule_token="",
@@ -810,6 +947,59 @@ class TestV2:
                 end=parse_date("2019-12-27"),
             )
 
+    @parametrize
+    def test_method_update_entities(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_method_update_entities_with_all_params(self, client: Lithic) -> None:
+        v2 = client.auth_rules.v2.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            add={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
+            remove={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_entities(self, client: Lithic) -> None:
+        response = client.auth_rules.v2.with_raw_response.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_entities(self, client: Lithic) -> None:
+        with client.auth_rules.v2.with_streaming_response.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = response.parse()
+            assert_matches_type(AuthRule, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_update_entities(self, client: Lithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+            client.auth_rules.v2.with_raw_response.update_entities(
+                auth_rule_token="",
+            )
+
 
 class TestAsyncV2:
     parametrize = pytest.mark.parametrize(
@@ -819,6 +1009,7 @@ class TestAsyncV2:
     @parametrize
     async def test_method_create_overload_1(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
+            entities={},
             parameters={
                 "period": {
                     "duration": 10,
@@ -832,6 +1023,91 @@ class TestAsyncV2:
 
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.create(
+            entities={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+                "filters": {
+                    "exclude_countries": ["USD"],
+                    "exclude_mccs": ["5542"],
+                    "include_countries": ["USD"],
+                    "include_mccs": ["5542"],
+                    "include_pan_entry_modes": ["AUTO_ENTRY"],
+                },
+                "limit_amount": 10000,
+                "limit_cash_amount": 5000,
+                "limit_cash_count": 0,
+                "limit_count": 0,
+            },
+            type="VELOCITY_LIMIT",
+            event_stream="AUTHORIZATION",
+            name="name",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
+        response = await async_client.auth_rules.v2.with_raw_response.create(
+            entities={},
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+            },
+            type="VELOCITY_LIMIT",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
+        async with async_client.auth_rules.v2.with_streaming_response.create(
+            entities={},
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+            },
+            type="VELOCITY_LIMIT",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = await response.parse()
+            assert_matches_type(AuthRule, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_create_overload_2(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.create(
+            parameters={
+                "period": {
+                    "duration": 10,
+                    "type": "CUSTOM",
+                },
+                "scope": "CARD",
+            },
+            type="VELOCITY_LIMIT",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             parameters={
                 "period": {
@@ -860,7 +1136,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncLithic) -> None:
+    async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
             parameters={
                 "period": {
@@ -878,7 +1154,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncLithic) -> None:
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
             parameters={
                 "period": {
@@ -898,7 +1174,7 @@ class TestAsyncV2:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncLithic) -> None:
+    async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -913,7 +1189,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
+    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -941,7 +1217,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+    async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -960,7 +1236,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncLithic) -> None:
+    async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
             card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             parameters={
@@ -981,7 +1257,7 @@ class TestAsyncV2:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_create_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_method_create_overload_4(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             parameters={
                 "period": {
@@ -996,7 +1272,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_method_create_with_all_params_overload_4(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.create(
             parameters={
                 "period": {
@@ -1027,7 +1303,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_raw_response_create_overload_4(self, async_client: AsyncLithic) -> None:
         response = await async_client.auth_rules.v2.with_raw_response.create(
             parameters={
                 "period": {
@@ -1046,7 +1322,7 @@ class TestAsyncV2:
         assert_matches_type(AuthRule, v2, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_3(self, async_client: AsyncLithic) -> None:
+    async def test_streaming_response_create_overload_4(self, async_client: AsyncLithic) -> None:
         async with async_client.auth_rules.v2.with_streaming_response.create(
             parameters={
                 "period": {
@@ -1115,8 +1391,10 @@ class TestAsyncV2:
     async def test_method_update_with_all_params_overload_1(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            entities={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
             name="name",
             state="INACTIVE",
         )
@@ -1164,7 +1442,8 @@ class TestAsyncV2:
     async def test_method_update_with_all_params_overload_2(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
             state="INACTIVE",
         )
@@ -1212,11 +1491,8 @@ class TestAsyncV2:
     async def test_method_update_with_all_params_overload_3(self, async_client: AsyncLithic) -> None:
         v2 = await async_client.auth_rules.v2.update(
             auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             name="name",
-            program_level=True,
             state="INACTIVE",
         )
         assert_matches_type(AuthRule, v2, path=["response"])
@@ -1247,6 +1523,57 @@ class TestAsyncV2:
 
     @parametrize
     async def test_path_params_update_overload_3(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+            await async_client.auth_rules.v2.with_raw_response.update(
+                auth_rule_token="",
+            )
+
+    @parametrize
+    async def test_method_update_overload_4(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_4(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            excluded_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_business_account_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            excluded_card_tokens=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            name="name",
+            program_level=True,
+            state="INACTIVE",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_4(self, async_client: AsyncLithic) -> None:
+        response = await async_client.auth_rules.v2.with_raw_response.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_4(self, async_client: AsyncLithic) -> None:
+        async with async_client.auth_rules.v2.with_streaming_response.update(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = await response.parse()
+            assert_matches_type(AuthRule, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update_overload_4(self, async_client: AsyncLithic) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
             await async_client.auth_rules.v2.with_raw_response.update(
                 auth_rule_token="",
@@ -1599,4 +1926,57 @@ class TestAsyncV2:
                 auth_rule_token="",
                 begin=parse_date("2019-12-27"),
                 end=parse_date("2019-12-27"),
+            )
+
+    @parametrize
+    async def test_method_update_entities(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_method_update_entities_with_all_params(self, async_client: AsyncLithic) -> None:
+        v2 = await async_client.auth_rules.v2.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            add={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
+            remove={
+                "exclude": [{"type": "PROGRAM"}],
+                "include": [{"type": "PROGRAM"}],
+            },
+        )
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_entities(self, async_client: AsyncLithic) -> None:
+        response = await async_client.auth_rules.v2.with_raw_response.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        v2 = response.parse()
+        assert_matches_type(AuthRule, v2, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_entities(self, async_client: AsyncLithic) -> None:
+        async with async_client.auth_rules.v2.with_streaming_response.update_entities(
+            auth_rule_token="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            v2 = await response.parse()
+            assert_matches_type(AuthRule, v2, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update_entities(self, async_client: AsyncLithic) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `auth_rule_token` but received ''"):
+            await async_client.auth_rules.v2.with_raw_response.update_entities(
+                auth_rule_token="",
             )
