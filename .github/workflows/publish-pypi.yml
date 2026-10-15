@@ -27,6 +27,17 @@ jobs:
           RYE_VERSION: '0.44.0'
           RYE_INSTALL_OPTION: '--yes'
 
+      # bin/publish-pypi's tokenless `rye publish` cannot do the trusted-publishing OIDC exchange
+      # ("an access token is required"), so build with rye and upload with the uv that rye
+      # bundles, which supports trusted publishing natively. Globbed rather than pinned so a rye
+      # bump that changes its bundled uv version doesn't silently break this.
       - name: Publish to PyPI
         run: |
-          bash ./bin/publish-pypi
+          set -euo pipefail
+          rye build --clean
+          uvs=("$HOME"/.rye/uv/*/uv)
+          if [ "${#uvs[@]}" -ne 1 ] || [ ! -x "${uvs[0]}" ]; then
+            echo "::error::Expected exactly one rye-bundled uv, found: ${uvs[*]}"
+            exit 1
+          fi
+          "${uvs[0]}" publish --trusted-publishing always
