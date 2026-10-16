@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.134.0](https://github.com/lithic-com/lithic-python/compare/v0.133.0...v0.134.0) (2026-10-16)
+
+
+### Features
+
+* **api:** add INSTANCE_TO_INSTANCE to book transfer type and financial event type enums ([27c08ac](https://github.com/lithic-com/lithic-python/commit/27c08acb8e0b667bd280a65d07ddeedec401f0ff))
+
 ## [0.133.0](https://github.com/lithic-com/lithic-python/compare/v0.132.0...v0.133.0) (2026-10-13)
 
 
