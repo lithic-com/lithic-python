@@ -137,5 +137,6 @@ class FinancialEvent(BaseModel):
             "STABLECOIN_SENT",
             "STABLECOIN_SETTLED",
             "STABLECOIN_REJECTED",
+            "INSTANCE_TO_INSTANCE",
         ]
     ] = None

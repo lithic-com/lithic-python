@@ -167,6 +167,7 @@ class Data(BaseModel):
         "STABLECOIN_SENT",
         "STABLECOIN_SETTLED",
         "STABLECOIN_REJECTED",
+        "INSTANCE_TO_INSTANCE",
     ]
 
     financial_account_token: str

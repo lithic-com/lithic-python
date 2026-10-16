@@ -78,6 +78,7 @@ class Event(BaseModel):
         "COLLECTION",
         "LITHIC_PROGRAM_TRANSFER",
         "BANK_PROGRAM_TRANSFER",
+        "INSTANCE_TO_INSTANCE",
     ]
     """Type of the book transfer"""
 
