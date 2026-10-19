@@ -591,7 +591,7 @@ class CardAuthorization(BaseModel):
     merchant.
     """
 
-    network: Optional[Literal["AMEX", "INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]] = None
+    network: Optional[Literal["ALLPOINT", "AMEX", "INTERLINK", "MAESTRO", "MASTERCARD", "UNKNOWN", "VISA"]] = None
     """Card network of the authorization."""
 
     network_risk_score: Optional[int] = None
