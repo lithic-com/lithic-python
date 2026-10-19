@@ -73,6 +73,14 @@ class ClaimCreatedWebhookEvent(BaseModel):
     ]
     """Dispute reason code provided when creating the claim"""
 
+    reference_id: Optional[str] = None
+    """Identifier for the claim as displayed in the Lithic dashboard.
+
+    Populated depending on your program's setup, null otherwise. Use it to match
+    claims received through the API and webhooks to the dashboard. This is not the
+    claim `token`, which is the identifier to use in API requests
+    """
+
     status: Literal["INITIALIZING", "AWAITING_INFO", "SUBMITTED", "RESOLVED", "ABANDONED"]
     """Current lifecycle status of the claim"""
 
