@@ -13,7 +13,10 @@ class CommonLineItem(BaseModel):
     """An L2/L3 enhanced commercial data line item."""
 
     amount: Optional[str] = None
-    """The price of the item purchased in merchant currency."""
+    """Deprecated: Use unit_amount instead.
+
+    The price of the item purchased in merchant currency.
+    """
 
     description: Optional[str] = None
     """A human-readable description of the item."""
@@ -23,6 +26,15 @@ class CommonLineItem(BaseModel):
 
     quantity: Optional[str] = None
     """The quantity of the item purchased."""
+
+    total_amount: Optional[str] = None
+    """
+    The total cost for the line item in merchant currency, covering all units
+    purchased.
+    """
+
+    unit_amount: Optional[str] = None
+    """The price per individual unit in merchant currency."""
 
 
 class CommonTax(BaseModel):
