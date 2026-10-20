@@ -120,6 +120,9 @@ class Data(BaseModel):
     date: datetime.date
     """The date for the limit view (ISO format)"""
 
+    financial_entity_id: str
+    """Financial entity ID the limits are scoped to"""
+
     is_fbo: bool
     """Whether the company is a FBO; based on the company ID prefix"""
 
