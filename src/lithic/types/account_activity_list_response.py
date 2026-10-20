@@ -27,6 +27,7 @@ class FinancialTransaction(BaseModel):
         "ACH",
         "WIRE",
         "STABLECOIN",
+        "INTRA_BANK",
         "BALANCE_OR_FUNDING",
         "FEE",
         "REWARD",
