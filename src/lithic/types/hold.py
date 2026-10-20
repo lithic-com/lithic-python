@@ -22,9 +22,6 @@ class Hold(BaseModel):
     created: datetime
     """ISO 8601 timestamp of when the transaction was created"""
 
-    status: Literal["PENDING", "SETTLED", "EXPIRED", "VOIDED", "DECLINED", "REVERSED", "CANCELED", "RETURNED"]
-    """Status of a hold transaction"""
-
     updated: datetime
     """ISO 8601 timestamp of when the transaction was last updated"""
 
@@ -44,5 +41,8 @@ class Hold(BaseModel):
     """Current pending amount (0 when resolved)"""
 
     result: Optional[Literal["APPROVED", "DECLINED"]] = None
+
+    status: Optional[Literal["PENDING", "SETTLED", "EXPIRED", "VOIDED"]] = None
+    """Status of a hold transaction"""
 
     user_defined_id: Optional[str] = None
