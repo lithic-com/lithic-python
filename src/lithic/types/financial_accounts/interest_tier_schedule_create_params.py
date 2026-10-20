@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import date
 from typing_extensions import Required, Annotated, TypedDict
 
@@ -18,14 +18,14 @@ class InterestTierScheduleCreateParams(TypedDict, total=False):
     effective_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """Date the tier should be effective in YYYY-MM-DD format"""
 
-    penalty_rates: object
+    penalty_rates: Optional[object]
     """Custom rates per category for penalties"""
 
-    tier_name: str
+    tier_name: Optional[str]
     """Name of a tier contained in the credit product.
 
     Mutually exclusive with tier_rates
     """
 
-    tier_rates: object
+    tier_rates: Optional[object]
     """Custom rates per category. Mutually exclusive with tier_name"""

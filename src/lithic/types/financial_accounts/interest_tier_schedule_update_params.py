@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["InterestTierScheduleUpdateParams"]
@@ -10,14 +11,14 @@ __all__ = ["InterestTierScheduleUpdateParams"]
 class InterestTierScheduleUpdateParams(TypedDict, total=False):
     financial_account_token: Required[str]
 
-    penalty_rates: object
+    penalty_rates: Optional[object]
     """Custom rates per category for penalties"""
 
-    tier_name: str
+    tier_name: Optional[str]
     """Name of a tier contained in the credit product.
 
     Mutually exclusive with tier_rates
     """
 
-    tier_rates: object
+    tier_rates: Optional[object]
     """Custom rates per category. Mutually exclusive with tier_name"""
