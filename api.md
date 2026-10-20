@@ -681,7 +681,15 @@ Methods:
 - <code title="delete /v1/responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">delete</a>(\*\*<a href="src/lithic/types/responder_endpoint_delete_params.py">params</a>) -> None</code>
 - <code title="get /v1/responder_endpoints">client.responder_endpoints.<a href="./src/lithic/resources/responder_endpoints.py">check_status</a>(\*\*<a href="src/lithic/types/responder_endpoint_check_status_params.py">params</a>) -> <a href="./src/lithic/types/responder_endpoint_status.py">ResponderEndpointStatus</a></code>
 
-<<<<<<< HEAD
+# Webhooks
+
+Methods:
+
+- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">unwrap</a>(\*args) -> object</code>
+- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">verify_signature</a>(\*args) -> None</code>
+- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">parse</a>(body, headers, secret) -> ParsedWebhookEvent</code>
+- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">parse_unsafe</a>(body) -> ParsedWebhookEvent</code>
+
 # IPRanges
 
 Types:
@@ -693,16 +701,6 @@ from lithic.types import IPRangeRetrieveResponse
 Methods:
 
 - <code title="get /v1/ip_ranges">client.ip_ranges.<a href="./src/lithic/resources/ip_ranges.py">retrieve</a>() -> <a href="./src/lithic/types/ip_range_retrieve_response.py">IPRangeRetrieveResponse</a></code>
-=======
-# Webhooks
-
-Methods:
-
-- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">unwrap</a>(\*args) -> object</code>
-- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">verify_signature</a>(\*args) -> None</code>
-- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">parse</a>(body, headers, secret) -> ParsedWebhookEvent</code>
-- <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">parse_unsafe</a>(body) -> ParsedWebhookEvent</code>
->>>>>>> f61301d5 (Apply custom code)
 
 # ExternalBankAccounts
 
