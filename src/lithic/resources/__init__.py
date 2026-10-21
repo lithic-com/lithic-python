@@ -81,6 +81,14 @@ from .three_ds import (
     AsyncThreeDSWithStreamingResponse,
 )
 from .webhooks import Webhooks, AsyncWebhooks
+from .ip_ranges import (
+    IPRanges,
+    AsyncIPRanges,
+    IPRangesWithRawResponse,
+    AsyncIPRangesWithRawResponse,
+    IPRangesWithStreamingResponse,
+    AsyncIPRangesWithStreamingResponse,
+)
 from .auth_rules import (
     AuthRules,
     AsyncAuthRules,
@@ -377,6 +385,12 @@ __all__ = [
     "AsyncResponderEndpointsWithRawResponse",
     "ResponderEndpointsWithStreamingResponse",
     "AsyncResponderEndpointsWithStreamingResponse",
+    "IPRanges",
+    "AsyncIPRanges",
+    "IPRangesWithRawResponse",
+    "AsyncIPRangesWithRawResponse",
+    "IPRangesWithStreamingResponse",
+    "AsyncIPRangesWithStreamingResponse",
     "ExternalBankAccounts",
     "AsyncExternalBankAccounts",
     "ExternalBankAccountsWithRawResponse",

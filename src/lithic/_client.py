@@ -52,6 +52,7 @@ if TYPE_CHECKING:
         disputes,
         payments,
         three_ds,
+        ip_ranges,
         auth_rules,
         disputes_v2,
         transactions,
@@ -83,6 +84,7 @@ if TYPE_CHECKING:
     from .resources.disputes import Disputes, AsyncDisputes
     from .resources.payments import Payments, AsyncPayments
     from .resources.webhooks import Webhooks, AsyncWebhooks
+    from .resources.ip_ranges import IPRanges, AsyncIPRanges
     from .resources.cards.cards import Cards, AsyncCards
     from .resources.disputes_v2 import DisputesV2, AsyncDisputesV2
     from .resources.fraud.fraud import Fraud, AsyncFraud
@@ -331,6 +333,12 @@ class Lithic(SyncAPIClient):
         from .resources.responder_endpoints import ResponderEndpoints
 
         return ResponderEndpoints(self)
+
+    @cached_property
+    def ip_ranges(self) -> IPRanges:
+        from .resources.ip_ranges import IPRanges
+
+        return IPRanges(self)
 
     @cached_property
     def external_bank_accounts(self) -> ExternalBankAccounts:
@@ -775,6 +783,12 @@ class AsyncLithic(AsyncAPIClient):
         return AsyncResponderEndpoints(self)
 
     @cached_property
+    def ip_ranges(self) -> AsyncIPRanges:
+        from .resources.ip_ranges import AsyncIPRanges
+
+        return AsyncIPRanges(self)
+
+    @cached_property
     def external_bank_accounts(self) -> AsyncExternalBankAccounts:
         from .resources.external_bank_accounts import AsyncExternalBankAccounts
 
@@ -1131,6 +1145,12 @@ class LithicWithRawResponse:
         return ResponderEndpointsWithRawResponse(self._client.responder_endpoints)
 
     @cached_property
+    def ip_ranges(self) -> ip_ranges.IPRangesWithRawResponse:
+        from .resources.ip_ranges import IPRangesWithRawResponse
+
+        return IPRangesWithRawResponse(self._client.ip_ranges)
+
+    @cached_property
     def external_bank_accounts(self) -> external_bank_accounts.ExternalBankAccountsWithRawResponse:
         from .resources.external_bank_accounts import ExternalBankAccountsWithRawResponse
 
@@ -1344,6 +1364,12 @@ class AsyncLithicWithRawResponse:
         from .resources.responder_endpoints import AsyncResponderEndpointsWithRawResponse
 
         return AsyncResponderEndpointsWithRawResponse(self._client.responder_endpoints)
+
+    @cached_property
+    def ip_ranges(self) -> ip_ranges.AsyncIPRangesWithRawResponse:
+        from .resources.ip_ranges import AsyncIPRangesWithRawResponse
+
+        return AsyncIPRangesWithRawResponse(self._client.ip_ranges)
 
     @cached_property
     def external_bank_accounts(self) -> external_bank_accounts.AsyncExternalBankAccountsWithRawResponse:
@@ -1561,6 +1587,12 @@ class LithicWithStreamedResponse:
         return ResponderEndpointsWithStreamingResponse(self._client.responder_endpoints)
 
     @cached_property
+    def ip_ranges(self) -> ip_ranges.IPRangesWithStreamingResponse:
+        from .resources.ip_ranges import IPRangesWithStreamingResponse
+
+        return IPRangesWithStreamingResponse(self._client.ip_ranges)
+
+    @cached_property
     def external_bank_accounts(self) -> external_bank_accounts.ExternalBankAccountsWithStreamingResponse:
         from .resources.external_bank_accounts import ExternalBankAccountsWithStreamingResponse
 
@@ -1774,6 +1806,12 @@ class AsyncLithicWithStreamedResponse:
         from .resources.responder_endpoints import AsyncResponderEndpointsWithStreamingResponse
 
         return AsyncResponderEndpointsWithStreamingResponse(self._client.responder_endpoints)
+
+    @cached_property
+    def ip_ranges(self) -> ip_ranges.AsyncIPRangesWithStreamingResponse:
+        from .resources.ip_ranges import AsyncIPRangesWithStreamingResponse
+
+        return AsyncIPRangesWithStreamingResponse(self._client.ip_ranges)
 
     @cached_property
     def external_bank_accounts(self) -> external_bank_accounts.AsyncExternalBankAccountsWithStreamingResponse:

@@ -690,6 +690,18 @@ Methods:
 - <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">parse</a>(body, headers, secret) -> ParsedWebhookEvent</code>
 - <code>client.webhooks.<a href="./src/lithic/resources/webhooks.py">parse_unsafe</a>(body) -> ParsedWebhookEvent</code>
 
+# IPRanges
+
+Types:
+
+```python
+from lithic.types import IPRangeRetrieveResponse
+```
+
+Methods:
+
+- <code title="get /v1/ip_ranges">client.ip_ranges.<a href="./src/lithic/resources/ip_ranges.py">retrieve</a>() -> <a href="./src/lithic/types/ip_range_retrieve_response.py">IPRangeRetrieveResponse</a></code>
+
 # ExternalBankAccounts
 
 Types:
