@@ -14,7 +14,7 @@ from ..._utils import path_template, maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
-from ...pagination import SyncSinglePage, AsyncSinglePage
+from ...pagination import SyncCursorPage, AsyncCursorPage
 from ...types.cards import financial_transaction_list_params
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.financial_transaction import FinancialTransaction
@@ -92,6 +92,7 @@ class FinancialTransactions(SyncAPIResource):
         category: Literal["CARD", "TRANSFER"] | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
         result: Literal["APPROVED", "DECLINED"] | Omit = omit,
         starting_after: str | Omit = omit,
         status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "SETTLED", "VOIDED"] | Omit = omit,
@@ -101,7 +102,7 @@ class FinancialTransactions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSinglePage[FinancialTransaction]:
+    ) -> SyncCursorPage[FinancialTransaction]:
         """
         List the financial transactions for a given card.
 
@@ -116,6 +117,8 @@ class FinancialTransactions(SyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          page_size: Page size (for pagination).
 
           result: Financial Transaction result to be returned.
 
@@ -136,7 +139,7 @@ class FinancialTransactions(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
             path_template("/v1/cards/{card_token}/financial_transactions", card_token=card_token),
-            page=SyncSinglePage[FinancialTransaction],
+            page=SyncCursorPage[FinancialTransaction],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -148,6 +151,7 @@ class FinancialTransactions(SyncAPIResource):
                         "category": category,
                         "end": end,
                         "ending_before": ending_before,
+                        "page_size": page_size,
                         "result": result,
                         "starting_after": starting_after,
                         "status": status,
@@ -229,6 +233,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
         category: Literal["CARD", "TRANSFER"] | Omit = omit,
         end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
+        page_size: int | Omit = omit,
         result: Literal["APPROVED", "DECLINED"] | Omit = omit,
         starting_after: str | Omit = omit,
         status: Literal["DECLINED", "EXPIRED", "PENDING", "RETURNED", "SETTLED", "VOIDED"] | Omit = omit,
@@ -238,7 +243,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[FinancialTransaction, AsyncSinglePage[FinancialTransaction]]:
+    ) -> AsyncPaginator[FinancialTransaction, AsyncCursorPage[FinancialTransaction]]:
         """
         List the financial transactions for a given card.
 
@@ -253,6 +258,8 @@ class AsyncFinancialTransactions(AsyncAPIResource):
 
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          page_size: Page size (for pagination).
 
           result: Financial Transaction result to be returned.
 
@@ -273,7 +280,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
         return self._get_api_list(
             path_template("/v1/cards/{card_token}/financial_transactions", card_token=card_token),
-            page=AsyncSinglePage[FinancialTransaction],
+            page=AsyncCursorPage[FinancialTransaction],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -285,6 +292,7 @@ class AsyncFinancialTransactions(AsyncAPIResource):
                         "category": category,
                         "end": end,
                         "ending_before": ending_before,
+                        "page_size": page_size,
                         "result": result,
                         "starting_after": starting_after,
                         "status": status,

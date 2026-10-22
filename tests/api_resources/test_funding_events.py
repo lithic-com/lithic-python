@@ -10,6 +10,7 @@ import pytest
 from lithic import Lithic, AsyncLithic
 from tests.utils import assert_matches_type
 from lithic.types import FundingEvent, FundingEventRetrieveDetailsResponse
+from lithic._utils import parse_date, parse_datetime
 from lithic.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -64,7 +65,10 @@ class TestFundingEvents:
     @parametrize
     def test_method_list_with_all_params(self, client: Lithic) -> None:
         funding_event = client.funding_events.list(
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            network_settlement_date=parse_date("2019-12-27"),
             page_size=1,
             starting_after="starting_after",
         )
@@ -180,7 +184,10 @@ class TestAsyncFundingEvents:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLithic) -> None:
         funding_event = await async_client.funding_events.list(
+            begin=parse_datetime("2019-12-27T18:11:19.117Z"),
+            end=parse_datetime("2019-12-27T18:11:19.117Z"),
             ending_before="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            network_settlement_date=parse_date("2019-12-27"),
             page_size=1,
             starting_after="starting_after",
         )

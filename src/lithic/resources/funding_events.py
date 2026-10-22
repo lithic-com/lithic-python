@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import date, datetime
+
 import httpx
 
 from .. import _legacy_response
@@ -77,7 +80,10 @@ class FundingEvents(SyncAPIResource):
     def list(
         self,
         *,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
+        network_settlement_date: Union[str, date] | Omit = omit,
         page_size: int | Omit = omit,
         starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -91,8 +97,17 @@ class FundingEvents(SyncAPIResource):
         Get all funding events for program
 
         Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified time
+              will be included. UTC time zone.
+
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          network_settlement_date: Only funding events with a settlement breakout for this network settlement date
+              will be included.
 
           page_size: Page size (for pagination).
 
@@ -117,7 +132,10 @@ class FundingEvents(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "begin": begin,
+                        "end": end,
                         "ending_before": ending_before,
+                        "network_settlement_date": network_settlement_date,
                         "page_size": page_size,
                         "starting_after": starting_after,
                     },
@@ -221,7 +239,10 @@ class AsyncFundingEvents(AsyncAPIResource):
     def list(
         self,
         *,
+        begin: Union[str, datetime] | Omit = omit,
+        end: Union[str, datetime] | Omit = omit,
         ending_before: str | Omit = omit,
+        network_settlement_date: Union[str, date] | Omit = omit,
         page_size: int | Omit = omit,
         starting_after: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -235,8 +256,17 @@ class AsyncFundingEvents(AsyncAPIResource):
         Get all funding events for program
 
         Args:
+          begin: Date string in RFC 3339 format. Only entries created after the specified time
+              will be included. UTC time zone.
+
+          end: Date string in RFC 3339 format. Only entries created before the specified time
+              will be included. UTC time zone.
+
           ending_before: A cursor representing an item's token before which a page of results should end.
               Used to retrieve the previous page of results before this item.
+
+          network_settlement_date: Only funding events with a settlement breakout for this network settlement date
+              will be included.
 
           page_size: Page size (for pagination).
 
@@ -261,7 +291,10 @@ class AsyncFundingEvents(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "begin": begin,
+                        "end": end,
                         "ending_before": ending_before,
+                        "network_settlement_date": network_settlement_date,
                         "page_size": page_size,
                         "starting_after": starting_after,
                     },

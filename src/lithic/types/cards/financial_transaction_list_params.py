@@ -33,6 +33,9 @@ class FinancialTransactionListParams(TypedDict, total=False):
     Used to retrieve the previous page of results before this item.
     """
 
+    page_size: int
+    """Page size (for pagination)."""
+
     result: Literal["APPROVED", "DECLINED"]
     """Financial Transaction result to be returned."""
 

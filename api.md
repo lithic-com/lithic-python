@@ -335,7 +335,7 @@ Methods:
 Methods:
 
 - <code title="get /v1/cards/{card_token}/financial_transactions/{financial_transaction_token}">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">retrieve</a>(financial_transaction_token, \*, card_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
-- <code title="get /v1/cards/{card_token}/financial_transactions">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
+- <code title="get /v1/cards/{card_token}/financial_transactions">client.cards.financial_transactions.<a href="./src/lithic/resources/cards/financial_transactions.py">list</a>(card_token, \*\*<a href="src/lithic/types/cards/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncCursorPage[FinancialTransaction]</a></code>
 
 # CardAuthorizations
 
@@ -499,7 +499,7 @@ Methods:
 Methods:
 
 - <code title="get /v1/financial_accounts/{financial_account_token}/financial_transactions/{financial_transaction_token}">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">retrieve</a>(financial_transaction_token, \*, financial_account_token) -> <a href="./src/lithic/types/financial_transaction.py">FinancialTransaction</a></code>
-- <code title="get /v1/financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncSinglePage[FinancialTransaction]</a></code>
+- <code title="get /v1/financial_accounts/{financial_account_token}/financial_transactions">client.financial_accounts.financial_transactions.<a href="./src/lithic/resources/financial_accounts/financial_transactions.py">list</a>(financial_account_token, \*\*<a href="src/lithic/types/financial_accounts/financial_transaction_list_params.py">params</a>) -> <a href="./src/lithic/types/financial_transaction.py">SyncCursorPage[FinancialTransaction]</a></code>
 
 ## CreditConfiguration
 
