@@ -87,6 +87,9 @@ class Balances(BaseModel):
     past_statements_due: CategoryBalances
     """Amount due for the past billing cycles."""
 
+    installments: Optional[CategoryBalances] = None
+    """Amounts converted into installment plans"""
+
 
 class InterestDetails(BaseModel):
     actual_interest_charged: Optional[int] = None
