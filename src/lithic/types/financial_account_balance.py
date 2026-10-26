@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -23,13 +24,13 @@ class FinancialAccountBalance(BaseModel):
     currency: str
     """3-character alphabetic ISO 4217 code for the local currency of the balance."""
 
-    last_transaction_event_token: str
+    last_transaction_event_token: Optional[str] = None
     """
     Globally unique identifier for the last financial transaction event that
     impacted this balance.
     """
 
-    last_transaction_token: str
+    last_transaction_token: Optional[str] = None
     """
     Globally unique identifier for the last financial transaction that impacted this
     balance.
