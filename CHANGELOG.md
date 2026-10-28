@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.134.0](https://github.com/lithic-com/lithic-python/compare/v0.133.0...v0.134.0) (2026-10-28)
+
+
+### Features
+
+* **api:** add ALLPOINT to card transaction and authorization network enums ([c091887](https://github.com/lithic-com/lithic-python/commit/c091887ddcd9db7669888db92a06148ad0e7d1e0))
+* **api:** add financial_entity_id to transfer limits response items ([5159916](https://github.com/lithic-com/lithic-python/commit/51599161430678db0ec1780343d3b0cfaa61af5e))
+* **api:** add installments balance to loan tape balances on financial accounts ([70bb79f](https://github.com/lithic-com/lithic-python/commit/70bb79f8f21f6ca4b1144154cf4fe44d068586f0))
+* **api:** add INSTANCE_TO_INSTANCE to book transfer type and financial event type enums ([27c08ac](https://github.com/lithic-com/lithic-python/commit/27c08acb8e0b667bd280a65d07ddeedec401f0ff))
+* **api:** add intra-bank transaction category and intra_bank financial event types ([e56ada5](https://github.com/lithic-com/lithic-python/commit/e56ada5d3c9509be75aed8c650d0e332d446882b))
+* **api:** add page_size to financial transaction lists and date filters to funding events list ([f8bdf69](https://github.com/lithic-com/lithic-python/commit/f8bdf690d84c319ec7fd7eb9854a018d93bd80f6))
+* **api:** add reference_id field to claims for matching with the dashboard ([3933cbb](https://github.com/lithic-com/lithic-python/commit/3933cbb49adc6554dd8aa6f1c4f9a458b3f6d661))
+* **api:** add unit_amount and total_amount to enhanced commercial data line items, deprecate amount ([5f8ba69](https://github.com/lithic-com/lithic-python/commit/5f8ba69b5655f0fe390da8eae400cb2af268244c))
+
+
+### Bug Fixes
+
+* **api:** correct status enum types on hold and card transaction models ([50cd992](https://github.com/lithic-com/lithic-python/commit/50cd9921f4e3d2304664ed2d5994875e93f269a6))
+* **api:** financial account balance last transaction tokens are nullable (breaks java/kotlin types) ([3305157](https://github.com/lithic-com/lithic-python/commit/33051578d8723a2943562ee50a699070d1fd1f73))
+* **api:** make tier_name, tier_rates, and penalty_rates nullable on account tier schedules ([121e9f7](https://github.com/lithic-com/lithic-python/commit/121e9f737e6143cdcc97ed8e49ea2a30e60082c8))
+
+
+### Documentation
+
+* **api:** clarify credit product can only be assigned once to pending financial accounts ([3c11e16](https://github.com/lithic-com/lithic-python/commit/3c11e169c5ba32c9287d76385f39ac42ae61e3f3))
+
 ## [0.133.0](https://github.com/lithic-com/lithic-python/compare/v0.132.0...v0.133.0) (2026-10-13)
 
 
