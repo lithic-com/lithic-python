@@ -91,11 +91,18 @@ class CreditConfiguration(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccountCreditConfig:
-        """
-        Update an account's credit configuration
+        """Update an account's credit configuration.
+
+        A credit product can only be attached
+        while the financial account is in the `PENDING` state; once a credit product has
+        been assigned the account transitions to `OPEN` and `credit_product_token` can
+        no longer be changed
 
         Args:
-          credit_product_token: Globally unique identifier for the credit product
+          credit_product_token: Globally unique identifier for the credit product. This can only be set while
+              the financial account is in the `PENDING` state. Because assigning a credit
+              product transitions the account to `OPEN`, a credit product can be attached only
+              once; updating it on an account in any other state returns a `403`
 
           tier: Tier to assign to a financial account
 
@@ -207,11 +214,18 @@ class AsyncCreditConfiguration(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialAccountCreditConfig:
-        """
-        Update an account's credit configuration
+        """Update an account's credit configuration.
+
+        A credit product can only be attached
+        while the financial account is in the `PENDING` state; once a credit product has
+        been assigned the account transitions to `OPEN` and `credit_product_token` can
+        no longer be changed
 
         Args:
-          credit_product_token: Globally unique identifier for the credit product
+          credit_product_token: Globally unique identifier for the credit product. This can only be set while
+              the financial account is in the `PENDING` state. Because assigning a credit
+              product transitions the account to `OPEN`, a credit product can be attached only
+              once; updating it on an account in any other state returns a `403`
 
           tier: Tier to assign to a financial account
 
