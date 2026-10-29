@@ -19,6 +19,12 @@ class InstallmentPayment(BaseModel):
     date: datetime.date
     """Date the payment was applied to the installment"""
 
+    is_adjustment: Optional[bool] = None
+    """
+    True when the source of the payment is an adjustment of an underlying account or
+    transaction
+    """
+
 
 class Installment(BaseModel):
     amount_due: int
@@ -54,6 +60,9 @@ class Installment(BaseModel):
     payments: List[InstallmentPayment]
     """Payments applied to this installment, oldest first"""
 
+    installment_adjustment: Optional[int] = None
+    """Amount from installment_plan_adjustment credited to this installment"""
+
 
 class InstallmentPlan(BaseModel):
     token: str
@@ -70,6 +79,12 @@ class InstallmentPlan(BaseModel):
 
     financial_account_token: str
     """Globally unique identifier for a financial account"""
+
+    installment_plan_adjustment: int
+    """Amount credited to this plan after the plan was recalculated.
+
+    The plan amount is not changed, and this credit reduces the amount owed
+    """
 
     installment_plan_total: int
     """Total owed on the plan in cents, the principal amount plus the enrollment fee"""
