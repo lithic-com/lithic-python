@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.135.0](https://github.com/lithic-com/lithic-python/compare/v0.134.0...v0.135.0) (2026-10-30)
+
+
+### Features
+
+* **api:** add installment plan adjustment amounts and is_adjustment flag to installment plans ([9ad8d4e](https://github.com/lithic-com/lithic-python/commit/9ad8d4effac884c009320b8a7fbeb2e4433b8894))
+* **api:** add source, adjustment, and timestamp fields to installment plan statements ([1f13e8b](https://github.com/lithic-com/lithic-python/commit/1f13e8b23dd9cc1f3f736ef633be1ecce80ee934))
+
+
+### Chores
+
+* **ci:** Removing pre-release configuration ([#798](https://github.com/lithic-com/lithic-python/issues/798)) ([467a0a0](https://github.com/lithic-com/lithic-python/commit/467a0a02aa5ce70ec4242cc4ef12ef848ffcc939))
+
+
+### Documentation
+
+* **api:** clarify that begin filters on list endpoints are inclusive (on or after) ([09a0126](https://github.com/lithic-com/lithic-python/commit/09a0126bda73adbf4044445e7a343453dfba0485))
+
 ## [0.134.0](https://github.com/lithic-com/lithic-python/compare/v0.133.0...v0.134.0) (2026-10-28)
 
 
