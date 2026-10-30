@@ -16,7 +16,7 @@ class TokenizationListParams(TypedDict, total=False):
     """Filters for tokenizations associated with a specific account."""
 
     begin: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
-    """Filter for tokenizations created after this date."""
+    """Filter for tokenizations created on or after this date."""
 
     card_token: str
     """Filters for tokenizations associated with a specific card."""

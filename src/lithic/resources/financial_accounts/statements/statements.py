@@ -122,8 +122,8 @@ class Statements(SyncAPIResource):
         Args:
           financial_account_token: Globally unique identifier for financial account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
-              will be included.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              date will be included.
 
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included.
@@ -270,8 +270,8 @@ class AsyncStatements(AsyncAPIResource):
         Args:
           financial_account_token: Globally unique identifier for financial account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified date
-              will be included.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              date will be included.
 
           end: Date string in RFC 3339 format. Only entries created before the specified date
               will be included.

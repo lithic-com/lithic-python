@@ -94,8 +94,8 @@ class NetworkPrograms(SyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified time
-              will be included. UTC time zone.
+        Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -204,8 +204,8 @@ class AsyncNetworkPrograms(AsyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified time
-              will be included. UTC time zone.
+        Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.

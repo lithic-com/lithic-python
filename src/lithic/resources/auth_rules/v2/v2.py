@@ -861,8 +861,8 @@ class V2(SyncAPIResource):
         Args:
           auth_rule_token: Filter by Auth Rule token
 
-          begin: Date string in RFC 3339 format. Only events evaluated after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only events evaluated on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only events evaluated before the specified time
               will be included. UTC time zone.
@@ -1961,8 +1961,8 @@ class AsyncV2(AsyncAPIResource):
         Args:
           auth_rule_token: Filter by Auth Rule token
 
-          begin: Date string in RFC 3339 format. Only events evaluated after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only events evaluated on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only events evaluated before the specified time
               will be included. UTC time zone.

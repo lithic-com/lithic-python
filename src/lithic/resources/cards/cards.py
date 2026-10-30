@@ -555,8 +555,8 @@ class Cards(SyncAPIResource):
         Args:
           account_token: Returns cards associated with the specified account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -1847,8 +1847,8 @@ class AsyncCards(AsyncAPIResource):
         Args:
           account_token: Returns cards associated with the specified account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.

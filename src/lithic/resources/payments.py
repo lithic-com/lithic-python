@@ -184,8 +184,8 @@ class Payments(SyncAPIResource):
         List all the payments for the provided search criteria.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -785,8 +785,8 @@ class AsyncPayments(AsyncAPIResource):
         List all the payments for the provided search criteria.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.

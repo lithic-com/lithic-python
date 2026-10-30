@@ -18,7 +18,8 @@ class V2ListResultsParams(TypedDict, total=False):
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
-    Only events evaluated after the specified time will be included. UTC time zone.
+    Only events evaluated on or after the specified time will be included. UTC time
+    zone.
     """
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]

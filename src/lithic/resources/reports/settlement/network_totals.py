@@ -102,8 +102,8 @@ class NetworkTotals(SyncAPIResource):
         Not available in sandbox.
 
         Args:
-          begin: Datetime in RFC 3339 format. Only entries created after the specified time will
-              be included. UTC time zone.
+          begin: Datetime in RFC 3339 format. Only entries created on or after the specified time
+              will be included. UTC time zone.
 
           end: Datetime in RFC 3339 format. Only entries created before the specified time will
               be included. UTC time zone.
@@ -246,8 +246,8 @@ class AsyncNetworkTotals(AsyncAPIResource):
         Not available in sandbox.
 
         Args:
-          begin: Datetime in RFC 3339 format. Only entries created after the specified time will
-              be included. UTC time zone.
+          begin: Datetime in RFC 3339 format. Only entries created on or after the specified time
+              will be included. UTC time zone.
 
           end: Datetime in RFC 3339 format. Only entries created before the specified time will
               be included. UTC time zone.

@@ -104,7 +104,7 @@ class Tokenizations(SyncAPIResource):
         Args:
           account_token: Filters for tokenizations associated with a specific account.
 
-          begin: Filter for tokenizations created after this date.
+          begin: Filter for tokenizations created on or after this date.
 
           card_token: Filters for tokenizations associated with a specific card.
 
@@ -572,7 +572,7 @@ class AsyncTokenizations(AsyncAPIResource):
         Args:
           account_token: Filters for tokenizations associated with a specific account.
 
-          begin: Filter for tokenizations created after this date.
+          begin: Filter for tokenizations created on or after this date.
 
           card_token: Filters for tokenizations associated with a specific card.
 

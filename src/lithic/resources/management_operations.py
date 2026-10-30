@@ -213,8 +213,8 @@ class ManagementOperations(SyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified time
-              will be included. UTC time zone.
+        Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           category: Management operation category to be returned.
 
@@ -503,8 +503,8 @@ class AsyncManagementOperations(AsyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified time
-              will be included. UTC time zone.
+        Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           category: Management operation category to be returned.
 

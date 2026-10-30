@@ -443,8 +443,8 @@ class Subscriptions(SyncAPIResource):
         List all the message attempts for a given event subscription.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -512,8 +512,8 @@ class Subscriptions(SyncAPIResource):
         Resend all failed messages since a given time.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -566,15 +566,15 @@ class Subscriptions(SyncAPIResource):
     ) -> None:
         """Replays messages to the endpoint.
 
-        Only messages that were created after `begin`
-        will be sent. Messages that were previously sent to the endpoint are not resent.
-        Message will be retried if endpoint responds with a non-2xx status code. See
-        [Retry Schedule](https://docs.lithic.com/docs/events-api#retry-schedule) for
+        Only messages that were created on or after
+        `begin` will be sent. Messages that were previously sent to the endpoint are not
+        resent. Message will be retried if endpoint responds with a non-2xx status code.
+        See [Retry Schedule](https://docs.lithic.com/docs/events-api#retry-schedule) for
         details.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -1211,8 +1211,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         List all the message attempts for a given event subscription.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -1280,8 +1280,8 @@ class AsyncSubscriptions(AsyncAPIResource):
         Resend all failed messages since a given time.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -1334,15 +1334,15 @@ class AsyncSubscriptions(AsyncAPIResource):
     ) -> None:
         """Replays messages to the endpoint.
 
-        Only messages that were created after `begin`
-        will be sent. Messages that were previously sent to the endpoint are not resent.
-        Message will be retried if endpoint responds with a non-2xx status code. See
-        [Retry Schedule](https://docs.lithic.com/docs/events-api#retry-schedule) for
+        Only messages that were created on or after
+        `begin` will be sent. Messages that were previously sent to the endpoint are not
+        resent. Message will be retried if endpoint responds with a non-2xx status code.
+        See [Retry Schedule](https://docs.lithic.com/docs/events-api#retry-schedule) for
         details.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.

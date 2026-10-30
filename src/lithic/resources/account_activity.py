@@ -98,8 +98,8 @@ class AccountActivity(SyncAPIResource):
         Args:
           account_token: Filter by account token
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           business_account_token: Filter by business account token
 
@@ -274,8 +274,8 @@ class AsyncAccountActivity(AsyncAPIResource):
         Args:
           account_token: Filter by account token
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           business_account_token: Filter by business account token
 

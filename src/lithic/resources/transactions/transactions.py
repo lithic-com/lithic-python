@@ -150,8 +150,8 @@ class Transactions(SyncAPIResource):
         Args:
           account_token: Filters for transactions associated with a specific account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           card_token: Filters for transactions associated with a specific card.
 
@@ -936,8 +936,8 @@ class AsyncTransactions(AsyncAPIResource):
         Args:
           account_token: Filters for transactions associated with a specific account.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           card_token: Filters for transactions associated with a specific card.
 

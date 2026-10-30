@@ -232,8 +232,8 @@ class Cases(SyncAPIResource):
           assignee: Only return cases assigned to the provided value. Pass an empty string to return
               only unassigned cases.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           card_token: Only return cases that include transactions on the provided card.
 
@@ -628,8 +628,8 @@ class AsyncCases(AsyncAPIResource):
           assignee: Only return cases assigned to the provided value. Pass an empty string to return
               only unassigned cases.
 
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           card_token: Only return cases that include transactions on the provided card.
 

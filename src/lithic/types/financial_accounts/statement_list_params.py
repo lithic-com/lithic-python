@@ -15,7 +15,7 @@ class StatementListParams(TypedDict, total=False):
     begin: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
-    Only entries created after the specified date will be included.
+    Only entries created on or after the specified date will be included.
     """
 
     end: Annotated[Union[str, date], PropertyInfo(format="iso8601")]

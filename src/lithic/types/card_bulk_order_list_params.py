@@ -15,7 +15,8 @@ class CardBulkOrderListParams(TypedDict, total=False):
     begin: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date string in RFC 3339 format.
 
-    Only entries created after the specified time will be included. UTC time zone.
+    Only entries created on or after the specified time will be included. UTC time
+    zone.
     """
 
     end: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]

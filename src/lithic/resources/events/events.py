@@ -188,8 +188,8 @@ class Events(SyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified time
-              will be included. UTC time zone.
+        Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -259,8 +259,8 @@ class Events(SyncAPIResource):
         List all the message attempts for a given event.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -472,8 +472,8 @@ class AsyncEvents(AsyncAPIResource):
         Args:
           begin: Date string in RFC 3339 format.
 
-        Only entries created after the specified time
-              will be included. UTC time zone.
+        Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
@@ -543,8 +543,8 @@ class AsyncEvents(AsyncAPIResource):
         List all the message attempts for a given event.
 
         Args:
-          begin: Date string in RFC 3339 format. Only entries created after the specified time
-              will be included. UTC time zone.
+          begin: Date string in RFC 3339 format. Only entries created on or after the specified
+              time will be included. UTC time zone.
 
           end: Date string in RFC 3339 format. Only entries created before the specified time
               will be included. UTC time zone.
