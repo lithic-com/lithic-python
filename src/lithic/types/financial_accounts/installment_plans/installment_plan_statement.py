@@ -5,7 +5,7 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ...._models import BaseModel
-from ..category_balances import CategoryBalances
+from ..transaction_category_balances import TransactionCategoryBalances
 
 __all__ = ["InstallmentPlanStatement", "Installment", "InstallmentPayment"]
 
@@ -14,30 +14,35 @@ class InstallmentPayment(BaseModel):
     amount: int
     """Amount applied to the installment in cents"""
 
+    amount_details: TransactionCategoryBalances
+
     date: datetime.date
     """Date the payment was applied to the installment"""
 
+    is_adjustment: Optional[bool] = None
+    """
+    True when the source of the payment is an adjustment of an underlying account or
+    transaction
+    """
+
 
 class Installment(BaseModel):
-    """One installment of a plan as of the statement.
-
-    Amounts are totalled across transaction categories rather than broken out by them, which the installment plan endpoint does
-    """
+    """One installment of a plan as of the statement"""
 
     amount_due: int
     """Amount the installment was opened for in cents"""
 
-    amount_due_details: CategoryBalances
+    amount_due_details: TransactionCategoryBalances
 
     amount_outstanding: int
     """Amount still owed on the installment in cents"""
 
-    amount_outstanding_details: CategoryBalances
+    amount_outstanding_details: TransactionCategoryBalances
 
     amount_paid: int
     """Amount paid towards the installment in cents"""
 
-    amount_paid_details: CategoryBalances
+    amount_paid_details: TransactionCategoryBalances
 
     date_assessed: Optional[datetime.date] = None
     """
@@ -57,6 +62,12 @@ class Installment(BaseModel):
     payments: List[InstallmentPayment]
     """Payments applied to this installment, oldest first"""
 
+    installment_adjustment: Optional[int] = None
+    """
+    Amount from installment_plan_adjustment credited to this installment as of this
+    statement
+    """
+
 
 class InstallmentPlanStatement(BaseModel):
     """
@@ -71,8 +82,24 @@ class InstallmentPlanStatement(BaseModel):
     pagination cursor
     """
 
+    closed_at: Optional[datetime.date] = None
+    """
+    Date the plan was paid off or cancelled, or null if it was still open as of this
+    statement
+    """
+
+    created: datetime.datetime
+    """Timestamp of when the installment plan was created"""
+
     fee_amount: int
     """Enrollment fee charged when the plan was created in cents"""
+
+    installment_plan_adjustment: int
+    """
+    Amount credited to this plan after the plan was recalculated, as of this
+    statement. The plan amount is not changed, and this credit reduces the amount
+    owed
+    """
 
     installment_plan_token: str
     """Globally unique identifier for the installment plan this snapshot is of"""
@@ -95,6 +122,18 @@ class InstallmentPlanStatement(BaseModel):
     principal_amount: int
     """Balance the plan was opened on in cents, excluding the enrollment fee"""
 
+    source_amounts: Optional[TransactionCategoryBalances] = None
+    """
+    Balance the plan was opened on, broken out by category, or null if it was not
+    recorded
+    """
+
+    source_id: str
+    """
+    Identifier of the record the plan was opened from, such as the closing statement
+    for an unpaid balance
+    """
+
     source_type: Literal["UNPAID_BALANCE", "TRANSACTION"]
 
     start_date: datetime.date
@@ -109,3 +148,6 @@ class InstallmentPlanStatement(BaseModel):
 
     total_paid: int
     """Amount paid towards the plan as of this statement in cents"""
+
+    updated: datetime.datetime
+    """Timestamp of when the installment plan was last updated as of this statement"""
