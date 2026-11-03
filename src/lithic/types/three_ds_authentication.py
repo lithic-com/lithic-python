@@ -588,6 +588,14 @@ class ThreeDSAuthentication(BaseModel):
     - `OTHER` - Other indicators not captured by above. These are rarely used
     """
 
+    updated: datetime
+    """Date and time when the authentication was last updated in Lithic's system.
+
+    Equal to `created` until the authentication is updated (e.g. a challenge is
+    completed). Permitted values: Date string in the ISO 8601 format
+    yyyy-MM-dd'T'hh:mm:ssZ.
+    """
+
     additional_data: Optional[AdditionalData] = None
     """
     Object containing additional data about the 3DS request that is beyond the EMV

@@ -27,6 +27,9 @@ class BacktestResults(BaseModel):
     backtest_token: str
     """Auth Rule Backtest Token"""
 
+    created: datetime
+    """Date and time when the backtest was requested"""
+
     results: Results
 
     simulation_parameters: SimulationParameters

@@ -38,4 +38,10 @@ class ThreeDSAuthenticationChallengeWebhookEvent(BaseModel):
     challenge: Challenge
     """Represents a challenge object for 3DS authentication"""
 
+    created: datetime
+    """Date and time when the challenge event was emitted.
+
+    Permitted values: Date string in the ISO 8601 format yyyy-MM-dd'T'hh:mm:ssZ.
+    """
+
     event_type: Literal["three_ds_authentication.challenge"]
