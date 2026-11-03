@@ -15,8 +15,10 @@ class AccountUpdateParams(TypedDict, total=False):
     daily_spend_limit: int
     """Amount (in cents) for the account's daily spend limit (e.g.
 
-    100000 would be a $1,000 limit). By default the daily spend limit is set to
-    $1,250.
+    100000 would be a $1,000 limit). A spend limit of 0 means that no daily spend
+    limit is enforced. Clients onboarded on or after February 1, 2026 have no
+    default account spend limits. For clients onboarded before that date that do not
+    use Auth Stream Access, new accounts have a default daily spend limit of $1,250
     """
 
     lifetime_spend_limit: int
@@ -24,17 +26,17 @@ class AccountUpdateParams(TypedDict, total=False):
 
     100000 would be a $1,000 limit). Once this limit is reached, no transactions
     will be accepted on any card created for this account until the limit is
-    updated. Note that a spend limit of 0 is effectively no limit, and should only
-    be used to reset or remove a prior limit. Only a limit of 1 or above will result
-    in declined transactions due to checks against the account limit. This behavior
-    differs from the daily spend limit and the monthly spend limit.
+    updated. A spend limit of 0 means that no lifetime spend limit is enforced
     """
 
     monthly_spend_limit: int
     """Amount (in cents) for the account's monthly spend limit (e.g.
 
-    100000 would be a $1,000 limit). By default the monthly spend limit is set to
-    $5,000.
+    100000 would be a $1,000 limit). A spend limit of 0 means that no monthly spend
+    limit is enforced. Clients onboarded on or after February 1, 2026 have no
+    default account spend limits. For clients onboarded before that date that do not
+    use Auth Stream Access, new accounts have a default monthly spend limit of
+    $5,000
     """
 
     state: Literal["ACTIVE", "PAUSED", "CLOSED"]
