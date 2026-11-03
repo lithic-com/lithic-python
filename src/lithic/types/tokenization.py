@@ -9,7 +9,7 @@ from .tokenization_tfa_reason import TokenizationTfaReason
 from .tokenization_rule_result import TokenizationRuleResult
 from .tokenization_decline_reason import TokenizationDeclineReason
 
-__all__ = ["Tokenization", "Event"]
+__all__ = ["Tokenization", "Event", "TfaMethod"]
 
 
 class Event(BaseModel):
@@ -58,6 +58,14 @@ class Event(BaseModel):
     """Enum representing the type of tokenization event that occurred"""
 
 
+class TfaMethod(BaseModel):
+    destination: str
+    """Destination for the authentication code, as provided by the card network"""
+
+    method: Literal["SMS", "EMAIL"]
+    """Method used to deliver the one-time authentication code"""
+
+
 class Tokenization(BaseModel):
     token: str
     """Globally unique identifier for a Tokenization"""
@@ -100,7 +108,7 @@ class Tokenization(BaseModel):
     token_unique_reference: str
     """The network's unique reference for the tokenization."""
 
-    tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT"]
+    tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "AGENT_PAY"]
     """The channel through which the tokenization was made."""
 
     updated_at: datetime
@@ -122,3 +130,10 @@ class Tokenization(BaseModel):
 
     payment_account_reference_id: Optional[str] = None
     """The network's unique reference for the card that is tokenized."""
+
+    tfa_methods: Optional[List[TfaMethod]] = None
+    """
+    Available authentication methods for an agent tokenization pending two-factor
+    authentication. Empty when no methods are available or authentication is no
+    longer pending
+    """

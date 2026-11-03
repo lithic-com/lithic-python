@@ -11,9 +11,13 @@ import httpx
 from .. import _legacy_response
 from ..types import (
     tokenization_list_params,
+    tokenization_create_params,
     tokenization_simulate_params,
+    tokenization_submit_tfa_params,
+    tokenization_select_tfa_method_params,
     tokenization_resend_activation_code_params,
     tokenization_update_digital_card_art_params,
+    tokenization_create_payment_credentials_params,
 )
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
@@ -23,6 +27,9 @@ from .._response import to_streamed_response_wrapper, async_to_streamed_response
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.tokenization import Tokenization
+from ..types.tokenization_submit_tfa_response import TokenizationSubmitTfaResponse
+from ..types.tokenization_select_tfa_method_response import TokenizationSelectTfaMethodResponse
+from ..types.tokenization_create_payment_credentials_response import TokenizationCreatePaymentCredentialsResponse
 
 __all__ = ["Tokenizations", "AsyncTokenizations"]
 
@@ -46,6 +53,64 @@ class Tokenizations(SyncAPIResource):
         For more information, see https://www.github.com/lithic-com/lithic-python#with_streaming_response
         """
         return TokenizationsWithStreamingResponse(self)
+
+    def create(
+        self,
+        card_token: str,
+        *,
+        agent_token: str,
+        type: Literal["AGENT"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Tokenization:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Create a tokenization for an OPEN card. Contact your Lithic representative to
+        configure tokenization for your program and card network.
+
+        If the status is PENDING_2FA, select an available tfa_methods entry and submit
+        the cardholder's authentication code. An ACTIVE tokenization can then be used to
+        create payment credentials.
+
+        Additional attempts to create the same tokenizations on a card will result in a
+        409 Conflict.
+
+        Args:
+          agent_token: Globally unique identifier for the active agent configured for your program
+
+          type: Type of tokenization to create
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return self._post(
+            path_template("/v1/cards/{card_token}/tokenizations", card_token=card_token),
+            body=maybe_transform(
+                {
+                    "agent_token": agent_token,
+                    "type": type,
+                },
+                tokenization_create_params.TokenizationCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Tokenization,
+        )
 
     def retrieve(
         self,
@@ -90,7 +155,7 @@ class Tokenizations(SyncAPIResource):
         ending_before: str | Omit = omit,
         page_size: int | Omit = omit,
         starting_after: str | Omit = omit,
-        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "ALL"] | Omit = omit,
+        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "AGENT_PAY", "ALL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -193,6 +258,63 @@ class Tokenizations(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    def create_payment_credentials(
+        self,
+        tokenization_token: str,
+        *,
+        device: tokenization_create_payment_credentials_params.Device,
+        mandate: tokenization_create_payment_credentials_params.Mandate,
+        type: Literal["AUTONOMOUS", "HUMAN_IN_THE_LOOP", "RECURRING"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenizationCreatePaymentCredentialsResponse:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Create payment credentials and a purchase mandate for an ACTIVE tokenization.
+
+        The credential value, expiration date, and CVV are only available in this
+        response and cannot be retrieved later.
+
+        Args:
+          device: Device used for the purchase
+
+          type: Type of purchase for which payment credentials are requested
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            path_template(
+                "/v1/tokenizations/{tokenization_token}/payment_credentials", tokenization_token=tokenization_token
+            ),
+            body=maybe_transform(
+                {
+                    "device": device,
+                    "mandate": mandate,
+                    "type": type,
+                },
+                tokenization_create_payment_credentials_params.TokenizationCreatePaymentCredentialsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationCreatePaymentCredentialsResponse,
         )
 
     def deactivate(
@@ -331,6 +453,57 @@ class Tokenizations(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def select_tfa_method(
+        self,
+        tokenization_token: str,
+        *,
+        method: Literal["SMS", "EMAIL"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenizationSelectTfaMethodResponse:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Select an available SMS or EMAIL authentication method for a tokenization with
+        status PENDING_2FA. Use a method returned in the tokenization's list of
+        tfa_methods. The card network initiates delivery of the authentication code to
+        the corresponding destination.
+
+        A successful response confirms method selection, not tokenization activation.
+        Submit the code using submit_tfa after the cardholder receives it.
+
+        Args:
+          method: An available method from the tokenization's list of tfa_methods
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            path_template(
+                "/v1/tokenizations/{tokenization_token}/select_tfa_method", tokenization_token=tokenization_token
+            ),
+            body=maybe_transform(
+                {"method": method}, tokenization_select_tfa_method_params.TokenizationSelectTfaMethodParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationSelectTfaMethodResponse,
+        )
+
     def simulate(
         self,
         *,
@@ -400,6 +573,54 @@ class Tokenizations(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Tokenization,
+        )
+
+    def submit_tfa(
+        self,
+        tokenization_token: str,
+        *,
+        value: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenizationSubmitTfaResponse:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Submit the cardholder's one-time authentication code for a tokenization with
+        status PENDING_2FA. A successful select_tfa_method request must precede
+        submission. Send the code as a string to preserve leading zeros.
+
+        A successful response means that the network accepted the authentication code.
+        The activation of a tokenization will occur asynchronously initiated by the card
+        network.
+
+        Args:
+          value: One-time authentication code received by the cardholder, including any leading
+              zeros
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return self._post(
+            path_template("/v1/tokenizations/{tokenization_token}/submit_tfa", tokenization_token=tokenization_token),
+            body=maybe_transform({"value": value}, tokenization_submit_tfa_params.TokenizationSubmitTfaParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationSubmitTfaResponse,
         )
 
     def unpause(
@@ -515,6 +736,64 @@ class AsyncTokenizations(AsyncAPIResource):
         """
         return AsyncTokenizationsWithStreamingResponse(self)
 
+    async def create(
+        self,
+        card_token: str,
+        *,
+        agent_token: str,
+        type: Literal["AGENT"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Tokenization:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Create a tokenization for an OPEN card. Contact your Lithic representative to
+        configure tokenization for your program and card network.
+
+        If the status is PENDING_2FA, select an available tfa_methods entry and submit
+        the cardholder's authentication code. An ACTIVE tokenization can then be used to
+        create payment credentials.
+
+        Additional attempts to create the same tokenizations on a card will result in a
+        409 Conflict.
+
+        Args:
+          agent_token: Globally unique identifier for the active agent configured for your program
+
+          type: Type of tokenization to create
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not card_token:
+            raise ValueError(f"Expected a non-empty value for `card_token` but received {card_token!r}")
+        return await self._post(
+            path_template("/v1/cards/{card_token}/tokenizations", card_token=card_token),
+            body=await async_maybe_transform(
+                {
+                    "agent_token": agent_token,
+                    "type": type,
+                },
+                tokenization_create_params.TokenizationCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Tokenization,
+        )
+
     async def retrieve(
         self,
         tokenization_token: str,
@@ -558,7 +837,7 @@ class AsyncTokenizations(AsyncAPIResource):
         ending_before: str | Omit = omit,
         page_size: int | Omit = omit,
         starting_after: str | Omit = omit,
-        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "ALL"] | Omit = omit,
+        tokenization_channel: Literal["DIGITAL_WALLET", "MERCHANT", "AGENT_PAY", "ALL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -661,6 +940,63 @@ class AsyncTokenizations(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    async def create_payment_credentials(
+        self,
+        tokenization_token: str,
+        *,
+        device: tokenization_create_payment_credentials_params.Device,
+        mandate: tokenization_create_payment_credentials_params.Mandate,
+        type: Literal["AUTONOMOUS", "HUMAN_IN_THE_LOOP", "RECURRING"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenizationCreatePaymentCredentialsResponse:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Create payment credentials and a purchase mandate for an ACTIVE tokenization.
+
+        The credential value, expiration date, and CVV are only available in this
+        response and cannot be retrieved later.
+
+        Args:
+          device: Device used for the purchase
+
+          type: Type of purchase for which payment credentials are requested
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            path_template(
+                "/v1/tokenizations/{tokenization_token}/payment_credentials", tokenization_token=tokenization_token
+            ),
+            body=await async_maybe_transform(
+                {
+                    "device": device,
+                    "mandate": mandate,
+                    "type": type,
+                },
+                tokenization_create_payment_credentials_params.TokenizationCreatePaymentCredentialsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationCreatePaymentCredentialsResponse,
         )
 
     async def deactivate(
@@ -799,6 +1135,57 @@ class AsyncTokenizations(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def select_tfa_method(
+        self,
+        tokenization_token: str,
+        *,
+        method: Literal["SMS", "EMAIL"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenizationSelectTfaMethodResponse:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Select an available SMS or EMAIL authentication method for a tokenization with
+        status PENDING_2FA. Use a method returned in the tokenization's list of
+        tfa_methods. The card network initiates delivery of the authentication code to
+        the corresponding destination.
+
+        A successful response confirms method selection, not tokenization activation.
+        Submit the code using submit_tfa after the cardholder receives it.
+
+        Args:
+          method: An available method from the tokenization's list of tfa_methods
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            path_template(
+                "/v1/tokenizations/{tokenization_token}/select_tfa_method", tokenization_token=tokenization_token
+            ),
+            body=await async_maybe_transform(
+                {"method": method}, tokenization_select_tfa_method_params.TokenizationSelectTfaMethodParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationSelectTfaMethodResponse,
+        )
+
     async def simulate(
         self,
         *,
@@ -868,6 +1255,56 @@ class AsyncTokenizations(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Tokenization,
+        )
+
+    async def submit_tfa(
+        self,
+        tokenization_token: str,
+        *,
+        value: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenizationSubmitTfaResponse:
+        """
+        > 🚧 Beta API
+        >
+        > This endpoint is in beta and subject to change.
+
+        Submit the cardholder's one-time authentication code for a tokenization with
+        status PENDING_2FA. A successful select_tfa_method request must precede
+        submission. Send the code as a string to preserve leading zeros.
+
+        A successful response means that the network accepted the authentication code.
+        The activation of a tokenization will occur asynchronously initiated by the card
+        network.
+
+        Args:
+          value: One-time authentication code received by the cardholder, including any leading
+              zeros
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tokenization_token:
+            raise ValueError(f"Expected a non-empty value for `tokenization_token` but received {tokenization_token!r}")
+        return await self._post(
+            path_template("/v1/tokenizations/{tokenization_token}/submit_tfa", tokenization_token=tokenization_token),
+            body=await async_maybe_transform(
+                {"value": value}, tokenization_submit_tfa_params.TokenizationSubmitTfaParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenizationSubmitTfaResponse,
         )
 
     async def unpause(
@@ -967,6 +1404,9 @@ class TokenizationsWithRawResponse:
     def __init__(self, tokenizations: Tokenizations) -> None:
         self._tokenizations = tokenizations
 
+        self.create = _legacy_response.to_raw_response_wrapper(
+            tokenizations.create,
+        )
         self.retrieve = _legacy_response.to_raw_response_wrapper(
             tokenizations.retrieve,
         )
@@ -975,6 +1415,9 @@ class TokenizationsWithRawResponse:
         )
         self.activate = _legacy_response.to_raw_response_wrapper(
             tokenizations.activate,
+        )
+        self.create_payment_credentials = _legacy_response.to_raw_response_wrapper(
+            tokenizations.create_payment_credentials,
         )
         self.deactivate = _legacy_response.to_raw_response_wrapper(
             tokenizations.deactivate,
@@ -985,8 +1428,14 @@ class TokenizationsWithRawResponse:
         self.resend_activation_code = _legacy_response.to_raw_response_wrapper(
             tokenizations.resend_activation_code,
         )
+        self.select_tfa_method = _legacy_response.to_raw_response_wrapper(
+            tokenizations.select_tfa_method,
+        )
         self.simulate = _legacy_response.to_raw_response_wrapper(
             tokenizations.simulate,
+        )
+        self.submit_tfa = _legacy_response.to_raw_response_wrapper(
+            tokenizations.submit_tfa,
         )
         self.unpause = _legacy_response.to_raw_response_wrapper(
             tokenizations.unpause,
@@ -1000,6 +1449,9 @@ class AsyncTokenizationsWithRawResponse:
     def __init__(self, tokenizations: AsyncTokenizations) -> None:
         self._tokenizations = tokenizations
 
+        self.create = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.create,
+        )
         self.retrieve = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.retrieve,
         )
@@ -1008,6 +1460,9 @@ class AsyncTokenizationsWithRawResponse:
         )
         self.activate = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.activate,
+        )
+        self.create_payment_credentials = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.create_payment_credentials,
         )
         self.deactivate = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.deactivate,
@@ -1018,8 +1473,14 @@ class AsyncTokenizationsWithRawResponse:
         self.resend_activation_code = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.resend_activation_code,
         )
+        self.select_tfa_method = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.select_tfa_method,
+        )
         self.simulate = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.simulate,
+        )
+        self.submit_tfa = _legacy_response.async_to_raw_response_wrapper(
+            tokenizations.submit_tfa,
         )
         self.unpause = _legacy_response.async_to_raw_response_wrapper(
             tokenizations.unpause,
@@ -1033,6 +1494,9 @@ class TokenizationsWithStreamingResponse:
     def __init__(self, tokenizations: Tokenizations) -> None:
         self._tokenizations = tokenizations
 
+        self.create = to_streamed_response_wrapper(
+            tokenizations.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
             tokenizations.retrieve,
         )
@@ -1041,6 +1505,9 @@ class TokenizationsWithStreamingResponse:
         )
         self.activate = to_streamed_response_wrapper(
             tokenizations.activate,
+        )
+        self.create_payment_credentials = to_streamed_response_wrapper(
+            tokenizations.create_payment_credentials,
         )
         self.deactivate = to_streamed_response_wrapper(
             tokenizations.deactivate,
@@ -1051,8 +1518,14 @@ class TokenizationsWithStreamingResponse:
         self.resend_activation_code = to_streamed_response_wrapper(
             tokenizations.resend_activation_code,
         )
+        self.select_tfa_method = to_streamed_response_wrapper(
+            tokenizations.select_tfa_method,
+        )
         self.simulate = to_streamed_response_wrapper(
             tokenizations.simulate,
+        )
+        self.submit_tfa = to_streamed_response_wrapper(
+            tokenizations.submit_tfa,
         )
         self.unpause = to_streamed_response_wrapper(
             tokenizations.unpause,
@@ -1066,6 +1539,9 @@ class AsyncTokenizationsWithStreamingResponse:
     def __init__(self, tokenizations: AsyncTokenizations) -> None:
         self._tokenizations = tokenizations
 
+        self.create = async_to_streamed_response_wrapper(
+            tokenizations.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
             tokenizations.retrieve,
         )
@@ -1074,6 +1550,9 @@ class AsyncTokenizationsWithStreamingResponse:
         )
         self.activate = async_to_streamed_response_wrapper(
             tokenizations.activate,
+        )
+        self.create_payment_credentials = async_to_streamed_response_wrapper(
+            tokenizations.create_payment_credentials,
         )
         self.deactivate = async_to_streamed_response_wrapper(
             tokenizations.deactivate,
@@ -1084,8 +1563,14 @@ class AsyncTokenizationsWithStreamingResponse:
         self.resend_activation_code = async_to_streamed_response_wrapper(
             tokenizations.resend_activation_code,
         )
+        self.select_tfa_method = async_to_streamed_response_wrapper(
+            tokenizations.select_tfa_method,
+        )
         self.simulate = async_to_streamed_response_wrapper(
             tokenizations.simulate,
+        )
+        self.submit_tfa = async_to_streamed_response_wrapper(
+            tokenizations.submit_tfa,
         )
         self.unpause = async_to_streamed_response_wrapper(
             tokenizations.unpause,
