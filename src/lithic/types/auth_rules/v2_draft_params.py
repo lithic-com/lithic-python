@@ -12,7 +12,6 @@ from .conditional_3ds_action_parameters_param import Conditional3DSActionParamet
 from .conditional_ach_action_parameters_param import ConditionalACHActionParametersParam
 from .conditional_tokenization_action_parameters_param import ConditionalTokenizationActionParametersParam
 from .conditional_authorization_action_parameters_param import ConditionalAuthorizationActionParametersParam
-from .conditional_authorization_adjustment_parameters_param import ConditionalAuthorizationAdjustmentParametersParam
 from .conditional_ach_payment_update_action_parameters_param import ConditionalACHPaymentUpdateActionParametersParam
 from .conditional_card_transaction_update_action_parameters_param import (
     ConditionalCardTransactionUpdateActionParametersParam,
@@ -36,5 +35,4 @@ Parameters: TypeAlias = Union[
     ConditionalCardTransactionUpdateActionParametersParam,
     ConditionalACHPaymentUpdateActionParametersParam,
     TypescriptCodeParametersParam,
-    ConditionalAuthorizationAdjustmentParametersParam,
 ]

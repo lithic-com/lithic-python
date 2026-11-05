@@ -61,9 +61,6 @@ from .conditional_tokenization_action_parameters import (
 from .conditional_authorization_action_parameters import (
     ConditionalAuthorizationActionParameters as ConditionalAuthorizationActionParameters,
 )
-from .conditional_authorization_adjustment_parameters import (
-    ConditionalAuthorizationAdjustmentParameters as ConditionalAuthorizationAdjustmentParameters,
-)
 from .conditional_ach_payment_update_action_parameters import (
     ConditionalACHPaymentUpdateActionParameters as ConditionalACHPaymentUpdateActionParameters,
 )
@@ -72,9 +69,6 @@ from .conditional_tokenization_action_parameters_param import (
 )
 from .conditional_authorization_action_parameters_param import (
     ConditionalAuthorizationActionParametersParam as ConditionalAuthorizationActionParametersParam,
-)
-from .conditional_authorization_adjustment_parameters_param import (
-    ConditionalAuthorizationAdjustmentParametersParam as ConditionalAuthorizationAdjustmentParametersParam,
 )
 from .conditional_card_transaction_update_action_parameters import (
     ConditionalCardTransactionUpdateActionParameters as ConditionalCardTransactionUpdateActionParameters,
