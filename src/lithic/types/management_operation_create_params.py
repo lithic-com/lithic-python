@@ -30,42 +30,31 @@ class ManagementOperationCreateParams(TypedDict, total=False):
 
     event_type: Required[
         Literal[
-            "LOSS_WRITE_OFF",
             "CASH_BACK",
-            "CASH_BACK_REVERSAL",
             "CURRENCY_CONVERSION",
-            "CURRENCY_CONVERSION_REVERSAL",
-            "INTEREST",
-            "INTEREST_REVERSAL",
             "INSTALLMENT_FEE",
-            "INSTALLMENT_FEE_REVERSAL",
             "LATE_PAYMENT",
-            "LATE_PAYMENT_REVERSAL",
             "BILLING_ERROR",
-            "BILLING_ERROR_REVERSAL",
             "PROVISIONAL_CREDIT",
-            "PROVISIONAL_CREDIT_REVERSAL",
             "RETURNED_PAYMENT",
-            "RETURNED_PAYMENT_REVERSAL",
             "DISPUTE_WON",
-            "DISPUTE_WON_REVERSAL",
             "DISBURSE",
-            "DISBURSE_REVERSAL",
             "ANNUAL",
-            "ANNUAL_REVERSAL",
             "QUARTERLY",
-            "QUARTERLY_REVERSAL",
             "MONTHLY",
-            "MONTHLY_REVERSAL",
             "FEE",
-            "FEE_REVERSAL",
         ]
     ]
+    """Type of management operation to create.
+
+    To reverse an existing management operation, use the reverse management
+    operation endpoint
+    """
 
     financial_account_token: Required[str]
 
     token: str
-    """Customer-provided token that will serve as an idempotency token.
+    """Client-provided token that will serve as an idempotency token.
 
     This token will become the transaction token.
     """
