@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.135.0](https://github.com/lithic-com/lithic-python/compare/v0.134.0...v0.135.0) (2026-11-09)
+
+
+### Features
+
+* **api:** add installment plan adjustment amounts and is_adjustment flag to installment plans ([9ad8d4e](https://github.com/lithic-com/lithic-python/commit/9ad8d4effac884c009320b8a7fbeb2e4433b8894))
+* **api:** add source, adjustment, and timestamp fields to installment plan statements ([1f13e8b](https://github.com/lithic-com/lithic-python/commit/1f13e8b23dd9cc1f3f736ef633be1ecce80ee934))
+* **api:** add tokenization create, 2fa, and payment credentials endpoints to tokenizations ([b2b3dc6](https://github.com/lithic-com/lithic-python/commit/b2b3dc6ccfe20ee00ab59e4da3a355a4d62ab3c0))
+* **api:** add updated to 3DS authentications and created to backtests and challenge events ([1edecf3](https://github.com/lithic-com/lithic-python/commit/1edecf39db9dc0238fcf5cf1961815e27bbaf078))
+* **api:** support hold adjustment actions in conditional authorization auth rule parameters ([4551c8e](https://github.com/lithic-com/lithic-python/commit/4551c8e9cc8c805a3ac0b4052767e580be4081d3))
+
+
+### Bug Fixes
+
+* **api:** correct event_type on create management operation to creatable, non-reversal types ([51d0c5d](https://github.com/lithic-com/lithic-python/commit/51d0c5d1497198997b2124f6d9c449483f778642))
+* **api:** remove incorrect defaults for daily and monthly spend limits on account update ([389ce99](https://github.com/lithic-com/lithic-python/commit/389ce99a3f774161cab7d2af7c5f9a4c4fa3e043))
+
+
+### Chores
+
+* **ci:** Removing pre-release configuration ([#798](https://github.com/lithic-com/lithic-python/issues/798)) ([467a0a0](https://github.com/lithic-com/lithic-python/commit/467a0a02aa5ce70ec4242cc4ef12ef848ffcc939))
+
+
+### Documentation
+
+* **api:** clarify that begin filters on list endpoints are inclusive (on or after) ([09a0126](https://github.com/lithic-com/lithic-python/commit/09a0126bda73adbf4044445e7a343453dfba0485))
+* **api:** note naics_code is required for KYB_BASIC account holder enrollment ([3aa44f5](https://github.com/lithic-com/lithic-python/commit/3aa44f550c16d7266d3e15845ea48f673bbea871))
+
 ## [0.134.0](https://github.com/lithic-com/lithic-python/compare/v0.133.0...v0.134.0) (2026-10-28)
 
 
