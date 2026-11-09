@@ -191,6 +191,8 @@ class KYBParam(TypedDict, total=False):
     """
     6-digit North American Industry Classification System (NAICS) code for the
     business.
+
+    This parameter is required if workflow type is `KYB_BASIC`
     """
 
     website_url: str
