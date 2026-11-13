@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.136.0](https://github.com/lithic-com/lithic-python/compare/v0.135.0...v0.136.0) (2026-11-13)
+
+
+### Features
+
+* **api:** add ALLPOINT to network enums on settlement report and detail endpoints ([cf189c2](https://github.com/lithic-com/lithic-python/commit/cf189c2c19e8e9360d5955bef34cb2d78eeaaa2d))
+
 ## [0.135.0](https://github.com/lithic-com/lithic-python/compare/v0.134.0...v0.135.0) (2026-11-09)
 
 
