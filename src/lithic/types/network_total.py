@@ -51,10 +51,10 @@ class NetworkTotal(BaseModel):
     available in the details endpoint.
     """
 
-    network: Literal["AMEX", "VISA", "MASTERCARD", "MAESTRO", "INTERLINK"]
+    network: Literal["ALLPOINT", "AMEX", "VISA", "MASTERCARD", "MAESTRO", "INTERLINK"]
     """Card network where the transaction took place.
 
-    AMEX, VISA, MASTERCARD, MAESTRO, or INTERLINK.
+    ALLPOINT, AMEX, VISA, MASTERCARD, MAESTRO, or INTERLINK.
     """
 
     report_date: date
