@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.136.0](https://github.com/lithic-com/lithic-python/compare/v0.135.0...v0.136.0) (2026-11-20)
+
+
+### Features
+
+* **api:** add ALLPOINT to network enums on settlement report and detail endpoints ([cf189c2](https://github.com/lithic-com/lithic-python/commit/cf189c2c19e8e9360d5955bef34cb2d78eeaaa2d))
+* **api:** Fix statement amount_due.amount description ([de6db32](https://github.com/lithic-com/lithic-python/commit/de6db32fa2e35169b1fed1433f053f73e2dc7b0a))
+
 ## [0.135.0](https://github.com/lithic-com/lithic-python/compare/v0.134.0...v0.135.0) (2026-11-09)
 
 
