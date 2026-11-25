@@ -57,9 +57,10 @@ DraftVersionParameters: TypeAlias = Union[
 
 class DraftVersion(BaseModel):
     error: Optional[str] = None
-    """An error message if the draft version failed compilation.
+    """An error message if the draft version failed compilation or its dry run.
 
-    Populated when `state` is `ERROR`, `null` otherwise.
+    When a scenario fails, the message names it. Populated when `state` is `ERROR`,
+    `null` otherwise.
     """
 
     parameters: DraftVersionParameters
@@ -69,14 +70,18 @@ class DraftVersion(BaseModel):
     """The state of the draft version.
 
     Most rules are created synchronously and the state is immediately `SHADOWING`.
-    Rules backed by TypeScript code are compiled asynchronously — the state starts
-    as `PENDING` and transitions to `SHADOWING` on success or `ERROR` on failure.
+    Rules backed by TypeScript code are compiled and dry run asynchronously — the
+    state starts as `PENDING` and transitions to `SHADOWING` on success or `ERROR`
+    on failure.
 
-    - `PENDING`: Compilation of the rule is in progress (TypeScript rules only).
+    - `PENDING`: Compilation and the dry run of the rule are in progress (TypeScript
+      rules only).
     - `SHADOWING`: The draft version is ready and evaluating in shadow mode
       alongside the current active version. It can be promoted to the active
       version.
-    - `ERROR`: Compilation of the rule failed. Check the `error` field for details.
+    - `ERROR`: Compilation of the rule failed, or the compiled rule failed its dry
+      run against sample events. A draft in this state cannot be promoted. Check the
+      `error` field for details.
     """
 
     version: int
