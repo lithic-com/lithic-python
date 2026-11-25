@@ -188,7 +188,9 @@ class Cards(SyncAPIResource):
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date five years in the future will be generated. Five years is the
-              maximum expiration date.
+              maximum expiration date. Cards expire at the end of this month in UTC. A card
+              with expiry month 01 can be used through 23:59:59 UTC on January 31 and is
+              declined from 00:00:00 UTC on February 1.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date five years in the future will be generated. Five
@@ -1121,7 +1123,9 @@ class Cards(SyncAPIResource):
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date five years in the future will be generated. Five years is the
-              maximum expiration date.
+              maximum expiration date. Cards expire at the end of this month in UTC. A card
+              with expiry month 01 can be used through 23:59:59 UTC on January 31 and is
+              declined from 00:00:00 UTC on February 1.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date five years in the future will be generated. Five
@@ -1480,7 +1484,9 @@ class AsyncCards(AsyncAPIResource):
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date five years in the future will be generated. Five years is the
-              maximum expiration date.
+              maximum expiration date. Cards expire at the end of this month in UTC. A card
+              with expiry month 01 can be used through 23:59:59 UTC on January 31 and is
+              declined from 00:00:00 UTC on February 1.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date five years in the future will be generated. Five
@@ -2413,7 +2419,9 @@ class AsyncCards(AsyncAPIResource):
 
           exp_month: Two digit (MM) expiry month. If neither `exp_month` nor `exp_year` is provided,
               an expiration date five years in the future will be generated. Five years is the
-              maximum expiration date.
+              maximum expiration date. Cards expire at the end of this month in UTC. A card
+              with expiry month 01 can be used through 23:59:59 UTC on January 31 and is
+              declined from 00:00:00 UTC on February 1.
 
           exp_year: Four digit (yyyy) expiry year. If neither `exp_month` nor `exp_year` is
               provided, an expiration date five years in the future will be generated. Five

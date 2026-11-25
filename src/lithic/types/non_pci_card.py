@@ -167,7 +167,12 @@ class NonPCICard(BaseModel):
     """
 
     exp_month: Optional[str] = None
-    """Two digit (MM) expiry month."""
+    """Two digit (MM) expiry month.
+
+    Cards expire at the end of this month in UTC. A card with expiry month 01 can be
+    used through 23:59:59 UTC on January 31 and is declined from 00:00:00 UTC on
+    February 1.
+    """
 
     exp_year: Optional[str] = None
     """Four digit (yyyy) expiry year."""
