@@ -47,7 +47,12 @@ class ClaimUpdatedWebhookEvent(BaseModel):
     """The type of event that occurred."""
 
     outstanding_requirements: List[Literal["QUESTIONNAIRE", "DOCUMENTS"]]
-    """Requirements that must be fulfilled before the claim can be submitted"""
+    """What the client still needs to provide for the claim.
+
+    The claim can be submitted once `QUESTIONNAIRE` is no longer in the array.
+    `DOCUMENTS` stays in the array, before and after submission, while any required
+    document is still outstanding
+    """
 
     reason: Literal[
         "CARD_NOT_PRESENT",
