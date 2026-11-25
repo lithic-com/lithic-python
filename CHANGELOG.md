@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.136.0](https://github.com/lithic-com/lithic-python/compare/v0.135.0...v0.136.0) (2026-11-25)
+
+
+### Features
+
+* **api:** add ALLPOINT to network enums on settlement report and detail endpoints ([cf189c2](https://github.com/lithic-com/lithic-python/commit/cf189c2c19e8e9360d5955bef34cb2d78eeaaa2d))
+* **api:** Document UTC end-of-month card expiry cutoff ([74c3941](https://github.com/lithic-com/lithic-python/commit/74c39418ae1eaf18c70c60f0a9e754f3331d79fe))
+* **api:** Fix statement amount_due.amount description ([de6db32](https://github.com/lithic-com/lithic-python/commit/de6db32fa2e35169b1fed1433f053f73e2dc7b0a))
+
+
+### Documentation
+
+* **api:** clarify auth rule draft version state and error cover dry run of typescript rules ([4fb2e22](https://github.com/lithic-com/lithic-python/commit/4fb2e22f5f79b6ebad86ada3995508eceb12aad5))
+* **api:** clarify when dispute claims can be submitted in outstanding_requirements description ([3d48402](https://github.com/lithic-com/lithic-python/commit/3d48402ef65a878ae16becf11215ecd04926222e))
+
 ## [0.135.0](https://github.com/lithic-com/lithic-python/compare/v0.134.0...v0.135.0) (2026-11-09)
 
 
